@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "template_mod",
+  "id": "tweakermore",
   "version": "1.0.0",
 
-  "name": "template_mod",
+  "name": "TweakerMore",
   "description": "",
   "authors": [
     "Fallen_Breath"
@@ -13,7 +13,7 @@
     "sources": "https://github.com/"
   },
 
-  "icon": "assets/template_mod/icon.png",
+  "icon": "assets/tweakermore/icon.png",
 
   "environment": "*",
   "entrypoints": {
@@ -21,12 +21,11 @@
     ]
   },
   "mixins": [
-    "template_mod.mixins.json"
+    "tweakermore.mixins.json"
   ],
 
   "depends": {
-    "fabricloader": ">=0.7.1",
-    "minecraft": "1.15.x"
+    "tweakeroo": "*"
   },
   "suggests": {
     "flamingo": "*"

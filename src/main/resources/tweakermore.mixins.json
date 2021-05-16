@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.fallenbreath.tweakermore.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+    "core.DisableConfigsMixin",
+    "disableLightUpdates.ClientChunkManagerMixin",
+    "disableLightUpdates.LightingProviderMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
