@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "template_mod",
+  "version": "1.0.0",
+
+  "name": "template_mod",
+  "description": "",
+  "authors": [
+    "Fallen_Breath"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/",
+    "sources": "https://github.com/"
+  },
+
+  "icon": "assets/template_mod/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+    ]
+  },
+  "mixins": [
+    "template_mod.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.1",
+    "minecraft": "1.15.x"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}
