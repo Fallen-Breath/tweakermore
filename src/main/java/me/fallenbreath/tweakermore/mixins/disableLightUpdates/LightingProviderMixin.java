@@ -21,7 +21,8 @@ public abstract class LightingProviderMixin implements ILightingProvider
 	@Inject(method = "checkBlock", at = @At("HEAD"), cancellable = true)
 	private void noLightUpdate(CallbackInfo ci)
 	{
-		if (this.world$tweakermore.isClient() && me.fallenbreath.tweakermore.config.TweakerMoreConfigs.DISABLE_LIGHT_UPDATES.getBooleanValue())
+		// if it's null, it's ofc a server-side world
+		if (this.world$tweakermore != null && this.world$tweakermore.isClient() && me.fallenbreath.tweakermore.config.TweakerMoreConfigs.DISABLE_LIGHT_UPDATES.getBooleanValue())
 		{
 			ci.cancel();
 		}
