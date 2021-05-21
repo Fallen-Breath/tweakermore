@@ -27,7 +27,7 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	modCompile "fi.dy.masa.malilib:malilib-fabric-1.15.2:0.10.0-dev.20+beta.1"
-	modCompileOnly "curse.maven:tweakeroo-297344:2942277"
+	modCompile "curse.maven:tweakeroo-297344:2942277"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	// modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
@@ -40,7 +40,7 @@ processResources {
 	inputs.property "version", project.version
 
 	filesMatching("fabric.mod.json") {
-		expand "version": project.version
+		expand "version": project.mod_version
 	}
 }
 
