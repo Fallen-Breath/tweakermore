@@ -4,6 +4,8 @@
   "package": "me.fallenbreath.tweakermore.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "core.GenericConfigsMixin",
+    "netherPortalSoundChance.NetherPortalBlockMixin"
   ],
   "client": [
     "core.DisableConfigsMixin",
