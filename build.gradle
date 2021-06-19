@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.5-SNAPSHOT'
+	id 'fabric-loom' version '0.8-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -26,8 +26,10 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	modCompile "fi.dy.masa.malilib:malilib-fabric-1.15.2:0.10.0-dev.20+beta.1"
-	modCompile "curse.maven:tweakeroo-297344:2942277"
+	// https://masa.dy.fi/maven/fi/dy/masa/malilib/
+	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.15.2:0.10.0-dev.20+beta.1"
+	// https://www.curseforge.com/minecraft/mc-mods/tweakeroo/files
+	modImplementation "curse.maven:tweakeroo-297344:2942277"  // tweakeroo-fabric-1.15.2-0.10.0-dev.20200424.222527.jar
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	// modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
