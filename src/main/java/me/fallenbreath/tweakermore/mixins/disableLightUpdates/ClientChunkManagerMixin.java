@@ -16,7 +16,7 @@ public abstract class ClientChunkManagerMixin
 {
 	@Shadow @Final private LightingProvider lightingProvider;
 
-	@Shadow @Final private ClientWorld world;
+	@Shadow @Final ClientWorld world;
 
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void setWorldForLightingProvider(CallbackInfo ci)
