@@ -6,3 +6,6 @@ New tweaks:
 
 - netherPortalSoundChance (Generic)
 - disableLightUpdates (Disable)
+- handRestockListType (List)
+- handRestockWhiteList (List)
+- handRestockBlackList (List)

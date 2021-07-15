@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.config.IHotkeyTogglable;
 import fi.dy.masa.tweakeroo.config.Configs;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
@@ -20,7 +21,7 @@ public abstract class DisableConfigsMixin
 	static
 	{
 		List<IHotkeyTogglable> optionList = Lists.newArrayList(OPTIONS);
-		optionList.add(me.fallenbreath.tweakermore.config.TweakerMoreConfigs.DISABLE_LIGHT_UPDATES);
+		optionList.add(TweakerMoreConfigs.DISABLE_LIGHT_UPDATES);
 		OPTIONS = ImmutableList.copyOf(optionList);
 	}
 }
