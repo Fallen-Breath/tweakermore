@@ -27,9 +27,9 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// https://masa.dy.fi/maven/fi/dy/masa/malilib/
-	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.15.2:0.10.0-dev.20+beta.1"
+	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.16.4:0.10.0-dev.21+arne.7"
 	// https://www.curseforge.com/minecraft/mc-mods/tweakeroo/files
-	modImplementation "curse.maven:tweakeroo-297344:2942277"  // tweakeroo-fabric-1.15.2-0.10.0-dev.20200424.222527.jar
+	modImplementation "curse.maven:tweakeroo-297344:3224921"  // tweakeroo-fabric-1.16.4-0.10.0-dev.20210303.123654.jar
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	// modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
