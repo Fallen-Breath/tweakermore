@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.List;
 
-@Mixin(Configs.Generic.class)
-public abstract class GenericConfigsMixin
+@Mixin(Configs.Lists.class)
+public abstract class ListsConfigsMixin
 {
 	@Mutable
 	@Shadow(remap = false) @Final public static ImmutableList<IConfigBase> OPTIONS;
@@ -21,7 +21,9 @@ public abstract class GenericConfigsMixin
 	static
 	{
 		List<IConfigBase> optionList = Lists.newArrayList(OPTIONS);
-		optionList.add(TweakerMoreConfigs.NETHER_PORTAL_SOUND_CHANCE);
+		optionList.add(TweakerMoreConfigs.HAND_RESTORE_LIST_TYPE);
+		optionList.add(TweakerMoreConfigs.HAND_RESTORE_BLACKLIST);
+		optionList.add(TweakerMoreConfigs.HAND_RESTORE_WHITELIST);
 		OPTIONS = ImmutableList.copyOf(optionList);
 	}
 }

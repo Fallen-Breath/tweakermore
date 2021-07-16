@@ -4,7 +4,11 @@
   "package": "me.fallenbreath.tweakermore.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "core.ConfigsMixin",
     "core.GenericConfigsMixin",
+    "core.ListsConfigsMixin",
+    "handRestoreRestriction.InventoryUtilsMixin",
+    "handRestoreRestriction.PlacementTweaksMixin",
     "netherPortalSoundChance.NetherPortalBlockMixin"
   ],
   "client": [
