@@ -4,17 +4,19 @@
   "package": "me.fallenbreath.tweakermore.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "access.ItemScrollerInventoryUtilsAccessor",
     "core.ConfigsMixin",
+    "core.DisableConfigsMixin",
     "core.GenericConfigsMixin",
     "core.ListsConfigsMixin",
-    "handRestoreRestriction.InventoryUtilsMixin",
-    "handRestoreRestriction.PlacementTweaksMixin",
-    "netherPortalSoundChance.NetherPortalBlockMixin"
+    "tweaks.disableLightUpdates.ClientChunkManagerMixin",
+    "tweaks.disableLightUpdates.LightingProviderMixin",
+    "tweaks.handRestoreRestriction.InventoryUtilsMixin",
+    "tweaks.handRestoreRestriction.PlacementTweaksMixin",
+    "tweaks.netherPortalSoundChance.NetherPortalBlockMixin",
+    "tweaks.tweakmAutoCleanContainer.ClientPlayNetworkHandlerMixin"
   ],
   "client": [
-    "core.DisableConfigsMixin",
-    "disableLightUpdates.ClientChunkManagerMixin",
-    "disableLightUpdates.LightingProviderMixin"
   ],
   "injectors": {
     "defaultRequire": 1

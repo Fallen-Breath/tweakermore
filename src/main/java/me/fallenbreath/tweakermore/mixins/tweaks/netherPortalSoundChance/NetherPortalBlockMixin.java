@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.netherPortalSoundChance;
+package me.fallenbreath.tweakermore.mixins.tweaks.netherPortalSoundChance;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.block.NetherPortalBlock;
