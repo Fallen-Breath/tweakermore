@@ -26,8 +26,15 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
+	// modmenu dependence is down
 	// https://masa.dy.fi/maven/fi/dy/masa/malilib/
-	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.15.2:0.10.0-dev.20+beta.1"
+//	modRuntime "fi.dy.masa.malilib:malilib-fabric-1.15.2:0.10.0-dev.20+beta.1"
+
+	// https://www.curseforge.com/minecraft/mc-mods/malilib/files
+	modImplementation "curse.maven:malilib-303119:2942271"  // malilib-fabric-1.15.2-0.10.0-dev.21+arne.2.jar
+	// malilib needs this to start
+	modRuntime "net.fabricmc.fabric-api:fabric-resource-loader-v0:0.1.10+06c939b30c"
+
 	// https://www.curseforge.com/minecraft/mc-mods/tweakeroo/files
 	modImplementation "curse.maven:tweakeroo-297344:2942277"  // tweakeroo-fabric-1.15.2-0.10.0-dev.20200424.222527.jar
 
