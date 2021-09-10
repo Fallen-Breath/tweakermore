@@ -1,6 +1,6 @@
-package me.fallenbreath.tweakermore.mixins.disableLightUpdates;
+package me.fallenbreath.tweakermore.mixins.tweaks.disableLightUpdates;
 
-import me.fallenbreath.tweakermore.ILightingProvider;
+import me.fallenbreath.tweakermore.impl.disableLightUpdates.ILightingProvider;
 import net.minecraft.client.world.ClientChunkManager;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.world.chunk.light.LightingProvider;
