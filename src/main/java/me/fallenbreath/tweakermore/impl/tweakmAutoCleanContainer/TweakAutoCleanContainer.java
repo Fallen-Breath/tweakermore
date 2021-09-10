@@ -6,25 +6,28 @@ import me.fallenbreath.tweakermore.mixins.access.ItemScrollerInventoryUtilsAcces
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
-import net.minecraft.client.gui.screen.ingame.ContainerScreen;
-import net.minecraft.client.gui.screen.ingame.CraftingTableScreen;
+import net.minecraft.client.gui.screen.ingame.CraftingScreen;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.container.Slot;
+import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.TranslatableText;
 
 public class TweakAutoCleanContainer
 {
 	public static void process(Screen screen)
 	{
+		// 1.15.2 -> 1.16.5
+		// HandledScreen -> HandledScreen
+		// Container -> ScreenHandler
 		if (TweakerMoreToggles.TWEAKM_AUTO_CLEAN_CONTAINER.getBooleanValue())
 		{
 			ClientPlayerEntity player = MinecraftClient.getInstance().player;
 			// not inventory and not crafting table
-			if (player != null && screen instanceof ContainerScreen<?> && !(screen instanceof AbstractInventoryScreen) && !(screen instanceof CraftingTableScreen))
+			if (player != null && screen instanceof HandledScreen<?> && !(screen instanceof AbstractInventoryScreen) && !(screen instanceof CraftingScreen))
 			{
-				ContainerScreen<?> containerScreen = (ContainerScreen<?>)screen;
+				HandledScreen<?> containerScreen = (HandledScreen<?>)screen;
 				Slot refSlot = null;
-				for (Slot slot : containerScreen.getContainer().slots)
+				for (Slot slot : containerScreen.getScreenHandler().slots)
 				{
 					if (refSlot == null)
 					{
@@ -36,8 +39,8 @@ public class TweakAutoCleanContainer
 					}
 				}
 				// close the container if anything gets thrown out
-				player.addChatMessage(new TranslatableText("tweakermore.tweakm_auto_clean_container.container_cleaned", screen.getTitle()), true);
-				player.closeContainer();
+				player.sendMessage(new TranslatableText("tweakermore.tweakm_auto_clean_container.container_cleaned", screen.getTitle()), true);
+				player.closeHandledScreen();
 			}
 		}
 	}

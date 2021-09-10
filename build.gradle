@@ -29,20 +29,14 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	// modmenu dependence is down
 	// https://masa.dy.fi/maven/fi/dy/masa/malilib/
-//	modRuntime "fi.dy.masa.malilib:malilib-fabric-1.15.2:0.10.0-dev.20+beta.1"
-
-	// https://www.curseforge.com/minecraft/mc-mods/malilib/files
-	modImplementation "curse.maven:malilib-303119:2942271"  // malilib-fabric-1.15.2-0.10.0-dev.21+arne.2.jar
-	// malilib needs this to start
-	modRuntime "net.fabricmc.fabric-api:fabric-resource-loader-v0:0.1.10+06c939b30c"
+	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.16.4:0.10.0-dev.21+arne.7"
 
 	// https://www.curseforge.com/minecraft/mc-mods/tweakeroo/files
 	modImplementation "curse.maven:tweakeroo-297344:3224921"  // tweakeroo-fabric-1.16.4-0.10.0-dev.20210303.123654.jar
 
 	// https://www.curseforge.com/minecraft/mc-mods/item-scroller/files
-	modImplementation "curse.maven:item-scroller-242064:2880360"  // itemscroller-fabric-1.15.2-0.15.0-dev.20200212.183513.jar
+	modImplementation "curse.maven:item-scroller-242064:3168057"  // itemscroller-fabric-1.16.4-0.15.0-dev.20210111.205029.jar
 
 
 	modImplementation "com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}"

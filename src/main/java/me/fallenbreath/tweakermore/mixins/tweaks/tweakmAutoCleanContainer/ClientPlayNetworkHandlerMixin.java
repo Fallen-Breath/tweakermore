@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ClientPlayNetworkHandler.class)
 public abstract class ClientPlayNetworkHandlerMixin
 {
-	@Inject(method = "onOpenContainer", at = @At("TAIL"), cancellable = true)
+	@Inject(method = "onOpenScreen", at = @At("TAIL"), cancellable = true)
 	private void tweakmAutoCleanContainer(CallbackInfo ci)
 	{
 		TweakAutoCleanContainer.process(MinecraftClient.getInstance().currentScreen);
