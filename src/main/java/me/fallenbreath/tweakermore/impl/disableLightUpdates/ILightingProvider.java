@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore;
+package me.fallenbreath.tweakermore.impl.disableLightUpdates;
 
 import net.minecraft.world.World;
 

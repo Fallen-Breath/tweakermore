@@ -10,6 +10,9 @@ repositories {
 	maven {
 		url 'https://www.cursemaven.com'
 	}
+	maven {
+		url 'https://jitpack.io'
+	}
 }
 
 
@@ -28,14 +31,16 @@ dependencies {
 
 	// https://masa.dy.fi/maven/fi/dy/masa/malilib/
 	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.17.1:0.10.0-dev.24"
+
 	// https://www.curseforge.com/minecraft/mc-mods/tweakeroo/files
 	modImplementation "curse.maven:tweakeroo-297344:3383609"  // tweakeroo-fabric-1.17.1-0.10.0-dev.20210710.155746.jar
 
-	// Fabric API. This is technically optional, but you probably want it anyway.
-	// modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	// https://www.curseforge.com/minecraft/mc-mods/item-scroller/files
+	modImplementation "curse.maven:item-scroller-242064:3168057"  // itemscroller-fabric-1.16.4-0.15.0-dev.20210111.205029.jar
 
-	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
-	// You may need to force-disable transitiveness on them.
+
+	modImplementation "com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}"
+	include "com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}"
 }
 
 processResources {
