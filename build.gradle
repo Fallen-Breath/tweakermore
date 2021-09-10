@@ -36,7 +36,7 @@ dependencies {
 	modImplementation "curse.maven:tweakeroo-297344:3383609"  // tweakeroo-fabric-1.17.1-0.10.0-dev.20210710.155746.jar
 
 	// https://www.curseforge.com/minecraft/mc-mods/item-scroller/files
-	modImplementation "curse.maven:item-scroller-242064:3168057"  // itemscroller-fabric-1.16.4-0.15.0-dev.20210111.205029.jar
+	modImplementation "curse.maven:item-scroller-242064:3379264"  // itemscroller-fabric-1.17.1-0.15.0-dev.20210707.005506.jar
 
 
 	modImplementation "com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}"
