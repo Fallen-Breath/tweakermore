@@ -1,3 +1,4 @@
 {
-  "tweakermore.tweakm_auto_clean_container.container_cleaned": "已扔出容器 %1$s 中的所有物品"
+  "tweakermore.tweakm_auto_clean_container.container_cleaned": "已扔出容器 %1$s 中的所有物品",
+  "tweakermore.tweakm_auto_clean_container.container_filled": "已使用所有 %2$s 物品装填容器 %1$s"
 }

@@ -35,7 +35,7 @@ public class TweakAutoCleanContainer
 						InventoryUtils.dropStack(containerScreen, slot.id);
 					}
 				}
-				// close the container if anything gets thrown out
+				// close the container
 				player.addChatMessage(new TranslatableText("tweakermore.tweakm_auto_clean_container.container_cleaned", screen.getTitle()), true);
 				player.closeContainer();
 			}

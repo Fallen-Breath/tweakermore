@@ -14,7 +14,10 @@
     "tweaks.handRestoreRestriction.InventoryUtilsMixin",
     "tweaks.handRestoreRestriction.PlacementTweaksMixin",
     "tweaks.netherPortalSoundChance.NetherPortalBlockMixin",
-    "tweaks.tweakmAutoCleanContainer.ClientPlayNetworkHandlerMixin"
+    "tweaks.tweakmAutoCleanContainer.ClientPlayNetworkHandlerMixin",
+    "tweaks.tweakmAutoFillContainer.ClientPlayNetworkHandlerMixin",
+    "tweaks.tweakmAutoFillContainer.ContainerMixin",
+    "tweaks.tweakmAutoFillContainer.ScreenMixin"
   ],
   "client": [
   ],
