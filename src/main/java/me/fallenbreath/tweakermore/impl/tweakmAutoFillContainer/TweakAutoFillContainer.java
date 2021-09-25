@@ -1,7 +1,9 @@
 package me.fallenbreath.tweakermore.impl.tweakmAutoFillContainer;
 
 import fi.dy.masa.itemscroller.util.InventoryUtils;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreToggles;
+import me.fallenbreath.tweakermore.mixins.access.ItemScrollerInventoryUtilsAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
@@ -13,6 +15,7 @@ import net.minecraft.container.Slot;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,10 +43,15 @@ public class TweakAutoFillContainer
 				{
 					return;
 				}
+				List<Slot> containerInvSlots = allSlots.stream().filter(slot -> ItemScrollerInventoryUtilsAccessor.areSlotsInSameInventory(slot, allSlots.get(0))).collect(Collectors.toList());
+				if (containerInvSlots.isEmpty())
+				{
+					return;
+				}
 				Slot bestSlot = null;
-				long maxCount = 0;
+				long maxCount = TweakerMoreConfigs.AUTO_FILL_CONTAINER_THRESHOLD.getIntegerValue() - 1;
 				for (Slot slot : playerInvSlots)
-					if (slot.hasStack() && allSlots.get(0).canInsert(slot.getStack()))
+					if (slot.hasStack() && containerInvSlots.get(0).canInsert(slot.getStack()))
 					{
 						long cnt = playerInvSlots.stream().filter(slt -> InventoryUtils.areStacksEqual(slot.getStack(), slt.getStack())).count();
 						if (cnt > maxCount)
@@ -60,11 +68,13 @@ public class TweakAutoFillContainer
 				{
 					Text stackName = bestSlot.getStack().getName();
 					InventoryUtils.tryMoveStacks(bestSlot, containerScreen, true, true, false);
-					player.addChatMessage(new TranslatableText("tweakermore.tweakm_auto_clean_container.container_filled", screen.getTitle(), stackName), true);
+					long amount = containerInvSlots.stream().filter(Slot::hasStack).count(), total = containerInvSlots.size();
+					String percentage = String.format("%s%d/%d%s", amount == total ? Formatting.GREEN : Formatting.GOLD, amount, total, Formatting.RESET);
+					player.addChatMessage(new TranslatableText("tweakmAutoFillContainer.container_filled", screen.getTitle(), stackName, percentage), true);
 				}
 				else
 				{
-					player.addChatMessage(new TranslatableText("tweakermore.tweakm_auto_clean_container.best_slot_not_found"), true);
+					player.addChatMessage(new TranslatableText("tweakmAutoFillContainer.best_slot_not_found"), true);
 				}
 				player.closeContainer();
 			}

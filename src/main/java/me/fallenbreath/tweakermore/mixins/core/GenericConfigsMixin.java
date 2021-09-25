@@ -21,6 +21,7 @@ public abstract class GenericConfigsMixin
 	static
 	{
 		List<IConfigBase> optionList = Lists.newArrayList(OPTIONS);
+		optionList.add(TweakerMoreConfigs.AUTO_FILL_CONTAINER_THRESHOLD);
 		optionList.add(TweakerMoreConfigs.NETHER_PORTAL_SOUND_CHANCE);
 		OPTIONS = ImmutableList.copyOf(optionList);
 	}

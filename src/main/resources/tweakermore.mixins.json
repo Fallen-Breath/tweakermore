@@ -9,6 +9,7 @@
     "core.DisableConfigsMixin",
     "core.GenericConfigsMixin",
     "core.ListsConfigsMixin",
+    "misc.ConfigBaseMixin",
     "tweaks.disableLightUpdates.ClientChunkManagerMixin",
     "tweaks.disableLightUpdates.LightingProviderMixin",
     "tweaks.handRestoreRestriction.InventoryUtilsMixin",
