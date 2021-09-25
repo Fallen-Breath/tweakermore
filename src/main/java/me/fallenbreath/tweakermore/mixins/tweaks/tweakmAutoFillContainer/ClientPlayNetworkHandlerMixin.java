@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ClientPlayNetworkHandler.class)
 public abstract class ClientPlayNetworkHandlerMixin
 {
-	@Inject(method = "onOpenContainer", at = @At("TAIL"))
+	@Inject(method = "onOpenScreen", at = @At("TAIL"))
 	private void tweakmAutoFillContainerMarking(CallbackInfo ci)
 	{
 		Screen screen = MinecraftClient.getInstance().currentScreen;

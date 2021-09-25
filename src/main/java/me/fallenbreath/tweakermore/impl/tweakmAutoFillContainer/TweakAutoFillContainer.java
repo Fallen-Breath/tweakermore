@@ -8,12 +8,12 @@ import me.fallenbreath.tweakermore.mixins.access.ItemScrollerInventoryUtilsAcces
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
-import net.minecraft.client.gui.screen.ingame.ContainerScreen;
-import net.minecraft.client.gui.screen.ingame.CraftingTableScreen;
+import net.minecraft.client.gui.screen.ingame.CraftingScreen;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.container.Container;
-import net.minecraft.container.Slot;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
@@ -22,17 +22,17 @@ import java.util.stream.Collectors;
 
 public class TweakAutoFillContainer
 {
-	public static void process(Container container)
+	public static void process(ScreenHandler container)
 	{
 		if (TweakerMoreToggles.TWEAKM_AUTO_FILL_CONTAINER.getBooleanValue())
 		{
 			Screen screen = MinecraftClient.getInstance().currentScreen;
 			ClientPlayerEntity player = MinecraftClient.getInstance().player;
 			// not inventory and not crafting table
-			if (player != null && screen instanceof ContainerScreen<?> && !(screen instanceof AbstractInventoryScreen) && !(screen instanceof CraftingTableScreen))
+			if (player != null && screen instanceof HandledScreen<?> && !(screen instanceof AbstractInventoryScreen) && !(screen instanceof CraftingScreen))
 			{
-				ContainerScreen<?> containerScreen = (ContainerScreen<?>)screen;
-				if (containerScreen.getContainer() != container || !((IScreen)screen).shouldProcess())
+				HandledScreen<?> containerScreen = (HandledScreen<?>)screen;
+				if (containerScreen.getScreenHandler() != container || !((IScreen)screen).shouldProcess())
 				{
 					return;
 				}
@@ -69,7 +69,7 @@ public class TweakAutoFillContainer
 					Text stackName = bestSlot.getStack().getName();
 					InventoryUtils.tryMoveStacks(bestSlot, containerScreen, true, true, false);
 					long amount = containerInvSlots.stream().filter(Slot::hasStack).count(), total = containerInvSlots.size();
-					boolean isFull = Container.calculateComparatorOutput(containerInvSlots.get(0).inventory) >= 15;
+					boolean isFull = ScreenHandler.calculateComparatorOutput(containerInvSlots.get(0).inventory) >= 15;
 					String percentage = String.format("%s%d/%d%s", isFull ? Formatting.GREEN : Formatting.GOLD, amount, total, Formatting.RESET);
 					InfoUtils.printActionbarMessage("tweakmAutoFillContainer.container_filled", screen.getTitle(), stackName, percentage);
 				}
@@ -77,7 +77,7 @@ public class TweakAutoFillContainer
 				{
 					InfoUtils.printActionbarMessage("tweakmAutoFillContainer.best_slot_not_found");
 				}
-				player.closeContainer();
+				player.closeHandledScreen();
 			}
 		}
 	}
