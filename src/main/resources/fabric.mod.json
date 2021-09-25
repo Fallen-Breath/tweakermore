@@ -4,18 +4,18 @@
   "version": "${version}",
 
   "name": "TweakerMore",
-  "description": "",
+  "description": "An addon of masa's tweakeroo mod",
   "authors": [
     "Fallen_Breath"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/",
-    "sources": "https://github.com/"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/tweakermore",
+    "sources": "https://github.com/Fallen-Breath/tweakermore"
   },
 
   "icon": "assets/tweakermore/icon.png",
 
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "client": [
       "me.fallenbreath.tweakermore.TweakerMoreMod"
