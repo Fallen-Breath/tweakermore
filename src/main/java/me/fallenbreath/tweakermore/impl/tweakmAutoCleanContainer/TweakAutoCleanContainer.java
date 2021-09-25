@@ -1,6 +1,7 @@
 package me.fallenbreath.tweakermore.impl.tweakmAutoCleanContainer;
 
 import fi.dy.masa.itemscroller.util.InventoryUtils;
+import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreToggles;
 import me.fallenbreath.tweakermore.mixins.access.ItemScrollerInventoryUtilsAccessor;
 import net.minecraft.client.MinecraftClient;
@@ -10,7 +11,6 @@ import net.minecraft.client.gui.screen.ingame.CraftingScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.screen.slot.Slot;
-import net.minecraft.text.TranslatableText;
 
 public class TweakAutoCleanContainer
 {
@@ -38,8 +38,8 @@ public class TweakAutoCleanContainer
 						InventoryUtils.dropStack(containerScreen, slot.id);
 					}
 				}
-				// close the container if anything gets thrown out
-				player.sendMessage(new TranslatableText("tweakermore.tweakm_auto_clean_container.container_cleaned", screen.getTitle()), true);
+				// close the container
+				InfoUtils.printActionbarMessage("tweakmAutoCleanContainer.container_cleaned", screen.getTitle());
 				player.closeHandledScreen();
 			}
 		}

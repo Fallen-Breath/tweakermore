@@ -1,3 +1,24 @@
 {
-  "tweakermore.tweakm_auto_clean_container.container_cleaned": "已扔出容器 %1$s 中的所有物品"
+  "netherPortalSoundChance": "netherPortalSoundChance | 地狱门音效概率",
+  "netherPortalSoundChance.comment": "地狱门方块播放音效的概率\n将其设为0.001或0.0001来让地狱门没那么吵",
+  "autoFillContainerThreshold": "autoFillContainerThreshold | 自动填充容器阈值",
+  "autoFillContainerThreshold.comment": "触发工具 tweakmAutoFillContainer 所需要的最小的物品槽位数\n例如，如果你总是带着2个格子的烟花火箭，那么你可以将其设置为3，\n那么这些烟花物品将必定不会被用于填充容器",
+
+  "handRestockListType": "handRestockListType | 自动补货名单约束类型",
+  "handRestockListType.comment": "tweakHandRestock 工具的物品名单约束类型",
+  "handRestockWhiteList": "handRestockWhiteList | 自动补货白名单",
+  "handRestockWhiteList.comment": "会触发 tweakHandRestock 的物品",
+  "handRestockBlackList": "handRestockBlackList | 自动补货黑名单",
+  "handRestockBlackList.comment": "不会触发 tweakHandRestock 的物品",
+
+  "disableLightUpdates": "disableLightUpdates | 禁用光照更新",
+  "disableLightUpdates.comment": "禁用客户端光照更新",
+
+  "tweakmAutoCleanContainer": "tweakmAutoCleanContainer | 自动清空容器",
+  "tweakmAutoCleanContainer.comment": "打开后容器，自动将容器内的所有物品扔出\n然后关闭容器",
+  "tweakmAutoCleanContainer.container_cleaned": "已扔出容器 %1$s 中的所有物品",
+  "tweakmAutoFillContainer": "tweakmAutoFillContainer | 自动装填容器",
+  "tweakmAutoFillContainer.comment": "打开后容器，自动使用物品栏中占用格子数最多的物品装填容器\n当且仅当占用格子数最多的物品是唯一的\n然后关闭容器",
+  "tweakmAutoFillContainer.container_filled": "已使用所有 %2$s 物品装填容器 %1$s (%3$s)",
+  "tweakmAutoFillContainer.best_slot_not_found": "未找到最适合装填容器的物品"
 }
