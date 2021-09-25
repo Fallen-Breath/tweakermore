@@ -1,6 +1,7 @@
 package me.fallenbreath.tweakermore.impl.tweakmAutoFillContainer;
 
 import fi.dy.masa.itemscroller.util.InventoryUtils;
+import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreToggles;
 import me.fallenbreath.tweakermore.mixins.access.ItemScrollerInventoryUtilsAccessor;
@@ -14,7 +15,6 @@ import net.minecraft.container.Container;
 import net.minecraft.container.Slot;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 
 import java.util.List;
@@ -69,12 +69,13 @@ public class TweakAutoFillContainer
 					Text stackName = bestSlot.getStack().getName();
 					InventoryUtils.tryMoveStacks(bestSlot, containerScreen, true, true, false);
 					long amount = containerInvSlots.stream().filter(Slot::hasStack).count(), total = containerInvSlots.size();
-					String percentage = String.format("%s%d/%d%s", amount == total ? Formatting.GREEN : Formatting.GOLD, amount, total, Formatting.RESET);
-					player.addChatMessage(new TranslatableText("tweakmAutoFillContainer.container_filled", screen.getTitle(), stackName, percentage), true);
+					boolean isFull = Container.calculateComparatorOutput(containerInvSlots.get(0).inventory) >= 15;
+					String percentage = String.format("%s%d/%d%s", isFull ? Formatting.GREEN : Formatting.GOLD, amount, total, Formatting.RESET);
+					InfoUtils.printActionbarMessage("tweakmAutoFillContainer.container_filled", screen.getTitle(), stackName, percentage);
 				}
 				else
 				{
-					player.addChatMessage(new TranslatableText("tweakmAutoFillContainer.best_slot_not_found"), true);
+					InfoUtils.printActionbarMessage("tweakmAutoFillContainer.best_slot_not_found");
 				}
 				player.closeContainer();
 			}

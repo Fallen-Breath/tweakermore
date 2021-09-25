@@ -1,6 +1,7 @@
 package me.fallenbreath.tweakermore.impl.tweakmAutoCleanContainer;
 
 import fi.dy.masa.itemscroller.util.InventoryUtils;
+import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreToggles;
 import me.fallenbreath.tweakermore.mixins.access.ItemScrollerInventoryUtilsAccessor;
 import net.minecraft.client.MinecraftClient;
@@ -10,7 +11,6 @@ import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import net.minecraft.client.gui.screen.ingame.CraftingTableScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.container.Slot;
-import net.minecraft.text.TranslatableText;
 
 public class TweakAutoCleanContainer
 {
@@ -36,7 +36,7 @@ public class TweakAutoCleanContainer
 					}
 				}
 				// close the container
-				player.addChatMessage(new TranslatableText("tweakmAutoCleanContainer.container_cleaned", screen.getTitle()), true);
+				InfoUtils.printActionbarMessage("tweakmAutoCleanContainer.container_cleaned", screen.getTitle());
 				player.closeContainer();
 			}
 		}
