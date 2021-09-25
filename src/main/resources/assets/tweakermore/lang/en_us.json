@@ -19,6 +19,6 @@
   "tweakmAutoCleanContainer.container_cleaned": "Dropped all items inside %1$s",
   "tweakmAutoFillContainer": "tweakmAutoFillContainer",
   "tweakmAutoFillContainer.comment": "Automatically fill the opened container with the most numerous item stack in your inventory\niff the item stack is the only most numerous one\nand then close the container",
-  "tweakmAutoFillContainer.container_filled": "Filled %1$s (%3$s) with all %2$s items",
+  "tweakmAutoFillContainer.container_filled": "Filled %1$s with all %2$s items (%3$s)",
   "tweakmAutoFillContainer.best_slot_not_found": "Most suitable item to fill the container not found"
 }
