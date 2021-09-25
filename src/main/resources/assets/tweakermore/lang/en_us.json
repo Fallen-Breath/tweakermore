@@ -1,4 +1,5 @@
 {
   "tweakermore.tweakm_auto_clean_container.container_cleaned": "Dropped all items inside %1$s",
-  "tweakermore.tweakm_auto_clean_container.container_filled": "Filled %1$s with all %2$s items"
+  "tweakermore.tweakm_auto_clean_container.container_filled": "Filled %1$s with all %2$s items",
+  "tweakermore.tweakm_auto_clean_container.best_slot_not_found": "Most suitable item to fill the container not found"
 }

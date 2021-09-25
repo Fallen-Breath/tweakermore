@@ -61,8 +61,12 @@ public class TweakAutoFillContainer
 					Text stackName = bestSlot.getStack().getName();
 					InventoryUtils.tryMoveStacks(bestSlot, containerScreen, true, true, false);
 					player.addChatMessage(new TranslatableText("tweakermore.tweakm_auto_clean_container.container_filled", screen.getTitle(), stackName), true);
-					player.closeContainer();
 				}
+				else
+				{
+					player.addChatMessage(new TranslatableText("tweakermore.tweakm_auto_clean_container.best_slot_not_found"), true);
+				}
+				player.closeContainer();
 			}
 		}
 	}
