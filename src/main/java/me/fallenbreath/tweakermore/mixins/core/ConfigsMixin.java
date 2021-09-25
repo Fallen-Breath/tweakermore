@@ -14,7 +14,6 @@ public class ConfigsMixin
 	@Inject(method = "loadFromFile", at = @At("TAIL"), remap = false)
 	private static void buildRestrictionLists(CallbackInfo ci)
 	{
-
 		TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.setListType((UsageRestriction.ListType)TweakerMoreConfigs.HAND_RESTORE_LIST_TYPE.getOptionListValue());
 		TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.setListContents(TweakerMoreConfigs.HAND_RESTORE_BLACKLIST.getStrings(), TweakerMoreConfigs.HAND_RESTORE_WHITELIST.getStrings());
 	}
