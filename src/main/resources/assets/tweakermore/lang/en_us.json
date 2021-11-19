@@ -16,7 +16,7 @@
 
   "tweakmAutoCleanContainer": "tweakmAutoCleanContainer",
   "tweakmAutoCleanContainer.comment": "Automatically drops everything in the opened container\nand then close the container",
-  "tweakmAutoCleanContainer.container_cleaned": "Dropped all items inside %1$s",
+  "tweakmAutoCleanContainer.container_cleaned": "Dropped all items in %1$s slots inside %2$s",
   "tweakmAutoFillContainer": "tweakmAutoFillContainer",
   "tweakmAutoFillContainer.comment": "Automatically fill the opened container with the most numerous item stack in your inventory\niff the item stack is the only most numerous one\nand then close the container",
   "tweakmAutoFillContainer.container_filled": "Filled %1$s with all %2$s items (%3$s)",

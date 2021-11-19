@@ -1,7 +1,8 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.tweakmAutoCleanContainer;
+package me.fallenbreath.tweakermore.mixins.tweaks.tweakmAutoContainerProcess;
 
-import me.fallenbreath.tweakermore.impl.tweakmAutoCleanContainer.TweakAutoCleanContainer;
+import me.fallenbreath.tweakermore.impl.tweakmAutoContainerProcess.IScreen;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,8 +13,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ClientPlayNetworkHandlerMixin
 {
 	@Inject(method = "onOpenContainer", at = @At("TAIL"))
-	private void tweakmAutoCleanContainer(CallbackInfo ci)
+	private void tweakmAutoFillContainerMarking(CallbackInfo ci)
 	{
-		TweakAutoCleanContainer.process(MinecraftClient.getInstance().currentScreen);
+		Screen screen = MinecraftClient.getInstance().currentScreen;
+		if (screen != null)
+		{
+			((IScreen)screen).setShouldProcess(true);
+		}
 	}
 }

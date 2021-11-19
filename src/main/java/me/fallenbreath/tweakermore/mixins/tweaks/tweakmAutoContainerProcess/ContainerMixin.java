@@ -1,6 +1,6 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.tweakmAutoFillContainer;
+package me.fallenbreath.tweakermore.mixins.tweaks.tweakmAutoContainerProcess;
 
-import me.fallenbreath.tweakermore.impl.tweakmAutoFillContainer.TweakAutoFillContainer;
+import me.fallenbreath.tweakermore.impl.tweakmAutoContainerProcess.ContainerProcessor;
 import net.minecraft.container.Container;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,6 +13,6 @@ public abstract class ContainerMixin
 	@Inject(method = "updateSlotStacks", at = @At("TAIL"))
 	private void tweakmAutoFillContainer(CallbackInfo ci)
 	{
-		TweakAutoFillContainer.process((Container)(Object)this);
+		ContainerProcessor.process((Container)(Object)this);
 	}
 }

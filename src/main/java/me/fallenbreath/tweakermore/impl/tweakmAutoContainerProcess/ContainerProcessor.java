@@ -1,9 +1,6 @@
-package me.fallenbreath.tweakermore.impl.tweakmAutoFillContainer;
+package me.fallenbreath.tweakermore.impl.tweakmAutoContainerProcess;
 
-import fi.dy.masa.itemscroller.util.InventoryUtils;
-import fi.dy.masa.malilib.util.InfoUtils;
-import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.config.TweakerMoreToggles;
+import com.google.common.collect.ImmutableList;
 import me.fallenbreath.tweakermore.mixins.access.ItemScrollerInventoryUtilsAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -14,17 +11,25 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.container.Container;
 import net.minecraft.container.Slot;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TweakAutoFillContainer
+public class ContainerProcessor
 {
+	private static final List<Processor> CONTAINER_PROCESSORS = ImmutableList.of(
+			new ContainerCleaner(),
+			new ContainerFiller()
+	);
+
+	private static boolean hasTweakEnabled()
+	{
+		return CONTAINER_PROCESSORS.stream().anyMatch(Processor::isEnabled);
+	}
+
 	public static void process(Container container)
 	{
-		if (TweakerMoreToggles.TWEAKM_AUTO_FILL_CONTAINER.getBooleanValue())
+		if (hasTweakEnabled())
 		{
 			Screen screen = MinecraftClient.getInstance().currentScreen;
 			ClientPlayerEntity player = MinecraftClient.getInstance().player;
@@ -48,34 +53,16 @@ public class TweakAutoFillContainer
 				{
 					return;
 				}
-				Slot bestSlot = null;
-				long maxCount = TweakerMoreConfigs.AUTO_FILL_CONTAINER_THRESHOLD.getIntegerValue() - 1;
-				for (Slot slot : playerInvSlots)
-					if (slot.hasStack() && containerInvSlots.get(0).canInsert(slot.getStack()))
+				for (Processor processor : CONTAINER_PROCESSORS)
+				{
+					if (processor.isEnabled())
 					{
-						long cnt = playerInvSlots.stream().filter(slt -> InventoryUtils.areStacksEqual(slot.getStack(), slt.getStack())).count();
-						if (cnt > maxCount)
+						boolean success = processor.process(player, containerScreen, allSlots, playerInvSlots, containerInvSlots);
+						if (success)
 						{
-							maxCount = cnt;
-							bestSlot = slot;
-						}
-						else if (cnt == maxCount && bestSlot != null && !InventoryUtils.areStacksEqual(slot.getStack(), bestSlot.getStack()))
-						{
-							bestSlot = null;
+							break;
 						}
 					}
-				if (bestSlot != null && !allSlots.isEmpty())
-				{
-					Text stackName = bestSlot.getStack().getName();
-					InventoryUtils.tryMoveStacks(bestSlot, containerScreen, true, true, false);
-					long amount = containerInvSlots.stream().filter(Slot::hasStack).count(), total = containerInvSlots.size();
-					boolean isFull = Container.calculateComparatorOutput(containerInvSlots.get(0).inventory) >= 15;
-					String percentage = String.format("%s%d/%d%s", isFull ? Formatting.GREEN : Formatting.GOLD, amount, total, Formatting.RESET);
-					InfoUtils.printActionbarMessage("tweakmAutoFillContainer.container_filled", screen.getTitle(), stackName, percentage);
-				}
-				else
-				{
-					InfoUtils.printActionbarMessage("tweakmAutoFillContainer.best_slot_not_found");
 				}
 				player.closeContainer();
 			}

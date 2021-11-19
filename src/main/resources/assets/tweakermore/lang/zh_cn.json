@@ -16,7 +16,7 @@
 
   "tweakmAutoCleanContainer": "tweakmAutoCleanContainer | 自动清空容器",
   "tweakmAutoCleanContainer.comment": "打开后容器，自动将容器内的所有物品扔出\n然后关闭容器",
-  "tweakmAutoCleanContainer.container_cleaned": "已扔出容器 %1$s 中的所有物品",
+  "tweakmAutoCleanContainer.container_cleaned": "已扔出容器 %2$s 中 %1$s 个槽位中的所有物品",
   "tweakmAutoFillContainer": "tweakmAutoFillContainer | 自动装填容器",
   "tweakmAutoFillContainer.comment": "打开后容器，自动使用物品栏中占用格子数最多的物品装填容器\n当且仅当占用格子数最多的物品是唯一的\n然后关闭容器",
   "tweakmAutoFillContainer.container_filled": "已使用所有 %2$s 物品装填容器 %1$s (%3$s)",
