@@ -3,9 +3,9 @@ package me.fallenbreath.tweakermore.impl.tweakmAutoContainerProcess;
 import fi.dy.masa.itemscroller.util.InventoryUtils;
 import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreToggles;
-import net.minecraft.client.gui.screen.ingame.ContainerScreen;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.container.Slot;
+import net.minecraft.screen.slot.Slot;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class ContainerCleaner implements Processor
 	}
 
 	@Override
-	public boolean process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
+	public boolean process(ClientPlayerEntity player, HandledScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
 	{
 		int counter = 0;
 		for (Slot slot : containerInvSlots)
