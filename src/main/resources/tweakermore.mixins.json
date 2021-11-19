@@ -9,16 +9,14 @@
     "core.DisableConfigsMixin",
     "core.GenericConfigsMixin",
     "core.ListsConfigsMixin",
-    "misc.ConfigBaseMixin",
     "tweaks.disableLightUpdates.ClientChunkManagerMixin",
     "tweaks.disableLightUpdates.LightingProviderMixin",
     "tweaks.handRestoreRestriction.InventoryUtilsMixin",
     "tweaks.handRestoreRestriction.PlacementTweaksMixin",
     "tweaks.netherPortalSoundChance.NetherPortalBlockMixin",
-    "tweaks.tweakmAutoCleanContainer.ClientPlayNetworkHandlerMixin",
-    "tweaks.tweakmAutoFillContainer.ClientPlayNetworkHandlerMixin",
-    "tweaks.tweakmAutoFillContainer.ContainerMixin",
-    "tweaks.tweakmAutoFillContainer.ScreenMixin"
+    "tweaks.tweakmAutoContainerProcess.ClientPlayNetworkHandlerMixin",
+    "tweaks.tweakmAutoContainerProcess.ContainerMixin",
+    "tweaks.tweakmAutoContainerProcess.ScreenMixin"
   ],
   "client": [
   ],
