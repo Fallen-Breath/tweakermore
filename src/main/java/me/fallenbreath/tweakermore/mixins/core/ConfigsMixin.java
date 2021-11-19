@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Configs.class)
-public class ConfigsMixin
+public abstract class ConfigsMixin
 {
 	@Inject(method = "loadFromFile", at = @At("TAIL"), remap = false)
 	private static void buildRestrictionLists(CallbackInfo ci)

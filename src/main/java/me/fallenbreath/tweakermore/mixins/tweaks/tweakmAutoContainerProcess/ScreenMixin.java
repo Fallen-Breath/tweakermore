@@ -1,6 +1,6 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.tweakmAutoFillContainer;
+package me.fallenbreath.tweakermore.mixins.tweaks.tweakmAutoContainerProcess;
 
-import me.fallenbreath.tweakermore.impl.tweakmAutoFillContainer.IScreen;
+import me.fallenbreath.tweakermore.impl.tweakmAutoContainerProcess.IScreen;
 import net.minecraft.client.gui.screen.Screen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
