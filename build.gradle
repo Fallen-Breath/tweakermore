@@ -30,15 +30,15 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// https://masa.dy.fi/maven/fi/dy/masa/malilib/
-	modImplementation("fi.dy.masa.malilib:malilib-fabric-1.15.2:0.10.0-dev.20+beta.1") {
+	modImplementation("fi.dy.masa.malilib:malilib-fabric-1.14.4:0.10.0-dev.20") {
 		exclude group: 'io.github.prospector', module: 'modmenu'
 	}
 
 	// https://www.curseforge.com/minecraft/mc-mods/tweakeroo/files
-	modImplementation "curse.maven:tweakeroo-297344:2942277"  // tweakeroo-fabric-1.15.2-0.10.0-dev.20200424.222527.jar
+	modImplementation "curse.maven:tweakeroo-297344:2777627"  // tweakeroo-fabric-1.14.4-0.10.0-dev.20190903.193019.jar
 
 	// https://www.curseforge.com/minecraft/mc-mods/item-scroller/files
-	modImplementation "curse.maven:item-scroller-242064:2880360"  // itemscroller-fabric-1.15.2-0.15.0-dev.20200212.183513.jar
+	modImplementation "curse.maven:item-scroller-242064:2744844"  // itemscroller-fabric-1.14.4-0.15.0-dev.20190720.190250.jar
 
 
 	modImplementation "com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}"
