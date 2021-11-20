@@ -13,6 +13,8 @@
 
   "disableLightUpdates": "disableLightUpdates",
   "disableLightUpdates.comment": "Yeets client-side light updates",
+  "disableRedstoneWireParticle": "disableRedstoneWireParticle",
+  "disableRedstoneWireParticle.comment": "Disable particle of redstone wire",
 
   "tweakmAutoCleanContainer": "tweakmAutoCleanContainer",
   "tweakmAutoCleanContainer.comment": "Automatically drops everything in the opened container\nand then close the container",
