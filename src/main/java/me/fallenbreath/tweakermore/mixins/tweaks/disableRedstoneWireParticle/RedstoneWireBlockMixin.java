@@ -12,7 +12,7 @@ public abstract class RedstoneWireBlockMixin
 {
 	// inject right before world.addParticle to avoid client RNG side effects
 	@Inject(
-			method = "randomDisplayTick",
+			method = "method_27936",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/world/World;addParticle(Lnet/minecraft/particle/ParticleEffect;DDDDDD)V"
