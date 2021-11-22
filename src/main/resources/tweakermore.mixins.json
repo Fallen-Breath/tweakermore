@@ -11,6 +11,7 @@
     "core.ListsConfigsMixin",
     "tweaks.disableLightUpdates.ClientChunkManagerMixin",
     "tweaks.disableLightUpdates.LightingProviderMixin",
+    "tweaks.disableRedstoneWireParticle.RedstoneWireBlockMixin",
     "tweaks.handRestoreRestriction.InventoryUtilsMixin",
     "tweaks.handRestoreRestriction.PlacementTweaksMixin",
     "tweaks.netherPortalSoundChance.NetherPortalBlockMixin",
