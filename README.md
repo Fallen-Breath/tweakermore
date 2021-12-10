@@ -18,6 +18,7 @@ New tweaks:
 - tweakmAutoFillContainer (Tweak toggles)
 - netherPortalSoundChance (Generic)
 - disableLightUpdates (Disable)
+- disableRedstoneWireParticle (Disable)
 - handRestockListType (List)
 - handRestockWhiteList (List)
 - handRestockBlackList (List)

@@ -13,6 +13,8 @@
 
   "disableLightUpdates": "disableLightUpdates | 禁用光照更新",
   "disableLightUpdates.comment": "禁用客户端光照更新",
+  "disableRedstoneWireParticle": "disableRedstoneWireParticle | 禁用红石粉粒子效果",
+  "disableRedstoneWireParticle.comment": "禁用红石粉发出的粒子效果",
 
   "tweakmAutoCleanContainer": "tweakmAutoCleanContainer | 自动清空容器",
   "tweakmAutoCleanContainer.comment": "打开后容器，自动将容器内的所有物品扔出\n然后关闭容器",
