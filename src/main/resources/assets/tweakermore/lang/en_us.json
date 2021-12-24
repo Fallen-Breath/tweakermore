@@ -3,6 +3,8 @@
   "netherPortalSoundChance.comment": "The chance for a nether portal block to play sound\nSet it to 0.001 or 0.0001 for less noisy portal",
   "autoFillContainerThreshold": "autoFillContainerThreshold",
   "autoFillContainerThreshold.comment": "The minimum occupied slot amount for the item to trigger tweak tweakmAutoFillContainer\ne.g. if you always have 2 slots of firework rocket you can set the value to 3,\n then your rockets will never be used to fill the container",
+  "villagerOfferUsesDisplay": "villagerOfferUsesDisplay",
+  "villagerOfferUsesDisplay.comment": "Display villager offer use and limit amount on villager offer list\nHover on the arrow of the offer to see it",
 
   "handRestockListType": "handRestockListType",
   "handRestockListType.comment": "The item restriction type for tweakHandRestock",
