@@ -3,6 +3,8 @@
   "netherPortalSoundChance.comment": "地狱门方块播放音效的概率\n将其设为0.001或0.0001来让地狱门没那么吵",
   "autoFillContainerThreshold": "autoFillContainerThreshold | 自动填充容器阈值",
   "autoFillContainerThreshold.comment": "触发工具 tweakmAutoFillContainer 所需要的最小的物品槽位数\n例如，如果你总是带着2个格子的烟花火箭，那么你可以将其设置为3，\n那么这些烟花物品将必定不会被用于填充容器",
+  "villagerOfferUsesDisplay": "villagerOfferUsesDisplay | 村民交易次数显示",
+  "villagerOfferUsesDisplay.comment": "在村民交易列表中显示当前交易的次数以及上限\n将指针移至交易的箭头上来以显示",
 
   "handRestockListType": "handRestockListType | 自动补货名单约束类型",
   "handRestockListType.comment": "tweakHandRestock 工具的物品名单约束类型",
