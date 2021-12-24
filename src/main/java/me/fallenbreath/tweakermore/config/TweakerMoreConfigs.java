@@ -22,6 +22,8 @@ public class TweakerMoreConfigs
 	public static final ConfigInteger AUTO_FILL_CONTAINER_THRESHOLD = new ConfigInteger("autoFillContainerThreshold", 2, 1, 36, "autoFillContainerThreshold.comment");
 	@GenericConfig
 	public static final ConfigDouble NETHER_PORTAL_SOUND_CHANCE = new ConfigDouble("netherPortalSoundChance", 0.01D, 0.0D, 0.01D, "netherPortalSoundChance.comment");
+	@GenericConfig
+	public static final ConfigBoolean VILLAGER_OFFER_USES_DISPLAY = new ConfigBoolean("villagerOfferUsesDisplay", false, "villagerOfferUsesDisplay.comment");
 
 	@ListConfig
 	public static final ConfigOptionList HAND_RESTORE_LIST_TYPE = new ConfigOptionList("handRestockListType", UsageRestriction.ListType.NONE, "handRestockListType.comment");
