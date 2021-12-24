@@ -27,7 +27,7 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
 	}
 
 	@Inject(
-			method = "renderToolTip(Lnet/minecraft/client/util/math/MatrixStack;II)V",
+			method = "renderTooltip(Lnet/minecraft/client/util/math/MatrixStack;II)V",
 			at = @At(
 					value = "FIELD",
 					target = "Lnet/minecraft/client/gui/screen/ingame/MerchantScreen$WidgetButtonPage;x:I",
