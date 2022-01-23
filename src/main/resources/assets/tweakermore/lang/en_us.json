@@ -3,6 +3,8 @@
   "netherPortalSoundChance.comment": "The chance for a nether portal block to play sound\nSet it to 0.001 or 0.0001 for less noisy portal",
   "autoFillContainerThreshold": "autoFillContainerThreshold",
   "autoFillContainerThreshold.comment": "The minimum occupied slot amount for the item to trigger tweak tweakmAutoFillContainer\ne.g. if you always have 2 slots of firework rocket you can set the value to 3,\n then your rockets will never be used to fill the container",
+  "villagerOfferUsesDisplay": "villagerOfferUsesDisplay",
+  "villagerOfferUsesDisplay.comment": "Display villager offer use and limit amount on villager offer list\nHover on the arrow of the offer to see it",
 
   "handRestockListType": "handRestockListType",
   "handRestockListType.comment": "The item restriction type for tweakHandRestock",
@@ -22,5 +24,8 @@
   "tweakmAutoFillContainer": "tweakmAutoFillContainer",
   "tweakmAutoFillContainer.comment": "Automatically fill the opened container with the most numerous item stack in your inventory\niff the item stack is the only most numerous one\nand then close the container",
   "tweakmAutoFillContainer.container_filled": "Filled %1$s with all %2$s items (%3$s)",
-  "tweakmAutoFillContainer.best_slot_not_found": "Most suitable item to fill the container not found"
+  "tweakmAutoFillContainer.best_slot_not_found": "Most suitable item to fill the container not found",
+
+  "tweakmAutoPickSchematicBlock": "tweakmAutoPickSchematicBlock",
+  "tweakmAutoPickSchematicBlock.comment": "Pick block from schematic automatically before block placement\nIt's logic is the same as the pickBlock tweaks in litematica mod, you need to enable pickBlockEnabled option in litematica\nDoes not work with easy place mode"
 }

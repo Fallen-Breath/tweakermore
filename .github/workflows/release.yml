@@ -4,23 +4,39 @@ on:
   release:
     types:
       - published
+  workflow_dispatch:
+    inputs:
+      target_release_tag:
+        description: The tag of the release you want to append the artifact to
+        required: true
 
 
 jobs:
+  matrix_prep:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.setmatrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: 'Display current branch/tag name'
+        run: echo ${{ github.ref_name }}
+
+      - id: setmatrix
+        uses: JoshuaTheMiller/conditional-build-matrix@0.0.1
+        with:
+          # inputFile: '.github/workflows/matrix_includes.json' # Default input file path
+          filter: '[? `${{ github.event_name }}` == `release` || `${{ github.ref_name }}` == branch]'
+
+      - name: 'Print matrix'
+        run: echo ${{ steps.setmatrix.outputs.matrix }}
+
   release:
+    needs: matrix_prep
     runs-on: ubuntu-latest
 
     strategy:
-      matrix:
-        include:
-          - branch: 1.15.2
-            cf_game_versions: modloader:fabric,minecraft-1-15:1.15.2
-          - branch: 1.16.5
-            cf_game_versions: modloader:fabric,minecraft-1-16:1.16.5
-          - branch: 1.17.1
-            cf_game_versions: modloader:fabric,minecraft-1-17:1.17.1
-          - branch: 1.18.x
-            cf_game_versions: modloader:fabric,minecraft-1-18:1.18.1
+      matrix: ${{fromJson(needs.matrix_prep.outputs.matrix)}}
 
     steps:
       - uses: actions/checkout@v2
@@ -47,6 +63,8 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew build
+        env:
+          BUILD_RELEASE: true
 
       - name: Find correct JAR  # ty fabric carpet
         id: findjar
@@ -60,10 +78,34 @@ jobs:
           name: '[${{ matrix.branch }}] build-artifacts'
           path: build/libs/
 
-      - name: Upload to the Github release
+      - name: Get github release information
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        id: get_release
+        uses: cardinalby/git-get-release-action@v1.1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          tag: ${{ github.event.inputs.target_release_tag }}
+
+      - name: Generate publish related infomation
+        id: release_info
+        run: |
+          if [ $GITHUB_EVENT_NAME == 'release' ]
+          then
+              echo "::set-output name=tag_name::"  # leave an empty value here so softprops/action-gh-release will use the default value
+          elif [ $GITHUB_EVENT_NAME == 'workflow_dispatch' ]
+          then
+              echo "::set-output name=tag_name::${{ github.event.inputs.target_release_tag }}"
+          else
+              echo Unknown github event name $GITHUB_EVENT_NAME
+              exit 1
+          fi
+
+      - name: Upload to Github release
         uses: softprops/action-gh-release@v1
         with:
           files: build/libs/${{ steps.findjar.outputs.jarname }}
+          tag_name: ${{ steps.release_info.outputs.tag_name }}
 
       - name: Upload to CurseForge
         uses: itsmeow/curseforge-upload@v3
@@ -73,7 +115,7 @@ jobs:
           game_endpoint: minecraft
           game_versions: ${{ matrix.cf_game_versions }}
           changelog_type: markdown
-          changelog: ${{ github.event.release.body }}
+          changelog: ${{ format('{0}{1}', github.event.release.body, steps.get_release.outputs.body) }}  # one of them should be an empty string (null)
           file_path: build/libs/${{ steps.findjar.outputs.jarname }}
           release_type: release
-          relations: tweakeroo:requiredDependency,item-scroller:requiredDependency
+          relations: malilib:requiredDependency,tweakeroo:requiredDependency,item-scroller:requiredDependency,litematica:requiredDependency
