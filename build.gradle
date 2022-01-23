@@ -19,8 +19,18 @@ repositories {
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
+String versionSuffix = ''
+if (System.getenv("BUILD_RELEASE") != "true") {
+	versionSuffix += '-SHAPSHOT'
+}
+String buildNumber = System.getenv("BUILD_ID")
+if (buildNumber != null) {
+	versionSuffix += '+build.' + buildNumber
+}
+String fullModVersion = project.mod_version + versionSuffix
+
 archivesBaseName = project.archives_base_name
-version = 'mc' + project.minecraft_version + '-v' + project.mod_version
+version = 'mc' + project.minecraft_version + '-v' + fullModVersion
 group = project.maven_group
 
 dependencies {
@@ -40,7 +50,7 @@ dependencies {
 	// https://www.curseforge.com/minecraft/mc-mods/item-scroller/files
 	modImplementation "curse.maven:item-scroller-242064:2744844"  // itemscroller-fabric-1.14.4-0.15.0-dev.20190720.190250.jar
 
-	// https://www.curseforge.com/minecraft/mc-mods/litematica/files/2957593
+	// https://www.curseforge.com/minecraft/mc-mods/litematica/files
 	modImplementation "curse.maven:litematica-308892:2846571"  // litematica-fabric-1.14.4-0.0.0-dev.20191222.014040.jar
 
 
@@ -52,10 +62,10 @@ dependencies {
 }
 
 processResources {
-	inputs.property "version", project.version
+	inputs.property "version", fullModVersion
 
 	filesMatching("fabric.mod.json") {
-		expand "version": project.mod_version
+		expand "version": fullModVersion
 	}
 }
 
