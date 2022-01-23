@@ -16,7 +16,7 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
 {
 	@Shadow @Final MerchantScreen field_19166;
 
-	@Shadow @Final int index;
+	@Shadow @Final int field_19165;
 
 	public MerchantScreenWidgetButtonPageMixin(int x, int y, int width, int height, String message, PressAction onPress)
 	{
@@ -37,7 +37,7 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
 		{
 			if (this.x + 50 <= mouseX && mouseX <= this.x + 65)
 			{
-				TradeOffer offer = this.field_19166.getContainer().getRecipes().get(this.index + ((MerchantScreenAccessor)this.field_19166).getIndexStartOffset());
+				TradeOffer offer = this.field_19166.getContainer().getRecipes().get(this.field_19165 + ((MerchantScreenAccessor)this.field_19166).getIndexStartOffset());
 				this.field_19166.renderTooltip(String.format("%d / %d", offer.getUses(), offer.getMaxUses()), mouseX, mouseY);
 			}
 		}
