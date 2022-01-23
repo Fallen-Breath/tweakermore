@@ -39,7 +39,7 @@ dependencies {
 	modImplementation "curse.maven:item-scroller-242064:3168057"  // itemscroller-fabric-1.16.4-0.15.0-dev.20210111.205029.jar
 
 	// https://www.curseforge.com/minecraft/mc-mods/litematica/files/2957593
-	modImplementation "curse.maven:litematica-308892:2957593"  // litematica-fabric-1.15.2-0.0.0-dev.20200515.184506.jar
+	modImplementation "curse.maven:litematica-308892:3349118"  // litematica-fabric-1.16.4-0.0.0-dev.20210612.170003.jar
 
 
 	modImplementation "com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}"

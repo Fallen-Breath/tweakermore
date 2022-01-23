@@ -23,6 +23,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -105,10 +106,18 @@ public abstract class PlacementTweaksMixin
 				{
 					int slot = inv.getSlotWithStack(stack);
 					boolean shouldPick = inv.selectedSlot != slot;
-					boolean canPick = slot != -1;
-					if (shouldPick && canPick)
+					if (shouldPick && slot != -1)
 					{
 						InventoryUtils.setPickedItemToHand(stack, mc);
+					}
+					else if (slot == -1 && Configs.Generic.PICK_BLOCK_SHULKERS.getBooleanValue())
+					{
+						slot = InventoryUtils.findSlotWithBoxWithItem(mc.player.playerScreenHandler, stack, false);
+						if (slot != -1)
+						{
+							ItemStack boxStack = ((Slot) mc.player.playerScreenHandler.slots.get(slot)).getStack();
+							InventoryUtils.setPickedItemToHand(boxStack, mc);
+						}
 					}
 				}
 
