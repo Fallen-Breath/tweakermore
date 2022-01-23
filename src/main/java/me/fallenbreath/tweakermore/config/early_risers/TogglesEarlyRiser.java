@@ -13,6 +13,7 @@ public class TogglesEarlyRiser implements Runnable
 		ClassTinkerers.enumBuilder(FeatureToggleClassPath, String.class, boolean.class, String.class, String.class, String.class).
 				addEnum("TWEAKM_AUTO_CLEAN_CONTAINER", "tweakmAutoCleanContainer", false, "", "tweakmAutoCleanContainer.comment", "Auto Clean Container").
 				addEnum("TWEAKM_AUTO_FILL_CONTAINER", "tweakmAutoFillContainer", false, "", "tweakmAutoFillContainer.comment", "Auto Fill Container").
+				addEnum("TWEAKM_AUTO_PICK_SCHEMATIC_BLOCK", "tweakmAutoPickSchematicBlock", false, "", "tweakmAutoPickSchematicBlock.comment", "Auto Pick Schematic Block").
 				build();
 	}
 }

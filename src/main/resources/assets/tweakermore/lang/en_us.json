@@ -24,5 +24,8 @@
   "tweakmAutoFillContainer": "tweakmAutoFillContainer",
   "tweakmAutoFillContainer.comment": "Automatically fill the opened container with the most numerous item stack in your inventory\niff the item stack is the only most numerous one\nand then close the container",
   "tweakmAutoFillContainer.container_filled": "Filled %1$s with all %2$s items (%3$s)",
-  "tweakmAutoFillContainer.best_slot_not_found": "Most suitable item to fill the container not found"
+  "tweakmAutoFillContainer.best_slot_not_found": "Most suitable item to fill the container not found",
+
+  "tweakmAutoPickSchematicBlock": "tweakmAutoPickBlock",
+  "tweakmAutoPickSchematicBlock.comment": "Pick block from schematic automatically before block placement\nIt's logic is the same as the pickBlock tweaks in litematica mod, you need to enable pickBlockEnabled option in litematica\nDoes not work with easy place mode"
 }
