@@ -24,5 +24,8 @@
   "tweakmAutoFillContainer": "tweakmAutoFillContainer | 自动装填容器",
   "tweakmAutoFillContainer.comment": "打开后容器，自动使用物品栏中占用格子数最多的物品装填容器\n当且仅当占用格子数最多的物品是唯一的\n然后关闭容器",
   "tweakmAutoFillContainer.container_filled": "已使用所有 %2$s 物品装填容器 %1$s (%3$s)",
-  "tweakmAutoFillContainer.best_slot_not_found": "未找到最适合装填容器的物品"
+  "tweakmAutoFillContainer.best_slot_not_found": "未找到最适合装填容器的物品",
+
+  "tweakmAutoPickSchematicBlock": "tweakmAutoPickSchematicBlock | 自动选择原理图方块",
+  "tweakmAutoPickSchematicBlock.comment": "在放置方块前自动选择原理图中的方块对应的物品\n逻辑同litematica mod的pickBlock功能，你需要在litematica mod中启用pickBlockEnabled选项\n在轻松放置开启时无效"
 }
