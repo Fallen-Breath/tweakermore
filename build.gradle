@@ -30,16 +30,16 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// https://masa.dy.fi/maven/fi/dy/masa/malilib/
-	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.17.1:0.10.0-dev.24"
+	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.17.1:0.10.0-dev.26"
 
 	// https://www.curseforge.com/minecraft/mc-mods/tweakeroo/files
-	modImplementation "curse.maven:tweakeroo-297344:3383609"  // tweakeroo-fabric-1.17.1-0.10.0-dev.20210710.155746.jar
+	modImplementation "curse.maven:tweakeroo-297344:3579869"  // tweakeroo-fabric-1.17.1-0.11.0.jar
 
 	// https://www.curseforge.com/minecraft/mc-mods/item-scroller/files
-	modImplementation "curse.maven:item-scroller-242064:3379264"  // itemscroller-fabric-1.17.1-0.15.0-dev.20210707.005506.jar
+	modImplementation "curse.maven:item-scroller-242064:3542814"  // itemscroller-fabric-1.17.1-0.15.0-dev.20211201.010054.jar
 
-	// https://www.curseforge.com/minecraft/mc-mods/litematica/files/2957593
-	modImplementation "curse.maven:litematica-308892:3349118"  // litematica-fabric-1.16.4-0.0.0-dev.20210612.170003.jar
+	// https://www.curseforge.com/minecraft/mc-mods/litematica/files
+	modImplementation "curse.maven:litematica-308892:3580241"  // litematica-fabric-1.17.1-0.9.0.jar
 
 
 	modImplementation "com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}"
