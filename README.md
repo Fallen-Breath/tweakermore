@@ -11,11 +11,13 @@ Requires:
 
 - [tweakeroo](https://github.com/maruohon/tweakeroo)
 - [itemscroller](https://github.com/maruohon/itemscroller)
+- [litematica](https://github.com/maruohon/litematica)
 
 New tweaks:
 
 - tweakmAutoCleanContainer (Tweak toggles)
 - tweakmAutoFillContainer (Tweak toggles)
+- tweakmAutoPickSchematicBlock (Tweak toggles)
 - autoFillContainerThreshold (Generic)
 - netherPortalSoundChance (Generic)
 - villagerOfferUsesDisplay (Generic)
