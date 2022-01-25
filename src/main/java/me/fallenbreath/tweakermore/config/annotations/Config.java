@@ -7,6 +7,12 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ListConfig
+public @interface Config
 {
+	Type[] value();
+
+	enum Type
+	{
+		GENERIC, LIST, TOGGLE, DISABLE
+	}
 }
