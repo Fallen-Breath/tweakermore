@@ -15,6 +15,7 @@
     "tweaks.handRestoreRestriction.InventoryUtilsMixin",
     "tweaks.handRestoreRestriction.PlacementTweaksMixin",
     "tweaks.netherPortalSoundChance.NetherPortalBlockMixin",
+    "tweaks.shulkerTooltipEnchantmentHint.ShulkerBoxBlockMixin",
     "tweaks.tweakmAutoContainerProcess.ClientPlayNetworkHandlerMixin",
     "tweaks.tweakmAutoContainerProcess.ContainerMixin",
     "tweaks.tweakmAutoContainerProcess.ScreenMixin",
