@@ -6,13 +6,14 @@ import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.EnchantedBookItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.BlockView;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,7 +31,7 @@ public abstract class ShulkerBoxBlockMixin
 	private static final int MAX_ENCHANTMENT_DISPLAY = 3;
 
 	@Inject(
-			method = "buildTooltip",
+			method = "appendTooltip",
 			slice = @Slice(
 					from = @At(
 							value = "CONSTANT",
@@ -44,13 +45,13 @@ public abstract class ShulkerBoxBlockMixin
 			),
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
-	private void shulkerTooltipEnchantmentHint(ItemStack shulker, BlockView view, List<Text> tooltip, TooltipContext options, CallbackInfo ci, CompoundTag compoundTag, DefaultedList<ItemStack> defaultedList, int i_, int j_, Iterator<ItemStack> var9, ItemStack itemStack, Text text)
+	private void shulkerTooltipEnchantmentHint(ItemStack shulker, BlockView world, List<Text> tooltip, TooltipContext options, CallbackInfo ci, NbtCompound nbtCompound, DefaultedList<ItemStack> defaultedList, int i_, int j_, Iterator<ItemStack> var9, ItemStack itemStack, MutableText text)
 	{
 
 		if (TweakerMoreConfigs.SHULKER_TOOLTIP_ENCHANTMENT_HINT.getBooleanValue())
 		{
 			List<Text> enchantmentTexts = Lists.newArrayList();
-			ListTag enchantmentTag = itemStack.getItem() instanceof EnchantedBookItem ? EnchantedBookItem.getEnchantmentTag(itemStack) : itemStack.getEnchantments();
+			NbtList enchantmentTag = itemStack.getItem() instanceof EnchantedBookItem ? EnchantedBookItem.getEnchantmentNbt(itemStack) : itemStack.getEnchantments();
 			ItemStack.appendEnchantments(enchantmentTexts, enchantmentTag);
 			int amount = enchantmentTexts.size();
 			if (amount > 0)
