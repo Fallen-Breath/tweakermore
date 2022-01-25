@@ -21,6 +21,7 @@ New tweaks:
 - autoFillContainerThreshold (Generic)
 - netherPortalSoundChance (Generic)
 - villagerOfferUsesDisplay (Generic)
+- shulkerTooltipItemEnchantmentHint (Generic)
 - disableLightUpdates (Disable)
 - disableRedstoneWireParticle (Disable)
 - handRestockListType (List)

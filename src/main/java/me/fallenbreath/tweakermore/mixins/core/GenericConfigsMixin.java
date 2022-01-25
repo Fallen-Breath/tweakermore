@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.tweakeroo.config.Configs;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.config.annotations.GenericConfig;
+import me.fallenbreath.tweakermore.config.annotations.Config;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
@@ -18,6 +18,6 @@ public abstract class GenericConfigsMixin
 
 	static
 	{
-		OPTIONS = TweakerMoreConfigs.updateOptionList(OPTIONS, GenericConfig.class);
+		OPTIONS = TweakerMoreConfigs.updateOptionList(OPTIONS, Config.Type.GENERIC);
 	}
 }
