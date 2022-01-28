@@ -30,5 +30,11 @@
   "tweakmAutoFillContainer.best_slot_not_found": "Most suitable item to fill the container not found",
 
   "tweakmAutoPickSchematicBlock": "tweakmAutoPickSchematicBlock",
-  "tweakmAutoPickSchematicBlock.comment": "Pick block from schematic automatically before block placement\nIt's logic is the same as the pickBlock tweaks in litematica mod, you need to enable pickBlockEnabled option in litematica\nDoes not work with easy place mode"
+  "tweakmAutoPickSchematicBlock.comment": "Pick block from schematic automatically before block placement\nIt's logic is the same as the pickBlock tweaks in litematica mod, you need to enable pickBlockEnabled option in litematica\nDoes not work with easy place mode",
+
+
+  "tweakermore.gui.title": "TweakerMore v%1$s Config GUI",
+  "tweakermore.gui.button.config_gui.tweaks": "Tweaks",
+  "tweakermore.gui.button.config_gui.hotkeys": "Hotkeys",
+  "tweakermore.gui.button.config_gui.config": "Config"
 }

@@ -8,6 +8,9 @@ repositories {
 		url 'https://masa.dy.fi/maven'
 	}
 	maven {
+		url 'https://maven.terraformersmc.com/releases'
+	}
+	maven {
 		url 'https://www.cursemaven.com'
 	}
 	maven {
@@ -53,6 +56,8 @@ dependencies {
 	// https://www.curseforge.com/minecraft/mc-mods/litematica/files
 	modImplementation "curse.maven:litematica-308892:2957593"  // litematica-fabric-1.15.2-0.0.0-dev.20200515.184506.jar
 
+
+	modImplementation "com.terraformersmc:modmenu:${project.mod_menu_version}"
 
 	modImplementation "com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}"
 	include "com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}"

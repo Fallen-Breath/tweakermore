@@ -1,7 +1,6 @@
 package me.fallenbreath.tweakermore;
 
 import fi.dy.masa.malilib.event.InitializationHandler;
-import fi.dy.masa.malilib.interfaces.IInitializationHandler;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
@@ -20,15 +19,8 @@ public class TweakerMoreMod implements ClientModInitializer
 	public void onInitializeClient()
 	{
 		VERSION = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
-		InitializationHandler.getInstance().registerInitializationHandler(new InitHandler());
-	}
-
-	private static class InitHandler implements IInitializationHandler
-	{
-		@Override
-		public void registerModHandlers()
-		{
+		InitializationHandler.getInstance().registerInitializationHandler(() -> {
 			// maybe
-		}
+		});
 	}
 }

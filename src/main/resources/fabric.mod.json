@@ -21,7 +21,10 @@
       "me.fallenbreath.tweakermore.TweakerMoreMod"
     ],
     "mm:early_risers": [
-      "me.fallenbreath.tweakermore.config.TweakerMoreToggles$TogglesEarlyRiser"
+      "me.fallenbreath.tweakermore.config.TogglesEarlyRiser"
+    ],
+    "modmenu": [
+      "me.fallenbreath.tweakermore.compat.modmenu.ModMenuApiImpl"
     ]
   },
   "mixins": [
@@ -32,8 +35,5 @@
     "tweakeroo": "*",
     "itemscroller": "*",
     "litematica": "*"
-  },
-  "suggests": {
-    "flamingo": "*"
   }
 }

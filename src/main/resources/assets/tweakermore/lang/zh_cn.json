@@ -30,5 +30,10 @@
   "tweakmAutoFillContainer.best_slot_not_found": "未找到最适合装填容器的物品",
 
   "tweakmAutoPickSchematicBlock": "tweakmAutoPickSchematicBlock | 自动选择原理图方块",
-  "tweakmAutoPickSchematicBlock.comment": "在放置方块前自动选择原理图中的方块对应的物品\n逻辑同litematica mod的pickBlock功能，你需要在litematica mod中启用pickBlockEnabled选项\n在轻松放置开启时无效"
+  "tweakmAutoPickSchematicBlock.comment": "在放置方块前自动选择原理图中的方块对应的物品\n逻辑同litematica mod的pickBlock功能，你需要在litematica mod中启用pickBlockEnabled选项\n在轻松放置开启时无效",
+
+  "tweakermore.gui.title": "TweakerMore v%1$s 配置界面",
+  "tweakermore.gui.button.config_gui.tweaks": "功能",
+  "tweakermore.gui.button.config_gui.hotkeys": "热键",
+  "tweakermore.gui.button.config_gui.config": "配置"
 }

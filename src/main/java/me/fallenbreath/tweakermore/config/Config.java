@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.config.annotations;
+package me.fallenbreath.tweakermore.config;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

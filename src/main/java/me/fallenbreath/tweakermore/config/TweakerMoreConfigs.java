@@ -12,7 +12,6 @@ import fi.dy.masa.malilib.util.JsonUtils;
 import fi.dy.masa.malilib.util.restrictions.ItemRestriction;
 import fi.dy.masa.malilib.util.restrictions.UsageRestriction;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
-import me.fallenbreath.tweakermore.config.annotations.Config;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -21,10 +20,8 @@ import net.minecraft.util.registry.Registry;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class TweakerMoreConfigs
 {
@@ -86,6 +83,11 @@ public class TweakerMoreConfigs
 		return (List<T>)OPTION_SETS.getOrDefault(optionType, Lists.newArrayList());
 	}
 
+	public static List<IConfigBase> getAllOptions()
+	{
+		return OPTION_SETS.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
+	}
+
 	public static <T extends IConfigBase> ImmutableList<T> updateOptionList(ImmutableList<T> originalConfig, Config.Type optionType)
 	{
 		List<T> optionList = Lists.newArrayList(originalConfig);
@@ -99,6 +101,8 @@ public class TweakerMoreConfigs
 	{
 		return FabricLoader.getInstance().getConfigDir().resolve(CONFIG_FILE_NAME).toFile();
 	}
+
+	private static JsonObject ROOT_JSON_OBJ = new JsonObject();
 
 	public static void loadFromFile()
 	{
@@ -115,6 +119,8 @@ public class TweakerMoreConfigs
 				ConfigUtils.readConfigBase(root, "Lists", getOptions(Config.Type.LIST));
 				ConfigUtils.readHotkeyToggleOptions(root, "TweakHotkeys", "TweakToggles", getOptions(Config.Type.TOGGLE));
 				ConfigUtils.readHotkeyToggleOptions(root, "DisableHotkeys", "DisableToggles", getOptions(Config.Type.DISABLE));
+
+				ROOT_JSON_OBJ = root;
 			}
 		}
 	}
@@ -122,7 +128,7 @@ public class TweakerMoreConfigs
 	public static void saveToFile()
 	{
 		File configFile = getConfigFile();
-		JsonObject root = new JsonObject();
+		JsonObject root = ROOT_JSON_OBJ;
 
 		ConfigUtils.writeConfigBase(root, "Generic", getOptions(Config.Type.GENERIC));
 		ConfigUtils.writeConfigBase(root, "Lists", getOptions(Config.Type.LIST));
