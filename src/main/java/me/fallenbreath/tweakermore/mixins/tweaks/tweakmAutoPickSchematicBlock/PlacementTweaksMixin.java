@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.tweakmPickBlockLastContinuously;
+package me.fallenbreath.tweakermore.mixins.tweaks.tweakmAutoPickSchematicBlock;
 
 import fi.dy.masa.litematica.config.Configs;
 import fi.dy.masa.litematica.data.DataManager;
@@ -39,7 +39,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PlacementTweaksMixin
 {
 	@Inject(method = "tryPlaceBlock", at = @At("HEAD"), remap = false)
-	private static void tweakmPickBlockLastContinuously(
+	private static void tweakmAutoPickSchematicBlock(
 			ClientPlayerInteractionManager controller,
 			ClientPlayerEntity player,
 			ClientWorld world,

@@ -21,7 +21,7 @@
       "me.fallenbreath.tweakermore.TweakerMoreMod"
     ],
     "mm:early_risers": [
-      "me.fallenbreath.tweakermore.config.early_risers.TogglesEarlyRiser"
+      "me.fallenbreath.tweakermore.config.TweakerMoreToggles$TogglesEarlyRiser"
     ]
   },
   "mixins": [

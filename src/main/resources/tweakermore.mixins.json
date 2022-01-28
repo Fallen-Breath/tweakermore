@@ -19,7 +19,7 @@
     "tweaks.tweakmAutoContainerProcess.ClientPlayNetworkHandlerMixin",
     "tweaks.tweakmAutoContainerProcess.ContainerMixin",
     "tweaks.tweakmAutoContainerProcess.ScreenMixin",
-    "tweaks.tweakmPickBlockLastContinuously.PlacementTweaksMixin",
+    "tweaks.tweakmAutoPickSchematicBlock.PlacementTweaksMixin",
     "tweaks.villagerOfferUsesDisplay.MerchantScreenAccessor",
     "tweaks.villagerOfferUsesDisplay.MerchantScreenWidgetButtonPageMixin"
   ],
