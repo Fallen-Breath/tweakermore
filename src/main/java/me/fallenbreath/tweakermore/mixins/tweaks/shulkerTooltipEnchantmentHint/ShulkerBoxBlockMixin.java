@@ -3,6 +3,8 @@ package me.fallenbreath.tweakermore.mixins.tweaks.shulkerTooltipEnchantmentHint;
 import com.google.common.collect.Lists;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.block.ShulkerBoxBlock;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.EnchantedBookItem;
 import net.minecraft.item.ItemStack;
@@ -27,7 +29,7 @@ import java.util.List;
 @Mixin(ShulkerBoxBlock.class)
 public abstract class ShulkerBoxBlockMixin
 {
-	private static final int MAX_ENCHANTMENT_DISPLAY = 3;
+	private static final int MAX_TEXT_LENGTH = 120;
 
 	@Inject(
 			method = "buildTooltip",
@@ -55,19 +57,26 @@ public abstract class ShulkerBoxBlockMixin
 			int amount = enchantmentTexts.size();
 			if (amount > 0)
 			{
-				text.append(new LiteralText(" | ").formatted(Formatting.DARK_GRAY));
-				for (int i = 0; i < Math.min(amount, MAX_ENCHANTMENT_DISPLAY); i++)
+				TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+				Text extraText = new LiteralText(" | ").formatted(Formatting.DARK_GRAY);
+				int idx;
+				for (idx = 0; idx < amount; idx++)
 				{
-					text.append(enchantmentTexts.get(i));
-					if (i < amount - 1)
+					if (idx > 0 && textRenderer.getStringWidth(extraText.getString() + enchantmentTexts.get(idx).getString()) > MAX_TEXT_LENGTH)
 					{
-						text.append(new LiteralText(", ").formatted(Formatting.GRAY));
+						break;
+					}
+					extraText.append(enchantmentTexts.get(idx));
+					if (idx < amount - 1)
+					{
+						extraText.append(new LiteralText(", ").formatted(Formatting.GRAY));
 					}
 				}
-				if (amount > MAX_ENCHANTMENT_DISPLAY)
+				if (idx < amount)
 				{
-					text.append(new TranslatableText("shulkerTooltipEnchantmentHint.more", amount- MAX_ENCHANTMENT_DISPLAY).formatted(Formatting.GRAY));
+					extraText.append(new TranslatableText("shulkerTooltipEnchantmentHint.more", amount - idx).formatted(Formatting.GRAY));
 				}
+				text.append(extraText);
 			}
 		}
 	}

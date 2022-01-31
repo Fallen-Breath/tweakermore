@@ -7,7 +7,7 @@
   "villagerOfferUsesDisplay.comment": "在村民交易列表中显示当前交易的次数以及上限\n将指针移至交易的箭头上来以显示",
   "shulkerTooltipEnchantmentHint": "shulkerTooltipEnchantmentHint | 潜影盒物品显示提示附魔",
   "shulkerTooltipEnchantmentHint.comment": "在潜影盒物品的工具提示中显示物品的附魔",
-  "shulkerTooltipEnchantmentHint.more": "...%1$sx附魔",
+  "shulkerTooltipEnchantmentHint.more": "... %1$sx附魔",
 
   "handRestockListType": "handRestockListType | 自动补货名单约束类型",
   "handRestockListType.comment": "tweakHandRestock 工具的物品名单约束类型",

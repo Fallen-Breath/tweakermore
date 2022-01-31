@@ -25,5 +25,4 @@ public class TweakerMoreToggles
 		FEATURE_TOGGLES.add(featureToggle);
 		return featureToggle;
 	}
-
 }

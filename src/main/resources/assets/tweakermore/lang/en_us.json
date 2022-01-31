@@ -7,7 +7,7 @@
   "villagerOfferUsesDisplay.comment": "Display villager offer use and limit amount on villager offer list\nHover on the arrow of the offer to see it",
   "shulkerTooltipEnchantmentHint": "shulkerTooltipEnchantmentHint",
   "shulkerTooltipEnchantmentHint.comment": "Display enchantments of items in the tooltip of shulker box item",
-  "shulkerTooltipEnchantmentHint.more": "...%1$sx Enchantments",
+  "shulkerTooltipEnchantmentHint.more": "... %1$sx",
 
   "handRestockListType": "handRestockListType",
   "handRestockListType.comment": "The item restriction type for tweakHandRestock",
