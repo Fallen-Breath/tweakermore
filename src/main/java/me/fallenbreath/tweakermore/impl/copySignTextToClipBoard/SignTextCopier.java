@@ -41,11 +41,11 @@ public class SignTextCopier
 					if (!text.isEmpty())
 					{
 						mc.keyboard.setClipboard(text);
-						InfoUtils.printActionbarMessage("copySignText.sign_copied", blockState.getBlock().getName());
+						InfoUtils.printActionbarMessage("copySignTextToClipBoard.sign_copied", blockState.getBlock().getName());
 					}
 					else
 					{
-						InfoUtils.printActionbarMessage("copySignText.empty_sign", blockState.getBlock().getName());
+						InfoUtils.printActionbarMessage("copySignTextToClipBoard.empty_sign", blockState.getBlock().getName());
 					}
 					return true;
 				}
