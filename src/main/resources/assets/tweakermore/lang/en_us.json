@@ -8,6 +8,10 @@
   "shulkerTooltipEnchantmentHint": "shulkerTooltipEnchantmentHint",
   "shulkerTooltipEnchantmentHint.comment": "Display enchantments of items in the tooltip of shulker box item",
   "shulkerTooltipEnchantmentHint.more": "... %1$sx",
+  "copySignTextToClipBoard": "copySignText",
+  "copySignTextToClipBoard.comment": "Copy texts in the sign you are pointing to into the clipboard",
+  "copySignTextToClipBoard.sign_copied": "Copied texts from %1$s",
+  "copySignTextToClipBoard.empty_sign": "%1$s does not contain any text",
 
   "handRestockListType": "handRestockListType",
   "handRestockListType.comment": "The item restriction type for tweakHandRestock",
@@ -31,6 +35,9 @@
 
   "tweakmAutoPickSchematicBlock": "tweakmAutoPickSchematicBlock",
   "tweakmAutoPickSchematicBlock.comment": "Pick block from schematic automatically before block placement\nIt's logic is the same as the pickBlock tweaks in litematica mod, you need to enable pickBlockEnabled option in litematica\nDoes not work with easy place mode",
+
+  "openTweakermoreConfigGui": "openTweakermoreConfigGui",
+  "openTweakermoreConfigGui.comment": "Open the config GUI of TweakerMore",
 
 
   "tweakermore.gui.title": "TweakerMore v%1$s Config GUI",

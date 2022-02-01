@@ -10,16 +10,17 @@ import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.gui.button.IButtonActionListener;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
+import me.fallenbreath.tweakermore.config.Config;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreToggles;
 
 import java.util.List;
 
-public class GuiConfigs extends GuiConfigsBase
+public class TweakermoreConfigGui extends GuiConfigsBase
 {
     private static ConfigGuiTab tab = ConfigGuiTab.TWEAKS;
 
-    public GuiConfigs()
+    public TweakermoreConfigGui()
     {
         super(10, 50, TweakerMoreMod.MOD_ID, null, "tweakermore.gui.title", TweakerMoreMod.VERSION);
     }
@@ -42,7 +43,7 @@ public class GuiConfigs extends GuiConfigsBase
     private int createButton(int x, int y, int width, ConfigGuiTab tab)
     {
         ButtonGeneric button = new ButtonGeneric(x, y, width, 20, tab.getDisplayName());
-        button.setEnabled(GuiConfigs.tab != tab);
+        button.setEnabled(TweakermoreConfigGui.tab != tab);
         this.addButton(button, new ButtonListener(tab, this));
 
         return button.getWidth() + 2;
@@ -58,16 +59,18 @@ public class GuiConfigs extends GuiConfigsBase
     public List<ConfigOptionWrapper> getConfigs()
     {
         List<IConfigBase> configs = Lists.newArrayList();
-        switch (GuiConfigs.tab)
+        switch (TweakermoreConfigGui.tab)
         {
             case TWEAKS:
                 configs.addAll(ConfigUtils.createConfigWrapperForType(ConfigType.BOOLEAN, TweakerMoreToggles.getFeatureToggles()));
-                configs.addAll(TweakerMoreConfigs.getAllOptions());
+                configs.addAll(TweakerMoreConfigs.getOptions(type -> type != Config.Type.HOTKEY && type != Config.Type.CONFIG));
                 break;
             case HOTKEYS:
+                configs.addAll(TweakerMoreConfigs.getOptions(Config.Type.HOTKEY));
                 configs.addAll(ConfigUtils.createConfigWrapperForType(ConfigType.HOTKEY, TweakerMoreToggles.getFeatureToggles()));
                 break;
             case CONFIG:
+                configs.addAll(TweakerMoreConfigs.getOptions(Config.Type.CONFIG));
                 break;
         }
         configs.sort((a, b) -> a.getName().compareToIgnoreCase(b.getName()));
@@ -76,10 +79,10 @@ public class GuiConfigs extends GuiConfigsBase
 
     private static class ButtonListener implements IButtonActionListener
     {
-        private final GuiConfigs parent;
+        private final TweakermoreConfigGui parent;
         private final ConfigGuiTab tab;
 
-        public ButtonListener(ConfigGuiTab tab, GuiConfigs parent)
+        public ButtonListener(ConfigGuiTab tab, TweakermoreConfigGui parent)
         {
             this.tab = tab;
             this.parent = parent;
@@ -88,7 +91,7 @@ public class GuiConfigs extends GuiConfigsBase
         @Override
         public void actionPerformedWithButton(ButtonBase button, int mouseButton)
         {
-            GuiConfigs.tab = this.tab;
+            TweakermoreConfigGui.tab = this.tab;
             this.parent.reCreateListWidget(); // apply the new config width
             this.parent.getListWidget().resetScrollbarPosition();
             this.parent.initGui();

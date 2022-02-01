@@ -13,6 +13,6 @@ public @interface Config
 
 	enum Type
 	{
-		GENERIC, LIST, TOGGLE, DISABLE
+		GENERIC, HOTKEY, LIST, TWEAK, DISABLE, CONFIG
 	}
 }

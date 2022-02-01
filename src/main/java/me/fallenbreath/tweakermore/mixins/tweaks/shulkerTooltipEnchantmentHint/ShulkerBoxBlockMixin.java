@@ -48,7 +48,6 @@ public abstract class ShulkerBoxBlockMixin
 	)
 	private void shulkerTooltipEnchantmentHint(ItemStack shulker, BlockView view, List<Text> tooltip, TooltipContext options, CallbackInfo ci, CompoundTag compoundTag, DefaultedList<ItemStack> defaultedList, int i_, int j_, Iterator<ItemStack> var9, ItemStack itemStack, Text text)
 	{
-
 		if (TweakerMoreConfigs.SHULKER_TOOLTIP_ENCHANTMENT_HINT.getBooleanValue())
 		{
 			List<Text> enchantmentTexts = Lists.newArrayList();
