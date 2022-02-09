@@ -1,28 +1,37 @@
 package me.fallenbreath.tweakermore.gui;
 
 import com.google.common.collect.Lists;
-import fi.dy.masa.malilib.config.ConfigType;
-import fi.dy.masa.malilib.config.ConfigUtils;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
-import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
-import fi.dy.masa.malilib.gui.button.IButtonActionListener;
+import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.Config;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.config.TweakerMoreToggles;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class TweakermoreConfigGui extends GuiConfigsBase
 {
-    private static ConfigGuiTab tab = ConfigGuiTab.TWEAKS;
+    private static Tabs tab = Tabs.TWEAKS;
+    @Nullable
+    private Config.Type filteredType = null;
+    @Nullable
+    private SelectorDropDownList<Config.Type> typeFilterDropDownList = null;
 
     public TweakermoreConfigGui()
     {
         super(10, 50, TweakerMoreMod.MOD_ID, null, "tweakermore.gui.title", TweakerMoreMod.VERSION);
+    }
+
+    public static Tabs getCurrentTab()
+    {
+        return tab;
     }
 
     @Override
@@ -34,25 +43,69 @@ public class TweakermoreConfigGui extends GuiConfigsBase
         int x = 10;
         int y = 26;
 
-        for (ConfigGuiTab tab : ConfigGuiTab.values())
+        for (Tabs tab : Tabs.values())
         {
-            x += this.createButton(x, y, -1, tab);
+            x += this.createNavigationButton(x, y, tab);
+        }
+
+        if (TweakermoreConfigGui.tab != Tabs.CONFIG)
+        {
+            List<Config.Type> items = Arrays.stream(Config.Type.values()).filter(type -> type != Config.Type.CONFIG).collect(Collectors.toList());
+            items.add(0, null);
+            SelectorDropDownList<Config.Type> dd = new SelectorDropDownList<>(this.width - 91, this.getListY() + 3, 80, 16, 200, items.size(), items);
+            dd.setEntryChangeListener(type -> {
+                if (type != this.filteredType)
+                {
+                    this.filteredType = type;
+                    this.reDraw();
+                }
+            });
+            dd.setZLevel(3);
+            dd.setSelectedEntry(this.filteredType);
+            this.addWidget(dd);
+            this.typeFilterDropDownList = dd;
+
+            String labelTextKey = "tweakermore.gui.config_type.label_text";
+            int labelWidth = this.getStringWidth(StringUtils.translate(labelTextKey));
+            WidgetLabel label = new WidgetLabel(dd.getX() - labelWidth - 5, dd.getY() + 1, labelWidth, dd.getHeight(), 0xFFE0E0E0, labelTextKey);
+            this.addWidget(label);
+        }
+        else
+        {
+            this.typeFilterDropDownList = null;
         }
     }
 
-    private int createButton(int x, int y, int width, ConfigGuiTab tab)
+    private int createNavigationButton(int x, int y, Tabs tab)
     {
-        ButtonGeneric button = new ButtonGeneric(x, y, width, 20, tab.getDisplayName());
+        ButtonGeneric button = new ButtonGeneric(x, y, -1, 20, tab.getDisplayName());
         button.setEnabled(TweakermoreConfigGui.tab != tab);
-        this.addButton(button, new ButtonListener(tab, this));
-
+        this.addButton(button, (b, mouseButton) -> {
+            TweakermoreConfigGui.tab = tab;
+            this.reDraw();
+        });
         return button.getWidth() + 2;
+    }
+
+    private void reDraw()
+    {
+        this.reCreateListWidget(); // apply the new config width
+        Objects.requireNonNull(this.getListWidget()).resetScrollbarPosition();
+        this.initGui();
+    }
+
+    public void renderDropDownList(int mouseX, int mouseY)
+    {
+        if (this.typeFilterDropDownList != null)
+        {
+            this.typeFilterDropDownList.render(mouseX, mouseY, this.typeFilterDropDownList.isMouseOver(mouseX, mouseY));
+        }
     }
 
     @Override
     protected int getConfigWidth()
     {
-        return 120;
+        return 150;
     }
 
     @Override
@@ -62,12 +115,7 @@ public class TweakermoreConfigGui extends GuiConfigsBase
         switch (TweakermoreConfigGui.tab)
         {
             case TWEAKS:
-                configs.addAll(ConfigUtils.createConfigWrapperForType(ConfigType.BOOLEAN, TweakerMoreToggles.getFeatureToggles()));
-                configs.addAll(TweakerMoreConfigs.getOptions(type -> type != Config.Type.HOTKEY && type != Config.Type.CONFIG));
-                break;
-            case HOTKEYS:
-                configs.addAll(TweakerMoreConfigs.getOptions(Config.Type.HOTKEY));
-                configs.addAll(ConfigUtils.createConfigWrapperForType(ConfigType.HOTKEY, TweakerMoreToggles.getFeatureToggles()));
+                configs.addAll(TweakerMoreConfigs.getOptions(type -> type != Config.Type.CONFIG && (this.filteredType == null || type == this.filteredType)));
                 break;
             case CONFIG:
                 configs.addAll(TweakerMoreConfigs.getOptions(Config.Type.CONFIG));
@@ -77,36 +125,14 @@ public class TweakermoreConfigGui extends GuiConfigsBase
         return ConfigOptionWrapper.createFor(configs);
     }
 
-    private static class ButtonListener implements IButtonActionListener
-    {
-        private final TweakermoreConfigGui parent;
-        private final ConfigGuiTab tab;
-
-        public ButtonListener(ConfigGuiTab tab, TweakermoreConfigGui parent)
-        {
-            this.tab = tab;
-            this.parent = parent;
-        }
-
-        @Override
-        public void actionPerformedWithButton(ButtonBase button, int mouseButton)
-        {
-            TweakermoreConfigGui.tab = this.tab;
-            this.parent.reCreateListWidget(); // apply the new config width
-            this.parent.getListWidget().resetScrollbarPosition();
-            this.parent.initGui();
-        }
-    }
-
-    public enum ConfigGuiTab
+    public enum Tabs
     {
         TWEAKS("tweakermore.gui.button.config_gui.tweaks"),
-        HOTKEYS("tweakermore.gui.button.config_gui.hotkeys"),
         CONFIG("tweakermore.gui.button.config_gui.config");
 
         private final String translationKey;
 
-        ConfigGuiTab(String translationKey)
+        Tabs(String translationKey)
         {
             this.translationKey = translationKey;
         }

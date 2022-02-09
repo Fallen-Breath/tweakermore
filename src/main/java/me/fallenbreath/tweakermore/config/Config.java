@@ -1,5 +1,8 @@
 package me.fallenbreath.tweakermore.config;
 
+import fi.dy.masa.malilib.interfaces.IStringValue;
+import fi.dy.masa.malilib.util.StringUtils;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -11,8 +14,14 @@ public @interface Config
 {
 	Type[] value();
 
-	enum Type
+	enum Type implements IStringValue
 	{
-		GENERIC, HOTKEY, LIST, TWEAK, DISABLE, CONFIG
+		GENERIC, HOTKEY, LIST, TWEAK, DISABLE, CONFIG;
+
+		@Override
+		public String getStringValue()
+		{
+			return StringUtils.translate("tweakermore.gui.config_type." + this.name().toLowerCase());
+		}
 	}
 }

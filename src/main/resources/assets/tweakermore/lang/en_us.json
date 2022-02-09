@@ -42,6 +42,13 @@
 
   "tweakermore.gui.title": "TweakerMore v%1$s Config GUI",
   "tweakermore.gui.button.config_gui.tweaks": "Tweaks",
-  "tweakermore.gui.button.config_gui.hotkeys": "Hotkeys",
-  "tweakermore.gui.button.config_gui.config": "Config"
+  "tweakermore.gui.button.config_gui.config": "Config",
+  "tweakermore.gui.selector_drop_down_list.all": "All",
+  "tweakermore.gui.config_type.label_text": "Type filter",
+  "tweakermore.gui.config_type.generic": "Generic",
+  "tweakermore.gui.config_type.hotkey": "Hotkey",
+  "tweakermore.gui.config_type.list": "List",
+  "tweakermore.gui.config_type.tweak": "Tweak",
+  "tweakermore.gui.config_type.disable": "Disable",
+  "tweakermore.gui.config_type.config": "Config"
 }
