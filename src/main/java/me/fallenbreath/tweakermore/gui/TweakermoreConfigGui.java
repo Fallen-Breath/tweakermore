@@ -56,10 +56,9 @@ public class TweakermoreConfigGui extends GuiConfigsBase
                 this.reDraw();
             }
         });
-        dd.setZLevel(3);
-        dd.setSelectedEntry(this.filteredType);
         this.addWidget(dd);
         this.typeFilterDropDownList = dd;
+        dd.setSelectedEntry(this.filteredType);
 
         String labelTextKey = "tweakermore.gui.config_type.label_text";
         int labelWidth = this.getStringWidth(StringUtils.translate(labelTextKey));

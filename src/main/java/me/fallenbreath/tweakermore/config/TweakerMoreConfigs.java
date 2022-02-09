@@ -96,8 +96,8 @@ public class TweakerMoreConfigs implements IConfigHandler
 
 	@Config(value = Config.Type.HOTKEY, category = Config.Category.SETTING)
 	public static final ConfigHotkey OPEN_TWEAKERMORE_CONFIG_GUI = newConfigHotKey("openTweakermoreConfigGui", "K,C");
-	@Config(value = Config.Type.HOTKEY, category = Config.Category.SETTING)
-	public static final ConfigBoolean TWEAKERMORE_DEBUG_SWITCH = newConfigBooleanHotkeyed("tweakermoreDebugSwitch");
+	@Config(value = Config.Type.TWEAK, category = Config.Category.SETTING)
+	public static final ConfigBooleanHotkeyed TWEAKERMORE_DEBUG_MODE = newConfigBooleanHotkeyed("tweakermoreDebugMode");
 
 	/**
 	 * ============================

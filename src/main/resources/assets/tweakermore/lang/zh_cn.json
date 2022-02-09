@@ -62,11 +62,13 @@
 
   "openTweakermoreConfigGui": "打开TweakerMore配置界面",
   "openTweakermoreConfigGui.comment": "打开TweakerMore的配置界面",
-  "tweakermoreDebugSwitch": "TweakerMore调试开关",
-  "tweakermoreDebugSwitch.comment": "TweakerMore的调试开关",
-  "tweakermoreDebugSwitch.pretty_name": "TweakerMore调试开关",
+  "tweakermoreDebugMode": "TweakerMore调试模式",
+  "tweakermoreDebugMode.comment": "TweakerMore的调试模式",
+  "tweakermoreDebugMode.pretty_name": "TweakerMore调试模式 (tweakermoreDebugMode)",
 
   "// GUI": "================================================",
+
+  "tweakermore.hotkeys.category.main": "TweakerMore",
 
   "tweakermore.gui.title": "TweakerMore v%1$s 配置界面",
   "tweakermore.gui.selector_drop_down_list.all": "全部",

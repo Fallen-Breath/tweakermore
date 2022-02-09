@@ -62,11 +62,13 @@
 
   "openTweakermoreConfigGui": "openTweakermoreConfigGui",
   "openTweakermoreConfigGui.comment": "Open the config GUI of TweakerMore",
-  "tweakermoreDebugSwitch": "tweakermoreDebugSwitch",
-  "tweakermoreDebugSwitch.comment": "Debug switch for TweakerMore",
-  "tweakermoreDebugSwitch.pretty_name": "TweakerMore Debug Switch",
+  "tweakermoreDebugMode": "tweakermoreDebugMode",
+  "tweakermoreDebugMode.comment": "Debug mode of TweakerMore",
+  "tweakermoreDebugMode.pretty_name": "TweakerMore Debug Mode",
 
   "// GUI": "================================================",
+
+  "tweakermore.hotkeys.category.main": "TweakerMore",
 
   "tweakermore.gui.title": "TweakerMore v%1$s Config GUI",
   "tweakermore.gui.selector_drop_down_list.all": "All",

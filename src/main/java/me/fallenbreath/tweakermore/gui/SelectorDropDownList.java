@@ -37,6 +37,19 @@ public class SelectorDropDownList<T extends IStringValue> extends WidgetDropDown
 	protected void setSelectedEntry(int index)
 	{
 		super.setSelectedEntry(index);
+		this.onEntryChanged();
+	}
+
+	@Override
+	public WidgetDropDownList<T> setSelectedEntry(T entry)
+	{
+		WidgetDropDownList<T> ret = super.setSelectedEntry(entry);
+		this.onEntryChanged();
+		return ret;
+	}
+
+	private void onEntryChanged()
+	{
 		if (this.entryChangeListener != null)
 		{
 			this.entryChangeListener.accept(this.getSelectedEntry());

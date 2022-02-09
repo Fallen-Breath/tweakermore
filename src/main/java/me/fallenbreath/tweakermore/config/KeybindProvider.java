@@ -24,6 +24,6 @@ public class KeybindProvider implements IKeybindProvider
 	@Override
 	public void addHotkeys(IKeybindManager manager)
 	{
-		manager.addHotkeysForCategory(TweakerMoreMod.MOD_NAME, "tweakermore.hotkeys.category.config_hotkeys", ALL_CUSTOM_HOTKEYS);
+		manager.addHotkeysForCategory(TweakerMoreMod.MOD_NAME, "tweakermore.hotkeys.category.main", ALL_CUSTOM_HOTKEYS);
 	}
 }
