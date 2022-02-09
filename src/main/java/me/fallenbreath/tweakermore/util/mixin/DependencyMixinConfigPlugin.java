@@ -16,6 +16,7 @@ import java.util.Map;
 public abstract class DependencyMixinConfigPlugin implements IMixinConfigPlugin
 {
 	private final Map<String, Boolean> dependencyMemory = Maps.newHashMap();
+	private String failedReason;
 
 	@Override
 	public boolean shouldApplyMixin(String targetClassName, String mixinClassName)
@@ -27,26 +28,24 @@ public abstract class DependencyMixinConfigPlugin implements IMixinConfigPlugin
 	{
 		return this.dependencyMemory.computeIfAbsent(mixinClassName, key ->
 		{
-			AnnotationNode modRequire = getDependencyAnnotation(mixinClassName);
-			if (modRequire != null)
+			AnnotationNode dependency = getDependencyAnnotation(mixinClassName);
+			if (dependency != null)
 			{
-				List<String> modIds = Annotations.getValue(modRequire, "value");
-				for (String modId : modIds)
+				List<AnnotationNode> enableConditions = Annotations.getValue(dependency, "enableWhen", true);
+				if (!enableConditions.isEmpty() && !this.checkCondition(enableConditions))
 				{
-					if (!FabricUtil.isModLoaded(modId))
-					{
-						this.onDependencyCheckFailed(mixinClassName, modIds, modId);
-						return false;
-					}
+					this.onDependencyCheckFailed(mixinClassName, this.failedReason);
+					return false;
 				}
-				return true;
+				List<AnnotationNode> disableConditions = Annotations.getValue(dependency, "disableWhen", true);
+				if (!disableConditions.isEmpty() && this.checkCondition(disableConditions))
+				{
+					this.onDependencyCheckFailed(mixinClassName, this.failedReason);
+					return false;
+				}
 			}
 			return true;
 		});
-	}
-
-	protected void onDependencyCheckFailed(String mixinClassName, List<String> requiredModIds, String failedModId)
-	{
 	}
 
 	@Nullable
@@ -61,5 +60,38 @@ public abstract class DependencyMixinConfigPlugin implements IMixinConfigPlugin
 		{
 			return null;
 		}
+	}
+
+	private boolean checkCondition(List<AnnotationNode> conditions)
+	{
+		for (AnnotationNode condition : conditions)
+		{
+			Requirement.Type type = Annotations.getValue(condition, "type", Requirement.Type.class, Requirement.Type.MOD);
+			switch (type)
+			{
+				case MOD:
+					String modId = Annotations.getValue(condition, "value");
+					if (!FabricUtil.isModLoaded(modId))
+					{
+						this.failedReason = String.format("mod requirement %s not found", modId);
+						return false;
+					}
+					break;
+
+				case MIXIN:
+					String className = Annotations.getValue(condition, "value");
+					if (!this.checkDependency(className))
+					{
+						this.failedReason = String.format("required mixin class %s disabled", className);
+						return false;
+					}
+					break;
+			}
+		}
+		return true;
+	}
+
+	protected void onDependencyCheckFailed(String mixinClassName, String reason)
+	{
 	}
 }

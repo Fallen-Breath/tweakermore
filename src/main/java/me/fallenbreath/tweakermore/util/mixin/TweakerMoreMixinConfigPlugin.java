@@ -13,9 +13,9 @@ public class TweakerMoreMixinConfigPlugin extends DependencyMixinConfigPlugin
 	private final Logger LOGGER = LogManager.getLogger();
 
 	@Override
-	protected void onDependencyCheckFailed(String mixinClassName, List<String> requiredModIds, String failedModId)
+	protected void onDependencyCheckFailed(String mixinClassName, String reason)
 	{
-		LOGGER.info("[TweakerMore] Disabled mixin {} due to mod requirement {} not found", mixinClassName, failedModId);
+		LOGGER.info("[TweakerMore] Disabled mixin {} due to {}", mixinClassName, reason);
 	}
 
 	@Override
