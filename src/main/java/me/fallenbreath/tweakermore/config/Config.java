@@ -31,7 +31,7 @@ public @interface Config
 
 	enum Category
 	{
-		MC_TWEAKS, MOD_TWEAKS, CONFIG;
+		MC_TWEAKS, MOD_TWEAKS, SETTING;
 
 		public String getDisplayName()
 		{

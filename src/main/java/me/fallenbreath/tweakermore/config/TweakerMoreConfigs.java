@@ -85,12 +85,14 @@ public class TweakerMoreConfigs implements IConfigHandler
 	@Config(value = Config.Type.GENERIC, modRequire = xaero_worldmap, category = Config.Category.MOD_TWEAKS)
 	public static final ConfigBoolean XMAP_NO_SESSION_FINALIZATION_WAIT = new ConfigBoolean("xmapNoSessionFinalizationWait", false, "xmapNoSessionFinalizationWait.comment");
 
-	//////////////////////
-	//    TweakerMore   //
-	//////////////////////
+	//////////////////////////
+	//  TweakerMore Setting //
+	//////////////////////////
 
-	@Config(value = Config.Type.HOTKEY, category = Config.Category.CONFIG)
+	@Config(value = Config.Type.HOTKEY, category = Config.Category.SETTING)
 	public static final ConfigHotkey OPEN_TWEAKERMORE_CONFIG_GUI = new ConfigHotkey("openTweakermoreConfigGui", "K,C", "openTweakermoreConfigGui.comment");
+	@Config(value = Config.Type.HOTKEY, category = Config.Category.SETTING)
+	public static final ConfigBoolean TWEAKERMORE_DEBUG_SWITCH = new ConfigBoolean("tweakermoreDebugSwitch", false, "tweakermoreDebugSwitch.comment");
 
 	/**
 	 * ============================

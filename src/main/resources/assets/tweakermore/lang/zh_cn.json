@@ -47,10 +47,12 @@
   "xmapNoSessionFinalizationWait": "xaero地图跳过会话结束等待",
   "xmapNoSessionFinalizationWait.comment": "退出一个世界时跳过小地图会话结束逻辑\n因此在退出服务器或单人游戏时不会出现卡顿\n不过可能会有一些副作用，但暂时没发现",
 
-  "// Config": "================================================",
+  "// Setting": "================================================",
 
   "openTweakermoreConfigGui": "打开TweakerMore配置界面",
   "openTweakermoreConfigGui.comment": "打开TweakerMore的配置界面",
+  "tweakermoreDebugSwitch": "TweakerMore调试开关",
+  "tweakermoreDebugSwitch.comment": "TweakerMore的调试开关",
 
   "// GUI": "================================================",
 
@@ -58,7 +60,7 @@
   "tweakermore.gui.selector_drop_down_list.all": "全部",
   "tweakermore.gui.config_category.mc_tweaks": "功能",
   "tweakermore.gui.config_category.mod_tweaks": "模组修改",
-  "tweakermore.gui.config_category.config": "配置",
+  "tweakermore.gui.config_category.setting": "配置",
   "tweakermore.gui.config_type.label_text": "类型筛选",
   "tweakermore.gui.config_type.generic": "通用 Generic",
   "tweakermore.gui.config_type.hotkey": "热键 Hotkey",

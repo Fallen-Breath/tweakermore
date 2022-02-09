@@ -47,10 +47,12 @@
   "xmapNoSessionFinalizationWait": "xmapNoSessionFinalizationWait",
   "xmapNoSessionFinalizationWait.comment": "Skip the session finalization operation when quit a world\nSo no lag when quitting server or single player\nMight have some side effects though",
 
-  "// Config": "================================================",
+  "// Setting": "================================================",
 
   "openTweakermoreConfigGui": "openTweakermoreConfigGui",
   "openTweakermoreConfigGui.comment": "Open the config GUI of TweakerMore",
+  "tweakermoreDebugSwitch": "tweakermoreDebugSwitch",
+  "tweakermoreDebugSwitch.comment": "Debug switch for TweakerMore",
 
   "// GUI": "================================================",
 
@@ -58,7 +60,7 @@
   "tweakermore.gui.selector_drop_down_list.all": "All",
   "tweakermore.gui.config_category.mc_tweaks": "Tweaks",
   "tweakermore.gui.config_category.mod_tweaks": "Mods Tweaks",
-  "tweakermore.gui.config_category.config": "Config",
+  "tweakermore.gui.config_category.setting": "Setting",
   "tweakermore.gui.config_type.label_text": "Type filter",
   "tweakermore.gui.config_type.generic": "Generic",
   "tweakermore.gui.config_type.hotkey": "Hotkey",
