@@ -27,6 +27,8 @@
     "tweaks.tweakmAutoContainerProcess.ItemScrollerInventoryUtilsAccessor",
     "tweaks.tweakmAutoContainerProcess.ScreenMixin",
     "tweaks.tweakmAutoPickSchematicBlock.PlacementTweaksMixin",
+    "tweaks.tweakmSafeAfk.ClientPlayNetworkHandlerMixin",
+    "tweaks.tweakmSafeAfk.LivingEntityMixin",
     "tweaks.villagerOfferUsesDisplay.MerchantScreenAccessor",
     "tweaks.villagerOfferUsesDisplay.MerchantScreenWidgetButtonPageMixin",
     "tweaks.xmapNoSessionFinalizationWait.WorldMapSessionMixin"

@@ -12,6 +12,8 @@
   "shulkerTooltipEnchantmentHint.more": "... %1$sx附魔",
   "chatMessageLimit": "聊天信息数量上限",
   "chatMessageLimit.comment": "修改聊天栏的历史信息储存数量上限",
+  "safeAfkHealthThreshold": "安全挂机血量阈值",
+  "safeAfkHealthThreshold.comment": "触发安全挂机功能的玩家的血量阈值\n当玩家受到伤害且血量小于给定值时断开连接",
 
   "copySignTextToClipBoard": "复制告示牌文本",
   "copySignTextToClipBoard.comment": "将玩家指向的告示牌中的文本复制到剪贴板",
@@ -25,20 +27,29 @@
   "handRestockBlackList": "自动补货黑名单",
   "handRestockBlackList.comment": "不会触发 tweakHandRestock 的物品",
 
-  "disableLightUpdates": "禁用光照更新",
-  "disableLightUpdates.comment": "禁用客户端光照更新",
-  "disableRedstoneWireParticle": "禁用红石粉粒子效果",
-  "disableRedstoneWireParticle.comment": "禁用红石粉发出的粒子效果",
-
   "tweakmAutoCleanContainer": "自动清空容器",
   "tweakmAutoCleanContainer.comment": "打开容器后，自动将容器内的所有物品扔出\n然后关闭容器",
+  "tweakmAutoCleanContainer.pretty_name": "自动清空容器 (AutoCleanContainer)",
   "tweakmAutoCleanContainer.container_cleaned": "已扔出容器 %2$s 中 %1$s 个槽位中的所有物品",
   "tweakmAutoFillContainer": "自动装填容器",
   "tweakmAutoFillContainer.comment": "打开容器后，自动使用物品栏中占用格子数最多的物品装填容器\n当且仅当占用格子数最多的物品是唯一的\n然后关闭容器",
+  "tweakmAutoFillContainer.pretty_name": "自动装填容器 (AutoFillContainer)",
   "tweakmAutoFillContainer.container_filled": "已使用所有 %2$s 物品装填容器 %1$s (%3$s)",
   "tweakmAutoFillContainer.best_slot_not_found": "未找到最适合装填容器的物品",
   "tweakmAutoPickSchematicBlock": "自动选择原理图方块",
   "tweakmAutoPickSchematicBlock.comment": "在放置方块前自动选择原理图中的方块对应的物品\n逻辑同litematica mod的pickBlock功能，你需要在litematica mod中启用pickBlockEnabled选项\n在轻松放置开启时无效",
+  "tweakmAutoPickSchematicBlock.pretty_name": "自动选择原理图方块 (AutoPickSchematicBlock)",
+  "tweakmSafeAfk": "安全挂机",
+  "tweakmSafeAfk.comment": "在受到伤害时断开连接\n触发断开连接的玩家血量阈值可以在safeAfkHealthThreshold中设置",
+  "tweakmSafeAfk.pretty_name": "安全挂机 (SafeAfk)",
+  "tweakmSafeAfk.received_damage": "于 %1$s 受到伤害\n剩余生命值: %2$s",
+
+  "disableLightUpdates": "禁用光照更新",
+  "disableLightUpdates.comment": "禁用客户端光照更新",
+  "disableLightUpdates.pretty_name": "禁用光照更新 (DisableLightUpdates)",
+  "disableRedstoneWireParticle": "禁用红石粉粒子效果",
+  "disableRedstoneWireParticle.comment": "禁用红石粉发出的粒子效果",
+  "disableRedstoneWireParticle.pretty_name": "禁用红石粉粒子效果 (DisableRedstoneWireParticle)",
 
   "// Mod Tweaks": "================================================",
 
@@ -53,6 +64,7 @@
   "openTweakermoreConfigGui.comment": "打开TweakerMore的配置界面",
   "tweakermoreDebugSwitch": "TweakerMore调试开关",
   "tweakermoreDebugSwitch.comment": "TweakerMore的调试开关",
+  "tweakermoreDebugSwitch.pretty_name": "TweakerMore调试开关",
 
   "// GUI": "================================================",
 
@@ -69,7 +81,7 @@
   "tweakermore.gui.config_type.disable": "禁用 Disable",
   "tweakermore.gui.config_type.config": "配置 Config",
 
-  "tweakermore.gui.mod_requirement.footer": "需要模组%1$s",
+  "tweakermore.gui.mod_requirement.footer": "需要模组 %1$s",
   "tweakermore.gui.mod_requirement.mod.tweakeroo": "tweakeroo",
   "tweakermore.gui.mod_requirement.mod.itemscroller": "itemscroller",
   "tweakermore.gui.mod_requirement.mod.litematica": "litematica",

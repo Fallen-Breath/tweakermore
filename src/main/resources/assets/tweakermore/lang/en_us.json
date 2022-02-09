@@ -12,8 +12,10 @@
   "shulkerTooltipEnchantmentHint.more": "... %1$sx",
   "chatMessageLimit": "chatMessageLimit",
   "chatMessageLimit.comment": "Modify the maximum number of history messages stored in the chat hud",
+  "safeAfkHealthThreshold": "safeAfkHealthThreshold",
+  "safeAfkHealthThreshold.comment": "The threshold of the health of the player which triggers the safe afk disconnecting feature\nDisconnect when player takes damage and its health becomes less than the given value",
 
-  "copySignTextToClipBoard": "copySignText",
+  "copySignTextToClipBoard": "copySignTextToClipBoard",
   "copySignTextToClipBoard.comment": "Copy texts in the sign you are pointing to into the clipboard",
   "copySignTextToClipBoard.sign_copied": "Copied texts from %1$s",
   "copySignTextToClipBoard.empty_sign": "%1$s does not contain any text",
@@ -25,20 +27,29 @@
   "handRestockBlackList": "handRestockBlackList",
   "handRestockBlackList.comment": "The items that will NOT trigger tweakHandRestock",
 
-  "disableLightUpdates": "disableLightUpdates",
-  "disableLightUpdates.comment": "Yeets client-side light updates",
-  "disableRedstoneWireParticle": "disableRedstoneWireParticle",
-  "disableRedstoneWireParticle.comment": "Disable particle of redstone wire",
-
   "tweakmAutoCleanContainer": "tweakmAutoCleanContainer",
   "tweakmAutoCleanContainer.comment": "Automatically drops everything in the opened container\nand then close the container",
+  "tweakmAutoCleanContainer.pretty_name": "Auto Clean Container",
   "tweakmAutoCleanContainer.container_cleaned": "Dropped all items in %1$s slots inside %2$s",
   "tweakmAutoFillContainer": "tweakmAutoFillContainer",
   "tweakmAutoFillContainer.comment": "Automatically fill the opened container with the most numerous item stack in your inventory\niff the item stack is the only most numerous one\nand then close the container",
+  "tweakmAutoFillContainer.pretty_name": "Auto Fill Container",
   "tweakmAutoFillContainer.container_filled": "Filled %1$s with all %2$s items (%3$s)",
   "tweakmAutoFillContainer.best_slot_not_found": "Most suitable item to fill the container not found",
   "tweakmAutoPickSchematicBlock": "tweakmAutoPickSchematicBlock",
   "tweakmAutoPickSchematicBlock.comment": "Pick block from schematic automatically before block placement\nIt's logic is the same as the pickBlock tweaks in litematica mod, you need to enable pickBlockEnabled option in litematica\nDoes not work with easy place mode",
+  "tweakmAutoPickSchematicBlock.pretty_name": "Auto Pick Schematic Block",
+  "tweakmSafeAfk": "tweakmSafeAfk",
+  "tweakmSafeAfk.comment": "Disconnect when receive damage\nHealth threshold to disconnect can be set via safeAfkHealthThreshold",
+  "tweakmSafeAfk.pretty_name": "Safe AFK",
+  "tweakmSafeAfk.received_damage": "Received damage at %1$\nHealth remaining: %2$s",
+
+  "disableLightUpdates": "disableLightUpdates",
+  "disableLightUpdates.comment": "Yeets client-side light updates",
+  "disableLightUpdates.pretty_name": "Disable Light Updates",
+  "disableRedstoneWireParticle": "disableRedstoneWireParticle",
+  "disableRedstoneWireParticle.comment": "Disable particle of redstone wire",
+  "disableRedstoneWireParticle.pretty_name": "Disable Redstone Wire Particle",
 
   "// Mod Tweaks": "================================================",
 
@@ -53,6 +64,7 @@
   "openTweakermoreConfigGui.comment": "Open the config GUI of TweakerMore",
   "tweakermoreDebugSwitch": "tweakermoreDebugSwitch",
   "tweakermoreDebugSwitch.comment": "Debug switch for TweakerMore",
+  "tweakermoreDebugSwitch.pretty_name": "TweakerMore Debug Switch",
 
   "// GUI": "================================================",
 
