@@ -10,6 +10,8 @@
   "shulkerTooltipEnchantmentHint": "shulkerTooltipEnchantmentHint",
   "shulkerTooltipEnchantmentHint.comment": "Display enchantments of items in the tooltip of shulker box item",
   "shulkerTooltipEnchantmentHint.more": "... %1$sx",
+  "chatMessageLimit": "chatMessageLimit",
+  "chatMessageLimit.comment": "Modify the maximum number of history messages stored in the chat hud",
 
   "copySignTextToClipBoard": "copySignText",
   "copySignTextToClipBoard.comment": "Copy texts in the sign you are pointing to into the clipboard",

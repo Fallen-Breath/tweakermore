@@ -10,6 +10,8 @@
   "shulkerTooltipEnchantmentHint": "潜影盒物品显示提示附魔",
   "shulkerTooltipEnchantmentHint.comment": "在潜影盒物品的工具提示中显示物品的附魔",
   "shulkerTooltipEnchantmentHint.more": "... %1$sx附魔",
+  "chatMessageLimit": "聊天信息数量上限",
+  "chatMessageLimit.comment": "修改聊天栏的历史信息储存数量上限",
 
   "copySignTextToClipBoard": "复制告示牌文本",
   "copySignTextToClipBoard.comment": "将玩家指向的告示牌中的文本复制到剪贴板",

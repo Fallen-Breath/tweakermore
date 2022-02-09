@@ -49,6 +49,8 @@ public class TweakerMoreConfigs implements IConfigHandler
 	public static final ConfigBoolean VILLAGER_OFFER_USES_DISPLAY = new ConfigBoolean("villagerOfferUsesDisplay", false, "villagerOfferUsesDisplay.comment");
 	@Config(Config.Type.GENERIC)
 	public static final ConfigBoolean SHULKER_TOOLTIP_ENCHANTMENT_HINT = new ConfigBoolean("shulkerTooltipEnchantmentHint", false, "shulkerTooltipEnchantmentHint.comment");
+	@Config(Config.Type.GENERIC)
+	public static final ConfigInteger CHAT_MESSAGE_LIMIT = new ConfigInteger("chatMessageLimit", 100, 100, 10000, "chatMessageLimit.comment");
 
 	@Config(Config.Type.HOTKEY)
 	public static final ConfigHotkey COPY_SIGN_TEXT_TO_CLIPBOARD = new ConfigHotkey("copySignTextToClipBoard", "", "copySignTextToClipBoard.comment");

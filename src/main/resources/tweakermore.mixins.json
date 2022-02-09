@@ -13,6 +13,7 @@
     "core.gui.WidgetListConfigOptionsAccessor",
     "core.gui.WidgetListConfigOptionsMixin",
     "core.migration.ConfigsMixin",
+    "tweaks.chatMessageLimit.ChatHudMixin",
     "tweaks.disableLightUpdates.ClientChunkManagerMixin",
     "tweaks.disableLightUpdates.LightingProviderMixin",
     "tweaks.disableRedstoneWireParticle.RedstoneWireBlockMixin",
