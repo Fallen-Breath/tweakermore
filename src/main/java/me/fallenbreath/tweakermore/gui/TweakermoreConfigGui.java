@@ -9,16 +9,18 @@ import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.Config;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.config.TweakerMoreOption;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class TweakermoreConfigGui extends GuiConfigsBase
 {
-    private static Tabs tab = Tabs.TWEAKS;
+    private static Config.Category category = Config.Category.MC_TWEAKS;
     @Nullable
     private Config.Type filteredType = null;
     @Nullable
@@ -27,11 +29,6 @@ public class TweakermoreConfigGui extends GuiConfigsBase
     public TweakermoreConfigGui()
     {
         super(10, 50, TweakerMoreMod.MOD_ID, null, "tweakermore.gui.title", TweakerMoreMod.VERSION);
-    }
-
-    public static Tabs getCurrentTab()
-    {
-        return tab;
     }
 
     @Override
@@ -43,45 +40,39 @@ public class TweakermoreConfigGui extends GuiConfigsBase
         int x = 10;
         int y = 26;
 
-        for (Tabs tab : Tabs.values())
+        for (Config.Category category : Config.Category.values())
         {
-            x += this.createNavigationButton(x, y, tab);
+            x += this.createNavigationButton(x, y, category);
         }
 
-        if (TweakermoreConfigGui.tab != Tabs.CONFIG)
-        {
-            List<Config.Type> items = Arrays.stream(Config.Type.values()).filter(type -> type != Config.Type.CONFIG).collect(Collectors.toList());
-            items.add(0, null);
-            SelectorDropDownList<Config.Type> dd = new SelectorDropDownList<>(this.width - 91, this.getListY() + 3, 80, 16, 200, items.size(), items);
-            dd.setEntryChangeListener(type -> {
-                if (type != this.filteredType)
-                {
-                    this.filteredType = type;
-                    this.reDraw();
-                }
-            });
-            dd.setZLevel(3);
-            dd.setSelectedEntry(this.filteredType);
-            this.addWidget(dd);
-            this.typeFilterDropDownList = dd;
+        Set<Config.Type> possibleTypes = TweakerMoreConfigs.getOptions(TweakermoreConfigGui.category).stream().map(TweakerMoreOption::getType).collect(Collectors.toSet());
+        List<Config.Type> items = Arrays.stream(Config.Type.values()).filter(possibleTypes::contains).collect(Collectors.toList());
+        items.add(0, null);
+        SelectorDropDownList<Config.Type> dd = new SelectorDropDownList<>(this.width - 91, this.getListY() + 3, 80, 16, 200, items.size(), items);
+        dd.setEntryChangeListener(type -> {
+            if (type != this.filteredType)
+            {
+                this.filteredType = type;
+                this.reDraw();
+            }
+        });
+        dd.setZLevel(3);
+        dd.setSelectedEntry(this.filteredType);
+        this.addWidget(dd);
+        this.typeFilterDropDownList = dd;
 
-            String labelTextKey = "tweakermore.gui.config_type.label_text";
-            int labelWidth = this.getStringWidth(StringUtils.translate(labelTextKey));
-            WidgetLabel label = new WidgetLabel(dd.getX() - labelWidth - 5, dd.getY() + 1, labelWidth, dd.getHeight(), 0xFFE0E0E0, labelTextKey);
-            this.addWidget(label);
-        }
-        else
-        {
-            this.typeFilterDropDownList = null;
-        }
+        String labelTextKey = "tweakermore.gui.config_type.label_text";
+        int labelWidth = this.getStringWidth(StringUtils.translate(labelTextKey));
+        WidgetLabel label = new WidgetLabel(dd.getX() - labelWidth - 5, dd.getY() + 1, labelWidth, dd.getHeight(), 0xFFE0E0E0, labelTextKey);
+        this.addWidget(label);
     }
 
-    private int createNavigationButton(int x, int y, Tabs tab)
+    private int createNavigationButton(int x, int y, Config.Category category)
     {
-        ButtonGeneric button = new ButtonGeneric(x, y, -1, 20, tab.getDisplayName());
-        button.setEnabled(TweakermoreConfigGui.tab != tab);
+        ButtonGeneric button = new ButtonGeneric(x, y, -1, 20, category.getDisplayName());
+        button.setEnabled(TweakermoreConfigGui.category != category);
         this.addButton(button, (b, mouseButton) -> {
-            TweakermoreConfigGui.tab = tab;
+            TweakermoreConfigGui.category = category;
             this.reDraw();
         });
         return button.getWidth() + 2;
@@ -111,35 +102,15 @@ public class TweakermoreConfigGui extends GuiConfigsBase
     @Override
     public List<ConfigOptionWrapper> getConfigs()
     {
-        List<IConfigBase> configs = Lists.newArrayList();
-        switch (TweakermoreConfigGui.tab)
+        List<IConfigBase> options = Lists.newArrayList();
+        for (TweakerMoreOption tweakerMoreOption : TweakerMoreConfigs.getOptions(TweakermoreConfigGui.category))
         {
-            case TWEAKS:
-                configs.addAll(TweakerMoreConfigs.getOptions(type -> type != Config.Type.CONFIG && (this.filteredType == null || type == this.filteredType)));
-                break;
-            case CONFIG:
-                configs.addAll(TweakerMoreConfigs.getOptions(Config.Type.CONFIG));
-                break;
+            if (this.filteredType == null || tweakerMoreOption.getType() == this.filteredType)
+            {
+                options.add(tweakerMoreOption.getOption());
+            }
         }
-        configs.sort((a, b) -> a.getName().compareToIgnoreCase(b.getName()));
-        return ConfigOptionWrapper.createFor(configs);
-    }
-
-    public enum Tabs
-    {
-        TWEAKS("tweakermore.gui.button.config_gui.tweaks"),
-        CONFIG("tweakermore.gui.button.config_gui.config");
-
-        private final String translationKey;
-
-        Tabs(String translationKey)
-        {
-            this.translationKey = translationKey;
-        }
-
-        public String getDisplayName()
-        {
-            return StringUtils.translate(this.translationKey);
-        }
+        options.sort((a, b) -> a.getName().compareToIgnoreCase(b.getName()));
+        return ConfigOptionWrapper.createFor(options);
     }
 }

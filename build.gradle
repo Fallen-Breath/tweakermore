@@ -56,11 +56,7 @@ dependencies {
 	// https://www.curseforge.com/minecraft/mc-mods/litematica/files
 	modImplementation "curse.maven:litematica-308892:2957593"  // litematica-fabric-1.15.2-0.0.0-dev.20200515.184506.jar
 
-
 	modImplementation "com.terraformersmc:modmenu:${project.mod_menu_version}"
-
-	modImplementation "com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}"
-	include "com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}"
 
 	// runtime mods
 	modRuntimeOnly "com.github.astei:lazydfu:0.1.2"  // faster startup

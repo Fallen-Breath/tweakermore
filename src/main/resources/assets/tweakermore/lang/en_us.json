@@ -1,13 +1,16 @@
 {
-  "netherPortalSoundChance": "netherPortalSoundChance",
-  "netherPortalSoundChance.comment": "The chance for a nether portal block to play sound\nSet it to 0.001 or 0.0001 for less noisy portal",
+  "// MC Tweaks": "================================================",
+
   "autoFillContainerThreshold": "autoFillContainerThreshold",
   "autoFillContainerThreshold.comment": "The minimum occupied slot amount for the item to trigger tweak tweakmAutoFillContainer\ne.g. if you always have 2 slots of firework rocket you can set the value to 3,\n then your rockets will never be used to fill the container",
+  "netherPortalSoundChance": "netherPortalSoundChance",
+  "netherPortalSoundChance.comment": "The chance for a nether portal block to play sound\nSet it to 0.001 or 0.0001 for less noisy portal",
   "villagerOfferUsesDisplay": "villagerOfferUsesDisplay",
   "villagerOfferUsesDisplay.comment": "Display villager offer use and limit amount on villager offer list\nHover on the arrow of the offer to see it",
   "shulkerTooltipEnchantmentHint": "shulkerTooltipEnchantmentHint",
   "shulkerTooltipEnchantmentHint.comment": "Display enchantments of items in the tooltip of shulker box item",
   "shulkerTooltipEnchantmentHint.more": "... %1$sx",
+
   "copySignTextToClipBoard": "copySignText",
   "copySignTextToClipBoard.comment": "Copy texts in the sign you are pointing to into the clipboard",
   "copySignTextToClipBoard.sign_copied": "Copied texts from %1$s",
@@ -32,23 +35,40 @@
   "tweakmAutoFillContainer.comment": "Automatically fill the opened container with the most numerous item stack in your inventory\niff the item stack is the only most numerous one\nand then close the container",
   "tweakmAutoFillContainer.container_filled": "Filled %1$s with all %2$s items (%3$s)",
   "tweakmAutoFillContainer.best_slot_not_found": "Most suitable item to fill the container not found",
-
   "tweakmAutoPickSchematicBlock": "tweakmAutoPickSchematicBlock",
   "tweakmAutoPickSchematicBlock.comment": "Pick block from schematic automatically before block placement\nIt's logic is the same as the pickBlock tweaks in litematica mod, you need to enable pickBlockEnabled option in litematica\nDoes not work with easy place mode",
+
+  "// Mod Tweaks": "================================================",
+
+  "ofUnlockF3FpsLimit": "ofUnlockF3FpsLimit",
+  "ofUnlockF3FpsLimit.comment": "Removed 10 FPS render limit for F3 debug hud",
+  "xmapNoSessionFinalizationWait": "xmapNoSessionFinalizationWait",
+  "xmapNoSessionFinalizationWait.comment": "Skip the session finalization operation when quit a world\nSo no lag when quitting server or single player\nMight have some side effects though",
+
+  "// Config": "================================================",
 
   "openTweakermoreConfigGui": "openTweakermoreConfigGui",
   "openTweakermoreConfigGui.comment": "Open the config GUI of TweakerMore",
 
+  "// GUI": "================================================",
 
   "tweakermore.gui.title": "TweakerMore v%1$s Config GUI",
-  "tweakermore.gui.button.config_gui.tweaks": "Tweaks",
-  "tweakermore.gui.button.config_gui.config": "Config",
   "tweakermore.gui.selector_drop_down_list.all": "All",
+  "tweakermore.gui.config_category.mc_tweaks": "Tweaks",
+  "tweakermore.gui.config_category.mod_tweaks": "Mods Tweaks",
+  "tweakermore.gui.config_category.config": "Config",
   "tweakermore.gui.config_type.label_text": "Type filter",
   "tweakermore.gui.config_type.generic": "Generic",
   "tweakermore.gui.config_type.hotkey": "Hotkey",
   "tweakermore.gui.config_type.list": "List",
   "tweakermore.gui.config_type.tweak": "Tweak",
   "tweakermore.gui.config_type.disable": "Disable",
-  "tweakermore.gui.config_type.config": "Config"
+  "tweakermore.gui.config_type.config": "Config",
+
+  "tweakermore.gui.mod_requirement.footer": "Requires mod %1$s",
+  "tweakermore.gui.mod_requirement.mod.tweakeroo": "tweakeroo",
+  "tweakermore.gui.mod_requirement.mod.itemscroller": "itemscroller",
+  "tweakermore.gui.mod_requirement.mod.litematica": "litematica",
+  "tweakermore.gui.mod_requirement.mod.optifine": "optifine (optifabric)",
+  "tweakermore.gui.mod_requirement.mod.xaero_worldmap": "xaero's worldmap"
 }

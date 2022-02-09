@@ -22,7 +22,7 @@ public abstract class WidgetLabelMixin extends WidgetBase
 
 	@Shadow(remap = false) @Final protected int textColor;
 
-	@Shadow @Final protected List<String> labels;
+	@Shadow(remap = false) @Final protected List<String> labels;
 
 	public WidgetLabelMixin(int x, int y, int width, int height)
 	{

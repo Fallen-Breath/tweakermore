@@ -32,7 +32,7 @@ public abstract class WidgetListConfigOptionsMixin extends WidgetListConfigOptio
 	)
 	private int tweakermoreSearchBarWidth(int width)
 	{
-		if (this.parent instanceof TweakermoreConfigGui && TweakermoreConfigGui.getCurrentTab() != TweakermoreConfigGui.Tabs.CONFIG)
+		if (this.parent instanceof TweakermoreConfigGui)
 		{
 			width -= 120;
 		}

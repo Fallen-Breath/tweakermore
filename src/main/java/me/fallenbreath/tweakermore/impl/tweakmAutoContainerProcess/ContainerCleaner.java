@@ -2,7 +2,7 @@ package me.fallenbreath.tweakermore.impl.tweakmAutoContainerProcess;
 
 import fi.dy.masa.itemscroller.util.InventoryUtils;
 import fi.dy.masa.malilib.util.InfoUtils;
-import me.fallenbreath.tweakermore.config.TweakerMoreToggles;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.container.Slot;
@@ -14,7 +14,7 @@ public class ContainerCleaner implements Processor
 	@Override
 	public boolean isEnabled()
 	{
-		return TweakerMoreToggles.TWEAKM_AUTO_CLEAN_CONTAINER.getBooleanValue();
+		return TweakerMoreConfigs.TWEAKM_AUTO_CLEAN_CONTAINER.getBooleanValue();
 	}
 
 	@Override

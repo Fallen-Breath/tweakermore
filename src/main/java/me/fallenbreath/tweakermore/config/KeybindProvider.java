@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class KeybindProvider implements IKeybindProvider
 {
-	private static final List<IHotkey> ALL_CUSTOM_HOTKEYS = TweakerMoreConfigs.getOptions(Config.Type.CONFIG).stream().
+	private static final List<IHotkey> ALL_CUSTOM_HOTKEYS = TweakerMoreConfigs.getAllConfigOptionStream().
 			filter(option -> option instanceof IHotkey).
 			map(option -> (IHotkey)option).
 			collect(Collectors.toList());

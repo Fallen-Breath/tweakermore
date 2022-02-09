@@ -12,16 +12,30 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Config
 {
-	Type[] value();
+	Type value();
+
+	Category category() default Category.MC_TWEAKS;
+
+	String[] modRequire() default {};
 
 	enum Type implements IStringValue
 	{
-		GENERIC, HOTKEY, LIST, TWEAK, DISABLE, CONFIG;
+		GENERIC, HOTKEY, LIST, TWEAK, DISABLE;
 
 		@Override
 		public String getStringValue()
 		{
 			return StringUtils.translate("tweakermore.gui.config_type." + this.name().toLowerCase());
+		}
+	}
+
+	enum Category
+	{
+		MC_TWEAKS, MOD_TWEAKS, CONFIG;
+
+		public String getDisplayName()
+		{
+			return StringUtils.translate("tweakermore.gui.config_category." + this.name().toLowerCase());
 		}
 	}
 }
