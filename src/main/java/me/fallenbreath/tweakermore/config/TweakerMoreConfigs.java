@@ -55,11 +55,11 @@ public class TweakerMoreConfigs implements IConfigHandler
 	@Config(Config.Type.HOTKEY)
 	public static final ConfigHotkey COPY_SIGN_TEXT_TO_CLIPBOARD = new ConfigHotkey("copySignTextToClipBoard", "", "copySignTextToClipBoard.comment");
 
-	@Config(Config.Type.LIST)
+	@Config(value = Config.Type.LIST, modRequire = tweakeroo)
 	public static final ConfigOptionList HAND_RESTORE_LIST_TYPE = new ConfigOptionList("handRestockListType", UsageRestriction.ListType.NONE, "handRestockListType.comment");
-	@Config(Config.Type.LIST)
+	@Config(value = Config.Type.LIST, modRequire = tweakeroo)
 	public static final ConfigStringList HAND_RESTORE_WHITELIST = new ConfigStringList("handRestockWhiteList", ImmutableList.of(RegistryUtil.getItemId(Items.BUCKET)), "handRestockWhiteList.comment");
-	@Config(Config.Type.LIST)
+	@Config(value = Config.Type.LIST, modRequire = tweakeroo)
 	public static final ConfigStringList HAND_RESTORE_BLACKLIST = new ConfigStringList("handRestockBlackList", ImmutableList.of(RegistryUtil.getItemId(Items.LAVA_BUCKET)), "handRestockBlackList.comment");
 	public static final ItemRestriction HAND_RESTORE_RESTRICTION = new ItemRestriction();
 
