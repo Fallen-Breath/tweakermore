@@ -1,7 +1,6 @@
 package me.fallenbreath.tweakermore.mixins.core;
 
 import fi.dy.masa.malilib.gui.widgets.WidgetListConfigOptions;
-import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.util.StringUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
