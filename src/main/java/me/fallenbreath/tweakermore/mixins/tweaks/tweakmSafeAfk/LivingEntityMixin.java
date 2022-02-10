@@ -1,8 +1,6 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.tweakmSafeAfk;
 
-import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.impl.tweakmSafeAfk.DamageMemory;
-import net.minecraft.client.MinecraftClient;
+import me.fallenbreath.tweakermore.impl.tweakmSafeAfk.SafeAfkHelper;
 import net.minecraft.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,14 +19,6 @@ public abstract class LivingEntityMixin
 	)
 	private void playerGetsHurtHook(byte status, CallbackInfo ci)
 	{
-		if (TweakerMoreConfigs.TWEAKM_SAFE_AFK.getBooleanValue())
-		{
-			MinecraftClient mc = MinecraftClient.getInstance();
-			LivingEntity livingEntity = (LivingEntity)(Object)this;
-			if (livingEntity == mc.player && mc.world != null)
-			{
-				DamageMemory.recordTime();
-			}
-		}
+		SafeAfkHelper.onEntityEnterDamageStatus((LivingEntity)(Object)this);
 	}
 }
