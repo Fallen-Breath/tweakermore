@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "TweakerMore",
-  "description": "An addon of masa's tweakeroo mod",
+  "description": "A collection of client-side tweak kits for enhance your Minecraft game experience",
   "authors": [
     "Fallen_Breath"
   ],
