@@ -60,11 +60,11 @@
 
   "// Setting": "================================================",
 
-  "openTweakermoreConfigGui": "openTweakermoreConfigGui",
-  "openTweakermoreConfigGui.comment": "Open the config GUI of TweakerMore",
-  "tweakermoreDebugMode": "tweakermoreDebugMode",
-  "tweakermoreDebugMode.comment": "Debug mode of TweakerMore",
-  "tweakermoreDebugMode.pretty_name": "TweakerMore Debug Mode",
+  "openTweakerMoreConfigGui": "openTweakerMoreConfigGui",
+  "openTweakerMoreConfigGui.comment": "Open the config GUI of TweakerMore",
+  "tweakerMoreDebugMode": "tweakerMoreDebugMode",
+  "tweakerMoreDebugMode.comment": "Debug mode of TweakerMore",
+  "tweakerMoreDebugMode.pretty_name": "TweakerMore Debug Mode",
 
   "// GUI": "================================================",
 

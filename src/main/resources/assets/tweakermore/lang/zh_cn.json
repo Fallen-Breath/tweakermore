@@ -60,11 +60,11 @@
 
   "// Setting": "================================================",
 
-  "openTweakermoreConfigGui": "打开TweakerMore配置界面",
-  "openTweakermoreConfigGui.comment": "打开TweakerMore的配置界面",
-  "tweakermoreDebugMode": "TweakerMore调试模式",
-  "tweakermoreDebugMode.comment": "TweakerMore的调试模式",
-  "tweakermoreDebugMode.pretty_name": "TweakerMore调试模式 (tweakermoreDebugMode)",
+  "openTweakerMoreConfigGui": "打开TweakerMore配置界面",
+  "openTweakerMoreConfigGui.comment": "打开TweakerMore的配置界面",
+  "tweakerMoreDebugMode": "TweakerMore调试模式",
+  "tweakerMoreDebugMode.comment": "TweakerMore的调试模式",
+  "tweakerMoreDebugMode.pretty_name": "TweakerMore调试模式 (TweakerMoreDebugMode)",
 
   "// GUI": "================================================",
 
