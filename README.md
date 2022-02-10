@@ -13,7 +13,7 @@ Press `K` + `C` to open the config GUI. You can also access the config GUI via [
 
 Requirements:
 
-- [Fabric Loader](https://fabricmc.net/)
+- [Fabric Loader](https://fabricmc.net/) >= 0.10.4
 - [MaLiLib](https://www.curseforge.com/minecraft/mc-mods/malilib)
 
 More features will be enabled with these mods

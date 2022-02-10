@@ -2,6 +2,11 @@ package me.fallenbreath.tweakermore.util.mixin;
 
 public abstract class ModIds
 {
+	// basics
+	public static final String minecraft = "minecraft";
+	public static final String fabric_loader = "fabricloader";
+	public static final String fabric_api = "fabric";
+
 	// masa's
 	public static final String tweakeroo = "tweakeroo";
 	public static final String itemscroller = "itemscroller";

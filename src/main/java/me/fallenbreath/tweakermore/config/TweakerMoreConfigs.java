@@ -12,9 +12,8 @@ import fi.dy.masa.malilib.config.options.*;
 import fi.dy.masa.malilib.util.JsonUtils;
 import fi.dy.masa.malilib.util.restrictions.ItemRestriction;
 import fi.dy.masa.malilib.util.restrictions.UsageRestriction;
-import me.fallenbreath.tweakermore.TweakerMoreMod;
+import me.fallenbreath.tweakermore.util.FileUtil;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Items;
 
 import java.io.File;
@@ -166,18 +165,11 @@ public class TweakerMoreConfigs implements IConfigHandler
 	 * ====================
 	 */
 
-	private static final String CONFIG_FILE_NAME = TweakerMoreMod.MOD_ID + ".json";
-
-	private static File getConfigFile()
-	{
-		return FabricLoader.getInstance().getConfigDir().resolve(CONFIG_FILE_NAME).toFile();
-	}
-
 	private static JsonObject ROOT_JSON_OBJ = new JsonObject();
 
 	public static void loadFromFile()
 	{
-		File configFile = getConfigFile();
+		File configFile = FileUtil.getConfigFile();
 		if (configFile.exists() && configFile.isFile() && configFile.canRead())
 		{
 			JsonElement element = JsonUtils.parseJsonFile(configFile);
@@ -216,7 +208,7 @@ public class TweakerMoreConfigs implements IConfigHandler
 
 	public static void saveToFile()
 	{
-		File configFile = getConfigFile();
+		File configFile = FileUtil.getConfigFile();
 		JsonObject root = ROOT_JSON_OBJ;
 
 		ConfigUtils.writeConfigBase(root, "Generic", getConfigOptions(Config.Type.GENERIC));
