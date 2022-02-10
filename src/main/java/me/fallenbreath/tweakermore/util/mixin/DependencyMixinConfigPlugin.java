@@ -76,6 +76,7 @@ public abstract class DependencyMixinConfigPlugin implements IMixinConfigPlugin
 						this.failedReason = String.format("mod requirement %s not found", modId);
 						return false;
 					}
+					this.failedReason = String.format("conflicted mod %s found", modId);
 					break;
 
 				case MIXIN:
@@ -85,6 +86,7 @@ public abstract class DependencyMixinConfigPlugin implements IMixinConfigPlugin
 						this.failedReason = String.format("required mixin class %s disabled", className);
 						return false;
 					}
+					this.failedReason = String.format("conflicted mixin class %s found", className);
 					break;
 			}
 		}
