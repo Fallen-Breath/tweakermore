@@ -4,7 +4,7 @@ import me.fallenbreath.tweakermore.TweakerMoreMod;
 
 public class StringUtil
 {
-	private static final String TWEAKERMORE_NAMESPACE_PREFIX = TweakerMoreMod.MOD_ID + ".";
+	public static final String TWEAKERMORE_NAMESPACE_PREFIX = TweakerMoreMod.MOD_ID + ".";
 
 	public static boolean inTweakerMoreNameSpace(String name)
 	{
