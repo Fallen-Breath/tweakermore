@@ -6,6 +6,6 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ModRequire
 {
-	Requirement[] enableWhen() default {};
-	Requirement[] disableWhen() default {};
+	Condition[] enableWhen() default {};
+	Condition[] disableWhen() default {};
 }

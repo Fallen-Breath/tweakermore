@@ -66,7 +66,7 @@ public abstract class DependencyMixinConfigPlugin implements IMixinConfigPlugin
 	{
 		for (AnnotationNode condition : conditions)
 		{
-			Requirement.Type type = Annotations.getValue(condition, "type", Requirement.Type.class, Requirement.Type.MOD);
+			Condition.Type type = Annotations.getValue(condition, "type", Condition.Type.class, Condition.Type.MOD);
 			switch (type)
 			{
 				case MOD:

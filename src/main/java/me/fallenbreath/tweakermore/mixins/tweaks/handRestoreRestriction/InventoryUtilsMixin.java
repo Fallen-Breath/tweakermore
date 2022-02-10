@@ -3,9 +3,9 @@ package me.fallenbreath.tweakermore.mixins.tweaks.handRestoreRestriction;
 import fi.dy.masa.tweakeroo.config.FeatureToggle;
 import fi.dy.masa.tweakeroo.util.InventoryUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.mixin.Condition;
 import me.fallenbreath.tweakermore.util.mixin.ModIds;
 import me.fallenbreath.tweakermore.util.mixin.ModRequire;
-import me.fallenbreath.tweakermore.util.mixin.Requirement;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.util.Hand;
@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.Slice;
 
-@ModRequire(enableWhen = @Requirement(ModIds.tweakeroo))
+@ModRequire(enableWhen = @Condition(ModIds.tweakeroo))
 @Mixin(InventoryUtils.class)
 public abstract class InventoryUtilsMixin
 {
