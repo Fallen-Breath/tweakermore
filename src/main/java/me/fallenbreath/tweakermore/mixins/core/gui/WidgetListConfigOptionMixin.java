@@ -6,7 +6,6 @@ import me.fallenbreath.tweakermore.gui.TranslatedOptionLabel;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
@@ -48,45 +47,5 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 			WidgetLabel label = new TranslatedOptionLabel(x, y, width, height, textColor, lines);
 			this.addWidget(label);
 		}
-	}
-
-	// some ocd alignment things xd
-
-	@ModifyArg(
-			method = "addHotkeyConfigElements",
-			at = @At(
-					value = "INVOKE",
-					target = "Lfi/dy/masa/malilib/gui/widgets/WidgetKeybindSettings;<init>(IIIILfi/dy/masa/malilib/hotkeys/IKeybind;Ljava/lang/String;Lfi/dy/masa/malilib/gui/widgets/WidgetListBase;Lfi/dy/masa/malilib/gui/interfaces/IDialogHandler;)V",
-					remap = false
-			),
-			index = 0,
-			remap = false
-	)
-	private int whyNotAlignTheHotkeyConfigButtonWidthWithOthers(int x)
-	{
-		if (isTweakerMoreConfigGui())
-		{
-			x += 1;
-		}
-		return x;
-	}
-
-	@ModifyArg(
-			method = "addHotkeyConfigElements",
-			at = @At(
-					value = "INVOKE",
-					target = "Lfi/dy/masa/malilib/gui/button/ConfigButtonKeybind;<init>(IIIILfi/dy/masa/malilib/hotkeys/IKeybind;Lfi/dy/masa/malilib/gui/interfaces/IKeybindConfigGui;)V",
-					remap = false
-			),
-			index = 2,
-			remap = false
-	)
-	private int whyNotAlignTheHotkeySetterButtonWidthWithOthers(int width)
-	{
-		if (isTweakerMoreConfigGui())
-		{
-			width += 3;
-		}
-		return width;
 	}
 }
