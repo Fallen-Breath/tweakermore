@@ -64,6 +64,8 @@ public class TweakerMoreConfigs implements IConfigHandler
 	@Config(value = Config.Type.LIST, modRequire = tweakeroo)
 	public static final ConfigStringList HAND_RESTORE_BLACKLIST = newConfigStringList("handRestockBlackList", ImmutableList.of(RegistryUtil.getItemId(Items.LAVA_BUCKET)));
 	public static final ItemRestriction HAND_RESTORE_RESTRICTION = new ItemRestriction();
+	@Config(Config.Type.LIST)
+	public static final ConfigStringList PRIORITIZED_COMMAND_SUGGESTIONS = newConfigStringList("prioritizedCommandSuggestions", ImmutableList.of());
 
 	@Config(value = Config.Type.TWEAK, modRequire = itemscroller)
 	public static final ConfigBooleanHotkeyed TWEAKM_AUTO_CLEAN_CONTAINER = newConfigBooleanHotkeyed("tweakmAutoCleanContainer");
@@ -94,9 +96,9 @@ public class TweakerMoreConfigs implements IConfigHandler
 	//////////////////////////
 
 	@Config(value = Config.Type.HOTKEY, category = Config.Category.SETTING)
-	public static final ConfigHotkey OPEN_TWEAKERMORE_CONFIG_GUI = newConfigHotKey("openTweakermoreConfigGui", "K,C");
+	public static final ConfigHotkey OPEN_TWEAKERMORE_CONFIG_GUI = newConfigHotKey("openTweakerMoreConfigGui", "K,C");
 	@Config(value = Config.Type.TWEAK, category = Config.Category.SETTING)
-	public static final ConfigBooleanHotkeyed TWEAKERMORE_DEBUG_MODE = newConfigBooleanHotkeyed("tweakermoreDebugMode");
+	public static final ConfigBooleanHotkeyed TWEAKERMORE_DEBUG_MODE = newConfigBooleanHotkeyed("tweakerMoreDebugMode");
 
 	/**
 	 * ============================
