@@ -7,7 +7,7 @@ import net.minecraft.client.gui.hud.DebugHud;
 import org.spongepowered.asm.mixin.Mixin;
 
 @SuppressWarnings("target")
-@ModRequire(enableWhen = @Condition(ModIds.optifine))
+@ModRequire(enableWhen = {@Condition(ModIds.optifine), @Condition(value = ModIds.minecraft, versionPredicates = ">=1.15")})
 @Mixin(DebugHud.class)
 public abstract class DebugHudMixin
 {
