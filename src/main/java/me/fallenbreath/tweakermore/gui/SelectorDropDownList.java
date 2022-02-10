@@ -1,6 +1,5 @@
 package me.fallenbreath.tweakermore.gui;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import fi.dy.masa.malilib.gui.widgets.WidgetDropDownList;
 import fi.dy.masa.malilib.interfaces.IStringValue;
 import fi.dy.masa.malilib.util.StringUtils;
@@ -76,17 +75,5 @@ public class SelectorDropDownList<T extends IStringValue> extends WidgetDropDown
 			return StringUtils.translate("tweakermore.gui.selector_drop_down_list.all");
 		}
 		return super.getDisplayString(entry);
-	}
-
-	@Override
-	public void render(int mouseX, int mouseY, boolean selected)
-	{
-		RenderSystem.pushMatrix();
-		RenderSystem.disableLighting();
-		RenderSystem.disableDepthTest();
-
-		super.render(mouseX, mouseY, selected);
-
-		RenderSystem.popMatrix();
 	}
 }

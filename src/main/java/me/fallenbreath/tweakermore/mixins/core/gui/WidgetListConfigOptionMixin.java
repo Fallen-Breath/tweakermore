@@ -32,10 +32,10 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 {
 	@Shadow(remap = false) @Final protected IKeybindConfigGui host;
 
-	@Shadow @Final protected GuiConfigsBase.ConfigOptionWrapper wrapper;
+	@Shadow(remap = false) @Final protected GuiConfigsBase.ConfigOptionWrapper wrapper;
 
 	@Mutable
-	@Shadow @Final protected KeybindSettings initialKeybindSettings;
+	@Shadow(remap = false) @Final protected KeybindSettings initialKeybindSettings;
 
 	@Unique
 	private boolean initialBoolean;

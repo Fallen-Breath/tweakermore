@@ -12,16 +12,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@SuppressWarnings("ShadowTarget")
+@SuppressWarnings("target")
 @ModRequire(enableWhen = @Requirement(ModIds.optifine))
 @Mixin(DebugHud.class)
 public abstract class DebugHudMixin
 {
-	@Dynamic
+	@Dynamic("Added by optifine")
 	@Shadow(remap = false)
 	private long updateInfoLeftTimeMs;
 
-	@Dynamic
+	@Dynamic("Added by optifine")
 	@Shadow(remap = false)
 	private long updateInfoRightTimeMs;
 
