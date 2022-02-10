@@ -40,25 +40,17 @@ version = 'mc' + project.minecraft_version + '-v' + fullModVersion
 group = project.maven_group
 
 dependencies {
-	//to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	// https://masa.dy.fi/maven/fi/dy/masa/malilib/
-	modImplementation("fi.dy.masa.malilib:malilib-fabric-1.15.2:0.10.0-dev.21+arne.1") {
+	// dependencies
+	modImplementation("fi.dy.masa.malilib:${project.malilib_version}") {
 		exclude group: 'io.github.prospector', module: 'modmenu'
 	}
-
-	// https://www.curseforge.com/minecraft/mc-mods/tweakeroo/files
-	modImplementation "curse.maven:tweakeroo-297344:2942277"  // tweakeroo-fabric-1.15.2-0.10.0-dev.20200424.222527.jar
-
-	// https://www.curseforge.com/minecraft/mc-mods/item-scroller/files
-	modImplementation "curse.maven:item-scroller-242064:2880360"  // itemscroller-fabric-1.15.2-0.15.0-dev.20200212.183513.jar
-
-	// https://www.curseforge.com/minecraft/mc-mods/litematica/files
-	modImplementation "curse.maven:litematica-308892:2957593"  // litematica-fabric-1.15.2-0.0.0-dev.20200515.184506.jar
-
+	modImplementation "curse.maven:tweakeroo-297344:${project.tweakeroo_file_id}"
+	modImplementation "curse.maven:item-scroller-242064:${project.itemscroller_file_id}"
+	modImplementation "curse.maven:litematica-308892:${project.litematica_file_id}"
 	modImplementation "com.terraformersmc:modmenu:${project.mod_menu_version}"
 
 	// runtime mods
