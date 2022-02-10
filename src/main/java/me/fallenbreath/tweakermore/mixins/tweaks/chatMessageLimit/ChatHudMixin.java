@@ -2,6 +2,8 @@ package me.fallenbreath.tweakermore.mixins.tweaks.chatMessageLimit;
 
 import com.google.common.collect.Lists;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.mixin.Condition;
+import me.fallenbreath.tweakermore.util.mixin.ModRequire;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.gui.hud.ChatHudLine;
 import net.minecraft.text.OrderedText;
@@ -16,6 +18,10 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import java.util.List;
 
+/**
+ * It's stolen from https://github.com/Fallen-Breath/raise-chat-limit so make sure it doesnt crash with it
+ */
+@ModRequire(disableWhen = @Condition("raise-chat-limit"))
 @Mixin(ChatHud.class)
 public abstract class ChatHudMixin
 {

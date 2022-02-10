@@ -1,9 +1,9 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.ofUnlockF3FpsLimit;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.mixin.Condition;
 import me.fallenbreath.tweakermore.util.mixin.ModIds;
 import me.fallenbreath.tweakermore.util.mixin.ModRequire;
-import me.fallenbreath.tweakermore.util.mixin.Requirement;
 import net.minecraft.client.gui.hud.DebugHud;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @SuppressWarnings("target")
-@ModRequire(enableWhen = @Requirement(ModIds.optifine))
+@ModRequire(enableWhen = @Condition(ModIds.optifine))
 @Mixin(DebugHud.class)
 public abstract class DebugHudMixin
 {
