@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.util.mixin;
+package me.fallenbreath.tweakermore.util;
 
 public abstract class ModIds
 {
