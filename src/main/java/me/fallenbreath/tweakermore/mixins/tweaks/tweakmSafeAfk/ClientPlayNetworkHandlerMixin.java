@@ -3,6 +3,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.tweakmSafeAfk;
 import me.fallenbreath.tweakermore.impl.tweakmSafeAfk.SafeAfkHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;

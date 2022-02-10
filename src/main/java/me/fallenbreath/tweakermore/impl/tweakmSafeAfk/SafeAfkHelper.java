@@ -54,7 +54,7 @@ public class SafeAfkHelper
 					mc.execute(() -> {
 						mc.world.disconnect();
 						mc.disconnect();
-						mc.openScreen(new DisconnectedScreen(new MultiplayerScreen(new TitleScreen()), title, reason));
+						mc.setScreen(new DisconnectedScreen(new MultiplayerScreen(new TitleScreen()), title, reason));
 					});
 				}
 			}
