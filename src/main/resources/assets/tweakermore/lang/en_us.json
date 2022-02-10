@@ -89,6 +89,6 @@
   "tweakermore.gui.mod_requirement.mod.tweakeroo": "tweakeroo",
   "tweakermore.gui.mod_requirement.mod.itemscroller": "itemscroller",
   "tweakermore.gui.mod_requirement.mod.litematica": "litematica",
-  "tweakermore.gui.mod_requirement.mod.optifine": "optifine (optifabric)",
+  "tweakermore.gui.mod_requirement.mod.optifabric": "optifine (optifabric)",
   "tweakermore.gui.mod_requirement.mod.xaero_worldmap": "xaero's worldmap"
 }
