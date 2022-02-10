@@ -14,6 +14,7 @@
     "core.gui.WidgetListConfigOptionsMixin",
     "core.migration.ConfigsMixin",
     "tweaks.chatMessageLimit.ChatHudMixin",
+    "tweaks.copySignTextToClipBoard.SignBlockEntityAccessor",
     "tweaks.disableLightUpdates.ClientChunkManagerMixin",
     "tweaks.disableLightUpdates.LightingProviderMixin",
     "tweaks.disableRedstoneWireParticle.RedstoneWireBlockMixin",

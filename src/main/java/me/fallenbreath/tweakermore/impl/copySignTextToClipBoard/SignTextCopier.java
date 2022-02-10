@@ -4,6 +4,7 @@ import com.google.common.base.Joiner;
 import fi.dy.masa.malilib.hotkeys.IKeybind;
 import fi.dy.masa.malilib.hotkeys.KeyAction;
 import fi.dy.masa.malilib.util.InfoUtils;
+import me.fallenbreath.tweakermore.mixins.tweaks.copySignTextToClipBoard.SignBlockEntityAccessor;
 import net.minecraft.block.AbstractSignBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -33,7 +34,7 @@ public class SignTextCopier
 				if (blockEntity instanceof SignBlockEntity)
 				{
 					String text = Joiner.on("\n").join(
-							Arrays.stream(((SignBlockEntity)blockEntity).text).
+							Arrays.stream(((SignBlockEntityAccessor)blockEntity).getTexts()).
 									map(Text::getString).
 									collect(Collectors.toList())
 					);

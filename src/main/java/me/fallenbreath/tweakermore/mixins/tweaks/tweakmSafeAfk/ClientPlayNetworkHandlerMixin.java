@@ -9,6 +9,7 @@ import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.text.BaseText;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -33,10 +34,10 @@ public abstract class ClientPlayNetworkHandlerMixin
 			if (mc.player != null && mc.world != null && DamageMemory.hasRecord())
 			{
 				float health = mc.player.getHealth();
-				float maxHealth = mc.player.getMaximumHealth();
+				float maxHealth = mc.player.getMaxHealth();
 				if (maxHealth > 0 && health < TweakerMoreConfigs.SAFE_AFK_HEALTH_THRESHOLD.getDoubleValue())
 				{
-					String title = TweakerMoreMod.MOD_NAME + " " + TweakerMoreConfigs.TWEAKM_SAFE_AFK.getPrettyName();
+					BaseText title = new LiteralText(TweakerMoreMod.MOD_NAME + " " + TweakerMoreConfigs.TWEAKM_SAFE_AFK.getPrettyName());
 					BaseText reason = new TranslatableText(
 							"tweakmSafeAfk.received_damage",
 							new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),

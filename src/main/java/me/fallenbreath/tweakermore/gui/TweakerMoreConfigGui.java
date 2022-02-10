@@ -10,6 +10,7 @@ import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.Config;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
+import net.minecraft.client.util.math.MatrixStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -84,11 +85,11 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
         this.initGui();
     }
 
-    public void renderDropDownList(int mouseX, int mouseY)
+    public void renderDropDownList(MatrixStack matrixStack, int mouseX, int mouseY)
     {
         if (this.typeFilterDropDownList != null)
         {
-            this.typeFilterDropDownList.render(mouseX, mouseY, this.typeFilterDropDownList.isMouseOver(mouseX, mouseY));
+            this.typeFilterDropDownList.render(mouseX, mouseY, this.typeFilterDropDownList.isMouseOver(mouseX, mouseY), matrixStack);
         }
     }
 

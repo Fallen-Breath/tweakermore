@@ -58,11 +58,11 @@ public abstract class ShulkerBoxBlockMixin
 			if (amount > 0)
 			{
 				TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-				Text extraText = new LiteralText(" | ").formatted(Formatting.DARK_GRAY);
+				MutableText extraText = new LiteralText(" | ").formatted(Formatting.DARK_GRAY);
 				int idx;
 				for (idx = 0; idx < amount; idx++)
 				{
-					if (idx > 0 && textRenderer.getStringWidth(extraText.getString() + enchantmentTexts.get(idx).getString()) > MAX_TEXT_LENGTH)
+					if (idx > 0 && textRenderer.getWidth(extraText.getString() + enchantmentTexts.get(idx).getString()) > MAX_TEXT_LENGTH)
 					{
 						break;
 					}
