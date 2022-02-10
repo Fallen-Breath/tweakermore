@@ -15,7 +15,7 @@ import net.minecraft.screen.slot.Slot;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ContainerProcessor
+public abstract class ContainerProcessor
 {
 	private static final List<Processor> CONTAINER_PROCESSORS = ImmutableList.of(
 			new ContainerCleaner(),
