@@ -81,7 +81,7 @@ public abstract class ConfigUtilsMixin
 	}
 
 	@ModifyArg(
-			method = {"writeConfigBase", "writeHotkeys"},
+			method = "writeConfigBase",
 			at = @At(
 					value = "INVOKE",
 					target = "Lcom/google/gson/JsonObject;add(Ljava/lang/String;Lcom/google/gson/JsonElement;)V"
@@ -89,7 +89,22 @@ public abstract class ConfigUtilsMixin
 			index = 0,
 			remap = false
 	)
-	private static String removeTweakerMorePrefix_write(String name)
+	private static String removeTweakerMorePrefix_writeConfigBase(String name)
+	{
+		return StringUtil.removeTweakerMoreNameSpacePrefix(name);
+	}
+
+	@ModifyArg(
+			method = "writeHotkeys",
+			at = @At(
+					value = "INVOKE",
+					target = "Lcom/google/gson/JsonObject;add(Ljava/lang/String;Lcom/google/gson/JsonElement;)V",
+					ordinal = 2
+			),
+			index = 0,
+			remap = false
+	)
+	private static String removeTweakerMorePrefix_writeHotkeys(String name)
 	{
 		return StringUtil.removeTweakerMoreNameSpacePrefix(name);
 	}
