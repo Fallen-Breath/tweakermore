@@ -18,7 +18,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class TweakermoreConfigGui extends GuiConfigsBase
+public class TweakerMoreConfigGui extends GuiConfigsBase
 {
     private static Config.Category category = Config.Category.MC_TWEAKS;
     @Nullable
@@ -26,7 +26,7 @@ public class TweakermoreConfigGui extends GuiConfigsBase
     @Nullable
     private SelectorDropDownList<Config.Type> typeFilterDropDownList = null;
 
-    public TweakermoreConfigGui()
+    public TweakerMoreConfigGui()
     {
         super(10, 50, TweakerMoreMod.MOD_ID, null, "tweakermore.gui.title", TweakerMoreMod.VERSION);
     }
@@ -45,7 +45,7 @@ public class TweakermoreConfigGui extends GuiConfigsBase
             x += this.createNavigationButton(x, y, category);
         }
 
-        Set<Config.Type> possibleTypes = TweakerMoreConfigs.getOptions(TweakermoreConfigGui.category).stream().map(TweakerMoreOption::getType).collect(Collectors.toSet());
+        Set<Config.Type> possibleTypes = TweakerMoreConfigs.getOptions(TweakerMoreConfigGui.category).stream().map(TweakerMoreOption::getType).collect(Collectors.toSet());
         List<Config.Type> items = Arrays.stream(Config.Type.values()).filter(possibleTypes::contains).collect(Collectors.toList());
         items.add(0, null);
         SelectorDropDownList<Config.Type> dd = new SelectorDropDownList<>(this.width - 91, this.getListY() + 3, 80, 16, 200, items.size(), items);
@@ -69,9 +69,9 @@ public class TweakermoreConfigGui extends GuiConfigsBase
     private int createNavigationButton(int x, int y, Config.Category category)
     {
         ButtonGeneric button = new ButtonGeneric(x, y, -1, 20, category.getDisplayName());
-        button.setEnabled(TweakermoreConfigGui.category != category);
+        button.setEnabled(TweakerMoreConfigGui.category != category);
         this.addButton(button, (b, mouseButton) -> {
-            TweakermoreConfigGui.category = category;
+            TweakerMoreConfigGui.category = category;
             this.reDraw();
         });
         return button.getWidth() + 2;
@@ -102,7 +102,7 @@ public class TweakermoreConfigGui extends GuiConfigsBase
     public List<ConfigOptionWrapper> getConfigs()
     {
         List<IConfigBase> options = Lists.newArrayList();
-        for (TweakerMoreOption tweakerMoreOption : TweakerMoreConfigs.getOptions(TweakermoreConfigGui.category))
+        for (TweakerMoreOption tweakerMoreOption : TweakerMoreConfigs.getOptions(TweakerMoreConfigGui.category))
         {
             if (this.filteredType == null || tweakerMoreOption.getType() == this.filteredType)
             {

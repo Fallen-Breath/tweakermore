@@ -3,7 +3,7 @@ package me.fallenbreath.tweakermore.mixins.core.gui;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetListBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetListConfigOptions;
-import me.fallenbreath.tweakermore.gui.TweakermoreConfigGui;
+import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -46,10 +46,10 @@ public abstract class WidgetListBaseMixin
 		if ((WidgetListBase<?, ?>)(Object)this instanceof WidgetListConfigOptions && shouldRenderTweakerMoreConfigGuiDropDownList)
 		{
 			GuiConfigsBase guiConfig = ((WidgetListConfigOptionsAccessor) this).getParent();
-			if (guiConfig instanceof TweakermoreConfigGui)
+			if (guiConfig instanceof TweakerMoreConfigGui)
 			{
 				// render it again to make sure it's on the top but below hovering widgets
-				((TweakermoreConfigGui)guiConfig).renderDropDownList(mouseX, mouseY);
+				((TweakerMoreConfigGui)guiConfig).renderDropDownList(mouseX, mouseY);
 				shouldRenderTweakerMoreConfigGuiDropDownList = false;
 			}
 		}

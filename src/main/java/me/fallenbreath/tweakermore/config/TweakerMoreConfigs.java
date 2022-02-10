@@ -16,7 +16,6 @@ import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Items;
-import net.minecraft.util.Util;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -105,8 +104,13 @@ public class TweakerMoreConfigs implements IConfigHandler
 	 * ============================
 	 */
 
-	private static final List<TweakerMoreOption> OPTIONS = Util.make(() -> {
-		List<TweakerMoreOption> list = Lists.newArrayList();
+	private static final List<TweakerMoreOption> OPTIONS = Lists.newArrayList();
+	private static final Map<Config.Category, List<TweakerMoreOption>> CATEGORY_TO_OPTION = Maps.newLinkedHashMap();
+	private static final Map<Config.Type, List<TweakerMoreOption>> TYPE_TO_OPTION = Maps.newLinkedHashMap();
+	private static final Map<IConfigBase, TweakerMoreOption> CONFIG_TO_OPTION = Maps.newLinkedHashMap();
+
+	static
+	{
 		for (Field field : TweakerMoreConfigs.class.getDeclaredFields())
 		{
 			Config annotation = field.getAnnotation(Config.class);
@@ -114,8 +118,12 @@ public class TweakerMoreConfigs implements IConfigHandler
 			{
 				try
 				{
-					IConfigBase option = (IConfigBase)field.get(null);
-					list.add(new TweakerMoreOption(annotation, option));
+					IConfigBase configBase = (IConfigBase)field.get(null);
+					TweakerMoreOption tweakerMoreOption = new TweakerMoreOption(annotation, configBase);
+					OPTIONS.add(tweakerMoreOption);
+					CATEGORY_TO_OPTION.computeIfAbsent(tweakerMoreOption.getCategory(), k -> Lists.newArrayList()).add(tweakerMoreOption);
+					TYPE_TO_OPTION.computeIfAbsent(tweakerMoreOption.getType(), k -> Lists.newArrayList()).add(tweakerMoreOption);
+					CONFIG_TO_OPTION.put(tweakerMoreOption.getOption(), tweakerMoreOption);
 				}
 				catch (IllegalAccessException e)
 				{
@@ -123,24 +131,7 @@ public class TweakerMoreConfigs implements IConfigHandler
 				}
 			}
 		}
-		return list;
-	});
-
-	private static final Map<Config.Category, List<TweakerMoreOption>> CATEGORY_TO_OPTION = Util.make(() -> {
-		Map<Config.Category, List<TweakerMoreOption>> map = Maps.newLinkedHashMap();
-		OPTIONS.forEach(tweakerMoreOption -> map.computeIfAbsent(tweakerMoreOption.getCategory(), k -> Lists.newArrayList()).add(tweakerMoreOption));
-		return map;
-	});
-	private static final Map<Config.Type, List<TweakerMoreOption>> TYPE_TO_OPTION = Util.make(() -> {
-		Map<Config.Type, List<TweakerMoreOption>> map = Maps.newLinkedHashMap();
-		OPTIONS.forEach(tweakerMoreOption -> map.computeIfAbsent(tweakerMoreOption.getType(), k -> Lists.newArrayList()).add(tweakerMoreOption));
-		return map;
-	});
-	private static final Map<IConfigBase, TweakerMoreOption> CONFIG_TO_OPTION = Util.make(() -> {
-		Map<IConfigBase, TweakerMoreOption> map = Maps.newLinkedHashMap();
-		OPTIONS.forEach(tweakerMoreOption -> map.put(tweakerMoreOption.getOption(), tweakerMoreOption));
-		return map;
-	});
+	}
 
 	public static List<TweakerMoreOption> getOptions(Config.Category categoryType)
 	{
@@ -160,6 +151,11 @@ public class TweakerMoreConfigs implements IConfigHandler
 	public static Optional<TweakerMoreOption> getOptionFromConfig(IConfigBase iConfigBase)
 	{
 		return Optional.ofNullable(CONFIG_TO_OPTION.get(iConfigBase));
+	}
+
+	public static boolean hasConfig(IConfigBase iConfigBase)
+	{
+		return getOptionFromConfig(iConfigBase).isPresent();
 	}
 
 	/**

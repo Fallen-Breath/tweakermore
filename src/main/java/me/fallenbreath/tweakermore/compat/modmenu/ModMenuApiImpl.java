@@ -2,7 +2,7 @@ package me.fallenbreath.tweakermore.compat.modmenu;
 
 import io.github.prospector.modmenu.api.ConfigScreenFactory;
 import io.github.prospector.modmenu.api.ModMenuApi;
-import me.fallenbreath.tweakermore.gui.TweakermoreConfigGui;
+import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 
 public class ModMenuApiImpl implements ModMenuApi
 {
@@ -10,7 +10,7 @@ public class ModMenuApiImpl implements ModMenuApi
     public ConfigScreenFactory<?> getModConfigScreenFactory()
     {
         return (screen) -> {
-            TweakermoreConfigGui gui = new TweakermoreConfigGui();
+            TweakerMoreConfigGui gui = new TweakerMoreConfigGui();
             gui.setParent(screen);
             return gui;
         };

@@ -4,7 +4,7 @@ import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetConfigOption;
 import fi.dy.masa.malilib.gui.widgets.WidgetListConfigOptions;
 import fi.dy.masa.malilib.gui.widgets.WidgetListConfigOptionsBase;
-import me.fallenbreath.tweakermore.gui.TweakermoreConfigGui;
+import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -32,7 +32,7 @@ public abstract class WidgetListConfigOptionsMixin extends WidgetListConfigOptio
 	)
 	private int tweakermoreSearchBarWidth(int width)
 	{
-		if (this.parent instanceof TweakermoreConfigGui)
+		if (this.parent instanceof TweakerMoreConfigGui)
 		{
 			width -= 120;
 		}
