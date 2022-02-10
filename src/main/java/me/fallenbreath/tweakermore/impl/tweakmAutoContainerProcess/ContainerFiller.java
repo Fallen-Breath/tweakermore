@@ -3,7 +3,6 @@ package me.fallenbreath.tweakermore.impl.tweakmAutoContainerProcess;
 import fi.dy.masa.itemscroller.util.InventoryUtils;
 import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.config.TweakerMoreToggles;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.container.Container;
@@ -18,7 +17,7 @@ public class ContainerFiller implements Processor
 	@Override
 	public boolean isEnabled()
 	{
-		return TweakerMoreToggles.TWEAKM_AUTO_FILL_CONTAINER.getBooleanValue();
+		return TweakerMoreConfigs.TWEAKM_AUTO_FILL_CONTAINER.getBooleanValue();
 	}
 
 	@Override
@@ -47,12 +46,12 @@ public class ContainerFiller implements Processor
 			long amount = containerInvSlots.stream().filter(Slot::hasStack).count(), total = containerInvSlots.size();
 			boolean isFull = Container.calculateComparatorOutput(containerInvSlots.get(0).inventory) >= 15;
 			String percentage = String.format("%s%d/%d%s", isFull ? Formatting.GREEN : Formatting.GOLD, amount, total, Formatting.RESET);
-			InfoUtils.printActionbarMessage("tweakmAutoFillContainer.container_filled", containerScreen.getTitle(), stackName, percentage);
+			InfoUtils.printActionbarMessage("tweakermore.tweakmAutoFillContainer.container_filled", containerScreen.getTitle(), stackName, percentage);
 			return true;
 		}
 		else
 		{
-			InfoUtils.printActionbarMessage("tweakmAutoFillContainer.best_slot_not_found");
+			InfoUtils.printActionbarMessage("tweakermore.tweakmAutoFillContainer.best_slot_not_found");
 			return false;
 		}
 	}

@@ -5,25 +5,24 @@
 [![MC Versions](http://cf.way2muchnoise.eu/versions/For%20MC_tweakermore_all.svg)](https://www.curseforge.com/minecraft/mc-mods/tweakermore)
 [![CurseForge](http://cf.way2muchnoise.eu/full_tweakermore_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/tweakermore)
 
-An addon of masa's [tweakeroo](https://github.com/maruohon/tweakeroo) mod using epic mixin hack
+A collection of client-side tweak kits for enhance your Minecraft game experience
 
-Requires:
+Everything is disabled by default, so you don't need to worry about the game becoming "not-vanilla" before you enable some tweaks
 
-- [tweakeroo](https://github.com/maruohon/tweakeroo)
-- [itemscroller](https://github.com/maruohon/itemscroller)
-- [litematica](https://github.com/maruohon/litematica)
+Press `K` + `C` to open the config GUI. You can also access the config GUI via [Mod Menu](https://www.curseforge.com/minecraft/mc-mods/modmenu)
 
-New tweaks:
+Requirements:
 
-- tweakmAutoCleanContainer (Tweak toggles)
-- tweakmAutoFillContainer (Tweak toggles)
-- tweakmAutoPickSchematicBlock (Tweak toggles)
-- autoFillContainerThreshold (Generic)
-- netherPortalSoundChance (Generic)
-- villagerOfferUsesDisplay (Generic)
-- shulkerTooltipItemEnchantmentHint (Generic)
-- disableLightUpdates (Disable)
-- disableRedstoneWireParticle (Disable)
-- handRestockListType (List)
-- handRestockWhiteList (List)
-- handRestockBlackList (List)
+- [Fabric Loader](https://fabricmc.net/)
+- [MaLiLib](https://www.curseforge.com/minecraft/mc-mods/malilib)
+
+More features will be enabled with these mods
+
+- [Tweakeroo](https://www.curseforge.com/minecraft/mc-mods/tweakeroo)
+- [Item Scroller](https://www.curseforge.com/minecraft/mc-mods/item-scroller)
+- [Litematica](https://www.curseforge.com/minecraft/mc-mods/litematica)
+
+The following mods are those targeted mods for mod tweaks features
+
+- [Optifine](https://www.optifine.net/home) ([Optifabric](https://www.curseforge.com/minecraft/mc-mods/optifabric))
+- [Xaero's World Map](https://www.curseforge.com/minecraft/mc-mods/xaeros-world-map)
