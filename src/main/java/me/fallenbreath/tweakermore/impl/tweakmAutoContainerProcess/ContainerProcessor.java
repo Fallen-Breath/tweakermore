@@ -1,7 +1,7 @@
 package me.fallenbreath.tweakermore.impl.tweakmAutoContainerProcess;
 
 import com.google.common.collect.ImmutableList;
-import me.fallenbreath.tweakermore.mixins.access.ItemScrollerInventoryUtilsAccessor;
+import me.fallenbreath.tweakermore.mixins.tweaks.tweakmAutoContainerProcess.ItemScrollerInventoryUtilsAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
@@ -37,11 +37,11 @@ public class ContainerProcessor
 			if (player != null && screen instanceof HandledScreen<?> && !(screen instanceof AbstractInventoryScreen) && !(screen instanceof CraftingScreen))
 			{
 				HandledScreen<?> containerScreen = (HandledScreen<?>)screen;
-				if (containerScreen.getScreenHandler() != container || !((IScreen)screen).shouldProcess())
+				if (containerScreen.getScreenHandler() != container || !((AutoProcessableScreen)screen).shouldProcess())
 				{
 					return;
 				}
-				((IScreen)screen).setShouldProcess(false);
+				((AutoProcessableScreen)screen).setShouldProcess(false);
 				List<Slot> allSlots = container.slots;
 				List<Slot> playerInvSlots = allSlots.stream().filter(slot -> slot.inventory instanceof PlayerInventory).collect(Collectors.toList());
 				if (allSlots.isEmpty() || playerInvSlots.isEmpty())

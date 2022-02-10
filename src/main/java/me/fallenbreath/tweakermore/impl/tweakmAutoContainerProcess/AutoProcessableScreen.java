@@ -1,6 +1,6 @@
 package me.fallenbreath.tweakermore.impl.tweakmAutoContainerProcess;
 
-public interface IScreen
+public interface AutoProcessableScreen
 {
 	void setShouldProcess(boolean value);
 

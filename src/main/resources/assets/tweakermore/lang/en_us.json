@@ -1,13 +1,24 @@
 {
-  "netherPortalSoundChance": "netherPortalSoundChance",
-  "netherPortalSoundChance.comment": "The chance for a nether portal block to play sound\nSet it to 0.001 or 0.0001 for less noisy portal",
+  "// MC Tweaks": "================================================",
+
   "autoFillContainerThreshold": "autoFillContainerThreshold",
   "autoFillContainerThreshold.comment": "The minimum occupied slot amount for the item to trigger tweak tweakmAutoFillContainer\ne.g. if you always have 2 slots of firework rocket you can set the value to 3,\n then your rockets will never be used to fill the container",
+  "netherPortalSoundChance": "netherPortalSoundChance",
+  "netherPortalSoundChance.comment": "The chance for a nether portal block to play sound\nSet it to 0.001 or 0.0001 for less noisy portal",
   "villagerOfferUsesDisplay": "villagerOfferUsesDisplay",
   "villagerOfferUsesDisplay.comment": "Display villager offer use and limit amount on villager offer list\nHover on the arrow of the offer to see it",
   "shulkerTooltipEnchantmentHint": "shulkerTooltipEnchantmentHint",
   "shulkerTooltipEnchantmentHint.comment": "Display enchantments of items in the tooltip of shulker box item",
-  "shulkerTooltipEnchantmentHint.more": "...%1$sx Enchantments",
+  "shulkerTooltipEnchantmentHint.more": "... %1$sx",
+  "chatMessageLimit": "chatMessageLimit",
+  "chatMessageLimit.comment": "Modify the maximum number of history messages stored in the chat hud",
+  "safeAfkHealthThreshold": "safeAfkHealthThreshold",
+  "safeAfkHealthThreshold.comment": "The threshold of the health of the player which triggers the safe afk disconnecting feature\nDisconnect when player takes damage and its health becomes less than the given value",
+
+  "copySignTextToClipBoard": "copySignTextToClipBoard",
+  "copySignTextToClipBoard.comment": "Copy texts in the sign you are pointing to into the clipboard",
+  "copySignTextToClipBoard.sign_copied": "Copied texts from %1$s",
+  "copySignTextToClipBoard.empty_sign": "%1$s does not contain any text",
 
   "handRestockListType": "handRestockListType",
   "handRestockListType.comment": "The item restriction type for tweakHandRestock",
@@ -16,19 +27,66 @@
   "handRestockBlackList": "handRestockBlackList",
   "handRestockBlackList.comment": "The items that will NOT trigger tweakHandRestock",
 
-  "disableLightUpdates": "disableLightUpdates",
-  "disableLightUpdates.comment": "Yeets client-side light updates",
-  "disableRedstoneWireParticle": "disableRedstoneWireParticle",
-  "disableRedstoneWireParticle.comment": "Disable particle of redstone wire",
-
   "tweakmAutoCleanContainer": "tweakmAutoCleanContainer",
   "tweakmAutoCleanContainer.comment": "Automatically drops everything in the opened container\nand then close the container",
+  "tweakmAutoCleanContainer.pretty_name": "Auto Clean Container",
   "tweakmAutoCleanContainer.container_cleaned": "Dropped all items in %1$s slots inside %2$s",
   "tweakmAutoFillContainer": "tweakmAutoFillContainer",
   "tweakmAutoFillContainer.comment": "Automatically fill the opened container with the most numerous item stack in your inventory\niff the item stack is the only most numerous one\nand then close the container",
+  "tweakmAutoFillContainer.pretty_name": "Auto Fill Container",
   "tweakmAutoFillContainer.container_filled": "Filled %1$s with all %2$s items (%3$s)",
   "tweakmAutoFillContainer.best_slot_not_found": "Most suitable item to fill the container not found",
-
   "tweakmAutoPickSchematicBlock": "tweakmAutoPickSchematicBlock",
-  "tweakmAutoPickSchematicBlock.comment": "Pick block from schematic automatically before block placement\nIt's logic is the same as the pickBlock tweaks in litematica mod, you need to enable pickBlockEnabled option in litematica\nDoes not work with easy place mode"
+  "tweakmAutoPickSchematicBlock.comment": "Pick block from schematic automatically before block placement\nIt's logic is the same as the pickBlock tweaks in litematica mod, you need to enable pickBlockEnabled option in litematica\nDoes not work with easy place mode",
+  "tweakmAutoPickSchematicBlock.pretty_name": "Auto Pick Schematic Block",
+  "tweakmSafeAfk": "tweakmSafeAfk",
+  "tweakmSafeAfk.comment": "Disconnect when receive damage\nHealth threshold to disconnect can be set via safeAfkHealthThreshold",
+  "tweakmSafeAfk.pretty_name": "Safe AFK",
+  "tweakmSafeAfk.received_damage": "Received damage at %1$\nHealth remaining: %2$s",
+
+  "disableLightUpdates": "disableLightUpdates",
+  "disableLightUpdates.comment": "Yeets client-side light updates",
+  "disableLightUpdates.pretty_name": "Disable Light Updates",
+  "disableRedstoneWireParticle": "disableRedstoneWireParticle",
+  "disableRedstoneWireParticle.comment": "Disable particle of redstone wire",
+  "disableRedstoneWireParticle.pretty_name": "Disable Redstone Wire Particle",
+
+  "// Mod Tweaks": "================================================",
+
+  "ofUnlockF3FpsLimit": "ofUnlockF3FpsLimit",
+  "ofUnlockF3FpsLimit.comment": "Removed 10 FPS render limit for F3 debug hud",
+  "xmapNoSessionFinalizationWait": "xmapNoSessionFinalizationWait",
+  "xmapNoSessionFinalizationWait.comment": "Skip the session finalization operation when quit a world\nSo no lag when quitting server or single player\nMight have some side effects though",
+
+  "// Setting": "================================================",
+
+  "openTweakermoreConfigGui": "openTweakermoreConfigGui",
+  "openTweakermoreConfigGui.comment": "Open the config GUI of TweakerMore",
+  "tweakermoreDebugMode": "tweakermoreDebugMode",
+  "tweakermoreDebugMode.comment": "Debug mode of TweakerMore",
+  "tweakermoreDebugMode.pretty_name": "TweakerMore Debug Mode",
+
+  "// GUI": "================================================",
+
+  "tweakermore.hotkeys.category.main": "TweakerMore",
+
+  "tweakermore.gui.title": "TweakerMore v%1$s Config GUI",
+  "tweakermore.gui.selector_drop_down_list.all": "All",
+  "tweakermore.gui.config_category.mc_tweaks": "Tweaks",
+  "tweakermore.gui.config_category.mod_tweaks": "Mods Tweaks",
+  "tweakermore.gui.config_category.setting": "Setting",
+  "tweakermore.gui.config_type.label_text": "Type filter",
+  "tweakermore.gui.config_type.generic": "Generic",
+  "tweakermore.gui.config_type.hotkey": "Hotkey",
+  "tweakermore.gui.config_type.list": "List",
+  "tweakermore.gui.config_type.tweak": "Tweak",
+  "tweakermore.gui.config_type.disable": "Disable",
+  "tweakermore.gui.config_type.config": "Config",
+
+  "tweakermore.gui.mod_requirement.footer": "Requires mod %1$s",
+  "tweakermore.gui.mod_requirement.mod.tweakeroo": "tweakeroo",
+  "tweakermore.gui.mod_requirement.mod.itemscroller": "itemscroller",
+  "tweakermore.gui.mod_requirement.mod.litematica": "litematica",
+  "tweakermore.gui.mod_requirement.mod.optifine": "optifine (optifabric)",
+  "tweakermore.gui.mod_requirement.mod.xaero_worldmap": "xaero's worldmap"
 }
