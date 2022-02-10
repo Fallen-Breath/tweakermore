@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(targets = "net.minecraft.client.gui.screen.ingame.MerchantScreen$WidgetButtonPage")
 public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
 {
+	@SuppressWarnings("target")
 	@Shadow @Final MerchantScreen field_19166;
 
 	@Shadow @Final int index;
