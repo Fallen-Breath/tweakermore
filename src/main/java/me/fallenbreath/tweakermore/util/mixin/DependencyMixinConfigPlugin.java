@@ -95,10 +95,10 @@ public abstract class DependencyMixinConfigPlugin implements IMixinConfigPlugin
 					boolean versionMatches = versionPredicates.stream().allMatch(predicate -> FabricUtil.doesVersionFitsPredicate(modVersion, predicate));
 					if (!versionMatches)
 					{
-						results.add(new Result(false, String.format("mod %s @ %s does not matches version predicates %s", modId, modVersion.getFriendlyString(), versionPredicates)));
+						results.add(new Result(false, String.format("mod %s@%s does not matches version predicates %s", modId, modVersion.getFriendlyString(), versionPredicates)));
 						continue;
 					}
-					results.add(new Result(true, String.format("conflicted mod %s @ %s found", modId, modVersion.getFriendlyString())));
+					results.add(new Result(true, String.format("conflicted/unsupported mod %s@%s found", modId, modVersion.getFriendlyString())));
 					break;
 
 				case MIXIN:
