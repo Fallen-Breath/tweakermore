@@ -14,6 +14,14 @@ public @interface Condition
 	 */
 	String value();
 
+	/**
+	 * All possible version range requirements, any of which getting matched results in the condition being true
+	 * Used when type == MOD
+	 * The condition is satisfied only when all the version matches all predicates or no predicate is given
+	 * e.g. ">=1.2.3"
+	 */
+	String[] versionPredicates() default {};
+
 	enum Type
 	{
 		MOD,
