@@ -1,6 +1,5 @@
 package me.fallenbreath.tweakermore.mixins.core.gui;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import fi.dy.masa.malilib.gui.widgets.WidgetBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
 import me.fallenbreath.tweakermore.gui.TranslatedOptionLabel;
@@ -55,7 +54,7 @@ public abstract class WidgetLabelMixin extends WidgetBase
 		return yTextStart;
 	}
 
-	@SuppressWarnings({"ConstantConditions", "deprecation"})
+	@SuppressWarnings("ConstantConditions")
 	@Inject(
 			method = "render",
 			at = @At(
@@ -76,8 +75,8 @@ public abstract class WidgetLabelMixin extends WidgetBase
 			int x = this.x + (this.centered ? this.width / 2 : 0);
 			int y = (int)(yTextStart + (this.labels.size() + i * scale + 0.2) * fontHeight);
 
-			RenderSystem.pushMatrix();
-			RenderSystem.scaled(scale, scale, 1);
+			matrixStackd.push();
+			matrixStackd.scale((float)scale, (float)scale, 1);
 			x /= scale;
 			y /= scale;
 
@@ -89,7 +88,7 @@ public abstract class WidgetLabelMixin extends WidgetBase
 			{
 				this.drawStringWithShadow(x, y, color, originText, matrixStackd);
 			}
-			RenderSystem.popMatrix();
+			matrixStackd.pop();
 		}
 	}
 

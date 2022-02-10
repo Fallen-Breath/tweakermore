@@ -11,6 +11,7 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.text.BaseText;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,7 +24,7 @@ import java.util.Date;
 @Mixin(ClientPlayNetworkHandler.class)
 public abstract class ClientPlayNetworkHandlerMixin
 {
-	@Shadow private MinecraftClient client;
+	@Shadow @Final private MinecraftClient client;
 
 	@Inject(method = "onHealthUpdate", at = @At("TAIL"))
 	private void tweakerMoreSafeAfkHook(CallbackInfo ci)
@@ -47,7 +48,7 @@ public abstract class ClientPlayNetworkHandlerMixin
 					mc.execute(() -> {
 						mc.world.disconnect();
 						mc.disconnect();
-						mc.openScreen(new DisconnectedScreen(new MultiplayerScreen(new TitleScreen()), title, reason));
+						mc.setScreen(new DisconnectedScreen(new MultiplayerScreen(new TitleScreen()), title, reason));
 					});
 				}
 			}
