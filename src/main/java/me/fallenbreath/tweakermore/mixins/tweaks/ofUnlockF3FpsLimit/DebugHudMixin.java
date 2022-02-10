@@ -1,8 +1,8 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.ofUnlockF3FpsLimit;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.util.mixin.Condition;
-import me.fallenbreath.tweakermore.util.mixin.ModIds;
 import me.fallenbreath.tweakermore.util.mixin.ModRequire;
 import net.minecraft.client.gui.hud.DebugHud;
 import org.spongepowered.asm.mixin.Dynamic;
