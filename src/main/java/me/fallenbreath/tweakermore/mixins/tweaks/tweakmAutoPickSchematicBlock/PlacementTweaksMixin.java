@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.tweakmPickBlockLastContinuously;
+package me.fallenbreath.tweakermore.mixins.tweaks.tweakmAutoPickSchematicBlock;
 
 import fi.dy.masa.litematica.config.Configs;
 import fi.dy.masa.litematica.data.DataManager;
@@ -10,7 +10,10 @@ import fi.dy.masa.litematica.world.SchematicWorldHandler;
 import fi.dy.masa.malilib.util.LayerRange;
 import fi.dy.masa.malilib.util.PositionUtils;
 import fi.dy.masa.tweakeroo.tweaks.PlacementTweaks;
-import me.fallenbreath.tweakermore.config.TweakerMoreToggles;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.mixin.Condition;
+import me.fallenbreath.tweakermore.util.mixin.ModIds;
+import me.fallenbreath.tweakermore.util.mixin.ModRequire;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -31,11 +34,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+@ModRequire(enableWhen = {@Condition(ModIds.tweakeroo), @Condition(ModIds.litematica)})
 @Mixin(PlacementTweaks.class)
 public abstract class PlacementTweaksMixin
 {
 	@Inject(method = "tryPlaceBlock", at = @At("HEAD"), remap = false)
-	private static void tweakmPickBlockLastContinuously(
+	private static void tweakmAutoPickSchematicBlock(
 			ClientPlayerInteractionManager controller,
 			ClientPlayerEntity player,
 			ClientWorld world,
@@ -55,7 +59,7 @@ public abstract class PlacementTweaksMixin
 		{
 			if (DataManager.getToolMode() != ToolMode.REBUILD && !Configs.Generic.EASY_PLACE_MODE.getBooleanValue())
 			{
-				if (TweakerMoreToggles.TWEAKM_AUTO_PICK_SCHEMATIC_BLOCK.getBooleanValue() && EntityUtils.shouldPickBlock(mc.player))
+				if (TweakerMoreConfigs.TWEAKM_AUTO_PICK_SCHEMATIC_BLOCK.getBooleanValue() && EntityUtils.shouldPickBlock(mc.player))
 				{
 					BlockHitResult hitResult = new BlockHitResult(hitVec, sideIn, posIn, false);
 					ItemPlacementContext ctx = new ItemPlacementContext(new ItemUsageContext(player, hand, hitResult));

@@ -1,6 +1,9 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.tweakmAutoContainerProcess;
 
-import me.fallenbreath.tweakermore.impl.tweakmAutoContainerProcess.IScreen;
+import me.fallenbreath.tweakermore.impl.tweakmAutoContainerProcess.AutoProcessableScreen;
+import me.fallenbreath.tweakermore.util.mixin.Condition;
+import me.fallenbreath.tweakermore.util.mixin.ModIds;
+import me.fallenbreath.tweakermore.util.mixin.ModRequire;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
@@ -9,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@ModRequire(enableWhen = @Condition(ModIds.itemscroller))
 @Mixin(ClientPlayNetworkHandler.class)
 public abstract class ClientPlayNetworkHandlerMixin
 {
@@ -18,7 +22,7 @@ public abstract class ClientPlayNetworkHandlerMixin
 		Screen screen = MinecraftClient.getInstance().currentScreen;
 		if (screen != null)
 		{
-			((IScreen)screen).setShouldProcess(true);
+			((AutoProcessableScreen)screen).setShouldProcess(true);
 		}
 	}
 }

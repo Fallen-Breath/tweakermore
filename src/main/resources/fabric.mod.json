@@ -20,8 +20,8 @@
     "client": [
       "me.fallenbreath.tweakermore.TweakerMoreMod"
     ],
-    "mm:early_risers": [
-      "me.fallenbreath.tweakermore.config.early_risers.TogglesEarlyRiser"
+    "modmenu": [
+      "me.fallenbreath.tweakermore.compat.modmenu.ModMenuApiImpl"
     ]
   },
   "mixins": [
@@ -29,11 +29,6 @@
   ],
 
   "depends": {
-    "tweakeroo": "*",
-    "itemscroller": "*",
-    "litematica": "*"
-  },
-  "suggests": {
-    "flamingo": "*"
+    "malilib": "*"
   }
 }
