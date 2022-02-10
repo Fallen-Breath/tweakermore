@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static me.fallenbreath.tweakermore.config.ConfigFactory.*;
-import static me.fallenbreath.tweakermore.util.mixin.ModIds.*;
+import static me.fallenbreath.tweakermore.util.ModIds.*;
 
 public class TweakerMoreConfigs implements IConfigHandler
 {
