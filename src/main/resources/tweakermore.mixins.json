@@ -6,6 +6,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "core.ConfigUtilsMixin",
+    "core.GuiStringListEditMixin",
     "core.WidgetListConfigOptionsMixin",
     "core.gui.ConfigBaseMixin",
     "core.gui.WidgetDropDownListMixin",
