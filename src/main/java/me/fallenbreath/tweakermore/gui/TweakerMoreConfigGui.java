@@ -95,7 +95,7 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
     @Override
     protected int getConfigWidth()
     {
-        return 150;
+        return 160;
     }
 
     @Override
