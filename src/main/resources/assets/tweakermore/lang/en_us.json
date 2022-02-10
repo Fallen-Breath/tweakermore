@@ -26,6 +26,8 @@
   "handRestockWhiteList.comment": "The items that will trigger tweakHandRestock",
   "handRestockBlackList": "handRestockBlackList",
   "handRestockBlackList.comment": "The items that will NOT trigger tweakHandRestock",
+  "prioritizedCommandSuggestions": "prioritizedCommandSuggestions",
+  "prioritizedCommandSuggestions.comment": "Command suggestions in this list will be more forward in the command completion list\nYou can put those command completions you always prefer to choose in this list\nso they will always be at the head of the command completion list",
 
   "tweakmAutoCleanContainer": "tweakmAutoCleanContainer",
   "tweakmAutoCleanContainer.comment": "Automatically drops everything in the opened container\nand then close the container",

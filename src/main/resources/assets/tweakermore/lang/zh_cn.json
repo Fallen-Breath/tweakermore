@@ -26,6 +26,8 @@
   "handRestockWhiteList.comment": "会触发 tweakHandRestock 的物品",
   "handRestockBlackList": "自动补货黑名单",
   "handRestockBlackList.comment": "不会触发 tweakHandRestock 的物品",
+  "prioritizedCommandSuggestions": "指令补全优先列表",
+  "prioritizedCommandSuggestions.comment": "此列表中的命令建议将在命令补全列表中更靠前\n你可以将那些你总是喜欢选择的命令补全放在此列表中\n它们将总会位于指令补全列表的首位",
 
   "tweakmAutoCleanContainer": "自动清空容器",
   "tweakmAutoCleanContainer.comment": "打开容器后，自动将容器内的所有物品扔出\n然后关闭容器",

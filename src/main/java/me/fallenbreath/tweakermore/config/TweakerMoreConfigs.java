@@ -64,6 +64,8 @@ public class TweakerMoreConfigs implements IConfigHandler
 	@Config(value = Config.Type.LIST, modRequire = tweakeroo)
 	public static final ConfigStringList HAND_RESTORE_BLACKLIST = newConfigStringList("handRestockBlackList", ImmutableList.of(RegistryUtil.getItemId(Items.LAVA_BUCKET)));
 	public static final ItemRestriction HAND_RESTORE_RESTRICTION = new ItemRestriction();
+	@Config(Config.Type.LIST)
+	public static final ConfigStringList PRIORITIZED_COMMAND_SUGGESTIONS = newConfigStringList("prioritizedCommandSuggestions", ImmutableList.of());
 
 	@Config(value = Config.Type.TWEAK, modRequire = itemscroller)
 	public static final ConfigBooleanHotkeyed TWEAKM_AUTO_CLEAN_CONTAINER = newConfigBooleanHotkeyed("tweakmAutoCleanContainer");

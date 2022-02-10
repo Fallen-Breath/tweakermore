@@ -21,6 +21,7 @@
     "tweaks.handRestoreRestriction.PlacementTweaksMixin",
     "tweaks.netherPortalSoundChance.NetherPortalBlockMixin",
     "tweaks.ofUnlockF3FpsLimit.DebugHudMixin",
+    "tweaks.prioritizedCommandSuggestions.CommandSuggestorMixin",
     "tweaks.shulkerTooltipEnchantmentHint.ShulkerBoxBlockMixin",
     "tweaks.tweakmAutoContainerProcess.ClientPlayNetworkHandlerMixin",
     "tweaks.tweakmAutoContainerProcess.ContainerMixin",
