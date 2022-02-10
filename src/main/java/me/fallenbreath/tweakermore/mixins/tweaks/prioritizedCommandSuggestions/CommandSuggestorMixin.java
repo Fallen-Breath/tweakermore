@@ -21,7 +21,8 @@ public abstract class CommandSuggestorMixin
 			method = "showSuggestions",
 			at = @At(
 					value = "INVOKE",
-					target = "Lcom/mojang/brigadier/suggestion/Suggestions;isEmpty()Z"
+					target = "Lcom/mojang/brigadier/suggestion/Suggestions;isEmpty()Z",
+					remap = false
 			)
 	)
 	private Suggestions tweakSuggestions(Suggestions suggestions)

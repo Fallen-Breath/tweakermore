@@ -72,7 +72,7 @@ public abstract class WidgetLabelMixin extends WidgetBase
 		{
 			int color = darkerColor(this.textColor);
 			double scale = TranslatedOptionLabel.TRANSLATION_SCALE;
-			String originText = ((TranslatedOptionLabel)(Object)this).getTranslationKeys()[i];
+			String originText = ((TranslatedOptionLabel)(Object)this).getDefaultNames()[i];
 			int x = this.x + (this.centered ? this.width / 2 : 0);
 			int y = (int)(yTextStart + (this.labels.size() + i * scale + 0.2) * fontHeight);
 
