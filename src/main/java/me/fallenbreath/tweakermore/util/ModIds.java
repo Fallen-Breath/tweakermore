@@ -1,6 +1,6 @@
 package me.fallenbreath.tweakermore.util;
 
-public abstract class ModIds
+public class ModIds
 {
 	// basics
 	public static final String minecraft = "minecraft";
@@ -8,6 +8,7 @@ public abstract class ModIds
 	public static final String fabric_api = "fabric";
 
 	// masa's
+	public static final String malilib = "malilib";
 	public static final String tweakeroo = "tweakeroo";
 	public static final String itemscroller = "itemscroller";
 	public static final String litematica = "litematica";
