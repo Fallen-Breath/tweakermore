@@ -3,17 +3,19 @@
 
   "tweakermore.autoFillContainerThreshold": "autoFillContainerThreshold",
   "tweakermore.autoFillContainerThreshold.comment": "The minimum occupied slot amount for the item to trigger tweak tweakmAutoFillContainer\ne.g. if you always have 2 slots of firework rocket you can set the value to 3,\n then your rockets will never be used to fill the container",
+  "tweakermore.chatMessageLimit": "chatMessageLimit",
+  "tweakermore.chatMessageLimit.comment": "Modify the maximum number of history messages stored in the chat hud",
+  "tweakermore.legacyF3NLogic": "legacyF3NLogic",
+  "tweakermore.legacyF3NLogic.comment": "Modify the logic of hotkey F3 + N back to 1.15 and before\n1.15- logic cheat sheet: creative -> spectator, other -> creative",
   "tweakermore.netherPortalSoundChance": "netherPortalSoundChance",
   "tweakermore.netherPortalSoundChance.comment": "The chance for a nether portal block to play sound\nSet it to 0.001 or 0.0001 for less noisy portal",
-  "tweakermore.villagerOfferUsesDisplay": "villagerOfferUsesDisplay",
-  "tweakermore.villagerOfferUsesDisplay.comment": "Display villager offer use and limit amount on villager offer list\nHover on the arrow of the offer to see it",
+  "tweakermore.safeAfkHealthThreshold": "safeAfkHealthThreshold",
+  "tweakermore.safeAfkHealthThreshold.comment": "The threshold of the health of the player which triggers the safe afk disconnecting feature\nDisconnect when player takes damage and its health becomes less than the given value",
   "tweakermore.shulkerTooltipEnchantmentHint": "shulkerTooltipEnchantmentHint",
   "tweakermore.shulkerTooltipEnchantmentHint.comment": "Display enchantments of items in the tooltip of shulker box item",
   "tweakermore.shulkerTooltipEnchantmentHint.more": "... %1$sx",
-  "tweakermore.chatMessageLimit": "chatMessageLimit",
-  "tweakermore.chatMessageLimit.comment": "Modify the maximum number of history messages stored in the chat hud",
-  "tweakermore.safeAfkHealthThreshold": "safeAfkHealthThreshold",
-  "tweakermore.safeAfkHealthThreshold.comment": "The threshold of the health of the player which triggers the safe afk disconnecting feature\nDisconnect when player takes damage and its health becomes less than the given value",
+  "tweakermore.villagerOfferUsesDisplay": "villagerOfferUsesDisplay",
+  "tweakermore.villagerOfferUsesDisplay.comment": "Display villager offer use and limit amount on villager offer list\nHover on the arrow of the offer to see it",
 
   "tweakermore.copySignTextToClipBoard": "copySignTextToClipBoard",
   "tweakermore.copySignTextToClipBoard.comment": "Copy texts in the sign you are pointing to into the clipboard",
@@ -55,6 +57,8 @@
 
   "// Mod Tweaks": "================================================",
 
+  "tweakermore.applyTweakerMoreOptionLabelGlobally": "applyTweakerMoreOptionLabelGlobally",
+  "tweakermore.applyTweakerMoreOptionLabelGlobally.comment": "Apply the TweakerMore style translated text + original text label to all config GUIs using malilib",
   "tweakermore.ofUnlockF3FpsLimit": "ofUnlockF3FpsLimit",
   "tweakermore.ofUnlockF3FpsLimit.comment": "Removed 10 FPS render limit for F3 debug hud",
   "tweakermore.xmapNoSessionFinalizationWait": "xmapNoSessionFinalizationWait",
@@ -62,6 +66,8 @@
 
   "// Setting": "================================================",
 
+  "tweakermore.hideDisabledOptions": "hideDisabledOptions",
+  "tweakermore.hideDisabledOptions.comment": "Hide options which are disabled due to mod relations unsatisfied in the config GUI",
   "tweakermore.openTweakerMoreConfigGui": "openTweakerMoreConfigGui",
   "tweakermore.openTweakerMoreConfigGui.comment": "Open the config GUI of TweakerMore",
   "tweakermore.preserveConfigUnknownEntries": "preserveConfigUnknownEntries",

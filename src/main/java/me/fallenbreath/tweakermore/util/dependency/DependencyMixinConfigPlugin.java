@@ -92,7 +92,7 @@ public abstract class DependencyMixinConfigPlugin implements IMixinConfigPlugin
 					}
 					Version modVersion = modContainer.get().getMetadata().getVersion();
 					List<String> versionPredicates = Lists.newArrayList(Annotations.getValue(condition, "versionPredicates", Lists.newArrayList()));
-					if (!versionPredicates.isEmpty() && !FabricUtil.doesVersionFitsPredicate(modVersion, versionPredicates))
+					if (!FabricUtil.doesVersionFitsPredicate(modVersion, versionPredicates))
 					{
 						results.add(new Result(false, String.format("mod %s@%s does not matches version predicates %s", modId, modVersion.getFriendlyString(), versionPredicates)));
 						continue;
