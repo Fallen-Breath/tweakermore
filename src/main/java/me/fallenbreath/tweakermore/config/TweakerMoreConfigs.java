@@ -111,6 +111,8 @@ public class TweakerMoreConfigs implements IConfigHandler
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final ConfigBoolean XMAP_NO_SESSION_FINALIZATION_WAIT = newConfigBoolean("xmapNoSessionFinalizationWait", false);
+	@Config(value = Config.Type.GENERIC, category = Config.Category.MOD_TWEAKS)
+	public static final ConfigBoolean APPLY_TWEAKERMORE_OPTION_LABEL_GLOBALLY = newConfigBoolean("applyTweakerMoreOptionLabelGlobally", false);
 
 	//////////////////////////
 	//  TweakerMore Setting //
@@ -122,8 +124,6 @@ public class TweakerMoreConfigs implements IConfigHandler
 	public static final ConfigBoolean PRESERVE_CONFIG_UNKNOWN_ENTRIES = newConfigBoolean("preserveConfigUnknownEntries", true);
 	@Config(value = Config.Type.GENERIC, category = Config.Category.SETTING)
 	public static final ConfigBoolean HIDE_DISABLE_OPTIONS = newConfigBoolean("hideDisabledOptions", false);
-	@Config(value = Config.Type.GENERIC, category = Config.Category.SETTING)
-	public static final ConfigBoolean APPLY_TWEAKERMORE_OPTION_LABEL_TO_ALL = newConfigBoolean("applyTweakerMoreOptionLabelToAll", false);
 
 	@Config(value = Config.Type.TWEAK, category = Config.Category.SETTING)
 	public static final ConfigBooleanHotkeyed TWEAKERMORE_DEBUG_MODE = newConfigBooleanHotkeyed("tweakerMoreDebugMode");

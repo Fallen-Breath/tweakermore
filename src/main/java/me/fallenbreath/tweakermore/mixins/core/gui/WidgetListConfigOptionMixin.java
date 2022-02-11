@@ -16,8 +16,8 @@ import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
 import me.fallenbreath.tweakermore.gui.HotkeyedBooleanResetListener;
-import me.fallenbreath.tweakermore.gui.TranslatedOptionLabel;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
+import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
 import me.fallenbreath.tweakermore.util.StringUtil;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
@@ -98,7 +98,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	)
 	private void useMyBetterOptionLabelForTweakerMore(Args args, int x_, int y_, float zLevel, int labelWidth, int configWidth, IConfigBase config)
 	{
-		if (isTweakerMoreConfigGui() || TweakerMoreConfigs.APPLY_TWEAKERMORE_OPTION_LABEL_TO_ALL.getBooleanValue())
+		if (isTweakerMoreConfigGui() || TweakerMoreConfigs.APPLY_TWEAKERMORE_OPTION_LABEL_GLOBALLY.getBooleanValue())
 		{
 			int x = args.get(0);
 			int y = args.get(1);
@@ -118,7 +118,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 					modifier = s -> GuiBase.TXT_DARK_RED + s + GuiBase.TXT_RST;
 				}
 			}
-			WidgetLabel label = new TranslatedOptionLabel(x, y, width, height, textColor, lines, modifier);
+			WidgetLabel label = new TweakerMoreOptionLabel(x, y, width, height, textColor, lines, modifier);
 			this.addWidget(label);
 		}
 	}

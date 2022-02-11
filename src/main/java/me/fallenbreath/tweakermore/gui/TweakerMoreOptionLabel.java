@@ -10,13 +10,13 @@ import java.util.function.Function;
  * Only works perfectly with 1 line tho
  * See {@link me.fallenbreath.tweakermore.mixins.core.gui.WidgetLabelMixin} for more details
  */
-public class TranslatedOptionLabel extends WidgetLabel
+public class TweakerMoreOptionLabel extends WidgetLabel
 {
 	public static final double TRANSLATION_SCALE = 0.65;
 	private final String[] defaultNames;
 	private final boolean showTranslation;
 
-	public TranslatedOptionLabel(int x, int y, int width, int height, int textColor, String[] lines, Function<String, String> lineModifier)
+	public TweakerMoreOptionLabel(int x, int y, int width, int height, int textColor, String[] lines, Function<String, String> lineModifier)
 	{
 		super(x, y, width, height, textColor, lines);
 		this.defaultNames = Arrays.stream(lines).map(StringUtil::removeTweakerMoreNameSpacePrefix).toArray(String[]::new);
