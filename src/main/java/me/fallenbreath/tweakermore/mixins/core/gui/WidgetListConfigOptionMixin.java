@@ -98,7 +98,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	)
 	private void useMyBetterOptionLabelForTweakerMore(Args args, int x_, int y_, float zLevel, int labelWidth, int configWidth, IConfigBase config)
 	{
-		if (isTweakerMoreConfigGui())
+		if (isTweakerMoreConfigGui() || TweakerMoreConfigs.APPLY_TWEAKERMORE_OPTION_LABEL_TO_ALL.getBooleanValue())
 		{
 			int x = args.get(0);
 			int y = args.get(1);
@@ -109,11 +109,14 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 
 			args.set(5, null);  // cancel original call
 
-			IntStream.range(0, lines.length).forEach(i -> lines[i] = StringUtil.TWEAKERMORE_NAMESPACE_PREFIX + lines[i]);
 			Function<String, String> modifier = s -> s;
-			if (!TweakerMoreConfigs.getOptionFromConfig(config).map(TweakerMoreOption::isEnabled).orElse(true))
+			if (isTweakerMoreConfigGui())
 			{
-				modifier = s -> GuiBase.TXT_DARK_RED + s + GuiBase.TXT_RST;
+				IntStream.range(0, lines.length).forEach(i -> lines[i] = StringUtil.TWEAKERMORE_NAMESPACE_PREFIX + lines[i]);
+				if (!TweakerMoreConfigs.getOptionFromConfig(config).map(TweakerMoreOption::isEnabled).orElse(true))
+				{
+					modifier = s -> GuiBase.TXT_DARK_RED + s + GuiBase.TXT_RST;
+				}
 			}
 			WidgetLabel label = new TranslatedOptionLabel(x, y, width, height, textColor, lines, modifier);
 			this.addWidget(label);
