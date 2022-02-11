@@ -87,6 +87,8 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 		return labelWidth;
 	}
 
+	private boolean showOriginalTextsThisTime;
+
 	@ModifyArgs(
 			method = "addConfigOption",
 			at = @At(
@@ -118,9 +120,52 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 					modifier = s -> GuiBase.TXT_DARK_RED + s + GuiBase.TXT_RST;
 				}
 			}
-			WidgetLabel label = new TweakerMoreOptionLabel(x, y, width, height, textColor, lines, modifier);
+			TweakerMoreOptionLabel label = new TweakerMoreOptionLabel(x, y, width, height, textColor, lines, modifier);
 			this.addWidget(label);
+			this.showOriginalTextsThisTime = label.shouldShowOriginalTexts();
 		}
+		else
+		{
+			this.showOriginalTextsThisTime = false;
+		}
+	}
+
+	@ModifyArg(
+			method = "addConfigOption",
+			at = @At(
+					value = "INVOKE",
+					target = "Lfi/dy/masa/malilib/gui/widgets/WidgetConfigOption;addConfigComment(IIIILjava/lang/String;)V",
+					remap = false
+			),
+			index = 1,
+			remap = false
+	)
+	private int tweaksCommentHeight_minY(int y)
+	{
+		if (this.showOriginalTextsThisTime)
+		{
+			y -= 4;
+		}
+		return y;
+	}
+
+	@ModifyArg(
+			method = "addConfigOption",
+			at = @At(
+					value = "INVOKE",
+					target = "Lfi/dy/masa/malilib/gui/widgets/WidgetConfigOption;addConfigComment(IIIILjava/lang/String;)V",
+					remap = false
+			),
+			index = 3,
+			remap = false
+	)
+	private int tweaksCommentHeight_height(int height)
+	{
+		if (this.showOriginalTextsThisTime)
+		{
+			height += 6;
+		}
+		return height;
 	}
 
 	@Inject(

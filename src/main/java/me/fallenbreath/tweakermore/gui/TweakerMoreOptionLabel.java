@@ -13,33 +13,33 @@ import java.util.function.Function;
 public class TweakerMoreOptionLabel extends WidgetLabel
 {
 	public static final double TRANSLATION_SCALE = 0.65;
-	private final String[] defaultNames;
-	private final boolean showTranslation;
+	private final String[] originalTexts;
+	private final boolean showOriginalTexts;
 
 	public TweakerMoreOptionLabel(int x, int y, int width, int height, int textColor, String[] lines, Function<String, String> lineModifier)
 	{
 		super(x, y, width, height, textColor, lines);
-		this.defaultNames = Arrays.stream(lines).map(StringUtil::removeTweakerMoreNameSpacePrefix).toArray(String[]::new);
-		boolean showTranslation = false;
-		for (int i = 0; i < this.defaultNames.length; i++)
+		this.originalTexts = Arrays.stream(lines).map(StringUtil::removeTweakerMoreNameSpacePrefix).toArray(String[]::new);
+		boolean showOriginalNames = false;
+		for (int i = 0; i < this.originalTexts.length; i++)
 		{
 			String linesToDisplay = this.labels.get(i);
-			if (!this.defaultNames[i].equals(linesToDisplay))
+			if (!this.originalTexts[i].equals(linesToDisplay))
 			{
-				showTranslation = true;
+				showOriginalNames = true;
 			}
 			this.labels.set(i, lineModifier.apply(linesToDisplay));
 		}
-		this.showTranslation = showTranslation;
+		this.showOriginalTexts = showOriginalNames;
 	}
 
-	public String[] getDefaultNames()
+	public String[] getOriginalTexts()
 	{
-		return this.defaultNames;
+		return this.originalTexts;
 	}
 
-	public boolean shouldShowTranslation()
+	public boolean shouldShowOriginalTexts()
 	{
-		return this.showTranslation;
+		return this.showOriginalTexts;
 	}
 }
