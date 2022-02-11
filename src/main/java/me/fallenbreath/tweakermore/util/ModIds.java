@@ -15,4 +15,5 @@ public abstract class ModIds
 	// others
 	public static final String optifine = "optifabric";
 	public static final String xaero_worldmap = "xaeroworldmap";
+	public static final String raise_chat_limit = "raise-chat-limit";
 }

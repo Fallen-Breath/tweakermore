@@ -87,8 +87,8 @@
   "tweakermore.gui.config_type.disable": "Disable",
   "tweakermore.gui.config_type.config": "Config",
 
-  "tweakermore.gui.mod_relation_footer.requirement": "Requires mod %1$s",
-  "tweakermore.gui.mod_relation_footer.confliction": "Conflicts with mod %1$s",
+  "tweakermore.gui.mod_relation_footer.requirement": "Required mods: %1$s",
+  "tweakermore.gui.mod_relation_footer.confliction": "Conflicted mods: %1$s",
 
   "tweakermore.util.mod.minecraft": "minecraft",
   "tweakermore.util.mod.fabricloader": "fabric loader",
@@ -97,5 +97,6 @@
   "tweakermore.util.mod.itemscroller": "itemscroller",
   "tweakermore.util.mod.litematica": "litematica",
   "tweakermore.util.mod.optifabric": "optifine (optifabric)",
-  "tweakermore.util.mod.xaeroworldmap": "xaero's worldmap"
+  "tweakermore.util.mod.xaeroworldmap": "xaero's worldmap",
+  "tweakermore.util.mod.raise-chat-limit": "raise-chat-limit"
 }
