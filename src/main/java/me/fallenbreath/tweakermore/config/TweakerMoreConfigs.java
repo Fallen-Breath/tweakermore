@@ -13,7 +13,6 @@ import fi.dy.masa.malilib.util.JsonUtils;
 import fi.dy.masa.malilib.util.restrictions.ItemRestriction;
 import fi.dy.masa.malilib.util.restrictions.UsageRestriction;
 import me.fallenbreath.tweakermore.util.FileUtil;
-import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
 import me.fallenbreath.tweakermore.util.dependency.Condition;
 import me.fallenbreath.tweakermore.util.dependency.Strategy;
@@ -51,7 +50,7 @@ public class TweakerMoreConfigs implements IConfigHandler
 	public static final ConfigBoolean VILLAGER_OFFER_USES_DISPLAY = newConfigBoolean("villagerOfferUsesDisplay", false);
 	@Config(Config.Type.GENERIC)
 	public static final ConfigBoolean SHULKER_TOOLTIP_ENCHANTMENT_HINT = newConfigBoolean("shulkerTooltipEnchantmentHint", false);
-	@Config(Config.Type.GENERIC)
+	@Config(value = Config.Type.GENERIC, strategy = @Strategy(disableWhen = @Condition(raise_chat_limit)))
 	public static final ConfigInteger CHAT_MESSAGE_LIMIT = newConfigInteger("chatMessageLimit", 100, 100, 10000);
 	@Config(Config.Type.GENERIC)
 	public static final ConfigDouble SAFE_AFK_HEALTH_THRESHOLD = newConfigDouble("safeAfkHealthThreshold", 10, 0, 100);
@@ -76,8 +75,8 @@ public class TweakerMoreConfigs implements IConfigHandler
 	@Config(
 			value = Config.Type.TWEAK,
 			strategy = @Strategy(enableWhen = {
-					@Condition(ModIds.tweakeroo),
-					@Condition(ModIds.litematica)
+					@Condition(tweakeroo),
+					@Condition(litematica)
 			})
 	)
 	public static final ConfigBooleanHotkeyed TWEAKM_AUTO_PICK_SCHEMATIC_BLOCK = newConfigBooleanHotkeyed("tweakmAutoPickSchematicBlock");
@@ -96,8 +95,8 @@ public class TweakerMoreConfigs implements IConfigHandler
 	@Config(
 			value = Config.Type.GENERIC,
 			strategy = @Strategy(enableWhen = {
-					@Condition(ModIds.optifine),
-					@Condition(value = ModIds.minecraft, versionPredicates = ">=1.15")
+					@Condition(optifine),
+					@Condition(value = minecraft, versionPredicates = ">=1.15")
 			}),
 			category = Config.Category.MOD_TWEAKS
 	)
