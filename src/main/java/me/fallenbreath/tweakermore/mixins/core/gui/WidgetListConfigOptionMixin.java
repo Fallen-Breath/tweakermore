@@ -4,6 +4,7 @@ import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IHotkeyTogglable;
 import fi.dy.masa.malilib.config.gui.ConfigOptionChangeListenerButton;
 import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
+import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.gui.button.ConfigButtonBoolean;
@@ -13,6 +14,7 @@ import fi.dy.masa.malilib.gui.widgets.*;
 import fi.dy.masa.malilib.hotkeys.IKeybind;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.config.TweakerMoreOption;
 import me.fallenbreath.tweakermore.gui.HotkeyedBooleanResetListener;
 import me.fallenbreath.tweakermore.gui.TranslatedOptionLabel;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
@@ -24,6 +26,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.IntStream;
 
 @Mixin(WidgetConfigOption.class)
 public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase<GuiConfigsBase.ConfigOptionWrapper>
@@ -92,7 +96,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 			),
 			remap = false
 	)
-	private void useMyBetterOptionLabelForTweakerMore(Args args)
+	private void useMyBetterOptionLabelForTweakerMore(Args args, int x_, int y_, float zLevel, int labelWidth, int configWidth, IConfigBase config)
 	{
 		if (isTweakerMoreConfigGui())
 		{
@@ -105,8 +109,13 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 
 			args.set(5, null);  // cancel original call
 
-			lines[0] = StringUtil.TWEAKERMORE_NAMESPACE_PREFIX + lines[0];
-			WidgetLabel label = new TranslatedOptionLabel(x, y, width, height, textColor, lines);
+			IntStream.range(0, lines.length).forEach(i -> lines[i] = StringUtil.TWEAKERMORE_NAMESPACE_PREFIX + lines[i]);
+			Function<String, String> modifier = s -> s;
+			if (!TweakerMoreConfigs.getOptionFromConfig(config).map(TweakerMoreOption::isEnabled).orElse(true))
+			{
+				modifier = s -> GuiBase.TXT_STRIKETHROUGH + s;
+			}
+			WidgetLabel label = new TranslatedOptionLabel(x, y, width, height, textColor, lines, modifier);
 			this.addWidget(label);
 		}
 	}

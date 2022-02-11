@@ -2,8 +2,8 @@ package me.fallenbreath.tweakermore.mixins.tweaks.tweakmAutoContainerProcess;
 
 import me.fallenbreath.tweakermore.impl.tweakmAutoContainerProcess.ContainerProcessor;
 import me.fallenbreath.tweakermore.util.ModIds;
-import me.fallenbreath.tweakermore.util.mixin.Condition;
-import me.fallenbreath.tweakermore.util.mixin.ModRequire;
+import me.fallenbreath.tweakermore.util.dependency.Condition;
+import me.fallenbreath.tweakermore.util.dependency.ModRequire;
 import net.minecraft.container.Container;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

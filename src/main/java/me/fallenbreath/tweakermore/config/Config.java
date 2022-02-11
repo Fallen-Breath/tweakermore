@@ -2,6 +2,7 @@ package me.fallenbreath.tweakermore.config;
 
 import fi.dy.masa.malilib.interfaces.IStringValue;
 import fi.dy.masa.malilib.util.StringUtils;
+import me.fallenbreath.tweakermore.util.dependency.ModRequire;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -16,7 +17,7 @@ public @interface Config
 
 	Category category() default Category.MC_TWEAKS;
 
-	String[] modRequire() default {};
+	ModRequire modRequire() default @ModRequire();
 
 	enum Type implements IStringValue
 	{
