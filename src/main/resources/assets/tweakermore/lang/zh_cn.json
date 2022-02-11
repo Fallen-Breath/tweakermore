@@ -9,6 +9,8 @@
   "tweakermore.config.bossBarScale.comment": "将Boss栏按照给定参数进行缩放显示",
   "tweakermore.config.chatMessageLimit": "聊天信息数量上限",
   "tweakermore.config.chatMessageLimit.comment": "修改聊天栏的历史信息储存数量上限",
+  "tweakermore.config.legacyF3NLogic": "旧版F3+N逻辑",
+  "tweakermore.config.legacyF3NLogic.comment": "修改快捷键F3+N的逻辑至1.15及之前的逻辑\n提示，1.15以前的逻辑为：创造模式->旁观者模式、其他模式->创造模式",
   "tweakermore.config.netherPortalSoundChance": "地狱门音效概率",
   "tweakermore.config.netherPortalSoundChance.comment": "地狱门方块播放音效的概率\n将其设为0.001或0.0001来让地狱门没那么吵",
   "tweakermore.config.safeAfkHealthThreshold": "安全挂机血量阈值",
