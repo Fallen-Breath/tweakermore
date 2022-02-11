@@ -10,7 +10,7 @@ public class MalilibStuffsInitializer
 	public static void init()
 	{
 		InitializationHandler.getInstance().registerInitializationHandler(() -> {
-			ConfigManager.getInstance().registerConfigHandler(TweakerMoreMod.MOD_ID, new TweakerMoreConfigs());
+			ConfigManager.getInstance().registerConfigHandler(TweakerMoreMod.MOD_ID, new TweakerMoreConfigStorage());
 
 			InputEventHandler.getKeybindManager().registerKeybindProvider(new KeybindProvider());
 
