@@ -87,8 +87,8 @@
   "tweakermore.gui.config_type.disable": "禁用 Disable",
   "tweakermore.gui.config_type.config": "配置 Config",
 
-  "tweakermore.gui.mod_relation_footer.requirement": "需要模组 %1$s",
-  "tweakermore.gui.mod_relation_footer.confliction": "冲突模组 %1$s",
+  "tweakermore.gui.mod_relation_footer.requirement": "依赖的模组: %1$s",
+  "tweakermore.gui.mod_relation_footer.confliction": "冲突的模组: %1$s",
 
   "tweakermore.util.mod.minecraft": "minecraft",
   "tweakermore.util.mod.fabricloader": "fabric loader",
@@ -97,5 +97,6 @@
   "tweakermore.util.mod.itemscroller": "itemscroller",
   "tweakermore.util.mod.litematica": "litematica",
   "tweakermore.util.mod.optifabric": "optifine (optifabric)",
-  "tweakermore.util.mod.xaeroworldmap": "xaero's worldmap"
+  "tweakermore.util.mod.xaeroworldmap": "xaero's worldmap",
+  "tweakermore.util.mod.raise-chat-limit": "raise-chat-limit"
 }
