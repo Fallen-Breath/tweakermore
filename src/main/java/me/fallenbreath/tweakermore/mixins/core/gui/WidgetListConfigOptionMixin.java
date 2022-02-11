@@ -16,6 +16,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.gui.HotkeyedBooleanResetListener;
 import me.fallenbreath.tweakermore.gui.TranslatedOptionLabel;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
+import me.fallenbreath.tweakermore.util.StringUtil;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -104,6 +105,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 
 			args.set(5, null);  // cancel original call
 
+			lines[0] = StringUtil.TWEAKERMORE_NAMESPACE_PREFIX + lines[0];
 			WidgetLabel label = new TranslatedOptionLabel(x, y, width, height, textColor, lines);
 			this.addWidget(label);
 		}
