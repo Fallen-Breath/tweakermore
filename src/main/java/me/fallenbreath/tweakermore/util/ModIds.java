@@ -1,6 +1,6 @@
 package me.fallenbreath.tweakermore.util;
 
-public abstract class ModIds
+public class ModIds
 {
 	// basics
 	public static final String minecraft = "minecraft";

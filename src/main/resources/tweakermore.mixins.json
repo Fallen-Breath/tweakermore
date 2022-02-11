@@ -21,6 +21,7 @@
     "tweaks.disableRedstoneWireParticle.RedstoneWireBlockMixin",
     "tweaks.handRestoreRestriction.InventoryUtilsMixin",
     "tweaks.handRestoreRestriction.PlacementTweaksMixin",
+    "tweaks.legacyF3NLogic.KeyboardMixin",
     "tweaks.netherPortalSoundChance.NetherPortalBlockMixin",
     "tweaks.ofUnlockF3FpsLimit.DebugHudMixin",
     "tweaks.prioritizedCommandSuggestions.CommandSuggestorMixin",
