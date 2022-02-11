@@ -1,18 +1,18 @@
-package me.fallenbreath.tweakermore.util.mixin;
+package me.fallenbreath.tweakermore.util.dependency;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ModRequire
+public @interface Strategy
 {
 	/**
-	 * Enable the mixin only when all given conditions are satisfied
+	 * Enable only when all given conditions are satisfied
 	 */
 	Condition[] enableWhen() default {};
 
 	/**
-	 * Disable the mixin if any given condition is satisfied
+	 * Disable if any given condition is satisfied
 	 * Overwrites field enableWhen
 	 */
 	Condition[] disableWhen() default {};

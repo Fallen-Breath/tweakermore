@@ -4,7 +4,7 @@ import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
 import me.fallenbreath.tweakermore.util.StringUtil;
 
 import java.util.Arrays;
-import java.util.stream.IntStream;
+import java.util.function.Function;
 
 /**
  * Only works perfectly with 1 line tho
@@ -16,11 +16,21 @@ public class TranslatedOptionLabel extends WidgetLabel
 	private final String[] defaultNames;
 	private final boolean showTranslation;
 
-	public TranslatedOptionLabel(int x, int y, int width, int height, int textColor, String[] lines)
+	public TranslatedOptionLabel(int x, int y, int width, int height, int textColor, String[] lines, Function<String, String> lineModifier)
 	{
 		super(x, y, width, height, textColor, lines);
 		this.defaultNames = Arrays.stream(lines).map(StringUtil::removeTweakerMoreNameSpacePrefix).toArray(String[]::new);
-		this.showTranslation = IntStream.range(0, this.defaultNames.length).anyMatch(i -> !this.defaultNames[i].equals(this.labels.get(i)));
+		boolean showTranslation = false;
+		for (int i = 0; i < this.defaultNames.length; i++)
+		{
+			String linesToDisplay = this.labels.get(i);
+			if (!this.defaultNames[i].equals(linesToDisplay))
+			{
+				showTranslation = true;
+			}
+			this.labels.set(i, lineModifier.apply(linesToDisplay));
+		}
+		this.showTranslation = showTranslation;
 	}
 
 	public String[] getDefaultNames()
