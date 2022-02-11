@@ -46,6 +46,9 @@ public class TweakerMoreConfigs
 	public static final ConfigInteger CHAT_MESSAGE_LIMIT = newConfigInteger("chatMessageLimit", 100, 100, 10000);
 
 	@Config(Config.Type.GENERIC)
+	public static final ConfigBoolean LEGACY_F3_N_LOGIC = newConfigBoolean("legacyF3NLogic", false);
+
+	@Config(Config.Type.GENERIC)
 	public static final ConfigDouble NETHER_PORTAL_SOUND_CHANCE = newConfigDouble("netherPortalSoundChance", 0.01D, 0.0D, 0.01D);
 
 	@Config(Config.Type.GENERIC)

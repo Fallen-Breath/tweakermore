@@ -5,6 +5,8 @@
   "tweakermore.autoFillContainerThreshold.comment": "触发工具 tweakmAutoFillContainer 所需要的最小的物品槽位数\n例如，如果你总是带着2个格子的烟花火箭，那么你可以将其设置为3，\n那么这些烟花物品将必定不会被用于填充容器",
   "tweakermore.chatMessageLimit": "聊天信息数量上限",
   "tweakermore.chatMessageLimit.comment": "修改聊天栏的历史信息储存数量上限",
+  "tweakermore.legacyF3NLogic": "旧版F3+N逻辑",
+  "tweakermore.legacyF3NLogic.comment": "修改快捷键F3+N的逻辑至1.15及之前的逻辑\n提示，1.15以前的逻辑为：创造模式->旁观者模式、其他模式->创造模式",
   "tweakermore.netherPortalSoundChance": "地狱门音效概率",
   "tweakermore.netherPortalSoundChance.comment": "地狱门方块播放音效的概率\n将其设为0.001或0.0001来让地狱门没那么吵",
   "tweakermore.safeAfkHealthThreshold": "安全挂机血量阈值",

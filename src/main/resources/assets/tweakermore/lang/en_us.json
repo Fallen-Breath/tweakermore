@@ -5,6 +5,8 @@
   "tweakermore.autoFillContainerThreshold.comment": "The minimum occupied slot amount for the item to trigger tweak tweakmAutoFillContainer\ne.g. if you always have 2 slots of firework rocket you can set the value to 3,\n then your rockets will never be used to fill the container",
   "tweakermore.chatMessageLimit": "chatMessageLimit",
   "tweakermore.chatMessageLimit.comment": "Modify the maximum number of history messages stored in the chat hud",
+  "tweakermore.legacyF3NLogic": "legacyF3NLogic",
+  "tweakermore.legacyF3NLogic.comment": "Modify the logic of hotkey F3 + N back to 1.15 and before\n1.15- logic cheat sheet: creative -> spectator, other -> creative",
   "tweakermore.netherPortalSoundChance": "netherPortalSoundChance",
   "tweakermore.netherPortalSoundChance.comment": "The chance for a nether portal block to play sound\nSet it to 0.001 or 0.0001 for less noisy portal",
   "tweakermore.safeAfkHealthThreshold": "safeAfkHealthThreshold",
