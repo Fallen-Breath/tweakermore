@@ -14,8 +14,8 @@ import fi.dy.masa.malilib.util.PositionUtils;
 import fi.dy.masa.tweakeroo.tweaks.PlacementTweaks;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import me.fallenbreath.tweakermore.util.mixin.Condition;
-import me.fallenbreath.tweakermore.util.mixin.ModRequire;
+import me.fallenbreath.tweakermore.util.dependency.Condition;
+import me.fallenbreath.tweakermore.util.dependency.Strategy;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
@@ -38,7 +38,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@ModRequire(enableWhen = {@Condition(ModIds.tweakeroo), @Condition(ModIds.litematica)})
+@Strategy(enableWhen = {@Condition(ModIds.tweakeroo), @Condition(ModIds.litematica)})
 @Mixin(PlacementTweaks.class)
 public abstract class PlacementTweaksMixin
 {

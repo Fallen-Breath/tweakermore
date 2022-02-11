@@ -13,7 +13,10 @@ import fi.dy.masa.malilib.util.JsonUtils;
 import fi.dy.masa.malilib.util.restrictions.ItemRestriction;
 import fi.dy.masa.malilib.util.restrictions.UsageRestriction;
 import me.fallenbreath.tweakermore.util.FileUtil;
+import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
+import me.fallenbreath.tweakermore.util.dependency.Condition;
+import me.fallenbreath.tweakermore.util.dependency.Strategy;
 import net.minecraft.item.Items;
 
 import java.io.File;
@@ -56,21 +59,27 @@ public class TweakerMoreConfigs implements IConfigHandler
 	@Config(Config.Type.HOTKEY)
 	public static final ConfigHotkey COPY_SIGN_TEXT_TO_CLIPBOARD = newConfigHotKey("copySignTextToClipBoard", "");
 
-	@Config(value = Config.Type.LIST, modRequire = tweakeroo)
+	@Config(value = Config.Type.LIST, strategy = @Strategy(enableWhen = @Condition(tweakeroo)))
 	public static final ConfigOptionList HAND_RESTORE_LIST_TYPE = newConfigOptionList("handRestockListType", UsageRestriction.ListType.NONE);
-	@Config(value = Config.Type.LIST, modRequire = tweakeroo)
+	@Config(value = Config.Type.LIST, strategy = @Strategy(enableWhen = @Condition(tweakeroo)))
 	public static final ConfigStringList HAND_RESTORE_WHITELIST = newConfigStringList("handRestockWhiteList", ImmutableList.of(RegistryUtil.getItemId(Items.BUCKET)));
-	@Config(value = Config.Type.LIST, modRequire = tweakeroo)
+	@Config(value = Config.Type.LIST, strategy = @Strategy(enableWhen = @Condition(tweakeroo)))
 	public static final ConfigStringList HAND_RESTORE_BLACKLIST = newConfigStringList("handRestockBlackList", ImmutableList.of(RegistryUtil.getItemId(Items.LAVA_BUCKET)));
 	public static final ItemRestriction HAND_RESTORE_RESTRICTION = new ItemRestriction();
 	@Config(Config.Type.LIST)
 	public static final ConfigStringList PRIORITIZED_COMMAND_SUGGESTIONS = newConfigStringList("prioritizedCommandSuggestions", ImmutableList.of());
 
-	@Config(value = Config.Type.TWEAK, modRequire = itemscroller)
+	@Config(value = Config.Type.TWEAK, strategy = @Strategy(enableWhen = @Condition(itemscroller)))
 	public static final ConfigBooleanHotkeyed TWEAKM_AUTO_CLEAN_CONTAINER = newConfigBooleanHotkeyed("tweakmAutoCleanContainer");
-	@Config(value = Config.Type.TWEAK, modRequire = itemscroller)
+	@Config(value = Config.Type.TWEAK, strategy = @Strategy(enableWhen = @Condition(itemscroller)))
 	public static final ConfigBooleanHotkeyed TWEAKM_AUTO_FILL_CONTAINER = newConfigBooleanHotkeyed("tweakmAutoFillContainer");
-	@Config(value = Config.Type.TWEAK, modRequire = {tweakeroo, litematica})
+	@Config(
+			value = Config.Type.TWEAK,
+			strategy = @Strategy(enableWhen = {
+					@Condition(ModIds.tweakeroo),
+					@Condition(ModIds.litematica)
+			})
+	)
 	public static final ConfigBooleanHotkeyed TWEAKM_AUTO_PICK_SCHEMATIC_BLOCK = newConfigBooleanHotkeyed("tweakmAutoPickSchematicBlock");
 	@Config(Config.Type.TWEAK)
 	public static final ConfigBooleanHotkeyed TWEAKM_SAFE_AFK = newConfigBooleanHotkeyed("tweakmSafeAfk");
@@ -84,10 +93,21 @@ public class TweakerMoreConfigs implements IConfigHandler
 	//   Mod Tweaks   //
 	////////////////////
 
-	@Config(value = Config.Type.GENERIC, modRequire = optifine, category = Config.Category.MOD_TWEAKS)
+	@Config(
+			value = Config.Type.GENERIC,
+			strategy = @Strategy(enableWhen = {
+					@Condition(ModIds.optifine),
+					@Condition(value = ModIds.minecraft, versionPredicates = ">=1.15")
+			}),
+			category = Config.Category.MOD_TWEAKS
+	)
 	public static final ConfigBoolean OF_UNLOCK_F3_FPS_LIMIT = newConfigBoolean("ofUnlockF3FpsLimit", false);
 
-	@Config(value = Config.Type.GENERIC, modRequire = xaero_worldmap, category = Config.Category.MOD_TWEAKS)
+	@Config(
+			value = Config.Type.GENERIC,
+			strategy = @Strategy(enableWhen = @Condition(xaero_worldmap)),
+			category = Config.Category.MOD_TWEAKS
+	)
 	public static final ConfigBoolean XMAP_NO_SESSION_FINALIZATION_WAIT = newConfigBoolean("xmapNoSessionFinalizationWait", false);
 
 	//////////////////////////
@@ -96,6 +116,8 @@ public class TweakerMoreConfigs implements IConfigHandler
 
 	@Config(value = Config.Type.HOTKEY, category = Config.Category.SETTING)
 	public static final ConfigHotkey OPEN_TWEAKERMORE_CONFIG_GUI = newConfigHotKey("openTweakerMoreConfigGui", "K,C");
+	@Config(value = Config.Type.GENERIC, category = Config.Category.SETTING)
+	public static final ConfigBoolean PRESERVE_CONFIG_UNKNOWN_ENTRIES = newConfigBoolean("preserveConfigUnknownEntries", true);
 	@Config(value = Config.Type.TWEAK, category = Config.Category.SETTING)
 	public static final ConfigBooleanHotkeyed TWEAKERMORE_DEBUG_MODE = newConfigBooleanHotkeyed("tweakerMoreDebugMode");
 
@@ -209,7 +231,7 @@ public class TweakerMoreConfigs implements IConfigHandler
 	public static void saveToFile()
 	{
 		File configFile = FileUtil.getConfigFile();
-		JsonObject root = ROOT_JSON_OBJ;
+		JsonObject root = PRESERVE_CONFIG_UNKNOWN_ENTRIES.getBooleanValue() ? ROOT_JSON_OBJ : new JsonObject();
 
 		ConfigUtils.writeConfigBase(root, "Generic", getConfigOptions(Config.Type.GENERIC));
 		ConfigUtils.writeConfigBase(root, "GenericHotkeys", getConfigOptions(Config.Type.HOTKEY));

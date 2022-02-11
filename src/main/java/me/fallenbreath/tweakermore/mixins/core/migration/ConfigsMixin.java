@@ -5,8 +5,8 @@ import com.google.gson.JsonObject;
 import fi.dy.masa.tweakeroo.config.Configs;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import me.fallenbreath.tweakermore.util.mixin.Condition;
-import me.fallenbreath.tweakermore.util.mixin.ModRequire;
+import me.fallenbreath.tweakermore.util.dependency.Condition;
+import me.fallenbreath.tweakermore.util.dependency.Strategy;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.io.File;
 
-@ModRequire(enableWhen = @Condition(ModIds.tweakeroo))
+@Strategy(enableWhen = @Condition(ModIds.tweakeroo))
 @Mixin(Configs.class)
 public abstract class ConfigsMixin
 {
