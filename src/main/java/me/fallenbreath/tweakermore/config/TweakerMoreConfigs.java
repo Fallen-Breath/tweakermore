@@ -47,16 +47,16 @@ public class TweakerMoreConfigs implements IConfigHandler
 
 	@Config(Config.Type.GENERIC)
 	public static final ConfigInteger AUTO_FILL_CONTAINER_THRESHOLD = newConfigInteger("autoFillContainerThreshold", 2, 1, 36);
-	@Config(Config.Type.GENERIC)
-	public static final ConfigDouble NETHER_PORTAL_SOUND_CHANCE = newConfigDouble("netherPortalSoundChance", 0.01D, 0.0D, 0.01D);
-	@Config(Config.Type.GENERIC)
-	public static final ConfigBoolean VILLAGER_OFFER_USES_DISPLAY = newConfigBoolean("villagerOfferUsesDisplay", false);
-	@Config(Config.Type.GENERIC)
-	public static final ConfigBoolean SHULKER_TOOLTIP_ENCHANTMENT_HINT = newConfigBoolean("shulkerTooltipEnchantmentHint", false);
 	@Config(value = Config.Type.GENERIC, strategy = @Strategy(disableWhen = @Condition(raise_chat_limit)))
 	public static final ConfigInteger CHAT_MESSAGE_LIMIT = newConfigInteger("chatMessageLimit", 100, 100, 10000);
 	@Config(Config.Type.GENERIC)
+	public static final ConfigDouble NETHER_PORTAL_SOUND_CHANCE = newConfigDouble("netherPortalSoundChance", 0.01D, 0.0D, 0.01D);
+	@Config(Config.Type.GENERIC)
 	public static final ConfigDouble SAFE_AFK_HEALTH_THRESHOLD = newConfigDouble("safeAfkHealthThreshold", 10, 0, 100);
+	@Config(Config.Type.GENERIC)
+	public static final ConfigBoolean SHULKER_TOOLTIP_ENCHANTMENT_HINT = newConfigBoolean("shulkerTooltipEnchantmentHint", false);
+	@Config(Config.Type.GENERIC)
+	public static final ConfigBoolean VILLAGER_OFFER_USES_DISPLAY = newConfigBoolean("villagerOfferUsesDisplay", false);
 
 	@Config(Config.Type.HOTKEY)
 	public static final ConfigHotkey COPY_SIGN_TEXT_TO_CLIPBOARD = newConfigHotKey("copySignTextToClipBoard", "");
@@ -95,6 +95,9 @@ public class TweakerMoreConfigs implements IConfigHandler
 	//   Mod Tweaks   //
 	////////////////////
 
+	@Config(value = Config.Type.GENERIC, category = Config.Category.MOD_TWEAKS)
+	public static final ConfigBoolean APPLY_TWEAKERMORE_OPTION_LABEL_GLOBALLY = newConfigBoolean("applyTweakerMoreOptionLabelGlobally", false);
+
 	@Config(
 			value = Config.Type.GENERIC,
 			strategy = @Strategy(enableWhen = {
@@ -111,19 +114,17 @@ public class TweakerMoreConfigs implements IConfigHandler
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final ConfigBoolean XMAP_NO_SESSION_FINALIZATION_WAIT = newConfigBoolean("xmapNoSessionFinalizationWait", false);
-	@Config(value = Config.Type.GENERIC, category = Config.Category.MOD_TWEAKS)
-	public static final ConfigBoolean APPLY_TWEAKERMORE_OPTION_LABEL_GLOBALLY = newConfigBoolean("applyTweakerMoreOptionLabelGlobally", false);
 
 	//////////////////////////
 	//  TweakerMore Setting //
 	//////////////////////////
 
+	@Config(value = Config.Type.GENERIC, category = Config.Category.SETTING)
+	public static final ConfigBoolean HIDE_DISABLE_OPTIONS = newConfigBoolean("hideDisabledOptions", false);
 	@Config(value = Config.Type.HOTKEY, category = Config.Category.SETTING)
 	public static final ConfigHotkey OPEN_TWEAKERMORE_CONFIG_GUI = newConfigHotKey("openTweakerMoreConfigGui", "K,C");
 	@Config(value = Config.Type.GENERIC, category = Config.Category.SETTING)
 	public static final ConfigBoolean PRESERVE_CONFIG_UNKNOWN_ENTRIES = newConfigBoolean("preserveConfigUnknownEntries", true);
-	@Config(value = Config.Type.GENERIC, category = Config.Category.SETTING)
-	public static final ConfigBoolean HIDE_DISABLE_OPTIONS = newConfigBoolean("hideDisabledOptions", false);
 
 	@Config(value = Config.Type.TWEAK, category = Config.Category.SETTING)
 	public static final ConfigBooleanHotkeyed TWEAKERMORE_DEBUG_MODE = newConfigBooleanHotkeyed("tweakerMoreDebugMode");
