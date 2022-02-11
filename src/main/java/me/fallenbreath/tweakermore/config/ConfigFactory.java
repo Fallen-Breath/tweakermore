@@ -13,7 +13,7 @@ public abstract class ConfigFactory
 
 	public static ConfigHotkey newConfigHotKey(String name, String defaultHotkey)
 	{
-		return new ConfigHotkey(PREFIX + name, defaultHotkey, PREFIX + name + COMMENT_SUFFIX);
+		return new ConfigHotkey(name, defaultHotkey, PREFIX + name + COMMENT_SUFFIX);
 	}
 
 	public static ConfigBooleanHotkeyed newConfigBooleanHotkeyed(String name)
@@ -23,36 +23,36 @@ public abstract class ConfigFactory
 
 	public static ConfigBooleanHotkeyed newConfigBooleanHotkeyed(String name, boolean defaultValue, String defaultHotKey)
 	{
-		return new ConfigBooleanHotkeyed(PREFIX + name, defaultValue, defaultHotKey, PREFIX + name + COMMENT_SUFFIX, PREFIX + name + PRETTY_NAME_SUFFIX);
+		return new ConfigBooleanHotkeyed(name, defaultValue, defaultHotKey, PREFIX + name + COMMENT_SUFFIX, PREFIX + name + PRETTY_NAME_SUFFIX);
 	}
 
 	public static ConfigBoolean newConfigBoolean(String name, boolean defaultValue)
 	{
-		return new ConfigBoolean(PREFIX + name, defaultValue, PREFIX + name + COMMENT_SUFFIX);
+		return new ConfigBoolean(name, defaultValue, PREFIX + name + COMMENT_SUFFIX);
 	}
 
 	public static ConfigInteger newConfigInteger(String name, int defaultValue, int minValue, int maxValue)
 	{
-		return new ConfigInteger(PREFIX + name, defaultValue, minValue, maxValue, PREFIX + name + COMMENT_SUFFIX);
+		return new ConfigInteger(name, defaultValue, minValue, maxValue, PREFIX + name + COMMENT_SUFFIX);
 	}
 
 	public static ConfigDouble newConfigDouble(String name, double defaultValue, double minValue, double maxValue)
 	{
-		return new ConfigDouble(PREFIX + name, defaultValue, minValue, maxValue, PREFIX + name + COMMENT_SUFFIX);
+		return new ConfigDouble(name, defaultValue, minValue, maxValue, PREFIX + name + COMMENT_SUFFIX);
 	}
 
 	public static ConfigString newConfigString(String name, String defaultValue)
 	{
-		return new ConfigString(PREFIX + name, defaultValue, PREFIX + name + COMMENT_SUFFIX);
+		return new ConfigString(name, defaultValue, PREFIX + name + COMMENT_SUFFIX);
 	}
 
 	public static ConfigStringList newConfigStringList(String name, ImmutableList<String> defaultValue)
 	{
-		return new ConfigStringList(PREFIX + name, defaultValue, PREFIX + name + COMMENT_SUFFIX);
+		return new ConfigStringList(name, defaultValue, PREFIX + name + COMMENT_SUFFIX);
 	}
 
 	public static ConfigOptionList newConfigOptionList(String name, IConfigOptionListEntry defaultValue)
 	{
-		return new ConfigOptionList(PREFIX + name, defaultValue, PREFIX + name + COMMENT_SUFFIX);
+		return new ConfigOptionList(name, defaultValue, PREFIX + name + COMMENT_SUFFIX);
 	}
 }

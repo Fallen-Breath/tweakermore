@@ -2,8 +2,8 @@ package me.fallenbreath.tweakermore.mixins.tweaks.xmapNoSessionFinalizationWait;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import me.fallenbreath.tweakermore.util.mixin.Condition;
-import me.fallenbreath.tweakermore.util.mixin.ModRequire;
+import me.fallenbreath.tweakermore.util.dependency.Condition;
+import me.fallenbreath.tweakermore.util.dependency.Strategy;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@ModRequire(enableWhen = @Condition(ModIds.xaero_worldmap))
+@Strategy(enableWhen = @Condition(ModIds.xaero_worldmap))
 @Pseudo
 @Mixin(targets = "xaero.map.WorldMapSession", remap = false)
 public abstract class WorldMapSessionMixin

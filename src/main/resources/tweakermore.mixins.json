@@ -5,8 +5,6 @@
   "plugin": "me.fallenbreath.tweakermore.util.mixin.TweakerMoreMixinConfigPlugin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "core.ConfigUtilsMixin",
-    "core.WidgetListConfigOptionsMixin",
     "core.gui.ConfigBaseMixin",
     "core.gui.WidgetDropDownListMixin",
     "core.gui.WidgetLabelMixin",

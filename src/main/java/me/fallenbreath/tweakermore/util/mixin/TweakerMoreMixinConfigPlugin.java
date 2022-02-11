@@ -1,5 +1,6 @@
 package me.fallenbreath.tweakermore.util.mixin;
 
+import me.fallenbreath.tweakermore.util.dependency.DependencyMixinConfigPlugin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.tree.ClassNode;
