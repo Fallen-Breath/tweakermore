@@ -59,6 +59,8 @@
   "tweakermore.ofUnlockF3FpsLimit.comment": "Removed 10 FPS render limit for F3 debug hud",
   "tweakermore.xmapNoSessionFinalizationWait": "xmapNoSessionFinalizationWait",
   "tweakermore.xmapNoSessionFinalizationWait.comment": "Skip the session finalization operation when quit a world\nSo no lag when quitting server or single player\nMight have some side effects though",
+  "tweakermore.applyTweakerMoreOptionLabelGlobally": "applyTweakerMoreOptionLabelGlobally",
+  "tweakermore.applyTweakerMoreOptionLabelGlobally.comment": "Apply the TweakerMore style translated text + original text label to all config GUIs using malilib",
 
   "// Setting": "================================================",
 
@@ -66,6 +68,8 @@
   "tweakermore.openTweakerMoreConfigGui.comment": "Open the config GUI of TweakerMore",
   "tweakermore.preserveConfigUnknownEntries": "preserveConfigUnknownEntries",
   "tweakermore.preserveConfigUnknownEntries.comment": "Preserve unknown config entries in TweakerMore's config file\nIf set to false, unknown entries will be removed on config being written",
+  "tweakermore.hideDisabledOptions": "hideDisabledOptions",
+  "tweakermore.hideDisabledOptions.comment": "Hide options which are disabled due to mod relations unsatisfied in the config GUI",
   "tweakermore.tweakerMoreDebugMode": "tweakerMoreDebugMode",
   "tweakermore.tweakerMoreDebugMode.comment": "Debug mode of TweakerMore",
   "tweakermore.tweakerMoreDebugMode.pretty_name": "TweakerMore Debug Mode",

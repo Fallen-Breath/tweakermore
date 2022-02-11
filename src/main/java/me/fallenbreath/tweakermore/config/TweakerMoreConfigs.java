@@ -9,9 +9,12 @@ import fi.dy.masa.malilib.config.ConfigUtils;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IConfigHandler;
 import fi.dy.masa.malilib.config.options.*;
+import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.util.JsonUtils;
 import fi.dy.masa.malilib.util.restrictions.ItemRestriction;
 import fi.dy.masa.malilib.util.restrictions.UsageRestriction;
+import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
+import me.fallenbreath.tweakermore.impl.copySignTextToClipBoard.SignTextCopier;
 import me.fallenbreath.tweakermore.util.FileUtil;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
 import me.fallenbreath.tweakermore.util.dependency.Condition;
@@ -108,6 +111,8 @@ public class TweakerMoreConfigs implements IConfigHandler
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final ConfigBoolean XMAP_NO_SESSION_FINALIZATION_WAIT = newConfigBoolean("xmapNoSessionFinalizationWait", false);
+	@Config(value = Config.Type.GENERIC, category = Config.Category.MOD_TWEAKS)
+	public static final ConfigBoolean APPLY_TWEAKERMORE_OPTION_LABEL_GLOBALLY = newConfigBoolean("applyTweakerMoreOptionLabelGlobally", false);
 
 	//////////////////////////
 	//  TweakerMore Setting //
@@ -117,6 +122,9 @@ public class TweakerMoreConfigs implements IConfigHandler
 	public static final ConfigHotkey OPEN_TWEAKERMORE_CONFIG_GUI = newConfigHotKey("openTweakerMoreConfigGui", "K,C");
 	@Config(value = Config.Type.GENERIC, category = Config.Category.SETTING)
 	public static final ConfigBoolean PRESERVE_CONFIG_UNKNOWN_ENTRIES = newConfigBoolean("preserveConfigUnknownEntries", true);
+	@Config(value = Config.Type.GENERIC, category = Config.Category.SETTING)
+	public static final ConfigBoolean HIDE_DISABLE_OPTIONS = newConfigBoolean("hideDisabledOptions", false);
+
 	@Config(value = Config.Type.TWEAK, category = Config.Category.SETTING)
 	public static final ConfigBooleanHotkeyed TWEAKERMORE_DEBUG_MODE = newConfigBooleanHotkeyed("tweakerMoreDebugMode");
 
@@ -125,6 +133,18 @@ public class TweakerMoreConfigs implements IConfigHandler
 	 *    Implementation Details
 	 * ============================
 	 */
+
+	public static void initCallbacks()
+	{
+		COPY_SIGN_TEXT_TO_CLIPBOARD.getKeybind().setCallback(SignTextCopier::copySignText);
+		OPEN_TWEAKERMORE_CONFIG_GUI.getKeybind().setCallback((action, key) -> {
+			GuiBase.openGui(new TweakerMoreConfigGui());
+			return true;
+		});
+		HIDE_DISABLE_OPTIONS.setValueChangeCallback(newValue -> {
+			TweakerMoreConfigGui.getCurrentInstance().ifPresent(TweakerMoreConfigGui::reDraw);
+		});
+	}
 
 	private static final List<TweakerMoreOption> OPTIONS = Lists.newArrayList();
 	private static final Map<Config.Category, List<TweakerMoreOption>> CATEGORY_TO_OPTION = Maps.newLinkedHashMap();

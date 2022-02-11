@@ -16,8 +16,8 @@ import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
 import me.fallenbreath.tweakermore.gui.HotkeyedBooleanResetListener;
-import me.fallenbreath.tweakermore.gui.TranslatedOptionLabel;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
+import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
 import me.fallenbreath.tweakermore.util.StringUtil;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
@@ -87,6 +87,8 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 		return labelWidth;
 	}
 
+	private boolean showOriginalTextsThisTime;
+
 	@ModifyArgs(
 			method = "addConfigOption",
 			at = @At(
@@ -98,7 +100,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	)
 	private void useMyBetterOptionLabelForTweakerMore(Args args, int x_, int y_, float zLevel, int labelWidth, int configWidth, IConfigBase config)
 	{
-		if (isTweakerMoreConfigGui())
+		if (isTweakerMoreConfigGui() || TweakerMoreConfigs.APPLY_TWEAKERMORE_OPTION_LABEL_GLOBALLY.getBooleanValue())
 		{
 			int x = args.get(0);
 			int y = args.get(1);
@@ -109,15 +111,61 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 
 			args.set(5, null);  // cancel original call
 
-			IntStream.range(0, lines.length).forEach(i -> lines[i] = StringUtil.TWEAKERMORE_NAMESPACE_PREFIX + lines[i]);
 			Function<String, String> modifier = s -> s;
-			if (!TweakerMoreConfigs.getOptionFromConfig(config).map(TweakerMoreOption::isEnabled).orElse(true))
+			if (isTweakerMoreConfigGui())
 			{
-				modifier = s -> GuiBase.TXT_DARK_RED + s + GuiBase.TXT_RST;
+				IntStream.range(0, lines.length).forEach(i -> lines[i] = StringUtil.TWEAKERMORE_NAMESPACE_PREFIX + lines[i]);
+				if (!TweakerMoreConfigs.getOptionFromConfig(config).map(TweakerMoreOption::isEnabled).orElse(true))
+				{
+					modifier = s -> GuiBase.TXT_DARK_RED + s + GuiBase.TXT_RST;
+				}
 			}
-			WidgetLabel label = new TranslatedOptionLabel(x, y, width, height, textColor, lines, modifier);
+			TweakerMoreOptionLabel label = new TweakerMoreOptionLabel(x, y, width, height, textColor, lines, modifier);
 			this.addWidget(label);
+			this.showOriginalTextsThisTime = label.shouldShowOriginalTexts();
 		}
+		else
+		{
+			this.showOriginalTextsThisTime = false;
+		}
+	}
+
+	@ModifyArg(
+			method = "addConfigOption",
+			at = @At(
+					value = "INVOKE",
+					target = "Lfi/dy/masa/malilib/gui/widgets/WidgetConfigOption;addConfigComment(IIIILjava/lang/String;)V",
+					remap = false
+			),
+			index = 1,
+			remap = false
+	)
+	private int tweaksCommentHeight_minY(int y)
+	{
+		if (this.showOriginalTextsThisTime)
+		{
+			y -= 4;
+		}
+		return y;
+	}
+
+	@ModifyArg(
+			method = "addConfigOption",
+			at = @At(
+					value = "INVOKE",
+					target = "Lfi/dy/masa/malilib/gui/widgets/WidgetConfigOption;addConfigComment(IIIILjava/lang/String;)V",
+					remap = false
+			),
+			index = 3,
+			remap = false
+	)
+	private int tweaksCommentHeight_height(int height)
+	{
+		if (this.showOriginalTextsThisTime)
+		{
+			height += 6;
+		}
+		return height;
 	}
 
 	@Inject(
