@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.util.mixin;
+package me.fallenbreath.tweakermore.util.dependency;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

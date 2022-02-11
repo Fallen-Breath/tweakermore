@@ -6,6 +6,7 @@ import net.fabricmc.loader.api.Version;
 import net.fabricmc.loader.api.metadata.version.VersionPredicate;
 
 import java.lang.reflect.Method;
+import java.util.Collection;
 
 public class FabricUtil
 {
@@ -40,5 +41,20 @@ public class FabricUtil
 			TweakerMoreMod.LOGGER.error("Failed to parse version or version predicate {} {}: {}", version.getFriendlyString(), versionPredicate, e);
 		}
 		return false;
+	}
+
+	/**
+	 * Satisfy when the versionPredicates is not empty and any of the predicate satisfies
+	 */
+	public static boolean doesVersionFitsPredicate(Version version, Collection<String> versionPredicates)
+	{
+		return versionPredicates.stream().anyMatch(vp -> doesVersionFitsPredicate(version, vp));
+	}
+
+	public static boolean doesModFitsAnyPredicate(String modId, Collection<String> versionPredicates)
+	{
+		return FabricLoader.getInstance().getModContainer(modId).
+				map(mod -> doesVersionFitsPredicate(mod.getMetadata().getVersion(), versionPredicates)).
+				orElse(false);
 	}
 }

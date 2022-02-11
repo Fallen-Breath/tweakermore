@@ -4,8 +4,8 @@ import fi.dy.masa.tweakeroo.config.FeatureToggle;
 import fi.dy.masa.tweakeroo.tweaks.PlacementTweaks;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import me.fallenbreath.tweakermore.util.mixin.Condition;
-import me.fallenbreath.tweakermore.util.mixin.ModRequire;
+import me.fallenbreath.tweakermore.util.dependency.Condition;
+import me.fallenbreath.tweakermore.util.dependency.Strategy;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.Slice;
 
-@ModRequire(enableWhen = @Condition(ModIds.tweakeroo))
+@Strategy(enableWhen = @Condition(ModIds.tweakeroo))
 @Mixin(PlacementTweaks.class)
 public abstract class PlacementTweaksMixin
 {

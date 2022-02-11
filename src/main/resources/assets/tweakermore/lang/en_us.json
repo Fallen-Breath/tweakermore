@@ -64,6 +64,8 @@
 
   "tweakermore.openTweakerMoreConfigGui": "openTweakerMoreConfigGui",
   "tweakermore.openTweakerMoreConfigGui.comment": "Open the config GUI of TweakerMore",
+  "tweakermore.preserveConfigUnknownEntries": "preserveConfigUnknownEntries",
+  "tweakermore.preserveConfigUnknownEntries.comment": "Preserve unknown config entries in TweakerMore's config file\nIf set to false, unknown entries will be removed on config being written",
   "tweakermore.tweakerMoreDebugMode": "tweakerMoreDebugMode",
   "tweakermore.tweakerMoreDebugMode.comment": "Debug mode of TweakerMore",
   "tweakermore.tweakerMoreDebugMode.pretty_name": "TweakerMore Debug Mode",
@@ -85,10 +87,15 @@
   "tweakermore.gui.config_type.disable": "Disable",
   "tweakermore.gui.config_type.config": "Config",
 
-  "tweakermore.gui.mod_requirement.footer": "Requires mod %1$s",
-  "tweakermore.gui.mod_requirement.mod.tweakeroo": "tweakeroo",
-  "tweakermore.gui.mod_requirement.mod.itemscroller": "itemscroller",
-  "tweakermore.gui.mod_requirement.mod.litematica": "litematica",
-  "tweakermore.gui.mod_requirement.mod.optifabric": "optifine (optifabric)",
-  "tweakermore.gui.mod_requirement.mod.xaero_worldmap": "xaero's worldmap"
+  "tweakermore.gui.mod_relation_footer.requirement": "Requires mod %1$s",
+  "tweakermore.gui.mod_relation_footer.confliction": "Conflicts with mod %1$s",
+
+  "tweakermore.util.mod.minecraft": "minecraft",
+  "tweakermore.util.mod.fabricloader": "fabric loader",
+  "tweakermore.util.mod.fabric": "fabric api",
+  "tweakermore.util.mod.tweakeroo": "tweakeroo",
+  "tweakermore.util.mod.itemscroller": "itemscroller",
+  "tweakermore.util.mod.litematica": "litematica",
+  "tweakermore.util.mod.optifabric": "optifine (optifabric)",
+  "tweakermore.util.mod.xaeroworldmap": "xaero's worldmap"
 }
