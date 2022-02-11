@@ -82,7 +82,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	{
 		if (isTweakerMoreConfigGui())
 		{
-			labelWidth = this.width - configWidth - 60;
+			labelWidth = this.width - configWidth - 59;
 		}
 		return labelWidth;
 	}
@@ -113,7 +113,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 			Function<String, String> modifier = s -> s;
 			if (!TweakerMoreConfigs.getOptionFromConfig(config).map(TweakerMoreOption::isEnabled).orElse(true))
 			{
-				modifier = s -> GuiBase.TXT_STRIKETHROUGH + s;
+				modifier = s -> GuiBase.TXT_DARK_RED + s + GuiBase.TXT_RST;
 			}
 			WidgetLabel label = new TranslatedOptionLabel(x, y, width, height, textColor, lines, modifier);
 			this.addWidget(label);
