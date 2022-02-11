@@ -45,36 +45,55 @@ public class TweakerMoreConfigs implements IConfigHandler
 	//    MC Tweaks   //
 	////////////////////
 
+	// Generic
+
 	@Config(Config.Type.GENERIC)
 	public static final ConfigInteger AUTO_FILL_CONTAINER_THRESHOLD = newConfigInteger("autoFillContainerThreshold", 2, 1, 36);
+
 	@Config(value = Config.Type.GENERIC, strategy = @Strategy(disableWhen = @Condition(raise_chat_limit)))
 	public static final ConfigInteger CHAT_MESSAGE_LIMIT = newConfigInteger("chatMessageLimit", 100, 100, 10000);
+
 	@Config(Config.Type.GENERIC)
 	public static final ConfigDouble NETHER_PORTAL_SOUND_CHANCE = newConfigDouble("netherPortalSoundChance", 0.01D, 0.0D, 0.01D);
+
 	@Config(Config.Type.GENERIC)
 	public static final ConfigDouble SAFE_AFK_HEALTH_THRESHOLD = newConfigDouble("safeAfkHealthThreshold", 10, 0, 100);
+
 	@Config(Config.Type.GENERIC)
 	public static final ConfigBoolean SHULKER_TOOLTIP_ENCHANTMENT_HINT = newConfigBoolean("shulkerTooltipEnchantmentHint", false);
+
 	@Config(Config.Type.GENERIC)
 	public static final ConfigBoolean VILLAGER_OFFER_USES_DISPLAY = newConfigBoolean("villagerOfferUsesDisplay", false);
+
+	// Hotkey
 
 	@Config(Config.Type.HOTKEY)
 	public static final ConfigHotkey COPY_SIGN_TEXT_TO_CLIPBOARD = newConfigHotKey("copySignTextToClipBoard", "");
 
+	// Generic
+
 	@Config(value = Config.Type.LIST, strategy = @Strategy(enableWhen = @Condition(tweakeroo)))
 	public static final ConfigOptionList HAND_RESTORE_LIST_TYPE = newConfigOptionList("handRestockListType", UsageRestriction.ListType.NONE);
+
 	@Config(value = Config.Type.LIST, strategy = @Strategy(enableWhen = @Condition(tweakeroo)))
 	public static final ConfigStringList HAND_RESTORE_WHITELIST = newConfigStringList("handRestockWhiteList", ImmutableList.of(RegistryUtil.getItemId(Items.BUCKET)));
+
 	@Config(value = Config.Type.LIST, strategy = @Strategy(enableWhen = @Condition(tweakeroo)))
 	public static final ConfigStringList HAND_RESTORE_BLACKLIST = newConfigStringList("handRestockBlackList", ImmutableList.of(RegistryUtil.getItemId(Items.LAVA_BUCKET)));
+
 	public static final ItemRestriction HAND_RESTORE_RESTRICTION = new ItemRestriction();
+
 	@Config(Config.Type.LIST)
 	public static final ConfigStringList PRIORITIZED_COMMAND_SUGGESTIONS = newConfigStringList("prioritizedCommandSuggestions", ImmutableList.of());
 
+	// Tweak
+
 	@Config(value = Config.Type.TWEAK, strategy = @Strategy(enableWhen = @Condition(itemscroller)))
 	public static final ConfigBooleanHotkeyed TWEAKM_AUTO_CLEAN_CONTAINER = newConfigBooleanHotkeyed("tweakmAutoCleanContainer");
+
 	@Config(value = Config.Type.TWEAK, strategy = @Strategy(enableWhen = @Condition(itemscroller)))
 	public static final ConfigBooleanHotkeyed TWEAKM_AUTO_FILL_CONTAINER = newConfigBooleanHotkeyed("tweakmAutoFillContainer");
+
 	@Config(
 			value = Config.Type.TWEAK,
 			strategy = @Strategy(enableWhen = {
@@ -83,11 +102,15 @@ public class TweakerMoreConfigs implements IConfigHandler
 			})
 	)
 	public static final ConfigBooleanHotkeyed TWEAKM_AUTO_PICK_SCHEMATIC_BLOCK = newConfigBooleanHotkeyed("tweakmAutoPickSchematicBlock");
+
 	@Config(Config.Type.TWEAK)
 	public static final ConfigBooleanHotkeyed TWEAKM_SAFE_AFK = newConfigBooleanHotkeyed("tweakmSafeAfk");
 
+	// Disable
+
 	@Config(Config.Type.DISABLE)
 	public static final ConfigBooleanHotkeyed DISABLE_LIGHT_UPDATES = newConfigBooleanHotkeyed("disableLightUpdates");
+
 	@Config(Config.Type.DISABLE)
 	public static final ConfigBooleanHotkeyed DISABLE_REDSTONE_WIRE_PARTICLE = newConfigBooleanHotkeyed("disableRedstoneWireParticle");
 
@@ -121,8 +144,10 @@ public class TweakerMoreConfigs implements IConfigHandler
 
 	@Config(value = Config.Type.GENERIC, category = Config.Category.SETTING)
 	public static final ConfigBoolean HIDE_DISABLE_OPTIONS = newConfigBoolean("hideDisabledOptions", false);
+
 	@Config(value = Config.Type.HOTKEY, category = Config.Category.SETTING)
 	public static final ConfigHotkey OPEN_TWEAKERMORE_CONFIG_GUI = newConfigHotKey("openTweakerMoreConfigGui", "K,C");
+
 	@Config(value = Config.Type.GENERIC, category = Config.Category.SETTING)
 	public static final ConfigBoolean PRESERVE_CONFIG_UNKNOWN_ENTRIES = newConfigBoolean("preserveConfigUnknownEntries", true);
 
