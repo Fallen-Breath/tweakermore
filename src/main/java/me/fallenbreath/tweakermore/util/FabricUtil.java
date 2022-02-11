@@ -44,11 +44,11 @@ public class FabricUtil
 	}
 
 	/**
-	 * Satisfy when the versionPredicates is not empty and any of the predicate satisfies
+	 * Satisfy when the versionPredicates is empty or any of the predicate satisfies
 	 */
 	public static boolean doesVersionFitsPredicate(Version version, Collection<String> versionPredicates)
 	{
-		return versionPredicates.stream().anyMatch(vp -> doesVersionFitsPredicate(version, vp));
+		return versionPredicates.isEmpty() || versionPredicates.stream().anyMatch(vp -> doesVersionFitsPredicate(version, vp));
 	}
 
 	public static boolean doesModFitsAnyPredicate(String modId, Collection<String> versionPredicates)
