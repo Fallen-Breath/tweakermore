@@ -64,6 +64,8 @@
 
   "tweakermore.openTweakerMoreConfigGui": "打开TweakerMore配置界面",
   "tweakermore.openTweakerMoreConfigGui.comment": "打开TweakerMore的配置界面",
+  "tweakermore.preserveConfigUnknownEntries": "保留配置文件中的未知条目",
+  "tweakermore.preserveConfigUnknownEntries.comment": "在TweakerMore的配置文件中保留未知的配置条目\n如果设置为false，未知的条目将于配置文件被写入时被删除",
   "tweakermore.tweakerMoreDebugMode": "TweakerMore调试模式",
   "tweakermore.tweakerMoreDebugMode.comment": "TweakerMore的调试模式",
   "tweakermore.tweakerMoreDebugMode.pretty_name": "TweakerMore调试模式 (TweakerMoreDebugMode)",

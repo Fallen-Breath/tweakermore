@@ -64,6 +64,8 @@
 
   "tweakermore.openTweakerMoreConfigGui": "openTweakerMoreConfigGui",
   "tweakermore.openTweakerMoreConfigGui.comment": "Open the config GUI of TweakerMore",
+  "tweakermore.preserveConfigUnknownEntries": "preserveConfigUnknownEntries",
+  "tweakermore.preserveConfigUnknownEntries.comment": "Preserve unknown config entries in TweakerMore's config file\nIf set to false, unknown entries will be removed on config being written",
   "tweakermore.tweakerMoreDebugMode": "tweakerMoreDebugMode",
   "tweakermore.tweakerMoreDebugMode.comment": "Debug mode of TweakerMore",
   "tweakermore.tweakerMoreDebugMode.pretty_name": "TweakerMore Debug Mode",

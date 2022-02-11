@@ -116,6 +116,8 @@ public class TweakerMoreConfigs implements IConfigHandler
 
 	@Config(value = Config.Type.HOTKEY, category = Config.Category.SETTING)
 	public static final ConfigHotkey OPEN_TWEAKERMORE_CONFIG_GUI = newConfigHotKey("openTweakerMoreConfigGui", "K,C");
+	@Config(value = Config.Type.GENERIC, category = Config.Category.SETTING)
+	public static final ConfigBoolean PRESERVE_CONFIG_UNKNOWN_ENTRIES = newConfigBoolean("preserveConfigUnknownEntries", true);
 	@Config(value = Config.Type.TWEAK, category = Config.Category.SETTING)
 	public static final ConfigBooleanHotkeyed TWEAKERMORE_DEBUG_MODE = newConfigBooleanHotkeyed("tweakerMoreDebugMode");
 
@@ -229,7 +231,7 @@ public class TweakerMoreConfigs implements IConfigHandler
 	public static void saveToFile()
 	{
 		File configFile = FileUtil.getConfigFile();
-		JsonObject root = ROOT_JSON_OBJ;
+		JsonObject root = PRESERVE_CONFIG_UNKNOWN_ENTRIES.getBooleanValue() ? ROOT_JSON_OBJ : new JsonObject();
 
 		ConfigUtils.writeConfigBase(root, "Generic", getConfigOptions(Config.Type.GENERIC));
 		ConfigUtils.writeConfigBase(root, "GenericHotkeys", getConfigOptions(Config.Type.HOTKEY));
