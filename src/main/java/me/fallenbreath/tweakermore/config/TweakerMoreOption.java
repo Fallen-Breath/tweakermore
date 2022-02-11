@@ -18,7 +18,7 @@ public class TweakerMoreOption
 {
 	private final Config annotation;
 	private final IConfigBase option;
-	private final List<ModPredicate> modPredicates;
+	private final List<ModPredicate> modRequirements;
 	private final List<ModPredicate> modConflictions;
 	private final boolean enable;
 
@@ -26,9 +26,9 @@ public class TweakerMoreOption
 	{
 		this.annotation = annotation;
 		this.option = option;
-		this.modPredicates = this.generateRequirement(this.annotation.modRequire().enableWhen());
-		this.modConflictions = this.generateRequirement(this.annotation.modRequire().disableWhen());
-		this.enable = this.modPredicates.stream().allMatch(ModPredicate::satisfies) && this.modConflictions.stream().noneMatch(ModPredicate::satisfies);
+		this.modRequirements = this.generateRequirement(this.annotation.strategy().enableWhen());
+		this.modConflictions = this.generateRequirement(this.annotation.strategy().disableWhen());
+		this.enable = this.modRequirements.stream().allMatch(ModPredicate::satisfies) && this.modConflictions.stream().noneMatch(ModPredicate::satisfies);
 	}
 
 	public Config.Type getType()
@@ -80,7 +80,7 @@ public class TweakerMoreOption
 	public List<String> getModRelationsFooter()
 	{
 		List<String> result = Lists.newArrayList();
-		this.getFooter(this.modPredicates, true, "tweakermore.gui.mod_relation_footer.requirement").ifPresent(result::add);
+		this.getFooter(this.modRequirements, true, "tweakermore.gui.mod_relation_footer.requirement").ifPresent(result::add);
 		this.getFooter(this.modConflictions, false, "tweakermore.gui.mod_relation_footer.confliction").ifPresent(result::add);
 		return result;
 	}
