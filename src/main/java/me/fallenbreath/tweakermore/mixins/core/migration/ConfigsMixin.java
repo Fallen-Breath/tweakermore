@@ -3,7 +3,7 @@ package me.fallenbreath.tweakermore.mixins.core.migration;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import fi.dy.masa.tweakeroo.config.Configs;
-import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigStorage;
 import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.util.dependency.Condition;
 import me.fallenbreath.tweakermore.util.dependency.Strategy;
@@ -36,6 +36,6 @@ public abstract class ConfigsMixin
 	)
 	private static void loadLegacyTweakerMoreOptionsFromTweakeroo(CallbackInfo ci, File configFile, JsonElement element, JsonObject root)
 	{
-		TweakerMoreConfigs.loadFromJson(root);
+		TweakerMoreConfigStorage.loadFromJson(root);
 	}
 }

@@ -3,7 +3,7 @@ package me.fallenbreath.tweakermore.mixins.core.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import fi.dy.masa.malilib.gui.widgets.WidgetBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
-import me.fallenbreath.tweakermore.gui.TranslatedOptionLabel;
+import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,7 +33,7 @@ public abstract class WidgetLabelMixin extends WidgetBase
 	private boolean shouldUseTranslatedOptionLabelLogic()
 	{
 		WidgetLabel self = (WidgetLabel)(Object)this;
-		return self instanceof TranslatedOptionLabel && ((TranslatedOptionLabel)self).shouldShowTranslation();
+		return self instanceof TweakerMoreOptionLabel && ((TweakerMoreOptionLabel)self).shouldShowOriginalTexts();
 	}
 
 	@ModifyVariable(
@@ -50,7 +50,7 @@ public abstract class WidgetLabelMixin extends WidgetBase
 	{
 		if (this.shouldUseTranslatedOptionLabelLogic())
 		{
-			yTextStart -= this.fontHeight * TranslatedOptionLabel.TRANSLATION_SCALE * 0.6;
+			yTextStart -= this.fontHeight * TweakerMoreOptionLabel.TRANSLATION_SCALE * 0.6;
 		}
 		return yTextStart;
 	}
@@ -71,8 +71,8 @@ public abstract class WidgetLabelMixin extends WidgetBase
 		if (this.shouldUseTranslatedOptionLabelLogic())
 		{
 			int color = darkerColor(this.textColor);
-			double scale = TranslatedOptionLabel.TRANSLATION_SCALE;
-			String originText = ((TranslatedOptionLabel)(Object)this).getDefaultNames()[i];
+			double scale = TweakerMoreOptionLabel.TRANSLATION_SCALE;
+			String originText = ((TweakerMoreOptionLabel)(Object)this).getOriginalTexts()[i];
 			int x = this.x + (this.centered ? this.width / 2 : 0);
 			int y = (int)(yTextStart + (this.labels.size() + i * scale + 0.2) * fontHeight);
 

@@ -15,9 +15,9 @@ public @interface Condition
 	String value();
 
 	/**
-	 * All possible version range requirements, any of which getting matched results in the condition being true
+	 * All possible version range requirements
 	 * Used when type == MOD
-	 * The condition is satisfied only when all the version matches all predicates or no predicate is given
+	 * The condition is satisfied when all the version matches any predicate or no predicate is given
 	 * e.g. ">=1.2.3"
 	 */
 	String[] versionPredicates() default {};

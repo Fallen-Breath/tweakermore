@@ -26,8 +26,9 @@ public class ModPredicate
 		return new ModPredicate(condition.value(), Arrays.asList(condition.versionPredicates()));
 	}
 
-	public boolean satisfies()	{
-		return FabricUtil.isModLoaded(this.modId) && (this.versionPredicates.isEmpty() || FabricUtil.doesModFitsAnyPredicate(this.modId, this.versionPredicates));
+	public boolean satisfies()
+	{
+		return FabricUtil.isModLoaded(this.modId) && FabricUtil.doesModFitsAnyPredicate(this.modId, this.versionPredicates);
 	}
 
 	public String getVersionPredicatesString()

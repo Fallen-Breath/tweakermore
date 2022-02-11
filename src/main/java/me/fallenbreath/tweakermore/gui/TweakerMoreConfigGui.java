@@ -13,14 +13,13 @@ import me.fallenbreath.tweakermore.config.TweakerMoreOption;
 import net.minecraft.client.util.math.MatrixStack;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TweakerMoreConfigGui extends GuiConfigsBase
 {
+    @Nullable
+    private static TweakerMoreConfigGui currentInstance = null;
     private static Config.Category category = Config.Category.MC_TWEAKS;
     @Nullable
     private Config.Type filteredType = null;
@@ -30,6 +29,19 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
     public TweakerMoreConfigGui()
     {
         super(10, 50, TweakerMoreMod.MOD_ID, null, "tweakermore.gui.title", TweakerMoreMod.VERSION);
+        currentInstance = this;
+    }
+
+    @Override
+    public void removed()
+    {
+        super.removed();
+        currentInstance = null;
+    }
+
+    public static Optional<TweakerMoreConfigGui> getCurrentInstance()
+    {
+        return Optional.ofNullable(currentInstance);
     }
 
     @Override
@@ -78,7 +90,7 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
         return button.getWidth() + 2;
     }
 
-    private void reDraw()
+    public void reDraw()
     {
         this.reCreateListWidget(); // apply the new config width
         Objects.requireNonNull(this.getListWidget()).resetScrollbarPosition();
@@ -107,7 +119,10 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
         {
             if (this.filteredType == null || tweakerMoreOption.getType() == this.filteredType)
             {
-                options.add(tweakerMoreOption.getOption());
+                if (!TweakerMoreConfigs.HIDE_DISABLE_OPTIONS.getBooleanValue() || tweakerMoreOption.isEnabled())
+                {
+                    options.add(tweakerMoreOption.getOption());
+                }
             }
         }
         options.sort((a, b) -> a.getName().compareToIgnoreCase(b.getName()));
