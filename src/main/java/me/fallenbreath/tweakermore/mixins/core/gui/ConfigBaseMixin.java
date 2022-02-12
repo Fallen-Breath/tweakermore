@@ -16,7 +16,7 @@ import java.util.List;
 @Mixin(ConfigBase.class)
 public abstract class ConfigBaseMixin
 {
-	@Shadow private String comment;
+	@Shadow(remap = false) private String comment;
 
 	@ModifyArg(
 			method = "getComment",
