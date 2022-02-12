@@ -32,7 +32,7 @@ public abstract class WidgetLabelMixin extends WidgetBase
 	private boolean shouldUseTranslatedOptionLabelLogic()
 	{
 		WidgetLabel self = (WidgetLabel)(Object)this;
-		return self instanceof TweakerMoreOptionLabel && ((TweakerMoreOptionLabel)self).shouldShowOriginalTexts();
+		return self instanceof TweakerMoreOptionLabel && ((TweakerMoreOptionLabel)self).shouldShowOriginalLines();
 	}
 
 	@ModifyVariable(
@@ -71,7 +71,7 @@ public abstract class WidgetLabelMixin extends WidgetBase
 		{
 			int color = darkerColor(this.textColor);
 			double scale = TweakerMoreOptionLabel.TRANSLATION_SCALE;
-			String originText = ((TweakerMoreOptionLabel)(Object)this).getOriginalTexts()[i];
+			String originText = ((TweakerMoreOptionLabel)(Object)this).getOriginalLines()[i];
 			int x = this.x + (this.centered ? this.width / 2 : 0);
 			int y = (int)(yTextStart + (this.labels.size() + i * scale + 0.2) * fontHeight);
 
