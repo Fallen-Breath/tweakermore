@@ -27,7 +27,6 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import java.util.Objects;
 import java.util.function.Function;
-import java.util.stream.IntStream;
 
 @Mixin(WidgetConfigOption.class)
 public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase<GuiConfigsBase.ConfigOptionWrapper>
@@ -108,21 +107,25 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 			int height = args.get(3);
 			int textColor = args.get(4);
 			String[] lines = args.get(5);
+			if (lines.length != 1)
+			{
+				return;
+			}
 
 			args.set(5, null);  // cancel original call
 
 			Function<String, String> modifier = s -> s;
 			if (isTweakerMoreConfigGui())
 			{
-				IntStream.range(0, lines.length).forEach(i -> lines[i] = StringUtil.TWEAKERMORE_NAMESPACE_PREFIX + lines[i]);
+				lines[0] = StringUtil.TWEAKERMORE_NAMESPACE_PREFIX + lines[0];
 				if (!TweakerMoreConfigs.getOptionFromConfig(config).map(TweakerMoreOption::isEnabled).orElse(true))
 				{
 					modifier = s -> GuiBase.TXT_DARK_RED + s + GuiBase.TXT_RST;
 				}
 			}
-			TweakerMoreOptionLabel label = new TweakerMoreOptionLabel(x, y, width, height, textColor, lines, modifier);
+			TweakerMoreOptionLabel label = new TweakerMoreOptionLabel(x, y, width, height, textColor, lines, new String[]{config.getName()}, modifier);
 			this.addWidget(label);
-			this.showOriginalTextsThisTime = label.shouldShowOriginalTexts();
+			this.showOriginalTextsThisTime = label.shouldShowOriginalLines();
 		}
 		else
 		{
