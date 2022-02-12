@@ -1,9 +1,7 @@
 package me.fallenbreath.tweakermore.gui;
 
 import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
-import me.fallenbreath.tweakermore.util.StringUtil;
 
-import java.util.Arrays;
 import java.util.function.Function;
 
 /**
@@ -13,33 +11,33 @@ import java.util.function.Function;
 public class TweakerMoreOptionLabel extends WidgetLabel
 {
 	public static final double TRANSLATION_SCALE = 0.65;
-	private final String[] originalTexts;
-	private final boolean showOriginalTexts;
+	private final String[] originalLines;
+	private final boolean showOriginalLines;
 
-	public TweakerMoreOptionLabel(int x, int y, int width, int height, int textColor, String[] lines, Function<String, String> lineModifier)
+	public TweakerMoreOptionLabel(int x, int y, int width, int height, int textColor, String[] displayLines, String[] originalLines, Function<String, String> lineModifier)
 	{
-		super(x, y, width, height, textColor, lines);
-		this.originalTexts = Arrays.stream(lines).map(StringUtil::removeTweakerMoreNameSpacePrefix).toArray(String[]::new);
-		boolean showOriginalNames = false;
-		for (int i = 0; i < this.originalTexts.length; i++)
+		super(x, y, width, height, textColor, displayLines);
+		this.originalLines = originalLines;
+		boolean showOriginalLines = false;
+		for (int i = 0; i < this.originalLines.length; i++)
 		{
 			String linesToDisplay = this.labels.get(i);
-			if (!this.originalTexts[i].equals(linesToDisplay))
+			if (!this.originalLines[i].equals(linesToDisplay))
 			{
-				showOriginalNames = true;
+				showOriginalLines = true;
 			}
 			this.labels.set(i, lineModifier.apply(linesToDisplay));
 		}
-		this.showOriginalTexts = showOriginalNames;
+		this.showOriginalLines = showOriginalLines;
 	}
 
-	public String[] getOriginalTexts()
+	public String[] getOriginalLines()
 	{
-		return this.originalTexts;
+		return this.originalLines;
 	}
 
-	public boolean shouldShowOriginalTexts()
+	public boolean shouldShowOriginalLines()
 	{
-		return this.showOriginalTexts;
+		return this.showOriginalLines;
 	}
 }
