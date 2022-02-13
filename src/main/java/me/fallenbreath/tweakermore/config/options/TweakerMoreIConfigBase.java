@@ -6,6 +6,8 @@ import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
 
+import java.util.Optional;
+
 public interface TweakerMoreIConfigBase extends IConfigBase
 {
 	String TWEAKERMORE_NAMESPACE_PREFIX = TweakerMoreMod.MOD_ID + ".";
@@ -26,9 +28,14 @@ public interface TweakerMoreIConfigBase extends IConfigBase
 		return GuiBase.TXT_DARK_RED + line + GuiBase.TXT_RST;
 	}
 
+	default Optional<TweakerMoreOption> getTweakerMoreOptionOptional()
+	{
+		return TweakerMoreConfigs.getOptionFromConfig(this);
+	}
+
 	default boolean isEnabled()
 	{
-		return TweakerMoreConfigs.getOptionFromConfig(this).map(TweakerMoreOption::isEnabled).orElseGet(() -> {
+		return this.getTweakerMoreOptionOptional().map(TweakerMoreOption::isEnabled).orElseGet(() -> {
 			TweakerMoreMod.LOGGER.warn("TweakerMoreIConfigBase {} not in TweakerMoreConfigs", this);
 			return true;
 		});
