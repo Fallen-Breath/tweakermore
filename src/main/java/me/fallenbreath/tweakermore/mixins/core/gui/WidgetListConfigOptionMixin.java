@@ -1,22 +1,26 @@
 package me.fallenbreath.tweakermore.mixins.core.gui;
 
 import fi.dy.masa.malilib.config.IConfigBase;
-import fi.dy.masa.malilib.gui.GuiBase;
+import fi.dy.masa.malilib.config.IHotkeyTogglable;
+import fi.dy.masa.malilib.config.gui.ConfigOptionChangeListenerButton;
+import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
-import fi.dy.masa.malilib.gui.widgets.WidgetConfigOption;
-import fi.dy.masa.malilib.gui.widgets.WidgetConfigOptionBase;
-import fi.dy.masa.malilib.gui.widgets.WidgetListConfigOptions;
-import fi.dy.masa.malilib.gui.widgets.WidgetListConfigOptionsBase;
+import fi.dy.masa.malilib.gui.button.ButtonGeneric;
+import fi.dy.masa.malilib.gui.button.ConfigButtonBoolean;
+import fi.dy.masa.malilib.gui.button.ConfigButtonKeybind;
+import fi.dy.masa.malilib.gui.interfaces.IKeybindConfigGui;
+import fi.dy.masa.malilib.gui.widgets.*;
+import fi.dy.masa.malilib.hotkeys.*;
+import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.config.TweakerMoreOption;
+import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
+import me.fallenbreath.tweakermore.gui.HotkeyedBooleanResetListener;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
-import me.fallenbreath.tweakermore.util.StringUtil;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.ModifyArgs;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import java.util.function.Function;
@@ -24,6 +28,18 @@ import java.util.function.Function;
 @Mixin(WidgetConfigOption.class)
 public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase<GuiConfigsBase.ConfigOptionWrapper>
 {
+	@Shadow(remap = false) @Final protected IKeybindConfigGui host;
+
+	@Shadow(remap = false) @Final protected GuiConfigsBase.ConfigOptionWrapper wrapper;
+
+	@Mutable
+	@Shadow(remap = false) @Final protected KeybindSettings initialKeybindSettings;
+
+	@Shadow(remap = false) protected abstract void addKeybindResetButton(int x, int y, IKeybind keybind, ConfigButtonKeybind buttonHotkey);
+
+	@Unique
+	private boolean initialBoolean;
+
 	public WidgetListConfigOptionMixin(int x, int y, int width, int height, WidgetListConfigOptionsBase<?, ?> parent, GuiConfigsBase.ConfigOptionWrapper entry, int listIndex)
 	{
 		super(x, y, width, height, parent, entry, listIndex);
@@ -79,13 +95,9 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 			args.set(5, null);  // cancel original call
 
 			Function<String, String> modifier = s -> s;
-			if (isTweakerMoreConfigGui())
+			if (config instanceof TweakerMoreIConfigBase && !((TweakerMoreIConfigBase)config).isEnabled())
 			{
-				lines[0] = StringUtil.TWEAKERMORE_NAMESPACE_PREFIX + lines[0];
-				if (!TweakerMoreConfigs.getOptionFromConfig(config).map(TweakerMoreOption::isEnabled).orElse(true))
-				{
-					modifier = s -> GuiBase.TXT_DARK_RED + s + GuiBase.TXT_RST;
-				}
+				modifier = TweakerMoreIConfigBase::modifyDisabledOptionLabelLine;
 			}
 			TweakerMoreOptionLabel label = new TweakerMoreOptionLabel(x, y, width, height, textColor, lines, new String[]{config.getName()}, modifier);
 			this.addWidget(label);
@@ -133,5 +145,76 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 			height += 6;
 		}
 		return height;
+	}
+
+	@Inject(
+			method = "addConfigOption",
+			at = @At(
+					value = "FIELD",
+					target = "Lfi/dy/masa/malilib/config/ConfigType;BOOLEAN:Lfi/dy/masa/malilib/config/ConfigType;",
+					remap = false
+			),
+			remap = false,
+			cancellable = true
+	)
+	private void tweakerMoreCustomConfigGui(int x, int y, float zLevel, int labelWidth, int configWidth, IConfigBase config, CallbackInfo ci)
+	{
+		if (this.isTweakerMoreConfigGui() && config instanceof IHotkey)
+		{
+			boolean modified = true;
+			if (config instanceof IHotkeyTogglable)
+			{
+				// handled on malilib side
+				// this.addBooleanAndHotkeyWidgets(x, y, configWidth, (IHotkeyTogglable)config);
+			}
+			else if (((IHotkey)config).getKeybind() instanceof KeybindMulti)
+			{
+				this.addButtonAndHotkeyWidgets(x, y, configWidth, (IHotkey)config);
+			}
+			else
+			{
+				modified = false;
+			}
+			if (modified)
+			{
+				ci.cancel();
+			}
+		}
+	}
+
+	private void addButtonAndHotkeyWidgets(int x, int y, int configWidth, IHotkey config)
+	{
+		IKeybind keybind = config.getKeybind();
+
+		int triggerBtnWidth = 60;
+		ButtonGeneric triggerButton = new ButtonGeneric(
+				x, y, triggerBtnWidth, 20,
+				StringUtils.translate("tweakermore.gui.trigger_button.text"),
+				StringUtils.translate("tweakermore.gui.trigger_button.hover", config.getName())
+		);
+		IHotkeyCallback callback = ((KeybindMultiAccessor)keybind).getCallback();
+		this.addButton(triggerButton, (button, mouseButton) -> {
+			KeyAction activateOn = keybind.getSettings().getActivateOn();
+			if (activateOn == KeyAction.BOTH || activateOn == KeyAction.PRESS)
+			{
+				callback.onKeyAction(KeyAction.PRESS, keybind);
+			}
+			if (activateOn == KeyAction.BOTH || activateOn == KeyAction.RELEASE)
+			{
+				callback.onKeyAction(KeyAction.RELEASE, keybind);
+			}
+		});
+
+		x += triggerBtnWidth + 2;
+		configWidth -= triggerBtnWidth + 2 + 22;
+
+		ConfigButtonKeybind keybindButton = new ConfigButtonKeybind(x, y, configWidth, 20, keybind, this.host);
+		x += configWidth + 2;
+
+		this.addWidget(new WidgetKeybindSettings(x, y, 20, 20, keybind, config.getName(), this.parent, this.host.getDialogHandler()));
+		x += 24;
+
+		this.addButton(keybindButton, this.host.getButtonPressListener());
+		this.addKeybindResetButton(x, y, keybind, keybindButton);
 	}
 }

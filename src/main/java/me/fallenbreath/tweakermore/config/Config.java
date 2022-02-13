@@ -2,7 +2,7 @@ package me.fallenbreath.tweakermore.config;
 
 import fi.dy.masa.malilib.interfaces.IStringValue;
 import fi.dy.masa.malilib.util.StringUtils;
-import me.fallenbreath.tweakermore.util.dependency.Strategy;
+import me.fallenbreath.tweakermore.util.dependency.Restriction;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -17,7 +17,9 @@ public @interface Config
 
 	Category category() default Category.MC_TWEAKS;
 
-	Strategy strategy() default @Strategy();
+	Restriction restriction() default @Restriction();
+
+	boolean debug() default false;
 
 	enum Type implements IStringValue
 	{
