@@ -9,6 +9,7 @@ public class RenderUtil
 		return new Scaler(anchorX, anchorY, factor);
 	}
 
+	@SuppressWarnings("deprecation")
 	public static class Scaler
 	{
 		private final int anchorX;

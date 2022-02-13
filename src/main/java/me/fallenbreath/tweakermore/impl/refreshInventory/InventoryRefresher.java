@@ -4,10 +4,10 @@ import fi.dy.masa.malilib.hotkeys.IKeybind;
 import fi.dy.masa.malilib.hotkeys.KeyAction;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.container.SlotActionType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.network.packet.c2s.play.ClickWindowC2SPacket;
+import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket;
+import net.minecraft.screen.slot.SlotActionType;
 
 public class InventoryRefresher
 {
@@ -23,12 +23,12 @@ public class InventoryRefresher
 		{
 			ItemStack uniqueItem = new ItemStack(Items.STONE);
 			uniqueItem.getOrCreateTag().putDouble("force_resync", Double.NaN);  // Tags with NaN are not equal
-			networkHandler.sendPacket(new ClickWindowC2SPacket(
-					mc.player.container.syncId,
+			networkHandler.sendPacket(new ClickSlotC2SPacket(
+					mc.player.currentScreenHandler.syncId,
 					-999, 2,
 					SlotActionType.QUICK_CRAFT,
 					uniqueItem,
-					mc.player.container.getNextActionId(mc.player.inventory)
+					mc.player.currentScreenHandler.getNextActionId(mc.player.inventory)
 			));
 		}
 		return true;

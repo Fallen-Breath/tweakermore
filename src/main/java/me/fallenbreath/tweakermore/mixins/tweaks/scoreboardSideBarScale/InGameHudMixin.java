@@ -23,7 +23,7 @@ public abstract class InGameHudMixin
 			method = "renderScoreboardSidebar",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/options/GameOptions;getTextBackgroundColor(F)I",
+					target = "Lnet/minecraft/client/option/GameOptions;getTextBackgroundColor(F)I",
 					ordinal = 0
 			),
 			ordinal = 3
