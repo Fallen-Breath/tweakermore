@@ -51,6 +51,7 @@ public class SignTextCopier
 				}
 			}
 		}
+		InfoUtils.printActionbarMessage("tweakermore.config.copySignTextToClipBoard.no_sign");
 		return false;
 	}
 }
