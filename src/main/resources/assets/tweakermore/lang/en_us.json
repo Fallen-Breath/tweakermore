@@ -4,7 +4,7 @@
   "tweakermore.config.autoFillContainerThreshold": "autoFillContainerThreshold",
   "tweakermore.config.autoFillContainerThreshold.comment": "The minimum occupied slot amount for the item to trigger tweak tweakmAutoFillContainer\ne.g. if you always have 2 slots of firework rocket you can set the value to 3,\n then your rockets will never be used to fill the container",
   "tweakermore.config.bossBarMaxEntry": "bossBarMaxEntry",
-  "tweakermore.config.bossBarMaxEntry.comment": "Overwrites the maximum amount of boss bar to be displayed at the same time\nIt will also skip the vanilla windowHeight/3 limit check\nSet it to -1 to disabled",
+  "tweakermore.config.bossBarMaxEntry.comment": "Overwrites the maximum amount of boss bar to be displayed at the same time\nIt will also skip the vanilla windowHeight/3 limit check\nSet it to -1 to disabled (use vanilla logic)",
   "tweakermore.config.bossBarScale": "bossBarScale",
   "tweakermore.config.bossBarScale.comment": "Scale the boss bar hud with given factor",
   "tweakermore.config.chatMessageLimit": "chatMessageLimit",
