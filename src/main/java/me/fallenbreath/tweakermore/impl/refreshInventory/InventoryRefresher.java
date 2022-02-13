@@ -2,6 +2,7 @@ package me.fallenbreath.tweakermore.impl.refreshInventory;
 
 import fi.dy.masa.malilib.hotkeys.IKeybind;
 import fi.dy.masa.malilib.hotkeys.KeyAction;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.item.ItemStack;
@@ -22,13 +23,13 @@ public class InventoryRefresher
 		if (networkHandler != null && mc.player != null)
 		{
 			ItemStack uniqueItem = new ItemStack(Items.STONE);
-			uniqueItem.getOrCreateTag().putDouble("force_resync", Double.NaN);  // Tags with NaN are not equal
+			uniqueItem.getOrCreateNbt().putDouble("force_resync", Double.NaN);  // Tags with NaN are not equal
 			networkHandler.sendPacket(new ClickSlotC2SPacket(
-					mc.player.currentScreenHandler.syncId,
+					mc.player.currentScreenHandler.syncId, mc.player.currentScreenHandler.getRevision(),
 					-999, 2,
 					SlotActionType.QUICK_CRAFT,
 					uniqueItem,
-					mc.player.currentScreenHandler.getNextActionId(mc.player.inventory)
+					new Int2ObjectOpenHashMap<>()
 			));
 		}
 		return true;
