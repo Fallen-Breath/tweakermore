@@ -46,6 +46,11 @@ public class TweakerMoreOption
 		return this.enable;
 	}
 
+	public boolean isDebug()
+	{
+		return this.annotation.debug();
+	}
+
 	public IConfigBase getOption()
 	{
 		return this.option;

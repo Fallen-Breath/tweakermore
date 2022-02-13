@@ -116,13 +116,19 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
         List<IConfigBase> options = Lists.newArrayList();
         for (TweakerMoreOption tweakerMoreOption : TweakerMoreConfigs.getOptions(TweakerMoreConfigGui.category))
         {
-            if (this.filteredType == null || tweakerMoreOption.getType() == this.filteredType)
+            if (this.filteredType != null && tweakerMoreOption.getType() != this.filteredType)
             {
-                if (!TweakerMoreConfigs.HIDE_DISABLE_OPTIONS.getBooleanValue() || tweakerMoreOption.isEnabled())
-                {
-                    options.add(tweakerMoreOption.getOption());
-                }
+                continue;
             }
+            if (TweakerMoreConfigs.HIDE_DISABLE_OPTIONS.getBooleanValue() && !tweakerMoreOption.isEnabled())
+            {
+                continue;
+            }
+            if (tweakerMoreOption.isDebug() && !TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
+            {
+                continue;
+            }
+            options.add(tweakerMoreOption.getOption());
         }
         options.sort((a, b) -> a.getName().compareToIgnoreCase(b.getName()));
         return ConfigOptionWrapper.createFor(options);

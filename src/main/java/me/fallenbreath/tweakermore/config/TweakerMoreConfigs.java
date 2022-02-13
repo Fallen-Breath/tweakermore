@@ -155,6 +155,12 @@ public class TweakerMoreConfigs
 	@Config(value = Config.Type.TWEAK, category = Config.Category.SETTING)
 	public static final ConfigBooleanHotkeyed TWEAKERMORE_DEBUG_MODE = newConfigBooleanHotkeyed("tweakerMoreDebugMode");
 
+	@Config(value = Config.Type.GENERIC, category = Config.Category.SETTING, debug = true)
+	public static final ConfigInteger TWEAKERMORE_DEBUG_INT = newConfigInteger("tweakerMoreDebugInt", 0, -1000, 1000);
+
+	@Config(value = Config.Type.GENERIC, category = Config.Category.SETTING, debug = true)
+	public static final ConfigInteger TWEAKERMORE_DEBUG_DOUBLE = newConfigInteger("tweakerMoreDebugDouble", 0, -1, 1);
+
 	/**
 	 * ============================
 	 *    Implementation Details

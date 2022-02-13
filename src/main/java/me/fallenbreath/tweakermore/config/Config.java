@@ -19,6 +19,8 @@ public @interface Config
 
 	Restriction restriction() default @Restriction();
 
+	boolean debug() default false;
+
 	enum Type implements IStringValue
 	{
 		GENERIC, HOTKEY, LIST, TWEAK, DISABLE;

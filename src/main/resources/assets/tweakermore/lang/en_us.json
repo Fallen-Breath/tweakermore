@@ -74,9 +74,14 @@
   "tweakermore.config.openTweakerMoreConfigGui.comment": "Open the config GUI of TweakerMore",
   "tweakermore.config.preserveConfigUnknownEntries": "preserveConfigUnknownEntries",
   "tweakermore.config.preserveConfigUnknownEntries.comment": "Preserve unknown config entries in TweakerMore's config file\nIf set to false, unknown entries will be removed on config being written",
+
   "tweakermore.config.tweakerMoreDebugMode": "tweakerMoreDebugMode",
   "tweakermore.config.tweakerMoreDebugMode.comment": "Debug mode of TweakerMore",
   "tweakermore.config.tweakerMoreDebugMode.pretty_name": "TweakerMore Debug Mode",
+  "tweakermore.config.tweakerMoreDebugInt": "tweakerMoreDebugInt",
+  "tweakermore.config.tweakerMoreDebugInt.comment": "A integer parameter for TweakerMore debugging",
+  "tweakermore.config.tweakerMoreDebugDouble": "tweakerMoreDebugDouble",
+  "tweakermore.config.tweakerMoreDebugDouble.comment": "A double parameter for TweakerMore debugging",
 
   "// GUI and Misc": "================================================",
 

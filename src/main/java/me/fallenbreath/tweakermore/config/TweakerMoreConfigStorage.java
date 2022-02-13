@@ -36,7 +36,10 @@ public class TweakerMoreConfigStorage implements IConfigHandler
 	@SuppressWarnings("unchecked")
 	private static <T extends IConfigBase> List<T> getConfigOptions(Config.Type optionType)
 	{
-		return (List<T>)TweakerMoreConfigs.getOptions(optionType).stream().map(TweakerMoreOption::getOption).collect(Collectors.toList());
+		return (List<T>)TweakerMoreConfigs.getOptions(optionType).stream().
+//				filter(o -> !o.isDebug()).
+				map(TweakerMoreOption::getOption).
+				collect(Collectors.toList());
 	}
 
 	public static void loadFromJson(JsonObject jsonObject)
