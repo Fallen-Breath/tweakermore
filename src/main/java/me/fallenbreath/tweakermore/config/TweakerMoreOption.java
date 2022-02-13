@@ -26,8 +26,8 @@ public class TweakerMoreOption
 	{
 		this.annotation = annotation;
 		this.option = option;
-		this.modRequirements = this.generateRequirement(this.annotation.strategy().enableWhen());
-		this.modConflictions = this.generateRequirement(this.annotation.strategy().disableWhen());
+		this.modRequirements = this.generateRequirement(this.annotation.restriction().enableWhen());
+		this.modConflictions = this.generateRequirement(this.annotation.restriction().disableWhen());
 		this.enable = this.modRequirements.stream().allMatch(ModPredicate::satisfies) && this.modConflictions.stream().noneMatch(ModPredicate::satisfies);
 	}
 
@@ -44,6 +44,11 @@ public class TweakerMoreOption
 	public boolean isEnabled()
 	{
 		return this.enable;
+	}
+
+	public boolean isDebug()
+	{
+		return this.annotation.debug();
 	}
 
 	public IConfigBase getOption()

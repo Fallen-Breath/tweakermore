@@ -65,7 +65,7 @@ public abstract class DependencyMixinConfigPlugin implements IMixinConfigPlugin
 		try
 		{
 			ClassNode classNode = MixinService.getService().getBytecodeProvider().getClassNode(className);
-			return Annotations.getVisible(classNode, Strategy.class);
+			return Annotations.getVisible(classNode, Restriction.class);
 		}
 		catch (ClassNotFoundException | IOException e)
 		{

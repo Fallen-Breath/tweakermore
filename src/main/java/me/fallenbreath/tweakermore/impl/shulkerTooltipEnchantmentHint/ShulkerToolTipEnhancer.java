@@ -46,7 +46,7 @@ public class ShulkerToolTipEnhancer
 				}
 				if (idx < amount)
 				{
-					extraText.append(new TranslatableText("tweakermore.shulkerTooltipEnchantmentHint.more", amount - idx).formatted(Formatting.GRAY));
+					extraText.append(new TranslatableText("tweakermore.config.shulkerTooltipEnchantmentHint.more", amount - idx).formatted(Formatting.GRAY));
 				}
 				text.append(extraText);
 			}
