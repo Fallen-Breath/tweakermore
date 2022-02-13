@@ -211,16 +211,16 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 				StringUtils.translate("tweakermore.gui.trigger_button.text"),
 				StringUtils.translate("tweakermore.gui.trigger_button.hover", config.getName())
 		);
-		IHotkeyCallback callback = ((KeybindMultiAccessor) config.getKeybind()).getCallback();
+		IHotkeyCallback callback = ((KeybindMultiAccessor)keybind).getCallback();
 		this.addButton(triggerButton, (button, mouseButton) -> {
-			KeyAction activateOn = config.getKeybind().getSettings().getActivateOn();
+			KeyAction activateOn = keybind.getSettings().getActivateOn();
 			if (activateOn == KeyAction.BOTH || activateOn == KeyAction.PRESS)
 			{
-				callback.onKeyAction(KeyAction.PRESS, null);
+				callback.onKeyAction(KeyAction.PRESS, keybind);
 			}
 			if (activateOn == KeyAction.BOTH || activateOn == KeyAction.RELEASE)
 			{
-				callback.onKeyAction(KeyAction.RELEASE, null);
+				callback.onKeyAction(KeyAction.RELEASE, keybind);
 			}
 		});
 
