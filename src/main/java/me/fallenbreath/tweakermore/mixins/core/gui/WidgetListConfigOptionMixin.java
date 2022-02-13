@@ -10,8 +10,8 @@ import fi.dy.masa.malilib.gui.button.ConfigButtonBoolean;
 import fi.dy.masa.malilib.gui.button.ConfigButtonKeybind;
 import fi.dy.masa.malilib.gui.interfaces.IKeybindConfigGui;
 import fi.dy.masa.malilib.gui.widgets.*;
-import fi.dy.masa.malilib.hotkeys.IKeybind;
-import fi.dy.masa.malilib.hotkeys.KeybindSettings;
+import fi.dy.masa.malilib.hotkeys.*;
+import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.gui.HotkeyedBooleanResetListener;
@@ -35,6 +35,8 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 
 	@Mutable
 	@Shadow(remap = false) @Final protected KeybindSettings initialKeybindSettings;
+
+	@Shadow protected abstract void addKeybindResetButton(int x, int y, IKeybind keybind, ConfigButtonKeybind buttonHotkey);
 
 	@Unique
 	private boolean initialBoolean;
@@ -177,16 +179,64 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	)
 	private void tweakerMoreCustomConfigGui(int x, int y, float zLevel, int labelWidth, int configWidth, IConfigBase config, CallbackInfo ci)
 	{
-		if (this.isTweakerMoreConfigGui() && config instanceof IHotkeyTogglable)
+		if (this.isTweakerMoreConfigGui() && config instanceof IHotkey)
 		{
-			this.addBooleanAndHotkeyWidgets(x, y, configWidth, (IHotkeyTogglable)config);
-			ci.cancel();
+			boolean modified = true;
+			if (config instanceof IHotkeyTogglable)
+			{
+				this.addBooleanAndHotkeyWidgets(x, y, configWidth, (IHotkeyTogglable)config);
+			}
+			else if (((IHotkey)config).getKeybind() instanceof KeybindMulti)
+			{
+				this.addButtonAndHotkeyWidgets(x, y, configWidth, (IHotkey)config);
+			}
+			else
+			{
+				modified = false;
+			}
+			if (modified)
+			{
+				ci.cancel();
+			}
 		}
 	}
 
-	/**
-	 * Stolen from malilib 1.18 v0.11.4
-	 */
+	private void addButtonAndHotkeyWidgets(int x, int y, int configWidth, IHotkey config)
+	{
+		IKeybind keybind = config.getKeybind();
+
+		int triggerBtnWidth = 60;
+		ButtonGeneric triggerButton = new ButtonGeneric(
+				x, y, triggerBtnWidth, 20,
+				StringUtils.translate("tweakermore.gui.trigger_button.text"),
+				StringUtils.translate("tweakermore.gui.trigger_button.hover", config.getName())
+		);
+		IHotkeyCallback callback = ((KeybindMultiAccessor) config.getKeybind()).getCallback();
+		this.addButton(triggerButton, (button, mouseButton) -> {
+			KeyAction activateOn = config.getKeybind().getSettings().getActivateOn();
+			if (activateOn == KeyAction.BOTH || activateOn == KeyAction.PRESS)
+			{
+				callback.onKeyAction(KeyAction.PRESS, null);
+			}
+			if (activateOn == KeyAction.BOTH || activateOn == KeyAction.RELEASE)
+			{
+				callback.onKeyAction(KeyAction.RELEASE, null);
+			}
+		});
+
+		x += triggerBtnWidth + 2;
+		configWidth -= triggerBtnWidth + 2 + 22;
+
+		ConfigButtonKeybind keybindButton = new ConfigButtonKeybind(x, y, configWidth, 20, keybind, this.host);
+		x += configWidth + 2;
+
+		this.addWidget(new WidgetKeybindSettings(x, y, 20, 20, keybind, config.getName(), this.parent, this.host.getDialogHandler()));
+		x += 24;
+
+		this.addButton(keybindButton, this.host.getButtonPressListener());
+		this.addKeybindResetButton(x, y, keybind, keybindButton);
+	}
+
 	private void addBooleanAndHotkeyWidgets(int x, int y, int configWidth, IHotkeyTogglable config)
 	{
 		IKeybind keybind = config.getKeybind();

@@ -93,6 +93,9 @@
 
   "tweakermore.gui.title": "TweakerMore v%1$s 配置界面",
   "tweakermore.gui.selector_drop_down_list.all": "全部",
+  "tweakermore.gui.trigger_button.text": "触发",
+  "tweakermore.gui.trigger_button.hover": "点击以触发一次 %1$s\n§7§o这将依次模拟热键按下与松开操作§r",
+
   "tweakermore.gui.config_category.mc_tweaks": "功能",
   "tweakermore.gui.config_category.mod_tweaks": "模组修改",
   "tweakermore.gui.config_category.setting": "配置",

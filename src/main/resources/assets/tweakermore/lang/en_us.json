@@ -93,6 +93,9 @@
 
   "tweakermore.gui.title": "TweakerMore v%1$s Config GUI",
   "tweakermore.gui.selector_drop_down_list.all": "All",
+  "tweakermore.gui.trigger_button.text": "Trigger",
+  "tweakermore.gui.trigger_button.hover": "Click to trigger %1$s once\n§7§oThis will simulate hotkey pressed and released in order§r",
+
   "tweakermore.gui.config_category.mc_tweaks": "Tweaks",
   "tweakermore.gui.config_category.mod_tweaks": "Mods Tweaks",
   "tweakermore.gui.config_category.setting": "Setting",

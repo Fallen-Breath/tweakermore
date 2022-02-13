@@ -3,13 +3,19 @@ package me.fallenbreath.tweakermore.config;
 import com.google.common.collect.ImmutableList;
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
 import fi.dy.masa.malilib.config.options.*;
+import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import me.fallenbreath.tweakermore.config.options.*;
 
 public abstract class ConfigFactory
 {
-	public static ConfigHotkey newConfigHotKey(String name, String defaultHotkey)
+	public static ConfigHotkey newConfigHotKey(String name, String defaultStorageString)
 	{
-		return new TweakerMoreConfigHotkey(name, defaultHotkey);
+		return new TweakerMoreConfigHotkey(name, defaultStorageString);
+	}
+
+	public static ConfigHotkey newConfigHotKey(String name, String defaultStorageString, KeybindSettings settings)
+	{
+		return new TweakerMoreConfigHotkey(name, defaultStorageString, settings);
 	}
 
 	public static ConfigBooleanHotkeyed newConfigBooleanHotkeyed(String name)
@@ -17,9 +23,9 @@ public abstract class ConfigFactory
 		return newConfigBooleanHotkeyed(name, false, "");
 	}
 
-	public static ConfigBooleanHotkeyed newConfigBooleanHotkeyed(String name, boolean defaultValue, String defaultHotKey)
+	public static ConfigBooleanHotkeyed newConfigBooleanHotkeyed(String name, boolean defaultValue, String defaultStorageString)
 	{
-		return new TweakerMoreConfigBooleanHotkeyed(name, defaultValue, defaultHotKey);
+		return new TweakerMoreConfigBooleanHotkeyed(name, defaultValue, defaultStorageString);
 	}
 
 	public static ConfigBoolean newConfigBoolean(String name, boolean defaultValue)
