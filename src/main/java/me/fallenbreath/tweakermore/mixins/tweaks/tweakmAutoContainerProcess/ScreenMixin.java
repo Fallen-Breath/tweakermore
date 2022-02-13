@@ -3,12 +3,12 @@ package me.fallenbreath.tweakermore.mixins.tweaks.tweakmAutoContainerProcess;
 import me.fallenbreath.tweakermore.impl.tweakmAutoContainerProcess.AutoProcessableScreen;
 import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.util.dependency.Condition;
-import me.fallenbreath.tweakermore.util.dependency.Strategy;
+import me.fallenbreath.tweakermore.util.dependency.Restriction;
 import net.minecraft.client.gui.screen.Screen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
-@Strategy(enableWhen = @Condition(ModIds.itemscroller))
+@Restriction(enableWhen = @Condition(ModIds.itemscroller))
 @Mixin(Screen.class)
 public abstract class ScreenMixin implements AutoProcessableScreen
 {
