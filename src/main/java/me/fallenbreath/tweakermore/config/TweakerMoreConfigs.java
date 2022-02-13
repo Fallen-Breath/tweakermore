@@ -14,7 +14,7 @@ import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.impl.copySignTextToClipBoard.SignTextCopier;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
 import me.fallenbreath.tweakermore.util.dependency.Condition;
-import me.fallenbreath.tweakermore.util.dependency.Strategy;
+import me.fallenbreath.tweakermore.util.dependency.Restriction;
 import net.minecraft.item.Items;
 
 import java.lang.reflect.Field;
@@ -44,7 +44,7 @@ public class TweakerMoreConfigs
 	@Config(Config.Type.GENERIC)
 	public static final ConfigInteger AUTO_FILL_CONTAINER_THRESHOLD = newConfigInteger("autoFillContainerThreshold", 2, 1, 36);
 
-	@Config(value = Config.Type.GENERIC, strategy = @Strategy(disableWhen = @Condition(raise_chat_limit)))
+	@Config(value = Config.Type.GENERIC, restriction = @Restriction(disableWhen = @Condition(raise_chat_limit)))
 	public static final ConfigInteger CHAT_MESSAGE_LIMIT = newConfigInteger("chatMessageLimit", 100, 100, 10000);
 
 	@Config(Config.Type.GENERIC)
@@ -66,13 +66,13 @@ public class TweakerMoreConfigs
 
 	// Generic
 
-	@Config(value = Config.Type.LIST, strategy = @Strategy(enableWhen = @Condition(tweakeroo)))
+	@Config(value = Config.Type.LIST, restriction = @Restriction(enableWhen = @Condition(tweakeroo)))
 	public static final ConfigOptionList HAND_RESTORE_LIST_TYPE = newConfigOptionList("handRestockListType", UsageRestriction.ListType.NONE);
 
-	@Config(value = Config.Type.LIST, strategy = @Strategy(enableWhen = @Condition(tweakeroo)))
+	@Config(value = Config.Type.LIST, restriction = @Restriction(enableWhen = @Condition(tweakeroo)))
 	public static final ConfigStringList HAND_RESTORE_WHITELIST = newConfigStringList("handRestockWhiteList", ImmutableList.of(RegistryUtil.getItemId(Items.BUCKET)));
 
-	@Config(value = Config.Type.LIST, strategy = @Strategy(enableWhen = @Condition(tweakeroo)))
+	@Config(value = Config.Type.LIST, restriction = @Restriction(enableWhen = @Condition(tweakeroo)))
 	public static final ConfigStringList HAND_RESTORE_BLACKLIST = newConfigStringList("handRestockBlackList", ImmutableList.of(RegistryUtil.getItemId(Items.LAVA_BUCKET)));
 
 	public static final ItemRestriction HAND_RESTORE_RESTRICTION = new ItemRestriction();
@@ -82,15 +82,15 @@ public class TweakerMoreConfigs
 
 	// Tweak
 
-	@Config(value = Config.Type.TWEAK, strategy = @Strategy(enableWhen = @Condition(itemscroller)))
+	@Config(value = Config.Type.TWEAK, restriction = @Restriction(enableWhen = @Condition(itemscroller)))
 	public static final ConfigBooleanHotkeyed TWEAKM_AUTO_CLEAN_CONTAINER = newConfigBooleanHotkeyed("tweakmAutoCleanContainer");
 
-	@Config(value = Config.Type.TWEAK, strategy = @Strategy(enableWhen = @Condition(itemscroller)))
+	@Config(value = Config.Type.TWEAK, restriction = @Restriction(enableWhen = @Condition(itemscroller)))
 	public static final ConfigBooleanHotkeyed TWEAKM_AUTO_FILL_CONTAINER = newConfigBooleanHotkeyed("tweakmAutoFillContainer");
 
 	@Config(
 			value = Config.Type.TWEAK,
-			strategy = @Strategy(enableWhen = {
+			restriction = @Restriction(enableWhen = {
 					@Condition(tweakeroo),
 					@Condition(litematica)
 			})
@@ -117,7 +117,7 @@ public class TweakerMoreConfigs
 
 	@Config(
 			value = Config.Type.GENERIC,
-			strategy = @Strategy(enableWhen = {
+			restriction = @Restriction(enableWhen = {
 					@Condition(optifine),
 					@Condition(value = minecraft, versionPredicates = ">=1.15")
 			}),
@@ -127,7 +127,7 @@ public class TweakerMoreConfigs
 
 	@Config(
 			value = Config.Type.GENERIC,
-			strategy = @Strategy(enableWhen = @Condition(xaero_worldmap)),
+			restriction = @Restriction(enableWhen = @Condition(xaero_worldmap)),
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final ConfigBoolean XMAP_NO_SESSION_FINALIZATION_WAIT = newConfigBoolean("xmapNoSessionFinalizationWait", false);
