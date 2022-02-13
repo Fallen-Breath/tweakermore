@@ -3,6 +3,10 @@
 
   "tweakermore.config.autoFillContainerThreshold": "自动填充容器阈值",
   "tweakermore.config.autoFillContainerThreshold.comment": "触发工具 tweakmAutoFillContainer 所需要的最小的物品槽位数\n例如，如果你总是带着2个格子的烟花火箭，那么你可以将其设置为3，\n那么这些烟花物品将必定不会被用于填充容器",
+  "tweakermore.config.bossBarMaxEntry": "Boss栏最大条目数",
+  "tweakermore.config.bossBarMaxEntry.comment": "修改最大同时显示的Boss栏条目数量\n它也会跳过原版的 窗口高度/3 限制检查\n将其设置为-1以禁用",
+  "tweakermore.config.bossBarScale": "Boss栏缩放",
+  "tweakermore.config.bossBarScale.comment": "将Boss栏按照给定参数进行缩放显示",
   "tweakermore.config.chatMessageLimit": "聊天信息数量上限",
   "tweakermore.config.chatMessageLimit.comment": "修改聊天栏的历史信息储存数量上限",
   "tweakermore.config.netherPortalSoundChance": "地狱门音效概率",

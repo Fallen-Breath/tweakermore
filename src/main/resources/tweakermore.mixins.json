@@ -13,6 +13,8 @@
     "core.gui.WidgetListConfigOptionsAccessor",
     "core.gui.WidgetListConfigOptionsMixin",
     "core.migration.ConfigsMixin",
+    "tweaks.bossBarMaxEntry.BossBarHudMixin",
+    "tweaks.bossBarScale.BossBarHudMixin",
     "tweaks.chatMessageLimit.ChatHudMixin",
     "tweaks.disableLightUpdates.ClientChunkManagerMixin",
     "tweaks.disableLightUpdates.LightingProviderMixin",

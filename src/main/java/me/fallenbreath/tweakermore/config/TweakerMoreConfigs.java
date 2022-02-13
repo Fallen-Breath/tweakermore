@@ -6,6 +6,7 @@ import com.google.common.collect.Maps;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.*;
 import fi.dy.masa.malilib.gui.GuiBase;
+import fi.dy.masa.malilib.interfaces.IValueChangeCallback;
 import fi.dy.masa.malilib.util.restrictions.ItemRestriction;
 import fi.dy.masa.malilib.util.restrictions.UsageRestriction;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
@@ -44,6 +45,12 @@ public class TweakerMoreConfigs
 	@Config(Config.Type.GENERIC)
 	public static final ConfigInteger AUTO_FILL_CONTAINER_THRESHOLD = newConfigInteger("autoFillContainerThreshold", 2, 1, 36);
 
+	@Config(Config.Type.GENERIC)
+	public static final ConfigInteger BOSS_BAR_MAX_ENTRY = newConfigInteger("bossBarMaxEntry", -1, -1, 20);
+
+	@Config(Config.Type.GENERIC)
+	public static final ConfigDouble BOSS_BAR_SCALE = newConfigDouble("bossBarScale", 1, 0.001, 2);
+
 	@Config(value = Config.Type.GENERIC, restriction = @Restriction(disableWhen = @Condition(raise_chat_limit)))
 	public static final ConfigInteger CHAT_MESSAGE_LIMIT = newConfigInteger("chatMessageLimit", 100, 100, 10000);
 
@@ -64,7 +71,7 @@ public class TweakerMoreConfigs
 	@Config(Config.Type.HOTKEY)
 	public static final ConfigHotkey COPY_SIGN_TEXT_TO_CLIPBOARD = newConfigHotKey("copySignTextToClipBoard", "");
 
-	// Generic
+	// List
 
 	@Config(value = Config.Type.LIST, restriction = @Restriction(enableWhen = @Condition(tweakeroo)))
 	public static final ConfigOptionList HAND_RESTORE_LIST_TYPE = newConfigOptionList("handRestockListType", UsageRestriction.ListType.NONE);
@@ -161,9 +168,11 @@ public class TweakerMoreConfigs
 			GuiBase.openGui(new TweakerMoreConfigGui());
 			return true;
 		});
-		HIDE_DISABLE_OPTIONS.setValueChangeCallback(newValue -> {
+		IValueChangeCallback<ConfigBoolean> redrawConfigGui = newValue -> {
 			TweakerMoreConfigGui.getCurrentInstance().ifPresent(TweakerMoreConfigGui::reDraw);
-		});
+		};
+		HIDE_DISABLE_OPTIONS.setValueChangeCallback(redrawConfigGui);
+		TWEAKERMORE_DEBUG_MODE.setValueChangeCallback(redrawConfigGui);
 	}
 
 	private static final List<TweakerMoreOption> OPTIONS = Lists.newArrayList();
