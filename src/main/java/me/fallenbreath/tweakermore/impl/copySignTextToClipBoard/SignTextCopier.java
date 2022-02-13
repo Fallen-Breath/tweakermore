@@ -41,11 +41,11 @@ public class SignTextCopier
 					if (!text.isEmpty())
 					{
 						mc.keyboard.setClipboard(text);
-						InfoUtils.printActionbarMessage("tweakermore.copySignTextToClipBoard.sign_copied", blockState.getBlock().getName());
+						InfoUtils.printActionbarMessage("tweakermore.config.copySignTextToClipBoard.sign_copied", blockState.getBlock().getName());
 					}
 					else
 					{
-						InfoUtils.printActionbarMessage("tweakermore.copySignTextToClipBoard.empty_sign", blockState.getBlock().getName());
+						InfoUtils.printActionbarMessage("tweakermore.config.copySignTextToClipBoard.empty_sign", blockState.getBlock().getName());
 					}
 					return true;
 				}

@@ -2,6 +2,7 @@ package me.fallenbreath.tweakermore.config.options;
 
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.GuiBase;
+import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
@@ -10,17 +11,14 @@ import java.util.Optional;
 
 public interface TweakerMoreIConfigBase extends IConfigBase
 {
-	String TWEAKERMORE_NAMESPACE_PREFIX = TweakerMoreMod.MOD_ID + ".";
+	String TWEAKERMORE_NAMESPACE_PREFIX = TweakerMoreMod.MOD_ID + ".config.";
 	String COMMENT_SUFFIX = ".comment";
 	String PRETTY_NAME_SUFFIX = ".pretty_name";
 
-	/**
-	 * Will be translated when passing to {@link fi.dy.masa.malilib.gui.widgets.WidgetLabel}
-	 */
 	@Override
 	default String getConfigGuiDisplayName()
 	{
-		return TWEAKERMORE_NAMESPACE_PREFIX + this.getName();
+		return StringUtils.translate(TWEAKERMORE_NAMESPACE_PREFIX + this.getName());
 	}
 
 	static String modifyDisabledOptionLabelLine(String line)
