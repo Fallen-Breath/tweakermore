@@ -21,7 +21,7 @@ public class RenderUtil
 			this.anchorY = anchorY;
 			if (factor <= 0)
 			{
-				throw new RuntimeException("factor should be greater than 0, but " + factor + " found");
+				throw new IllegalArgumentException("factor should be greater than 0, but " + factor + " found");
 			}
 			this.factor = factor;
 		}
