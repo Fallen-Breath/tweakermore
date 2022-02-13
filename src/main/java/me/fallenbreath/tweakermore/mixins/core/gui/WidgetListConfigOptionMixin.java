@@ -36,7 +36,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	@Mutable
 	@Shadow(remap = false) @Final protected KeybindSettings initialKeybindSettings;
 
-	@Shadow protected abstract void addKeybindResetButton(int x, int y, IKeybind keybind, ConfigButtonKeybind buttonHotkey);
+	@Shadow(remap = false) protected abstract void addKeybindResetButton(int x, int y, IKeybind keybind, ConfigButtonKeybind buttonHotkey);
 
 	@Unique
 	private boolean initialBoolean;

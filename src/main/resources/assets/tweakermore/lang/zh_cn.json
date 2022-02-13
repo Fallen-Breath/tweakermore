@@ -27,7 +27,7 @@
   "tweakermore.config.copySignTextToClipBoard.no_sign": "玩家未指向告示牌方块",
   "tweakermore.config.copySignTextToClipBoard.empty_sign": "%1$s不包含任何文本",
   "tweakermore.config.refreshInventory": "刷新物品栏",
-  "tweakermore.config.refreshInventory.comment": "向服务端请求一次玩家物品栏刷新\n它将模拟一次无效的物品栏拖动操作数，\n让服务器将认为玩家的物品栏已失去同步，来刷新玩家物品栏",
+  "tweakermore.config.refreshInventory.comment": "向服务端请求一次玩家物品栏刷新\n它将模拟一次无效的物品栏拖动操作，\n让服务器认为玩家的物品栏已失去同步并刷新玩家物品栏",
 
   "tweakermore.config.handRestockListType": "自动补货名单约束类型",
   "tweakermore.config.handRestockListType.comment": "tweakHandRestock 工具的物品名单约束类型",
