@@ -1,12 +1,8 @@
 package me.fallenbreath.tweakermore.mixins.core.gui;
 
 import fi.dy.masa.malilib.config.IConfigBase;
-import fi.dy.masa.malilib.config.IHotkeyTogglable;
-import fi.dy.masa.malilib.config.gui.ConfigOptionChangeListenerButton;
-import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
-import fi.dy.masa.malilib.gui.button.ConfigButtonBoolean;
 import fi.dy.masa.malilib.gui.button.ConfigButtonKeybind;
 import fi.dy.masa.malilib.gui.interfaces.IKeybindConfigGui;
 import fi.dy.masa.malilib.gui.widgets.*;
@@ -14,13 +10,14 @@ import fi.dy.masa.malilib.hotkeys.*;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
-import me.fallenbreath.tweakermore.gui.HotkeyedBooleanResetListener;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
-import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import java.util.function.Function;
@@ -29,11 +26,6 @@ import java.util.function.Function;
 public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase<GuiConfigsBase.ConfigOptionWrapper>
 {
 	@Shadow(remap = false) @Final protected IKeybindConfigGui host;
-
-	@Shadow(remap = false) @Final protected GuiConfigsBase.ConfigOptionWrapper wrapper;
-
-	@Mutable
-	@Shadow(remap = false) @Final protected KeybindSettings initialKeybindSettings;
 
 	@Shadow(remap = false) protected abstract void addKeybindResetButton(int x, int y, IKeybind keybind, ConfigButtonKeybind buttonHotkey);
 
@@ -148,35 +140,18 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	}
 
 	@Inject(
-			method = "addConfigOption",
-			at = @At(
-					value = "FIELD",
-					target = "Lfi/dy/masa/malilib/config/ConfigType;BOOLEAN:Lfi/dy/masa/malilib/config/ConfigType;",
-					remap = false
-			),
+			method = "addHotkeyConfigElements",
+			at = @At(value = "HEAD"),
 			remap = false,
 			cancellable = true
 	)
-	private void tweakerMoreCustomConfigGui(int x, int y, float zLevel, int labelWidth, int configWidth, IConfigBase config, CallbackInfo ci)
+	private void tweakerMoreCustomConfigGui(int x, int y, int configWidth, String configName, IHotkey config, CallbackInfo ci)
 	{
-		if (this.isTweakerMoreConfigGui() && config instanceof IHotkey)
+		if (this.isTweakerMoreConfigGui())
 		{
-			boolean modified = true;
-			if (config instanceof IHotkeyTogglable)
+			if ((config).getKeybind() instanceof KeybindMulti)
 			{
-				// handled on malilib side
-				// this.addBooleanAndHotkeyWidgets(x, y, configWidth, (IHotkeyTogglable)config);
-			}
-			else if (((IHotkey)config).getKeybind() instanceof KeybindMulti)
-			{
-				this.addButtonAndHotkeyWidgets(x, y, configWidth, (IHotkey)config);
-			}
-			else
-			{
-				modified = false;
-			}
-			if (modified)
-			{
+				this.addButtonAndHotkeyWidgets(x, y, configWidth, config);
 				ci.cancel();
 			}
 		}
@@ -212,7 +187,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 		x += configWidth + 2;
 
 		this.addWidget(new WidgetKeybindSettings(x, y, 20, 20, keybind, config.getName(), this.parent, this.host.getDialogHandler()));
-		x += 24;
+		x += 22;
 
 		this.addButton(keybindButton, this.host.getButtonPressListener());
 		this.addKeybindResetButton(x, y, keybind, keybindButton);
