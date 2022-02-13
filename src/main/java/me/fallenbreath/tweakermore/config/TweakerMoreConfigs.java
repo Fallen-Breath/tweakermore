@@ -61,6 +61,9 @@ public class TweakerMoreConfigs
 	public static final ConfigDouble SAFE_AFK_HEALTH_THRESHOLD = newConfigDouble("safeAfkHealthThreshold", 10, 0, 100);
 
 	@Config(Config.Type.GENERIC)
+	public static final ConfigDouble SCOREBOARD_SIDE_BAR_SCALE = newConfigDouble("scoreboardSideBarScale", 1, 0.001, 2);
+
+	@Config(Config.Type.GENERIC)
 	public static final ConfigBoolean SHULKER_TOOLTIP_ENCHANTMENT_HINT = newConfigBoolean("shulkerTooltipEnchantmentHint", false);
 
 	@Config(Config.Type.GENERIC)

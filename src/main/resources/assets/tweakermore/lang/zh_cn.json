@@ -13,6 +13,8 @@
   "tweakermore.config.netherPortalSoundChance.comment": "地狱门方块播放音效的概率\n将其设为0.001或0.0001来让地狱门没那么吵",
   "tweakermore.config.safeAfkHealthThreshold": "安全挂机血量阈值",
   "tweakermore.config.safeAfkHealthThreshold.comment": "触发安全挂机功能的玩家的血量阈值\n当玩家受到伤害且血量小于给定值时断开连接",
+  "tweakermore.config.scoreboardSideBarScale": "计分板侧边栏缩放",
+  "tweakermore.config.scoreboardSideBarScale.comment": "将计分板侧边栏按照给定参数进行缩放显示",
   "tweakermore.config.shulkerTooltipEnchantmentHint": "潜影盒物品显示提示附魔",
   "tweakermore.config.shulkerTooltipEnchantmentHint.comment": "在潜影盒物品的工具提示中显示物品的附魔",
   "tweakermore.config.shulkerTooltipEnchantmentHint.more": "... %1$sx附魔",

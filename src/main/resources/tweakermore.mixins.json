@@ -24,6 +24,7 @@
     "tweaks.netherPortalSoundChance.NetherPortalBlockMixin",
     "tweaks.ofUnlockF3FpsLimit.DebugHudMixin",
     "tweaks.prioritizedCommandSuggestions.CommandSuggestorMixin",
+    "tweaks.scoreboardSideBarScale.InGameHudMixin",
     "tweaks.shulkerTooltipEnchantmentHint.ShulkerBoxBlockMixin",
     "tweaks.tweakmAutoContainerProcess.ClientPlayNetworkHandlerMixin",
     "tweaks.tweakmAutoContainerProcess.ContainerMixin",

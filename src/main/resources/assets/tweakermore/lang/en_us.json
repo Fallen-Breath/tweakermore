@@ -13,6 +13,8 @@
   "tweakermore.config.netherPortalSoundChance.comment": "The chance for a nether portal block to play sound\nSet it to 0.001 or 0.0001 for less noisy portal",
   "tweakermore.config.safeAfkHealthThreshold": "safeAfkHealthThreshold",
   "tweakermore.config.safeAfkHealthThreshold.comment": "The threshold of the health of the player which triggers the safe afk disconnecting feature\nDisconnect when player takes damage and its health becomes less than the given value",
+  "tweakermore.config.scoreboardSideBarScale": "scoreboardSideBarScale",
+  "tweakermore.config.scoreboardSideBarScale.comment": "Scale the scoreboard side bar hud with given factor",
   "tweakermore.config.shulkerTooltipEnchantmentHint": "shulkerTooltipEnchantmentHint",
   "tweakermore.config.shulkerTooltipEnchantmentHint.comment": "Display enchantments of items in the tooltip of shulker box item",
   "tweakermore.config.shulkerTooltipEnchantmentHint.more": "... %1$sx",

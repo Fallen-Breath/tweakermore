@@ -1,8 +1,9 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.bossBarScale;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.RenderUtil;
 import net.minecraft.client.gui.hud.BossBarHud;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -13,7 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = BossBarHud.class, priority = 2000)
 public abstract class BossBarHudMixin
 {
-	private boolean renderScaled;
+	@Nullable
+	private RenderUtil.Scaler scaler = null;
 
 	@ModifyVariable(
 			method = "render",
@@ -27,16 +29,11 @@ public abstract class BossBarHudMixin
 	)
 	private int tweakerMore_bossBarScale_push(int windowsWidth)
 	{
-		this.renderScaled = false;
+		this.scaler = null;
 		if (TweakerMoreConfigs.BOSS_BAR_SCALE.isModified())
 		{
-			this.renderScaled = true;
-			double scale = TweakerMoreConfigs.BOSS_BAR_SCALE.getDoubleValue();
-			int centerX = windowsWidth / 2;
-			RenderSystem.pushMatrix();
-			RenderSystem.translated(-centerX * scale, 0, 0);
-			RenderSystem.scaled(scale, scale, 1);
-			RenderSystem.translated(centerX / scale, 0, 0);
+			this.scaler = RenderUtil.createScaler(windowsWidth / 2, 0, TweakerMoreConfigs.BOSS_BAR_SCALE.getDoubleValue());
+			this.scaler.apply();
 		}
 		return windowsWidth;
 	}
@@ -55,9 +52,9 @@ public abstract class BossBarHudMixin
 	)
 	private void tweakerMore_bossBarScale_pop(CallbackInfo ci)
 	{
-		if (this.renderScaled)
+		if (this.scaler != null)
 		{
-			RenderSystem.popMatrix();
+			this.scaler.restore();
 		}
 	}
 }
