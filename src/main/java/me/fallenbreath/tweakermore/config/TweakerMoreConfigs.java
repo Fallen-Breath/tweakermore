@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.*;
-import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.interfaces.IValueChangeCallback;
 import fi.dy.masa.malilib.util.restrictions.ItemRestriction;
 import fi.dy.masa.malilib.util.restrictions.UsageRestriction;
@@ -13,6 +12,7 @@ import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.impl.copySignTextToClipBoard.SignTextCopier;
+import me.fallenbreath.tweakermore.impl.refreshInventory.InventoryRefresher;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
 import me.fallenbreath.tweakermore.util.dependency.Condition;
 import me.fallenbreath.tweakermore.util.dependency.Restriction;
@@ -73,6 +73,9 @@ public class TweakerMoreConfigs
 
 	@Config(Config.Type.HOTKEY)
 	public static final ConfigHotkey COPY_SIGN_TEXT_TO_CLIPBOARD = newConfigHotKey("copySignTextToClipBoard", "");
+
+	@Config(Config.Type.HOTKEY)
+	public static final ConfigHotkey REFRESH_INVENTORY = newConfigHotKey("refreshInventory", "");
 
 	// List
 
@@ -172,11 +175,12 @@ public class TweakerMoreConfigs
 
 	public static void initCallbacks()
 	{
+		// hotkeys
 		COPY_SIGN_TEXT_TO_CLIPBOARD.getKeybind().setCallback(SignTextCopier::copySignText);
-		OPEN_TWEAKERMORE_CONFIG_GUI.getKeybind().setCallback((action, key) -> {
-			GuiBase.openGui(new TweakerMoreConfigGui());
-			return true;
-		});
+		OPEN_TWEAKERMORE_CONFIG_GUI.getKeybind().setCallback(TweakerMoreConfigGui::onOpenGuiHotkey);
+		REFRESH_INVENTORY.getKeybind().setCallback(InventoryRefresher::refresh);
+
+		// value listeners
 		IValueChangeCallback<ConfigBoolean> redrawConfigGui = newValue -> {
 			TweakerMoreConfigGui.getCurrentInstance().ifPresent(TweakerMoreConfigGui::reDraw);
 		};

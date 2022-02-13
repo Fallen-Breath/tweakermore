@@ -25,6 +25,8 @@
   "tweakermore.config.copySignTextToClipBoard.comment": "Copy texts in the sign you are pointing to into the clipboard",
   "tweakermore.config.copySignTextToClipBoard.sign_copied": "Copied texts from %1$s",
   "tweakermore.config.copySignTextToClipBoard.empty_sign": "%1$s does not contain any text",
+  "tweakermore.config.refreshInventory": "refreshInventory",
+  "tweakermore.config.refreshInventory.comment": "Request a player inventory refresh to the server\nIt's done by simulating an invalid inventory dragging operation,\nso the server think that the inventory is out of sync then do resync",
 
   "tweakermore.config.handRestockListType": "handRestockListType",
   "tweakermore.config.handRestockListType.comment": "The item restriction type for tweakHandRestock",
