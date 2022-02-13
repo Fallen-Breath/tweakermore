@@ -1,42 +1,36 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.bossBarMaxEntry;
 
+import com.google.common.collect.Iterators;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.gui.hud.BossBarHud;
+import net.minecraft.client.gui.hud.ClientBossBar;
 import net.minecraft.client.util.Window;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.Iterator;
 
 @Mixin(BossBarHud.class)
 public abstract class BossBarHudMixin
 {
-	private int renderedBossBarAmount;
-
-	@Inject(method = "render", at = @At("HEAD"))
-	private void recordRenderedBossBarAmount(CallbackInfo ci)
-	{
-		this.renderedBossBarAmount = 0;
-	}
-
-	@Inject(
+	@ModifyVariable(
 			method = "render",
 			at = @At(
-					value = "INVOKE",
-					target = "Ljava/util/Iterator;next()Ljava/lang/Object;",
+					value = "INVOKE_ASSIGN",
+					target = "Ljava/util/Collection;iterator()Ljava/util/Iterator;",
 					remap = false
-			),
-			cancellable = true
+			)
 	)
-	private void tweakerMore_bossBarMaxEntry(CallbackInfo ci)
+	private Iterator<ClientBossBar> tweakerMore_bossBarMaxEntry_checkLimitation(Iterator<ClientBossBar> iterator)
 	{
-		this.renderedBossBarAmount++;
-		int value = TweakerMoreConfigs.BOSS_BAR_MAX_ENTRY.getIntegerValue();
-		if (value >= 0 && this.renderedBossBarAmount > value)
+		int limitation = TweakerMoreConfigs.BOSS_BAR_MAX_ENTRY.getIntegerValue();
+		if (limitation >= 0)
 		{
-			ci.cancel();
+			iterator = Iterators.limit(iterator, limitation);
 		}
+		return iterator;
 	}
 
 	@Redirect(
