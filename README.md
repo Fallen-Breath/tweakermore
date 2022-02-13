@@ -4,6 +4,7 @@
 [![Issues](https://img.shields.io/github/issues/Fallen-Breath/tweakermore.svg)](https://github.com/Fallen-Breath/tweakermore/issues)
 [![MC Versions](http://cf.way2muchnoise.eu/versions/For%20MC_tweakermore_all.svg)](https://www.curseforge.com/minecraft/mc-mods/tweakermore)
 [![CurseForge](http://cf.way2muchnoise.eu/full_tweakermore_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/tweakermore)
+[![Modrinth](https://img.shields.io/modrinth/dt/GBeCx05I?label=Modrinth%20Downloads)](https://modrinth.com/mod/tweakermore)
 
 A collection of client-side tweak kits for enhance your Minecraft game experience
 
