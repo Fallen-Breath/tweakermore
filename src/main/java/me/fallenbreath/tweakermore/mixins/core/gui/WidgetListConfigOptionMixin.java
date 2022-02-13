@@ -4,7 +4,6 @@ import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IHotkeyTogglable;
 import fi.dy.masa.malilib.config.gui.ConfigOptionChangeListenerButton;
 import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
-import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.gui.button.ConfigButtonBoolean;
@@ -14,11 +13,10 @@ import fi.dy.masa.malilib.gui.widgets.*;
 import fi.dy.masa.malilib.hotkeys.IKeybind;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.config.TweakerMoreOption;
+import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.gui.HotkeyedBooleanResetListener;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
-import me.fallenbreath.tweakermore.util.StringUtil;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -115,13 +113,9 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 			args.set(5, null);  // cancel original call
 
 			Function<String, String> modifier = s -> s;
-			if (isTweakerMoreConfigGui())
+			if (config instanceof TweakerMoreIConfigBase && !((TweakerMoreIConfigBase)config).isEnabled())
 			{
-				lines[0] = StringUtil.TWEAKERMORE_NAMESPACE_PREFIX + lines[0];
-				if (!TweakerMoreConfigs.getOptionFromConfig(config).map(TweakerMoreOption::isEnabled).orElse(true))
-				{
-					modifier = s -> GuiBase.TXT_DARK_RED + s + GuiBase.TXT_RST;
-				}
+				modifier = TweakerMoreIConfigBase::modifyDisabledOptionLabelLine;
 			}
 			TweakerMoreOptionLabel label = new TweakerMoreOptionLabel(x, y, width, height, textColor, lines, new String[]{config.getName()}, modifier);
 			this.addWidget(label);

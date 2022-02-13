@@ -8,6 +8,8 @@ import fi.dy.masa.malilib.config.options.*;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.util.restrictions.ItemRestriction;
 import fi.dy.masa.malilib.util.restrictions.UsageRestriction;
+import me.fallenbreath.tweakermore.TweakerMoreMod;
+import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.impl.copySignTextToClipBoard.SignTextCopier;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
@@ -179,6 +181,10 @@ public class TweakerMoreConfigs
 				try
 				{
 					IConfigBase configBase = (IConfigBase)field.get(null);
+					if (!(configBase instanceof TweakerMoreIConfigBase))
+					{
+						TweakerMoreMod.LOGGER.warn("[TweakerMore] {} is not a subclass of TweakerMoreIConfigBase", configBase);
+					}
 					TweakerMoreOption tweakerMoreOption = new TweakerMoreOption(annotation, configBase);
 					OPTIONS.add(tweakerMoreOption);
 					CATEGORY_TO_OPTION.computeIfAbsent(tweakerMoreOption.getCategory(), k -> Lists.newArrayList()).add(tweakerMoreOption);
