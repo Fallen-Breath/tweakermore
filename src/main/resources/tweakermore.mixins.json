@@ -20,6 +20,7 @@
     "tweaks.copySignTextToClipBoard.SignBlockEntityAccessor",
     "tweaks.disableLightUpdates.ClientChunkManagerMixin",
     "tweaks.disableLightUpdates.LightingProviderMixin",
+    "tweaks.disablePistonBlockBreakingParticle.PistonBlockMixin",
     "tweaks.disableRedstoneWireParticle.RedstoneWireBlockMixin",
     "tweaks.handRestoreRestriction.InventoryUtilsMixin",
     "tweaks.handRestoreRestriction.PlacementTweaksMixin",
