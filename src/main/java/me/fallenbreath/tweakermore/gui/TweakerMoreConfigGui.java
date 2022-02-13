@@ -2,9 +2,12 @@ package me.fallenbreath.tweakermore.gui;
 
 import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.config.IConfigBase;
+import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
+import fi.dy.masa.malilib.hotkeys.IKeybind;
+import fi.dy.masa.malilib.hotkeys.KeyAction;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.Config;
@@ -41,6 +44,12 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
     public static Optional<TweakerMoreConfigGui> getCurrentInstance()
     {
         return Optional.ofNullable(currentInstance);
+    }
+
+    public static boolean onOpenGuiHotkey(KeyAction keyAction, IKeybind iKeybind)
+    {
+        GuiBase.openGui(new TweakerMoreConfigGui());
+        return true;
     }
 
     @Override
@@ -116,13 +125,19 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
         List<IConfigBase> options = Lists.newArrayList();
         for (TweakerMoreOption tweakerMoreOption : TweakerMoreConfigs.getOptions(TweakerMoreConfigGui.category))
         {
-            if (this.filteredType == null || tweakerMoreOption.getType() == this.filteredType)
+            if (this.filteredType != null && tweakerMoreOption.getType() != this.filteredType)
             {
-                if (!TweakerMoreConfigs.HIDE_DISABLE_OPTIONS.getBooleanValue() || tweakerMoreOption.isEnabled())
-                {
-                    options.add(tweakerMoreOption.getOption());
-                }
+                continue;
             }
+            if (TweakerMoreConfigs.HIDE_DISABLE_OPTIONS.getBooleanValue() && !tweakerMoreOption.isEnabled())
+            {
+                continue;
+            }
+            if (tweakerMoreOption.isDebug() && !TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
+            {
+                continue;
+            }
+            options.add(tweakerMoreOption.getOption());
         }
         options.sort((a, b) -> a.getName().compareToIgnoreCase(b.getName()));
         return ConfigOptionWrapper.createFor(options);

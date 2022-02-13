@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.util.dependency.Condition;
-import me.fallenbreath.tweakermore.util.dependency.Strategy;
+import me.fallenbreath.tweakermore.util.dependency.Restriction;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.gui.hud.ChatHudLine;
 import org.spongepowered.asm.mixin.Final;
@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * It's stolen from https://github.com/Fallen-Breath/raise-chat-limit so make sure it doesnt crash with it
  */
-@Strategy(disableWhen = @Condition(ModIds.raise_chat_limit))
+@Restriction(disableWhen = @Condition(ModIds.raise_chat_limit))
 @Mixin(ChatHud.class)
 public abstract class ChatHudMixin
 {

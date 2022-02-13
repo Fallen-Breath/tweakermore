@@ -45,7 +45,7 @@ public class SafeAfkHelper
 				{
 					String title = TweakerMoreMod.MOD_NAME + " " + TweakerMoreConfigs.TWEAKM_SAFE_AFK.getPrettyName();
 					BaseText reason = new TranslatableText(
-							"tweakermore.tweakmSafeAfk.received_damage",
+							"tweakermore.config.tweakmSafeAfk.received_damage",
 							new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),
 							String.format("%.1f / %.1f (%.0f%%)", health, maxHealth, health / maxHealth * 100)
 					);

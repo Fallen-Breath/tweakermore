@@ -46,12 +46,12 @@ public class ContainerFiller implements Processor
 			long amount = containerInvSlots.stream().filter(Slot::hasStack).count(), total = containerInvSlots.size();
 			boolean isFull = Container.calculateComparatorOutput(containerInvSlots.get(0).inventory) >= 15;
 			String percentage = String.format("%s%d/%d%s", isFull ? Formatting.GREEN : Formatting.GOLD, amount, total, Formatting.RESET);
-			InfoUtils.printActionbarMessage("tweakermore.tweakmAutoFillContainer.container_filled", containerScreen.getTitle(), stackName, percentage);
+			InfoUtils.printActionbarMessage("tweakermore.config.tweakmAutoFillContainer.container_filled", containerScreen.getTitle(), stackName, percentage);
 			return true;
 		}
 		else
 		{
-			InfoUtils.printActionbarMessage("tweakermore.tweakmAutoFillContainer.best_slot_not_found");
+			InfoUtils.printActionbarMessage("tweakermore.config.tweakmAutoFillContainer.best_slot_not_found");
 			return false;
 		}
 	}

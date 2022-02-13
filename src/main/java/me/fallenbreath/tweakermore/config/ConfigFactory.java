@@ -3,17 +3,19 @@ package me.fallenbreath.tweakermore.config;
 import com.google.common.collect.ImmutableList;
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
 import fi.dy.masa.malilib.config.options.*;
-import me.fallenbreath.tweakermore.util.StringUtil;
+import fi.dy.masa.malilib.hotkeys.KeybindSettings;
+import me.fallenbreath.tweakermore.config.options.*;
 
 public abstract class ConfigFactory
 {
-	private static final String PREFIX = StringUtil.TWEAKERMORE_NAMESPACE_PREFIX;
-	private static final String COMMENT_SUFFIX = ".comment";
-	private static final String PRETTY_NAME_SUFFIX = ".pretty_name";
-
-	public static ConfigHotkey newConfigHotKey(String name, String defaultHotkey)
+	public static ConfigHotkey newConfigHotKey(String name, String defaultStorageString)
 	{
-		return new ConfigHotkey(name, defaultHotkey, PREFIX + name + COMMENT_SUFFIX);
+		return new TweakerMoreConfigHotkey(name, defaultStorageString);
+	}
+
+	public static ConfigHotkey newConfigHotKey(String name, String defaultStorageString, KeybindSettings settings)
+	{
+		return new TweakerMoreConfigHotkey(name, defaultStorageString, settings);
 	}
 
 	public static ConfigBooleanHotkeyed newConfigBooleanHotkeyed(String name)
@@ -21,38 +23,48 @@ public abstract class ConfigFactory
 		return newConfigBooleanHotkeyed(name, false, "");
 	}
 
-	public static ConfigBooleanHotkeyed newConfigBooleanHotkeyed(String name, boolean defaultValue, String defaultHotKey)
+	public static ConfigBooleanHotkeyed newConfigBooleanHotkeyed(String name, boolean defaultValue, String defaultStorageString)
 	{
-		return new ConfigBooleanHotkeyed(name, defaultValue, defaultHotKey, PREFIX + name + COMMENT_SUFFIX, PREFIX + name + PRETTY_NAME_SUFFIX);
+		return new TweakerMoreConfigBooleanHotkeyed(name, defaultValue, defaultStorageString);
 	}
 
 	public static ConfigBoolean newConfigBoolean(String name, boolean defaultValue)
 	{
-		return new ConfigBoolean(name, defaultValue, PREFIX + name + COMMENT_SUFFIX);
+		return new TweakerMoreConfigBoolean(name, defaultValue);
+	}
+
+	public static ConfigInteger newConfigInteger(String name, int defaultValue)
+	{
+		return new TweakerMoreConfigInteger(name, defaultValue);
 	}
 
 	public static ConfigInteger newConfigInteger(String name, int defaultValue, int minValue, int maxValue)
 	{
-		return new ConfigInteger(name, defaultValue, minValue, maxValue, PREFIX + name + COMMENT_SUFFIX);
+		return new TweakerMoreConfigInteger(name, defaultValue, minValue, maxValue);
+	}
+
+	public static ConfigDouble newConfigDouble(String name, double defaultValue)
+	{
+		return new TweakerMoreConfigDouble(name, defaultValue);
 	}
 
 	public static ConfigDouble newConfigDouble(String name, double defaultValue, double minValue, double maxValue)
 	{
-		return new ConfigDouble(name, defaultValue, minValue, maxValue, PREFIX + name + COMMENT_SUFFIX);
+		return new TweakerMoreConfigDouble(name, defaultValue, minValue, maxValue);
 	}
 
 	public static ConfigString newConfigString(String name, String defaultValue)
 	{
-		return new ConfigString(name, defaultValue, PREFIX + name + COMMENT_SUFFIX);
+		return new TweakerMoreConfigString(name, defaultValue);
 	}
 
 	public static ConfigStringList newConfigStringList(String name, ImmutableList<String> defaultValue)
 	{
-		return new ConfigStringList(name, defaultValue, PREFIX + name + COMMENT_SUFFIX);
+		return new TweakerMoreConfigStringList(name, defaultValue);
 	}
 
 	public static ConfigOptionList newConfigOptionList(String name, IConfigOptionListEntry defaultValue)
 	{
-		return new ConfigOptionList(name, defaultValue, PREFIX + name + COMMENT_SUFFIX);
+		return new TweakerMoreConfigOptionList(name, defaultValue);
 	}
 }
