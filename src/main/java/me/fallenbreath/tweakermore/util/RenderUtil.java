@@ -1,6 +1,6 @@
 package me.fallenbreath.tweakermore.util;
 
-import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.platform.GlStateManager;
 
 public class RenderUtil
 {
@@ -28,15 +28,15 @@ public class RenderUtil
 
 		public void apply()
 		{
-			RenderSystem.pushMatrix();
-			RenderSystem.translated(-anchorX * factor, -anchorY * factor, 0);
-			RenderSystem.scaled(factor, factor, 1);
-			RenderSystem.translated(anchorX / factor, anchorY / factor, 0);
+			GlStateManager.pushMatrix();
+			GlStateManager.translated(-anchorX * factor, -anchorY * factor, 0);
+			GlStateManager.scaled(factor, factor, 1);
+			GlStateManager.translated(anchorX / factor, anchorY / factor, 0);
 		}
 
 		public void restore()
 		{
-			RenderSystem.popMatrix();
+			GlStateManager.popMatrix();
 		}
 	}
 }
