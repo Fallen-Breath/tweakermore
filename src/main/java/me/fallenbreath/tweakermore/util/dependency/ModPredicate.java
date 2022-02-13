@@ -21,7 +21,7 @@ public class ModPredicate
 	{
 		if (condition.type() != Condition.Type.MOD)
 		{
-			throw new RuntimeException("Only MOD condition type is accepted");
+			throw new IllegalArgumentException("Only MOD condition type is accepted");
 		}
 		return new ModPredicate(condition.value(), Arrays.asList(condition.versionPredicates()));
 	}
