@@ -1,7 +1,11 @@
 package me.fallenbreath.tweakermore.gui;
 
 import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
+import fi.dy.masa.malilib.util.StringUtils;
+import me.fallenbreath.tweakermore.TweakerMoreMod;
+import me.fallenbreath.tweakermore.util.StringUtil;
 
+import java.util.Arrays;
 import java.util.function.Function;
 
 /**
@@ -22,13 +26,28 @@ public class TweakerMoreOptionLabel extends WidgetLabel
 		for (int i = 0; i < this.originalLines.length; i++)
 		{
 			String linesToDisplay = this.labels.get(i);
-			if (!this.originalLines[i].equals(linesToDisplay))
+			if (!this.originalLines[i].equals(StringUtil.removeFormattingCode(linesToDisplay)))
 			{
 				showOriginalLines = true;
 			}
 			this.labels.set(i, lineModifier.apply(linesToDisplay));
 		}
 		this.showOriginalLines = showOriginalLines;
+		if (this.showOriginalLines != willShowOriginalLines(displayLines, originalLines))
+		{
+			TweakerMoreMod.LOGGER.warn("Inconsistent showOriginalLines result: {} {}", this.showOriginalLines, willShowOriginalLines(displayLines, originalLines));
+		}
+	}
+
+	public static boolean willShowOriginalLines(String[] displayLines, String[] originalLines)
+	{
+		return !Arrays.equals(
+				originalLines,
+				Arrays.stream(displayLines).
+						map(StringUtils::translate).
+						map(StringUtil::removeFormattingCode).
+						toArray(String[]::new)
+		);
 	}
 
 	public String[] getOriginalLines()

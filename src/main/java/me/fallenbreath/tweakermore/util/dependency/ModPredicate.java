@@ -10,11 +10,13 @@ public class ModPredicate
 {
 	public final String modId;
 	public final List<String> versionPredicates;
+	private final boolean satisfied;
 
 	private ModPredicate(String modId, List<String> versionPredicates)
 	{
 		this.modId = modId;
 		this.versionPredicates = versionPredicates;
+		this.satisfied = FabricUtil.isModLoaded(this.modId) && FabricUtil.doesModFitsAnyPredicate(this.modId, this.versionPredicates);
 	}
 
 	public static ModPredicate of(Condition condition)
@@ -26,9 +28,9 @@ public class ModPredicate
 		return new ModPredicate(condition.value(), Arrays.asList(condition.versionPredicates()));
 	}
 
-	public boolean satisfies()
+	public boolean isSatisfied()
 	{
-		return FabricUtil.isModLoaded(this.modId) && FabricUtil.doesModFitsAnyPredicate(this.modId, this.versionPredicates);
+		return this.satisfied;
 	}
 
 	public String getVersionPredicatesString()
