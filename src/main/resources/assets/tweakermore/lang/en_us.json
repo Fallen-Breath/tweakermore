@@ -86,7 +86,7 @@
   "tweakermore.config.preserveConfigUnknownEntries.comment": "Preserve unknown config entries in TweakerMore's config file\nIf set to false, unknown entries will be removed on config being written",
 
   "tweakermore.config.tweakerMoreDebugMode": "tweakerMoreDebugMode",
-  "tweakermore.config.tweakerMoreDebugMode.comment": "Debug mode of TweakerMore",
+  "tweakermore.config.tweakerMoreDebugMode.comment": "Debug mode of TweakerMore\nWhen enabled, debug parameter options and options not supported by the current Minecraft version will be displayed\nand debugging related functions will be enabled",
   "tweakermore.config.tweakerMoreDebugMode.pretty_name": "TweakerMore Debug Mode",
   "tweakermore.config.tweakerMoreDebugInt": "tweakerMoreDebugInt",
   "tweakermore.config.tweakerMoreDebugInt.comment": "A integer parameter for TweakerMore debugging",
