@@ -126,14 +126,22 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
         List<IConfigBase> options = Lists.newArrayList();
         for (TweakerMoreOption tweakerMoreOption : TweakerMoreConfigs.getOptions(TweakerMoreConfigGui.category))
         {
+            // drop down list filtering logic
             if (this.filteredType != null && tweakerMoreOption.getType() != this.filteredType)
             {
                 continue;
             }
+            // hide disable options if config hideDisabledOptions is enabled
             if (TweakerMoreConfigs.HIDE_DISABLE_OPTIONS.getBooleanValue() && !tweakerMoreOption.isEnabled())
             {
                 continue;
             }
+            // hide options that don't work with current Minecraft versions, unless debug mode on
+            if (!tweakerMoreOption.worksForCurrentMCVersion() && !TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
+            {
+                continue;
+            }
+            // hide debug options unless debug mode on
             if (tweakerMoreOption.isDebug() && !TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
             {
                 continue;
