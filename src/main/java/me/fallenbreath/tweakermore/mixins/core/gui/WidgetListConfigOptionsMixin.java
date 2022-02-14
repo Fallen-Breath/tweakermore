@@ -1,15 +1,22 @@
 package me.fallenbreath.tweakermore.mixins.core.gui;
 
+import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetConfigOption;
 import fi.dy.masa.malilib.gui.widgets.WidgetListConfigOptions;
 import fi.dy.masa.malilib.gui.widgets.WidgetListConfigOptionsBase;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
+import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
+
+import java.util.List;
+import java.util.Objects;
 
 @Mixin(WidgetListConfigOptions.class)
 public abstract class WidgetListConfigOptionsMixin extends WidgetListConfigOptionsBase<GuiConfigsBase.ConfigOptionWrapper, WidgetConfigOption>
@@ -37,5 +44,34 @@ public abstract class WidgetListConfigOptionsMixin extends WidgetListConfigOptio
 			width -= 120;
 		}
 		return width;
+	}
+
+	@ModifyVariable(
+			method = "getMaxNameLengthWrapped",
+			at = @At(
+					value = "INVOKE",
+					target = "Ljava/util/List;iterator()Ljava/util/Iterator;",
+					remap = false
+			),
+			remap = false
+	)
+	private int updateMaxNameLengthIfUsingTweakerMoreOptionLabelAndShowsOriginalText(int maxWidth, List<GuiConfigsBase.ConfigOptionWrapper> wrappers)
+	{
+		if (this.parent instanceof TweakerMoreConfigGui || TweakerMoreConfigs.APPLY_TWEAKERMORE_OPTION_LABEL_GLOBALLY.getBooleanValue())
+		{
+			for (GuiConfigsBase.ConfigOptionWrapper wrapper : wrappers)
+			{
+				if (wrapper.getType() == GuiConfigsBase.ConfigOptionWrapper.Type.CONFIG)
+				{
+					IConfigBase config = Objects.requireNonNull(wrapper.getConfig());
+					if (TweakerMoreOptionLabel.willShowOriginalLines(new String[]{config.getConfigGuiDisplayName()}, new String[]{config.getName()}))
+					{
+						int optionWidth = (int)(this.getStringWidth(config.getName()) * TweakerMoreOptionLabel.TRANSLATION_SCALE);
+						maxWidth = Math.max(maxWidth, optionWidth);
+					}
+				}
+			}
+		}
+		return maxWidth;
 	}
 }
