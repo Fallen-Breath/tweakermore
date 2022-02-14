@@ -57,7 +57,7 @@ public class TweakerMoreConfigs
 	@Config(value = Config.Type.GENERIC, restriction = @Restriction(disableWhen = @Condition(raise_chat_limit)))
 	public static final ConfigInteger CHAT_MESSAGE_LIMIT = newConfigInteger("chatMessageLimit", 100, 100, 10000);
 
-	@Config(Config.Type.GENERIC)
+	@Config(value = Config.Type.GENERIC, restriction = @Restriction(enableWhen = @Condition(value = minecraft, versionPredicates = ">=1.16")))
 	public static final ConfigBoolean LEGACY_F3_N_LOGIC = newConfigBoolean("legacyF3NLogic", false);
 
 	@Config(Config.Type.GENERIC)
@@ -123,6 +123,9 @@ public class TweakerMoreConfigs
 
 	@Config(Config.Type.DISABLE)
 	public static final ConfigBooleanHotkeyed DISABLE_LIGHT_UPDATES = newConfigBooleanHotkeyed("disableLightUpdates");
+
+	@Config(value = Config.Type.DISABLE, restriction = @Restriction(enableWhen = @Condition(value = minecraft, versionPredicates = ">=1.17")))
+	public static final ConfigBooleanHotkeyed DISABLE_PISTON_BLOCK_BREAKING_PARTICLE = newConfigBooleanHotkeyed("disablePistonBlockBreakingParticle");
 
 	@Config(Config.Type.DISABLE)
 	public static final ConfigBooleanHotkeyed DISABLE_REDSTONE_WIRE_PARTICLE = newConfigBooleanHotkeyed("disableRedstoneWireParticle");
