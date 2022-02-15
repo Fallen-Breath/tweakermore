@@ -57,6 +57,9 @@ public class TweakerMoreConfigs
 	@Config(value = Config.Type.GENERIC, restriction = @Restriction(disableWhen = @Condition(raise_chat_limit)))
 	public static final ConfigInteger CHAT_MESSAGE_LIMIT = newConfigInteger("chatMessageLimit", 100, 100, 10000);
 
+	@Config(Config.Type.GENERIC)
+	public static final ConfigInteger CONNECTION_SIMULATED_DELAY = newConfigInteger("connectionSimulatedDelay", 0, 0, 15_000);
+
 	@Config(value = Config.Type.GENERIC, restriction = @Restriction(enableWhen = @Condition(value = minecraft, versionPredicates = ">=1.16")))
 	public static final ConfigBoolean LEGACY_F3_N_LOGIC = newConfigBoolean("legacyF3NLogic", false);
 

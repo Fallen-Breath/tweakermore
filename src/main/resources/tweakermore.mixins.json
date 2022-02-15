@@ -17,6 +17,7 @@
     "tweaks.bossBarMaxEntry.BossBarHudMixin",
     "tweaks.bossBarScale.BossBarHudMixin",
     "tweaks.chatMessageLimit.ChatHudMixin",
+    "tweaks.connectionSimulatedDelay.ClientConnection_ChannelInitializerMixin",
     "tweaks.disableLightUpdates.ClientChunkManagerMixin",
     "tweaks.disableLightUpdates.LightingProviderMixin",
     "tweaks.disableRedstoneWireParticle.RedstoneWireBlockMixin",

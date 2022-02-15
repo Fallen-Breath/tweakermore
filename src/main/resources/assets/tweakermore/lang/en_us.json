@@ -9,6 +9,8 @@
   "tweakermore.config.bossBarScale.comment": "Scale the boss bar hud with given factor",
   "tweakermore.config.chatMessageLimit": "chatMessageLimit",
   "tweakermore.config.chatMessageLimit.comment": "Modify the maximum number of history messages stored in the chat hud",
+  "tweakermore.config.connectionSimulatedDelay": "connectionSimulatedDelay",
+  "tweakermore.config.connectionSimulatedDelay.comment": "Client network delay simulator. Enabled when the value is greater than 0\nAdds given delay (in milliseconds) before any packet processing\nBasically it stably adds your ping to the server with the given value",
   "tweakermore.config.legacyF3NLogic": "legacyF3NLogic",
   "tweakermore.config.legacyF3NLogic.comment": "Modify the logic of hotkey F3 + N back to 1.15 and before\n1.15- logic cheat sheet: creative -> spectator, other -> creative",
   "tweakermore.config.netherPortalSoundChance": "netherPortalSoundChance",
