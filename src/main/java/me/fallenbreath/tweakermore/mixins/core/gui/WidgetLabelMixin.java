@@ -71,6 +71,7 @@ public abstract class WidgetLabelMixin extends WidgetBase
 		{
 			int color = darkerColor(this.textColor);
 			double scale = TweakerMoreOptionLabel.TRANSLATION_SCALE;
+			if (!((Object)this instanceof TweakerMoreOptionLabel)) return;
 			String originText = ((TweakerMoreOptionLabel)(Object)this).getOriginalLines()[i];
 			int x = this.x + (this.centered ? this.width / 2 : 0);
 			int y = (int)(yTextStart + (this.labels.size() + i * scale + 0.2) * fontHeight);
