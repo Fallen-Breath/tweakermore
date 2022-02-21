@@ -30,6 +30,6 @@
 
   "depends": {
     "fabricloader": ">=0.10.4",
-    "malilib": "*"
+    "malilib": ">=0.11.4"
   }
 }
