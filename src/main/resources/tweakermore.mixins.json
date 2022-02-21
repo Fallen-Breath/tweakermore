@@ -18,6 +18,7 @@
     "tweaks.bossBarMaxEntry.BossBarHudMixin",
     "tweaks.bossBarScale.BossBarHudMixin",
     "tweaks.chatMessageLimit.ChatHudMixin",
+    "tweaks.connectionSimulatedDelay.ClientConnection_ChannelInitializerMixin",
     "tweaks.copySignTextToClipBoard.SignBlockEntityAccessor",
     "tweaks.disableLightUpdates.ClientChunkManagerMixin",
     "tweaks.disableLightUpdates.LightingProviderMixin",

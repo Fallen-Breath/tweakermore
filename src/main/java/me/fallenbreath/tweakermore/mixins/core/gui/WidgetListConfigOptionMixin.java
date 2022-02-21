@@ -12,6 +12,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
+import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -53,7 +54,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	{
 		if (isTweakerMoreConfigGui())
 		{
-			labelWidth = this.width - configWidth - 59;
+			labelWidth = MathHelper.clamp(this.width - configWidth - 59, 80, 190);
 		}
 		return labelWidth;
 	}
