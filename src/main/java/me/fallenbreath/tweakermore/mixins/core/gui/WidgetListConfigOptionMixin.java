@@ -81,7 +81,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	{
 		if (isTweakerMoreConfigGui())
 		{
-			labelWidth = this.width - configWidth - 59;
+			labelWidth = Math.min(this.width - configWidth - 59, 240);
 		}
 		return labelWidth;
 	}
