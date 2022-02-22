@@ -22,6 +22,8 @@
     "tweaks.disableLightUpdates.ClientChunkManagerMixin",
     "tweaks.disableLightUpdates.LightingProviderMixin",
     "tweaks.disableRedstoneWireParticle.RedstoneWireBlockMixin",
+    "tweaks.eCraftItemScrollerCompact.ConfigsMixin",
+    "tweaks.eCraftItemScrollerCompact.CraftingHandlerMixin",
     "tweaks.handRestoreRestriction.InventoryUtilsMixin",
     "tweaks.handRestoreRestriction.PlacementTweaksMixin",
     "tweaks.netherPortalSoundChance.NetherPortalBlockMixin",

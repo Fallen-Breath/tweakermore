@@ -2,9 +2,9 @@ package me.fallenbreath.tweakermore.config;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.util.StringUtils;
+import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.util.dependency.ModPredicate;
 import me.fallenbreath.tweakermore.util.dependency.ModRestriction;
@@ -16,11 +16,11 @@ import java.util.Optional;
 public class TweakerMoreOption
 {
 	private final Config annotation;
-	private final IConfigBase config;
+	private final TweakerMoreIConfigBase config;
 	private final ModRestriction modRestriction;
 	private final ModRestriction minecraftRestriction;
 
-	public TweakerMoreOption(Config annotation, IConfigBase config)
+	public TweakerMoreOption(Config annotation, TweakerMoreIConfigBase config)
 	{
 		this.annotation = annotation;
 		this.config = config;
@@ -63,7 +63,7 @@ public class TweakerMoreOption
 		return this.annotation.devOnly();
 	}
 
-	public IConfigBase getConfig()
+	public TweakerMoreIConfigBase getConfig()
 	{
 		return this.config;
 	}

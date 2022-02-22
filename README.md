@@ -29,3 +29,4 @@ The following mods are those targeted mods for mod tweaks features
 
 - [Optifine](https://www.optifine.net/home) ([Optifabric](https://www.curseforge.com/minecraft/mc-mods/optifabric))
 - [Xaero's World Map](https://www.curseforge.com/minecraft/mc-mods/xaeros-world-map)
+- [EasierCrafting](https://www.curseforge.com/minecraft/mc-mods/easiercrafting)
