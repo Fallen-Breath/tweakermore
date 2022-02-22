@@ -95,6 +95,9 @@
   "tweakermore.config.tweakerMoreDebugDouble": "tweakerMoreDebugDouble",
   "tweakermore.config.tweakerMoreDebugDouble.comment": "A double parameter for TweakerMore debugging",
 
+  "tweakermore.config.tweakerMoreDevPrintDoc": "tweakerMoreDevPrintDoc",
+  "tweakermore.config.tweakerMoreDevPrintDoc.comment": "Document Printer",
+
   "// GUI and Misc": "================================================",
 
   "tweakermore.hotkeys.category.main": "TweakerMore",
@@ -126,5 +129,27 @@
   "tweakermore.util.mod.litematica": "litematica",
   "tweakermore.util.mod.optifabric": "optifine (optifabric)",
   "tweakermore.util.mod.xaeroworldmap": "xaero's worldmap",
-  "tweakermore.util.mod.raise-chat-limit": "raise-chat-limit"
+  "tweakermore.util.mod.raise-chat-limit": "raise-chat-limit",
+
+  "// Document generator": "================================================",
+
+  "tweakermore.doc_gen.text.type": "Type",
+  "tweakermore.doc_gen.text.category": "Category",
+  "tweakermore.doc_gen.text.default_value": "Default value",
+  "tweakermore.doc_gen.text.minimum_value": "Minimum value",
+  "tweakermore.doc_gen.text.maximum_value": "Maximum value",
+  "tweakermore.doc_gen.text.options": "Available options",
+  "tweakermore.doc_gen.text.requirements": "Required mods",
+  "tweakermore.doc_gen.text.conflictions": "Conflicted mods",
+
+  "tweakermore.doc_gen.value.none": "none",
+
+  "tweakermore.doc_gen.type.boolean": "boolean",
+  "tweakermore.doc_gen.type.integer": "integer",
+  "tweakermore.doc_gen.type.double": "double",
+  "tweakermore.doc_gen.type.string": "string",
+  "tweakermore.doc_gen.type.string_list": "string list",
+  "tweakermore.doc_gen.type.option_list": "option list",
+  "tweakermore.doc_gen.type.hotkey": "hotkey",
+  "tweakermore.doc_gen.type.hotkey_togglable": "togglable hotkey"
 }

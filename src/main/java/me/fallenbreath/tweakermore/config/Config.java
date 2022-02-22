@@ -21,6 +21,8 @@ public @interface Config
 
 	boolean debug() default false;
 
+	boolean devOnly() default false;
+
 	enum Type implements IStringValue
 	{
 		GENERIC, HOTKEY, LIST, TWEAK, DISABLE;

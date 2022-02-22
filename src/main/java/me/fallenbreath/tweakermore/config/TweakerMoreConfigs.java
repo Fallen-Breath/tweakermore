@@ -17,6 +17,7 @@ import me.fallenbreath.tweakermore.impl.refreshInventory.InventoryRefresher;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
 import me.fallenbreath.tweakermore.util.dependency.Condition;
 import me.fallenbreath.tweakermore.util.dependency.Restriction;
+import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
 import net.minecraft.item.Items;
 
 import java.lang.reflect.Field;
@@ -179,6 +180,9 @@ public class TweakerMoreConfigs
 	@Config(value = Config.Type.GENERIC, category = Config.Category.SETTING, debug = true)
 	public static final ConfigInteger TWEAKERMORE_DEBUG_DOUBLE = newConfigInteger("tweakerMoreDebugDouble", 0, -1, 1);
 
+	@Config(value = Config.Type.GENERIC, category = Config.Category.SETTING, devOnly = true)
+	public static final ConfigHotkey TWEAKERMORE_DEV_PRINT_DOC = newConfigHotKey("tweakerMoreDevPrintDoc", "");
+
 	/**
 	 * ============================
 	 *    Implementation Details
@@ -198,6 +202,9 @@ public class TweakerMoreConfigs
 		};
 		HIDE_DISABLE_OPTIONS.setValueChangeCallback(redrawConfigGui);
 		TWEAKERMORE_DEBUG_MODE.setValueChangeCallback(redrawConfigGui);
+
+		// debugs
+		TWEAKERMORE_DEV_PRINT_DOC.getKeybind().setCallback(DocumentGenerator::onHotKey);
 	}
 
 	private static final List<TweakerMoreOption> OPTIONS = Lists.newArrayList();
@@ -223,7 +230,7 @@ public class TweakerMoreConfigs
 					OPTIONS.add(tweakerMoreOption);
 					CATEGORY_TO_OPTION.computeIfAbsent(tweakerMoreOption.getCategory(), k -> Lists.newArrayList()).add(tweakerMoreOption);
 					TYPE_TO_OPTION.computeIfAbsent(tweakerMoreOption.getType(), k -> Lists.newArrayList()).add(tweakerMoreOption);
-					CONFIG_TO_OPTION.put(tweakerMoreOption.getOption(), tweakerMoreOption);
+					CONFIG_TO_OPTION.put(tweakerMoreOption.getConfig(), tweakerMoreOption);
 				}
 				catch (IllegalAccessException e)
 				{
@@ -245,7 +252,7 @@ public class TweakerMoreConfigs
 
 	public static Stream<IConfigBase> getAllConfigOptionStream()
 	{
-		return OPTIONS.stream().map(TweakerMoreOption::getOption);
+		return OPTIONS.stream().map(TweakerMoreOption::getConfig);
 	}
 
 	public static Optional<TweakerMoreOption> getOptionFromConfig(IConfigBase iConfigBase)

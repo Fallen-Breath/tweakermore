@@ -57,4 +57,9 @@ public class FabricUtil
 				map(mod -> doesVersionFitsPredicate(mod.getMetadata().getVersion(), versionPredicates)).
 				orElse(false);
 	}
+
+	public static boolean isDevelopmentEnvironment()
+	{
+		return FabricLoader.getInstance().isDevelopmentEnvironment();
+	}
 }

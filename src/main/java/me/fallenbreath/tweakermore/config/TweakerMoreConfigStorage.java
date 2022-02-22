@@ -38,7 +38,7 @@ public class TweakerMoreConfigStorage implements IConfigHandler
 	{
 		return (List<T>)TweakerMoreConfigs.getOptions(optionType).stream().
 //				filter(o -> !o.isDebug()).
-				map(TweakerMoreOption::getOption).
+				map(TweakerMoreOption::getConfig).
 				collect(Collectors.toList());
 	}
 

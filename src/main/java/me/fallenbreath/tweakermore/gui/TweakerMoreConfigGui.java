@@ -13,6 +13,7 @@ import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.Config;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
+import me.fallenbreath.tweakermore.util.FabricUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -122,7 +123,7 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
     @Override
     public List<ConfigOptionWrapper> getConfigs()
     {
-        List<IConfigBase> options = Lists.newArrayList();
+        List<IConfigBase> configs = Lists.newArrayList();
         for (TweakerMoreOption tweakerMoreOption : TweakerMoreConfigs.getOptions(TweakerMoreConfigGui.category))
         {
             // drop down list filtering logic
@@ -145,9 +146,14 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
             {
                 continue;
             }
-            options.add(tweakerMoreOption.getOption());
+            // hide dev only options unless debug mode on and is dev env
+            if (tweakerMoreOption.isDevOnly() && !(TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue() && FabricUtil.isDevelopmentEnvironment()))
+            {
+                continue;
+            }
+            configs.add(tweakerMoreOption.getConfig());
         }
-        options.sort((a, b) -> a.getName().compareToIgnoreCase(b.getName()));
-        return ConfigOptionWrapper.createFor(options);
+        configs.sort((a, b) -> a.getName().compareToIgnoreCase(b.getName()));
+        return ConfigOptionWrapper.createFor(configs);
     }
 }

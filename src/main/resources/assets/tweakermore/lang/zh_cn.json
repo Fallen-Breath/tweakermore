@@ -95,6 +95,9 @@
   "tweakermore.config.tweakerMoreDebugDouble": "TweakerMore调试用Double",
   "tweakermore.config.tweakerMoreDebugDouble.comment": "用于调试TweakerMore的Double",
 
+  "tweakermore.config.tweakerMoreDevPrintDoc": "TweakerMore开发-打印文档",
+  "tweakermore.config.tweakerMoreDevPrintDoc.comment": "文档生成器",
+
   "// GUI and Misc": "================================================",
 
   "tweakermore.hotkeys.category.main": "TweakerMore",
@@ -126,5 +129,27 @@
   "tweakermore.util.mod.litematica": "litematica",
   "tweakermore.util.mod.optifabric": "optifine (optifabric)",
   "tweakermore.util.mod.xaeroworldmap": "xaero's worldmap",
-  "tweakermore.util.mod.raise-chat-limit": "raise-chat-limit"
+  "tweakermore.util.mod.raise-chat-limit": "raise-chat-limit",
+
+  "// Document generator": "================================================",
+
+  "tweakermore.doc_gen.text.type": "类型",
+  "tweakermore.doc_gen.text.category": "分类",
+  "tweakermore.doc_gen.text.default_value": "默认值",
+  "tweakermore.doc_gen.text.minimum_value": "最小值",
+  "tweakermore.doc_gen.text.maximum_value": "最大值",
+  "tweakermore.doc_gen.text.options": "可用选项",
+  "tweakermore.doc_gen.text.requirements": "依赖模组",
+  "tweakermore.doc_gen.text.conflictions": "冲突模组",
+
+  "tweakermore.doc_gen.value.none": "无",
+
+  "tweakermore.doc_gen.type.boolean": "布尔值",
+  "tweakermore.doc_gen.type.integer": "整数",
+  "tweakermore.doc_gen.type.double": "实数",
+  "tweakermore.doc_gen.type.string": "字符串",
+  "tweakermore.doc_gen.type.string_list": "字符串列表",
+  "tweakermore.doc_gen.type.option_list": "选项列表",
+  "tweakermore.doc_gen.type.hotkey": "热键",
+  "tweakermore.doc_gen.type.hotkey_togglable": "可开关型热键"
 }

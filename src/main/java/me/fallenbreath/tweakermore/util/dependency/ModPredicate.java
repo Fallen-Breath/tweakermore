@@ -37,4 +37,10 @@ public class ModPredicate
 	{
 		return this.versionPredicates.isEmpty() ? "" : " " + Joiner.on(" || ").join(this.versionPredicates);
 	}
+
+	@Override
+	public String toString()
+	{
+		return this.modId + this.getVersionPredicatesString();
+	}
 }

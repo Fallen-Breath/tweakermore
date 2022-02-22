@@ -116,9 +116,9 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 			args.set(5, null);  // cancel original call
 
 			Function<String, String> modifier = s -> s;
-			if (config instanceof TweakerMoreIConfigBase && !((TweakerMoreIConfigBase)config).isEnabled())
+			if (config instanceof TweakerMoreIConfigBase)
 			{
-				modifier = TweakerMoreIConfigBase::modifyDisabledOptionLabelLine;
+				modifier = ((TweakerMoreIConfigBase)config).getGuiDisplayLineModifier();
 			}
 			TweakerMoreOptionLabel label = new TweakerMoreOptionLabel(x, y, width, height, textColor, lines, new String[]{config.getName()}, modifier);
 			this.addWidget(label);

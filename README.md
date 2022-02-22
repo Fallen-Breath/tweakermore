@@ -12,6 +12,8 @@ Everything is disabled by default, so you don't need to worry about the game bec
 
 Press `K` + `C` to open the config GUI. You can also access the config GUI via [Mod Menu](https://www.curseforge.com/minecraft/mc-mods/modmenu)
 
+Check [here](./docs) to see the document of all available options
+
 Requirements:
 
 - [Fabric Loader](https://fabricmc.net/) >= 0.10.4
