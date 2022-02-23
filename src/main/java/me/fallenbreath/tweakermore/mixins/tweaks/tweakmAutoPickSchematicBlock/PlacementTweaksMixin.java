@@ -12,10 +12,10 @@ import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.util.LayerRange;
 import fi.dy.masa.malilib.util.PositionUtils;
 import fi.dy.masa.tweakeroo.tweaks.PlacementTweaks;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import me.fallenbreath.tweakermore.util.dependency.Condition;
-import me.fallenbreath.tweakermore.util.dependency.Restriction;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
@@ -38,7 +38,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Restriction(enableWhen = {@Condition(ModIds.tweakeroo), @Condition(ModIds.litematica)})
+@Restriction(require = {@Condition(ModIds.tweakeroo), @Condition(ModIds.litematica)})
 @Mixin(PlacementTweaks.class)
 public abstract class PlacementTweaksMixin
 {

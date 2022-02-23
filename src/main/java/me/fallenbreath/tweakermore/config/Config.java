@@ -2,7 +2,7 @@ package me.fallenbreath.tweakermore.config;
 
 import fi.dy.masa.malilib.interfaces.IStringValue;
 import fi.dy.masa.malilib.util.StringUtils;
-import me.fallenbreath.tweakermore.util.dependency.Restriction;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -20,6 +20,8 @@ public @interface Config
 	Restriction restriction() default @Restriction();
 
 	boolean debug() default false;
+
+	boolean devOnly() default false;
 
 	enum Type implements IStringValue
 	{

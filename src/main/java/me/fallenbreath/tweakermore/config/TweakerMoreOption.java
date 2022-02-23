@@ -2,12 +2,12 @@ package me.fallenbreath.tweakermore.config;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.util.StringUtils;
+import me.fallenbreath.conditionalmixin.api.value.ModPredicate;
+import me.fallenbreath.conditionalmixin.api.value.ModRestriction;
+import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.util.ModIds;
-import me.fallenbreath.tweakermore.util.dependency.ModPredicate;
-import me.fallenbreath.tweakermore.util.dependency.ModRestriction;
 
 import java.util.Collection;
 import java.util.List;
@@ -16,14 +16,14 @@ import java.util.Optional;
 public class TweakerMoreOption
 {
 	private final Config annotation;
-	private final IConfigBase option;
+	private final TweakerMoreIConfigBase config;
 	private final ModRestriction modRestriction;
 	private final ModRestriction minecraftRestriction;
 
-	public TweakerMoreOption(Config annotation, IConfigBase option)
+	public TweakerMoreOption(Config annotation, TweakerMoreIConfigBase config)
 	{
 		this.annotation = annotation;
-		this.option = option;
+		this.config = config;
 		this.modRestriction = ModRestriction.of(annotation.restriction());
 		this.minecraftRestriction = ModRestriction.of(annotation.restriction(), c -> ModIds.minecraft.equals(c.value()));
 	}
@@ -36,6 +36,11 @@ public class TweakerMoreOption
 	public Config.Category getCategory()
 	{
 		return this.annotation.category();
+	}
+
+	public ModRestriction getModRestriction()
+	{
+		return this.modRestriction;
 	}
 
 	public boolean isEnabled()
@@ -53,9 +58,14 @@ public class TweakerMoreOption
 		return this.annotation.debug();
 	}
 
-	public IConfigBase getOption()
+	public boolean isDevOnly()
 	{
-		return this.option;
+		return this.annotation.devOnly();
+	}
+
+	public TweakerMoreIConfigBase getConfig()
+	{
+		return this.config;
 	}
 
 	private static Optional<String> getFooter(Collection<ModPredicate> modPredicates, boolean good, String footerTextKey)
@@ -63,10 +73,10 @@ public class TweakerMoreOption
 		if (modPredicates.size() > 0)
 		{
 			List<String> elements = Lists.newArrayList();
-			for (ModPredicate requirement : modPredicates)
+			for (ModPredicate modPredicate : modPredicates)
 			{
-				String element = StringUtils.translate("tweakermore.util.mod." + requirement.modId) + requirement.getVersionPredicatesString();
-				if ((good && !requirement.isSatisfied()) || (!good && requirement.isSatisfied()))
+				String element = StringUtils.translate("tweakermore.util.mod." + modPredicate.modId) + modPredicate.getVersionPredicatesString();
+				if ((good && !modPredicate.isSatisfied()) || (!good && modPredicate.isSatisfied()))
 				{
 					element = GuiBase.TXT_RED + GuiBase.TXT_ITALIC + element + GuiBase.TXT_GRAY + GuiBase.TXT_ITALIC;
 				}
