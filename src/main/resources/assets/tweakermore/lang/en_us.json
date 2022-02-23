@@ -14,7 +14,7 @@
   "tweakermore.config.legacyF3NLogic": "legacyF3NLogic",
   "tweakermore.config.legacyF3NLogic.comment": "Modify the logic of hotkey F3 + N back to 1.15 and before\n1.15- logic cheat sheet: creative -> spectator, other -> creative",
   "tweakermore.config.maxChatHudHeight": "maxChatHudHeight",
-  "tweakermore.config.maxChatHudHeight.comment": "The maximum height of the chat hud focused height",
+  "tweakermore.config.maxChatHudHeight.comment": "The maximum height of the chat hud",
   "tweakermore.config.netherPortalSoundChance": "netherPortalSoundChance",
   "tweakermore.config.netherPortalSoundChance.comment": "The chance for a nether portal block to play sound\nSet it to 0.001 or 0.0001 for less noisy portal",
   "tweakermore.config.safeAfkHealthThreshold": "safeAfkHealthThreshold",
