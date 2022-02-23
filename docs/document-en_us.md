@@ -158,6 +158,17 @@ Modify the logic of hotkey F3 + N back to 1.15 and before
   - `minecraft >=1.16`
 
 
+### maxChatHudHeight
+
+The maximum height of the chat hud
+
+- Category: Tweaks
+- Type: integer
+- Default value: `160`
+- Minimum value: `160`
+- Maximum value: `1000`
+
+
 ### netherPortalSoundChance
 
 The chance for a nether portal block to play sound
@@ -313,6 +324,20 @@ Apply the TweakerMore style translated text + original text label to all config 
 - Default value: `false`
 
 
+### eCraftItemScrollerCompact
+
+Fixed some item scroller functionality doesn't work with easier crafting mod
+
+e.g. broken mass craft
+
+- Category: Mods Tweaks
+- Type: boolean
+- Default value: `false`
+- Required mods:
+  - `easiercrafting`
+  - `itemscroller`
+
+
 ### ofUnlockF3FpsLimit
 
 Removed 10 FPS render limit for F3 debug hud
@@ -327,7 +352,7 @@ Removed 10 FPS render limit for F3 debug hud
 
 ### xmapNoSessionFinalizationWait
 
-Skip the session finalization operation when quit a world
+Skip the session finalization operation of xaero's worldmap when quit a world
 
 So no lag when quitting server or single player
 
