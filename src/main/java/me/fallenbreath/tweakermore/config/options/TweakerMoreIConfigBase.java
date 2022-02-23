@@ -33,9 +33,13 @@ public interface TweakerMoreIConfigBase extends IConfigBase
 		{
 			return line -> GuiBase.TXT_DARK_RED + line + GuiBase.TXT_RST;
 		}
-		if (tweakerMoreOption.isDebug() || tweakerMoreOption.isDevOnly())
+		if (tweakerMoreOption.isDebug())
 		{
 			return line -> GuiBase.TXT_BLUE + line + GuiBase.TXT_RST;
+		}
+		if (tweakerMoreOption.isDevOnly())
+		{
+			return line -> GuiBase.TXT_LIGHT_PURPLE + line + GuiBase.TXT_RST;
 		}
 		return line -> line;
 	}
