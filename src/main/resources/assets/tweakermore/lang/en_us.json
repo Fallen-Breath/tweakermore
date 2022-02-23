@@ -13,6 +13,8 @@
   "tweakermore.config.connectionSimulatedDelay.comment": "Client network delay simulator. Enabled when the value is greater than 0\nAdds given delay (in milliseconds) before any packet processing\nBasically it stably adds your ping to the server with the given value",
   "tweakermore.config.legacyF3NLogic": "legacyF3NLogic",
   "tweakermore.config.legacyF3NLogic.comment": "Modify the logic of hotkey F3 + N back to 1.15 and before\n1.15- logic cheat sheet: creative -> spectator, other -> creative",
+  "tweakermore.config.maxChatHudHeight": "maxChatHudHeight",
+  "tweakermore.config.maxChatHudHeight.comment": "The maximum height of the chat hud",
   "tweakermore.config.netherPortalSoundChance": "netherPortalSoundChance",
   "tweakermore.config.netherPortalSoundChance.comment": "The chance for a nether portal block to play sound\nSet it to 0.001 or 0.0001 for less noisy portal",
   "tweakermore.config.safeAfkHealthThreshold": "safeAfkHealthThreshold",
@@ -73,10 +75,12 @@
 
   "tweakermore.config.applyTweakerMoreOptionLabelGlobally": "applyTweakerMoreOptionLabelGlobally",
   "tweakermore.config.applyTweakerMoreOptionLabelGlobally.comment": "Apply the TweakerMore style translated text + original text label to all config GUIs using malilib",
+  "tweakermore.config.eCraftItemScrollerCompact": "eCraftItemScrollerCompact",
+  "tweakermore.config.eCraftItemScrollerCompact.comment": "Fixed some item scroller functionality doesn't work with easier crafting mod\ne.g. broken mass craft",
   "tweakermore.config.ofUnlockF3FpsLimit": "ofUnlockF3FpsLimit",
   "tweakermore.config.ofUnlockF3FpsLimit.comment": "Removed 10 FPS render limit for F3 debug hud",
   "tweakermore.config.xmapNoSessionFinalizationWait": "xmapNoSessionFinalizationWait",
-  "tweakermore.config.xmapNoSessionFinalizationWait.comment": "Skip the session finalization operation when quit a world\nSo no lag when quitting server or single player\nMight have some side effects though",
+  "tweakermore.config.xmapNoSessionFinalizationWait.comment": "Skip the session finalization operation of xaero's worldmap when quit a world\nSo no lag when quitting server or single player\nMight have some side effects though",
 
   "// Setting": "================================================",
 
@@ -94,6 +98,9 @@
   "tweakermore.config.tweakerMoreDebugInt.comment": "A integer parameter for TweakerMore debugging",
   "tweakermore.config.tweakerMoreDebugDouble": "tweakerMoreDebugDouble",
   "tweakermore.config.tweakerMoreDebugDouble.comment": "A double parameter for TweakerMore debugging",
+
+  "tweakermore.config.tweakerMoreDevPrintDoc": "tweakerMoreDevPrintDoc",
+  "tweakermore.config.tweakerMoreDevPrintDoc.comment": "Document Printer",
 
   "// GUI and Misc": "================================================",
 
@@ -126,5 +133,28 @@
   "tweakermore.util.mod.litematica": "litematica",
   "tweakermore.util.mod.optifabric": "optifine (optifabric)",
   "tweakermore.util.mod.xaeroworldmap": "xaero's worldmap",
-  "tweakermore.util.mod.raise-chat-limit": "raise-chat-limit"
+  "tweakermore.util.mod.raise-chat-limit": "raise-chat-limit",
+  "tweakermore.util.mod.easiercrafting": "EasierCrafting",
+
+  "// Document generator": "================================================",
+
+  "tweakermore.doc_gen.text.type": "Type",
+  "tweakermore.doc_gen.text.category": "Category",
+  "tweakermore.doc_gen.text.default_value": "Default value",
+  "tweakermore.doc_gen.text.minimum_value": "Minimum value",
+  "tweakermore.doc_gen.text.maximum_value": "Maximum value",
+  "tweakermore.doc_gen.text.options": "Available options",
+  "tweakermore.doc_gen.text.requirements": "Required mods",
+  "tweakermore.doc_gen.text.conflictions": "Conflicted mods",
+
+  "tweakermore.doc_gen.value.none": "none",
+
+  "tweakermore.doc_gen.type.boolean": "boolean",
+  "tweakermore.doc_gen.type.integer": "integer",
+  "tweakermore.doc_gen.type.double": "double",
+  "tweakermore.doc_gen.type.string": "string",
+  "tweakermore.doc_gen.type.string_list": "string list",
+  "tweakermore.doc_gen.type.option_list": "option list",
+  "tweakermore.doc_gen.type.hotkey": "hotkey",
+  "tweakermore.doc_gen.type.hotkey_togglable": "togglable hotkey"
 }

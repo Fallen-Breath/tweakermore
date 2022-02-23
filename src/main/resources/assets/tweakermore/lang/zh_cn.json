@@ -13,6 +13,8 @@
   "tweakermore.config.connectionSimulatedDelay.comment": "客户端网络延迟模拟器，于给定值大于0时启用\n在任何数据包处理前插入给定的延迟 (单位毫秒)\n可以认为它会稳定地将你的网络延迟ping值增加给定的值",
   "tweakermore.config.legacyF3NLogic": "旧版F3+N逻辑",
   "tweakermore.config.legacyF3NLogic.comment": "修改快捷键F3+N的逻辑至1.15及之前的逻辑\n提示，1.15以前的逻辑为：创造模式->旁观者模式、其他模式->创造模式",
+  "tweakermore.config.maxChatHudHeight": "最大聊天界面高度",
+  "tweakermore.config.maxChatHudHeight.comment": "聊天界面高度的最大值",
   "tweakermore.config.netherPortalSoundChance": "地狱门音效概率",
   "tweakermore.config.netherPortalSoundChance.comment": "地狱门方块播放音效的概率\n将其设为0.001或0.0001来让地狱门没那么吵",
   "tweakermore.config.safeAfkHealthThreshold": "安全挂机血量阈值",
@@ -73,10 +75,12 @@
 
   "tweakermore.config.applyTweakerMoreOptionLabelGlobally": "全局应用TweakerMore选项标签",
   "tweakermore.config.applyTweakerMoreOptionLabelGlobally.comment": "将TweakerMore风格的翻译文本+原始文本的选项标签应用到所有使用Malilib的配置界面",
+  "tweakermore.config.eCraftItemScrollerCompact": "EasierCrafting与ItemScroller兼容性修复",
+  "tweakermore.config.eCraftItemScrollerCompact.comment": "修复ItemScroller的部分功能无法与EasierCrafting模组一同工作\n例如无法使用的massCraft",
   "tweakermore.config.ofUnlockF3FpsLimit": "optifine解锁F3帧数限制",
   "tweakermore.config.ofUnlockF3FpsLimit.comment": "移除F3 HUD显示的10FPS帧数限制",
-  "tweakermore.config.xmapNoSessionFinalizationWait": "xaero地图跳过会话结束等待",
-  "tweakermore.config.xmapNoSessionFinalizationWait.comment": "退出一个世界时跳过小地图会话结束逻辑\n因此在退出服务器或单人游戏时不会出现卡顿\n不过可能会有一些副作用，但暂时没发现",
+  "tweakermore.config.xmapNoSessionFinalizationWait": "xaero世界地图跳过会话结束等待",
+  "tweakermore.config.xmapNoSessionFinalizationWait.comment": "退出一个世界时跳过xaero worldmap的会话结束逻辑\n因此在退出服务器或单人游戏时不会出现卡顿\n不过可能会有一些副作用，但暂时没发现",
 
   "// Setting": "================================================",
 
@@ -94,6 +98,9 @@
   "tweakermore.config.tweakerMoreDebugInt.comment": "用于调试TweakerMore的Int",
   "tweakermore.config.tweakerMoreDebugDouble": "TweakerMore调试用Double",
   "tweakermore.config.tweakerMoreDebugDouble.comment": "用于调试TweakerMore的Double",
+
+  "tweakermore.config.tweakerMoreDevPrintDoc": "TweakerMore开发-打印文档",
+  "tweakermore.config.tweakerMoreDevPrintDoc.comment": "文档生成器",
 
   "// GUI and Misc": "================================================",
 
@@ -126,5 +133,34 @@
   "tweakermore.util.mod.litematica": "litematica",
   "tweakermore.util.mod.optifabric": "optifine (optifabric)",
   "tweakermore.util.mod.xaeroworldmap": "xaero's worldmap",
-  "tweakermore.util.mod.raise-chat-limit": "raise-chat-limit"
+  "tweakermore.util.mod.raise-chat-limit": "raise-chat-limit",
+  "tweakermore.util.mod.easiercrafting": "EasierCrafting",
+
+  "// Document generator": "================================================",
+
+  "tweakermore.doc_gen.text.type": "类型",
+  "tweakermore.doc_gen.text.category": "分类",
+  "tweakermore.doc_gen.text.default_value": "默认值",
+  "tweakermore.doc_gen.text.minimum_value": "最小值",
+  "tweakermore.doc_gen.text.maximum_value": "最大值",
+  "tweakermore.doc_gen.text.options": "可用选项",
+  "tweakermore.doc_gen.text.requirements": "依赖模组",
+  "tweakermore.doc_gen.text.conflictions": "冲突模组",
+
+  "tweakermore.doc_gen.value.none": "无",
+
+  "tweakermore.doc_gen.type.boolean": "布尔值",
+  "tweakermore.doc_gen.type.integer": "整数",
+  "tweakermore.doc_gen.type.double": "实数",
+  "tweakermore.doc_gen.type.string": "字符串",
+  "tweakermore.doc_gen.type.string_list": "字符串列表",
+  "tweakermore.doc_gen.type.option_list": "选项列表",
+  "tweakermore.doc_gen.type.hotkey": "热键",
+  "tweakermore.doc_gen.type.hotkey_togglable": "可开关型热键",
+
+  "// Un-translated used malilib stuffs": "================================================",
+
+  "malilib.label.list_type.blacklist": "黑名单",
+  "malilib.label.list_type.none": "无",
+  "malilib.label.list_type.whitelist": "白名单"
 }

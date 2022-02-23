@@ -1,5 +1,6 @@
 package me.fallenbreath.tweakermore.mixins.core.gui;
 
+import com.mojang.datafixers.util.Pair;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetConfigOption;
@@ -12,8 +13,10 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 import java.util.Objects;
@@ -64,14 +67,33 @@ public abstract class WidgetListConfigOptionsMixin extends WidgetListConfigOptio
 				if (wrapper.getType() == GuiConfigsBase.ConfigOptionWrapper.Type.CONFIG)
 				{
 					IConfigBase config = Objects.requireNonNull(wrapper.getConfig());
+					maxWidth = Math.max(maxWidth, this.getStringWidth(config.getConfigGuiDisplayName()));
 					if (TweakerMoreOptionLabel.willShowOriginalLines(new String[]{config.getConfigGuiDisplayName()}, new String[]{config.getName()}))
 					{
-						int optionWidth = (int)(this.getStringWidth(config.getName()) * TweakerMoreOptionLabel.TRANSLATION_SCALE);
-						maxWidth = Math.max(maxWidth, optionWidth);
+						maxWidth = Math.max(maxWidth, (int)(this.getStringWidth(config.getName()) * TweakerMoreOptionLabel.TRANSLATION_SCALE));
 					}
 				}
 			}
 		}
 		return maxWidth;
+	}
+
+	@Inject(
+			method = "reCreateListEntryWidgets",
+			at = @At(
+					value = "INVOKE",
+					target = "Lfi/dy/masa/malilib/gui/widgets/WidgetListConfigOptionsBase;reCreateListEntryWidgets()V",
+					remap = false
+			),
+			remap = false
+	)
+	private void adjustConfigAndOptionPanelWidth(CallbackInfo ci)
+	{
+		if (this.parent instanceof TweakerMoreConfigGui)
+		{
+			Pair<Integer, Integer> result = ((TweakerMoreConfigGui)this.parent).adjustWidths(this.totalWidth, this.maxLabelWidth);
+			this.maxLabelWidth = result.getFirst();
+			this.configWidth = result.getSecond();
+		}
 	}
 }

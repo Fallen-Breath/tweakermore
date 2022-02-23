@@ -1,6 +1,6 @@
 package me.fallenbreath.tweakermore.util.mixin;
 
-import me.fallenbreath.tweakermore.util.dependency.DependencyMixinConfigPlugin;
+import me.fallenbreath.conditionalmixin.api.mixin.RestrictiveMixinConfigPlugin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.tree.ClassNode;
@@ -9,12 +9,12 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import java.util.List;
 import java.util.Set;
 
-public class TweakerMoreMixinConfigPlugin extends DependencyMixinConfigPlugin
+public class TweakerMoreMixinConfigPlugin extends RestrictiveMixinConfigPlugin
 {
 	private final Logger LOGGER = LogManager.getLogger();
 
 	@Override
-	protected void onDependencyCheckFailed(String mixinClassName, String reason)
+	protected void onRestrictionCheckFailed(String mixinClassName, String reason)
 	{
 		LOGGER.info("[TweakerMore] Disabled mixin {} due to {}", mixinClassName, reason);
 	}
