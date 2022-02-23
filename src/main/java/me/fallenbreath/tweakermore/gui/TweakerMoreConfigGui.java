@@ -119,11 +119,11 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
     public Pair<Integer, Integer> adjustWidths(int guiWidth, int maxTextWidth)
     {
         int labelWidth;
-        int panelWidth = 160;
+        int panelWidth = 190;
         guiWidth -= 75;
 
         // tweak label width first, to make sure the panel is not too close or too far from the label
-        labelWidth = MathHelper.clamp(guiWidth - panelWidth, maxTextWidth - 5, maxTextWidth + 50);
+        labelWidth = MathHelper.clamp(guiWidth - panelWidth, maxTextWidth - 5, maxTextWidth + 100);
         // decrease the panel width if space is not enough
         panelWidth = MathHelper.clamp(guiWidth - labelWidth, 100, panelWidth);
         // decrease the label width for a bit if space is still way not enough (the label text might overlap with the panel now)
