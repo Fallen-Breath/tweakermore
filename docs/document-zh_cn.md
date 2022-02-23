@@ -88,7 +88,7 @@
 
 - 分类: 功能
 - 类型: 可开关型热键
-- 默认值: `false`, `false`
+- 默认值: *无*, `false`
 
 
 ### 禁用活塞方块破坏粒子效果 (disablePistonBlockBreakingParticle)
@@ -97,7 +97,7 @@
 
 - 分类: 功能
 - 类型: 可开关型热键
-- 默认值: `false`, `false`
+- 默认值: *无*, `false`
 - 依赖模组:
   - `minecraft >=1.17`
 
@@ -108,7 +108,7 @@
 
 - 分类: 功能
 - 类型: 可开关型热键
-- 默认值: `false`, `false`
+- 默认值: *无*, `false`
 
 
 ### 自动补货黑名单 (handRestockBlackList)
@@ -253,7 +253,7 @@ tweakHandRestock功能的物品名单约束类型
 
 - 分类: 功能
 - 类型: 可开关型热键
-- 默认值: `false`, `false`
+- 默认值: *无*, `false`
 - 依赖模组:
   - `itemscroller`
 
@@ -268,7 +268,7 @@ tweakHandRestock功能的物品名单约束类型
 
 - 分类: 功能
 - 类型: 可开关型热键
-- 默认值: `false`, `false`
+- 默认值: *无*, `false`
 - 依赖模组:
   - `itemscroller`
 
@@ -283,7 +283,7 @@ tweakHandRestock功能的物品名单约束类型
 
 - 分类: 功能
 - 类型: 可开关型热键
-- 默认值: `false`, `false`
+- 默认值: *无*, `false`
 - 依赖模组:
   - `tweakeroo`
   - `litematica`
@@ -297,7 +297,7 @@ tweakHandRestock功能的物品名单约束类型
 
 - 分类: 功能
 - 类型: 可开关型热键
-- 默认值: `false`, `false`
+- 默认值: *无*, `false`
 
 
 ### 村民交易次数显示 (villagerOfferUsesDisplay)
@@ -406,6 +406,6 @@ TweakerMore的调试模式
 
 - 分类: 配置
 - 类型: 可开关型热键
-- 默认值: `false`, `false`
+- 默认值: *无*, `false`
 
 

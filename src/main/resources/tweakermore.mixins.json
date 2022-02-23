@@ -15,6 +15,7 @@
     "core.gui.WidgetListConfigOptionsMixin",
     "core.migration.ConfigsMixin",
     "doc.ConfigBaseAccessor",
+    "doc.MinecraftClientMixin",
     "tweaks.bossBarMaxEntry.BossBarHudMixin",
     "tweaks.bossBarScale.BossBarHudMixin",
     "tweaks.chatMessageLimit.ChatHudMixin",

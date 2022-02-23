@@ -88,7 +88,7 @@ Yeets client-side light updates
 
 - Category: Tweaks
 - Type: togglable hotkey
-- Default value: `false`, `false`
+- Default value: *none*, `false`
 
 
 ### disablePistonBlockBreakingParticle
@@ -97,7 +97,7 @@ Remove block breaking particles when pistons break blocks
 
 - Category: Tweaks
 - Type: togglable hotkey
-- Default value: `false`, `false`
+- Default value: *none*, `false`
 - Required mods:
   - `minecraft >=1.17`
 
@@ -108,7 +108,7 @@ Disable particle of redstone wire
 
 - Category: Tweaks
 - Type: togglable hotkey
-- Default value: `false`, `false`
+- Default value: *none*, `false`
 
 
 ### handRestockBlackList
@@ -253,7 +253,7 @@ and then close the container
 
 - Category: Tweaks
 - Type: togglable hotkey
-- Default value: `false`, `false`
+- Default value: *none*, `false`
 - Required mods:
   - `itemscroller`
 
@@ -268,7 +268,7 @@ and then close the container
 
 - Category: Tweaks
 - Type: togglable hotkey
-- Default value: `false`, `false`
+- Default value: *none*, `false`
 - Required mods:
   - `itemscroller`
 
@@ -283,7 +283,7 @@ Does not work with easy place mode
 
 - Category: Tweaks
 - Type: togglable hotkey
-- Default value: `false`, `false`
+- Default value: *none*, `false`
 - Required mods:
   - `tweakeroo`
   - `litematica`
@@ -297,7 +297,7 @@ Health threshold to disconnect can be set via safeAfkHealthThreshold
 
 - Category: Tweaks
 - Type: togglable hotkey
-- Default value: `false`, `false`
+- Default value: *none*, `false`
 
 
 ### villagerOfferUsesDisplay
@@ -406,6 +406,6 @@ and debugging related functions will be enabled
 
 - Category: Setting
 - Type: togglable hotkey
-- Default value: `false`, `false`
+- Default value: *none*, `false`
 
 
