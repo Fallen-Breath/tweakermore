@@ -7,7 +7,7 @@ import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
 
-import java.util.Optional;
+import java.util.function.Function;
 
 public interface TweakerMoreIConfigBase extends IConfigBase
 {
@@ -21,21 +21,26 @@ public interface TweakerMoreIConfigBase extends IConfigBase
 		return StringUtils.translate(TWEAKERMORE_NAMESPACE_PREFIX + this.getName());
 	}
 
-	static String modifyDisabledOptionLabelLine(String line)
+	default TweakerMoreOption getTweakerMoreOption()
 	{
-		return GuiBase.TXT_DARK_RED + line + GuiBase.TXT_RST;
+		return TweakerMoreConfigs.getOptionFromConfig(this).orElseThrow(() -> new RuntimeException("TweakerMoreIConfigBase " + this + " not in TweakerMoreConfigs"));
 	}
 
-	default Optional<TweakerMoreOption> getTweakerMoreOptionOptional()
+	default Function<String, String> getGuiDisplayLineModifier()
 	{
-		return TweakerMoreConfigs.getOptionFromConfig(this);
-	}
-
-	default boolean isEnabled()
-	{
-		return this.getTweakerMoreOptionOptional().map(TweakerMoreOption::isEnabled).orElseGet(() -> {
-			TweakerMoreMod.LOGGER.warn("TweakerMoreIConfigBase {} not in TweakerMoreConfigs", this);
-			return true;
-		});
+		TweakerMoreOption tweakerMoreOption = this.getTweakerMoreOption();
+		if (!tweakerMoreOption.isEnabled())
+		{
+			return line -> GuiBase.TXT_DARK_RED + line + GuiBase.TXT_RST;
+		}
+		if (tweakerMoreOption.isDebug())
+		{
+			return line -> GuiBase.TXT_BLUE + line + GuiBase.TXT_RST;
+		}
+		if (tweakerMoreOption.isDevOnly())
+		{
+			return line -> GuiBase.TXT_LIGHT_PURPLE + line + GuiBase.TXT_RST;
+		}
+		return line -> line;
 	}
 }

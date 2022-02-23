@@ -12,12 +12,11 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
-import net.minecraft.util.math.MathHelper;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
@@ -41,22 +40,6 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	private boolean isTweakerMoreConfigGui()
 	{
 		return this.parent instanceof WidgetListConfigOptions && ((WidgetListConfigOptionsAccessor)this.parent).getParent() instanceof TweakerMoreConfigGui;
-	}
-
-	@ModifyVariable(
-			method = "addConfigOption",
-			at = @At("HEAD"),
-			argsOnly = true,
-			index = 4,
-			remap = false
-	)
-	private int rightAlignedConfigPanel(int labelWidth, int x, int y, float zLevel, int labelWidth_, int configWidth, IConfigBase config)
-	{
-		if (isTweakerMoreConfigGui())
-		{
-			labelWidth = MathHelper.clamp(this.width - configWidth - 59, 80, 190);
-		}
-		return labelWidth;
 	}
 
 	private boolean showOriginalTextsThisTime;
@@ -88,9 +71,9 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 			args.set(5, null);  // cancel original call
 
 			Function<String, String> modifier = s -> s;
-			if (config instanceof TweakerMoreIConfigBase && !((TweakerMoreIConfigBase)config).isEnabled())
+			if (config instanceof TweakerMoreIConfigBase)
 			{
-				modifier = TweakerMoreIConfigBase::modifyDisabledOptionLabelLine;
+				modifier = ((TweakerMoreIConfigBase)config).getGuiDisplayLineModifier();
 			}
 			TweakerMoreOptionLabel label = new TweakerMoreOptionLabel(x, y, width, height, textColor, lines, new String[]{config.getName()}, modifier);
 			this.addWidget(label);
@@ -162,14 +145,14 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	{
 		IKeybind keybind = config.getKeybind();
 
-		int triggerBtnWidth = 60;
+		int triggerBtnWidth = (configWidth - 24) / 2;
 		ButtonGeneric triggerButton = new ButtonGeneric(
 				x, y, triggerBtnWidth, 20,
 				StringUtils.translate("tweakermore.gui.trigger_button.text"),
 				StringUtils.translate("tweakermore.gui.trigger_button.hover", config.getName())
 		);
-		IHotkeyCallback callback = ((KeybindMultiAccessor)keybind).getCallback();
 		this.addButton(triggerButton, (button, mouseButton) -> {
+			IHotkeyCallback callback = ((KeybindMultiAccessor)keybind).getCallback();
 			KeyAction activateOn = keybind.getSettings().getActivateOn();
 			if (activateOn == KeyAction.BOTH || activateOn == KeyAction.PRESS)
 			{
