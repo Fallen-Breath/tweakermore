@@ -1,6 +1,8 @@
 package me.fallenbreath.tweakermore.mixins.core.gui;
 
 import fi.dy.masa.malilib.config.IConfigBase;
+import fi.dy.masa.malilib.config.IConfigBoolean;
+import fi.dy.masa.malilib.config.IConfigResettable;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.gui.button.ConfigButtonKeybind;
@@ -12,11 +14,11 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.ModifyArgs;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
@@ -175,5 +177,23 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 
 		this.addButton(keybindButton, this.host.getButtonPressListener());
 		this.addKeybindResetButton(x, y, keybind, keybindButton);
+	}
+
+	@ModifyVariable(
+			method = "addBooleanAndHotkeyWidgets",
+			at = @At(
+					value = "STORE",
+					ordinal = 0
+			),
+			ordinal = 3,
+			remap = false
+	)
+	private int tweakerMoreDynamicBooleanButtonWidth(int booleanBtnWidth, int x, int y, int configWidth, IConfigResettable resettableConfig, IConfigBoolean booleanConfig, IKeybind keybind)
+	{
+		if (this.isTweakerMoreConfigGui())
+		{
+			booleanBtnWidth = (configWidth - 24) / 2;
+		}
+		return booleanBtnWidth;
 	}
 }

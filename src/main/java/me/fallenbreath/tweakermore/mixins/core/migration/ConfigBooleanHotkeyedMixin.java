@@ -4,10 +4,10 @@ import com.google.gson.JsonElement;
 import fi.dy.masa.malilib.MaLiLib;
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import me.fallenbreath.tweakermore.util.dependency.Condition;
-import me.fallenbreath.tweakermore.util.dependency.Restriction;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * which breaks compatibility of config files generated in previous mc versions
  * here comes a hacky fix, still for tweakermore's config only xd
  */
-@Restriction(enableWhen = @Condition(value = ModIds.malilib, versionPredicates = ">=0.11.5"))
+@Restriction(require = @Condition(value = ModIds.malilib, versionPredicates = ">=0.11.5"))
 @Mixin(ConfigBooleanHotkeyed.class)
 public abstract class ConfigBooleanHotkeyedMixin extends ConfigBoolean
 {
