@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.Slice;
 
-@Restriction(enableWhen = @Condition(ModIds.tweakeroo))
+@Restriction(require = @Condition(ModIds.tweakeroo))
 @Mixin(InventoryUtils.class)
 public abstract class InventoryUtilsMixin
 {

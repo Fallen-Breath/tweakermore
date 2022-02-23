@@ -56,13 +56,13 @@ public class TweakerMoreConfigs
 	@Config(Config.Type.GENERIC)
 	public static final TweakerMoreConfigDouble BOSS_BAR_SCALE = newConfigDouble("bossBarScale", 1, 0.001, 2);
 
-	@Config(value = Config.Type.GENERIC, restriction = @Restriction(disableWhen = @Condition(raise_chat_limit)))
+	@Config(value = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(raise_chat_limit)))
 	public static final TweakerMoreConfigInteger CHAT_MESSAGE_LIMIT = newConfigInteger("chatMessageLimit", 100, 100, 10000);
 
 	@Config(Config.Type.GENERIC)
 	public static final TweakerMoreConfigInteger CONNECTION_SIMULATED_DELAY = newConfigInteger("connectionSimulatedDelay", 0, 0, 15_000);
 
-	@Config(value = Config.Type.GENERIC, restriction = @Restriction(enableWhen = @Condition(value = minecraft, versionPredicates = ">=1.16")))
+	@Config(value = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.16")))
 	public static final TweakerMoreConfigBoolean LEGACY_F3_N_LOGIC = newConfigBoolean("legacyF3NLogic", false);
 
 	@Config(Config.Type.GENERIC)
@@ -90,13 +90,13 @@ public class TweakerMoreConfigs
 
 	// List
 
-	@Config(value = Config.Type.LIST, restriction = @Restriction(enableWhen = @Condition(tweakeroo)))
+	@Config(value = Config.Type.LIST, restriction = @Restriction(require = @Condition(tweakeroo)))
 	public static final TweakerMoreConfigOptionList HAND_RESTORE_LIST_TYPE = newConfigOptionList("handRestockListType", UsageRestriction.ListType.NONE);
 
-	@Config(value = Config.Type.LIST, restriction = @Restriction(enableWhen = @Condition(tweakeroo)))
+	@Config(value = Config.Type.LIST, restriction = @Restriction(require = @Condition(tweakeroo)))
 	public static final TweakerMoreConfigStringList HAND_RESTORE_WHITELIST = newConfigStringList("handRestockWhiteList", ImmutableList.of(RegistryUtil.getItemId(Items.BUCKET)));
 
-	@Config(value = Config.Type.LIST, restriction = @Restriction(enableWhen = @Condition(tweakeroo)))
+	@Config(value = Config.Type.LIST, restriction = @Restriction(require = @Condition(tweakeroo)))
 	public static final TweakerMoreConfigStringList HAND_RESTORE_BLACKLIST = newConfigStringList("handRestockBlackList", ImmutableList.of(RegistryUtil.getItemId(Items.LAVA_BUCKET)));
 
 	public static final ItemRestriction HAND_RESTORE_RESTRICTION = new ItemRestriction();
@@ -106,15 +106,15 @@ public class TweakerMoreConfigs
 
 	// Tweak
 
-	@Config(value = Config.Type.TWEAK, restriction = @Restriction(enableWhen = @Condition(itemscroller)))
+	@Config(value = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)))
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_CLEAN_CONTAINER = newConfigBooleanHotkeyed("tweakmAutoCleanContainer");
 
-	@Config(value = Config.Type.TWEAK, restriction = @Restriction(enableWhen = @Condition(itemscroller)))
+	@Config(value = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)))
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_FILL_CONTAINER = newConfigBooleanHotkeyed("tweakmAutoFillContainer");
 
 	@Config(
 			value = Config.Type.TWEAK,
-			restriction = @Restriction(enableWhen = {
+			restriction = @Restriction(require = {
 					@Condition(tweakeroo),
 					@Condition(litematica)
 			})
@@ -129,7 +129,7 @@ public class TweakerMoreConfigs
 	@Config(Config.Type.DISABLE)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_LIGHT_UPDATES = newConfigBooleanHotkeyed("disableLightUpdates");
 
-	@Config(value = Config.Type.DISABLE, restriction = @Restriction(enableWhen = @Condition(value = minecraft, versionPredicates = ">=1.17")))
+	@Config(value = Config.Type.DISABLE, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.17")))
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_PISTON_BLOCK_BREAKING_PARTICLE = newConfigBooleanHotkeyed("disablePistonBlockBreakingParticle");
 
 	@Config(Config.Type.DISABLE)
@@ -144,7 +144,7 @@ public class TweakerMoreConfigs
 
 	@Config(
 			value = Config.Type.GENERIC,
-			restriction = @Restriction(enableWhen = {
+			restriction = @Restriction(require = {
 					@Condition(easier_crafting),
 					@Condition(itemscroller)
 			}),
@@ -154,7 +154,7 @@ public class TweakerMoreConfigs
 
 	@Config(
 			value = Config.Type.GENERIC,
-			restriction = @Restriction(enableWhen = {
+			restriction = @Restriction(require = {
 					@Condition(optifine),
 					@Condition(value = minecraft, versionPredicates = ">=1.15")
 			}),
@@ -164,7 +164,7 @@ public class TweakerMoreConfigs
 
 	@Config(
 			value = Config.Type.GENERIC,
-			restriction = @Restriction(enableWhen = @Condition(xaero_worldmap)),
+			restriction = @Restriction(require = @Condition(xaero_worldmap)),
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigBoolean XMAP_NO_SESSION_FINALIZATION_WAIT = newConfigBoolean("xmapNoSessionFinalizationWait", false);

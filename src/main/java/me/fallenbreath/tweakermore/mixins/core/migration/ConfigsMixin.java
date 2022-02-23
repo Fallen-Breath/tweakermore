@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.io.File;
 
-@Restriction(enableWhen = @Condition(ModIds.tweakeroo))
+@Restriction(require = @Condition(ModIds.tweakeroo))
 @Mixin(Configs.class)
 public abstract class ConfigsMixin
 {

@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * It's stolen from https://github.com/Fallen-Breath/raise-chat-limit so make sure it doesnt crash with it
  */
-@Restriction(disableWhen = @Condition(ModIds.raise_chat_limit))
+@Restriction(conflict = @Condition(ModIds.raise_chat_limit))
 @Mixin(ChatHud.class)
 public abstract class ChatHudMixin
 {

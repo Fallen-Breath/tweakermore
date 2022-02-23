@@ -13,8 +13,8 @@ public class ModRestriction
 
 	private ModRestriction(Restriction restriction, Predicate<Condition> conditionPredicate)
 	{
-		this.requirements = generateRequirement(restriction.enableWhen(), conditionPredicate);
-		this.conflictions = generateRequirement(restriction.disableWhen(), conditionPredicate);
+		this.requirements = generateRequirement(restriction.require(), conditionPredicate);
+		this.conflictions = generateRequirement(restriction.conflict(), conditionPredicate);
 		this.satisfied = this.requirements.stream().allMatch(ModPredicate::isSatisfied) && this.conflictions.stream().noneMatch(ModPredicate::isSatisfied);
 	}
 

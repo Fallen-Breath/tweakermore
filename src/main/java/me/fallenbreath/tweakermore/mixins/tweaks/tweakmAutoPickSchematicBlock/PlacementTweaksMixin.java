@@ -38,7 +38,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Restriction(enableWhen = {@Condition(ModIds.tweakeroo), @Condition(ModIds.litematica)})
+@Restriction(require = {@Condition(ModIds.tweakeroo), @Condition(ModIds.litematica)})
 @Mixin(PlacementTweaks.class)
 public abstract class PlacementTweaksMixin
 {

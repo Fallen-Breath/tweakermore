@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Restriction(enableWhen = {@Condition(ModIds.easier_crafting), @Condition(ModIds.itemscroller)})
+@Restriction(require = {@Condition(ModIds.easier_crafting), @Condition(ModIds.itemscroller)})
 @Mixin(Configs.class)
 public abstract class ConfigsMixin
 {

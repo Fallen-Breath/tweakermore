@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Restriction(enableWhen = @Condition(ModIds.itemscroller))
+@Restriction(require = @Condition(ModIds.itemscroller))
 @Mixin(Container.class)
 public abstract class ContainerMixin
 {

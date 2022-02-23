@@ -8,7 +8,7 @@ import net.minecraft.container.Slot;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Restriction(enableWhen = @Condition(ModIds.itemscroller))
+@Restriction(require = @Condition(ModIds.itemscroller))
 @Mixin(InventoryUtils.class)
 public interface ItemScrollerInventoryUtilsAccessor
 {

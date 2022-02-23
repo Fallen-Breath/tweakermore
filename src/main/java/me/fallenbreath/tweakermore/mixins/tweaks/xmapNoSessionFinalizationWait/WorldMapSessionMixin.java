@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Restriction(enableWhen = @Condition(ModIds.xaero_worldmap))
+@Restriction(require = @Condition(ModIds.xaero_worldmap))
 @Pseudo
 @Mixin(targets = "xaero.map.WorldMapSession", remap = false)
 public abstract class WorldMapSessionMixin

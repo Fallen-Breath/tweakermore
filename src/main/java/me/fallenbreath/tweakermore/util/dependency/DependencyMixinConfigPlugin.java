@@ -36,7 +36,7 @@ public abstract class DependencyMixinConfigPlugin implements IMixinConfigPlugin
 			AnnotationNode dependency = getDependencyAnnotation(mixinClassName);
 			if (dependency != null)
 			{
-				List<AnnotationNode> enableConditions = Annotations.getValue(dependency, "enableWhen", true);
+				List<AnnotationNode> enableConditions = Annotations.getValue(dependency, "require", true);
 				for (Result result : this.checkConditions(enableConditions))
 				{
 					if (!result.success)
@@ -45,7 +45,7 @@ public abstract class DependencyMixinConfigPlugin implements IMixinConfigPlugin
 						return false;
 					}
 				}
-				List<AnnotationNode> disableConditions = Annotations.getValue(dependency, "disableWhen", true);
+				List<AnnotationNode> disableConditions = Annotations.getValue(dependency, "conflict", true);
 				for (Result result : this.checkConditions(disableConditions))
 				{
 					if (result.success)

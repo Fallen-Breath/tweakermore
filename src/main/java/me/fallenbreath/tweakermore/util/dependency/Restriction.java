@@ -9,11 +9,11 @@ public @interface Restriction
 	/**
 	 * Enable only when all given conditions are satisfied, like the "depends" entry in "fabric.mod.json"
 	 */
-	Condition[] enableWhen() default {};
+	Condition[] require() default {};
 
 	/**
 	 * Disable if any given condition is satisfied, like the "conflicts" entry in "fabric.mod.json"
-	 * Overwrites field enableWhen
+	 * Has higher priority than field "require"
 	 */
-	Condition[] disableWhen() default {};
+	Condition[] conflict() default {};
 }
