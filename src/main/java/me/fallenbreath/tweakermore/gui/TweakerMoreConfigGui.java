@@ -1,6 +1,7 @@
 package me.fallenbreath.tweakermore.gui;
 
 import com.google.common.collect.Lists;
+import com.mojang.datafixers.util.Pair;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
@@ -14,6 +15,7 @@ import me.fallenbreath.tweakermore.config.Config;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
 import me.fallenbreath.tweakermore.util.FabricUtil;
+import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -114,10 +116,24 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
         }
     }
 
-    @Override
-    protected int getConfigWidth()
+    public Pair<Integer, Integer> adjustWidths(int guiWidth, int maxTextWidth)
     {
-        return 160;
+        int labelWidth;
+        int panelWidth = 160;
+        guiWidth -= 75;
+
+        // tweak label width first, to make sure the panel is not too close or too far from the label
+        labelWidth = MathHelper.clamp(guiWidth - panelWidth, maxTextWidth - 5, maxTextWidth + 50);
+        // decrease the panel width if space is not enough
+        panelWidth = MathHelper.clamp(guiWidth - labelWidth, 100, panelWidth);
+        // decrease the label width for a bit if space is still way not enough (the label text might overlap with the panel now)
+        labelWidth = MathHelper.clamp(guiWidth - panelWidth + 25, labelWidth - Math.max((int)(maxTextWidth * 0.4), 30), labelWidth);
+
+        // just in case
+        labelWidth = Math.max(labelWidth, 0);
+        panelWidth = Math.max(panelWidth, 0);
+
+        return Pair.of(labelWidth, panelWidth);
     }
 
     @Override

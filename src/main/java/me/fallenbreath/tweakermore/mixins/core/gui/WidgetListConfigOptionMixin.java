@@ -17,9 +17,11 @@ import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.gui.HotkeyedBooleanResetListener;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
-import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
@@ -69,22 +71,6 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 				this.initialKeybindSettings = ((ConfigBooleanHotkeyed)config).getKeybind().getSettings();
 			}
 		}
-	}
-
-	@ModifyVariable(
-			method = "addConfigOption",
-			at = @At("HEAD"),
-			argsOnly = true,
-			index = 4,
-			remap = false
-	)
-	private int rightAlignedConfigPanel(int labelWidth, int x, int y, float zLevel, int labelWidth_, int configWidth, IConfigBase config)
-	{
-		if (isTweakerMoreConfigGui())
-		{
-			labelWidth = MathHelper.clamp(this.width - configWidth - 49, 80, 190);
-		}
-		return labelWidth;
 	}
 
 	private boolean showOriginalTextsThisTime;
@@ -206,7 +192,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	{
 		IKeybind keybind = config.getKeybind();
 
-		int triggerBtnWidth = 60;
+		int triggerBtnWidth = (configWidth - 24) / 2;
 		ButtonGeneric triggerButton = new ButtonGeneric(
 				x, y, triggerBtnWidth, 20,
 				StringUtils.translate("tweakermore.gui.trigger_button.text"),
@@ -242,7 +228,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	{
 		IKeybind keybind = config.getKeybind();
 
-		int booleanBtnWidth = 60;
+		int booleanBtnWidth = (configWidth - 24) / 2;
 		ConfigButtonBoolean booleanButton = new ConfigButtonBoolean(x, y, booleanBtnWidth, 20, config);
 		x += booleanBtnWidth + 2;
 		configWidth -= booleanBtnWidth + 2 + 22;
