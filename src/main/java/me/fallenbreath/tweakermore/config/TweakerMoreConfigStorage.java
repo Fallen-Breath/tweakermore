@@ -7,6 +7,7 @@ import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IConfigHandler;
 import fi.dy.masa.malilib.util.JsonUtils;
 import fi.dy.masa.malilib.util.restrictions.UsageRestriction;
+import me.fallenbreath.tweakermore.util.FabricUtil;
 import me.fallenbreath.tweakermore.util.FileUtil;
 
 import java.io.File;
@@ -37,8 +38,8 @@ public class TweakerMoreConfigStorage implements IConfigHandler
 	private static <T extends IConfigBase> List<T> getConfigOptions(Config.Type optionType)
 	{
 		return (List<T>)TweakerMoreConfigs.getOptions(optionType).stream().
-//				filter(o -> !o.isDebug()).
-				map(TweakerMoreOption::getOption).
+				filter(o -> !o.isDevOnly() || FabricUtil.isDevelopmentEnvironment()).
+				map(TweakerMoreOption::getConfig).
 				collect(Collectors.toList());
 	}
 

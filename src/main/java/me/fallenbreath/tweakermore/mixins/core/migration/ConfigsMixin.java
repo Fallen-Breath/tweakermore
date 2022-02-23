@@ -3,10 +3,10 @@ package me.fallenbreath.tweakermore.mixins.core.migration;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import fi.dy.masa.tweakeroo.config.Configs;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigStorage;
 import me.fallenbreath.tweakermore.util.ModIds;
-import me.fallenbreath.tweakermore.util.dependency.Condition;
-import me.fallenbreath.tweakermore.util.dependency.Restriction;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.io.File;
 
-@Restriction(enableWhen = @Condition(ModIds.tweakeroo))
+@Restriction(require = @Condition(ModIds.tweakeroo))
 @Mixin(Configs.class)
 public abstract class ConfigsMixin
 {

@@ -30,6 +30,7 @@
 
   "depends": {
     "fabricloader": ">=0.10.4",
+    "conditional-mixin": "*",
     "malilib": "*"
   }
 }
