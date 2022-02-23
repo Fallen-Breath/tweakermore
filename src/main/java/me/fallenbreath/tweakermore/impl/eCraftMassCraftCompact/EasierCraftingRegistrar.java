@@ -3,7 +3,7 @@ package me.fallenbreath.tweakermore.impl.eCraftMassCraftCompact;
 import fi.dy.masa.itemscroller.recipes.CraftingHandler;
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.container.CraftingResultSlot;
+import net.minecraft.screen.slot.CraftingResultSlot;
 
 public class EasierCraftingRegistrar
 {
