@@ -158,6 +158,17 @@ tweakHandRestock功能的物品名单约束类型
   - `minecraft >=1.16`
 
 
+### 最大聊天界面高度 (maxChatHudHeight)
+
+聊天界面高度的最大值
+
+- 分类: 功能
+- 类型: 整数
+- 默认值: `160`
+- 最小值: `160`
+- 最大值: `1000`
+
+
 ### 地狱门音效概率 (netherPortalSoundChance)
 
 地狱门方块播放音效的概率
@@ -313,6 +324,20 @@ tweakHandRestock功能的物品名单约束类型
 - 默认值: `false`
 
 
+### EasierCrafting与ItemScroller兼容性修复 (eCraftItemScrollerCompact)
+
+修复ItemScroller的部分功能无法与EasierCrafting模组一同工作
+
+例如无法使用的massCraft
+
+- 分类: 模组修改
+- 类型: 布尔值
+- 默认值: `false`
+- 依赖模组:
+  - `easiercrafting`
+  - `itemscroller`
+
+
 ### optifine解锁F3帧数限制 (ofUnlockF3FpsLimit)
 
 移除F3 HUD显示的10FPS帧数限制
@@ -325,9 +350,9 @@ tweakHandRestock功能的物品名单约束类型
   - `minecraft >=1.15`
 
 
-### xaero地图跳过会话结束等待 (xmapNoSessionFinalizationWait)
+### xaero世界地图跳过会话结束等待 (xmapNoSessionFinalizationWait)
 
-退出一个世界时跳过小地图会话结束逻辑
+退出一个世界时跳过xaero worldmap的会话结束逻辑
 
 因此在退出服务器或单人游戏时不会出现卡顿
 
