@@ -53,7 +53,7 @@ public class DocumentPrinter
 	{
 		if (config instanceof IHotkeyTogglable)
 		{
-			return Lists.newArrayList(((IHotkeyTogglable)config).getDefaultStringValue(), String.valueOf(((IHotkeyTogglable)config).getDefaultBooleanValue()));
+			return Lists.newArrayList(((IHotkeyTogglable)config).getKeybind().getDefaultStringValue(), String.valueOf(((IHotkeyTogglable)config).getDefaultBooleanValue()));
 		}
 		if (config instanceof IStringRepresentable)
 		{
