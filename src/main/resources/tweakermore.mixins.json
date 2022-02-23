@@ -26,6 +26,7 @@
     "tweaks.eCraftItemScrollerCompact.CraftingHandlerMixin",
     "tweaks.handRestoreRestriction.InventoryUtilsMixin",
     "tweaks.handRestoreRestriction.PlacementTweaksMixin",
+    "tweaks.maxChatHudHeight.ChatHudMixin",
     "tweaks.netherPortalSoundChance.NetherPortalBlockMixin",
     "tweaks.ofUnlockF3FpsLimit.DebugHudMixin",
     "tweaks.prioritizedCommandSuggestions.CommandSuggestorMixin",

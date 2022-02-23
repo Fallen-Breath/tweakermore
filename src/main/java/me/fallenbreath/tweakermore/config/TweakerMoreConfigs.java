@@ -66,6 +66,9 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBoolean LEGACY_F3_N_LOGIC = newConfigBoolean("legacyF3NLogic", false);
 
 	@Config(Config.Type.GENERIC)
+	public static final TweakerMoreConfigInteger MAX_CHAT_HUD_HEIGHT = newConfigInteger("maxChatHudHeight", 160, 160, 1000);
+
+	@Config(Config.Type.GENERIC)
 	public static final TweakerMoreConfigDouble NETHER_PORTAL_SOUND_CHANCE = newConfigDouble("netherPortalSoundChance", 0.01D, 0.0D, 0.01D);
 
 	@Config(Config.Type.GENERIC)
