@@ -131,6 +131,9 @@ public class TweakerMoreConfigs
 	@Config(Config.Type.TWEAK)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SAFE_AFK = newConfigBooleanHotkeyed("tweakmSafeAfk");
 
+	@Config(Config.Type.TWEAK)
+	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_UNLIMITED_ENTITY_RENDER_DISTANCE = newConfigBooleanHotkeyed("tweakmUnlimitedEntityRenderDistance");
+
 	// Disable
 
 	@Config(Config.Type.TWEAK)

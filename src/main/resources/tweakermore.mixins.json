@@ -48,6 +48,7 @@
     "tweaks.tweakmFlawlessFrames.VideoRendererMixin",
     "tweaks.tweakmSafeAfk.ClientPlayNetworkHandlerMixin",
     "tweaks.tweakmSafeAfk.LivingEntityMixin",
+    "tweaks.tweakmUnlimitedEntityRenderDistance.EntityMixin",
     "tweaks.villagerOfferUsesDisplay.MerchantScreenAccessor",
     "tweaks.villagerOfferUsesDisplay.MerchantScreenWidgetButtonPageMixin",
     "tweaks.xmapNoSessionFinalizationWait.WorldMapSessionMixin"
