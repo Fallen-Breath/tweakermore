@@ -4,8 +4,8 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.util.StringUtils;
-import me.fallenbreath.conditionalmixin.api.value.ModPredicate;
-import me.fallenbreath.conditionalmixin.api.value.ModRestriction;
+import me.fallenbreath.conditionalmixin.util.ModPredicate;
+import me.fallenbreath.conditionalmixin.util.ModRestriction;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.util.ModIds;
 
