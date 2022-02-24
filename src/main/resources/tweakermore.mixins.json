@@ -31,6 +31,8 @@
     "tweaks.netherPortalSoundChance.NetherPortalBlockMixin",
     "tweaks.ofUnlockF3FpsLimit.DebugHudMixin",
     "tweaks.prioritizedCommandSuggestions.CommandSuggestorMixin",
+    "tweaks.replayFlySpeedLimit.ClassicCameraControllerMixin",
+    "tweaks.replayFlySpeedLimit.VanillaCameraControllerMixin",
     "tweaks.scoreboardSideBarScale.InGameHudMixin",
     "tweaks.shulkerTooltipEnchantmentHint.ShulkerBoxBlockMixin",
     "tweaks.tweakmAutoContainerProcess.ClientPlayNetworkHandlerMixin",

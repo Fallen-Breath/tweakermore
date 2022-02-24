@@ -167,6 +167,13 @@ public class TweakerMoreConfigs
 
 	@Config(
 			value = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(replay_mod)),
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigInteger REPLAY_FLY_SPEED_LIMIT_MULTIPLIER = newConfigInteger("replayFlySpeedLimitMultiplier", 1, 1, 30);
+
+	@Config(
+			value = Config.Type.GENERIC,
 			restriction = @Restriction(require = @Condition(xaero_worldmap)),
 			category = Config.Category.MOD_TWEAKS
 	)
