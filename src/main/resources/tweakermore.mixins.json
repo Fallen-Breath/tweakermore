@@ -41,6 +41,8 @@
     "tweaks.tweakmAutoContainerProcess.ItemScrollerInventoryUtilsAccessor",
     "tweaks.tweakmAutoContainerProcess.ScreenMixin",
     "tweaks.tweakmAutoPickSchematicBlock.PlacementTweaksMixin",
+    "tweaks.tweakmFlawlessFrames.ScreenshotRendererMixin",
+    "tweaks.tweakmFlawlessFrames.VideoRendererMixin",
     "tweaks.tweakmSafeAfk.ClientPlayNetworkHandlerMixin",
     "tweaks.tweakmSafeAfk.LivingEntityMixin",
     "tweaks.villagerOfferUsesDisplay.MerchantScreenAccessor",

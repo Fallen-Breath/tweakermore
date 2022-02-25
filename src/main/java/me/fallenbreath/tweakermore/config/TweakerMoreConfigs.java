@@ -17,6 +17,7 @@ import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.impl.copySignTextToClipBoard.SignTextCopier;
 import me.fallenbreath.tweakermore.impl.eCraftMassCraftCompact.EasierCraftingRegistrar;
 import me.fallenbreath.tweakermore.impl.refreshInventory.InventoryRefresher;
+import me.fallenbreath.tweakermore.impl.tweakmFlawlessFrames.FlawlessFramesHandler;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
 import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
 import net.minecraft.item.Items;
@@ -124,6 +125,9 @@ public class TweakerMoreConfigs
 	)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_PICK_SCHEMATIC_BLOCK = newConfigBooleanHotkeyed("tweakmAutoPickSchematicBlock");
 
+	@Config(value = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(replay_mod)))
+	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_FLAWLESS_FRAMES = newConfigBooleanHotkeyed("tweakmFlawlessFrames");
+
 	@Config(Config.Type.TWEAK)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SAFE_AFK = newConfigBooleanHotkeyed("tweakmSafeAfk");
 
@@ -230,6 +234,7 @@ public class TweakerMoreConfigs
 		// value listeners
 		ECRAFT_ITEM_SCROLLER_COMPACT.setValueChangeCallback(EasierCraftingRegistrar::onConfigValueChanged);
 		HIDE_DISABLE_OPTIONS.setValueChangeCallback(redrawConfigGui);
+		TWEAKM_FLAWLESS_FRAMES.setValueChangeCallback(new FlawlessFramesHandler.ValueChangeCallback(TWEAKM_FLAWLESS_FRAMES));
 
 		// debugs
 		TWEAKERMORE_DEBUG_MODE.setValueChangeCallback(redrawConfigGui);
