@@ -1,6 +1,5 @@
 package me.fallenbreath.tweakermore.config;
 
-import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.util.StringUtils;
@@ -10,8 +9,8 @@ import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.util.ModIds;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 public class TweakerMoreOption
 {
@@ -68,32 +67,32 @@ public class TweakerMoreOption
 		return this.config;
 	}
 
-	private static Optional<String> getFooter(Collection<ModPredicate> modPredicates, boolean good, String footerTextKey)
+	private static List<String> getFooter(Collection<ModPredicate> modPredicates, boolean good, String footerTextKey)
 	{
 		if (modPredicates.size() > 0)
 		{
-			List<String> elements = Lists.newArrayList();
+			List<String> lines = Lists.newArrayList();
+			lines.add(GuiBase.TXT_GRAY + GuiBase.TXT_ITALIC + StringUtils.translate(footerTextKey) + GuiBase.TXT_RST);
 			for (ModPredicate modPredicate : modPredicates)
 			{
-				String element = StringUtils.translate("tweakermore.util.mod." + modPredicate.modId) + modPredicate.getVersionPredicatesString();
+				String element = String.format("%s (%s) %s", StringUtils.translate("tweakermore.util.mod." + modPredicate.modId), modPredicate.modId, modPredicate.getVersionPredicatesString());
+				String lineItem = GuiBase.TXT_GRAY + GuiBase.TXT_ITALIC + element;
 				if ((good && !modPredicate.isSatisfied()) || (!good && modPredicate.isSatisfied()))
 				{
-					element = GuiBase.TXT_RED + GuiBase.TXT_ITALIC + element + GuiBase.TXT_GRAY + GuiBase.TXT_ITALIC;
+					lineItem = GuiBase.TXT_RED + GuiBase.TXT_ITALIC + lineItem + GuiBase.TXT_GRAY + GuiBase.TXT_ITALIC;
 				}
-				elements.add(element);
+				lines.add(GuiBase.TXT_DARK_GRAY + GuiBase.TXT_ITALIC + "- " + lineItem);
 			}
-			String footer = StringUtils.translate(footerTextKey, Joiner.on(", ").join(elements));
-			footer = GuiBase.TXT_GRAY + GuiBase.TXT_ITALIC + footer + GuiBase.TXT_RST;
-			return Optional.of(footer);
+			return lines;
 		}
-		return Optional.empty();
+		return Collections.emptyList();
 	}
 
 	public List<String> getModRelationsFooter()
 	{
 		List<String> result = Lists.newArrayList();
-		getFooter(this.modRestriction.getRequirements(), true, "tweakermore.gui.mod_relation_footer.requirement").ifPresent(result::add);
-		getFooter(this.modRestriction.getConflictions(), false, "tweakermore.gui.mod_relation_footer.confliction").ifPresent(result::add);
+		result.addAll(getFooter(this.modRestriction.getRequirements(), true, "tweakermore.gui.mod_relation_footer.requirement"));
+		result.addAll(getFooter(this.modRestriction.getConflictions(), false, "tweakermore.gui.mod_relation_footer.confliction"));
 		return result;
 	}
 }
