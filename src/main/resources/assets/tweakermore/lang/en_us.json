@@ -64,6 +64,9 @@
   "tweakermore.config.tweakmSafeAfk.pretty_name": "Safe AFK",
   "tweakermore.config.tweakmSafeAfk.received_damage": "Received damage at %1$\nHealth remaining: %2$s",
 
+  "tweakermore.config.disableCameraFrustumCulling": "disableCameraFrustumCulling",
+  "tweakermore.config.disableCameraFrustumCulling.comment": "Disable rendering culling using camera's frustum, i.e. stuffs outside the player's fov will also be rendered\nAffects both block and entity rendering\nA use case is to ensure the integrity of shadows when using shaders\nHas significant impact on framerate",
+  "tweakermore.config.disableCameraFrustumCulling.pretty_name": "Disable Camera Frustum Culling",
   "tweakermore.config.disableLightUpdates": "disableLightUpdates",
   "tweakermore.config.disableLightUpdates.comment": "Yeets client-side light updates",
   "tweakermore.config.disableLightUpdates.pretty_name": "Disable Light Updates",

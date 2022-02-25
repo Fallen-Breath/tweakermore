@@ -64,6 +64,9 @@
   "tweakermore.config.tweakmSafeAfk.pretty_name": "安全挂机",
   "tweakermore.config.tweakmSafeAfk.received_damage": "于 %1$s 受到伤害\n剩余生命值: %2$s",
 
+  "tweakermore.config.disableCameraFrustumCulling": "禁用相机视锥体渲染剔除",
+  "tweakermore.config.disableCameraFrustumCulling.comment": "禁用基于相机视锥体的渲染剔除，即玩家视野范围外的画面也会被渲染\n方块和实体的渲染均受影响\n常用于保证光影下阴影的完整性等\n对帧数有明显影响",
+  "tweakermore.config.disableCameraFrustumCulling.pretty_name": "禁用相机视锥体渲染剔除",
   "tweakermore.config.disableLightUpdates": "禁用光照更新",
   "tweakermore.config.disableLightUpdates.comment": "禁用客户端光照更新",
   "tweakermore.config.disableLightUpdates.pretty_name": "禁用光照更新",
