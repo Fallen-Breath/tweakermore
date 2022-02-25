@@ -174,6 +174,13 @@ public class TweakerMoreConfigs
 
 	@Config(
 			value = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(replay_mod)),
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigBoolean REPLAY_ACCURATE_TIMELINE_TIMESTAMP = newConfigBoolean("replayAccurateTimelineTimestamp", false);
+
+	@Config(
+			value = Config.Type.GENERIC,
 			restriction = @Restriction(require = @Condition(xaero_worldmap)),
 			category = Config.Category.MOD_TWEAKS
 	)
@@ -212,18 +219,20 @@ public class TweakerMoreConfigs
 
 	public static void initCallbacks()
 	{
+		// common callbacks
+		IValueChangeCallback<ConfigBoolean> redrawConfigGui = newValue -> TweakerMoreConfigGui.getCurrentInstance().ifPresent(TweakerMoreConfigGui::reDraw);
+
 		// hotkeys
 		COPY_SIGN_TEXT_TO_CLIPBOARD.getKeybind().setCallback(SignTextCopier::copySignText);
 		OPEN_TWEAKERMORE_CONFIG_GUI.getKeybind().setCallback(TweakerMoreConfigGui::onOpenGuiHotkey);
 		REFRESH_INVENTORY.getKeybind().setCallback(InventoryRefresher::refresh);
 
 		// value listeners
-		IValueChangeCallback<ConfigBoolean> redrawConfigGui = newValue -> TweakerMoreConfigGui.getCurrentInstance().ifPresent(TweakerMoreConfigGui::reDraw);
-		HIDE_DISABLE_OPTIONS.setValueChangeCallback(redrawConfigGui);
-		TWEAKERMORE_DEBUG_MODE.setValueChangeCallback(redrawConfigGui);
 		ECRAFT_ITEM_SCROLLER_COMPACT.setValueChangeCallback(EasierCraftingRegistrar::onConfigValueChanged);
+		HIDE_DISABLE_OPTIONS.setValueChangeCallback(redrawConfigGui);
 
 		// debugs
+		TWEAKERMORE_DEBUG_MODE.setValueChangeCallback(redrawConfigGui);
 		TWEAKERMORE_DEV_PRINT_DOC.getKeybind().setCallback(DocumentGenerator::onHotKey);
 	}
 

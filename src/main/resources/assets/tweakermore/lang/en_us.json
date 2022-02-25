@@ -79,6 +79,8 @@
   "tweakermore.config.eCraftItemScrollerCompact.comment": "Fixed some item scroller functionality doesn't work with easier crafting mod\ne.g. broken mass craft",
   "tweakermore.config.ofUnlockF3FpsLimit": "ofUnlockF3FpsLimit",
   "tweakermore.config.ofUnlockF3FpsLimit.comment": "Removed 10 FPS render limit for F3 debug hud",
+  "tweakermore.config.replayAccurateTimelineTimestamp": "replayPreciseTimelineHoveredTime",
+  "tweakermore.config.replayAccurateTimelineTimestamp.comment": "Display timestamps accurate to milliseconds on the timeline in replay mod",
   "tweakermore.config.replayFlySpeedLimitMultiplier": "replayFlySpeedLimitMultiplier",
   "tweakermore.config.replayFlySpeedLimitMultiplier.comment": "Multiple the camera fly speed upper limit in replay mod with given value\nSo the maximum fly speed can be increased",
   "tweakermore.config.xmapNoSessionFinalizationWait": "xmapNoSessionFinalizationWait",

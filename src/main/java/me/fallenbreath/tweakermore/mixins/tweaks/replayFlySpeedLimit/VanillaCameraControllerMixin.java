@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
+@SuppressWarnings("UnresolvedMixinReference")
 @Restriction(require = @Condition(ModIds.replay_mod))
 @Pseudo
 @Mixin(targets = "com.replaymod.replay.camera.VanillaCameraController")
