@@ -1,8 +1,6 @@
 package me.fallenbreath.tweakermore.impl.tweakmFlawlessFrames;
 
 import com.google.common.collect.ImmutableList;
-import fi.dy.masa.malilib.config.options.ConfigBoolean;
-import fi.dy.masa.malilib.interfaces.IValueChangeCallback;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.MinecraftClient;
@@ -16,7 +14,7 @@ public class FlawlessFramesHandler
 			"com.replaymod.render.hooks.ChunkLoadingRenderGlobal",  // in ReplayMod <=2.5.2
 			"com.replaymod.render.hooks.ForceChunkLoadingHook"  // in ReplayMod >=2.6.0
 	);
-	private static Object hook;
+	private static Object hook = null;
 
 	private static void installHook()
 	{
@@ -86,24 +84,6 @@ public class FlawlessFramesHandler
 		{
 			uninstallHook();
 			installHook();
-		}
-	}
-
-	public static class ValueChangeCallback implements IValueChangeCallback<ConfigBoolean>
-	{
-		public ValueChangeCallback(ConfigBoolean config)
-		{
-			// if it's true at game launch
-			if (config.getBooleanValue())
-			{
-				setEnabled(config.getBooleanValue());
-			}
-		}
-
-		@Override
-		public void onValueChanged(ConfigBoolean config)
-		{
-			setEnabled(config.getBooleanValue());
 		}
 	}
 }

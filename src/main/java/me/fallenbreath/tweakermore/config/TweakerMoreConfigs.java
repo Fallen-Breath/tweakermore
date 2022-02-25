@@ -234,7 +234,7 @@ public class TweakerMoreConfigs
 		// value listeners
 		ECRAFT_ITEM_SCROLLER_COMPACT.setValueChangeCallback(EasierCraftingRegistrar::onConfigValueChanged);
 		HIDE_DISABLE_OPTIONS.setValueChangeCallback(redrawConfigGui);
-		TWEAKM_FLAWLESS_FRAMES.setValueChangeCallback(new FlawlessFramesHandler.ValueChangeCallback(TWEAKM_FLAWLESS_FRAMES));
+		TWEAKM_FLAWLESS_FRAMES.setValueChangeCallback(config -> FlawlessFramesHandler.setEnabled(config.getBooleanValue()));
 
 		// debugs
 		TWEAKERMORE_DEBUG_MODE.setValueChangeCallback(redrawConfigGui);
