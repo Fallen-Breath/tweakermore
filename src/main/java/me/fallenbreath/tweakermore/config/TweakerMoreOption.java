@@ -46,12 +46,12 @@ public class TweakerMoreOption
 
 	public boolean isEnabled()
 	{
-		return this.modRestrictions.stream().allMatch(ModRestriction::isSatisfied);
+		return this.modRestrictions.isEmpty() || this.modRestrictions.stream().anyMatch(ModRestriction::isSatisfied);
 	}
 
 	public boolean worksForCurrentMCVersion()
 	{
-		return this.minecraftRestrictions.stream().allMatch(ModRestriction::isSatisfied);
+		return this.minecraftRestrictions.isEmpty() || this.minecraftRestrictions.stream().anyMatch(ModRestriction::isSatisfied);
 	}
 
 	public boolean isDebug()
