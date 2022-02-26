@@ -161,6 +161,7 @@
   "tweakermore.doc_gen.text.minimum_value": "最小值",
   "tweakermore.doc_gen.text.maximum_value": "最大值",
   "tweakermore.doc_gen.text.options": "可用选项",
+  "tweakermore.doc_gen.text.mod_restrictions": "模组约束",
   "tweakermore.doc_gen.text.requirements": "依赖模组",
   "tweakermore.doc_gen.text.conflictions": "冲突模组",
 

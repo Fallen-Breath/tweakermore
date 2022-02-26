@@ -78,11 +78,16 @@ public class TweakerMoreOption
 			for (ModPredicate modPredicate : modPredicates)
 			{
 				String element = String.format("%s (%s) %s", StringUtils.translate("tweakermore.util.mod." + modPredicate.modId), modPredicate.modId, modPredicate.getVersionPredicatesString());
-				String lineItem = GuiBase.TXT_GRAY + GuiBase.TXT_ITALIC + element;
-				if ((good && !modPredicate.isSatisfied()) || (!good && modPredicate.isSatisfied()))
+				String color;
+				if ((good && modPredicate.isSatisfied()) || (!good && !modPredicate.isSatisfied()))  // nice
 				{
-					lineItem = GuiBase.TXT_RED + GuiBase.TXT_ITALIC + lineItem + GuiBase.TXT_GRAY + GuiBase.TXT_ITALIC;
+					color = GuiBase.TXT_GRAY;
 				}
+				else  // oh no the restriction check might fail due to this
+				{
+					color = GuiBase.TXT_RED;
+				}
+				String lineItem = color + GuiBase.TXT_ITALIC + element + GuiBase.TXT_GRAY + GuiBase.TXT_ITALIC;
 				lines.add(GuiBase.TXT_DARK_GRAY + GuiBase.TXT_ITALIC + "- " + lineItem);
 			}
 			return lines;

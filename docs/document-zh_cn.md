@@ -52,8 +52,9 @@
 - 默认值: `100`
 - 最小值: `100`
 - 最大值: `10000`
-- 冲突模组:
-  - `raise-chat-limit`
+- 模组约束:
+  - 冲突模组:
+    - `raise-chat-limit`
 
 
 ### 网络连接延迟模拟 (connectionSimulatedDelay)
@@ -82,6 +83,21 @@
 ![copySignTextToClipBoard](assets/copySignTextToClipBoard-zh_cn.png)
 
 
+### 禁用相机视锥体渲染剔除 (disableCameraFrustumCulling)
+
+禁用基于相机视锥体的渲染剔除，即玩家视野范围外的画面也会被渲染
+
+方块和实体的渲染均受影响
+
+常用于保证光影下阴影的完整性等
+
+对帧数有明显影响
+
+- 分类: 功能
+- 类型: 可开关型热键
+- 默认值: *无*, `false`
+
+
 ### 禁用光照更新 (disableLightUpdates)
 
 禁用客户端光照更新
@@ -98,8 +114,9 @@
 - 分类: 功能
 - 类型: 可开关型热键
 - 默认值: *无*, `false`
-- 依赖模组:
-  - `minecraft >=1.17`
+- 模组约束:
+  - 依赖模组:
+    - `minecraft >=1.17`
 
 
 ### 禁用红石粉粒子效果 (disableRedstoneWireParticle)
@@ -118,8 +135,9 @@
 - 分类: 功能
 - 类型: 字符串列表
 - 默认值: `[minecraft:lava_bucket]`
-- 依赖模组:
-  - `tweakeroo`
+- 模组约束:
+  - 依赖模组:
+    - `tweakeroo`
 
 
 ### 自动补货名单约束类型 (handRestockListType)
@@ -130,8 +148,9 @@ tweakHandRestock功能的物品名单约束类型
 - 类型: 选项列表
 - 默认值: `none`
 - 可用选项: `无`, `黑名单`
-- 依赖模组:
-  - `tweakeroo`
+- 模组约束:
+  - 依赖模组:
+    - `tweakeroo`
 
 
 ### 自动补货白名单 (handRestockWhiteList)
@@ -141,8 +160,9 @@ tweakHandRestock功能的物品名单约束类型
 - 分类: 功能
 - 类型: 字符串列表
 - 默认值: `[minecraft:bucket]`
-- 依赖模组:
-  - `tweakeroo`
+- 模组约束:
+  - 依赖模组:
+    - `tweakeroo`
 
 
 ### 旧版F3+N逻辑 (legacyF3NLogic)
@@ -154,8 +174,9 @@ tweakHandRestock功能的物品名单约束类型
 - 分类: 功能
 - 类型: 布尔值
 - 默认值: `false`
-- 依赖模组:
-  - `minecraft >=1.16`
+- 模组约束:
+  - 依赖模组:
+    - `minecraft >=1.16`
 
 
 ### 最大聊天界面高度 (maxChatHudHeight)
@@ -254,8 +275,9 @@ tweakHandRestock功能的物品名单约束类型
 - 分类: 功能
 - 类型: 可开关型热键
 - 默认值: *无*, `false`
-- 依赖模组:
-  - `itemscroller`
+- 模组约束:
+  - 依赖模组:
+    - `itemscroller`
 
 
 ### 自动装填容器 (tweakmAutoFillContainer)
@@ -269,8 +291,9 @@ tweakHandRestock功能的物品名单约束类型
 - 分类: 功能
 - 类型: 可开关型热键
 - 默认值: *无*, `false`
-- 依赖模组:
-  - `itemscroller`
+- 模组约束:
+  - 依赖模组:
+    - `itemscroller`
 
 
 ### 自动选择原理图方块 (tweakmAutoPickSchematicBlock)
@@ -284,9 +307,26 @@ tweakHandRestock功能的物品名单约束类型
 - 分类: 功能
 - 类型: 可开关型热键
 - 默认值: *无*, `false`
-- 依赖模组:
-  - `tweakeroo`
-  - `litematica`
+- 模组约束:
+  - 依赖模组:
+    - `tweakeroo`
+    - `litematica`
+
+
+### 无瑕世界渲染 (tweakmFlawlessFrames)
+
+强制客户端渲染世界时每一帧都更新完毕所有已加载区块中的变化
+
+借用了Replay模组渲染各种任务时所使用的逻辑
+
+警告：这可能会让客户端频繁地卡顿
+
+- 分类: 功能
+- 类型: 可开关型热键
+- 默认值: *无*, `false`
+- 模组约束:
+  - 依赖模组:
+    - `replaymod`
 
 
 ### 安全挂机 (tweakmSafeAfk)
@@ -333,21 +373,84 @@ tweakHandRestock功能的物品名单约束类型
 - 分类: 模组修改
 - 类型: 布尔值
 - 默认值: `false`
-- 依赖模组:
-  - `easiercrafting`
-  - `itemscroller`
+- 模组约束:
+  - 依赖模组:
+    - `easiercrafting`
+    - `itemscroller`
 
 
-### optifine解锁F3帧数限制 (ofUnlockF3FpsLimit)
+### Optifine移除告示牌方块文字渲染距离限制 (ofRemoveSignTextRenderDistance)
+
+移除Optifine的告示牌文字渲染距离限制
+
+回归原版行为，即告示牌的文字总与告示牌同时渲染
+
+- 分类: 模组修改
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - `optifabric`
+
+
+### Optifine解锁F3帧数限制 (ofUnlockF3FpsLimit)
 
 移除F3 HUD显示的10FPS帧数限制
 
 - 分类: 模组修改
 - 类型: 布尔值
 - 默认值: `false`
-- 依赖模组:
-  - `optifabric`
-  - `minecraft >=1.15`
+- 模组约束:
+  - 依赖模组:
+    - `optifabric`
+    - `minecraft >=1.15`
+
+
+### Replay精准时间戳显示 (replayAccurateTimelineTimestamp)
+
+在Replay模组的时间线上显示精确到毫秒的时间戳
+
+- 分类: 模组修改
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - `replaymod`
+
+
+### Replay飞行速度上限倍率 (replayFlySpeedLimitMultiplier)
+
+将Replay模组中的相机飞行速度上限乘以给定的值
+
+基本上这是用来提高最大飞行速度的
+
+- 分类: 模组修改
+- 类型: 整数
+- 默认值: `1`
+- 最小值: `1`
+- 最大值: `30`
+- 模组约束:
+  - 依赖模组:
+    - `replaymod`
+
+
+### 光影使用游戏时间作为世界时间 (shaderGameTimeAsWorldTime)
+
+使用游戏时间作为Optifine/Iris光影的"worldTime"uniform变量
+
+因此在游戏规则doDaylightCycle关闭的情况下这一变量仍能递增
+
+- 分类: 模组修改
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - `optifabric`
+
+  *或*
+
+  - 依赖模组:
+    - `iris`
 
 
 ### xaero世界地图跳过会话结束等待 (xmapNoSessionFinalizationWait)
@@ -361,8 +464,9 @@ tweakHandRestock功能的物品名单约束类型
 - 分类: 模组修改
 - 类型: 布尔值
 - 默认值: `false`
-- 依赖模组:
-  - `xaeroworldmap`
+- 模组约束:
+  - 依赖模组:
+    - `xaeroworldmap`
 
 
 ## 配置

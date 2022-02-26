@@ -161,6 +161,7 @@
   "tweakermore.doc_gen.text.minimum_value": "Minimum value",
   "tweakermore.doc_gen.text.maximum_value": "Maximum value",
   "tweakermore.doc_gen.text.options": "Available options",
+  "tweakermore.doc_gen.text.mod_restrictions": "Mod restrictions",
   "tweakermore.doc_gen.text.requirements": "Required mods",
   "tweakermore.doc_gen.text.conflictions": "Conflicted mods",
 
