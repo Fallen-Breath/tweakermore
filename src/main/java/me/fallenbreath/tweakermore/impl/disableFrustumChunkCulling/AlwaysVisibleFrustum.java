@@ -1,26 +1,25 @@
 package me.fallenbreath.tweakermore.impl.disableFrustumChunkCulling;
 
-import net.minecraft.client.render.Frustum;
-import net.minecraft.client.util.math.Matrix4f;
+import net.minecraft.client.render.VisibleRegion;
 import net.minecraft.util.math.Box;
 
-public class AlwaysVisibleFrustum extends Frustum
+public class AlwaysVisibleFrustum implements VisibleRegion
 {
-	private final Frustum frustum;
+	private final VisibleRegion frustum;
 
-	public AlwaysVisibleFrustum(Frustum frustum)
+	public AlwaysVisibleFrustum(VisibleRegion frustum)
 	{
-		super(new Matrix4f(), new Matrix4f());
 		this.frustum = frustum;
 	}
 
-	public void setPosition(double cameraX, double cameraY, double cameraZ)
+	@Override
+	public void setOrigin(double cameraX, double cameraY, double cameraZ)
 	{
-		this.frustum.setPosition(cameraX, cameraY, cameraZ);
+		this.frustum.setOrigin(cameraX, cameraY, cameraZ);
 	}
 
 	@Override
-	public boolean isVisible(Box box)
+	public boolean intersects(Box boundingBox)
 	{
 		return true;
 	}

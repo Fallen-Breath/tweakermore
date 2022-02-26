@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(MinecraftClient.class)
 public abstract class MinecraftClientMixin
 {
-	@Inject(method = "method_24227", at = @At("TAIL"), remap = false)
+	@Inject(method = "method_18504", at = @At("TAIL"), remap = false)
 	private void onClientInitFinished(CallbackInfo ci)
 	{
 		DocumentGenerator.onClientInitFinished();
