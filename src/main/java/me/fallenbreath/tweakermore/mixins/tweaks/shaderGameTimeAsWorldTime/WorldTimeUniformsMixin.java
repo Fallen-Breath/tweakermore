@@ -22,7 +22,7 @@ public abstract class WorldTimeUniformsMixin
 	private static ClientWorld getWorld() { return null; }
 
 	@Inject(method = "getWorldDayTime", at = @At("HEAD"), cancellable = true, remap = false)
-	private void irisShaderGameTimeAsWorldTime(CallbackInfoReturnable<Integer> cir)
+	private static void irisShaderGameTimeAsWorldTime(CallbackInfoReturnable<Integer> cir)
 	{
 		if (TweakerMoreConfigs.SHADER_GAME_TIME_AS_WORLD_TIME.getBooleanValue())
 		{
