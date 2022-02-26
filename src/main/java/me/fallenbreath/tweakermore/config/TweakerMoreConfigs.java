@@ -165,6 +165,16 @@ public class TweakerMoreConfigs
 	@Config(
 			value = Config.Type.GENERIC,
 			restriction = @Restriction(require = {
+					@Condition(iris),
+					@Condition(value = minecraft, versionPredicates = ">=1.16")  // no iris for mc <1.16
+			}),
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigBoolean IRIS_SHADER_GAME_TIME_AS_WORLD_TIME = newConfigBoolean("irisShaderGameTimeAsWorldTime", false);
+
+	@Config(
+			value = Config.Type.GENERIC,
+			restriction = @Restriction(require = {
 					@Condition(optifine),
 					@Condition(value = minecraft, versionPredicates = ">=1.15")
 			}),
