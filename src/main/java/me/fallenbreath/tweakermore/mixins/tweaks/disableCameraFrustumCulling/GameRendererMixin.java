@@ -19,7 +19,7 @@ public abstract class GameRendererMixin
 					shift = At.Shift.AFTER
 			)
 	)
-	private VisibleRegion disableFrustumChunkCulling(VisibleRegion visibleRegion)
+	private VisibleRegion disableCameraFrustumCulling(VisibleRegion visibleRegion)
 	{
 		if (TweakerMoreConfigs.DISABLE_CAMERA_FRUSTUM_CULLING.getBooleanValue())
 		{
