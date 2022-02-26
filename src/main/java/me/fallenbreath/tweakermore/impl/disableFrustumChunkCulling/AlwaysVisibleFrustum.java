@@ -1,8 +1,8 @@
 package me.fallenbreath.tweakermore.impl.disableFrustumChunkCulling;
 
 import net.minecraft.client.render.Frustum;
-import net.minecraft.client.util.math.Matrix4f;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Matrix4f;
 
 public class AlwaysVisibleFrustum extends Frustum
 {
