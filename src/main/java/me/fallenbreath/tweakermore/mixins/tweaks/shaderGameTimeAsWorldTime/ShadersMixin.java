@@ -9,6 +9,7 @@ import net.minecraft.client.world.ClientWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Group;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Slice;
 
@@ -18,8 +19,12 @@ import org.spongepowered.asm.mixin.injection.Slice;
 @Mixin(targets = "net.optifine.shaders.Shaders")
 public abstract class ShadersMixin
 {
+	@Group(min = 1, max = 1)
 	@ModifyArg(
-			method = "useProgram",
+			method = {
+					"useProgram",  // optifine < HD U G7 (1.16.4)
+					"setProgramUniforms",  // optifine >= HD U G7 (1.16.4)
+			},
 			slice = @Slice(
 					from = @At(
 							value = "FIELD",
