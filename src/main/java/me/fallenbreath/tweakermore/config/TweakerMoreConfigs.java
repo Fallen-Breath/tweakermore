@@ -17,6 +17,7 @@ import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.impl.copySignTextToClipBoard.SignTextCopier;
 import me.fallenbreath.tweakermore.impl.eCraftMassCraftCompact.EasierCraftingRegistrar;
 import me.fallenbreath.tweakermore.impl.refreshInventory.InventoryRefresher;
+import me.fallenbreath.tweakermore.impl.tweakmFlawlessFrames.FlawlessFramesHandler;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
 import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
 import net.minecraft.item.Items;
@@ -124,10 +125,16 @@ public class TweakerMoreConfigs
 	)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_PICK_SCHEMATIC_BLOCK = newConfigBooleanHotkeyed("tweakmAutoPickSchematicBlock");
 
+	@Config(value = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(replay_mod)))
+	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_FLAWLESS_FRAMES = newConfigBooleanHotkeyed("tweakmFlawlessFrames");
+
 	@Config(Config.Type.TWEAK)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SAFE_AFK = newConfigBooleanHotkeyed("tweakmSafeAfk");
 
 	// Disable
+
+	@Config(Config.Type.TWEAK)
+	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_CAMERA_FRUSTUM_CULLING = newConfigBooleanHotkeyed("disableCameraFrustumCulling");
 
 	@Config(Config.Type.DISABLE)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_LIGHT_UPDATES = newConfigBooleanHotkeyed("disableLightUpdates");
@@ -157,6 +164,23 @@ public class TweakerMoreConfigs
 
 	@Config(
 			value = Config.Type.GENERIC,
+			restriction = {
+					@Restriction(require = @Condition(optifine)),
+					@Restriction(require = @Condition(iris))
+			},
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigBoolean SHADER_GAME_TIME_AS_WORLD_TIME = newConfigBoolean("shaderGameTimeAsWorldTime", false);
+
+	@Config(
+			value = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(optifine)),
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigBoolean OF_REMOVE_SIGN_TEXT_RENDER_DISTANCE = newConfigBoolean("ofRemoveSignTextRenderDistance", false);
+
+	@Config(
+			value = Config.Type.GENERIC,
 			restriction = @Restriction(require = {
 					@Condition(optifine),
 					@Condition(value = minecraft, versionPredicates = ">=1.15")
@@ -164,6 +188,20 @@ public class TweakerMoreConfigs
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigBoolean OF_UNLOCK_F3_FPS_LIMIT = newConfigBoolean("ofUnlockF3FpsLimit", false);
+
+	@Config(
+			value = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(replay_mod)),
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigInteger REPLAY_FLY_SPEED_LIMIT_MULTIPLIER = newConfigInteger("replayFlySpeedLimitMultiplier", 1, 1, 30);
+
+	@Config(
+			value = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(replay_mod)),
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigBoolean REPLAY_ACCURATE_TIMELINE_TIMESTAMP = newConfigBoolean("replayAccurateTimelineTimestamp", false);
 
 	@Config(
 			value = Config.Type.GENERIC,
@@ -205,18 +243,21 @@ public class TweakerMoreConfigs
 
 	public static void initCallbacks()
 	{
+		// common callbacks
+		IValueChangeCallback<ConfigBoolean> redrawConfigGui = newValue -> TweakerMoreConfigGui.getCurrentInstance().ifPresent(TweakerMoreConfigGui::reDraw);
+
 		// hotkeys
 		COPY_SIGN_TEXT_TO_CLIPBOARD.getKeybind().setCallback(SignTextCopier::copySignText);
 		OPEN_TWEAKERMORE_CONFIG_GUI.getKeybind().setCallback(TweakerMoreConfigGui::onOpenGuiHotkey);
 		REFRESH_INVENTORY.getKeybind().setCallback(InventoryRefresher::refresh);
 
 		// value listeners
-		IValueChangeCallback<ConfigBoolean> redrawConfigGui = newValue -> TweakerMoreConfigGui.getCurrentInstance().ifPresent(TweakerMoreConfigGui::reDraw);
-		HIDE_DISABLE_OPTIONS.setValueChangeCallback(redrawConfigGui);
-		TWEAKERMORE_DEBUG_MODE.setValueChangeCallback(redrawConfigGui);
 		ECRAFT_ITEM_SCROLLER_COMPACT.setValueChangeCallback(EasierCraftingRegistrar::onConfigValueChanged);
+		HIDE_DISABLE_OPTIONS.setValueChangeCallback(redrawConfigGui);
+		TWEAKM_FLAWLESS_FRAMES.setValueChangeCallback(config -> FlawlessFramesHandler.setEnabled(config.getBooleanValue()));
 
 		// debugs
+		TWEAKERMORE_DEBUG_MODE.setValueChangeCallback(redrawConfigGui);
 		TWEAKERMORE_DEV_PRINT_DOC.getKeybind().setCallback(DocumentGenerator::onHotKey);
 	}
 

@@ -1,9 +1,12 @@
 package me.fallenbreath.tweakermore.util.mixin;
 
 import me.fallenbreath.conditionalmixin.api.mixin.RestrictiveMixinConfigPlugin;
+import me.fallenbreath.tweakermore.util.FabricUtil;
+import me.fallenbreath.tweakermore.util.ModIds;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.tree.ClassNode;
+import org.spongepowered.asm.mixin.Mixins;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
 import java.util.List;
@@ -38,6 +41,13 @@ public class TweakerMoreMixinConfigPlugin extends RestrictiveMixinConfigPlugin
 	@Override
 	public List<String> getMixins()
 	{
+		// Fabric ASM (mm) direct MixinConfigPlugin getMixins() ---mm:early_risers--> optiFabric OptifabricSetup
+		// We need to wait until optifine loading stuffs to be done to add our optifine mixins
+		if (FabricUtil.isModLoaded(ModIds.optifine))  // a rough check
+		{
+			LOGGER.info("[TweakerMore] loading optifine mixin");
+			Mixins.addConfiguration("tweakermore.optifine.mixins.json");
+		}
 		return null;
 	}
 
