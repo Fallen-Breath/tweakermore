@@ -1,5 +1,6 @@
 package me.fallenbreath.tweakermore.util.doc;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.config.*;
 import fi.dy.masa.malilib.hotkeys.IHotkey;
@@ -181,7 +182,7 @@ public class DocumentPrinter
 
 		getMinValue(config).ifPresent(min -> writeln.accept(String.format("- %s: `%s`", tr("minimum_value"), min)));
 		getMaxValue(config).ifPresent(max -> writeln.accept(String.format("- %s: `%s`", tr("maximum_value"), max)));
-		getOptionListValueNames(config).ifPresent(values -> writeln.accept(String.format("- %s: %s", tr("options"), values)));
+		getOptionListValueNames(config).ifPresent(values -> writeln.accept(String.format("- %s: %s", tr("options"), Joiner.on(", ").join(values))));
 
 		List<ModRestriction> modRestrictions = tweakerMoreOption.getModRestrictions();
 		if (!modRestrictions.isEmpty())

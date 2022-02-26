@@ -78,7 +78,7 @@
 
 - 分类: 功能
 - 类型: 热键
-- 默认值: *无*
+- 默认值: *无快捷键*
 
 ![copySignTextToClipBoard](assets/copySignTextToClipBoard-zh_cn.png)
 
@@ -95,7 +95,7 @@
 
 - 分类: 功能
 - 类型: 可开关型热键
-- 默认值: *无*, `false`
+- 默认值: *无快捷键*, `false`
 
 
 ### 禁用光照更新 (disableLightUpdates)
@@ -104,7 +104,7 @@
 
 - 分类: 功能
 - 类型: 可开关型热键
-- 默认值: *无*, `false`
+- 默认值: *无快捷键*, `false`
 
 
 ### 禁用活塞方块破坏粒子效果 (disablePistonBlockBreakingParticle)
@@ -113,7 +113,7 @@
 
 - 分类: 功能
 - 类型: 可开关型热键
-- 默认值: *无*, `false`
+- 默认值: *无快捷键*, `false`
 - 模组约束:
   - 依赖模组:
     - `minecraft >=1.17`
@@ -125,7 +125,7 @@
 
 - 分类: 功能
 - 类型: 可开关型热键
-- 默认值: *无*, `false`
+- 默认值: *无快捷键*, `false`
 
 
 ### 自动补货黑名单 (handRestockBlackList)
@@ -228,7 +228,7 @@ tweakHandRestock功能的物品名单约束类型
 
 - 分类: 功能
 - 类型: 热键
-- 默认值: *无*
+- 默认值: *无快捷键*
 
 
 ### 安全挂机血量阈值 (safeAfkHealthThreshold)
@@ -274,7 +274,7 @@ tweakHandRestock功能的物品名单约束类型
 
 - 分类: 功能
 - 类型: 可开关型热键
-- 默认值: *无*, `false`
+- 默认值: *无快捷键*, `false`
 - 模组约束:
   - 依赖模组:
     - `itemscroller`
@@ -290,7 +290,7 @@ tweakHandRestock功能的物品名单约束类型
 
 - 分类: 功能
 - 类型: 可开关型热键
-- 默认值: *无*, `false`
+- 默认值: *无快捷键*, `false`
 - 模组约束:
   - 依赖模组:
     - `itemscroller`
@@ -306,7 +306,7 @@ tweakHandRestock功能的物品名单约束类型
 
 - 分类: 功能
 - 类型: 可开关型热键
-- 默认值: *无*, `false`
+- 默认值: *无快捷键*, `false`
 - 模组约束:
   - 依赖模组:
     - `tweakeroo`
@@ -323,7 +323,7 @@ tweakHandRestock功能的物品名单约束类型
 
 - 分类: 功能
 - 类型: 可开关型热键
-- 默认值: *无*, `false`
+- 默认值: *无快捷键*, `false`
 - 模组约束:
   - 依赖模组:
     - `replaymod`
@@ -337,7 +337,7 @@ tweakHandRestock功能的物品名单约束类型
 
 - 分类: 功能
 - 类型: 可开关型热键
-- 默认值: *无*, `false`
+- 默认值: *无快捷键*, `false`
 
 
 ### 无限实体渲染距离 (tweakmUnlimitedEntityRenderDistance)
@@ -348,7 +348,7 @@ tweakHandRestock功能的物品名单约束类型
 
 - 分类: 功能
 - 类型: 可开关型热键
-- 默认值: *无*, `false`
+- 默认值: *无快捷键*, `false`
 
 
 ### 村民交易次数显示 (villagerOfferUsesDisplay)
@@ -389,6 +389,8 @@ tweakHandRestock功能的物品名单约束类型
     - `easiercrafting`
     - `itemscroller`
 
+![eCraftItemScrollerCompact](assets/eCraftItemScrollerCompact.png)
+
 
 ### Optifine移除告示牌方块文字渲染距离限制 (ofRemoveSignTextRenderDistance)
 
@@ -427,6 +429,8 @@ tweakHandRestock功能的物品名单约束类型
 - 模组约束:
   - 依赖模组:
     - `replaymod`
+
+![replayAccurateTimelineTimestamp](assets/replayAccurateTimelineTimestamp.png)
 
 
 ### Replay飞行速度上限倍率 (replayFlySpeedLimitMultiplier)
@@ -521,6 +525,6 @@ TweakerMore的调试模式
 
 - 分类: 配置
 - 类型: 可开关型热键
-- 默认值: *无*, `false`
+- 默认值: *无快捷键*, `false`
 
 
