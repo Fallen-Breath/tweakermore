@@ -4,7 +4,7 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.config.*;
 import fi.dy.masa.malilib.util.StringUtils;
-import me.fallenbreath.conditionalmixin.api.value.ModRestriction;
+import me.fallenbreath.conditionalmixin.util.ModRestriction;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.Config;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
@@ -53,7 +53,7 @@ public class DocumentPrinter
 	{
 		if (config instanceof IHotkeyTogglable)
 		{
-			return Lists.newArrayList(((IHotkeyTogglable)config).getDefaultStringValue(), String.valueOf(((IHotkeyTogglable)config).getDefaultBooleanValue()));
+			return Lists.newArrayList(((IHotkeyTogglable)config).getKeybind().getDefaultStringValue(), String.valueOf(((IHotkeyTogglable)config).getDefaultBooleanValue()));
 		}
 		if (config instanceof IStringRepresentable)
 		{
@@ -164,16 +164,31 @@ public class DocumentPrinter
 		getMaxValue(config).ifPresent(max -> writeln.accept(String.format("- %s: `%s`", tr("maximum_value"), max)));
 		getOptionValues(config).ifPresent(values -> writeln.accept(String.format("- %s: %s", tr("options"), valueList(values))));
 
-		ModRestriction modRestriction = tweakerMoreOption.getModRestriction();
-		if (!modRestriction.getRequirements().isEmpty())
+		List<ModRestriction> modRestrictions = tweakerMoreOption.getModRestrictions();
+		if (!modRestrictions.isEmpty())
 		{
-			writeln.accept(String.format("- %s:", tr("requirements")));
-			modRestriction.getRequirements().forEach(req -> writeln.accept(String.format("  - `%s`", req.toString())));
-		}
-		if (!modRestriction.getConflictions().isEmpty())
-		{
-			writeln.accept(String.format("- %s:", tr("conflictions")));
-			modRestriction.getConflictions().forEach(cfl -> writeln.accept(String.format("  - `%s`", cfl.toString())));
+			writeln.accept(String.format("- %s:", tr("mod_restrictions")));
+			boolean first = true;
+			for (ModRestriction modRestriction : modRestrictions)
+			{
+				if (!first)
+				{
+					writeln.accept("");
+					writeln.accept(String.format("  *%s*", StringUtils.translate("tweakermore.gui.mod_relation_footer.or")));
+					writeln.accept("");
+				}
+				first = false;
+				if (!modRestriction.getRequirements().isEmpty())
+				{
+					writeln.accept(String.format("  - %s:", tr("requirements")));
+					modRestriction.getRequirements().forEach(req -> writeln.accept(String.format("    - `%s`", req.toString())));
+				}
+				if (!modRestriction.getConflictions().isEmpty())
+				{
+					writeln.accept(String.format("  - %s:", tr("conflictions")));
+					modRestriction.getConflictions().forEach(cfl -> writeln.accept(String.format("    - `%s`", cfl.toString())));
+				}
+			}
 		}
 		writeln.accept("");
 		getScreenShotFileName(configId, lang).ifPresent(fileName -> {

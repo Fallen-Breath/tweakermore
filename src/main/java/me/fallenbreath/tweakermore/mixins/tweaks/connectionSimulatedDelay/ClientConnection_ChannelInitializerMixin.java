@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 })
 public abstract class ClientConnection_ChannelInitializerMixin
 {
-	@Inject(method = "initChannel", at = @At("TAIL"))
+	@Inject(method = "initChannel(Lio/netty/channel/Channel;)V", at = @At("TAIL"))
 	private void connectionSimulatedDelay(Channel channel, CallbackInfo ci)
 	{
 		channel.pipeline().addFirst(new ChannelDelayer());
