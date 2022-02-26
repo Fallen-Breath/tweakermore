@@ -2,7 +2,6 @@ package me.fallenbreath.tweakermore.impl.disableFrustumChunkCulling;
 
 import net.minecraft.client.render.Frustum;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Matrix4f;
 
 public class AlwaysVisibleFrustum extends Frustum
 {
@@ -10,7 +9,7 @@ public class AlwaysVisibleFrustum extends Frustum
 
 	public AlwaysVisibleFrustum(Frustum frustum)
 	{
-		super(new Matrix4f(), new Matrix4f());
+		super(frustum);
 		this.frustum = frustum;
 	}
 
