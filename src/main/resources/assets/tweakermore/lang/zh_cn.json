@@ -174,11 +174,5 @@
   "tweakermore.doc_gen.type.string_list": "字符串列表",
   "tweakermore.doc_gen.type.option_list": "选项列表",
   "tweakermore.doc_gen.type.hotkey": "热键",
-  "tweakermore.doc_gen.type.hotkey_togglable": "可开关型热键",
-
-  "// Un-translated used malilib stuffs": "================================================",
-
-  "malilib.label.list_type.blacklist": "黑名单",
-  "malilib.label.list_type.none": "无",
-  "malilib.label.list_type.whitelist": "白名单"
+  "tweakermore.doc_gen.type.hotkey_togglable": "可开关型热键"
 }

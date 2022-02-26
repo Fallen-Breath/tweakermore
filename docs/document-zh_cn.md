@@ -147,7 +147,7 @@ tweakHandRestock功能的物品名单约束类型
 - 分类: 功能
 - 类型: 选项列表
 - 默认值: `none`
-- 可用选项: `无`, `黑名单`
+- 可用选项: `None`, `Black List`
 - 模组约束:
   - 依赖模组:
     - `tweakeroo`
