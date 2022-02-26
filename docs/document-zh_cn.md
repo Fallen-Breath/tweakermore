@@ -340,6 +340,17 @@ tweakHandRestock功能的物品名单约束类型
 - 默认值: *无*, `false`
 
 
+### 无限实体渲染距离 (tweakmUnlimitedEntityRenderDistance)
+
+将客户端实体渲染距离设置为无限制
+
+仍然需要服务器正确地借助EntityTracker发送相关实体数据包
+
+- 分类: 功能
+- 类型: 可开关型热键
+- 默认值: *无*, `false`
+
+
 ### 村民交易次数显示 (villagerOfferUsesDisplay)
 
 在村民交易列表中显示当前交易的次数以及上限

@@ -340,6 +340,17 @@ Health threshold to disconnect can be set via safeAfkHealthThreshold
 - Default value: *none*, `false`
 
 
+### tweakmUnlimitedEntityRenderDistance
+
+Set client-side entity render distance to unlimited
+
+Still requires the server to send entity packets via EntityTracker properly
+
+- Category: Tweaks
+- Type: togglable hotkey
+- Default value: *none*, `false`
+
+
 ### villagerOfferUsesDisplay
 
 Display villager offer use and limit amount on villager offer list
