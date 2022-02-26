@@ -69,12 +69,12 @@ public class TweakerMoreOption
 		return this.config;
 	}
 
-	private static List<String> getFooter(Collection<ModPredicate> modPredicates, boolean good, String footerTextKey)
+	private static List<String> getFooter(Collection<ModPredicate> modPredicates, boolean nice, boolean good, String footerTextKey)
 	{
 		if (modPredicates.size() > 0)
 		{
 			List<String> lines = Lists.newArrayList();
-			lines.add(GuiBase.TXT_GRAY + GuiBase.TXT_ITALIC + StringUtils.translate(footerTextKey) + GuiBase.TXT_RST);
+			lines.add((nice ? GuiBase.TXT_GRAY : GuiBase.TXT_RED) + GuiBase.TXT_ITALIC + StringUtils.translate(footerTextKey) + GuiBase.TXT_RST);
 			for (ModPredicate modPredicate : modPredicates)
 			{
 				String element = String.format("%s (%s) %s", StringUtils.translate("tweakermore.util.mod." + modPredicate.modId), modPredicate.modId, modPredicate.getVersionPredicatesString());
@@ -106,8 +106,8 @@ public class TweakerMoreOption
 				result.add(GuiBase.TXT_DARK_GRAY + GuiBase.TXT_ITALIC + String.format("--- %s ---", StringUtils.translate("tweakermore.gui.mod_relation_footer.or")));
 			}
 			first = false;
-			result.addAll(getFooter(modRestriction.getRequirements(), true, "tweakermore.gui.mod_relation_footer.requirement"));
-			result.addAll(getFooter(modRestriction.getConflictions(), false, "tweakermore.gui.mod_relation_footer.confliction"));
+			result.addAll(getFooter(modRestriction.getRequirements(), modRestriction.isRequirementsSatisfied(), true, "tweakermore.gui.mod_relation_footer.requirement"));
+			result.addAll(getFooter(modRestriction.getConflictions(), modRestriction.isNoConfliction(), false, "tweakermore.gui.mod_relation_footer.confliction"));
 		}
 		return result;
 	}
