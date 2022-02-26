@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.fallenbreath.tweakermore.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "tweaks.shaderGameTimeAsWorldTime.ShadersMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "tweakermore-refmap.json"
+}

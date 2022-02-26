@@ -1,31 +1,32 @@
 package me.fallenbreath.tweakermore.config;
 
-import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.util.StringUtils;
-import me.fallenbreath.conditionalmixin.api.value.ModPredicate;
-import me.fallenbreath.conditionalmixin.api.value.ModRestriction;
+import me.fallenbreath.conditionalmixin.util.ModPredicate;
+import me.fallenbreath.conditionalmixin.util.ModRestriction;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.util.ModIds;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class TweakerMoreOption
 {
 	private final Config annotation;
 	private final TweakerMoreIConfigBase config;
-	private final ModRestriction modRestriction;
-	private final ModRestriction minecraftRestriction;
+	private final List<ModRestriction> modRestrictions;
+	private final List<ModRestriction> minecraftRestrictions;
 
 	public TweakerMoreOption(Config annotation, TweakerMoreIConfigBase config)
 	{
 		this.annotation = annotation;
 		this.config = config;
-		this.modRestriction = ModRestriction.of(annotation.restriction());
-		this.minecraftRestriction = ModRestriction.of(annotation.restriction(), c -> ModIds.minecraft.equals(c.value()));
+		this.modRestrictions = Arrays.stream(annotation.restriction()).map(ModRestriction::of).collect(Collectors.toList());
+		this.minecraftRestrictions = Arrays.stream(annotation.restriction()).map(r -> ModRestriction.of(r, c -> ModIds.minecraft.equals(c.value()))).collect(Collectors.toList());
 	}
 
 	public Config.Type getType()
@@ -38,19 +39,19 @@ public class TweakerMoreOption
 		return this.annotation.category();
 	}
 
-	public ModRestriction getModRestriction()
+	public List<ModRestriction> getModRestrictions()
 	{
-		return this.modRestriction;
+		return this.modRestrictions;
 	}
 
 	public boolean isEnabled()
 	{
-		return this.modRestriction.isSatisfied();
+		return this.modRestrictions.isEmpty() || this.modRestrictions.stream().anyMatch(ModRestriction::isSatisfied);
 	}
 
 	public boolean worksForCurrentMCVersion()
 	{
-		return this.minecraftRestriction.isSatisfied();
+		return this.minecraftRestrictions.isEmpty() || this.minecraftRestrictions.stream().anyMatch(ModRestriction::isSatisfied);
 	}
 
 	public boolean isDebug()
@@ -68,32 +69,46 @@ public class TweakerMoreOption
 		return this.config;
 	}
 
-	private static Optional<String> getFooter(Collection<ModPredicate> modPredicates, boolean good, String footerTextKey)
+	private static List<String> getFooter(Collection<ModPredicate> modPredicates, boolean nice, boolean good, String footerTextKey)
 	{
 		if (modPredicates.size() > 0)
 		{
-			List<String> elements = Lists.newArrayList();
+			List<String> lines = Lists.newArrayList();
+			lines.add((nice ? GuiBase.TXT_GRAY : GuiBase.TXT_RED) + GuiBase.TXT_ITALIC + StringUtils.translate(footerTextKey) + GuiBase.TXT_RST);
 			for (ModPredicate modPredicate : modPredicates)
 			{
-				String element = StringUtils.translate("tweakermore.util.mod." + modPredicate.modId) + modPredicate.getVersionPredicatesString();
-				if ((good && !modPredicate.isSatisfied()) || (!good && modPredicate.isSatisfied()))
+				String element = String.format("%s (%s) %s", StringUtils.translate("tweakermore.util.mod." + modPredicate.modId), modPredicate.modId, modPredicate.getVersionPredicatesString());
+				String color;
+				if ((good && modPredicate.isSatisfied()) || (!good && !modPredicate.isSatisfied()))  // nice
 				{
-					element = GuiBase.TXT_RED + GuiBase.TXT_ITALIC + element + GuiBase.TXT_GRAY + GuiBase.TXT_ITALIC;
+					color = GuiBase.TXT_GRAY;
 				}
-				elements.add(element);
+				else  // oh no the restriction check might fail due to this
+				{
+					color = GuiBase.TXT_RED;
+				}
+				String lineItem = color + GuiBase.TXT_ITALIC + element + GuiBase.TXT_GRAY + GuiBase.TXT_ITALIC;
+				lines.add(GuiBase.TXT_DARK_GRAY + GuiBase.TXT_ITALIC + "- " + lineItem);
 			}
-			String footer = StringUtils.translate(footerTextKey, Joiner.on(", ").join(elements));
-			footer = GuiBase.TXT_GRAY + GuiBase.TXT_ITALIC + footer + GuiBase.TXT_RST;
-			return Optional.of(footer);
+			return lines;
 		}
-		return Optional.empty();
+		return Collections.emptyList();
 	}
 
 	public List<String> getModRelationsFooter()
 	{
 		List<String> result = Lists.newArrayList();
-		getFooter(this.modRestriction.getRequirements(), true, "tweakermore.gui.mod_relation_footer.requirement").ifPresent(result::add);
-		getFooter(this.modRestriction.getConflictions(), false, "tweakermore.gui.mod_relation_footer.confliction").ifPresent(result::add);
+		boolean first = true;
+		for (ModRestriction modRestriction : this.modRestrictions)
+		{
+			if (!first)
+			{
+				result.add(GuiBase.TXT_DARK_GRAY + GuiBase.TXT_ITALIC + String.format("--- %s ---", StringUtils.translate("tweakermore.gui.mod_relation_footer.or")));
+			}
+			first = false;
+			result.addAll(getFooter(modRestriction.getRequirements(), modRestriction.isRequirementsSatisfied(), true, "tweakermore.gui.mod_relation_footer.requirement"));
+			result.addAll(getFooter(modRestriction.getConflictions(), modRestriction.isNoConfliction(), false, "tweakermore.gui.mod_relation_footer.confliction"));
+		}
 		return result;
 	}
 }
