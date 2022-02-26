@@ -87,10 +87,10 @@
   "tweakermore.config.eCraftItemScrollerCompact": "eCraftItemScrollerCompact",
   "tweakermore.config.eCraftItemScrollerCompact.comment": "Fixed some item scroller functionality doesn't work with easier crafting mod\ne.g. broken mass craft",
   "tweakermore.config.ofRemoveSignTextRenderDistance": "ofRemoveSignTextRenderDistance",
-  "tweakermore.config.ofRemoveSignTextRenderDistance.comment": "Remove the sign text render distance limit from Optifine\bBack to vanilla behavior where sign text is always rendered together with the sign block",
+  "tweakermore.config.ofRemoveSignTextRenderDistance.comment": "Remove the sign text render distance limit from Optifine\nBack to vanilla behavior where sign text is always rendered together with the sign block",
   "tweakermore.config.ofUnlockF3FpsLimit": "ofUnlockF3FpsLimit",
   "tweakermore.config.ofUnlockF3FpsLimit.comment": "Removed 10 FPS render limit for F3 debug hud",
-  "tweakermore.config.replayAccurateTimelineTimestamp": "replayPreciseTimelineHoveredTime",
+  "tweakermore.config.replayAccurateTimelineTimestamp": "replayAccurateTimelineTimestamp",
   "tweakermore.config.replayAccurateTimelineTimestamp.comment": "Display timestamps accurate to milliseconds on the timeline in replay mod",
   "tweakermore.config.replayFlySpeedLimitMultiplier": "replayFlySpeedLimitMultiplier",
   "tweakermore.config.replayFlySpeedLimitMultiplier.comment": "Multiple the camera fly speed upper limit in replay mod with given value\nSo the maximum fly speed can be increased",
@@ -168,7 +168,7 @@
   "tweakermore.doc_gen.text.requirements": "Required mods",
   "tweakermore.doc_gen.text.conflictions": "Conflicted mods",
 
-  "tweakermore.doc_gen.value.none": "none",
+  "tweakermore.doc_gen.value.no_hotkey": "no hotkey",
 
   "tweakermore.doc_gen.type.boolean": "boolean",
   "tweakermore.doc_gen.type.integer": "integer",

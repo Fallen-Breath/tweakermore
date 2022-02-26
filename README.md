@@ -19,14 +19,13 @@ Requirements:
 - [Fabric Loader](https://fabricmc.net/) >= 0.10.4
 - [MaLiLib](https://www.curseforge.com/minecraft/mc-mods/malilib)
 
-More features will be enabled with these mods
+More features/tweaks will be enabled with these mods
 
-- [Tweakeroo](https://www.curseforge.com/minecraft/mc-mods/tweakeroo)
+- [EasierCrafting](https://www.curseforge.com/minecraft/mc-mods/easiercrafting)
+- [Iris](https://github.com/IrisShaders/Iris)
 - [Item Scroller](https://www.curseforge.com/minecraft/mc-mods/item-scroller)
 - [Litematica](https://www.curseforge.com/minecraft/mc-mods/litematica)
-
-The following mods are those targeted mods for mod tweaks features
-
 - [Optifine](https://www.optifine.net/home) ([Optifabric](https://www.curseforge.com/minecraft/mc-mods/optifabric))
+- [ReplayMod](https://www.replaymod.com/)
+- [Tweakeroo](https://www.curseforge.com/minecraft/mc-mods/tweakeroo)
 - [Xaero's World Map](https://www.curseforge.com/minecraft/mc-mods/xaeros-world-map)
-- [EasierCrafting](https://www.curseforge.com/minecraft/mc-mods/easiercrafting)

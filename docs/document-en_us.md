@@ -78,7 +78,7 @@ Copy texts in the sign you are pointing to into the clipboard
 
 - Category: Tweaks
 - Type: hotkey
-- Default value: *none*
+- Default value: *no hotkey*
 
 ![copySignTextToClipBoard](assets/copySignTextToClipBoard-en_us.png)
 
@@ -95,7 +95,7 @@ Has significant impact on framerate
 
 - Category: Tweaks
 - Type: togglable hotkey
-- Default value: *none*, `false`
+- Default value: *no hotkey*, `false`
 
 
 ### disableLightUpdates
@@ -104,7 +104,7 @@ Yeets client-side light updates
 
 - Category: Tweaks
 - Type: togglable hotkey
-- Default value: *none*, `false`
+- Default value: *no hotkey*, `false`
 
 
 ### disablePistonBlockBreakingParticle
@@ -113,7 +113,7 @@ Remove block breaking particles when pistons break blocks
 
 - Category: Tweaks
 - Type: togglable hotkey
-- Default value: *none*, `false`
+- Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
     - `minecraft >=1.17`
@@ -125,7 +125,7 @@ Disable particle of redstone wire
 
 - Category: Tweaks
 - Type: togglable hotkey
-- Default value: *none*, `false`
+- Default value: *no hotkey*, `false`
 
 
 ### handRestockBlackList
@@ -228,7 +228,7 @@ so the server think that the inventory is out of sync then do resync
 
 - Category: Tweaks
 - Type: hotkey
-- Default value: *none*
+- Default value: *no hotkey*
 
 
 ### safeAfkHealthThreshold
@@ -274,7 +274,7 @@ and then close the container
 
 - Category: Tweaks
 - Type: togglable hotkey
-- Default value: *none*, `false`
+- Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
     - `itemscroller`
@@ -290,7 +290,7 @@ and then close the container
 
 - Category: Tweaks
 - Type: togglable hotkey
-- Default value: *none*, `false`
+- Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
     - `itemscroller`
@@ -306,7 +306,7 @@ Does not work with easy place mode
 
 - Category: Tweaks
 - Type: togglable hotkey
-- Default value: *none*, `false`
+- Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
     - `tweakeroo`
@@ -323,7 +323,7 @@ WARNING: Expect client lag spike with enabled
 
 - Category: Tweaks
 - Type: togglable hotkey
-- Default value: *none*, `false`
+- Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
     - `replaymod`
@@ -337,7 +337,7 @@ Health threshold to disconnect can be set via safeAfkHealthThreshold
 
 - Category: Tweaks
 - Type: togglable hotkey
-- Default value: *none*, `false`
+- Default value: *no hotkey*, `false`
 
 
 ### tweakmUnlimitedEntityRenderDistance
@@ -348,7 +348,7 @@ Still requires the server to send entity packets via EntityTracker properly
 
 - Category: Tweaks
 - Type: togglable hotkey
-- Default value: *none*, `false`
+- Default value: *no hotkey*, `false`
 
 
 ### villagerOfferUsesDisplay
@@ -389,10 +389,14 @@ e.g. broken mass craft
     - `easiercrafting`
     - `itemscroller`
 
+![eCraftItemScrollerCompact](assets/eCraftItemScrollerCompact.png)
+
 
 ### ofRemoveSignTextRenderDistance
 
-Remove the sign text render distance limit from OptifineBack to vanilla behavior where sign text is always rendered together with the sign block
+Remove the sign text render distance limit from Optifine
+
+Back to vanilla behavior where sign text is always rendered together with the sign block
 
 - Category: Mods Tweaks
 - Type: boolean
@@ -415,7 +419,7 @@ Removed 10 FPS render limit for F3 debug hud
     - `minecraft >=1.15`
 
 
-### replayPreciseTimelineHoveredTime (replayAccurateTimelineTimestamp)
+### replayAccurateTimelineTimestamp
 
 Display timestamps accurate to milliseconds on the timeline in replay mod
 
@@ -425,6 +429,8 @@ Display timestamps accurate to milliseconds on the timeline in replay mod
 - Mod restrictions:
   - Required mods:
     - `replaymod`
+
+![replayAccurateTimelineTimestamp](assets/replayAccurateTimelineTimestamp.png)
 
 
 ### replayFlySpeedLimitMultiplier
@@ -519,6 +525,6 @@ and debugging related functions will be enabled
 
 - Category: Setting
 - Type: togglable hotkey
-- Default value: *none*, `false`
+- Default value: *no hotkey*, `false`
 
 

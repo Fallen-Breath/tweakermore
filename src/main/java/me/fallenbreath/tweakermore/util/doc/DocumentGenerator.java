@@ -1,10 +1,8 @@
 package me.fallenbreath.tweakermore.util.doc;
 
 import com.google.common.collect.ImmutableList;
-import fi.dy.masa.malilib.gui.Message;
 import fi.dy.masa.malilib.hotkeys.IKeybind;
 import fi.dy.masa.malilib.hotkeys.KeyAction;
-import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.util.FabricUtil;
 import net.minecraft.client.MinecraftClient;
@@ -44,7 +42,7 @@ public class DocumentGenerator
 		{
 			completableFuture = new CompletableFuture<>();  // assign to any value first to prevent hotkey spam
 
-			InfoUtils.showGuiMessage(Message.MessageType.INFO, "Generating doc...");
+			TweakerMoreMod.LOGGER.info("Generating doc...");
 			String prevLang = MinecraftClient.getInstance().options.language;
 
 			CompletableFuture<Void>[] futures = new CompletableFuture[LANGS.size() + 1];
@@ -69,6 +67,7 @@ public class DocumentGenerator
 					TweakerMoreMod.LOGGER.info("Doc generating done");
 					if (exit)
 					{
+						TweakerMoreMod.LOGGER.info("Stopping Minecraft client");
 						MinecraftClient.getInstance().scheduleStop();
 					}
 				});
