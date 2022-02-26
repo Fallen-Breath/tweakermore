@@ -87,7 +87,7 @@
   "tweakermore.config.eCraftItemScrollerCompact": "eCraftItemScrollerCompact",
   "tweakermore.config.eCraftItemScrollerCompact.comment": "Fixed some item scroller functionality doesn't work with easier crafting mod\ne.g. broken mass craft",
   "tweakermore.config.ofRemoveSignTextRenderDistance": "ofRemoveSignTextRenderDistance",
-  "tweakermore.config.ofRemoveSignTextRenderDistance.comment": "Remove the sign text render distance limit from Optifine\bBack to vanilla behavior where sign text is always rendered together with the sign block",
+  "tweakermore.config.ofRemoveSignTextRenderDistance.comment": "Remove the sign text render distance limit from Optifine\nBack to vanilla behavior where sign text is always rendered together with the sign block",
   "tweakermore.config.ofUnlockF3FpsLimit": "ofUnlockF3FpsLimit",
   "tweakermore.config.ofUnlockF3FpsLimit.comment": "Removed 10 FPS render limit for F3 debug hud",
   "tweakermore.config.replayAccurateTimelineTimestamp": "replayAccurateTimelineTimestamp",
