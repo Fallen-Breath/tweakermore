@@ -168,7 +168,7 @@
   "tweakermore.doc_gen.text.requirements": "依赖模组",
   "tweakermore.doc_gen.text.conflictions": "冲突模组",
 
-  "tweakermore.doc_gen.value.none": "无",
+  "tweakermore.doc_gen.value.no_hotkey": "无快捷键",
 
   "tweakermore.doc_gen.type.boolean": "布尔值",
   "tweakermore.doc_gen.type.integer": "整数",

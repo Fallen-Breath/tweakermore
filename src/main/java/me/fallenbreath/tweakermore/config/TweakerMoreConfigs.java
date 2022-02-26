@@ -136,7 +136,7 @@ public class TweakerMoreConfigs
 
 	// Disable
 
-	@Config(Config.Type.TWEAK)
+	@Config(Config.Type.DISABLE)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_CAMERA_FRUSTUM_CULLING = newConfigBooleanHotkeyed("disableCameraFrustumCulling");
 
 	@Config(Config.Type.DISABLE)
