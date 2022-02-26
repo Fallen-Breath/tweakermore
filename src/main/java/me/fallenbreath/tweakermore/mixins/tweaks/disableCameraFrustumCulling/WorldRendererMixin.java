@@ -19,7 +19,7 @@ public abstract class WorldRendererMixin
 					ordinal = 0
 			)
 	)
-	private Frustum disableFrustumChunkCulling(Frustum frustum)
+	private Frustum disableCameraFrustumCulling(Frustum frustum)
 	{
 		if (TweakerMoreConfigs.DISABLE_CAMERA_FRUSTUM_CULLING.getBooleanValue())
 		{
