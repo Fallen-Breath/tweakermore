@@ -174,6 +174,13 @@ public class TweakerMoreConfigs
 
 	@Config(
 			value = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(optifine)),
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigBoolean OF_SHADER_GAME_TIME_AS_WORLD_TIME = newConfigBoolean("ofShaderGameTimeAsWorldTime", false);
+
+	@Config(
+			value = Config.Type.GENERIC,
 			restriction = @Restriction(require = @Condition(replay_mod)),
 			category = Config.Category.MOD_TWEAKS
 	)
