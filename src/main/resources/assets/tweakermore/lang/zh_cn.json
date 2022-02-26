@@ -85,6 +85,8 @@
   "tweakermore.config.eCraftItemScrollerCompact.comment": "修复ItemScroller的部分功能无法与EasierCrafting模组一同工作\n例如无法使用的massCraft",
   "tweakermore.config.irisShaderGameTimeAsWorldTime": "Iris光影使用游戏时间作为世界时间",
   "tweakermore.config.irisShaderGameTimeAsWorldTime.comment": "使用游戏时间作为Iris光影的\"worldTime\"uniform变量\n因此在游戏规则doDaylightCycle关闭的情况下这一变量仍能递增\n与选项ofShaderGameTimeAsWorldTime的功能相同",
+  "tweakermore.config.ofRemoveSignTextRenderDistance": "Optifine移除告示牌方块文字渲染距离限制",
+  "tweakermore.config.ofRemoveSignTextRenderDistance.comment": "移除Optifine的告示牌文字渲染距离限制\n回归原版行为，即告示牌的文字总与告示牌同时渲染",
   "tweakermore.config.ofUnlockF3FpsLimit": "Optifine解锁F3帧数限制",
   "tweakermore.config.ofUnlockF3FpsLimit.comment": "移除F3 HUD显示的10FPS帧数限制",
   "tweakermore.config.ofShaderGameTimeAsWorldTime": "Optifine光影使用游戏时间作为世界时间",

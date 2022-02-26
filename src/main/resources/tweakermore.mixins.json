@@ -31,6 +31,7 @@
     "tweaks.irisShaderGameTimeAsWorldTime.WorldTimeUniformsMixin",
     "tweaks.maxChatHudHeight.ChatHudMixin",
     "tweaks.netherPortalSoundChance.NetherPortalBlockMixin",
+    "tweaks.ofRemoveSignTextRenderDistance.SignBlockEntityRendererMixin",
     "tweaks.ofUnlockF3FpsLimit.DebugHudMixin",
     "tweaks.prioritizedCommandSuggestions.CommandSuggestorMixin",
     "tweaks.replayAccurateTimelineTimestamp.AbstractGuiTimelineMixin",

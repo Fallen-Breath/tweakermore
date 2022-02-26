@@ -85,6 +85,8 @@
   "tweakermore.config.eCraftItemScrollerCompact.comment": "Fixed some item scroller functionality doesn't work with easier crafting mod\ne.g. broken mass craft",
   "tweakermore.config.irisShaderGameTimeAsWorldTime": "irisShaderGameTimeAsWorldTime",
   "tweakermore.config.irisShaderGameTimeAsWorldTime.comment": "Use game time instead of day time as uniform value \"worldTime\" for Iris shaders\nSo with gamerule doDaylightCycle false this timer variable still increases\nSimilar with option ofShaderGameTimeAsWorldTime",
+  "tweakermore.config.ofRemoveSignTextRenderDistance": "ofRemoveSignTextRenderDistance",
+  "tweakermore.config.ofRemoveSignTextRenderDistance.comment": "Remove the sign text render distance limit from Optifine\bBack to vanilla behavior where sign text is always rendered together with the sign block",
   "tweakermore.config.ofUnlockF3FpsLimit": "ofUnlockF3FpsLimit",
   "tweakermore.config.ofUnlockF3FpsLimit.comment": "Removed 10 FPS render limit for F3 debug hud",
   "tweakermore.config.ofShaderGameTimeAsWorldTime": "ofShaderGameTimeAsWorldTime",

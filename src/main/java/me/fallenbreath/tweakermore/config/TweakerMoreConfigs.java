@@ -174,6 +174,13 @@ public class TweakerMoreConfigs
 
 	@Config(
 			value = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(optifine)),
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigBoolean OF_REMOVE_SIGN_TEXT_RENDER_DISTANCE = newConfigBoolean("ofRemoveSignTextRenderDistance", false);
+
+	@Config(
+			value = Config.Type.GENERIC,
 			restriction = @Restriction(require = {
 					@Condition(optifine),
 					@Condition(value = minecraft, versionPredicates = ">=1.15")
