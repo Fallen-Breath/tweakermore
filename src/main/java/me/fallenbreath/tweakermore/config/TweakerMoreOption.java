@@ -8,23 +8,25 @@ import me.fallenbreath.conditionalmixin.util.ModRestriction;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.util.ModIds;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TweakerMoreOption
 {
 	private final Config annotation;
 	private final TweakerMoreIConfigBase config;
-	private final ModRestriction modRestriction;
-	private final ModRestriction minecraftRestriction;
+	private final List<ModRestriction> modRestrictions;
+	private final List<ModRestriction> minecraftRestrictions;
 
 	public TweakerMoreOption(Config annotation, TweakerMoreIConfigBase config)
 	{
 		this.annotation = annotation;
 		this.config = config;
-		this.modRestriction = ModRestriction.of(annotation.restriction());
-		this.minecraftRestriction = ModRestriction.of(annotation.restriction(), c -> ModIds.minecraft.equals(c.value()));
+		this.modRestrictions = Arrays.stream(annotation.restriction()).map(ModRestriction::of).collect(Collectors.toList());
+		this.minecraftRestrictions = Arrays.stream(annotation.restriction()).map(r -> ModRestriction.of(r, c -> ModIds.minecraft.equals(c.value()))).collect(Collectors.toList());
 	}
 
 	public Config.Type getType()
@@ -37,19 +39,19 @@ public class TweakerMoreOption
 		return this.annotation.category();
 	}
 
-	public ModRestriction getModRestriction()
+	public List<ModRestriction> getModRestrictions()
 	{
-		return this.modRestriction;
+		return this.modRestrictions;
 	}
 
 	public boolean isEnabled()
 	{
-		return this.modRestriction.isSatisfied();
+		return this.modRestrictions.stream().allMatch(ModRestriction::isSatisfied);
 	}
 
 	public boolean worksForCurrentMCVersion()
 	{
-		return this.minecraftRestriction.isSatisfied();
+		return this.minecraftRestrictions.stream().allMatch(ModRestriction::isSatisfied);
 	}
 
 	public boolean isDebug()
@@ -91,8 +93,17 @@ public class TweakerMoreOption
 	public List<String> getModRelationsFooter()
 	{
 		List<String> result = Lists.newArrayList();
-		result.addAll(getFooter(this.modRestriction.getRequirements(), true, "tweakermore.gui.mod_relation_footer.requirement"));
-		result.addAll(getFooter(this.modRestriction.getConflictions(), false, "tweakermore.gui.mod_relation_footer.confliction"));
+		boolean first = true;
+		for (ModRestriction modRestriction : this.modRestrictions)
+		{
+			if (!first)
+			{
+				result.add(GuiBase.TXT_DARK_GRAY + GuiBase.TXT_ITALIC + String.format("--- %s ---", StringUtils.translate("tweakermore.gui.mod_relation_footer.or")));
+			}
+			first = false;
+			result.addAll(getFooter(modRestriction.getRequirements(), true, "tweakermore.gui.mod_relation_footer.requirement"));
+			result.addAll(getFooter(modRestriction.getConflictions(), false, "tweakermore.gui.mod_relation_footer.confliction"));
+		}
 		return result;
 	}
 }

@@ -164,16 +164,28 @@ public class DocumentPrinter
 		getMaxValue(config).ifPresent(max -> writeln.accept(String.format("- %s: `%s`", tr("maximum_value"), max)));
 		getOptionValues(config).ifPresent(values -> writeln.accept(String.format("- %s: %s", tr("options"), valueList(values))));
 
-		ModRestriction modRestriction = tweakerMoreOption.getModRestriction();
-		if (!modRestriction.getRequirements().isEmpty())
+		boolean first = true;
+		for (ModRestriction modRestriction : tweakerMoreOption.getModRestrictions())
 		{
-			writeln.accept(String.format("- %s:", tr("requirements")));
-			modRestriction.getRequirements().forEach(req -> writeln.accept(String.format("  - `%s`", req.toString())));
-		}
-		if (!modRestriction.getConflictions().isEmpty())
-		{
-			writeln.accept(String.format("- %s:", tr("conflictions")));
-			modRestriction.getConflictions().forEach(cfl -> writeln.accept(String.format("  - `%s`", cfl.toString())));
+			if (first)
+			{
+				writeln.accept("");
+			}
+			else
+			{
+				writeln.accept(String.format("- %s", StringUtils.translate("tweakermore.gui.mod_relation_footer.or")));
+			}
+			first = false;
+			if (!modRestriction.getRequirements().isEmpty())
+			{
+				writeln.accept(String.format("- %s:", tr("requirements")));
+				modRestriction.getRequirements().forEach(req -> writeln.accept(String.format("  - `%s`", req.toString())));
+			}
+			if (!modRestriction.getConflictions().isEmpty())
+			{
+				writeln.accept(String.format("- %s:", tr("conflictions")));
+				modRestriction.getConflictions().forEach(cfl -> writeln.accept(String.format("  - `%s`", cfl.toString())));
+			}
 		}
 		writeln.accept("");
 		getScreenShotFileName(configId, lang).ifPresent(fileName -> {

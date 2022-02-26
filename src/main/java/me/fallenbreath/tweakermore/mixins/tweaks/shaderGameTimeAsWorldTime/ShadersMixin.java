@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.ofShaderGameTimeAsWorldTime;
+package me.fallenbreath.tweakermore.mixins.tweaks.shaderGameTimeAsWorldTime;
 
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
@@ -37,7 +37,7 @@ public abstract class ShadersMixin
 	)
 	private static int ofShaderGameTimeAsWorldTime(int worldTime)
 	{
-		if (TweakerMoreConfigs.OF_SHADER_GAME_TIME_AS_WORLD_TIME.getBooleanValue())
+		if (TweakerMoreConfigs.SHADER_GAME_TIME_AS_WORLD_TIME.getBooleanValue())
 		{
 			ClientWorld clientWorld = MinecraftClient.getInstance().world;
 			if (clientWorld != null)

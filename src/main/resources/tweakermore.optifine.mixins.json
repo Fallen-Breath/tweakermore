@@ -4,7 +4,7 @@
   "package": "me.fallenbreath.tweakermore.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "tweaks.ofShaderGameTimeAsWorldTime.ShadersMixin"
+    "tweaks.shaderGameTimeAsWorldTime.ShadersMixin"
   ],
   "client": [
   ],

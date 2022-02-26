@@ -164,13 +164,13 @@ public class TweakerMoreConfigs
 
 	@Config(
 			value = Config.Type.GENERIC,
-			restriction = @Restriction(require = {
-					@Condition(iris),
-					@Condition(value = minecraft, versionPredicates = ">=1.16")  // no iris for mc <1.16
-			}),
+			restriction = {
+					@Restriction(require = @Condition(optifine)),
+					@Restriction(require = @Condition(iris))
+			},
 			category = Config.Category.MOD_TWEAKS
 	)
-	public static final TweakerMoreConfigBoolean IRIS_SHADER_GAME_TIME_AS_WORLD_TIME = newConfigBoolean("irisShaderGameTimeAsWorldTime", false);
+	public static final TweakerMoreConfigBoolean SHADER_GAME_TIME_AS_WORLD_TIME = newConfigBoolean("shaderGameTimeAsWorldTime", false);
 
 	@Config(
 			value = Config.Type.GENERIC,
@@ -188,13 +188,6 @@ public class TweakerMoreConfigs
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigBoolean OF_UNLOCK_F3_FPS_LIMIT = newConfigBoolean("ofUnlockF3FpsLimit", false);
-
-	@Config(
-			value = Config.Type.GENERIC,
-			restriction = @Restriction(require = @Condition(optifine)),
-			category = Config.Category.MOD_TWEAKS
-	)
-	public static final TweakerMoreConfigBoolean OF_SHADER_GAME_TIME_AS_WORLD_TIME = newConfigBoolean("ofShaderGameTimeAsWorldTime", false);
 
 	@Config(
 			value = Config.Type.GENERIC,

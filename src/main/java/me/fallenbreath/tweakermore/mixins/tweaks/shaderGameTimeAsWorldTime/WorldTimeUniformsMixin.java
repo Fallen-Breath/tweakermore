@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.irisShaderGameTimeAsWorldTime;
+package me.fallenbreath.tweakermore.mixins.tweaks.shaderGameTimeAsWorldTime;
 
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
@@ -24,7 +24,7 @@ public abstract class WorldTimeUniformsMixin
 	@Inject(method = "getWorldDayTime", at = @At("HEAD"), cancellable = true, remap = false)
 	private void irisShaderGameTimeAsWorldTime(CallbackInfoReturnable<Integer> cir)
 	{
-		if (TweakerMoreConfigs.IRIS_SHADER_GAME_TIME_AS_WORLD_TIME.getBooleanValue())
+		if (TweakerMoreConfigs.SHADER_GAME_TIME_AS_WORLD_TIME.getBooleanValue())
 		{
 			ClientWorld clientWorld = getWorld();
 			if (clientWorld != null)

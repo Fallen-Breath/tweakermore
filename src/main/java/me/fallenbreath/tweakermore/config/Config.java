@@ -17,7 +17,10 @@ public @interface Config
 
 	Category category() default Category.MC_TWEAKS;
 
-	Restriction restriction() default @Restriction();
+	/**
+	 * Any of these restrictions satisfied => enable
+	 */
+	Restriction[] restriction() default {};
 
 	boolean debug() default false;
 
