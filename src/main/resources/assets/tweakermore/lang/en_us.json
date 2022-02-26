@@ -168,7 +168,7 @@
   "tweakermore.doc_gen.text.requirements": "Required mods",
   "tweakermore.doc_gen.text.conflictions": "Conflicted mods",
 
-  "tweakermore.doc_gen.value.none": "none",
+  "tweakermore.doc_gen.value.no_hotkey": "no hotkey",
 
   "tweakermore.doc_gen.type.boolean": "boolean",
   "tweakermore.doc_gen.type.integer": "integer",
