@@ -3,6 +3,7 @@ package me.fallenbreath.tweakermore.util.doc;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.config.*;
+import fi.dy.masa.malilib.hotkeys.IHotkey;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.conditionalmixin.util.ModRestriction;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
@@ -17,7 +18,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -27,15 +30,14 @@ public class DocumentPrinter
 	private static final String ASSETS_DIRECTORY_NAME = "assets";
 	private static final Path ASSETS_DIRECTORY = DOC_DIRECTORY.resolve(ASSETS_DIRECTORY_NAME);
 
-	private static String valueList(Collection<String> collection)
+	private static String codeBlock(String text)
 	{
-		return Joiner.on(", ").join(collection.stream().
-				map(s -> s.isEmpty() ?
-						"*" + StringUtils.translate("tweakermore.doc_gen.value.none") + "*" :
-						"`" + s + "`"
-				).
-				collect(Collectors.toList())
-		);
+		return "`" + text + "`";
+	}
+
+	private static String italic(String text)
+	{
+		return "*" + text + "*";
 	}
 
 	private static String getConfigType(IConfigBase config)
@@ -49,26 +51,44 @@ public class DocumentPrinter
 		return config instanceof ConfigBaseAccessor ? StringUtils.translate(((ConfigBaseAccessor)config).getCommentKey()) : config.getComment();
 	}
 
-	private static List<String> getDefaultValue(IConfigBase config)
+	private static String getDefaultValue(IConfigBase config)
 	{
+		String hotkey = "";
+		if (config instanceof IHotkey)
+		{
+			hotkey = ((IHotkey)config).getKeybind().getDefaultStringValue();
+			if (hotkey.isEmpty())
+			{
+				hotkey = italic(StringUtils.translate("tweakermore.doc_gen.value.no_hotkey"));
+			}
+			else
+			{
+				hotkey = codeBlock(hotkey);
+			}
+		}
+
 		if (config instanceof IHotkeyTogglable)
 		{
-			return Lists.newArrayList(((IHotkeyTogglable)config).getKeybind().getDefaultStringValue(), String.valueOf(((IHotkeyTogglable)config).getDefaultBooleanValue()));
+			return hotkey + ", " + codeBlock(String.valueOf(((IHotkeyTogglable)config).getDefaultBooleanValue()));
 		}
-		if (config instanceof IStringRepresentable)
+		else if (config instanceof IHotkey)
 		{
-			return Collections.singletonList(((IStringRepresentable) config).getDefaultStringValue());
+			return hotkey;
 		}
-		if (config instanceof IConfigStringList)
+		else if (config instanceof IStringRepresentable)
 		{
-			return Collections.singletonList(((IConfigStringList)config).getDefaultStrings().toString());
+			return codeBlock(((IStringRepresentable) config).getDefaultStringValue());
 		}
-		if (config instanceof IConfigOptionList)
+		else if (config instanceof IConfigStringList)
 		{
-			return Collections.singletonList(((IConfigOptionList)config).getDefaultOptionListValue().getDisplayName());
+			return codeBlock(((IConfigStringList)config).getDefaultStrings().toString());
+		}
+		else if (config instanceof IConfigOptionList)
+		{
+			return codeBlock(((IConfigOptionList)config).getDefaultOptionListValue().getDisplayName());
 		}
 		TweakerMoreMod.LOGGER.warn("Unknown type found in getDefaultValue: {}", config.getClass());
-		return Collections.singletonList("unknown type: " + config.getClass().getName());
+		return italic("unknown type: " + config.getClass().getName());
 	}
 
 	private static Optional<Number> getMinValue(IConfigBase config)
@@ -97,7 +117,7 @@ public class DocumentPrinter
 		return Optional.empty();
 	}
 
-	private static Optional<List<String>> getOptionValues(IConfigBase config)
+	private static Optional<List<String>> getOptionListValueNames(IConfigBase config)
 	{
 		if (config instanceof IConfigOptionList)
 		{
@@ -113,7 +133,7 @@ public class DocumentPrinter
 			{
 				values.sort(Comparator.comparing(v -> ((Enum<?>)v).ordinal()));
 			}
-			return Optional.of(values.stream().map(IConfigOptionListEntry::getDisplayName).collect(Collectors.toList()));
+			return Optional.of(values.stream().map(IConfigOptionListEntry::getDisplayName).map(DocumentPrinter::codeBlock).collect(Collectors.toList()));
 		}
 		return Optional.empty();
 	}
@@ -158,11 +178,11 @@ public class DocumentPrinter
 		writeln.accept("");
 		writeln.accept(String.format("- %s: %s", tr("category"), tweakerMoreOption.getCategory().getDisplayName()));
 		writeln.accept(String.format("- %s: %s", tr("type"), getConfigType(config)));
-		writeln.accept(String.format("- %s: %s", tr("default_value"), valueList(getDefaultValue(config))));
+		writeln.accept(String.format("- %s: %s", tr("default_value"), getDefaultValue(config)));
 
 		getMinValue(config).ifPresent(min -> writeln.accept(String.format("- %s: `%s`", tr("minimum_value"), min)));
 		getMaxValue(config).ifPresent(max -> writeln.accept(String.format("- %s: `%s`", tr("maximum_value"), max)));
-		getOptionValues(config).ifPresent(values -> writeln.accept(String.format("- %s: %s", tr("options"), valueList(values))));
+		getOptionListValueNames(config).ifPresent(values -> writeln.accept(String.format("- %s: %s", tr("options"), Joiner.on(", ").join(values))));
 
 		List<ModRestriction> modRestrictions = tweakerMoreOption.getModRestrictions();
 		if (!modRestrictions.isEmpty())
