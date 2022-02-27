@@ -54,7 +54,11 @@
 - 最大值: `10000`
 - 模组约束:
   - 冲突模组:
+    - `compactchat`
+    - `morechathistory`
+    - `parachute`
     - `raise-chat-limit`
+    - `wmch`
 
 
 ### 网络连接延迟模拟 (connectionSimulatedDelay)

@@ -54,7 +54,11 @@ Modify the maximum number of history messages stored in the chat hud
 - Maximum value: `10000`
 - Mod restrictions:
   - Conflicted mods:
+    - `compactchat`
+    - `morechathistory`
+    - `parachute`
     - `raise-chat-limit`
+    - `wmch`
 
 
 ### connectionSimulatedDelay

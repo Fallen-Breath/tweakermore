@@ -17,10 +17,13 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import java.util.List;
 
-/**
- * It's stolen from https://github.com/Fallen-Breath/raise-chat-limit so make sure it doesnt crash with it
- */
-@Restriction(conflict = @Condition(ModIds.raise_chat_limit))
+@Restriction(conflict = {
+		@Condition(ModIds.compact_chat),
+		@Condition(ModIds.more_chat_history),
+		@Condition(ModIds.parachute),
+		@Condition(ModIds.raise_chat_limit),
+		@Condition(ModIds.wheres_my_chat_history)
+})
 @Mixin(ChatHud.class)
 public abstract class ChatHudMixin
 {
@@ -33,7 +36,9 @@ public abstract class ChatHudMixin
 	@ModifyConstant(
 			method = "addMessage(Lnet/minecraft/text/Text;IIZ)V",
 			constant = @Constant(intValue = 100),
-			require = 2
+			// there are so many mod that modifies the chat limit
+			// in case it's not in the conflict list, here comes a fail-soft solution
+			require = 0
 	)
 	private int raiseChatLimitTo(int value)
 	{
