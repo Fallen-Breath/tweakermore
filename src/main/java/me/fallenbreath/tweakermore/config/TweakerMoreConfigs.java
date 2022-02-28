@@ -57,7 +57,16 @@ public class TweakerMoreConfigs
 	@Config(Config.Type.GENERIC)
 	public static final TweakerMoreConfigDouble BOSS_BAR_SCALE = newConfigDouble("bossBarScale", 1, 0.001, 2);
 
-	@Config(value = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(raise_chat_limit)))
+	@Config(
+			value = Config.Type.GENERIC,
+			restriction = @Restriction(conflict = {
+					@Condition(compact_chat),
+					@Condition(more_chat_history),
+					@Condition(parachute),
+					@Condition(raise_chat_limit),
+					@Condition(wheres_my_chat_history)
+			})
+	)
 	public static final TweakerMoreConfigInteger CHAT_MESSAGE_LIMIT = newConfigInteger("chatMessageLimit", 100, 100, 10000);
 
 	@Config(Config.Type.GENERIC)
