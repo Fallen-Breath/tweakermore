@@ -54,11 +54,11 @@ Modify the maximum number of history messages stored in the chat hud
 - Maximum value: `10000`
 - Mod restrictions:
   - Conflicted mods:
-    - `compactchat`
-    - `morechathistory`
-    - `parachute`
-    - `raise-chat-limit`
-    - `wmch`
+    - CompactChat (`compactchat`)
+    - MoreChatHistory (`morechathistory`)
+    - Parachute (`parachute`)
+    - Raise Chat Limit (`raise-chat-limit`)
+    - Where's My Chat History (`wmch`)
 
 
 ### connectionSimulatedDelay
@@ -120,7 +120,7 @@ Remove block breaking particles when pistons break blocks
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
-    - `minecraft >=1.17`
+    - Minecraft (`minecraft`) ` >=1.17`
 
 
 ### disableRedstoneWireParticle
@@ -141,7 +141,7 @@ The items that will NOT trigger tweakHandRestock
 - Default value: `[minecraft:lava_bucket]`
 - Mod restrictions:
   - Required mods:
-    - `tweakeroo`
+    - Tweakeroo (`tweakeroo`)
 
 
 ### handRestockListType
@@ -154,7 +154,7 @@ The item restriction type for tweakHandRestock
 - Available options: `None`, `Black List`
 - Mod restrictions:
   - Required mods:
-    - `tweakeroo`
+    - Tweakeroo (`tweakeroo`)
 
 
 ### handRestockWhiteList
@@ -166,7 +166,7 @@ The items that will trigger tweakHandRestock
 - Default value: `[minecraft:bucket]`
 - Mod restrictions:
   - Required mods:
-    - `tweakeroo`
+    - Tweakeroo (`tweakeroo`)
 
 
 ### legacyF3NLogic
@@ -180,7 +180,7 @@ Modify the logic of hotkey F3 + N back to 1.15 and before
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
-    - `minecraft >=1.16`
+    - Minecraft (`minecraft`) ` >=1.16`
 
 
 ### maxChatHudHeight
@@ -281,7 +281,7 @@ and then close the container
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
-    - `itemscroller`
+    - Item Scroller (`itemscroller`)
 
 
 ### tweakmAutoFillContainer
@@ -297,7 +297,7 @@ and then close the container
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
-    - `itemscroller`
+    - Item Scroller (`itemscroller`)
 
 
 ### tweakmAutoPickSchematicBlock
@@ -313,8 +313,8 @@ Does not work with easy place mode
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
-    - `tweakeroo`
-    - `litematica`
+    - Tweakeroo (`tweakeroo`)
+    - Litematica (`litematica`)
 
 
 ### tweakmFlawlessFrames
@@ -330,7 +330,7 @@ WARNING: Expect client lag spike with enabled
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
-    - `replaymod`
+    - Replay mod (`replaymod`)
 
 
 ### tweakmSafeAfk
@@ -390,8 +390,8 @@ e.g. broken mass craft
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
-    - `easiercrafting`
-    - `itemscroller`
+    - EasierCrafting (`easiercrafting`)
+    - Item Scroller (`itemscroller`)
 
 ![eCraftItemScrollerCompact](assets/eCraftItemScrollerCompact.png)
 
@@ -407,7 +407,7 @@ Back to vanilla behavior where sign text is always rendered together with the si
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
-    - `optifabric`
+    - Optifine (`optifabric`)
 
 
 ### ofUnlockF3FpsLimit
@@ -419,8 +419,8 @@ Removed 10 FPS render limit for F3 debug hud
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
-    - `optifabric`
-    - `minecraft >=1.15`
+    - Optifine (`optifabric`)
+    - Minecraft (`minecraft`) ` >=1.15`
 
 
 ### replayAccurateTimelineTimestamp
@@ -432,7 +432,7 @@ Display timestamps accurate to milliseconds on the timeline in replay mod
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
-    - `replaymod`
+    - Replay mod (`replaymod`)
 
 ![replayAccurateTimelineTimestamp](assets/replayAccurateTimelineTimestamp.png)
 
@@ -450,7 +450,7 @@ So the maximum fly speed can be increased
 - Maximum value: `30`
 - Mod restrictions:
   - Required mods:
-    - `replaymod`
+    - Replay mod (`replaymod`)
 
 
 ### shaderGameTimeAsWorldTime
@@ -464,12 +464,12 @@ So with gamerule doDaylightCycle false this timer variable still increases
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
-    - `optifabric`
+    - Optifine (`optifabric`)
 
   *or*
 
   - Required mods:
-    - `iris`
+    - Iris (`iris`)
 
 
 ### xmapNoSessionFinalizationWait
@@ -485,7 +485,7 @@ Might have some side effects though
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
-    - `xaeroworldmap`
+    - Xaero's World Map (`xaeroworldmap`)
 
 
 ## Setting
