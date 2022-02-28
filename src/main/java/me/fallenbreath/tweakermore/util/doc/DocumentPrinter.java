@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.config.*;
 import fi.dy.masa.malilib.hotkeys.IHotkey;
 import fi.dy.masa.malilib.util.StringUtils;
+import me.fallenbreath.conditionalmixin.util.ModPredicate;
 import me.fallenbreath.conditionalmixin.util.ModRestriction;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.Config;
@@ -38,6 +39,17 @@ public class DocumentPrinter
 	private static String italic(String text)
 	{
 		return "*" + text + "*";
+	}
+
+	private static String prettyPredicate(ModPredicate modPredicate)
+	{
+		String ret = String.format("%s (`%s`)", StringUtils.translate("tweakermore.util.mod." + modPredicate.modId), modPredicate.modId);
+		String predicate = modPredicate.getVersionPredicatesString();
+		if (!predicate.isEmpty())
+		{
+			ret += " " + codeBlock(predicate);
+		}
+		return ret;
 	}
 
 	private static String getConfigType(IConfigBase config)
@@ -201,12 +213,12 @@ public class DocumentPrinter
 				if (!modRestriction.getRequirements().isEmpty())
 				{
 					writeln.accept(String.format("  - %s:", tr("requirements")));
-					modRestriction.getRequirements().forEach(req -> writeln.accept(String.format("    - `%s`", req.toString())));
+					modRestriction.getRequirements().forEach(req -> writeln.accept(String.format("    - %s", prettyPredicate(req))));
 				}
 				if (!modRestriction.getConflictions().isEmpty())
 				{
 					writeln.accept(String.format("  - %s:", tr("conflictions")));
-					modRestriction.getConflictions().forEach(cfl -> writeln.accept(String.format("    - `%s`", cfl.toString())));
+					modRestriction.getConflictions().forEach(cfl -> writeln.accept(String.format("    - %s", prettyPredicate(cfl))));
 				}
 			}
 		}

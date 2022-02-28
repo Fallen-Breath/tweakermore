@@ -13,11 +13,17 @@ public class ModIds
 	public static final String itemscroller = "itemscroller";
 	public static final String litematica = "litematica";
 
-	// others
-	public static final String optifine = "optifabric";
-	public static final String xaero_worldmap = "xaeroworldmap";
+	// those who modify chat limit
+	public static final String compact_chat = "compactchat";
+	public static final String more_chat_history = "morechathistory";
+	public static final String parachute = "parachute";
 	public static final String raise_chat_limit = "raise-chat-limit";
+	public static final String wheres_my_chat_history = "wmch";
+
+	// others
 	public static final String easier_crafting = "easiercrafting";
-	public static final String replay_mod = "replaymod";
 	public static final String iris = "iris";
+	public static final String optifine = "optifabric";
+	public static final String replay_mod = "replaymod";
+	public static final String xaero_worldmap = "xaeroworldmap";
 }
