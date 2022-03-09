@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.overwriteDayTime;
+package me.fallenbreath.tweakermore.mixins.tweaks.tweakmDaytimeOverride;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.world.ClientWorld;
@@ -17,10 +17,9 @@ public abstract class WorldMixin
 		World self = (World)(Object)this;
 		if (self instanceof ClientWorld)
 		{
-			int dayTime = TweakerMoreConfigs.OVERWRITE_DAYTIME.getIntegerValue();
-			if (dayTime > 0)
+			if (TweakerMoreConfigs.TWEAKM_DAYTIME_OVERRIDE.getBooleanValue())
 			{
-				cir.setReturnValue((long)dayTime);
+				cir.setReturnValue((long)TweakerMoreConfigs.DAYTIME_OVERRIDE_VALUE.getIntegerValue());
 			}
 		}
 	}

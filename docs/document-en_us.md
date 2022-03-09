@@ -87,6 +87,17 @@ Copy texts in the sign you are pointing to into the clipboard
 ![copySignTextToClipBoard](assets/copySignTextToClipBoard-en_us.png)
 
 
+### daytimeOverrideValue
+
+The client-side daytime value to be overrided by tweak tweakmDaytimeOverride
+
+- Category: Tweaks
+- Type: integer
+- Default value: `0`
+- Minimum value: `0`
+- Maximum value: `24000`
+
+
 ### disableCameraFrustumCulling
 
 Disable rendering culling using camera's frustum, i.e. stuffs outside the player's fov will also be rendered
@@ -207,19 +218,6 @@ Set it to 0.001 or 0.0001 for less noisy portal
 - Maximum value: `0.01`
 
 
-### overwriteDayTime
-
-Overwrite the time of day of the client world
-
-Does not affect server-side daytime
-
-- Category: Tweaks
-- Type: integer
-- Default value: `-1`
-- Minimum value: `-1`
-- Maximum value: `24000`
-
-
 ### prioritizedCommandSuggestions
 
 Command suggestions in this list will be more forward in the command completion list
@@ -328,6 +326,17 @@ Does not work with easy place mode
   - Required mods:
     - Tweakeroo (`tweakeroo`)
     - Litematica (`litematica`)
+
+
+### tweakmDaytimeOverride
+
+Override the time of day of the client world
+
+Does not affect server-side daytime
+
+- Category: Tweaks
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
 
 
 ### tweakmFlawlessFrames

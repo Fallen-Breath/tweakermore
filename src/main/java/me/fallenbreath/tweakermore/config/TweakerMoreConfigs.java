@@ -72,6 +72,9 @@ public class TweakerMoreConfigs
 	@Config(Config.Type.GENERIC)
 	public static final TweakerMoreConfigInteger CONNECTION_SIMULATED_DELAY = newConfigInteger("connectionSimulatedDelay", 0, 0, 15_000);
 
+	@Config(Config.Type.GENERIC)
+	public static final TweakerMoreConfigInteger DAYTIME_OVERRIDE_VALUE = newConfigInteger("daytimeOverrideValue", 0, 0, 24000);
+
 	@Config(value = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.16")))
 	public static final TweakerMoreConfigBoolean LEGACY_F3_N_LOGIC = newConfigBoolean("legacyF3NLogic", false);
 
@@ -80,9 +83,6 @@ public class TweakerMoreConfigs
 
 	@Config(Config.Type.GENERIC)
 	public static final TweakerMoreConfigDouble NETHER_PORTAL_SOUND_CHANCE = newConfigDouble("netherPortalSoundChance", 0.01D, 0.0D, 0.01D);
-
-	@Config(Config.Type.GENERIC)
-	public static final TweakerMoreConfigInteger OVERWRITE_DAYTIME = newConfigInteger("overwriteDayTime", -1, -1, 24000);
 
 	@Config(Config.Type.GENERIC)
 	public static final TweakerMoreConfigDouble SAFE_AFK_HEALTH_THRESHOLD = newConfigDouble("safeAfkHealthThreshold", 10, 0, 100);
@@ -136,6 +136,9 @@ public class TweakerMoreConfigs
 			})
 	)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_PICK_SCHEMATIC_BLOCK = newConfigBooleanHotkeyed("tweakmAutoPickSchematicBlock");
+
+	@Config(Config.Type.TWEAK)
+	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_DAYTIME_OVERRIDE = newConfigBooleanHotkeyed("tweakmDaytimeOverride");
 
 	@Config(value = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(replay_mod)))
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_FLAWLESS_FRAMES = newConfigBooleanHotkeyed("tweakmFlawlessFrames");

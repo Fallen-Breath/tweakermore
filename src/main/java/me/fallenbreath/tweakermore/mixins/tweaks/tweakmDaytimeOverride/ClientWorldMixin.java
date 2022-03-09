@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.overwriteDayTime;
+package me.fallenbreath.tweakermore.mixins.tweaks.tweakmDaytimeOverride;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.world.ClientWorld;
@@ -16,10 +16,9 @@ public abstract class ClientWorldMixin
 	@ModifyVariable(method = "setTimeOfDay", at = @At("HEAD"), argsOnly = true)
 	private long overwriteDayTime(long timeArg)
 	{
-		int dayTime = TweakerMoreConfigs.OVERWRITE_DAYTIME.getIntegerValue();
-		if (dayTime > 0)
+		if (TweakerMoreConfigs.TWEAKM_DAYTIME_OVERRIDE.getBooleanValue())
 		{
-			timeArg = -dayTime;
+			timeArg = -TweakerMoreConfigs.DAYTIME_OVERRIDE_VALUE.getIntegerValue();
 		}
 		return timeArg;
 	}

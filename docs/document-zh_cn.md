@@ -87,6 +87,17 @@
 ![copySignTextToClipBoard](assets/copySignTextToClipBoard-zh_cn.png)
 
 
+### 覆盖世界时间数值 (daytimeOverrideValue)
+
+用于功能tweakmDaytimeOverride的客户端的世界时间数值
+
+- 分类: 功能
+- 类型: 整数
+- 默认值: `0`
+- 最小值: `0`
+- 最大值: `24000`
+
+
 ### 禁用相机视锥体渲染剔除 (disableCameraFrustumCulling)
 
 禁用基于相机视锥体的渲染剔除，即玩家视野范围外的画面也会被渲染
@@ -207,19 +218,6 @@ tweakHandRestock功能的物品名单约束类型
 - 最大值: `0.01`
 
 
-### 覆盖世界时间数值 (overwriteDayTime)
-
-覆盖客户端中的世界时间
-
-对服务端无影响
-
-- 分类: 功能
-- 类型: 整数
-- 默认值: `-1`
-- 最小值: `-1`
-- 最大值: `24000`
-
-
 ### 指令补全优先列表 (prioritizedCommandSuggestions)
 
 此列表中的命令建议将在命令补全列表中更靠前
@@ -328,6 +326,17 @@ tweakHandRestock功能的物品名单约束类型
   - 依赖模组:
     - Tweakeroo (`tweakeroo`)
     - Litematica (`litematica`)
+
+
+### 覆盖世界时间 (tweakmDaytimeOverride)
+
+覆盖客户端中的世界时间
+
+对服务端无影响
+
+- 分类: 功能
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
 
 
 ### 无瑕世界渲染 (tweakmFlawlessFrames)
