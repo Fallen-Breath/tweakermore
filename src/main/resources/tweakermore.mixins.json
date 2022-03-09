@@ -32,6 +32,8 @@
     "tweaks.netherPortalSoundChance.NetherPortalBlockMixin",
     "tweaks.ofRemoveSignTextRenderDistance.SignBlockEntityRendererMixin",
     "tweaks.ofUnlockF3FpsLimit.DebugHudMixin",
+    "tweaks.overwriteDayTime.ClientWorldMixin",
+    "tweaks.overwriteDayTime.WorldMixin",
     "tweaks.prioritizedCommandSuggestions.CommandSuggestorMixin",
     "tweaks.replayAccurateTimelineTimestamp.AbstractGuiTimelineMixin",
     "tweaks.replayFlySpeedLimit.ClassicCameraControllerMixin",

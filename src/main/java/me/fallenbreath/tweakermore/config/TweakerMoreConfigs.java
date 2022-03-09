@@ -82,6 +82,9 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigDouble NETHER_PORTAL_SOUND_CHANCE = newConfigDouble("netherPortalSoundChance", 0.01D, 0.0D, 0.01D);
 
 	@Config(Config.Type.GENERIC)
+	public static final TweakerMoreConfigInteger OVERWRITE_DAYTIME = newConfigInteger("overwriteDayTime", -1, -1, 24000);
+
+	@Config(Config.Type.GENERIC)
 	public static final TweakerMoreConfigDouble SAFE_AFK_HEALTH_THRESHOLD = newConfigDouble("safeAfkHealthThreshold", 10, 0, 100);
 
 	@Config(Config.Type.GENERIC)

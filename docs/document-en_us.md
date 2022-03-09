@@ -207,6 +207,19 @@ Set it to 0.001 or 0.0001 for less noisy portal
 - Maximum value: `0.01`
 
 
+### overwriteDayTime
+
+Overwrite the time of day of the client world
+
+Does not affect server-side daytime
+
+- Category: Tweaks
+- Type: integer
+- Default value: `-1`
+- Minimum value: `-1`
+- Maximum value: `24000`
+
+
 ### prioritizedCommandSuggestions
 
 Command suggestions in this list will be more forward in the command completion list

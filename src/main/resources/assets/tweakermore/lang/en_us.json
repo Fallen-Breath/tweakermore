@@ -17,6 +17,8 @@
   "tweakermore.config.maxChatHudHeight.comment": "The maximum height of the chat hud",
   "tweakermore.config.netherPortalSoundChance": "netherPortalSoundChance",
   "tweakermore.config.netherPortalSoundChance.comment": "The chance for a nether portal block to play sound\nSet it to 0.001 or 0.0001 for less noisy portal",
+  "tweakermore.config.overwriteDayTime": "overwriteDayTime",
+  "tweakermore.config.overwriteDayTime.comment": "Overwrite the time of day of the client world\nDoes not affect server-side daytime",
   "tweakermore.config.safeAfkHealthThreshold": "safeAfkHealthThreshold",
   "tweakermore.config.safeAfkHealthThreshold.comment": "The threshold of the health of the player which triggers the safe afk disconnecting feature\nDisconnect when player takes damage and its health becomes less than the given value",
   "tweakermore.config.scoreboardSideBarScale": "scoreboardSideBarScale",
