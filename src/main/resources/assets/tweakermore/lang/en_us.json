@@ -121,6 +121,8 @@
   "tweakermore.config.tweakerMoreDebugDouble": "tweakerMoreDebugDouble",
   "tweakermore.config.tweakerMoreDebugDouble.comment": "A double parameter for TweakerMore debugging",
 
+  "tweakermore.config.tweakerMoreDevMixinAudit": "tweakerMoreDevMixinAudit",
+  "tweakermore.config.tweakerMoreDevMixinAudit.comment": "Forced load all mixin target classes",
   "tweakermore.config.tweakerMoreDevPrintDoc": "tweakerMoreDevPrintDoc",
   "tweakermore.config.tweakerMoreDevPrintDoc.comment": "Document Printer",
 

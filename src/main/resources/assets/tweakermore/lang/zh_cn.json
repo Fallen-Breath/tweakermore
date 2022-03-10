@@ -121,6 +121,8 @@
   "tweakermore.config.tweakerMoreDebugDouble": "TweakerMore调试用Double",
   "tweakermore.config.tweakerMoreDebugDouble.comment": "用于调试TweakerMore的Double",
 
+  "tweakermore.config.tweakerMoreDevMixinAudit": "TweakerMore开发-Mixin审计",
+  "tweakermore.config.tweakerMoreDevMixinAudit.comment": "强制加载所有mixin目标类",
   "tweakermore.config.tweakerMoreDevPrintDoc": "TweakerMore开发-打印文档",
   "tweakermore.config.tweakerMoreDevPrintDoc.comment": "文档生成器",
 
