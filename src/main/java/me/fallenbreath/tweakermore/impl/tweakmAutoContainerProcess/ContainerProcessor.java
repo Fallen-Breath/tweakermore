@@ -19,7 +19,8 @@ public abstract class ContainerProcessor
 {
 	private static final List<Processor> CONTAINER_PROCESSORS = ImmutableList.of(
 			new ContainerCleaner(),
-			new ContainerFiller()
+			new ContainerFiller(),
+			new ContainerMaterialListItemTaker()
 	);
 
 	private static boolean hasTweakEnabled()

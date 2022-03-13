@@ -295,6 +295,21 @@ tweakHandRestock功能的物品名单约束类型
     - Item Scroller (`itemscroller`)
 
 
+### 自动收集材料列表物品 (tweakmAutoCollectMaterialListItem)
+
+打开容器后，自动收集litematica材料列表中缺失的物品至玩家物品栏
+
+然后关闭容器
+
+- 分类: 功能
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
 ### 自动装填容器 (tweakmAutoFillContainer)
 
 打开容器后，自动使用物品栏中占用格子数最多的物品装填容器
@@ -315,7 +330,7 @@ tweakHandRestock功能的物品名单约束类型
 
 在放置方块前自动选择原理图中的方块对应的物品
 
-逻辑同litematica mod的pickBlock功能，你需要在litematica mod中启用pickBlockEnabled选项
+逻辑同litematica模组的pickBlock功能，你需要在litematica mod中启用pickBlockEnabled选项
 
 在轻松放置开启时无效
 

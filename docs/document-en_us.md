@@ -295,6 +295,21 @@ and then close the container
     - Item Scroller (`itemscroller`)
 
 
+### tweakmAutoCollectMaterialListItem
+
+Automatically collect missing items in litematica mod material list in the opened container to player inventory
+
+and then close the container
+
+- Category: Tweaks
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
 ### tweakmAutoFillContainer
 
 Automatically fill the opened container with the most numerous item stack in your inventory

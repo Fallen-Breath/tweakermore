@@ -138,6 +138,15 @@ public class TweakerMoreConfigs
 	)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_PICK_SCHEMATIC_BLOCK = newConfigBooleanHotkeyed("tweakmAutoPickSchematicBlock");
 
+	@Config(
+			value = Config.Type.TWEAK,
+			restriction = @Restriction(require = {
+					@Condition(litematica),
+					@Condition(itemscroller)
+			})
+	)
+	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_TAKE_MATERIAL_LIST_ITEM = newConfigBooleanHotkeyed("tweakmAutoCollectMaterialListItem");
+
 	@Config(Config.Type.TWEAK)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_DAYTIME_OVERRIDE = newConfigBooleanHotkeyed("tweakmDaytimeOverride");
 
