@@ -87,6 +87,17 @@ Copy texts in the sign you are pointing to into the clipboard
 ![copySignTextToClipBoard](assets/copySignTextToClipBoard-en_us.png)
 
 
+### daytimeOverrideValue
+
+The client-side daytime value to be overrided by tweak tweakmDaytimeOverride
+
+- Category: Tweaks
+- Type: integer
+- Default value: `0`
+- Minimum value: `0`
+- Maximum value: `24000`
+
+
 ### disableCameraFrustumCulling
 
 Disable rendering culling using camera's frustum, i.e. stuffs outside the player's fov will also be rendered
@@ -284,6 +295,21 @@ and then close the container
     - Item Scroller (`itemscroller`)
 
 
+### tweakmAutoCollectMaterialListItem
+
+Automatically collect missing items in litematica mod material list in the opened container to player inventory
+
+and then close the container
+
+- Category: Tweaks
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
 ### tweakmAutoFillContainer
 
 Automatically fill the opened container with the most numerous item stack in your inventory
@@ -315,6 +341,17 @@ Does not work with easy place mode
   - Required mods:
     - Tweakeroo (`tweakeroo`)
     - Litematica (`litematica`)
+
+
+### tweakmDaytimeOverride
+
+Override the time of day of the client world
+
+Does not affect server-side daytime
+
+- Category: Tweaks
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
 
 
 ### tweakmFlawlessFrames
