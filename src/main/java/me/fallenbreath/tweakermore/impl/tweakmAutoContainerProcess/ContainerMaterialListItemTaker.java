@@ -11,10 +11,10 @@ import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.mixins.tweaks.tweakmAutoCollectMaterialListItem.MaterialListHudRendererAccessor;
-import net.minecraft.client.gui.screen.ingame.ContainerScreen;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.slot.Slot;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class ContainerMaterialListItemTaker implements Processor
 	 * Requires litematica mod
 	 */
 	@Override
-	public boolean process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
+	public boolean process(ClientPlayerEntity player, HandledScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
 	{
 		// make sure required mods are loaded
 		if (!TweakerMoreConfigs.TWEAKM_AUTO_TAKE_MATERIAL_LIST_ITEM.getTweakerMoreOption().isEnabled())
@@ -108,7 +108,7 @@ public class ContainerMaterialListItemTaker implements Processor
 		return true;
 	}
 
-	private void moveToPlayerInventory(ContainerScreen<?> containerScreen, List<Slot> playerInvSlots, Slot fromSlot, int amount)
+	private void moveToPlayerInventory(HandledScreen<?> containerScreen, List<Slot> playerInvSlots, Slot fromSlot, int amount)
 	{
 		ItemStack stack = fromSlot.getStack();
 		if (amount == stack.getCount())
