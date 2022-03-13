@@ -11,15 +11,11 @@ import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.mixins.tweaks.tweakmAutoCollectMaterialListItem.MaterialListHudRendererAccessor;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.container.Container;
 import net.minecraft.container.Slot;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class ContainerMaterialListItemTaker implements Processor
@@ -123,12 +119,15 @@ public class ContainerMaterialListItemTaker implements Processor
 		else if (amount > stack.getCount())
 		{
 			TweakerMoreMod.LOGGER.warn("Too many items to move to player inventory, the stack {} has {} items but {} items are required", stack.getItem(), stack.getCount(), amount);
+			return;
 		}
 		// ensure amount <= stack.getCount()
 
 		InventoryUtils.leftClickSlot(containerScreen, fromSlot.id);
-		for (Slot slot : playerInvSlots)
+		// reversed iterating to match vanilla shift-click item putting order
+		for (int idx = playerInvSlots.size() - 1; idx >= 0; idx--)
 		{
+			Slot slot = playerInvSlots.get(idx);
 			ItemStack invStack = slot.getStack();
 			int clickAmount = 0;
 			if (slot.hasStack() && InventoryUtils.areStacksEqual(slot.getStack(), stack))
@@ -150,30 +149,6 @@ public class ContainerMaterialListItemTaker implements Processor
 		if (amount != 0)
 		{
 			TweakerMoreMod.LOGGER.warn("Failed to move full item stack to player inventory, {} items remains", amount);
-		}
-	}
-
-	private static void moveOneItemToFirstValidSlot(ContainerScreen<? extends Container> gui, Slot slotFrom, List<Integer> slotsTo)
-	{
-		MinecraftClient mc = MinecraftClient.getInstance();
-		PlayerInventory inv = mc.player.inventory;
-		if (!InventoryUtils.isStackEmpty(inv.getCursorStack())) {
-			int sizeOrig = InventoryUtils.getStackSize(inv.getCursorStack());
-			Iterator var6 = slotsTo.iterator();
-
-			while(var6.hasNext()) {
-				int slotNum = (Integer)var6.next();
-				InventoryUtils.rightClickSlot(gui, slotNum);
-				ItemStack stackCursor = inv.getCursorStack();
-				if (InventoryUtils.isStackEmpty(stackCursor) || InventoryUtils.getStackSize(stackCursor) != sizeOrig) {
-					break;
-				}
-			}
-
-			if (!InventoryUtils.isStackEmpty(inv.getCursorStack())) {
-				InventoryUtils.leftClickSlot(gui, slotFrom.id);
-			}
-
 		}
 	}
 }
