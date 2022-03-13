@@ -5,9 +5,7 @@ import me.fallenbreath.tweakermore.util.FabricUtil;
 import me.fallenbreath.tweakermore.util.ModIds;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.Mixins;
-import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
 import java.util.List;
 import java.util.Set;
@@ -20,11 +18,6 @@ public class TweakerMoreMixinConfigPlugin extends RestrictiveMixinConfigPlugin
 	protected void onRestrictionCheckFailed(String mixinClassName, String reason)
 	{
 		LOGGER.info("[TweakerMore] Disabled mixin {} due to {}", mixinClassName, reason);
-	}
-
-	@Override
-	public void onLoad(String mixinPackage)
-	{
 	}
 
 	@Override
@@ -49,15 +42,5 @@ public class TweakerMoreMixinConfigPlugin extends RestrictiveMixinConfigPlugin
 			Mixins.addConfiguration("tweakermore.optifine.mixins.json");
 		}
 		return null;
-	}
-
-	@Override
-	public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo)
-	{
-	}
-
-	@Override
-	public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo)
-	{
 	}
 }
