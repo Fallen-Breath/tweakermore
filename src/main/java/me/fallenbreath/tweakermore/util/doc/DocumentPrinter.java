@@ -5,13 +5,13 @@ import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.config.*;
 import fi.dy.masa.malilib.hotkeys.IHotkey;
 import fi.dy.masa.malilib.util.StringUtils;
-import me.fallenbreath.conditionalmixin.util.ModPredicate;
-import me.fallenbreath.conditionalmixin.util.ModRestriction;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.Config;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
 import me.fallenbreath.tweakermore.mixins.doc.ConfigBaseAccessor;
+import me.fallenbreath.tweakermore.util.condition.ModPredicate;
+import me.fallenbreath.tweakermore.util.condition.ModRestriction;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.BufferedWriter;
