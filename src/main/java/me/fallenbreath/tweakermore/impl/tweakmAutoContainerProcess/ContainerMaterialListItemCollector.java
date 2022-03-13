@@ -18,7 +18,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-public class ContainerMaterialListItemTaker implements Processor
+public class ContainerMaterialListItemCollector implements Processor
 {
 	@Override
 	public boolean isEnabled()
@@ -110,7 +110,7 @@ public class ContainerMaterialListItemTaker implements Processor
 
 	private void moveToPlayerInventory(ContainerScreen<?> containerScreen, List<Slot> playerInvSlots, Slot fromSlot, int amount)
 	{
-		ItemStack stack = fromSlot.getStack();
+		ItemStack stack = fromSlot.getStack().copy();
 		if (amount == stack.getCount())
 		{
 			InventoryUtils.shiftClickSlot(containerScreen, fromSlot.id);
@@ -128,10 +128,10 @@ public class ContainerMaterialListItemTaker implements Processor
 		for (int idx = playerInvSlots.size() - 1; idx >= 0; idx--)
 		{
 			Slot slot = playerInvSlots.get(idx);
-			ItemStack invStack = slot.getStack();
 			int clickAmount = 0;
 			if (slot.hasStack() && InventoryUtils.areStacksEqual(slot.getStack(), stack))
 			{
+				ItemStack invStack = slot.getStack();
 				clickAmount = Math.min(invStack.getMaxCount() - invStack.getCount(), amount);
 			}
 			else if (!slot.hasStack())
