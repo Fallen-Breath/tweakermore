@@ -18,7 +18,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-public class ContainerMaterialListItemTaker implements Processor
+public class ContainerMaterialListItemCollector implements Processor
 {
 	@Override
 	public boolean isEnabled()
