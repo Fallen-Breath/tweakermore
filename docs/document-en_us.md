@@ -442,6 +442,20 @@ e.g. broken mass craft
 ![eCraftItemScrollerCompact](assets/eCraftItemScrollerCompact.png)
 
 
+### ofRemoveItemFrameItemRenderDistance
+
+Remove the item frame item render distance limit from Optifine
+
+Back to vanilla behavior where the displayed item of item frame is always rendered together with the item frame
+
+- Category: Mods Tweaks
+- Type: boolean
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Optifine (`optifabric`)
+
+
 ### ofRemoveSignTextRenderDistance
 
 Remove the sign text render distance limit from Optifine

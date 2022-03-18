@@ -442,6 +442,20 @@ tweakHandRestock功能的物品名单约束类型
 ![eCraftItemScrollerCompact](assets/eCraftItemScrollerCompact.png)
 
 
+### Optifine移除展示框物品渲染距离限制 (ofRemoveItemFrameItemRenderDistance)
+
+移除Optifine的展示框物品渲染距离限制
+
+回归原版行为，即展示框的物品总与展示框本身同时渲染
+
+- 分类: 模组修改
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Optifine (`optifabric`)
+
+
 ### Optifine移除告示牌方块文字渲染距离限制 (ofRemoveSignTextRenderDistance)
 
 移除Optifine的告示牌文字渲染距离限制

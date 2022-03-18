@@ -13,8 +13,10 @@ public abstract class SignBlockEntityRendererMixin
 			method = "method_3583",  // lambda method in method render
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/util/Texts;wrapLines(Lnet/minecraft/text/Text;ILnet/minecraft/client/font/TextRenderer;ZZ)Ljava/util/List;"
-			)
+					target = "Lnet/minecraft/client/util/Texts;wrapLines(Lnet/minecraft/text/Text;ILnet/minecraft/client/font/TextRenderer;ZZ)Ljava/util/List;",
+					remap = true
+			),
+			remap = false
 	)
 	private static int disableSignTextLengthLimit(int maxLength)
 	{
