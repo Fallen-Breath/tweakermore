@@ -103,6 +103,8 @@
   "tweakermore.config.eCraftItemScrollerCompact.comment": "修复ItemScroller的部分功能无法与EasierCrafting模组一同工作\n例如无法使用的massCraft",
   "tweakermore.config.ofRemoveSignTextRenderDistance": "Optifine移除告示牌方块文字渲染距离限制",
   "tweakermore.config.ofRemoveSignTextRenderDistance.comment": "移除Optifine的告示牌文字渲染距离限制\n回归原版行为，即告示牌的文字总与告示牌同时渲染",
+  "tweakermore.config.ofRemoveItemFrameItemRenderDistance": "Optifine移除展示框物品渲染距离限制",
+  "tweakermore.config.ofRemoveItemFrameItemRenderDistance.comment": "移除Optifine的展示框物品渲染距离限制\n回归原版行为，即展示框的物品总与展示框本身同时渲染",
   "tweakermore.config.ofUnlockF3FpsLimit": "Optifine解锁F3帧数限制",
   "tweakermore.config.ofUnlockF3FpsLimit.comment": "移除F3 HUD显示的10FPS帧数限制",
   "tweakermore.config.replayAccurateTimelineTimestamp": "Replay精准时间戳显示",
