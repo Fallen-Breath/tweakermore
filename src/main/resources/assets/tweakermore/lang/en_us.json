@@ -91,6 +91,9 @@
   "tweakermore.config.disableRedstoneWireParticle": "disableRedstoneWireParticle",
   "tweakermore.config.disableRedstoneWireParticle.comment": "Disable particle of redstone wire",
   "tweakermore.config.disableRedstoneWireParticle.pretty_name": "Disable Redstone Wire Particle",
+  "tweakermore.config.disableSignTextLengthLimit": "disableSignTextLengthLimit",
+  "tweakermore.config.disableSignTextLengthLimit.comment": "Disable the text length limit based on character width when editing or rendering a sign block",
+  "tweakermore.config.disableSignTextLengthLimit.pretty_name": "Disable Sign Text Length Limit",
 
   "// Mod Tweaks": "================================================",
 

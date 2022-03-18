@@ -173,6 +173,9 @@ public class TweakerMoreConfigs
 	@Config(Config.Type.DISABLE)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_REDSTONE_WIRE_PARTICLE = newConfigBooleanHotkeyed("disableRedstoneWireParticle");
 
+	@Config(Config.Type.DISABLE)
+	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_SIGN_TEXT_LENGTH_LIMIT = newConfigBooleanHotkeyed("disableSignTextLengthLimit");
+
 	////////////////////
 	//   Mod Tweaks   //
 	////////////////////

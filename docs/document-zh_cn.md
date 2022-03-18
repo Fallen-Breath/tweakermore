@@ -143,6 +143,15 @@
 - 默认值: *无快捷键*, `false`
 
 
+### 禁用告示牌文本长度限制 (disableSignTextLengthLimit)
+
+禁用在编辑或渲染告示牌时，告示牌基于字符长度的文本长度限制
+
+- 分类: 功能
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+
+
 ### 自动补货黑名单 (handRestockBlackList)
 
 不会触发tweakHandRestock的物品

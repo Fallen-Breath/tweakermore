@@ -143,6 +143,15 @@ Disable particle of redstone wire
 - Default value: *no hotkey*, `false`
 
 
+### disableSignTextLengthLimit
+
+Disable the text length limit based on character width when editing or rendering a sign block
+
+- Category: Tweaks
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+
+
 ### handRestockBlackList
 
 The items that will NOT trigger tweakHandRestock

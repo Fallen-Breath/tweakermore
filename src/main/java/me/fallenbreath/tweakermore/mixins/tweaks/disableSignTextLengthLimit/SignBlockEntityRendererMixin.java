@@ -1,0 +1,27 @@
+package me.fallenbreath.tweakermore.mixins.tweaks.disableSignTextLengthLimit;
+
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+
+@Mixin(SignBlockEntityRenderer.class)
+public abstract class SignBlockEntityRendererMixin
+{
+	@ModifyArg(
+			method = "method_3583",  // lambda method in method render
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/client/util/Texts;wrapLines(Lnet/minecraft/text/Text;ILnet/minecraft/client/font/TextRenderer;ZZ)Ljava/util/List;"
+			)
+	)
+	private static int disableSignTextLengthLimit(int maxLength)
+	{
+		if (TweakerMoreConfigs.DISABLE_SIGN_TEXT_LENGTH_LIMIT.getBooleanValue())
+		{
+			maxLength = Integer.MAX_VALUE;
+		}
+		return maxLength;
+	}
+}
