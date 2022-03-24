@@ -134,9 +134,11 @@ Remove block breaking particles when pistons break blocks
     - Minecraft (`minecraft`) ` >=1.17`
 
 
-### disableRedstoneWireParticle
+### disableRedstoneParticle
 
-Disable particle of redstone wire
+Disable all redstone particles
+
+i.e. particles from redstone dust, redstone torch, redstone repeater etc.
 
 - Category: Tweaks
 - Type: togglable hotkey

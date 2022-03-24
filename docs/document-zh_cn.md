@@ -134,9 +134,11 @@
     - Minecraft (`minecraft`) ` >=1.17`
 
 
-### 禁用红石粉粒子效果 (disableRedstoneWireParticle)
+### 禁用红石粒子效果 (disableRedstoneParticle)
 
-禁用红石粉发出的粒子效果
+禁用所有的红石粒子效果
+
+即来自红石粉、红石火把、红石中继器等的粒子效果
 
 - 分类: 功能
 - 类型: 可开关型热键

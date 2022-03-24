@@ -23,7 +23,7 @@
     "tweaks.disableCameraFrustumCulling.WorldRendererMixin",
     "tweaks.disableLightUpdates.ClientChunkManagerMixin",
     "tweaks.disableLightUpdates.LightingProviderMixin",
-    "tweaks.disableRedstoneWireParticle.RedstoneWireBlockMixin",
+    "tweaks.disableRedstoneParticle.WorldRendererMixin",
     "tweaks.disableSignTextLengthLimit.SelectionManagerAccessor",
     "tweaks.disableSignTextLengthLimit.SignBlockEntityRendererMixin",
     "tweaks.disableSignTextLengthLimit.SignEditScreenMixin",
