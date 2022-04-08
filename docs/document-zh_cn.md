@@ -134,9 +134,20 @@
     - Minecraft (`minecraft`) ` >=1.17`
 
 
-### 禁用红石粉粒子效果 (disableRedstoneWireParticle)
+### 禁用红石粒子效果 (disableRedstoneParticle)
 
-禁用红石粉发出的粒子效果
+禁用所有的红石粒子效果
+
+即来自红石粉、红石火把、红石中继器等的粒子效果
+
+- 分类: 功能
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+
+
+### 禁用告示牌文本长度限制 (disableSignTextLengthLimit)
+
+禁用在编辑或渲染告示牌时，告示牌基于字符长度的文本长度限制
 
 - 分类: 功能
 - 类型: 可开关型热键
@@ -270,7 +281,7 @@ tweakHandRestock功能的物品名单约束类型
 - 最大值: `2.0`
 
 
-### 潜影盒物品显示提示附魔 (shulkerTooltipEnchantmentHint)
+### 潜影盒物品附魔提示 (shulkerTooltipEnchantmentHint)
 
 在潜影盒物品的工具提示中显示物品的附魔
 
@@ -279,6 +290,17 @@ tweakHandRestock功能的物品名单约束类型
 - 默认值: `false`
 
 ![shulkerTooltipEnchantmentHint](assets/shulkerTooltipEnchantmentHint-zh_cn.png)
+
+
+### 潜影盒物品填充率提示 (shulkerTooltipFillLevelHint)
+
+在潜影盒物品工具提示的第一行显示其内容物填充率
+
+- 分类: 功能
+- 类型: 布尔值
+- 默认值: `false`
+
+![shulkerTooltipFillLevelHint](assets/shulkerTooltipFillLevelHint-zh_cn.png)
 
 
 ### 自动清空容器 (tweakmAutoCleanContainer)
@@ -431,6 +453,20 @@ tweakHandRestock功能的物品名单约束类型
     - Item Scroller (`itemscroller`)
 
 ![eCraftItemScrollerCompact](assets/eCraftItemScrollerCompact.png)
+
+
+### Optifine移除展示框物品渲染距离限制 (ofRemoveItemFrameItemRenderDistance)
+
+移除Optifine的展示框物品渲染距离限制
+
+回归原版行为，即展示框的物品总与展示框本身同时渲染
+
+- 分类: 模组修改
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Optifine (`optifabric`)
 
 
 ### Optifine移除告示牌方块文字渲染距离限制 (ofRemoveSignTextRenderDistance)

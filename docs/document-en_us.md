@@ -134,9 +134,20 @@ Remove block breaking particles when pistons break blocks
     - Minecraft (`minecraft`) ` >=1.17`
 
 
-### disableRedstoneWireParticle
+### disableRedstoneParticle
 
-Disable particle of redstone wire
+Disable all redstone particles
+
+i.e. particles from redstone dust, redstone torch, redstone repeater etc.
+
+- Category: Tweaks
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+
+
+### disableSignTextLengthLimit
+
+Disable the text length limit based on character width when editing or rendering a sign block
 
 - Category: Tweaks
 - Type: togglable hotkey
@@ -272,13 +283,24 @@ Scale the scoreboard side bar hud with given factor
 
 ### shulkerTooltipEnchantmentHint
 
-Display enchantments of items in the tooltip of shulker box item
+Display enchantments of items in the tooltip of shulker box items
 
 - Category: Tweaks
 - Type: boolean
 - Default value: `false`
 
 ![shulkerTooltipEnchantmentHint](assets/shulkerTooltipEnchantmentHint-en_us.png)
+
+
+### shulkerTooltipFillLevelHint
+
+Display content fill level in first line of the tooltip of shulker box items
+
+- Category: Tweaks
+- Type: boolean
+- Default value: `false`
+
+![shulkerTooltipFillLevelHint](assets/shulkerTooltipFillLevelHint-en_us.png)
 
 
 ### tweakmAutoCleanContainer
@@ -431,6 +453,20 @@ e.g. broken mass craft
     - Item Scroller (`itemscroller`)
 
 ![eCraftItemScrollerCompact](assets/eCraftItemScrollerCompact.png)
+
+
+### ofRemoveItemFrameItemRenderDistance
+
+Remove the item frame item render distance limit from Optifine
+
+Back to vanilla behavior where the displayed item of item frame is always rendered together with the item frame
+
+- Category: Mods Tweaks
+- Type: boolean
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Optifine (`optifabric`)
 
 
 ### ofRemoveSignTextRenderDistance

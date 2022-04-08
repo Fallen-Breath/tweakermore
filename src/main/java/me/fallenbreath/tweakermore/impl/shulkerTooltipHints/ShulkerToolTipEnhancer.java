@@ -1,7 +1,9 @@
-package me.fallenbreath.tweakermore.impl.shulkerTooltipEnchantmentHint;
+package me.fallenbreath.tweakermore.impl.shulkerTooltipHints;
 
 import com.google.common.collect.Lists;
+import fi.dy.masa.malilib.util.InventoryUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.InventoryUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.item.EnchantedBookItem;
@@ -12,6 +14,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.collection.DefaultedList;
 
 import java.util.List;
 
@@ -50,6 +53,57 @@ public class ShulkerToolTipEnhancer
 				}
 				text.append(extraText);
 			}
+		}
+	}
+
+	public static void applyFillLevelHint(ItemStack skulker, List<Text> tooltip)
+	{
+		if (TweakerMoreConfigs.SHULKER_TOOLTIP_FILL_LEVEL_HINT.getBooleanValue() && tooltip.size() > 0)
+		{
+			int slotAmount = InventoryUtil.getInventorySlotAmount(skulker);
+			if (slotAmount == -1)
+			{
+				return;
+			}
+
+			DefaultedList<ItemStack> stackList = InventoryUtils.getStoredItems(skulker, slotAmount);
+			if (stackList.isEmpty())
+			{
+				return;
+			}
+
+			double sum = 0;
+			for (ItemStack stack : stackList)
+			{
+				sum += 1.0D * stack.getCount() / stack.getMaxCount();
+			}
+
+			double ratio = sum / slotAmount;
+			Formatting color = ratio >= 1.0D ? Formatting.DARK_GREEN : Formatting.GRAY;
+			Text fillLevelText = new LiteralText(String.format("%.2f%%", 100 * ratio)).formatted(color);
+
+			// let fillLevelText be rendered right-aligned
+			String spacing = " ";
+			Text firstLine = new LiteralText("").append(tooltip.get(0)).append(spacing).append(fillLevelText);
+			TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+			int maxWidth = tooltip.stream().
+					mapToInt(textRenderer::getWidth).
+					max().
+					orElse(0);
+
+			while (true)
+			{
+				List<Text> siblings = firstLine.getSiblings();
+				spacing += " ";
+				Text prevSpacing = siblings.get(1);
+				siblings.set(1, new LiteralText(spacing));
+				if (textRenderer.getWidth(firstLine) > maxWidth)
+				{
+					siblings.set(1, prevSpacing);  // rollback
+					break;
+				}
+			}
+			tooltip.set(0, firstLine);
 		}
 	}
 }
