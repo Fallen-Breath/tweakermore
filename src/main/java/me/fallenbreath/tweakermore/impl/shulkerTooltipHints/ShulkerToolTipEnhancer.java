@@ -12,8 +12,8 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.collection.DefaultedList;
 
 import java.util.List;
 
@@ -81,7 +81,7 @@ public class ShulkerToolTipEnhancer
 			Text firstLine = new LiteralText("").append(tooltip.get(0)).append(spacing).append(fillLevelText);
 			TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
 			int maxWidth = tooltip.stream().
-					mapToInt(text -> textRenderer.getStringWidth(text.asFormattedString())).
+					mapToInt(textRenderer::getWidth).
 					max().
 					orElse(0);
 
@@ -91,7 +91,7 @@ public class ShulkerToolTipEnhancer
 				spacing += " ";
 				Text prevSpacing = siblings.get(1);
 				siblings.set(1, new LiteralText(spacing));
-				if (textRenderer.getStringWidth(firstLine.asFormattedString()) > maxWidth)
+				if (textRenderer.getWidth(firstLine) > maxWidth)
 				{
 					siblings.set(1, prevSpacing);  // rollback
 					break;

@@ -19,7 +19,7 @@ public abstract class SignBlockEntityRendererMixin
 			},
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/util/Texts;wrapLines(Lnet/minecraft/text/Text;ILnet/minecraft/client/font/TextRenderer;ZZ)Ljava/util/List;",
+					target = "Lnet/minecraft/client/font/TextRenderer;wrapLines(Lnet/minecraft/text/StringVisitable;I)Ljava/util/List;",
 					remap = true
 			),
 			remap = false
