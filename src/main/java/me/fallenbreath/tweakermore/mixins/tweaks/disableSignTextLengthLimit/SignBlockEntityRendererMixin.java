@@ -15,7 +15,7 @@ public abstract class SignBlockEntityRendererMixin
 	@ModifyArg(
 			method = {  // lambda method in method render
 					"method_32159",  // vanilla
-					"lambda$render$0"  // after being polluted by optifine
+					"lambda$render$2"  // after being polluted by optifine
 			},
 			at = @At(
 					value = "INVOKE",
