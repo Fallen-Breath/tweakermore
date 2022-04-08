@@ -3,6 +3,7 @@ package me.fallenbreath.tweakermore.impl.shulkerTooltipHints;
 import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.util.InventoryUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.InventoryUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.item.EnchantedBookItem;
@@ -59,20 +60,25 @@ public class ShulkerToolTipEnhancer
 	{
 		if (TweakerMoreConfigs.SHULKER_TOOLTIP_FILL_LEVEL_HINT.getBooleanValue() && tooltip.size() > 0)
 		{
-			DefaultedList<ItemStack> stackList = InventoryUtils.getStoredItems(skulker, -1);
+			int slotAmount = InventoryUtil.getInventorySlotAmount(skulker);
+			if (slotAmount == -1)
+			{
+				return;
+			}
+
+			DefaultedList<ItemStack> stackList = InventoryUtils.getStoredItems(skulker, slotAmount);
 			if (stackList.isEmpty())
 			{
 				return;
 			}
 
-			int total = 0, maximum = 0;
+			double sum = 0;
 			for (ItemStack stack : stackList)
 			{
-				total += stack.getCount();
-				maximum += stack.getMaxCount();
+				sum += 1.0D * stack.getCount() / stack.getMaxCount();
 			}
 
-			double ratio = 1.0D * total / maximum;
+			double ratio = sum / slotAmount;
 			Formatting color = ratio >= 1.0D ? Formatting.DARK_GREEN : Formatting.GRAY;
 			Text fillLevelText = new LiteralText(String.format("%.2f%%", 100 * ratio)).formatted(color);
 
