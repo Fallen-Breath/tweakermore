@@ -25,6 +25,7 @@
     "tweaks.disableLightUpdates.LightingProviderMixin",
     "tweaks.disableRedstoneParticle.WorldRendererMixin",
     "tweaks.disableSignTextLengthLimit.SelectionManagerAccessor",
+    "tweaks.disableSignTextLengthLimit.SignBlockEntityRenderer_optifineMixin",
     "tweaks.disableSignTextLengthLimit.SignBlockEntityRendererMixin",
     "tweaks.disableSignTextLengthLimit.SignEditScreenMixin",
     "tweaks.eCraftItemScrollerCompact.ConfigsMixin",
