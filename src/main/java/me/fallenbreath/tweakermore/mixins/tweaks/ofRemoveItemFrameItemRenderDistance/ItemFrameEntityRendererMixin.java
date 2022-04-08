@@ -6,9 +6,11 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.render.entity.ItemFrameEntityRenderer;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+
+import java.lang.reflect.Field;
+import java.util.function.Supplier;
 
 import static me.fallenbreath.tweakermore.util.ModIds.optifine;
 
@@ -16,10 +18,11 @@ import static me.fallenbreath.tweakermore.util.ModIds.optifine;
 @Mixin(ItemFrameEntityRenderer.class)
 public abstract class ItemFrameEntityRendererMixin
 {
-	@SuppressWarnings("target")
-	@Dynamic("Added by optifine")
-	@Shadow(remap = false)
-	private static double itemRenderDistanceSq;
+// idk why @Shadow does not work
+//	@SuppressWarnings("target")
+//	@Dynamic("Added by optifine")
+//	@Shadow(remap = false)
+//	private static double itemRenderDistanceSq;
 
 	@Dynamic("Added by optifine")
 	@Redirect(
@@ -38,6 +41,32 @@ public abstract class ItemFrameEntityRendererMixin
 			return Double.MAX_VALUE;
 		}
 		// "vanilla" optifine behavior
-		return itemRenderDistanceSq;
+		return itemRenderDistanceSqGetter.get();
+	}
+
+	private static final Supplier<Double> itemRenderDistanceSqGetter;
+
+	static
+	{
+		try
+		{
+			//noinspection JavaReflectionMemberAccess
+			Field field = ItemFrameEntityRenderer.class.getDeclaredField("itemRenderDistanceSq");
+			field.setAccessible(true);
+			itemRenderDistanceSqGetter = () -> {
+				try
+				{
+					return (double)field.get(null);
+				}
+				catch (Exception e)
+				{
+					throw new RuntimeException("cannot access itemRenderDistanceSq");
+				}
+			};
+		}
+		catch (Exception e)
+		{
+			throw new RuntimeException("cannot access itemRenderDistanceSq, it should be added by Optifine");
+		}
 	}
 }
