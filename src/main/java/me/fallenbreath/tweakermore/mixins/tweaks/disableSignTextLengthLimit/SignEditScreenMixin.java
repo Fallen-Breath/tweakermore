@@ -5,7 +5,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.SignEditScreen;
+import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -27,9 +29,17 @@ public abstract class SignEditScreenMixin extends Screen
 
 	@Shadow @Final private String[] text;
 
+	private boolean filtered$TKM;
+
 	protected SignEditScreenMixin(Text title)
 	{
 		super(title);
+	}
+
+	@Inject(method = "<init>", at = @At("TAIL"))
+	private void recordFilteredParam(SignBlockEntity sign, boolean filtered, CallbackInfo ci)
+	{
+		this.filtered$TKM = filtered;
 	}
 
 	@ModifyConstant(
@@ -56,11 +66,11 @@ public abstract class SignEditScreenMixin extends Screen
 			),
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
-	private void drawLineOverflowHint(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci, float f, BlockState blockState, boolean bl, boolean bl2, float g, VertexConsumerProvider.Immediate immediate, float h, int i, int j, int k, int l, Matrix4f matrix4f, int lineIdx, String string, float xStart)
+	private void drawLineOverflowHint(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci, float f, BlockState blockState, boolean bl, boolean bl2, float g, VertexConsumerProvider.Immediate immediate, SpriteIdentifier spriteIdentifier, VertexConsumer vertexConsumer, float h, int i, int j, int k, int l, Matrix4f matrix4f, int lineIdx, String string, float xStart)
 	{
 		if (TweakerMoreConfigs.DISABLE_SIGN_TEXT_LENGTH_LIMIT.getBooleanValue())
 		{
-			Text text = this.sign.getTextOnRow(lineIdx);
+			Text text = this.sign.getTextOnRow(lineIdx, this.filtered$TKM);
 			if (0 <= lineIdx && lineIdx < this.text.length)
 			{
 				assert this.client != null;
