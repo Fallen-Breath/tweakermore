@@ -37,6 +37,10 @@ public abstract class ContainerProcessor
 			// not inventory and not crafting table
 			if (player != null && screen instanceof ContainerScreen<?> && !(screen instanceof AbstractInventoryScreen) && !(screen instanceof CraftingTableScreen))
 			{
+				if (player.isSpectator())
+				{
+					return;
+				}
 				ContainerScreen<?> containerScreen = (ContainerScreen<?>)screen;
 				if (containerScreen.getContainer() != container || !((AutoProcessableScreen)screen).shouldProcess())
 				{

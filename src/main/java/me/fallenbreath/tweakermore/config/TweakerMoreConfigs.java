@@ -95,6 +95,9 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBoolean SHULKER_TOOLTIP_ENCHANTMENT_HINT = newConfigBoolean("shulkerTooltipEnchantmentHint", false);
 
 	@Config(Config.Type.GENERIC)
+	public static final TweakerMoreConfigBoolean SHULKER_TOOLTIP_FILL_LEVEL_HINT = newConfigBoolean("shulkerTooltipFillLevelHint", false);
+
+	@Config(Config.Type.GENERIC)
 	public static final TweakerMoreConfigBoolean VILLAGER_OFFER_USES_DISPLAY = newConfigBoolean("villagerOfferUsesDisplay", false);
 
 	// Hotkey
@@ -171,7 +174,10 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_PISTON_BLOCK_BREAKING_PARTICLE = newConfigBooleanHotkeyed("disablePistonBlockBreakingParticle");
 
 	@Config(Config.Type.DISABLE)
-	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_REDSTONE_WIRE_PARTICLE = newConfigBooleanHotkeyed("disableRedstoneWireParticle");
+	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_REDSTONE_PARTICLE = newConfigBooleanHotkeyed("disableRedstoneParticle");
+
+	@Config(Config.Type.DISABLE)
+	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_SIGN_TEXT_LENGTH_LIMIT = newConfigBooleanHotkeyed("disableSignTextLengthLimit");
 
 	////////////////////
 	//   Mod Tweaks   //
@@ -206,6 +212,13 @@ public class TweakerMoreConfigs
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigBoolean OF_REMOVE_SIGN_TEXT_RENDER_DISTANCE = newConfigBoolean("ofRemoveSignTextRenderDistance", false);
+
+	@Config(
+			value = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(optifine)),
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigBoolean OF_REMOVE_ITEM_FRAME_ITEM_RENDER_DISTANCE = newConfigBoolean("ofRemoveItemFrameItemRenderDistance", false);
 
 	@Config(
 			value = Config.Type.GENERIC,

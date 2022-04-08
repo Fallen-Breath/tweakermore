@@ -39,7 +39,7 @@ public class TweakerMoreMixinConfigPlugin extends RestrictiveMixinConfigPlugin
 		if (FabricUtil.isModLoaded(ModIds.optifine))  // a rough check
 		{
 			LOGGER.info("[TweakerMore] loading optifine mixin");
-			Mixins.addConfiguration("tweakermore.optifine.mixins.json");
+			Mixins.addConfiguration("tweakermore.optifine_mixins.json");
 		}
 		return null;
 	}
