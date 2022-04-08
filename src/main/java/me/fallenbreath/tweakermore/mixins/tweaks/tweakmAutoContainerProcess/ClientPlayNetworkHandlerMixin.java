@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ClientPlayNetworkHandlerMixin
 {
 	@Inject(method = "onOpenScreen", at = @At("TAIL"))
-	private void tweakmAutoFillContainerMarking(CallbackInfo ci)
+	private void tweakerMoreAntuContainerProcessorMarking(CallbackInfo ci)
 	{
 		Screen screen = MinecraftClient.getInstance().currentScreen;
 		if (screen != null)

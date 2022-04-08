@@ -10,6 +10,7 @@ import fi.dy.masa.malilib.gui.Message;
 import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
 import me.fallenbreath.tweakermore.mixins.tweaks.tweakmAutoCollectMaterialListItem.MaterialListHudRendererAccessor;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -23,7 +24,9 @@ public class ContainerMaterialListItemCollector implements Processor
 	@Override
 	public boolean isEnabled()
 	{
-		return TweakerMoreConfigs.TWEAKM_AUTO_TAKE_MATERIAL_LIST_ITEM.getBooleanValue();
+		TweakerMoreConfigBooleanHotkeyed config = TweakerMoreConfigs.TWEAKM_AUTO_TAKE_MATERIAL_LIST_ITEM;
+		// make sure required mods are loaded
+		return config.getBooleanValue() && config.getTweakerMoreOption().isEnabled();
 	}
 
 	/**
@@ -32,12 +35,6 @@ public class ContainerMaterialListItemCollector implements Processor
 	@Override
 	public boolean process(ClientPlayerEntity player, HandledScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
 	{
-		// make sure required mods are loaded
-		if (!TweakerMoreConfigs.TWEAKM_AUTO_TAKE_MATERIAL_LIST_ITEM.getTweakerMoreOption().isEnabled())
-		{
-			return false;
-		}
-
 		MaterialListBase materialList = DataManager.getMaterialList();
 		if (materialList != null)
 		{

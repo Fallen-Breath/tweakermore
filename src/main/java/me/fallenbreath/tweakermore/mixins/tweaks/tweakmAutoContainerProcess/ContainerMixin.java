@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ContainerMixin
 {
 	@Inject(method = "updateSlotStacks", at = @At("TAIL"))
-	private void tweakmAutoFillContainer(CallbackInfo ci)
+	private void tweakerMoreAntuContainerProcessorProcess(CallbackInfo ci)
 	{
 		ContainerProcessor.process((ScreenHandler)(Object)this);
 	}
