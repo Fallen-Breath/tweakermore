@@ -24,8 +24,10 @@
   "tweakermore.config.scoreboardSideBarScale": "scoreboardSideBarScale",
   "tweakermore.config.scoreboardSideBarScale.comment": "Scale the scoreboard side bar hud with given factor",
   "tweakermore.config.shulkerTooltipEnchantmentHint": "shulkerTooltipEnchantmentHint",
-  "tweakermore.config.shulkerTooltipEnchantmentHint.comment": "Display enchantments of items in the tooltip of shulker box item",
+  "tweakermore.config.shulkerTooltipEnchantmentHint.comment": "Display enchantments of items in the tooltip of shulker box items",
   "tweakermore.config.shulkerTooltipEnchantmentHint.more": "... %1$sx",
+  "tweakermore.config.shulkerTooltipFillLevelHint": "shulkerTooltipFillLevelHint",
+  "tweakermore.config.shulkerTooltipFillLevelHint.comment": "Display content fill level in first line of the tooltip of shulker box items",
   "tweakermore.config.villagerOfferUsesDisplay": "villagerOfferUsesDisplay",
   "tweakermore.config.villagerOfferUsesDisplay.comment": "Display villager offer use and limit amount on villager offer list\nHover on the arrow of the offer to see it",
 

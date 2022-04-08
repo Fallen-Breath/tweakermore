@@ -283,13 +283,24 @@ Scale the scoreboard side bar hud with given factor
 
 ### shulkerTooltipEnchantmentHint
 
-Display enchantments of items in the tooltip of shulker box item
+Display enchantments of items in the tooltip of shulker box items
 
 - Category: Tweaks
 - Type: boolean
 - Default value: `false`
 
 ![shulkerTooltipEnchantmentHint](assets/shulkerTooltipEnchantmentHint-en_us.png)
+
+
+### shulkerTooltipFillLevelHint
+
+Display content fill level in first line of the tooltip of shulker box items
+
+- Category: Tweaks
+- Type: boolean
+- Default value: `false`
+
+![shulkerTooltipFillLevelHint](assets/shulkerTooltipFillLevelHint-en_us.png)
 
 
 ### tweakmAutoCleanContainer

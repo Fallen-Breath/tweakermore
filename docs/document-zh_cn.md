@@ -281,7 +281,7 @@ tweakHandRestock功能的物品名单约束类型
 - 最大值: `2.0`
 
 
-### 潜影盒物品显示提示附魔 (shulkerTooltipEnchantmentHint)
+### 潜影盒物品附魔提示 (shulkerTooltipEnchantmentHint)
 
 在潜影盒物品的工具提示中显示物品的附魔
 
@@ -290,6 +290,17 @@ tweakHandRestock功能的物品名单约束类型
 - 默认值: `false`
 
 ![shulkerTooltipEnchantmentHint](assets/shulkerTooltipEnchantmentHint-zh_cn.png)
+
+
+### 潜影盒物品填充率提示 (shulkerTooltipFillLevelHint)
+
+在潜影盒物品工具提示的第一行显示其内容物填充率
+
+- 分类: 功能
+- 类型: 布尔值
+- 默认值: `false`
+
+![shulkerTooltipFillLevelHint](assets/shulkerTooltipFillLevelHint-zh_cn.png)
 
 
 ### 自动清空容器 (tweakmAutoCleanContainer)

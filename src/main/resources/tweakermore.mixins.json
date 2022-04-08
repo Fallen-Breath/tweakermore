@@ -43,6 +43,7 @@
     "tweaks.scoreboardSideBarScale.InGameHudMixin",
     "tweaks.shaderGameTimeAsWorldTime.WorldTimeUniformsMixin",
     "tweaks.shulkerTooltipEnchantmentHint.ShulkerBoxBlockMixin",
+    "tweaks.shulkerTooltipFillLevelHint.ItemStackMixin",
     "tweaks.tweakmAutoCollectMaterialListItem.MaterialListHudRendererAccessor",
     "tweaks.tweakmAutoContainerProcess.ClientPlayNetworkHandlerMixin",
     "tweaks.tweakmAutoContainerProcess.ContainerMixin",
