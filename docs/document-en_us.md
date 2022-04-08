@@ -149,9 +149,13 @@ i.e. particles from redstone dust, redstone torch, redstone repeater etc.
 
 Disable the text length limit based on character width when editing or rendering a sign block
 
+A red exclamation mark will be shown on the left side when the limit is exceeded during the editing of the sign
+
 - Category: Tweaks
 - Type: togglable hotkey
 - Default value: *no hotkey*, `false`
+
+![disableSignTextLengthLimit](assets/disableSignTextLengthLimit.png)
 
 
 ### handRestockBlackList

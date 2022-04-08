@@ -149,9 +149,13 @@
 
 禁用在编辑或渲染告示牌时，告示牌基于字符长度的文本长度限制
 
+在编辑告示牌过程中，超出限制长度时，文本左侧会显示红色感叹号
+
 - 分类: 功能
 - 类型: 可开关型热键
 - 默认值: *无快捷键*, `false`
+
+![disableSignTextLengthLimit](assets/disableSignTextLengthLimit.png)
 
 
 ### 自动补货黑名单 (handRestockBlackList)

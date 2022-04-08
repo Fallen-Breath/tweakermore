@@ -94,7 +94,7 @@
   "tweakermore.config.disableRedstoneParticle.comment": "禁用所有的红石粒子效果\n即来自红石粉、红石火把、红石中继器等的粒子效果",
   "tweakermore.config.disableRedstoneParticle.pretty_name": "禁用红石粒子效果",
   "tweakermore.config.disableSignTextLengthLimit": "禁用告示牌文本长度限制",
-  "tweakermore.config.disableSignTextLengthLimit.comment": "禁用在编辑或渲染告示牌时，告示牌基于字符长度的文本长度限制",
+  "tweakermore.config.disableSignTextLengthLimit.comment": "禁用在编辑或渲染告示牌时，告示牌基于字符长度的文本长度限制\n在编辑告示牌过程中，超出限制长度时，文本左侧会显示红色感叹号",
   "tweakermore.config.disableSignTextLengthLimit.pretty_name": "禁用告示牌文本长度限制",
 
   "// Mod Tweaks": "================================================",
