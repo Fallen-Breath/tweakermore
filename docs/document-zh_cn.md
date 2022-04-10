@@ -530,6 +530,66 @@ tweakHandRestock功能的物品名单约束类型
     - Replay mod (`replaymod`)
 
 
+### 服务端数据同步器 (serverDataSyncer)
+
+使用原版数据查询协议从服务器同步实体和方块实体的数据至客户端
+
+在以下操作发生时将进行同步数据：
+
+- Tweakeroo的物品栏预览
+
+- Litematica的原理图保存
+
+- Litematica的方块信息显示
+
+- MiniHUD的蜂巢蜜蜂数量显示
+
+需要玩家拥有服务器的OP权限（权限等级2）才能正常工作
+
+- 分类: 模组修改
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Tweakeroo (`tweakeroo`)
+
+  *或*
+
+  - 依赖模组:
+    - Litematica (`litematica`)
+
+  *或*
+
+  - 依赖模组:
+    - MiniHUD (`minihud`)
+
+
+### 服务端数据同步器查询间隔 (serverDataSyncerQueryInterval)
+
+服务端数据同步器的查询间隔 (单位:游戏刻)
+
+在使用默认值1时，每游戏刻都会发送一批查询
+
+- 分类: 模组修改
+- 类型: 整数
+- 默认值: `1`
+- 最小值: `1`
+- 最大值: `100`
+
+
+### 服务端数据同步器查询数量限制 (serverDataSyncerQueryLimit)
+
+服务端数据同步器每游戏刻中发送的查询数量上限
+
+超出数量上限的查询将被延迟发送
+
+- 分类: 模组修改
+- 类型: 整数
+- 默认值: `1024`
+- 最小值: `1`
+- 最大值: `16384`
+
+
 ### 光影使用游戏时间作为世界时间 (shaderGameTimeAsWorldTime)
 
 使用游戏时间作为Optifine/Iris光影的"worldTime"uniform变量

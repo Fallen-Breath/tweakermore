@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
+import fi.dy.masa.malilib.event.TickHandler;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import fi.dy.masa.malilib.interfaces.IValueChangeCallback;
 import fi.dy.masa.malilib.util.restrictions.ItemRestriction;
@@ -17,6 +18,7 @@ import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.impl.copySignTextToClipBoard.SignTextCopier;
 import me.fallenbreath.tweakermore.impl.eCraftMassCraftCompact.EasierCraftingRegistrar;
 import me.fallenbreath.tweakermore.impl.refreshInventory.InventoryRefresher;
+import me.fallenbreath.tweakermore.impl.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.impl.tweakerMoreDevMixinAudit.MixinAuditHelper;
 import me.fallenbreath.tweakermore.impl.tweakmFlawlessFrames.FlawlessFramesHandler;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
@@ -198,16 +200,6 @@ public class TweakerMoreConfigs
 
 	@Config(
 			value = Config.Type.GENERIC,
-			restriction = {
-					@Restriction(require = @Condition(optifine)),
-					@Restriction(require = @Condition(iris))
-			},
-			category = Config.Category.MOD_TWEAKS
-	)
-	public static final TweakerMoreConfigBoolean SHADER_GAME_TIME_AS_WORLD_TIME = newConfigBoolean("shaderGameTimeAsWorldTime", false);
-
-	@Config(
-			value = Config.Type.GENERIC,
 			restriction = @Restriction(require = @Condition(optifine)),
 			category = Config.Category.MOD_TWEAKS
 	)
@@ -243,6 +235,33 @@ public class TweakerMoreConfigs
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigBoolean REPLAY_ACCURATE_TIMELINE_TIMESTAMP = newConfigBoolean("replayAccurateTimelineTimestamp", false);
+
+	@Config(
+			value = Config.Type.TWEAK,
+			restriction = {
+					@Restriction(require = @Condition(tweakeroo)),
+					@Restriction(require = @Condition(litematica)),
+					@Restriction(require = @Condition(minihud))
+			},
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigBooleanHotkeyed SERVER_DATA_SYNCER = newConfigBooleanHotkeyed("serverDataSyncer");
+
+	@Config(value = Config.Type.GENERIC, category = Config.Category.MOD_TWEAKS)
+	public static final TweakerMoreConfigInteger SERVER_DATA_SYNCER_QUERY_INTERVAL = newConfigInteger("serverDataSyncerQueryInterval", 1, 1, 100);
+
+	@Config(value = Config.Type.GENERIC, category = Config.Category.MOD_TWEAKS)
+	public static final TweakerMoreConfigInteger SERVER_DATA_SYNCER_QUERY_LIMIT = newConfigInteger("serverDataSyncerQueryLimit", 1024, 1, 16384);
+
+	@Config(
+			value = Config.Type.GENERIC,
+			restriction = {
+					@Restriction(require = @Condition(optifine)),
+					@Restriction(require = @Condition(iris))
+			},
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigBoolean SHADER_GAME_TIME_AS_WORLD_TIME = newConfigBoolean("shaderGameTimeAsWorldTime", false);
 
 	@Config(
 			value = Config.Type.GENERIC,
@@ -304,6 +323,11 @@ public class TweakerMoreConfigs
 		TWEAKERMORE_DEBUG_MODE.setValueChangeCallback(redrawConfigGui);
 		TWEAKERMORE_DEV_MIXIN_AUDIT.getKeybind().setCallback(MixinAuditHelper::onHotKey);
 		TWEAKERMORE_DEV_PRINT_DOC.getKeybind().setCallback(DocumentGenerator::onHotKey);
+	}
+
+	public static void initEventListeners()
+	{
+		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
 	}
 
 	private static final List<TweakerMoreOption> OPTIONS = Lists.newArrayList();

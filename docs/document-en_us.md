@@ -530,6 +530,66 @@ So the maximum fly speed can be increased
     - Replay mod (`replaymod`)
 
 
+### serverDataSyncer
+
+Sync entity & block entity datas from the server using vanilla's tag query protocol
+
+Sync when following actions happen:
+
+- Tweakeroo inventory preview
+
+- Litematica schematic saving
+
+- MiniHUD bee hive bee amount display
+
+- Litematica block info overlay
+
+Requires player having OP permission (permission level 2) for it to work
+
+- Category: Mods Tweaks
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
+
+  *or*
+
+  - Required mods:
+    - Litematica (`litematica`)
+
+  *or*
+
+  - Required mods:
+    - MiniHUD (`minihud`)
+
+
+### serverDataSyncerQueryInterval
+
+The query interval of serverDataSyncer for each batch of queries in game tick
+
+With default value 1 it will send a batch of query every game tick
+
+- Category: Mods Tweaks
+- Type: integer
+- Default value: `1`
+- Minimum value: `1`
+- Maximum value: `100`
+
+
+### serverDataSyncerQueryLimit
+
+Maximum amount of queries sent with serverDataSyncer per game tick
+
+Queries exceeding the limit will be delayed
+
+- Category: Mods Tweaks
+- Type: integer
+- Default value: `1024`
+- Minimum value: `1`
+- Maximum value: `16384`
+
+
 ### shaderGameTimeAsWorldTime
 
 Use game time instead of day time as uniform value "worldTime" for Optifine/Iris shaders
