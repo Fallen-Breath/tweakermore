@@ -29,7 +29,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 	@Override
 	protected int getMaxTaskPerTick()
 	{
-		// default 1024
+		// default 512
 		return TweakerMoreConfigs.SERVER_DATA_SYNCER_QUERY_LIMIT.getIntegerValue();
 	}
 
@@ -85,12 +85,27 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 				this.syncedEntityId.add(entityId);
 				CompletableFuture<Void> future = new CompletableFuture<>();
 				this.addTask(() -> {
-					TweakerMoreMod.LOGGER.debug("Syncing entity data of " + entity);
+					TweakerMoreMod.LOGGER.debug("Syncing entity data of {}", entity);
 					this.queryHandler.queryEntityNbt(entityId, nbt -> {
 						if (nbt != null)
 						{
-							TweakerMoreMod.LOGGER.debug("Synced entity data of " + entity);
-							entity.fromTag(nbt);
+							// net.minecraft.entity.Entity.fromTag is designed to be used server-side
+							// so things like casting e.g. (ServerWorld)this.world might happen
+							// that will definitely cause an exception since this.world is a ClientWorld
+							// so a try-catch is required here
+							try
+							{
+								entity.fromTag(nbt);
+								TweakerMoreMod.LOGGER.debug("Synced entity data of {}", entity);
+							}
+							catch (Exception exception)
+							{
+								TweakerMoreMod.LOGGER.warn("Failed to sync entity data of {}: {}", entity, exception);
+								if (TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
+								{
+									TweakerMoreMod.LOGGER.warn("[TweakerMore Debug]", exception);
+								}
+							}
 						}
 						future.complete(null);
 					});
@@ -116,12 +131,12 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 				{
 					CompletableFuture<Void> future = new CompletableFuture<>();
 					this.addTask(() -> {
-						TweakerMoreMod.LOGGER.debug("Syncing block entity data at " + pos);
+						TweakerMoreMod.LOGGER.debug("Syncing block entity data at {}", pos);
 						this.queryHandler.queryBlockNbt(blockEntity.getPos(), nbt -> {
 							if (nbt != null)
 							{
 								blockEntity.fromTag(nbt);
-								TweakerMoreMod.LOGGER.debug("Synced block entity data at " + pos);
+								TweakerMoreMod.LOGGER.debug("Synced block entity data at {}", pos);
 							}
 							future.complete(null);
 						});
