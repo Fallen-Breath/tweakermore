@@ -25,6 +25,7 @@ More features/tweaks will be enabled with these mods
 - [Iris](https://github.com/IrisShaders/Iris)
 - [Item Scroller](https://www.curseforge.com/minecraft/mc-mods/item-scroller)
 - [Litematica](https://www.curseforge.com/minecraft/mc-mods/litematica)
+- [MiniHUD](https://www.curseforge.com/minecraft/mc-mods/minihud)
 - [Optifine](https://www.optifine.net/home) ([Optifabric](https://www.curseforge.com/minecraft/mc-mods/optifabric))
 - [ReplayMod](https://www.replaymod.com/)
 - [Tweakeroo](https://www.curseforge.com/minecraft/mc-mods/tweakeroo)
