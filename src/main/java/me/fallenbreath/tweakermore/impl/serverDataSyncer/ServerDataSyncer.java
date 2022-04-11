@@ -29,7 +29,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 	@Override
 	protected int getMaxTaskPerTick()
 	{
-		// default 1024
+		// default 512
 		return TweakerMoreConfigs.SERVER_DATA_SYNCER_QUERY_LIMIT.getIntegerValue();
 	}
 
@@ -101,6 +101,10 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 							catch (Exception exception)
 							{
 								TweakerMoreMod.LOGGER.warn("Failed to sync entity data of {}: {}", entity, exception);
+								if (TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
+								{
+									TweakerMoreMod.LOGGER.warn("[TweakerMore Debug]", exception);
+								}
 							}
 						}
 						future.complete(null);
