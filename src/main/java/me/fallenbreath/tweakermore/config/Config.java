@@ -28,7 +28,7 @@ public @interface Config
 
 	enum Type implements IStringValue
 	{
-		GENERIC, HOTKEY, LIST, TWEAK, DISABLE;
+		GENERIC, HOTKEY, LIST, TWEAK, DISABLE, FIX;
 
 		@Override
 		public String getStringValue()

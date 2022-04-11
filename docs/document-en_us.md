@@ -149,9 +149,24 @@ i.e. particles from redstone dust, redstone torch, redstone repeater etc.
 
 Disable the text length limit based on character width when editing or rendering a sign block
 
+A red exclamation mark will be shown on the left side when the limit is exceeded during the editing of the sign
+
 - Category: Tweaks
 - Type: togglable hotkey
 - Default value: *no hotkey*, `false`
+
+![disableSignTextLengthLimit](assets/disableSignTextLengthLimit.png)
+
+
+### fixChestMirroring
+
+Fixed chest type is not properly transformed when chest block is mirrored
+
+Affects stuffs that use vanilla block mirror logic, e.g. vanilla structure placement, litematica mod schematic placement
+
+- Category: Tweaks
+- Type: boolean
+- Default value: `false`
 
 
 ### handRestockBlackList
@@ -524,6 +539,66 @@ So the maximum fly speed can be increased
 - Mod restrictions:
   - Required mods:
     - Replay mod (`replaymod`)
+
+
+### serverDataSyncer
+
+Sync entity & block entity datas from the server using vanilla's tag query protocol
+
+Sync when following actions happen:
+
+- Tweakeroo inventory preview
+
+- Litematica schematic saving
+
+- MiniHUD bee hive bee amount display
+
+- Litematica block info overlay
+
+Requires player having OP permission (permission level 2) for it to work
+
+- Category: Mods Tweaks
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
+
+  *or*
+
+  - Required mods:
+    - Litematica (`litematica`)
+
+  *or*
+
+  - Required mods:
+    - MiniHUD (`minihud`)
+
+
+### serverDataSyncerQueryInterval
+
+The query interval of serverDataSyncer for each batch of queries in game tick
+
+With default value 1 it will send a batch of query every game tick
+
+- Category: Mods Tweaks
+- Type: integer
+- Default value: `1`
+- Minimum value: `1`
+- Maximum value: `100`
+
+
+### serverDataSyncerQueryLimit
+
+Maximum amount of queries sent with serverDataSyncer per game tick
+
+Queries exceeding the limit will be delayed
+
+- Category: Mods Tweaks
+- Type: integer
+- Default value: `512`
+- Minimum value: `1`
+- Maximum value: `8192`
 
 
 ### shaderGameTimeAsWorldTime
