@@ -158,6 +158,17 @@ A red exclamation mark will be shown on the left side when the limit is exceeded
 ![disableSignTextLengthLimit](assets/disableSignTextLengthLimit.png)
 
 
+### fixChestMirroring
+
+Fixed chest type is not properly transformed when chest block is mirrored
+
+Affects stuffs that use vanilla block mirror logic, e.g. vanilla structure placement, litematica mod schematic placement
+
+- Category: Tweaks
+- Type: boolean
+- Default value: `false`
+
+
 ### handRestockBlackList
 
 The items that will NOT trigger tweakHandRestock

@@ -97,6 +97,9 @@
   "tweakermore.config.disableSignTextLengthLimit.comment": "Disable the text length limit based on character width when editing or rendering a sign block\nA red exclamation mark will be shown on the left side when the limit is exceeded during the editing of the sign",
   "tweakermore.config.disableSignTextLengthLimit.pretty_name": "Disable Sign Text Length Limit",
 
+  "tweakermore.config.fixChestMirroring": "fixChestMirroring",
+  "tweakermore.config.fixChestMirroring.comment": "Fixed chest type is not properly transformed when chest block is mirrored\nAffects stuffs that use vanilla block mirror logic, e.g. vanilla structure placement, litematica mod schematic placement",
+
   "// Mod Tweaks": "================================================",
 
   "tweakermore.config.applyTweakerMoreOptionLabelGlobally": "applyTweakerMoreOptionLabelGlobally",

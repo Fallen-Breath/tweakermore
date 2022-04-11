@@ -158,6 +158,17 @@
 ![disableSignTextLengthLimit](assets/disableSignTextLengthLimit.png)
 
 
+### 修复箱子镜像变换 (fixChestMirroring)
+
+修复箱子方块在进行镜像变换时没有正确地处理其chest_type属性
+
+对使用了原版方块镜像逻辑的功能有效，包括原版结构放置、litematica mod的原理图放置
+
+- 分类: 功能
+- 类型: 布尔值
+- 默认值: `false`
+
+
 ### 自动补货黑名单 (handRestockBlackList)
 
 不会触发tweakHandRestock的物品

@@ -181,6 +181,11 @@ public class TweakerMoreConfigs
 	@Config(Config.Type.DISABLE)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_SIGN_TEXT_LENGTH_LIMIT = newConfigBooleanHotkeyed("disableSignTextLengthLimit");
 
+	// Fix
+
+	@Config(Config.Type.FIX)
+	public static final TweakerMoreConfigBoolean FIX_CHEST_MIRRORING = newConfigBoolean("fixChestMirroring", false);
+
 	////////////////////
 	//   Mod Tweaks   //
 	////////////////////

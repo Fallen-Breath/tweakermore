@@ -29,6 +29,7 @@
     "tweaks.disableSignTextLengthLimit.SignEditScreenMixin",
     "tweaks.eCraftItemScrollerCompact.ConfigsMixin",
     "tweaks.eCraftItemScrollerCompact.CraftingHandlerMixin",
+    "tweaks.fixChestMirroring.ChestBlockMixin",
     "tweaks.handRestoreRestriction.InventoryUtilsMixin",
     "tweaks.handRestoreRestriction.PlacementTweaksMixin",
     "tweaks.maxChatHudHeight.ChatHudMixin",

@@ -97,6 +97,9 @@
   "tweakermore.config.disableSignTextLengthLimit.comment": "禁用在编辑或渲染告示牌时，告示牌基于字符长度的文本长度限制\n在编辑告示牌过程中，超出限制长度时，文本左侧会显示红色感叹号",
   "tweakermore.config.disableSignTextLengthLimit.pretty_name": "禁用告示牌文本长度限制",
 
+  "tweakermore.config.fixChestMirroring": "修复箱子镜像变换",
+  "tweakermore.config.fixChestMirroring.comment": "修复箱子方块在进行镜像变换时没有正确地处理其chest_type属性\n对使用了原版方块镜像逻辑的功能有效，包括原版结构放置、litematica mod的原理图放置",
+
   "// Mod Tweaks": "================================================",
 
   "tweakermore.config.applyTweakerMoreOptionLabelGlobally": "全局应用TweakerMore选项标签",
