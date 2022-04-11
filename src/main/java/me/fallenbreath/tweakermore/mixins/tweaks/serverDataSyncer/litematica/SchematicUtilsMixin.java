@@ -44,7 +44,7 @@ public abstract class SchematicUtilsMixin
 				MinecraftClient.getInstance().send(() -> {
 					showMessage$TKM(Message.MessageType.INFO, "start", area.getName());
 
-					TargetPair pair = AreaSelectionUtil.extractBlockEntitiesAndEntities(area);
+					TargetPair pair = AreaSelectionUtil.extractBlockEntitiesAndEntities(area, true);
 					final int beTotal = pair.getBlockEntityAmount();
 					final int eTotal = pair.getEntityAmount();
 
