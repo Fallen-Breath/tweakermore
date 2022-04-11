@@ -6,17 +6,13 @@ import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHandler
 {
@@ -137,48 +133,31 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 		return CompletableFuture.allOf();
 	}
 
-	public void syncEverythingWithin(BlockPos pos1, BlockPos pos2, @Nullable SyncAllCallback callback)
+	public CompletableFuture<Void> syncEverything(TargetPair pair, ProgressCallback callback)
 	{
-		MinecraftClient mc = MinecraftClient.getInstance();
-		ClientPlayNetworkHandler networkHandler = mc.getNetworkHandler();
-		if (networkHandler == null || mc.player == null)
-		{
-			return;
-		}
-
-		int minX = Math.min(pos1.getX(), pos2.getX());
-		int minY = Math.min(pos1.getY(), pos2.getY());
-		int minZ = Math.min(pos1.getZ(), pos2.getZ());
-		int maxX = Math.max(pos1.getX(), pos2.getX());
-		int maxY = Math.max(pos1.getY(), pos2.getY());
-		int maxZ = Math.max(pos1.getZ(), pos2.getZ());
-		World world = mc.player.clientWorld;
-
-		List<BlockPos> bePositions = BlockPos.stream(minX, minY, minZ, maxX, maxY, maxZ).
-				map(BlockPos::toImmutable).
-				// same check in fi.dy.masa.litematica.schematic.LitematicaSchematic.takeBlocksFromWorldWithinChunk
-				filter(blockPos -> world.getBlockState(blockPos).getBlock().hasBlockEntity()).
-				collect(Collectors.toList());
+		AtomicInteger beCounter = new AtomicInteger(0);
+		AtomicInteger entityCounter = new AtomicInteger(0);
 		CompletableFuture<Void> beSynced = CompletableFuture.allOf(
-				bePositions.stream().map(this::syncBlockEntity).toArray(CompletableFuture[]::new)
+				pair.getBlockEntityPositions().stream().
+						map(this::syncBlockEntity).
+						map(f -> f.thenRun(
+								() -> callback.apply(beCounter.addAndGet(1), entityCounter.get())
+						)).
+						toArray(CompletableFuture[]::new)
 		);
-
-		Box box = new Box(minX, minY, minZ, maxX + 1, maxY + 1, maxZ + 1);
-		List<Entity> entities = world.getEntities((Entity) null, box, null);
 		CompletableFuture<Void> entitySynced = CompletableFuture.allOf(
-				entities.stream().map(this::syncEntity).toArray(CompletableFuture[]::new)
+				pair.getEntities().stream().
+						map(this::syncEntity).
+						map(f -> f.thenRun(
+								() -> callback.apply(beCounter.get(), entityCounter.addAndGet(1))
+						)).
+						toArray(CompletableFuture[]::new)
 		);
-
-		if (callback != null)
-		{
-			CompletableFuture.allOf(entitySynced, beSynced).thenRun(
-					() -> callback.apply(bePositions.size(), entities.size())
-			);
-		}
+		return CompletableFuture.allOf(beSynced, entitySynced);
 	}
 
 	@FunctionalInterface
-	public interface SyncAllCallback
+	public interface ProgressCallback
 	{
 		void apply(int blockEntityAmount, int entityAmount);
 	}
