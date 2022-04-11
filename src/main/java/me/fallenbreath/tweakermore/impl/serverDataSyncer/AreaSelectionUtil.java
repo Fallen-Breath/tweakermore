@@ -50,7 +50,7 @@ public class AreaSelectionUtil
 				collect(Collectors.toList());
 
 		Box aabb = new Box(minX, minY, minZ, maxX + 1, maxY + 1, maxZ + 1);
-		List<Entity> entities = world.getEntities((Entity)null, aabb, null);
+		List<Entity> entities = world.getOtherEntities((Entity)null, aabb, null);
 
 		return TargetPair.of(bePositions, entities);
 	}

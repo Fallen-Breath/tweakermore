@@ -5,7 +5,7 @@ import me.fallenbreath.tweakermore.mixins.tweaks.serverDataSyncer.DataQueryHandl
 import me.fallenbreath.tweakermore.util.collection.ExpiringMap;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.c2s.play.QueryBlockNbtC2SPacket;
 import net.minecraft.network.packet.c2s.play.QueryEntityNbtC2SPacket;
 import net.minecraft.util.math.BlockPos;
@@ -35,7 +35,7 @@ public class DataQueryHandlerPro
 		return id;
 	}
 
-	public boolean handleQueryResponse(int transactionId, @Nullable CompoundTag tag)
+	public boolean handleQueryResponse(int transactionId, @Nullable NbtCompound tag)
 	{
 		Callback callback = this.callbacks.remove(transactionId);
 		if (callback != null)
@@ -80,6 +80,6 @@ public class DataQueryHandlerPro
 	@FunctionalInterface
 	public interface Callback
 	{
-		void accept(CompoundTag nbt);
+		void accept(NbtCompound nbt);
 	}
 }

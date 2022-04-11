@@ -53,7 +53,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 	public static boolean hasEnoughPermission()
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
-		return mc.player != null && mc.player.allowsPermissionLevel(2);
+		return mc.player != null && mc.player.hasPermissionLevel(2);
 	}
 
 	public void resetSyncLimiter()
@@ -90,7 +90,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 						if (nbt != null)
 						{
 							TweakerMoreMod.LOGGER.debug("Synced entity data of " + entity);
-							entity.fromTag(nbt);
+							entity.readNbt(nbt);
 						}
 						future.complete(null);
 					});
@@ -120,7 +120,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 						this.queryHandler.queryBlockNbt(blockEntity.getPos(), nbt -> {
 							if (nbt != null)
 							{
-								blockEntity.fromTag(nbt);
+								blockEntity.fromTag(world.getBlockState(pos), nbt);
 								TweakerMoreMod.LOGGER.debug("Synced block entity data at " + pos);
 							}
 							future.complete(null);

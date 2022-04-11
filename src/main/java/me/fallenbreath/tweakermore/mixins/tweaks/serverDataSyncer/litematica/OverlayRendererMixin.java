@@ -9,6 +9,7 @@ import me.fallenbreath.tweakermore.impl.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -32,7 +33,7 @@ public abstract class OverlayRendererMixin
 			locals = LocalCapture.CAPTURE_FAILHARD,
 			remap = false
 	)
-	private void serverDataSyncer4InfoOverlay(RayTraceUtils.RayTraceWrapper traceWrapper, MinecraftClient mc, CallbackInfo ci, BlockState air, World worldSchematic, World worldClient, BlockPos pos)
+	private void serverDataSyncer4InfoOverlay(RayTraceUtils.RayTraceWrapper traceWrapper, MinecraftClient mc, MatrixStack matrixStack, CallbackInfo ci, BlockState air, World worldSchematic, World worldClient, BlockPos pos)
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{
