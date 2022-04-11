@@ -1,8 +1,6 @@
 package me.fallenbreath.tweakermore.impl.serverDataSyncer;
 
 import com.google.common.collect.Queues;
-import me.fallenbreath.tweakermore.TweakerMoreMod;
-import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 
 import java.util.Queue;
 
@@ -51,11 +49,6 @@ public abstract class LimitedTaskRunner
 
 	protected void tickTask()
 	{
-		if (!this.tasks.isEmpty() && TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
-		{
-			TweakerMoreMod.LOGGER.info("D size={} cooldown={}", this.tasks.size(), this.cooldown);
-		}
-
 		if (this.cooldown > 0)
 		{
 			this.cooldown--;
