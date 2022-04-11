@@ -94,8 +94,11 @@
   "tweakermore.config.disableRedstoneParticle.comment": "Disable all redstone particles\ni.e. particles from redstone dust, redstone torch, redstone repeater etc.",
   "tweakermore.config.disableRedstoneParticle.pretty_name": "Disable Redstone Particle",
   "tweakermore.config.disableSignTextLengthLimit": "disableSignTextLengthLimit",
-  "tweakermore.config.disableSignTextLengthLimit.comment": "Disable the text length limit based on character width when editing or rendering a sign block",
+  "tweakermore.config.disableSignTextLengthLimit.comment": "Disable the text length limit based on character width when editing or rendering a sign block\nA red exclamation mark will be shown on the left side when the limit is exceeded during the editing of the sign",
   "tweakermore.config.disableSignTextLengthLimit.pretty_name": "Disable Sign Text Length Limit",
+
+  "tweakermore.config.fixChestMirroring": "fixChestMirroring",
+  "tweakermore.config.fixChestMirroring.comment": "Fixed chest type is not properly transformed when chest block is mirrored\nAffects stuffs that use vanilla block mirror logic, e.g. vanilla structure placement, litematica mod schematic placement",
 
   "// Mod Tweaks": "================================================",
 
@@ -115,6 +118,15 @@
   "tweakermore.config.replayFlySpeedLimitMultiplier.comment": "Multiple the camera fly speed upper limit in replay mod with given value\nSo the maximum fly speed can be increased",
   "tweakermore.config.shaderGameTimeAsWorldTime": "shaderGameTimeAsWorldTime",
   "tweakermore.config.shaderGameTimeAsWorldTime.comment": "Use game time instead of day time as uniform value \"worldTime\" for Optifine/Iris shaders\nSo with gamerule doDaylightCycle false this timer variable still increases",
+  "tweakermore.config.serverDataSyncer": "serverDataSyncer",
+  "tweakermore.config.serverDataSyncer.comment": "Sync entity & block entity datas from the server using vanilla's tag query protocol\nSync when following actions happen:\n- Tweakeroo inventory preview\n- Litematica schematic saving\n- MiniHUD bee hive bee amount display\n- Litematica block info overlay\nRequires player having OP permission (permission level 2) for it to work",
+  "tweakermore.config.serverDataSyncer.schematic_sync.start": "Syncing block entities and entities in the selection area %1$s",
+  "tweakermore.config.serverDataSyncer.schematic_sync.progress": "Synced %1$s/%1$s block entities and %3$s/%4$s entities (%5$s)",
+  "tweakermore.config.serverDataSyncer.schematic_sync.synced": "Synced %1$s block entities and %2$s entities from the server",
+  "tweakermore.config.serverDataSyncerQueryInterval": "serverDataSyncerQueryInterval",
+  "tweakermore.config.serverDataSyncerQueryInterval.comment": "The query interval of serverDataSyncer for each batch of queries in game tick\nWith default value 1 it will send a batch of query every game tick",
+  "tweakermore.config.serverDataSyncerQueryLimit": "serverDataSyncerQueryLimit",
+  "tweakermore.config.serverDataSyncerQueryLimit.comment": "Maximum amount of queries sent with serverDataSyncer per game tick\nQueries exceeding the limit will be delayed",
   "tweakermore.config.xmapNoSessionFinalizationWait": "xmapNoSessionFinalizationWait",
   "tweakermore.config.xmapNoSessionFinalizationWait.comment": "Skip the session finalization operation of xaero's worldmap when quit a world\nSo no lag when quitting server or single player\nMight have some side effects though",
 
@@ -159,6 +171,7 @@
   "tweakermore.gui.config_type.tweak": "Tweak",
   "tweakermore.gui.config_type.disable": "Disable",
   "tweakermore.gui.config_type.config": "Config",
+  "tweakermore.gui.config_type.fix": "Fix",
 
   "tweakermore.gui.mod_relation_footer.or": "or",
   "tweakermore.gui.mod_relation_footer.requirement": "Required mods:",
@@ -172,6 +185,7 @@
   "tweakermore.util.mod.itemscroller": "Item Scroller",
   "tweakermore.util.mod.litematica": "Litematica",
   "tweakermore.util.mod.minecraft": "Minecraft",
+  "tweakermore.util.mod.minihud": "MiniHUD",
   "tweakermore.util.mod.morechathistory": "MoreChatHistory",
   "tweakermore.util.mod.optifabric": "Optifine",
   "tweakermore.util.mod.parachute": "Parachute",
