@@ -12,6 +12,7 @@ public class ModIds
 	public static final String tweakeroo = "tweakeroo";
 	public static final String itemscroller = "itemscroller";
 	public static final String litematica = "litematica";
+	public static final String minihud = "minihud";
 
 	// those who modify chat limit
 	public static final String compact_chat = "compactchat";
