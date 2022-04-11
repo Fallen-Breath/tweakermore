@@ -168,6 +168,7 @@
   "tweakermore.gui.config_type.tweak": "工具 Tweak",
   "tweakermore.gui.config_type.disable": "禁用 Disable",
   "tweakermore.gui.config_type.config": "配置 Config",
+  "tweakermore.gui.config_type.fix": "修复 Fix",
 
   "tweakermore.gui.mod_relation_footer.or": "或",
   "tweakermore.gui.mod_relation_footer.requirement": "依赖模组:",

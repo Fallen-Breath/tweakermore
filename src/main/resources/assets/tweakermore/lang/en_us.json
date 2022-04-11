@@ -168,6 +168,7 @@
   "tweakermore.gui.config_type.tweak": "Tweak",
   "tweakermore.gui.config_type.disable": "Disable",
   "tweakermore.gui.config_type.config": "Config",
+  "tweakermore.gui.config_type.fix": "Fix",
 
   "tweakermore.gui.mod_relation_footer.or": "or",
   "tweakermore.gui.mod_relation_footer.requirement": "Required mods:",
