@@ -256,7 +256,7 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigInteger SERVER_DATA_SYNCER_QUERY_INTERVAL = newConfigInteger("serverDataSyncerQueryInterval", 1, 1, 100);
 
 	@Config(value = Config.Type.GENERIC, category = Config.Category.MOD_TWEAKS)
-	public static final TweakerMoreConfigInteger SERVER_DATA_SYNCER_QUERY_LIMIT = newConfigInteger("serverDataSyncerQueryLimit", 1024, 1, 16384);
+	public static final TweakerMoreConfigInteger SERVER_DATA_SYNCER_QUERY_LIMIT = newConfigInteger("serverDataSyncerQueryLimit", 1024, 1, 8192);
 
 	@Config(
 			value = Config.Type.GENERIC,
