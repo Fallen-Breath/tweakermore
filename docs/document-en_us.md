@@ -596,9 +596,9 @@ Queries exceeding the limit will be delayed
 
 - Category: Mods Tweaks
 - Type: integer
-- Default value: `1024`
+- Default value: `512`
 - Minimum value: `1`
-- Maximum value: `16384`
+- Maximum value: `8192`
 
 
 ### shaderGameTimeAsWorldTime
