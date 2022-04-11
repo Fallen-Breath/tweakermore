@@ -79,7 +79,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 	{
 		if (hasEnoughPermission())
 		{
-			int entityId = entity.getEntityId();
+			int entityId = entity.getId();
 			if (!this.syncedEntityId.contains(entityId))
 			{
 				this.syncedEntityId.add(entityId);
@@ -135,7 +135,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 						this.queryHandler.queryBlockNbt(blockEntity.getPos(), nbt -> {
 							if (nbt != null)
 							{
-								blockEntity.fromTag(world.getBlockState(pos), nbt);
+								blockEntity.readNbt(nbt);
 								TweakerMoreMod.LOGGER.debug("Synced block entity data at {}", pos);
 							}
 							future.complete(null);

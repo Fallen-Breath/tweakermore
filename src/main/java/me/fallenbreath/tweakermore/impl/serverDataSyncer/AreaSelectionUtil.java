@@ -46,7 +46,7 @@ public class AreaSelectionUtil
 		List<BlockPos> bePositions = BlockPos.stream(minX, minY, minZ, maxX, maxY, maxZ).
 				map(BlockPos::toImmutable).
 				// same check in fi.dy.masa.litematica.schematic.LitematicaSchematic.takeBlocksFromWorldWithinChunk
-						filter(blockPos -> world.getBlockState(blockPos).getBlock().hasBlockEntity()).
+						filter(blockPos -> world.getBlockState(blockPos).hasBlockEntity()).
 				collect(Collectors.toList());
 
 		Box aabb = new Box(minX, minY, minZ, maxX + 1, maxY + 1, maxZ + 1);

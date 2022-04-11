@@ -41,6 +41,7 @@ public abstract class RenderUtilsMixin
 					target = "Lnet/minecraft/util/hit/EntityHitResult;getEntity()Lnet/minecraft/entity/Entity;",
 					remap = true
 			),
+			ordinal = 1,
 			remap = false
 	)
 	private static Entity serverDataSyncer4InventoryOverlay(Entity entity)
