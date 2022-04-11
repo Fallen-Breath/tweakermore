@@ -19,7 +19,7 @@ public class AreaSelectionUtil
 	/**
 	 * Requires mod litematica
 	 */
-	public static TargetPair extractBlockEntitiesAndEntities(fi.dy.masa.litematica.selection.Box box)
+	public static TargetPair extractBlockEntitiesAndEntities(fi.dy.masa.litematica.selection.Box box, boolean saveableOnly)
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
 		ClientPlayNetworkHandler networkHandler = mc.getNetworkHandler();
@@ -50,7 +50,7 @@ public class AreaSelectionUtil
 				collect(Collectors.toList());
 
 		Box aabb = new Box(minX, minY, minZ, maxX + 1, maxY + 1, maxZ + 1);
-		List<Entity> entities = world.getOtherEntities((Entity)null, aabb, null);
+		List<Entity> entities = world.getOtherEntities((Entity)null, aabb, entity -> entity.getType().isSaveable());
 
 		return TargetPair.of(bePositions, entities);
 	}
@@ -58,12 +58,12 @@ public class AreaSelectionUtil
 	/**
 	 * Requires mod litematica
 	 */
-	public static TargetPair extractBlockEntitiesAndEntities(AreaSelection area)
+	public static TargetPair extractBlockEntitiesAndEntities(AreaSelection area, boolean saveableOnly)
 	{
 		Set<BlockPos> bePositions = Sets.newLinkedHashSet();
 		Set<Entity> entities = Sets.newLinkedHashSet();
 		PositionUtils.getValidBoxes(area).forEach(box -> {
-			TargetPair pair = extractBlockEntitiesAndEntities(box);
+			TargetPair pair = extractBlockEntitiesAndEntities(box, saveableOnly);
 			bePositions.addAll(pair.getBlockEntityPositions());
 			entities.addAll(pair.getEntities());
 		});
