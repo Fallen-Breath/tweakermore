@@ -4,9 +4,12 @@ import com.google.common.collect.Sets;
 import fi.dy.masa.malilib.interfaces.IClientTickHandler;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.mixins.tweaks.serverDataSyncer.DoubleInventoryAccessor;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
+import net.minecraft.inventory.DoubleInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -146,6 +149,21 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 			}
 		}
 		return CompletableFuture.allOf();
+	}
+
+	public void syncBlockInventory(Inventory inventory)
+	{
+		if (inventory instanceof BlockEntity)
+		{
+			BlockEntity blockEntity = (BlockEntity)inventory;
+			this.syncBlockEntity(blockEntity.getPos());
+		}
+		else if (inventory instanceof DoubleInventory)
+		{
+			DoubleInventoryAccessor accessor = (DoubleInventoryAccessor)inventory;
+			syncBlockInventory(accessor.getFirst());
+			syncBlockInventory(accessor.getSecond());
+		}
 	}
 
 	public CompletableFuture<Void> syncEverything(TargetPair pair, ProgressCallback callback)
