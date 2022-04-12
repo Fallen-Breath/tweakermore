@@ -48,6 +48,7 @@
     "tweaks.serverDataSyncer.ClientPlayNetworkHandlerMixin",
     "tweaks.serverDataSyncer.DataQueryHandlerAccessor",
     "tweaks.serverDataSyncer.DataQueryHandlerMixin",
+    "tweaks.serverDataSyncer.DoubleInventoryAccessor",
     "tweaks.serverDataSyncer.litematica.OverlayRendererMixin",
     "tweaks.serverDataSyncer.litematica.SchematicUtilsMixin",
     "tweaks.serverDataSyncer.minihud.RenderHandlerMixin",

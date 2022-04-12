@@ -6,8 +6,9 @@ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.util.ModIds;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.inventory.Inventory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -20,18 +21,22 @@ public abstract class RenderUtilsMixin
 			method = "renderInventoryOverlay",
 			at = @At(
 					value = "INVOKE_ASSIGN",
-					target = "Lnet/minecraft/util/hit/BlockHitResult;getBlockPos()Lnet/minecraft/util/math/BlockPos;",
+					target = "Lfi/dy/masa/malilib/util/InventoryUtils;getInventory(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/inventory/Inventory;",
+					ordinal = 0,
 					remap = true
 			),
 			remap = false
 	)
-	private static BlockPos serverDataSyncer4InventoryOverlay(BlockPos pos)
+	private static Inventory serverDataSyncer4InventoryOverlay(Inventory inventory)
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{
-			ServerDataSyncer.getInstance().syncBlockEntity(pos);
+			if (!MinecraftClient.getInstance().isIntegratedServerRunning())
+			{
+				ServerDataSyncer.getInstance().syncBlockInventory(inventory);
+			}
 		}
-		return pos;
+		return inventory;
 	}
 
 	@ModifyVariable(
@@ -48,7 +53,10 @@ public abstract class RenderUtilsMixin
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{
-			ServerDataSyncer.getInstance().syncEntity(entity);
+			if (!MinecraftClient.getInstance().isIntegratedServerRunning())
+			{
+				ServerDataSyncer.getInstance().syncEntity(entity);
+			}
 		}
 		return entity;
 	}
