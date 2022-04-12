@@ -2,6 +2,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.serverDataSyncer.litematica;
 
 import fi.dy.masa.litematica.render.OverlayRenderer;
 import fi.dy.masa.litematica.util.RayTraceUtils;
+import fi.dy.masa.malilib.util.InventoryUtils;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
@@ -11,6 +12,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -39,7 +41,11 @@ public abstract class OverlayRendererMixin
 		{
 			if (worldClient instanceof ClientWorld)
 			{
-				ServerDataSyncer.getInstance().syncBlockEntity(pos);
+				Inventory inventory = InventoryUtils.getInventory(worldClient, pos);
+				if (inventory != null)
+				{
+					ServerDataSyncer.getInstance().syncBlockInventory(inventory);
+				}
 			}
 		}
 	}
