@@ -8,6 +8,7 @@ import me.fallenbreath.tweakermore.impl.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.block.entity.BeehiveBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -38,7 +39,7 @@ public abstract class RenderHandlerMixin
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{
-			if (blockEntity instanceof BeehiveBlockEntity)
+			if (blockEntity instanceof BeehiveBlockEntity && !MinecraftClient.getInstance().isIntegratedServerRunning())
 			{
 				ServerDataSyncer.getInstance().syncBlockEntity(blockEntity.getPos());
 			}
