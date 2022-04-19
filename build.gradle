@@ -15,12 +15,12 @@ preprocess {
     def mc115 = createNode('1.15.2', 11502, 'yarn')
     def mc116 = createNode('1.16.5', 11605, 'yarn')
     def mc117 = createNode('1.17.1', 11701, 'yarn')
-//    def mc118 = createNode('1.18.2', 11802, 'yarn')
+    def mc118 = createNode('1.18.2', 11802, 'yarn')
 
     mc115.link(mc114, null)
     mc115.link(mc116, null)
     mc116.link(mc117, file('versions/mapping-1.16-1.17.txt'))
-//    mc117.link(mc118, null)
+    mc117.link(mc118, null)
 }
 
 task buildAndGather {

@@ -2,10 +2,14 @@ package me.fallenbreath.tweakermore.impl.disableFrustumChunkCulling;
 
 //#if MC >= 11500
 import net.minecraft.client.render.Frustum;
+
+//#if MC < 11800
 import net.minecraft.client.util.math.Matrix4f;
-//#else
+//#endif  // if MC < 11800
+
+//#else  // if MC >= 11500
 //$$ import net.minecraft.client.render.VisibleRegion;
-//#endif
+//#endif  // if MC >= 11500
 import net.minecraft.util.math.Box;
 
 public class AlwaysVisibleFrustum
@@ -30,7 +34,9 @@ public class AlwaysVisibleFrustum
 			//#endif
 	)
 	{
-		//#if MC >= 11500
+		//#if MC >= 11800
+		//$$ super(frustum);
+		//#elseif MC >= 11500
 		super(new Matrix4f(), new Matrix4f());
 		//#endif
 		this.frustum = frustum;

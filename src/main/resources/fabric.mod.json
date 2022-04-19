@@ -30,7 +30,8 @@
 
   "depends": {
     "fabricloader": ">=0.10.4",
-    "conditional-mixin": ">=0.2.0",
-    "malilib": "*"
+    "minecraft": "${minecraft_dependency}",
+    "malilib": "${malilib_dependency}",
+    "conditional-mixin": ">=0.2.0"
   }
 }

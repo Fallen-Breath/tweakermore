@@ -1,5 +1,10 @@
 package me.fallenbreath.tweakermore.mixins.core.gui;
 
+//#if MC >= 11800
+//$$ import fi.dy.masa.malilib.config.IConfigBoolean;
+//$$ import fi.dy.masa.malilib.config.IConfigResettable;
+//#endif
+
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IHotkeyTogglable;
 import fi.dy.masa.malilib.config.gui.ConfigOptionChangeListenerButton;
@@ -18,10 +23,7 @@ import me.fallenbreath.tweakermore.gui.HotkeyedBooleanResetListener;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
 import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.ModifyArgs;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
@@ -34,10 +36,10 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 {
 	@Shadow(remap = false) @Final protected IKeybindConfigGui host;
 
+	//#if MC < 11800
 	@Shadow(remap = false) @Final protected GuiConfigsBase.ConfigOptionWrapper wrapper;
-
-	@Mutable
-	@Shadow(remap = false) @Final protected KeybindSettings initialKeybindSettings;
+	@Mutable @Shadow(remap = false) @Final protected KeybindSettings initialKeybindSettings;
+	//#endif
 
 	@Shadow(remap = false) protected abstract void addKeybindResetButton(int x, int y, IKeybind keybind, ConfigButtonKeybind buttonHotkey);
 
@@ -54,6 +56,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 		return this.parent instanceof WidgetListConfigOptions && ((WidgetListConfigOptionsAccessor)this.parent).getParent() instanceof TweakerMoreConfigGui;
 	}
 
+	//#if MC < 11800
 	/**
 	 * Stolen from malilib 1.18 v0.11.4
 	 * to make compact ConfigBooleanHotkeyed option panel works
@@ -72,6 +75,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 			}
 		}
 	}
+	//#endif
 
 	private boolean showOriginalTextsThisTime;
 
@@ -154,6 +158,25 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 		return height;
 	}
 
+	//#if MC >= 11800
+	//$$ @Inject(
+	//$$ 		method = "addHotkeyConfigElements",
+	//$$ 		at = @At(value = "HEAD"),
+	//$$ 		remap = false,
+	//$$ 		cancellable = true
+	//$$ )
+	//$$ private void tweakerMoreCustomConfigGui(int x, int y, int configWidth, String configName, IHotkey config, CallbackInfo ci)
+	//$$ {
+	//$$ 	if (this.isTweakerMoreConfigGui())
+	//$$ 	{
+	//$$ 		if ((config).getKeybind() instanceof KeybindMulti)
+	//$$ 		{
+	//$$ 			this.addButtonAndHotkeyWidgets(x, y, configWidth, config);
+	//$$ 			ci.cancel();
+	//$$ 		}
+	//$$ 	}
+	//$$ }
+	//#else
 	@Inject(
 			method = "addConfigOption",
 			at = @At(
@@ -187,6 +210,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 			}
 		}
 	}
+	//#endif
 
 	private void addButtonAndHotkeyWidgets(int x, int y, int configWidth, IHotkey config)
 	{
@@ -218,12 +242,18 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 		x += configWidth + 2;
 
 		this.addWidget(new WidgetKeybindSettings(x, y, 20, 20, keybind, config.getName(), this.parent, this.host.getDialogHandler()));
+
+		//#if MC >= 11800
+		//$$ x += 22;
+		//#else
 		x += 24;
+		//#endif
 
 		this.addButton(keybindButton, this.host.getButtonPressListener());
 		this.addKeybindResetButton(x, y, keybind, keybindButton);
 	}
 
+	//#if MC < 11800
 	private void addBooleanAndHotkeyWidgets(int x, int y, int configWidth, IHotkeyTogglable config)
 	{
 		IKeybind keybind = config.getKeybind();
@@ -301,7 +331,27 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 		}
 		return x;
 	}
+	//#endif  // if MC < 11800
 
+	//#if MC >= 11800
+	//$$ @ModifyVariable(
+	//$$ 		method = "addBooleanAndHotkeyWidgets",
+	//$$ 		at = @At(
+	//$$ 				value = "STORE",
+	//$$ 				ordinal = 0
+	//$$ 		),
+	//$$ 		ordinal = 3,
+	//$$ 		remap = false
+	//$$ )
+	//$$ private int tweakerMoreDynamicBooleanButtonWidth(int booleanBtnWidth, int x, int y, int configWidth, IConfigResettable resettableConfig, IConfigBoolean booleanConfig, IKeybind keybind)
+	//$$ {
+	//$$ 	if (this.isTweakerMoreConfigGui())
+	//$$ 	{
+	//$$ 		booleanBtnWidth = (configWidth - 24) / 2;
+	//$$ 	}
+	//$$ 	return booleanBtnWidth;
+	//$$ }
+	//#else
 	@ModifyArg(
 			method = "addConfigOption",
 			at = @At(
@@ -320,4 +370,5 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 		}
 		return width;
 	}
+	//#endif
 }

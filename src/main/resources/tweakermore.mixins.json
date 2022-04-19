@@ -13,6 +13,7 @@
     "core.gui.WidgetListConfigOptionMixin",
     "core.gui.WidgetListConfigOptionsAccessor",
     "core.gui.WidgetListConfigOptionsMixin",
+    "core.migration.ConfigBooleanHotkeyedMixin",
     "core.migration.ConfigsMixin",
     "doc.ConfigBaseAccessor",
     "doc.MinecraftClientMixin",
