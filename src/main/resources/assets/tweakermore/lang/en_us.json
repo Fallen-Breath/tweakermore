@@ -149,6 +149,7 @@
 
   "tweakermore.config.tweakerMoreDevMixinAudit": "tweakerMoreDevMixinAudit",
   "tweakermore.config.tweakerMoreDevMixinAudit.comment": "Forced load all mixin target classes",
+  "tweakermore.config.tweakerMoreDevMixinAudit.success": "Mixin audit succeeded",
   "tweakermore.config.tweakerMoreDevPrintDoc": "tweakerMoreDevPrintDoc",
   "tweakermore.config.tweakerMoreDevPrintDoc.comment": "Document Printer",
 
