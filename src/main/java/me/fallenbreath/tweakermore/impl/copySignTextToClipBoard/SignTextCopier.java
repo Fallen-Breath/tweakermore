@@ -15,6 +15,10 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import org.apache.commons.lang3.StringUtils;
 
+//#if MC >= 11600
+//$$ import me.fallenbreath.tweakermore.mixins.tweaks.copySignTextToClipBoard.SignBlockEntityAccessor;
+//#endif
+
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -32,8 +36,14 @@ public class SignTextCopier
 				BlockEntity blockEntity = mc.world.getBlockEntity(blockPos);
 				if (blockEntity instanceof SignBlockEntity)
 				{
+					//#if MC >= 11600
+					//$$ Text[] texts = ((SignBlockEntityAccessor)blockEntity).getTexts();
+					//#else
+					Text[] texts = ((SignBlockEntity)blockEntity).text;
+					//#endif
+
 					String text = Joiner.on("\n").join(
-							Arrays.stream(((SignBlockEntity)blockEntity).text).
+							Arrays.stream(texts).
 									map(Text::getString).
 									collect(Collectors.toList())
 					);

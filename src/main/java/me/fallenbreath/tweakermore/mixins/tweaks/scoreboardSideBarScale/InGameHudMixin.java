@@ -23,7 +23,11 @@ public abstract class InGameHudMixin
 			method = "renderScoreboardSidebar",
 			at = @At(
 					value = "INVOKE",
+					//#if MC >= 11600
+					//$$ target = "Lnet/minecraft/client/option/GameOptions;getTextBackgroundColor(F)I",
+					//#else
 					target = "Lnet/minecraft/client/options/GameOptions;getTextBackgroundColor(F)I",
+					//#endif
 					ordinal = 0
 			),
 			ordinal = 3

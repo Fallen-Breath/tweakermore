@@ -8,6 +8,7 @@ import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.text.BaseText;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 
 import java.text.SimpleDateFormat;
@@ -43,7 +44,7 @@ public class SafeAfkHelper
 				float maxHealth = mc.player.getMaximumHealth();
 				if (maxHealth > 0 && health < TweakerMoreConfigs.SAFE_AFK_HEALTH_THRESHOLD.getDoubleValue())
 				{
-					String title = TweakerMoreMod.MOD_NAME + " " + TweakerMoreConfigs.TWEAKM_SAFE_AFK.getPrettyName();
+					BaseText title = new LiteralText(TweakerMoreMod.MOD_NAME + " " + TweakerMoreConfigs.TWEAKM_SAFE_AFK.getPrettyName());
 					BaseText reason = new TranslatableText(
 							"tweakermore.config.tweakmSafeAfk.received_damage",
 							new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),
@@ -53,7 +54,15 @@ public class SafeAfkHelper
 					mc.execute(() -> {
 						mc.world.disconnect();
 						mc.disconnect();
-						mc.openScreen(new DisconnectedScreen(new MultiplayerScreen(new TitleScreen()), title, reason));
+						mc.openScreen(new DisconnectedScreen(
+								new MultiplayerScreen(new TitleScreen()),
+								//#if MC >= 11600
+								//$$ title,
+								//#else
+								title.getString(),
+								//#endif
+								reason
+						));
 					});
 				}
 			}

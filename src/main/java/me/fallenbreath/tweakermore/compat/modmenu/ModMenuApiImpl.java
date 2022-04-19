@@ -1,14 +1,18 @@
 package me.fallenbreath.tweakermore.compat.modmenu;
 
-//#if MC >= 11500
+//#if MC >= 11600
+//$$ import com.terraformersmc.modmenu.api.ConfigScreenFactory;
+//$$ import com.terraformersmc.modmenu.api.ModMenuApi;
+//#elseif MC >= 11500
 import io.github.prospector.modmenu.api.ConfigScreenFactory;
+import io.github.prospector.modmenu.api.ModMenuApi;
 //#else
+//$$ import io.github.prospector.modmenu.api.ModMenuApi;
 //$$ import me.fallenbreath.tweakermore.TweakerMoreMod;
 //$$ import net.minecraft.client.gui.screen.Screen;
 //$$ import java.util.function.Function;
 //#endif
 
-import io.github.prospector.modmenu.api.ModMenuApi;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 
 //#if MC < 11500

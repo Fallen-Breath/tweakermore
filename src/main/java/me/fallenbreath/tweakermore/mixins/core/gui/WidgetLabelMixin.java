@@ -5,6 +5,11 @@ import com.mojang.blaze3d.systems.RenderSystem;
 //#else
 //$$ import com.mojang.blaze3d.platform.GlStateManager;
 //#endif
+
+//#if MC >= 11600
+//$$ import net.minecraft.client.util.math.MatrixStack;
+//#endif
+
 import fi.dy.masa.malilib.gui.widgets.WidgetBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
 import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
@@ -58,7 +63,12 @@ public abstract class WidgetLabelMixin extends WidgetBase
 		return yTextStart;
 	}
 
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings({
+			"ConstantConditions",
+			//#if MC >= 11600
+			//$$ "deprecation",
+			//#endif
+	})
 	@Inject(
 			method = "render",
 			at = @At(
@@ -69,7 +79,14 @@ public abstract class WidgetLabelMixin extends WidgetBase
 			remap = false,
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
-	private void translatedOptionLabelRenderTranslation(int mouseX, int mouseY, boolean selected, CallbackInfo ci, int fontHeight, int yCenter, int yTextStart, int i, String text)
+	private void translatedOptionLabelRenderTranslation(
+			int mouseX, int mouseY, boolean selected,
+			//#if MC >= 11600
+			//$$ MatrixStack matrixStackd,
+			//#endif
+			CallbackInfo ci,
+			int fontHeight, int yCenter, int yTextStart, int i, String text
+	)
 	{
 		if (this.shouldUseTranslatedOptionLabelLogic())
 		{
@@ -92,11 +109,21 @@ public abstract class WidgetLabelMixin extends WidgetBase
 
 			if (this.centered)
 			{
-				this.drawCenteredStringWithShadow(x, y, color, originText);
+				this.drawCenteredStringWithShadow(
+						x, y, color, originText
+						//#if MC >= 11600
+						//$$ , matrixStackd
+						//#endif
+				);
 			}
 			else
 			{
-				this.drawStringWithShadow(x, y, color, originText);
+				this.drawStringWithShadow(
+						x, y, color, originText
+						//#if MC >= 11600
+						//$$ , matrixStackd
+						//#endif
+				);
 			}
 
 			//#if MC >= 11500

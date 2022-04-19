@@ -16,7 +16,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ClientPlayNetworkHandler.class)
 public abstract class ClientPlayNetworkHandlerMixin
 {
-	@Inject(method = "onOpenContainer", at = @At("TAIL"))
+	@Inject(
+			//#if MC >= 11600
+			//$$ method = "onOpenScreen",
+			//#else
+			method = "onOpenContainer",
+			//#endif
+			at = @At("TAIL")
+	)
 	private void tweakerMoreAntuContainerProcessorMarking(CallbackInfo ci)
 	{
 		Screen screen = MinecraftClient.getInstance().currentScreen;

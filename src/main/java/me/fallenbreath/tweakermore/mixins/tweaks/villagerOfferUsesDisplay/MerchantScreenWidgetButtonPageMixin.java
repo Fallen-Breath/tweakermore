@@ -11,6 +11,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//#if MC >= 11600
+//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import net.minecraft.text.LiteralText;
+//$$ import net.minecraft.text.Text;
+//#endif
+
 @Mixin(targets = "net.minecraft.client.gui.screen.ingame.MerchantScreen$WidgetButtonPage")
 public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
 {
@@ -24,20 +30,36 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
 	//$$ int field_19165;
 	//#endif
 
-	public MerchantScreenWidgetButtonPageMixin(int x, int y, int width, int height, String message, PressAction onPress)
+	public MerchantScreenWidgetButtonPageMixin(
+			int x, int y, int width, int height,
+			//#if MC >= 11600
+			//$$ Text message,
+			//#else
+			String message,
+			//#endif
+			PressAction onPress)
 	{
 		super(x, y, width, height, message, onPress);
 	}
 
 	@Inject(
+			//#if MC >= 11600
+			//$$ method = "renderToolTip(Lnet/minecraft/client/util/math/MatrixStack;II)V",
+			//#else
 			method = "renderToolTip(II)V",
+			//#endif
 			at = @At(
 					value = "FIELD",
 					target = "Lnet/minecraft/client/gui/screen/ingame/MerchantScreen$WidgetButtonPage;x:I",
 					ordinal = 0
 			)
 	)
-	private void renderMaxUsesAmount(int mouseX, int mouseY, CallbackInfo ci)
+	private void renderMaxUsesAmount(
+			//#if MC >= 11600
+			//$$ MatrixStack matrices,
+			//#endif
+			int mouseX, int mouseY, CallbackInfo ci
+	)
 	{
 		if (TweakerMoreConfigs.VILLAGER_OFFER_USES_DISPLAY.getBooleanValue())
 		{
@@ -49,7 +71,16 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
 				//$$ int index = this.field_19165;
 				//#endif
 				TradeOffer offer = this.field_19166.getContainer().getRecipes().get(index + ((MerchantScreenAccessor)this.field_19166).getIndexStartOffset());
-				this.field_19166.renderTooltip(String.format("%d / %d", offer.getUses(), offer.getMaxUses()), mouseX, mouseY);
+
+				String text = String.format("%d / %d", offer.getUses(), offer.getMaxUses());
+				this.field_19166.renderTooltip(
+						//#if MC >= 11600
+						//$$ matrices, new LiteralText(text),
+						//#else
+						text,
+						//#endif
+						mouseX, mouseY)
+				;
 			}
 		}
 	}

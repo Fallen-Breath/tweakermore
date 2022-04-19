@@ -20,6 +20,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
+//#if MC >= 11600
+//$$ import net.minecraft.client.util.math.MatrixStack;
+//#endif
+
 @Restriction(require = @Condition(ModIds.litematica))
 @Mixin(OverlayRenderer.class)
 public abstract class OverlayRendererMixin
@@ -34,7 +38,14 @@ public abstract class OverlayRendererMixin
 			locals = LocalCapture.CAPTURE_FAILHARD,
 			remap = false
 	)
-	private void serverDataSyncer4InfoOverlay(RayTraceUtils.RayTraceWrapper traceWrapper, MinecraftClient mc, CallbackInfo ci, BlockState air, World worldSchematic, World worldClient, BlockPos pos)
+	private void serverDataSyncer4InfoOverlay(
+			RayTraceUtils.RayTraceWrapper traceWrapper, MinecraftClient mc,
+			//#if MC >= 11600
+			//$$ MatrixStack matrixStack,
+			//#endif
+			CallbackInfo ci,
+			BlockState air, World worldSchematic, World worldClient, BlockPos pos
+	)
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{

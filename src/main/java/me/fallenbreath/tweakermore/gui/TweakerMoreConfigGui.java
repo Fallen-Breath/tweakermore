@@ -18,6 +18,10 @@ import me.fallenbreath.tweakermore.util.FabricUtil;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 
+//#if MC >= 11600
+//$$ import net.minecraft.client.util.math.MatrixStack;
+//#endif
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -108,11 +112,21 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
         this.initGui();
     }
 
-    public void renderDropDownList(int mouseX, int mouseY)
+    public void renderDropDownList(
+            //#if MC >= 11600
+            //$$ MatrixStack matrixStack,
+            //#endif
+            int mouseX, int mouseY
+    )
     {
         if (this.typeFilterDropDownList != null)
         {
-            this.typeFilterDropDownList.render(mouseX, mouseY, this.typeFilterDropDownList.isMouseOver(mouseX, mouseY));
+            this.typeFilterDropDownList.render(
+                    mouseX, mouseY, this.typeFilterDropDownList.isMouseOver(mouseX, mouseY)
+                    //#if MC >= 11600
+                    //$$ , matrixStack
+                    //#endif
+            );
         }
     }
 

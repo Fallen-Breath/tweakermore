@@ -15,13 +15,25 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Formatting;
 
+//#if MC >= 11600
+//$$ import net.minecraft.text.MutableText;
+//#endif
+
 import java.util.List;
+import java.util.function.ToIntFunction;
 
 public class ShulkerToolTipEnhancer
 {
 	private static final int MAX_TEXT_LENGTH = 120;
 
-	public static void appendEnchantmentHints(ItemStack itemStack, Text text)
+	public static void appendEnchantmentHints(
+			ItemStack itemStack,
+			//#if MC >= 11600
+			//$$ MutableText text
+			//#else
+			Text text
+			//#endif
+	)
 	{
 		if (TweakerMoreConfigs.SHULKER_TOOLTIP_ENCHANTMENT_HINT.getBooleanValue())
 		{
@@ -31,8 +43,14 @@ public class ShulkerToolTipEnhancer
 			int amount = enchantmentTexts.size();
 			if (amount > 0)
 			{
+				//#if MC >= 11600
+				//$$ MutableText extraText
+				//#else
+				Text extraText
+				//#endif
+						= new LiteralText(" | ").formatted(Formatting.DARK_GRAY);
+
 				TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-				Text extraText = new LiteralText(" | ").formatted(Formatting.DARK_GRAY);
 				int idx;
 				for (idx = 0; idx < amount; idx++)
 				{
@@ -85,10 +103,15 @@ public class ShulkerToolTipEnhancer
 			String spacing = " ";
 			Text firstLine = new LiteralText("").append(tooltip.get(0)).append(spacing).append(fillLevelText);
 			TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-			int maxWidth = tooltip.stream().
-					mapToInt(text -> textRenderer.getStringWidth(text.asFormattedString())).
-					max().
-					orElse(0);
+
+			ToIntFunction<Text> textLenCalc = text ->
+					//#if MC >= 11600
+					//$$ textRenderer.getWidth(text);
+					//#else
+					textRenderer.getStringWidth(text.asFormattedString());
+					//#endif
+
+			int maxWidth = tooltip.stream().mapToInt(textLenCalc).max().orElse(0);
 
 			while (true)
 			{
@@ -96,7 +119,7 @@ public class ShulkerToolTipEnhancer
 				spacing += " ";
 				Text prevSpacing = siblings.get(1);
 				siblings.set(1, new LiteralText(spacing));
-				if (textRenderer.getStringWidth(firstLine.asFormattedString()) > maxWidth)
+				if (textLenCalc.applyAsInt(firstLine) > maxWidth)
 				{
 					siblings.set(1, prevSpacing);  // rollback
 					break;

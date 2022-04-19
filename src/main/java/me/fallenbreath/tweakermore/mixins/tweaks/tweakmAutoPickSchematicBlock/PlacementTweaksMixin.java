@@ -38,6 +38,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+//#if MC >= 11600
+//$$ import net.minecraft.screen.slot.Slot;
+//#endif
+
 @Restriction(require = {@Condition(ModIds.tweakeroo), @Condition(ModIds.litematica)})
 @Mixin(PlacementTweaks.class)
 public abstract class PlacementTweaksMixin
@@ -116,11 +120,21 @@ public abstract class PlacementTweaksMixin
 				{
 					int slot = inv.getSlotWithStack(stack);
 					boolean shouldPick = inv.selectedSlot != slot;
-					boolean canPick = slot != -1;
-					if (shouldPick && canPick)
+					if (shouldPick && slot != -1)
 					{
 						InventoryUtils.setPickedItemToHand(stack, mc);
 					}
+					//#if MC >= 11600
+					//$$ else if (slot == -1 && Configs.Generic.PICK_BLOCK_SHULKERS.getBooleanValue())
+					//$$ {
+					//$$ 	slot = InventoryUtils.findSlotWithBoxWithItem(mc.player.playerScreenHandler, stack, false);
+					//$$ 	if (slot != -1)
+					//$$ 	{
+					//$$ 		ItemStack boxStack = ((Slot) mc.player.playerScreenHandler.slots.get(slot)).getStack();
+					//$$ 		InventoryUtils.setPickedItemToHand(boxStack, mc);
+					//$$ 	}
+					//$$ }
+					//#endif
 				}
 
 				// so hand restore works fine

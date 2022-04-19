@@ -6,7 +6,6 @@ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.gui.hud.ChatHud;
-import net.minecraft.client.gui.hud.ChatHudLine;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
@@ -28,10 +27,10 @@ import java.util.List;
 public abstract class ChatHudMixin
 {
 	@Mutable
-	@Shadow @Final private List<ChatHudLine> messages;
+	@Shadow @Final private List<?> messages;
 
 	@Mutable
-	@Shadow @Final private List<ChatHudLine> visibleMessages;
+	@Shadow @Final private List<?> visibleMessages;
 
 	@ModifyConstant(
 			method = "addMessage(Lnet/minecraft/text/Text;IIZ)V",
@@ -49,13 +48,25 @@ public abstract class ChatHudMixin
 			method = "render",
 			at = @At(
 					value = "INVOKE",
+					//#if MC >= 11600
+					//$$ target = "Lnet/minecraft/client/gui/hud/ChatHud;fill(Lnet/minecraft/client/util/math/MatrixStack;IIIII)V"
+					//#else
 					target = "Lnet/minecraft/client/gui/hud/ChatHud;fill(IIIII)V"
+					//#endif
 			)
 	)
 	private void makeSureTheScrollBarIsVisible(Args args)
 	{
-		int y1 = args.get(1);
-		int y2 = args.get(3);
+		//#if MC >= 11600
+		//$$ int y1Idx = 2;
+		//$$ int y2Idx = 4;
+		//#else
+		int y1Idx = 1;
+		int y2Idx = 3;
+		//#endif
+
+		int y1 = args.get(y1Idx);
+		int y2 = args.get(y2Idx);
 		// it's too short (length = 0)
 		if (y1 == y2)
 		{
@@ -67,8 +78,8 @@ public abstract class ChatHudMixin
 			{
 				y2--;
 			}
-			args.set(1, y1);
-			args.set(3, y2);
+			args.set(y1Idx, y1);
+			args.set(y2Idx, y2);
 		}
 	}
 

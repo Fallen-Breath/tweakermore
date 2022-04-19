@@ -13,6 +13,9 @@ public class RenderUtil
 		return new Scaler(anchorX, anchorY, factor);
 	}
 
+	//#if MC >= 11600
+	//$$ @SuppressWarnings("deprecation")
+	//#endif
 	public static class Scaler
 	{
 		private final int anchorX;
