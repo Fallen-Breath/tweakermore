@@ -101,8 +101,14 @@ public abstract class PlacementTweaksMixin
 					//#endif
 							(state, schematicWorld, pos);
 
+
+			//#if MC >= 11700
+			//$$ InventoryUtils.schematicWorldPickBlock(stack, pos, schematicWorld, mc);
+			//#endif
+
 			if (!stack.isEmpty())
 			{
+				//#if MC < 11700
 				PlayerInventory inv = mc.player.inventory;
 				stack = stack.copy();
 				if (mc.player.abilities.creativeMode)
@@ -136,6 +142,7 @@ public abstract class PlacementTweaksMixin
 					//$$ }
 					//#endif
 				}
+				//#endif  // if MC < 11700
 
 				// so hand restore works fine
 				PlacementTweaks.cacheStackInHand(hand);

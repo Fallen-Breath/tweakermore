@@ -31,6 +31,14 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
+	// compact stuffs
+	if (11700 <= mcVersion && mcVersion < 11800) {
+		configurations.all {
+			// 1.17 litematica mod crashes in dev env due to guava's version is set to 27.1-jre
+			resolutionStrategy.force 'com.google.guava:guava:21.0'
+		}
+	}
+
 	// dependencies
 	modImplementation("fi.dy.masa.malilib:${project.malilib_version}") {
 		exclude group: 'io.github.prospector', module: 'modmenu'

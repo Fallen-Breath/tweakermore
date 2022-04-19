@@ -96,7 +96,10 @@ public abstract class WidgetLabelMixin extends WidgetBase
 			int x = this.x + (this.centered ? this.width / 2 : 0);
 			int y = (int)(yTextStart + (this.labels.size() + i * scale + 0.2) * fontHeight);
 
-			//#if MC >= 11500
+			//#if MC >= 11600
+			//$$ matrixStackd.push();
+			//$$ matrixStackd.scale((float)scale, (float)scale, 1);
+			//#elseif MC >= 11500
 			RenderSystem.pushMatrix();
 			RenderSystem.scaled(scale, scale, 1);
 			//#else
@@ -126,7 +129,9 @@ public abstract class WidgetLabelMixin extends WidgetBase
 				);
 			}
 
-			//#if MC >= 11500
+			//#if MC >= 11600
+			//$$ matrixStackd.pop();
+			//#elseif MC >= 11500
 			RenderSystem.popMatrix();
 			//#else
 			//$$ GlStateManager.popMatrix();

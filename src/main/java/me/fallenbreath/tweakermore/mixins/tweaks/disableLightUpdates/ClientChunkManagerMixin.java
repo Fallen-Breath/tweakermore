@@ -16,7 +16,12 @@ public abstract class ClientChunkManagerMixin
 {
 	@Shadow @Final private LightingProvider lightingProvider;
 
-	@Shadow @Final private ClientWorld world;
+	@Shadow @Final
+	//#if MC >= 11700
+	//$$ ClientWorld world;
+	//#else
+	private ClientWorld world;
+	//#endif
 
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void setWorldForLightingProvider(CallbackInfo ci)

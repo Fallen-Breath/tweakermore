@@ -3,6 +3,7 @@ package me.fallenbreath.tweakermore.impl.serverDataSyncer;
 import com.google.common.collect.Sets;
 import fi.dy.masa.litematica.selection.AreaSelection;
 import fi.dy.masa.litematica.util.PositionUtils;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.entity.Entity;
@@ -46,7 +47,14 @@ public class AreaSelectionUtil
 		List<BlockPos> bePositions = BlockPos.stream(minX, minY, minZ, maxX, maxY, maxZ).
 				map(BlockPos::toImmutable).
 				// same check in fi.dy.masa.litematica.schematic.LitematicaSchematic.takeBlocksFromWorldWithinChunk
-						filter(blockPos -> world.getBlockState(blockPos).getBlock().hasBlockEntity()).
+				filter(blockPos -> {
+					BlockState blockState = world.getBlockState(blockPos);
+					//#if MC >= 11700
+					//$$ return blockState.hasBlockEntity();
+					//#else
+					return blockState.getBlock().hasBlockEntity();
+					//#endif
+				}).
 				collect(Collectors.toList());
 
 		Box aabb = new Box(minX, minY, minZ, maxX + 1, maxY + 1, maxZ + 1);

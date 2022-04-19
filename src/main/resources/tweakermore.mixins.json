@@ -25,6 +25,7 @@
     "tweaks.disableCameraFrustumCulling.WorldRendererMixin",
     "tweaks.disableLightUpdates.ClientChunkManagerMixin",
     "tweaks.disableLightUpdates.LightingProviderMixin",
+    "tweaks.disablePistonBlockBreakingParticle.PistonBlockMixin",
     "tweaks.disableRedstoneParticle.WorldRendererMixin",
     "tweaks.disableSignTextLengthLimit.SelectionManagerAccessor",
     "tweaks.disableSignTextLengthLimit.SignBlockEntityRenderer_optifineMixin",

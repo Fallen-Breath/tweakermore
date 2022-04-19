@@ -11,6 +11,10 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//#if MC >= 11600
+//$$ import net.minecraft.client.util.math.MatrixStack;
+//#endif
+
 @Mixin(BossBarHud.class)
 public abstract class BossBarHudMixin
 {
@@ -27,13 +31,22 @@ public abstract class BossBarHudMixin
 			),
 			ordinal = 0
 	)
-	private int tweakerMore_bossBarScale_push(int windowsWidth)
+	private int tweakerMore_bossBarScale_push(
+			int windowsWidth
+			//#if MC >= 11600
+			//$$ , MatrixStack matrices
+			//#endif
+	)
 	{
 		this.scaler = null;
 		if (TweakerMoreConfigs.BOSS_BAR_SCALE.isModified())
 		{
 			this.scaler = RenderUtil.createScaler(windowsWidth / 2, 0, TweakerMoreConfigs.BOSS_BAR_SCALE.getDoubleValue());
-			this.scaler.apply();
+			this.scaler.apply(
+					//#if MC >= 11600
+					//$$ matrices
+					//#endif
+			);
 		}
 		return windowsWidth;
 	}

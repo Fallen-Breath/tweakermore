@@ -9,6 +9,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.packet.c2s.play.ClickWindowC2SPacket;
 
+//#if MC >= 11700
+//$$ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+//#endif
+
 public class InventoryRefresher
 {
 	/**
@@ -25,10 +29,18 @@ public class InventoryRefresher
 			uniqueItem.getOrCreateTag().putDouble("force_resync", Double.NaN);  // Tags with NaN are not equal
 			networkHandler.sendPacket(new ClickWindowC2SPacket(
 					mc.player.container.syncId,
+					//#if MC >= 11700
+					//$$ mc.player.currentScreenHandler.getRevision(),
+					//#endif
 					-999, 2,
 					SlotActionType.QUICK_CRAFT,
 					uniqueItem,
+
+					//#if MC >= 11700
+					//$$ new Int2ObjectOpenHashMap<>()
+					//#else
 					mc.player.container.getNextActionId(mc.player.inventory)
+					//#endif
 			));
 		}
 		return true;

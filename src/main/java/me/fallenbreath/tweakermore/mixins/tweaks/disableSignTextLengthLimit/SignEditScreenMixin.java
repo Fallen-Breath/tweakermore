@@ -12,6 +12,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.*;
 
+//#if MC >= 11700
+//$$ import net.minecraft.client.render.VertexConsumer;
+//$$ import net.minecraft.client.util.SpriteIdentifier;
+//#endif
+
 //#if MC >= 11500
 import net.minecraft.block.BlockState;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -38,10 +43,22 @@ public abstract class SignEditScreenMixin extends Screen
 	//$$ @Shadow @Final private String[] text;
 	//#endif
 
+	//#if MC >= 11700
+	//$$ private boolean filtered$TKM;
+	//#endif
+
 	protected SignEditScreenMixin(Text title)
 	{
 		super(title);
 	}
+
+	//#if MC >= 11700
+	//$$ @Inject(method = "<init>", at = @At("TAIL"))
+	//$$ private void recordFilteredParam(SignBlockEntity sign, boolean filtered, CallbackInfo ci)
+	//$$ {
+	//$$ 	this.filtered$TKM = filtered;
+	//$$ }
+	//#endif
 
 	//#if MC >= 11600
 	//$$ @ModifyConstant(
@@ -103,7 +120,9 @@ public abstract class SignEditScreenMixin extends Screen
 			),
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
-	//#if MC >= 11600
+	//#if MC >= 11700
+	//$$ private void drawLineOverflowHint(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci, float f, BlockState blockState, boolean bl, boolean bl2, float g, VertexConsumerProvider.Immediate immediate, SpriteIdentifier spriteIdentifier, VertexConsumer vertexConsumer, float h, int i, int j, int k, int l, Matrix4f matrix4f, int lineIdx, String string, float xStart)
+	//#elseif MC >= 11600
 	//$$ private void drawLineOverflowHint(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci, float f, BlockState blockState, boolean bl, boolean bl2, float g, VertexConsumerProvider.Immediate immediate, float h, int i, int j, int k, int l, Matrix4f matrix4f, int lineIdx, String string, float xStart)
 	//#else
 	private void drawLineOverflowHint(int mouseX, int mouseY, float delta, CallbackInfo ci, MatrixStack matrixStack, float f, BlockState blockState, boolean bl, boolean bl2, float g, VertexConsumerProvider.Immediate immediate, float h, int i, String strings[], Matrix4f matrix4f, int k, int l, int m, int n, int lineIdx, String string, float xStart)
@@ -120,7 +139,12 @@ public abstract class SignEditScreenMixin extends Screen
 			//#endif
 			if (mc != null && 0 <= lineIdx && lineIdx < textArrayLen)
 			{
-				Text text = this.sign.getTextOnRow(lineIdx);
+				Text text = this.sign.getTextOnRow(
+						lineIdx
+						//#if MC >= 11700
+						//$$ , this.filtered$TKM
+						//#endif
+				);
 				List<?> wrapped =
 						//#if MC >= 11600
 						//$$ mc.textRenderer.wrapLines(text, 90);

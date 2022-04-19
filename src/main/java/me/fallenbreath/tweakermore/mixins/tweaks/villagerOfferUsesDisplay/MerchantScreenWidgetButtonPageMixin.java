@@ -43,7 +43,9 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
 	}
 
 	@Inject(
-			//#if MC >= 11600
+			//#if MC >= 11700
+			//$$ method = "renderTooltip(Lnet/minecraft/client/util/math/MatrixStack;II)V",
+			//#elseif MC >= 11600
 			//$$ method = "renderToolTip(Lnet/minecraft/client/util/math/MatrixStack;II)V",
 			//#else
 			method = "renderToolTip(II)V",

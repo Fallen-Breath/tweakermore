@@ -11,6 +11,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//#if MC >= 11600
+//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import net.minecraft.scoreboard.ScoreboardObjective;
+//#endif
+
 @Mixin(InGameHud.class)
 public abstract class InGameHudMixin
 {
@@ -32,13 +37,22 @@ public abstract class InGameHudMixin
 			),
 			ordinal = 3
 	)
-	private int tweakerMore_scoreboardSideBarScale_push(int centerY)
+	private int tweakerMore_scoreboardSideBarScale_push(
+			int centerY
+			//#if MC >= 11600
+			//$$ , MatrixStack matrices, ScoreboardObjective objective
+			//#endif
+	)
 	{
 		this.scaler = null;
 		if (TweakerMoreConfigs.SCOREBOARD_SIDE_BAR_SCALE.isModified())
 		{
 			this.scaler = RenderUtil.createScaler(this.scaledWidth, centerY, TweakerMoreConfigs.SCOREBOARD_SIDE_BAR_SCALE.getDoubleValue());
-			this.scaler.apply();
+			this.scaler.apply(
+					//#if MC >= 11600
+					//$$ matrices
+					//#endif
+			);;
 		}
 		return centerY;
 	}

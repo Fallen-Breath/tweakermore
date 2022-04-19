@@ -28,8 +28,13 @@ public abstract class SignBlockEntityRendererMixin
 	@Group(min = 1, max = 1)
 	@ModifyArg(
 			method = {  // lambda method in method render
+					//#if MC >= 11700
+					//$$ "method_32159",  // vanilla
+					//$$ "lambda$render$2"  // after being polluted by optifine
+					//#else
 					"method_3583",  // vanilla
 					"lambda$render$0"  // after being polluted by optifine
+					//#endif
 			},
 			at = @At(
 					value = "INVOKE",
@@ -42,7 +47,12 @@ public abstract class SignBlockEntityRendererMixin
 			),
 			remap = false
 	)
-	private static int disableSignTextLengthLimit(int maxLength)
+	//#if MC >= 11700
+	//$$ private int
+	//#else
+	private static int
+	//#endif
+	disableSignTextLengthLimit(int maxLength)
 	{
 		if (TweakerMoreConfigs.DISABLE_SIGN_TEXT_LENGTH_LIMIT.getBooleanValue())
 		{
