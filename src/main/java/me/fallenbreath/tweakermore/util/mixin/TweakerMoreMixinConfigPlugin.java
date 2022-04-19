@@ -17,7 +17,7 @@ public class TweakerMoreMixinConfigPlugin extends RestrictiveMixinConfigPlugin
 	@Override
 	protected void onRestrictionCheckFailed(String mixinClassName, String reason)
 	{
-		LOGGER.info("[TweakerMore] Disabled mixin {} due to {}", mixinClassName, reason);
+		LOGGER.debug("[TweakerMore] Disabled mixin {} due to {}", mixinClassName, reason);
 	}
 
 	@Override
