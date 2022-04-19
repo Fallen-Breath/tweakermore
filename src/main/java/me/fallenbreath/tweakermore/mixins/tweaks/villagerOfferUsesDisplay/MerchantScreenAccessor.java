@@ -7,6 +7,10 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(MerchantScreen.class)
 public interface MerchantScreenAccessor
 {
-	@Accessor
+	@Accessor(
+			//#if MC < 11500
+			//$$ "field_19163"
+			//#endif
+	)
 	int getIndexStartOffset();
 }

@@ -7,6 +7,10 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(SelectionManager.class)
 public interface SelectionManagerAccessor
 {
-	@Accessor
+	@Accessor(
+			//#if MC < 11500
+			//$$ "field_16455"
+			//#endif
+	)
 	int getMaxLength();
 }

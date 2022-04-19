@@ -1,6 +1,10 @@
 package me.fallenbreath.tweakermore.mixins.core.gui;
 
+//#if MC >= 11500
 import com.mojang.blaze3d.systems.RenderSystem;
+//#else
+//$$ import com.mojang.blaze3d.platform.GlStateManager;
+//#endif
 import fi.dy.masa.malilib.gui.widgets.WidgetBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
 import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
@@ -75,8 +79,14 @@ public abstract class WidgetLabelMixin extends WidgetBase
 			int x = this.x + (this.centered ? this.width / 2 : 0);
 			int y = (int)(yTextStart + (this.labels.size() + i * scale + 0.2) * fontHeight);
 
+			//#if MC >= 11500
 			RenderSystem.pushMatrix();
 			RenderSystem.scaled(scale, scale, 1);
+			//#else
+			//$$ GlStateManager.pushMatrix();
+			//$$ GlStateManager.scaled(scale, scale, 1);
+			//#endif
+
 			x /= scale;
 			y /= scale;
 
@@ -88,7 +98,12 @@ public abstract class WidgetLabelMixin extends WidgetBase
 			{
 				this.drawStringWithShadow(x, y, color, originText);
 			}
+
+			//#if MC >= 11500
 			RenderSystem.popMatrix();
+			//#else
+			//$$ GlStateManager.popMatrix();
+			//#endif
 		}
 	}
 

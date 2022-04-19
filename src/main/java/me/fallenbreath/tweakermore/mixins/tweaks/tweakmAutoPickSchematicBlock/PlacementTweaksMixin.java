@@ -88,8 +88,15 @@ public abstract class PlacementTweaksMixin
 				return;
 			}
 			BlockState state = schematicWorld.getBlockState(pos);
-			ItemStack stack = MaterialCache.getInstance().getRequiredBuildItemForState(state, schematicWorld, pos);
-//			System.err.println(pos + " " + state + " " + stack);
+
+			ItemStack stack = MaterialCache.getInstance().
+					//#if MC >= 11500
+					getRequiredBuildItemForState
+					//#else
+					//$$ getItemForState
+					//#endif
+							(state, schematicWorld, pos);
+
 			if (!stack.isEmpty())
 			{
 				PlayerInventory inv = mc.player.inventory;

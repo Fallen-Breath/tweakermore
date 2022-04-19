@@ -1,25 +1,28 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.disableSignTextLengthLimit;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.SignEditScreen;
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.SelectionManager;
-import net.minecraft.client.util.Texts;
-import net.minecraft.client.util.math.Matrix4f;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+
+//#if MC >= 11500
+import net.minecraft.block.BlockState;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.util.Texts;
+import net.minecraft.client.util.math.Matrix4f;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Formatting;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+//#endif
 
 @Mixin(SignEditScreen.class)
 public abstract class SignEditScreenMixin extends Screen
@@ -49,6 +52,7 @@ public abstract class SignEditScreenMixin extends Screen
 		return maxLength;
 	}
 
+	//#if MC >= 11500
 	@ModifyArg(
 			method = "method_23773",  // lambda method in method render
 			at = @At(
@@ -94,4 +98,5 @@ public abstract class SignEditScreenMixin extends Screen
 			}
 		}
 	}
+	//#endif
 }

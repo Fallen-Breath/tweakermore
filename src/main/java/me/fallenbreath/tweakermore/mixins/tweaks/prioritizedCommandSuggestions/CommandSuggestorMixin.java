@@ -5,7 +5,13 @@ import com.google.common.collect.Maps;
 import com.mojang.brigadier.suggestion.Suggestion;
 import com.mojang.brigadier.suggestion.Suggestions;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+
+//#if MC >= 11500
 import net.minecraft.client.gui.screen.CommandSuggestor;
+//#else
+//$$ import net.minecraft.client.gui.screen.ChatScreen;
+//#endif
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -14,14 +20,23 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * there's no CommandSuggestor in 1.14, and our injection point is in ChatScreen
+ * the class name is not changed to make git happier
+ */
+//#if MC >= 11500
 @Mixin(CommandSuggestor.class)
+//#else
+//$$ @Mixin(ChatScreen.class)
+//#endif
 public abstract class CommandSuggestorMixin
 {
 	@ModifyVariable(
 			method = "showSuggestions",
 			at = @At(
 					value = "INVOKE",
-					target = "Lcom/mojang/brigadier/suggestion/Suggestions;isEmpty()Z",
+					target = "Lcom/mojang/brigadier/suggestion/Suggestions;getList()Ljava/util/List;",
+					ordinal = 0,
 					remap = false
 			)
 	)

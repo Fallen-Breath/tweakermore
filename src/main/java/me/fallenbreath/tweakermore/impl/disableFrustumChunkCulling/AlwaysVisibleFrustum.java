@@ -1,26 +1,65 @@
 package me.fallenbreath.tweakermore.impl.disableFrustumChunkCulling;
 
+//#if MC >= 11500
 import net.minecraft.client.render.Frustum;
 import net.minecraft.client.util.math.Matrix4f;
+//#else
+//$$ import net.minecraft.client.render.VisibleRegion;
+//#endif
 import net.minecraft.util.math.Box;
 
-public class AlwaysVisibleFrustum extends Frustum
+public class AlwaysVisibleFrustum
+		//#if MC >= 11500
+		extends Frustum
+		//#else
+		//$$ implements VisibleRegion
+		//#endif
 {
-	private final Frustum frustum;
 
-	public AlwaysVisibleFrustum(Frustum frustum)
+	//#if MC >= 11500
+	private final Frustum frustum;
+	//#else
+	//$$ private final VisibleRegion frustum;
+	//#endif
+
+	public AlwaysVisibleFrustum(
+			//#if MC >= 11500
+			Frustum frustum
+			//#else
+			//$$ VisibleRegion frustum
+			//#endif
+	)
 	{
+		//#if MC >= 11500
 		super(new Matrix4f(), new Matrix4f());
+		//#endif
 		this.frustum = frustum;
 	}
 
-	public void setPosition(double cameraX, double cameraY, double cameraZ)
+	@Override
+	public void
+			//#if MC >= 11500
+			setPosition
+			//#else
+			//$$ setOrigin
+			//#endif
+			(double cameraX, double cameraY, double cameraZ)
 	{
-		this.frustum.setPosition(cameraX, cameraY, cameraZ);
+		this.frustum.
+				//#if MC >= 11500
+				setPosition
+				//#else
+				//$$ setOrigin
+				//#endif
+						(cameraX, cameraY, cameraZ);
 	}
 
 	@Override
+	//#if MC >= 11500
 	public boolean isVisible(Box box)
+	//#else
+	//$$ public boolean intersects(Box box)
+	//#endif
 	{
 		return true;
 	}

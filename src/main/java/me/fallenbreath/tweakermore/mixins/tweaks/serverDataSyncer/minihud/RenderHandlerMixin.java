@@ -3,21 +3,26 @@ package me.fallenbreath.tweakermore.mixins.tweaks.serverDataSyncer.minihud;
 import fi.dy.masa.minihud.event.RenderHandler;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
+import me.fallenbreath.tweakermore.util.ModIds;
+import org.spongepowered.asm.mixin.Mixin;
+
+//#if MC >= 11500
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.serverDataSyncer.ServerDataSyncer;
-import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.block.entity.BeehiveBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
-import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Slice;
+//#endif
 
 @Restriction(require = @Condition(ModIds.minihud))
 @Mixin(RenderHandler.class)
 public abstract class RenderHandlerMixin
 {
+	// no bee hive in 1.14
+	//#if MC >= 11500
 	@ModifyVariable(
 			method = "addLine(Lfi/dy/masa/minihud/config/InfoToggle;)V",
 			slice = @Slice(
@@ -46,4 +51,5 @@ public abstract class RenderHandlerMixin
 		}
 		return blockEntity;
 	}
+	//#endif
 }
