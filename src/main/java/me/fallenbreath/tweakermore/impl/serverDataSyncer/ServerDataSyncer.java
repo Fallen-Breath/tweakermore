@@ -138,14 +138,25 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 						this.queryHandler.queryBlockNbt(blockEntity.getPos(), nbt -> {
 							if (nbt != null)
 							{
-								//#if MC >= 11700
-								//$$ blockEntity.readNbt(nbt);
-								//#elseif MC >= 11600
-								//$$ blockEntity.fromTag(world.getBlockState(pos), nbt);
-								//#else
-								blockEntity.fromTag(nbt);
-								//#endif
-								TweakerMoreMod.LOGGER.debug("Synced block entity data at {}", pos);
+								try
+								{
+									//#if MC >= 11700
+									//$$ blockEntity.readNbt(nbt);
+									//#elseif MC >= 11600
+									//$$ blockEntity.fromTag(world.getBlockState(pos), nbt);
+									//#else
+									blockEntity.fromTag(nbt);
+									//#endif
+									TweakerMoreMod.LOGGER.debug("Synced block entity data at {}", pos);
+								}
+								catch (Exception exception)
+								{
+									TweakerMoreMod.LOGGER.warn("Failed to sync block entity data at {}: {}", pos, exception);
+									if (TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
+									{
+										TweakerMoreMod.LOGGER.warn("[TweakerMore Debug]", exception);
+									}
+								}
 							}
 							future.complete(null);
 						});
