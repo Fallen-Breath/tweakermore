@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.tweakmSafeAfk;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmSafeAfk;
 
 import me.fallenbreath.tweakermore.impl.tweakmSafeAfk.SafeAfkHelper;
 import net.minecraft.client.MinecraftClient;

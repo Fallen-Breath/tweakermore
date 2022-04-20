@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.tweakmShowRedstoneDustUpdateOrder;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmShowRedstoneDustUpdateOrder;
 
 import fi.dy.masa.malilib.event.RenderEventHandler;
 import me.fallenbreath.tweakermore.impl.showRedstoneDustUpdateOrder.RedstoneDustUpdateOrderRenderer;

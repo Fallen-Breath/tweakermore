@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.tweakmAutoContainerProcess;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmAutoContainerProcess;
 
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;

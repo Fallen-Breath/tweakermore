@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.shulkerTooltipEnchantmentHint;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.shulkerTooltipEnchantmentHint;
 
 import me.fallenbreath.tweakermore.impl.shulkerTooltipHints.ShulkerToolTipEnhancer;
 import net.minecraft.block.ShulkerBoxBlock;

@@ -237,6 +237,10 @@ public class DocumentPrinter
 		Consumer<String> writeln = line -> buffer.append(line).append("\n");
 		for (Config.Category category : Config.Category.values())
 		{
+			if (category == Config.Category.ALL)
+			{
+				continue;
+			}
 			writeln.accept("## " + category.getDisplayName());
 			writeln.accept("");
 			List<TweakerMoreOption> options = Lists.newArrayList(TweakerMoreConfigs.getOptions(category));

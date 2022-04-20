@@ -15,67 +15,6 @@
 - 最大值: `36`
 
 
-### Boss栏最大条目数 (bossBarMaxEntry)
-
-修改最大同时显示的Boss栏条目数量
-
-它也会跳过原版的 窗口高度/3 限制检查
-
-将其设置为-1以禁用 (沿用原版逻辑)
-
-- 分类: 功能
-- 类型: 整数
-- 默认值: `-1`
-- 最小值: `-1`
-- 最大值: `20`
-
-![bossBarMaxEntry](assets/bossBarMaxEntry-zh_cn.png)
-
-
-### Boss栏缩放 (bossBarScale)
-
-将Boss栏按照给定参数进行缩放显示
-
-- 分类: 功能
-- 类型: 实数
-- 默认值: `1.0`
-- 最小值: `0.001`
-- 最大值: `2.0`
-
-
-### 聊天信息数量上限 (chatMessageLimit)
-
-修改聊天栏的历史信息储存数量上限
-
-- 分类: 功能
-- 类型: 整数
-- 默认值: `100`
-- 最小值: `100`
-- 最大值: `10000`
-- 模组约束:
-  - 冲突模组:
-    - CompactChat (`compactchat`)
-    - MoreChatHistory (`morechathistory`)
-    - Parachute (`parachute`)
-    - Raise Chat Limit (`raise-chat-limit`)
-    - Where's My Chat History (`wmch`)
-
-
-### 网络连接延迟模拟 (connectionSimulatedDelay)
-
-客户端网络延迟模拟器，于给定值大于0时启用
-
-在任何数据包处理前插入给定的延迟 (单位毫秒)
-
-可以认为它会稳定地将你的网络延迟ping值增加给定的值
-
-- 分类: 功能
-- 类型: 整数
-- 默认值: `0`
-- 最小值: `0`
-- 最大值: `15000`
-
-
 ### 复制告示牌文本 (copySignTextToClipBoard)
 
 将玩家指向的告示牌中的文本复制到剪贴板
@@ -85,178 +24,6 @@
 - 默认值: *无快捷键*
 
 ![copySignTextToClipBoard](assets/copySignTextToClipBoard-zh_cn.png)
-
-
-### 覆盖世界时间数值 (daytimeOverrideValue)
-
-用于功能tweakmDaytimeOverride的客户端的世界时间数值
-
-- 分类: 功能
-- 类型: 整数
-- 默认值: `0`
-- 最小值: `0`
-- 最大值: `24000`
-
-
-### 禁用相机视锥体渲染剔除 (disableCameraFrustumCulling)
-
-禁用基于相机视锥体的渲染剔除，即玩家视野范围外的画面也会被渲染
-
-方块和实体的渲染均受影响
-
-常用于保证光影下阴影的完整性等
-
-对帧数有明显影响
-
-- 分类: 功能
-- 类型: 可开关型热键
-- 默认值: *无快捷键*, `false`
-
-
-### 禁用光照更新 (disableLightUpdates)
-
-禁用客户端光照更新
-
-- 分类: 功能
-- 类型: 可开关型热键
-- 默认值: *无快捷键*, `false`
-
-
-### 禁用活塞方块破坏粒子效果 (disablePistonBlockBreakingParticle)
-
-移除活塞破坏方块时生成的粒子效果
-
-- 分类: 功能
-- 类型: 可开关型热键
-- 默认值: *无快捷键*, `false`
-- 模组约束:
-  - 依赖模组:
-    - Minecraft (`minecraft`) ` >=1.17`
-
-
-### 禁用红石粒子效果 (disableRedstoneParticle)
-
-禁用所有的红石粒子效果
-
-即来自红石粉、红石火把、红石中继器等的粒子效果
-
-- 分类: 功能
-- 类型: 可开关型热键
-- 默认值: *无快捷键*, `false`
-
-
-### 禁用告示牌文本长度限制 (disableSignTextLengthLimit)
-
-禁用在编辑或渲染告示牌时，告示牌基于字符长度的文本长度限制
-
-在编辑告示牌过程中，超出限制长度时，文本左侧会显示红色感叹号
-
-- 分类: 功能
-- 类型: 可开关型热键
-- 默认值: *无快捷键*, `false`
-
-![disableSignTextLengthLimit](assets/disableSignTextLengthLimit.png)
-
-
-### 修复箱子镜像变换 (fixChestMirroring)
-
-修复箱子方块在进行镜像变换时没有正确地处理其chest_type属性
-
-对使用了原版方块镜像逻辑的功能有效，包括原版结构放置、litematica mod的原理图放置
-
-- 分类: 功能
-- 类型: 布尔值
-- 默认值: `false`
-
-
-### 自动补货黑名单 (handRestockBlackList)
-
-不会触发tweakHandRestock的物品
-
-- 分类: 功能
-- 类型: 字符串列表
-- 默认值: `[minecraft:lava_bucket]`
-- 模组约束:
-  - 依赖模组:
-    - Tweakeroo (`tweakeroo`)
-
-
-### 自动补货名单约束类型 (handRestockListType)
-
-tweakHandRestock功能的物品名单约束类型
-
-- 分类: 功能
-- 类型: 选项列表
-- 默认值: `none`
-- 可用选项: `None`, `Black List`
-- 模组约束:
-  - 依赖模组:
-    - Tweakeroo (`tweakeroo`)
-
-
-### 自动补货白名单 (handRestockWhiteList)
-
-会触发tweakHandRestock的物品
-
-- 分类: 功能
-- 类型: 字符串列表
-- 默认值: `[minecraft:bucket]`
-- 模组约束:
-  - 依赖模组:
-    - Tweakeroo (`tweakeroo`)
-
-
-### 旧版F3+N逻辑 (legacyF3NLogic)
-
-修改快捷键F3+N的逻辑至1.15及之前的逻辑
-
-提示，1.15以前的逻辑为：创造模式->旁观者模式、其他模式->创造模式
-
-- 分类: 功能
-- 类型: 布尔值
-- 默认值: `false`
-- 模组约束:
-  - 依赖模组:
-    - Minecraft (`minecraft`) ` >=1.16`
-
-
-### 最大聊天界面高度 (maxChatHudHeight)
-
-聊天界面高度的最大值
-
-- 分类: 功能
-- 类型: 整数
-- 默认值: `160`
-- 最小值: `160`
-- 最大值: `1000`
-
-
-### 地狱门音效概率 (netherPortalSoundChance)
-
-地狱门方块播放音效的概率
-
-将其设为0.001或0.0001来让地狱门没那么吵
-
-- 分类: 功能
-- 类型: 实数
-- 默认值: `0.01`
-- 最小值: `0.0`
-- 最大值: `0.01`
-
-
-### 指令补全优先列表 (prioritizedCommandSuggestions)
-
-此列表中的命令建议将在命令补全列表中更靠前
-
-你可以将那些你总是喜欢选择的命令补全放在此列表中
-
-它们将总会位于指令补全列表的首位
-
-- 分类: 功能
-- 类型: 字符串列表
-- 默认值: `[]`
-
-![prioritizedCommandSuggestions](assets/prioritizedCommandSuggestions.png)
 
 
 ### 红石粉更新顺序文本透明度 (redstoneDustUpdateOrderTextAlpha)
@@ -296,39 +63,6 @@ tweakHandRestock功能的物品名单约束类型
 - 默认值: `10.0`
 - 最小值: `0.0`
 - 最大值: `100.0`
-
-
-### 计分板侧边栏缩放 (scoreboardSideBarScale)
-
-将计分板侧边栏按照给定参数进行缩放显示
-
-- 分类: 功能
-- 类型: 实数
-- 默认值: `1.0`
-- 最小值: `0.001`
-- 最大值: `2.0`
-
-
-### 潜影盒物品附魔提示 (shulkerTooltipEnchantmentHint)
-
-在潜影盒物品的工具提示中显示物品的附魔
-
-- 分类: 功能
-- 类型: 布尔值
-- 默认值: `false`
-
-![shulkerTooltipEnchantmentHint](assets/shulkerTooltipEnchantmentHint-zh_cn.png)
-
-
-### 潜影盒物品填充率提示 (shulkerTooltipFillLevelHint)
-
-在潜影盒物品工具提示的第一行显示其内容物填充率
-
-- 分类: 功能
-- 类型: 布尔值
-- 默认值: `false`
-
-![shulkerTooltipFillLevelHint](assets/shulkerTooltipFillLevelHint-zh_cn.png)
 
 
 ### 自动清空容器 (tweakmAutoCleanContainer)
@@ -393,33 +127,6 @@ tweakHandRestock功能的物品名单约束类型
     - Litematica (`litematica`)
 
 
-### 覆盖世界时间 (tweakmDaytimeOverride)
-
-覆盖客户端中的世界时间
-
-对服务端无影响
-
-- 分类: 功能
-- 类型: 可开关型热键
-- 默认值: *无快捷键*, `false`
-
-
-### 无瑕世界渲染 (tweakmFlawlessFrames)
-
-强制客户端渲染世界时每一帧都更新完毕所有已加载区块中的变化
-
-借用了Replay模组渲染各种任务时所使用的逻辑
-
-警告：这可能会让客户端频繁地卡顿
-
-- 分类: 功能
-- 类型: 可开关型热键
-- 默认值: *无快捷键*, `false`
-- 模组约束:
-  - 依赖模组:
-    - Replay mod (`replaymod`)
-
-
 ### 安全挂机 (tweakmSafeAfk)
 
 在受到伤害时断开连接
@@ -440,17 +147,6 @@ tweakHandRestock功能的物品名单约束类型
 - 默认值: *无快捷键*, `false`
 
 
-### 无限实体渲染距离 (tweakmUnlimitedEntityRenderDistance)
-
-将客户端实体渲染距离设置为无限制
-
-仍然需要服务器正确地借助EntityTracker发送相关实体数据包
-
-- 分类: 功能
-- 类型: 可开关型热键
-- 默认值: *无快捷键*, `false`
-
-
 ### 村民交易次数显示 (villagerOfferUsesDisplay)
 
 在村民交易列表中显示当前交易的次数以及上限
@@ -462,6 +158,275 @@ tweakHandRestock功能的物品名单约束类型
 - 默认值: `false`
 
 ![villagerOfferUsesDisplay](assets/villagerOfferUsesDisplay.png)
+
+
+## MC修改
+
+### Boss栏最大条目数 (bossBarMaxEntry)
+
+修改最大同时显示的Boss栏条目数量
+
+它也会跳过原版的 窗口高度/3 限制检查
+
+将其设置为-1以禁用 (沿用原版逻辑)
+
+- 分类: MC修改
+- 类型: 整数
+- 默认值: `-1`
+- 最小值: `-1`
+- 最大值: `20`
+
+![bossBarMaxEntry](assets/bossBarMaxEntry-zh_cn.png)
+
+
+### Boss栏缩放 (bossBarScale)
+
+将Boss栏按照给定参数进行缩放显示
+
+- 分类: MC修改
+- 类型: 实数
+- 默认值: `1.0`
+- 最小值: `0.001`
+- 最大值: `2.0`
+
+
+### 聊天信息数量上限 (chatMessageLimit)
+
+修改聊天栏的历史信息储存数量上限
+
+- 分类: MC修改
+- 类型: 整数
+- 默认值: `100`
+- 最小值: `100`
+- 最大值: `10000`
+- 模组约束:
+  - 冲突模组:
+    - CompactChat (`compactchat`)
+    - MoreChatHistory (`morechathistory`)
+    - Parachute (`parachute`)
+    - Raise Chat Limit (`raise-chat-limit`)
+    - Where's My Chat History (`wmch`)
+
+
+### 网络连接延迟模拟 (connectionSimulatedDelay)
+
+客户端网络延迟模拟器，于给定值大于0时启用
+
+在任何数据包处理前插入给定的延迟 (单位毫秒)
+
+可以认为它会稳定地将你的网络延迟ping值增加给定的值
+
+- 分类: MC修改
+- 类型: 整数
+- 默认值: `0`
+- 最小值: `0`
+- 最大值: `15000`
+
+
+### 覆盖世界时间数值 (daytimeOverrideValue)
+
+用于功能tweakmDaytimeOverride的客户端的世界时间数值
+
+- 分类: MC修改
+- 类型: 整数
+- 默认值: `0`
+- 最小值: `0`
+- 最大值: `24000`
+
+
+### 禁用相机视锥体渲染剔除 (disableCameraFrustumCulling)
+
+禁用基于相机视锥体的渲染剔除，即玩家视野范围外的画面也会被渲染
+
+方块和实体的渲染均受影响
+
+常用于保证光影下阴影的完整性等
+
+对帧数有明显影响
+
+- 分类: MC修改
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+
+
+### 禁用光照更新 (disableLightUpdates)
+
+禁用客户端光照更新
+
+- 分类: MC修改
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+
+
+### 禁用活塞方块破坏粒子效果 (disablePistonBlockBreakingParticle)
+
+移除活塞破坏方块时生成的粒子效果
+
+- 分类: MC修改
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Minecraft (`minecraft`) ` >=1.17`
+
+
+### 禁用红石粒子效果 (disableRedstoneParticle)
+
+禁用所有的红石粒子效果
+
+即来自红石粉、红石火把、红石中继器等的粒子效果
+
+- 分类: MC修改
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+
+
+### 禁用告示牌文本长度限制 (disableSignTextLengthLimit)
+
+禁用在编辑或渲染告示牌时，告示牌基于字符长度的文本长度限制
+
+在编辑告示牌过程中，超出限制长度时，文本左侧会显示红色感叹号
+
+- 分类: MC修改
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+
+![disableSignTextLengthLimit](assets/disableSignTextLengthLimit.png)
+
+
+### 修复箱子镜像变换 (fixChestMirroring)
+
+修复箱子方块在进行镜像变换时没有正确地处理其chest_type属性
+
+对使用了原版方块镜像逻辑的功能有效，包括原版结构放置、litematica mod的原理图放置
+
+- 分类: MC修改
+- 类型: 布尔值
+- 默认值: `false`
+
+
+### 旧版F3+N逻辑 (legacyF3NLogic)
+
+修改快捷键F3+N的逻辑至1.15及之前的逻辑
+
+提示，1.15以前的逻辑为：创造模式->旁观者模式、其他模式->创造模式
+
+- 分类: MC修改
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Minecraft (`minecraft`) ` >=1.16`
+
+
+### 最大聊天界面高度 (maxChatHudHeight)
+
+聊天界面高度的最大值
+
+- 分类: MC修改
+- 类型: 整数
+- 默认值: `160`
+- 最小值: `160`
+- 最大值: `1000`
+
+
+### 地狱门音效概率 (netherPortalSoundChance)
+
+地狱门方块播放音效的概率
+
+将其设为0.001或0.0001来让地狱门没那么吵
+
+- 分类: MC修改
+- 类型: 实数
+- 默认值: `0.01`
+- 最小值: `0.0`
+- 最大值: `0.01`
+
+
+### 指令补全优先列表 (prioritizedCommandSuggestions)
+
+此列表中的命令建议将在命令补全列表中更靠前
+
+你可以将那些你总是喜欢选择的命令补全放在此列表中
+
+它们将总会位于指令补全列表的首位
+
+- 分类: MC修改
+- 类型: 字符串列表
+- 默认值: `[]`
+
+![prioritizedCommandSuggestions](assets/prioritizedCommandSuggestions.png)
+
+
+### 计分板侧边栏缩放 (scoreboardSideBarScale)
+
+将计分板侧边栏按照给定参数进行缩放显示
+
+- 分类: MC修改
+- 类型: 实数
+- 默认值: `1.0`
+- 最小值: `0.001`
+- 最大值: `2.0`
+
+
+### 潜影盒物品附魔提示 (shulkerTooltipEnchantmentHint)
+
+在潜影盒物品的工具提示中显示物品的附魔
+
+- 分类: MC修改
+- 类型: 布尔值
+- 默认值: `false`
+
+![shulkerTooltipEnchantmentHint](assets/shulkerTooltipEnchantmentHint-zh_cn.png)
+
+
+### 潜影盒物品填充率提示 (shulkerTooltipFillLevelHint)
+
+在潜影盒物品工具提示的第一行显示其内容物填充率
+
+- 分类: MC修改
+- 类型: 布尔值
+- 默认值: `false`
+
+![shulkerTooltipFillLevelHint](assets/shulkerTooltipFillLevelHint-zh_cn.png)
+
+
+### 覆盖世界时间 (tweakmDaytimeOverride)
+
+覆盖客户端中的世界时间
+
+对服务端无影响
+
+- 分类: MC修改
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+
+
+### 无瑕世界渲染 (tweakmFlawlessFrames)
+
+强制客户端渲染世界时每一帧都更新完毕所有已加载区块中的变化
+
+借用了Replay模组渲染各种任务时所使用的逻辑
+
+警告：这可能会让客户端频繁地卡顿
+
+- 分类: MC修改
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Replay mod (`replaymod`)
+
+
+### 无限实体渲染距离 (tweakmUnlimitedEntityRenderDistance)
+
+将客户端实体渲染距离设置为无限制
+
+仍然需要服务器正确地借助EntityTracker发送相关实体数据包
+
+- 分类: MC修改
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
 
 
 ## 模组修改
@@ -490,6 +455,43 @@ tweakHandRestock功能的物品名单约束类型
     - Item Scroller (`itemscroller`)
 
 ![eCraftItemScrollerCompact](assets/eCraftItemScrollerCompact.png)
+
+
+### 自动补货黑名单 (handRestockBlackList)
+
+不会触发tweakHandRestock的物品
+
+- 分类: 模组修改
+- 类型: 字符串列表
+- 默认值: `[minecraft:lava_bucket]`
+- 模组约束:
+  - 依赖模组:
+    - Tweakeroo (`tweakeroo`)
+
+
+### 自动补货名单约束类型 (handRestockListType)
+
+tweakHandRestock功能的物品名单约束类型
+
+- 分类: 模组修改
+- 类型: 选项列表
+- 默认值: `none`
+- 可用选项: `None`, `Black List`
+- 模组约束:
+  - 依赖模组:
+    - Tweakeroo (`tweakeroo`)
+
+
+### 自动补货白名单 (handRestockWhiteList)
+
+会触发tweakHandRestock的物品
+
+- 分类: 模组修改
+- 类型: 字符串列表
+- 默认值: `[minecraft:bucket]`
+- 模组约束:
+  - 依赖模组:
+    - Tweakeroo (`tweakeroo`)
 
 
 ### Optifine移除展示框物品渲染距离限制 (ofRemoveItemFrameItemRenderDistance)

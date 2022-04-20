@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.copySignTextToClipBoard;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.copySignTextToClipBoard;
 
 import net.minecraft.block.entity.SignBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;

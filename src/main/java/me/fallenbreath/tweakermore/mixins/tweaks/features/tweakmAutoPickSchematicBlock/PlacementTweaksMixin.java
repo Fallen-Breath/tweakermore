@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.tweakmAutoPickSchematicBlock;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmAutoPickSchematicBlock;
 
 import fi.dy.masa.litematica.config.Configs;
 import fi.dy.masa.litematica.data.DataManager;

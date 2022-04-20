@@ -13,9 +13,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Config
 {
-	Type value();
+	Type type();
 
-	Category category() default Category.MC_TWEAKS;
+	Category category();
 
 	/**
 	 * Any of these restrictions satisfied => enable
@@ -39,7 +39,7 @@ public @interface Config
 
 	enum Category
 	{
-		MC_TWEAKS, MOD_TWEAKS, PORTING, SETTING;
+		ALL, FEATURES, MC_TWEAKS, MOD_TWEAKS, PORTING, SETTING;
 
 		public String getDisplayName()
 		{

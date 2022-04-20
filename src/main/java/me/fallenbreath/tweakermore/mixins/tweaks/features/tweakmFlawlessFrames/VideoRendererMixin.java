@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.tweakmFlawlessFrames;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmFlawlessFrames;
 
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;

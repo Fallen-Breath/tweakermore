@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.handRestoreRestriction;
+package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.handRestoreRestriction;
 
 import fi.dy.masa.tweakeroo.config.FeatureToggle;
 import fi.dy.masa.tweakeroo.tweaks.PlacementTweaks;

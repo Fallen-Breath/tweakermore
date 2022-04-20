@@ -11,7 +11,7 @@ import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
-import me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.tweakmAutoCollectMaterialListItem.MaterialListHudRendererAccessor;
+import me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmAutoCollectMaterialListItem.MaterialListHudRendererAccessor;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.container.Slot;

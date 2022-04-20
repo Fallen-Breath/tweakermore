@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Restriction(require = @Condition(type = Condition.Type.MIXIN, value = "me.fallenbreath.tweakermore.mixins.tweaks.eCraftItemScrollerCompact.ConfigsMixin"))
+@Restriction(require = @Condition(type = Condition.Type.MIXIN, value = "me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.eCraftItemScrollerCompact.ConfigsMixin"))
 @Mixin(CraftingHandler.class)
 public abstract class CraftingHandlerMixin
 {

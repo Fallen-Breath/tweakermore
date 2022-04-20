@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.villagerOfferUsesDisplay;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.villagerOfferUsesDisplay;
 
 import net.minecraft.client.gui.screen.ingame.MerchantScreen;
 import org.spongepowered.asm.mixin.Mixin;

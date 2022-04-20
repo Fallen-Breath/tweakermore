@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.tweakmAutoCollectMaterialListItem;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmAutoCollectMaterialListItem;
 
 import fi.dy.masa.litematica.materials.MaterialListHudRenderer;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;

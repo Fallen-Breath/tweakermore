@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.tweakmAutoContainerProcess;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmAutoContainerProcess;
 
 import fi.dy.masa.itemscroller.util.InventoryUtils;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;

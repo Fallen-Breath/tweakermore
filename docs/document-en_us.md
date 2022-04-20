@@ -1,4 +1,4 @@
-## Tweaks
+## Features
 
 ### autoFillContainerThreshold
 
@@ -8,12 +8,159 @@ e.g. if you always have 2 slots of firework rocket you can set the value to 3,
 
  then your rockets will never be used to fill the container
 
-- Category: Tweaks
+- Category: Features
 - Type: integer
 - Default value: `2`
 - Minimum value: `1`
 - Maximum value: `36`
 
+
+### copySignTextToClipBoard
+
+Copy texts in the sign you are pointing to into the clipboard
+
+- Category: Features
+- Type: hotkey
+- Default value: *no hotkey*
+
+![copySignTextToClipBoard](assets/copySignTextToClipBoard-en_us.png)
+
+
+### redstoneDustUpdateOrderTextAlpha
+
+The alpha value of the floating text used in redstone dust update order displaying
+
+See also: option tweakmShowRedstoneDustUpdateOrder
+
+- Category: Features
+- Type: double
+- Default value: `0.6`
+- Minimum value: `0.0`
+- Maximum value: `1.0`
+
+
+### refreshInventory
+
+Request a player inventory refresh to the server
+
+It's done by simulating an invalid inventory dragging operation,
+
+so the server think that the inventory is out of sync then do resync
+
+- Category: Features
+- Type: hotkey
+- Default value: *no hotkey*
+
+
+### safeAfkHealthThreshold
+
+The threshold of the health of the player which triggers the safe afk disconnecting feature
+
+Disconnect when player takes damage and its health becomes less than the given value
+
+- Category: Features
+- Type: double
+- Default value: `10.0`
+- Minimum value: `0.0`
+- Maximum value: `100.0`
+
+
+### tweakmAutoCleanContainer
+
+Automatically drops everything in the opened container
+
+and then close the container
+
+- Category: Features
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Item Scroller (`itemscroller`)
+
+
+### tweakmAutoCollectMaterialListItem
+
+Automatically collect missing items in litematica mod material list in the opened container to player inventory
+
+and then close the container
+
+- Category: Features
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
+### tweakmAutoFillContainer
+
+Automatically fill the opened container with the most numerous item stack in your inventory
+
+iff the item stack is the only most numerous one
+
+and then close the container
+
+- Category: Features
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Item Scroller (`itemscroller`)
+
+
+### tweakmAutoPickSchematicBlock
+
+Pick block from schematic automatically before block placement
+
+It's logic is the same as the pickBlock tweaks in litematica mod, you need to enable pickBlockEnabled option in litematica
+
+Does not work with easy place mode
+
+- Category: Features
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
+    - Litematica (`litematica`)
+
+
+### tweakmSafeAfk
+
+Disconnect when receive damage
+
+Health threshold to disconnect can be set via safeAfkHealthThreshold
+
+- Category: Features
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+
+
+### tweakmShowRedstoneDustUpdateOrder
+
+When looking at a redstone dust block, show the block update order of it
+
+- Category: Features
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+
+
+### villagerOfferUsesDisplay
+
+Display villager offer use and limit amount on villager offer list
+
+Hover on the arrow of the offer to see it
+
+- Category: Features
+- Type: boolean
+- Default value: `false`
+
+![villagerOfferUsesDisplay](assets/villagerOfferUsesDisplay.png)
+
+
+## MC Tweaks
 
 ### bossBarMaxEntry
 
@@ -23,7 +170,7 @@ It will also skip the vanilla windowHeight/3 limit check
 
 Set it to -1 to disabled (use vanilla logic)
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: integer
 - Default value: `-1`
 - Minimum value: `-1`
@@ -36,7 +183,7 @@ Set it to -1 to disabled (use vanilla logic)
 
 Scale the boss bar hud with given factor
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: double
 - Default value: `1.0`
 - Minimum value: `0.001`
@@ -47,7 +194,7 @@ Scale the boss bar hud with given factor
 
 Modify the maximum number of history messages stored in the chat hud
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: integer
 - Default value: `100`
 - Minimum value: `100`
@@ -69,29 +216,18 @@ Adds given delay (in milliseconds) before any packet processing
 
 Basically it stably adds your ping to the server with the given value
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: integer
 - Default value: `0`
 - Minimum value: `0`
 - Maximum value: `15000`
 
 
-### copySignTextToClipBoard
-
-Copy texts in the sign you are pointing to into the clipboard
-
-- Category: Tweaks
-- Type: hotkey
-- Default value: *no hotkey*
-
-![copySignTextToClipBoard](assets/copySignTextToClipBoard-en_us.png)
-
-
 ### daytimeOverrideValue
 
 The client-side daytime value to be overrided by tweak tweakmDaytimeOverride
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: integer
 - Default value: `0`
 - Minimum value: `0`
@@ -108,7 +244,7 @@ A use case is to ensure the integrity of shadows when using shaders
 
 Has significant impact on framerate
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: togglable hotkey
 - Default value: *no hotkey*, `false`
 
@@ -117,7 +253,7 @@ Has significant impact on framerate
 
 Yeets client-side light updates
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: togglable hotkey
 - Default value: *no hotkey*, `false`
 
@@ -126,7 +262,7 @@ Yeets client-side light updates
 
 Remove block breaking particles when pistons break blocks
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: togglable hotkey
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
@@ -140,7 +276,7 @@ Disable all redstone particles
 
 i.e. particles from redstone dust, redstone torch, redstone repeater etc.
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: togglable hotkey
 - Default value: *no hotkey*, `false`
 
@@ -151,7 +287,7 @@ Disable the text length limit based on character width when editing or rendering
 
 A red exclamation mark will be shown on the left side when the limit is exceeded during the editing of the sign
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: togglable hotkey
 - Default value: *no hotkey*, `false`
 
@@ -164,46 +300,9 @@ Fixed chest type is not properly transformed when chest block is mirrored
 
 Affects stuffs that use vanilla block mirror logic, e.g. vanilla structure placement, litematica mod schematic placement
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: boolean
 - Default value: `false`
-
-
-### handRestockBlackList
-
-The items that will NOT trigger tweakHandRestock
-
-- Category: Tweaks
-- Type: string list
-- Default value: `[minecraft:lava_bucket]`
-- Mod restrictions:
-  - Required mods:
-    - Tweakeroo (`tweakeroo`)
-
-
-### handRestockListType
-
-The item restriction type for tweakHandRestock
-
-- Category: Tweaks
-- Type: option list
-- Default value: `none`
-- Available options: `None`, `Black List`
-- Mod restrictions:
-  - Required mods:
-    - Tweakeroo (`tweakeroo`)
-
-
-### handRestockWhiteList
-
-The items that will trigger tweakHandRestock
-
-- Category: Tweaks
-- Type: string list
-- Default value: `[minecraft:bucket]`
-- Mod restrictions:
-  - Required mods:
-    - Tweakeroo (`tweakeroo`)
 
 
 ### legacyF3NLogic
@@ -212,7 +311,7 @@ Modify the logic of hotkey F3 + N back to 1.15 and before
 
 1.15- logic cheat sheet: creative -> spectator, other -> creative
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: boolean
 - Default value: `false`
 - Mod restrictions:
@@ -224,7 +323,7 @@ Modify the logic of hotkey F3 + N back to 1.15 and before
 
 The maximum height of the chat hud
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: integer
 - Default value: `160`
 - Minimum value: `160`
@@ -237,7 +336,7 @@ The chance for a nether portal block to play sound
 
 Set it to 0.001 or 0.0001 for less noisy portal
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: double
 - Default value: `0.01`
 - Minimum value: `0.0`
@@ -252,57 +351,18 @@ You can put those command completions you always prefer to choose in this list
 
 so they will always be at the head of the command completion list
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: string list
 - Default value: `[]`
 
 ![prioritizedCommandSuggestions](assets/prioritizedCommandSuggestions.png)
 
 
-### redstoneDustUpdateOrderTextAlpha
-
-The alpha value of the floating text used in redstone dust update order displaying
-
-See also: option tweakmShowRedstoneDustUpdateOrder
-
-- Category: Tweaks
-- Type: double
-- Default value: `0.6`
-- Minimum value: `0.0`
-- Maximum value: `1.0`
-
-
-### refreshInventory
-
-Request a player inventory refresh to the server
-
-It's done by simulating an invalid inventory dragging operation,
-
-so the server think that the inventory is out of sync then do resync
-
-- Category: Tweaks
-- Type: hotkey
-- Default value: *no hotkey*
-
-
-### safeAfkHealthThreshold
-
-The threshold of the health of the player which triggers the safe afk disconnecting feature
-
-Disconnect when player takes damage and its health becomes less than the given value
-
-- Category: Tweaks
-- Type: double
-- Default value: `10.0`
-- Minimum value: `0.0`
-- Maximum value: `100.0`
-
-
 ### scoreboardSideBarScale
 
 Scale the scoreboard side bar hud with given factor
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: double
 - Default value: `1.0`
 - Minimum value: `0.001`
@@ -313,7 +373,7 @@ Scale the scoreboard side bar hud with given factor
 
 Display enchantments of items in the tooltip of shulker box items
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: boolean
 - Default value: `false`
 
@@ -324,73 +384,11 @@ Display enchantments of items in the tooltip of shulker box items
 
 Display content fill level in first line of the tooltip of shulker box items
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: boolean
 - Default value: `false`
 
 ![shulkerTooltipFillLevelHint](assets/shulkerTooltipFillLevelHint-en_us.png)
-
-
-### tweakmAutoCleanContainer
-
-Automatically drops everything in the opened container
-
-and then close the container
-
-- Category: Tweaks
-- Type: togglable hotkey
-- Default value: *no hotkey*, `false`
-- Mod restrictions:
-  - Required mods:
-    - Item Scroller (`itemscroller`)
-
-
-### tweakmAutoCollectMaterialListItem
-
-Automatically collect missing items in litematica mod material list in the opened container to player inventory
-
-and then close the container
-
-- Category: Tweaks
-- Type: togglable hotkey
-- Default value: *no hotkey*, `false`
-- Mod restrictions:
-  - Required mods:
-    - Litematica (`litematica`)
-    - Item Scroller (`itemscroller`)
-
-
-### tweakmAutoFillContainer
-
-Automatically fill the opened container with the most numerous item stack in your inventory
-
-iff the item stack is the only most numerous one
-
-and then close the container
-
-- Category: Tweaks
-- Type: togglable hotkey
-- Default value: *no hotkey*, `false`
-- Mod restrictions:
-  - Required mods:
-    - Item Scroller (`itemscroller`)
-
-
-### tweakmAutoPickSchematicBlock
-
-Pick block from schematic automatically before block placement
-
-It's logic is the same as the pickBlock tweaks in litematica mod, you need to enable pickBlockEnabled option in litematica
-
-Does not work with easy place mode
-
-- Category: Tweaks
-- Type: togglable hotkey
-- Default value: *no hotkey*, `false`
-- Mod restrictions:
-  - Required mods:
-    - Tweakeroo (`tweakeroo`)
-    - Litematica (`litematica`)
 
 
 ### tweakmDaytimeOverride
@@ -399,7 +397,7 @@ Override the time of day of the client world
 
 Does not affect server-side daytime
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: togglable hotkey
 - Default value: *no hotkey*, `false`
 
@@ -412,32 +410,12 @@ using the logic from replay mod which is used in its rendering tasks
 
 WARNING: Expect client lag spike with enabled
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: togglable hotkey
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
     - Replay mod (`replaymod`)
-
-
-### tweakmSafeAfk
-
-Disconnect when receive damage
-
-Health threshold to disconnect can be set via safeAfkHealthThreshold
-
-- Category: Tweaks
-- Type: togglable hotkey
-- Default value: *no hotkey*, `false`
-
-
-### tweakmShowRedstoneDustUpdateOrder
-
-When looking at a redstone dust block, show the block update order of it
-
-- Category: Tweaks
-- Type: togglable hotkey
-- Default value: *no hotkey*, `false`
 
 
 ### tweakmUnlimitedEntityRenderDistance
@@ -446,22 +424,9 @@ Set client-side entity render distance to unlimited
 
 Still requires the server to send entity packets via EntityTracker properly
 
-- Category: Tweaks
+- Category: MC Tweaks
 - Type: togglable hotkey
 - Default value: *no hotkey*, `false`
-
-
-### villagerOfferUsesDisplay
-
-Display villager offer use and limit amount on villager offer list
-
-Hover on the arrow of the offer to see it
-
-- Category: Tweaks
-- Type: boolean
-- Default value: `false`
-
-![villagerOfferUsesDisplay](assets/villagerOfferUsesDisplay.png)
 
 
 ## Mods Tweaks
@@ -490,6 +455,43 @@ e.g. broken mass craft
     - Item Scroller (`itemscroller`)
 
 ![eCraftItemScrollerCompact](assets/eCraftItemScrollerCompact.png)
+
+
+### handRestockBlackList
+
+The items that will NOT trigger tweakHandRestock
+
+- Category: Mods Tweaks
+- Type: string list
+- Default value: `[minecraft:lava_bucket]`
+- Mod restrictions:
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
+
+
+### handRestockListType
+
+The item restriction type for tweakHandRestock
+
+- Category: Mods Tweaks
+- Type: option list
+- Default value: `none`
+- Available options: `None`, `Black List`
+- Mod restrictions:
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
+
+
+### handRestockWhiteList
+
+The items that will trigger tweakHandRestock
+
+- Category: Mods Tweaks
+- Type: string list
+- Default value: `[minecraft:bucket]`
+- Mod restrictions:
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
 
 
 ### ofRemoveItemFrameItemRenderDistance

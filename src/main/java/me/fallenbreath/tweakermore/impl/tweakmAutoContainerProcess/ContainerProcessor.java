@@ -1,7 +1,7 @@
 package me.fallenbreath.tweakermore.impl.tweakmAutoContainerProcess;
 
 import com.google.common.collect.ImmutableList;
-import me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.tweakmAutoContainerProcess.ItemScrollerInventoryUtilsAccessor;
+import me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmAutoContainerProcess.ItemScrollerInventoryUtilsAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
