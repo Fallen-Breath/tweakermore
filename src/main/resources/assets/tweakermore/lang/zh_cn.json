@@ -166,6 +166,7 @@
 
   "tweakermore.gui.config_category.mc_tweaks": "功能",
   "tweakermore.gui.config_category.mod_tweaks": "模组修改",
+  "tweakermore.gui.config_category.porting": "移植",
   "tweakermore.gui.config_category.setting": "配置",
   "tweakermore.gui.config_type.label_text": "类型筛选",
   "tweakermore.gui.config_type.generic": "通用 Generic",

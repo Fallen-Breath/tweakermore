@@ -166,6 +166,7 @@
 
   "tweakermore.gui.config_category.mc_tweaks": "Tweaks",
   "tweakermore.gui.config_category.mod_tweaks": "Mods Tweaks",
+  "tweakermore.gui.config_category.porting": "Porting",
   "tweakermore.gui.config_category.setting": "Setting",
   "tweakermore.gui.config_type.label_text": "Type filter",
   "tweakermore.gui.config_type.generic": "Generic",
