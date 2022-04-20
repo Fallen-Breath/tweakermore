@@ -29,7 +29,7 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 {
 	@Nullable
 	private static TweakerMoreConfigGui currentInstance = null;
-	private static Config.Category category = Config.Category.MC_TWEAKS;
+	private static Config.Category category = Config.Category.FEATURES;
 	@Nullable
 	private Config.Type filteredType = null;
 	@Nullable
