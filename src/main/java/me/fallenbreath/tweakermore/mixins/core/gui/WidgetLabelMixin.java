@@ -1,7 +1,6 @@
 package me.fallenbreath.tweakermore.mixins.core.gui;
 
 //#if MC >= 11500
-import com.mojang.blaze3d.systems.RenderSystem;
 //#else
 //$$ import com.mojang.blaze3d.platform.GlStateManager;
 //#endif
@@ -13,7 +12,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import fi.dy.masa.malilib.gui.widgets.WidgetBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
 import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
-import me.fallenbreath.tweakermore.util.RenderContext;
+import me.fallenbreath.tweakermore.util.render.RenderContext;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

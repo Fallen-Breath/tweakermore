@@ -1,7 +1,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.bossBarScale;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.util.RenderUtil;
+import me.fallenbreath.tweakermore.util.render.RenderUtil;
 import net.minecraft.client.gui.hud.BossBarHud;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
