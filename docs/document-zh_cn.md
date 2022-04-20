@@ -692,6 +692,8 @@ tweakHandRestock功能的物品名单约束类型
 
 从Tweakeroo 1.17+移植disableNauseaEffect
 
+同时修复了玩家在接触地狱门时，地狱门材质覆盖无法显示的问题
+
 - 分类: 移植
 - 类型: 可开关型热键
 - 默认值: *无快捷键*, `false`

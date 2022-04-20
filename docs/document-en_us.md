@@ -692,6 +692,8 @@ Backports option pickBlockShulkers from Litematica 1.16+
 
 Backports option disableNauseaEffect from Tweakeroo 1.17+
 
+Also fixes the nether portal overlay fails to be displayed with this option on
+
 - Category: Porting
 - Type: togglable hotkey
 - Default value: *no hotkey*, `false`

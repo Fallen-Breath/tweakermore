@@ -62,6 +62,7 @@
     "tweaks.shulkerTooltipEnchantmentHint.ShulkerBoxBlockMixin",
     "tweaks.shulkerTooltipFillLevelHint.ItemStackMixin",
     "tweaks.tkrDisableNauseaEffectPorting.ClientPlayerEntityMixin",
+    "tweaks.tkrDisableNauseaEffectPorting.InGameHudMixin",
     "tweaks.tweakmAutoCollectMaterialListItem.MaterialListHudRendererAccessor",
     "tweaks.tweakmAutoContainerProcess.ClientPlayNetworkHandlerMixin",
     "tweaks.tweakmAutoContainerProcess.ContainerMixin",

@@ -3,6 +3,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.tkrDisableNauseaEffectPorting;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.impl.tkrDisableNauseaEffectPorting.ClientPlayerEntityWithRealNauseaStrength;
 import net.minecraft.client.network.ClientPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -14,7 +15,7 @@ import static me.fallenbreath.tweakermore.util.ModIds.minecraft;
 
 @Restriction(require = @Condition(value = minecraft, versionPredicates = "<1.17"))
 @Mixin(ClientPlayerEntity.class)
-public abstract class ClientPlayerEntityMixin
+public abstract class ClientPlayerEntityMixin implements ClientPlayerEntityWithRealNauseaStrength
 {
 	@Shadow public float lastNauseaStrength;
 
@@ -22,6 +23,18 @@ public abstract class ClientPlayerEntityMixin
 
 	private float realLastNauseaStrength$TKM = -1;
 	private float realNextNauseaStrength$TKM = -1;
+
+	@Override
+	public float getRealLastNauseaStrength()
+	{
+		return this.realLastNauseaStrength$TKM;
+	}
+
+	@Override
+	public float getRealNextNauseaStrength()
+	{
+		return this.realNextNauseaStrength$TKM;
+	}
 
 	@Inject(method = "updateNausea", at = @At("HEAD"))
 	private void tkrDisableNauseaEffectPorting_restoreRealValues(CallbackInfo ci)

@@ -142,7 +142,7 @@
   "tweakermore.config.lmPickBlockShulkersPorting": "Litematica选择含目标物潜影盒移植",
   "tweakermore.config.lmPickBlockShulkersPorting.comment": "从Litematica 1.16+移植pickBlockShulkers",
   "tweakermore.config.tkrDisableNauseaEffectPorting": "Tweakeroo禁用扭曲效果移植",
-  "tweakermore.config.tkrDisableNauseaEffectPorting.comment": "从Tweakeroo 1.17+移植disableNauseaEffect",
+  "tweakermore.config.tkrDisableNauseaEffectPorting.comment": "从Tweakeroo 1.17+移植disableNauseaEffect\n同时修复了玩家在接触地狱门时，地狱门材质覆盖无法显示的问题",
 
   "// Setting": "================================================",
 

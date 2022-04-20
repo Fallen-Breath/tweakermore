@@ -142,7 +142,7 @@
   "tweakermore.config.lmPickBlockShulkersPorting": "lmPickBlockShulkersPorting",
   "tweakermore.config.lmPickBlockShulkersPorting.comment": "Backports option pickBlockShulkers from Litematica 1.16+",
   "tweakermore.config.tkrDisableNauseaEffectPorting": "tkrDisableNauseaEffectPorting",
-  "tweakermore.config.tkrDisableNauseaEffectPorting.comment": "Backports option disableNauseaEffect from Tweakeroo 1.17+",
+  "tweakermore.config.tkrDisableNauseaEffectPorting.comment": "Backports option disableNauseaEffect from Tweakeroo 1.17+\nAlso fixes the nether portal overlay fails to be displayed with this option on",
 
   "// Setting": "================================================",
 
