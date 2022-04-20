@@ -90,6 +90,9 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigDouble NETHER_PORTAL_SOUND_CHANCE = newConfigDouble("netherPortalSoundChance", 0.01D, 0.0D, 0.01D);
 
 	@Config(Config.Type.GENERIC)
+	public static final TweakerMoreConfigDouble REDSTONE_DUST_UPDATE_ORDER_TEXT_ALPHA = newConfigDouble("redstoneDustUpdateOrderTextAlpha", 0.6, 0, 1);
+
+	@Config(Config.Type.GENERIC)
 	public static final TweakerMoreConfigDouble SAFE_AFK_HEALTH_THRESHOLD = newConfigDouble("safeAfkHealthThreshold", 10, 0, 100);
 
 	@Config(Config.Type.GENERIC)

@@ -19,6 +19,8 @@
   "tweakermore.config.maxChatHudHeight.comment": "聊天界面高度的最大值",
   "tweakermore.config.netherPortalSoundChance": "地狱门音效概率",
   "tweakermore.config.netherPortalSoundChance.comment": "地狱门方块播放音效的概率\n将其设为0.001或0.0001来让地狱门没那么吵",
+  "tweakermore.config.redstoneDustUpdateOrderTextAlpha": "红石粉更新顺序文本透明度",
+  "tweakermore.config.redstoneDustUpdateOrderTextAlpha.comment": "用于渲染红石粉方块更新顺序文本的透明度\n参见选项tweakmShowRedstoneDustUpdateOrder",
   "tweakermore.config.safeAfkHealthThreshold": "安全挂机血量阈值",
   "tweakermore.config.safeAfkHealthThreshold.comment": "触发安全挂机功能的玩家的血量阈值\n当玩家受到伤害且血量小于给定值时断开连接",
   "tweakermore.config.scoreboardSideBarScale": "计分板侧边栏缩放",

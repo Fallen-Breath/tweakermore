@@ -259,6 +259,19 @@ tweakHandRestock功能的物品名单约束类型
 ![prioritizedCommandSuggestions](assets/prioritizedCommandSuggestions.png)
 
 
+### 红石粉更新顺序文本透明度 (redstoneDustUpdateOrderTextAlpha)
+
+用于渲染红石粉方块更新顺序文本的透明度
+
+参见选项tweakmShowRedstoneDustUpdateOrder
+
+- 分类: 功能
+- 类型: 实数
+- 默认值: `0.6`
+- 最小值: `0.0`
+- 最大值: `1.0`
+
+
 ### 刷新物品栏 (refreshInventory)
 
 向服务端请求一次玩家物品栏刷新

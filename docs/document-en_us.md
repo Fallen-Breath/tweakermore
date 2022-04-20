@@ -259,6 +259,19 @@ so they will always be at the head of the command completion list
 ![prioritizedCommandSuggestions](assets/prioritizedCommandSuggestions.png)
 
 
+### redstoneDustUpdateOrderTextAlpha
+
+The alpha value of the floating text used in redstone dust update order displaying
+
+See also: option tweakmShowRedstoneDustUpdateOrder
+
+- Category: Tweaks
+- Type: double
+- Default value: `0.6`
+- Minimum value: `0.0`
+- Maximum value: `1.0`
+
+
 ### refreshInventory
 
 Request a player inventory refresh to the server

@@ -41,16 +41,24 @@ public class RedstoneDustUpdateOrderRenderer implements IRenderer
 		{
 			return;
 		}
+
 		MinecraftClient mc = MinecraftClient.getInstance();
 		if (mc.world!= null && mc.crosshairTarget instanceof BlockHitResult)
 		{
 			BlockPos pos = ((BlockHitResult)mc.crosshairTarget).getBlockPos();
 			if (mc.world.getBlockState(pos).getBlock() instanceof RedstoneWireBlock)
 			{
+				int alphaBits = (int)Math.round(255 * TweakerMoreConfigs.REDSTONE_DUST_UPDATE_ORDER_TEXT_ALPHA.getDoubleValue());
+				if (alphaBits == 0)
+				{
+					return;
+				}
+				int color = Objects.requireNonNull(Formatting.RED.getColorValue()) | ((alphaBits & 0xFF) << 24);
+
 				List<BlockPos> order = getDustUpdateOrderAt(pos);
 				for (int i = 0; i < order.size(); i++)
 				{
-					this.renderTextAtPos(order.get(i), String.valueOf(i + 1), Objects.requireNonNull(Formatting.RED.getColorValue()));
+					this.renderTextAtPos(order.get(i), String.valueOf(i + 1), color);
 				}
 			}
 		}
