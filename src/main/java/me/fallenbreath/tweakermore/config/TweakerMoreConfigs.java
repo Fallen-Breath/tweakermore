@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
-import fi.dy.masa.malilib.event.RenderEventHandler;
 import fi.dy.masa.malilib.event.TickHandler;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import fi.dy.masa.malilib.interfaces.IValueChangeCallback;
@@ -20,7 +19,6 @@ import me.fallenbreath.tweakermore.impl.copySignTextToClipBoard.SignTextCopier;
 import me.fallenbreath.tweakermore.impl.eCraftMassCraftCompact.EasierCraftingRegistrar;
 import me.fallenbreath.tweakermore.impl.refreshInventory.InventoryRefresher;
 import me.fallenbreath.tweakermore.impl.serverDataSyncer.ServerDataSyncer;
-import me.fallenbreath.tweakermore.impl.showRedstoneDustUpdateOrder.RedstoneDustUpdateOrderRenderer;
 import me.fallenbreath.tweakermore.impl.tweakerMoreDevMixinAudit.MixinAuditHelper;
 import me.fallenbreath.tweakermore.impl.tweakmFlawlessFrames.FlawlessFramesHandler;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
@@ -155,7 +153,7 @@ public class TweakerMoreConfigs
 					@Condition(itemscroller)
 			})
 	)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_TAKE_MATERIAL_LIST_ITEM = newConfigBooleanHotkeyed("tweakmAutoCollectMaterialListItem");
+	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_COLLECT_MATERIAL_LIST_ITEM = newConfigBooleanHotkeyed("tweakmAutoCollectMaterialListItem");
 
 	@Config(Config.Type.TWEAK)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_DAYTIME_OVERRIDE = newConfigBooleanHotkeyed("tweakmDaytimeOverride");

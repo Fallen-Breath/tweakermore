@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import fi.dy.masa.malilib.interfaces.IClientTickHandler;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.mixins.tweaks.serverDataSyncer.DoubleInventoryAccessor;
+import me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.DoubleInventoryAccessor;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;

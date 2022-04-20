@@ -1,7 +1,7 @@
 package me.fallenbreath.tweakermore.impl.serverDataSyncer;
 
 import com.google.common.collect.Maps;
-import me.fallenbreath.tweakermore.mixins.tweaks.serverDataSyncer.DataQueryHandlerAccessor;
+import me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.DataQueryHandlerAccessor;
 import me.fallenbreath.tweakermore.util.collection.ExpiringMap;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;

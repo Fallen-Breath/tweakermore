@@ -11,7 +11,7 @@ import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
-import me.fallenbreath.tweakermore.mixins.tweaks.tweakmAutoCollectMaterialListItem.MaterialListHudRendererAccessor;
+import me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.tweakmAutoCollectMaterialListItem.MaterialListHudRendererAccessor;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.container.Slot;
@@ -24,7 +24,7 @@ public class ContainerMaterialListItemCollector implements Processor
 	@Override
 	public boolean isEnabled()
 	{
-		TweakerMoreConfigBooleanHotkeyed config = TweakerMoreConfigs.TWEAKM_AUTO_TAKE_MATERIAL_LIST_ITEM;
+		TweakerMoreConfigBooleanHotkeyed config = TweakerMoreConfigs.TWEAKM_AUTO_COLLECT_MATERIAL_LIST_ITEM;
 		// make sure required mods are loaded
 		return config.getBooleanValue() && config.getTweakerMoreOption().isEnabled();
 	}
