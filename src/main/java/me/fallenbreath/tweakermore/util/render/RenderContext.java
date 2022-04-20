@@ -11,6 +11,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 //$$ import com.mojang.blaze3d.platform.GlStateManager;
 //#endif
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.util.math.Matrix4f;
 
 //#if 11600 <= MC && MC < 11700
@@ -155,4 +156,28 @@ public class RenderContext
 		//#endif
 	}
 	//#endif
+
+	public void enableBlend()
+	{
+		//#if MC >= 11500
+		RenderSystem.enableBlend();
+		//#else
+		//$$ GlStateManager.enableBlend();
+		//#endif
+	}
+
+	public void blendFunc(
+			//#if MC >= 11500
+			GlStateManager.SrcFactor srcFactor, GlStateManager.DstFactor dstFactor
+			//#else
+			//$$ GlStateManager.SourceFactor srcFactor, GlStateManager.DestFactor dstFactor
+			//#endif
+	)
+	{
+		//#if MC >= 11500
+		RenderSystem.blendFunc(srcFactor, dstFactor);
+		//#else
+		//$$ GlStateManager.blendFunc(srcFactor, dstFactor);
+		//#endif
+	}
 }

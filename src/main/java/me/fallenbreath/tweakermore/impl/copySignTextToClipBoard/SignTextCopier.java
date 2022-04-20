@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import org.apache.commons.lang3.StringUtils;
 
 //#if MC >= 11600
-//$$ import me.fallenbreath.tweakermore.mixins.tweaks.copySignTextToClipBoard.SignBlockEntityAccessor;
+//$$ import me.fallenbreath.tweakermore.mixins.tweaks.features.copySignTextToClipBoard.SignBlockEntityAccessor;
 //#endif
 
 import java.util.Arrays;

@@ -1,5 +1,9 @@
 package me.fallenbreath.tweakermore.util.render;
 
+//#if MC >= 11700
+//$$ import com.mojang.blaze3d.systems.RenderSystem;
+//#endif
+
 //#if MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //#endif
@@ -13,7 +17,6 @@ import net.minecraft.client.util.math.Rotation3;
 //#endif
 
 import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.debug.DebugRenderer;
@@ -79,8 +82,14 @@ public class RenderUtil
 			//#endif
 
 			// enable transparent-able text rendering
-			RenderSystem.enableBlend();
-			RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
+			renderContext.enableBlend();
+			renderContext.blendFunc(
+					//#if MC >= 11500
+					GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA
+					//#else
+					//$$ GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA
+					//#endif
+			);
 
 			float renderX = -client.textRenderer.getStringWidth(text) * 0.5F;
 			float renderY = client.textRenderer.getStringBoundedHeight(text, Integer.MAX_VALUE) * -0.5F;
