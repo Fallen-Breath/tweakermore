@@ -17,7 +17,7 @@
     "core.migration.ConfigsMixin",
     "doc.ConfigBaseAccessor",
     "doc.MinecraftClientMixin",
-    "tkrDisableNauseaEffectPorting.ClientPlayerEntityMixin",
+    "tweaks.tkrDisableNauseaEffectPorting.ClientPlayerEntityMixin",
     "tweaks.bossBarMaxEntry.BossBarHudMixin",
     "tweaks.bossBarScale.BossBarHudMixin",
     "tweaks.chatMessageLimit.ChatHudMixin",

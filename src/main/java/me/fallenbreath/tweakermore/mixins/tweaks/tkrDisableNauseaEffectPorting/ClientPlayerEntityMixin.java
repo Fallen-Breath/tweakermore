@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tkrDisableNauseaEffectPorting;
+package me.fallenbreath.tweakermore.mixins.tweaks.tkrDisableNauseaEffectPorting;
 
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
