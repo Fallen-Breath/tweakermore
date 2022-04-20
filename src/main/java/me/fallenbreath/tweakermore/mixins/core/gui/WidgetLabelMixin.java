@@ -13,6 +13,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import fi.dy.masa.malilib.gui.widgets.WidgetBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
 import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
+import me.fallenbreath.tweakermore.util.RenderContext;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -96,16 +97,14 @@ public abstract class WidgetLabelMixin extends WidgetBase
 			int x = this.x + (this.centered ? this.width / 2 : 0);
 			int y = (int)(yTextStart + (this.labels.size() + i * scale + 0.2) * fontHeight);
 
-			//#if MC >= 11600
-			//$$ matrixStackd.push();
-			//$$ matrixStackd.scale((float)scale, (float)scale, 1);
-			//#elseif MC >= 11500
-			RenderSystem.pushMatrix();
-			RenderSystem.scaled(scale, scale, 1);
-			//#else
-			//$$ GlStateManager.pushMatrix();
-			//$$ GlStateManager.scaled(scale, scale, 1);
-			//#endif
+			RenderContext renderContext = new RenderContext(
+					//#if MC >= 11600
+					//$$ matrixStackd
+					//#endif
+			);
+
+			renderContext.pushMatrix();
+			renderContext.scale(scale, scale, 1);
 
 			x /= scale;
 			y /= scale;
@@ -129,13 +128,7 @@ public abstract class WidgetLabelMixin extends WidgetBase
 				);
 			}
 
-			//#if MC >= 11600
-			//$$ matrixStackd.pop();
-			//#elseif MC >= 11500
-			RenderSystem.popMatrix();
-			//#else
-			//$$ GlStateManager.popMatrix();
-			//#endif
+			renderContext.popMatrix();
 		}
 	}
 

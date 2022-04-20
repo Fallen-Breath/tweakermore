@@ -2,11 +2,6 @@ package me.fallenbreath.tweakermore.util;
 
 //#if MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
-//$$ import javax.annotation.Nullable;
-//#elseif MC >= 11500
-import com.mojang.blaze3d.systems.RenderSystem;
-//#else
-//$$ import com.mojang.blaze3d.platform.GlStateManager;
 //#endif
 
 public class RenderUtil
@@ -16,19 +11,13 @@ public class RenderUtil
 		return new Scaler(anchorX, anchorY, factor);
 	}
 
-	//#if MC >= 11600
-	//$$ @SuppressWarnings("deprecation")
-	//#endif
 	public static class Scaler
 	{
 		private final int anchorX;
 		private final int anchorY;
 		private final double factor;
 
-		//#if MC >= 11600
-		//$$ @Nullable
-		//$$ private MatrixStack matrixStack = null;
-		//#endif
+		private RenderContext renderContext;
 
 		private Scaler(int anchorX, int anchorY, double factor)
 		{
@@ -47,42 +36,24 @@ public class RenderUtil
 				//#endif
 		)
 		{
-			//#if MC >= 11600
-			//$$ this.matrixStack = matrixStack;
-			//$$ matrixStack.push();
-			//$$ matrixStack.translate(-anchorX * factor, -anchorY * factor, 0);
-			//$$ matrixStack.scale((float)factor, (float) factor, 1);
-			//$$ matrixStack.translate(anchorX / factor, anchorY / factor, 0);
-			//#elseif MC >= 11500
-			RenderSystem.pushMatrix();
-			RenderSystem.translated(-anchorX * factor, -anchorY * factor, 0);
-			RenderSystem.scaled(factor, factor, 1);
-			RenderSystem.translated(anchorX / factor, anchorY / factor, 0);
-			//#else
-			//$$ GlStateManager.pushMatrix();
-			//$$ GlStateManager.translated(-anchorX * factor, -anchorY * factor, 0);
-			//$$ GlStateManager.scaled(factor, factor, 1);
-			//$$ GlStateManager.translated(anchorX / factor, anchorY / factor, 0);
-			//#endif
+			this.renderContext = new RenderContext(
+					//#if MC >= 11600
+					//$$ matrixStack
+					//#endif
+			);
+			this.renderContext.pushMatrix();
+			this.renderContext.translated(-anchorX * factor, -anchorY * factor, 0);
+			this.renderContext.scale(factor, factor, 1);
+			this.renderContext.translated(anchorX / factor, anchorY / factor, 0);
 		}
 
 		public void restore()
 		{
-			//#if MC >= 11600
-			//$$ if (this.matrixStack != null)
-			//$$ {
-			//$$ 	this.matrixStack.pop();
-			//$$ }
-			//$$ else
-			//$$ {
-			//$$ 	throw new RuntimeException("RenderUtil.Scaler: Calling restore before calling apply");
-			//$$ }
-			//$$ this.matrixStack = null;
-			//#elseif MC >= 11500
-			RenderSystem.popMatrix();
-			//#else
-			//$$ GlStateManager.popMatrix();
-			//#endif
+			if (this.renderContext == null)
+			{
+				throw new RuntimeException("RenderUtil.Scaler: Calling restore before calling apply");
+			}
+			this.renderContext.popMatrix();
 		}
 	}
 }
