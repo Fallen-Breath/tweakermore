@@ -39,6 +39,9 @@ dependencies {
 		}
 	}
 
+	// runtime mods
+	modRuntimeOnly "com.github.astei:lazydfu:0.1.2"  // faster startup
+
 	// dependencies
 	modImplementation("fi.dy.masa.malilib:${project.malilib_version}") {
 		exclude group: 'io.github.prospector', module: 'modmenu'
