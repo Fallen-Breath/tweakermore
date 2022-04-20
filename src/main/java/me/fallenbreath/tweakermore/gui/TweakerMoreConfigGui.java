@@ -98,6 +98,7 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 	{
 		ButtonGeneric button = new ButtonGeneric(x, y, -1, 20, category.getDisplayName());
 		button.setEnabled(TweakerMoreConfigGui.category != category);
+		button.setHoverStrings(category.getDescription());
 		this.addButton(button, (b, mouseButton) -> {
 			TweakerMoreConfigGui.category = category;
 			this.reDraw();

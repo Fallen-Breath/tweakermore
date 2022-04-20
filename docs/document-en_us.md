@@ -1,5 +1,7 @@
 ## Features
 
+New features provided by TweakerMore
+
 ### autoFillContainerThreshold
 
 The minimum occupied slot amount for the item to trigger tweak tweakmAutoFillContainer
@@ -161,6 +163,8 @@ Hover on the arrow of the offer to see it
 
 
 ## MC Tweaks
+
+Tweaks on Minecraft
 
 ### bossBarMaxEntry
 
@@ -431,6 +435,8 @@ Still requires the server to send entity packets via EntityTracker properly
 
 ## Mods Tweaks
 
+Tweaks on mods
+
 ### applyTweakerMoreOptionLabelGlobally
 
 Apply the TweakerMore style translated text + original text label to all config GUIs using malilib
@@ -662,6 +668,8 @@ Might have some side effects though
 
 ## Porting
 
+Stuffs porting from mods from other Minecraft versions
+
 ### isScrollStacksFallbackFixPorting
 
 Fixed SCROLL_STACKS_FALLBACK of item-scroller ignores the last stack
@@ -705,6 +713,8 @@ Also fixes the nether portal overlay fails to be displayed with this option on
 
 
 ## Setting
+
+Settings of TweakMore itself
 
 ### hideDisabledOptions
 

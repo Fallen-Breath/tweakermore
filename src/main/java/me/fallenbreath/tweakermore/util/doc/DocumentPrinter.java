@@ -243,6 +243,8 @@ public class DocumentPrinter
 			}
 			writeln.accept("## " + category.getDisplayName());
 			writeln.accept("");
+			writeln.accept(category.getDescription());
+			writeln.accept("");
 			List<TweakerMoreOption> options = Lists.newArrayList(TweakerMoreConfigs.getOptions(category));
 			options.sort((a, b) -> a.getConfig().getName().compareToIgnoreCase(b.getConfig().getName()));
 			for (TweakerMoreOption tweakerMoreOption : options)

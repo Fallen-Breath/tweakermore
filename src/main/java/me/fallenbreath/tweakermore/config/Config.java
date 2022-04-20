@@ -43,7 +43,12 @@ public @interface Config
 
 		public String getDisplayName()
 		{
-			return StringUtils.translate("tweakermore.gui.config_category." + this.name().toLowerCase());
+			return StringUtils.translate(String.format("tweakermore.gui.config_category.%s", this.name().toLowerCase()));
+		}
+
+		public String getDescription()
+		{
+			return StringUtils.translate(String.format("tweakermore.gui.config_category.%s.description", this.name().toLowerCase()));
 		}
 	}
 }

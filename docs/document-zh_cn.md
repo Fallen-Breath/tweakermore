@@ -1,6 +1,8 @@
 ## 功能
 
-### 自动填充容器阈值 (autoFillContainerThreshold)
+TweakerMore提供的新功能
+
+### 自动装填容器阈值 (autoFillContainerThreshold)
 
 触发功能tweakmAutoFillContainer所需要的最小的物品槽位数
 
@@ -161,6 +163,8 @@
 
 
 ## MC修改
+
+对Minecraft已有内容修改
 
 ### Boss栏最大条目数 (bossBarMaxEntry)
 
@@ -431,6 +435,8 @@
 
 ## 模组修改
 
+对模组已有内容修改
+
 ### 全局应用TweakerMore选项标签 (applyTweakerMoreOptionLabelGlobally)
 
 将TweakerMore风格的翻译文本+原始文本的选项标签应用到所有使用Malilib的配置界面
@@ -662,6 +668,8 @@ tweakHandRestock功能的物品名单约束类型
 
 ## 移植
 
+从其他Minecraft版本的模组中移植的功能
+
 ### ItemScroller移动整组物品备用操作修复移植 (isScrollStacksFallbackFixPorting)
 
 修复ItemScroller的SCROLL_STACKS_FALLBACK未考虑最后一组物品
@@ -705,6 +713,8 @@ tweakHandRestock功能的物品名单约束类型
 
 
 ## 配置
+
+与TweakerMore相关的配置
 
 ### 隐藏禁用的选项 (hideDisabledOptions)
 
