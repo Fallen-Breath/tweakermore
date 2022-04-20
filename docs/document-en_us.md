@@ -638,7 +638,7 @@ Might have some side effects though
 
 ## Porting
 
-### isScrollStacksFallbackFix
+### isScrollStacksFallbackFixPorting
 
 Fixed SCROLL_STACKS_FALLBACK of item-scroller ignores the last stack
 
@@ -653,7 +653,7 @@ The same as masa's fixed in itemscoller commit 0984fe7
     - Minecraft (`minecraft`) ` <1.18`
 
 
-### lmPickBlockShulkers
+### lmPickBlockShulkersPorting
 
 Backports option pickBlockShulkers from Litematica 1.16+
 
@@ -664,6 +664,18 @@ Backports option pickBlockShulkers from Litematica 1.16+
   - Required mods:
     - Litematica (`litematica`)
     - Minecraft (`minecraft`) ` <1.16`
+
+
+### tkrDisableNauseaEffectPorting
+
+Backports option disableNauseaEffect from Tweakeroo 1.17+
+
+- Category: Porting
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Minecraft (`minecraft`) ` <1.17`
 
 
 ## Setting

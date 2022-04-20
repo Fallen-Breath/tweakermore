@@ -287,7 +287,7 @@ public class TweakerMoreConfigs
 			}),
 			category = Config.Category.PORTING
 	)
-	public static final TweakerMoreConfigBoolean LM_PICK_BLOCK_SHULKERS = newConfigBoolean("lmPickBlockShulkers", false);
+	public static final TweakerMoreConfigBoolean LM_PICK_BLOCK_SHULKERS_PORTING = newConfigBoolean("lmPickBlockShulkersPorting", false);
 
 	@Config(
 			value = Config.Type.FIX,
@@ -297,7 +297,16 @@ public class TweakerMoreConfigs
 			}),
 			category = Config.Category.PORTING
 	)
-	public static final TweakerMoreConfigBoolean IS_SCROLL_STACKS_FALLBACK_FIX = newConfigBoolean("isScrollStacksFallbackFix", false);
+	public static final TweakerMoreConfigBoolean IS_SCROLL_STACKS_FALLBACK_FIX_PORTING = newConfigBoolean("isScrollStacksFallbackFixPorting", false);
+
+	@Config(
+			value = Config.Type.DISABLE,
+			restriction = @Restriction(require = {
+					@Condition(value = minecraft, versionPredicates = "<1.17")
+			}),
+			category = Config.Category.PORTING
+	)
+	public static final TweakerMoreConfigBooleanHotkeyed TKR_DISABLE_NAUSEA_EFFECT_PORTING = newConfigBooleanHotkeyed("tkrDisableNauseaEffectPorting");
 
 	//////////////////////////
 	//  TweakerMore Setting //

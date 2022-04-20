@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.isScrollStacksFallbackFix;
+package me.fallenbreath.tweakermore.mixins.tweaks.isScrollStacksFallbackFixPorting;
 
 import fi.dy.masa.itemscroller.util.InventoryUtils;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
@@ -36,7 +36,7 @@ public abstract class InventoryUtilsMixin
 	)
 	private static void itemScrollerScrollStacksFallbackFix(CallbackInfo ci)
 	{
-		if (TweakerMoreConfigs.IS_SCROLL_STACKS_FALLBACK_FIX.getBooleanValue())
+		if (TweakerMoreConfigs.IS_SCROLL_STACKS_FALLBACK_FIX_PORTING.getBooleanValue())
 		{
 			ci.cancel();
 		}

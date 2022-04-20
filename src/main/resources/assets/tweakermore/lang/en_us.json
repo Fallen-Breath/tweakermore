@@ -132,10 +132,12 @@
 
   "// Porting": "================================================",
 
-  "tweakermore.config.isScrollStacksFallbackFix": "isScrollStacksFallbackFix",
-  "tweakermore.config.isScrollStacksFallbackFix.comment": "Fixed SCROLL_STACKS_FALLBACK of item-scroller ignores the last stack\nThe same as masa's fixed in itemscoller commit 0984fe7",
-  "tweakermore.config.lmPickBlockShulkers": "lmPickBlockShulkers",
-  "tweakermore.config.lmPickBlockShulkers.comment": "Backports option pickBlockShulkers from Litematica 1.16+",
+  "tweakermore.config.isScrollStacksFallbackFixPorting": "isScrollStacksFallbackFixPorting",
+  "tweakermore.config.isScrollStacksFallbackFixPorting.comment": "Fixed SCROLL_STACKS_FALLBACK of item-scroller ignores the last stack\nThe same as masa's fixed in itemscoller commit 0984fe7",
+  "tweakermore.config.lmPickBlockShulkersPorting": "lmPickBlockShulkersPorting",
+  "tweakermore.config.lmPickBlockShulkersPorting.comment": "Backports option pickBlockShulkers from Litematica 1.16+",
+  "tweakermore.config.tkrDisableNauseaEffectPorting": "tkrDisableNauseaEffectPorting",
+  "tweakermore.config.tkrDisableNauseaEffectPorting.comment": "Backports option disableNauseaEffect from Tweakeroo 1.17+",
 
   "// Setting": "================================================",
 

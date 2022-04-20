@@ -638,7 +638,7 @@ tweakHandRestock功能的物品名单约束类型
 
 ## 移植
 
-### ItemScroller移动整组物品备用操作修复 (isScrollStacksFallbackFix)
+### ItemScroller移动整组物品备用操作修复移植 (isScrollStacksFallbackFixPorting)
 
 修复ItemScroller的SCROLL_STACKS_FALLBACK未考虑最后一组物品
 
@@ -653,7 +653,7 @@ tweakHandRestock功能的物品名单约束类型
     - Minecraft (`minecraft`) ` <1.18`
 
 
-### Litematica选择含目标物潜影盒 (lmPickBlockShulkers)
+### Litematica选择含目标物潜影盒移植 (lmPickBlockShulkersPorting)
 
 从Litematica 1.16+移植pickBlockShulkers
 
@@ -664,6 +664,18 @@ tweakHandRestock功能的物品名单约束类型
   - 依赖模组:
     - Litematica (`litematica`)
     - Minecraft (`minecraft`) ` <1.16`
+
+
+### Tweakeroo禁用扭曲效果移植 (tkrDisableNauseaEffectPorting)
+
+从Tweakeroo 1.17+移植disableNauseaEffect
+
+- 分类: 移植
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Minecraft (`minecraft`) ` <1.17`
 
 
 ## 配置

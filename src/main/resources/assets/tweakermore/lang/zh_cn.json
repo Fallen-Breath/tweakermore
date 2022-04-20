@@ -132,10 +132,12 @@
 
   "// Porting": "================================================",
 
-  "tweakermore.config.isScrollStacksFallbackFix": "ItemScroller移动整组物品备用操作修复",
-  "tweakermore.config.isScrollStacksFallbackFix.comment": "修复ItemScroller的SCROLL_STACKS_FALLBACK未考虑最后一组物品\n同masa在itemscroller的修复commit 0984fe7相同",
-  "tweakermore.config.lmPickBlockShulkers": "Litematica选择含目标物潜影盒",
-  "tweakermore.config.lmPickBlockShulkers.comment": "从Litematica 1.16+移植pickBlockShulkers",
+  "tweakermore.config.isScrollStacksFallbackFixPorting": "ItemScroller移动整组物品备用操作修复移植",
+  "tweakermore.config.isScrollStacksFallbackFixPorting.comment": "修复ItemScroller的SCROLL_STACKS_FALLBACK未考虑最后一组物品\n同masa在itemscroller的修复commit 0984fe7相同",
+  "tweakermore.config.lmPickBlockShulkersPorting": "Litematica选择含目标物潜影盒移植",
+  "tweakermore.config.lmPickBlockShulkersPorting.comment": "从Litematica 1.16+移植pickBlockShulkers",
+  "tweakermore.config.tkrDisableNauseaEffectPorting": "Tweakeroo禁用扭曲效果移植",
+  "tweakermore.config.tkrDisableNauseaEffectPorting.comment": "从Tweakeroo 1.17+移植disableNauseaEffect",
 
   "// Setting": "================================================",
 

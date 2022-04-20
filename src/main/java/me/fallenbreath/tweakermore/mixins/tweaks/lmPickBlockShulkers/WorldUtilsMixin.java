@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.lmPickBlockShulkers;
+package me.fallenbreath.tweakermore.mixins.tweaks.lmPickBlockShulkersPorting;
 
 import fi.dy.masa.litematica.util.InventoryUtils;
 import fi.dy.masa.litematica.util.WorldUtils;
@@ -42,9 +42,9 @@ public abstract class WorldUtilsMixin
 			//#endif
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
-	private static void lmPickBlockShulkers(boolean closest, MinecraftClient mc, CallbackInfoReturnable<Boolean> cir, BlockPos pos, World world, BlockState state, ItemStack stack, PlayerInventory inv, int slot)
+	private static void lmPickBlockShulkersPorting(boolean closest, MinecraftClient mc, CallbackInfoReturnable<Boolean> cir, BlockPos pos, World world, BlockState state, ItemStack stack, PlayerInventory inv, int slot)
 	{
-		if (TweakerMoreConfigs.LM_PICK_BLOCK_SHULKERS.getBooleanValue())
+		if (TweakerMoreConfigs.LM_PICK_BLOCK_SHULKERS_PORTING.getBooleanValue())
 		{
 			if (slot == -1 && mc.player != null)
 			{
