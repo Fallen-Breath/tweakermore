@@ -418,6 +418,15 @@ tweakHandRestock功能的物品名单约束类型
 - 默认值: *无快捷键*, `false`
 
 
+### 显示红石粉更新顺序 (tweakmShowRedstoneDustUpdateOrder)
+
+在指向红石粉方块时，显示其方块更新顺序
+
+- 分类: 功能
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+
+
 ### 无限实体渲染距离 (tweakmUnlimitedEntityRenderDistance)
 
 将客户端实体渲染距离设置为无限制

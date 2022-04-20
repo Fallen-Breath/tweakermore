@@ -5,7 +5,11 @@ package me.fallenbreath.tweakermore.util.render;
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //#endif
 
-//#if MC < 11500
+//#if MC >= 11500
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.util.math.Rotation3;
+//#else
 //$$ import com.mojang.blaze3d.platform.GlStateManager;
 //$$ import net.minecraft.client.render.entity.EntityRenderDispatcher;
 //#endif
@@ -19,6 +23,9 @@ public class RenderUtil
 {
 	/**
 	 * Reference: {@link DebugRenderer#drawString(String, double, double, double, int, float, boolean, float, boolean)}
+	 * Note:
+	 * - shadow=true + seeThrough=false might result in weird rendering
+	 * - 1.14 doesn't support shadow = true
 	 */
 	public static void drawString(String text, double x, double y, double z, float fontSize, int color, boolean shadow, boolean seeThrough)
 	{
@@ -40,17 +47,19 @@ public class RenderUtil
 
 			renderContext.pushMatrix();
 			renderContext.translate((float)(x - camX), (float)(y - camY), (float)(z - camZ));
-//			renderContext.normal3f(0.0F, 1.0F, 0.0F);
 
 			//#if MC >= 11500
 			renderContext.multMatrix(new Matrix4f(camera.getRotation()));
-			//#else
+			//#endif
+
+			renderContext.scale(fontSize, -fontSize, fontSize);
+
+			//#if MC < 11500
 			//$$ EntityRenderDispatcher entityRenderDispatcher = client.getEntityRenderManager();
 			//$$ GlStateManager.rotatef(-entityRenderDispatcher.cameraYaw, 0.0F, 1.0F, 0.0F);
 			//$$ GlStateManager.rotatef(-entityRenderDispatcher.cameraPitch, 1.0F, 0.0F, 0.0F);
 			//#endif
 
-			renderContext.scale(fontSize, -fontSize, fontSize);
 			renderContext.enableTexture();
 			if (seeThrough)
 			{
@@ -72,24 +81,14 @@ public class RenderUtil
 			float renderX = -client.textRenderer.getStringWidth(text) * 0.5F;
 			float renderY = client.textRenderer.getStringBoundedHeight(text, Integer.MAX_VALUE) * -0.5F;
 
-			if (shadow)
-			{
-				client.textRenderer.drawWithShadow(
-						//#if MC >= 11600
-						//$$ renderContext.getMatrixStack(),
-						//#endif
-						text, renderX, renderY, color
-				);
-			}
-			else
-			{
-				client.textRenderer.draw(
-						//#if MC >= 11600
-						//$$ renderContext.getMatrixStack(),
-						//#endif
-						text, renderX, renderY, color
-				);
-			}
+			//#if MC >= 11500
+			VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
+			Matrix4f matrix4f = Rotation3.identity().getMatrix();
+			client.textRenderer.draw(text, renderX, renderY, color, shadow, matrix4f, immediate, seeThrough, 0, 0xF000F0);
+			immediate.draw();
+			//#else
+			//$$ client.textRenderer.draw(text, renderX, renderY, color);
+			//#endif
 
 			//#if MC < 11600
 			renderContext.color4f(1.0F, 1.0F, 1.0F, 1.0F);

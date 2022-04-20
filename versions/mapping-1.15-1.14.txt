@@ -1,1 +1,0 @@
-net.minecraft.client.render.debug.DebugRenderer drawString() method_3712()

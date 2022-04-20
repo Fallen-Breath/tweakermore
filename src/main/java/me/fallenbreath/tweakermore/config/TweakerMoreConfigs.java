@@ -164,7 +164,7 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SAFE_AFK = newConfigBooleanHotkeyed("tweakmSafeAfk");
 
 	@Config(Config.Type.TWEAK)
-	public static final TweakerMoreConfigBooleanHotkeyed SHOW_REDSTONE_DUST_UPDATE_ORDER = newConfigBooleanHotkeyed("showRedstoneDustUpdateOrder");
+	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SHOW_REDSTONE_DUST_UPDATE_ORDER = newConfigBooleanHotkeyed("tweakmShowRedstoneDustUpdateOrder");
 
 	@Config(Config.Type.TWEAK)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_UNLIMITED_ENTITY_RENDER_DISTANCE = newConfigBooleanHotkeyed("tweakmUnlimitedEntityRenderDistance");
@@ -371,7 +371,6 @@ public class TweakerMoreConfigs
 	public static void initEventListeners()
 	{
 		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
-		RenderEventHandler.getInstance().registerWorldLastRenderer(new RedstoneDustUpdateOrderRenderer());
 	}
 
 	private static final List<TweakerMoreOption> OPTIONS = Lists.newArrayList();

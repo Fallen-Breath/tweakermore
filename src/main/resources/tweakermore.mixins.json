@@ -74,6 +74,7 @@
     "tweaks.tweakmFlawlessFrames.VideoRendererMixin",
     "tweaks.tweakmSafeAfk.ClientPlayNetworkHandlerMixin",
     "tweaks.tweakmSafeAfk.LivingEntityMixin",
+    "tweaks.tweakmShowRedstoneDustUpdateOrder.RenderEventHandlerMixin",
     "tweaks.tweakmUnlimitedEntityRenderDistance.EntityMixin",
     "tweaks.villagerOfferUsesDisplay.MerchantScreenAccessor",
     "tweaks.villagerOfferUsesDisplay.MerchantScreenWidgetButtonPageMixin",

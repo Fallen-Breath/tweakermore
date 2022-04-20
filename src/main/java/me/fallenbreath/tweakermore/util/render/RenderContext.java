@@ -43,7 +43,7 @@ public class RenderContext
 
 	public void pushMatrix()
 	{
-		//#if MC >= 11600
+		//#if MC >= 11700
 		//$$ this.matrixStack.push();
 		//#elseif MC >= 11500
 		RenderSystem.pushMatrix();
@@ -54,7 +54,7 @@ public class RenderContext
 
 	public void popMatrix()
 	{
-		//#if MC >= 11600
+		//#if MC >= 11700
 		//$$ this.matrixStack.pop();
 		//#elseif MC >= 11500
 		RenderSystem.popMatrix();
@@ -65,7 +65,7 @@ public class RenderContext
 
 	public void translate(double x, double y, double z)
 	{
-		//#if MC >= 11600
+		//#if MC >= 11700
 		//$$ matrixStack.translate(x, y, z);
 		//#elseif MC >= 11500
 		RenderSystem.translated(x, y, z);
@@ -76,7 +76,7 @@ public class RenderContext
 
 	public void scale(double x, double y, double z)
 	{
-		//#if MC >= 11600
+		//#if MC >= 11700
 		//$$ matrixStack.scale((float)x, (float)y, (float)z);
 		//#elseif MC >= 11500
 		RenderSystem.scaled(x, y, z);
@@ -84,17 +84,6 @@ public class RenderContext
 		//$$ GlStateManager.scaled(x, y, z);
 		//#endif
 	}
-
-//	public void normal3f(float nx, float ny, float nz)
-//	{
-//		//#if MC >= 11600
-//		//$$ matrixStack.normal3f(nx, ny, nz);
-//		//#elseif MC >= 11500
-//		RenderSystem.normal3f(nx, ny, nz);
-//		//#else
-//		//$$ GlStateManager.normal3f(nx, ny, nz);
-//		//#endif
-//	}
 
 	public void multMatrix(Matrix4f matrix4f)
 	{

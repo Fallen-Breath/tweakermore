@@ -7,7 +7,6 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.render.RenderUtil;
 import net.minecraft.block.RedstoneWireBlock;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.debug.DebugRenderer;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -38,7 +37,7 @@ public class RedstoneDustUpdateOrderRenderer implements IRenderer
 			//#endif
 	)
 	{
-		if (!TweakerMoreConfigs.SHOW_REDSTONE_DUST_UPDATE_ORDER.getBooleanValue())
+		if (!TweakerMoreConfigs.TWEAKM_SHOW_REDSTONE_DUST_UPDATE_ORDER.getBooleanValue())
 		{
 			return;
 		}

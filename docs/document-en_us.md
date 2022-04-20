@@ -418,6 +418,15 @@ Health threshold to disconnect can be set via safeAfkHealthThreshold
 - Default value: *no hotkey*, `false`
 
 
+### tweakmShowRedstoneDustUpdateOrder
+
+When looking at a redstone dust block, show the block update order of it
+
+- Category: Tweaks
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+
+
 ### tweakmUnlimitedEntityRenderDistance
 
 Set client-side entity render distance to unlimited
