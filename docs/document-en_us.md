@@ -470,6 +470,21 @@ e.g. broken mass craft
 ![eCraftItemScrollerCompact](assets/eCraftItemScrollerCompact.png)
 
 
+### isScrollStacksFallbackFix
+
+Fixed SCROLL_STACKS_FALLBACK of item-scroller ignores the last stack
+
+The same as masa's fixed in itemscoller commit 0984fe7
+
+- Category: Mods Tweaks
+- Type: boolean
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Item Scroller (`itemscroller`)
+    - Minecraft (`minecraft`) ` <1.18`
+
+
 ### ofRemoveItemFrameItemRenderDistance
 
 Remove the item frame item render distance limit from Optifine

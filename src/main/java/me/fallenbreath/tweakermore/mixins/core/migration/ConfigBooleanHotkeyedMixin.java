@@ -41,23 +41,23 @@ public abstract class ConfigBooleanHotkeyedMixin extends ConfigBoolean
 	//$$ 		cancellable = true,
 	//$$ 		remap = false
 	//$$ )
-	//$$private void youCanReadSingleBooleanToo(JsonElement obj, CallbackInfo ci)
-	//$${
-	//$$	if (TweakerMoreConfigs.hasConfig((ConfigBooleanHotkeyed)(Object)this))
-	//$$	{
-	//$$		if (obj.isJsonPrimitive())
-	//$$		{
-	//$$			try
-	//$$			{
-	//$$				super.setValueFromJsonElement(obj);
-	//$$			}
-	//$$			catch (Exception e)
-	//$$			{
-	//$$				MaLiLib.logger.warn("Failed to set config value for '{}' from the JSON element '{}'", this.getName(), obj, e);
-	//$$			}
-	//$$			ci.cancel();
-	//$$		}
-	//$$	}
-	//$$}
+	//$$ private void youCanReadSingleBooleanToo(JsonElement obj, CallbackInfo ci)
+	//$$ {
+	//$$ 	if (TweakerMoreConfigs.hasConfig((ConfigBooleanHotkeyed)(Object)this))
+	//$$ 	{
+	//$$ 		if (obj.isJsonPrimitive())
+	//$$ 		{
+	//$$ 			try
+	//$$ 			{
+	//$$ 				super.setValueFromJsonElement(obj);
+	//$$ 			}
+	//$$ 			catch (Exception e)
+	//$$ 			{
+	//$$ 				MaLiLib.logger.warn("Failed to set config value for '{}' from the JSON element '{}'", this.getName(), obj, e);
+	//$$ 			}
+	//$$ 			ci.cancel();
+	//$$ 		}
+	//$$ 	}
+	//$$ }
 	//#endif
 }

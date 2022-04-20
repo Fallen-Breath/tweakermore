@@ -37,6 +37,7 @@
     "tweaks.fixChestMirroring.ChestBlockMixin",
     "tweaks.handRestoreRestriction.InventoryUtilsMixin",
     "tweaks.handRestoreRestriction.PlacementTweaksMixin",
+    "tweaks.isScrollStacksFallbackFix.InventoryUtilsMixin",
     "tweaks.legacyF3NLogic.KeyboardMixin",
     "tweaks.maxChatHudHeight.ChatHudMixin",
     "tweaks.netherPortalSoundChance.NetherPortalBlockMixin",

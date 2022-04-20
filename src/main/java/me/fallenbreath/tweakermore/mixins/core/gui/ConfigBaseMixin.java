@@ -21,7 +21,7 @@ public abstract class ConfigBaseMixin
 {
 	//#if MC >= 11800
 	//$$ @Shadow(remap = false) private String comment;
-	//$$
+ //$$
 	//$$ @ModifyArg(
 	//$$ 		method = "getComment",
 	//$$ 		at = @At(

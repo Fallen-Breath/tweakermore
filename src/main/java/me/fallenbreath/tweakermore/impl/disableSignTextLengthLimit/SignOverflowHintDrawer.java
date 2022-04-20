@@ -22,7 +22,7 @@ public class SignOverflowHintDrawer
 		//$$ 	{
 		//$$ 		return;
 		//$$ 	}
-
+  //$$
 		//$$ 	Text[] texts = signBlockEntity.text;
 		//$$ 	if (0 <= lineIdx && lineIdx < texts.length)
 		//$$ 	{

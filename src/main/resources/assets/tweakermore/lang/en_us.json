@@ -106,6 +106,8 @@
   "tweakermore.config.applyTweakerMoreOptionLabelGlobally.comment": "Apply the TweakerMore style translated text + original text label to all config GUIs using malilib",
   "tweakermore.config.eCraftItemScrollerCompact": "eCraftItemScrollerCompact",
   "tweakermore.config.eCraftItemScrollerCompact.comment": "Fixed some item scroller functionality doesn't work with easier crafting mod\ne.g. broken mass craft",
+  "tweakermore.config.isScrollStacksFallbackFix": "isScrollStacksFallbackFix",
+  "tweakermore.config.isScrollStacksFallbackFix.comment": "Fixed SCROLL_STACKS_FALLBACK of item-scroller ignores the last stack\nThe same as masa's fixed in itemscoller commit 0984fe7",
   "tweakermore.config.ofRemoveSignTextRenderDistance": "ofRemoveSignTextRenderDistance",
   "tweakermore.config.ofRemoveSignTextRenderDistance.comment": "Remove the sign text render distance limit from Optifine\nBack to vanilla behavior where sign text is always rendered together with the sign block",
   "tweakermore.config.ofRemoveItemFrameItemRenderDistance": "ofRemoveItemFrameItemRenderDistance",

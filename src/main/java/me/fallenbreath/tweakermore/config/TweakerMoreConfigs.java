@@ -204,6 +204,16 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBoolean ECRAFT_ITEM_SCROLLER_COMPACT = newConfigBoolean("eCraftItemScrollerCompact", false);
 
 	@Config(
+			value = Config.Type.FIX,
+			restriction = @Restriction(require = {
+					@Condition(itemscroller),
+					@Condition(value = minecraft, versionPredicates = "<1.18")
+			}),
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigBoolean IS_SCROLL_STACKS_FALLBACK_FIX = newConfigBoolean("isScrollStacksFallbackFix", false);
+
+	@Config(
 			value = Config.Type.GENERIC,
 			restriction = @Restriction(require = @Condition(optifine)),
 			category = Config.Category.MOD_TWEAKS
