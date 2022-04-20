@@ -333,7 +333,7 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigInteger TWEAKERMORE_DEBUG_INT = newConfigInteger("tweakerMoreDebugInt", 0, -1000, 1000);
 
 	@Config(value = Config.Type.GENERIC, category = Config.Category.SETTING, debug = true)
-	public static final TweakerMoreConfigInteger TWEAKERMORE_DEBUG_DOUBLE = newConfigInteger("tweakerMoreDebugDouble", 0, -1, 1);
+	public static final TweakerMoreConfigDouble TWEAKERMORE_DEBUG_DOUBLE = newConfigDouble("tweakerMoreDebugDouble", 0, -1, 1);
 
 	@Config(value = Config.Type.GENERIC, category = Config.Category.SETTING, devOnly = true)
 	public static final TweakerMoreConfigHotkey TWEAKERMORE_DEV_MIXIN_AUDIT = newConfigHotKey("tweakerMoreDevMixinAudit", "");
