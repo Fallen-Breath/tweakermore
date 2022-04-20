@@ -106,8 +106,6 @@
   "tweakermore.config.applyTweakerMoreOptionLabelGlobally.comment": "Apply the TweakerMore style translated text + original text label to all config GUIs using malilib",
   "tweakermore.config.eCraftItemScrollerCompact": "eCraftItemScrollerCompact",
   "tweakermore.config.eCraftItemScrollerCompact.comment": "Fixed some item scroller functionality doesn't work with easier crafting mod\ne.g. broken mass craft",
-  "tweakermore.config.isScrollStacksFallbackFix": "isScrollStacksFallbackFix",
-  "tweakermore.config.isScrollStacksFallbackFix.comment": "Fixed SCROLL_STACKS_FALLBACK of item-scroller ignores the last stack\nThe same as masa's fixed in itemscoller commit 0984fe7",
   "tweakermore.config.ofRemoveSignTextRenderDistance": "ofRemoveSignTextRenderDistance",
   "tweakermore.config.ofRemoveSignTextRenderDistance.comment": "Remove the sign text render distance limit from Optifine\nBack to vanilla behavior where sign text is always rendered together with the sign block",
   "tweakermore.config.ofRemoveItemFrameItemRenderDistance": "ofRemoveItemFrameItemRenderDistance",
@@ -131,6 +129,13 @@
   "tweakermore.config.serverDataSyncerQueryLimit.comment": "Maximum amount of queries sent with serverDataSyncer per game tick\nQueries exceeding the limit will be delayed",
   "tweakermore.config.xmapNoSessionFinalizationWait": "xmapNoSessionFinalizationWait",
   "tweakermore.config.xmapNoSessionFinalizationWait.comment": "Skip the session finalization operation of xaero's worldmap when quit a world\nSo no lag when quitting server or single player\nMight have some side effects though",
+
+  "// Porting": "================================================",
+
+  "tweakermore.config.isScrollStacksFallbackFix": "isScrollStacksFallbackFix",
+  "tweakermore.config.isScrollStacksFallbackFix.comment": "Fixed SCROLL_STACKS_FALLBACK of item-scroller ignores the last stack\nThe same as masa's fixed in itemscoller commit 0984fe7",
+  "tweakermore.config.lmPickBlockShulkers": "lmPickBlockShulkers",
+  "tweakermore.config.lmPickBlockShulkers.comment": "Backports option pickBlockShulkers from Litematica 1.16+",
 
   "// Setting": "================================================",
 

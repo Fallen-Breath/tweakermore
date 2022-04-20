@@ -470,21 +470,6 @@ tweakHandRestock功能的物品名单约束类型
 ![eCraftItemScrollerCompact](assets/eCraftItemScrollerCompact.png)
 
 
-### ItemScroller移动整组物品备用操作修复 (isScrollStacksFallbackFix)
-
-修复ItemScroller的SCROLL_STACKS_FALLBACK未考虑最后一组物品
-
-同masa在itemscroller的修复commit 0984fe7相同
-
-- 分类: 模组修改
-- 类型: 布尔值
-- 默认值: `false`
-- 模组约束:
-  - 依赖模组:
-    - Item Scroller (`itemscroller`)
-    - Minecraft (`minecraft`) ` <1.18`
-
-
 ### Optifine移除展示框物品渲染距离限制 (ofRemoveItemFrameItemRenderDistance)
 
 移除Optifine的展示框物品渲染距离限制
@@ -649,6 +634,36 @@ tweakHandRestock功能的物品名单约束类型
 - 模组约束:
   - 依赖模组:
     - Xaero's World Map (`xaeroworldmap`)
+
+
+## 移植
+
+### ItemScroller移动整组物品备用操作修复 (isScrollStacksFallbackFix)
+
+修复ItemScroller的SCROLL_STACKS_FALLBACK未考虑最后一组物品
+
+同masa在itemscroller的修复commit 0984fe7相同
+
+- 分类: 移植
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Item Scroller (`itemscroller`)
+    - Minecraft (`minecraft`) ` <1.18`
+
+
+### Litematica选择含目标物潜影盒 (lmPickBlockShulkers)
+
+从Litematica 1.16+移植pickBlockShulkers
+
+- 分类: 移植
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+    - Minecraft (`minecraft`) ` <1.16`
 
 
 ## 配置

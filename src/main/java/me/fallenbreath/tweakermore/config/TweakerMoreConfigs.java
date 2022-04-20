@@ -204,16 +204,6 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBoolean ECRAFT_ITEM_SCROLLER_COMPACT = newConfigBoolean("eCraftItemScrollerCompact", false);
 
 	@Config(
-			value = Config.Type.FIX,
-			restriction = @Restriction(require = {
-					@Condition(itemscroller),
-					@Condition(value = minecraft, versionPredicates = "<1.18")
-			}),
-			category = Config.Category.MOD_TWEAKS
-	)
-	public static final TweakerMoreConfigBoolean IS_SCROLL_STACKS_FALLBACK_FIX = newConfigBoolean("isScrollStacksFallbackFix", false);
-
-	@Config(
 			value = Config.Type.GENERIC,
 			restriction = @Restriction(require = @Condition(optifine)),
 			category = Config.Category.MOD_TWEAKS
@@ -284,6 +274,30 @@ public class TweakerMoreConfigs
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigBoolean XMAP_NO_SESSION_FINALIZATION_WAIT = newConfigBoolean("xmapNoSessionFinalizationWait", false);
+
+	//////////////////////////
+	//        Porting       //
+	//////////////////////////
+
+	@Config(
+			value = Config.Type.GENERIC,
+			restriction = @Restriction(require = {
+					@Condition(litematica),
+					@Condition(value = minecraft, versionPredicates = "<1.16")
+			}),
+			category = Config.Category.PORTING
+	)
+	public static final TweakerMoreConfigBoolean LM_PICK_BLOCK_SHULKERS = newConfigBoolean("lmPickBlockShulkers", false);
+
+	@Config(
+			value = Config.Type.FIX,
+			restriction = @Restriction(require = {
+					@Condition(itemscroller),
+					@Condition(value = minecraft, versionPredicates = "<1.18")
+			}),
+			category = Config.Category.PORTING
+	)
+	public static final TweakerMoreConfigBoolean IS_SCROLL_STACKS_FALLBACK_FIX = newConfigBoolean("isScrollStacksFallbackFix", false);
 
 	//////////////////////////
 	//  TweakerMore Setting //

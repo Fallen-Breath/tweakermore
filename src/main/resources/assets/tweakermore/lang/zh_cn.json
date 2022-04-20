@@ -104,8 +104,6 @@
 
   "tweakermore.config.applyTweakerMoreOptionLabelGlobally": "全局应用TweakerMore选项标签",
   "tweakermore.config.applyTweakerMoreOptionLabelGlobally.comment": "将TweakerMore风格的翻译文本+原始文本的选项标签应用到所有使用Malilib的配置界面",
-  "tweakermore.config.isScrollStacksFallbackFix": "ItemScroller移动整组物品备用操作修复",
-  "tweakermore.config.isScrollStacksFallbackFix.comment": "修复ItemScroller的SCROLL_STACKS_FALLBACK未考虑最后一组物品\n同masa在itemscroller的修复commit 0984fe7相同",
   "tweakermore.config.eCraftItemScrollerCompact": "EasierCrafting与ItemScroller兼容性修复",
   "tweakermore.config.eCraftItemScrollerCompact.comment": "修复ItemScroller的部分功能无法与EasierCrafting模组一同工作\n例如无法使用的massCraft",
   "tweakermore.config.ofRemoveSignTextRenderDistance": "Optifine移除告示牌方块文字渲染距离限制",
@@ -131,6 +129,13 @@
   "tweakermore.config.serverDataSyncerQueryLimit.comment": "服务端数据同步器每游戏刻中发送的查询数量上限\n超出数量上限的查询将被延迟发送",
   "tweakermore.config.xmapNoSessionFinalizationWait": "xaero世界地图跳过会话结束等待",
   "tweakermore.config.xmapNoSessionFinalizationWait.comment": "退出一个世界时跳过xaero worldmap的会话结束逻辑\n因此在退出服务器或单人游戏时不会出现卡顿\n不过可能会有一些副作用，但暂时没发现",
+
+  "// Porting": "================================================",
+
+  "tweakermore.config.isScrollStacksFallbackFix": "ItemScroller移动整组物品备用操作修复",
+  "tweakermore.config.isScrollStacksFallbackFix.comment": "修复ItemScroller的SCROLL_STACKS_FALLBACK未考虑最后一组物品\n同masa在itemscroller的修复commit 0984fe7相同",
+  "tweakermore.config.lmPickBlockShulkers": "Litematica选择含目标物潜影盒",
+  "tweakermore.config.lmPickBlockShulkers.comment": "从Litematica 1.16+移植pickBlockShulkers",
 
   "// Setting": "================================================",
 

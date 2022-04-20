@@ -39,6 +39,7 @@
     "tweaks.handRestoreRestriction.PlacementTweaksMixin",
     "tweaks.isScrollStacksFallbackFix.InventoryUtilsMixin",
     "tweaks.legacyF3NLogic.KeyboardMixin",
+    "tweaks.lmPickBlockShulkers.WorldUtilsMixin",
     "tweaks.maxChatHudHeight.ChatHudMixin",
     "tweaks.netherPortalSoundChance.NetherPortalBlockMixin",
     "tweaks.ofRemoveItemFrameItemRenderDistance.ItemFrameEntityRendererMixin",
