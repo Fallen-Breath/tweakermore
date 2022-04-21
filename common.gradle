@@ -3,10 +3,10 @@ apply plugin: 'fabric-loom'
 apply plugin: 'io.github.juuxel.loom-quiltflower'
 apply plugin: 'com.replaymod.preprocess'
 
-def mcVersion = project.minecraft_version_number as int
+int mcVersion = 1
 
 preprocess {
-	vars.put("MC", mcVersion)
+	mcVersion = vars.get()["MC"]
 	tabIndentation = true
 }
 
