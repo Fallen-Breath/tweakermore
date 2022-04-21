@@ -50,6 +50,7 @@ public class TweakerMoreConfigStorage implements IConfigHandler
 		ConfigUtils.readConfigBase(jsonObject, "Lists", getConfigOptions(Config.Type.LIST));
 		ConfigUtils.readHotkeyToggleOptions(jsonObject, "TweakHotkeys", "TweakToggles", getConfigOptions(Config.Type.TWEAK));
 		ConfigUtils.readHotkeyToggleOptions(jsonObject, "DisableHotkeys", "DisableToggles", getConfigOptions(Config.Type.DISABLE));
+		ConfigUtils.readConfigBase(jsonObject, "Fixes", getConfigOptions(Config.Type.FIX));
 
 		onConfigLoaded();
 	}
@@ -70,6 +71,7 @@ public class TweakerMoreConfigStorage implements IConfigHandler
 		ConfigUtils.writeConfigBase(root, "Lists", getConfigOptions(Config.Type.LIST));
 		ConfigUtils.writeHotkeyToggleOptions(root, "TweakHotkeys", "TweakToggles", getConfigOptions(Config.Type.TWEAK));
 		ConfigUtils.writeHotkeyToggleOptions(root, "DisableHotkeys", "DisableToggles", getConfigOptions(Config.Type.DISABLE));
+		ConfigUtils.writeConfigBase(root, "Fixes", getConfigOptions(Config.Type.FIX));
 
 		JsonUtils.writeJsonToFile(root, configFile);
 	}
