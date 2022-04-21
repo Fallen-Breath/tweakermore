@@ -148,6 +148,8 @@ When looking at a redstone dust block, show the block update order of it
 - Type: togglable hotkey
 - Default value: *no hotkey*, `false`
 
+![tweakmShowRedstoneDustUpdateOrder](assets/tweakmShowRedstoneDustUpdateOrder.png)
+
 
 ### villagerOfferUsesDisplay
 

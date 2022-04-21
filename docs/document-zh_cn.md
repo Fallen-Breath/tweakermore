@@ -148,6 +148,8 @@ TweakerMore提供的新功能
 - 类型: 可开关型热键
 - 默认值: *无快捷键*, `false`
 
+![tweakmShowRedstoneDustUpdateOrder](assets/tweakmShowRedstoneDustUpdateOrder.png)
+
 
 ### 村民交易次数显示 (villagerOfferUsesDisplay)
 
