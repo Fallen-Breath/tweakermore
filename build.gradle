@@ -43,3 +43,12 @@ task buildAndGather {
         }
     }
 }
+
+task cleanPreprocessSources {
+    doFirst {
+        subprojects {
+            def path = project.projectDir.toPath().resolve('build/preprocessed')
+            path.toFile().deleteDir()
+        }
+    }
+}
