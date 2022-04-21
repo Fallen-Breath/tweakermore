@@ -11,12 +11,12 @@ plugins {
 }
 
 preprocess {
-    def mc115 = createNode('1.15.2', 11502, 'yarn')  // root
+    def mc115 = createNode('1.15.2', 1_15_02, 'yarn')  // root
 
-    def mc114 = createNode('1.14.4', 11404, 'yarn')
-    def mc116 = createNode('1.16.5', 11605, 'yarn')
-    def mc117 = createNode('1.17.1', 11701, 'yarn')
-    def mc118 = createNode('1.18.2', 11802, 'yarn')
+    def mc114 = createNode('1.14.4', 1_14_04, 'yarn')
+    def mc116 = createNode('1.16.5', 1_16_05, 'yarn')
+    def mc117 = createNode('1.17.1', 1_17_01, 'yarn')
+    def mc118 = createNode('1.18.2', 1_18_02, 'yarn')
 
     mc115.link(mc114, null)
     mc115.link(mc116, null)
