@@ -86,9 +86,9 @@ if (System.getenv("BUILD_RELEASE") != "true") {
 }
 String fullModVersion = project.mod_version + versionSuffix
 
-archivesBaseName = project.archives_base_name
 version = 'mc' + project.minecraft_version + '-v' + fullModVersion
-group = project.maven_group
+group = project.parent.maven_group
+archivesBaseName = project.parent.archives_base_name
 
 processResources {
 	inputs.property "version", fullModVersion
@@ -127,6 +127,8 @@ jar {
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
+			artifactId archivesBaseName
+
 			from components.java
 		}
 	}
