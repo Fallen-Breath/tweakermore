@@ -231,13 +231,24 @@ Basically it stably adds your ping to the server with the given value
 
 ### daytimeOverrideValue
 
-The client-side daytime value to be overrided by tweak tweakmDaytimeOverride
+The client-side daytime value to be override by tweak tweakmDaytimeOverride
 
 - Category: MC Tweaks
 - Type: integer
 - Default value: `0`
 - Minimum value: `0`
 - Maximum value: `24000`
+
+
+### disableBeaconBeamRendering
+
+Prevents rendering beacon beams
+
+So beacon beams can never suddenly come out when recording / rendering
+
+- Category: MC Tweaks
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
 
 
 ### disableCameraFrustumCulling

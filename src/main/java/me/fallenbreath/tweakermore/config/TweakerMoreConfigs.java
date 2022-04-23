@@ -134,6 +134,9 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_CAMERA_FRUSTUM_CULLING = newConfigBooleanHotkeyed("disableCameraFrustumCulling");
 
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_BEACON_BEAM_RENDERING = newConfigBooleanHotkeyed("disableBeaconBeamRendering");
+
+	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_LIGHT_UPDATES = newConfigBooleanHotkeyed("disableLightUpdates");
 
 	@Config(type = Config.Type.DISABLE, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.17")), category = Config.Category.MC_TWEAKS)
