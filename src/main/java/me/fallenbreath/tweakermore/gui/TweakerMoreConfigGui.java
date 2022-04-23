@@ -172,24 +172,20 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 			{
 				continue;
 			}
-			// when debug mode is off
-			if (!TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
+			// hide options that don't work with current Minecraft versions, unless debug mode on
+			if (!tweakerMoreOption.worksForCurrentMCVersion() && !TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
 			{
-				// hide options that don't work with current Minecraft versions, unless debug mode on
-				if (!tweakerMoreOption.worksForCurrentMCVersion())
-				{
-					continue;
-				}
-				// hide debug options unless debug mode on
-				if (tweakerMoreOption.isDebug())
-				{
-					continue;
-				}
-				// hide dev only options unless debug mode on and is dev env
-				if (tweakerMoreOption.isDevOnly() && !FabricUtil.isDevelopmentEnvironment())
-				{
-					continue;
-				}
+				continue;
+			}
+			// hide debug options unless debug mode on
+			if (tweakerMoreOption.isDebug() && !TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
+			{
+				continue;
+			}
+			// hide dev only options unless debug mode on and is dev env
+			if (tweakerMoreOption.isDevOnly() && !(TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue() && FabricUtil.isDevelopmentEnvironment()))
+			{
+				continue;
 			}
 			configs.add(tweakerMoreOption.getConfig());
 		}
