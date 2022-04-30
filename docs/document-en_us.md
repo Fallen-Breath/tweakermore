@@ -322,6 +322,19 @@ Affects stuffs that use vanilla block mirror logic, e.g. vanilla structure place
 - Default value: `false`
 
 
+### flyDrag
+
+Overwrite the drag factor when flying in creative or spectator mode
+
+Overwrites fabric-carpet's rule creativeFlyDrag when the value is modified
+
+- Category: MC Tweaks
+- Type: double
+- Default value: `0.09`
+- Minimum value: `0.0`
+- Maximum value: `1.0`
+
+
 ### legacyF3NLogic
 
 Modify the logic of hotkey F3 + N back to 1.15 and before

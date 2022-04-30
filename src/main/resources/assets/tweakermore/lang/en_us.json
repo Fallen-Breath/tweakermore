@@ -68,6 +68,8 @@
   "tweakermore.config.disableSignTextLengthLimit.pretty_name": "Disable Sign Text Length Limit",
   "tweakermore.config.fixChestMirroring": "fixChestMirroring",
   "tweakermore.config.fixChestMirroring.comment": "Fixed chest type is not properly transformed when chest block is mirrored\nAffects stuffs that use vanilla block mirror logic, e.g. vanilla structure placement, litematica mod schematic placement",
+  "tweakermore.config.flyDrag": "flyDrag",
+  "tweakermore.config.flyDrag.comment": "Overwrite the drag factor when flying in creative or spectator mode\nOverwrites fabric-carpet's rule creativeFlyDrag when the value is modified",
   "tweakermore.config.legacyF3NLogic": "legacyF3NLogic",
   "tweakermore.config.legacyF3NLogic.comment": "Modify the logic of hotkey F3 + N back to 1.15 and before\n1.15- logic cheat sheet: creative -> spectator, other -> creative",
   "tweakermore.config.maxChatHudHeight": "maxChatHudHeight",

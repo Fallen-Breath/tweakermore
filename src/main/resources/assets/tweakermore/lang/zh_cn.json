@@ -68,6 +68,8 @@
   "tweakermore.config.disableSignTextLengthLimit.pretty_name": "禁用告示牌文本长度限制",
   "tweakermore.config.fixChestMirroring": "修复箱子镜像变换",
   "tweakermore.config.fixChestMirroring.comment": "修复箱子方块在进行镜像变换时没有正确地处理其chest_type属性\n对使用了原版方块镜像逻辑的功能有效，包括原版结构放置、litematica mod的原理图放置",
+  "tweakermore.config.flyDrag": "玩家飞行阻力",
+  "tweakermore.config.flyDrag.comment": "覆盖玩家在创造模式或旁观模式下的飞行阻力因子\n在该选项被修改时，fabric-carpet规则creativeFlyDrag的效果将被覆盖",
   "tweakermore.config.legacyF3NLogic": "旧版F3+N逻辑",
   "tweakermore.config.legacyF3NLogic.comment": "修改快捷键F3+N的逻辑至1.15及之前的逻辑\n提示，1.15以前的逻辑为：创造模式->旁观者模式、其他模式->创造模式",
   "tweakermore.config.maxChatHudHeight": "最大聊天界面高度",
