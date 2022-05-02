@@ -18,9 +18,5 @@
   {
     "subproject_dir": "1.18.2",
     "game_versions": "1.18.2"
-  },
-  {
-    "subproject_dir": "snapshot",
-    "game_versions": "22w15a"
   }
 ]
