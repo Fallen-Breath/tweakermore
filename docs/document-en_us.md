@@ -432,6 +432,15 @@ Does not affect server-side daytime
 - Default value: *no hotkey*, `false`
 
 
+### tweakmFakeNightVision
+
+Always use night vision for game rendering, regardless of whether the player actually has night vision
+
+- Category: MC Tweaks
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+
+
 ### tweakmFlawlessFrames
 
 Forced client to render all changes in loaded chunk for each frames

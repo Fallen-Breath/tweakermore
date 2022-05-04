@@ -178,6 +178,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_DAYTIME_OVERRIDE = newConfigBooleanHotkeyed("tweakmDaytimeOverride");
 
+	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_FAKE_NIGHT_VISION = newConfigBooleanHotkeyed("tweakmFakeNightVision");
+
 	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(replay_mod)), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_FLAWLESS_FRAMES = newConfigBooleanHotkeyed("tweakmFlawlessFrames");
 
