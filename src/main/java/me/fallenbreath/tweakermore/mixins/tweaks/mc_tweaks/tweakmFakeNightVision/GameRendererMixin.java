@@ -15,7 +15,11 @@ public abstract class GameRendererMixin
 			at = @At("HEAD"),
 			cancellable = true
 	)
-	private static void tweakmFakeNightVision(CallbackInfoReturnable<Float> cir)
+	private
+	//#if MC >= 11500
+	static
+	//#endif
+	void tweakmFakeNightVision(CallbackInfoReturnable<Float> cir)
 	{
 		if (TweakerMoreConfigs.TWEAKM_FAKE_NIGHT_VISION.getBooleanValue())
 		{

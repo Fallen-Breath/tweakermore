@@ -25,8 +25,10 @@ public abstract class BackgroundRendererMixin
 	)
 	//#if MC >= 11700
 	//$$ private static CameraSubmersionType disableWaterFog(CameraSubmersionType cameraSubmersionType)
-	//#else
+	//#elseif MC >= 11500
 	private static FluidState disableWaterFog(FluidState fluidState)
+	//#else
+	//$$ private FluidState disableWaterFog(FluidState fluidState)
 	//#endif
 	{
 		if (TweakerMoreConfigs.DISABLE_CAMERA_SUBMERSION_FOG.getBooleanValue())

@@ -10,6 +10,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
+//#if MC >= 11600
+//$$ import net.minecraft.client.util.math.MatrixStack;
+//#endif
+
 /**
  * Compares to WidgetDropDownList:
  * - Accepts IStringValue as generic value only
@@ -100,14 +104,32 @@ public class SelectorDropDownList<T extends IStringValue> extends WidgetDropDown
 		return super.getDisplayString(entry);
 	}
 
+	/**
+	 * Hover text rendering logic reference: {@link fi.dy.masa.malilib.gui.button.ButtonBase#postRenderHovered}
+	 */
 	@Override
-	public void postRenderHovered(int mouseX, int mouseY, boolean selected)
+	public void postRenderHovered(
+			int mouseX, int mouseY, boolean selected
+			//#if MC >= 11600
+			//$$ , MatrixStack matrixStack
+			//#endif
+	)
 	{
-		super.postRenderHovered(mouseX, mouseY, selected);
-		// reference: fi.dy.masa.malilib.gui.button.ButtonBase.postRenderHovered
+		super.postRenderHovered(
+				mouseX, mouseY, selected
+				//#if MC >= 11600
+				//$$ , matrixStack
+				//#endif
+		);
+
 		if (this.hoverText != null && this.isMouseOver(mouseX, mouseY) && !this.isOpen)
 		{
-			RenderUtils.drawHoverText(mouseX, mouseY, Collections.singletonList(this.hoverText.getStringValue()));
+			RenderUtils.drawHoverText(
+					mouseX, mouseY, Collections.singletonList(this.hoverText.getStringValue())
+					//#if MC >= 11600
+					//$$ , matrixStack
+					//#endif
+			);
 			//#if MC >= 11500
 			RenderUtils.disableDiffuseLighting();
 			//#else
