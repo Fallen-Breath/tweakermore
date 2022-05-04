@@ -93,13 +93,10 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 			}
 		});
 		this.addWidget(dd);
+		dd.setNullEntry(() -> StringUtils.translate("tweakermore.gui.selector_drop_down_list.all"));
+		dd.setHoverText("tweakermore.gui.config_type.label_text");
 		this.typeFilterDropDownList = dd;
 		dd.setSelectedEntry(this.filteredType);
-
-		String labelTextKey = "tweakermore.gui.config_type.label_text";
-		int labelWidth = this.getStringWidth(StringUtils.translate(labelTextKey));
-		WidgetLabel label = new WidgetLabel(dd.getX() - labelWidth - 5, dd.getY() + 1, labelWidth, dd.getHeight(), 0xFFE0E0E0, labelTextKey);
-		this.addWidget(label);
 	}
 
 	private int createNavigationButton(int x, int y, Config.Category category)

@@ -2,9 +2,11 @@ package me.fallenbreath.tweakermore.gui;
 
 import fi.dy.masa.malilib.gui.widgets.WidgetDropDownList;
 import fi.dy.masa.malilib.interfaces.IStringValue;
+import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -15,12 +17,18 @@ import java.util.function.Consumer;
  * - Use opaque background when rendering
  * - Show 1px left borderline
  * - Does not respond to key input
+ * - Supports custom null entry display
+ * - Supports hover text, display hover text when the drop-down list is not opened
  * See {@link me.fallenbreath.tweakermore.mixins.core.gui.WidgetDropDownListMixin}
  */
 public class SelectorDropDownList<T extends IStringValue> extends WidgetDropDownList<T>
 {
 	@Nullable
 	protected Consumer<T> entryChangeListener = null;
+	@Nullable
+	private IStringValue nullEntry = null;
+	@Nullable
+	private IStringValue hoverText = null;
 
 	public SelectorDropDownList(int x, int y, int width, int height, int maxHeight, int maxVisibleEntries, List<T> entries)
 	{
@@ -30,6 +38,21 @@ public class SelectorDropDownList<T extends IStringValue> extends WidgetDropDown
 	public void setEntryChangeListener(@Nullable Consumer<T> entryChangeListener)
 	{
 		this.entryChangeListener = entryChangeListener;
+	}
+
+	public void setNullEntry(@Nullable IStringValue nullEntry)
+	{
+		this.nullEntry = nullEntry;
+	}
+
+	public void setHoverText(@Nullable IStringValue hoverText)
+	{
+		this.hoverText = hoverText;
+	}
+
+	public void setHoverText(String translationKey, Object... args)
+	{
+		this.setHoverText(() -> StringUtils.translate(translationKey, args));
 	}
 
 	@Override
@@ -70,10 +93,26 @@ public class SelectorDropDownList<T extends IStringValue> extends WidgetDropDown
 	@Override
 	protected String getDisplayString(T entry)
 	{
-		if (entry == null)
+		if (entry == null && this.nullEntry != null)
 		{
-			return StringUtils.translate("tweakermore.gui.selector_drop_down_list.all");
+			return this.nullEntry.getStringValue();
 		}
 		return super.getDisplayString(entry);
+	}
+
+	@Override
+	public void postRenderHovered(int mouseX, int mouseY, boolean selected)
+	{
+		super.postRenderHovered(mouseX, mouseY, selected);
+		// reference: fi.dy.masa.malilib.gui.button.ButtonBase.postRenderHovered
+		if (this.hoverText != null && this.isMouseOver(mouseX, mouseY) && !this.isOpen)
+		{
+			RenderUtils.drawHoverText(mouseX, mouseY, Collections.singletonList(this.hoverText.getStringValue()));
+			//#if MC >= 11500
+			RenderUtils.disableDiffuseLighting();
+			//#else
+			//$$ RenderUtils.disableItemLighting();
+			//#endif
+		}
 	}
 }
