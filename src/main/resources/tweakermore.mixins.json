@@ -40,6 +40,7 @@
     "tweaks.mc_tweaks.disableBeaconBeamRendering.BeaconBlockEntityRendererMixin",
     "tweaks.mc_tweaks.disableCameraFrustumCulling.GameRendererMixin",
     "tweaks.mc_tweaks.disableCameraFrustumCulling.WorldRendererMixin",
+    "tweaks.mc_tweaks.disableCameraSubmersionFog.BackgroundRendererMixin",
     "tweaks.mc_tweaks.disableLightUpdates.ClientChunkManagerMixin",
     "tweaks.mc_tweaks.disableLightUpdates.LightingProviderMixin",
     "tweaks.mc_tweaks.disablePistonBlockBreakingParticle.PistonBlockMixin",

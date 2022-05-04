@@ -266,6 +266,19 @@ Has significant impact on framerate
 - Default value: *no hotkey*, `false`
 
 
+### disableCameraSubmersionFog
+
+Disable fog effect caused by camera being submerged in block or fluid, including water, lava and powder snow
+
+It will use the render distance fog instead, just like the camera is in the air
+
+- Category: MC Tweaks
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+
+![disableCameraSubmersionFog](assets/disableCameraSubmersionFog.png)
+
+
 ### disableLightUpdates
 
 Yeets client-side light updates

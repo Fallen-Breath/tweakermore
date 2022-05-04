@@ -266,6 +266,19 @@ TweakerMore提供的新功能
 - 默认值: *无快捷键*, `false`
 
 
+### 禁用相机浸没迷雾 (disableCameraSubmersionFog)
+
+禁用由于相机浸没在方块或流体中，包括水、熔岩和粉雪，而造成的迷雾效果
+
+它将使用渲染距离的雾将被使用，就像相机在空气中一样
+
+- 分类: MC修改
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+
+![disableCameraSubmersionFog](assets/disableCameraSubmersionFog.png)
+
+
 ### 禁用光照更新 (disableLightUpdates)
 
 禁用客户端光照更新
