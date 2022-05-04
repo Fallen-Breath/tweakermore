@@ -44,7 +44,7 @@ public abstract class WidgetListConfigOptionsMixin extends WidgetListConfigOptio
 	{
 		if (this.parent instanceof TweakerMoreConfigGui)
 		{
-			width -= 120;
+			width -= 150;
 		}
 		return width;
 	}

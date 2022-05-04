@@ -20,6 +20,7 @@ public class TweakerMoreOption
 	private final TweakerMoreIConfigBase config;
 	private final List<ModRestriction> modRestrictions;
 	private final List<ModRestriction> minecraftRestrictions;
+	private final ConfigStatistic statistic;
 
 	public TweakerMoreOption(Config annotation, TweakerMoreIConfigBase config)
 	{
@@ -27,6 +28,7 @@ public class TweakerMoreOption
 		this.config = config;
 		this.modRestrictions = Arrays.stream(annotation.restriction()).map(ModRestriction::of).collect(Collectors.toList());
 		this.minecraftRestrictions = Arrays.stream(annotation.restriction()).map(r -> ModRestriction.of(r, c -> ModIds.minecraft.equals(c.value()))).collect(Collectors.toList());
+		this.statistic = new ConfigStatistic();
 	}
 
 	public Config.Type getType()
@@ -42,6 +44,11 @@ public class TweakerMoreOption
 	public List<ModRestriction> getModRestrictions()
 	{
 		return this.modRestrictions;
+	}
+
+	public ConfigStatistic getStatistic()
+	{
+		return this.statistic;
 	}
 
 	public boolean isEnabled()

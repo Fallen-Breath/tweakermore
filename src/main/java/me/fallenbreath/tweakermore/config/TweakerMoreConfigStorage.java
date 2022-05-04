@@ -127,4 +127,30 @@ public class TweakerMoreConfigStorage implements IConfigHandler
 			internal.add(name, jsonSaveAble.dumpToJson());
 		});
 	}
+
+	public static void loadOptionStatistic(JsonObject jsonObject)
+	{
+		JsonObject obj = JsonUtils.getNestedObject(jsonObject, "Statistic", false);
+		if (obj != null)
+		{
+			for (TweakerMoreOption tweakerMoreOption : TweakerMoreConfigs.getAllOptions())
+			{
+				String key = tweakerMoreOption.getConfig().getName();
+				if (obj.has(key))
+				{
+					tweakerMoreOption.getStatistic().loadFromJson(obj.get(key));
+				}
+			}
+		}
+	}
+
+	public static void saveOptionStatistic(JsonObject jsonObject)
+	{
+		JsonObject obj = JsonUtils.getNestedObject(jsonObject, "Statistic", true);
+		assert obj != null;
+		for (TweakerMoreOption tweakerMoreOption : TweakerMoreConfigs.getAllOptions())
+		{
+			obj.add(tweakerMoreOption.getConfig().getName(), tweakerMoreOption.getStatistic().toJson());
+		}
+	}
 }

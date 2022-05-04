@@ -431,6 +431,11 @@ public class TweakerMoreConfigs
 		return TYPE_TO_OPTION.getOrDefault(optionType, Collections.emptyList());
 	}
 
+	public static List<TweakerMoreOption> getAllOptions()
+	{
+		return OPTIONS;
+	}
+
 	public static Stream<TweakerMoreIConfigBase> getAllConfigOptionStream()
 	{
 		return OPTIONS.stream().map(TweakerMoreOption::getConfig);

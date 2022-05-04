@@ -3,18 +3,18 @@ package me.fallenbreath.tweakermore.gui;
 import com.google.common.collect.Lists;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
-import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
-import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
 import fi.dy.masa.malilib.hotkeys.IKeybind;
 import fi.dy.masa.malilib.hotkeys.KeyAction;
+import fi.dy.masa.malilib.interfaces.IStringValue;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.Config;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
+import me.fallenbreath.tweakermore.config.ConfigStatistic;
 import me.fallenbreath.tweakermore.util.FabricUtil;
 import me.fallenbreath.tweakermore.util.JsonSaveAble;
 import net.minecraft.util.math.MathHelper;
@@ -35,6 +35,10 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 	private Config.Type filteredType = null;
 	@Nullable
 	private SelectorDropDownList<Config.Type> typeFilterDropDownList = null;
+
+	private SortingStrategy sortingStrategy = SortingStrategy.ALPHABET;
+	@Nullable
+	private SelectorDropDownList<SortingStrategy> sortingStrategyDropDownList = null;
 
 	private static final Setting SETTING = new Setting();
 
@@ -81,10 +85,20 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 			x += this.createNavigationButton(x, y, category);
 		}
 
-		Set<Config.Type> possibleTypes = TweakerMoreConfigs.getOptions(SETTING.category).stream().map(TweakerMoreOption::getType).collect(Collectors.toSet());
+		x = this.width - 150;
+		x = this.initTypeFilterDropDownList(x);
+		x = this.initSortingStrategyDropDownList(x);
+	}
+
+	private int initTypeFilterDropDownList(int x)
+	{
+		int y = this.getListY() + 3;
+		int height = 16;
+
+		Set<Config.Type> possibleTypes = TweakerMoreConfigs.getOptions(TweakerMoreConfigGui.category).stream().map(TweakerMoreOption::getType).collect(Collectors.toSet());
 		List<Config.Type> items = Arrays.stream(Config.Type.values()).filter(possibleTypes::contains).collect(Collectors.toList());
 		items.add(0, null);
-		SelectorDropDownList<Config.Type> dd = new SelectorDropDownList<>(this.width - 91, this.getListY() + 3, 80, 16, 200, items.size(), items);
+		SelectorDropDownList<Config.Type> dd = new SelectorDropDownList<>(x, y, 70, height, 200, items.size(), items);
 		dd.setEntryChangeListener(type -> {
 			if (type != this.filteredType)
 			{
@@ -92,11 +106,37 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 				this.reDraw();
 			}
 		});
-		this.addWidget(dd);
+		dd.setSelectedEntry(this.filteredType);
 		dd.setNullEntry(() -> StringUtils.translate("tweakermore.gui.selector_drop_down_list.all"));
 		dd.setHoverText("tweakermore.gui.config_type.label_text");
 		this.typeFilterDropDownList = dd;
-		dd.setSelectedEntry(this.filteredType);
+		this.addWidget(this.typeFilterDropDownList);
+		x += dd.getWidth() + 10;
+
+		return x;
+	}
+
+	private int initSortingStrategyDropDownList(int x)
+	{
+		int y = this.getListY() + 3;
+		int height = 16;
+
+		List<SortingStrategy> items = Arrays.asList(SortingStrategy.values());
+		SelectorDropDownList<SortingStrategy> dd = new SelectorDropDownList<>(x, y, 70, height, 200, items.size(), items);
+		dd.setEntryChangeListener(strategy -> {
+			if (strategy != this.sortingStrategy)
+			{
+				this.sortingStrategy = strategy;
+				this.reDraw();
+			}
+		});
+		dd.setSelectedEntry(this.sortingStrategy);
+		dd.setHoverText("tweakermore.gui.sorting_strategy.label_text");
+		this.sortingStrategyDropDownList = dd;
+		this.addWidget(this.sortingStrategyDropDownList);
+		x += dd.getWidth() + 10;
+
+		return x;
 	}
 
 	private int createNavigationButton(int x, int y, Config.Category category)
@@ -134,6 +174,15 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 					//#endif
 			);
 		}
+		if (this.sortingStrategyDropDownList != null)
+		{
+			this.sortingStrategyDropDownList.render(
+					mouseX, mouseY, this.sortingStrategyDropDownList.isMouseOver(mouseX, mouseY)
+					//#if MC >= 11600
+					//$$ , matrixStack
+					//#endif
+			);
+		}
 	}
 
 	public Pair<Integer, Integer> adjustWidths(int guiWidth, int maxTextWidth)
@@ -164,7 +213,7 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 	@Override
 	public List<ConfigOptionWrapper> getConfigs()
 	{
-		List<IConfigBase> configs = Lists.newArrayList();
+		List<TweakerMoreOption> configs = Lists.newArrayList();
 		for (TweakerMoreOption tweakerMoreOption : TweakerMoreConfigs.getOptions(SETTING.category))
 		{
 			// drop down list filtering logic
@@ -192,10 +241,25 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 			{
 				continue;
 			}
-			configs.add(tweakerMoreOption.getConfig());
+			configs.add(tweakerMoreOption);
 		}
-		configs.sort((a, b) -> a.getName().compareToIgnoreCase(b.getName()));
-		return ConfigOptionWrapper.createFor(configs);
+
+		configs.sort((a, b) -> {
+			int comp = 0;
+			ConfigStatistic as = a.getStatistic(), bs = b.getStatistic();
+			switch (this.sortingStrategy)
+			{
+				case MOST_COMMONLY_USED:
+					comp = -Long.compare(as.useAmount, bs.useAmount);
+					break;
+				case MOST_RECENTLY_USED:
+					comp = -Long.compare(as.lastUsedTime, bs.lastUsedTime);
+					break;
+			}
+			return comp == 0 ? comp : a.getConfig().getName().compareToIgnoreCase(b.getConfig().getName());
+		});
+
+		return ConfigOptionWrapper.createFor(configs.stream().map(TweakerMoreOption::getConfig).collect(Collectors.toList()));
 	}
 
 	private static class Setting implements JsonSaveAble
@@ -212,6 +276,19 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		public void loadFromJson(JsonObject jsonObject)
 		{
 			this.category = Config.Category.valueOf(jsonObject.get("category").getAsString());
+		}
+	}
+
+	private enum SortingStrategy implements IStringValue
+	{
+		ALPHABET,
+		MOST_RECENTLY_USED,
+		MOST_COMMONLY_USED;
+
+		@Override
+		public String getStringValue()
+		{
+			return StringUtils.translate("tweakermore.gui.sorting_strategy." + this.name().toLowerCase());
 		}
 	}
 }

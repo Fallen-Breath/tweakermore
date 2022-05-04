@@ -206,6 +206,11 @@
   "tweakermore.gui.config_type.config": "Config",
   "tweakermore.gui.config_type.fix": "Fix",
 
+  "tweakermore.gui.sorting_strategy.label_text": "Sorting strategy",
+  "tweakermore.gui.sorting_strategy.alphabet": "Alphabet",
+  "tweakermore.gui.sorting_strategy.most_recently_used": "Most recently used",
+  "tweakermore.gui.sorting_strategy.most_commonly_used": "Most commonly used",
+
   "tweakermore.gui.mod_relation_footer.or": "or",
   "tweakermore.gui.mod_relation_footer.requirement": "Required mods:",
   "tweakermore.gui.mod_relation_footer.confliction": "Conflicted mods:",
