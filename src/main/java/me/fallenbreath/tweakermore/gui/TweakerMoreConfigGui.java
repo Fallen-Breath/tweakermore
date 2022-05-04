@@ -1,6 +1,7 @@
 package me.fallenbreath.tweakermore.gui;
 
 import com.google.common.collect.Lists;
+import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.GuiBase;
@@ -15,6 +16,7 @@ import me.fallenbreath.tweakermore.config.Config;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
 import me.fallenbreath.tweakermore.util.FabricUtil;
+import me.fallenbreath.tweakermore.util.JsonSaveAble;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,11 +31,12 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 {
 	@Nullable
 	private static TweakerMoreConfigGui currentInstance = null;
-	private static Config.Category category = Config.Category.FEATURES;
 	@Nullable
 	private Config.Type filteredType = null;
 	@Nullable
 	private SelectorDropDownList<Config.Type> typeFilterDropDownList = null;
+
+	private static final Setting SETTING = new Setting();
 
 	public TweakerMoreConfigGui()
 	{
@@ -46,6 +49,11 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 	{
 		super.removed();
 		currentInstance = null;
+	}
+
+	public static Setting getSetting()
+	{
+		return SETTING;
 	}
 
 	public static Optional<TweakerMoreConfigGui> getCurrentInstance()
@@ -73,7 +81,7 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 			x += this.createNavigationButton(x, y, category);
 		}
 
-		Set<Config.Type> possibleTypes = TweakerMoreConfigs.getOptions(TweakerMoreConfigGui.category).stream().map(TweakerMoreOption::getType).collect(Collectors.toSet());
+		Set<Config.Type> possibleTypes = TweakerMoreConfigs.getOptions(SETTING.category).stream().map(TweakerMoreOption::getType).collect(Collectors.toSet());
 		List<Config.Type> items = Arrays.stream(Config.Type.values()).filter(possibleTypes::contains).collect(Collectors.toList());
 		items.add(0, null);
 		SelectorDropDownList<Config.Type> dd = new SelectorDropDownList<>(this.width - 91, this.getListY() + 3, 80, 16, 200, items.size(), items);
@@ -97,10 +105,10 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 	private int createNavigationButton(int x, int y, Config.Category category)
 	{
 		ButtonGeneric button = new ButtonGeneric(x, y, -1, 20, category.getDisplayName());
-		button.setEnabled(TweakerMoreConfigGui.category != category);
+		button.setEnabled(SETTING.category != category);
 		button.setHoverStrings(category.getDescription());
 		this.addButton(button, (b, mouseButton) -> {
-			TweakerMoreConfigGui.category = category;
+			SETTING.category = category;
 			this.reDraw();
 		});
 		return button.getWidth() + 2;
@@ -160,7 +168,7 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 	public List<ConfigOptionWrapper> getConfigs()
 	{
 		List<IConfigBase> configs = Lists.newArrayList();
-		for (TweakerMoreOption tweakerMoreOption : TweakerMoreConfigs.getOptions(TweakerMoreConfigGui.category))
+		for (TweakerMoreOption tweakerMoreOption : TweakerMoreConfigs.getOptions(SETTING.category))
 		{
 			// drop down list filtering logic
 			if (this.filteredType != null && tweakerMoreOption.getType() != this.filteredType)
@@ -191,5 +199,22 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		}
 		configs.sort((a, b) -> a.getName().compareToIgnoreCase(b.getName()));
 		return ConfigOptionWrapper.createFor(configs);
+	}
+
+	private static class Setting implements JsonSaveAble
+	{
+		public Config.Category category = Config.Category.FEATURES;
+
+		@Override
+		public void dumpToJson(JsonObject jsonObject)
+		{
+			jsonObject.addProperty("category", this.category.name());
+		}
+
+		@Override
+		public void loadFromJson(JsonObject jsonObject)
+		{
+			this.category = Config.Category.valueOf(jsonObject.get("category").getAsString());
+		}
 	}
 }

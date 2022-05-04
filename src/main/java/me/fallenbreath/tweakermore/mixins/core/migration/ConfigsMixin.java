@@ -36,6 +36,6 @@ public abstract class ConfigsMixin
 	)
 	private static void loadLegacyTweakerMoreOptionsFromTweakeroo(CallbackInfo ci, File configFile, JsonElement element, JsonObject root)
 	{
-		TweakerMoreConfigStorage.loadFromJson(root);
+		TweakerMoreConfigStorage.getInstance().loadFromJson(root);
 	}
 }
