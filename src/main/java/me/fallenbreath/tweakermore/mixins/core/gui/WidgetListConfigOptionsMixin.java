@@ -44,9 +44,24 @@ public abstract class WidgetListConfigOptionsMixin extends WidgetListConfigOptio
 	{
 		if (this.parent instanceof TweakerMoreConfigGui)
 		{
+			// a default value.
+			// a more precise width control wil be applied during the initGui of TweakerMoreConfigGui
 			width -= 150;
 		}
 		return width;
+	}
+
+	@Inject(
+			method = "<init>",
+			at = @At("TAIL"),
+			remap = false
+	)
+	private void tweakermoreRecordSearchBar(CallbackInfo ci)
+	{
+		if (this.parent instanceof TweakerMoreConfigGui)
+		{
+			((TweakerMoreConfigGui)this.parent).setSearchBar(this.widgetSearchBar);
+		}
 	}
 
 	@ModifyVariable(

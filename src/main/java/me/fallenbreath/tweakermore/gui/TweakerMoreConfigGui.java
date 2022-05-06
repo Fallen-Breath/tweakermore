@@ -6,22 +6,21 @@ import com.mojang.datafixers.util.Pair;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
+import fi.dy.masa.malilib.gui.GuiTextFieldGeneric;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.gui.widgets.WidgetBase;
+import fi.dy.masa.malilib.gui.widgets.WidgetSearchBar;
 import fi.dy.masa.malilib.interfaces.IStringValue;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.Config;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
+import me.fallenbreath.tweakermore.mixins.core.gui.WidgetSearchBarAccessor;
 import me.fallenbreath.tweakermore.util.FabricUtil;
 import me.fallenbreath.tweakermore.util.JsonSaveAble;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
-
-//#if MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
-//#endif
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -32,12 +31,12 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 {
 	@Nullable
 	private static TweakerMoreConfigGui currentInstance = null;
-	@Nullable
-	private Config.Type filteredType = null;
+	private static final Setting SETTING = new Setting();
 
 	private final List<WidgetBase> hoveringWidgets = Lists.newArrayList();
-
-	private static final Setting SETTING = new Setting();
+	@Nullable
+	private Config.Type filteredType = null;
+	private WidgetSearchBar searchBar = null;
 
 	public TweakerMoreConfigGui()
 	{
@@ -62,6 +61,11 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		return Optional.ofNullable(currentInstance);
 	}
 
+	public void setSearchBar(WidgetSearchBar searchBar)
+	{
+		this.searchBar = searchBar;
+	}
+
 	public static void openGui()
 	{
 		GuiBase.openGui(new TweakerMoreConfigGui());
@@ -82,9 +86,16 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 			x += this.createNavigationButton(x, y, category);
 		}
 
-		x = this.width - 164;
-		x = this.initTypeFilterDropDownList(x);
-		x = this.initSortingStrategyDropDownList(x);
+		x = this.width - 11;
+		x = this.initTypeFilterDropDownList(x) - 5;
+		x = this.initSortingStrategyDropDownList(x) - 5;
+		if (this.searchBar != null)
+		{
+			GuiTextFieldGeneric searchBox = ((WidgetSearchBarAccessor) this.searchBar).getSearchBox();
+			int deltaWidth = Math.max(50, x - this.searchBar.getX()) - this.searchBar.getWidth();
+			this.searchBar.setWidth(this.searchBar.getWidth() + deltaWidth);
+			searchBox.setWidth(searchBox.getWidth() + deltaWidth);
+		}
 	}
 
 	private <T> void setDisplayParameter(T currentValue, T newValue, Runnable valueSetter)
@@ -105,12 +116,18 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		return button.getWidth() + 2;
 	}
 
-	private <T extends IStringValue> int initDropDownList(int x, int width, List<T> entries, T defaultValue, Supplier<T> valueGetter, Consumer<T> valueSetter, String hoverTextKey, Consumer<SelectorDropDownList<T>> postProcessor)
+	private <T extends IStringValue> int initDropDownList(int x, List<T> entries, T defaultValue, Supplier<T> valueGetter, Consumer<T> valueSetter, String hoverTextKey, Consumer<SelectorDropDownList<T>> postProcessor)
 	{
 		int y = this.getListY() + 3;
 		int height = 16;
+		int maxTextWidth = entries.stream().
+				filter(Objects::nonNull).
+				mapToInt(e -> this.getStringWidth(e.getStringValue())).
+				max().orElse(-1);
+		// constant 20 reference: fi.dy.masa.malilib.gui.widgets.WidgetDropDownList.getRequiredWidth
+		int width = Math.max(maxTextWidth, 40) + 20;
 
-		SelectorDropDownList<T> dd = new SelectorDropDownList<>(x, y, width, height, 200, entries.size(), entries);
+		SelectorDropDownList<T> dd = new SelectorDropDownList<>(x - width, y, width, height, 200, entries.size(), entries);
 		dd.setEntryChangeListener(entry -> this.setDisplayParameter(valueGetter.get(), entry, () -> valueSetter.accept(entry)));
 		dd.setSelectedEntry(defaultValue);
 		dd.setHoverText(hoverTextKey);
@@ -118,9 +135,8 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 
 		this.addWidget(dd);
 		this.hoveringWidgets.add(dd);
-		x += dd.getWidth() + 5;
 
-		return x;
+		return dd.getX();
 	}
 
 	private int initTypeFilterDropDownList(int x)
@@ -130,7 +146,7 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		items.add(0, null);
 
 		return this.initDropDownList(
-				x, 58, items, this.filteredType,
+				x, items, this.filteredType,
 				() -> this.filteredType, type -> this.filteredType = type,
 				"tweakermore.gui.config_type.label_text",
 				dd -> dd.setNullEntry(() -> StringUtils.translate("tweakermore.gui.selector_drop_down_list.all"))
@@ -141,7 +157,7 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 	{
 		List<SortingStrategy> items = Arrays.asList(SortingStrategy.values());
 		return this.initDropDownList(
-				x, 90, items, SETTING.sortingStrategy,
+				x, items, SETTING.sortingStrategy,
 				() -> SETTING.sortingStrategy, strategy -> SETTING.sortingStrategy = strategy,
 				"tweakermore.gui.sorting_strategy.label_text",
 				dd -> {}
