@@ -129,6 +129,42 @@ TweakerMore提供的新功能
     - Litematica (`litematica`)
 
 
+### 自动容器处理提示 (tweakmContainerProcessorHint)
+
+在界面右上角显示自动容器处理相关功能的开启情况，包括：
+
+- 自动清空容器 (tweakmAutoCleanContainer)
+
+- 自动装填容器 (tweakmAutoFillContainer)
+
+- 自动收集材料列表物品 (tweakmAutoCollectMaterialListItem)
+
+- 分类: 功能
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+
+
+### 自动容器处理提示-位置 (tweakmContainerProcessorHintPos)
+
+自动容器处理提示渲染时所用的显示位置
+
+- 分类: 功能
+- 类型: 选项列表
+- 默认值: `top_right`
+- 可用选项: `Top Right`, `Bottom Left`, `Bottom Right`, `Center`
+
+
+### 自动容器处理提示-字体大小 (tweakmContainerProcessorHintScale)
+
+自动容器处理提示渲染时所用的字体相对大小
+
+- 分类: 功能
+- 类型: 实数
+- 默认值: `1.0`
+- 最小值: `0.25`
+- 最大值: `4.0`
+
+
 ### 安全挂机 (tweakmSafeAfk)
 
 在受到伤害时断开连接

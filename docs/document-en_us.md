@@ -129,6 +129,42 @@ Does not work with easy place mode
     - Litematica (`litematica`)
 
 
+### tweakmContainerProcessorHint
+
+Displays the enable status of auto container processing related features, including:
+
+- tweakmAutoCleanContainer
+
+- tweakmAutoFillContainer
+
+- tweakmAutoCollectMaterialListItem
+
+- Category: Features
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+
+
+### tweakmContainerProcessorHintPos
+
+The displayed position of the auto container processor enable status hint
+
+- Category: Features
+- Type: option list
+- Default value: `top_right`
+- Available options: `Top Right`, `Bottom Left`, `Bottom Right`, `Center`
+
+
+### tweakmContainerProcessorHintScale
+
+The font scale of the auto container processor enable status hint
+
+- Category: Features
+- Type: double
+- Default value: `1.0`
+- Minimum value: `0.25`
+- Maximum value: `4.0`
+
+
 ### tweakmSafeAfk
 
 Disconnect when receive damage

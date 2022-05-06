@@ -3,8 +3,10 @@ package me.fallenbreath.tweakermore.config;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import fi.dy.masa.malilib.config.HudAlignment;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
+import fi.dy.masa.malilib.event.RenderEventHandler;
 import fi.dy.masa.malilib.event.TickHandler;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import fi.dy.masa.malilib.interfaces.IValueChangeCallback;
@@ -19,6 +21,7 @@ import me.fallenbreath.tweakermore.impl.copySignTextToClipBoard.SignTextCopier;
 import me.fallenbreath.tweakermore.impl.eCraftMassCraftCompact.EasierCraftingRegistrar;
 import me.fallenbreath.tweakermore.impl.refreshInventory.InventoryRefresher;
 import me.fallenbreath.tweakermore.impl.serverDataSyncer.ServerDataSyncer;
+import me.fallenbreath.tweakermore.impl.tweakmAutoContainerProcess.HintRenderer;
 import me.fallenbreath.tweakermore.impl.tweakmDebug.TweakerMoreDebugHelper;
 import me.fallenbreath.tweakermore.impl.tweakmFlawlessFrames.FlawlessFramesHandler;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
@@ -66,6 +69,15 @@ public class TweakerMoreConfigs
 
 	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_CLEAN_CONTAINER = newConfigBooleanHotkeyed("tweakmAutoCleanContainer");
+
+	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_CONTAINER_PROCESSOR_HINT = newConfigBooleanHotkeyed("tweakmContainerProcessorHint");
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigOptionList TWEAKM_CONTAINER_PROCESSOR_HINT_POS = newConfigOptionList("tweakmContainerProcessorHintPos", HudAlignment.TOP_RIGHT);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigDouble TWEAKM_CONTAINER_PROCESSOR_HINT_SCALE = newConfigDouble("tweakmContainerProcessorHintScale", 1, 0.25, 4);
 
 	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_FILL_CONTAINER = newConfigBooleanHotkeyed("tweakmAutoFillContainer");
@@ -395,6 +407,7 @@ public class TweakerMoreConfigs
 	public static void initEventListeners()
 	{
 		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
+		RenderEventHandler.getInstance().registerGameOverlayRenderer(HintRenderer.getInstance());
 	}
 
 	// Config fields collecting

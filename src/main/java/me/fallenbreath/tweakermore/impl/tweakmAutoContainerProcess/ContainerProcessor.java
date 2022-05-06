@@ -28,6 +28,11 @@ public abstract class ContainerProcessor
 		return CONTAINER_PROCESSORS.stream().anyMatch(Processor::isEnabled);
 	}
 
+	public static List<Processor> getProcessors()
+	{
+		return CONTAINER_PROCESSORS;
+	}
+
 	public static void process(Container container)
 	{
 		if (hasTweakEnabled())

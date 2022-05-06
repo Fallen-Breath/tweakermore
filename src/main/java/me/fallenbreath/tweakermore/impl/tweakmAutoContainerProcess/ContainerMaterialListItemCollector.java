@@ -24,9 +24,14 @@ public class ContainerMaterialListItemCollector implements Processor
 	@Override
 	public boolean isEnabled()
 	{
-		TweakerMoreConfigBooleanHotkeyed config = TweakerMoreConfigs.TWEAKM_AUTO_COLLECT_MATERIAL_LIST_ITEM;
 		// make sure required mods are loaded
-		return config.getBooleanValue() && config.getTweakerMoreOption().isEnabled();
+		return Processor.super.isEnabled() && getConfig().getTweakerMoreOption().isEnabled();
+	}
+
+	@Override
+	public TweakerMoreConfigBooleanHotkeyed getConfig()
+	{
+		return TweakerMoreConfigs.TWEAKM_AUTO_COLLECT_MATERIAL_LIST_ITEM;
 	}
 
 	/**
