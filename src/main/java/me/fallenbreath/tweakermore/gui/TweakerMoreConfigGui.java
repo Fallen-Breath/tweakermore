@@ -27,6 +27,10 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+//#if MC >= 11600
+//$$ import net.minecraft.client.util.math.MatrixStack;
+//#endif
+
 public class TweakerMoreConfigGui extends GuiConfigsBase
 {
 	@Nullable
