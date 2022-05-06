@@ -143,6 +143,8 @@ TweakerMore提供的新功能
 - 类型: 可开关型热键
 - 默认值: *无快捷键*, `false`
 
+![tweakmContainerProcessorHint](assets/tweakmContainerProcessorHint-zh_cn.png)
+
 
 ### 自动容器处理提示-位置 (tweakmContainerProcessorHintPos)
 

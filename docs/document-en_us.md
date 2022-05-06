@@ -143,6 +143,8 @@ Displays the enable status of auto container processing related features, includ
 - Type: togglable hotkey
 - Default value: *no hotkey*, `false`
 
+![tweakmContainerProcessorHint](assets/tweakmContainerProcessorHint-en_us.png)
+
 
 ### tweakmContainerProcessorHintPos
 
