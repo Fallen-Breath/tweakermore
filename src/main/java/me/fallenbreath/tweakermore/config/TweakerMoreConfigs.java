@@ -340,10 +340,10 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKERMORE_DEBUG_MODE = newConfigBooleanHotkeyed("tweakerMoreDebugMode");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.SETTING, debug = true)
-	public static final TweakerMoreConfigInteger TWEAKERMORE_DEBUG_INT = newConfigInteger("tweakerMoreDebugInt", 0, -1000, 1000);
+	public static final TweakerMoreConfigDouble TWEAKERMORE_DEBUG_DOUBLE = newConfigDouble("tweakerMoreDebugDouble", 0, -1, 1);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.SETTING, debug = true)
-	public static final TweakerMoreConfigDouble TWEAKERMORE_DEBUG_DOUBLE = newConfigDouble("tweakerMoreDebugDouble", 0, -1, 1);
+	public static final TweakerMoreConfigInteger TWEAKERMORE_DEBUG_INT = newConfigInteger("tweakerMoreDebugInt", 0, -1000, 1000);
 
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.SETTING, debug = true)
 	public static final TweakerMoreConfigHotkey TWEAKERMORE_DEBUG_RESET_OPTION_STATISTIC = newConfigHotKey("tweakerMoreDebugResetOptionStatistic", "");
