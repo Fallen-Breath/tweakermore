@@ -151,7 +151,7 @@ TweakerMore提供的新功能
 - 分类: 功能
 - 类型: 选项列表
 - 默认值: `top_right`
-- 可用选项: `Top Right`, `Bottom Left`, `Bottom Right`, `Center`
+- 可用选项: `Top Left`, `Top Right`, `Bottom Left`, `Bottom Right`, `Center`
 
 
 ### 自动容器处理提示-字体大小 (tweakmContainerProcessorHintScale)
@@ -566,7 +566,7 @@ tweakHandRestock功能的物品名单约束类型
 - 分类: 模组修改
 - 类型: 选项列表
 - 默认值: `none`
-- 可用选项: `None`, `Black List`
+- 可用选项: `None`, `Black List`, `White List`
 - 模组约束:
   - 依赖模组:
     - Tweakeroo (`tweakeroo`)

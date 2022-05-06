@@ -133,17 +133,20 @@ public class DocumentPrinter
 	{
 		if (config instanceof IConfigOptionList)
 		{
-			IConfigOptionListEntry firstValue = ((IConfigOptionList)config).getOptionListValue();
+			IConfigOptionListEntry firstValue = ((IConfigOptionList)config).getDefaultOptionListValue();
 			List<IConfigOptionListEntry> values = Lists.newArrayList();
 			boolean allEnum = true;
-			for (IConfigOptionListEntry v = firstValue; v.cycle(true) != firstValue; v = v.cycle(true))
+			IConfigOptionListEntry value = firstValue;
+			do
 			{
-				allEnum &= v instanceof Enum;
-				values.add(v);
+				allEnum &= value instanceof Enum;
+				values.add(value);
+				value = value.cycle(true);
 			}
-			if (allEnum && !values.isEmpty())
+			while (value != firstValue);
+			if (allEnum)
 			{
-				values.sort(Comparator.comparing(v -> ((Enum<?>)v).ordinal()));
+				values.sort(Comparator.comparingInt(v -> ((Enum<?>)v).ordinal()));
 			}
 			return Optional.of(values.stream().map(IConfigOptionListEntry::getDisplayName).map(DocumentPrinter::codeBlock).collect(Collectors.toList()));
 		}

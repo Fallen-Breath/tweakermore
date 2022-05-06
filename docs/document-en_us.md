@@ -151,7 +151,7 @@ The displayed position of the auto container processor enable status hint
 - Category: Features
 - Type: option list
 - Default value: `top_right`
-- Available options: `Top Right`, `Bottom Left`, `Bottom Right`, `Center`
+- Available options: `Top Left`, `Top Right`, `Bottom Left`, `Bottom Right`, `Center`
 
 
 ### tweakmContainerProcessorHintScale
@@ -566,7 +566,7 @@ The item restriction type for tweakHandRestock
 - Category: Mods Tweaks
 - Type: option list
 - Default value: `none`
-- Available options: `None`, `Black List`
+- Available options: `None`, `Black List`, `White List`
 - Mod restrictions:
   - Required mods:
     - Tweakeroo (`tweakeroo`)
