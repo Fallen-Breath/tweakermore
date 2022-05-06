@@ -345,13 +345,13 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.SETTING, debug = true)
 	public static final TweakerMoreConfigDouble TWEAKERMORE_DEBUG_DOUBLE = newConfigDouble("tweakerMoreDebugDouble", 0, -1, 1);
 
-	@Config(type = Config.Type.GENERIC, category = Config.Category.SETTING, debug = true)
+	@Config(type = Config.Type.HOTKEY, category = Config.Category.SETTING, debug = true)
 	public static final TweakerMoreConfigHotkey TWEAKERMORE_DEBUG_RESET_OPTION_STATISTIC = newConfigHotKey("tweakerMoreDebugResetOptionStatistic", "");
 
-	@Config(type = Config.Type.GENERIC, category = Config.Category.SETTING, devOnly = true)
+	@Config(type = Config.Type.HOTKEY, category = Config.Category.SETTING, devOnly = true)
 	public static final TweakerMoreConfigHotkey TWEAKERMORE_DEV_MIXIN_AUDIT = newConfigHotKey("tweakerMoreDevMixinAudit", "");
 
-	@Config(type = Config.Type.GENERIC, category = Config.Category.SETTING, devOnly = true)
+	@Config(type = Config.Type.HOTKEY, category = Config.Category.SETTING, devOnly = true)
 	public static final TweakerMoreConfigHotkey TWEAKERMORE_DEV_PRINT_DOC = newConfigHotKey("tweakerMoreDevPrintDoc", "");
 
 	/**
