@@ -1,5 +1,6 @@
 package me.fallenbreath.tweakermore.config;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import fi.dy.masa.malilib.config.ConfigUtils;
@@ -12,7 +13,6 @@ import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.util.FabricUtil;
 import me.fallenbreath.tweakermore.util.FileUtil;
 import me.fallenbreath.tweakermore.util.JsonSaveAble;
-import org.spongepowered.include.com.google.common.collect.ImmutableMap;
 
 import java.io.File;
 import java.util.List;
