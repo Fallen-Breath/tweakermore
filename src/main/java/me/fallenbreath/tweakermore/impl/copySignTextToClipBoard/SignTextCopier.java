@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 public class SignTextCopier
 {
-	public static boolean copySignText(KeyAction action, IKeybind key)
+	public static void copySignText()
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
 		if (mc.world != null && mc.crosshairTarget != null && mc.crosshairTarget.getType() == HitResult.Type.BLOCK)
@@ -57,11 +57,10 @@ public class SignTextCopier
 					{
 						InfoUtils.printActionbarMessage("tweakermore.config.copySignTextToClipBoard.empty_sign", blockState.getBlock().getName());
 					}
-					return true;
+					return;
 				}
 			}
 		}
 		InfoUtils.printActionbarMessage("tweakermore.config.copySignTextToClipBoard.no_sign");
-		return false;
 	}
 }

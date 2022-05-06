@@ -24,4 +24,20 @@ public class TweakerMoreConfigString extends ConfigString implements TweakerMore
 			this.onValueChanged();
 		}
 	}
+
+	@Override
+	public void onValueChanged()
+	{
+		this.onValueChanged(false);
+	}
+
+	@Override
+	public void onValueChanged(boolean fromFile)
+	{
+		super.onValueChanged();
+		if (!fromFile)
+		{
+			this.updateStatisticOnUse();
+		}
+	}
 }

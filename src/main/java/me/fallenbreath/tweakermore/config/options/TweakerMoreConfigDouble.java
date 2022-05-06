@@ -24,7 +24,23 @@ public class TweakerMoreConfigDouble extends ConfigDouble implements TweakerMore
 
 		if (oldValue != this.getDoubleValue())
 		{
-			this.onValueChanged();
+			this.onValueChanged(true);
+		}
+	}
+
+	@Override
+	public void onValueChanged()
+	{
+		this.onValueChanged(false);
+	}
+
+	@Override
+	public void onValueChanged(boolean fromFile)
+	{
+		super.onValueChanged();
+		if (!fromFile)
+		{
+			this.updateStatisticOnUse();
 		}
 	}
 }

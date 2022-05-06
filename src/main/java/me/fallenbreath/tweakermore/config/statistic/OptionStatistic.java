@@ -1,15 +1,26 @@
-package me.fallenbreath.tweakermore.config;
+package me.fallenbreath.tweakermore.config.statistic;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 
-public class ConfigStatistic
+public class OptionStatistic
 {
 	private static final int USE_AMOUNT_INCREASE_COOLDOWN = 1000;  // ms
 	public long lastUsedTime;
 	public long useAmount;
+
+	public OptionStatistic()
+	{
+		this.reset();
+	}
+
+	public void reset()
+	{
+		this.lastUsedTime = 0;
+		this.useAmount = 0;
+	}
 
 	public void loadFromJson(JsonElement jsonElement)
 	{
@@ -24,7 +35,7 @@ public class ConfigStatistic
 		}
 		catch (Exception e)
 		{
-			TweakerMoreMod.LOGGER.warn("Failed to load ConfigStatistic from json '{}'", jsonElement);
+			TweakerMoreMod.LOGGER.warn("Failed to load OptionStatistic from json '{}'", jsonElement);
 		}
 	}
 

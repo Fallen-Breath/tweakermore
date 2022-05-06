@@ -19,7 +19,23 @@ public class TweakerMoreConfigBoolean extends ConfigBoolean implements TweakerMo
 
 		if (oldValue != this.getBooleanValue())
 		{
-			this.onValueChanged();
+			this.onValueChanged(true);
+		}
+	}
+
+	@Override
+	public void onValueChanged()
+	{
+		this.onValueChanged(false);
+	}
+
+	@Override
+	public void onValueChanged(boolean fromFile)
+	{
+		super.onValueChanged();
+		if (!fromFile)
+		{
+			this.updateStatisticOnUse();
 		}
 	}
 }

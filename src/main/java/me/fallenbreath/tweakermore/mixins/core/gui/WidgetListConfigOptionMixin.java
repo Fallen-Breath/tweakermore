@@ -233,6 +233,10 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 			{
 				callback.onKeyAction(KeyAction.RELEASE, keybind);
 			}
+			if (config instanceof TweakerMoreIConfigBase)
+			{
+				((TweakerMoreIConfigBase)config).updateStatisticOnUse();
+			}
 		});
 
 		x += triggerBtnWidth + 2;

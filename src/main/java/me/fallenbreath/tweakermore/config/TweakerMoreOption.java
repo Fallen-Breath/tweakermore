@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
+import me.fallenbreath.tweakermore.config.statistic.OptionStatistic;
 import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.util.condition.ModPredicate;
 import me.fallenbreath.tweakermore.util.condition.ModRestriction;
@@ -20,7 +21,7 @@ public class TweakerMoreOption
 	private final TweakerMoreIConfigBase config;
 	private final List<ModRestriction> modRestrictions;
 	private final List<ModRestriction> minecraftRestrictions;
-	private final ConfigStatistic statistic;
+	private final OptionStatistic statistic;
 
 	public TweakerMoreOption(Config annotation, TweakerMoreIConfigBase config)
 	{
@@ -28,7 +29,7 @@ public class TweakerMoreOption
 		this.config = config;
 		this.modRestrictions = Arrays.stream(annotation.restriction()).map(ModRestriction::of).collect(Collectors.toList());
 		this.minecraftRestrictions = Arrays.stream(annotation.restriction()).map(r -> ModRestriction.of(r, c -> ModIds.minecraft.equals(c.value()))).collect(Collectors.toList());
-		this.statistic = new ConfigStatistic();
+		this.statistic = new OptionStatistic();
 	}
 
 	public Config.Type getType()
@@ -46,7 +47,7 @@ public class TweakerMoreOption
 		return this.modRestrictions;
 	}
 
-	public ConfigStatistic getStatistic()
+	public OptionStatistic getStatistic()
 	{
 		return this.statistic;
 	}

@@ -77,10 +77,9 @@ public class DocumentGenerator
 		}
 	}
 
-	public static boolean onHotKey(KeyAction keyAction, IKeybind iKeybind)
+	public static void onHotKey()
 	{
 		generateDoc(false);
-		return true;
 	}
 
 	public static void onClientInitFinished()

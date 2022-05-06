@@ -19,7 +19,7 @@ import me.fallenbreath.tweakermore.impl.copySignTextToClipBoard.SignTextCopier;
 import me.fallenbreath.tweakermore.impl.eCraftMassCraftCompact.EasierCraftingRegistrar;
 import me.fallenbreath.tweakermore.impl.refreshInventory.InventoryRefresher;
 import me.fallenbreath.tweakermore.impl.serverDataSyncer.ServerDataSyncer;
-import me.fallenbreath.tweakermore.impl.tweakerMoreDevMixinAudit.MixinAuditHelper;
+import me.fallenbreath.tweakermore.impl.tweakmDebug.TweakerMoreDebugHelper;
 import me.fallenbreath.tweakermore.impl.tweakmFlawlessFrames.FlawlessFramesHandler;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
 import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
@@ -345,6 +345,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.SETTING, debug = true)
 	public static final TweakerMoreConfigDouble TWEAKERMORE_DEBUG_DOUBLE = newConfigDouble("tweakerMoreDebugDouble", 0, -1, 1);
 
+	@Config(type = Config.Type.GENERIC, category = Config.Category.SETTING, debug = true)
+	public static final TweakerMoreConfigHotkey TWEAKERMORE_DEBUG_RESET_OPTION_STATISTIC = newConfigHotKey("tweakerMoreDebugResetOptionStatistic", "");
+
 	@Config(type = Config.Type.GENERIC, category = Config.Category.SETTING, devOnly = true)
 	public static final TweakerMoreConfigHotkey TWEAKERMORE_DEV_MIXIN_AUDIT = newConfigHotKey("tweakerMoreDevMixinAudit", "");
 
@@ -357,15 +360,17 @@ public class TweakerMoreConfigs
 	 * ============================
 	 */
 
+	// registering
+
 	public static void initCallbacks()
 	{
 		// common callbacks
 		IValueChangeCallback<ConfigBoolean> redrawConfigGui = newValue -> TweakerMoreConfigGui.getCurrentInstance().ifPresent(TweakerMoreConfigGui::reDraw);
 
 		// hotkeys
-		COPY_SIGN_TEXT_TO_CLIPBOARD.getKeybind().setCallback(SignTextCopier::copySignText);
-		OPEN_TWEAKERMORE_CONFIG_GUI.getKeybind().setCallback(TweakerMoreConfigGui::onOpenGuiHotkey);
-		REFRESH_INVENTORY.getKeybind().setCallback(InventoryRefresher::refresh);
+		setHotkeyCallback(COPY_SIGN_TEXT_TO_CLIPBOARD, SignTextCopier::copySignText, false);
+		setHotkeyCallback(OPEN_TWEAKERMORE_CONFIG_GUI, TweakerMoreConfigGui::openGui, true);
+		setHotkeyCallback(REFRESH_INVENTORY, InventoryRefresher::refresh, false);
 
 		// value listeners
 		ECRAFT_ITEM_SCROLLER_COMPACT.setValueChangeCallback(EasierCraftingRegistrar::onConfigValueChanged);
@@ -374,14 +379,25 @@ public class TweakerMoreConfigs
 
 		// debugs
 		TWEAKERMORE_DEBUG_MODE.setValueChangeCallback(redrawConfigGui);
-		TWEAKERMORE_DEV_MIXIN_AUDIT.getKeybind().setCallback(MixinAuditHelper::onHotKey);
-		TWEAKERMORE_DEV_PRINT_DOC.getKeybind().setCallback(DocumentGenerator::onHotKey);
+		setHotkeyCallback(TWEAKERMORE_DEBUG_RESET_OPTION_STATISTIC, TweakerMoreDebugHelper::resetAllConfigStatistic, false);
+		setHotkeyCallback(TWEAKERMORE_DEV_MIXIN_AUDIT, TweakerMoreDebugHelper::forceLoadAllMixins, true);
+		setHotkeyCallback(TWEAKERMORE_DEV_PRINT_DOC, DocumentGenerator::onHotKey, true);
+	}
+
+	private static void setHotkeyCallback(TweakerMoreConfigHotkey configHotkey, Runnable runnable, boolean cancelFurtherProcess)
+	{
+		configHotkey.setCallBack((action, key) -> {
+			runnable.run();
+			return cancelFurtherProcess;
+		});
 	}
 
 	public static void initEventListeners()
 	{
 		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
 	}
+
+	// Config fields collecting
 
 	private static final List<TweakerMoreOption> OPTIONS = Lists.newArrayList();
 	private static final Map<Config.Category, List<TweakerMoreOption>> CATEGORY_TO_OPTION = Maps.newLinkedHashMap();

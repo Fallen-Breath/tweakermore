@@ -165,10 +165,12 @@
   "tweakermore.config.tweakerMoreDebugMode": "tweakerMoreDebugMode",
   "tweakermore.config.tweakerMoreDebugMode.comment": "Debug mode of TweakerMore\nWhen enabled, debug parameter options and options not supported by the current Minecraft version will be displayed\nand debugging related functions will be enabled",
   "tweakermore.config.tweakerMoreDebugMode.pretty_name": "TweakerMore Debug Mode",
-  "tweakermore.config.tweakerMoreDebugInt": "tweakerMoreDebugInt",
-  "tweakermore.config.tweakerMoreDebugInt.comment": "A integer parameter for TweakerMore debugging",
   "tweakermore.config.tweakerMoreDebugDouble": "tweakerMoreDebugDouble",
   "tweakermore.config.tweakerMoreDebugDouble.comment": "A double parameter for TweakerMore debugging",
+  "tweakermore.config.tweakerMoreDebugInt": "tweakerMoreDebugInt",
+  "tweakermore.config.tweakerMoreDebugInt.comment": "A integer parameter for TweakerMore debugging",
+  "tweakermore.config.tweakerMoreDebugResetOptionStatistic": "tweakerMoreDebugResetOptionStatistic",
+  "tweakermore.config.tweakerMoreDebugResetOptionStatistic.comment": "Reset statistics of options of tweakermore",
 
   "tweakermore.config.tweakerMoreDevMixinAudit": "tweakerMoreDevMixinAudit",
   "tweakermore.config.tweakerMoreDevMixinAudit.comment": "Forced load all mixin target classes",
@@ -208,8 +210,8 @@
 
   "tweakermore.gui.sorting_strategy.label_text": "Sorting strategy",
   "tweakermore.gui.sorting_strategy.alphabet": "Alphabet",
-  "tweakermore.gui.sorting_strategy.most_recently_used": "Most recently used",
-  "tweakermore.gui.sorting_strategy.most_commonly_used": "Most commonly used",
+  "tweakermore.gui.sorting_strategy.most_recently_used": "Recently used",
+  "tweakermore.gui.sorting_strategy.most_commonly_used": "Commonly used",
 
   "tweakermore.gui.mod_relation_footer.or": "or",
   "tweakermore.gui.mod_relation_footer.requirement": "Required mods:",

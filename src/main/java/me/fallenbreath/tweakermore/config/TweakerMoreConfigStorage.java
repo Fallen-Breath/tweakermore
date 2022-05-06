@@ -7,6 +7,7 @@ import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IConfigHandler;
 import fi.dy.masa.malilib.util.JsonUtils;
 import fi.dy.masa.malilib.util.restrictions.UsageRestriction;
+import me.fallenbreath.tweakermore.config.statistic.OptionStatisticSaver;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.util.FabricUtil;
 import me.fallenbreath.tweakermore.util.FileUtil;
@@ -23,6 +24,7 @@ public class TweakerMoreConfigStorage implements IConfigHandler
 	private static final TweakerMoreConfigStorage INSTANCE = new TweakerMoreConfigStorage();
 	private static final Map<String, JsonSaveAble> INTERNAL_DATA_SAVERS = new ImmutableMap.Builder<String, JsonSaveAble>().
 			put("configGui", TweakerMoreConfigGui.getSetting()).
+			put("configStatistic", new OptionStatisticSaver()).
 			build();
 
 	private JsonObject loadedJson = new JsonObject();
@@ -126,31 +128,5 @@ public class TweakerMoreConfigStorage implements IConfigHandler
 		INTERNAL_DATA_SAVERS.forEach((name, jsonSaveAble) -> {
 			internal.add(name, jsonSaveAble.dumpToJson());
 		});
-	}
-
-	public static void loadOptionStatistic(JsonObject jsonObject)
-	{
-		JsonObject obj = JsonUtils.getNestedObject(jsonObject, "Statistic", false);
-		if (obj != null)
-		{
-			for (TweakerMoreOption tweakerMoreOption : TweakerMoreConfigs.getAllOptions())
-			{
-				String key = tweakerMoreOption.getConfig().getName();
-				if (obj.has(key))
-				{
-					tweakerMoreOption.getStatistic().loadFromJson(obj.get(key));
-				}
-			}
-		}
-	}
-
-	public static void saveOptionStatistic(JsonObject jsonObject)
-	{
-		JsonObject obj = JsonUtils.getNestedObject(jsonObject, "Statistic", true);
-		assert obj != null;
-		for (TweakerMoreOption tweakerMoreOption : TweakerMoreConfigs.getAllOptions())
-		{
-			obj.add(tweakerMoreOption.getConfig().getName(), tweakerMoreOption.getStatistic().toJson());
-		}
 	}
 }

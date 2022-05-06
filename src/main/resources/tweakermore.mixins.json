@@ -7,7 +7,6 @@
   "mixins": [
     "core.gui.ConfigBaseMixin",
     "core.gui.KeybindMultiAccessor",
-    "core.gui.WidgetConfigOptionBaseMixin",
     "core.gui.WidgetDropDownListMixin",
     "core.gui.WidgetLabelMixin",
     "core.gui.WidgetListBaseMixin",

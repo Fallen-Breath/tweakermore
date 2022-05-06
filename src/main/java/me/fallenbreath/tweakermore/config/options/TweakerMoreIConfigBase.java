@@ -15,6 +15,14 @@ public interface TweakerMoreIConfigBase extends IConfigBase
 	String COMMENT_SUFFIX = ".comment";
 	String PRETTY_NAME_SUFFIX = ".pretty_name";
 
+	void onValueChanged(boolean fromFile);
+
+	default void updateStatisticOnUse()
+	{
+		System.err.println(this.getTweakerMoreOption().getConfig().getName() + " +1 used");
+		this.getTweakerMoreOption().getStatistic().onConfigUsed();
+	}
+
 	@Override
 	default String getConfigGuiDisplayName()
 	{

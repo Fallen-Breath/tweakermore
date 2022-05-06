@@ -20,7 +20,23 @@ public class TweakerMoreConfigOptionList extends ConfigOptionList implements Twe
 
 		if (oldValue != this.getOptionListValue())
 		{
-			this.onValueChanged();
+			this.onValueChanged(true);
+		}
+	}
+
+	@Override
+	public void onValueChanged()
+	{
+		this.onValueChanged(false);
+	}
+
+	@Override
+	public void onValueChanged(boolean fromFile)
+	{
+		super.onValueChanged();
+		if (!fromFile)
+		{
+			this.updateStatisticOnUse();
 		}
 	}
 }

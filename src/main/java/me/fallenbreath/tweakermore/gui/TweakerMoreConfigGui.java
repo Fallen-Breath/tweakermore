@@ -3,18 +3,17 @@ package me.fallenbreath.tweakermore.gui;
 import com.google.common.collect.Lists;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
+import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
-import fi.dy.masa.malilib.hotkeys.IKeybind;
-import fi.dy.masa.malilib.hotkeys.KeyAction;
+import fi.dy.masa.malilib.gui.widgets.WidgetBase;
 import fi.dy.masa.malilib.interfaces.IStringValue;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.Config;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
-import me.fallenbreath.tweakermore.config.ConfigStatistic;
 import me.fallenbreath.tweakermore.util.FabricUtil;
 import me.fallenbreath.tweakermore.util.JsonSaveAble;
 import net.minecraft.util.math.MathHelper;
@@ -25,6 +24,8 @@ import org.jetbrains.annotations.Nullable;
 //#endif
 
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class TweakerMoreConfigGui extends GuiConfigsBase
@@ -33,12 +34,8 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 	private static TweakerMoreConfigGui currentInstance = null;
 	@Nullable
 	private Config.Type filteredType = null;
-	@Nullable
-	private SelectorDropDownList<Config.Type> typeFilterDropDownList = null;
 
-	private SortingStrategy sortingStrategy = SortingStrategy.ALPHABET;
-	@Nullable
-	private SelectorDropDownList<SortingStrategy> sortingStrategyDropDownList = null;
+	private final List<WidgetBase> hoveringWidgets = Lists.newArrayList();
 
 	private static final Setting SETTING = new Setting();
 
@@ -65,10 +62,9 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		return Optional.ofNullable(currentInstance);
 	}
 
-	public static boolean onOpenGuiHotkey(KeyAction keyAction, IKeybind iKeybind)
+	public static void openGui()
 	{
 		GuiBase.openGui(new TweakerMoreConfigGui());
-		return true;
 	}
 
 	@Override
@@ -77,6 +73,7 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		super.initGui();
 		this.clearOptions();
 
+		this.hoveringWidgets.clear();
 		int x = 10;
 		int y = 26;
 
@@ -85,58 +82,18 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 			x += this.createNavigationButton(x, y, category);
 		}
 
-		x = this.width - 150;
+		x = this.width - 164;
 		x = this.initTypeFilterDropDownList(x);
 		x = this.initSortingStrategyDropDownList(x);
 	}
 
-	private int initTypeFilterDropDownList(int x)
+	private <T> void setDisplayParameter(T currentValue, T newValue, Runnable valueSetter)
 	{
-		int y = this.getListY() + 3;
-		int height = 16;
-
-		Set<Config.Type> possibleTypes = TweakerMoreConfigs.getOptions(TweakerMoreConfigGui.category).stream().map(TweakerMoreOption::getType).collect(Collectors.toSet());
-		List<Config.Type> items = Arrays.stream(Config.Type.values()).filter(possibleTypes::contains).collect(Collectors.toList());
-		items.add(0, null);
-		SelectorDropDownList<Config.Type> dd = new SelectorDropDownList<>(x, y, 70, height, 200, items.size(), items);
-		dd.setEntryChangeListener(type -> {
-			if (type != this.filteredType)
-			{
-				this.filteredType = type;
-				this.reDraw();
-			}
-		});
-		dd.setSelectedEntry(this.filteredType);
-		dd.setNullEntry(() -> StringUtils.translate("tweakermore.gui.selector_drop_down_list.all"));
-		dd.setHoverText("tweakermore.gui.config_type.label_text");
-		this.typeFilterDropDownList = dd;
-		this.addWidget(this.typeFilterDropDownList);
-		x += dd.getWidth() + 10;
-
-		return x;
-	}
-
-	private int initSortingStrategyDropDownList(int x)
-	{
-		int y = this.getListY() + 3;
-		int height = 16;
-
-		List<SortingStrategy> items = Arrays.asList(SortingStrategy.values());
-		SelectorDropDownList<SortingStrategy> dd = new SelectorDropDownList<>(x, y, 70, height, 200, items.size(), items);
-		dd.setEntryChangeListener(strategy -> {
-			if (strategy != this.sortingStrategy)
-			{
-				this.sortingStrategy = strategy;
-				this.reDraw();
-			}
-		});
-		dd.setSelectedEntry(this.sortingStrategy);
-		dd.setHoverText("tweakermore.gui.sorting_strategy.label_text");
-		this.sortingStrategyDropDownList = dd;
-		this.addWidget(this.sortingStrategyDropDownList);
-		x += dd.getWidth() + 10;
-
-		return x;
+		if (newValue != currentValue)
+		{
+			valueSetter.run();
+			this.reDraw();
+		}
 	}
 
 	private int createNavigationButton(int x, int y, Config.Category category)
@@ -144,11 +101,51 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		ButtonGeneric button = new ButtonGeneric(x, y, -1, 20, category.getDisplayName());
 		button.setEnabled(SETTING.category != category);
 		button.setHoverStrings(category.getDescription());
-		this.addButton(button, (b, mouseButton) -> {
-			SETTING.category = category;
-			this.reDraw();
-		});
+		this.addButton(button, (b, mb) -> this.setDisplayParameter(SETTING.category, category, () -> SETTING.category = category));
 		return button.getWidth() + 2;
+	}
+
+	private <T extends IStringValue> int initDropDownList(int x, int width, List<T> entries, T defaultValue, Supplier<T> valueGetter, Consumer<T> valueSetter, String hoverTextKey, Consumer<SelectorDropDownList<T>> postProcessor)
+	{
+		int y = this.getListY() + 3;
+		int height = 16;
+
+		SelectorDropDownList<T> dd = new SelectorDropDownList<>(x, y, width, height, 200, entries.size(), entries);
+		dd.setEntryChangeListener(entry -> this.setDisplayParameter(valueGetter.get(), entry, () -> valueSetter.accept(entry)));
+		dd.setSelectedEntry(defaultValue);
+		dd.setHoverText(hoverTextKey);
+		postProcessor.accept(dd);
+
+		this.addWidget(dd);
+		this.hoveringWidgets.add(dd);
+		x += dd.getWidth() + 5;
+
+		return x;
+	}
+
+	private int initTypeFilterDropDownList(int x)
+	{
+		Set<Config.Type> possibleTypes = TweakerMoreConfigs.getOptions(SETTING.category).stream().map(TweakerMoreOption::getType).collect(Collectors.toSet());
+		List<Config.Type> items = Arrays.stream(Config.Type.values()).filter(possibleTypes::contains).collect(Collectors.toList());
+		items.add(0, null);
+
+		return this.initDropDownList(
+				x, 58, items, this.filteredType,
+				() -> this.filteredType, type -> this.filteredType = type,
+				"tweakermore.gui.config_type.label_text",
+				dd -> dd.setNullEntry(() -> StringUtils.translate("tweakermore.gui.selector_drop_down_list.all"))
+		);
+	}
+
+	private int initSortingStrategyDropDownList(int x)
+	{
+		List<SortingStrategy> items = Arrays.asList(SortingStrategy.values());
+		return this.initDropDownList(
+				x, 90, items, SETTING.sortingStrategy,
+				() -> SETTING.sortingStrategy, strategy -> SETTING.sortingStrategy = strategy,
+				"tweakermore.gui.sorting_strategy.label_text",
+				dd -> {}
+		);
 	}
 
 	public void reDraw()
@@ -165,24 +162,14 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 			int mouseX, int mouseY
 	)
 	{
-		if (this.typeFilterDropDownList != null)
-		{
-			this.typeFilterDropDownList.render(
-					mouseX, mouseY, this.typeFilterDropDownList.isMouseOver(mouseX, mouseY)
+		this.hoveringWidgets.forEach(widget -> {
+			widget.render(
+					mouseX, mouseY, widget.isMouseOver(mouseX, mouseY)
 					//#if MC >= 11600
 					//$$ , matrixStack
 					//#endif
 			);
-		}
-		if (this.sortingStrategyDropDownList != null)
-		{
-			this.sortingStrategyDropDownList.render(
-					mouseX, mouseY, this.sortingStrategyDropDownList.isMouseOver(mouseX, mouseY)
-					//#if MC >= 11600
-					//$$ , matrixStack
-					//#endif
-			);
-		}
+		});
 	}
 
 	public Pair<Integer, Integer> adjustWidths(int guiWidth, int maxTextWidth)
@@ -213,77 +200,84 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 	@Override
 	public List<ConfigOptionWrapper> getConfigs()
 	{
-		List<TweakerMoreOption> configs = Lists.newArrayList();
-		for (TweakerMoreOption tweakerMoreOption : TweakerMoreConfigs.getOptions(SETTING.category))
+		Comparator<TweakerMoreOption> nameComparator = Comparator.comparing(c -> c.getConfig().getName(), String::compareToIgnoreCase);
+
+		List<IConfigBase> configs = TweakerMoreConfigs.getOptions(SETTING.category).stream().
+				filter(this::shouldShowOption).
+				sorted(SETTING.sortingStrategy.getComparator().thenComparing(nameComparator)).
+				map(TweakerMoreOption::getConfig).
+				collect(Collectors.toList());
+
+		return ConfigOptionWrapper.createFor(configs);
+	}
+
+	private boolean shouldShowOption(TweakerMoreOption option)
+	{
+		// drop down list filtering logic
+		if (this.filteredType != null && option.getType() != this.filteredType)
 		{
-			// drop down list filtering logic
-			if (this.filteredType != null && tweakerMoreOption.getType() != this.filteredType)
-			{
-				continue;
-			}
-			// hide disable options if config hideDisabledOptions is enabled
-			if (TweakerMoreConfigs.HIDE_DISABLE_OPTIONS.getBooleanValue() && !tweakerMoreOption.isEnabled())
-			{
-				continue;
-			}
-			// hide options that don't work with current Minecraft versions, unless debug mode on
-			if (!tweakerMoreOption.worksForCurrentMCVersion() && !TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
-			{
-				continue;
-			}
-			// hide debug options unless debug mode on
-			if (tweakerMoreOption.isDebug() && !TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
-			{
-				continue;
-			}
-			// hide dev only options unless debug mode on and is dev env
-			if (tweakerMoreOption.isDevOnly() && !(TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue() && FabricUtil.isDevelopmentEnvironment()))
-			{
-				continue;
-			}
-			configs.add(tweakerMoreOption);
+			return false;
 		}
-
-		configs.sort((a, b) -> {
-			int comp = 0;
-			ConfigStatistic as = a.getStatistic(), bs = b.getStatistic();
-			switch (this.sortingStrategy)
-			{
-				case MOST_COMMONLY_USED:
-					comp = -Long.compare(as.useAmount, bs.useAmount);
-					break;
-				case MOST_RECENTLY_USED:
-					comp = -Long.compare(as.lastUsedTime, bs.lastUsedTime);
-					break;
-			}
-			return comp == 0 ? comp : a.getConfig().getName().compareToIgnoreCase(b.getConfig().getName());
-		});
-
-		return ConfigOptionWrapper.createFor(configs.stream().map(TweakerMoreOption::getConfig).collect(Collectors.toList()));
+		// hide disable options if config hideDisabledOptions is enabled
+		if (TweakerMoreConfigs.HIDE_DISABLE_OPTIONS.getBooleanValue() && !option.isEnabled())
+		{
+			return false;
+		}
+		// hide options that don't work with current Minecraft versions, unless debug mode on
+		if (!option.worksForCurrentMCVersion() && !TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
+		{
+			return false;
+		}
+		// hide debug options unless debug mode on
+		if (option.isDebug() && !TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
+		{
+			return false;
+		}
+		// hide dev only options unless debug mode on and is dev env
+		if (option.isDevOnly() && !(TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue() && FabricUtil.isDevelopmentEnvironment()))
+		{
+			return false;
+		}
+		return true;
 	}
 
 	private static class Setting implements JsonSaveAble
 	{
 		public Config.Category category = Config.Category.FEATURES;
+		public SortingStrategy sortingStrategy = SortingStrategy.ALPHABET;
 
 		@Override
 		public void dumpToJson(JsonObject jsonObject)
 		{
 			jsonObject.addProperty("category", this.category.name());
+			jsonObject.addProperty("sortingStrategy", this.sortingStrategy.name());
 		}
 
 		@Override
 		public void loadFromJson(JsonObject jsonObject)
 		{
-			this.category = Config.Category.valueOf(jsonObject.get("category").getAsString());
+			this.category = this.getEnumSafe(jsonObject, "category", this.category);
+			this.sortingStrategy = this.getEnumSafe(jsonObject, "sortingStrategy", this.sortingStrategy);
 		}
 	}
 
 	private enum SortingStrategy implements IStringValue
 	{
-		ALPHABET,
-		MOST_RECENTLY_USED,
-		MOST_COMMONLY_USED;
+		ALPHABET((a, b) -> 0),
+		MOST_RECENTLY_USED(Collections.reverseOrder(Comparator.comparingLong(c -> c.getStatistic().lastUsedTime))),
+		MOST_COMMONLY_USED(Collections.reverseOrder(Comparator.comparingLong(c -> c.getStatistic().useAmount)));
+
+		private final Comparator<TweakerMoreOption> comparator;
+
+		SortingStrategy(Comparator<TweakerMoreOption> comparator)
+		{
+			this.comparator = comparator;
+		}
+
+		public Comparator<TweakerMoreOption> getComparator()
+		{
+			return comparator;
+		}
 
 		@Override
 		public String getStringValue()

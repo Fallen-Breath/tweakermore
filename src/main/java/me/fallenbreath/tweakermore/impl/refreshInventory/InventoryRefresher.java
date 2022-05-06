@@ -19,7 +19,7 @@ public class InventoryRefresher
 	 * Inspired by viaversion 1.14 -> 1.13 villager selection inventory forced resync
 	 * https://github.com/ViaVersion/ViaVersion/blob/4074352a531cfb0de6fa81e043ee761737748a7a/common/src/main/java/com/viaversion/viaversion/protocols/protocol1_14to1_13_2/packets/InventoryPackets.java#L238
 	 */
-	public static boolean refresh(KeyAction keyAction, IKeybind iKeybind)
+	public static void refresh()
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
 		ClientPlayNetworkHandler networkHandler = mc.getNetworkHandler();
@@ -43,6 +43,5 @@ public class InventoryRefresher
 					//#endif
 			));
 		}
-		return true;
 	}
 }
