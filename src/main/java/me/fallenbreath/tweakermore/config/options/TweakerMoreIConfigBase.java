@@ -19,7 +19,6 @@ public interface TweakerMoreIConfigBase extends IConfigBase
 
 	default void updateStatisticOnUse()
 	{
-		System.err.println(this.getTweakerMoreOption().getConfig().getName() + " +1 used");
 		this.getTweakerMoreOption().getStatistic().onConfigUsed();
 	}
 
