@@ -2,8 +2,8 @@ package me.fallenbreath.tweakermore.config.options;
 
 import fi.dy.masa.malilib.config.options.ConfigHotkey;
 import fi.dy.masa.malilib.hotkeys.IHotkeyCallback;
-import fi.dy.masa.malilib.hotkeys.IKeybind;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 
 import javax.annotation.Nullable;
 
@@ -25,16 +25,19 @@ public class TweakerMoreConfigHotkey extends ConfigHotkey implements TweakerMore
 	 */
 	public void setCallBack(@Nullable IHotkeyCallback callback)
 	{
-		if (callback == null)
+		// don't count OPEN_TWEAKERMORE_CONFIG_GUI cuz technically it's just a shortcut option instead of a feature option
+		if (callback == null || this == TweakerMoreConfigs.OPEN_TWEAKERMORE_CONFIG_GUI)
 		{
-			this.getKeybind().setCallback(null);
-			return;
+			this.getKeybind().setCallback(callback);
 		}
-		this.getKeybind().setCallback((action, key) -> {
-			boolean ret = callback.onKeyAction(action, key);
-			this.updateStatisticOnUse();
-			return ret;
-		});
+		else
+		{
+			this.getKeybind().setCallback((action, key) -> {
+				boolean ret = callback.onKeyAction(action, key);
+				this.updateStatisticOnUse();
+				return ret;
+			});
+		}
 	}
 
 	@Override
