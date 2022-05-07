@@ -63,6 +63,10 @@ public class RenderUtil
 			//$$ GlStateManager.rotatef(-entityRenderDispatcher.cameraPitch, 1.0F, 0.0F, 0.0F);
 			//#endif
 
+			//#if MC < 11700
+			renderContext.disableLighting();
+			//#endif
+
 			renderContext.enableTexture();
 			if (seeThrough)
 			{

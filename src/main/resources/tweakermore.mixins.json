@@ -31,7 +31,6 @@
     "tweaks.features.tweakmFlawlessFrames.VideoRendererMixin",
     "tweaks.features.tweakmSafeAfk.ClientPlayNetworkHandlerMixin",
     "tweaks.features.tweakmSafeAfk.LivingEntityMixin",
-    "tweaks.features.tweakmShowRedstoneDustUpdateOrder.RenderEventHandlerMixin",
     "tweaks.features.villagerOfferUsesDisplay.MerchantScreenAccessor",
     "tweaks.features.villagerOfferUsesDisplay.MerchantScreenWidgetButtonPageMixin",
     "tweaks.mc_tweaks.bossBarMaxEntry.BossBarHudMixin",

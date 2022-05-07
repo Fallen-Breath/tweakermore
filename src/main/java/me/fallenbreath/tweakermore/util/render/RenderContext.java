@@ -180,4 +180,15 @@ public class RenderContext
 		//$$ GlStateManager.blendFunc(srcFactor, dstFactor);
 		//#endif
 	}
+
+	//#if MC < 11700
+	public void disableLighting()
+	{
+		//#if MC >= 11500
+		RenderSystem.disableLighting();
+		//#else
+		//$$ GlStateManager.disableLighting();
+		//#endif
+	}
+	//#endif
 }

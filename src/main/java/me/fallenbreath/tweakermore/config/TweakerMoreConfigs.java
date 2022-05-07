@@ -21,7 +21,8 @@ import me.fallenbreath.tweakermore.impl.copySignTextToClipBoard.SignTextCopier;
 import me.fallenbreath.tweakermore.impl.eCraftMassCraftCompact.EasierCraftingRegistrar;
 import me.fallenbreath.tweakermore.impl.refreshInventory.InventoryRefresher;
 import me.fallenbreath.tweakermore.impl.serverDataSyncer.ServerDataSyncer;
-import me.fallenbreath.tweakermore.impl.tweakmAutoContainerProcess.HintRenderer;
+import me.fallenbreath.tweakermore.impl.showRedstoneDustUpdateOrder.RedstoneDustUpdateOrderRenderer;
+import me.fallenbreath.tweakermore.impl.tweakmAutoContainerProcess.AutoContainerProcessorHintRenderer;
 import me.fallenbreath.tweakermore.impl.tweakmDebug.TweakerMoreDebugHelper;
 import me.fallenbreath.tweakermore.impl.tweakmFlawlessFrames.FlawlessFramesHandler;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
@@ -352,6 +353,9 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKERMORE_DEBUG_MODE = newConfigBooleanHotkeyed("tweakerMoreDebugMode");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.SETTING, debug = true)
+	public static final TweakerMoreConfigBoolean TWEAKERMORE_DEBUG_BOOL = newConfigBoolean("tweakerMoreDebugBool", false);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.SETTING, debug = true)
 	public static final TweakerMoreConfigDouble TWEAKERMORE_DEBUG_DOUBLE = newConfigDouble("tweakerMoreDebugDouble", 0, -1, 1);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.SETTING, debug = true)
@@ -407,7 +411,8 @@ public class TweakerMoreConfigs
 	public static void initEventListeners()
 	{
 		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
-		RenderEventHandler.getInstance().registerGameOverlayRenderer(HintRenderer.getInstance());
+		RenderEventHandler.getInstance().registerWorldLastRenderer(new RedstoneDustUpdateOrderRenderer());
+		RenderEventHandler.getInstance().registerGameOverlayRenderer(new AutoContainerProcessorHintRenderer());
 	}
 
 	// Config fields collecting

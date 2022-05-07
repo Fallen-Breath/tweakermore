@@ -14,17 +14,8 @@ import java.util.List;
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //#endif
 
-public class HintRenderer implements IRenderer
+public class AutoContainerProcessorHintRenderer implements IRenderer
 {
-	private static final HintRenderer INSTANCE = new HintRenderer();
-
-	private HintRenderer() {}
-
-	public static HintRenderer getInstance()
-	{
-		return INSTANCE;
-	}
-
 	@Override
 	public void onRenderGameOverlayPost(
 			//#if MC >= 11700

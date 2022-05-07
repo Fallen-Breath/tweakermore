@@ -173,6 +173,8 @@
   "tweakermore.config.tweakerMoreDebugMode": "tweakerMoreDebugMode",
   "tweakermore.config.tweakerMoreDebugMode.comment": "Debug mode of TweakerMore\nWhen enabled, debug parameter options and options not supported by the current Minecraft version will be displayed\nand debugging related functions will be enabled",
   "tweakermore.config.tweakerMoreDebugMode.pretty_name": "TweakerMore Debug Mode",
+  "tweakermore.config.tweakerMoreDebugBool": "tweakerMoreDebugBool",
+  "tweakermore.config.tweakerMoreDebugBool.comment": "A boolean parameter for TweakerMore debugging",
   "tweakermore.config.tweakerMoreDebugDouble": "tweakerMoreDebugDouble",
   "tweakermore.config.tweakerMoreDebugDouble.comment": "A double parameter for TweakerMore debugging",
   "tweakermore.config.tweakerMoreDebugInt": "tweakerMoreDebugInt",
