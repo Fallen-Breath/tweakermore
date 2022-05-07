@@ -14,7 +14,8 @@ public interface Processor
 {
 	default boolean isEnabled()
 	{
-		return getConfig().getBooleanValue();
+		TweakerMoreConfigBooleanHotkeyed config = this.getConfig();
+		return config.getBooleanValue() && config.getTweakerMoreOption().isEnabled();
 	}
 
 	TweakerMoreConfigBooleanHotkeyed getConfig();

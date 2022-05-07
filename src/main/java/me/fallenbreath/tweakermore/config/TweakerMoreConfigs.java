@@ -71,14 +71,15 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_CLEAN_CONTAINER = newConfigBooleanHotkeyed("tweakmAutoCleanContainer");
 
-	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_CONTAINER_PROCESSOR_HINT = newConfigBooleanHotkeyed("tweakmContainerProcessorHint");
-
-	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigOptionList TWEAKM_CONTAINER_PROCESSOR_HINT_POS = newConfigOptionList("tweakmContainerProcessorHintPos", HudAlignment.TOP_RIGHT);
-
-	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigDouble TWEAKM_CONTAINER_PROCESSOR_HINT_SCALE = newConfigDouble("tweakmContainerProcessorHintScale", 1, 0.25, 4);
+	@Config(
+			type = Config.Type.TWEAK,
+			restriction = @Restriction(require = {
+					@Condition(litematica),
+					@Condition(itemscroller)
+			}),
+			category = Config.Category.FEATURES
+	)
+	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_COLLECT_MATERIAL_LIST_ITEM = newConfigBooleanHotkeyed("tweakmAutoCollectMaterialListItem");
 
 	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_FILL_CONTAINER = newConfigBooleanHotkeyed("tweakmAutoFillContainer");
@@ -93,15 +94,17 @@ public class TweakerMoreConfigs
 	)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_PICK_SCHEMATIC_BLOCK = newConfigBooleanHotkeyed("tweakmAutoPickSchematicBlock");
 
-	@Config(
-			type = Config.Type.TWEAK,
-			restriction = @Restriction(require = {
-					@Condition(litematica),
-					@Condition(itemscroller)
-			}),
-			category = Config.Category.FEATURES
-	)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_COLLECT_MATERIAL_LIST_ITEM = newConfigBooleanHotkeyed("tweakmAutoCollectMaterialListItem");
+	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_PUT_BACK_EXISTED_ITEM = newConfigBooleanHotkeyed("tweakmAutoPutBackExistedItem");
+
+	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_CONTAINER_PROCESSOR_HINT = newConfigBooleanHotkeyed("tweakmContainerProcessorHint");
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigOptionList TWEAKM_CONTAINER_PROCESSOR_HINT_POS = newConfigOptionList("tweakmContainerProcessorHintPos", HudAlignment.TOP_RIGHT);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigDouble TWEAKM_CONTAINER_PROCESSOR_HINT_SCALE = newConfigDouble("tweakmContainerProcessorHintScale", 1, 0.25, 4);
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SAFE_AFK = newConfigBooleanHotkeyed("tweakmSafeAfk");
@@ -378,8 +381,10 @@ public class TweakerMoreConfigs
 
 	// registering
 
-	public static void initCallbacks()
+	public static void initConfigs()
 	{
+		//////////// Callbacks ////////////
+
 		// common callbacks
 		IValueChangeCallback<ConfigBoolean> redrawConfigGui = newValue -> TweakerMoreConfigGui.getCurrentInstance().ifPresent(TweakerMoreConfigGui::reDraw);
 
@@ -398,6 +403,16 @@ public class TweakerMoreConfigs
 		setHotkeyCallback(TWEAKERMORE_DEBUG_RESET_OPTION_STATISTIC, TweakerMoreDebugHelper::resetAllConfigStatistic, false);
 		setHotkeyCallback(TWEAKERMORE_DEV_MIXIN_AUDIT, TweakerMoreDebugHelper::forceLoadAllMixins, true);
 		setHotkeyCallback(TWEAKERMORE_DEV_PRINT_DOC, DocumentGenerator::onHotKey, true);
+
+		//////////// Event Listeners ////////////
+
+		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
+		RenderEventHandler.getInstance().registerWorldLastRenderer(new RedstoneDustUpdateOrderRenderer());
+		RenderEventHandler.getInstance().registerGameOverlayRenderer(new AutoContainerProcessorHintRenderer());
+
+		//////////// Misc ////////////
+
+		TWEAKM_CONTAINER_PROCESSOR_HINT.setCommentModifier(AutoContainerProcessorHintRenderer::modifyComment);
 	}
 
 	private static void setHotkeyCallback(TweakerMoreConfigHotkey configHotkey, Runnable runnable, boolean cancelFurtherProcess)
@@ -406,13 +421,6 @@ public class TweakerMoreConfigs
 			runnable.run();
 			return cancelFurtherProcess;
 		});
-	}
-
-	public static void initEventListeners()
-	{
-		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
-		RenderEventHandler.getInstance().registerWorldLastRenderer(new RedstoneDustUpdateOrderRenderer());
-		RenderEventHandler.getInstance().registerGameOverlayRenderer(new AutoContainerProcessorHintRenderer());
 	}
 
 	// Config fields collecting

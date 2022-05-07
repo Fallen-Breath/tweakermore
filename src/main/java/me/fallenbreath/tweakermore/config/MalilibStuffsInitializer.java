@@ -14,8 +14,7 @@ public class MalilibStuffsInitializer
 
 			InputEventHandler.getKeybindManager().registerKeybindProvider(new KeybindProvider());
 
-			TweakerMoreConfigs.initCallbacks();
-			TweakerMoreConfigs.initEventListeners();
+			TweakerMoreConfigs.initConfigs();
 		});
 	}
 }

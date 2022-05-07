@@ -9,7 +9,8 @@ import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.Config;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
-import me.fallenbreath.tweakermore.mixins.doc.ConfigBaseAccessor;
+import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
+import me.fallenbreath.tweakermore.util.StringUtil;
 import me.fallenbreath.tweakermore.util.condition.ModPredicate;
 import me.fallenbreath.tweakermore.util.condition.ModRestriction;
 import net.fabricmc.loader.api.FabricLoader;
@@ -58,9 +59,9 @@ public class DocumentPrinter
 		return StringUtils.translate("tweakermore.doc_gen.type." + id);
 	}
 
-	private static String getComment(IConfigBase config)
+	private static String getComment(TweakerMoreIConfigBase config)
 	{
-		return config instanceof ConfigBaseAccessor ? StringUtils.translate(((ConfigBaseAccessor)config).getCommentKey()) : config.getComment();
+		return StringUtil.removeFormattingCode(config.getCommentNoFooter());
 	}
 
 	private static String getDefaultValue(IConfigBase config)
@@ -178,7 +179,7 @@ public class DocumentPrinter
 
 	private static void printOption(Consumer<String> writeln, TweakerMoreOption tweakerMoreOption, String lang)
 	{
-		IConfigBase config = tweakerMoreOption.getConfig();
+		TweakerMoreIConfigBase config = tweakerMoreOption.getConfig();
 		String configId = config.getName();
 
 		String title = config.getConfigGuiDisplayName();

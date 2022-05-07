@@ -6,6 +6,7 @@ import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 
@@ -16,6 +17,25 @@ public interface TweakerMoreIConfigBase extends IConfigBase
 	String PRETTY_NAME_SUFFIX = ".pretty_name";
 
 	void onValueChanged(boolean fromFile);
+
+	default void setCommentModifier(@Nullable Function<String, String> commentModifier)
+	{
+		this.getTweakerMoreOption().setCommentModifier(commentModifier);
+	}
+
+	default String getCommentNoFooter()
+	{
+		TweakerMoreOption option = this.getTweakerMoreOption();
+		option.setAppendFooterFlag(false);
+		try
+		{
+			return this.getComment();
+		}
+		finally
+		{
+			option.setAppendFooterFlag(true);
+		}
+	}
 
 	default void updateStatisticOnUse()
 	{

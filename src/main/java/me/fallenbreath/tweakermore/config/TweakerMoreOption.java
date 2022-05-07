@@ -1,5 +1,6 @@
 package me.fallenbreath.tweakermore.config;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.util.StringUtils;
@@ -8,11 +9,13 @@ import me.fallenbreath.tweakermore.config.statistic.OptionStatistic;
 import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.util.condition.ModPredicate;
 import me.fallenbreath.tweakermore.util.condition.ModRestriction;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class TweakerMoreOption
@@ -22,6 +25,9 @@ public class TweakerMoreOption
 	private final List<ModRestriction> modRestrictions;
 	private final List<ModRestriction> minecraftRestrictions;
 	private final OptionStatistic statistic;
+	@Nullable
+	protected Function<String, String> commentModifier = null;
+	private boolean appendFooterFlag = true;
 
 	public TweakerMoreOption(Config annotation, TweakerMoreIConfigBase config)
 	{
@@ -103,7 +109,7 @@ public class TweakerMoreOption
 		return Collections.emptyList();
 	}
 
-	public List<String> getModRelationsFooter()
+	private List<String> getModRelationsFooter()
 	{
 		List<String> result = Lists.newArrayList();
 		boolean first = true;
@@ -118,5 +124,34 @@ public class TweakerMoreOption
 			result.addAll(getFooter(modRestriction.getConflictions(), modRestriction.isNoConfliction(), false, "tweakermore.gui.mod_relation_footer.confliction"));
 		}
 		return result;
+	}
+
+	public void setCommentModifier(@Nullable Function<String, String> commentModifier)
+	{
+		this.commentModifier = commentModifier;
+	}
+
+	public void setAppendFooterFlag(boolean appendFooterFlag)
+	{
+		this.appendFooterFlag = appendFooterFlag;
+	}
+
+	public String modifyComment(String comment)
+	{
+		if (this.commentModifier != null)
+		{
+			comment = this.commentModifier.apply(comment);
+		}
+
+		if (this.appendFooterFlag)
+		{
+			List<String> footers = this.getModRelationsFooter();
+			if (!footers.isEmpty())
+			{
+				comment += "\n" + Joiner.on("\n").join(footers);
+			}
+		}
+
+		return comment;
 	}
 }

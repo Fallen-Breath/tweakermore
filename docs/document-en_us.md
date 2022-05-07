@@ -129,13 +129,29 @@ Does not work with easy place mode
     - Litematica (`litematica`)
 
 
+### tweakmAutoPutBackExistedItem
+
+Automatically put back all items which also exist in the container from your inventory into the container
+
+and then close the container
+
+- Category: Features
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Item Scroller (`itemscroller`)
+
+
 ### tweakmContainerProcessorHint
 
-Displays the enable status of auto container processing related features, including:
+Displays the enabling status of auto container processing related features, including:
 
 - tweakmAutoCleanContainer
 
 - tweakmAutoFillContainer
+
+- tweakmAutoPutBackExistedItem
 
 - tweakmAutoCollectMaterialListItem
 

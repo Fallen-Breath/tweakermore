@@ -22,13 +22,6 @@ import java.util.List;
 public class ContainerMaterialListItemCollector implements Processor
 {
 	@Override
-	public boolean isEnabled()
-	{
-		// make sure required mods are loaded
-		return Processor.super.isEnabled() && getConfig().getTweakerMoreOption().isEnabled();
-	}
-
-	@Override
 	public TweakerMoreConfigBooleanHotkeyed getConfig()
 	{
 		return TweakerMoreConfigs.TWEAKM_AUTO_COLLECT_MATERIAL_LIST_ITEM;

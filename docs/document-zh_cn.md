@@ -129,6 +129,20 @@ TweakerMore提供的新功能
     - Litematica (`litematica`)
 
 
+### 自动放回已存在的物品 (tweakmAutoPutBackExistedItem)
+
+自动将在容器中也存在的背包物品放回容器中
+
+然后关闭容器
+
+- 分类: 功能
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Item Scroller (`itemscroller`)
+
+
 ### 自动容器处理提示 (tweakmContainerProcessorHint)
 
 在界面右上角显示自动容器处理相关功能的开启情况，包括：
@@ -136,6 +150,8 @@ TweakerMore提供的新功能
 - 自动清空容器 (tweakmAutoCleanContainer)
 
 - 自动装填容器 (tweakmAutoFillContainer)
+
+- 自动放回已存在的物品 (tweakmAutoPutBackExistedItem)
 
 - 自动收集材料列表物品 (tweakmAutoCollectMaterialListItem)
 

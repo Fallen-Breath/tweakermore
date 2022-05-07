@@ -45,11 +45,7 @@ public abstract class ConfigBaseMixin
 	private void appendModRequirementHeader(CallbackInfoReturnable<String> cir)
 	{
 		TweakerMoreConfigs.getOptionFromConfig((IConfigBase)this).ifPresent(tweakerMoreOption -> {
-			List<String> footers = tweakerMoreOption.getModRelationsFooter();
-			if (!footers.isEmpty())
-			{
-				cir.setReturnValue(cir.getReturnValue() + "\n" + Joiner.on("\n").join(footers));
-			}
+			cir.setReturnValue(tweakerMoreOption.modifyComment(cir.getReturnValue()));
 		});
 	}
 }
