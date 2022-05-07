@@ -86,9 +86,9 @@ if (System.getenv("BUILD_RELEASE") != "true") {
 }
 String fullModVersion = project.mod_version + versionSuffix
 
-version = 'mc' + project.minecraft_version + '-v' + fullModVersion
+version = 'v' + fullModVersion
 group = project.parent.maven_group
-archivesBaseName = project.parent.archives_base_name
+archivesBaseName = project.parent.archives_base_name + '-mc' + project.minecraft_version
 
 processResources {
 	inputs.property "version", fullModVersion
