@@ -24,7 +24,7 @@ public class ContainerCleaner implements Processor
 		int counter = 0;
 		for (Slot slot : containerInvSlots)
 		{
-			if (slot.hasStack())
+			if (slot.hasStack() && TweakerMoreConfigs.TWEAKM_AUTO_CLEAN_CONTAINER_RESTRICTION.isAllowed(slot.getStack().getItem()))
 			{
 				InventoryUtils.dropStack(containerScreen, slot.id);
 				counter++;

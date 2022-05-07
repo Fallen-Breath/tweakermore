@@ -81,6 +81,43 @@ TweakerMore提供的新功能
     - Item Scroller (`itemscroller`)
 
 
+### 自动清空容器-黑名单 (tweakmAutoCleanContainerBlackList)
+
+使用自动清空容器功能时不会从容器里中扔出的物品类型
+
+- 分类: 功能
+- 类型: 字符串列表
+- 默认值: `[]`
+- 模组约束:
+  - 依赖模组:
+    - Item Scroller (`itemscroller`)
+
+
+### 自动清空容器-名单约束类型 (tweakmAutoCleanContainerListType)
+
+触发自动清空容器功能的物品名单约束类型
+
+- 分类: 功能
+- 类型: 选项列表
+- 默认值: `none`
+- 可用选项: `None`, `Black List`, `White List`
+- 模组约束:
+  - 依赖模组:
+    - Item Scroller (`itemscroller`)
+
+
+### 自动清空容器-白名单 (tweakmAutoCleanContainerWhiteList)
+
+使用自动清空容器功能时从容器里中扔出的物品类型
+
+- 分类: 功能
+- 类型: 字符串列表
+- 默认值: `[minecraft:shulker_box]`
+- 模组约束:
+  - 依赖模组:
+    - Item Scroller (`itemscroller`)
+
+
 ### 自动收集材料列表物品 (tweakmAutoCollectMaterialListItem)
 
 打开容器后，自动收集litematica材料列表中缺失的物品至玩家物品栏

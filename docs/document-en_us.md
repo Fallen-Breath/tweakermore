@@ -81,6 +81,43 @@ and then close the container
     - Item Scroller (`itemscroller`)
 
 
+### tweakmAutoCleanContainerBlackList
+
+Items that will NOT be thrown out from the container with tweakmAutoCleanContainer
+
+- Category: Features
+- Type: string list
+- Default value: `[]`
+- Mod restrictions:
+  - Required mods:
+    - Item Scroller (`itemscroller`)
+
+
+### tweakmAutoCleanContainerListType
+
+The item restriction type for tweakmAutoCleanContainer
+
+- Category: Features
+- Type: option list
+- Default value: `none`
+- Available options: `None`, `Black List`, `White List`
+- Mod restrictions:
+  - Required mods:
+    - Item Scroller (`itemscroller`)
+
+
+### tweakmAutoCleanContainerWhiteList
+
+Items that will be thrown out from the container with tweakmAutoCleanContainer
+
+- Category: Features
+- Type: string list
+- Default value: `[minecraft:shulker_box]`
+- Mod restrictions:
+  - Required mods:
+    - Item Scroller (`itemscroller`)
+
+
 ### tweakmAutoCollectMaterialListItem
 
 Automatically collect missing items in litematica mod material list in the opened container to player inventory

@@ -71,6 +71,17 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_CLEAN_CONTAINER = newConfigBooleanHotkeyed("tweakmAutoCleanContainer");
 
+	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigOptionList TWEAKM_AUTO_CLEAN_CONTAINER_LIST_TYPE = newConfigOptionList("tweakmAutoCleanContainerListType", UsageRestriction.ListType.NONE);
+
+	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigStringList TWEAKM_AUTO_CLEAN_CONTAINER_WHITELIST = newConfigStringList("tweakmAutoCleanContainerWhiteList", ImmutableList.of(RegistryUtil.getItemId(Items.SHULKER_BOX)));
+
+	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigStringList TWEAKM_AUTO_CLEAN_CONTAINER_BLACKLIST = newConfigStringList("tweakmAutoCleanContainerBlackList", ImmutableList.of(RegistryUtil.getItemId(Items.SHULKER_BOX)));
+
+	public static final ItemRestriction TWEAKM_AUTO_CLEAN_CONTAINER_RESTRICTION = new ItemRestriction();
+
 	@Config(
 			type = Config.Type.TWEAK,
 			restriction = @Restriction(require = {

@@ -51,6 +51,8 @@ public class TweakerMoreConfigStorage implements IConfigHandler
 	{
 		TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.setListType((UsageRestriction.ListType)TweakerMoreConfigs.HAND_RESTORE_LIST_TYPE.getOptionListValue());
 		TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.setListContents(TweakerMoreConfigs.HAND_RESTORE_BLACKLIST.getStrings(), TweakerMoreConfigs.HAND_RESTORE_WHITELIST.getStrings());
+		TweakerMoreConfigs.TWEAKM_AUTO_CLEAN_CONTAINER_RESTRICTION.setListType((UsageRestriction.ListType)TweakerMoreConfigs.TWEAKM_AUTO_CLEAN_CONTAINER_LIST_TYPE.getOptionListValue());
+		TweakerMoreConfigs.TWEAKM_AUTO_CLEAN_CONTAINER_RESTRICTION.setListContents(TweakerMoreConfigs.TWEAKM_AUTO_CLEAN_CONTAINER_BLACKLIST.getStrings(), TweakerMoreConfigs.TWEAKM_AUTO_CLEAN_CONTAINER_WHITELIST.getStrings());
 	}
 
 	@Override
