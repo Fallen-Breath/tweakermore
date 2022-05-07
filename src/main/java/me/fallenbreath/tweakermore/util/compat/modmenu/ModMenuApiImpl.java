@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.compat.modmenu;
+package me.fallenbreath.tweakermore.util.compat.modmenu;
 
 //#if MC >= 11600
 //$$ import com.terraformersmc.modmenu.api.ConfigScreenFactory;

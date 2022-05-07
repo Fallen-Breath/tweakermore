@@ -21,7 +21,7 @@
       "me.fallenbreath.tweakermore.TweakerMoreMod"
     ],
     "modmenu": [
-      "me.fallenbreath.tweakermore.compat.modmenu.ModMenuApiImpl"
+      "me.fallenbreath.tweakermore.util.compat.modmenu.ModMenuApiImpl"
     ]
   },
   "mixins": [
