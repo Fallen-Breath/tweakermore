@@ -21,6 +21,7 @@ public abstract class GameRendererMixin
 	//#endif
 	void tweakmFakeNightVision(CallbackInfoReturnable<Float> cir)
 	{
+		// only mc.player and camera.getFocusedEntity() will invoke this method, so we don't need to check the entity arg
 		if (TweakerMoreConfigs.TWEAKM_FAKE_NIGHT_VISION.getBooleanValue())
 		{
 			cir.setReturnValue(1.0F);

@@ -1,6 +1,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.tweakmFakeNightVision;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
@@ -21,7 +22,9 @@ public abstract class LivingEntityMixin
 	{
 		if (TweakerMoreConfigs.TWEAKM_FAKE_NIGHT_VISION.getBooleanValue())
 		{
-			if (effect == StatusEffects.NIGHT_VISION)
+			LivingEntity self = (LivingEntity)(Object)this;
+			MinecraftClient mc = MinecraftClient.getInstance();
+			if (effect == StatusEffects.NIGHT_VISION && (self == mc.player || self == mc.gameRenderer.getCamera().getFocusedEntity()))
 			{
 				cir.setReturnValue(true);
 			}
