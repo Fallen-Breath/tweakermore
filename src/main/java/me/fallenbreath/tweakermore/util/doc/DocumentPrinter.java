@@ -88,10 +88,6 @@ public class DocumentPrinter
 		{
 			return hotkey;
 		}
-		else if (config instanceof IStringRepresentable)
-		{
-			return codeBlock(((IStringRepresentable) config).getDefaultStringValue());
-		}
 		else if (config instanceof IConfigStringList)
 		{
 			return codeBlock(((IConfigStringList)config).getDefaultStrings().toString());
@@ -99,6 +95,10 @@ public class DocumentPrinter
 		else if (config instanceof IConfigOptionList)
 		{
 			return codeBlock(((IConfigOptionList)config).getDefaultOptionListValue().getDisplayName());
+		}
+		else if (config instanceof IStringRepresentable)
+		{
+			return codeBlock(((IStringRepresentable) config).getDefaultStringValue());
 		}
 		TweakerMoreMod.LOGGER.warn("Unknown type found in getDefaultValue: {}", config.getClass());
 		return italic("unknown type: " + config.getClass().getName());

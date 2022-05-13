@@ -99,7 +99,7 @@ TweakerMore提供的新功能
 
 - 分类: 功能
 - 类型: 选项列表
-- 默认值: `none`
+- 默认值: `None`
 - 可用选项: `None`, `Black List`, `White List`
 - 模组约束:
   - 依赖模组:
@@ -205,7 +205,7 @@ TweakerMore提供的新功能
 
 - 分类: 功能
 - 类型: 选项列表
-- 默认值: `top_right`
+- 默认值: `Top Right`
 - 可用选项: `Top Left`, `Top Right`, `Bottom Left`, `Bottom Right`, `Center`
 
 
@@ -589,7 +589,7 @@ Does not affect server-side weather
 
 - 分类: MC修改
 - 类型: 选项列表
-- 默认值: `clear`
+- 默认值: `晴天`
 - 可用选项: `晴天`, `降雨`, `雷暴`
 
 
@@ -641,7 +641,7 @@ tweakHandRestock功能的物品名单约束类型
 
 - 分类: 模组修改
 - 类型: 选项列表
-- 默认值: `none`
+- 默认值: `None`
 - 可用选项: `None`, `Black List`, `White List`
 - 模组约束:
   - 依赖模组:

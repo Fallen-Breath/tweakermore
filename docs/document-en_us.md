@@ -99,7 +99,7 @@ The item restriction type for tweakmAutoCleanContainer
 
 - Category: Features
 - Type: option list
-- Default value: `none`
+- Default value: `None`
 - Available options: `None`, `Black List`, `White List`
 - Mod restrictions:
   - Required mods:
@@ -205,7 +205,7 @@ The displayed position of the auto container processor enable status hint
 
 - Category: Features
 - Type: option list
-- Default value: `top_right`
+- Default value: `Top Right`
 - Available options: `Top Left`, `Top Right`, `Bottom Left`, `Bottom Right`, `Center`
 
 
@@ -589,7 +589,7 @@ The client-side weather value to be overridden by tweak tweakmWeatherOverride
 
 - Category: MC Tweaks
 - Type: option list
-- Default value: `clear`
+- Default value: `Clear sky`
 - Available options: `Clear sky`, `Rain`, `Thunderstorm`
 
 
@@ -641,7 +641,7 @@ The item restriction type for tweakHandRestock
 
 - Category: Mods Tweaks
 - Type: option list
-- Default value: `none`
+- Default value: `None`
 - Available options: `None`, `Black List`, `White List`
 - Mod restrictions:
   - Required mods:
