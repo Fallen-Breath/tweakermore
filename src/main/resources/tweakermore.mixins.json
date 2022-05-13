@@ -16,7 +16,6 @@
     "core.gui.WidgetSearchBarAccessor",
     "core.migration.ConfigBooleanHotkeyedMixin",
     "core.migration.ConfigsMixin",
-    "doc.ConfigBaseAccessor",
     "doc.MinecraftClientMixin",
     "tweaks.features.copySignTextToClipBoard.SignBlockEntityAccessor",
     "tweaks.features.shulkerTooltipEnchantmentHint.ShulkerBoxBlockMixin",
