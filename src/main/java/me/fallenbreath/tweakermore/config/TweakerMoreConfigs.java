@@ -16,6 +16,7 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.options.*;
+import me.fallenbreath.tweakermore.config.options.listentries.WeatherOverrideValue;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.impl.copySignTextToClipBoard.SignTextCopier;
 import me.fallenbreath.tweakermore.impl.eCraftMassCraftCompact.EasierCraftingRegistrar;
@@ -216,6 +217,12 @@ public class TweakerMoreConfigs
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_UNLIMITED_ENTITY_RENDER_DISTANCE = newConfigBooleanHotkeyed("tweakmUnlimitedEntityRenderDistance");
+
+	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_WEATHER_OVERRIDE = newConfigBooleanHotkeyed("tweakmWeatherOverride");
+
+	@Config(type = Config.Type.LIST, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigOptionList WEATHER_OVERRIDE_VALUE = newConfigOptionList("weatherOverrideValue", WeatherOverrideValue.DEFAULT);
 
 	////////////////////
 	//   Mod Tweaks   //

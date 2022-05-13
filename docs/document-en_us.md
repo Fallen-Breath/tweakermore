@@ -87,7 +87,7 @@ Items that will NOT be thrown out from the container with tweakmAutoCleanContain
 
 - Category: Features
 - Type: string list
-- Default value: `[]`
+- Default value: `[minecraft:shulker_box]`
 - Mod restrictions:
   - Required mods:
     - Item Scroller (`itemscroller`)
@@ -322,7 +322,7 @@ Basically it stably adds your ping to the server with the given value
 
 ### daytimeOverrideValue
 
-The client-side daytime value to be override by tweak tweakmDaytimeOverride
+The client-side daytime value to be overridden by tweak tweakmDaytimeOverride
 
 - Category: MC Tweaks
 - Type: integer
@@ -527,7 +527,7 @@ Display content fill level in first line of the tooltip of shulker box items
 
 ### tweakmDaytimeOverride
 
-Override the time of day of the client world
+Override the time of day in the client world
 
 Does not affect server-side daytime
 
@@ -570,6 +570,27 @@ Still requires the server to send entity packets via EntityTracker properly
 - Category: MC Tweaks
 - Type: togglable hotkey
 - Default value: *no hotkey*, `false`
+
+
+### tweakmWeatherOverride
+
+Override the weather of the world in the client world
+
+Does not affect server-side weather
+
+- Category: MC Tweaks
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+
+
+### weatherOverrideValue
+
+The client-side weather value to be overridden by tweak tweakmWeatherOverride
+
+- Category: MC Tweaks
+- Type: option list
+- Default value: `clear`
+- Available options: `Clear sky`, `Rain`, `Thunderstorm`
 
 
 ## Mods Tweaks

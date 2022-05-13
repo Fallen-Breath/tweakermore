@@ -87,7 +87,7 @@ TweakerMore提供的新功能
 
 - 分类: 功能
 - 类型: 字符串列表
-- 默认值: `[]`
+- 默认值: `[minecraft:shulker_box]`
 - 模组约束:
   - 依赖模组:
     - Item Scroller (`itemscroller`)
@@ -570,6 +570,27 @@ TweakerMore提供的新功能
 - 分类: MC修改
 - 类型: 可开关型热键
 - 默认值: *无快捷键*, `false`
+
+
+### 覆盖世界天气 (tweakmWeatherOverride)
+
+Override the weather of the world in the client world
+
+Does not affect server-side weather
+
+- 分类: MC修改
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+
+
+### 覆盖世界天气种类 (weatherOverrideValue)
+
+用于功能tweakmWeatherOverride的客户端的世界天气种类
+
+- 分类: MC修改
+- 类型: 选项列表
+- 默认值: `clear`
+- 可用选项: `晴天`, `降雨`, `雷暴`
 
 
 ## 模组修改

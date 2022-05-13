@@ -125,6 +125,11 @@
   "tweakermore.config.tweakmUnlimitedEntityRenderDistance": "无限实体渲染距离",
   "tweakermore.config.tweakmUnlimitedEntityRenderDistance.comment": "将客户端实体渲染距离设置为无限制\n仍然需要服务器正确地借助EntityTracker发送相关实体数据包",
   "tweakermore.config.tweakmUnlimitedEntityRenderDistance.pretty_name": "无限实体渲染距离",
+  "tweakermore.config.tweakmWeatherOverride": "覆盖世界天气",
+  "tweakermore.config.tweakmWeatherOverride.comment": "Override the weather of the world in the client world\nDoes not affect server-side weather",
+  "tweakermore.config.tweakmWeatherOverride.pretty_name": "覆盖世界天气",
+  "tweakermore.config.weatherOverrideValue": "覆盖世界天气种类",
+  "tweakermore.config.weatherOverrideValue.comment": "用于功能tweakmWeatherOverride的客户端的世界天气种类",
 
   "// Mod Tweaks": "================================================",
 
@@ -198,7 +203,13 @@
   "tweakermore.config.tweakerMoreDevPrintDoc": "TweakerMore开发-打印文档",
   "tweakermore.config.tweakerMoreDevPrintDoc.comment": "文档生成器",
 
-  "// GUI and Misc": "================================================",
+  "// List entries": "================================================",
+
+  "tweakermore.list_entry.weatherOverrideValue.clear": "晴天",
+  "tweakermore.list_entry.weatherOverrideValue.rain": "降雨",
+  "tweakermore.list_entry.weatherOverrideValue.thunder": "雷暴",
+
+  "// GUI": "================================================",
 
   "tweakermore.hotkeys.category.main": "TweakerMore",
 
@@ -236,6 +247,8 @@
   "tweakermore.gui.mod_relation_footer.or": "或",
   "tweakermore.gui.mod_relation_footer.requirement": "依赖模组:",
   "tweakermore.gui.mod_relation_footer.confliction": "冲突模组:",
+
+  "// Misc": "================================================",
 
   "tweakermore.util.mod.compactchat": "CompactChat",
   "tweakermore.util.mod.easiercrafting": "EasierCrafting",

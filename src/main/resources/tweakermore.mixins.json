@@ -62,6 +62,7 @@
     "tweaks.mc_tweaks.tweakmFakeNightVision.GameRendererMixin",
     "tweaks.mc_tweaks.tweakmFakeNightVision.LivingEntityMixin",
     "tweaks.mc_tweaks.tweakmUnlimitedEntityRenderDistance.EntityMixin",
+    "tweaks.mc_tweaks.tweakmWeatherOverride.WorldMixin",
     "tweaks.mod_tweaks.eCraftItemScrollerCompact.ConfigsMixin",
     "tweaks.mod_tweaks.eCraftItemScrollerCompact.CraftingHandlerMixin",
     "tweaks.mod_tweaks.handRestoreRestriction.InventoryUtilsMixin",

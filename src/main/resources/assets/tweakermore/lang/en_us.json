@@ -72,7 +72,7 @@
   "tweakermore.config.connectionSimulatedDelay": "connectionSimulatedDelay",
   "tweakermore.config.connectionSimulatedDelay.comment": "Client network delay simulator. Enabled when the value is greater than 0\nAdds given delay (in milliseconds) before any packet processing\nBasically it stably adds your ping to the server with the given value",
   "tweakermore.config.daytimeOverrideValue": "daytimeOverrideValue",
-  "tweakermore.config.daytimeOverrideValue.comment": "The client-side daytime value to be override by tweak tweakmDaytimeOverride",
+  "tweakermore.config.daytimeOverrideValue.comment": "The client-side daytime value to be overridden by tweak tweakmDaytimeOverride",
   "tweakermore.config.disableBeaconBeamRendering": "disableBeaconBeamRendering",
   "tweakermore.config.disableBeaconBeamRendering.comment": "Prevents rendering beacon beams\nSo beacon beams can never suddenly come out when recording / rendering",
   "tweakermore.config.disableBeaconBeamRendering.pretty_name": "Disable Beacon Beam Rendering",
@@ -114,7 +114,7 @@
   "tweakermore.config.shulkerTooltipFillLevelHint": "shulkerTooltipFillLevelHint",
   "tweakermore.config.shulkerTooltipFillLevelHint.comment": "Display content fill level in first line of the tooltip of shulker box items",
   "tweakermore.config.tweakmDaytimeOverride": "tweakmDaytimeOverride",
-  "tweakermore.config.tweakmDaytimeOverride.comment": "Override the time of day of the client world\nDoes not affect server-side daytime",
+  "tweakermore.config.tweakmDaytimeOverride.comment": "Override the time of day in the client world\nDoes not affect server-side daytime",
   "tweakermore.config.tweakmDaytimeOverride.pretty_name": "Daytime Override",
   "tweakermore.config.tweakmFakeNightVision": "tweakmFakeNightVision",
   "tweakermore.config.tweakmFakeNightVision.comment": "Always use night vision for game rendering, regardless of whether the player actually has night vision",
@@ -125,7 +125,12 @@
   "tweakermore.config.tweakmUnlimitedEntityRenderDistance": "tweakmUnlimitedEntityRenderDistance",
   "tweakermore.config.tweakmUnlimitedEntityRenderDistance.comment": "Set client-side entity render distance to unlimited\nStill requires the server to send entity packets via EntityTracker properly",
   "tweakermore.config.tweakmUnlimitedEntityRenderDistance.pretty_name": "Unlimited Entity Render Distance",
-  
+  "tweakermore.config.tweakmWeatherOverride": "tweakmWeatherOverride",
+  "tweakermore.config.tweakmWeatherOverride.comment": "Override the weather of the world in the client world\nDoes not affect server-side weather",
+  "tweakermore.config.tweakmWeatherOverride.pretty_name": "Weather Override",
+  "tweakermore.config.weatherOverrideValue": "weatherOverrideValue",
+  "tweakermore.config.weatherOverrideValue.comment": "The client-side weather value to be overridden by tweak tweakmWeatherOverride",
+
   "// Mod Tweaks": "================================================",
 
   "tweakermore.config.applyTweakerMoreOptionLabelGlobally": "applyTweakerMoreOptionLabelGlobally",
@@ -198,7 +203,13 @@
   "tweakermore.config.tweakerMoreDevPrintDoc": "tweakerMoreDevPrintDoc",
   "tweakermore.config.tweakerMoreDevPrintDoc.comment": "Document Printer",
 
-  "// GUI and Misc": "================================================",
+  "// List entries": "================================================",
+
+  "tweakermore.list_entry.weatherOverrideValue.clear": "Clear sky",
+  "tweakermore.list_entry.weatherOverrideValue.rain": "Rain",
+  "tweakermore.list_entry.weatherOverrideValue.thunder": "Thunderstorm",
+
+  "// GUI": "================================================",
 
   "tweakermore.hotkeys.category.main": "TweakerMore",
 
@@ -236,6 +247,8 @@
   "tweakermore.gui.mod_relation_footer.or": "or",
   "tweakermore.gui.mod_relation_footer.requirement": "Required mods:",
   "tweakermore.gui.mod_relation_footer.confliction": "Conflicted mods:",
+
+  "// Misc": "================================================",
 
   "tweakermore.util.mod.compactchat": "CompactChat",
   "tweakermore.util.mod.easiercrafting": "EasierCrafting",

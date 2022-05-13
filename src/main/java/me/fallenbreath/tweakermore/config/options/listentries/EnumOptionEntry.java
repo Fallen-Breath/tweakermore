@@ -13,11 +13,15 @@ public interface EnumOptionEntry extends IConfigOptionListEntry
 
 	String name();
 	int ordinal();
-	EnumOptionEntry[] values();
 
 	////////////////////////////////////////////
 	//            to be implemented           //
 	////////////////////////////////////////////
+
+	/**
+	 * Redirect this to Enum.values()
+	 */
+	EnumOptionEntry[] getAllValues();
 
 	/**
 	 * The default/fallback value
@@ -49,18 +53,18 @@ public interface EnumOptionEntry extends IConfigOptionListEntry
 	default IConfigOptionListEntry cycle(boolean forward)
 	{
 		int index = this.ordinal();
-		EnumOptionEntry[] values = this.values();
+		EnumOptionEntry[] values = this.getAllValues();
 
 		index += forward ? 1 : -1;
 		index = (index + values.length) % values.length;
 
-		return values()[index];
+		return values[index];
 	}
 
 	@Override
 	default IConfigOptionListEntry fromString(String value)
 	{
-		return Arrays.stream(values()).
+		return Arrays.stream(getAllValues()).
 				filter(o -> o.name().equalsIgnoreCase(value)).
 				findFirst().
 				orElseGet(this::getDefault);
