@@ -1,7 +1,5 @@
 package me.fallenbreath.tweakermore.impl.refreshInventory;
 
-import fi.dy.masa.malilib.hotkeys.IKeybind;
-import fi.dy.masa.malilib.hotkeys.KeyAction;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.container.SlotActionType;

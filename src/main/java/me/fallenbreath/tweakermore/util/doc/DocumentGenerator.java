@@ -1,8 +1,6 @@
 package me.fallenbreath.tweakermore.util.doc;
 
 import com.google.common.collect.ImmutableList;
-import fi.dy.masa.malilib.hotkeys.IKeybind;
-import fi.dy.masa.malilib.hotkeys.KeyAction;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.util.FabricUtil;
 import net.minecraft.client.MinecraftClient;
