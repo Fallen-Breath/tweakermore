@@ -112,6 +112,8 @@
   "tweakermore.config.shulkerTooltipEnchantmentHint.comment": "Display enchantments of items in the tooltip of shulker box items",
   "tweakermore.config.shulkerTooltipFillLevelHint": "shulkerTooltipFillLevelHint",
   "tweakermore.config.shulkerTooltipFillLevelHint.comment": "Display content fill level in first line of the tooltip of shulker box items",
+  "tweakermore.config.shulkerTooltipHintLengthLimit": "shulkerTooltipHintLengthLimit",
+  "tweakermore.config.shulkerTooltipHintLengthLimit.comment": "The text length limit used during displaying extra information of items in the tooltip of shulker box items\nWhen exceed, remaining information will be folded",
   "tweakermore.config.shulkerTooltipPotionInfoHint": "shulkerTooltipPotionInfoHint",
   "tweakermore.config.shulkerTooltipPotionInfoHint.comment": "Display potion information of items in the tooltip of shulker box items",
   "tweakermore.config.tweakmDaytimeOverride": "tweakmDaytimeOverride",

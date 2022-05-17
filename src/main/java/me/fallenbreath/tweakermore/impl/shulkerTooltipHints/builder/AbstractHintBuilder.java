@@ -1,5 +1,6 @@
 package me.fallenbreath.tweakermore.impl.shulkerTooltipHints.builder;
 
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.item.ItemStack;
@@ -14,8 +15,6 @@ import java.util.List;
 
 public abstract class AbstractHintBuilder
 {
-	protected static final int MAX_TEXT_LENGTH = 120;
-
 	@Nullable
 	public abstract BaseText build(ItemStack itemStack);
 
@@ -34,11 +33,12 @@ public abstract class AbstractHintBuilder
 		}
 		BaseText extraText = getDivider();
 
+		int maxLength = TweakerMoreConfigs.SHULKER_TOOLTIP_HINT_LENGTH_LIMIT.getIntegerValue();
 		TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
 		int idx;
 		for (idx = 0; idx < amount; idx++)
 		{
-			if (idx > 0 && textRenderer.getStringWidth(extraText.getString() + texts.get(idx).getString()) > MAX_TEXT_LENGTH)
+			if (idx > 0 && textRenderer.getStringWidth(extraText.getString() + texts.get(idx).getString()) > maxLength)
 			{
 				break;
 			}

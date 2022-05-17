@@ -525,6 +525,19 @@ TweakerMore提供的新功能
 ![shulkerTooltipFillLevelHint](assets/shulkerTooltipFillLevelHint-zh_cn.png)
 
 
+### 潜影盒物品提示长度限制 (shulkerTooltipHintLengthLimit)
+
+在显示潜影盒工具提示中的额外信息时，文本长度的限制
+
+在超出限制时，剩余未显示的信息将被折叠
+
+- 分类: MC修改
+- 类型: 整数
+- 默认值: `120`
+- 最小值: `0`
+- 最大值: `600`
+
+
 ### 潜影盒物品药水提示 (shulkerTooltipPotionInfoHint)
 
 在潜影盒物品的工具提示中显示物品提供的药水效果

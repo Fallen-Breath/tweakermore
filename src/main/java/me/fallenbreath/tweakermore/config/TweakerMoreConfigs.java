@@ -207,6 +207,9 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBoolean SHULKER_TOOLTIP_FILL_LEVEL_HINT = newConfigBoolean("shulkerTooltipFillLevelHint", false);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigInteger SHULKER_TOOLTIP_HINT_LENGTH_LIMIT = newConfigInteger("shulkerTooltipHintLengthLimit", 120, 0, 600);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean SHULKER_TOOLTIP_POTION_INFO_HINT = newConfigBoolean("shulkerTooltipPotionInfoHint", false);
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)

@@ -525,6 +525,19 @@ Display content fill level in first line of the tooltip of shulker box items
 ![shulkerTooltipFillLevelHint](assets/shulkerTooltipFillLevelHint-en_us.png)
 
 
+### shulkerTooltipHintLengthLimit
+
+The text length limit used during displaying extra information of items in the tooltip of shulker box items
+
+When exceed, remaining information will be folded
+
+- Category: MC Tweaks
+- Type: integer
+- Default value: `120`
+- Minimum value: `0`
+- Maximum value: `600`
+
+
 ### shulkerTooltipPotionInfoHint
 
 Display potion information of items in the tooltip of shulker box items
