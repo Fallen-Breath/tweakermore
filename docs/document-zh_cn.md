@@ -525,6 +525,17 @@ TweakerMore提供的新功能
 ![shulkerTooltipFillLevelHint](assets/shulkerTooltipFillLevelHint-zh_cn.png)
 
 
+### 潜影盒物品药水提示 (shulkerTooltipPotionInfoHint)
+
+在潜影盒物品的工具提示中显示物品提供的药水效果
+
+- 分类: MC修改
+- 类型: 布尔值
+- 默认值: `false`
+
+![shulkerTooltipPotionInfoHint](assets/shulkerTooltipPotionInfoHint-zh_cn.png)
+
+
 ### 覆盖世界时间 (tweakmDaytimeOverride)
 
 覆盖客户端中的世界时间

@@ -110,9 +110,10 @@
   "tweakermore.config.scoreboardSideBarScale.comment": "将计分板侧边栏按照给定参数进行缩放显示",
   "tweakermore.config.shulkerTooltipEnchantmentHint": "潜影盒物品附魔提示",
   "tweakermore.config.shulkerTooltipEnchantmentHint.comment": "在潜影盒物品的工具提示中显示物品的附魔",
-  "tweakermore.config.shulkerTooltipEnchantmentHint.more": "... %1$sx附魔",
   "tweakermore.config.shulkerTooltipFillLevelHint": "潜影盒物品填充率提示",
   "tweakermore.config.shulkerTooltipFillLevelHint.comment": "在潜影盒物品工具提示的第一行显示其内容物填充率",
+  "tweakermore.config.shulkerTooltipPotionInfoHint": "潜影盒物品药水提示",
+  "tweakermore.config.shulkerTooltipPotionInfoHint.comment": "在潜影盒物品的工具提示中显示物品提供的药水效果",
   "tweakermore.config.tweakmDaytimeOverride": "覆盖世界时间",
   "tweakermore.config.tweakmDaytimeOverride.comment": "覆盖客户端中的世界时间\n对服务端无影响",
   "tweakermore.config.tweakmDaytimeOverride.pretty_name": "覆盖世界时间",
@@ -249,6 +250,8 @@
   "tweakermore.gui.mod_relation_footer.confliction": "冲突模组:",
 
   "// Misc": "================================================",
+
+  "tweakermore.impl.shulkerTooltipHintBuilder.more": "... %1$sx",
 
   "tweakermore.util.mod.compactchat": "CompactChat",
   "tweakermore.util.mod.easiercrafting": "EasierCrafting",

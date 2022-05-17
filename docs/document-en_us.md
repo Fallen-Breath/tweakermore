@@ -525,6 +525,17 @@ Display content fill level in first line of the tooltip of shulker box items
 ![shulkerTooltipFillLevelHint](assets/shulkerTooltipFillLevelHint-en_us.png)
 
 
+### shulkerTooltipPotionInfoHint
+
+Display potion information of items in the tooltip of shulker box items
+
+- Category: MC Tweaks
+- Type: boolean
+- Default value: `false`
+
+![shulkerTooltipPotionInfoHint](assets/shulkerTooltipPotionInfoHint-en_us.png)
+
+
 ### tweakmDaytimeOverride
 
 Override the time of day in the client world

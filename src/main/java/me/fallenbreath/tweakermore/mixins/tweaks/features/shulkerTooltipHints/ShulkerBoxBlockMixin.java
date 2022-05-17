@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.features.shulkerTooltipEnchantmentHint;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.shulkerTooltipHints;
 
 import me.fallenbreath.tweakermore.impl.shulkerTooltipHints.ShulkerToolTipEnhancer;
 import net.minecraft.block.ShulkerBoxBlock;
@@ -44,7 +44,7 @@ public abstract class ShulkerBoxBlockMixin
 			),
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
-	private void shulkerTooltipEnchantmentHint(
+	private void shulkerTooltipHints(
 			ItemStack shulker, BlockView view, List<Text> tooltip, TooltipContext options,
 			CallbackInfo ci,
 			CompoundTag compoundTag, DefaultedList<ItemStack> defaultedList, int i_, int j_, Iterator<ItemStack> var9, ItemStack itemStack,
@@ -55,6 +55,6 @@ public abstract class ShulkerBoxBlockMixin
 			//#endif
 	)
 	{
-		ShulkerToolTipEnhancer.appendEnchantmentHints(itemStack, text);
+		ShulkerToolTipEnhancer.appendContentHints(itemStack, text);
 	}
 }

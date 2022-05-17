@@ -110,9 +110,10 @@
   "tweakermore.config.scoreboardSideBarScale.comment": "Scale the scoreboard side bar hud with given factor",
   "tweakermore.config.shulkerTooltipEnchantmentHint": "shulkerTooltipEnchantmentHint",
   "tweakermore.config.shulkerTooltipEnchantmentHint.comment": "Display enchantments of items in the tooltip of shulker box items",
-  "tweakermore.config.shulkerTooltipEnchantmentHint.more": "... %1$sx",
   "tweakermore.config.shulkerTooltipFillLevelHint": "shulkerTooltipFillLevelHint",
   "tweakermore.config.shulkerTooltipFillLevelHint.comment": "Display content fill level in first line of the tooltip of shulker box items",
+  "tweakermore.config.shulkerTooltipPotionInfoHint": "shulkerTooltipPotionInfoHint",
+  "tweakermore.config.shulkerTooltipPotionInfoHint.comment": "Display potion information of items in the tooltip of shulker box items",
   "tweakermore.config.tweakmDaytimeOverride": "tweakmDaytimeOverride",
   "tweakermore.config.tweakmDaytimeOverride.comment": "Override the time of day in the client world\nDoes not affect server-side daytime",
   "tweakermore.config.tweakmDaytimeOverride.pretty_name": "Daytime Override",
@@ -249,6 +250,8 @@
   "tweakermore.gui.mod_relation_footer.confliction": "Conflicted mods:",
 
   "// Misc": "================================================",
+
+  "tweakermore.impl.shulkerTooltipHintBuilder.more": "... %1$sx",
 
   "tweakermore.util.mod.compactchat": "CompactChat",
   "tweakermore.util.mod.easiercrafting": "EasierCrafting",

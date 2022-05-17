@@ -18,7 +18,7 @@
     "core.migration.ConfigsMixin",
     "doc.MinecraftClientMixin",
     "tweaks.features.copySignTextToClipBoard.SignBlockEntityAccessor",
-    "tweaks.features.shulkerTooltipEnchantmentHint.ShulkerBoxBlockMixin",
+    "tweaks.features.shulkerTooltipHints.ShulkerBoxBlockMixin",
     "tweaks.features.shulkerTooltipFillLevelHint.ItemStackMixin",
     "tweaks.features.tweakmAutoCollectMaterialListItem.MaterialListHudRendererAccessor",
     "tweaks.features.tweakmAutoContainerProcess.ClientPlayNetworkHandlerMixin",

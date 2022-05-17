@@ -1,32 +1,36 @@
 package me.fallenbreath.tweakermore.impl.shulkerTooltipHints;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.ImmutableList;
 import fi.dy.masa.malilib.util.InventoryUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.impl.shulkerTooltipHints.builder.EnchantmentHintBuilder;
+import me.fallenbreath.tweakermore.impl.shulkerTooltipHints.builder.AbstractHintBuilder;
+import me.fallenbreath.tweakermore.impl.shulkerTooltipHints.builder.PotionHintBuilder;
 import me.fallenbreath.tweakermore.util.InventoryUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.item.EnchantedBookItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Formatting;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.function.ToIntFunction;
 
 //#if MC >= 11600
 //$$ import net.minecraft.text.MutableText;
 //#endif
 
-import java.util.List;
-import java.util.function.ToIntFunction;
-
 public class ShulkerToolTipEnhancer
 {
-	private static final int MAX_TEXT_LENGTH = 120;
+	private static final List<AbstractHintBuilder> HINT_BUILDERS = ImmutableList.of(
+			new EnchantmentHintBuilder(),
+			new PotionHintBuilder()
+	);
 
-	public static void appendEnchantmentHints(
+	public static void appendContentHints(
 			ItemStack itemStack,
 			//#if MC >= 11600
 			//$$ MutableText text
@@ -35,42 +39,10 @@ public class ShulkerToolTipEnhancer
 			//#endif
 	)
 	{
-		if (TweakerMoreConfigs.SHULKER_TOOLTIP_ENCHANTMENT_HINT.getBooleanValue())
-		{
-			List<Text> enchantmentTexts = Lists.newArrayList();
-			ListTag enchantmentTag = itemStack.getItem() instanceof EnchantedBookItem ? EnchantedBookItem.getEnchantmentTag(itemStack) : itemStack.getEnchantments();
-			ItemStack.appendEnchantments(enchantmentTexts, enchantmentTag);
-			int amount = enchantmentTexts.size();
-			if (amount > 0)
-			{
-				//#if MC >= 11600
-				//$$ MutableText extraText
-				//#else
-				Text extraText
-				//#endif
-						= new LiteralText(" | ").formatted(Formatting.DARK_GRAY);
-
-				TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-				int idx;
-				for (idx = 0; idx < amount; idx++)
-				{
-					if (idx > 0 && textRenderer.getStringWidth(extraText.getString() + enchantmentTexts.get(idx).getString()) > MAX_TEXT_LENGTH)
-					{
-						break;
-					}
-					extraText.append(enchantmentTexts.get(idx));
-					if (idx < amount - 1)
-					{
-						extraText.append(new LiteralText(", ").formatted(Formatting.GRAY));
-					}
-				}
-				if (idx < amount)
-				{
-					extraText.append(new TranslatableText("tweakermore.config.shulkerTooltipEnchantmentHint.more", amount - idx).formatted(Formatting.GRAY));
-				}
-				text.append(extraText);
-			}
-		}
+		HINT_BUILDERS.stream().
+				map(builder -> builder.build(itemStack)).
+				filter(Objects::nonNull).
+				forEach(text::append);
 	}
 
 	public static void applyFillLevelHint(ItemStack skulker, List<Text> tooltip)
