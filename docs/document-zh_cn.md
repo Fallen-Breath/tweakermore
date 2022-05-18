@@ -684,6 +684,24 @@ tweakHandRestock功能的物品名单约束类型
     - Tweakeroo (`tweakeroo`)
 
 
+### MiniHUD禁用光照显示可刷怪检查 (minihudDisableLightOverlaySpawnCheck)
+
+Mini HUD的光照等级显示仅于可刷怪方块上渲染
+
+该选项移除了这一可刷怪检查，
+
+使得光照等级显示会在任何非空气非流体方块上方的非实体方块处渲染
+
+- 分类: 模组修改
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - MiniHUD (`minihud`)
+
+![minihudDisableLightOverlaySpawnCheck](assets/minihudDisableLightOverlaySpawnCheck.png)
+
+
 ### Optifine移除展示框物品渲染距离限制 (ofRemoveItemFrameItemRenderDistance)
 
 移除Optifine的展示框物品渲染距离限制

@@ -146,6 +146,8 @@
   "tweakermore.config.handRestockWhiteList.comment": "会触发tweakHandRestock的物品",
   "tweakermore.config.handRestockBlackList": "自动补货黑名单",
   "tweakermore.config.handRestockBlackList.comment": "不会触发tweakHandRestock的物品",
+  "tweakermore.config.minihudDisableLightOverlaySpawnCheck": "MiniHUD禁用光照显示可刷怪检查",
+  "tweakermore.config.minihudDisableLightOverlaySpawnCheck.comment": "Mini HUD的光照等级显示仅于可刷怪方块上渲染\n该选项移除了这一可刷怪检查，\n使得光照等级显示会在任何非空气非流体方块上方的非实体方块处渲染",
   "tweakermore.config.ofRemoveSignTextRenderDistance": "Optifine移除告示牌方块文字渲染距离限制",
   "tweakermore.config.ofRemoveSignTextRenderDistance.comment": "移除Optifine的告示牌文字渲染距离限制\n回归原版行为，即告示牌的文字总与告示牌同时渲染",
   "tweakermore.config.ofRemoveItemFrameItemRenderDistance": "Optifine移除展示框物品渲染距离限制",

@@ -18,7 +18,7 @@ preprocess {
     def mc118 = createNode('1.18.2', 1_18_02, 'yarn')
 
     mc115.link(mc114, null)
-    mc115.link(mc116, null)
+    mc115.link(mc116, file('versions/mapping-1.15-1.16.txt'))
     mc116.link(mc117, file('versions/mapping-1.16-1.17.txt'))
     mc117.link(mc118, null)
 }

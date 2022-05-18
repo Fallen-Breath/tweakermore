@@ -684,6 +684,24 @@ The items that will trigger tweakHandRestock
     - Tweakeroo (`tweakeroo`)
 
 
+### minihudDisableLightOverlaySpawnCheck
+
+Mini HUD light level overlay are rendered only on spawn-able block
+
+This option removes the spawn-able check,
+
+so light overlay will be rendered at every non-solid block above a non-air non-fluid block
+
+- Category: Mods Tweaks
+- Type: boolean
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - MiniHUD (`minihud`)
+
+![minihudDisableLightOverlaySpawnCheck](assets/minihudDisableLightOverlaySpawnCheck.png)
+
+
 ### ofRemoveItemFrameItemRenderDistance
 
 Remove the item frame item render distance limit from Optifine

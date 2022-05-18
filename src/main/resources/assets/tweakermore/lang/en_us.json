@@ -146,6 +146,8 @@
   "tweakermore.config.handRestockWhiteList.comment": "The items that will trigger tweakHandRestock",
   "tweakermore.config.handRestockBlackList": "handRestockBlackList",
   "tweakermore.config.handRestockBlackList.comment": "The items that will NOT trigger tweakHandRestock",
+  "tweakermore.config.minihudDisableLightOverlaySpawnCheck": "minihudDisableLightOverlaySpawnCheck",
+  "tweakermore.config.minihudDisableLightOverlaySpawnCheck.comment": "Mini HUD light level overlay are rendered only on spawn-able block\nThis option removes the spawn-able check,\nso light overlay will be rendered at every non-solid block above a non-air non-fluid block",
   "tweakermore.config.ofRemoveSignTextRenderDistance": "ofRemoveSignTextRenderDistance",
   "tweakermore.config.ofRemoveSignTextRenderDistance.comment": "Remove the sign text render distance limit from Optifine\nBack to vanilla behavior where sign text is always rendered together with the sign block",
   "tweakermore.config.ofRemoveItemFrameItemRenderDistance": "ofRemoveItemFrameItemRenderDistance",
