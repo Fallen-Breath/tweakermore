@@ -370,6 +370,17 @@ TweakerMore提供的新功能
 ![disableCameraSubmersionFog](assets/disableCameraSubmersionFog.png)
 
 
+### 禁用创造模式飞行攀爬 (disableCreativeFlyClimbingCheck)
+
+阻止创造模式玩家在飞行时进入"在梯子上攀爬"的状态，
+
+这样玩家的飞行移动就能不受梯子等方块的影响
+
+- 分类: MC修改
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+
+
 ### 禁用光照更新 (disableLightUpdates)
 
 禁用客户端光照更新

@@ -370,6 +370,17 @@ It will use the render distance fog instead, just like the camera is in the air
 ![disableCameraSubmersionFog](assets/disableCameraSubmersionFog.png)
 
 
+### disableCreativeFlyClimbingCheck
+
+Prevent creative flying player from entering "ladder climbing" state,
+
+so player's flying movement will not be affected by ladder things
+
+- Category: MC Tweaks
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+
+
 ### disableLightUpdates
 
 Yeets client-side light updates

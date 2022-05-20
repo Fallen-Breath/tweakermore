@@ -1,6 +1,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.flyDrag;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.EntityUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
@@ -41,15 +42,7 @@ public abstract class LivingEntityMixin extends Entity
 		LivingEntity self = (LivingEntity)(Object)this;
 		if (self == MinecraftClient.getInstance().player && TweakerMoreConfigs.FLY_DRAG.isModified())
 		{
-			ClientPlayerEntity player = (ClientPlayerEntity) self;
-			PlayerAbilities abilities =
-					//#if MC >= 11700
-					//$$ player.getAbilities();
-					//#else
-					player.abilities;
-					//#endif
-
-			if (abilities.flying && !this.onGround)
+			if (EntityUtil.isFlyingCreativePlayer(self) && !this.onGround)
 			{
 				dragFactor = (float)(1.0 - TweakerMoreConfigs.FLY_DRAG.getDoubleValue());
 			}
