@@ -2,10 +2,7 @@ package me.fallenbreath.tweakermore.impl.shulkerTooltipHints.builder;
 
 import com.google.common.collect.Lists;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.LingeringPotionItem;
-import net.minecraft.item.PotionItem;
+import net.minecraft.item.*;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.text.BaseText;
 import net.minecraft.text.LiteralText;
@@ -23,10 +20,11 @@ public class PotionHintBuilder extends AbstractHintBuilder
 		if (TweakerMoreConfigs.SHULKER_TOOLTIP_POTION_INFO_HINT.getBooleanValue())
 		{
 			Item item = itemStack.getItem();
-			if (item instanceof PotionItem && PotionUtil.getPotionEffects(itemStack).size() > 0)
+			float ratio = getPotionDurationRatio(item);
+			if (ratio > 0 && PotionUtil.getPotionEffects(itemStack).size() > 0)
 			{
 				List<Text> potionTexts = Lists.newArrayList();
-				PotionUtil.buildTooltip(itemStack, potionTexts, getPotionDurationRatio((PotionItem)item));
+				PotionUtil.buildTooltip(itemStack, potionTexts, ratio);
 
 				int i = 0;
 				BaseText newLine = new LiteralText("");
@@ -46,10 +44,26 @@ public class PotionHintBuilder extends AbstractHintBuilder
 	}
 
 	/**
-	 * Reference: Constants in {@link PotionItem#appendTooltip} and {@link LingeringPotionItem#appendTooltip}
+	 * Reference: Constants in
+	 * - {@link PotionItem#appendTooltip}
+	 * - {@link LingeringPotionItem#appendTooltip}
+	 * - {@link TippedArrowItem#appendTooltip}
 	 */
-	private static float getPotionDurationRatio(PotionItem item)
+	private static float getPotionDurationRatio(Item item)
 	{
-		return item instanceof LingeringPotionItem ? 0.25F : 1.0F;
+		if (item instanceof LingeringPotionItem)
+		{
+			return 0.25F;
+		}
+		if (item instanceof TippedArrowItem)
+		{
+			return 0.125F;
+		}
+		if (item instanceof PotionItem)
+		{
+			return 1.0F;
+		}
+		// unknown
+		return -1;
 	}
 }
