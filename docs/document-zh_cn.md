@@ -609,9 +609,9 @@ TweakerMore提供的新功能
 
 ### 覆盖世界天气 (tweakmWeatherOverride)
 
-Override the weather of the world in the client world
+覆盖客户端中的世界天气
 
-Does not affect server-side weather
+对服务端无影响
 
 - 分类: MC修改
 - 类型: 可开关型热键
