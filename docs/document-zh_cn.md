@@ -560,6 +560,17 @@ TweakerMore提供的新功能
 ![shulkerTooltipPotionInfoHint](assets/shulkerTooltipPotionInfoHint-zh_cn.png)
 
 
+### 旁观者传送菜单包含旁观者 (spectatorTeleportMenuIncludeSpectator)
+
+允许旁观者传送菜单列出玩家列表中的旁观者玩家
+
+旁观者玩家将在位于菜单列表的尾部，其玩家名将以灰色斜体的形式显示
+
+- 分类: MC修改
+- 类型: 布尔值
+- 默认值: `false`
+
+
 ### 覆盖世界时间 (tweakmDaytimeOverride)
 
 覆盖客户端中的世界时间

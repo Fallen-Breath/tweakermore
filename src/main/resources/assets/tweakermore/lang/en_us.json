@@ -119,6 +119,8 @@
   "tweakermore.config.shulkerTooltipHintLengthLimit.comment": "The text length limit used during displaying extra information of items in the tooltip of shulker box items\nWhen exceed, remaining information will be folded",
   "tweakermore.config.shulkerTooltipPotionInfoHint": "shulkerTooltipPotionInfoHint",
   "tweakermore.config.shulkerTooltipPotionInfoHint.comment": "Display potion information of items in the tooltip of shulker box items",
+  "tweakermore.config.spectatorTeleportMenuIncludeSpectator": "spectatorTeleportMenuIncludeSpectator",
+  "tweakermore.config.spectatorTeleportMenuIncludeSpectator.comment": "Allow spectator players in the player list to be listed in the spectator teleport menu\nSpectators will be listed at the end of the menu with gray and italic name",
   "tweakermore.config.tweakmDaytimeOverride": "tweakmDaytimeOverride",
   "tweakermore.config.tweakmDaytimeOverride.comment": "Override the time of day in the client world\nDoes not affect server-side daytime",
   "tweakermore.config.tweakmDaytimeOverride.pretty_name": "Daytime Override",

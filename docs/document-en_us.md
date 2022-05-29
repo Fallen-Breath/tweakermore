@@ -560,6 +560,17 @@ Display potion information of items in the tooltip of shulker box items
 ![shulkerTooltipPotionInfoHint](assets/shulkerTooltipPotionInfoHint-en_us.png)
 
 
+### spectatorTeleportMenuIncludeSpectator
+
+Allow spectator players in the player list to be listed in the spectator teleport menu
+
+Spectators will be listed at the end of the menu with gray and italic name
+
+- Category: MC Tweaks
+- Type: boolean
+- Default value: `false`
+
+
 ### tweakmDaytimeOverride
 
 Override the time of day in the client world
