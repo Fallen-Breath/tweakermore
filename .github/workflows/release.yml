@@ -35,7 +35,7 @@ jobs:
         uses: JoshuaTheMiller/conditional-build-matrix@0.0.1
         with:
           # inputFile: '.github/workflows/matrix_includes.json' # Default input file path
-          filter: '[? `${{ github.event_name }}` == `release` || `${{ github.event.inputs.target_subproject }}` == `` || subproject_dir == `${{ github.event.inputs.target_subproject }}` ]'
+          filter: '[? `${{ github.event_name }}` == `release` || `${{ github.event.inputs.target_subproject }}` == `` || `"${{ github.event.inputs.target_subproject }}"` == subproject_dir ]'
 
       - name: Print matrix
         run: echo ${{ steps.setmatrix.outputs.matrix }}
