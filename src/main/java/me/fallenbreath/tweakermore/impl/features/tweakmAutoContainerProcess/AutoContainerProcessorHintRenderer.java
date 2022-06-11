@@ -3,30 +3,19 @@ package me.fallenbreath.tweakermore.impl.features.tweakmAutoContainerProcess;
 import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.config.HudAlignment;
 import fi.dy.masa.malilib.gui.GuiBase;
-import fi.dy.masa.malilib.interfaces.IRenderer;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
+import me.fallenbreath.tweakermore.util.render.RenderContext;
+import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
 
 import java.util.List;
 
-//#if MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
-//#endif
-
-public class AutoContainerProcessorHintRenderer implements IRenderer
+public class AutoContainerProcessorHintRenderer implements TweakerMoreIRenderer
 {
 	@Override
-	public void onRenderGameOverlayPost(
-			//#if MC >= 11700
-			//$$ MatrixStack matrixStack
-			//#elseif MC >= 11600
-			//$$ float partialTicks, MatrixStack matrixStack
-			//#else
-			float partialTicks
-			//#endif
-	)
+	public void onRenderGameOverlayPost(RenderContext context)
 	{
 		if (!TweakerMoreConfigs.TWEAKM_CONTAINER_PROCESSOR_HINT.getBooleanValue())
 		{
@@ -55,7 +44,7 @@ public class AutoContainerProcessorHintRenderer implements IRenderer
 				false, true,
 				lines
 				//#if MC >= 11600
-				//$$ , matrixStack
+				//$$ , context.getMatrixStack()
 				//#endif
 		);
 	}

@@ -2,9 +2,10 @@ package me.fallenbreath.tweakermore.impl.features.showRedstoneDustUpdateOrder;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import fi.dy.masa.malilib.interfaces.IRenderer;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.render.RenderContext;
 import me.fallenbreath.tweakermore.util.render.RenderUtil;
+import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
 import net.minecraft.block.RedstoneWireBlock;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Formatting;
@@ -12,30 +13,14 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
-//#if MC >= 11700
-//$$ import net.minecraft.util.math.Matrix4f;
-//#endif
-
-//#if MC >= 11500
-import net.minecraft.client.util.math.MatrixStack;
-//#endif
-
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-public class RedstoneDustUpdateOrderRenderer implements IRenderer
+public class RedstoneDustUpdateOrderRenderer implements TweakerMoreIRenderer
 {
 	@Override
-	public void onRenderWorldLast(
-			//#if MC >= 11700
-			//$$ MatrixStack matrixStack, Matrix4f positionMatrix
-			//#elseif MC >= 11500
-			float partialTicks, MatrixStack matrixStack
-			//#else
-			//$$ float partialTicks
-			//#endif
-	)
+	public void onRenderWorldLast(RenderContext context)
 	{
 		if (!TweakerMoreConfigs.TWEAKM_SHOW_REDSTONE_DUST_UPDATE_ORDER.getBooleanValue())
 		{
