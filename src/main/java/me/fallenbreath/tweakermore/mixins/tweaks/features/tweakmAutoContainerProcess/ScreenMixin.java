@@ -2,7 +2,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmAutoContainerPr
 
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
-import me.fallenbreath.tweakermore.impl.tweakmAutoContainerProcess.AutoProcessableScreen;
+import me.fallenbreath.tweakermore.impl.features.tweakmAutoContainerProcess.AutoProcessableScreen;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.gui.screen.Screen;
 import org.spongepowered.asm.mixin.Mixin;

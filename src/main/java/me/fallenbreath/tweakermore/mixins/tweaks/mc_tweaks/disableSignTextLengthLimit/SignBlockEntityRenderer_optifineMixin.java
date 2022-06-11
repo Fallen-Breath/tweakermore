@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 //#if MC < 11500
-//$$ import me.fallenbreath.tweakermore.impl.disableSignTextLengthLimit.SignOverflowHintDrawer;
+//$$ import me.fallenbreath.tweakermore.impl.mc_tweaks.disableSignTextLengthLimit.SignOverflowHintDrawer;
 //$$ import net.minecraft.block.BlockState;
 //$$ import net.minecraft.block.entity.SignBlockEntity;
 //$$ import net.minecraft.client.font.TextRenderer;

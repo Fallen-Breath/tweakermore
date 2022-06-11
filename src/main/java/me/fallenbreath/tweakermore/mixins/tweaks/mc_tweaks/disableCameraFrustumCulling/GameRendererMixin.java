@@ -1,16 +1,15 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableCameraFrustumCulling;
 
-import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.impl.disableFrustumChunkCulling.AlwaysVisibleFrustum;
-
 //#if MC < 11500
+//$$ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+//$$ import me.fallenbreath.tweakermore.impl.mc_tweaks.disableFrustumChunkCulling.AlwaysVisibleFrustum;
 //$$ import net.minecraft.client.render.VisibleRegion;
+//$$ import org.spongepowered.asm.mixin.injection.At;
+//$$ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 //#endif
 
 import net.minecraft.client.render.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 /**
  * Only used in mc1.14.4

@@ -1,6 +1,6 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmSafeAfk;
 
-import me.fallenbreath.tweakermore.impl.tweakmSafeAfk.SafeAfkHelper;
+import me.fallenbreath.tweakermore.impl.features.tweakmSafeAfk.SafeAfkHelper;
 import net.minecraft.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

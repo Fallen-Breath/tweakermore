@@ -1,6 +1,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableLightUpdates;
 
-import me.fallenbreath.tweakermore.impl.disableLightUpdates.ILightingProvider;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.disableLightUpdates.ILightingProvider;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.light.LightingProvider;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,7 +23,7 @@ public abstract class LightingProviderMixin implements ILightingProvider
 	private void noLightUpdate(CallbackInfo ci)
 	{
 		// if it's null, it's ofc a server-side world
-		if (this.world$tweakermore != null && this.world$tweakermore.isClient() && me.fallenbreath.tweakermore.config.TweakerMoreConfigs.DISABLE_LIGHT_UPDATES.getBooleanValue())
+		if (this.world$tweakermore != null && this.world$tweakermore.isClient() && TweakerMoreConfigs.DISABLE_LIGHT_UPDATES.getBooleanValue())
 		{
 			ci.cancel();
 		}

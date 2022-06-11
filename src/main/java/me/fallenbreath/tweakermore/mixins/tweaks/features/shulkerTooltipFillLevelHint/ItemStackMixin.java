@@ -1,6 +1,6 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.features.shulkerTooltipFillLevelHint;
 
-import me.fallenbreath.tweakermore.impl.shulkerTooltipHints.ShulkerToolTipEnhancer;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerTooltipHints.ShulkerToolTipEnhancer;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

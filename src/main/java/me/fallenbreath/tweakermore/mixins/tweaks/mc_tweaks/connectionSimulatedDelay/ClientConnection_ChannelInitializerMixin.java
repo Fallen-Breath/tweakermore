@@ -1,7 +1,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.connectionSimulatedDelay;
 
 import io.netty.channel.Channel;
-import me.fallenbreath.tweakermore.impl.connectionSimulatedDelay.ChannelDelayer;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.connectionSimulatedDelay.ChannelDelayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

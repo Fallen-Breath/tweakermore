@@ -2,7 +2,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmFlawlessFrames;
 
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
-import me.fallenbreath.tweakermore.impl.tweakmFlawlessFrames.FlawlessFramesHandler;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.tweakmFlawlessFrames.FlawlessFramesHandler;
 import me.fallenbreath.tweakermore.util.ModIds;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;

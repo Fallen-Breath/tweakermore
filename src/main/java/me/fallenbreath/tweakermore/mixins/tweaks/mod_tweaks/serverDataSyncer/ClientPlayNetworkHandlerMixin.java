@@ -1,6 +1,6 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer;
 
-import me.fallenbreath.tweakermore.impl.serverDataSyncer.ServerDataSyncer;
+import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.serverDataSyncer.ServerDataSyncer;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

@@ -1,6 +1,6 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.features.shulkerTooltipHints;
 
-import me.fallenbreath.tweakermore.impl.shulkerTooltipHints.ShulkerToolTipEnhancer;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerTooltipHints.ShulkerToolTipEnhancer;
 import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;

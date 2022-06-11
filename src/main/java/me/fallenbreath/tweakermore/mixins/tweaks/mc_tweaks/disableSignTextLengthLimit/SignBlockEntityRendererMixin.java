@@ -3,7 +3,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableSignTextLengt
 //#if MC < 11500
 //$$ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 //$$ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
-//$$ import me.fallenbreath.tweakermore.impl.disableSignTextLengthLimit.SignOverflowHintDrawer;
+//$$ import me.fallenbreath.tweakermore.impl.mc_tweaks.disableSignTextLengthLimit.SignOverflowHintDrawer;
 //$$ import me.fallenbreath.tweakermore.util.ModIds;
 //$$ import net.minecraft.block.entity.SignBlockEntity;
 //$$ import net.minecraft.client.font.TextRenderer;

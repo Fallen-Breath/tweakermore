@@ -1,7 +1,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.spectatorTeleportMenuIncludeSpectator;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.impl.spectatorTeleportMenuIncludeSpectator.CommandEntryWithSpectatorMark;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.spectatorTeleportMenuIncludeSpectator.CommandEntryWithSpectatorMark;
 import net.minecraft.client.gui.hud.spectator.SpectatorMenuCommand;
 import net.minecraft.client.gui.hud.spectator.TeleportSpectatorMenu;
 import net.minecraft.client.gui.hud.spectator.TeleportToSpecificPlayerSpectatorCommand;

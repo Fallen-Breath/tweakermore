@@ -1,7 +1,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableCameraFrustumCulling;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.impl.disableFrustumChunkCulling.AlwaysVisibleFrustum;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.disableFrustumChunkCulling.AlwaysVisibleFrustum;
 import net.minecraft.client.render.WorldRenderer;
 
 //#if MC >= 11500

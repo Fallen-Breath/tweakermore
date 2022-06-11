@@ -1,6 +1,6 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmSafeAfk;
 
-import me.fallenbreath.tweakermore.impl.tweakmSafeAfk.SafeAfkHelper;
+import me.fallenbreath.tweakermore.impl.features.tweakmSafeAfk.SafeAfkHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import org.spongepowered.asm.mixin.Mixin;
