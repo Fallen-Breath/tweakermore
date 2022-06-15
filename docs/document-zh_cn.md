@@ -180,6 +180,25 @@ TweakerMore提供的新功能
     - Item Scroller (`itemscroller`)
 
 
+### 原理图方块放置限制 (tweakmBlockSchematicPlacementRestriction)
+
+与litematica的放置限制(placementRestriction)选项类似，它将取消与原理图不匹配的方块的放置
+
+但与litematica的实现不同的是，它可以完美地与tweakeroo的方块放置功能兼容
+
+并且它不会在阻止玩家的方块放置时进行消息刷屏
+
+在litematica的放置限制或轻松放置开启时无效
+
+- 分类: 功能
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Tweakeroo (`tweakeroo`)
+    - Litematica (`litematica`)
+
+
 ### 自动容器处理提示 (tweakmContainerProcessorHint)
 
 在界面右上角显示自动容器处理相关功能的开启情况，包括：

@@ -180,6 +180,25 @@ and then close the container
     - Item Scroller (`itemscroller`)
 
 
+### tweakmBlockSchematicPlacementRestriction
+
+Similar to litematica's placementRestriction option, it cancels block placement when the placement doesn't match current schematic
+
+Unlike litematica's implementation, it works perfectly with tweakeroo's placement tweaks
+
+And it doesn't spam messages when canceling player's block placement
+
+Does not work with litematica's or easy place mode
+
+- Category: Features
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
+    - Litematica (`litematica`)
+
+
 ### tweakmContainerProcessorHint
 
 Displays the enabling status of auto container processing related features, including:

@@ -121,6 +121,16 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SAFE_AFK = newConfigBooleanHotkeyed("tweakmSafeAfk");
 
+	@Config(
+			type = Config.Type.TWEAK,
+			restriction = @Restriction(require = {
+					@Condition(tweakeroo),
+					@Condition(litematica)
+			}),
+			category = Config.Category.FEATURES
+	)
+	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION = newConfigBooleanHotkeyed("tweakmBlockSchematicPlacementRestriction");
+
 	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SHOW_REDSTONE_DUST_UPDATE_ORDER = newConfigBooleanHotkeyed("tweakmShowRedstoneDustUpdateOrder");
 
