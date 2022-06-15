@@ -15,8 +15,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 import java.util.Objects;
@@ -64,19 +64,21 @@ public abstract class WidgetListConfigOptionsMixin extends WidgetListConfigOptio
 		}
 	}
 
-	@ModifyVariable(
+	@Inject(
 			method = "getMaxNameLengthWrapped",
 			at = @At(
 					value = "INVOKE",
 					target = "Ljava/util/List;iterator()Ljava/util/Iterator;",
 					remap = false
 			),
+			cancellable = true,
 			remap = false
 	)
-	private int updateMaxNameLengthIfUsingTweakerMoreOptionLabelAndShowsOriginalText(int maxWidth, List<GuiConfigsBase.ConfigOptionWrapper> wrappers)
+	private void useCustomMaxNameLengthIfUsingTweakerMoreOptionLabelAndShowsOriginalText(List<GuiConfigsBase.ConfigOptionWrapper> wrappers, CallbackInfoReturnable<Integer> cir)
 	{
 		if (this.parent instanceof TweakerMoreConfigGui || TweakerMoreConfigs.APPLY_TWEAKERMORE_OPTION_LABEL_GLOBALLY.getBooleanValue())
 		{
+			int maxWidth = 0;
 			for (GuiConfigsBase.ConfigOptionWrapper wrapper : wrappers)
 			{
 				if (wrapper.getType() == GuiConfigsBase.ConfigOptionWrapper.Type.CONFIG)
@@ -85,12 +87,12 @@ public abstract class WidgetListConfigOptionsMixin extends WidgetListConfigOptio
 					maxWidth = Math.max(maxWidth, this.getStringWidth(config.getConfigGuiDisplayName()));
 					if (TweakerMoreOptionLabel.willShowOriginalLines(new String[]{config.getConfigGuiDisplayName()}, new String[]{config.getName()}))
 					{
-						maxWidth = Math.max(maxWidth, (int)(this.getStringWidth(config.getName()) * TweakerMoreOptionLabel.TRANSLATION_SCALE));
+						maxWidth = Math.max(maxWidth, (int)Math.ceil(this.getStringWidth(config.getName()) * TweakerMoreOptionLabel.TRANSLATION_SCALE));
 					}
 				}
 			}
+			cir.setReturnValue(maxWidth);
 		}
-		return maxWidth;
 	}
 
 	@Inject(
