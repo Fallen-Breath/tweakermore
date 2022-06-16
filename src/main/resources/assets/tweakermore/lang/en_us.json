@@ -56,7 +56,7 @@
   "tweakermore.config.tweakmSafeAfk.pretty_name": "Safe AFK",
   "tweakermore.config.tweakmSafeAfk.received_damage": "Received damage at %1$\nHealth remaining: %2$s",
   "tweakermore.config.tweakmBlockSchematicPlacementRestriction": "tweakmBlockSchematicPlacementRestriction",
-  "tweakermore.config.tweakmBlockSchematicPlacementRestriction.comment": "Similar to litematica's placementRestriction option, it cancels block placement when the placement doesn't match current schematic\nUnlike litematica's implementation, it works perfectly with tweakeroo's placement tweaks\nAnd it doesn't spam messages when canceling player's block placement\nDoes not work with litematica's or easy place mode",
+  "tweakermore.config.tweakmBlockSchematicPlacementRestriction.comment": "Similar to litematica's placementRestriction option, it cancels block placement when the placement doesn't match current schematic\nUnlike litematica's implementation, it uses a simple and accurate constraint strategy,\nit works nicely with tweakeroo's placement tweaks,\nand it doesn't spam messages if it cancels\nDoes not work with litematica's or easy place mode",
   "tweakermore.config.tweakmBlockSchematicPlacementRestriction.pretty_name": "Schematic Block Placement Restriction",
   "tweakermore.config.tweakmShowRedstoneDustUpdateOrder": "tweakmShowRedstoneDustUpdateOrder",
   "tweakermore.config.tweakmShowRedstoneDustUpdateOrder.comment": "When looking at a redstone dust block, show the block update order of it",

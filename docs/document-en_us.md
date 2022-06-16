@@ -184,9 +184,11 @@ and then close the container
 
 Similar to litematica's placementRestriction option, it cancels block placement when the placement doesn't match current schematic
 
-Unlike litematica's implementation, it works perfectly with tweakeroo's placement tweaks
+Unlike litematica's implementation, it uses a simple and accurate constraint strategy,
 
-And it doesn't spam messages when canceling player's block placement
+it works nicely with tweakeroo's placement tweaks,
+
+and it doesn't spam messages if it cancels
 
 Does not work with litematica's or easy place mode
 

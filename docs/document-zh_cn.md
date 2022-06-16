@@ -184,9 +184,11 @@ TweakerMore提供的新功能
 
 与litematica的放置限制(placementRestriction)选项类似，它将取消与原理图不匹配的方块的放置
 
-但与litematica的实现不同的是，它可以完美地与tweakeroo的方块放置功能兼容
+但与litematica的实现不同的是，它使用了一个简单又准确的约束策略，
 
-并且它不会在阻止玩家的方块放置时进行消息刷屏
+可以完美地与tweakeroo的方块放置功能兼容，
+
+并且不会在阻止玩家的方块放置时进行消息刷屏
 
 在litematica的放置限制或轻松放置开启时无效
 
