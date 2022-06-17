@@ -258,10 +258,6 @@ Switch for displaying hint message when option tweakmSchematicBlockPlacementRest
 - Type: option list
 - Default value: `All`
 - Available options: `All`, `Wrong item only`, `Never`
-- Mod restrictions:
-  - Required mods:
-    - Tweakeroo (`tweakeroo`)
-    - Litematica (`litematica`)
 
 
 ### tweakmSchematicBlockPlacementRestrictionMargin
@@ -277,10 +273,6 @@ Used in option tweakmSchematicBlockPlacementRestriction
 - Default value: `2`
 - Minimum value: `0`
 - Maximum value: `16`
-- Mod restrictions:
-  - Required mods:
-    - Tweakeroo (`tweakeroo`)
-    - Litematica (`litematica`)
 
 
 ### tweakmSchematicProPlace

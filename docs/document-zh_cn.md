@@ -258,10 +258,6 @@ TweakerMore提供的新功能
 - 类型: 选项列表
 - 默认值: `全部`
 - 可用选项: `全部`, `仅物品错误`, `总不`
-- 模组约束:
-  - 依赖模组:
-    - Tweakeroo (`tweakeroo`)
-    - Litematica (`litematica`)
 
 
 ### 原理图方块放置限制边缘保护 (tweakmSchematicBlockPlacementRestrictionMargin)
@@ -277,10 +273,6 @@ TweakerMore提供的新功能
 - 默认值: `2`
 - 最小值: `0`
 - 最大值: `16`
-- 模组约束:
-  - 依赖模组:
-    - Tweakeroo (`tweakeroo`)
-    - Litematica (`litematica`)
 
 
 ### 专业原理图方块放置 (tweakmSchematicProPlace)
