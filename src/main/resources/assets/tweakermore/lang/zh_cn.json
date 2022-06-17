@@ -230,6 +230,10 @@
 
   "// List entries": "================================================",
 
+  "tweakermore.list_entry.schematicBlockPlacementRestrictionHintType.all": "全部",
+  "tweakermore.list_entry.schematicBlockPlacementRestrictionHintType.wrong_item_only": "仅物品错误",
+  "tweakermore.list_entry.schematicBlockPlacementRestrictionHintType.never": "总不",
+
   "tweakermore.list_entry.weatherOverrideValue.clear": "晴天",
   "tweakermore.list_entry.weatherOverrideValue.rain": "降雨",
   "tweakermore.list_entry.weatherOverrideValue.thunder": "雷暴",

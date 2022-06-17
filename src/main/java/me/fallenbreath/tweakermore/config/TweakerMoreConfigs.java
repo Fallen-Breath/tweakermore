@@ -16,6 +16,7 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.options.*;
+import me.fallenbreath.tweakermore.config.options.listentries.SchematicBlockPlacementRestrictionHintType;
 import me.fallenbreath.tweakermore.config.options.listentries.WeatherOverrideValue;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.impl.features.copySignTextToClipBoard.SignTextCopier;
@@ -143,14 +144,14 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION = newConfigBooleanHotkeyed("tweakmSchematicBlockPlacementRestriction");
 
 	@Config(
-			type = Config.Type.GENERIC,
+			type = Config.Type.LIST,
 			restriction = @Restriction(require = {
 					@Condition(tweakeroo),
 					@Condition(litematica)
 			}),
 			category = Config.Category.FEATURES
 	)
-	public static final TweakerMoreConfigBoolean TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_HINT = newConfigBoolean("tweakmSchematicBlockPlacementRestrictionHint", true);
+	public static final TweakerMoreConfigOptionList TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_HINT = newConfigOptionList("tweakmSchematicBlockPlacementRestrictionHint", SchematicBlockPlacementRestrictionHintType.DEFAULT);
 
 	@Config(
 			type = Config.Type.GENERIC,

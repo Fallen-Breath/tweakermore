@@ -230,6 +230,10 @@
 
   "// List entries": "================================================",
 
+  "tweakermore.list_entry.schematicBlockPlacementRestrictionHintType.all": "All",
+  "tweakermore.list_entry.schematicBlockPlacementRestrictionHintType.wrong_item_only": "Wrong item only",
+  "tweakermore.list_entry.schematicBlockPlacementRestrictionHintType.never": "Never",
+
   "tweakermore.list_entry.weatherOverrideValue.clear": "Clear sky",
   "tweakermore.list_entry.weatherOverrideValue.rain": "Rain",
   "tweakermore.list_entry.weatherOverrideValue.thunder": "Thunderstorm",

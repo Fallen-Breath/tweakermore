@@ -255,8 +255,9 @@ Does not work with litematica's or easy place mode
 Switch for displaying hint message when option tweakmSchematicBlockPlacementRestriction cancels a placement
 
 - Category: Features
-- Type: boolean
-- Default value: `true`
+- Type: option list
+- Default value: `All`
+- Available options: `All`, `Wrong item only`, `Never`
 - Mod restrictions:
   - Required mods:
     - Tweakeroo (`tweakeroo`)

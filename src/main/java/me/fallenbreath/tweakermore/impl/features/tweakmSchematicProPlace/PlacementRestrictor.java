@@ -8,6 +8,7 @@ import fi.dy.masa.litematica.world.SchematicWorldHandler;
 import fi.dy.masa.malilib.util.InfoUtils;
 import fi.dy.masa.malilib.util.LayerRange;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.config.options.listentries.SchematicBlockPlacementRestrictionHintType;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemPlacementContext;
@@ -19,15 +20,13 @@ public class PlacementRestrictor
 {
 	private static void info(String key, Object... args)
 	{
-		if (TweakerMoreConfigs.TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_HINT.getBooleanValue())
-		{
-			InfoUtils.printActionbarMessage("tweakermore.config.tweakmSchematicBlockPlacementRestriction." + key, args);
-		}
+		InfoUtils.printActionbarMessage("tweakermore.config.tweakmSchematicBlockPlacementRestriction." + key, args);
 	}
 
 	public static boolean canDoBlockPlacement(MinecraftClient mc, ItemPlacementContext ctx)
 	{
 		final int MARGIN = TweakerMoreConfigs.TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_MARGIN.getIntegerValue();
+		SchematicBlockPlacementRestrictionHintType hintType = (SchematicBlockPlacementRestrictionHintType)TweakerMoreConfigs.TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_HINT.getOptionListValue();
 
 		BlockPos pos = ctx.getBlockPos();
 
@@ -67,13 +66,16 @@ public class PlacementRestrictor
 			// there's no possible block for this schematic block, cancel
 			if (schematicStack.isEmpty())
 			{
-				if (schematicState.isAir())
+				if (hintType.showNotPossible)
 				{
-					info("is_air");
-				}
-				else
-				{
-					info("no_block", schematicState.getBlock().getName());
+					if (schematicState.isAir())
+					{
+						info("is_air");
+					}
+					else
+					{
+						info("no_block", schematicState.getBlock().getName());
+					}
 				}
 				return false;
 			}
@@ -81,7 +83,10 @@ public class PlacementRestrictor
 			// check if the player is using the right item stack for block placement
 			if (EntityUtils.getUsedHandForItem(mc.player, schematicStack) == null)
 			{
-				info("wrong_item", schematicStack.getName());
+				if (hintType.showWrongItem)
+				{
+					info("wrong_item", schematicStack.getName());
+				}
 				return false;
 			}
 		}
