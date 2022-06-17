@@ -45,6 +45,12 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 	public TweakerMoreConfigGui()
 	{
 		super(10, 50, TweakerMoreMod.MOD_ID, null, "tweakermore.gui.title", TweakerMoreMod.VERSION);
+	}
+
+	@Override
+	public void init()
+	{
+		super.init();
 		currentInstance = this;
 	}
 

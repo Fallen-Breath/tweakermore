@@ -1,6 +1,5 @@
 package me.fallenbreath.tweakermore.mixins.core.gui;
 
-import com.google.common.base.Joiner;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigBase;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
