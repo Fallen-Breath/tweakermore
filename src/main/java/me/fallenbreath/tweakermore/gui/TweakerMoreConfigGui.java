@@ -102,12 +102,12 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		}
 	}
 
-	private <T> void setDisplayParameter(T currentValue, T newValue, Runnable valueSetter)
+	private <T> void setDisplayParameter(T currentValue, T newValue, Runnable valueSetter, boolean keepSearchBar)
 	{
 		if (newValue != currentValue)
 		{
 			valueSetter.run();
-			this.reDraw();
+			this.reDraw(keepSearchBar);
 		}
 	}
 
@@ -116,7 +116,7 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		ButtonGeneric button = new ButtonGeneric(x, y, -1, 20, category.getDisplayName());
 		button.setEnabled(SETTING.category != category);
 		button.setHoverStrings(category.getDescription());
-		this.addButton(button, (b, mb) -> this.setDisplayParameter(SETTING.category, category, () -> SETTING.category = category));
+		this.addButton(button, (b, mb) -> this.setDisplayParameter(SETTING.category, category, () -> SETTING.category = category, false));
 		return button.getWidth() + 2;
 	}
 
@@ -132,7 +132,7 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		int width = Math.max(maxTextWidth, 40) + 20;
 
 		SelectorDropDownList<T> dd = new SelectorDropDownList<>(x - width, y, width, height, 200, entries.size(), entries);
-		dd.setEntryChangeListener(entry -> this.setDisplayParameter(valueGetter.get(), entry, () -> valueSetter.accept(entry)));
+		dd.setEntryChangeListener(entry -> this.setDisplayParameter(valueGetter.get(), entry, () -> valueSetter.accept(entry), true));
 		dd.setSelectedEntry(defaultValue);
 		dd.setHoverText(hoverTextKey);
 		postProcessor.accept(dd);
@@ -168,12 +168,12 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		);
 	}
 
-	public void reDraw()
+	public void reDraw(boolean keepSearchBar)
 	{
 		// storing search bar data
 		String previousSearchBarText = null;
 		boolean previousSearchBoxFocus = false;
-		if (this.searchBar != null && this.searchBar.isSearchOpen())
+		if (keepSearchBar && this.searchBar != null && this.searchBar.isSearchOpen())
 		{
 			previousSearchBarText = this.searchBar.getFilter();
 			previousSearchBoxFocus = ((WidgetSearchBarAccessor)this.searchBar).getSearchBox().isFocused();
@@ -191,6 +191,11 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 
 		Objects.requireNonNull(this.getListWidget()).resetScrollbarPosition();
 		this.initGui();
+	}
+
+	public void reDraw()
+	{
+		this.reDraw(true);
 	}
 
 	public void renderDropDownList(

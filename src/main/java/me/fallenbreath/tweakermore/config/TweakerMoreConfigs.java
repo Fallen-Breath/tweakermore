@@ -150,6 +150,16 @@ public class TweakerMoreConfigs
 			}),
 			category = Config.Category.FEATURES
 	)
+	public static final TweakerMoreConfigBoolean TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_HINT = newConfigBoolean("tweakmBlockSchematicPlacementRestrictionHint", true);
+
+	@Config(
+			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = {
+					@Condition(tweakeroo),
+					@Condition(litematica)
+			}),
+			category = Config.Category.FEATURES
+	)
 	public static final TweakerMoreConfigInteger TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_MARGIN = newConfigInteger("tweakmBlockSchematicPlacementRestrictionMargin", 2, 0, 16);
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
