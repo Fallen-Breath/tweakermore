@@ -170,7 +170,25 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 
 	public void reDraw()
 	{
-		this.reCreateListWidget(); // apply the new config width
+		// storing search bar data
+		String previousSearchBarText = null;
+		boolean previousSearchBoxFocus = false;
+		if (this.searchBar != null && this.searchBar.isSearchOpen())
+		{
+			previousSearchBarText = this.searchBar.getFilter();
+			previousSearchBoxFocus = ((WidgetSearchBarAccessor)this.searchBar).getSearchBox().isFocused();
+		}
+
+		this.reCreateListWidget();
+
+		// restoring search bar data
+		if (this.searchBar != null && previousSearchBarText != null)
+		{
+			this.searchBar.setSearchOpen(true);
+			((WidgetSearchBarAccessor)this.searchBar).getSearchBox().setText(previousSearchBarText);
+			((WidgetSearchBarAccessor)this.searchBar).getSearchBox().setFocused(previousSearchBoxFocus);
+		}
+
 		Objects.requireNonNull(this.getListWidget()).resetScrollbarPosition();
 		this.initGui();
 	}
