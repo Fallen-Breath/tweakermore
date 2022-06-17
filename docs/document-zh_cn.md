@@ -180,46 +180,6 @@ TweakerMore提供的新功能
     - Item Scroller (`itemscroller`)
 
 
-### 原理图方块放置限制 (tweakmBlockSchematicPlacementRestriction)
-
-与litematica的放置限制(placementRestriction)选项类似，它将取消与原理图不匹配的方块的放置
-
-但与litematica的实现不同的是，它使用了一个简单又准确的约束策略，
-
-可以完美地与tweakeroo的方块放置功能兼容，
-
-并且不会在阻止玩家的方块放置时进行消息刷屏
-
-在litematica的放置限制或轻松放置开启时无效
-
-- 分类: 功能
-- 类型: 可开关型热键
-- 默认值: *无快捷键*, `false`
-- 模组约束:
-  - 依赖模组:
-    - Tweakeroo (`tweakeroo`)
-    - Litematica (`litematica`)
-
-
-### 原理图方块放置限制边缘保护 (tweakmBlockSchematicPlacementRestrictionMargin)
-
-用于阻止位于原理图框附近的方块放置的放置保护距离
-
-例如，在使用默认值为2时，距离任意原理图2米范围内的方块放置将被取消
-
-选项tweakmBlockSchematicPlacementRestriction将使用本规则的值
-
-- 分类: 功能
-- 类型: 整数
-- 默认值: `2`
-- 最小值: `0`
-- 最大值: `16`
-- 模组约束:
-  - 依赖模组:
-    - Tweakeroo (`tweakeroo`)
-    - Litematica (`litematica`)
-
-
 ### 自动容器处理提示 (tweakmContainerProcessorHint)
 
 在界面右上角显示自动容器处理相关功能的开启情况，包括：
@@ -271,13 +231,64 @@ TweakerMore提供的新功能
 - 默认值: *无快捷键*, `false`
 
 
+### 原理图方块放置限制 (tweakmSchematicBlockPlacementRestriction)
+
+与litematica的放置限制(placementRestriction)选项类似，它将取消与原理图不匹配的方块的放置
+
+但与litematica的实现不同的是，它使用了一个简单又准确的约束策略，
+
+可以完美地与tweakeroo的方块放置功能兼容
+
+在litematica的放置限制或轻松放置开启时无效
+
+- 分类: 功能
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Tweakeroo (`tweakeroo`)
+    - Litematica (`litematica`)
+
+
+### 原理图方块放置限制提示 (tweakmSchematicBlockPlacementRestrictionHint)
+
+在“原理图方块放置限制”取消方块放置时是否显示提示信息的开关
+
+- 分类: 功能
+- 类型: 布尔值
+- 默认值: `true`
+- 模组约束:
+  - 依赖模组:
+    - Tweakeroo (`tweakeroo`)
+    - Litematica (`litematica`)
+
+
+### 原理图方块放置限制边缘保护 (tweakmSchematicBlockPlacementRestrictionMargin)
+
+用于阻止位于原理图框附近的方块放置的放置保护距离
+
+例如，在使用默认值为2时，距离任意原理图2米范围内的方块放置将被取消
+
+选项tweakmSchematicBlockPlacementRestriction将使用本规则的值
+
+- 分类: 功能
+- 类型: 整数
+- 默认值: `2`
+- 最小值: `0`
+- 最大值: `16`
+- 模组约束:
+  - 依赖模组:
+    - Tweakeroo (`tweakeroo`)
+    - Litematica (`litematica`)
+
+
 ### 专业原理图方块放置 (tweakmSchematicProPlace)
 
 同时开启/关闭以下功能的一个快捷选项:
 
 - 自动选择原理图方块 (tweakmAutoPickSchematicBlock)
 
-- 原理图方块放置限制 (tweakmBlockSchematicPlacementRestriction)
+- 原理图方块放置限制 (tweakmSchematicBlockPlacementRestriction)
 
 启用这些选项后，你就有了一个litematica的轻松放置的非作弊版本，
 

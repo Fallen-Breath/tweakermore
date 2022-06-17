@@ -21,7 +21,7 @@ public class PlacementRestrictor
 	{
 		if (TweakerMoreConfigs.TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_HINT.getBooleanValue())
 		{
-			InfoUtils.printActionbarMessage("tweakermore.config.tweakmBlockSchematicPlacementRestriction." + key, args);
+			InfoUtils.printActionbarMessage("tweakermore.config.tweakmSchematicBlockPlacementRestriction." + key, args);
 		}
 	}
 

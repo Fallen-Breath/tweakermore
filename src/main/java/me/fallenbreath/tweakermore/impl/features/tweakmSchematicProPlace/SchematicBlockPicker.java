@@ -18,6 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 //#if MC >= 11600
+//$$ import fi.dy.masa.litematica.config.Configs;
 //$$ import net.minecraft.screen.slot.Slot;
 //#endif
 

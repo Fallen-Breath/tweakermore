@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmBlockSchematicPlacementRestriction;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmSchematicBlockPlacementRestriction;
 
 import fi.dy.masa.litematica.util.WorldUtils;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;

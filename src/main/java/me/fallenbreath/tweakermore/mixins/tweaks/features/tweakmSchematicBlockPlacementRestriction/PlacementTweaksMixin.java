@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmBlockSchematicPlacementRestriction;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmSchematicBlockPlacementRestriction;
 
 import fi.dy.masa.litematica.config.Configs;
 import fi.dy.masa.malilib.util.PositionUtils;
@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PlacementTweaksMixin
 {
 	@Inject(method = "tryPlaceBlock", at = @At("HEAD"), cancellable = true, remap = false)
-	private static void tweakmBlockSchematicPlacementRestriction(
+	private static void tweakmSchematicBlockPlacementRestriction(
 			ClientPlayerInteractionManager controller,
 			ClientPlayerEntity player,
 			ClientWorld world,

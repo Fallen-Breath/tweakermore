@@ -180,46 +180,6 @@ and then close the container
     - Item Scroller (`itemscroller`)
 
 
-### tweakmBlockSchematicPlacementRestriction
-
-Similar to litematica's placementRestriction option, it cancels block placement when the placement doesn't match current schematic
-
-Unlike litematica's implementation, it uses a simple and accurate constraint strategy,
-
-it works nicely with tweakeroo's placement tweaks,
-
-and it doesn't spam messages if it cancels
-
-Does not work with litematica's or easy place mode
-
-- Category: Features
-- Type: togglable hotkey
-- Default value: *no hotkey*, `false`
-- Mod restrictions:
-  - Required mods:
-    - Tweakeroo (`tweakeroo`)
-    - Litematica (`litematica`)
-
-
-### tweakmBlockSchematicPlacementRestrictionMargin
-
-The no-block-placement protection margin length from schematic boxes
-
-e.g. with default value 2, block placements within 2 blocks range of any schematic boxes will be cancelled
-
-Used in option tweakmBlockSchematicPlacementRestriction
-
-- Category: Features
-- Type: integer
-- Default value: `2`
-- Minimum value: `0`
-- Maximum value: `16`
-- Mod restrictions:
-  - Required mods:
-    - Tweakeroo (`tweakeroo`)
-    - Litematica (`litematica`)
-
-
 ### tweakmContainerProcessorHint
 
 Displays the enabling status of auto container processing related features, including:
@@ -271,13 +231,64 @@ Health threshold to disconnect can be set via safeAfkHealthThreshold
 - Default value: *no hotkey*, `false`
 
 
+### tweakmSchematicBlockPlacementRestriction
+
+Similar to litematica's placementRestriction option, it cancels block placement when the placement doesn't match current schematic
+
+Unlike litematica's implementation, it uses a simple and accurate constraint strategy,
+
+it works nicely with tweakeroo's placement tweaks
+
+Does not work with litematica's or easy place mode
+
+- Category: Features
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
+    - Litematica (`litematica`)
+
+
+### tweakmSchematicBlockPlacementRestrictionHint
+
+Switch for displaying hint message when option tweakmSchematicBlockPlacementRestriction cancels a placement
+
+- Category: Features
+- Type: boolean
+- Default value: `true`
+- Mod restrictions:
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
+    - Litematica (`litematica`)
+
+
+### tweakmSchematicBlockPlacementRestrictionMargin
+
+The no-block-placement protection margin length from schematic boxes
+
+e.g. with default value 2, block placements within 2 blocks range of any schematic boxes will be cancelled
+
+Used in option tweakmSchematicBlockPlacementRestriction
+
+- Category: Features
+- Type: integer
+- Default value: `2`
+- Minimum value: `0`
+- Maximum value: `16`
+- Mod restrictions:
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
+    - Litematica (`litematica`)
+
+
 ### tweakmSchematicProPlace
 
 A shortcut option to enable/disable the following options at the same time:
 
 - tweakmAutoPickSchematicBlock
 
-- tweakmBlockSchematicPlacementRestriction
+- tweakmSchematicBlockPlacementRestriction
 
 With these options enabled, you can have a not-cheaty version of "easy place" from litematica,
 
