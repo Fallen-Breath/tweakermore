@@ -201,6 +201,25 @@ Does not work with litematica's or easy place mode
     - Litematica (`litematica`)
 
 
+### tweakmBlockSchematicPlacementRestrictionMargin
+
+The no-block-placement protection margin length from schematic boxes
+
+e.g. with default value 2, block placements within 2 blocks range of any schematic boxes will be cancelled
+
+Used in option tweakmBlockSchematicPlacementRestriction
+
+- Category: Features
+- Type: integer
+- Default value: `2`
+- Minimum value: `0`
+- Maximum value: `16`
+- Mod restrictions:
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
+    - Litematica (`litematica`)
+
+
 ### tweakmContainerProcessorHint
 
 Displays the enabling status of auto container processing related features, including:
@@ -250,6 +269,31 @@ Health threshold to disconnect can be set via safeAfkHealthThreshold
 - Category: Features
 - Type: togglable hotkey
 - Default value: *no hotkey*, `false`
+
+
+### tweakmSchematicProPlace
+
+A shortcut option to enable/disable the following options at the same time:
+
+- tweakmAutoPickSchematicBlock
+
+- tweakmBlockSchematicPlacementRestriction
+
+With these options enabled, you can have a not-cheaty version of "easy place" from litematica,
+
+which help you auto select target item and cancel wrong block placements
+
+Has all the functions of easy place except for the floating block placing
+
+Compatible with various block placement tweaks from tweakeroo, doesn't work with easy place mode
+
+- Category: Features
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
+    - Litematica (`litematica`)
 
 
 ### tweakmShowRedstoneDustUpdateOrder

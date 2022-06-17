@@ -19,6 +19,7 @@ import me.fallenbreath.tweakermore.config.options.*;
 import me.fallenbreath.tweakermore.config.options.listentries.WeatherOverrideValue;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.impl.features.copySignTextToClipBoard.SignTextCopier;
+import me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.eCraftMassCraftCompact.EasierCraftingRegistrar;
 import me.fallenbreath.tweakermore.impl.features.refreshInventory.InventoryRefresher;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.serverDataSyncer.ServerDataSyncer;
@@ -118,6 +119,16 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble TWEAKM_CONTAINER_PROCESSOR_HINT_SCALE = newConfigDouble("tweakmContainerProcessorHintScale", 1, 0.25, 4);
 
+	@Config(
+			type = Config.Type.TWEAK,
+			restriction = @Restriction(require = {
+					@Condition(tweakeroo),
+					@Condition(litematica)
+			}),
+			category = Config.Category.FEATURES
+	)
+	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SCHEMATIC_PRO_PLACE = newConfigBooleanHotkeyed("tweakmSchematicProPlace");
+
 	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SAFE_AFK = newConfigBooleanHotkeyed("tweakmSafeAfk");
 
@@ -130,6 +141,16 @@ public class TweakerMoreConfigs
 			category = Config.Category.FEATURES
 	)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION = newConfigBooleanHotkeyed("tweakmBlockSchematicPlacementRestriction");
+
+	@Config(
+			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = {
+					@Condition(tweakeroo),
+					@Condition(litematica)
+			}),
+			category = Config.Category.FEATURES
+	)
+	public static final TweakerMoreConfigInteger TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_MARGIN = newConfigInteger("tweakmBlockSchematicPlacementRestrictionMargin", 2, 0, 16);
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SHOW_REDSTONE_DUST_UPDATE_ORDER = newConfigBooleanHotkeyed("tweakmShowRedstoneDustUpdateOrder");
@@ -444,6 +465,7 @@ public class TweakerMoreConfigs
 		ECRAFT_ITEM_SCROLLER_COMPACT.setValueChangeCallback(EasierCraftingRegistrar::onConfigValueChanged);
 		HIDE_DISABLE_OPTIONS.setValueChangeCallback(redrawConfigGui);
 		TWEAKM_FLAWLESS_FRAMES.setValueChangeCallback(config -> FlawlessFramesHandler.setEnabled(config.getBooleanValue()));
+		TWEAKM_SCHEMATIC_PRO_PLACE.setValueChangeCallback(ProPlaceImpl::onConfigChanged);
 
 		// debugs
 		TWEAKERMORE_DEBUG_MODE.setValueChangeCallback(redrawConfigGui);
@@ -460,6 +482,7 @@ public class TweakerMoreConfigs
 		//////////// Misc ////////////
 
 		TWEAKM_CONTAINER_PROCESSOR_HINT.setCommentModifier(AutoContainerProcessorHintRenderer::modifyComment);
+		TWEAKM_SCHEMATIC_PRO_PLACE.setCommentModifier(ProPlaceImpl::modifyComment);
 	}
 
 	private static void setHotkeyCallback(TweakerMoreConfigHotkey configHotkey, Runnable runnable, boolean cancelFurtherProcess)

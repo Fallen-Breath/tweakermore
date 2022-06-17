@@ -77,12 +77,12 @@ public abstract class PlacementTweaksMixin
 
 	private static boolean canDoBlockPlacement(MinecraftClient mc, ItemPlacementContext ctx)
 	{
-		final int PROTECT_RANGE = 2;
+		final int MARGIN = TweakerMoreConfigs.TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_MARGIN.getIntegerValue();
 
 		BlockPos pos = ctx.getBlockPos();
 
 		// Always permit if it's far from the schematic
-		if (!WorldUtils.isPositionWithinRangeOfSchematicRegions(pos, PROTECT_RANGE))
+		if (!WorldUtils.isPositionWithinRangeOfSchematicRegions(pos, MARGIN))
 		{
 			return true;
 		}
@@ -91,8 +91,8 @@ public abstract class PlacementTweaksMixin
 		LayerRange layerRange = DataManager.getRenderLayerRange();
 		if (
 				BlockPos.stream(
-						pos.add(-PROTECT_RANGE, -PROTECT_RANGE, -PROTECT_RANGE),
-						pos.add(PROTECT_RANGE, PROTECT_RANGE, PROTECT_RANGE)
+						pos.add(-MARGIN, -MARGIN, -MARGIN),
+						pos.add(MARGIN, MARGIN, MARGIN)
 				).
 				noneMatch(layerRange::isPositionWithinRange)
 		)

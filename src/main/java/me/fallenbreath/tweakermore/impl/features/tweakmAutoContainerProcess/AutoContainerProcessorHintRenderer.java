@@ -6,11 +6,12 @@ import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
+import me.fallenbreath.tweakermore.util.StringUtil;
 import me.fallenbreath.tweakermore.util.render.RenderContext;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AutoContainerProcessorHintRenderer implements TweakerMoreIRenderer
 {
@@ -51,20 +52,12 @@ public class AutoContainerProcessorHintRenderer implements TweakerMoreIRenderer
 
 	public static String modifyComment(String comment)
 	{
-		StringBuilder builder = new StringBuilder(comment);
-		for (Processor processor : ContainerProcessor.getProcessors())
-		{
-			TweakerMoreConfigBooleanHotkeyed config = processor.getConfig();
-			String id = config.getName();
-			String name = config.getConfigGuiDisplayName();
-			builder.append("\n");
-			builder.append(GuiBase.TXT_GRAY).append("- ");
-			builder.append(GuiBase.TXT_RST).append(name);
-			if (!id.equals(name))
-			{
-				builder.append(GuiBase.TXT_GRAY).append(" (").append(id).append(")").append(GuiBase.TXT_RST);
-			}
-		}
-		return builder.toString();
+		String lines = StringUtil.configsToListLines(
+				ContainerProcessor.getProcessors().
+						stream().
+						map(Processor::getConfig).
+						collect(Collectors.toList())
+		);
+		return comment + '\n' + lines;
 	}
 }

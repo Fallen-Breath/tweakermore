@@ -201,6 +201,25 @@ TweakerMore提供的新功能
     - Litematica (`litematica`)
 
 
+### 原理图方块放置限制边缘保护 (tweakmBlockSchematicPlacementRestrictionMargin)
+
+用于阻止位于原理图框附近的方块放置的放置保护距离
+
+例如，在使用默认值为2时，距离任意原理图2米范围内的方块放置将被取消
+
+选项tweakmBlockSchematicPlacementRestriction将使用本规则的值
+
+- 分类: 功能
+- 类型: 整数
+- 默认值: `2`
+- 最小值: `0`
+- 最大值: `16`
+- 模组约束:
+  - 依赖模组:
+    - Tweakeroo (`tweakeroo`)
+    - Litematica (`litematica`)
+
+
 ### 自动容器处理提示 (tweakmContainerProcessorHint)
 
 在界面右上角显示自动容器处理相关功能的开启情况，包括：
@@ -250,6 +269,31 @@ TweakerMore提供的新功能
 - 分类: 功能
 - 类型: 可开关型热键
 - 默认值: *无快捷键*, `false`
+
+
+### 专业原理图方块放置 (tweakmSchematicProPlace)
+
+同时开启/关闭以下功能的一个快捷选项:
+
+- 自动选择原理图方块 (tweakmAutoPickSchematicBlock)
+
+- 原理图方块放置限制 (tweakmBlockSchematicPlacementRestriction)
+
+启用这些选项后，你就有了一个litematica的轻松放置的非作弊版本，
+
+它可以帮助您自动选择目标物品，并取消错误方块的放置
+
+拥有着轻松放置除了浮空放置方块外的所有功能
+
+兼容tweakeroo的各种方块放置功能，在轻松放置开启时无效
+
+- 分类: 功能
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Tweakeroo (`tweakeroo`)
+    - Litematica (`litematica`)
 
 
 ### 显示红石粉更新顺序 (tweakmShowRedstoneDustUpdateOrder)
