@@ -49,16 +49,6 @@ public class PlacementRestrictor
 			return true;
 		}
 
-		// If the target pos is outside the layer range (within margin range), cancel
-		if (!layerRange.isPositionWithinRange(pos))
-		{
-			if (hintType.showNotPossible)
-			{
-				info("in_margin");
-			}
-			return false;
-		}
-
 		World schematicWorld = SchematicWorldHandler.getSchematicWorld();
 		World clientWorld = mc.world;
 
@@ -86,6 +76,16 @@ public class PlacementRestrictor
 					{
 						info("no_block", schematicState.getBlock().getName());
 					}
+				}
+				return false;
+			}
+
+			// If the target pos is outside the layer range, cancel
+			if (!layerRange.isPositionWithinRange(pos))
+			{
+				if (hintType.showNotPossible)
+				{
+					info("outside_the_layer");
 				}
 				return false;
 			}
