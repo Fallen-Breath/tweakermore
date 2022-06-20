@@ -1,15 +1,10 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmAutoPickSchematicBlock;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmSchematicProPlace;
 
 import fi.dy.masa.litematica.config.Configs;
-import fi.dy.masa.litematica.data.DataManager;
-import fi.dy.masa.litematica.tool.ToolMode;
-import fi.dy.masa.litematica.util.EntityUtils;
-import fi.dy.masa.malilib.util.PositionUtils;
 import fi.dy.masa.tweakeroo.tweaks.PlacementTweaks;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
-import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.SchematicBlockPicker;
+import me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -32,34 +27,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(PlacementTweaks.class)
 public abstract class PlacementTweaksMixin
 {
-	@Inject(method = "tryPlaceBlock", at = @At("HEAD"), remap = false)
-	private static void tweakmAutoPickSchematicBlock(
+	@Inject(method = "processRightClickBlockWrapper", at = @At("HEAD"), cancellable = true, remap = false)
+	private static void tweakmSchematicProPlace(
 			ClientPlayerInteractionManager controller,
 			ClientPlayerEntity player,
 			ClientWorld world,
 			BlockPos posIn,
 			Direction sideIn,
-			Direction sideRotatedIn,
-			float playerYaw,
-			Vec3d hitVec,
+			Vec3d hitVecIn,
 			Hand hand,
-			PositionUtils.HitPart hitPart,
-			boolean isFirstClick,
 			CallbackInfoReturnable<ActionResult> cir
 	)
 	{
-		MinecraftClient mc = MinecraftClient.getInstance();
-		if (mc.player != null)
-		{
-			if (DataManager.getToolMode() != ToolMode.REBUILD && !Configs.Generic.EASY_PLACE_MODE.getBooleanValue())
-			{
-				if (TweakerMoreConfigs.TWEAKM_AUTO_PICK_SCHEMATIC_BLOCK.getBooleanValue() && EntityUtils.shouldPickBlock(mc.player))
-				{
-					BlockHitResult hitResult = new BlockHitResult(hitVec, sideIn, posIn, false);
-					ItemPlacementContext ctx = new ItemPlacementContext(new ItemUsageContext(player, hand, hitResult));
-					SchematicBlockPicker.doSchematicWorldPickBlock(mc, ctx.getBlockPos(), hand);
-				}
-			}
-		}
+		BlockHitResult hitResult = new BlockHitResult(hitVecIn, sideIn, posIn, false);
+		ItemPlacementContext ctx = new ItemPlacementContext(new ItemUsageContext(player, hand, hitResult));
+
+		ProPlaceImpl.handleBlockPlacement(ctx, cir);
 	}
 }

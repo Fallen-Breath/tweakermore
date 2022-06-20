@@ -11,7 +11,6 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.listentries.SchematicBlockPlacementRestrictionHintType;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -23,12 +22,10 @@ public class PlacementRestrictor
 		InfoUtils.printActionbarMessage("tweakermore.config.tweakmSchematicBlockPlacementRestriction." + key, args);
 	}
 
-	public static boolean canDoBlockPlacement(MinecraftClient mc, ItemPlacementContext ctx)
+	public static boolean canDoBlockPlacement(MinecraftClient mc, BlockPos pos)
 	{
 		final int MARGIN = TweakerMoreConfigs.TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_MARGIN.getIntegerValue();
 		SchematicBlockPlacementRestrictionHintType hintType = (SchematicBlockPlacementRestrictionHintType)TweakerMoreConfigs.TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_HINT.getOptionListValue();
-
-		BlockPos pos = ctx.getBlockPos();
 
 		// Always permit if it's far from the schematic
 		if (!WorldUtils.isPositionWithinRangeOfSchematicRegions(pos, MARGIN))
