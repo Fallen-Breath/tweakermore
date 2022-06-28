@@ -180,6 +180,21 @@ and then close the container
     - Item Scroller (`itemscroller`)
 
 
+### tweakmAutoVillagerTradeFavorites
+
+Automatically trigger item scroller's villagerTradeFavorites feature when a merchant screen is opened
+
+and then close the merchant screen
+
+- Category: Features
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Item Scroller (`itemscroller`)
+    - Minecraft (`minecraft`) ` >=1.16`
+
+
 ### tweakmContainerProcessorHint
 
 Displays the enabling status of auto container processing related features, including:
@@ -191,6 +206,8 @@ Displays the enabling status of auto container processing related features, incl
 - tweakmAutoPutBackExistedItem
 
 - tweakmAutoCollectMaterialListItem
+
+- tweakmAutoVillagerTradeFavorites
 
 - Category: Features
 - Type: togglable hotkey

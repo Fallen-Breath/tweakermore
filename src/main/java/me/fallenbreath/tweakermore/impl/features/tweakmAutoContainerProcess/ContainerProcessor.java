@@ -21,7 +21,8 @@ public abstract class ContainerProcessor
 			new ContainerCleaner(),
 			new ContainerFiller(),
 			new ContainerItemPutBackProcessor(),
-			new ContainerMaterialListItemCollector()
+			new ContainerMaterialListItemCollector(),
+			new MerchantAutoFavoritesTrader()
 	);
 
 	private static boolean hasTweakEnabled()

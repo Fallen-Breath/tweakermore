@@ -111,6 +111,16 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_PUT_BACK_EXISTED_ITEM = newConfigBooleanHotkeyed("tweakmAutoPutBackExistedItem");
 
+	@Config(
+			type = Config.Type.TWEAK,
+			restriction = @Restriction(require = {
+					@Condition(itemscroller),
+					@Condition(value = minecraft, versionPredicates = ">=1.16")
+			}),
+			category = Config.Category.FEATURES
+	)
+	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_VILLAGER_TRADE_FAVORITES = newConfigBooleanHotkeyed("tweakmAutoVillagerTradeFavorites");
+
 	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_CONTAINER_PROCESSOR_HINT = newConfigBooleanHotkeyed("tweakmContainerProcessorHint");
 
