@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.impl.features.tweakmAutoContainerProcess;
+package me.fallenbreath.tweakermore.impl.features.tweakmAutoContainerProcess.processors;
 
 import fi.dy.masa.itemscroller.util.InventoryUtils;
 import fi.dy.masa.litematica.data.DataManager;
@@ -19,7 +19,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-public class ContainerMaterialListItemCollector implements Processor
+public class ContainerMaterialListItemCollector implements IProcessor
 {
 	@Override
 	public TweakerMoreConfigBooleanHotkeyed getConfig()

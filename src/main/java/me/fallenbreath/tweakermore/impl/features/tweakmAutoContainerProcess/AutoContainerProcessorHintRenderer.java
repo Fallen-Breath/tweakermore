@@ -6,6 +6,7 @@ import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.impl.features.tweakmAutoContainerProcess.processors.IProcessor;
 import me.fallenbreath.tweakermore.util.StringUtil;
 import me.fallenbreath.tweakermore.util.render.RenderContext;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
@@ -24,7 +25,7 @@ public class AutoContainerProcessorHintRenderer implements TweakerMoreIRenderer
 		}
 
 		List<String> lines = Lists.newArrayList();
-		ContainerProcessor.getProcessors().forEach(processor -> {
+		ContainerProcessorManager.getProcessors().forEach(processor -> {
 			if (processor.isEnabled())
 			{
 				lines.add(GuiBase.TXT_GRAY + processor.getConfig().getConfigGuiDisplayName());
@@ -53,9 +54,9 @@ public class AutoContainerProcessorHintRenderer implements TweakerMoreIRenderer
 	public static String modifyComment(String comment)
 	{
 		String lines = StringUtil.configsToListLines(
-				ContainerProcessor.getProcessors().
+				ContainerProcessorManager.getProcessors().
 						stream().
-						map(Processor::getConfig).
+						map(IProcessor::getConfig).
 						collect(Collectors.toList())
 		);
 		return comment + '\n' + lines;

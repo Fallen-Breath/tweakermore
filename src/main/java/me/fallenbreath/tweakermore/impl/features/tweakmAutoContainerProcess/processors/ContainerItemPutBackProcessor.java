@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.impl.features.tweakmAutoContainerProcess;
+package me.fallenbreath.tweakermore.impl.features.tweakmAutoContainerProcess.processors;
 
 import com.google.common.collect.Sets;
 import fi.dy.masa.itemscroller.util.InventoryUtils;
@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import java.util.List;
 import java.util.Set;
 
-public class ContainerItemPutBackProcessor implements Processor
+public class ContainerItemPutBackProcessor implements IProcessor
 {
 	@Override
 	public TweakerMoreConfigBooleanHotkeyed getConfig()

@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.impl.features.tweakmAutoContainerProcess;
+package me.fallenbreath.tweakermore.impl.features.tweakmAutoContainerProcess.processors;
 
 import fi.dy.masa.itemscroller.util.InventoryUtils;
 import fi.dy.masa.malilib.util.InfoUtils;
@@ -13,7 +13,7 @@ import net.minecraft.util.Formatting;
 
 import java.util.List;
 
-public class ContainerFiller implements Processor
+public class ContainerFiller implements IProcessor
 {
 	@Override
 	public TweakerMoreConfigBooleanHotkeyed getConfig()

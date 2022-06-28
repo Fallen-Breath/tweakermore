@@ -1,6 +1,7 @@
 package me.fallenbreath.tweakermore.impl.features.tweakmAutoContainerProcess;
 
 import com.google.common.collect.ImmutableList;
+import me.fallenbreath.tweakermore.impl.features.tweakmAutoContainerProcess.processors.*;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmAutoContainerProcess.ItemScrollerInventoryUtilsAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -15,9 +16,9 @@ import net.minecraft.entity.player.PlayerInventory;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class ContainerProcessor
+public class ContainerProcessorManager
 {
-	private static final List<Processor> CONTAINER_PROCESSORS = ImmutableList.of(
+	private static final List<IProcessor> CONTAINER_PROCESSORS = ImmutableList.of(
 			new ContainerCleaner(),
 			new ContainerFiller(),
 			new ContainerItemPutBackProcessor(),
@@ -27,10 +28,10 @@ public abstract class ContainerProcessor
 
 	private static boolean hasTweakEnabled()
 	{
-		return CONTAINER_PROCESSORS.stream().anyMatch(Processor::isEnabled);
+		return CONTAINER_PROCESSORS.stream().anyMatch(IProcessor::isEnabled);
 	}
 
-	public static List<Processor> getProcessors()
+	public static List<IProcessor> getProcessors()
 	{
 		return CONTAINER_PROCESSORS;
 	}
@@ -65,7 +66,7 @@ public abstract class ContainerProcessor
 				{
 					return;
 				}
-				for (Processor processor : CONTAINER_PROCESSORS)
+				for (IProcessor processor : CONTAINER_PROCESSORS)
 				{
 					if (processor.isEnabled())
 					{
