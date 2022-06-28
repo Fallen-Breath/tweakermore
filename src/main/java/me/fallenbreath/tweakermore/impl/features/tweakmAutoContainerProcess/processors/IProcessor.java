@@ -17,5 +17,7 @@ public interface IProcessor
 
 	TweakerMoreConfigBooleanHotkeyed getConfig();
 
+	boolean shouldProcess(ContainerScreen<?> containerScreen);
+
 	boolean process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots);
 }

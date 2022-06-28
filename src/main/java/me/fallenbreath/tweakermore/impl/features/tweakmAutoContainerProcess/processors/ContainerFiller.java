@@ -13,7 +13,7 @@ import net.minecraft.util.Formatting;
 
 import java.util.List;
 
-public class ContainerFiller implements IProcessor
+public class ContainerFiller implements IContainerProcessor
 {
 	@Override
 	public TweakerMoreConfigBooleanHotkeyed getConfig()

@@ -19,7 +19,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-public class ContainerMaterialListItemCollector implements IProcessor
+public class ContainerMaterialListItemCollector implements IContainerProcessor
 {
 	@Override
 	public TweakerMoreConfigBooleanHotkeyed getConfig()

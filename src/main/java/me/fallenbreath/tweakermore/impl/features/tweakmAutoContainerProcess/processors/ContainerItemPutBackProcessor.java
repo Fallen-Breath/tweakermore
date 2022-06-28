@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import java.util.List;
 import java.util.Set;
 
-public class ContainerItemPutBackProcessor implements IProcessor
+public class ContainerItemPutBackProcessor implements IContainerProcessor
 {
 	@Override
 	public TweakerMoreConfigBooleanHotkeyed getConfig()

@@ -43,7 +43,7 @@ public class ContainerProcessorManager
 			Screen screen = MinecraftClient.getInstance().currentScreen;
 			ClientPlayerEntity player = MinecraftClient.getInstance().player;
 			// not inventory and not crafting table
-			if (player != null && screen instanceof ContainerScreen<?> && !(screen instanceof AbstractInventoryScreen) && !(screen instanceof CraftingTableScreen))
+			if (player != null && screen instanceof ContainerScreen<?>)
 			{
 				if (player.isSpectator())
 				{
@@ -68,7 +68,7 @@ public class ContainerProcessorManager
 				}
 				for (IProcessor processor : CONTAINER_PROCESSORS)
 				{
-					if (processor.isEnabled())
+					if (processor.isEnabled() && processor.shouldProcess(containerScreen))
 					{
 						boolean success = processor.process(player, containerScreen, allSlots, playerInvSlots, containerInvSlots);
 						if (success)

@@ -12,6 +12,8 @@ import java.util.List;
 
 public class MerchantAutoFavoritesTrader implements IProcessor
 {
+	private static final Class<?> dummy$dontOptimizeImport = InventoryUtils.class;
+
 	@Override
 	public TweakerMoreConfigBooleanHotkeyed getConfig()
 	{
@@ -19,16 +21,19 @@ public class MerchantAutoFavoritesTrader implements IProcessor
 	}
 
 	@Override
+	public boolean shouldProcess(ContainerScreen<?> containerScreen)
+	{
+		return containerScreen instanceof MerchantScreen;
+	}
+
+	@Override
 	public boolean process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
 	{
-		if (containerScreen instanceof MerchantScreen)
-		{
-			Class<?> dontOptimizeImport = InventoryUtils.class;
-			//#if MC >= 11600
-			//#$$ InventoryUtils.villagerTradeEverythingPossibleWithAllFavoritedTrades();
-			//#$$ return true;
-			//#endif
-		}
+		//#if MC >= 11600
+		//$$ InventoryUtils.villagerTradeEverythingPossibleWithAllFavoritedTrades();
+		//$$ return true;
+		//#else
 		return false;
+		//#endif
 	}
 }

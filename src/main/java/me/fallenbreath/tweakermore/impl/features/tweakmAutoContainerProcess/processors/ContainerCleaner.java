@@ -10,7 +10,7 @@ import net.minecraft.container.Slot;
 
 import java.util.List;
 
-public class ContainerCleaner implements IProcessor
+public class ContainerCleaner implements IContainerProcessor
 {
 	@Override
 	public TweakerMoreConfigBooleanHotkeyed getConfig()
