@@ -46,6 +46,8 @@
   "tweakermore.config.tweakmAutoVillagerTradeFavorites": "tweakmAutoVillagerTradeFavorites",
   "tweakermore.config.tweakmAutoVillagerTradeFavorites.comment": "Automatically trigger item scroller's villagerTradeFavorites feature when a merchant screen is opened\nand then close the merchant screen",
   "tweakermore.config.tweakmAutoVillagerTradeFavorites.pretty_name": "Auto Villager Trade Favorites",
+  "tweakermore.config.tweakmAutoVillagerTradeFavorites.triggered": "%1$s is triggered for %2$s",
+  "tweakermore.config.tweakmAutoVillagerTradeFavorites.no_favorite": "%1$s doesn't have any favorite trades",
   "tweakermore.config.tweakmContainerProcessorHint": "tweakmContainerProcessorHint",
   "tweakermore.config.tweakmContainerProcessorHint.comment": "Displays the enabling status of auto container processing related features, including:",
   "tweakermore.config.tweakmContainerProcessorHint.pretty_name": "Auto Container Processor Hint",

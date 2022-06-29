@@ -207,8 +207,6 @@ TweakerMore提供的新功能
 
 - 自动收集材料列表物品 (tweakmAutoCollectMaterialListItem)
 
-- 自动交易收藏村民交易 (tweakmAutoVillagerTradeFavorites)
-
 - 分类: 功能
 - 类型: 可开关型热键
 - 默认值: *无快捷键*, `false`

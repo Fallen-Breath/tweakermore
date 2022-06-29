@@ -5,9 +5,7 @@ import me.fallenbreath.tweakermore.impl.features.tweakmAutoContainerProcess.proc
 import me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmAutoContainerProcess.ItemScrollerInventoryUtilsAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
-import net.minecraft.client.gui.screen.ingame.CraftingTableScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.container.Container;
 import net.minecraft.container.Slot;
@@ -22,8 +20,7 @@ public class ContainerProcessorManager
 			new ContainerCleaner(),
 			new ContainerFiller(),
 			new ContainerItemPutBackProcessor(),
-			new ContainerMaterialListItemCollector(),
-			new MerchantAutoFavoritesTrader()
+			new ContainerMaterialListItemCollector()
 	);
 
 	private static boolean hasTweakEnabled()
@@ -66,18 +63,24 @@ public class ContainerProcessorManager
 				{
 					return;
 				}
+
+				boolean hasProcessed = false;
 				for (IProcessor processor : CONTAINER_PROCESSORS)
 				{
 					if (processor.isEnabled() && processor.shouldProcess(containerScreen))
 					{
-						boolean success = processor.process(player, containerScreen, allSlots, playerInvSlots, containerInvSlots);
-						if (success)
+						hasProcessed = true;
+						boolean cancelProcessing = processor.process(player, containerScreen, allSlots, playerInvSlots, containerInvSlots);
+						if (cancelProcessing)
 						{
 							break;
 						}
 					}
 				}
-				player.closeContainer();
+				if (hasProcessed)
+				{
+					player.closeContainer();
+				}
 			}
 		}
 	}

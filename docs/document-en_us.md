@@ -207,8 +207,6 @@ Displays the enabling status of auto container processing related features, incl
 
 - tweakmAutoCollectMaterialListItem
 
-- tweakmAutoVillagerTradeFavorites
-
 - Category: Features
 - Type: togglable hotkey
 - Default value: *no hotkey*, `false`

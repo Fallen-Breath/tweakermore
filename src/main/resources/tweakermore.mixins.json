@@ -25,6 +25,7 @@
     "tweaks.features.tweakmAutoContainerProcess.ContainerMixin",
     "tweaks.features.tweakmAutoContainerProcess.ItemScrollerInventoryUtilsAccessor",
     "tweaks.features.tweakmAutoContainerProcess.ScreenMixin",
+    "tweaks.features.tweakmAutoVillagerTradeFavorites.ClientPlayNetworkHandlerMixin",
     "tweaks.features.tweakmFlawlessFrames.ScreenshotRendererMixin",
     "tweaks.features.tweakmFlawlessFrames.VideoRendererMixin",
     "tweaks.features.tweakmSafeAfk.ClientPlayNetworkHandlerMixin",
