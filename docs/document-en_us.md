@@ -465,6 +465,15 @@ so player's flying movement will not be affected by ladder things
 - Default value: *no hotkey*, `false`
 
 
+### disableEntityRenderInterpolation
+
+Disable the entity animation interpolation during rendering
+
+- Category: MC Tweaks
+- Type: togglable hotkey
+- Default value: *no hotkey*, `false`
+
+
 ### disableLightUpdates
 
 Yeets client-side light updates

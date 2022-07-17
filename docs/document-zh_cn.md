@@ -465,6 +465,15 @@ TweakerMore提供的新功能
 - 默认值: *无快捷键*, `false`
 
 
+### 禁用实体渲染插值 (disableEntityRenderInterpolation)
+
+禁用在渲染过程中实体的动画插值
+
+- 分类: MC修改
+- 类型: 可开关型热键
+- 默认值: *无快捷键*, `false`
+
+
 ### 禁用光照更新 (disableLightUpdates)
 
 禁用客户端光照更新
