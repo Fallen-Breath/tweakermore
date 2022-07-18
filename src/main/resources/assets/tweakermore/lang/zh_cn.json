@@ -292,6 +292,12 @@
   "tweakermore.gui.element.config_button_boolean_switch.enabled": "已启用",
   "tweakermore.gui.element.config_button_boolean_switch.disabled": "已禁用",
 
+  "// Statistic": "================================================",
+
+  "tweakermore.statistic.debug_title": "统计信息数据",
+  "tweakermore.statistic.entry.lastUsedTime": "上次使用时间",
+  "tweakermore.statistic.entry.useAmount": "使用次数",
+
   "// Misc": "================================================",
 
   "tweakermore.impl.shulkerTooltipHintBuilder.more": "... %1$sx",

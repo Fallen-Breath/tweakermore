@@ -150,6 +150,20 @@ public class TweakerMoreOption
 			{
 				comment += "\n" + Joiner.on("\n").join(footers);
 			}
+
+			// show statistic data when debug mode on
+			if (TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
+			{
+				List<String> lines = this.statistic.getDisplayLines();
+				comment +=
+						"\n" +
+						GuiBase.TXT_DARK_GRAY + "-------------------------" + GuiBase.TXT_RST + "\n" +
+						GuiBase.TXT_GRAY + StringUtils.translate("tweakermore.statistic.debug_title") + GuiBase.TXT_RST + "\n" +
+						Joiner.on('\n').join(lines.stream().
+								map(line -> GuiBase.TXT_DARK_GRAY + "- " + GuiBase.TXT_GRAY + line + GuiBase.TXT_RST).
+								toArray()
+						);
+			}
 		}
 
 		return comment;
