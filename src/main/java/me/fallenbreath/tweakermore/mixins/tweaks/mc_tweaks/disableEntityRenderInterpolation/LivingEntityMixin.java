@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
@@ -28,7 +29,7 @@ public abstract class LivingEntityMixin extends Entity
 			//#endif
 
 	@Inject(method = "updateTrackedPositionAndAngles", at = @At("TAIL"))
-	private void disableEntityRenderInterpolation_noExtraInterpolationSteps(double x, double y, double z, float yaw, float pitch, int interpolationSteps, boolean interpolate, CallbackInfo ci)
+	private void disableEntityRenderInterpolation_noExtraInterpolationSteps1(double x, double y, double z, float yaw, float pitch, int interpolationSteps, boolean interpolate, CallbackInfo ci)
 	{
 		if (TweakerMoreConfigs.DISABLE_ENTITY_RENDER_INTERPOLATION.getBooleanValue())
 		{
@@ -46,5 +47,23 @@ public abstract class LivingEntityMixin extends Entity
 				super.updateTrackedPositionAndAngles(x, y, z, yaw, pitch, interpolationSteps, interpolate);
 			}
 		}
+	}
+
+	@ModifyVariable(method = "updateTrackedHeadRotation", at = @At("HEAD"), argsOnly = true)
+	private int disableEntityRenderInterpolation_noExtraInterpolationSteps2(int interpolationSteps, float yaw, int interpolationSteps_)
+	{
+		if (TweakerMoreConfigs.DISABLE_ENTITY_RENDER_INTERPOLATION.getBooleanValue())
+		{
+			interpolationSteps = 1;
+
+			// carpet's tick freeze state also freezes client world entity ticking,
+			// which cancels the client-side entity position interpolation logic,
+			// so we need to manually setting the entity's position & rotation to the correct values
+			if (CarpetModAccess.isTickFrozen())
+			{
+				super.updateTrackedHeadRotation(yaw, interpolationSteps);
+			}
+		}
+		return interpolationSteps;
 	}
 }

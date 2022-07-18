@@ -44,6 +44,7 @@
     "tweaks.mc_tweaks.disableCameraSubmersionFog.BackgroundRendererMixin",
     "tweaks.mc_tweaks.disableCreativeFlyClimbingCheck.LivingEntityMixin",
     "tweaks.mc_tweaks.disableEntityRenderInterpolation.AbstractMinecartEntityMixin",
+    "tweaks.mc_tweaks.disableEntityRenderInterpolation.BoatEntityMixin",
     "tweaks.mc_tweaks.disableEntityRenderInterpolation.LivingEntityMixin",
     "tweaks.mc_tweaks.disableEntityRenderInterpolation.WorldRendererMixin",
     "tweaks.mc_tweaks.disableLightUpdates.ClientChunkManagerMixin",
