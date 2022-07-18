@@ -341,7 +341,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	 */
 
 	// some ocd alignment things xd
-
+	//#if MC < 11800
 	@ModifyArg(
 			method = "addConfigOption",
 			at = @At(
@@ -360,6 +360,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 		}
 		return x;
 	}
+	//#endif
 
 	//#if MC >= 11800
 	//$$ @ModifyVariable(

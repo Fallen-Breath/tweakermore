@@ -30,6 +30,13 @@ public class TweakerMoreConfigHotkeyWithSwitch extends TweakerMoreConfigHotkey i
 	}
 
 	@Override
+	public void resetToDefault()
+	{
+		super.resetToDefault();
+		this.enableState = this.defaultEnableState;
+	}
+
+	@Override
 	public void setValueFromJsonElement(JsonElement element)
 	{
 		boolean oldState = this.getEnableState();
@@ -94,7 +101,7 @@ public class TweakerMoreConfigHotkeyWithSwitch extends TweakerMoreConfigHotkey i
 		this.enableState = value;
 		if (this.enableState != oldValue)
 		{
-			this.onValueChanged();
+			this.onValueChanged(false);
 		}
 	}
 }
