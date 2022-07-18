@@ -17,6 +17,16 @@ public abstract class ConfigFactory
 		return new TweakerMoreConfigHotkey(name, defaultStorageString, settings);
 	}
 
+	public static TweakerMoreConfigHotkeyWithSwitch newConfigHotKeyWithSwitch(String name, boolean defaultEnableState, String defaultStorageString)
+	{
+		return new TweakerMoreConfigHotkeyWithSwitch(name, defaultEnableState, defaultStorageString);
+	}
+
+	public static TweakerMoreConfigHotkeyWithSwitch newConfigHotKeyWithSwitch(String name, boolean defaultEnableState, String defaultStorageString, KeybindSettings settings)
+	{
+		return new TweakerMoreConfigHotkeyWithSwitch(name, defaultEnableState, defaultStorageString, settings);
+	}
+
 	public static TweakerMoreConfigBooleanHotkeyed newConfigBooleanHotkeyed(String name)
 	{
 		return newConfigBooleanHotkeyed(name, false, "");

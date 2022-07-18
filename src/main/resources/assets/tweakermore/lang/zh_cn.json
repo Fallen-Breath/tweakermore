@@ -286,6 +286,9 @@
   "tweakermore.gui.mod_relation_footer.requirement": "依赖模组:",
   "tweakermore.gui.mod_relation_footer.confliction": "冲突模组:",
 
+  "tweakermore.gui.element.config_button_boolean_switch.enabled": "已启用",
+  "tweakermore.gui.element.config_button_boolean_switch.disabled": "已禁用",
+
   "// Misc": "================================================",
 
   "tweakermore.impl.shulkerTooltipHintBuilder.more": "... %1$sx",
@@ -329,5 +332,6 @@
   "tweakermore.doc_gen.type.string_list": "字符串列表",
   "tweakermore.doc_gen.type.option_list": "选项列表",
   "tweakermore.doc_gen.type.hotkey": "热键",
-  "tweakermore.doc_gen.type.hotkey_togglable": "可开关型热键"
+  "tweakermore.doc_gen.type.hotkey_togglable": "带热键布尔值",
+  "tweakermore.doc_gen.type.hotkey_with_switch": "带开关热键"
 }

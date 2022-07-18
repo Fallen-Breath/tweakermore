@@ -9,6 +9,7 @@ import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.Config;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
+import me.fallenbreath.tweakermore.config.options.IHotkeyWithSwitch;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.util.StringUtil;
 import me.fallenbreath.tweakermore.util.condition.ModPredicate;
@@ -55,7 +56,19 @@ public class DocumentPrinter
 
 	private static String getConfigType(IConfigBase config)
 	{
-		String id = config instanceof IHotkeyTogglable ? "hotkey_togglable" : config.getType().name().toLowerCase();
+		String id;
+		if (config instanceof IHotkeyTogglable)
+		{
+			id = "hotkey_togglable";
+		}
+		else if (config instanceof IHotkeyWithSwitch)
+		{
+			id = "hotkey_with_switch";
+		}
+		else
+		{
+			id = config.getType().name().toLowerCase();
+		}
 		return StringUtils.translate("tweakermore.doc_gen.type." + id);
 	}
 

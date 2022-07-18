@@ -286,6 +286,9 @@
   "tweakermore.gui.mod_relation_footer.requirement": "Required mods:",
   "tweakermore.gui.mod_relation_footer.confliction": "Conflicted mods:",
 
+  "tweakermore.gui.element.config_button_boolean_switch.enabled": "Enabled",
+  "tweakermore.gui.element.config_button_boolean_switch.disabled": "Disabled",
+
   "// Misc": "================================================",
 
   "tweakermore.impl.shulkerTooltipHintBuilder.more": "... %1$sx",
@@ -329,5 +332,6 @@
   "tweakermore.doc_gen.type.string_list": "string list",
   "tweakermore.doc_gen.type.option_list": "option list",
   "tweakermore.doc_gen.type.hotkey": "hotkey",
-  "tweakermore.doc_gen.type.hotkey_togglable": "togglable hotkey"
+  "tweakermore.doc_gen.type.hotkey_togglable": "hotkey togglable boolean",
+  "tweakermore.doc_gen.type.hotkey_with_switch": "hotkey with switch"
 }
