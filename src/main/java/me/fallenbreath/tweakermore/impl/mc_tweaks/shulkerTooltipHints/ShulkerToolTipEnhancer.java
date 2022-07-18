@@ -7,6 +7,7 @@ import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerTooltipHints.builder.Po
 import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerTooltipHints.builder.EnchantmentHintBuilder;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerTooltipHints.builder.AbstractHintBuilder;
 import me.fallenbreath.tweakermore.util.InventoryUtil;
+import me.fallenbreath.tweakermore.util.Messenger;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.item.ItemStack;
@@ -69,11 +70,11 @@ public class ShulkerToolTipEnhancer
 
 			double ratio = sum / slotAmount;
 			Formatting color = ratio >= 1.0D ? Formatting.DARK_GREEN : Formatting.GRAY;
-			Text fillLevelText = new LiteralText(String.format("%.2f%%", 100 * ratio)).formatted(color);
+			Text fillLevelText = Messenger.s(String.format("%.2f%%", 100 * ratio), color);
 
 			// let fillLevelText be rendered right-aligned
 			String spacing = " ";
-			Text firstLine = new LiteralText("").append(tooltip.get(0)).append(spacing).append(fillLevelText);
+			Text firstLine = Messenger.c(tooltip.get(0), spacing, fillLevelText);
 			TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
 
 			ToIntFunction<Text> textLenCalc = text ->
@@ -90,7 +91,7 @@ public class ShulkerToolTipEnhancer
 				List<Text> siblings = firstLine.getSiblings();
 				spacing += " ";
 				Text prevSpacing = siblings.get(1);
-				siblings.set(1, new LiteralText(spacing));
+				siblings.set(1, Messenger.s(spacing));
 				if (textLenCalc.applyAsInt(firstLine) > maxWidth)
 				{
 					siblings.set(1, prevSpacing);  // rollback

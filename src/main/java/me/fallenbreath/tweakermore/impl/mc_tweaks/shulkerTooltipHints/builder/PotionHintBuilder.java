@@ -2,6 +2,7 @@ package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerTooltipHints.builder;
 
 import com.google.common.collect.Lists;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.Messenger;
 import net.minecraft.item.*;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.text.BaseText;
@@ -27,7 +28,7 @@ public class PotionHintBuilder extends AbstractHintBuilder
 				PotionUtil.buildTooltip(itemStack, potionTexts, ratio);
 
 				int i = 0;
-				BaseText newLine = new LiteralText("");
+				BaseText newLine = Messenger.s("");
 				for (; i < potionTexts.size(); i++)
 				{
 					// we don't want the "potion.whenDrank" section

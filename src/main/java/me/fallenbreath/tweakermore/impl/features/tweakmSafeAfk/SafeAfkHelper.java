@@ -2,14 +2,13 @@ package me.fallenbreath.tweakermore.impl.features.tweakmSafeAfk;
 
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.Messenger;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DisconnectedScreen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.text.BaseText;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.TranslatableText;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,8 +43,8 @@ public class SafeAfkHelper
 				float maxHealth = mc.player.getMaximumHealth();
 				if (maxHealth > 0 && health < TweakerMoreConfigs.SAFE_AFK_HEALTH_THRESHOLD.getDoubleValue())
 				{
-					BaseText title = new LiteralText(TweakerMoreMod.MOD_NAME + " " + TweakerMoreConfigs.TWEAKM_SAFE_AFK.getPrettyName());
-					BaseText reason = new TranslatableText(
+					BaseText title = Messenger.s(TweakerMoreMod.MOD_NAME + " " + TweakerMoreConfigs.TWEAKM_SAFE_AFK.getPrettyName());
+					BaseText reason = Messenger.tr(
 							"tweakermore.config.tweakmSafeAfk.received_damage",
 							new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),
 							String.format("%.1f / %.1f (%.0f%%)", health, maxHealth, health / maxHealth * 100)

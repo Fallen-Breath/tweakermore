@@ -1,6 +1,7 @@
 package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerTooltipHints.builder;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.Messenger;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.item.ItemStack;
@@ -20,7 +21,7 @@ public abstract class AbstractHintBuilder
 
 	protected static BaseText getDivider()
 	{
-		return (BaseText)(new LiteralText(" | ").formatted(Formatting.DARK_GRAY));
+		return Messenger.s(" | ", Formatting.DARK_GRAY);
 	}
 
 	@Nullable
@@ -45,12 +46,12 @@ public abstract class AbstractHintBuilder
 			extraText.append(texts.get(idx));
 			if (idx < amount - 1)
 			{
-				extraText.append(new LiteralText(", ").formatted(Formatting.GRAY));
+				extraText.append(Messenger.s(", ", Formatting.GRAY));
 			}
 		}
 		if (idx < amount)
 		{
-			extraText.append(new TranslatableText("tweakermore.impl.shulkerTooltipHintBuilder.more", amount - idx).formatted(Formatting.GRAY));
+			extraText.append(Messenger.formatting(Messenger.tr("tweakermore.impl.shulkerTooltipHintBuilder.more", amount - idx), Formatting.GRAY));
 		}
 
 		return extraText;

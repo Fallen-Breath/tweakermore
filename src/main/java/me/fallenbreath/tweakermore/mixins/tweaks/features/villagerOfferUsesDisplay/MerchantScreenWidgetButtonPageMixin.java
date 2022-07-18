@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
-//$$ import net.minecraft.text.LiteralText;
 //$$ import net.minecraft.text.Text;
+//$$ import me.fallenbreath.tweakermore.util.Messenger;
 //#endif
 
 @Mixin(targets = "net.minecraft.client.gui.screen.ingame.MerchantScreen$WidgetButtonPage")
@@ -77,7 +77,7 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
 				String text = String.format("%d / %d", offer.getUses(), offer.getMaxUses());
 				this.field_19166.renderTooltip(
 						//#if MC >= 11600
-						//$$ matrices, new LiteralText(text),
+						//$$ matrices, Messenger.s(text),
 						//#else
 						text,
 						//#endif
