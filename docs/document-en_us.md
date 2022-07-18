@@ -28,6 +28,19 @@ Copy texts in the sign you are pointing to into the clipboard
 ![copySignTextToClipBoard](assets/copySignTextToClipBoard-en_us.png)
 
 
+### creativePickBlockWithState
+
+When performing creative pick block action (middle click) with hotkey pressed,
+
+store the target block's block state into the nbt named "BlockStateTag" of the picked item.
+
+So the block state can be restored when you place blocks with the picked item
+
+- Category: Features
+- Type: hotkey with switch
+- Default value: `LEFT_ALT`
+
+
 ### redstoneDustUpdateOrderTextAlpha
 
 The alpha value of the floating text used in redstone dust update order displaying
@@ -74,7 +87,7 @@ Automatically drops everything in the opened container
 and then close the container
 
 - Category: Features
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -125,7 +138,7 @@ Automatically collect missing items in litematica mod material list in the opene
 and then close the container
 
 - Category: Features
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -142,7 +155,7 @@ iff the item stack is the only most numerous one
 and then close the container
 
 - Category: Features
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -158,7 +171,7 @@ It's logic is the same as the pickBlock tweaks in litematica mod, you need to en
 Does not work with easy place mode
 
 - Category: Features
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -173,7 +186,7 @@ Automatically put back all items which also exist in the container from your inv
 and then close the container
 
 - Category: Features
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -187,7 +200,7 @@ Automatically trigger item scroller's villagerTradeFavorites feature when a merc
 and then close the merchant screen
 
 - Category: Features
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -208,7 +221,7 @@ Displays the enabling status of auto container processing related features, incl
 - tweakmAutoCollectMaterialListItem
 
 - Category: Features
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 
 ![tweakmContainerProcessorHint](assets/tweakmContainerProcessorHint-en_us.png)
@@ -242,7 +255,7 @@ Disconnect when receive damage
 Health threshold to disconnect can be set via safeAfkHealthThreshold
 
 - Category: Features
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 
 
@@ -257,7 +270,7 @@ it works nicely with tweakeroo's placement tweaks
 Does not work with litematica's or easy place mode
 
 - Category: Features
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -307,7 +320,7 @@ Has all the functions of easy place except for the floating block placing
 Compatible with various block placement tweaks from tweakeroo, doesn't work with easy place mode
 
 - Category: Features
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -320,7 +333,7 @@ Compatible with various block placement tweaks from tweakeroo, doesn't work with
 When looking at a redstone dust block, show the block update order of it
 
 - Category: Features
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 
 ![tweakmShowRedstoneDustUpdateOrder](assets/tweakmShowRedstoneDustUpdateOrder.png)
@@ -422,7 +435,7 @@ Prevents rendering beacon beams
 So beacon beams can never suddenly come out when recording / rendering
 
 - Category: MC Tweaks
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 
 
@@ -437,7 +450,7 @@ A use case is to ensure the integrity of shadows when using shaders
 Has significant impact on framerate
 
 - Category: MC Tweaks
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 
 
@@ -448,7 +461,7 @@ Disable fog effect caused by camera being submerged in block or fluid, including
 It will use the render distance fog instead, just like the camera is in the air
 
 - Category: MC Tweaks
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 
 ![disableCameraSubmersionFog](assets/disableCameraSubmersionFog.png)
@@ -461,7 +474,7 @@ Prevent creative flying player from entering "ladder climbing" state,
 so player's flying movement will not be affected by ladder things
 
 - Category: MC Tweaks
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 
 
@@ -470,7 +483,7 @@ so player's flying movement will not be affected by ladder things
 Disable the entity animation interpolation during rendering
 
 - Category: MC Tweaks
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 
 
@@ -479,7 +492,7 @@ Disable the entity animation interpolation during rendering
 Yeets client-side light updates
 
 - Category: MC Tweaks
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 
 
@@ -488,7 +501,7 @@ Yeets client-side light updates
 Remove block breaking particles when pistons break blocks
 
 - Category: MC Tweaks
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -502,7 +515,7 @@ Disable all redstone particles
 i.e. particles from redstone dust, redstone torch, redstone repeater etc.
 
 - Category: MC Tweaks
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 
 
@@ -513,7 +526,7 @@ Disable the text length limit based on character width when editing or rendering
 A red exclamation mark will be shown on the left side when the limit is exceeded during the editing of the sign
 
 - Category: MC Tweaks
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 
 ![disableSignTextLengthLimit](assets/disableSignTextLengthLimit.png)
@@ -671,7 +684,7 @@ Override the time of day in the client world
 Does not affect server-side daytime
 
 - Category: MC Tweaks
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 
 
@@ -680,7 +693,7 @@ Does not affect server-side daytime
 Always use night vision for game rendering, regardless of whether the player actually has night vision
 
 - Category: MC Tweaks
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 
 
@@ -693,7 +706,7 @@ using the logic from replay mod which is used in its rendering tasks
 WARNING: Expect client lag spike with enabled
 
 - Category: MC Tweaks
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -707,7 +720,7 @@ Set client-side entity render distance to unlimited
 Still requires the server to send entity packets via EntityTracker properly
 
 - Category: MC Tweaks
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 
 
@@ -718,7 +731,7 @@ Override the weather of the world in the client world
 Does not affect server-side weather
 
 - Category: MC Tweaks
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 
 
@@ -905,7 +918,7 @@ Sync when following actions happen:
 Requires player having OP permission (permission level 2) for it to work
 
 - Category: Mods Tweaks
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -1022,7 +1035,7 @@ Backports option disableNauseaEffect from Tweakeroo 1.17+
 Also fixes the nether portal overlay fails to be displayed with this option on
 
 - Category: Porting
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -1071,7 +1084,7 @@ When enabled, debug parameter options and options not supported by the current M
 and debugging related functions will be enabled
 
 - Category: Setting
-- Type: togglable hotkey
+- Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 
 
