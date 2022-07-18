@@ -1,7 +1,10 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.minihudDisableLightLevelSpawnableCheck;
 
 import fi.dy.masa.minihud.renderer.OverlayRendererLightLevel;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.util.math.BlockPos;
@@ -12,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+@Restriction(require = @Condition(ModIds.minihud))
 @Mixin(OverlayRendererLightLevel.class)
 public abstract class OverlayRendererLightLevelMixin
 {
