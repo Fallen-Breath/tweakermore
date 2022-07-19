@@ -627,6 +627,9 @@ TweakerMore提供的新功能
 - 分类: MC修改
 - 类型: 布尔值
 - 默认值: `false`
+- 模组约束:
+  - 冲突模组:
+    - tooltips+ (`tooltipsplus`)
 
 ![shulkerTooltipEnchantmentHint](assets/shulkerTooltipEnchantmentHint-zh_cn.png)
 
@@ -662,6 +665,9 @@ TweakerMore提供的新功能
 - 分类: MC修改
 - 类型: 布尔值
 - 默认值: `false`
+- 模组约束:
+  - 冲突模组:
+    - tooltips+ (`tooltipsplus`)
 
 ![shulkerTooltipPotionInfoHint](assets/shulkerTooltipPotionInfoHint-zh_cn.png)
 

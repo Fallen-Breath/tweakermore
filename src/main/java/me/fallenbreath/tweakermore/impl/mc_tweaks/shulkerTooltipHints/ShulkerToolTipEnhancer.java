@@ -31,6 +31,10 @@ public class ShulkerToolTipEnhancer
 			new PotionHintBuilder()
 	);
 
+	/**
+	 * Content hints are for modifying the item contents display text of shulker box
+	 * It's injected during the shulker box tooltip building
+	 */
 	public static void appendContentHints(
 			ItemStack itemStack,
 			//#if MC >= 11600
@@ -46,6 +50,10 @@ public class ShulkerToolTipEnhancer
 				forEach(text::append);
 	}
 
+	/**
+	 * Fill level hint is applied at the end of the tool tip building, since it requires the complete tool tip text list
+	 * It's injected at the end of general item tooltip building
+	 */
 	public static void applyFillLevelHint(ItemStack skulker, List<Text> tooltip)
 	{
 		if (TweakerMoreConfigs.SHULKER_TOOLTIP_FILL_LEVEL_HINT.getBooleanValue() && tooltip.size() > 0)

@@ -20,14 +20,14 @@ import me.fallenbreath.tweakermore.config.options.listentries.SchematicBlockPlac
 import me.fallenbreath.tweakermore.config.options.listentries.WeatherOverrideValue;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.impl.features.copySignTextToClipBoard.SignTextCopier;
-import me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.ProPlaceImpl;
-import me.fallenbreath.tweakermore.impl.mod_tweaks.eCraftMassCraftCompact.EasierCraftingRegistrar;
 import me.fallenbreath.tweakermore.impl.features.refreshInventory.InventoryRefresher;
-import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.impl.features.showRedstoneDustUpdateOrder.RedstoneDustUpdateOrderRenderer;
 import me.fallenbreath.tweakermore.impl.features.tweakmAutoContainerProcess.AutoContainerProcessorHintRenderer;
-import me.fallenbreath.tweakermore.impl.setting.tweakmDebug.TweakerMoreDebugHelper;
+import me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.tweakmFlawlessFrames.FlawlessFramesHandler;
+import me.fallenbreath.tweakermore.impl.mod_tweaks.eCraftMassCraftCompact.EasierCraftingRegistrar;
+import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.serverDataSyncer.ServerDataSyncer;
+import me.fallenbreath.tweakermore.impl.setting.tweakmDebug.TweakerMoreDebugHelper;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
 import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
 import net.minecraft.item.Items;
@@ -247,7 +247,7 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigDouble SCOREBOARD_SIDE_BAR_SCALE = newConfigDouble("scoreboardSideBarScale", 1, 0.001, 2);
 
-	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(tooltips_plus)), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean SHULKER_TOOLTIP_ENCHANTMENT_HINT = newConfigBoolean("shulkerTooltipEnchantmentHint", false);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
@@ -256,7 +256,7 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigInteger SHULKER_TOOLTIP_HINT_LENGTH_LIMIT = newConfigInteger("shulkerTooltipHintLengthLimit", 120, 0, 600);
 
-	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(tooltips_plus)), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean SHULKER_TOOLTIP_POTION_INFO_HINT = newConfigBoolean("shulkerTooltipPotionInfoHint", false);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)

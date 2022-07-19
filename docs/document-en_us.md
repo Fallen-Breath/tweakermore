@@ -627,6 +627,9 @@ Display enchantments of items in the tooltip of shulker box items
 - Category: MC Tweaks
 - Type: boolean
 - Default value: `false`
+- Mod restrictions:
+  - Conflicted mods:
+    - tooltips+ (`tooltipsplus`)
 
 ![shulkerTooltipEnchantmentHint](assets/shulkerTooltipEnchantmentHint-en_us.png)
 
@@ -662,6 +665,9 @@ Display potion information of items in the tooltip of shulker box items
 - Category: MC Tweaks
 - Type: boolean
 - Default value: `false`
+- Mod restrictions:
+  - Conflicted mods:
+    - tooltips+ (`tooltipsplus`)
 
 ![shulkerTooltipPotionInfoHint](assets/shulkerTooltipPotionInfoHint-en_us.png)
 
