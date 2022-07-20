@@ -29,9 +29,9 @@ public abstract class MinecraftClientMixin
 			),
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
-	private void creativePickBlockWithState_storeStateInTag(CallbackInfo ci, boolean bl, ItemStack itemStack, HitResult.Type type, BlockPos blockPos, BlockState blockState, Block block)
+	private void creativePickBlockWithState_storeStateInTag(CallbackInfo ci, boolean isCreative, ItemStack itemStack, HitResult.Type type, BlockPos blockPos, BlockState blockState, Block block)
 	{
-		if (!itemStack.isEmpty())
+		if (isCreative && !itemStack.isEmpty())
 		{
 			if (TweakerMoreConfigs.CREATIVE_PICK_BLOCK_WITH_STATE.isKeybindHeld())
 			{
