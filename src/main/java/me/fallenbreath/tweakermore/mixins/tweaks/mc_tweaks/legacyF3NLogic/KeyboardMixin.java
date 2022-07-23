@@ -14,6 +14,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.function.Consumer;
+
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.16"))
 @Mixin(Keyboard.class)
 public abstract class KeyboardMixin
@@ -46,13 +48,21 @@ public abstract class KeyboardMixin
 		if (TweakerMoreConfigs.LEGACY_F3_N_LOGIC.getBooleanValue())
 		{
 			assert this.client.player != null;
+
+			Consumer<String> commandSender =
+					//#if MC >= 11900
+					//$$ this.client.player::sendCommand;
+					//#else
+					cmd -> this.client.player.sendChatMessage("/" + cmd);
+					//#endif
+
 			if (this.client.player.isCreative())
 			{
-				this.client.player.sendChatMessage("/gamemode spectator");
+				commandSender.accept("gamemode spectator");
 			}
 			else
 			{
-				this.client.player.sendChatMessage("/gamemode creative");
+				commandSender.accept("gamemode creative");
 			}
 			cir.setReturnValue(true);
 		}
