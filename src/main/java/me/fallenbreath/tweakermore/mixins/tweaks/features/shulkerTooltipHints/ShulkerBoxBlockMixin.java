@@ -1,9 +1,6 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.features.shulkerTooltipHints;
 
-import me.fallenbreath.conditionalmixin.api.annotation.Condition;
-import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerTooltipHints.ShulkerToolTipEnhancer;
-import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
@@ -25,7 +22,6 @@ import java.util.List;
 //$$ import net.minecraft.text.MutableText;
 //#endif
 
-@Restriction(conflict = @Condition(ModIds.tooltips_plus))
 @Mixin(ShulkerBoxBlock.class)
 public abstract class ShulkerBoxBlockMixin
 {

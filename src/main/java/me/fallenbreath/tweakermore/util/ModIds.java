@@ -26,6 +26,5 @@ public class ModIds
 	public static final String iris = "iris";
 	public static final String optifine = "optifabric";
 	public static final String replay_mod = "replaymod";
-	public static final String tooltips_plus = "tooltipsplus";  // https://github.com/itsmiir/tooltipsplus
 	public static final String xaero_worldmap = "xaeroworldmap";
 }
