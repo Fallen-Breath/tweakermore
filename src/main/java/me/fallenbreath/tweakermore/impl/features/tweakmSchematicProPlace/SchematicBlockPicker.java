@@ -1,5 +1,6 @@
 package me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace;
 
+import fi.dy.masa.litematica.config.Configs;
 import fi.dy.masa.litematica.data.DataManager;
 import fi.dy.masa.litematica.materials.MaterialCache;
 import fi.dy.masa.litematica.util.InventoryUtils;
@@ -29,6 +30,12 @@ public class SchematicBlockPicker
 	 */
 	public static void doSchematicWorldPickBlock(MinecraftClient mc, BlockPos pos, Hand hand)
 	{
+		// do nothing if schematic rendering is not enabled
+		if (!Configs.Visuals.ENABLE_RENDERING.getBooleanValue() || !Configs.Visuals.ENABLE_SCHEMATIC_RENDERING.getBooleanValue())
+		{
+			return;
+		}
+
 		World schematicWorld = SchematicWorldHandler.getSchematicWorld();
 		World clientWorld = mc.world;
 		if (schematicWorld != null && mc.player != null && clientWorld != null && mc.interactionManager != null)
