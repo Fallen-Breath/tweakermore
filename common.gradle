@@ -47,19 +47,10 @@ dependencies {
 		exclude group: 'io.github.prospector', module: 'modmenu'
 	}
 
-	if (mcVersion < 11900) {
-		modImplementation "curse.maven:tweakeroo-297344:${project.tweakeroo_file_id}"
-		modImplementation "curse.maven:item-scroller-242064:${project.itemscroller_file_id}"
-		modImplementation "curse.maven:litematica-308892:${project.litematica_file_id}"
-		modImplementation "curse.maven:minihud-244260:${project.minihud_file_id}"
-	}
-	else {
-		// TODO: reset this branch when masa has all his mods updated to 1.19
-		modCompileOnly "curse.maven:tweakeroo-297344:${project.tweakeroo_file_id}"
-		modCompileOnly "curse.maven:item-scroller-242064:${project.itemscroller_file_id}"
-		modCompileOnly "curse.maven:litematica-308892:${project.litematica_file_id}"
-		modCompileOnly "curse.maven:minihud-244260:${project.minihud_file_id}"
-	}
+	modImplementation "curse.maven:tweakeroo-297344:${project.tweakeroo_file_id}"
+	modImplementation "curse.maven:item-scroller-242064:${project.itemscroller_file_id}"
+	modImplementation "curse.maven:litematica-308892:${project.litematica_file_id}"
+	modImplementation "curse.maven:minihud-244260:${project.minihud_file_id}"
 
 	if (mcVersion >= 11500) {
 		modImplementation "com.terraformersmc:modmenu:${project.mod_menu_version}"

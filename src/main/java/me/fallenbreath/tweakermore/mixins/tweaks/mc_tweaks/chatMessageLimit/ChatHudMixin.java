@@ -33,7 +33,11 @@ public abstract class ChatHudMixin
 	@Shadow @Final private List<?> visibleMessages;
 
 	@ModifyConstant(
+			//#if MC >= 11901
+			//$$ method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;ILnet/minecraft/client/gui/hud/MessageIndicator;Z)V",
+			//#else
 			method = "addMessage(Lnet/minecraft/text/Text;IIZ)V",
+			//#endif
 			constant = @Constant(intValue = 100),
 			// there are so many mod that modifies the chat limit
 			// in case it's not in the conflict list, here comes a fail-soft solution
