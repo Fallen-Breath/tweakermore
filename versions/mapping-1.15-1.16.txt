@@ -1,1 +1,0 @@
-net.minecraft.block.BlockState isSimpleFullBlock() net.minecraft.block.AbstractBlock.AbstractBlockState isSolidBlock()

@@ -147,11 +147,11 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	//$$ {
 	//$$ 	if (this.isTweakerMoreConfigGui())
 	//$$ 	{
-	//$$		if (config instanceof IHotkeyWithSwitch)
-	//$$		{
-	//$$			this.addHotkeyWithSwitchButtons(x, y, configWidth, (IHotkeyWithSwitch)config);
+	//$$ 		if (config instanceof IHotkeyWithSwitch)
+	//$$ 		{
+	//$$ 			this.addHotkeyWithSwitchButtons(x, y, configWidth, (IHotkeyWithSwitch)config);
 	//$$ 			ci.cancel();
-	//$$		}
+	//$$ 		}
 	//$$ 		else if ((config).getKeybind() instanceof KeybindMulti)
 	//$$ 		{
 	//$$ 			this.addButtonAndHotkeyWidgets(x, y, configWidth, config);

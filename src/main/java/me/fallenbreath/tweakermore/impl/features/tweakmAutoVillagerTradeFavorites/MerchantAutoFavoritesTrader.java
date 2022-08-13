@@ -34,10 +34,10 @@ public class MerchantAutoFavoritesTrader
 				//$$ 	InventoryUtils.villagerTradeEverythingPossibleWithAllFavoritedTrades();
 				//$$ 	InfoUtils.printActionbarMessage("tweakermore.config.tweakmAutoVillagerTradeFavorites.triggered", config.getPrettyName(), screen.getTitle());
 				//$$ }
-				//$$else
-				//$${
+				//$$ else
+				//$$ {
 				//$$ 	InfoUtils.printActionbarMessage("tweakermore.config.tweakmAutoVillagerTradeFavorites.no_favorite", screen.getTitle());
-				//$$}
+				//$$ }
 				//#else
 				Object dummy = InventoryUtils.class;
 				//#endif

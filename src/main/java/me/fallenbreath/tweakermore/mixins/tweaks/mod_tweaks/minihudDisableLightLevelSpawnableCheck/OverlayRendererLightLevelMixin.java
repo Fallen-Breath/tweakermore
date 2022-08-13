@@ -42,7 +42,14 @@ public abstract class OverlayRendererLightLevelMixin
 			// simple checks
 			BlockPos pos = new BlockPos(x, y, z);
 			BlockPos posDown = pos.down();
-			boolean inSolidBlock = chunk.getBlockState(pos).isSimpleFullBlock(world, pos);
+			BlockState state = chunk.getBlockState(pos);
+			boolean inSolidBlock = state.
+					//#if MC >= 11600
+					//$$ isSolidBlock
+					//#else
+					isSimpleFullBlock
+					//#endif
+							(world, pos);
 			BlockState stateDown = chunk.getBlockState(posDown);
 			boolean aboveNonAirBlock = !stateDown.isAir() && !(stateDown.getBlock() instanceof FluidBlock);
 			cir.setReturnValue(!inSolidBlock && aboveNonAirBlock);
