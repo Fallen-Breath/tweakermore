@@ -39,6 +39,7 @@
     "tweaks.mc_tweaks.chatMessageLimit.ChatHudMixin",
     "tweaks.mc_tweaks.connectionSimulatedDelay.ClientConnection_ChannelInitializerMixin",
     "tweaks.mc_tweaks.disableBeaconBeamRendering.BeaconBlockEntityRendererMixin",
+    "tweaks.mc_tweaks.disableCameraFrustumCulling.FrustumMixin",
     "tweaks.mc_tweaks.disableCameraFrustumCulling.GameRendererMixin",
     "tweaks.mc_tweaks.disableCameraFrustumCulling.WorldRendererMixin",
     "tweaks.mc_tweaks.disableCameraSubmersionFog.BackgroundRenderer_optifineMixin",
