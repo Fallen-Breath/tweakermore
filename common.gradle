@@ -49,8 +49,17 @@ dependencies {
 
 	modImplementation "curse.maven:tweakeroo-297344:${project.tweakeroo_file_id}"
 	modImplementation "curse.maven:item-scroller-242064:${project.itemscroller_file_id}"
-	modImplementation "curse.maven:litematica-308892:${project.litematica_file_id}"
 	modImplementation "curse.maven:minihud-244260:${project.minihud_file_id}"
+
+	// loom doesn't remap base class method (method_10263) call of fi.dy.masa.malilib.util.SubChunkPos in
+	// fi.dy.masa.litematica.render.schematic.WorldRendererSchematic.setupTerrain, resulting in a crash in dev env
+	// so we have to disable litematica at runtime
+	if (11500 <= mcVersion && mcVersion < 11700) {
+		modCompileOnly "curse.maven:litematica-308892:${project.litematica_file_id}"
+	}
+	else {
+		modImplementation "curse.maven:litematica-308892:${project.litematica_file_id}"
+	}
 
 	if (mcVersion >= 11500) {
 		modImplementation "com.terraformersmc:modmenu:${project.mod_menu_version}"
