@@ -146,6 +146,8 @@
   "tweakermore.config.shulkerTooltipHintLengthLimit.comment": "在显示潜影盒工具提示中的额外信息时，文本长度的限制\n在超出限制时，剩余未显示的信息将被折叠",
   "tweakermore.config.shulkerTooltipPotionInfoHint": "潜影盒物品药水提示",
   "tweakermore.config.shulkerTooltipPotionInfoHint.comment": "在潜影盒物品的工具提示中显示物品提供的药水效果",
+  "tweakermore.config.signMultilinePasteSupport": "告示牌多行粘贴支持",
+  "tweakermore.config.signMultilinePasteSupport.comment": "让告示牌编辑界面可以支持\n从剪切板一口气粘贴多行文本",
   "tweakermore.config.spectatorTeleportMenuIncludeSpectator": "旁观者传送菜单包含旁观者",
   "tweakermore.config.spectatorTeleportMenuIncludeSpectator.comment": "允许旁观者传送菜单列出玩家列表中的旁观者玩家\n旁观者玩家将在位于菜单列表的尾部，其玩家名将以灰色斜体的形式显示",
   "tweakermore.config.tweakmDaytimeOverride": "覆盖世界时间",

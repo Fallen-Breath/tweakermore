@@ -666,6 +666,17 @@ TweakerMore提供的新功能
 ![shulkerTooltipPotionInfoHint](assets/shulkerTooltipPotionInfoHint-zh_cn.png)
 
 
+### 告示牌多行粘贴支持 (signMultilinePasteSupport)
+
+让告示牌编辑界面可以支持
+
+从剪切板一口气粘贴多行文本
+
+- 分类: MC修改
+- 类型: 布尔值
+- 默认值: `false`
+
+
 ### 旁观者传送菜单包含旁观者 (spectatorTeleportMenuIncludeSpectator)
 
 允许旁观者传送菜单列出玩家列表中的旁观者玩家

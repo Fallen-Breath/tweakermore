@@ -66,6 +66,8 @@
     "tweaks.mc_tweaks.netherPortalSoundChance.NetherPortalBlockMixin",
     "tweaks.mc_tweaks.prioritizedCommandSuggestions.CommandSuggestorMixin",
     "tweaks.mc_tweaks.scoreboardSideBarScale.InGameHudMixin",
+    "tweaks.mc_tweaks.signMultilinePasteSupport.SelectionManagerMixin",
+    "tweaks.mc_tweaks.signMultilinePasteSupport.SignEditScreenMixin",
     "tweaks.mc_tweaks.spectatorTeleportMenuIncludeSpectator.TeleportSpectatorMenuMixin",
     "tweaks.mc_tweaks.spectatorTeleportMenuIncludeSpectator.TeleportToSpecificPlayerSpectatorCommandMixin",
     "tweaks.mc_tweaks.tweakmDaytimeOverride.ClientWorldMixin",

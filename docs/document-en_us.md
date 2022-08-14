@@ -666,6 +666,17 @@ Display potion information of items in the tooltip of shulker box items
 ![shulkerTooltipPotionInfoHint](assets/shulkerTooltipPotionInfoHint-en_us.png)
 
 
+### signMultilinePasteSupport
+
+Add support for the sign editing screen
+
+to correctly paste multiple lines from clipboard
+
+- Category: MC Tweaks
+- Type: boolean
+- Default value: `false`
+
+
 ### spectatorTeleportMenuIncludeSpectator
 
 Allow spectator players in the player list to be listed in the spectator teleport menu
