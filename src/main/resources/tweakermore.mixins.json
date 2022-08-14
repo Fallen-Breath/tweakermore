@@ -42,6 +42,7 @@
     "tweaks.mc_tweaks.disableCameraFrustumCulling.FrustumMixin",
     "tweaks.mc_tweaks.disableCameraFrustumCulling.GameRendererMixin",
     "tweaks.mc_tweaks.disableCameraFrustumCulling.WorldRendererMixin",
+    "tweaks.mc_tweaks.disableCameraFrustumCulling.compat.sodium.JomlFrustumMixin",
     "tweaks.mc_tweaks.disableCameraSubmersionFog.BackgroundRenderer_optifineMixin",
     "tweaks.mc_tweaks.disableCameraSubmersionFog.BackgroundRendererMixin",
     "tweaks.mc_tweaks.disableCreativeFlyClimbingCheck.LivingEntityMixin",
@@ -99,6 +100,7 @@
     "tweaks.porting.tkrDisableNauseaEffectPorting.InGameHudMixin"
   ],
   "client": [
+    "tweaks.mc_tweaks.disableCameraFrustumCulling.compat.sodium.FrustumMixin"
   ],
   "injectors": {
     "defaultRequire": 1

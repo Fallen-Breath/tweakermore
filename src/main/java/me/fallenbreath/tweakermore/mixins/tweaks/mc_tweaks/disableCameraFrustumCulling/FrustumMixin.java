@@ -31,6 +31,12 @@ public abstract class FrustumMixin implements CouldBeAlwaysVisibleFrustum
 		this.alwaysVisible$TKM = alwaysVisible;
 	}
 
+	@Override
+	public boolean getAlwaysVisible()
+	{
+		return this.alwaysVisible$TKM;
+	}
+
 	@Inject(
 			method = "isVisible(Lnet/minecraft/util/math/Box;)Z",
 			at = @At("HEAD"),
