@@ -25,6 +25,8 @@ public abstract class SelectionManagerMixin implements SelectionManagerInSignEdi
 	//#endif
 	abstract void insert(String string);
 
+	@Shadow public abstract void moveCaretToEnd();
+
 	private SignEditScreenRowIndexController signEditScreen$TKM;
 	private String pastingString$TKM;
 
@@ -100,6 +102,7 @@ public abstract class SelectionManagerMixin implements SelectionManagerInSignEdi
 				{
 					inserter.accept(lines[i]);
 					this.signEditScreen$TKM.addCurrentRowIndex(1);
+					this.moveCaretToEnd();
 				}
 				else
 				{
