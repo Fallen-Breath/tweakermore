@@ -19,26 +19,9 @@ on:
 
 jobs:
   matrix_prep:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.setmatrix.outputs.matrix }}
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Display context
-        run: | 
-          echo ref_name = ${{ github.ref_name }}
-          echo target_subproject = ${{ github.event.inputs.target_subproject }}
-          echo target_release_tag = ${{ github.event.inputs.target_release_tag }}
-
-      - id: setmatrix
-        uses: JoshuaTheMiller/conditional-build-matrix@0.0.1
-        with:
-          # inputFile: '.github/workflows/matrix_includes.json' # Default input file path
-          filter: '[? `${{ github.event_name }}` == `release` || `${{ github.event.inputs.target_subproject }}` == `` || `"${{ github.event.inputs.target_subproject }}"` == subproject_dir ]'
-
-      - name: Print matrix
-        run: echo ${{ steps.setmatrix.outputs.matrix }}
+    uses: ./.github/workflows/matrix_prep.yml
+    with:
+      target_subproject: ${{ github.event.inputs.target_subproject }}
 
   build:
     uses: ./.github/workflows/build.yml
