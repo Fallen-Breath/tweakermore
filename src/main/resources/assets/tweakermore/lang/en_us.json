@@ -134,6 +134,10 @@
   "tweakermore.config.maxChatHudHeight.comment": "The maximum height of the chat hud",
   "tweakermore.config.netherPortalSoundChance": "netherPortalSoundChance",
   "tweakermore.config.netherPortalSoundChance.comment": "The chance for a nether portal block to play sound\nSet it to 0.001 or 0.0001 for less noisy portal",
+  "tweakermore.config.playerNameTagRenderStrategyList": "playerNameTagRenderStrategyList",
+  "tweakermore.config.playerNameTagRenderStrategyList.comment": "The whitelist / blacklist used in playerNameTagRenderStrategyList\nMatching using player's id, case-sensitive",
+  "tweakermore.config.playerNameTagRenderStrategyType": "playerNameTagRenderStrategyType",
+  "tweakermore.config.playerNameTagRenderStrategyType.comment": "Use whitelist / blacklist to control whether the name tag of the player will be rendered",
   "tweakermore.config.prioritizedCommandSuggestions": "prioritizedCommandSuggestions",
   "tweakermore.config.prioritizedCommandSuggestions.comment": "Command suggestions in this list will be more forward in the command completion list\nYou can put those command completions you always prefer to choose in this list\nso they will always be at the head of the command completion list",
   "tweakermore.config.scoreboardSideBarScale": "scoreboardSideBarScale",
@@ -243,6 +247,10 @@
   "tweakermore.config.tweakerMoreDevPrintDoc.comment": "Document Printer",
 
   "// List entries": "================================================",
+
+  "tweakermore.list_entry.restriction_type.none": "None",
+  "tweakermore.list_entry.restriction_type.whitelist": "Whitelist",
+  "tweakermore.list_entry.restriction_type.blacklist": "Blacklist",
 
   "tweakermore.list_entry.schematicBlockPlacementRestrictionHintType.all": "All",
   "tweakermore.list_entry.schematicBlockPlacementRestrictionHintType.wrong_item_only": "Wrong item only",

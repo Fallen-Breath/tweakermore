@@ -16,6 +16,7 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.options.*;
+import me.fallenbreath.tweakermore.config.options.listentries.RestrictionType;
 import me.fallenbreath.tweakermore.config.options.listentries.SchematicBlockPlacementRestrictionHintType;
 import me.fallenbreath.tweakermore.config.options.listentries.WeatherOverrideValue;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
@@ -238,6 +239,12 @@ public class TweakerMoreConfigs
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigDouble NETHER_PORTAL_SOUND_CHANCE = newConfigDouble("netherPortalSoundChance", 0.01D, 0.0D, 0.01D);
+
+	@Config(type = Config.Type.LIST, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigStringList PLAYER_NAME_TAG_RENDER_STRATEGY_LIST = newConfigStringList("playerNameTagRenderStrategyList", ImmutableList.of());
+
+	@Config(type = Config.Type.LIST, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigOptionList PLAYER_NAME_TAG_RENDER_STRATEGY_TYPE = newConfigOptionList("playerNameTagRenderStrategyType", RestrictionType.NONE);
 
 	@Config(type = Config.Type.LIST, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigStringList PRIORITIZED_COMMAND_SUGGESTIONS = newConfigStringList("prioritizedCommandSuggestions", ImmutableList.of());

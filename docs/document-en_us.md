@@ -594,6 +594,27 @@ Set it to 0.001 or 0.0001 for less noisy portal
 - Maximum value: `0.01`
 
 
+### playerNameTagRenderStrategyList
+
+The whitelist / blacklist used in playerNameTagRenderStrategyList
+
+Matching using player's id, case-sensitive
+
+- Category: MC Tweaks
+- Type: string list
+- Default value: `[]`
+
+
+### playerNameTagRenderStrategyType
+
+Use whitelist / blacklist to control whether the name tag of the player will be rendered
+
+- Category: MC Tweaks
+- Type: option list
+- Default value: `None`
+- Available options: `None`, `Whitelist`, `Blacklist`
+
+
 ### prioritizedCommandSuggestions
 
 Command suggestions in this list will be more forward in the command completion list

@@ -594,6 +594,27 @@ TweakerMore提供的新功能
 - 最大值: `0.01`
 
 
+### 玩家名称标签渲染策略-列表 (playerNameTagRenderStrategyList)
+
+玩家名称标签渲染策略所使用的的白名单/黑名单
+
+用玩家id进行匹配，区分大小写
+
+- 分类: MC修改
+- 类型: 字符串列表
+- 默认值: `[]`
+
+
+### 玩家名称标签渲染策略-类型 (playerNameTagRenderStrategyType)
+
+通过白名单/黑名单来控制玩家名称标签是否被渲染
+
+- 分类: MC修改
+- 类型: 选项列表
+- 默认值: `无`
+- 可用选项: `无`, `白名单`, `黑名单`
+
+
 ### 指令补全优先列表 (prioritizedCommandSuggestions)
 
 此列表中的命令建议将在命令补全列表中更靠前

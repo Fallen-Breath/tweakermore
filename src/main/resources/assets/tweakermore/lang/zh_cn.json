@@ -134,6 +134,10 @@
   "tweakermore.config.maxChatHudHeight.comment": "聊天界面高度的最大值",
   "tweakermore.config.netherPortalSoundChance": "地狱门音效概率",
   "tweakermore.config.netherPortalSoundChance.comment": "地狱门方块播放音效的概率\n将其设为0.001或0.0001来让地狱门没那么吵",
+  "tweakermore.config.playerNameTagRenderStrategyList": "玩家名称标签渲染策略-列表",
+  "tweakermore.config.playerNameTagRenderStrategyList.comment": "玩家名称标签渲染策略所使用的的白名单/黑名单\n用玩家id进行匹配，区分大小写",
+  "tweakermore.config.playerNameTagRenderStrategyType": "玩家名称标签渲染策略-类型",
+  "tweakermore.config.playerNameTagRenderStrategyType.comment": "通过白名单/黑名单来控制玩家名称标签是否被渲染",
   "tweakermore.config.prioritizedCommandSuggestions": "指令补全优先列表",
   "tweakermore.config.prioritizedCommandSuggestions.comment": "此列表中的命令建议将在命令补全列表中更靠前\n你可以将那些你总是喜欢选择的命令补全放在此列表中\n它们将总会位于指令补全列表的首位",
   "tweakermore.config.scoreboardSideBarScale": "计分板侧边栏缩放",
@@ -243,6 +247,10 @@
   "tweakermore.config.tweakerMoreDevPrintDoc.comment": "文档生成器",
 
   "// List entries": "================================================",
+
+  "tweakermore.list_entry.restriction_type.none": "无",
+  "tweakermore.list_entry.restriction_type.whitelist": "白名单",
+  "tweakermore.list_entry.restriction_type.blacklist": "黑名单",
 
   "tweakermore.list_entry.schematicBlockPlacementRestrictionHintType.all": "全部",
   "tweakermore.list_entry.schematicBlockPlacementRestrictionHintType.wrong_item_only": "仅物品错误",

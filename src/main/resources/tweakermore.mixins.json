@@ -63,6 +63,7 @@
     "tweaks.mc_tweaks.flyDrag.LivingEntityMixin",
     "tweaks.mc_tweaks.legacyF3NLogic.KeyboardMixin",
     "tweaks.mc_tweaks.maxChatHudHeight.ChatHudMixin",
+    "tweaks.mc_tweaks.nameTagRenderStrategy.EntityRendererMixin",
     "tweaks.mc_tweaks.netherPortalSoundChance.NetherPortalBlockMixin",
     "tweaks.mc_tweaks.prioritizedCommandSuggestions.CommandSuggestorMixin",
     "tweaks.mc_tweaks.scoreboardSideBarScale.InGameHudMixin",
