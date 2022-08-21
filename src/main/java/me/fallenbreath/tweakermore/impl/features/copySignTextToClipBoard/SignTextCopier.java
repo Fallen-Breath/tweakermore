@@ -47,7 +47,6 @@ public class SignTextCopier
 									map(Text::getString).
 									collect(Collectors.toList())
 					);
-					text = StringUtils.strip(text);
 					if (!text.isEmpty())
 					{
 						mc.keyboard.setClipboard(text);
