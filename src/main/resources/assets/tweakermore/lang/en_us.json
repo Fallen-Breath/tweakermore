@@ -138,6 +138,8 @@
   "tweakermore.config.playerNameTagRenderStrategyList.comment": "The whitelist / blacklist used in playerNameTagRenderStrategyList\nMatching using player's id, case-sensitive",
   "tweakermore.config.playerNameTagRenderStrategyType": "playerNameTagRenderStrategyType",
   "tweakermore.config.playerNameTagRenderStrategyType.comment": "Use whitelist / blacklist to control whether the name tag of the player will be rendered",
+  "tweakermore.config.playerSkinBlockingLoading": "playerSkinBlockingLoading",
+  "tweakermore.config.playerSkinBlockingLoading.comment": "Make loading skins of the player blocks the client from running\nClient will freeze until player skins is downloaded and loaded\nIt's useful when you want player skins to always be loaded, e.g. replay video rendering",
   "tweakermore.config.prioritizedCommandSuggestions": "prioritizedCommandSuggestions",
   "tweakermore.config.prioritizedCommandSuggestions.comment": "Command suggestions in this list will be more forward in the command completion list\nYou can put those command completions you always prefer to choose in this list\nso they will always be at the head of the command completion list",
   "tweakermore.config.scoreboardSideBarScale": "scoreboardSideBarScale",
@@ -313,6 +315,7 @@
   "tweakermore.impl.shulkerTooltipHintBuilder.more": "... %1$sx",
 
   "tweakermore.util.mod.compactchat": "CompactChat",
+  "tweakermore.util.mod.customskinloader": "CustomSkinLoader",
   "tweakermore.util.mod.easiercrafting": "EasierCrafting",
   "tweakermore.util.mod.fabric": "Fabric API",
   "tweakermore.util.mod.fabricloader": "Fabric Loader",

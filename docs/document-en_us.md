@@ -615,6 +615,19 @@ Use whitelist / blacklist to control whether the name tag of the player will be 
 - Available options: `None`, `Whitelist`, `Blacklist`
 
 
+### playerSkinBlockingLoading
+
+Make loading skins of the player blocks the client from running
+
+Client will freeze until player skins is downloaded and loaded
+
+It's useful when you want player skins to always be loaded, e.g. replay video rendering
+
+- Category: MC Tweaks
+- Type: boolean
+- Default value: `false`
+
+
 ### prioritizedCommandSuggestions
 
 Command suggestions in this list will be more forward in the command completion list

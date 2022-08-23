@@ -28,4 +28,5 @@ public class ModIds
 	public static final String replay_mod = "replaymod";
 	public static final String sodium = "sodium";
 	public static final String xaero_worldmap = "xaeroworldmap";
+	public static final String custom_skin_loader = "customskinloader";
 }
