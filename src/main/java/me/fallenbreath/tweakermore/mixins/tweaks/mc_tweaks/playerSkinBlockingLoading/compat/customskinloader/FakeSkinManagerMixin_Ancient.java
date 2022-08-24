@@ -12,21 +12,21 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 /**
  * The way to submit Runnable in {@link customskinloader.fake.FakeSkinManager#loadProfileTextures}
- *   >=14.14-SNAPSHOT-336: {@code CustomSkinLoader.loadProfileTextures()}    <--------
+ *   >=14.14-SNAPSHOT-336: {@code CustomSkinLoader.loadProfileTextures()}
  *   >14.11 <14.14-SNAPSHOT-336: {@code THREAD_POOL.execute()}
- *   <=14.11: {@code THREAD_POOL.submit()}
+ *   <=14.11: {@code THREAD_POOL.submit()}    <--------
  */
-@Restriction(require = @Condition(value = ModIds.custom_skin_loader, versionPredicates = ">=14.14-SNAPSHOT-336"))
+@Restriction(require = @Condition(value = ModIds.custom_skin_loader, versionPredicates = "<=14.11"))
 @Pseudo
 @Mixin(targets = "customskinloader.fake.FakeSkinManager")
-public abstract class FakeSkinManagerMixin_New
+public abstract class FakeSkinManagerMixin_Ancient
 {
 	@SuppressWarnings("UnresolvedMixinReference")
 	@ModifyArg(
 			method = "loadProfileTextures",
 			at = @At(
 					value = "INVOKE",
-					target = "Lcustomskinloader/CustomSkinLoader;loadProfileTextures(Ljava/lang/Runnable;)V"
+					target = "Ljava/util/concurrent/ExecutorService;submit(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;"
 			),
 			remap = false
 	)

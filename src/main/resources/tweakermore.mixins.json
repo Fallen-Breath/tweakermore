@@ -67,6 +67,7 @@
     "tweaks.mc_tweaks.netherPortalSoundChance.NetherPortalBlockMixin",
     "tweaks.mc_tweaks.playerSkinBlockingLoading.PlayerSkinProviderMixin",
     "tweaks.mc_tweaks.playerSkinBlockingLoading.PlayerSkinTextureMixin",
+    "tweaks.mc_tweaks.playerSkinBlockingLoading.compat.customskinloader.FakeSkinManagerMixin_Ancient",
     "tweaks.mc_tweaks.playerSkinBlockingLoading.compat.customskinloader.FakeSkinManagerMixin_New",
     "tweaks.mc_tweaks.playerSkinBlockingLoading.compat.customskinloader.FakeSkinManagerMixin_Old",
     "tweaks.mc_tweaks.prioritizedCommandSuggestions.CommandSuggestorMixin",

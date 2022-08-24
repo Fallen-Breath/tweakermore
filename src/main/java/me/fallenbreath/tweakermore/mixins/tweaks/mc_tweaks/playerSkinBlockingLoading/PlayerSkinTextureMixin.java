@@ -1,6 +1,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.playerSkinBlockingLoading;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.playerSkinBlockingLoading.TaskSynchronizer;
 import net.minecraft.client.texture.PlayerSkinTexture;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,8 +21,7 @@ public abstract class PlayerSkinTextureMixin
 	{
 		if (TweakerMoreConfigs.PLAYER_SKIN_BLOCKING_LOADING.getBooleanValue())
 		{
-			runnable.run();
-			return () -> {};
+			runnable = TaskSynchronizer.createSyncedTask(runnable);
 		}
 		return runnable;
 	}
