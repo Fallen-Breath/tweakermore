@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Restriction(require = {
-		@Condition(value = ModIds.sodium, versionPredicates = ">0.3.3 <=0.4.3")
+		@Condition(value = ModIds.sodium, versionPredicates = ">0.3.3 <0.5.0")
 })
 @Pseudo
 @Mixin(targets = "me.jellysquid.mods.sodium.client.util.frustum.JomlFrustum")
