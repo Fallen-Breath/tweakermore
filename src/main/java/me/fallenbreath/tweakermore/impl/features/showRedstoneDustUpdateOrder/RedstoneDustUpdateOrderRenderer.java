@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.render.RenderContext;
-import me.fallenbreath.tweakermore.util.render.RenderUtil;
+import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
 import net.minecraft.block.RedstoneWireBlock;
 import net.minecraft.client.MinecraftClient;
@@ -51,11 +51,11 @@ public class RedstoneDustUpdateOrderRenderer implements TweakerMoreIRenderer
 
 	private void renderTextAtPos(BlockPos pos, String text, int color)
 	{
-		double x = pos.getX() + 0.5;
-		double y = pos.getY() + 0.5;
-		double z = pos.getZ() + 0.5;
-
-		RenderUtil.drawString(text, x, y, z, 0.02F, color, true, true);
+		TextRenderer.create().
+				text(text).atCenter(pos).
+				color(color).
+				shadow().seeThrough().
+				render();
 	}
 
 	/**
