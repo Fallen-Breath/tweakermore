@@ -41,6 +41,20 @@ TweakerMore提供的新功能
 - 默认值: `LEFT_ALT`
 
 
+### 容器预览支持命令方块 (inventoryPreviewForCommandBlock)
+
+让tweakeroo的容器预览功能支持显命令方块的指令
+
+- 分类: 功能
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Tweakeroo (`tweakeroo`)
+
+![inventoryPreviewForCommandBlock](assets/inventoryPreviewForCommandBlock.png)
+
+
 ### 红石粉更新顺序文本透明度 (redstoneDustUpdateOrderTextAlpha)
 
 用于渲染红石粉方块更新顺序文本的透明度

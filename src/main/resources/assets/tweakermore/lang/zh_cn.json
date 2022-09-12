@@ -11,6 +11,8 @@
   "tweakermore.config.creativePickBlockWithState": "创造模式提取方块带方块状态",
   "tweakermore.config.creativePickBlockWithState.comment": "当执行创造模式的提取方块（按下中键）时，如果热键处于按下状态，\n则将目标方块的方块状态存储到提取的物品的nbt中，名为“BlockStateTag”\n因此，在你用提取的物品放置方块时，你可以直接放下与之前被选择的方块状态相同的方块",
   "tweakermore.config.creativePickBlockWithState.message": "已储存%1$s的方块状态",
+  "tweakermore.config.inventoryPreviewForCommandBlock": "容器预览支持命令方块",
+  "tweakermore.config.inventoryPreviewForCommandBlock.comment": "让tweakeroo的容器预览功能支持显命令方块的指令",
   "tweakermore.config.refreshInventory": "刷新物品栏",
   "tweakermore.config.refreshInventory.comment": "向服务端请求一次玩家物品栏刷新\n它将模拟一次无效的物品栏拖动操作，\n让服务器认为玩家的物品栏已失去同步并刷新玩家物品栏",
   "tweakermore.config.redstoneDustUpdateOrderTextAlpha": "红石粉更新顺序文本透明度",

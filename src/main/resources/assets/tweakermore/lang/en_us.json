@@ -11,6 +11,8 @@
   "tweakermore.config.creativePickBlockWithState": "creativePickBlockWithState",
   "tweakermore.config.creativePickBlockWithState.comment": "When performing creative pick block action (middle click) with hotkey pressed,\nstore the target block's block state into the nbt named \"BlockStateTag\" of the picked item.\nSo the block state can be restored when you place blocks with the picked item",
   "tweakermore.config.creativePickBlockWithState.message": "Block state of %1$s stored",
+  "tweakermore.config.inventoryPreviewForCommandBlock": "inventoryPreviewForCommandBlock",
+  "tweakermore.config.inventoryPreviewForCommandBlock.comment": "Add command block command display support for tweakeroo's inventory preview",
   "tweakermore.config.refreshInventory": "refreshInventory",
   "tweakermore.config.refreshInventory.comment": "Request a player inventory refresh to the server\nIt's done by simulating an invalid inventory dragging operation,\nso the server think that the inventory is out of sync then do resync",
   "tweakermore.config.redstoneDustUpdateOrderTextAlpha": "redstoneDustUpdateOrderTextAlpha",

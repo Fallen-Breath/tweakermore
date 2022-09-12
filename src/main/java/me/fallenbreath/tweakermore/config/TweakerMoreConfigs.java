@@ -21,6 +21,7 @@ import me.fallenbreath.tweakermore.config.options.listentries.SchematicBlockPlac
 import me.fallenbreath.tweakermore.config.options.listentries.WeatherOverrideValue;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.impl.features.copySignTextToClipBoard.SignTextCopier;
+import me.fallenbreath.tweakermore.impl.features.inventoryPreviewForCommandBlock.CommandBlockContentPreviewRenderer;
 import me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.eCraftMassCraftCompact.EasierCraftingRegistrar;
 import me.fallenbreath.tweakermore.impl.features.refreshInventory.InventoryRefresher;
@@ -65,6 +66,9 @@ public class TweakerMoreConfigs
 
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkeyWithSwitch CREATIVE_PICK_BLOCK_WITH_STATE = newConfigHotKeyWithSwitch("creativePickBlockWithState", false, "LEFT_ALT", KeybindSettings.MODIFIER_INGAME);
+
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(tweakeroo)), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBoolean INVENTORY_PREVIEW_FOR_COMMAND_BLOCK = newConfigBoolean("inventoryPreviewForCommandBlock", false);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble REDSTONE_DUST_UPDATE_ORDER_TEXT_ALPHA = newConfigDouble("redstoneDustUpdateOrderTextAlpha", 0.6, 0, 1);
@@ -499,6 +503,7 @@ public class TweakerMoreConfigs
 		//////////// Event Listeners ////////////
 
 		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
+		RenderEventHandler.getInstance().registerWorldLastRenderer(new CommandBlockContentPreviewRenderer());
 		RenderEventHandler.getInstance().registerWorldLastRenderer(new RedstoneDustUpdateOrderRenderer());
 		RenderEventHandler.getInstance().registerGameOverlayRenderer(new AutoContainerProcessorHintRenderer());
 

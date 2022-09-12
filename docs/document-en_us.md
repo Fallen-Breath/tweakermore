@@ -41,6 +41,20 @@ So the block state can be restored when you place blocks with the picked item
 - Default value: `LEFT_ALT`
 
 
+### inventoryPreviewForCommandBlock
+
+Add command block command display support for tweakeroo's inventory preview
+
+- Category: Features
+- Type: boolean
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
+
+![inventoryPreviewForCommandBlock](assets/inventoryPreviewForCommandBlock.png)
+
+
 ### redstoneDustUpdateOrderTextAlpha
 
 The alpha value of the floating text used in redstone dust update order displaying
