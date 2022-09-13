@@ -3,6 +3,7 @@ package me.fallenbreath.tweakermore.util.render;
 import fi.dy.masa.malilib.interfaces.IRenderer;
 
 //#if MC >= 11700
+//$$ import com.mojang.blaze3d.systems.RenderSystem;
 //$$ import net.minecraft.util.math.Matrix4f;
 //#endif
 
@@ -31,6 +32,10 @@ public interface TweakerMoreIRenderer extends IRenderer
 						//#endif
 				)
 		);
+		//#if MC >= 11700
+		//$$ // to prevent rain rendering got messed up
+		//$$ RenderSystem.applyModelViewMatrix();
+		//#endif
 	}
 
 	@Deprecated
