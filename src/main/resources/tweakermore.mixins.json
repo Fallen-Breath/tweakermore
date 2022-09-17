@@ -109,7 +109,8 @@
     "tweaks.porting.isScrollStacksFallbackFixPorting.InventoryUtilsMixin",
     "tweaks.porting.lmPickBlockShulkersPorting.WorldUtilsMixin",
     "tweaks.porting.tkrDisableNauseaEffectPorting.ClientPlayerEntityMixin",
-    "tweaks.porting.tkrDisableNauseaEffectPorting.InGameHudMixin"
+    "tweaks.porting.tkrDisableNauseaEffectPorting.InGameHudMixin",
+    "util.render.TextHandlerAccessor"
   ],
   "client": [
   ],

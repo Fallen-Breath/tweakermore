@@ -52,7 +52,7 @@ public abstract class InGameHudMixin
 					//#if MC >= 11600
 					//$$ matrices
 					//#endif
-			);;
+			);
 		}
 		return centerY;
 	}

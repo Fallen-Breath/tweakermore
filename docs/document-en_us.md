@@ -52,7 +52,35 @@ Add command block command display support for tweakeroo's inventory preview
   - Required mods:
     - Tweakeroo (`tweakeroo`)
 
-![inventoryPreviewForCommandBlock](assets/inventoryPreviewForCommandBlock.png)
+![inventoryPreviewForCommandBlock](assets/inventoryPreviewForCommandBlock-en_us.png)
+
+
+### inventoryPreviewForCommandBlockMaxWidth
+
+Maximum width of the displayed text rendered by inventoryPreviewForCommandBlock
+
+- Category: Features
+- Type: integer
+- Default value: `200`
+- Minimum value: `10`
+- Maximum value: `2000`
+- Mod restrictions:
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
+
+
+### inventoryPreviewForCommandBlockTextScale
+
+Scale of the displayed text rendered by inventoryPreviewForCommandBlock
+
+- Category: Features
+- Type: double
+- Default value: `1.0`
+- Minimum value: `0.1`
+- Maximum value: `3.0`
+- Mod restrictions:
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
 
 
 ### redstoneDustUpdateOrderTextAlpha

@@ -52,7 +52,35 @@ TweakerMore提供的新功能
   - 依赖模组:
     - Tweakeroo (`tweakeroo`)
 
-![inventoryPreviewForCommandBlock](assets/inventoryPreviewForCommandBlock.png)
+![inventoryPreviewForCommandBlock](assets/inventoryPreviewForCommandBlock-zh_cn.png)
+
+
+### 容器预览支持命令方块-文本宽度最大值 (inventoryPreviewForCommandBlockMaxWidth)
+
+选项inventoryPreviewForCommandBlock渲染的文本宽度的最大值
+
+- 分类: 功能
+- 类型: 整数
+- 默认值: `200`
+- 最小值: `10`
+- 最大值: `2000`
+- 模组约束:
+  - 依赖模组:
+    - Tweakeroo (`tweakeroo`)
+
+
+### 容器预览支持命令方块-文本缩放 (inventoryPreviewForCommandBlockTextScale)
+
+选项inventoryPreviewForCommandBlock渲染的文本的缩放比例
+
+- 分类: 功能
+- 类型: 实数
+- 默认值: `1.0`
+- 最小值: `0.1`
+- 最大值: `3.0`
+- 模组约束:
+  - 依赖模组:
+    - Tweakeroo (`tweakeroo`)
 
 
 ### 红石粉更新顺序文本透明度 (redstoneDustUpdateOrderTextAlpha)

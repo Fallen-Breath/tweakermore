@@ -70,6 +70,12 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(tweakeroo)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBoolean INVENTORY_PREVIEW_FOR_COMMAND_BLOCK = newConfigBoolean("inventoryPreviewForCommandBlock", false);
 
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(tweakeroo)), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigInteger INVENTORY_PREVIEW_FOR_COMMAND_BLOCK_MAX_WIDTH = newConfigInteger("inventoryPreviewForCommandBlockMaxWidth", 200, 10, 2000);
+
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(tweakeroo)), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigDouble INVENTORY_PREVIEW_FOR_COMMAND_BLOCK_TEXT_SCALE = newConfigDouble("inventoryPreviewForCommandBlockTextScale", 1, 0.1, 3);
+
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble REDSTONE_DUST_UPDATE_ORDER_TEXT_ALPHA = newConfigDouble("redstoneDustUpdateOrderTextAlpha", 0.6, 0, 1);
 
