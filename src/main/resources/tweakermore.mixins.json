@@ -115,6 +115,7 @@
     "tweaks.mod_tweaks.lmOriginOverride000.TaskSaveSchematicMixin",
     "tweaks.mod_tweaks.lmOriginOverride000.WidgetSchematicEntryButtonListenerMixin",
     "tweaks.mod_tweaks.minihudDisableLightLevelSpawnableCheck.OverlayRendererLightLevelMixin",
+    "tweaks.mod_tweaks.minihudHideIfChatScreenOpened.RenderHandlerMixin",
     "tweaks.mod_tweaks.ofRemoveItemFrameItemRenderDistance.ItemFrameEntityRendererMixin",
     "tweaks.mod_tweaks.ofRemoveSignTextRenderDistance.SignBlockEntityRendererMixin",
     "tweaks.mod_tweaks.ofUnlockF3FpsLimit.DebugHudMixin",

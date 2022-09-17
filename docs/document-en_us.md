@@ -1207,6 +1207,18 @@ so light overlay will be rendered at every non-solid block above a non-air non-f
 ![minihudDisableLightOverlaySpawnCheck](assets/minihudDisableLightOverlaySpawnCheck.png)
 
 
+### minihudHideIfChatScreenOpened
+
+Hide minihud text overlay if the chat screen is opened
+
+- Category: Mods Tweaks
+- Type: boolean
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - MiniHUD (`minihud`)
+
+
 ### ofRemoveItemFrameItemRenderDistance
 
 Remove the item frame item render distance limit from Optifine

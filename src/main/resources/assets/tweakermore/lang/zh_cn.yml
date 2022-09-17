@@ -477,6 +477,9 @@ tweakermore:
         Mini HUD的光照等级显示仅于可刷怪方块上渲染
         该选项移除了这一可刷怪检查，
         使得光照等级显示会在任何非空气非流体方块上方的非实体方块处渲染
+    minihudHideIfChatScreenOpened:
+      .: MiniHUD-隐藏文本若聊天GUI开启
+      comment: 在聊天GUI开启时，隐藏Mini HUD的信息文本渲染
     ofSantaHat:
       .: Optifine圣诞老人帽子
       comment: |-

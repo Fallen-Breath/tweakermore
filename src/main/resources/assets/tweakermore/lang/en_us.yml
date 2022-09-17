@@ -477,6 +477,9 @@ tweakermore:
         Mini HUD light level overlay are rendered only on spawn-able block
         This option removes the spawn-able check,
         so light overlay will be rendered at every non-solid block above a non-air non-fluid block
+    minihudHideIfChatScreenOpened:
+      .: minihudHideIfChatScreenOpened
+      comment: Hide minihud text overlay if the chat screen is opened
     ofSantaHat:
       .: ofSantaHat
       comment: |-

@@ -1207,6 +1207,18 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
 ![minihudDisableLightOverlaySpawnCheck](assets/minihudDisableLightOverlaySpawnCheck.png)
 
 
+### MiniHUD-隐藏文本若聊天GUI开启 (minihudHideIfChatScreenOpened)
+
+在聊天GUI开启时，隐藏Mini HUD的信息文本渲染
+
+- 分类: 模组修改
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - MiniHUD (`minihud`)
+
+
 ### Optifine移除展示框物品渲染距离限制 (ofRemoveItemFrameItemRenderDistance)
 
 移除Optifine的展示框物品渲染距离限制

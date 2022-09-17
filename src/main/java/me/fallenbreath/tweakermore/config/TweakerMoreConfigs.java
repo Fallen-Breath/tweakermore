@@ -426,6 +426,13 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBoolean MINIHUD_DISABLE_LIGHT_OVERLAY_SPAWN_CHECK = newConfigBoolean("minihudDisableLightOverlaySpawnCheck", false);
 
 	@Config(
+			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(minihud)),
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigBoolean MINIHUD_HIDE_IF_CHAT_SCREEN_OPENED = newConfigBoolean("minihudHideIfChatScreenOpened", false);
+
+	@Config(
 			type = Config.Type.LIST,
 			restriction = @Restriction(require = @Condition(optifine)),
 			category = Config.Category.MOD_TWEAKS
