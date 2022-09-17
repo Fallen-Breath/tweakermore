@@ -1,8 +1,8 @@
 package me.fallenbreath.tweakermore.util.compat.carpet;
 
 import me.fallenbreath.tweakermore.util.ReflectionUtil;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class CarpetModAccess

@@ -4,8 +4,7 @@ import fi.dy.masa.malilib.config.options.ConfigHotkey;
 import fi.dy.masa.malilib.hotkeys.IHotkeyCallback;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class TweakerMoreConfigHotkey extends ConfigHotkey implements TweakerMoreIConfigBase
 {
