@@ -520,6 +520,19 @@ so player's flying movement will not be affected by ladder things
 - Default value: *no hotkey*, `false`
 
 
+### disableDarkSkyRendering
+
+Prevent the bottom of the sky from turning dark when you are under sea level
+
+See also: option disableHorizonShadingRendering
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+
+![disableDarkSkyRendering](assets/disableDarkSkyRendering.png)
+
+
 ### disableEntityRenderInterpolation
 
 Disable the entity animation interpolation during rendering
@@ -527,6 +540,19 @@ Disable the entity animation interpolation during rendering
 - Category: MC Tweaks
 - Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
+
+
+### disableHorizonShadingRendering
+
+Prevent the horizon from turning dark when you are nearby the world's bottom y
+
+See also: option disableDarkSkyRendering
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+
+![disableHorizonShadingRendering](assets/disableHorizonShadingRendering.png)
 
 
 ### disableLightUpdates

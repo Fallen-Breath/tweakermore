@@ -520,6 +520,19 @@ TweakerMore提供的新功能
 - 默认值: *无快捷键*, `false`
 
 
+### 禁用天空渲染变暗 (disableDarkSkyRendering)
+
+阻止天空的下半部分在玩家位于海平面以下时变暗的渲染效果
+
+另见: 选项disableHorizonShadingRendering
+
+- 分类: MC修改
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+
+![disableDarkSkyRendering](assets/disableDarkSkyRendering.png)
+
+
 ### 禁用实体渲染插值 (disableEntityRenderInterpolation)
 
 禁用在渲染过程中实体的动画插值
@@ -527,6 +540,19 @@ TweakerMore提供的新功能
 - 分类: MC修改
 - 类型: 带热键布尔值
 - 默认值: *无快捷键*, `false`
+
+
+### 禁用地平线渲染变暗 (disableHorizonShadingRendering)
+
+阻止地平线在玩家接近世界最低y值时变暗的渲染效果
+
+另见: 选项disableDarkSkyRendering
+
+- 分类: MC修改
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+
+![disableHorizonShadingRendering](assets/disableHorizonShadingRendering.png)
 
 
 ### 禁用光照更新 (disableLightUpdates)
