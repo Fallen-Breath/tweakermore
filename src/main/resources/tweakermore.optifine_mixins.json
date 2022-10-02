@@ -11,5 +11,5 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "refmap": "tweakermore-refmap.json"
+  "refmap": "${archivesBaseName}-refmap.json"
 }

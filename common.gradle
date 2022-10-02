@@ -111,6 +111,15 @@ processResources {
 		]
 		expand valueMap
 	}
+
+	// the mixin ref map json file name is based on the archivesBaseName which is based on subproject name
+	// so we need to adjust it
+	filesMatching("tweakermore.optifine_mixins.json") {
+		def valueMap = [
+				"archivesBaseName": archivesBaseName,
+		]
+		expand valueMap
+	}
 }
 
 // ensure that the encoding is set to UTF-8, no matter what the system default is
