@@ -80,6 +80,13 @@ loom {
 		// to make sure it generates all "Minecraft Client (:subproject_name)" applications
 		ideConfigGenerated = true
 	}
+	runs {
+		mixinAuditClient {
+			client()
+			vmArgs '-Dtweakermore.mixin_audit=true'
+			ideConfigGenerated false
+		}
+	}
 }
 
 remapJar {

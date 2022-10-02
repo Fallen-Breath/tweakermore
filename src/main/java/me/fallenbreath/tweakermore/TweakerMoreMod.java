@@ -1,6 +1,7 @@
 package me.fallenbreath.tweakermore;
 
 import me.fallenbreath.tweakermore.config.MalilibStuffsInitializer;
+import me.fallenbreath.tweakermore.util.AutoMixinAuditExecutor;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import org.apache.logging.log4j.LogManager;
@@ -20,5 +21,6 @@ public class TweakerMoreMod implements ClientModInitializer
 		VERSION = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
 
 		MalilibStuffsInitializer.init();
+		AutoMixinAuditExecutor.run();
 	}
 }
