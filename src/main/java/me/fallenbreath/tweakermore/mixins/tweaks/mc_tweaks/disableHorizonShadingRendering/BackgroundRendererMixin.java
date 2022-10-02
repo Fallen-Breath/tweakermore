@@ -11,7 +11,11 @@ import org.spongepowered.asm.mixin.injection.Slice;
 public abstract class BackgroundRendererMixin
 {
 	@ModifyVariable(
+			//#if MC >= 11500
 			method = "render",
+			//#else
+			//$$ method = "renderBackground",
+			//#endif
 			slice = @Slice(
 					from = @At(
 							value = "INVOKE",
@@ -24,22 +28,31 @@ public abstract class BackgroundRendererMixin
 			),
 			at = @At(
 					value = "INVOKE",
+					//#if MC >= 11900
+					//$$ target = "Lnet/minecraft/client/render/BackgroundRenderer;getFogModifier(Lnet/minecraft/entity/Entity;F)Lnet/minecraft/client/render/BackgroundRenderer$StatusEffectFogModifier;"
+					//#else
+
 					target = "Lnet/minecraft/client/render/Camera;getFocusedEntity()Lnet/minecraft/entity/Entity;",
-//					shift = At.Shift.AFTER,
+					//#if MC >= 11700
+					//$$ ordinal = 1
+					//#else
 					ordinal = 0
+					//#endif
+
+					//#endif
 			),
-			print = true,
 			//#if MC >= 11800
 			//$$ ordinal = 2
 			//#else
 			ordinal = 0
 			//#endif
 	)
-	private static
 	//#if MC >= 11800
-	//$$ float
+	//$$ private static float
+	//#elseif MC >= 11500
+	private static double
 	//#else
-	double
+	//$$ private double
 	//#endif
 	disableHorizonShadingRendering(
 			//#if MC >= 11800
