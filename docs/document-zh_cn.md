@@ -984,6 +984,20 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
     - Minecraft (`minecraft`) ` >=1.15`
 
 
+### Optifine使用原版明亮度缓存 (ofUseVanillaBrightnessCache)
+
+让Optifine在它的LightCacheOF中使用原版的明亮度缓存
+
+能提升少许平滑光照开启时的帧数
+
+- 分类: 模组修改
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Optifine (`optifabric`)
+
+
 ### Replay精准时间戳显示 (replayAccurateTimelineTimestamp)
 
 在Replay模组的时间线上显示精确到毫秒的时间戳

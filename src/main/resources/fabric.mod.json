@@ -24,6 +24,7 @@
       "me.fallenbreath.tweakermore.util.compat.modmenu.ModMenuApiImpl"
     ]
   },
+  "accessWidener": "tweakermore.accesswidener",
   "mixins": [
     "tweakermore.mixins.json"
   ],

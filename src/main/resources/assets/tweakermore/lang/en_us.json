@@ -206,6 +206,8 @@
   "tweakermore.config.ofRemoveItemFrameItemRenderDistance.comment": "Remove the item frame item render distance limit from Optifine\nBack to vanilla behavior where the displayed item of item frame is always rendered together with the item frame",
   "tweakermore.config.ofUnlockF3FpsLimit": "ofUnlockF3FpsLimit",
   "tweakermore.config.ofUnlockF3FpsLimit.comment": "Removed 10 FPS render limit for F3 debug hud",
+  "tweakermore.config.ofUseVanillaBrightnessCache": "ofUseVanillaBrightnessCache",
+  "tweakermore.config.ofUseVanillaBrightnessCache.comment": "Let optifine make use vanilla's brightness cache in its LightCacheOF\nIncreases FPS with smooth lighting on for a few",
   "tweakermore.config.replayAccurateTimelineTimestamp": "replayAccurateTimelineTimestamp",
   "tweakermore.config.replayAccurateTimelineTimestamp.comment": "Display timestamps accurate to milliseconds on the timeline in replay mod",
   "tweakermore.config.replayFlySpeedLimitMultiplier": "replayFlySpeedLimitMultiplier",

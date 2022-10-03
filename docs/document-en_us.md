@@ -984,6 +984,20 @@ Removed 10 FPS render limit for F3 debug hud
     - Minecraft (`minecraft`) ` >=1.15`
 
 
+### ofUseVanillaBrightnessCache
+
+Let optifine make use vanilla's brightness cache in its LightCacheOF
+
+Increases FPS with smooth lighting on for a few
+
+- Category: Mods Tweaks
+- Type: boolean
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Optifine (`optifabric`)
+
+
 ### replayAccurateTimelineTimestamp
 
 Display timestamps accurate to milliseconds on the timeline in replay mod

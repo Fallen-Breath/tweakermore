@@ -94,6 +94,7 @@
     "tweaks.mod_tweaks.ofRemoveItemFrameItemRenderDistance.ItemFrameEntityRendererMixin",
     "tweaks.mod_tweaks.ofRemoveSignTextRenderDistance.SignBlockEntityRendererMixin",
     "tweaks.mod_tweaks.ofUnlockF3FpsLimit.DebugHudMixin",
+    "tweaks.mod_tweaks.ofUseVanillaBrightnessCache.BlockModelRendererAccessor",
     "tweaks.mod_tweaks.replayAccurateTimelineTimestamp.AbstractGuiTimelineMixin",
     "tweaks.mod_tweaks.replayFlySpeedLimit.ClassicCameraControllerMixin",
     "tweaks.mod_tweaks.replayFlySpeedLimit.VanillaCameraControllerMixin",

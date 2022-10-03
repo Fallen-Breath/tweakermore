@@ -206,6 +206,8 @@
   "tweakermore.config.ofRemoveItemFrameItemRenderDistance.comment": "移除Optifine的展示框物品渲染距离限制\n回归原版行为，即展示框的物品总与展示框本身同时渲染",
   "tweakermore.config.ofUnlockF3FpsLimit": "Optifine解锁F3帧数限制",
   "tweakermore.config.ofUnlockF3FpsLimit.comment": "移除F3 HUD显示的10FPS帧数限制",
+  "tweakermore.config.ofUseVanillaBrightnessCache": "Optifine使用原版明亮度缓存",
+  "tweakermore.config.ofUseVanillaBrightnessCache.comment": "让Optifine在它的LightCacheOF中使用原版的明亮度缓存\n能提升少许平滑光照开启时的帧数",
   "tweakermore.config.replayAccurateTimelineTimestamp": "Replay精准时间戳显示",
   "tweakermore.config.replayAccurateTimelineTimestamp.comment": "在Replay模组的时间线上显示精确到毫秒的时间戳",
   "tweakermore.config.replayFlySpeedLimitMultiplier": "Replay飞行速度上限倍率",
