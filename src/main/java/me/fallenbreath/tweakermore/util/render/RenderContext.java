@@ -20,6 +20,10 @@
 
 package me.fallenbreath.tweakermore.util.render;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.util.math.Matrix4f;
+
 //#if MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //$$ import org.jetbrains.annotations.NotNull;
@@ -31,13 +35,10 @@ import com.mojang.blaze3d.systems.RenderSystem;
 //$$ import com.mojang.blaze3d.platform.GlStateManager;
 //#endif
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.client.util.math.Matrix4f;
-
 //#if 11600 <= MC && MC < 11700
 //$$ @SuppressWarnings("deprecation")
 //#endif
-public class RenderContext
+public class RenderContext extends DrawableHelper
 {
 	//#if MC >= 11600
 	//$$ @NotNull
@@ -168,16 +169,16 @@ public class RenderContext
 		//#endif
 	}
 
-	//#if MC < 11600
 	public void color4f(float red, float green, float blue, float alpha)
 	{
-		//#if MC >= 11500
+		//#if MC >= 11700
+		//$$ RenderSystem.setShaderColor(red, green, blue, alpha);
+		//#elseif MC >= 11500
 		RenderSystem.color4f(red, green, blue, alpha);
 		//#else
 		//$$ GlStateManager.color4f(red, green, blue, alpha);
 		//#endif
 	}
-	//#endif
 
 	public void enableBlend()
 	{

@@ -33,7 +33,10 @@ import java.util.Objects;
 public class RenderUtil
 {
 	private static final TextRenderer TEXT_RENDERER = MinecraftClient.getInstance().textRenderer;
+
 	public static final int TEXT_HEIGHT = TEXT_RENDERER.fontHeight;
+	// text with background has 1 extra height at the top
+	public static final int TEXT_LINE_HEIGHT = RenderUtil.TEXT_HEIGHT + 1;
 	public static float tickDelta = 1.0F;
 
 	public static int getRenderWidth(String text)
