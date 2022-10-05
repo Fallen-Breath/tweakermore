@@ -16,20 +16,20 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.options.*;
+import me.fallenbreath.tweakermore.config.options.listentries.InfoViewStrategy;
 import me.fallenbreath.tweakermore.config.options.listentries.RestrictionType;
 import me.fallenbreath.tweakermore.config.options.listentries.SchematicBlockPlacementRestrictionHintType;
 import me.fallenbreath.tweakermore.config.options.listentries.WeatherOverrideValue;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.impl.features.copySignTextToClipBoard.SignTextCopier;
-import me.fallenbreath.tweakermore.impl.features.inventoryPreviewForCommandBlock.CommandBlockContentPreviewRenderer;
-import me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.ProPlaceImpl;
-import me.fallenbreath.tweakermore.impl.mod_tweaks.eCraftMassCraftCompact.EasierCraftingRegistrar;
+import me.fallenbreath.tweakermore.impl.features.infoView.InfoViewRenderer;
 import me.fallenbreath.tweakermore.impl.features.refreshInventory.InventoryRefresher;
-import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.serverDataSyncer.ServerDataSyncer;
-import me.fallenbreath.tweakermore.impl.features.showRedstoneDustUpdateOrder.RedstoneDustUpdateOrderRenderer;
 import me.fallenbreath.tweakermore.impl.features.tweakmAutoContainerProcess.AutoContainerProcessorHintRenderer;
-import me.fallenbreath.tweakermore.impl.setting.tweakmDebug.TweakerMoreDebugHelper;
+import me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.tweakmFlawlessFrames.FlawlessFramesHandler;
+import me.fallenbreath.tweakermore.impl.mod_tweaks.eCraftMassCraftCompact.EasierCraftingRegistrar;
+import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.serverDataSyncer.ServerDataSyncer;
+import me.fallenbreath.tweakermore.impl.setting.tweakmDebug.TweakerMoreDebugHelper;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
 import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
 import net.minecraft.item.Items;
@@ -67,17 +67,29 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkeyWithSwitch CREATIVE_PICK_BLOCK_WITH_STATE = newConfigHotKeyWithSwitch("creativePickBlockWithState", false, "LEFT_ALT", KeybindSettings.MODIFIER_INGAME);
 
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(tweakeroo)), category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigBoolean INVENTORY_PREVIEW_FOR_COMMAND_BLOCK = newConfigBoolean("inventoryPreviewForCommandBlock", false);
-
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(tweakeroo)), category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigInteger INVENTORY_PREVIEW_FOR_COMMAND_BLOCK_MAX_WIDTH = newConfigInteger("inventoryPreviewForCommandBlockMaxWidth", 200, 10, 2000);
-
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(tweakeroo)), category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigDouble INVENTORY_PREVIEW_FOR_COMMAND_BLOCK_TEXT_SCALE = newConfigDouble("inventoryPreviewForCommandBlockTextScale", 1, 0.1, 3);
+	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigHotkey INFO_VIEW_RENDERING_KEY = newConfigHotKey("infoViewRenderingKey", "RIGHT_ALT");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigDouble REDSTONE_DUST_UPDATE_ORDER_TEXT_ALPHA = newConfigDouble("redstoneDustUpdateOrderTextAlpha", 0.6, 0, 1);
+	public static final TweakerMoreConfigBoolean INFO_VIEW_COMMAND_BLOCK = newConfigBoolean("infoViewCommandBlock", true);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigInteger INFO_VIEW_COMMAND_BLOCK_MAX_WIDTH = newConfigInteger("infoViewCommandBlockMaxWidth", 200, 10, 2000);
+
+	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigOptionList INFO_VIEW_COMMAND_BLOCK_STRATEGY = newConfigOptionList("infoViewCommandBlockStrategy", InfoViewStrategy.DEFAULT);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigDouble INFO_VIEW_COMMAND_BLOCK_TEXT_SCALE = newConfigDouble("infoViewCommandBlockTextScale", 1, 0.1, 3);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBoolean INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER = newConfigBoolean("infoViewRedstoneDustUpdateOrder", true);
+
+	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigOptionList INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER_STRATEGY = newConfigOptionList("infoViewRedstoneDustUpdateOrderStrategy", InfoViewStrategy.DEFAULT);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigDouble INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER_TEXT_ALPHA = newConfigDouble("infoViewRedstoneDustUpdateOrderTextAlpha", 0.8, 0, 1);
 
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkey REFRESH_INVENTORY = newConfigHotKey("refreshInventory", "", KEYBIND_SETTINGS_ANY);
@@ -144,6 +156,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble TWEAKM_CONTAINER_PROCESSOR_HINT_SCALE = newConfigDouble("tweakmContainerProcessorHintScale", 1, 0.25, 4);
 
+	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_INFO_VIEW = newConfigBooleanHotkeyed("tweakmInfoView");
+
 	@Config(
 			type = Config.Type.TWEAK,
 			restriction = @Restriction(require = {
@@ -172,9 +187,6 @@ public class TweakerMoreConfigs
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigInteger TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_MARGIN = newConfigInteger("tweakmSchematicBlockPlacementRestrictionMargin", 2, 0, 16);
-
-	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SHOW_REDSTONE_DUST_UPDATE_ORDER = newConfigBooleanHotkeyed("tweakmShowRedstoneDustUpdateOrder");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBoolean VILLAGER_OFFER_USES_DISPLAY = newConfigBoolean("villagerOfferUsesDisplay", false);
@@ -522,8 +534,7 @@ public class TweakerMoreConfigs
 		//////////// Event Listeners ////////////
 
 		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
-		RenderEventHandler.getInstance().registerWorldLastRenderer(new CommandBlockContentPreviewRenderer());
-		RenderEventHandler.getInstance().registerWorldLastRenderer(new RedstoneDustUpdateOrderRenderer());
+		RenderEventHandler.getInstance().registerWorldLastRenderer(new InfoViewRenderer());
 		RenderEventHandler.getInstance().registerGameOverlayRenderer(new AutoContainerProcessorHintRenderer());
 
 		//////////// Misc ////////////

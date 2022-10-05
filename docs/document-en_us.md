@@ -41,59 +41,92 @@ So the block state can be restored when you place blocks with the picked item
 - Default value: `LEFT_ALT`
 
 
-### inventoryPreviewForCommandBlock
+### infoViewCommandBlock
 
-Add command block command display support for tweakeroo's inventory preview
+View the command and the output of command blocks
 
 - Category: Features
 - Type: boolean
-- Default value: `false`
-- Mod restrictions:
-  - Required mods:
-    - Tweakeroo (`tweakeroo`)
+- Default value: `true`
 
-![inventoryPreviewForCommandBlock](assets/inventoryPreviewForCommandBlock-en_us.png)
+![infoViewCommandBlock](assets/infoViewCommandBlock-en_us.png)
 
 
-### inventoryPreviewForCommandBlockMaxWidth
+### infoViewCommandBlockMaxWidth
 
-Maximum width of the displayed text rendered by inventoryPreviewForCommandBlock
+Maximum width of the displayed text rendered by infoViewCommandBlock
 
 - Category: Features
 - Type: integer
 - Default value: `200`
 - Minimum value: `10`
 - Maximum value: `2000`
-- Mod restrictions:
-  - Required mods:
-    - Tweakeroo (`tweakeroo`)
 
 
-### inventoryPreviewForCommandBlockTextScale
+### infoViewCommandBlockStrategy
 
-Scale of the displayed text rendered by inventoryPreviewForCommandBlock
+The view rendering strategy of infoViewCommandBlockStrategy
+
+- Category: Features
+- Type: option list
+- Default value: `View hotkey held`
+- Available options: `View hotkey held`, `Always`
+
+
+### infoViewCommandBlockTextScale
+
+Scale of the displayed text rendered by infoViewCommandBlock
 
 - Category: Features
 - Type: double
 - Default value: `1.0`
 - Minimum value: `0.1`
 - Maximum value: `3.0`
-- Mod restrictions:
-  - Required mods:
-    - Tweakeroo (`tweakeroo`)
 
 
-### redstoneDustUpdateOrderTextAlpha
+### infoViewRedstoneDustUpdateOrder
+
+Show the block update order of the redstone dust
+
+- Category: Features
+- Type: boolean
+- Default value: `true`
+
+
+### infoViewRedstoneDustUpdateOrderStrategy
+
+The view rendering strategy of infoViewRedstoneDustUpdateOrder
+
+- Category: Features
+- Type: option list
+- Default value: `View hotkey held`
+- Available options: `View hotkey held`, `Always`
+
+
+### infoViewRedstoneDustUpdateOrderTextAlpha
 
 The alpha value of the floating text used in redstone dust update order displaying
 
-See also: option tweakmShowRedstoneDustUpdateOrder
+See also: option infoViewRedstoneDustUpdateOrder
 
 - Category: Features
 - Type: double
-- Default value: `0.6`
+- Default value: `0.8`
 - Minimum value: `0.0`
 - Maximum value: `1.0`
+
+
+### infoViewRenderingKey
+
+The rendering hotkey for info viewers
+
+When the info view strategy is "View hotkey held", press to enable rendering
+
+When the info view strategy is "Always", it will always rendering ignoring the hotkey's state
+
+- Category: Features
+- Type: hotkey
+- Default value: `RIGHT_ALT`
 
 
 ### refreshInventory
@@ -290,6 +323,17 @@ The font scale of the auto container processor enable status hint
 - Maximum value: `4.0`
 
 
+### tweakmInfoView
+
+The main switch of the info view feature
+
+Search "infoView" to see related features
+
+- Category: Features
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+
+
 ### tweakmSafeAfk
 
 Disconnect when receive damage
@@ -368,17 +412,6 @@ Compatible with various block placement tweaks from tweakeroo, doesn't work with
   - Required mods:
     - Tweakeroo (`tweakeroo`)
     - Litematica (`litematica`)
-
-
-### tweakmShowRedstoneDustUpdateOrder
-
-When looking at a redstone dust block, show the block update order of it
-
-- Category: Features
-- Type: hotkey togglable boolean
-- Default value: *no hotkey*, `false`
-
-![tweakmShowRedstoneDustUpdateOrder](assets/tweakmShowRedstoneDustUpdateOrder.png)
 
 
 ### villagerOfferUsesDisplay

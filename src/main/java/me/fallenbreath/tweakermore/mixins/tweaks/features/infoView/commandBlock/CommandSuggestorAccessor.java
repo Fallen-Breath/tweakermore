@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.mixins.tweaks.features.inventoryPreviewForCommandBlock;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.commandBlock;
 
 import com.mojang.brigadier.ParseResults;
 import net.minecraft.server.command.CommandSource;

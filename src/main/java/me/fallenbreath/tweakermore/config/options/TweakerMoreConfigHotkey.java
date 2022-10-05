@@ -39,6 +39,11 @@ public class TweakerMoreConfigHotkey extends ConfigHotkey implements TweakerMore
 		}
 	}
 
+	public boolean isKeybindHeld()
+	{
+		return this.getKeybind().isKeybindHeld();
+	}
+
 	@Override
 	public void onValueChanged()
 	{

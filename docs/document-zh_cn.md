@@ -41,59 +41,92 @@ TweakerMore提供的新功能
 - 默认值: `LEFT_ALT`
 
 
-### 容器预览支持命令方块 (inventoryPreviewForCommandBlock)
+### 信息展示-命令方块 (infoViewCommandBlock)
 
-让tweakeroo的容器预览功能支持显命令方块的指令
+展示命令方块的指令及其输出
 
 - 分类: 功能
 - 类型: 布尔值
-- 默认值: `false`
-- 模组约束:
-  - 依赖模组:
-    - Tweakeroo (`tweakeroo`)
+- 默认值: `true`
 
-![inventoryPreviewForCommandBlock](assets/inventoryPreviewForCommandBlock-zh_cn.png)
+![infoViewCommandBlock](assets/infoViewCommandBlock-zh_cn.png)
 
 
-### 容器预览支持命令方块-文本宽度最大值 (inventoryPreviewForCommandBlockMaxWidth)
+### 信息展示-命令方块-文本宽度最大值 (infoViewCommandBlockMaxWidth)
 
-选项inventoryPreviewForCommandBlock渲染的文本宽度的最大值
+选项infoViewCommandBlock渲染的文本宽度的最大值
 
 - 分类: 功能
 - 类型: 整数
 - 默认值: `200`
 - 最小值: `10`
 - 最大值: `2000`
-- 模组约束:
-  - 依赖模组:
-    - Tweakeroo (`tweakeroo`)
 
 
-### 容器预览支持命令方块-文本缩放 (inventoryPreviewForCommandBlockTextScale)
+### 信息展示-命令方块-渲染策略 (infoViewCommandBlockStrategy)
 
-选项inventoryPreviewForCommandBlock渲染的文本的缩放比例
+选项infoViewCommandBlock的渲染策略
+
+- 分类: 功能
+- 类型: 选项列表
+- 默认值: `按住展示热键`
+- 可用选项: `按住展示热键`, `总是`
+
+
+### 信息展示-命令方块-文本缩放 (infoViewCommandBlockTextScale)
+
+选项infoViewCommandBlock渲染的文本的缩放比例
 
 - 分类: 功能
 - 类型: 实数
 - 默认值: `1.0`
 - 最小值: `0.1`
 - 最大值: `3.0`
-- 模组约束:
-  - 依赖模组:
-    - Tweakeroo (`tweakeroo`)
 
 
-### 红石粉更新顺序文本透明度 (redstoneDustUpdateOrderTextAlpha)
+### 信息展示-红石粉更新顺序 (infoViewRedstoneDustUpdateOrder)
+
+展示红石粉的方块更新顺序
+
+- 分类: 功能
+- 类型: 布尔值
+- 默认值: `true`
+
+
+### 信息展示-命令方块-渲染策略 (infoViewRedstoneDustUpdateOrderStrategy)
+
+选项infoViewRedstoneDustUpdateOrder的渲染策略
+
+- 分类: 功能
+- 类型: 选项列表
+- 默认值: `按住展示热键`
+- 可用选项: `按住展示热键`, `总是`
+
+
+### 信息展示-红石粉更新顺序-文本透明度 (infoViewRedstoneDustUpdateOrderTextAlpha)
 
 用于渲染红石粉方块更新顺序文本的透明度
 
-参见选项tweakmShowRedstoneDustUpdateOrder
+参见选项infoViewRedstoneDustUpdateOrder
 
 - 分类: 功能
 - 类型: 实数
-- 默认值: `0.6`
+- 默认值: `0.8`
 - 最小值: `0.0`
 - 最大值: `1.0`
+
+
+### 信息展示渲染热键 (infoViewRenderingKey)
+
+触发信息展示相关功能的热键
+
+当渲染策略为"按住展示热键"时，按住此热键以启用渲染
+
+当渲染策略为"总是"时，无论该热键是否被按下，都将启用渲染
+
+- 分类: 功能
+- 类型: 热键
+- 默认值: `RIGHT_ALT`
 
 
 ### 刷新物品栏 (refreshInventory)
@@ -290,6 +323,17 @@ TweakerMore提供的新功能
 - 最大值: `4.0`
 
 
+### 信息展示 (tweakmInfoView)
+
+信息展示相关特性的总开关
+
+搜索"infoView"以查阅相关特性
+
+- 分类: 功能
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+
+
 ### 安全挂机 (tweakmSafeAfk)
 
 在受到伤害时断开连接
@@ -368,17 +412,6 @@ TweakerMore提供的新功能
   - 依赖模组:
     - Tweakeroo (`tweakeroo`)
     - Litematica (`litematica`)
-
-
-### 显示红石粉更新顺序 (tweakmShowRedstoneDustUpdateOrder)
-
-在指向红石粉方块时，显示其方块更新顺序
-
-- 分类: 功能
-- 类型: 带热键布尔值
-- 默认值: *无快捷键*, `false`
-
-![tweakmShowRedstoneDustUpdateOrder](assets/tweakmShowRedstoneDustUpdateOrder.png)
 
 
 ### 村民交易次数显示 (villagerOfferUsesDisplay)
