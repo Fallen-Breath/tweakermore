@@ -23,6 +23,7 @@ public class ModIds
 
 	// others
 	public static final String easier_crafting = "easiercrafting";
+	public static final String extra_player_renderer = "explayerenderer";
 	public static final String iris = "iris";
 	public static final String optifine = "optifabric";
 	public static final String replay_mod = "replaymod";

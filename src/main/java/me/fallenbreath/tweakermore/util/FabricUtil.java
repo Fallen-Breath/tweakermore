@@ -4,6 +4,7 @@ import me.fallenbreath.conditionalmixin.api.util.VersionChecker;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class FabricUtil
 {
@@ -22,5 +23,9 @@ public class FabricUtil
 		return FabricLoader.getInstance().getModContainer(modId).
 				map(mod -> VersionChecker.doesVersionSatisfyPredicate(mod.getMetadata().getVersion(), versionPredicates)).
 				orElse(false);
+	}
+	public static boolean doesModFitsAnyPredicate(String modId, String versionPredicate)
+	{
+		return doesModFitsAnyPredicate(modId, Collections.singleton(versionPredicate));
 	}
 }

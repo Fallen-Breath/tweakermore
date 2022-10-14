@@ -921,6 +921,18 @@ e.g. broken mass craft
 ![eCraftItemScrollerCompact](assets/eCraftItemScrollerCompact.png)
 
 
+### eprHideOnDebugHud
+
+Hide extra player renderer rendering when debug hud (the F3 thing) is enabled
+
+- Category: Mods Tweaks
+- Type: boolean
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - ExtraPlayerRenderer (`explayerenderer`)
+
+
 ### handRestockBlackList
 
 The items that will NOT trigger tweakHandRestock

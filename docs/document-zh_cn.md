@@ -921,6 +921,18 @@ TweakerMore提供的新功能
 ![eCraftItemScrollerCompact](assets/eCraftItemScrollerCompact.png)
 
 
+### 额外玩家渲染隐藏于调试界面 (eprHideOnDebugHud)
+
+在调试界面开启（那个按 F3 显示的东西）时，隐藏额外玩家渲染的渲染
+
+- 分类: 模组修改
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - ExtraPlayerRenderer (`explayerenderer`)
+
+
 ### 自动补货黑名单 (handRestockBlackList)
 
 不会触发tweakHandRestock的物品

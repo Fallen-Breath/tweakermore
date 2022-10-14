@@ -336,6 +336,9 @@ public class TweakerMoreConfigs
 	)
 	public static final TweakerMoreConfigBoolean ECRAFT_ITEM_SCROLLER_COMPACT = newConfigBoolean("eCraftItemScrollerCompact", false);
 
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(extra_player_renderer)), category = Config.Category.MOD_TWEAKS)
+	public static final TweakerMoreConfigBoolean EPR_HIDE_ON_DEBUG_HUD = newConfigBoolean("eprHideOnDebugHud", false);
+
 	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(tweakeroo)), category = Config.Category.MOD_TWEAKS)
 	public static final TweakerMoreConfigOptionList HAND_RESTORE_LIST_TYPE = newConfigOptionList("handRestockListType", UsageRestriction.ListType.NONE);
 
