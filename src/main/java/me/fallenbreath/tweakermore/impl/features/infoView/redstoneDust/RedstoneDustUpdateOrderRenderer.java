@@ -26,7 +26,7 @@ public class RedstoneDustUpdateOrderRenderer extends AbstractInfoViewer
 	}
 
 	@Override
-	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity)
+	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState)
 	{
 		return blockState.getBlock() instanceof RedstoneWireBlock;
 	}

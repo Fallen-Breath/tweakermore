@@ -71,7 +71,7 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigDouble INFO_VIEW_BEAM_CONE_ANGLE = newConfigDouble("infoViewBeamConeAngle", 40, 1, 90);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigDouble INFO_VIEW_BEAM_DISTANCE = newConfigDouble("infoViewBeamDistance", 5, 4, 16);
+	public static final TweakerMoreConfigDouble INFO_VIEW_BEAM_DISTANCE = newConfigDouble("infoViewBeamDistance", 5, 4, 24);
 
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkey INFO_VIEW_RENDERING_KEY = newConfigHotKey("infoViewRenderingKey", "RIGHT_ALT");

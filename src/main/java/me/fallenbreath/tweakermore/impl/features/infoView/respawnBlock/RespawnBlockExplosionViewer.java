@@ -91,8 +91,15 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 	}
 
 	@Override
-	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity)
+	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState)
 	{
-		return BLOCK_HANDLERS.stream().anyMatch(handler -> handler.worksFor(world, blockPos, blockState));
+		for (BlockHandler handler : BLOCK_HANDLERS)
+		{
+			if (handler.worksFor(world, blockPos, blockState))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }

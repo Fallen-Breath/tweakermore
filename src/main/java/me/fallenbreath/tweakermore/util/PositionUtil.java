@@ -5,6 +5,7 @@ import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
@@ -16,7 +17,7 @@ public class PositionUtil
 		return new Vec3d(blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5);
 	}
 
-	public static Iterable<BlockPos> boxSurface(BlockPos pos1, BlockPos pos2)
+	public static Collection<BlockPos> boxSurface(BlockPos pos1, BlockPos pos2)
 	{
 		int minX = Math.min(pos1.getX(), pos2.getX());
 		int minY = Math.min(pos1.getY(), pos2.getY());
@@ -62,7 +63,7 @@ public class PositionUtil
 		return result;
 	}
 
-	public static Iterable<BlockPos> beam(Vec3d startPos, Vec3d endPos, double maxOffsetAngle)
+	public static Collection<BlockPos> beam(Vec3d startPos, Vec3d endPos, double coneAngle)
 	{
 		Vec3d dir1 = endPos.subtract(startPos).normalize();
 		if (dir1 == Vec3d.ZERO)
@@ -70,17 +71,73 @@ public class PositionUtil
 			return Collections.emptyList();
 		}
 
+		double step = 1 / (1 + Math.sin(coneAngle));
 		double maxLen = startPos.distanceTo(endPos);
 		LongOpenHashSet positions = new LongOpenHashSet();
-		for (double len = 0; len < maxLen + 0.5; len += 0.5)
+
+		BlockPos lastMin = null;
+		BlockPos lastMax = null;
+		for (double len = 0; len < maxLen + step; len +=step)
 		{
-			double r = len * Math.sin(maxOffsetAngle);
+			double r = len * Math.sin(coneAngle);
 			Vec3d vec3d = startPos.add(dir1.multiply(len));
 			Vec3d a = vec3d.add(-r, -r, -r);
 			Vec3d b = vec3d.add(+r, +r, +r);
 			BlockPos pos1 = new BlockPos((int)Math.floor(a.x), (int)Math.floor(a.y),(int)Math.floor(a.z));
 			BlockPos pos2 = new BlockPos((int)Math.ceil(b.x), (int)Math.ceil(b.y),(int)Math.ceil(b.z));
-			PositionUtil.boxSurface(pos1, pos2).forEach(pos -> positions.add(pos.asLong()));
+
+			if (lastMin != null)
+			{
+				int minX = pos1.getX();
+				int minY = pos1.getY();
+				int minZ = pos1.getZ();
+				int maxX = pos2.getX();
+				int maxY = pos2.getY();
+				int maxZ = pos2.getZ();
+
+				// minX changed
+				if (minX != lastMin.getX())
+					for (int y = minY; y <= maxY; y++)
+						for (int z = minZ; z <= maxZ; z++)
+							positions.add(new BlockPos(minX, y, z).asLong());
+
+				// maxX changed
+				if (maxX != lastMax.getX())
+					for (int y = minY; y <= maxY; y++)
+						for (int z = minZ; z <= maxZ; z++)
+							positions.add(new BlockPos(maxX, y, z).asLong());
+
+				// minY changed
+				if (minY != lastMin.getY())
+					for (int x = minX; x <= maxX; x++)
+						for (int z = minZ; z <= maxZ; z++)
+							positions.add(new BlockPos(x, minY, z).asLong());
+
+				// minY changed
+				if (maxY != lastMax.getY())
+					for (int x = minX; x <= maxX; x++)
+						for (int z = minZ; z <= maxZ; z++)
+							positions.add(new BlockPos(x, maxY, z).asLong());
+
+				// minZ changed
+				if (minZ != lastMin.getZ())
+					for (int x = minX; x <= maxX; x++)
+						for (int y = minY; y <= maxY; y++)
+							positions.add(new BlockPos(x, y, minZ).asLong());
+
+				// maxZ changed
+				if (maxZ != lastMin.getZ())
+					for (int x = minX; x <= maxX; x++)
+						for (int y = minY; y <= maxY; y++)
+							positions.add(new BlockPos(x, y, maxZ).asLong());
+			}
+			else
+			{
+				PositionUtil.boxSurface(pos1, pos2).forEach(pos -> positions.add(pos.asLong()));
+			}
+
+			lastMin = pos1;
+			lastMax = pos2;
 		}
 
 		List<BlockPos> result = Lists.newArrayList();
@@ -92,7 +149,7 @@ public class PositionUtil
 			{
 				Vec3d dir2 = vec3d.normalize();
 				double cos = dir2.dotProduct(dir1);
-				if (cos >= 0 && Math.acos(cos) <= maxOffsetAngle)
+				if (cos >= Math.cos(coneAngle))
 				{
 					result.add(pos);
 				}

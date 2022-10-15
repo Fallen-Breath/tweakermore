@@ -34,14 +34,18 @@ public class CommandBlockContentRenderer extends AbstractInfoViewer
 	}
 
 	@Override
-	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity)
+	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState)
 	{
-		return blockState.getBlock() instanceof CommandBlock && blockEntity instanceof CommandBlockBlockEntity;
+		return blockState.getBlock() instanceof CommandBlock;
 	}
 
 	@Override
 	public void render(RenderContext context, World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity)
 	{
+		if (!(blockEntity instanceof CommandBlockBlockEntity))
+		{
+			return;
+		}
 		CommandBlockExecutor executor = ((CommandBlockBlockEntity) blockEntity).getCommandExecutor();
 		String command = executor.getCommand();
 		Text lastOutput = executor.getLastOutput();
