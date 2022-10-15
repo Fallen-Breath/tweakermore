@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.util;
+package me.fallenbreath.tweakermore.util.damage;
 
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -66,7 +66,7 @@ public class DamageCalculator
 	 * ============================
 	 */
 
-	public Entity getEntity()
+	public LivingEntity getEntity()
 	{
 		return this.entity;
 	}
@@ -111,18 +111,7 @@ public class DamageCalculator
 		{
 			if (this.damageSource.isScaledWithDifficulty())
 			{
-				switch (difficulty)
-				{
-					case PEACEFUL:
-						this.damageAmount = 0.0F;
-						break;
-					case EASY:
-						this.damageAmount = Math.min(this.damageAmount / 2.0F + 1.0F, this.damageAmount);
-						break;
-					case HARD:
-						this.damageAmount = this.damageAmount * 3.0F / 2.0F;
-						break;
-				}
+				this.damageAmount = me.fallenbreath.tweakermore.util.damage.DamageUtil.modifyDamageForDifficulty(this.damageAmount, difficulty);
 			}
 		}
 		return this;

@@ -6,9 +6,10 @@ import me.fallenbreath.tweakermore.impl.features.infoView.AbstractInfoViewer;
 import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.handler.BedHandler;
 import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.handler.BlockHandler;
 import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.handler.RespawnAnchorHandler;
-import me.fallenbreath.tweakermore.util.DamageCalculator;
+import me.fallenbreath.tweakermore.util.damage.DamageCalculator;
 import me.fallenbreath.tweakermore.util.Messenger;
 import me.fallenbreath.tweakermore.util.TemporaryBlockReplacer;
+import me.fallenbreath.tweakermore.util.damage.DamageUtil;
 import me.fallenbreath.tweakermore.util.render.RenderContext;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import net.minecraft.block.BlockState;
@@ -20,6 +21,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +37,22 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 	public RespawnBlockExplosionViewer()
 	{
 		super(TweakerMoreConfigs.INFO_VIEW_RESPAWN_BLOCK_EXPLOSION, TweakerMoreConfigs.INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_STRATEGY);
+	}
+
+	@Nullable
+	private static Formatting stagedColor(float value, float[] bounds, Formatting[] formattings)
+	{
+		if (bounds.length == formattings.length)
+		{
+			for (int i = 0; i < bounds.length; i++)
+			{
+				if (value <= bounds[i])
+				{
+					return formattings[i];
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -69,22 +87,38 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 		calculator.applyAbsorption();
 		float remainingHealth = calculator.getEntityHealthAfterDeal();
 
+		Formatting amountFmt = stagedColor(
+				remainingHealth,
+				new float[]{0.0F, mc.player.getMaximumHealth() * 0.2F},
+				new Formatting[]{Formatting.RED, Formatting.GOLD}
+		);
+		Formatting lineFmt = stagedColor(
+				amount,
+				new float[]{1E-6F, DamageUtil.modifyDamageForDifficulty(1.0F, world.getDifficulty(), calculator.getDamageSource())},
+				new Formatting[]{Formatting.DARK_GRAY, Formatting.GRAY}
+		);
+
 		Function<Float, BaseText> float2text = hp -> {
 			BaseText text = Messenger.s(String.format("%.2f", hp));
-			if (remainingHealth <= 0)
+			if (amountFmt != null)
 			{
-				Messenger.formatting(text, Formatting.RED);
+				Messenger.formatting(text, amountFmt);
 			}
-			else if (remainingHealth < mc.player.getMaximumHealth() * 0.2)
+			return text;
+		};
+		Function<BaseText, BaseText> lineModifier = text -> {
+			if (amountFmt == null && lineFmt != null)
 			{
-				Messenger.formatting(text, Formatting.GOLD);
+				Messenger.formatting(text, lineFmt);
 			}
 			return text;
 		};
 
+		BaseText line1 = Messenger.tr("tweakermore.config.infoViewRespawnBlockExplosion.message.damage", float2text.apply(amount));
+		BaseText line2 = Messenger.c("-> ", float2text.apply(remainingHealth), "HP");
 		TextRenderer.create().at(explosionCenter).
-				addLine(Messenger.tr("tweakermore.config.infoViewRespawnBlockExplosion.message.damage", float2text.apply(amount))).
-				addLine(Messenger.c("-> ", float2text.apply(remainingHealth), "HP")).
+				addLine(lineModifier.apply(line1)).
+				addLine(lineModifier.apply(line2)).
 				bgColor(0x1F000000).
 				seeThrough().shadow().
 				render();
