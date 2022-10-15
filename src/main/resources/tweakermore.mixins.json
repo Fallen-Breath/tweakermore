@@ -115,6 +115,7 @@
     "tweaks.porting.lmPickBlockShulkersPorting.WorldUtilsMixin",
     "tweaks.porting.tkrDisableNauseaEffectPorting.ClientPlayerEntityMixin",
     "tweaks.porting.tkrDisableNauseaEffectPorting.InGameHudMixin",
+    "util.render.GameRendererMixin",
     "util.render.TextHandlerAccessor"
   ],
   "client": [

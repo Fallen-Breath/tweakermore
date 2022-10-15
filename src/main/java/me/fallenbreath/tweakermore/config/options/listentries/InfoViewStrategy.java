@@ -3,7 +3,8 @@ package me.fallenbreath.tweakermore.config.options.listentries;
 public enum InfoViewStrategy implements EnumOptionEntry
 {
 	HOTKEY_HELD,
-	ALWAYS;
+	POINTED,
+	BEAM;
 
 	public static final InfoViewStrategy DEFAULT = HOTKEY_HELD;
 

@@ -11,8 +11,12 @@
   "tweakermore.config.creativePickBlockWithState": "creativePickBlockWithState",
   "tweakermore.config.creativePickBlockWithState.comment": "When performing creative pick block action (middle click) with hotkey pressed,\nstore the target block's block state into the nbt named \"BlockStateTag\" of the picked item.\nSo the block state can be restored when you place blocks with the picked item",
   "tweakermore.config.creativePickBlockWithState.message": "Block state of %1$s stored",
+  "tweakermore.config.infoViewBeamConeAngle": "infoViewBeamConeAngle",
+  "tweakermore.config.infoViewBeamConeAngle.comment": "The angle of the cone range used in info view strategy \"Beam\"\nInfo of blocks within the given degree to player's slight vector will be shown, just like a flashlight\nUsing degree measure",
+  "tweakermore.config.infoViewBeamDistance": "infoViewBeamDistance",
+  "tweakermore.config.infoViewBeamDistance.comment": "The maximum beam distance of info view strategy \"Beam\"",
   "tweakermore.config.infoViewRenderingKey": "infoViewRenderingKey",
-  "tweakermore.config.infoViewRenderingKey.comment": "The rendering hotkey for info viewers\nWhen the info view strategy is \"View hotkey held\", press to enable rendering\nWhen the info view strategy is \"Always\", it will always rendering ignoring the hotkey's state",
+  "tweakermore.config.infoViewRenderingKey.comment": "The rendering hotkey for info viewers\nWhen the info view strategy is \"View hotkey held\", press to enable rendering\nWhen the info view strategy is \"Pointed\", it will always rendering ignoring the hotkey's state",
   "tweakermore.config.infoViewCommandBlock": "infoViewCommandBlock",
   "tweakermore.config.infoViewCommandBlock.comment": "Show the command and the output of command blocks",
   "tweakermore.config.infoViewCommandBlockMaxWidth": "infoViewCommandBlockMaxWidth",
@@ -296,7 +300,8 @@
   "tweakermore.list_entry.weatherOverrideValue.thunder": "Thunderstorm",
 
   "tweakermore.list_entry.infoViewStrategy.hotkey_held": "View hotkey held",
-  "tweakermore.list_entry.infoViewStrategy.always": "Always",
+  "tweakermore.list_entry.infoViewStrategy.pointed": "Pointed",
+  "tweakermore.list_entry.infoViewStrategy.beam": "Beam",
 
   "// GUI": "================================================",
 

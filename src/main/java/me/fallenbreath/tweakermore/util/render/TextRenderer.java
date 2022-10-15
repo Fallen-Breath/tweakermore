@@ -2,6 +2,7 @@ package me.fallenbreath.tweakermore.util.render;
 
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.GlStateManager;
+import me.fallenbreath.tweakermore.util.PositionUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.debug.DebugRenderer;
@@ -262,7 +263,7 @@ public class TextRenderer
 
 	public TextRenderer atCenter(BlockPos blockPos)
 	{
-		return this.at(blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5);
+		return this.at(PositionUtil.centerOf(blockPos));
 	}
 
 	public TextRenderer fontSize(double fontSize)

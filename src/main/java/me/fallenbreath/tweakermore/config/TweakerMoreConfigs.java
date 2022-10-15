@@ -67,6 +67,12 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkeyWithSwitch CREATIVE_PICK_BLOCK_WITH_STATE = newConfigHotKeyWithSwitch("creativePickBlockWithState", false, "LEFT_ALT", KeybindSettings.MODIFIER_INGAME);
 
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigDouble INFO_VIEW_BEAM_CONE_ANGLE = newConfigDouble("infoViewBeamConeAngle", 40, 1, 90);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigDouble INFO_VIEW_BEAM_DISTANCE = newConfigDouble("infoViewBeamDistance", 5, 4, 16);
+
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkey INFO_VIEW_RENDERING_KEY = newConfigHotKey("infoViewRenderingKey", "RIGHT_ALT");
 

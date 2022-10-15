@@ -1,5 +1,6 @@
 package me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.handler;
 
+import me.fallenbreath.tweakermore.util.PositionUtil;
 import me.fallenbreath.tweakermore.util.TemporaryBlockReplacer;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
@@ -41,7 +42,7 @@ public class BedHandler implements BlockHandler
 	@Override
 	public Vec3d getExplosionCenter(BlockPos blockPos)
 	{
-		return new Vec3d(blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5);
+		return PositionUtil.centerOf(blockPos);
 	}
 
 	@Override

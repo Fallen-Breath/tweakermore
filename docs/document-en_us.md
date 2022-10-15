@@ -41,6 +41,36 @@ So the block state can be restored when you place blocks with the picked item
 - Default value: `LEFT_ALT`
 
 
+### infoViewBeamConeAngle
+
+The angle of the cone range used in info view strategy "Beam"
+
+Info of blocks within the given degree to player's slight vector will be shown, just like a flashlight
+
+Using degree measure
+
+- Category: Features
+- Type: double
+- Default value: `40.0`
+- Minimum value: `1.0`
+- Maximum value: `90.0`
+
+![infoViewBeamConeAngle](assets/infoViewBeamConeAngle.png)
+
+
+### infoViewBeamDistance
+
+The maximum beam distance of info view strategy "Beam"
+
+- Category: Features
+- Type: double
+- Default value: `5.0`
+- Minimum value: `4.0`
+- Maximum value: `16.0`
+
+![infoViewBeamDistance](assets/infoViewBeamDistance.png)
+
+
 ### infoViewCommandBlock
 
 Show the command and the output of command blocks
@@ -70,7 +100,7 @@ The view rendering strategy of infoViewCommandBlockStrategy
 - Category: Features
 - Type: option list
 - Default value: `View hotkey held`
-- Available options: `View hotkey held`, `Always`
+- Available options: `View hotkey held`, `Pointed`, `Beam`
 
 
 ### infoViewCommandBlockTextScale
@@ -100,7 +130,7 @@ The view rendering strategy of infoViewRedstoneDustUpdateOrder
 - Category: Features
 - Type: option list
 - Default value: `View hotkey held`
-- Available options: `View hotkey held`, `Always`
+- Available options: `View hotkey held`, `Pointed`, `Beam`
 
 
 ### infoViewRedstoneDustUpdateOrderTextAlpha
@@ -122,7 +152,7 @@ The rendering hotkey for info viewers
 
 When the info view strategy is "View hotkey held", press to enable rendering
 
-When the info view strategy is "Always", it will always rendering ignoring the hotkey's state
+When the info view strategy is "Pointed", it will always rendering ignoring the hotkey's state
 
 - Category: Features
 - Type: hotkey
@@ -149,7 +179,7 @@ The view rendering strategy of infoViewRespawnBlockExplosion
 - Category: Features
 - Type: option list
 - Default value: `View hotkey held`
-- Available options: `View hotkey held`, `Always`
+- Available options: `View hotkey held`, `Pointed`, `Beam`
 
 
 ### refreshInventory

@@ -38,18 +38,30 @@ public abstract class AbstractInfoViewer
 	 */
 	public abstract boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity);
 
-	protected boolean isEnabled()
+	public boolean isConfigEnabled()
 	{
-		if (this.switchConfig.getBooleanValue())
+		return this.switchConfig.getBooleanValue();
+	}
+
+	public boolean isDirectViewEnabled()
+	{
+		if (this.isConfigEnabled())
 		{
 			switch (this.strategySupplier.get())
 			{
 				case HOTKEY_HELD:
 					return TweakerMoreConfigs.INFO_VIEW_RENDERING_KEY.isKeybindHeld();
-				case ALWAYS:
+				case POINTED:
 					return true;
+				case BEAM:
+					return false;
 			}
 		}
 		return false;
+	}
+
+	public boolean isInBeamRangeViewEnabled()
+	{
+		return this.isConfigEnabled() && this.strategySupplier.get() == InfoViewStrategy.BEAM;
 	}
 }

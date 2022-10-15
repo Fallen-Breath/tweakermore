@@ -11,8 +11,12 @@
   "tweakermore.config.creativePickBlockWithState": "创造模式提取方块带方块状态",
   "tweakermore.config.creativePickBlockWithState.comment": "当执行创造模式的提取方块（按下中键）时，如果热键处于按下状态，\n则将目标方块的方块状态存储到提取的物品的nbt中，名为“BlockStateTag”\n因此，在你用提取的物品放置方块时，你可以直接放下与之前被选择的方块状态相同的方块",
   "tweakermore.config.creativePickBlockWithState.message": "已储存%1$s的方块状态",
+  "tweakermore.config.infoViewBeamConeAngle": "信息展示光柱渲染策略圆锥角度",
+  "tweakermore.config.infoViewBeamConeAngle.comment": "在信息展示渲染策略 \"光柱\" 中使用的圆锥的角度\n那些位于玩家视线向量给定角度内的方块信息将被渲染，就像手电筒一样\n使用角度制",
+  "tweakermore.config.infoViewBeamDistance": "信息展示光柱渲染策略距离",
+  "tweakermore.config.infoViewBeamDistance.comment": "在信息展示渲染策略 \"光柱\" 中的光柱最大距离",
   "tweakermore.config.infoViewRenderingKey": "信息展示渲染热键",
-  "tweakermore.config.infoViewRenderingKey.comment": "触发信息展示相关功能的热键\n当渲染策略为\"按住展示热键\"时，按住此热键以启用渲染\n当渲染策略为\"总是\"时，无论该热键是否被按下，都将启用渲染",
+  "tweakermore.config.infoViewRenderingKey.comment": "触发信息展示相关功能的热键\n当渲染策略为\"按住展示热键\"时，按住此热键以启用渲染\n当渲染策略为\"指向\"时，无论该热键是否被按下，都将启用渲染",
   "tweakermore.config.infoViewCommandBlock": "信息展示-命令方块",
   "tweakermore.config.infoViewCommandBlock.comment": "展示命令方块的指令及其输出",
   "tweakermore.config.infoViewCommandBlockMaxWidth": "信息展示-命令方块-文本宽度最大值",
@@ -296,7 +300,8 @@
   "tweakermore.list_entry.weatherOverrideValue.thunder": "雷暴",
 
   "tweakermore.list_entry.infoViewStrategy.hotkey_held": "按住展示热键",
-  "tweakermore.list_entry.infoViewStrategy.always": "总是",
+  "tweakermore.list_entry.infoViewStrategy.pointed": "指向",
+  "tweakermore.list_entry.infoViewStrategy.beam": "光柱",
 
   "// GUI": "================================================",
 
