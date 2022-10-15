@@ -66,7 +66,7 @@ The maximum beam distance of info view strategy "Beam"
 - Type: double
 - Default value: `5.0`
 - Minimum value: `4.0`
-- Maximum value: `16.0`
+- Maximum value: `24.0`
 
 ![infoViewBeamDistance](assets/infoViewBeamDistance.png)
 

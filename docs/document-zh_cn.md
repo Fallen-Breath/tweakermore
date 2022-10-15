@@ -66,7 +66,7 @@ TweakerMore提供的新功能
 - 类型: 实数
 - 默认值: `5.0`
 - 最小值: `4.0`
-- 最大值: `16.0`
+- 最大值: `24.0`
 
 ![infoViewBeamDistance](assets/infoViewBeamDistance.png)
 
