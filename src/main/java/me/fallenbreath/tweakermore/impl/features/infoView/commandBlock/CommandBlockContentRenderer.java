@@ -34,7 +34,7 @@ public class CommandBlockContentRenderer extends AbstractInfoViewer
 	}
 
 	@Override
-	public boolean shouldRenderFor(BlockState blockState, BlockEntity blockEntity)
+	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity)
 	{
 		return blockState.getBlock() instanceof CommandBlock && blockEntity instanceof CommandBlockBlockEntity;
 	}

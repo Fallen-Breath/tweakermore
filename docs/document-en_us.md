@@ -43,7 +43,7 @@ So the block state can be restored when you place blocks with the picked item
 
 ### infoViewCommandBlock
 
-View the command and the output of command blocks
+Show the command and the output of command blocks
 
 - Category: Features
 - Type: boolean
@@ -127,6 +127,29 @@ When the info view strategy is "Always", it will always rendering ignoring the h
 - Category: Features
 - Type: hotkey
 - Default value: `RIGHT_ALT`
+
+
+### infoViewRespawnBlockExplosion
+
+Show the explosion damage of respawn blocks located in wrong dimension
+
+It will also estimate and display your remaining health if it explodes
+
+- Category: Features
+- Type: boolean
+- Default value: `true`
+
+![infoViewRespawnBlockExplosion](assets/infoViewRespawnBlockExplosion-en_us.png)
+
+
+### infoViewRespawnBlockExplosionStrategy
+
+The view rendering strategy of infoViewRespawnBlockExplosion
+
+- Category: Features
+- Type: option list
+- Default value: `View hotkey held`
+- Available options: `View hotkey held`, `Always`
 
 
 ### refreshInventory

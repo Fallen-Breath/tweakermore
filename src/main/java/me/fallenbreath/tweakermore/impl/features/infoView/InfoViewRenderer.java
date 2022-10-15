@@ -5,6 +5,7 @@ import fi.dy.masa.malilib.util.WorldUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.commandBlock.CommandBlockContentRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.redstoneDust.RedstoneDustUpdateOrderRenderer;
+import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.RespawnBlockExplosionViewer;
 import me.fallenbreath.tweakermore.util.WorldUtil;
 import me.fallenbreath.tweakermore.util.render.RenderContext;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
@@ -22,7 +23,8 @@ public class InfoViewRenderer implements TweakerMoreIRenderer
 {
 	private static final List<AbstractInfoViewer> CONTENT_PREVIEWERS = Lists.newArrayList(
 			new RedstoneDustUpdateOrderRenderer(),
-			new CommandBlockContentRenderer()
+			new CommandBlockContentRenderer(),
+			new RespawnBlockExplosionViewer()
 	);
 
 	@Override
@@ -42,7 +44,7 @@ public class InfoViewRenderer implements TweakerMoreIRenderer
 				boolean[] synced = new boolean[]{false};
 				CONTENT_PREVIEWERS.stream().
 						filter(AbstractInfoViewer::isEnabled).
-						filter(previewer -> previewer.shouldRenderFor(blockState, blockEntity)).
+						filter(previewer -> previewer.shouldRenderFor(world, blockPos, blockState, blockEntity)).
 						forEach(previewer -> {
 							if (!synced[0])
 							{

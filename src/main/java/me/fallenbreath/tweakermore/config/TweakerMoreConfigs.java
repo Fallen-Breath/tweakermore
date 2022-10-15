@@ -91,6 +91,12 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER_TEXT_ALPHA = newConfigDouble("infoViewRedstoneDustUpdateOrderTextAlpha", 0.8, 0, 1);
 
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBoolean INFO_VIEW_RESPAWN_BLOCK_EXPLOSION = newConfigBoolean("infoViewRespawnBlockExplosion", true);
+
+	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigOptionList INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_STRATEGY = newConfigOptionList("infoViewRespawnBlockExplosionStrategy", InfoViewStrategy.DEFAULT);
+
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkey REFRESH_INVENTORY = newConfigHotKey("refreshInventory", "", KEYBIND_SETTINGS_ANY);
 

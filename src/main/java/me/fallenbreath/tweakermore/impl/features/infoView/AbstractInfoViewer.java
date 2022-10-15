@@ -29,7 +29,14 @@ public abstract class AbstractInfoViewer
 
 	public abstract void render(RenderContext context, World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity);
 
-	public abstract boolean shouldRenderFor(BlockState blockState, BlockEntity blockEntity);
+	/**
+	 * If this viewer works for and should render for given context
+	 * @param world The current world get from {@link fi.dy.masa.malilib.util.WorldUtils#getBestWorld}
+	 * @param blockPos The block pos the player looking at
+	 * @param blockState The block state the player looking at
+	 * @param blockEntity The block entity the player looking at
+	 */
+	public abstract boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity);
 
 	protected boolean isEnabled()
 	{

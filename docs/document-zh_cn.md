@@ -129,6 +129,29 @@ TweakerMore提供的新功能
 - 默认值: `RIGHT_ALT`
 
 
+### 信息展示-重生方块爆炸伤害 (infoViewRespawnBlockExplosion)
+
+展示位于错误维度中重生类方块的爆炸伤害
+
+它还会估计并显示发生爆炸后你的剩余生命值
+
+- 分类: 功能
+- 类型: 布尔值
+- 默认值: `true`
+
+![infoViewRespawnBlockExplosion](assets/infoViewRespawnBlockExplosion-zh_cn.png)
+
+
+### 信息展示-重生方块爆炸伤害-渲染策略 (infoViewRespawnBlockExplosionStrategy)
+
+选项infoViewRespawnBlockExplosion的渲染策略
+
+- 分类: 功能
+- 类型: 选项列表
+- 默认值: `按住展示热键`
+- 可用选项: `按住展示热键`, `总是`
+
+
 ### 刷新物品栏 (refreshInventory)
 
 向服务端请求一次玩家物品栏刷新
