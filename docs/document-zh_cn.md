@@ -633,6 +633,19 @@ TweakerMore提供的新功能
 ![disableSignTextLengthLimit](assets/disableSignTextLengthLimit.png)
 
 
+### 禁用暗角渲染 (disableVignetteDarkness)
+
+禁用暗角渲染覆盖层
+
+即那个当玩家眼睛处的亮度小于最大亮度时，
+
+画面四角会逐渐变暗的效果
+
+- 分类: MC修改
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+
+
 ### 修复箱子镜像变换 (fixChestMirroring)
 
 修复箱子方块在进行镜像变换时没有正确地处理其chest_type属性

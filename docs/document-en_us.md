@@ -633,6 +633,19 @@ A red exclamation mark will be shown on the left side when the limit is exceeded
 ![disableSignTextLengthLimit](assets/disableSignTextLengthLimit.png)
 
 
+### disableVignetteDarkness
+
+Disable the vignette darkness overlay
+
+i.e. the darkness effect on the screen corner that accumulates slowly
+
+when the light level at player's eyes is not the maximum light level
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+
+
 ### fixChestMirroring
 
 Fixed chest type is not properly transformed when chest block is mirrored

@@ -62,6 +62,7 @@
     "tweaks.mc_tweaks.disableSignTextLengthLimit.SignBlockEntityRenderer_optifineMixin",
     "tweaks.mc_tweaks.disableSignTextLengthLimit.SignBlockEntityRendererMixin",
     "tweaks.mc_tweaks.disableSignTextLengthLimit.SignEditScreenMixin",
+    "tweaks.mc_tweaks.disableVignetteDarkness.InGameHudMixin",
     "tweaks.mc_tweaks.fixChestMirroring.ChestBlockMixin",
     "tweaks.mc_tweaks.flyDrag.LivingEntityMixin",
     "tweaks.mc_tweaks.legacyF3NLogic.KeyboardMixin",
