@@ -45,7 +45,7 @@ public abstract class AbstractInfoViewer
 	 */
 	public abstract boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState);
 
-	public abstract boolean requireBlockEntityFetching();
+	public abstract boolean requireBlockEntitySyncing();
 
 	public boolean isRenderEnabled()
 	{

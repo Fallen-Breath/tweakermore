@@ -44,7 +44,7 @@ public class CommandBlockContentRenderer extends AbstractInfoViewer
 	}
 
 	@Override
-	public boolean requireBlockEntityFetching()
+	public boolean requireBlockEntitySyncing()
 	{
 		return true;
 	}

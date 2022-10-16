@@ -4,6 +4,7 @@ import com.google.common.base.Suppliers;
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Pair;
 import fi.dy.masa.malilib.event.TickHandler;
+import fi.dy.masa.malilib.interfaces.IClientTickHandler;
 import fi.dy.masa.malilib.util.WorldUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.commandBlock.CommandBlockContentRenderer;
@@ -13,7 +14,6 @@ import me.fallenbreath.tweakermore.util.PositionUtil;
 import me.fallenbreath.tweakermore.util.ThrowawayRunnable;
 import me.fallenbreath.tweakermore.util.render.RenderContext;
 import me.fallenbreath.tweakermore.util.render.RenderUtil;
-import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class InfoViewRenderer implements TweakerMoreIRenderer
+public class InfoViewRenderer implements TweakerMoreIRenderer, IClientTickHandler
 {
 	private static final InfoViewRenderer INSTANCE = new InfoViewRenderer();
 	private static final List<AbstractInfoViewer> CONTENT_PREVIEWERS = Lists.newArrayList(
@@ -41,7 +41,7 @@ public class InfoViewRenderer implements TweakerMoreIRenderer
 
 	private InfoViewRenderer()
 	{
-		TickHandler.getInstance().registerClientTickHandler(this::onClientTick);
+		TickHandler.getInstance().registerClientTickHandler(this);
 	}
 
 	public static InfoViewRenderer getInstance()
@@ -107,7 +107,7 @@ public class InfoViewRenderer implements TweakerMoreIRenderer
 				boolean enabled = viewer.isValidTarget(isCrossHairPos);
 				if (enabled && viewer.shouldRenderFor(world, blockPos, blockState.get()))
 				{
-					if (viewer.requireBlockEntityFetching())
+					if (viewer.requireBlockEntitySyncing())
 					{
 						sync.run();
 					}
@@ -124,7 +124,8 @@ public class InfoViewRenderer implements TweakerMoreIRenderer
 		// serverDataSyncer do your job here
 	}
 
-	private void onClientTick(MinecraftClient client)
+	@Override
+	public void onClientTick(MinecraftClient client)
 	{
 		CONTENT_PREVIEWERS.forEach(AbstractInfoViewer::onClientTick);
 	}

@@ -168,7 +168,7 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 	}
 
 	@Override
-	public boolean requireBlockEntityFetching()
+	public boolean requireBlockEntitySyncing()
 	{
 		return false;
 	}
