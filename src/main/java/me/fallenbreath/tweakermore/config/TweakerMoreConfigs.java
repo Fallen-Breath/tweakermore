@@ -566,7 +566,7 @@ public class TweakerMoreConfigs
 		//////////// Event Listeners ////////////
 
 		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
-		RenderEventHandler.getInstance().registerWorldLastRenderer(new InfoViewRenderer());
+		RenderEventHandler.getInstance().registerWorldLastRenderer(InfoViewRenderer.getInstance());
 		RenderEventHandler.getInstance().registerGameOverlayRenderer(new AutoContainerProcessorHintRenderer());
 
 		//////////// Misc ////////////

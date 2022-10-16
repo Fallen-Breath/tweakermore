@@ -1,6 +1,7 @@
 package me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Maps;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.AbstractInfoViewer;
@@ -17,6 +18,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.text.BaseText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
@@ -25,23 +27,19 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
 public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 {
-	@FunctionalInterface
-	private interface BlockHandlerProvider
-	{
-		AbstractBlockHandler construct(World world, BlockPos blockPos, BlockState blockState);
-	}
-
 	private static final List<BlockHandlerProvider> BLOCK_HANDLER_FACTORIES = ImmutableList.of(
 			BedHandler::new,
 			RespawnAnchorHandler::new
 	);
 
 	private final LongOpenHashSet renderedKeys = new LongOpenHashSet();
+	private final Map<Vec3d, DamageCache> damageCache = Maps.newHashMap();
 
 	public RespawnBlockExplosionViewer()
 	{
@@ -91,29 +89,34 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 		{
 			return;
 		}
-		Vec3d explosionCenter = handler.getExplosionCenter();
 
-		TemporaryBlockReplacer replacer = new TemporaryBlockReplacer(clientWorld);
-		handler.addBlocksToRemove(replacer);
-		replacer.removeBlocks();
-		DamageCalculator calculator = DamageCalculator.explosion(explosionCenter, handler.getExplosionPower(), mc.player);
-		replacer.restoreBlocks();
+		DamageCache cache = this.damageCache.computeIfAbsent(
+				handler.getExplosionCenter(),
+				explosionCenter -> {
+					TemporaryBlockReplacer replacer = new TemporaryBlockReplacer(clientWorld);
+					handler.addBlocksToRemove(replacer);
+					replacer.removeBlocks();
+					DamageCalculator calculator = DamageCalculator.explosion(explosionCenter, handler.getExplosionPower(), mc.player);
+					replacer.restoreBlocks();
 
-		calculator.applyDifficulty(world.getDifficulty());
-		float baseAmount = calculator.getDamageAmount();
-		calculator.applyArmorAndResistanceAndEnchantment();
-		float amount = calculator.getDamageAmount();
-		calculator.applyAbsorption();
-		float remainingHealth = calculator.getEntityHealthAfterDeal();
+					calculator.applyDifficulty(world.getDifficulty());
+					float baseAmount = calculator.getDamageAmount();
+					calculator.applyArmorAndResistanceAndEnchantment();
+					float appliedAmount = calculator.getDamageAmount();
+					calculator.applyAbsorption();
+					float remainingHealth = calculator.getEntityHealthAfterDeal();
+
+					return new DamageCache(calculator.getDamageSource(), baseAmount, appliedAmount, remainingHealth);
+				});
 
 		Formatting amountFmt = stagedColor(
-				remainingHealth,
+				cache.remainingHealth,
 				new float[]{0.0F, mc.player.getMaximumHealth() * 0.2F},
 				new Formatting[]{Formatting.RED, Formatting.GOLD}
 		);
 		Formatting lineFmt = stagedColor(
-				baseAmount,
-				new float[]{1E-6F, DamageUtil.modifyDamageForDifficulty(1.0F, world.getDifficulty(), calculator.getDamageSource())},
+				cache.baseAmount,
+				new float[]{1E-6F, DamageUtil.modifyDamageForDifficulty(1.0F, world.getDifficulty(), cache.damageSource)},
 				new Formatting[]{Formatting.DARK_GRAY, Formatting.GRAY}
 		);
 
@@ -133,8 +136,8 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 			return text;
 		};
 
-		BaseText line1 = Messenger.tr("tweakermore.config.infoViewRespawnBlockExplosion.message.damage", float2text.apply(amount));
-		BaseText line2 = Messenger.c("-> ", float2text.apply(remainingHealth), "HP");
+		BaseText line1 = Messenger.tr("tweakermore.config.infoViewRespawnBlockExplosion.message.damage", float2text.apply(cache.appliedAmount));
+		BaseText line2 = Messenger.c("-> ", float2text.apply(cache.remainingHealth), "HP");
 		double alpha = TweakerMoreConfigs.INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_TEXT_ALPHA.getDoubleValue();
 		if (alpha > 0)
 		{
@@ -168,5 +171,33 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 	public void onInfoViewStart()
 	{
 		this.renderedKeys.clear();
+	}
+
+	@Override
+	public void onClientTick()
+	{
+		this.damageCache.clear();
+	}
+
+	@FunctionalInterface
+	private interface BlockHandlerProvider
+	{
+		AbstractBlockHandler construct(World world, BlockPos blockPos, BlockState blockState);
+	}
+
+	private static class DamageCache
+	{
+		public final DamageSource damageSource;
+		public final float baseAmount;
+		public final float appliedAmount;
+		public final float remainingHealth;
+
+		public DamageCache(DamageSource damageSource, float baseAmount, float appliedAmount, float remainingHealth)
+		{
+			this.damageSource = damageSource;
+			this.baseAmount = baseAmount;
+			this.appliedAmount = appliedAmount;
+			this.remainingHealth = remainingHealth;
+		}
 	}
 }

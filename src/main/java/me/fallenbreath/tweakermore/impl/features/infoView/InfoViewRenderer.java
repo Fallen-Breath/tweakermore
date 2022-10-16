@@ -3,6 +3,7 @@ package me.fallenbreath.tweakermore.impl.features.infoView;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Pair;
+import fi.dy.masa.malilib.event.TickHandler;
 import fi.dy.masa.malilib.util.WorldUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.commandBlock.CommandBlockContentRenderer;
@@ -12,6 +13,7 @@ import me.fallenbreath.tweakermore.util.PositionUtil;
 import me.fallenbreath.tweakermore.util.ThrowawayRunnable;
 import me.fallenbreath.tweakermore.util.render.RenderContext;
 import me.fallenbreath.tweakermore.util.render.RenderUtil;
+import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -30,11 +32,22 @@ import java.util.stream.Collectors;
 
 public class InfoViewRenderer implements TweakerMoreIRenderer
 {
+	private static final InfoViewRenderer INSTANCE = new InfoViewRenderer();
 	private static final List<AbstractInfoViewer> CONTENT_PREVIEWERS = Lists.newArrayList(
 			new RedstoneDustUpdateOrderRenderer(),
 			new CommandBlockContentRenderer(),
 			new RespawnBlockExplosionViewer()
 	);
+
+	private InfoViewRenderer()
+	{
+		TickHandler.getInstance().registerClientTickHandler(this::onClientTick);
+	}
+
+	public static InfoViewRenderer getInstance()
+	{
+		return INSTANCE;
+	}
 
 	@Override
 	public void onRenderWorldLast(RenderContext context)
@@ -106,5 +119,10 @@ public class InfoViewRenderer implements TweakerMoreIRenderer
 	private void syncBlockEntity(World world, BlockPos blockPos)
 	{
 		// serverDataSyncer do your job here
+	}
+
+	private void onClientTick(MinecraftClient client)
+	{
+		CONTENT_PREVIEWERS.forEach(AbstractInfoViewer::onClientTick);
 	}
 }

@@ -79,4 +79,8 @@ public abstract class AbstractInfoViewer
 	public void onInfoViewStop()
 	{
 	}
+
+	public void onClientTick()
+	{
+	}
 }
