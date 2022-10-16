@@ -61,8 +61,8 @@ TweakerMore提供的新功能
 展示命令方块的指令及其输出
 
 - 分类: 功能
-- 类型: 布尔值
-- 默认值: `true`
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
 
 ![infoViewCommandBlock](assets/infoViewCommandBlock-zh_cn.png)
 
@@ -114,8 +114,8 @@ TweakerMore提供的新功能
 展示红石粉的方块更新顺序
 
 - 分类: 功能
-- 类型: 布尔值
-- 默认值: `true`
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
 
 
 ### 信息展示-命令方块-渲染策略 (infoViewRedstoneDustUpdateOrderRenderStrategy)
@@ -161,8 +161,8 @@ TweakerMore提供的新功能
 它还会估计并显示发生爆炸后你的剩余生命值
 
 - 分类: 功能
-- 类型: 布尔值
-- 默认值: `true`
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
 
 ![infoViewRespawnBlockExplosion](assets/infoViewRespawnBlockExplosion-zh_cn.png)
 

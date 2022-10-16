@@ -73,8 +73,8 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkey INFO_VIEW_RENDERING_KEY = newConfigHotKey("infoViewRenderingKey", "RIGHT_ALT");
 
-	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigBoolean INFO_VIEW_COMMAND_BLOCK = newConfigBoolean("infoViewCommandBlock", true);
+	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW_COMMAND_BLOCK = newConfigBooleanHotkeyed("infoViewCommandBlock");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigInteger INFO_VIEW_COMMAND_BLOCK_MAX_WIDTH = newConfigInteger("infoViewCommandBlockMaxWidth", 200, 10, 2000);
@@ -88,8 +88,8 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble INFO_VIEW_COMMAND_BLOCK_TEXT_SCALE = newConfigDouble("infoViewCommandBlockTextScale", 1, 0.1, 3);
 
-	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigBoolean INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER = newConfigBoolean("infoViewRedstoneDustUpdateOrder", true);
+	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER = newConfigBooleanHotkeyed("infoViewRedstoneDustUpdateOrder");
 
 	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigOptionList INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER_RENDER_STRATEGY = newConfigOptionList("infoViewRedstoneDustUpdateOrderRenderStrategy", InfoViewRenderStrategy.DEFAULT);
@@ -97,8 +97,8 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER_TEXT_ALPHA = newConfigDouble("infoViewRedstoneDustUpdateOrderTextAlpha", 0.8, 0, 1);
 
-	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigBoolean INFO_VIEW_RESPAWN_BLOCK_EXPLOSION = newConfigBoolean("infoViewRespawnBlockExplosion", true);
+	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW_RESPAWN_BLOCK_EXPLOSION = newConfigBooleanHotkeyed("infoViewRespawnBlockExplosion");
 
 	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigOptionList INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_RENDER_STRATEGY = newConfigOptionList("infoViewRespawnBlockExplosionRenderStrategy", InfoViewRenderStrategy.ALWAYS);

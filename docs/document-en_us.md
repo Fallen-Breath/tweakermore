@@ -61,8 +61,8 @@ Using degree measure
 Show the command and the output of command blocks
 
 - Category: Features
-- Type: boolean
-- Default value: `true`
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
 
 ![infoViewCommandBlock](assets/infoViewCommandBlock-en_us.png)
 
@@ -114,8 +114,8 @@ Scale of the displayed text rendered by infoViewCommandBlock
 Show the block update order of the redstone dust
 
 - Category: Features
-- Type: boolean
-- Default value: `true`
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
 
 
 ### infoViewRedstoneDustUpdateOrderRenderST (infoViewRedstoneDustUpdateOrderRenderStrategy)
@@ -161,8 +161,8 @@ Show the explosion damage of respawn blocks located in wrong dimension
 It will also estimate and display your remaining health if it explodes
 
 - Category: Features
-- Type: boolean
-- Default value: `true`
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
 
 ![infoViewRespawnBlockExplosion](assets/infoViewRespawnBlockExplosion-en_us.png)
 
