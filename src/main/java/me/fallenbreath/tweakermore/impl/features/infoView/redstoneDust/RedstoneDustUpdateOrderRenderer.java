@@ -3,6 +3,7 @@ package me.fallenbreath.tweakermore.impl.features.infoView.redstoneDust;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.config.options.listentries.InfoViewTargetStrategy;
 import me.fallenbreath.tweakermore.impl.features.infoView.AbstractInfoViewer;
 import me.fallenbreath.tweakermore.util.render.RenderContext;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
@@ -22,7 +23,11 @@ public class RedstoneDustUpdateOrderRenderer extends AbstractInfoViewer
 {
 	public RedstoneDustUpdateOrderRenderer()
 	{
-		super(TweakerMoreConfigs.INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER, TweakerMoreConfigs.INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER_STRATEGY);
+		super(
+				TweakerMoreConfigs.INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER,
+				TweakerMoreConfigs.INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER_RENDER_STRATEGY,
+				() -> InfoViewTargetStrategy.POINTED
+		);
 	}
 
 	@Override

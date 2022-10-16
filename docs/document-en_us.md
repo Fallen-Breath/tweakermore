@@ -41,9 +41,9 @@ So the block state can be restored when you place blocks with the picked item
 - Default value: `LEFT_ALT`
 
 
-### infoViewBeamConeAngle
+### infoViewBeamAngle
 
-The angle of the cone range used in info view strategy "Beam"
+The angle of the initialed cone used in info view strategy "Beam"
 
 Info of blocks within the given degree to player's slight vector will be shown, just like a flashlight
 
@@ -53,22 +53,7 @@ Using degree measure
 - Type: double
 - Default value: `40.0`
 - Minimum value: `1.0`
-- Maximum value: `90.0`
-
-![infoViewBeamConeAngle](assets/infoViewBeamConeAngle.png)
-
-
-### infoViewBeamDistance
-
-The maximum beam distance of info view strategy "Beam"
-
-- Category: Features
-- Type: double
-- Default value: `5.0`
-- Minimum value: `4.0`
-- Maximum value: `24.0`
-
-![infoViewBeamDistance](assets/infoViewBeamDistance.png)
+- Maximum value: `120.0`
 
 
 ### infoViewCommandBlock
@@ -93,14 +78,24 @@ Maximum width of the displayed text rendered by infoViewCommandBlock
 - Maximum value: `2000`
 
 
-### infoViewCommandBlockStrategy
+### infoViewCommandBlockRenderStrategy
 
-The view rendering strategy of infoViewCommandBlockStrategy
+The view rendering strategy of infoViewCommandBlock
 
 - Category: Features
 - Type: option list
 - Default value: `View hotkey held`
-- Available options: `View hotkey held`, `Pointed`, `Beam`
+- Available options: `View hotkey held`, `Always`
+
+
+### infoViewCommandBlockTargetStrategy
+
+The target selecting strategy of infoViewCommandBlock
+
+- Category: Features
+- Type: option list
+- Default value: `Pointed`
+- Available options: `Pointed`, `Beam`
 
 
 ### infoViewCommandBlockTextScale
@@ -123,14 +118,14 @@ Show the block update order of the redstone dust
 - Default value: `true`
 
 
-### infoViewRedstoneDustUpdateOrderStrategy
+### infoViewRedstoneDustUpdateOrderRenderStrategy
 
 The view rendering strategy of infoViewRedstoneDustUpdateOrder
 
 - Category: Features
 - Type: option list
 - Default value: `View hotkey held`
-- Available options: `View hotkey held`, `Pointed`, `Beam`
+- Available options: `View hotkey held`, `Always`
 
 
 ### infoViewRedstoneDustUpdateOrderTextAlpha
@@ -152,7 +147,7 @@ The rendering hotkey for info viewers
 
 When the info view strategy is "View hotkey held", press to enable rendering
 
-When the info view strategy is "Pointed", it will always rendering ignoring the hotkey's state
+When the info view strategy is "Always", it will always rendering ignoring the hotkey's state
 
 - Category: Features
 - Type: hotkey
@@ -172,14 +167,35 @@ It will also estimate and display your remaining health if it explodes
 ![infoViewRespawnBlockExplosion](assets/infoViewRespawnBlockExplosion-en_us.png)
 
 
-### infoViewRespawnBlockExplosionStrategy
+### infoViewRespawnBlockExplosionRenderStrategy
 
 The view rendering strategy of infoViewRespawnBlockExplosion
 
 - Category: Features
 - Type: option list
 - Default value: `View hotkey held`
-- Available options: `View hotkey held`, `Pointed`, `Beam`
+- Available options: `View hotkey held`, `Always`
+
+
+### infoViewRespawnBlockExplosionTargetStrategy
+
+The target selecting strategy of infoViewRespawnBlockExplosion
+
+- Category: Features
+- Type: option list
+- Default value: `Pointed`
+- Available options: `Pointed`, `Beam`
+
+
+### infoViewTargetDistance
+
+The maximum target distance of info view
+
+- Category: Features
+- Type: double
+- Default value: `8.0`
+- Minimum value: `4.0`
+- Maximum value: `32.0`
 
 
 ### refreshInventory

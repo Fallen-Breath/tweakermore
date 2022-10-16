@@ -41,9 +41,9 @@ TweakerMore提供的新功能
 - 默认值: `LEFT_ALT`
 
 
-### 信息展示光柱渲染策略圆锥角度 (infoViewBeamConeAngle)
+### 信息展示设置-光柱渲染策略角度 (infoViewBeamAngle)
 
-在信息展示渲染策略 "光柱" 中使用的圆锥的角度
+在信息展示渲染策略 "光柱" 中使用的初始圆锥角度
 
 那些位于玩家视线向量给定角度内的方块信息将被渲染，就像手电筒一样
 
@@ -53,22 +53,7 @@ TweakerMore提供的新功能
 - 类型: 实数
 - 默认值: `40.0`
 - 最小值: `1.0`
-- 最大值: `90.0`
-
-![infoViewBeamConeAngle](assets/infoViewBeamConeAngle.png)
-
-
-### 信息展示光柱渲染策略距离 (infoViewBeamDistance)
-
-在信息展示渲染策略 "光柱" 中的光柱最大距离
-
-- 分类: 功能
-- 类型: 实数
-- 默认值: `5.0`
-- 最小值: `4.0`
-- 最大值: `24.0`
-
-![infoViewBeamDistance](assets/infoViewBeamDistance.png)
+- 最大值: `120.0`
 
 
 ### 信息展示-命令方块 (infoViewCommandBlock)
@@ -93,14 +78,24 @@ TweakerMore提供的新功能
 - 最大值: `2000`
 
 
-### 信息展示-命令方块-渲染策略 (infoViewCommandBlockStrategy)
+### 信息展示-命令方块-渲染策略 (infoViewCommandBlockRenderStrategy)
 
 选项infoViewCommandBlock的渲染策略
 
 - 分类: 功能
 - 类型: 选项列表
 - 默认值: `按住展示热键`
-- 可用选项: `按住展示热键`, `指向`, `光柱`
+- 可用选项: `按住展示热键`, `总是`
+
+
+### 信息展示-命令方块-目标策略 (infoViewCommandBlockTargetStrategy)
+
+选项infoViewCommandBlock的目标选择策略
+
+- 分类: 功能
+- 类型: 选项列表
+- 默认值: `指向`
+- 可用选项: `指向`, `光柱`
 
 
 ### 信息展示-命令方块-文本缩放 (infoViewCommandBlockTextScale)
@@ -123,14 +118,14 @@ TweakerMore提供的新功能
 - 默认值: `true`
 
 
-### 信息展示-命令方块-渲染策略 (infoViewRedstoneDustUpdateOrderStrategy)
+### 信息展示-命令方块-渲染策略 (infoViewRedstoneDustUpdateOrderRenderStrategy)
 
 选项infoViewRedstoneDustUpdateOrder的渲染策略
 
 - 分类: 功能
 - 类型: 选项列表
 - 默认值: `按住展示热键`
-- 可用选项: `按住展示热键`, `指向`, `光柱`
+- 可用选项: `按住展示热键`, `总是`
 
 
 ### 信息展示-红石粉更新顺序-文本透明度 (infoViewRedstoneDustUpdateOrderTextAlpha)
@@ -146,13 +141,13 @@ TweakerMore提供的新功能
 - 最大值: `1.0`
 
 
-### 信息展示渲染热键 (infoViewRenderingKey)
+### 信息展示设置-渲染热键 (infoViewRenderingKey)
 
 触发信息展示相关功能的热键
 
 当渲染策略为"按住展示热键"时，按住此热键以启用渲染
 
-当渲染策略为"指向"时，无论该热键是否被按下，都将启用渲染
+当渲染策略为"总是"时，无论该热键是否被按下，都将启用渲染
 
 - 分类: 功能
 - 类型: 热键
@@ -172,14 +167,35 @@ TweakerMore提供的新功能
 ![infoViewRespawnBlockExplosion](assets/infoViewRespawnBlockExplosion-zh_cn.png)
 
 
-### 信息展示-重生方块爆炸伤害-渲染策略 (infoViewRespawnBlockExplosionStrategy)
+### 信息展示-重生方块爆炸伤害-渲染策略 (infoViewRespawnBlockExplosionRenderStrategy)
 
 选项infoViewRespawnBlockExplosion的渲染策略
 
 - 分类: 功能
 - 类型: 选项列表
 - 默认值: `按住展示热键`
-- 可用选项: `按住展示热键`, `指向`, `光柱`
+- 可用选项: `按住展示热键`, `总是`
+
+
+### 信息展示-重生方块爆炸伤害-渲染策略 (infoViewRespawnBlockExplosionTargetStrategy)
+
+选项infoViewRespawnBlockExplosion的目标选择策略
+
+- 分类: 功能
+- 类型: 选项列表
+- 默认值: `指向`
+- 可用选项: `指向`, `光柱`
+
+
+### 信息展示设置-目标距离 (infoViewTargetDistance)
+
+信息展示目标的最大距离
+
+- 分类: 功能
+- 类型: 实数
+- 默认值: `8.0`
+- 最小值: `4.0`
+- 最大值: `32.0`
 
 
 ### 刷新物品栏 (refreshInventory)

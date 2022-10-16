@@ -16,10 +16,7 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.options.*;
-import me.fallenbreath.tweakermore.config.options.listentries.InfoViewStrategy;
-import me.fallenbreath.tweakermore.config.options.listentries.RestrictionType;
-import me.fallenbreath.tweakermore.config.options.listentries.SchematicBlockPlacementRestrictionHintType;
-import me.fallenbreath.tweakermore.config.options.listentries.WeatherOverrideValue;
+import me.fallenbreath.tweakermore.config.options.listentries.*;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.impl.features.copySignTextToClipBoard.SignTextCopier;
 import me.fallenbreath.tweakermore.impl.features.infoView.InfoViewRenderer;
@@ -68,10 +65,10 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigHotkeyWithSwitch CREATIVE_PICK_BLOCK_WITH_STATE = newConfigHotKeyWithSwitch("creativePickBlockWithState", false, "LEFT_ALT", KeybindSettings.MODIFIER_INGAME);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigDouble INFO_VIEW_BEAM_CONE_ANGLE = newConfigDouble("infoViewBeamConeAngle", 40, 1, 90);
+	public static final TweakerMoreConfigDouble INFO_VIEW_BEAM_ANGLE = newConfigDouble("infoViewBeamAngle", 40, 1, 120);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigDouble INFO_VIEW_BEAM_DISTANCE = newConfigDouble("infoViewBeamDistance", 5, 4, 24);
+	public static final TweakerMoreConfigDouble INFO_VIEW_TARGET_DISTANCE = newConfigDouble("infoViewTargetDistance", 8, 4, 32);
 
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkey INFO_VIEW_RENDERING_KEY = newConfigHotKey("infoViewRenderingKey", "RIGHT_ALT");
@@ -83,7 +80,10 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigInteger INFO_VIEW_COMMAND_BLOCK_MAX_WIDTH = newConfigInteger("infoViewCommandBlockMaxWidth", 200, 10, 2000);
 
 	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigOptionList INFO_VIEW_COMMAND_BLOCK_STRATEGY = newConfigOptionList("infoViewCommandBlockStrategy", InfoViewStrategy.DEFAULT);
+	public static final TweakerMoreConfigOptionList INFO_VIEW_COMMAND_BLOCK_RENDER_STRATEGY = newConfigOptionList("infoViewCommandBlockRenderStrategy", InfoViewRenderStrategy.DEFAULT);
+
+	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigOptionList INFO_VIEW_COMMAND_BLOCK_TARGET_STRATEGY = newConfigOptionList("infoViewCommandBlockTargetStrategy", InfoViewTargetStrategy.DEFAULT);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble INFO_VIEW_COMMAND_BLOCK_TEXT_SCALE = newConfigDouble("infoViewCommandBlockTextScale", 1, 0.1, 3);
@@ -92,7 +92,7 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBoolean INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER = newConfigBoolean("infoViewRedstoneDustUpdateOrder", true);
 
 	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigOptionList INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER_STRATEGY = newConfigOptionList("infoViewRedstoneDustUpdateOrderStrategy", InfoViewStrategy.DEFAULT);
+	public static final TweakerMoreConfigOptionList INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER_RENDER_STRATEGY = newConfigOptionList("infoViewRedstoneDustUpdateOrderRenderStrategy", InfoViewRenderStrategy.DEFAULT);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER_TEXT_ALPHA = newConfigDouble("infoViewRedstoneDustUpdateOrderTextAlpha", 0.8, 0, 1);
@@ -101,7 +101,10 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBoolean INFO_VIEW_RESPAWN_BLOCK_EXPLOSION = newConfigBoolean("infoViewRespawnBlockExplosion", true);
 
 	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigOptionList INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_STRATEGY = newConfigOptionList("infoViewRespawnBlockExplosionStrategy", InfoViewStrategy.DEFAULT);
+	public static final TweakerMoreConfigOptionList INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_RENDER_STRATEGY = newConfigOptionList("infoViewRespawnBlockExplosionRenderStrategy", InfoViewRenderStrategy.DEFAULT);
+
+	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigOptionList INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_TARGET_STRATEGY = newConfigOptionList("infoViewRespawnBlockExplosionTargetStrategy", InfoViewTargetStrategy.DEFAULT);
 
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkey REFRESH_INVENTORY = newConfigHotKey("refreshInventory", "", KEYBIND_SETTINGS_ANY);

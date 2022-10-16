@@ -45,7 +45,7 @@ public class InfoViewRenderer implements TweakerMoreIRenderer
 		}
 
 		List<AbstractInfoViewer> viewers = CONTENT_PREVIEWERS.stream().
-				filter(AbstractInfoViewer::isConfigEnabled).
+				filter(AbstractInfoViewer::isRenderEnabled).
 				collect(Collectors.toList());
 		if (viewers.isEmpty())
 		{
@@ -59,15 +59,15 @@ public class InfoViewRenderer implements TweakerMoreIRenderer
 			return;
 		}
 
-		HitResult target = mc.crosshairTarget;
-		BlockPos crossHairPos = target instanceof BlockHitResult ? ((BlockHitResult) target).getBlockPos() : null;
 		Vec3d camPos = mc.player.getCameraPosVec(RenderUtil.tickDelta);
 		Vec3d camVec = mc.player.getRotationVec(RenderUtil.tickDelta);
-		double reach = TweakerMoreConfigs.INFO_VIEW_BEAM_DISTANCE.getDoubleValue();
-		double angle = Math.PI * TweakerMoreConfigs.INFO_VIEW_BEAM_CONE_ANGLE.getDoubleValue() / 2 / 180;
+		double reach = TweakerMoreConfigs.INFO_VIEW_TARGET_DISTANCE.getDoubleValue();
+		double angle = Math.PI * TweakerMoreConfigs.INFO_VIEW_BEAM_ANGLE.getDoubleValue() / 2 / 180;
+		HitResult target = mc.player.rayTrace(reach, RenderUtil.tickDelta, false);
+		BlockPos crossHairPos = target instanceof BlockHitResult ? ((BlockHitResult) target).getBlockPos() : null;
 
 		List<BlockPos> positions = Lists.newArrayList();
-		positions.addAll(PositionUtil.beam(camPos, camPos.add(camVec.normalize().multiply(reach)), angle));
+		positions.addAll(PositionUtil.beam(camPos, camPos.add(camVec.normalize().multiply(reach)), angle, PositionUtil.BeamMode.BEAM));
 		if (crossHairPos != null && !positions.contains(crossHairPos))
 		{
 			positions.add(crossHairPos);
@@ -90,7 +90,7 @@ public class InfoViewRenderer implements TweakerMoreIRenderer
 
 			for (AbstractInfoViewer viewer : viewers)
 			{
-				boolean enabled = viewer.isInBeamRangeViewEnabled() || (isCrossHairPos && viewer.isDirectViewEnabled());
+				boolean enabled = viewer.isValidTarget(isCrossHairPos);
 				if (enabled && viewer.shouldRenderFor(world, blockPos, blockState.get()))
 				{
 					sync.run();

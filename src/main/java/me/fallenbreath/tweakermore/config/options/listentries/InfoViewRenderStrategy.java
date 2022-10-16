@@ -1,12 +1,11 @@
 package me.fallenbreath.tweakermore.config.options.listentries;
 
-public enum InfoViewStrategy implements EnumOptionEntry
+public enum InfoViewRenderStrategy implements EnumOptionEntry
 {
 	HOTKEY_HELD,
-	POINTED,
-	BEAM;
+	ALWAYS;
 
-	public static final InfoViewStrategy DEFAULT = HOTKEY_HELD;
+	public static final InfoViewRenderStrategy DEFAULT = HOTKEY_HELD;
 
 	@Override
 	public EnumOptionEntry[] getAllValues()
@@ -23,6 +22,6 @@ public enum InfoViewStrategy implements EnumOptionEntry
 	@Override
 	public String getTranslationPrefix()
 	{
-		return "tweakermore.list_entry.infoViewStrategy.";
+		return "tweakermore.list_entry.infoViewRenderStrategy.";
 	}
 }

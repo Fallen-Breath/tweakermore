@@ -30,7 +30,11 @@ public class CommandBlockContentRenderer extends AbstractInfoViewer
 {
 	public CommandBlockContentRenderer()
 	{
-		super(TweakerMoreConfigs.INFO_VIEW_COMMAND_BLOCK, TweakerMoreConfigs.INFO_VIEW_COMMAND_BLOCK_STRATEGY);
+		super(
+				TweakerMoreConfigs.INFO_VIEW_COMMAND_BLOCK,
+				TweakerMoreConfigs.INFO_VIEW_COMMAND_BLOCK_RENDER_STRATEGY,
+				TweakerMoreConfigs.INFO_VIEW_COMMAND_BLOCK_TARGET_STRATEGY
+		);
 	}
 
 	@Override

@@ -36,7 +36,11 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 
 	public RespawnBlockExplosionViewer()
 	{
-		super(TweakerMoreConfigs.INFO_VIEW_RESPAWN_BLOCK_EXPLOSION, TweakerMoreConfigs.INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_STRATEGY);
+		super(
+				TweakerMoreConfigs.INFO_VIEW_RESPAWN_BLOCK_EXPLOSION,
+				TweakerMoreConfigs.INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_RENDER_STRATEGY,
+				TweakerMoreConfigs.INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_TARGET_STRATEGY
+		);
 	}
 
 	@Nullable

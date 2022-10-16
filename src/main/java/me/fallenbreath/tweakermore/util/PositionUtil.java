@@ -1,6 +1,7 @@
 package me.fallenbreath.tweakermore.util;
 
 import com.google.common.collect.Lists;
+import it.unimi.dsi.fastutil.longs.Long2DoubleOpenHashMap;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -63,7 +64,7 @@ public class PositionUtil
 		return result;
 	}
 
-	public static Collection<BlockPos> beam(Vec3d startPos, Vec3d endPos, double coneAngle)
+	public static Collection<BlockPos> beam(Vec3d startPos, Vec3d endPos, double coneAngle, BeamMode mode)
 	{
 		Vec3d dir1 = endPos.subtract(startPos).normalize();
 		if (dir1 == Vec3d.ZERO)
@@ -71,15 +72,15 @@ public class PositionUtil
 			return Collections.emptyList();
 		}
 
-		double step = 1 / (1 + Math.sin(coneAngle));
 		double maxLen = startPos.distanceTo(endPos);
-		LongOpenHashSet positions = new LongOpenHashSet();
+		double step = 1 / (1 + Math.sin(coneAngle));
+		Long2DoubleOpenHashMap positions = new Long2DoubleOpenHashMap();
 
 		BlockPos lastMin = null;
 		BlockPos lastMax = null;
-		for (double len = 0; len < maxLen + step; len +=step)
+		for (double len = 0, angle = coneAngle; len < maxLen + step; len += step)
 		{
-			double r = len * Math.sin(coneAngle);
+			double r = len * Math.sin(angle);
 			Vec3d vec3d = startPos.add(dir1.multiply(len));
 			Vec3d a = vec3d.add(-r, -r, -r);
 			Vec3d b = vec3d.add(+r, +r, +r);
@@ -88,6 +89,7 @@ public class PositionUtil
 
 			if (lastMin != null)
 			{
+				// optimize increasing PositionUtil.boxSurface
 				int minX = pos1.getX();
 				int minY = pos1.getY();
 				int minZ = pos1.getZ();
@@ -99,62 +101,97 @@ public class PositionUtil
 				if (minX != lastMin.getX())
 					for (int y = minY; y <= maxY; y++)
 						for (int z = minZ; z <= maxZ; z++)
-							positions.add(new BlockPos(minX, y, z).asLong());
+							positions.putIfAbsent(new BlockPos(minX, y, z).asLong(), angle);
 
 				// maxX changed
 				if (maxX != lastMax.getX())
 					for (int y = minY; y <= maxY; y++)
 						for (int z = minZ; z <= maxZ; z++)
-							positions.add(new BlockPos(maxX, y, z).asLong());
+							positions.putIfAbsent(new BlockPos(maxX, y, z).asLong(), angle);
 
 				// minY changed
 				if (minY != lastMin.getY())
 					for (int x = minX; x <= maxX; x++)
 						for (int z = minZ; z <= maxZ; z++)
-							positions.add(new BlockPos(x, minY, z).asLong());
+							positions.putIfAbsent(new BlockPos(x, minY, z).asLong(), angle);
 
 				// minY changed
 				if (maxY != lastMax.getY())
 					for (int x = minX; x <= maxX; x++)
 						for (int z = minZ; z <= maxZ; z++)
-							positions.add(new BlockPos(x, maxY, z).asLong());
+							positions.putIfAbsent(new BlockPos(x, maxY, z).asLong(), angle);
 
 				// minZ changed
 				if (minZ != lastMin.getZ())
 					for (int x = minX; x <= maxX; x++)
 						for (int y = minY; y <= maxY; y++)
-							positions.add(new BlockPos(x, y, minZ).asLong());
+							positions.putIfAbsent(new BlockPos(x, y, minZ).asLong(), angle);
 
 				// maxZ changed
 				if (maxZ != lastMin.getZ())
 					for (int x = minX; x <= maxX; x++)
 						for (int y = minY; y <= maxY; y++)
-							positions.add(new BlockPos(x, y, maxZ).asLong());
+							positions.putIfAbsent(new BlockPos(x, y, maxZ).asLong(), angle);
 			}
 			else
 			{
-				PositionUtil.boxSurface(pos1, pos2).forEach(pos -> positions.add(pos.asLong()));
+				for (BlockPos pos : PositionUtil.boxSurface(pos1, pos2))
+				{
+					positions.putIfAbsent(pos.asLong(), angle);
+				}
 			}
 
 			lastMin = pos1;
 			lastMax = pos2;
+
+			switch (mode)
+			{
+				case BEAM:
+					angle = coneAngle * Math.max(1 - len / maxLen, 0);
+					break;
+				case CONE:
+					angle = coneAngle;
+					break;
+			}
 		}
 
 		List<BlockPos> result = Lists.newArrayList();
-		for (Long l : positions)
-		{
+		positions.forEach((l, a) -> {
 			BlockPos pos = BlockPos.fromLong(l);
 			Vec3d vec3d = PositionUtil.centerOf(pos).subtract(startPos);
 			if (vec3d.length() <= maxLen)
 			{
 				Vec3d dir2 = vec3d.normalize();
 				double cos = dir2.dotProduct(dir1);
-				if (cos >= Math.cos(coneAngle))
+				if (cos >= Math.cos(a))
 				{
 					result.add(pos);
 				}
 			}
-		}
+		});
 		return result;
+	}
+
+	public enum BeamMode
+	{
+		/**
+		 *       / ---
+		 *   / -------
+		 * x ---------
+		 *   \ -------
+		 *       \ ---
+		 */
+		BEAM,
+
+		/**
+		 *       /-
+		 *     /---
+		 *   /-----
+		 * x ------
+		 *   \-----
+		 *     \---
+		 *       \-
+		 */
+		CONE
 	}
 }

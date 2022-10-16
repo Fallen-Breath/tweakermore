@@ -3,7 +3,8 @@ package me.fallenbreath.tweakermore.impl.features.infoView;
 import fi.dy.masa.malilib.config.IConfigBoolean;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigOptionList;
-import me.fallenbreath.tweakermore.config.options.listentries.InfoViewStrategy;
+import me.fallenbreath.tweakermore.config.options.listentries.InfoViewRenderStrategy;
+import me.fallenbreath.tweakermore.config.options.listentries.InfoViewTargetStrategy;
 import me.fallenbreath.tweakermore.util.render.RenderContext;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -15,16 +16,22 @@ import java.util.function.Supplier;
 public abstract class AbstractInfoViewer
 {
 	private final IConfigBoolean switchConfig;
-	private final Supplier<InfoViewStrategy> strategySupplier;
+	private final Supplier<InfoViewRenderStrategy> renderStrategySupplier;
+	private final Supplier<InfoViewTargetStrategy> targetStrategySupplier;
 
-	public AbstractInfoViewer(IConfigBoolean switchConfig, Supplier<InfoViewStrategy> strategySupplier)
+	public AbstractInfoViewer(IConfigBoolean switchConfig, Supplier<InfoViewRenderStrategy> renderStrategySupplier, Supplier<InfoViewTargetStrategy> targetStrategySupplier)
 	{
 		this.switchConfig = switchConfig;
-		this.strategySupplier = strategySupplier;
+		this.renderStrategySupplier = renderStrategySupplier;
+		this.targetStrategySupplier = targetStrategySupplier;
 	}
-	public AbstractInfoViewer(IConfigBoolean switchConfig, TweakerMoreConfigOptionList strategyOption)
+	public AbstractInfoViewer(IConfigBoolean switchConfig, TweakerMoreConfigOptionList renderStrategyOption, TweakerMoreConfigOptionList targetStrategyOption)
 	{
-		this(switchConfig, () -> (InfoViewStrategy)strategyOption.getOptionListValue());
+		this(switchConfig, () -> (InfoViewRenderStrategy)renderStrategyOption.getOptionListValue(), () -> (InfoViewTargetStrategy)targetStrategyOption.getOptionListValue());
+	}
+	public AbstractInfoViewer(IConfigBoolean switchConfig, TweakerMoreConfigOptionList renderStrategyOption, Supplier<InfoViewTargetStrategy> targetStrategySupplier)
+	{
+		this(switchConfig, () -> (InfoViewRenderStrategy)renderStrategyOption.getOptionListValue(), targetStrategySupplier);
 	}
 
 	public abstract void render(RenderContext context, World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity);
@@ -38,30 +45,30 @@ public abstract class AbstractInfoViewer
 	 */
 	public abstract boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState);
 
-	public boolean isConfigEnabled()
+	public boolean isRenderEnabled()
 	{
-		return this.switchConfig.getBooleanValue();
-	}
-
-	public boolean isDirectViewEnabled()
-	{
-		if (this.isConfigEnabled())
+		if (this.switchConfig.getBooleanValue())
 		{
-			switch (this.strategySupplier.get())
+			switch (this.renderStrategySupplier.get())
 			{
 				case HOTKEY_HELD:
 					return TweakerMoreConfigs.INFO_VIEW_RENDERING_KEY.isKeybindHeld();
-				case POINTED:
+				case ALWAYS:
 					return true;
-				case BEAM:
-					return false;
 			}
 		}
 		return false;
 	}
 
-	public boolean isInBeamRangeViewEnabled()
+	public boolean isValidTarget(boolean crossHairPointed)
 	{
-		return this.isConfigEnabled() && this.strategySupplier.get() == InfoViewStrategy.BEAM;
+		switch (this.targetStrategySupplier.get())
+		{
+			case POINTED:
+				return crossHairPointed;
+			case BEAM:
+				return true;
+		}
+		return false;
 	}
 }
