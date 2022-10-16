@@ -96,11 +96,12 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 		TemporaryBlockReplacer replacer = new TemporaryBlockReplacer(clientWorld);
 		handler.addBlocksToRemove(replacer);
 		replacer.removeBlocks();
-		DamageCalculator calculator = DamageCalculator.explosion(explosionCenter, handler.getExplosionPower(), mc.player).
-				applyDifficulty(world.getDifficulty()).
-				applyArmorAndResistanceAndEnchantment();
+		DamageCalculator calculator = DamageCalculator.explosion(explosionCenter, handler.getExplosionPower(), mc.player);
 		replacer.restoreBlocks();
 
+		calculator.applyDifficulty(world.getDifficulty());
+		float baseAmount = calculator.getDamageAmount();
+		calculator.applyArmorAndResistanceAndEnchantment();
 		float amount = calculator.getDamageAmount();
 		calculator.applyAbsorption();
 		float remainingHealth = calculator.getEntityHealthAfterDeal();
@@ -111,7 +112,7 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 				new Formatting[]{Formatting.RED, Formatting.GOLD}
 		);
 		Formatting lineFmt = stagedColor(
-				amount,
+				baseAmount,
 				new float[]{1E-6F, DamageUtil.modifyDamageForDifficulty(1.0F, world.getDifficulty(), calculator.getDamageSource())},
 				new Formatting[]{Formatting.DARK_GRAY, Formatting.GRAY}
 		);
