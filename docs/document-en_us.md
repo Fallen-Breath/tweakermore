@@ -78,7 +78,7 @@ Maximum width of the displayed text rendered by infoViewCommandBlock
 - Maximum value: `2000`
 
 
-### infoViewCommandBlockRenderStrategy
+### infoViewCommandBlockRenderST (infoViewCommandBlockRenderStrategy)
 
 The view rendering strategy of infoViewCommandBlock
 
@@ -88,7 +88,7 @@ The view rendering strategy of infoViewCommandBlock
 - Available options: `View hotkey held`, `Always`
 
 
-### infoViewCommandBlockTargetStrategy
+### infoViewCommandBlockTargetST (infoViewCommandBlockTargetStrategy)
 
 The target selecting strategy of infoViewCommandBlock
 
@@ -118,7 +118,7 @@ Show the block update order of the redstone dust
 - Default value: `true`
 
 
-### infoViewRedstoneDustUpdateOrderRenderStrategy
+### infoViewRedstoneDustUpdateOrderRenderST (infoViewRedstoneDustUpdateOrderRenderStrategy)
 
 The view rendering strategy of infoViewRedstoneDustUpdateOrder
 
@@ -167,23 +167,23 @@ It will also estimate and display your remaining health if it explodes
 ![infoViewRespawnBlockExplosion](assets/infoViewRespawnBlockExplosion-en_us.png)
 
 
-### infoViewRespawnBlockExplosionRenderStrategy
+### infoViewRespawnBlockExplosionRenderST (infoViewRespawnBlockExplosionRenderStrategy)
 
 The view rendering strategy of infoViewRespawnBlockExplosion
 
 - Category: Features
 - Type: option list
-- Default value: `View hotkey held`
+- Default value: `Always`
 - Available options: `View hotkey held`, `Always`
 
 
-### infoViewRespawnBlockExplosionTargetStrategy
+### infoViewRespawnBlockExplosionTargetST (infoViewRespawnBlockExplosionTargetStrategy)
 
 The target selecting strategy of infoViewRespawnBlockExplosion
 
 - Category: Features
 - Type: option list
-- Default value: `Pointed`
+- Default value: `Beam`
 - Available options: `Pointed`, `Beam`
 
 
@@ -414,7 +414,7 @@ Health threshold to disconnect can be set via safeAfkHealthThreshold
 - Default value: *no hotkey*, `false`
 
 
-### tweakmSchematicBlockPlacementRestriction
+### tweakmSchematicBlockPlaceRS (tweakmSchematicBlockPlacementRestriction)
 
 Similar to litematica's placementRestriction option, it cancels block placement when the placement doesn't match current schematic
 
@@ -433,7 +433,7 @@ Does not work with litematica's or easy place mode
     - Litematica (`litematica`)
 
 
-### tweakmSchematicBlockPlacementRestrictionHint
+### tweakmSchematicBlockPlacementRSHint (tweakmSchematicBlockPlacementRestrictionHint)
 
 Switch for displaying hint message when option tweakmSchematicBlockPlacementRestriction cancels a placement
 
@@ -443,7 +443,7 @@ Switch for displaying hint message when option tweakmSchematicBlockPlacementRest
 - Available options: `All`, `Wrong item only`, `Never`
 
 
-### tweakmSchematicBlockPlacementRestrictionMargin
+### tweakmSchematicBlockPlacementRSMargin (tweakmSchematicBlockPlacementRestrictionMargin)
 
 The no-block-placement protection margin length from schematic boxes
 
@@ -464,7 +464,7 @@ A shortcut option to enable/disable the following options at the same time:
 
 - tweakmAutoPickSchematicBlock
 
-- tweakmSchematicBlockPlacementRestriction
+- tweakmSchematicBlockPlaceRS (tweakmSchematicBlockPlacementRestriction)
 
 With these options enabled, you can have a not-cheaty version of "easy place" from litematica,
 

@@ -101,10 +101,10 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBoolean INFO_VIEW_RESPAWN_BLOCK_EXPLOSION = newConfigBoolean("infoViewRespawnBlockExplosion", true);
 
 	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigOptionList INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_RENDER_STRATEGY = newConfigOptionList("infoViewRespawnBlockExplosionRenderStrategy", InfoViewRenderStrategy.DEFAULT);
+	public static final TweakerMoreConfigOptionList INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_RENDER_STRATEGY = newConfigOptionList("infoViewRespawnBlockExplosionRenderStrategy", InfoViewRenderStrategy.ALWAYS);
 
 	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigOptionList INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_TARGET_STRATEGY = newConfigOptionList("infoViewRespawnBlockExplosionTargetStrategy", InfoViewTargetStrategy.DEFAULT);
+	public static final TweakerMoreConfigOptionList INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_TARGET_STRATEGY = newConfigOptionList("infoViewRespawnBlockExplosionTargetStrategy", InfoViewTargetStrategy.BEAM);
 
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkey REFRESH_INVENTORY = newConfigHotKey("refreshInventory", "", KEYBIND_SETTINGS_ANY);
