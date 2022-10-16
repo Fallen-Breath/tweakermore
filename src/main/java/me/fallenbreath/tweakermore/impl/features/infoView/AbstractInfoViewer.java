@@ -34,8 +34,6 @@ public abstract class AbstractInfoViewer
 		this(switchConfig, () -> (InfoViewRenderStrategy)renderStrategyOption.getOptionListValue(), targetStrategySupplier);
 	}
 
-	public abstract void render(RenderContext context, World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity);
-
 	/**
 	 * If this viewer works for and should render for given context
 	 *
@@ -46,6 +44,8 @@ public abstract class AbstractInfoViewer
 	public abstract boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState);
 
 	public abstract boolean requireBlockEntitySyncing();
+
+	public abstract void render(RenderContext context, World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity);
 
 	public boolean isRenderEnabled()
 	{

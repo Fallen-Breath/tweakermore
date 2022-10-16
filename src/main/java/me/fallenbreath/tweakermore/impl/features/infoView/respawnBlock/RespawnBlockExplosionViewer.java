@@ -67,6 +67,25 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 	}
 
 	@Override
+	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState)
+	{
+		for (BlockHandlerProvider factory : BLOCK_HANDLER_FACTORIES)
+		{
+			if (factory.construct(world, blockPos, blockState).isValid())
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean requireBlockEntitySyncing()
+	{
+		return false;
+	}
+
+	@Override
 	public void render(RenderContext context, World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity)
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
@@ -152,25 +171,6 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 					seeThrough().shadow().
 					render();
 		}
-	}
-
-	@Override
-	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState)
-	{
-		for (BlockHandlerProvider factory : BLOCK_HANDLER_FACTORIES)
-		{
-			if (factory.construct(world, blockPos, blockState).isValid())
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public boolean requireBlockEntitySyncing()
-	{
-		return false;
 	}
 
 	@Override
