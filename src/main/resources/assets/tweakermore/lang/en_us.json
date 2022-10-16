@@ -378,6 +378,8 @@
 
   "tweakermore.impl.shulkerTooltipHintBuilder.more": "... %1$sx",
 
+  "tweakermore.util.mod.carpet": "Fabric Carpet",
+  "tweakermore.util.mod.carpet-tis-addition": "Carpet TIS Addition",
   "tweakermore.util.mod.compactchat": "CompactChat",
   "tweakermore.util.mod.customskinloader": "CustomSkinLoader",
   "tweakermore.util.mod.easiercrafting": "EasierCrafting",
