@@ -211,6 +211,10 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 		);
 		this.addButton(triggerButton, (button, mouseButton) -> {
 			IHotkeyCallback callback = ((KeybindMultiAccessor)keybind).getCallback();
+			if (callback == null)
+			{
+				return;
+			}
 			KeyAction activateOn = keybind.getSettings().getActivateOn();
 			if (activateOn == KeyAction.BOTH || activateOn == KeyAction.PRESS)
 			{
