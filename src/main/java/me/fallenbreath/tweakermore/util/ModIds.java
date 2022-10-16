@@ -22,8 +22,10 @@ public class ModIds
 	public static final String wheres_my_chat_history = "wmch";
 
 	// others
+	public static final String carpet_tis_addition = "carpet-tis-addition";
 	public static final String easier_crafting = "easiercrafting";
 	public static final String extra_player_renderer = "explayerenderer";
+	public static final String fabric_carpet = "carpet";
 	public static final String iris = "iris";
 	public static final String optifine = "optifabric";
 	public static final String replay_mod = "replaymod";

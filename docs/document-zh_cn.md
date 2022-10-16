@@ -846,6 +846,27 @@ TweakerMore提供的新功能
 - 最大值: `2.0`
 
 
+### 服务端mspt指标统计类型 (serverMsptMetricsStatisticType)
+
+调试界面中服务端mspt指标统计的类型
+
+设置为"游戏刻"以使用原版表现
+
+- 分类: MC修改
+- 类型: 选项列表
+- 默认值: `MSPT (原版)`
+- 可用选项: `MSPT (原版)`, `每秒MSPT平均值`, `每秒MSPT最大值`, `每分钟MSPT平均值`, `每分钟MSPT最大值`
+
+
+### 服务端mspt指标统计类型循环 (serverMsptMetricsStatisticTypeCycle)
+
+一个快速循环切换选项serverMsptMetricsStatisticType的值的快捷键
+
+- 分类: MC修改
+- 类型: 热键
+- 默认值: *无快捷键*
+
+
 ### 潜影盒物品附魔提示 (shulkerTooltipEnchantmentHint)
 
 在潜影盒物品的工具提示中显示物品的附魔

@@ -49,6 +49,12 @@
   "tweakermore.config.refreshInventory.comment": "Request a player inventory refresh to the server\nIt's done by simulating an invalid inventory dragging operation,\nso the server think that the inventory is out of sync then do resync",
   "tweakermore.config.safeAfkHealthThreshold": "safeAfkHealthThreshold",
   "tweakermore.config.safeAfkHealthThreshold.comment": "The threshold of the health of the player which triggers the safe afk disconnecting feature\nDisconnect when player takes damage and its health becomes less than the given value",
+  "tweakermore.config.serverMsptMetricsStatisticType": "serverMsptMetricsStatisticType",
+  "tweakermore.config.serverMsptMetricsStatisticType.comment": "Type of the server mspt metrics statistic display in debug hud\nSet to \"Game tick\" to keep vanilla behavior",
+  "tweakermore.config.serverMsptMetricsStatisticTypeCycle": "serverMsptMetricsStatisticTypeCycle",
+  "tweakermore.config.serverMsptMetricsStatisticTypeCycle.comment": "A hotkey to quickly cycle forward the value of serverMsptMetricsStatisticType",
+  "tweakermore.config.serverMsptMetricsStatisticTypeCycle.message.cycled": "Cycled statistic type to %1$s",
+  "tweakermore.config.serverMsptMetricsStatisticTypeCycle.message.hint": "Statistic type: %1$s",
   "tweakermore.config.tweakmAutoCleanContainer": "tweakmAutoCleanContainer",
   "tweakermore.config.tweakmAutoCleanContainer.comment": "Automatically drops everything in the opened container\nand then close the container",
   "tweakermore.config.tweakmAutoCleanContainer.pretty_name": "Auto Clean Container",
@@ -313,6 +319,12 @@
 
   "tweakermore.list_entry.infoViewTargetStrategy.pointed": "Pointed",
   "tweakermore.list_entry.infoViewTargetStrategy.beam": "Beam",
+
+  "tweakermore.list_entry.serverMsptMetricsStatistic.game_tick": "MSPT (vanilla)",
+  "tweakermore.list_entry.serverMsptMetricsStatistic.second_avg": "Average MSPT per second",
+  "tweakermore.list_entry.serverMsptMetricsStatistic.second_max": "Maximum MSPT per second",
+  "tweakermore.list_entry.serverMsptMetricsStatistic.minute_avg": "Average MSPT per minute",
+  "tweakermore.list_entry.serverMsptMetricsStatistic.minute_max": "Maximum MSPT per minute",
 
   "// GUI": "================================================",
 

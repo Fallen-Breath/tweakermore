@@ -49,6 +49,12 @@
   "tweakermore.config.refreshInventory.comment": "向服务端请求一次玩家物品栏刷新\n它将模拟一次无效的物品栏拖动操作，\n让服务器认为玩家的物品栏已失去同步并刷新玩家物品栏",
   "tweakermore.config.safeAfkHealthThreshold": "安全挂机血量阈值",
   "tweakermore.config.safeAfkHealthThreshold.comment": "触发安全挂机功能的玩家的血量阈值\n当玩家受到伤害且血量小于给定值时断开连接",
+  "tweakermore.config.serverMsptMetricsStatisticType": "服务端mspt指标统计类型",
+  "tweakermore.config.serverMsptMetricsStatisticType.comment": "调试界面中服务端mspt指标统计的类型\n设置为\"游戏刻\"以使用原版表现",
+  "tweakermore.config.serverMsptMetricsStatisticTypeCycle": "服务端mspt指标统计类型循环",
+  "tweakermore.config.serverMsptMetricsStatisticTypeCycle.comment": "一个快速循环切换选项serverMsptMetricsStatisticType的值的快捷键",
+  "tweakermore.config.serverMsptMetricsStatisticTypeCycle.message.cycled": "已将统计类型切换至%1$s",
+  "tweakermore.config.serverMsptMetricsStatisticTypeCycle.message.hint": "统计类型: %1$s",
   "tweakermore.config.tweakmAutoCleanContainer": "自动清空容器",
   "tweakermore.config.tweakmAutoCleanContainer.comment": "打开容器后，自动将容器内的所有物品扔出\n然后关闭容器",
   "tweakermore.config.tweakmAutoCleanContainer.pretty_name": "自动清空容器",
@@ -313,6 +319,12 @@
 
   "tweakermore.list_entry.infoViewTargetStrategy.pointed": "指向",
   "tweakermore.list_entry.infoViewTargetStrategy.beam": "光柱",
+
+  "tweakermore.list_entry.serverMsptMetricsStatistic.game_tick": "MSPT (原版)",
+  "tweakermore.list_entry.serverMsptMetricsStatistic.second_avg": "每秒MSPT平均值",
+  "tweakermore.list_entry.serverMsptMetricsStatistic.second_max": "每秒MSPT最大值",
+  "tweakermore.list_entry.serverMsptMetricsStatistic.minute_avg": "每分钟MSPT平均值",
+  "tweakermore.list_entry.serverMsptMetricsStatistic.minute_max": "每分钟MSPT最大值",
 
   "// GUI": "================================================",
 

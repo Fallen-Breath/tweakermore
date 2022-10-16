@@ -846,6 +846,27 @@ Scale the scoreboard side bar hud with given factor
 - Maximum value: `2.0`
 
 
+### serverMsptMetricsStatisticType
+
+Type of the server mspt metrics statistic display in debug hud
+
+Set to "Game tick" to keep vanilla behavior
+
+- Category: MC Tweaks
+- Type: option list
+- Default value: `MSPT (vanilla)`
+- Available options: `MSPT (vanilla)`, `Average MSPT per second`, `Maximum MSPT per second`, `Average MSPT per minute`, `Maximum MSPT per minute`
+
+
+### serverMsptMetricsStatisticTypeCycle
+
+A hotkey to quickly cycle forward the value of serverMsptMetricsStatisticType
+
+- Category: MC Tweaks
+- Type: hotkey
+- Default value: *no hotkey*
+
+
 ### shulkerTooltipEnchantmentHint
 
 Display enchantments of items in the tooltip of shulker box items
