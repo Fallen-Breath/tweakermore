@@ -120,12 +120,18 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 
 		BaseText line1 = Messenger.tr("tweakermore.config.infoViewRespawnBlockExplosion.message.damage", float2text.apply(amount));
 		BaseText line2 = Messenger.c("-> ", float2text.apply(remainingHealth), "HP");
-		TextRenderer.create().at(explosionCenter).
-				addLine(lineModifier.apply(line1)).
-				addLine(lineModifier.apply(line2)).
-				bgColor(0x1F000000).
-				seeThrough().shadow().
-				render();
+		double alpha = TweakerMoreConfigs.INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_TEXT_ALPHA.getDoubleValue();
+		if (alpha > 0)
+		{
+			int textAlphaBits = ((int)Math.round(0xFF * alpha) & 0xFF) << 24;
+			int bgAlphaBits = ((int)Math.round(0x1F * alpha) & 0xFF) << 24;
+			TextRenderer.create().at(explosionCenter).
+					addLine(lineModifier.apply(line1)).
+					addLine(lineModifier.apply(line2)).
+					color(0x00FFFFFF | textAlphaBits, bgAlphaBits).
+					seeThrough().shadow().
+					render();
+		}
 	}
 
 	@Override

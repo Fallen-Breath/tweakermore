@@ -118,7 +118,7 @@ TweakerMore提供的新功能
 - 默认值: *无快捷键*, `false`
 
 
-### 信息展示-命令方块-渲染策略 (infoViewRedstoneDustUpdateOrderRenderStrategy)
+### 信息展示-红石粉更新顺序-渲染策略 (infoViewRedstoneDustUpdateOrderRenderStrategy)
 
 选项infoViewRedstoneDustUpdateOrder的渲染策略
 
@@ -130,9 +130,7 @@ TweakerMore提供的新功能
 
 ### 信息展示-红石粉更新顺序-文本透明度 (infoViewRedstoneDustUpdateOrderTextAlpha)
 
-用于渲染红石粉方块更新顺序文本的透明度
-
-参见选项infoViewRedstoneDustUpdateOrder
+用于渲染infoViewRedstoneDustUpdateOrder文本的透明度
 
 - 分类: 功能
 - 类型: 实数
@@ -177,7 +175,7 @@ TweakerMore提供的新功能
 - 可用选项: `按住展示热键`, `总是`
 
 
-### 信息展示-重生方块爆炸伤害-渲染策略 (infoViewRespawnBlockExplosionTargetStrategy)
+### 信息展示-重生方块爆炸伤害-目标选择策略 (infoViewRespawnBlockExplosionTargetStrategy)
 
 选项infoViewRespawnBlockExplosion的目标选择策略
 
@@ -185,6 +183,17 @@ TweakerMore提供的新功能
 - 类型: 选项列表
 - 默认值: `光柱`
 - 可用选项: `指向`, `光柱`
+
+
+### 信息展示-重生方块爆炸伤害-文本透明度 (infoViewRespawnBlockExplosionTextAlpha)
+
+用于渲染infoViewRespawnBlockExplosion文本的透明度
+
+- 分类: 功能
+- 类型: 实数
+- 默认值: `0.8`
+- 最小值: `0.0`
+- 最大值: `1.0`
 
 
 ### 信息展示设置-目标距离 (infoViewTargetDistance)

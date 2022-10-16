@@ -130,9 +130,7 @@ The view rendering strategy of infoViewRedstoneDustUpdateOrder
 
 ### infoViewRedstoneDustUpdateOrderTextAlpha
 
-The alpha value of the floating text used in redstone dust update order displaying
-
-See also: option infoViewRedstoneDustUpdateOrder
+The alpha value of the floating text used in infoViewRedstoneDustUpdateOrder
 
 - Category: Features
 - Type: double
@@ -185,6 +183,17 @@ The target selecting strategy of infoViewRespawnBlockExplosion
 - Type: option list
 - Default value: `Beam`
 - Available options: `Pointed`, `Beam`
+
+
+### infoViewRespawnBlockExplosionTextAlpha
+
+The alpha value of the floating text used in infoViewRespawnBlockExplosion
+
+- Category: Features
+- Type: double
+- Default value: `0.8`
+- Minimum value: `0.0`
+- Maximum value: `1.0`
 
 
 ### infoViewTargetDistance
