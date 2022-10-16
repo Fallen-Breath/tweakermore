@@ -115,7 +115,7 @@ public class InfoViewRenderer implements TweakerMoreIRenderer, IClientTickHandle
 				}
 			}
 		}
-		viewers.forEach(AbstractInfoViewer::onInfoViewStop);
+		viewers.forEach(AbstractInfoViewer::onInfoViewEnd);
 	}
 
 	@SuppressWarnings("unused")
