@@ -37,6 +37,12 @@ public class RedstoneDustUpdateOrderRenderer extends AbstractInfoViewer
 	}
 
 	@Override
+	public boolean requireBlockEntityFetching()
+	{
+		return false;
+	}
+
+	@Override
 	public void render(RenderContext context, World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity)
 	{
 		int alphaBits = (int)Math.round(255 * TweakerMoreConfigs.INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER_TEXT_ALPHA.getDoubleValue());

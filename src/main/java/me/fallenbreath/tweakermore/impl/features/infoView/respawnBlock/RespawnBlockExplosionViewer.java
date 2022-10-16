@@ -168,6 +168,12 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 	}
 
 	@Override
+	public boolean requireBlockEntityFetching()
+	{
+		return false;
+	}
+
+	@Override
 	public void onInfoViewStart()
 	{
 		this.renderedKeys.clear();

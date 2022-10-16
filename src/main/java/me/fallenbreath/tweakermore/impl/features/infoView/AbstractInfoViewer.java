@@ -45,6 +45,8 @@ public abstract class AbstractInfoViewer
 	 */
 	public abstract boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState);
 
+	public abstract boolean requireBlockEntityFetching();
+
 	public boolean isRenderEnabled()
 	{
 		if (this.switchConfig.getBooleanValue())

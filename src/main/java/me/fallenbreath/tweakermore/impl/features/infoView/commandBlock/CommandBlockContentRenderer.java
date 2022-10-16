@@ -44,6 +44,12 @@ public class CommandBlockContentRenderer extends AbstractInfoViewer
 	}
 
 	@Override
+	public boolean requireBlockEntityFetching()
+	{
+		return true;
+	}
+
+	@Override
 	public void render(RenderContext context, World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity)
 	{
 		if (!(blockEntity instanceof CommandBlockBlockEntity))
