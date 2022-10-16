@@ -9,10 +9,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class RespawnAnchorHandler implements BlockHandler
+public class RespawnAnchorHandler extends AbstractBlockHandler
 {
+	public RespawnAnchorHandler(World world, BlockPos blockPos, BlockState blockState)
+	{
+		super(world, blockPos, blockState);
+	}
+
 	@Override
-	public boolean worksFor(World world, BlockPos blockPos, BlockState blockState)
+	public boolean isValid()
 	{
 		// ref: net.minecraft.block.RespawnAnchorBlock.onUse
 		if (blockState.getBlock() instanceof RespawnAnchorBlock)
@@ -23,15 +28,21 @@ public class RespawnAnchorHandler implements BlockHandler
 	}
 
 	@Override
-	public void addBlocksToRemove(World world, BlockPos blockPos, BlockState blockState, TemporaryBlockReplacer replacer)
+	public Vec3d getExplosionCenter()
 	{
-		replacer.add(blockPos, Blocks.AIR.getDefaultState());
+		return PositionUtil.centerOf(this.blockPos);
 	}
 
 	@Override
-	public Vec3d getExplosionCenter(BlockPos blockPos)
+	public BlockPos getDeduplicationKey()
 	{
-		return PositionUtil.centerOf(blockPos);
+		return this.blockPos;
+	}
+
+	@Override
+	public void addBlocksToRemove(TemporaryBlockReplacer replacer)
+	{
+		replacer.add(this.blockPos, Blocks.AIR.getDefaultState());
 	}
 
 	@Override

@@ -80,6 +80,7 @@ public class InfoViewRenderer implements TweakerMoreIRenderer
 		Collections.reverse(posPairs);
 
 		ChunkCachedWorldAccess chunkCache = new ChunkCachedWorldAccess(world);
+		viewers.forEach(AbstractInfoViewer::onInfoViewStart);
 		for (Pair<BlockPos, Double> pair : posPairs)
 		{
 			BlockPos blockPos = pair.getFirst();
@@ -98,6 +99,7 @@ public class InfoViewRenderer implements TweakerMoreIRenderer
 				}
 			}
 		}
+		viewers.forEach(AbstractInfoViewer::onInfoViewStop);
 	}
 
 	@SuppressWarnings("unused")

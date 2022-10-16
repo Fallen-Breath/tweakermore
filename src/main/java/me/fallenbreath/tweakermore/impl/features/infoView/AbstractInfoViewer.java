@@ -71,4 +71,12 @@ public abstract class AbstractInfoViewer
 		}
 		return false;
 	}
+
+	public void onInfoViewStart()
+	{
+	}
+
+	public void onInfoViewStop()
+	{
+	}
 }

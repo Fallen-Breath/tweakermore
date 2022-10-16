@@ -1,14 +1,15 @@
 package me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock;
 
 import com.google.common.collect.ImmutableList;
+import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.AbstractInfoViewer;
+import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.handler.AbstractBlockHandler;
 import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.handler.BedHandler;
-import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.handler.BlockHandler;
 import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.handler.RespawnAnchorHandler;
-import me.fallenbreath.tweakermore.util.damage.DamageCalculator;
 import me.fallenbreath.tweakermore.util.Messenger;
 import me.fallenbreath.tweakermore.util.TemporaryBlockReplacer;
+import me.fallenbreath.tweakermore.util.damage.DamageCalculator;
 import me.fallenbreath.tweakermore.util.damage.DamageUtil;
 import me.fallenbreath.tweakermore.util.render.RenderContext;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
@@ -29,10 +30,18 @@ import java.util.function.Function;
 
 public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 {
-	private static final List<BlockHandler> BLOCK_HANDLERS = ImmutableList.of(
-			new BedHandler(),
-			new RespawnAnchorHandler()
+	@FunctionalInterface
+	private interface BlockHandlerProvider
+	{
+		AbstractBlockHandler construct(World world, BlockPos blockPos, BlockState blockState);
+	}
+
+	private static final List<BlockHandlerProvider> BLOCK_HANDLER_FACTORIES = ImmutableList.of(
+			BedHandler::new,
+			RespawnAnchorHandler::new
 	);
+
+	private final LongOpenHashSet renderedKeys = new LongOpenHashSet();
 
 	public RespawnBlockExplosionViewer()
 	{
@@ -68,19 +77,24 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 		{
 			return;
 		}
-		Optional<BlockHandler> optionalBlockHandler = BLOCK_HANDLERS.stream().
-				filter(handler -> handler.worksFor(world, blockPos, blockState)).
+		Optional<AbstractBlockHandler> optionalBlockHandler = BLOCK_HANDLER_FACTORIES.stream().
+				map(fac -> fac.construct(world, blockPos, blockState)).
+				filter(AbstractBlockHandler::isValid).
 				findFirst();
 		if (!optionalBlockHandler.isPresent())
 		{
 			return;
 		}
 
-		BlockHandler handler = optionalBlockHandler.get();
-		Vec3d explosionCenter = handler.getExplosionCenter(blockPos);
+		AbstractBlockHandler handler = optionalBlockHandler.get();
+		if (!this.renderedKeys.add(handler.getDeduplicationKey().asLong()))
+		{
+			return;
+		}
+		Vec3d explosionCenter = handler.getExplosionCenter();
 
 		TemporaryBlockReplacer replacer = new TemporaryBlockReplacer(clientWorld);
-		handler.addBlocksToRemove(clientWorld, blockPos, blockState, replacer);
+		handler.addBlocksToRemove(replacer);
 		replacer.removeBlocks();
 		DamageCalculator calculator = DamageCalculator.explosion(explosionCenter, handler.getExplosionPower(), mc.player).
 				applyDifficulty(world.getDifficulty()).
@@ -125,10 +139,12 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 		{
 			int textAlphaBits = ((int)Math.round(0xFF * alpha) & 0xFF) << 24;
 			int bgAlphaBits = ((int)Math.round(0x1F * alpha) & 0xFF) << 24;
-			TextRenderer.create().at(explosionCenter).
+			//noinspection PointlessBitwiseExpression
+			TextRenderer.create().
+					at(handler.getTextPosition()).
 					addLine(lineModifier.apply(line1)).
 					addLine(lineModifier.apply(line2)).
-					color(0x00FFFFFF | textAlphaBits, bgAlphaBits).
+					color(0x00FFFFFF | textAlphaBits, 0x00000000 | bgAlphaBits).
 					seeThrough().shadow().
 					render();
 		}
@@ -137,13 +153,19 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 	@Override
 	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState)
 	{
-		for (BlockHandler handler : BLOCK_HANDLERS)
+		for (BlockHandlerProvider factory : BLOCK_HANDLER_FACTORIES)
 		{
-			if (handler.worksFor(world, blockPos, blockState))
+			if (factory.construct(world, blockPos, blockState).isValid())
 			{
 				return true;
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void onInfoViewStart()
+	{
+		this.renderedKeys.clear();
 	}
 }
