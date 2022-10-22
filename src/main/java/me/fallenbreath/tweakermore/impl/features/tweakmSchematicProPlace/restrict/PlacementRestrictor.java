@@ -1,4 +1,4 @@
-package me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace;
+package me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.restrict;
 
 import fi.dy.masa.litematica.data.DataManager;
 import fi.dy.masa.litematica.materials.MaterialCache;

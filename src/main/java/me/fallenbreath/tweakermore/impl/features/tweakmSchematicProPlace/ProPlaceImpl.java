@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import fi.dy.masa.litematica.config.Configs;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
+import me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.restrict.PlacementRestrictor;
 import me.fallenbreath.tweakermore.util.StringUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemPlacementContext;

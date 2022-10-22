@@ -711,6 +711,17 @@ TweakerMore提供的新功能
 ![disableSignTextLengthLimit](assets/disableSignTextLengthLimit.png)
 
 
+### 禁用史莱姆方块弹跳 (disableSlimeBlockBouncing)
+
+禁用玩家落在史莱姆方块或床上的反弹效果
+
+就像你潜行了一样
+
+- 分类: MC修改
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+
+
 ### 禁用暗角渲染 (disableVignetteDarkness)
 
 禁用暗角渲染覆盖层

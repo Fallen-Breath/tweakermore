@@ -711,6 +711,17 @@ A red exclamation mark will be shown on the left side when the limit is exceeded
 ![disableSignTextLengthLimit](assets/disableSignTextLengthLimit.png)
 
 
+### disableSlimeBlockBouncing
+
+Disable the bouncing effect on player lands on slime block or bed
+
+Just like you are sneaking
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+
+
 ### disableVignetteDarkness
 
 Disable the vignette darkness overlay
