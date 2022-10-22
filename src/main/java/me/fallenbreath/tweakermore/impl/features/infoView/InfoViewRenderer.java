@@ -10,6 +10,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.commandBlock.CommandBlockContentRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.redstoneDust.RedstoneDustUpdateOrderRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.RespawnBlockExplosionViewer;
+import me.fallenbreath.tweakermore.util.FabricUtil;
 import me.fallenbreath.tweakermore.util.PositionUtil;
 import me.fallenbreath.tweakermore.util.ThrowawayRunnable;
 import me.fallenbreath.tweakermore.util.render.RenderContext;
@@ -27,6 +28,7 @@ import net.minecraft.world.World;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -84,6 +86,17 @@ public class InfoViewRenderer implements TweakerMoreIRenderer, IClientTickHandle
 		if (crossHairPos != null && !positions.contains(crossHairPos))
 		{
 			positions.add(crossHairPos);
+		}
+
+		// debug
+		if (TweakerMoreConfigs.TWEAKERMORE_DEBUG_BOOL.getBooleanValue() && FabricUtil.isDevelopmentEnvironment())
+		{
+			Function<BlockPos, Double> distanceGetter = pos -> camPos.distanceTo(PositionUtil.centerOf(pos));
+			double maxDis = positions.stream().map(distanceGetter).mapToDouble(x -> x).max().orElse(1);
+			positions.forEach(pos -> me.fallenbreath.tweakermore.util.render.TextRenderer.create().
+					color(0xFFFFFF00 | (int)(255.0 * distanceGetter.apply(pos) / maxDis)).
+					atCenter(pos).text("x").render()
+			);
 		}
 
 		// sort by distance in descending order, so we render block info from far to near (simulating depth test)

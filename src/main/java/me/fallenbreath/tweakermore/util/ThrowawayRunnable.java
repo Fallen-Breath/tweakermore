@@ -1,13 +1,16 @@
 package me.fallenbreath.tweakermore.util;
 
+/**
+ * A runnable wrapper that only runs the delegate Runnable at the first invocation
+ */
 public class ThrowawayRunnable implements Runnable
 {
-	private final Runnable runnable;
+	private final Runnable delegate;
 	private boolean processed;
 
-	private ThrowawayRunnable(Runnable runnable)
+	private ThrowawayRunnable(Runnable delegate)
 	{
-		this.runnable = runnable;
+		this.delegate = delegate;
 		this.processed = false;
 	}
 	
@@ -22,7 +25,7 @@ public class ThrowawayRunnable implements Runnable
 		if (!this.processed)
 		{
 			this.processed = true;
-			this.runnable.run();
+			this.delegate.run();
 		}
 	}
 }
