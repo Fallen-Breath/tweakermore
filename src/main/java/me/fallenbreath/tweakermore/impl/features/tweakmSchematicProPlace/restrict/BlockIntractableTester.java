@@ -65,6 +65,9 @@ public class BlockIntractableTester
 		interactAble(BeaconBlock.class);
 		interactAble(BedBlock.class);
 		interactAble(BrewingStandBlock.class);
+		interactAble(CakeBlock.class).
+				when((player, worldState) -> player.canConsume(false)).
+				allowIf(unequalProperty(CakeBlock.BITES));
 		interactAble(CartographyTableBlock.class);
 		interactAble(ChestBlock.class);
 		interactAble(ComparatorBlock.class).
