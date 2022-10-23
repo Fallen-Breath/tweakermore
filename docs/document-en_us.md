@@ -442,6 +442,24 @@ Does not work with litematica's or easy place mode
     - Litematica (`litematica`)
 
 
+### tweakmSchematicBlockPlacementRSChkFacing (tweakmSchematicBlockPlacementRestrictionCheckFacing)
+
+Should tweakmSchematicBlockPlacementRestriction check the facing of the to be placed block
+
+- Category: Features
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `true`
+
+
+### tweakmSchematicBlockPlacementRSChkSlab (tweakmSchematicBlockPlacementRestrictionCheckSlab)
+
+Should tweakmSchematicBlockPlacementRestriction check the slab type of the to be placed slab block
+
+- Category: Features
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `true`
+
+
 ### tweakmSchematicBlockPlacementRSHint (tweakmSchematicBlockPlacementRestrictionHint)
 
 Switch for displaying hint message when option tweakmSchematicBlockPlacementRestriction cancels a placement
@@ -449,7 +467,7 @@ Switch for displaying hint message when option tweakmSchematicBlockPlacementRest
 - Category: Features
 - Type: option list
 - Default value: `All`
-- Available options: `All`, `Wrong item only`, `Never`
+- Available options: `All`, `Operation not allowed `, `Wrong item only`, `Never`
 
 
 ### tweakmSchematicBlockPlacementRSMargin (tweakmSchematicBlockPlacementRestrictionMargin)

@@ -442,17 +442,35 @@ TweakerMore提供的新功能
     - Litematica (`litematica`)
 
 
-### 原理图方块放置限制提示 (tweakmSchematicBlockPlacementRestrictionHint)
+### 原理图方块放置限制-检查方块朝向 (tweakmSchematicBlockPlacementRestrictionCheckFacing)
 
-在“原理图方块放置限制”取消方块放置时是否显示提示信息的开关
+选项“原理图方块放置限制”是否应该检查将要放置的方块的朝向
+
+- 分类: 功能
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `true`
+
+
+### 原理图方块放置限制-检查半砖类型 (tweakmSchematicBlockPlacementRestrictionCheckSlab)
+
+选项“原理图方块放置限制”是否应该检查将要放置的半砖的半砖类型
+
+- 分类: 功能
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `true`
+
+
+### 原理图方块放置限制-提示范围 (tweakmSchematicBlockPlacementRestrictionHint)
+
+在“原理图方块放置限制”取消方块放置时是否显示提示信息的策略
 
 - 分类: 功能
 - 类型: 选项列表
 - 默认值: `全部`
-- 可用选项: `全部`, `仅物品错误`, `总不`
+- 可用选项: `全部`, `不允许的操作`, `仅物品错误`, `总不`
 
 
-### 原理图方块放置限制边缘保护 (tweakmSchematicBlockPlacementRestrictionMargin)
+### 原理图方块放置限制-边缘保护 (tweakmSchematicBlockPlacementRestrictionMargin)
 
 用于阻止位于原理图框附近的方块放置的放置保护距离
 
