@@ -9,6 +9,7 @@ import me.fallenbreath.tweakermore.util.StringUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.hit.BlockHitResult;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public class ProPlaceImpl
 		return comment.replaceFirst("##CONFIGS##", lines);
 	}
 
-	public static void handleBlockPlacement(ItemPlacementContext ctx, CallbackInfoReturnable<ActionResult> cir)
+	public static void handleBlockPlacement(BlockHitResult hitResult, ItemPlacementContext ctx, CallbackInfoReturnable<ActionResult> cir)
 	{
 		if (Configs.Generic.EASY_PLACE_MODE.getBooleanValue())
 		{
@@ -46,7 +47,7 @@ public class ProPlaceImpl
 
 		if (restrict)
 		{
-			if (!PlacementRestrictor.canDoBlockPlacement(mc, ctx.getBlockPos()))
+			if (!PlacementRestrictor.canDoBlockPlacement(mc, hitResult, ctx))
 			{
 				cir.setReturnValue(ActionResult.PASS);
 			}

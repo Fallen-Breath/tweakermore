@@ -11,7 +11,10 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.listentries.SchematicBlockPlacementRestrictionHintType;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -19,13 +22,14 @@ public class PlacementRestrictor
 {
 	private static void info(String key, Object... args)
 	{
-		InfoUtils.printActionbarMessage("tweakermore.config.tweakmSchematicBlockPlacementRestriction." + key, args);
+		InfoUtils.printActionbarMessage("tweakermore.config.tweakmSchematicBlockPlacementRestriction.info." + key, args);
 	}
 
-	public static boolean canDoBlockPlacement(MinecraftClient mc, BlockPos pos)
+	public static boolean canDoBlockPlacement(MinecraftClient mc, BlockHitResult hitResult, ItemPlacementContext ctx)
 	{
 		final int MARGIN = TweakerMoreConfigs.TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_MARGIN.getIntegerValue();
 		SchematicBlockPlacementRestrictionHintType hintType = (SchematicBlockPlacementRestrictionHintType)TweakerMoreConfigs.TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_HINT.getOptionListValue();
+		BlockPos pos = ctx.getBlockPos();
 
 		// Always permit if it's far from the schematic
 		if (!WorldUtils.isPositionWithinRangeOfSchematicRegions(pos, MARGIN))
@@ -47,10 +51,31 @@ public class PlacementRestrictor
 		}
 
 		World schematicWorld = SchematicWorldHandler.getSchematicWorld();
-		World clientWorld = mc.world;
+		World realWorld = ctx.getWorld();
+		PlayerEntity player = ctx.getPlayer();
 
-		if (schematicWorld != null && mc.player != null && clientWorld != null && mc.interactionManager != null)
+		if (schematicWorld != null && player != null && mc.interactionManager != null)
 		{
+			{
+				BlockPos interactPos = hitResult.getBlockPos();
+				BlockState interactWorldState = realWorld.getBlockState(interactPos);
+				BlockState interactSchematicState = schematicWorld.getBlockState(interactPos);
+				BlockIntractableTester.CheckResult result = BlockIntractableTester.checkInteract(player, interactWorldState, interactSchematicState);
+				switch (result.getType())
+				{
+					case GOOD_INTERACTION:
+						// The right click action will be consumed, no block placement which means no need to check
+						return true;
+					case BAD_INTERACTION:
+						info("interaction_not_allowed", result.getMessage());
+						return false;
+					case NO_INTERACTION:
+					default:
+						break;
+				}
+			}
+			// now we are sure that the player will try to do the block placement
+
 			BlockState schematicState = schematicWorld.getBlockState(pos);
 			ItemStack schematicStack = MaterialCache.getInstance().
 					//#if MC >= 11500
@@ -88,7 +113,7 @@ public class PlacementRestrictor
 			}
 
 			// check if the player is using the right item stack for block placement
-			if (EntityUtils.getUsedHandForItem(mc.player, schematicStack) == null)
+			if (EntityUtils.getUsedHandForItem(player, schematicStack) == null)
 			{
 				if (hintType.showWrongItem)
 				{

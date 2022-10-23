@@ -42,6 +42,6 @@ public abstract class PlacementTweaksMixin
 		BlockHitResult hitResult = new BlockHitResult(hitVecIn, sideIn, posIn, false);
 		ItemPlacementContext ctx = new ItemPlacementContext(new ItemUsageContext(player, hand, hitResult));
 
-		ProPlaceImpl.handleBlockPlacement(ctx, cir);
+		ProPlaceImpl.handleBlockPlacement(hitResult, ctx, cir);
 	}
 }
