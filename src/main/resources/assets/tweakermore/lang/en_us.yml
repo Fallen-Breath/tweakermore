@@ -1,0 +1,740 @@
+tweakermore:
+  config:
+    # ================================ Features ================================
+
+    autoFillContainerThreshold:
+      .: autoFillContainerThreshold
+      comment: |-
+        The minimum occupied slot amount for the item to trigger tweak tweakmAutoFillContainer
+        e.g. if you always have 2 slots of firework rocket you can set the value to 3,
+         then your rockets will never be used to fill the container
+    copySignTextToClipBoard:
+      .: copySignTextToClipBoard
+      comment: Copy texts in the sign you are pointing to into the clipboard
+      sign_copied: Copied texts from %1$s
+      no_sign: You are not pointing to a sign block
+      empty_sign: '%1$s does not contain any text'
+    creativePickBlockWithState:
+      .: creativePickBlockWithState
+      comment: |-
+        When performing creative pick block action (middle click) with hotkey pressed,
+        store the target block's block state into the nbt named "BlockStateTag" of the picked item.
+        So the block state can be restored when you place blocks with the picked item
+      message: Block state of %1$s stored
+    infoViewBeamAngle:
+      .: infoViewBeamAngle
+      comment: |-
+        The angle of the initialed cone used in info view strategy "Beam"
+        Info of blocks within the given degree to player's slight vector will be shown, just like a flashlight
+        Using degree measure
+    infoViewTargetDistance:
+      .: infoViewTargetDistance
+      comment: The maximum target distance of info view
+    infoViewRenderingKey:
+      .: infoViewRenderingKey
+      comment: |-
+        The rendering hotkey for info viewers
+        When the info view strategy is "View hotkey held", press to enable rendering
+        When the info view strategy is "Always", it will always rendering ignoring the hotkey's state
+    infoViewCommandBlock:
+      .: infoViewCommandBlock
+      comment: Show the command and the output of command blocks
+      pretty_name: Info View Command Block
+    infoViewCommandBlockMaxWidth:
+      .: infoViewCommandBlockMaxWidth
+      comment: Maximum width of the displayed text rendered by infoViewCommandBlock
+    infoViewCommandBlockRenderStrategy:
+      .: infoViewCommandBlockRenderST
+      comment: The view rendering strategy of infoViewCommandBlock
+    infoViewCommandBlockTargetStrategy:
+      .: infoViewCommandBlockTargetST
+      comment: The target selecting strategy of infoViewCommandBlock
+    infoViewCommandBlockTextScale:
+      .: infoViewCommandBlockTextScale
+      comment: Scale of the displayed text rendered by infoViewCommandBlock
+    infoViewRedstoneDustUpdateOrder:
+      .: infoViewRedstoneDustUpdateOrder
+      comment: Show the block update order of the redstone dust
+      pretty_name: Info View Redstone Dust Update Order
+    infoViewRedstoneDustUpdateOrderRenderStrategy:
+      .: infoViewRedstoneDustUpdateOrderRenderST
+      comment: The view rendering strategy of infoViewRedstoneDustUpdateOrder
+    infoViewRedstoneDustUpdateOrderTextAlpha:
+      .: infoViewRedstoneDustUpdateOrderTextAlpha
+      comment: The alpha value of the floating text used in infoViewRedstoneDustUpdateOrder
+    infoViewRespawnBlockExplosion:
+      .: infoViewRespawnBlockExplosion
+      comment: |-
+        Show the explosion damage of respawn blocks located in wrong dimension
+        It will also estimate and display your remaining health if it explodes
+      pretty_name: Info View Respawn Block Explosion
+      message:
+        damage: 'Damage: %1$s'
+    infoViewRespawnBlockExplosionTextAlpha:
+      .: infoViewRespawnBlockExplosionTextAlpha
+      comment: The alpha value of the floating text used in infoViewRespawnBlockExplosion
+    infoViewRespawnBlockExplosionRenderStrategy:
+      .: infoViewRespawnBlockExplosionRenderST
+      comment: The view rendering strategy of infoViewRespawnBlockExplosion
+    infoViewRespawnBlockExplosionTargetStrategy:
+      .: infoViewRespawnBlockExplosionTargetST
+      comment: The target selecting strategy of infoViewRespawnBlockExplosion
+    refreshInventory:
+      .: refreshInventory
+      comment: |-
+        Request a player inventory refresh to the server
+        It's done by simulating an invalid inventory dragging operation,
+        so the server think that the inventory is out of sync then do resync
+    safeAfkHealthThreshold:
+      .: safeAfkHealthThreshold
+      comment: |-
+        The threshold of the health of the player which triggers the safe afk disconnecting feature
+        Disconnect when player takes damage and its health becomes less than the given value
+    serverMsptMetricsStatisticType:
+      .: serverMsptMetricsStatisticType
+      comment: |-
+        Type of the server mspt metrics statistic display in debug hud
+        Set to "Game tick" to keep vanilla behavior
+    serverMsptMetricsStatisticTypeCycle:
+      .: serverMsptMetricsStatisticTypeCycle
+      comment: A hotkey to quickly cycle forward the value of serverMsptMetricsStatisticType
+      message:
+        cycled: Cycled statistic type to %1$s
+        hint: 'Statistic type: %1$s'
+    tweakmAutoCleanContainer:
+      .: tweakmAutoCleanContainer
+      comment: |-
+        Automatically drops everything in the opened container
+        and then close the container
+      pretty_name: Auto Clean Container
+      container_cleaned: Dropped all items in %1$s slots inside %2$s
+    tweakmAutoCleanContainerListType:
+      .: tweakmAutoCleanContainerListType
+      comment: The item restriction type for tweakmAutoCleanContainer
+    tweakmAutoCleanContainerWhiteList:
+      .: tweakmAutoCleanContainerWhiteList
+      comment: Items that will be thrown out from the container with tweakmAutoCleanContainer
+    tweakmAutoCleanContainerBlackList:
+      .: tweakmAutoCleanContainerBlackList
+      comment: Items that will NOT be thrown out from the container with tweakmAutoCleanContainer
+    tweakmAutoCollectMaterialListItem:
+      .: tweakmAutoCollectMaterialListItem
+      comment: |-
+        Automatically collect missing items in litematica mod material list in the opened container to player inventory
+        and then close the container
+      pretty_name: Auto Collect Material List Item
+      info:
+        title: Items took from container %1$s
+        line: '- %1$sx %2$s, still missing %3$s'
+      took_nothing: Took nothing required in the material list from %1$s
+      no_material_list: No material list is activated
+    tweakmAutoFillContainer:
+      .: tweakmAutoFillContainer
+      comment: |-
+        Automatically fill the opened container with the most numerous item stack in your inventory
+        iff the item stack is the only most numerous one
+        and then close the container
+      pretty_name: Auto Fill Container
+      container_filled: Filled %1$s with all %2$s items (%3$s)
+      best_slot_not_found: Most suitable item to fill the container not found
+    tweakmAutoPickSchematicBlock:
+      .: tweakmAutoPickSchematicBlock
+      comment: |-
+        Pick block from schematic automatically before block placement
+        It's logic is the same as the pickBlock tweaks in litematica mod, you need to enable pickBlockEnabled option in litematica
+        Does not work with easy place mode
+      pretty_name: Auto Pick Schematic Block
+    tweakmAutoPutBackExistedItem:
+      .: tweakmAutoPutBackExistedItem
+      comment: |-
+        Automatically put back all items which also exist in the container from your inventory into the container
+        and then close the container
+      pretty_name: Auto Put Back Matched Item
+      result: Put back %1$s slot items into %2$s
+    tweakmAutoVillagerTradeFavorites:
+      .: tweakmAutoVillagerTradeFavorites
+      comment: |-
+        Automatically trigger item scroller's villagerTradeFavorites feature when a merchant screen is opened
+        and then close the merchant screen
+      pretty_name: Auto Villager Trade Favorites
+      triggered: '%1$s is triggered for %2$s'
+      no_favorite: "%1$s doesn't have any favorite trades"
+    tweakmContainerProcessorHint:
+      .: tweakmContainerProcessorHint
+      comment: 'Displays the enabling status of auto container processing related features, including:'
+      pretty_name: Auto Container Processor Hint
+      title: Enabled auto container processing features
+    tweakmContainerProcessorHintPos:
+      .: tweakmContainerProcessorHintPos
+      comment: The displayed position of the auto container processor enable status hint
+    tweakmContainerProcessorHintScale:
+      .: tweakmContainerProcessorHintScale
+      comment: The font scale of the auto container processor enable status hint
+    tweakmInfoView:
+      .: tweakmInfoView
+      comment: |-
+        The main switch of the info view feature
+        Search "infoView" to see related features
+      pretty_name: Info View
+    tweakmSchematicProPlace:
+      .: tweakmSchematicProPlace
+      comment: |-
+        A shortcut option to enable/disable the following options at the same time:
+        ##CONFIGS##
+        With these options enabled, you can have a not-cheaty version of "easy place" from litematica,
+        which help you auto select target item and cancel wrong block placements
+        Has all the functions of easy place except for the floating block placing
+        Compatible with various block placement tweaks from tweakeroo, doesn't work with easy place mode
+      pretty_name: Schematic Pro Place
+    tweakmSafeAfk:
+      .: tweakmSafeAfk
+      comment: |-
+        Disconnect when receive damage
+        Health threshold to disconnect can be set via safeAfkHealthThreshold
+      pretty_name: Safe AFK
+      received_damage: |-
+        Received damage at %1$
+        Health remaining: %2$s
+    tweakmSchematicBlockPlacementRestriction:
+      .: tweakmSchematicBlockPlaceRS
+      comment: |-
+        Similar to litematica's placementRestriction option, it cancels block placement when the placement doesn't match current schematic
+        Unlike litematica's implementation, it uses a simple and accurate constraint strategy,
+        it works nicely with tweakeroo's placement tweaks
+        Does not work with litematica's or easy place mode
+      pretty_name: Schematic Block Placement Restriction
+      info:
+        interaction_not_allowed: Block interaction not allowed (%1$s)
+        is_air: Block placement not allowed (is air)
+        no_block: No item for %1$s
+        outside_the_layer: Block placement not allowed (outside the layer)
+        wrong_item: Require %1$s
+        wrong_block_type: Wrong block type, should be %1$s
+        wrong_slab: Wrong slab type, should be %1$s
+        wrong_facing: Wrong block facing, should be %1$s
+        interact_not_allow:
+          property_protection: block property protection
+    tweakmSchematicBlockPlacementRestrictionHint:
+      .: tweakmSchematicBlockPlacementRSHint
+      comment: Switch for displaying hint message when option tweakmSchematicBlockPlacementRestriction cancels a placement
+      pretty_name: Schematic Block Placement Restriction Hint
+    tweakmSchematicBlockPlacementRestrictionMargin:
+      .: tweakmSchematicBlockPlacementRSMargin
+      comment: |-
+        The no-block-placement protection margin length from schematic boxes
+        e.g. with default value 2, block placements within 2 blocks range of any schematic boxes will be cancelled
+        Used in option tweakmSchematicBlockPlacementRestriction
+      pretty_name: Schematic Block Placement Restriction Margin
+    tweakmSchematicBlockPlacementRestrictionCheckFacing:
+      .: tweakmSchematicBlockPlacementRSChkFacing
+      comment: Should tweakmSchematicBlockPlacementRestriction check the facing of the to be placed block
+      pretty_name: Schematic Block Placement Restriction Check Facing
+    tweakmSchematicBlockPlacementRestrictionCheckSlab:
+      .: tweakmSchematicBlockPlacementRSChkSlab
+      comment: Should tweakmSchematicBlockPlacementRestriction check the slab type of the to be placed slab block
+      pretty_name: Schematic Block Placement Restriction Check Slab
+    tweakmShowRedstoneDustUpdateOrder:
+      pretty_name: Show Redstone Dust Update Order
+    villagerOfferUsesDisplay:
+      .: villagerOfferUsesDisplay
+      comment: |-
+        Display villager offer use and limit amount on villager offer list
+        Hover on the arrow of the offer to see it
+
+    # ================================ MC Tweaks ================================
+
+    bossBarMaxEntry:
+      .: bossBarMaxEntry
+      comment: |-
+        Overwrites the maximum amount of boss bar to be displayed at the same time
+        It will also skip the vanilla windowHeight/3 limit check
+        Set it to -1 to disabled (use vanilla logic)
+    bossBarScale:
+      .: bossBarScale
+      comment: Scale the boss bar hud with given factor
+    chatMessageLimit:
+      .: chatMessageLimit
+      comment: Modify the maximum number of history messages stored in the chat hud
+    connectionSimulatedDelay:
+      .: connectionSimulatedDelay
+      comment: |-
+        Client network delay simulator. Enabled when the value is greater than 0
+        Adds given delay (in milliseconds) before any packet processing
+        Basically it stably adds your ping to the server with the given value
+    daytimeOverrideValue:
+      .: daytimeOverrideValue
+      comment: The client-side daytime value to be overridden by tweak tweakmDaytimeOverride
+    disableBeaconBeamRendering:
+      .: disableBeaconBeamRendering
+      comment: |-
+        Prevents rendering beacon beams
+        So beacon beams can never suddenly come out when recording / rendering
+      pretty_name: Disable Beacon Beam Rendering
+    disableCameraFrustumCulling:
+      .: disableCameraFrustumCulling
+      comment: |-
+        Disable rendering culling using camera's frustum, i.e. stuffs outside the player's fov will also be rendered
+        Affects both block and entity rendering
+        A use case is to ensure the integrity of shadows when using shaders
+        Has significant impact on framerate
+      pretty_name: Disable Camera Frustum Culling
+    disableCameraSubmersionFog:
+      .: disableCameraSubmersionFog
+      comment: |-
+        Disable fog effect caused by camera being submerged in block or fluid, including water, lava and powder snow
+        It will use the render distance fog instead, just like the camera is in the air
+      pretty_name: Disable Camera Submersion Fog
+    disableCreativeFlyClimbingCheck:
+      .: disableCreativeFlyClimbingCheck
+      comment: |-
+        Prevent creative flying player from entering "ladder climbing" state,
+        so player's flying movement will not be affected by ladder things
+      pretty_name: Disable Creative Fly Climbing Check
+    disableDarkSkyRendering:
+      .: disableDarkSkyRendering
+      comment: |-
+        Prevent the bottom of the sky from turning dark when you are under sea level
+        See also: option disableHorizonShadingRendering
+      pretty_name: Disable Dark Sky Rendering Effect
+    disableEntityRenderInterpolation:
+      .: disableEntityRenderInterpolation
+      comment: Disable the entity animation interpolation during rendering
+      pretty_name: Disable Entity Render Interpolation
+    disableHorizonShadingRendering:
+      .: disableHorizonShadingRendering
+      comment: |-
+        Prevent the horizon from turning dark when you are nearby the world's bottom y
+        See also: option disableDarkSkyRendering
+      pretty_name: Disable Horizon Shading Rendering
+    disableLightUpdates:
+      .: disableLightUpdates
+      comment: Yeets client-side light updates
+      pretty_name: Disable Light Updates
+    disablePistonBlockBreakingParticle:
+      .: disablePistonBlockBreakingParticle
+      comment: Remove block breaking particles when pistons break blocks
+      pretty_name: Disable Block Breaking Particle
+    disableRedstoneParticle:
+      .: disableRedstoneParticle
+      comment: |-
+        Disable all redstone particles
+        i.e. particles from redstone dust, redstone torch, redstone repeater etc.
+      pretty_name: Disable Redstone Particle
+    disableSignTextLengthLimit:
+      .: disableSignTextLengthLimit
+      comment: |-
+        Disable the text length limit based on character width when editing or rendering a sign block
+        A red exclamation mark will be shown on the left side when the limit is exceeded during the editing of the sign
+      pretty_name: Disable Sign Text Length Limit
+    disableSlimeBlockBouncing:
+      .: disableSlimeBlockBouncing
+      comment: |-
+        Disable the bouncing effect on player lands on slime block or bed
+        Just like you are sneaking
+      pretty_name: Disable Slime Block Bouncing
+    disableVignetteDarkness:
+      .: disableVignetteDarkness
+      comment: |-
+        Disable the vignette darkness overlay
+        i.e. the darkness effect on the screen corner that accumulates slowly
+        when the light level at player's eyes is not the maximum light level
+      pretty_name: Disable Vignette Darkness
+    fixChestMirroring:
+      .: fixChestMirroring
+      comment: |-
+        Fixed chest type is not properly transformed when chest block is mirrored
+        Affects stuffs that use vanilla block mirror logic, e.g. vanilla structure placement, litematica mod schematic placement
+    flyDrag:
+      .: flyDrag
+      comment: |-
+        Overwrite the drag factor when flying in creative or spectator mode
+        Overwrites fabric-carpet's rule creativeFlyDrag when the value is modified
+    legacyF3NLogic:
+      .: legacyF3NLogic
+      comment: |-
+        Modify the logic of hotkey F3 + N back to 1.15 and before
+        1.15- logic cheat sheet: creative -> spectator, other -> creative
+    maxChatHudHeight:
+      .: maxChatHudHeight
+      comment: The maximum height of the chat hud
+    netherPortalSoundChance:
+      .: netherPortalSoundChance
+      comment: |-
+        The chance for a nether portal block to play sound
+        Set it to 0.001 or 0.0001 for less noisy portal
+    playerNameTagRenderStrategyList:
+      .: playerNameTagRenderStrategyList
+      comment: |-
+        The whitelist / blacklist used in playerNameTagRenderStrategyList
+        Matching using player's id, case-sensitive
+    playerNameTagRenderStrategyType:
+      .: playerNameTagRenderStrategyType
+      comment: Use whitelist / blacklist to control whether the name tag of the player will be rendered
+    playerSkinBlockingLoading:
+      .: playerSkinBlockingLoading
+      comment: |-
+        Make loading skins of the player blocks the client from running
+        Client will freeze until player skins is downloaded and loaded
+        It's useful when you want player skins to always be loaded, e.g. replay video rendering
+    prioritizedCommandSuggestions:
+      .: prioritizedCommandSuggestions
+      comment: |-
+        Command suggestions in this list will be more forward in the command completion list
+        You can put those command completions you always prefer to choose in this list
+        so they will always be at the head of the command completion list
+    scoreboardSideBarScale:
+      .: scoreboardSideBarScale
+      comment: Scale the scoreboard side bar hud with given factor
+    shulkerTooltipEnchantmentHint:
+      .: shulkerTooltipEnchantmentHint
+      comment: Display enchantments of items in the tooltip of shulker box items
+    shulkerTooltipFillLevelHint:
+      .: shulkerTooltipFillLevelHint
+      comment: Display content fill level in first line of the tooltip of shulker box items
+    shulkerTooltipHintLengthLimit:
+      .: shulkerTooltipHintLengthLimit
+      comment: |-
+        The text length limit used during displaying extra information of items in the tooltip of shulker box items
+        When exceed, remaining information will be folded
+    shulkerTooltipPotionInfoHint:
+      .: shulkerTooltipPotionInfoHint
+      comment: Display potion information of items in the tooltip of shulker box items
+    signMultilinePasteSupport:
+      .: signMultilinePasteSupport
+      comment: |-
+        Add support for the sign editing screen
+        to correctly paste multiple lines from clipboard
+    spectatorTeleportMenuIncludeSpectator:
+      .: spectatorTeleportMenuIncludeSpectator
+      comment: |-
+        Allow spectator players in the player list to be listed in the spectator teleport menu
+        Spectators will be listed at the end of the menu with gray and italic name
+    tweakmDaytimeOverride:
+      .: tweakmDaytimeOverride
+      comment: |-
+        Override the time of day in the client world
+        Does not affect server-side daytime
+      pretty_name: Daytime Override
+    tweakmFakeNightVision:
+      .: tweakmFakeNightVision
+      comment: Always use night vision for game rendering, regardless of whether the player actually has night vision
+      pretty_name: Fake Night Vision
+    tweakmFlawlessFrames:
+      .: tweakmFlawlessFrames
+      comment: |-
+        Forced client to render all changes in loaded chunk for each frames
+        using the logic from replay mod which is used in its rendering tasks
+        WARNING: Expect client lag spike with enabled
+      pretty_name: Flawless Frames
+    tweakmUnlimitedEntityRenderDistance:
+      .: tweakmUnlimitedEntityRenderDistance
+      comment: |-
+        Set client-side entity render distance to unlimited
+        Still requires the server to send entity packets via EntityTracker properly
+      pretty_name: Unlimited Entity Render Distance
+    tweakmWeatherOverride:
+      .: tweakmWeatherOverride
+      comment: |-
+        Override the weather of the world in the client world
+        Does not affect server-side weather
+      pretty_name: Weather Override
+    weatherOverrideValue:
+      .: weatherOverrideValue
+      comment: The client-side weather value to be overridden by tweak tweakmWeatherOverride
+
+    # ================================ Mod Tweaks ================================
+
+    applyTweakerMoreOptionLabelGlobally:
+      .: applyTweakerMoreOptionLabelGlobally
+      comment: Apply the TweakerMore style translated text + original text label to all config GUIs using malilib
+    eCraftItemScrollerCompact:
+      .: eCraftItemScrollerCompact
+      comment: |-
+        Fixed some item scroller functionality doesn't work with easier crafting mod
+        e.g. broken mass craft
+    handRestockListType:
+      .: handRestockListType
+      comment: The item restriction type for tweakHandRestock
+    handRestockWhiteList:
+      .: handRestockWhiteList
+      comment: The items that will trigger tweakHandRestock
+    handRestockBlackList:
+      .: handRestockBlackList
+      comment: The items that will NOT trigger tweakHandRestock
+    eprHideOnDebugHud:
+      .: eprHideOnDebugHud
+      comment: Hide extra player renderer rendering when debug hud (the F3 thing) is enabled
+    minihudDisableLightOverlaySpawnCheck:
+      .: minihudDisableLightOverlaySpawnCheck
+      comment: |-
+        Mini HUD light level overlay are rendered only on spawn-able block
+        This option removes the spawn-able check,
+        so light overlay will be rendered at every non-solid block above a non-air non-fluid block
+    ofRemoveSignTextRenderDistance:
+      .: ofRemoveSignTextRenderDistance
+      comment: |-
+        Remove the sign text render distance limit from Optifine
+        Back to vanilla behavior where sign text is always rendered together with the sign block
+    ofRemoveItemFrameItemRenderDistance:
+      .: ofRemoveItemFrameItemRenderDistance
+      comment: |-
+        Remove the item frame item render distance limit from Optifine
+        Back to vanilla behavior where the displayed item of item frame is always rendered together with the item frame
+    ofUnlockF3FpsLimit:
+      .: ofUnlockF3FpsLimit
+      comment: Removed 10 FPS render limit for F3 debug hud
+    ofUseVanillaBrightnessCache:
+      .: ofUseVanillaBrightnessCache
+      comment: |-
+        Let optifine make use vanilla's brightness cache in its LightCacheOF
+        Increases FPS with smooth lighting on for a few
+    replayAccurateTimelineTimestamp:
+      .: replayAccurateTimelineTimestamp
+      comment: Display timestamps accurate to milliseconds on the timeline in replay mod
+    replayFlySpeedLimitMultiplier:
+      .: replayFlySpeedLimitMultiplier
+      comment: |-
+        Multiple the camera fly speed upper limit in replay mod with given value
+        So the maximum fly speed can be increased
+    shaderGameTimeAsWorldTime:
+      .: shaderGameTimeAsWorldTime
+      comment: |-
+        Use game time instead of day time as uniform value "worldTime" for Optifine/Iris shaders
+        So with gamerule doDaylightCycle false this timer variable still increases
+    serverDataSyncer:
+      .: serverDataSyncer
+      comment: |-
+        Sync entity & block entity datas from the server using vanilla's tag query protocol
+        Sync when following actions happen:
+        - Tweakeroo inventory preview
+        - Litematica schematic saving
+        - MiniHUD bee hive bee amount display
+        - Litematica block info overlay
+        Requires player having OP permission (permission level 2) for it to work
+      schematic_sync:
+        start: Syncing block entities and entities in the selection area %1$s
+        progress: Synced %1$s/%1$s block entities and %3$s/%4$s entities (%5$s)
+        synced: Synced %1$s block entities and %2$s entities from the server
+    serverDataSyncerQueryInterval:
+      .: serverDataSyncerQueryInterval
+      comment: |-
+        The query interval of serverDataSyncer for each batch of queries in game tick
+        With default value 1 it will send a batch of query every game tick
+    serverDataSyncerQueryLimit:
+      .: serverDataSyncerQueryLimit
+      comment: |-
+        Maximum amount of queries sent with serverDataSyncer per game tick
+        Queries exceeding the limit will be delayed
+    xmapNoSessionFinalizationWait:
+      .: xmapNoSessionFinalizationWait
+      comment: |-
+        Skip the session finalization operation of xaero's worldmap when quit a world
+        So no lag when quitting server or single player
+        Might have some side effects though
+
+    # ================================ Porting ================================
+
+    isScrollStacksFallbackFixPorting:
+      .: isScrollStacksFallbackFixPorting
+      comment: |-
+        Fixed SCROLL_STACKS_FALLBACK of item-scroller ignores the last stack
+        The same as masa's fixed in itemscoller commit 0984fe7
+    lmPickBlockShulkersPorting:
+      .: lmPickBlockShulkersPorting
+      comment: Backports option pickBlockShulkers from Litematica 1.16+
+    tkrDisableNauseaEffectPorting:
+      .: tkrDisableNauseaEffectPorting
+      comment: |-
+        Backports option disableNauseaEffect from Tweakeroo 1.17+
+        Also fixes the nether portal overlay fails to be displayed with this option on
+
+    # ================================ Setting ================================
+
+    hideDisabledOptions:
+      .: hideDisabledOptions
+      comment: Hide options which are disabled due to mod relations unsatisfied in the config GUI
+    openTweakerMoreConfigGui:
+      .: openTweakerMoreConfigGui
+      comment: Open the config GUI of TweakerMore
+    preserveConfigUnknownEntries:
+      .: preserveConfigUnknownEntries
+      comment: |-
+        Preserve unknown config entries in TweakerMore's config file
+        If set to false, unknown entries will be removed on config being written
+    tweakerMoreDebugMode:
+      .: tweakerMoreDebugMode
+      comment: |-
+        Debug mode of TweakerMore
+        When enabled, debug parameter options and options not supported by the current Minecraft version will be displayed
+        and debugging related functions will be enabled
+      pretty_name: TweakerMore Debug Mode
+    tweakerMoreDebugBool:
+      .: tweakerMoreDebugBool
+      comment: A boolean parameter for TweakerMore debugging
+    tweakerMoreDebugDouble:
+      .: tweakerMoreDebugDouble
+      comment: A double parameter for TweakerMore debugging
+    tweakerMoreDebugInt:
+      .: tweakerMoreDebugInt
+      comment: A integer parameter for TweakerMore debugging
+    tweakerMoreDebugResetOptionStatistic:
+      .: tweakerMoreDebugResetOptionStatistic
+      comment: Reset statistics of options of tweakermore
+    tweakerMoreDevMixinAudit:
+      .: tweakerMoreDevMixinAudit
+      comment: Forced load all mixin target classes
+      success: Mixin audit succeeded
+    tweakerMoreDevPrintDoc:
+      .: tweakerMoreDevPrintDoc
+      comment: Document Printer
+
+  # ================================ List entries ================================
+
+  list_entry:
+    restriction_type:
+      none: None
+      whitelist: Whitelist
+      blacklist: Blacklist
+    schematicBlockPlacementRestrictionHintType:
+      all: All
+      operation_not_allowed: 'Operation not allowed '
+      wrong_item_only: Wrong item only
+      never: Never
+    weatherOverrideValue:
+      clear: Clear sky
+      rain: Rain
+      thunder: Thunderstorm
+    infoViewRenderStrategy:
+      hotkey_held: View hotkey held
+      always: Always
+    infoViewTargetStrategy:
+      pointed: Pointed
+      beam: Beam
+    serverMsptMetricsStatistic:
+      game_tick: MSPT (vanilla)
+      second_avg: Average MSPT per second
+      second_max: Maximum MSPT per second
+      minute_avg: Average MSPT per minute
+      minute_max: Maximum MSPT per minute
+
+  # ================================ GUI ================================
+
+  hotkeys:
+    category:
+      main: TweakerMore
+  gui:
+    title: TweakerMore v%1$s Config GUI
+    selector_drop_down_list:
+      all: All
+    trigger_button:
+      text: Trigger
+      hover: |-
+        Click to trigger %1$s once
+        §7§oThis will simulate hotkey pressed and released in order§r
+    config_category:
+      all:
+        .: All
+        description: |-
+          All options provided by TweakerMore
+          Use the search bar wisely
+      features:
+        .: Features
+        description: New features provided by TweakerMore
+      mc_tweaks:
+        .: MC Tweaks
+        description: Tweaks on Minecraft
+      mod_tweaks:
+        .: Mods Tweaks
+        description: Tweaks on mods
+      porting:
+        .: Porting
+        description: Stuffs porting from mods from other Minecraft versions
+      setting:
+        .: Setting
+        description: Settings of TweakMore itself
+    config_type:
+      label_text: Type filter
+      generic: Generic
+      hotkey: Hotkey
+      list: List
+      tweak: Tweak
+      disable: Disable
+      config: Config
+      fix: Fix
+    sorting_strategy:
+      label_text: Sorting strategy
+      alphabet: Alphabet
+      most_recently_used: Recently used
+      most_commonly_used: Commonly used
+    mod_relation_footer:
+      or: or
+      requirement: 'Required mods:'
+      confliction: 'Conflicted mods:'
+    element:
+      config_button_boolean_switch:
+        enabled: Enabled
+        disabled: Disabled
+
+  # ================================ Statistic ================================
+
+  statistic:
+    debug_title: Statistics Data
+    entry:
+      lastUsedTime: Last used time
+      useAmount: Use amount
+
+  # ================================ Misc ================================
+
+  impl:
+    shulkerTooltipHintBuilder:
+      more: '... %1$sx'
+  util:
+    mod:
+      carpet: Fabric Carpet
+      carpet-tis-addition: Carpet TIS Addition
+      compactchat: CompactChat
+      customskinloader: CustomSkinLoader
+      easiercrafting: EasierCrafting
+      explayerenderer: ExtraPlayerRenderer
+      fabric: Fabric API
+      fabricloader: Fabric Loader
+      iris: Iris
+      itemscroller: Item Scroller
+      litematica: Litematica
+      minecraft: Minecraft
+      minihud: MiniHUD
+      morechathistory: MoreChatHistory
+      optifabric: Optifine
+      parachute: Parachute
+      raise-chat-limit: Raise Chat Limit
+      replaymod: Replay mod
+      sodium: Sodium
+      tweakeroo: Tweakeroo
+      wmch: Where's My Chat History
+      xaeroworldmap: Xaero's World Map
+
+  # ================================ Document generator ================================
+
+  doc_gen:
+    text:
+      type: Type
+      category: Category
+      default_value: Default value
+      minimum_value: Minimum value
+      maximum_value: Maximum value
+      options: Available options
+      mod_restrictions: Mod restrictions
+      requirements: Required mods
+      conflictions: Conflicted mods
+    value:
+      no_hotkey: no hotkey
+    type:
+      boolean: boolean
+      integer: integer
+      double: double
+      string: string
+      string_list: string list
+      option_list: option list
+      hotkey: hotkey
+      hotkey_togglable: hotkey togglable boolean
+      hotkey_with_switch: hotkey with switch
