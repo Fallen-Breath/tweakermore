@@ -37,7 +37,9 @@ tweakermore:
         当渲染策略为"总是"时，无论该热键是否被按下，都将启用渲染
     infoViewCommandBlock:
       .: 信息展示-命令方块
-      comment: 展示命令方块的指令及其输出
+      comment: |-
+        展示命令方块的指令及其输出
+        在多人服务器中，命令方块的数据可以通过选项serverDataSyncer同步至客户端
       pretty_name: 信息展示-命令方块
     infoViewCommandBlockMaxWidth:
       .: 信息展示-命令方块-文本宽度最大值

@@ -60,6 +60,8 @@ Using degree measure
 
 Show the command and the output of command blocks
 
+In multiplayer server, command block data can be synced to client using option serverDataSyncer
+
 - Category: Features
 - Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`

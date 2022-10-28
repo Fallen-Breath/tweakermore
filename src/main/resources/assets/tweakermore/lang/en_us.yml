@@ -37,7 +37,9 @@ tweakermore:
         When the info view strategy is "Always", it will always rendering ignoring the hotkey's state
     infoViewCommandBlock:
       .: infoViewCommandBlock
-      comment: Show the command and the output of command blocks
+      comment: |-
+        Show the command and the output of command blocks
+        In multiplayer server, command block data can be synced to client using option serverDataSyncer
       pretty_name: Info View Command Block
     infoViewCommandBlockMaxWidth:
       .: infoViewCommandBlockMaxWidth
