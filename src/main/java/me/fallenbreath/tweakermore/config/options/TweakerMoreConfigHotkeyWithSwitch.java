@@ -30,6 +30,12 @@ public class TweakerMoreConfigHotkeyWithSwitch extends TweakerMoreConfigHotkey i
 	}
 
 	@Override
+	public boolean isKeybindHeld()
+	{
+		return this.getEnableState() && super.isKeybindHeld();
+	}
+
+	@Override
 	public void resetToDefault()
 	{
 		super.resetToDefault();

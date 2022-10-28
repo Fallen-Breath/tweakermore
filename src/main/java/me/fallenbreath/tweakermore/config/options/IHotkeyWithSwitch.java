@@ -5,16 +5,16 @@ import fi.dy.masa.malilib.hotkeys.IHotkey;
 
 public interface IHotkeyWithSwitch extends IHotkey, IConfigBoolean
 {
+	/**
+	 * If the hotkey is enabled
+	 */
 	boolean getEnableState();
 
 	boolean getDefaultEnableState();
 
 	void setEnableState(boolean value);
 
-	default boolean isKeybindHeld()
-	{
-		return this.getEnableState() && this.getKeybind().isKeybindHeld();
-	}
+	boolean isKeybindHeld();
 
 	@Deprecated
 	@Override
