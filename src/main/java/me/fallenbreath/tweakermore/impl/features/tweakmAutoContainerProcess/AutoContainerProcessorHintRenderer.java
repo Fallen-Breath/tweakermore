@@ -36,7 +36,7 @@ public class AutoContainerProcessorHintRenderer implements TweakerMoreIRenderer
 		{
 			return;
 		}
-		lines.add(0, GuiBase.TXT_UNDERLINE + StringUtils.translate("tweakermore.config.tweakmContainerProcessorHint.title"));
+		lines.add(0, GuiBase.TXT_UNDERLINE + StringUtils.translate("tweakermore.impl.tweakmContainerProcessorHint.title"));
 
 		RenderUtils.renderText(
 				0, 0,

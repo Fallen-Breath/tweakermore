@@ -32,11 +32,11 @@ public class MerchantAutoFavoritesTrader
 				//$$ if (!VillagerDataStorage.getInstance().getFavoritesForCurrentVillager(container).favorites.isEmpty())
 				//$$ {
 				//$$ 	InventoryUtils.villagerTradeEverythingPossibleWithAllFavoritedTrades();
-				//$$ 	InfoUtils.printActionbarMessage("tweakermore.config.tweakmAutoVillagerTradeFavorites.triggered", config.getPrettyName(), screen.getTitle());
+				//$$ 	InfoUtils.printActionbarMessage("tweakermore.impl.tweakmAutoVillagerTradeFavorites.triggered", config.getPrettyName(), screen.getTitle());
 				//$$ }
 				//$$ else
 				//$$ {
-				//$$ 	InfoUtils.printActionbarMessage("tweakermore.config.tweakmAutoVillagerTradeFavorites.no_favorite", screen.getTitle());
+				//$$ 	InfoUtils.printActionbarMessage("tweakermore.impl.tweakmAutoVillagerTradeFavorites.no_favorite", screen.getTitle());
 				//$$ }
 				//#else
 				Object dummy = InventoryUtils.class;

@@ -49,7 +49,7 @@ public abstract class MinecraftClientMixin
 				});
 				itemStack.getOrCreateTag().put("BlockStateTag", nbt);
 
-				InfoUtils.printActionbarMessage("tweakermore.config.creativePickBlockWithState.message", block.getName());
+				InfoUtils.printActionbarMessage("tweakermore.impl.creativePickBlockWithState.message", block.getName());
 			}
 		}
 	}

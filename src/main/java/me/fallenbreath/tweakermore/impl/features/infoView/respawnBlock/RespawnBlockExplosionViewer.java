@@ -155,7 +155,7 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 			return text;
 		};
 
-		BaseText line1 = Messenger.tr("tweakermore.config.infoViewRespawnBlockExplosion.message.damage", float2text.apply(cache.appliedAmount));
+		BaseText line1 = Messenger.tr("tweakermore.impl.infoViewRespawnBlockExplosion.damage", float2text.apply(cache.appliedAmount));
 		BaseText line2 = Messenger.c("-> ", float2text.apply(cache.remainingHealth), "HP");
 		double alpha = TweakerMoreConfigs.INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_TEXT_ALPHA.getDoubleValue();
 		if (alpha > 0)

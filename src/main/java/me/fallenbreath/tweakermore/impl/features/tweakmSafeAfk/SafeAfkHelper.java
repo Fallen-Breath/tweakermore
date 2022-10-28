@@ -45,7 +45,7 @@ public class SafeAfkHelper
 				{
 					BaseText title = Messenger.s(TweakerMoreMod.MOD_NAME + " " + TweakerMoreConfigs.TWEAKM_SAFE_AFK.getPrettyName());
 					BaseText reason = Messenger.tr(
-							"tweakermore.config.tweakmSafeAfk.received_damage",
+							"tweakermore.impl.tweakmSafeAfk.received_damage",
 							new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),
 							String.format("%.1f / %.1f (%.0f%%)", health, maxHealth, health / maxHealth * 100)
 					);

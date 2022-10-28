@@ -74,13 +74,13 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 				{
 					if (!takenSomething)
 					{
-						InfoUtils.showGuiOrInGameMessage(Message.MessageType.INFO, "tweakermore.config.tweakmAutoCollectMaterialListItem.info.title", guiTitle);
+						InfoUtils.showGuiOrInGameMessage(Message.MessageType.INFO, "tweakermore.impl.tweakmAutoCollectMaterialListItem.info.title", guiTitle);
 					}
 					takenSomething = true;
 					String missingColor = missing == 0 ? GuiBase.TXT_GREEN : GuiBase.TXT_GOLD;
 					InfoUtils.showGuiOrInGameMessage(
 							Message.MessageType.INFO,
-							"tweakermore.config.tweakmAutoCollectMaterialListItem.info.line",
+							"tweakermore.impl.tweakmAutoCollectMaterialListItem.info.line",
 							GuiBase.TXT_GOLD + totalTaken + GuiBase.TXT_RST,
 							stack.getRarity().formatting + stack.getName().getString() + GuiBase.TXT_RST,
 							missingColor + hudRendererAccessor.invokeGetFormattedCountString(missing, stack.getMaxCount()) + GuiBase.TXT_RST
@@ -90,7 +90,7 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 
 			if (!takenSomething)
 			{
-				InfoUtils.showGuiOrInGameMessage(Message.MessageType.INFO, "tweakermore.config.tweakmAutoCollectMaterialListItem.took_nothing", guiTitle);
+				InfoUtils.showGuiOrInGameMessage(Message.MessageType.INFO, "tweakermore.impl.tweakmAutoCollectMaterialListItem.took_nothing", guiTitle);
 			}
 
 			// refresh after operation ends
@@ -98,7 +98,7 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 		}
 		else
 		{
-			InfoUtils.showGuiOrInGameMessage(Message.MessageType.WARNING, "tweakermore.config.tweakmAutoCollectMaterialListItem.no_material_list");
+			InfoUtils.showGuiOrInGameMessage(Message.MessageType.WARNING, "tweakermore.impl.tweakmAutoCollectMaterialListItem.no_material_list");
 		}
 		return true;
 	}

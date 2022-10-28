@@ -30,7 +30,7 @@ public class ContainerCleaner implements IContainerProcessor
 				counter++;
 			}
 		}
-		InfoUtils.printActionbarMessage("tweakermore.config.tweakmAutoCleanContainer.container_cleaned", counter, containerScreen.getTitle());
+		InfoUtils.printActionbarMessage("tweakermore.impl.tweakmAutoCleanContainer.container_cleaned", counter, containerScreen.getTitle());
 		return true;
 	}
 }

@@ -20,7 +20,6 @@ tweakermore:
         当执行创造模式的提取方块（按下中键）时，如果热键处于按下状态，
         则将目标方块的方块状态存储到提取的物品的nbt中，名为“BlockStateTag”
         因此，在你用提取的物品放置方块时，你可以直接放下与之前被选择的方块状态相同的方块
-      message: 已储存%1$s的方块状态
     infoViewBeamAngle:
       .: 信息展示设置-光柱渲染策略角度
       comment: |-
@@ -67,8 +66,6 @@ tweakermore:
       comment: |-
         展示位于错误维度中重生类方块的爆炸伤害
         它还会估计并显示发生爆炸后你的剩余生命值
-      message:
-        damage: '伤害: %1$s'
       pretty_name: 信息展示-重生方块爆炸伤害
     infoViewRespawnBlockExplosionTextAlpha:
       .: 信息展示-重生方块爆炸伤害-文本透明度
@@ -98,16 +95,12 @@ tweakermore:
     serverMsptMetricsStatisticTypeCycle:
       .: 服务端mspt指标统计类型循环
       comment: 一个快速循环切换选项serverMsptMetricsStatisticType的值的快捷键
-      message:
-        cycled: 已将统计类型切换至%1$s
-        hint: '统计类型: %1$s'
     tweakmAutoCleanContainer:
       .: 自动清空容器
       comment: |-
         打开容器后，自动将容器内的所有物品扔出
         然后关闭容器
       pretty_name: 自动清空容器
-      container_cleaned: 已扔出容器 %2$s 中 %1$s 个槽位中的所有物品
     tweakmAutoCleanContainerListType:
       .: 自动清空容器-名单约束类型
       comment: 触发自动清空容器功能的物品名单约束类型
@@ -123,11 +116,6 @@ tweakermore:
         打开容器后，自动收集litematica材料列表中缺失的物品至玩家物品栏
         然后关闭容器
       pretty_name: 自动收集材料列表物品
-      info:
-        title: '从%1$s中收集了:'
-        line: '- %1$s 个%2$s，仍需 %3$s'
-      took_nothing: 未在%1$s中收集任何材料列表中需要的物品
-      no_material_list: 没有生效的材料列表
     tweakmAutoFillContainer:
       .: 自动装填容器
       comment: |-
@@ -135,8 +123,6 @@ tweakermore:
         当且仅当占用格子数最多的物品是唯一的
         然后关闭容器
       pretty_name: 自动装填容器
-      container_filled: 已使用所有 %2$s 物品装填容器 %1$s (%3$s)
-      best_slot_not_found: 未找到最适合装填容器的物品
     tweakmAutoPickSchematicBlock:
       .: 自动选择原理图方块
       comment: |-
@@ -150,20 +136,16 @@ tweakermore:
         自动将在容器中也存在的背包物品放回容器中
         然后关闭容器
       pretty_name: 自动放回已存在的物品
-      result: 已将 %1$s 槽位中的物品放回 %2$s
     tweakmAutoVillagerTradeFavorites:
       .: 自动交易收藏村民交易
       comment: |-
         在打开村民交易GUI时自动触发ItemScroller模组的villagerTradeFavorites功能
         然后关闭村民交易GUI
       pretty_name: 自动交易收藏村民交易
-      triggered: 已对%2$s使用%1$s
-      no_favorite: '%1$s没有收藏的交易'
     tweakmContainerProcessorHint:
       .: 自动容器处理提示
       comment: 在界面右上角显示自动容器处理相关功能的开启情况，包括：
       pretty_name: 自动容器处理提示
-      title: 启用的自动容器处理功能
     tweakmContainerProcessorHintPos:
       .: 自动容器处理提示-位置
       comment: 自动容器处理提示渲染时所用的显示位置
@@ -192,9 +174,6 @@ tweakermore:
         在受到伤害时断开连接
         触发断开连接的玩家血量阈值可以在safeAfkHealthThreshold中设置
       pretty_name: 安全挂机
-      received_damage: |-
-        于 %1$s 受到伤害
-        剩余生命值: %2$s
     tweakmSchematicBlockPlacementRestriction:
       .: 原理图方块放置限制
       comment: |-
@@ -203,17 +182,6 @@ tweakermore:
         可以完美地与tweakeroo的方块放置功能兼容
         在litematica的放置限制或轻松放置开启时无效
       pretty_name: 原理图方块放置限制
-      info:
-        interaction_not_allowed: 不允许方块交互交互 (%1$s)
-        is_air: 此处不允许方块放置 (不存在方块)
-        no_block: '%1$s不存在对应的物品'
-        outside_the_layer: 此处不允许方块放置 (位于渲染层外)
-        wrong_item: 需要%1$s
-        wrong_block_type: 错误的方块类型，应该为%1$s
-        wrong_slab: 错误的半砖类型，应该为%1$s
-        wrong_facing: 错误的方块朝向，应该为%1$s
-        interact_not_allow:
-          property_protection: 方块属性保护
     tweakmSchematicBlockPlacementRestrictionHint:
       .: 原理图方块放置限制-提示范围
       comment: 在“原理图方块放置限制”取消方块放置时是否显示提示信息的策略
@@ -233,8 +201,6 @@ tweakermore:
       .: 原理图方块放置限制-检查半砖类型
       comment: 选项“原理图方块放置限制”是否应该检查将要放置的半砖的半砖类型
       pretty_name: 原理图方块放置限制-检查半砖类型
-    tweakmShowRedstoneDustUpdateOrder:
-      pretty_name: 显示红石粉更新顺序
     villagerOfferUsesDisplay:
       .: 村民交易次数显示
       comment: |-
@@ -511,10 +477,6 @@ tweakermore:
         - Litematica的方块信息显示
         - MiniHUD的蜂巢蜜蜂数量显示
         需要玩家拥有服务器的OP权限（权限等级2）才能正常工作
-      schematic_sync:
-        start: 正在同步选区%1$s中方块实体及实体的数据
-        progress: 已同步%1$s/%2$s个方块实体及%3$s/%4$s个实体的数据 (%5$s)
-        synced: 已从服务端同步%1$s个方块实体及%2$s个实体的数据
     serverDataSyncerQueryInterval:
       .: 服务端数据同步器查询间隔
       comment: |-
@@ -583,7 +545,6 @@ tweakermore:
     tweakerMoreDevMixinAudit:
       .: TweakerMore开发-Mixin审计
       comment: 强制加载所有mixin目标类
-      success: Mixin审计成功
     tweakerMoreDevPrintDoc:
       .: TweakerMore开发-打印文档
       comment: 文档生成器
@@ -683,11 +644,62 @@ tweakermore:
       lastUsedTime: 上次使用时间
       useAmount: 使用次数
 
-  # ================================ Misc ================================
+  # ================================ Feature Implementations ================================
 
   impl:
+    creativePickBlockWithState:
+      message: 已储存%1$s的方块状态
+    infoViewRespawnBlockExplosion:
+      damage: '伤害: %1$s'
+    serverDataSyncer:
+      schematic_sync:
+        start: 正在同步选区%1$s中方块实体及实体的数据
+        progress: 已同步%1$s/%2$s个方块实体及%3$s/%4$s个实体的数据 (%5$s)
+        synced: 已从服务端同步%1$s个方块实体及%2$s个实体的数据
+    serverMsptMetricsStatisticTypeCycle:
+      cycled: 已将统计类型切换至%1$s
+      hint: '统计类型: %1$s'
     shulkerTooltipHintBuilder:
       more: '... %1$sx'
+    tweakerMoreDevMixinAudit:
+      success: Mixin审计成功
+    tweakmAutoCleanContainer:
+      container_cleaned: 已扔出容器 %2$s 中 %1$s 个槽位中的所有物品
+    tweakmAutoCollectMaterialListItem:
+      info:
+        title: '从%1$s中收集了:'
+        line: '- %1$s 个%2$s，仍需 %3$s'
+      took_nothing: 未在%1$s中收集任何材料列表中需要的物品
+      no_material_list: 没有生效的材料列表
+    tweakmAutoFillContainer:
+      container_filled: 已使用所有 %2$s 物品装填容器 %1$s (%3$s)
+      best_slot_not_found: 未找到最适合装填容器的物品
+    tweakmAutoPutBackExistedItem:
+      result: 已将 %1$s 槽位中的物品放回 %2$s
+    tweakmAutoVillagerTradeFavorites:
+      triggered: 已对%2$s使用%1$s
+      no_favorite: '%1$s没有收藏的交易'
+    tweakmContainerProcessorHint:
+      title: 启用的自动容器处理功能
+    tweakmSafeAfk:
+      received_damage: |-
+        于 %1$s 受到伤害
+        剩余生命值: %2$s
+    tweakmSchematicBlockPlacementRestriction:
+      info:
+        interaction_not_allowed: 不允许方块交互交互 (%1$s)
+        is_air: 此处不允许方块放置 (不存在方块)
+        no_block: '%1$s不存在对应的物品'
+        outside_the_layer: 此处不允许方块放置 (位于渲染层外)
+        wrong_item: 需要%1$s
+        wrong_block_type: 错误的方块类型，应该为%1$s
+        wrong_slab: 错误的半砖类型，应该为%1$s
+        wrong_facing: 错误的方块朝向，应该为%1$s
+        interact_not_allow:
+          property_protection: 方块属性保护
+
+  # ================================ Misc ================================
+
   util:
     mod:
       carpet: Fabric Carpet

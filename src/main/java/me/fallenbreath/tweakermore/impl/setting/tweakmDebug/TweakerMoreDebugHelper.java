@@ -15,6 +15,6 @@ public class TweakerMoreDebugHelper
 	public static void forceLoadAllMixins()
 	{
 		MixinEnvironment.getCurrentEnvironment().audit();
-		InfoUtils.showGuiOrInGameMessage(Message.MessageType.SUCCESS, "tweakermore.config.tweakerMoreDevMixinAudit.success");
+		InfoUtils.showGuiOrInGameMessage(Message.MessageType.SUCCESS, "tweakermore.impl.tweakerMoreDevMixinAudit.success");
 	}
 }

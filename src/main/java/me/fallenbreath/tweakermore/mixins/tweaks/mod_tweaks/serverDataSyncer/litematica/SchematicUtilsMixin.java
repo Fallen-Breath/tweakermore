@@ -68,6 +68,6 @@ public abstract class SchematicUtilsMixin
 	@Unique
 	private static void showMessage$TKM(Message.MessageType type, String textName, Object... args)
 	{
-		InfoUtils.showGuiOrInGameMessage(type, 3000, "tweakermore.config.serverDataSyncer.schematic_sync." + textName, args);
+		InfoUtils.showGuiOrInGameMessage(type, 3000, "tweakermore.impl.serverDataSyncer.schematic_sync." + textName, args);
 	}
 }

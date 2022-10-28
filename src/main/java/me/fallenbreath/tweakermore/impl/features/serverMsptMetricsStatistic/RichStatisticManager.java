@@ -40,7 +40,7 @@ public class RichStatisticManager
 		IConfigOptionListEntry value = TweakerMoreConfigs.SERVER_MSPT_METRICS_STATISTIC_TYPE.getOptionListValue();
 		value = value.cycle(true);
 		TweakerMoreConfigs.SERVER_MSPT_METRICS_STATISTIC_TYPE.setOptionListValue(value);
-		InfoUtils.printActionbarMessage("tweakermore.config.serverMsptMetricsStatisticTypeCycle.message.cycled", value.getDisplayName());
+		InfoUtils.printActionbarMessage("tweakermore.impl.serverMsptMetricsStatisticTypeCycle.cycled", value.getDisplayName());
 	}
 
 	public void recordGameTickMetrics(long msThisTick)
@@ -80,7 +80,7 @@ public class RichStatisticManager
 			return;
 		}
 
-		String text = StringUtils.translate("tweakermore.config.serverMsptMetricsStatisticTypeCycle.message.hint", value.getDisplayName());
+		String text = StringUtils.translate("tweakermore.impl.serverMsptMetricsStatisticTypeCycle.hint", value.getDisplayName());
 		MinecraftClient mc = MinecraftClient.getInstance();
 		int height =
 				//#if MC >= 11500

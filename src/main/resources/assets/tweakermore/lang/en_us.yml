@@ -20,7 +20,6 @@ tweakermore:
         When performing creative pick block action (middle click) with hotkey pressed,
         store the target block's block state into the nbt named "BlockStateTag" of the picked item.
         So the block state can be restored when you place blocks with the picked item
-      message: Block state of %1$s stored
     infoViewBeamAngle:
       .: infoViewBeamAngle
       comment: |-
@@ -68,8 +67,6 @@ tweakermore:
         Show the explosion damage of respawn blocks located in wrong dimension
         It will also estimate and display your remaining health if it explodes
       pretty_name: Info View Respawn Block Explosion
-      message:
-        damage: 'Damage: %1$s'
     infoViewRespawnBlockExplosionTextAlpha:
       .: infoViewRespawnBlockExplosionTextAlpha
       comment: The alpha value of the floating text used in infoViewRespawnBlockExplosion
@@ -98,16 +95,12 @@ tweakermore:
     serverMsptMetricsStatisticTypeCycle:
       .: serverMsptMetricsStatisticTypeCycle
       comment: A hotkey to quickly cycle forward the value of serverMsptMetricsStatisticType
-      message:
-        cycled: Cycled statistic type to %1$s
-        hint: 'Statistic type: %1$s'
     tweakmAutoCleanContainer:
       .: tweakmAutoCleanContainer
       comment: |-
         Automatically drops everything in the opened container
         and then close the container
       pretty_name: Auto Clean Container
-      container_cleaned: Dropped all items in %1$s slots inside %2$s
     tweakmAutoCleanContainerListType:
       .: tweakmAutoCleanContainerListType
       comment: The item restriction type for tweakmAutoCleanContainer
@@ -123,11 +116,6 @@ tweakermore:
         Automatically collect missing items in litematica mod material list in the opened container to player inventory
         and then close the container
       pretty_name: Auto Collect Material List Item
-      info:
-        title: Items took from container %1$s
-        line: '- %1$sx %2$s, still missing %3$s'
-      took_nothing: Took nothing required in the material list from %1$s
-      no_material_list: No material list is activated
     tweakmAutoFillContainer:
       .: tweakmAutoFillContainer
       comment: |-
@@ -135,8 +123,6 @@ tweakermore:
         iff the item stack is the only most numerous one
         and then close the container
       pretty_name: Auto Fill Container
-      container_filled: Filled %1$s with all %2$s items (%3$s)
-      best_slot_not_found: Most suitable item to fill the container not found
     tweakmAutoPickSchematicBlock:
       .: tweakmAutoPickSchematicBlock
       comment: |-
@@ -150,20 +136,16 @@ tweakermore:
         Automatically put back all items which also exist in the container from your inventory into the container
         and then close the container
       pretty_name: Auto Put Back Matched Item
-      result: Put back %1$s slot items into %2$s
     tweakmAutoVillagerTradeFavorites:
       .: tweakmAutoVillagerTradeFavorites
       comment: |-
         Automatically trigger item scroller's villagerTradeFavorites feature when a merchant screen is opened
         and then close the merchant screen
       pretty_name: Auto Villager Trade Favorites
-      triggered: '%1$s is triggered for %2$s'
-      no_favorite: "%1$s doesn't have any favorite trades"
     tweakmContainerProcessorHint:
       .: tweakmContainerProcessorHint
       comment: 'Displays the enabling status of auto container processing related features, including:'
       pretty_name: Auto Container Processor Hint
-      title: Enabled auto container processing features
     tweakmContainerProcessorHintPos:
       .: tweakmContainerProcessorHintPos
       comment: The displayed position of the auto container processor enable status hint
@@ -192,9 +174,6 @@ tweakermore:
         Disconnect when receive damage
         Health threshold to disconnect can be set via safeAfkHealthThreshold
       pretty_name: Safe AFK
-      received_damage: |-
-        Received damage at %1$
-        Health remaining: %2$s
     tweakmSchematicBlockPlacementRestriction:
       .: tweakmSchematicBlockPlaceRS
       comment: |-
@@ -203,17 +182,6 @@ tweakermore:
         it works nicely with tweakeroo's placement tweaks
         Does not work with litematica's or easy place mode
       pretty_name: Schematic Block Placement Restriction
-      info:
-        interaction_not_allowed: Block interaction not allowed (%1$s)
-        is_air: Block placement not allowed (is air)
-        no_block: No item for %1$s
-        outside_the_layer: Block placement not allowed (outside the layer)
-        wrong_item: Require %1$s
-        wrong_block_type: Wrong block type, should be %1$s
-        wrong_slab: Wrong slab type, should be %1$s
-        wrong_facing: Wrong block facing, should be %1$s
-        interact_not_allow:
-          property_protection: block property protection
     tweakmSchematicBlockPlacementRestrictionHint:
       .: tweakmSchematicBlockPlacementRSHint
       comment: Switch for displaying hint message when option tweakmSchematicBlockPlacementRestriction cancels a placement
@@ -233,8 +201,6 @@ tweakermore:
       .: tweakmSchematicBlockPlacementRSChkSlab
       comment: Should tweakmSchematicBlockPlacementRestriction check the slab type of the to be placed slab block
       pretty_name: Schematic Block Placement Restriction Check Slab
-    tweakmShowRedstoneDustUpdateOrder:
-      pretty_name: Show Redstone Dust Update Order
     villagerOfferUsesDisplay:
       .: villagerOfferUsesDisplay
       comment: |-
@@ -511,10 +477,6 @@ tweakermore:
         - MiniHUD bee hive bee amount display
         - Litematica block info overlay
         Requires player having OP permission (permission level 2) for it to work
-      schematic_sync:
-        start: Syncing block entities and entities in the selection area %1$s
-        progress: Synced %1$s/%1$s block entities and %3$s/%4$s entities (%5$s)
-        synced: Synced %1$s block entities and %2$s entities from the server
     serverDataSyncerQueryInterval:
       .: serverDataSyncerQueryInterval
       comment: |-
@@ -583,7 +545,6 @@ tweakermore:
     tweakerMoreDevMixinAudit:
       .: tweakerMoreDevMixinAudit
       comment: Forced load all mixin target classes
-      success: Mixin audit succeeded
     tweakerMoreDevPrintDoc:
       .: tweakerMoreDevPrintDoc
       comment: Document Printer
@@ -683,11 +644,62 @@ tweakermore:
       lastUsedTime: Last used time
       useAmount: Use amount
 
-  # ================================ Misc ================================
+  # ================================ Feature Implementations ================================
 
   impl:
+    creativePickBlockWithState:
+      message: Block state of %1$s stored
+    infoViewRespawnBlockExplosion:
+      damage: 'Damage: %1$s'
+    serverDataSyncer:
+      schematic_sync:
+        start: Syncing block entities and entities in the selection area %1$s
+        progress: Synced %1$s/%1$s block entities and %3$s/%4$s entities (%5$s)
+        synced: Synced %1$s block entities and %2$s entities from the server
+    serverMsptMetricsStatisticTypeCycle:
+      cycled: Cycled statistic type to %1$s
+      hint: 'Statistic type: %1$s'
     shulkerTooltipHintBuilder:
       more: '... %1$sx'
+    tweakerMoreDevMixinAudit:
+      success: Mixin audit succeeded
+    tweakmAutoCleanContainer:
+      container_cleaned: Dropped all items in %1$s slots inside %2$s
+    tweakmAutoCollectMaterialListItem:
+      info:
+        title: Items took from container %1$s
+        line: '- %1$sx %2$s, still missing %3$s'
+      took_nothing: Took nothing required in the material list from %1$s
+      no_material_list: No material list is activated
+    tweakmAutoFillContainer:
+      container_filled: Filled %1$s with all %2$s items (%3$s)
+      best_slot_not_found: Most suitable item to fill the container not found
+    tweakmAutoPutBackExistedItem:
+      result: Put back %1$s slot items into %2$s
+    tweakmAutoVillagerTradeFavorites:
+      triggered: '%1$s is triggered for %2$s'
+      no_favorite: "%1$s doesn't have any favorite trades"
+    tweakmContainerProcessorHint:
+      title: Enabled auto container processing features
+    tweakmSafeAfk:
+      received_damage: |-
+        Received damage at %1$
+        Health remaining: %2$s
+    tweakmSchematicBlockPlacementRestriction:
+      info:
+        interaction_not_allowed: Block interaction not allowed (%1$s)
+        is_air: Block placement not allowed (is air)
+        no_block: No item for %1$s
+        outside_the_layer: Block placement not allowed (outside the layer)
+        wrong_item: Require %1$s
+        wrong_block_type: Wrong block type, should be %1$s
+        wrong_slab: Wrong slab type, should be %1$s
+        wrong_facing: Wrong block facing, should be %1$s
+        interact_not_allow:
+          property_protection: block property protection
+
+  # ================================ Misc ================================
+
   util:
     mod:
       carpet: Fabric Carpet

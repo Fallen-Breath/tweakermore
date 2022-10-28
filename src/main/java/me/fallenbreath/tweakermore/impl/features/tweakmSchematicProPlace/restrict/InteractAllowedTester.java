@@ -11,7 +11,7 @@ abstract class InteractAllowedTester
 
 	private static String msg(String id)
 	{
-		return StringUtils.translate("tweakermore.config.tweakmSchematicBlockPlacementRestriction.info.interact_not_allow." + id);
+		return StringUtils.translate("tweakermore.impl.tweakmSchematicBlockPlacementRestriction.info.interact_not_allow." + id);
 	}
 
 	/**

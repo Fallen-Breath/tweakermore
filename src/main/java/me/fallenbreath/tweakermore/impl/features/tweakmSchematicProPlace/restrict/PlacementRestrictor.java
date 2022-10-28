@@ -34,7 +34,7 @@ public class PlacementRestrictor
 {
 	private static void info(String key, Object... args)
 	{
-		InfoUtils.printActionbarMessage("tweakermore.config.tweakmSchematicBlockPlacementRestriction.info." + key, args);
+		InfoUtils.printActionbarMessage("tweakermore.impl.tweakmSchematicBlockPlacementRestriction.info." + key, args);
 	}
 
 	public static boolean canDoBlockPlacement(MinecraftClient mc, BlockHitResult hitResult, ItemPlacementContext context)

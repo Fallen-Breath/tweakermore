@@ -50,7 +50,7 @@ public class ContainerItemPutBackProcessor implements IContainerProcessor
 		String color = matchedCount > 0 ? (movedCount == matchedCount ? GuiBase.TXT_GREEN : GuiBase.TXT_GOLD) : GuiBase.TXT_RED;
 		String percentage = String.format("%s%d/%d%s", color, movedCount, matchedCount, GuiBase.TXT_RST);
 		InfoUtils.printActionbarMessage(
-				"tweakermore.config.tweakmAutoPutBackExistedItem.result",
+				"tweakermore.impl.tweakmAutoPutBackExistedItem.result",
 				percentage, containerScreen.getTitle()
 		);
 		return true;
