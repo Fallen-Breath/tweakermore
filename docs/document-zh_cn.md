@@ -1186,6 +1186,19 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
     - Optifine (`optifabric`)
 
 
+### Optifine女巫帽子 (ofWitchHat)
+
+在渲染玩家实体时，让玩家戴上Optifine的女巫帽子
+
+- 分类: 模组修改
+- 类型: 选项列表
+- 默认值: `不修改`
+- 可用选项: `不修改`, `应用于我自己`, `应用于所有人`
+- 模组约束:
+  - 依赖模组:
+    - Optifine (`optifabric`)
+
+
 ### Replay精准时间戳显示 (replayAccurateTimelineTimestamp)
 
 在Replay模组的时间线上显示精确到毫秒的时间戳

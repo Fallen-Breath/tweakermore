@@ -26,6 +26,7 @@ import me.fallenbreath.tweakermore.impl.features.tweakmAutoContainerProcess.Auto
 import me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.tweakmFlawlessFrames.FlawlessFramesHandler;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.eCraftMassCraftCompact.EasierCraftingRegistrar;
+import me.fallenbreath.tweakermore.impl.mod_tweaks.ofPlayerExtraModelOverride.OptifinePlayerExtraModelOverrider;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.impl.setting.tweakmDebug.TweakerMoreDebugHelper;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
@@ -395,6 +396,13 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBoolean MINIHUD_DISABLE_LIGHT_OVERLAY_SPAWN_CHECK = newConfigBoolean("minihudDisableLightOverlaySpawnCheck", false);
 
 	@Config(
+			type = Config.Type.LIST,
+			restriction = @Restriction(require = @Condition(optifine)),
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigOptionList OF_WITCH_HAT = newConfigOptionList("ofWitchHat", OptifineExtraModelRenderStrategy.DEFAULT);
+
+	@Config(
 			type = Config.Type.GENERIC,
 			restriction = @Restriction(require = @Condition(optifine)),
 			category = Config.Category.MOD_TWEAKS
@@ -564,6 +572,7 @@ public class TweakerMoreConfigs
 		// value listeners
 		ECRAFT_ITEM_SCROLLER_COMPACT.setValueChangeCallback(EasierCraftingRegistrar::onConfigValueChanged);
 		HIDE_DISABLE_OPTIONS.setValueChangeCallback(redrawConfigGui);
+		OF_WITCH_HAT.setValueChangeCallback(OptifinePlayerExtraModelOverrider::onConfigValueChanged);
 		TWEAKM_FLAWLESS_FRAMES.setValueChangeCallback(config -> FlawlessFramesHandler.setEnabled(config.getBooleanValue()));
 
 		// debugs

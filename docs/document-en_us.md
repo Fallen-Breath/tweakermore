@@ -1186,6 +1186,19 @@ Increases FPS with smooth lighting on for a few
     - Optifine (`optifabric`)
 
 
+### ofWitchHat
+
+Let players wear the witch hat from Optifine when rendering player entities
+
+- Category: Mods Tweaks
+- Type: option list
+- Default value: `Untouched`
+- Available options: `Untouched`, `Apply to me`, `Apply to everyone`
+- Mod restrictions:
+  - Required mods:
+    - Optifine (`optifabric`)
+
+
 ### replayAccurateTimelineTimestamp
 
 Display timestamps accurate to milliseconds on the timeline in replay mod

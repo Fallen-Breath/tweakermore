@@ -438,6 +438,9 @@ tweakermore:
         Mini HUD light level overlay are rendered only on spawn-able block
         This option removes the spawn-able check,
         so light overlay will be rendered at every non-solid block above a non-air non-fluid block
+    ofWitchHat:
+      .: ofWitchHat
+      comment: Let players wear the witch hat from Optifine when rendering player entities
     ofRemoveSignTextRenderDistance:
       .: ofRemoveSignTextRenderDistance
       comment: |-
@@ -579,6 +582,10 @@ tweakermore:
       second_max: Maximum MSPT per second
       minute_avg: Average MSPT per minute
       minute_max: Maximum MSPT per minute
+    optifineExtraModelRenderStrategy:
+      untouched: Untouched
+      me: Apply to me
+      all: Apply to everyone
 
   # ================================ GUI ================================
 
