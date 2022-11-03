@@ -1,7 +1,6 @@
 package me.fallenbreath.tweakermore.impl.features.serverMsptMetricsStatistic;
 
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
-import fi.dy.masa.malilib.util.InfoUtils;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.listentries.ServerMsptMetricsStatisticType;
@@ -33,14 +32,6 @@ public class RichStatisticManager
 		this.statGameTick.addNewSampleCallback(this.statSecondMax::addData);
 		this.statSecondAvg.addNewSampleCallback(this.statMinuteAvg::addData);
 		this.statSecondMax.addNewSampleCallback(this.statMinuteMax::addData);
-	}
-
-	public static void cycleStatisticType()
-	{
-		IConfigOptionListEntry value = TweakerMoreConfigs.SERVER_MSPT_METRICS_STATISTIC_TYPE.getOptionListValue();
-		value = value.cycle(true);
-		TweakerMoreConfigs.SERVER_MSPT_METRICS_STATISTIC_TYPE.setOptionListValue(value);
-		InfoUtils.printActionbarMessage("tweakermore.impl.serverMsptMetricsStatisticTypeCycle.cycled", value.getDisplayName());
 	}
 
 	public void recordGameTickMetrics(long msThisTick)

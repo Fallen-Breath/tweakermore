@@ -10,6 +10,7 @@ import me.fallenbreath.tweakermore.config.Config;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
 import me.fallenbreath.tweakermore.config.options.IHotkeyWithSwitch;
+import me.fallenbreath.tweakermore.config.options.IOptionListHotkeyed;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.util.StringUtil;
 import me.fallenbreath.tweakermore.util.condition.ModPredicate;
@@ -65,6 +66,10 @@ public class DocumentPrinter
 		{
 			id = "hotkey_with_switch";
 		}
+		else if (config instanceof IOptionListHotkeyed)
+		{
+			id = "option_list_hotkeyed";
+		}
 		else
 		{
 			id = config.getType().name().toLowerCase();
@@ -97,17 +102,17 @@ public class DocumentPrinter
 		{
 			return hotkey + ", " + codeBlock(String.valueOf(((IHotkeyTogglable)config).getDefaultBooleanValue()));
 		}
-		else if (config instanceof IHotkey)
-		{
-			return hotkey;
-		}
 		else if (config instanceof IConfigStringList)
 		{
 			return codeBlock(((IConfigStringList)config).getDefaultStrings().toString());
 		}
-		else if (config instanceof IConfigOptionList)
+		else if (config instanceof IConfigOptionList)  // IOptionListHotkeyed here too
 		{
 			return codeBlock(((IConfigOptionList)config).getDefaultOptionListValue().getDisplayName());
+		}
+		else if (config instanceof IHotkey)
+		{
+			return hotkey;
 		}
 		else if (config instanceof IStringRepresentable)
 		{

@@ -884,18 +884,9 @@ Type of the server mspt metrics statistic display in debug hud
 Set to "Game tick" to keep vanilla behavior
 
 - Category: MC Tweaks
-- Type: option list
+- Type: option list with hotkey
 - Default value: `MSPT (vanilla)`
 - Available options: `MSPT (vanilla)`, `Average MSPT per second`, `Maximum MSPT per second`, `Average MSPT per minute`, `Maximum MSPT per minute`
-
-
-### serverMsptMetricsStatisticTypeCycle
-
-A hotkey to quickly cycle forward the value of serverMsptMetricsStatisticType
-
-- Category: MC Tweaks
-- Type: hotkey
-- Default value: *no hotkey*
 
 
 ### shulkerTooltipEnchantmentHint
@@ -1191,7 +1182,7 @@ Increases FPS with smooth lighting on for a few
 Let players wear the witch hat from Optifine when rendering player entities
 
 - Category: Mods Tweaks
-- Type: option list
+- Type: option list with hotkey
 - Default value: `Untouched`
 - Available options: `Untouched`, `Apply to me`, `Apply to everyone`
 - Mod restrictions:

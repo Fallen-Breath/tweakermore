@@ -21,7 +21,6 @@ import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.impl.features.copySignTextToClipBoard.SignTextCopier;
 import me.fallenbreath.tweakermore.impl.features.infoView.InfoViewRenderer;
 import me.fallenbreath.tweakermore.impl.features.refreshInventory.InventoryRefresher;
-import me.fallenbreath.tweakermore.impl.features.serverMsptMetricsStatistic.RichStatisticManager;
 import me.fallenbreath.tweakermore.impl.features.tweakmAutoContainerProcess.AutoContainerProcessorHintRenderer;
 import me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.tweakmFlawlessFrames.FlawlessFramesHandler;
@@ -118,10 +117,7 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigDouble SAFE_AFK_HEALTH_THRESHOLD = newConfigDouble("safeAfkHealthThreshold", 10, 0, 100);
 
 	@Config(type = Config.Type.LIST, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigOptionList SERVER_MSPT_METRICS_STATISTIC_TYPE = newConfigOptionList("serverMsptMetricsStatisticType", ServerMsptMetricsStatisticType.DEFAULT);
-
-	@Config(type = Config.Type.HOTKEY, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigHotkey SERVER_MSPT_METRICS_STATISTIC_TYPE_CYCLE = newConfigHotKey("serverMsptMetricsStatisticTypeCycle", "");
+	public static final TweakerMoreConfigOptionListHotkeyed SERVER_MSPT_METRICS_STATISTIC_TYPE = newConfigOptionListHotkeyed("serverMsptMetricsStatisticType", ServerMsptMetricsStatisticType.DEFAULT);
 
 	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_CLEAN_CONTAINER = newConfigBooleanHotkeyed("tweakmAutoCleanContainer");
@@ -400,7 +396,7 @@ public class TweakerMoreConfigs
 			restriction = @Restriction(require = @Condition(optifine)),
 			category = Config.Category.MOD_TWEAKS
 	)
-	public static final TweakerMoreConfigOptionList OF_WITCH_HAT = newConfigOptionList("ofWitchHat", OptifineExtraModelRenderStrategy.DEFAULT);
+	public static final TweakerMoreConfigOptionListHotkeyed OF_WITCH_HAT = newConfigOptionListHotkeyed("ofWitchHat", OptifineExtraModelRenderStrategy.DEFAULT);
 
 	@Config(
 			type = Config.Type.GENERIC,
@@ -567,7 +563,6 @@ public class TweakerMoreConfigs
 		setHotkeyCallback(COPY_SIGN_TEXT_TO_CLIPBOARD, SignTextCopier::copySignText, false);
 		setHotkeyCallback(OPEN_TWEAKERMORE_CONFIG_GUI, TweakerMoreConfigGui::openGui, true);
 		setHotkeyCallback(REFRESH_INVENTORY, InventoryRefresher::refresh, false);
-		setHotkeyCallback(SERVER_MSPT_METRICS_STATISTIC_TYPE_CYCLE, RichStatisticManager::cycleStatisticType, false);
 
 		// value listeners
 		ECRAFT_ITEM_SCROLLER_COMPACT.setValueChangeCallback(EasierCraftingRegistrar::onConfigValueChanged);

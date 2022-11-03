@@ -76,4 +76,19 @@ public abstract class ConfigFactory
 	{
 		return new TweakerMoreConfigOptionList(name, defaultValue);
 	}
+
+	public static TweakerMoreConfigOptionListHotkeyed newConfigOptionListHotkeyed(String name, IConfigOptionListEntry defaultValue)
+	{
+		return newConfigOptionListHotkeyed(name, defaultValue, "");
+	}
+
+	public static TweakerMoreConfigOptionListHotkeyed newConfigOptionListHotkeyed(String name, IConfigOptionListEntry defaultValue, String defaultStorageString)
+	{
+		return new TweakerMoreConfigOptionListHotkeyed(name, defaultValue, defaultStorageString);
+	}
+
+	public static TweakerMoreConfigOptionListHotkeyed newConfigOptionListHotkeyed(String name, IConfigOptionListEntry defaultValue, String defaultStorageString, KeybindSettings settings)
+	{
+		return new TweakerMoreConfigOptionListHotkeyed(name, defaultValue, defaultStorageString, settings);
+	}
 }

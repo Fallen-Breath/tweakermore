@@ -666,7 +666,6 @@ tweakermore:
         progress: Synced %1$s/%1$s block entities and %3$s/%4$s entities (%5$s)
         synced: Synced %1$s block entities and %2$s entities from the server
     serverMsptMetricsStatisticTypeCycle:
-      cycled: Cycled statistic type to %1$s
       hint: 'Statistic type: %1$s'
     shulkerTooltipHintBuilder:
       more: '... %1$sx'
@@ -708,6 +707,10 @@ tweakermore:
           property_protection: block property protection
 
   # ================================ Misc ================================
+
+  config_type:
+    option_list_hotkeyed:
+      cycled_message: Cycled option %1$s to %2$s
 
   util:
     mod:
@@ -759,3 +762,4 @@ tweakermore:
       hotkey: hotkey
       hotkey_togglable: hotkey togglable boolean
       hotkey_with_switch: hotkey with switch
+      option_list_hotkeyed: option list with hotkey

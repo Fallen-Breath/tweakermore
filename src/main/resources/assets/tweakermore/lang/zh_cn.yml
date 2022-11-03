@@ -666,7 +666,6 @@ tweakermore:
         progress: 已同步%1$s/%2$s个方块实体及%3$s/%4$s个实体的数据 (%5$s)
         synced: 已从服务端同步%1$s个方块实体及%2$s个实体的数据
     serverMsptMetricsStatisticTypeCycle:
-      cycled: 已将统计类型切换至%1$s
       hint: '统计类型: %1$s'
     shulkerTooltipHintBuilder:
       more: '... %1$sx'
@@ -734,6 +733,10 @@ tweakermore:
       wmch: Where's My Chat History
       xaeroworldmap: Xaero's World Map
 
+  config_type:
+    option_list_hotkeyed:
+      cycled_message: 已将选项 %1$s 切换至 %2$s
+
   # ================================ Document generator ================================
 
   doc_gen:
@@ -759,3 +762,4 @@ tweakermore:
       hotkey: 热键
       hotkey_togglable: 带热键布尔值
       hotkey_with_switch: 带开关热键
+      option_list_hotkeyed: 带热键选项列表

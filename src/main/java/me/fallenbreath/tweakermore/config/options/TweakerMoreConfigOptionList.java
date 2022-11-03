@@ -18,6 +18,7 @@ public class TweakerMoreConfigOptionList extends ConfigOptionList implements Twe
 
 		super.setValueFromJsonElement(element);
 
+		// malilb uses != instead of equals() in ConfigOptionList.setOptionListValue, so we do the same here
 		if (oldValue != this.getOptionListValue())
 		{
 			this.onValueChanged(true);

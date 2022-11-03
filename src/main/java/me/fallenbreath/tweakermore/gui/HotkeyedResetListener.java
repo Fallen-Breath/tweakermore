@@ -1,5 +1,6 @@
 /**
  * Stolen from malilib 1.18 v0.11.4
+ * original name: HotkeyedBooleanResetListener
  */
 package me.fallenbreath.tweakermore.gui;
 
@@ -10,19 +11,19 @@ import fi.dy.masa.malilib.gui.button.ConfigButtonKeybind;
 import fi.dy.masa.malilib.gui.interfaces.IKeybindConfigGui;
 import fi.dy.masa.malilib.hotkeys.IHotkey;
 
-public class HotkeyedBooleanResetListener extends ConfigOptionChangeListenerKeybind
+public class HotkeyedResetListener extends ConfigOptionChangeListenerKeybind
 {
 	private final IHotkey config;
-	private final ButtonGeneric booleanButton;
+	private final ButtonGeneric valueButton;
 	private final ConfigButtonKeybind hotkeyButton;
 	private final ButtonGeneric resetButton;
 	private final IKeybindConfigGui host;
 
-	public HotkeyedBooleanResetListener(IHotkey config, ButtonGeneric booleanButton, ConfigButtonKeybind hotkeyButton, ButtonGeneric resetButton, IKeybindConfigGui host)
+	public HotkeyedResetListener(IHotkey config, ButtonGeneric valueButton, ConfigButtonKeybind hotkeyButton, ButtonGeneric resetButton, IKeybindConfigGui host)
 	{
-		super(config.getKeybind(), hotkeyButton, booleanButton, host);
+		super(config.getKeybind(), hotkeyButton, valueButton, host);
 		this.config = config;
-		this.booleanButton = booleanButton;
+		this.valueButton = valueButton;
 		this.hotkeyButton = hotkeyButton;
 		this.resetButton = resetButton;
 		this.host = host;
@@ -39,7 +40,7 @@ public class HotkeyedBooleanResetListener extends ConfigOptionChangeListenerKeyb
 	@Override
 	public void updateButtons()
 	{
-		this.booleanButton.updateDisplayString();
+		this.valueButton.updateDisplayString();
 		this.hotkeyButton.updateDisplayString();
 		this.resetButton.setEnabled(this.config.isModified());
 	}

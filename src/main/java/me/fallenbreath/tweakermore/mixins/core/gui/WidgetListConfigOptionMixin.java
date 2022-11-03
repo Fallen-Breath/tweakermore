@@ -13,15 +13,17 @@ import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.gui.button.ConfigButtonBoolean;
 import fi.dy.masa.malilib.gui.button.ConfigButtonKeybind;
+import fi.dy.masa.malilib.gui.button.ConfigButtonOptionList;
 import fi.dy.masa.malilib.gui.interfaces.IKeybindConfigGui;
 import fi.dy.masa.malilib.gui.widgets.*;
 import fi.dy.masa.malilib.hotkeys.*;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.IHotkeyWithSwitch;
+import me.fallenbreath.tweakermore.config.options.IOptionListHotkeyed;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.gui.ConfigButtonBooleanSwitch;
-import me.fallenbreath.tweakermore.gui.HotkeyedBooleanResetListener;
+import me.fallenbreath.tweakermore.gui.HotkeyedResetListener;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
 import org.spongepowered.asm.mixin.*;
@@ -138,12 +140,33 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 
 	//#if MC >= 11800
 	//$$ @Inject(
+	//$$ 		method = "addConfigOption",
+	//$$ 		at = @At(
+	//$$ 				value = "INVOKE",
+	//$$ 				target = "Lfi/dy/masa/malilib/gui/button/ConfigButtonOptionList;<init>(IIIILfi/dy/masa/malilib/config/IConfigOptionList;)V"
+	//$$ 		),
+	//$$ 		remap = false,
+	//$$ 		cancellable = true
+	//$$ )
+	//$$ private void tweakerMoreCustomConfigGui_IOptionListHotkeyed(int x, int y, float zLevel, int labelWidth, int configWidth, IConfigBase config, CallbackInfo ci)
+	//$$ {
+	//$$ 	if (this.isTweakerMoreConfigGui())
+	//$$ 	{
+	//$$ 		if (config instanceof IOptionListHotkeyed)
+	//$$ 		{
+	//$$ 			this.addOptionListWithHotkey(x, y, configWidth, (IOptionListHotkeyed)config);
+	//$$ 			ci.cancel();
+	//$$ 		}
+	//$$ 	}
+	//$$ }
+	//$$
+	//$$ @Inject(
 	//$$ 		method = "addHotkeyConfigElements",
 	//$$ 		at = @At(value = "HEAD"),
 	//$$ 		remap = false,
 	//$$ 		cancellable = true
 	//$$ )
-	//$$ private void tweakerMoreCustomConfigGui(int x, int y, int configWidth, String configName, IHotkey config, CallbackInfo ci)
+	//$$ private void tweakerMoreCustomConfigGui_IHotkey(int x, int y, int configWidth, String configName, IHotkey config, CallbackInfo ci)
 	//$$ {
 	//$$ 	if (this.isTweakerMoreConfigGui())
 	//$$ 	{
@@ -183,6 +206,10 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 			{
 				this.addHotkeyWithSwitchButtons(x, y, configWidth, (IHotkeyWithSwitch)config);
 			}
+			else if (config instanceof IOptionListHotkeyed)
+			{
+				this.addOptionListWithHotkey(x, y, configWidth, (IOptionListHotkeyed)config);
+			}
 			else if (((IHotkey)config).getKeybind() instanceof KeybindMulti)
 			{
 				this.addButtonAndHotkeyWidgets(x, y, configWidth, (IHotkey)config);
@@ -199,6 +226,9 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	}
 	//#endif
 
+	/**
+	 * For regular IHotkey
+	 */
 	private void addButtonAndHotkeyWidgets(int x, int y, int configWidth, IHotkey config)
 	{
 		IKeybind keybind = config.getKeybind();
@@ -248,11 +278,21 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 		this.addKeybindResetButton(x, y, keybind, keybindButton);
 	}
 
-	private <T extends IHotkey & IConfigBoolean> void addBooleanAndHotkeyWidgets(int x, int y, int configWidth, T config, ButtonGeneric booleanButton)
+	/*
+	 * ------------------------------------------------
+	 *             Widgets Builders start
+	 * ------------------------------------------------
+	 */
+
+	/**
+	 * Common logic used for IHotkeyTogglable, IHotkeyWithSwitch and IOptionListHotkeyed
+	 * whose layouts all are [some button] [keybind button] [reset button]
+	 */
+	private void addValueWithKeybindWidgets(int x, int y, int configWidth, IHotkey config, ButtonGeneric valueButton)
 	{
 		IKeybind keybind = config.getKeybind();
 
-		int booleanBtnWidth = booleanButton.getWidth();
+		int booleanBtnWidth = valueButton.getWidth();
 		x += booleanBtnWidth + 2;
 		configWidth -= booleanBtnWidth + 2 + 22;
 
@@ -260,12 +300,17 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 		x += configWidth + 2;
 
 		this.addWidget(new WidgetKeybindSettings(x, y, 20, 20, keybind, config.getName(), this.parent, this.host.getDialogHandler()));
+
+		//#if MC >= 11800
+		//$$ x += 22;
+		//#else
 		x += 24;
+		//#endif
 
 		ButtonGeneric resetButton = this.createResetButton(x, y, config);
 
 		ConfigOptionChangeListenerButton booleanChangeListener = new ConfigOptionChangeListenerButton(config, resetButton, null);
-		HotkeyedBooleanResetListener resetListener = new HotkeyedBooleanResetListener(config, booleanButton, keybindButton, resetButton, this.host);
+		HotkeyedResetListener resetListener = new HotkeyedResetListener(config, valueButton, keybindButton, resetButton, this.host);
 
 		this.host.addKeybindChangeListener(
 				//#if MC >= 11800
@@ -275,7 +320,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 				//#endif
 		);
 
-		this.addButton(booleanButton, booleanChangeListener);
+		this.addButton(valueButton, booleanChangeListener);
 		this.addButton(keybindButton, this.host.getButtonPressListener());
 		this.addButton(resetButton, resetListener);
 	}
@@ -284,20 +329,35 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	{
 		int booleanBtnWidth = (configWidth - 24) / 2;
 		ButtonGeneric booleanButton = new ConfigButtonBoolean(x, y, booleanBtnWidth, 20, config);
-		this.addBooleanAndHotkeyWidgets(x, y, configWidth, config, booleanButton);
+		this.addValueWithKeybindWidgets(x, y, configWidth, config, booleanButton);
 	}
 
 	private void addHotkeyWithSwitchButtons(int x, int y, int configWidth, IHotkeyWithSwitch config)
 	{
 		int booleanBtnWidth = (configWidth - 24) / 2;
 		ButtonGeneric booleanButton = new ConfigButtonBooleanSwitch(x, y, booleanBtnWidth, 20, config);
-		this.addBooleanAndHotkeyWidgets(x, y, configWidth, config, booleanButton);
+		this.addValueWithKeybindWidgets(x, y, configWidth, config, booleanButton);
 	}
+
+	private void addOptionListWithHotkey(int x, int y, int configWidth, IOptionListHotkeyed config)
+	{
+		int optionBtnWidth = (configWidth - 24) / 2;
+		ConfigButtonOptionList optionButton = new ConfigButtonOptionList(x, y, optionBtnWidth, 20, config);
+		this.addValueWithKeybindWidgets(x, y, configWidth, config, optionButton);
+	}
+
+	/*
+	 * ------------------------------------------------
+	 *             Widgets Builders ends
+	 * ------------------------------------------------
+	 */
 
 	/*
 	 * Stolen from malilib 1.18 v0.11.4
 	 * to make IHotkeyWithSwitch option panel works
 	 * and also to make compact ConfigBooleanHotkeyed option panel works in <1.18
+	 *
+	 * Compact panel thing starts
 	 */
 
 	@Inject(method = "<init>", at = @At("TAIL"), remap = false)
