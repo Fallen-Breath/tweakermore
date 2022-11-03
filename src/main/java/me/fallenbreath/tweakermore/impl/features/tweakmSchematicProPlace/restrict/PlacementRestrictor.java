@@ -52,6 +52,7 @@ public class PlacementRestrictor
 		// Always permit if it's far from the render range
 		LayerRange layerRange = DataManager.getRenderLayerRange();
 		if (
+				// bruteforce iterating xd
 				BlockPos.stream(
 						pos.add(-MARGIN, -MARGIN, -MARGIN),
 						pos.add(MARGIN, MARGIN, MARGIN)
@@ -68,11 +69,12 @@ public class PlacementRestrictor
 
 		if (schematicWorld != null && player != null && mc.interactionManager != null)
 		{
+			// check if the player will interact with the block
 			{
 				BlockPos interactPos = hitResult.getBlockPos();
 				BlockState interactWorldState = realWorld.getBlockState(interactPos);
 				BlockState interactSchematicState = schematicWorld.getBlockState(interactPos);
-				BlockIntractableTester.CheckResult result = BlockIntractableTester.checkInteract(player, interactWorldState, interactSchematicState);
+				BlockInteractionRestrictor.Result result = BlockInteractionRestrictor.checkInteract(player, interactWorldState, interactSchematicState);
 				switch (result.getType())
 				{
 					case GOOD_INTERACTION:
@@ -127,7 +129,7 @@ public class PlacementRestrictor
 				return false;
 			}
 
-			// check if the player is using the right item stack for block placement
+			// check if the player is using the correct item stack for block placement
 			Hand usedHandForItem = EntityUtils.getUsedHandForItem(player, schematicStack);
 			if (usedHandForItem == null)
 			{

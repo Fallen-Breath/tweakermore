@@ -7,7 +7,7 @@ import net.minecraft.entity.player.PlayerEntity;
 /**
  * Test if the block is interact-able
  */
-interface InteractAbleTester
+public interface InteractAbleTester
 {
 	boolean isInteractAble(PlayerEntity player, BlockState worldState);
 
@@ -26,6 +26,9 @@ interface InteractAbleTester
 		return (player, worldState) -> player.canModifyWorld();
 	}
 
+	/**
+	 * For doors / trapdoors
+	 */
 	static InteractAbleTester notMetal()
 	{
 		return (player, worldState) -> worldState.getMaterial() != Material.METAL;

@@ -5,14 +5,16 @@ import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 
 import java.util.Map;
+import java.util.Optional;
 
 import static me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.restrict.InteractAbleTester.notMetal;
 import static me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.restrict.InteractAbleTester.playerCanModifyWorld;
-import static me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.restrict.InteractAllowedTester.Result;
 import static me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.restrict.InteractAllowedTester.unequalProperty;
 
-public class BlockIntractableTester
+public class BlockInteractionRestrictor
 {
+	// interact-able: check if the block can be interacted
+	// interact-allowed: check if the block interaction is allowed
 	private static final Map<Class<? extends Block>, InteractAbleTester> INTERACT_ABLE_TESTER_MAP = Maps.newHashMap();
 	private static final Map<Class<? extends Block>, InteractAllowedTester> INTERACT_ALLOWED_TESTER_MAP = Maps.newHashMap();
 
@@ -24,14 +26,12 @@ public class BlockIntractableTester
 		private RequirementBuilder(Class<? extends Block> blockClass)
 		{
 			this.blockClass = blockClass;
-		}
-
-		private RequirementBuilder alwaysInteractAble()
-		{
 			INTERACT_ABLE_TESTER_MAP.put(this.blockClass, InteractAbleTester.always());
-			return this;
 		}
 
+		/**
+		 * Set interact-able testers
+		 */
 		private RequirementBuilder when(InteractAbleTester ...testers)
 		{
 			InteractAbleTester tester = InteractAbleTester.always();
@@ -43,6 +43,9 @@ public class BlockIntractableTester
 			return this;
 		}
 
+		/**
+		 * Set interact-allowed tester
+		 */
 		private RequirementBuilder allowIf(InteractAllowedTester tester)
 		{
 			INTERACT_ALLOWED_TESTER_MAP.put(this.blockClass, tester);
@@ -52,7 +55,7 @@ public class BlockIntractableTester
 
 	private static RequirementBuilder interactAble(Class<? extends Block> blockClass)
 	{
-		return new RequirementBuilder(blockClass).alwaysInteractAble();
+		return new RequirementBuilder(blockClass);
 	}
 
 	static
@@ -100,7 +103,7 @@ public class BlockIntractableTester
 				when(notMetal()).allowIf(unequalProperty(DoorBlock.OPEN));
 	}
 
-	public static CheckResult checkInteract(PlayerEntity player, BlockState worldState, BlockState schematicState)
+	public static Result checkInteract(PlayerEntity player, BlockState worldState, BlockState schematicState)
 	{
 		// ref: net.minecraft.client.network.ClientPlayerInteractionManager.interactBlock
 		boolean hasItemOnHand = !player.getMainHandStack().isEmpty() || !player.getOffHandStack().isEmpty();
@@ -114,7 +117,7 @@ public class BlockIntractableTester
 
 		if (shiftingAndHasItem)
 		{
-			return CheckResult.NO_INTERACTION;
+			return Result.no();
 		}
 
 		boolean canConsume = false;
@@ -127,32 +130,44 @@ public class BlockIntractableTester
 				InteractAllowedTester tester2 = INTERACT_ALLOWED_TESTER_MAP.get(clazz);
 				if (tester2 != null)
 				{
-					Result result = tester2.hasAllowedInteraction(player, worldState, schematicState);
-					if (!result.allowed)
+					Optional<String> failureMessage = tester2.isInteractionAllowed(player, worldState, schematicState);
+					if (failureMessage.isPresent())
 					{
-						return new CheckResult(CheckResultType.BAD_INTERACTION, result.failureMessage);
+						return Result.bad(failureMessage.get());
 					}
 				}
 			}
 		}
-		return canConsume ? CheckResult.GOOD_INTERACTION : CheckResult.NO_INTERACTION;
+		return canConsume ? Result.good() : Result.no();
 	}
 
-	public static class CheckResult
+	public static class Result
 	{
-		private final CheckResultType type;
+		private final ResultType type;
 		private final String message;
 
-		public static final CheckResult NO_INTERACTION = new CheckResult(CheckResultType.NO_INTERACTION, "");
-		public static final CheckResult GOOD_INTERACTION = new CheckResult(CheckResultType.GOOD_INTERACTION, "");
-
-		public CheckResult(CheckResultType type, String message)
+		private Result(ResultType type, String message)
 		{
 			this.type = type;
 			this.message = message;
 		}
 
-		public CheckResultType getType()
+		public static Result no()
+		{
+			return new Result(ResultType.NO_INTERACTION, "");
+		}
+
+		public static Result good()
+		{
+			return new Result(ResultType.GOOD_INTERACTION, "");
+		}
+
+		public static Result bad(String message)
+		{
+			return new Result(ResultType.BAD_INTERACTION, message);
+		}
+
+		public ResultType getType()
 		{
 			return this.type;
 		}
@@ -163,10 +178,19 @@ public class BlockIntractableTester
 		}
 	}
 
-	public enum CheckResultType
+	public enum ResultType
 	{
+		/**
+		 * There's no valid / available interaction for this block
+		 */
 		NO_INTERACTION,
+		/**
+		 * There are some interaction, and all of them are allowed
+		 */
 		GOOD_INTERACTION,
+		/**
+		 * There are some interaction, and some of them are NOT allowed
+		 */
 		BAD_INTERACTION
 	}
 }

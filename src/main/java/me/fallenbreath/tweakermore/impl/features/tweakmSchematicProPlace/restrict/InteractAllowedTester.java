@@ -5,43 +5,49 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.property.Property;
 
-abstract class InteractAllowedTester
-{
-	public abstract Result hasAllowedInteraction(PlayerEntity player, BlockState worldState, BlockState schematicState);
+import java.util.Optional;
 
-	private static String msg(String id)
+public abstract class InteractAllowedTester
+{
+	private final String translationKey;
+
+	protected InteractAllowedTester(String id)
 	{
-		return StringUtils.translate("tweakermore.impl.tweakmSchematicBlockPlacementRestriction.info.interact_not_allow." + id);
+		this.translationKey = "tweakermore.impl.tweakmSchematicBlockPlacementRestriction.info.interact_not_allow." + id;
 	}
+
+	/**
+	 * @return null if interaction is allowed,
+	 * not-null if interaction is NOT allowed and the string value is the failure message
+	 */
+	public final Optional<String> isInteractionAllowed(PlayerEntity player, BlockState worldState, BlockState schematicState)
+	{
+		return this.test(player, worldState, schematicState) ?
+				/* success */ Optional.empty() :
+				/* failed */ Optional.of(StringUtils.translate(this.translationKey));
+
+	}
+
+	protected abstract boolean test(PlayerEntity player, BlockState worldState, BlockState schematicState);
+
+	/*
+	 * ----------------------------
+	 *       Implementations
+	 * ----------------------------
+	 */
 
 	/**
 	 * Interaction is allowed only when the block unmatched or given property unmatched
 	 */
-	static InteractAllowedTester unequalProperty(Property<?> property)
+	public static InteractAllowedTester unequalProperty(Property<?> property)
 	{
-		return new InteractAllowedTester()
+		return new InteractAllowedTester("property_protection")
 		{
 			@Override
-			public Result hasAllowedInteraction(PlayerEntity player, BlockState worldState, BlockState schematicState)
+			public boolean test(PlayerEntity player, BlockState worldState, BlockState schematicState)
 			{
-				if (worldState.getBlock() == schematicState.getBlock() && worldState.get(property) == schematicState.get(property))
-				{
-					return new Result(false, msg("property_protection"));
-				}
-				return new Result(true, "");
+				return worldState.getBlock() != schematicState.getBlock() || worldState.get(property) != schematicState.get(property);
 			}
 		};
-	}
-
-	public static class Result
-	{
-		public final boolean allowed;
-		public final String failureMessage;
-
-		public Result(boolean allowed, String failureMessage)
-		{
-			this.allowed = allowed;
-			this.failureMessage = failureMessage;
-		}
 	}
 }
