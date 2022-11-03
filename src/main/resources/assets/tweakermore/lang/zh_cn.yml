@@ -21,9 +21,9 @@ tweakermore:
         则将目标方块的方块状态存储到提取的物品的nbt中，名为“BlockStateTag”
         因此，在你用提取的物品放置方块时，你可以直接放下与之前被选择的方块状态相同的方块
     infoViewBeamAngle:
-      .: 信息展示设置-光柱渲染策略角度
+      .: 信息展示设置-光束渲染策略角度
       comment: |-
-        在信息展示渲染策略 "光柱" 中使用的初始圆锥角度
+        在信息展示渲染策略 "光束" 中使用的初始圆锥角度
         那些位于玩家视线向量给定角度内的方块信息将被渲染，就像手电筒一样
         使用角度制
     infoViewTargetDistance:
@@ -233,11 +233,11 @@ tweakermore:
       .: 覆盖世界时间数值
       comment: 用于功能tweakmDaytimeOverride的客户端的世界时间数值
     disableBeaconBeamRendering:
-      .: 禁用信标光柱渲染
+      .: 禁用信标光束渲染
       comment: |-
-        阻止游戏渲染信标光柱
-        这样信标光柱就不会在你录像或渲染的时候突然出现
-      pretty_name: 禁用信标光柱渲染
+        阻止游戏渲染信标光束
+        这样信标光束就不会在你录像或渲染的时候突然出现
+      pretty_name: 禁用信标光束渲染
     disableCameraFrustumCulling:
       .: 禁用相机视锥体渲染剔除
       comment: |-
@@ -575,7 +575,7 @@ tweakermore:
       always: 总是
     infoViewTargetStrategy:
       pointed: 指向
-      beam: 光柱
+      beam: 光束
     serverMsptMetricsStatistic:
       game_tick: MSPT (原版)
       second_avg: 每秒MSPT平均值
