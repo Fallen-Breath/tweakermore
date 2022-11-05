@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import static me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.restrict.InteractAbleTester.notMetal;
 import static me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.restrict.InteractAbleTester.playerCanModifyWorld;
+import static me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.restrict.InteractAllowedTester.cauldronTester;
 import static me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.restrict.InteractAllowedTester.unequalProperty;
 
 public class BlockInteractionRestrictor
@@ -51,6 +52,11 @@ public class BlockInteractionRestrictor
 			INTERACT_ALLOWED_TESTER_MAP.put(this.blockClass, tester);
 			return this;
 		}
+
+		private void notAllowed()
+		{
+			INTERACT_ALLOWED_TESTER_MAP.put(this.blockClass, InteractAllowedTester.notAllowed());
+		}
 	}
 
 	private static RequirementBuilder interactAble(Class<? extends Block> blockClass)
@@ -60,47 +66,34 @@ public class BlockInteractionRestrictor
 
 	static
 	{
-		interactAble(AbstractButtonBlock.class);
-		interactAble(AbstractFurnaceBlock.class);
-		interactAble(AbstractSignBlock.class);
-		interactAble(AnvilBlock.class);
-		interactAble(BarrelBlock.class);
-		interactAble(BeaconBlock.class);
-		interactAble(BedBlock.class);
-		interactAble(BrewingStandBlock.class);
-		interactAble(CakeBlock.class).
-				when((player, worldState) -> player.canConsume(false)).
-				allowIf(unequalProperty(CakeBlock.BITES));
-		interactAble(CartographyTableBlock.class);
-		interactAble(ChestBlock.class);
-		interactAble(ComparatorBlock.class).
-				when(playerCanModifyWorld()).
-				allowIf(unequalProperty(ComparatorBlock.MODE));
-		interactAble(CraftingTableBlock.class);
-		interactAble(DaylightDetectorBlock.class).
-				when(playerCanModifyWorld()).
-				allowIf(unequalProperty(DaylightDetectorBlock.INVERTED));
-		interactAble(DispenserBlock.class);
-		interactAble(DoorBlock.class).
-				when(notMetal()).
-				allowIf(unequalProperty(DoorBlock.OPEN));
-		interactAble(EnchantingTableBlock.class);
-		interactAble(EnderChestBlock.class);
-		interactAble(FenceGateBlock.class).
-				allowIf(unequalProperty(FenceGateBlock.OPEN));
-		interactAble(GrindstoneBlock.class);
-		interactAble(LeverBlock.class).
-				allowIf(unequalProperty(LeverBlock.POWERED));
-		interactAble(LoomBlock.class);
-		interactAble(NoteBlock.class).
-				allowIf(unequalProperty(NoteBlock.NOTE));
-		interactAble(RepeaterBlock.class).
-				when(playerCanModifyWorld()).
-				allowIf(unequalProperty(RepeaterBlock.DELAY));
-		interactAble(ShulkerBoxBlock.class);
-		interactAble(StonecutterBlock.class);
-		interactAble(TrapdoorBlock.class).
-				when(notMetal()).allowIf(unequalProperty(DoorBlock.OPEN));
+		interactAble(AbstractButtonBlock.class   ).notAllowed();
+		interactAble(AbstractFurnaceBlock.class  );
+		interactAble(AbstractSignBlock.class     );
+		interactAble(AnvilBlock.class            );
+		interactAble(BarrelBlock.class           );
+		interactAble(BeaconBlock.class           );
+		interactAble(BedBlock.class              );
+		interactAble(BrewingStandBlock.class     );
+		interactAble(CakeBlock.class             ).when((player, worldState) -> player.canConsume(false)).allowIf(unequalProperty(CakeBlock.BITES));
+		interactAble(CartographyTableBlock.class );
+		interactAble(CauldronBlock.class         ).allowIf(cauldronTester());
+		interactAble(ChestBlock.class            );
+		interactAble(ComparatorBlock.class       ).when(playerCanModifyWorld()).allowIf(unequalProperty(ComparatorBlock.MODE));
+		interactAble(CraftingTableBlock.class    );
+		interactAble(DaylightDetectorBlock.class ).when(playerCanModifyWorld()).allowIf(unequalProperty(DaylightDetectorBlock.INVERTED));
+		interactAble(DispenserBlock.class        );
+		interactAble(DoorBlock.class             ).when(notMetal()).allowIf(unequalProperty(DoorBlock.OPEN));
+		interactAble(EnchantingTableBlock.class  );
+		interactAble(EnderChestBlock.class       );
+		interactAble(FenceGateBlock.class        ).allowIf(unequalProperty(FenceGateBlock.OPEN));
+		interactAble(GrindstoneBlock.class       );
+		interactAble(LeverBlock.class            ).allowIf(unequalProperty(LeverBlock.POWERED));
+		interactAble(LoomBlock.class             );
+		interactAble(NoteBlock.class             ).allowIf(unequalProperty(NoteBlock.NOTE));
+		interactAble(RepeaterBlock.class         ).when(playerCanModifyWorld()).allowIf(unequalProperty(RepeaterBlock.DELAY));
+		interactAble(ShulkerBoxBlock.class       );
+		interactAble(StonecutterBlock.class      );
+		interactAble(TrapdoorBlock.class         ).when(notMetal()).allowIf(unequalProperty(DoorBlock.OPEN));
 	}
 
 	public static Result checkInteract(PlayerEntity player, BlockState worldState, BlockState schematicState)

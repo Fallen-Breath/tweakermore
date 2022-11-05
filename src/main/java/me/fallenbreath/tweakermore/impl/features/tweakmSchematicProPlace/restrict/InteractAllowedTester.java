@@ -7,6 +7,12 @@ import net.minecraft.state.property.Property;
 
 import java.util.Optional;
 
+//#if MC >= 11700
+//$$ import net.minecraft.block.LeveledCauldronBlock;
+//#else
+import net.minecraft.block.CauldronBlock;
+//#endif
+
 public abstract class InteractAllowedTester
 {
 	private final String translationKey;
@@ -39,6 +45,21 @@ public abstract class InteractAllowedTester
 	/**
 	 * Interaction is allowed only when the block unmatched or given property unmatched
 	 */
+	public static InteractAllowedTester notAllowed()
+	{
+		return new InteractAllowedTester("not_allowed")
+		{
+			@Override
+			public boolean test(PlayerEntity player, BlockState worldState, BlockState schematicState)
+			{
+				return false;
+			}
+		};
+	}
+
+	/**
+	 * Interaction is allowed only when the block unmatched or given property unmatched
+	 */
 	public static InteractAllowedTester unequalProperty(Property<?> property)
 	{
 		return new InteractAllowedTester("property_protection")
@@ -49,5 +70,16 @@ public abstract class InteractAllowedTester
 				return worldState.getBlock() != schematicState.getBlock() || worldState.get(property) != schematicState.get(property);
 			}
 		};
+	}
+
+	public static InteractAllowedTester cauldronTester()
+	{
+		return unequalProperty(
+				//#if MC >= 11700
+				//$$ AbstractCauldronBlock.LEVEL
+				//#else
+				CauldronBlock.LEVEL
+				//#endif
+		);
 	}
 }

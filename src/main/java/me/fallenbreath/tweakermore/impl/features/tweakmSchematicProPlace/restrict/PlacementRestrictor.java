@@ -93,6 +93,19 @@ public class PlacementRestrictor
 			}
 			// now we are sure that the player will try to do the block placement
 
+			// -----------------------------------------------------------------------------
+			// now cancel logics due to restriction not satisfied start to work
+
+			// If the target pos is outside the layer range, cancel
+			if (!layerRange.isPositionWithinRange(pos))
+			{
+				if (hintType.showNotPossible)
+				{
+					info("outside_the_layer");
+				}
+				return false;
+			}
+
 			BlockState schematicState = schematicWorld.getBlockState(pos);
 			ItemStack schematicStack = MaterialCache.getInstance().
 					//#if MC >= 11500
@@ -115,16 +128,6 @@ public class PlacementRestrictor
 					{
 						info("no_block", schematicState.getBlock().getName());
 					}
-				}
-				return false;
-			}
-
-			// If the target pos is outside the layer range, cancel
-			if (!layerRange.isPositionWithinRange(pos))
-			{
-				if (hintType.showNotPossible)
-				{
-					info("outside_the_layer");
 				}
 				return false;
 			}
@@ -154,7 +157,8 @@ public class PlacementRestrictor
 
 	private static final List<Property<?>> FACING_PROPERTIES = Lists.newArrayList(
 			Properties.FACING, Properties.HORIZONTAL_FACING, Properties.HOPPER_FACING,
-			Properties.ROTATION
+			Properties.ROTATION,
+			Properties.BLOCK_HALF  // stairs, trapdoors
 	);
 
 	public static boolean checkStateToPlace(ItemPlacementContext context, PlayerEntity player, ItemStack stackToUse, BlockState schematicState, boolean showNotAllowed)

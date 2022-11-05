@@ -712,6 +712,7 @@ tweakermore:
         wrong_slab: 错误的半砖类型，应该为%1$s
         wrong_facing: 错误的方块朝向，应该为%1$s
         interact_not_allow:
+          not_allowed: 不允许操作
           property_protection: 方块属性保护
 
   # ================================ Misc ================================

@@ -712,6 +712,7 @@ tweakermore:
         wrong_slab: Wrong slab type, should be %1$s
         wrong_facing: Wrong block facing, should be %1$s
         interact_not_allow:
+          not_allowed: operation not allowed
           property_protection: block property protection
 
   # ================================ Misc ================================
