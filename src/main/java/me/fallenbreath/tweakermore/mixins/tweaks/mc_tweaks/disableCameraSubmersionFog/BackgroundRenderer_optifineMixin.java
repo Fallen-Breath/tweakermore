@@ -1,15 +1,14 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableCameraSubmersionFog;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.render.BackgroundRenderer;
-import net.minecraft.client.render.Camera;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 //#if MC >= 11700
 //$$ import net.minecraft.client.render.CameraSubmersionType;
@@ -24,7 +23,7 @@ public abstract class BackgroundRenderer_optifineMixin
 {
 	// @ModifyVariable doesn't work, since mixin will not able to locate method metadata for the "setupFog" method
 	@Dynamic("Added by optifine")
-	@Redirect(
+	@ModifyExpressionValue(
 			method = "setupFog",
 			at = @At(
 					value = "INVOKE",
@@ -39,11 +38,11 @@ public abstract class BackgroundRenderer_optifineMixin
 			remap = false
 	)
 	//#if MC >= 11700
-	//$$ private static CameraSubmersionType disableSubmergedFog(Camera camera)
+	//$$ private static CameraSubmersionType disableSubmergedFog(CameraSubmersionType cameraSubmersionType)
 	//#elseif MC >= 11500
-	private static FluidState disableSubmergedFog(Camera camera)
+	private static FluidState disableSubmergedFog(FluidState fluidState)
 	//#else
-	//$$ private FluidState disableSubmergedFog(Camera camera)
+	//$$ private FluidState disableSubmergedFog(FluidState fluidState)
 	//#endif
 	{
 		if (TweakerMoreConfigs.DISABLE_CAMERA_SUBMERSION_FOG.getBooleanValue())
@@ -55,9 +54,9 @@ public abstract class BackgroundRenderer_optifineMixin
 			//#endif
 		}
 		//#if MC >= 11700
-		//$$ return camera.getSubmersionType();
+		//$$ return cameraSubmersionType;
 		//#else
-		return camera.getSubmergedFluidState();
+		return fluidState;
 		//#endif
 	}
 }

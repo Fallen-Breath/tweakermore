@@ -1,6 +1,6 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.handRestoreRestriction;
 
-import fi.dy.masa.tweakeroo.config.FeatureToggle;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import fi.dy.masa.tweakeroo.tweaks.PlacementTweaks;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
@@ -13,14 +13,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.Slice;
 
 @Restriction(require = @Condition(ModIds.tweakeroo))
 @Mixin(PlacementTweaks.class)
 public abstract class PlacementTweaksMixin
 {
-	@Redirect(
+	@ModifyExpressionValue(
 			method = "onProcessRightClickPre",
 			slice = @Slice(
 					from = @At(
@@ -37,13 +36,13 @@ public abstract class PlacementTweaksMixin
 			),
 			remap = false
 	)
-	private static boolean applyHandRestoreRestriction(FeatureToggle featureToggle, /* parent method parameters -> */ PlayerEntity player, Hand hand)
+	private static boolean applyHandRestoreRestriction(boolean booleanValue, /* parent method parameters -> */ PlayerEntity player, Hand hand)
 	{
 		Item currentItem = player.getStackInHand(hand).getItem();
-		return featureToggle.getBooleanValue() && TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.isAllowed(currentItem);
+		return booleanValue && TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.isAllowed(currentItem);
 	}
 
-	@Redirect(
+	@ModifyExpressionValue(
 			method = "cacheStackInHand",
 			slice = @Slice(
 					from = @At(
@@ -60,9 +59,9 @@ public abstract class PlacementTweaksMixin
 			),
 			remap = false
 	)
-	private static boolean applyHandRestoreRestriction(FeatureToggle featureToggle, /* parent method parameters -> */ Hand hand)
+	private static boolean applyHandRestoreRestriction(boolean booleanValue, /* parent method parameters -> */ Hand hand)
 	{
-		boolean result = featureToggle.getBooleanValue();
+		boolean result = booleanValue;
 		PlayerEntity player = MinecraftClient.getInstance().player;
 		if (player != null)
 		{
@@ -72,7 +71,7 @@ public abstract class PlacementTweaksMixin
 		return result;
 	}
 
-	@Redirect(
+	@ModifyExpressionValue(
 			method = "tryRestockHand",
 			slice = @Slice(
 					from = @At(
@@ -89,8 +88,8 @@ public abstract class PlacementTweaksMixin
 			),
 			remap = false
 	)
-	private static boolean applyHandRestoreRestriction(FeatureToggle featureToggle, /* parent method parameters -> */ PlayerEntity player, Hand hand, ItemStack stackOriginal)
+	private static boolean applyHandRestoreRestriction(boolean booleanValue, /* parent method parameters -> */ PlayerEntity player, Hand hand, ItemStack stackOriginal)
 	{
-		return featureToggle.getBooleanValue() && TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.isAllowed(stackOriginal.getItem());
+		return booleanValue && TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.isAllowed(stackOriginal.getItem());
 	}
 }

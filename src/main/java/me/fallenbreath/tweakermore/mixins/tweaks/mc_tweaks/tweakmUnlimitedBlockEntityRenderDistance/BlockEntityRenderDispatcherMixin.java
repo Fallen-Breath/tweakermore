@@ -10,10 +10,14 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class BlockEntityRenderDispatcherMixin
 {
 	@ModifyExpressionValue(
+			//#if MC >= 11500
 			method = "render(Lnet/minecraft/block/entity/BlockEntity;FLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;)V",
+			//#else
+			//$$ method = "render(Lnet/minecraft/block/entity/BlockEntity;FI)V",
+			//#endif
 			at = @At(
 					value = "INVOKE",
-					//#if MC>= 11700
+					//#if MC >= 11700
 					//$$ target = "Lnet/minecraft/client/render/block/entity/BlockEntityRenderer;isInRenderDistance(Lnet/minecraft/block/entity/BlockEntity;Lnet/minecraft/util/math/Vec3d;)Z"
 					//#else
 					target = "Lnet/minecraft/block/entity/BlockEntity;getSquaredRenderDistance()D"

@@ -1,20 +1,15 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.ofPlayerExtraModelOverride;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.ofPlayerExtraModelOverride.OverrideImpl;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.ofPlayerExtraModelOverride.PlayerConfigurationParserWithOverride;
 import me.fallenbreath.tweakermore.util.ModIds;
-import me.fallenbreath.tweakermore.util.ReflectionUtil;
-import org.apache.commons.lang3.mutable.MutableObject;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
-import java.net.Proxy;
-
-@SuppressWarnings("UnresolvedMixinReference")
 @Restriction(require = @Condition(ModIds.optifine))
 @Pseudo
 @Mixin(targets = "net.optifine.player.PlayerConfigurationParser")
@@ -28,7 +23,7 @@ public abstract class PlayerConfigurationParserMixin implements PlayerConfigurat
 		this.override$TKM = override;
 	}
 
-	@Redirect(
+	@ModifyExpressionValue(
 			method = "downloadModel",
 			at = @At(
 					value = "INVOKE",
@@ -37,18 +32,16 @@ public abstract class PlayerConfigurationParserMixin implements PlayerConfigurat
 			require = 0,
 			remap = false
 	)
-	private byte[] downloadModelOverride$TKM(String urlStr, Proxy proxy)
+	private byte[] downloadModelOverride$TKM(byte[] getResult)
 	{
 		if (this.override$TKM != null && this.override$TKM.model != null)
 		{
-			return this.override$TKM.model;
+			getResult = this.override$TKM.model;
 		}
-
-		// original logic
-		return invokeHttpPipelineGet$TKM(urlStr, proxy);
+		return getResult;
 	}
 
-	@Redirect(
+	@ModifyExpressionValue(
 			method = "downloadTextureImage",
 			at = @At(
 					value = "INVOKE",
@@ -57,25 +50,12 @@ public abstract class PlayerConfigurationParserMixin implements PlayerConfigurat
 			require = 0,
 			remap = false
 	)
-	private byte[] downloadTextureOverride$TKM(String urlStr, Proxy proxy)
+	private byte[] downloadTextureOverride$TKM(byte[] getResult)
 	{
 		if (this.override$TKM != null && this.override$TKM.texture != null)
 		{
-			return this.override$TKM.texture;
+			getResult = this.override$TKM.texture;
 		}
-
-		// original logic
-		return invokeHttpPipelineGet$TKM(urlStr, proxy);
-	}
-
-	private static byte[] invokeHttpPipelineGet$TKM(String urlStr, Proxy proxy)
-	{
-		// HttpPipeline.get(urlStr, proxy)
-		MutableObject<byte[]> ret = new MutableObject<>();
-		ReflectionUtil.getClass("net.optifine.http.HttpPipeline").ifPresent(clazz -> {
-			byte[] b = ReflectionUtil.<byte[]>invoke(clazz, "get", null, urlStr, proxy).get();
-			ret.setValue(b);
-		});
-		return ret.getValue();
+		return getResult;
 	}
 }

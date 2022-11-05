@@ -1,6 +1,6 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.handRestoreRestriction;
 
-import fi.dy.masa.tweakeroo.config.FeatureToggle;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import fi.dy.masa.tweakeroo.util.InventoryUtils;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
@@ -11,15 +11,13 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Hand;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.Slice;
 
 @Restriction(require = @Condition(ModIds.tweakeroo))
 @Mixin(InventoryUtils.class)
 public abstract class InventoryUtilsMixin
 {
-
-	@Redirect(
+	@ModifyExpressionValue(
 			method = "preRestockHand",
 			slice = @Slice(
 					from = @At(
@@ -36,9 +34,9 @@ public abstract class InventoryUtilsMixin
 			),
 			remap = false
 	)
-	private static boolean applyHandRestoreRestriction(FeatureToggle featureToggle, /* parent method parameters -> */ PlayerEntity player, Hand hand, boolean allowHotbar)
+	private static boolean applyHandRestoreRestriction(boolean booleanValue, /* parent method parameters -> */ PlayerEntity player, Hand hand, boolean allowHotbar)
 	{
 		Item currentItem = player.getStackInHand(hand).getItem();
-		return featureToggle.getBooleanValue() && TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.isAllowed(currentItem);
+		return booleanValue && TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.isAllowed(currentItem);
 	}
 }
