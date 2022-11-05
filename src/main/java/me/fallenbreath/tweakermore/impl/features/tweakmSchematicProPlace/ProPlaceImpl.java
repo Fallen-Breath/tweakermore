@@ -27,7 +27,7 @@ public class ProPlaceImpl
 		return comment.replaceFirst("##CONFIGS##", lines);
 	}
 
-	public static void handleBlockPlacement(BlockHitResult hitResult, ItemPlacementContext ctx, CallbackInfoReturnable<ActionResult> cir)
+	public static void handleRightClick(BlockHitResult hitResult, ItemPlacementContext ctx, CallbackInfoReturnable<ActionResult> cir)
 	{
 		if (Configs.Generic.EASY_PLACE_MODE.getBooleanValue())
 		{
@@ -49,7 +49,8 @@ public class ProPlaceImpl
 		{
 			if (!PlacementRestrictor.canDoBlockPlacement(mc, hitResult, ctx))
 			{
-				cir.setReturnValue(ActionResult.PASS);
+				// return fail so no more further actions that might cause issues e.g. water bucket using
+				cir.setReturnValue(ActionResult.FAIL);
 			}
 		}
 	}

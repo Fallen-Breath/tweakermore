@@ -9,8 +9,7 @@ import java.util.Optional;
 
 import static me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.restrict.InteractAbleTester.notMetal;
 import static me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.restrict.InteractAbleTester.playerCanModifyWorld;
-import static me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.restrict.InteractAllowedTester.cauldronTester;
-import static me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.restrict.InteractAllowedTester.unequalProperty;
+import static me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.restrict.InteractAllowedTesters.unequalProperty;
 
 public class BlockInteractionRestrictor
 {
@@ -55,7 +54,7 @@ public class BlockInteractionRestrictor
 
 		private void notAllowed()
 		{
-			INTERACT_ALLOWED_TESTER_MAP.put(this.blockClass, InteractAllowedTester.notAllowed());
+			INTERACT_ALLOWED_TESTER_MAP.put(this.blockClass, InteractAllowedTesters.notAllowed());
 		}
 	}
 
@@ -76,7 +75,7 @@ public class BlockInteractionRestrictor
 		interactAble(BrewingStandBlock.class     );
 		interactAble(CakeBlock.class             ).when((player, worldState) -> player.canConsume(false)).allowIf(unequalProperty(CakeBlock.BITES));
 		interactAble(CartographyTableBlock.class );
-		interactAble(CauldronBlock.class         ).allowIf(cauldronTester());
+		interactAble(CauldronBlock.class         ).notAllowed();
 		interactAble(ChestBlock.class            );
 		interactAble(ComparatorBlock.class       ).when(playerCanModifyWorld()).allowIf(unequalProperty(ComparatorBlock.MODE));
 		interactAble(CraftingTableBlock.class    );

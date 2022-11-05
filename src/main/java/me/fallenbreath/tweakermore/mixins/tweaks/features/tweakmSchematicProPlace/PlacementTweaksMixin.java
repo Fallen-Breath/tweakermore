@@ -1,12 +1,10 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmSchematicProPlace;
 
-import fi.dy.masa.litematica.config.Configs;
 import fi.dy.masa.tweakeroo.tweaks.PlacementTweaks;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.client.world.ClientWorld;
@@ -42,6 +40,6 @@ public abstract class PlacementTweaksMixin
 		BlockHitResult hitResult = new BlockHitResult(hitVecIn, sideIn, posIn, false);
 		ItemPlacementContext ctx = new ItemPlacementContext(new ItemUsageContext(player, hand, hitResult));
 
-		ProPlaceImpl.handleBlockPlacement(hitResult, ctx, cir);
+		ProPlaceImpl.handleRightClick(hitResult, ctx, cir);
 	}
 }
