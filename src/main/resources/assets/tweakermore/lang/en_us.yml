@@ -660,6 +660,8 @@ tweakermore:
       message: Block state of %1$s stored
     infoViewRespawnBlockExplosion:
       damage: 'Damage: %1$s'
+    refreshInventory:
+      refreshed: Inventory refreshed
     serverDataSyncer:
       schematic_sync:
         start: Syncing block entities and entities in the selection area %1$s

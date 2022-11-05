@@ -1,5 +1,6 @@
 package me.fallenbreath.tweakermore.impl.features.refreshInventory;
 
+import fi.dy.masa.malilib.util.InfoUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.container.SlotActionType;
@@ -40,6 +41,8 @@ public class InventoryRefresher
 					mc.player.container.getNextActionId(mc.player.inventory)
 					//#endif
 			));
+
+			InfoUtils.printActionbarMessage("tweakermore.impl.refreshInventory.refreshed");
 		}
 	}
 }

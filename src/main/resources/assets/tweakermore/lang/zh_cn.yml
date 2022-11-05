@@ -660,6 +660,8 @@ tweakermore:
       message: 已储存%1$s的方块状态
     infoViewRespawnBlockExplosion:
       damage: '伤害: %1$s'
+    refreshInventory:
+      refreshed: 物品栏已刷新
     serverDataSyncer:
       schematic_sync:
         start: 正在同步选区%1$s中方块实体及实体的数据
