@@ -993,6 +993,17 @@ WARNING: Expect client lag spike with enabled
     - Replay mod (`replaymod`)
 
 
+### tweakmUnlimitedBlockEntityRenderDistance
+
+Set client-side block entity render distance to unlimited
+
+Affect block entities like chests, shulker boxes and skulls
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+
+
 ### tweakmUnlimitedEntityRenderDistance
 
 Set client-side entity render distance to unlimited

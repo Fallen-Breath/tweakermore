@@ -394,6 +394,12 @@ tweakermore:
         using the logic from replay mod which is used in its rendering tasks
         WARNING: Expect client lag spike with enabled
       pretty_name: Flawless Frames
+    tweakmUnlimitedBlockEntityRenderDistance:
+      .: tweakmUnlimitedBlockEntityRenderDistance
+      comment: |-
+        Set client-side block entity render distance to unlimited
+        Affect block entities like chests, shulker boxes and skulls
+      pretty_name: Unlimited Block Entity Render Distance
     tweakmUnlimitedEntityRenderDistance:
       .: tweakmUnlimitedEntityRenderDistance
       comment: |-

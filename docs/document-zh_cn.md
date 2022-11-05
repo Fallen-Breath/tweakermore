@@ -993,6 +993,17 @@ TweakerMore提供的新功能
     - Replay mod (`replaymod`)
 
 
+### 无限方块实体渲染距离 (tweakmUnlimitedBlockEntityRenderDistance)
+
+将客户端方块实体渲染距离设置为无限制
+
+影响如箱子、潜影盒、头颅等方块实体
+
+- 分类: MC修改
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+
+
 ### 无限实体渲染距离 (tweakmUnlimitedEntityRenderDistance)
 
 将客户端实体渲染距离设置为无限制

@@ -92,6 +92,7 @@
     "tweaks.mc_tweaks.tweakmDaytimeOverride.WorldMixin",
     "tweaks.mc_tweaks.tweakmFakeNightVision.GameRendererMixin",
     "tweaks.mc_tweaks.tweakmFakeNightVision.LivingEntityMixin",
+    "tweaks.mc_tweaks.tweakmUnlimitedBlockEntityRenderDistance.BlockEntityRenderDispatcherMixin",
     "tweaks.mc_tweaks.tweakmUnlimitedEntityRenderDistance.EntityMixin",
     "tweaks.mc_tweaks.tweakmWeatherOverride.WorldMixin",
     "tweaks.mod_tweaks.eCraftItemScrollerCompact.ConfigsMixin",

@@ -345,6 +345,9 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_FLAWLESS_FRAMES = newConfigBooleanHotkeyed("tweakmFlawlessFrames");
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_UNLIMITED_BLOCK_ENTITY_RENDER_DISTANCE = newConfigBooleanHotkeyed("tweakmUnlimitedBlockEntityRenderDistance");
+
+	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_UNLIMITED_ENTITY_RENDER_DISTANCE = newConfigBooleanHotkeyed("tweakmUnlimitedEntityRenderDistance");
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)

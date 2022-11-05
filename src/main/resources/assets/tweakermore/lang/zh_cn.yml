@@ -394,6 +394,12 @@ tweakermore:
         借用了Replay模组渲染各种任务时所使用的逻辑
         警告：这可能会让客户端频繁地卡顿
       pretty_name: 无瑕世界渲染
+    tweakmUnlimitedBlockEntityRenderDistance:
+      .: 无限方块实体渲染距离
+      comment: |- 
+        将客户端方块实体渲染距离设置为无限制
+        影响如箱子、潜影盒、头颅等方块实体
+      pretty_name: 无限方块实体渲染距离
     tweakmUnlimitedEntityRenderDistance:
       .: 无限实体渲染距离
       comment: |-
