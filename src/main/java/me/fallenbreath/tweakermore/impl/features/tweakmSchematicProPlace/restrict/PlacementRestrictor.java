@@ -11,9 +11,7 @@ import fi.dy.masa.malilib.util.LayerRange;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.listentries.SchematicBlockPlacementRestrictionHintType;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmSchematicProPlace.BlockItemAccessor;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SlabBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
@@ -205,8 +203,7 @@ public class PlacementRestrictor
 		// not we know that the player is able to place the block down
 
 		// block type check
-		Block blockToPlace = stateToPlace.getBlock();
-		if (blockToPlace != schematicState.getBlock())
+		if (!isBlockToPlaceCorrect(schematicState, stateToPlace))
 		{
 			if (showNotAllowed)
 			{
@@ -214,6 +211,8 @@ public class PlacementRestrictor
 				return false;
 			}
 		}
+
+		Block blockToPlace = stateToPlace.getBlock();
 
 		// slab check
 		if (TweakerMoreConfigs.TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_CHECK_SLAB.getBooleanValue())
@@ -249,5 +248,27 @@ public class PlacementRestrictor
 		}
 
 		return true;
+	}
+
+	private static boolean isBlockToPlaceCorrect(BlockState schematicState, BlockState stateToPlace)
+	{
+		Block schematicBlock = schematicState.getBlock();
+		Block blockToPlace = stateToPlace.getBlock();
+
+		if (schematicBlock instanceof FlowerPotBlock && blockToPlace == Blocks.FLOWER_POT)
+		{
+			return true;
+		}
+
+		// 1.17+ cauldron variants things
+		// notes that preprocessor remapper will remap CauldronBlock into AbstractCauldronBlock in 1.17+
+		if (schematicBlock instanceof CauldronBlock && blockToPlace == Blocks.CAULDRON)
+		{
+			return true;
+		}
+
+		// direct block check
+		// the blockToPlace needs to be exactly equaled to schematicBlock
+		return blockToPlace == schematicBlock;
 	}
 }
