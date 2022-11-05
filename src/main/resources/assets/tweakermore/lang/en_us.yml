@@ -188,6 +188,13 @@ tweakermore:
       .: tweakmSchematicBlockPlacementRSHint
       comment: Switch for displaying hint message when option tweakmSchematicBlockPlacementRestriction cancels a placement
       pretty_name: Schematic Block Placement Restriction Hint
+    tweakmSchematicBlockPlacementRestrictionItemWhitelist:
+      .: tweakmSchematicBlockPlacementRSItemWhitelist
+      comment: |-
+        When items in the list are being used, the tweakmSchematicBlockPlacementRestriction restriction will be ignored
+        These strings should be valid item ids like "ender_chest" or "minecraft:ender_chest"
+        You can add scaffolding blocks or your carry-on items into this whitelist for more ease
+      pretty_name: Schematic Block Placement Restriction Whitelist
     tweakmSchematicBlockPlacementRestrictionMargin:
       .: tweakmSchematicBlockPlacementRSMargin
       comment: |-

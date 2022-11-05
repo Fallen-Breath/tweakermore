@@ -472,6 +472,19 @@ Switch for displaying hint message when option tweakmSchematicBlockPlacementRest
 - Available options: `All`, `Operation not allowed `, `Wrong item only`, `Never`
 
 
+### tweakmSchematicBlockPlacementRSItemWhitelist (tweakmSchematicBlockPlacementRestrictionItemWhitelist)
+
+When items in the list are being used, the tweakmSchematicBlockPlacementRestriction restriction will be ignored
+
+These strings should be valid item ids like "ender_chest" or "minecraft:ender_chest"
+
+You can add scaffolding blocks or your carry-on items into this whitelist for more ease
+
+- Category: Features
+- Type: string list
+- Default value: `[minecraft:ender_chest]`
+
+
 ### tweakmSchematicBlockPlacementRSMargin (tweakmSchematicBlockPlacementRestrictionMargin)
 
 The no-block-placement protection margin length from schematic boxes

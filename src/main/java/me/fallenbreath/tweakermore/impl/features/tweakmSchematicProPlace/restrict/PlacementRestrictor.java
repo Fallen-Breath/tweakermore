@@ -18,11 +18,13 @@ import net.minecraft.block.enums.SlabType;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
@@ -93,6 +95,12 @@ public class PlacementRestrictor
 			}
 			// now we are sure that the player will try to do the block placement
 
+			// whitelist logic for e.g. scaffolding blocks
+			if (isItemInWhitelist(player))
+			{
+				return true;
+			}
+
 			// -----------------------------------------------------------------------------
 			// now cancel logics due to restriction not satisfied start to work
 
@@ -153,6 +161,19 @@ public class PlacementRestrictor
 		}
 
 		return true;
+	}
+
+	private static boolean isItemInWhitelist(PlayerEntity player)
+	{
+		for (String itemId : TweakerMoreConfigs.TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_ITEM_WHITELIST.getStrings())
+		{
+			Item item = Registry.ITEM.get(new Identifier(itemId));
+			if (player.getMainHandStack().getItem() == item || (player.getMainHandStack().isEmpty() && player.getOffHandStack().getItem() == item))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private static final List<Property<?>> FACING_PROPERTIES = Lists.newArrayList(

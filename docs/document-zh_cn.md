@@ -472,6 +472,19 @@ TweakerMore提供的新功能
 - 可用选项: `全部`, `不允许的操作`, `仅物品错误`, `总不`
 
 
+### 原理图方块放置限制-物品白名单 (tweakmSchematicBlockPlacementRestrictionItemWhitelist)
+
+列表中的物品在被使用时，可以忽略tweakmSchematicBlockPlacementRestriction的限制
+
+这些字符串应该为合法的物品id，如"ender_chest"或"minecraft:ender_chest"
+
+你可以把脚手架方块或者随身物品添加进这个白名单里，这样会有更加舒适的体验
+
+- 分类: 功能
+- 类型: 字符串列表
+- 默认值: `[minecraft:ender_chest]`
+
+
 ### 原理图方块放置限制-边缘保护 (tweakmSchematicBlockPlacementRestrictionMargin)
 
 用于阻止位于原理图框附近的方块放置的放置保护距离

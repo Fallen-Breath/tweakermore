@@ -188,6 +188,13 @@ tweakermore:
       .: 原理图方块放置限制-提示范围
       comment: 在“原理图方块放置限制”取消方块放置时是否显示提示信息的策略
       pretty_name: 原理图方块放置限制提示
+    tweakmSchematicBlockPlacementRestrictionItemWhitelist:
+      .: 原理图方块放置限制-物品白名单
+      comment: |-
+        列表中的物品在被使用时，可以忽略tweakmSchematicBlockPlacementRestriction的限制
+        这些字符串应该为合法的物品id，如"ender_chest"或"minecraft:ender_chest"
+        你可以把脚手架方块或者随身物品添加进这个白名单里，这样会有更加舒适的体验
+      pretty_name: 原理图方块放置限制-物品白名单
     tweakmSchematicBlockPlacementRestrictionMargin:
       .: 原理图方块放置限制-边缘保护
       comment: |-

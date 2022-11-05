@@ -207,6 +207,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigOptionList TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_HINT = newConfigOptionList("tweakmSchematicBlockPlacementRestrictionHint", SchematicBlockPlacementRestrictionHintType.DEFAULT);
 
+	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigStringList TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_ITEM_WHITELIST = newConfigStringList("tweakmSchematicBlockPlacementRestrictionItemWhitelist", ImmutableList.of(RegistryUtil.getItemId(Items.ENDER_CHEST)));
+
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigInteger TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_MARGIN = newConfigInteger("tweakmSchematicBlockPlacementRestrictionMargin", 2, 0, 16);
 
