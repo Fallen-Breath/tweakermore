@@ -70,7 +70,9 @@ dependencies {
 		modCompileOnly "com.terraformersmc:modmenu:${project.mod_menu_version}"
 	}
 
+	// libraries
 	include(modImplementation("com.github.Fallen-Breath:conditional-mixin:${project.conditionalmixin_version}"))
+	annotationProcessor(include(implementation("com.github.LlamaLad7:MixinExtras:${project.mixin_extra_version}")))
 }
 
 loom {

@@ -17,6 +17,9 @@
 
   "environment": "client",
   "entrypoints": {
+    "preLaunch": [
+      "me.fallenbreath.tweakermore.util.bootstrap.TweakerMorePreLaunchEntrypoint"
+    ],
     "client": [
       "me.fallenbreath.tweakermore.TweakerMoreMod"
     ],
