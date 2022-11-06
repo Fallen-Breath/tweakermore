@@ -482,7 +482,7 @@ TweakerMore提供的新功能
 
 - 分类: 功能
 - 类型: 字符串列表
-- 默认值: `[minecraft:ender_chest]`
+- 默认值: `[]`
 
 
 ### 原理图方块放置限制-边缘保护 (tweakmSchematicBlockPlacementRestrictionMargin)

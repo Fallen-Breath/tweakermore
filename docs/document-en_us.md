@@ -482,7 +482,7 @@ You can add scaffolding blocks or your carry-on items into this whitelist for mo
 
 - Category: Features
 - Type: string list
-- Default value: `[minecraft:ender_chest]`
+- Default value: `[]`
 
 
 ### tweakmSchematicBlockPlacementRSMargin (tweakmSchematicBlockPlacementRestrictionMargin)
