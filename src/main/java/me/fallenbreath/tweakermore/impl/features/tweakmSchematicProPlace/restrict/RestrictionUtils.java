@@ -1,6 +1,5 @@
 package me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.restrict;
 
-import fi.dy.masa.litematica.materials.MaterialCache;
 import fi.dy.masa.malilib.util.LayerRange;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmSchematicProPlace.BlockItemAccessor;
@@ -12,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
 
 import java.util.Optional;
 
@@ -32,20 +30,6 @@ class RestrictionUtils
 				pos.add(-margin, -margin, -margin),
 				pos.add(margin, margin, margin)
 		);
-	}
-
-	/**
-	 * BlockState -> ItemStack
-	 */
-	public static ItemStack getItemForState(BlockState state, World world, BlockPos pos)
-	{
-		return MaterialCache.getInstance().
-				//#if MC >= 11500
-				getRequiredBuildItemForState
-				//#else
-				//$$ getItemForState
-				//#endif
-				(state, world, pos);
 	}
 
 	/**

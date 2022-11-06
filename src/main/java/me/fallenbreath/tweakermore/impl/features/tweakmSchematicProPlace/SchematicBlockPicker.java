@@ -46,15 +46,7 @@ public class SchematicBlockPicker
 				return;
 			}
 			BlockState state = schematicWorld.getBlockState(pos);
-
-			ItemStack stack = MaterialCache.getInstance().
-					//#if MC >= 11500
-					getRequiredBuildItemForState
-					//#else
-					//$$ getItemForState
-					//#endif
-							(state, schematicWorld, pos);
-
+			ItemStack stack = ProPlaceUtils.getItemForState(state, schematicWorld, pos);
 
 			//#if MC >= 11700
 			//$$ InventoryUtils.schematicWorldPickBlock(stack, pos, schematicWorld, mc);

@@ -8,6 +8,7 @@ import fi.dy.masa.malilib.util.InfoUtils;
 import fi.dy.masa.malilib.util.LayerRange;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.listentries.SchematicBlockPlacementRestrictionHintType;
+import me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.ProPlaceUtils;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.client.MinecraftClient;
@@ -87,7 +88,7 @@ public class PlacementRestrictor
 
 			BlockState schematicState = schematicWorld.getBlockState(pos);
 			Block schematicBlock = schematicState.getBlock();
-			ItemStack schematicStack = RestrictionUtils.getItemForState(schematicState, schematicWorld, pos);
+			ItemStack schematicStack = ProPlaceUtils.getItemForState(schematicState, schematicWorld, pos);
 			ItemStack stackToUse = RestrictionUtils.getPlayerUsingStack(player);
 
 			// whitelist logic for e.g. scaffolding blocks
