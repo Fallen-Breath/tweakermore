@@ -500,6 +500,23 @@ TweakerMore提供的新功能
 - 最大值: `16`
 
 
+### 原理图方块放置限制-严格方块检查 (tweakmSchematicBlockPlacementRestrictionStrict)
+
+tweakmSchematicBlockPlacement的严格模式
+
+若开启，方块放置只在将要放置的方块与原理图中的方块匹配时被允许
+
+若关闭，一些错误但又有道理的的方块放置将被允许，包括：
+
+- 使用活珊瑚来“放置”死珊瑚
+
+- 使用冰来“放置”水源/气泡柱/含水方块
+
+- 分类: 功能
+- 类型: 布尔值
+- 默认值: `true`
+
+
 ### 专业原理图方块放置 (tweakmSchematicProPlace)
 
 同时开启/关闭以下功能的一个快捷选项:

@@ -210,6 +210,14 @@ tweakermore:
       .: 原理图方块放置限制-检查半砖类型
       comment: 选项“原理图方块放置限制”是否应该检查将要放置的半砖的半砖类型
       pretty_name: 原理图方块放置限制-检查半砖类型
+    tweakmSchematicBlockPlacementRestrictionStrict:
+      .: 原理图方块放置限制-严格方块检查
+      comment: |-
+        tweakmSchematicBlockPlacement的严格模式
+        若开启，方块放置只在将要放置的方块与原理图中的方块匹配时被允许
+        若关闭，一些错误但又有道理的的方块放置将被允许，包括：
+        - 使用活珊瑚来“放置”死珊瑚
+        - 使用冰来“放置”水源/气泡柱/含水方块
     villagerOfferUsesDisplay:
       .: 村民交易次数显示
       comment: |-

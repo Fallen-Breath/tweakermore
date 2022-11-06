@@ -500,6 +500,23 @@ Used in option tweakmSchematicBlockPlacementRestriction
 - Maximum value: `16`
 
 
+### tweakmSchematicBlockPlacementRSStrict (tweakmSchematicBlockPlacementRestrictionStrict)
+
+Strict mode switch for tweakmSchematicBlockPlacement
+
+When on, block placement is allowed only if the to-be-placed block equals to the schematic block
+
+When off, some incorrect but reasonable block placements are allowed, including:
+
+- place living coral for dead coral
+
+- place ice for water / bubble column / waterlogged block
+
+- Category: Features
+- Type: boolean
+- Default value: `true`
+
+
 ### tweakmSchematicProPlace
 
 A shortcut option to enable/disable the following options at the same time:

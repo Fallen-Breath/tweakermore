@@ -220,6 +220,9 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_CHECK_SLAB = newConfigBooleanHotkeyed("tweakmSchematicBlockPlacementRestrictionCheckSlab", true, "");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBoolean TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_STRICT = newConfigBoolean("tweakmSchematicBlockPlacementRestrictionStrict", true);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBoolean VILLAGER_OFFER_USES_DISPLAY = newConfigBoolean("villagerOfferUsesDisplay", false);
 
 	////////////////////
