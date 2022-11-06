@@ -19,8 +19,10 @@ public abstract class BackgroundRendererMixin
 			slice = @Slice(
 					from = @At(
 							value = "INVOKE",
-							//#if MC >= 11600
+							//#if MC >= 11800
 							//$$ target = "Lnet/minecraft/client/world/ClientWorld$Properties;getHorizonShadingRatio()F"
+							//#elseif MC >= 11600
+							//$$ target = "Lnet/minecraft/client/world/ClientWorld$Properties;getHorizonShadingRatio()D"
 							//#else
 							target = "Lnet/minecraft/world/dimension/Dimension;getHorizonShadingRatio()D"
 							//#endif
