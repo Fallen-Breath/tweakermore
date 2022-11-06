@@ -119,6 +119,8 @@ Show the block update order of the redstone dust
 - Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
 
+![infoViewRedstoneDustUpdateOrder](assets/infoViewRedstoneDustUpdateOrder.png)
+
 
 ### infoViewRedstoneDustUpdateOrderRenderST (infoViewRedstoneDustUpdateOrderRenderStrategy)
 
@@ -145,9 +147,9 @@ The alpha value of the floating text used in infoViewRedstoneDustUpdateOrder
 
 The rendering hotkey for info viewers
 
-When the info view strategy is "View hotkey held", press to enable rendering
+When the render strategy is "View hotkey held", press to enable rendering
 
-When the info view strategy is "Always", it will always rendering ignoring the hotkey's state
+When the render strategy is "Always", it will always rendering ignoring the hotkey's state
 
 - Category: Features
 - Type: hotkey

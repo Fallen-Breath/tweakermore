@@ -119,6 +119,8 @@ TweakerMore提供的新功能
 - 类型: 带热键布尔值
 - 默认值: *无快捷键*, `false`
 
+![infoViewRedstoneDustUpdateOrder](assets/infoViewRedstoneDustUpdateOrder.png)
+
 
 ### 信息展示-红石粉更新顺序-渲染策略 (infoViewRedstoneDustUpdateOrderRenderStrategy)
 
