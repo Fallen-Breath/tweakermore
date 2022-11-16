@@ -20,7 +20,11 @@ public abstract class ServerMsptMetricsDataSyncerMixin
 {
 	@Shadow(remap = false) private MetricsData metricsData;
 
-	@Inject(method = "<init>", at = @At("TAIL"), remap = false)
+	@Inject(
+			method = {"<init>", "reset"},
+			at = @At("TAIL"),
+			remap = false
+	)
 	private void serverMsptMetricsStatistic_hookMetricsData(CallbackInfo ci)
 	{
 		((MetricsDataWithRichStatistic)this.metricsData).enableRichStatistic();
