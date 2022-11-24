@@ -30,7 +30,8 @@ public class PlacementRestrictor
 	private static final List<Property<?>> FACING_PROPERTIES = Lists.newArrayList(
 			Properties.FACING, Properties.HORIZONTAL_FACING, Properties.HOPPER_FACING,
 			Properties.ROTATION,
-			Properties.BLOCK_HALF  // stairs, trapdoors
+			Properties.BLOCK_HALF,  // stairs, trapdoors
+			Properties.AXIS, Properties.HORIZONTAL_AXIS  // logs, pillars
 	);
 
 	private static void info(boolean condition, String key, Object... args)
