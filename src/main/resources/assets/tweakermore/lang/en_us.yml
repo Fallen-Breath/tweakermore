@@ -279,6 +279,12 @@ tweakermore:
         Prevent the bottom of the sky from turning dark when you are under sea level
         See also: option disableHorizonShadingRendering
       pretty_name: Disable Dark Sky Rendering Effect
+    disableEntityModelRendering:
+      .: disableEntityModelRendering
+      comment: |-
+        Prevent the model of the entity to be rendered
+        So you can have a clean view of entity collision boxes without being disturbed by entities' random poses
+      pretty_name: Disable Entity Model Rendering
     disableEntityRenderInterpolation:
       .: disableEntityRenderInterpolation
       comment: Disable the entity animation interpolation during rendering

@@ -696,6 +696,19 @@ See also: option disableHorizonShadingRendering
 ![disableDarkSkyRendering](assets/disableDarkSkyRendering.png)
 
 
+### disableEntityModelRendering
+
+Prevent the model of the entity to be rendered
+
+So you can have a clean view of entity collision boxes without being disturbed by entities' random poses
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+
+![disableEntityModelRendering](assets/disableEntityModelRendering.png)
+
+
 ### disableEntityRenderInterpolation
 
 Disable the entity animation interpolation during rendering

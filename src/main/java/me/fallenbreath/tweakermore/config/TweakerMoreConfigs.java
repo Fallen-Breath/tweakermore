@@ -270,6 +270,9 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_DARK_SKY_RENDERING = newConfigBooleanHotkeyed("disableDarkSkyRendering");
 
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_ENTITY_MODEL_RENDERING = newConfigBooleanHotkeyed("disableEntityModelRendering");
+
+	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_ENTITY_RENDER_INTERPOLATION = newConfigBooleanHotkeyed("disableEntityRenderInterpolation");
 
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)

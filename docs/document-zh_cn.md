@@ -696,6 +696,19 @@ tweakmSchematicBlockPlacement的严格模式
 ![disableDarkSkyRendering](assets/disableDarkSkyRendering.png)
 
 
+### 禁用实体模型渲染 (disableEntityModelRendering)
+
+阻止游戏渲染实体的模型
+
+这样你就可以清晰地观察实体的碰撞箱，不需要担心被实体乱七八糟的姿势扰乱视线
+
+- 分类: MC修改
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+
+![disableEntityModelRendering](assets/disableEntityModelRendering.png)
+
+
 ### 禁用实体渲染插值 (disableEntityRenderInterpolation)
 
 禁用在渲染过程中实体的动画插值

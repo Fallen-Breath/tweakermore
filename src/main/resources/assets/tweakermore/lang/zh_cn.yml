@@ -279,6 +279,12 @@ tweakermore:
         阻止天空的下半部分在玩家位于海平面以下时变暗的渲染效果
         另见: 选项disableHorizonShadingRendering
       pretty_name: 禁用天空渲染变暗
+    disableEntityModelRendering:
+      .: 禁用实体模型渲染
+      comment: |-
+        阻止游戏渲染实体的模型
+        这样你就可以清晰地观察实体的碰撞箱，不需要担心被实体乱七八糟的姿势扰乱视线
+      pretty_name: Disable Entity Model Rendering
     disableEntityRenderInterpolation:
       .: 禁用实体渲染插值
       comment: 禁用在渲染过程中实体的动画插值
