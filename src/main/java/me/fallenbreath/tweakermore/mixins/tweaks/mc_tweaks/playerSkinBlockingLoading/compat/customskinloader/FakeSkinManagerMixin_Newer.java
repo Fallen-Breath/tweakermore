@@ -12,15 +12,15 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 /**
  * The way to submit Runnable in {@link customskinloader.fake.FakeSkinManager#loadProfileTextures}
- *   >=14.15-SNAPSHOT-350: {@code CustomSkinLoader.loadProfileTextures()}, static
- *   >=14.14-SNAPSHOT-336 <14.15-SNAPSHOT-350: {@code CustomSkinLoader.loadProfileTextures()}    <--------
+ *   >=14.15-SNAPSHOT-350: {@code CustomSkinLoader.loadProfileTextures()}, static    <--------
+ *   >=14.14-SNAPSHOT-336 <14.15-SNAPSHOT-350: {@code CustomSkinLoader.loadProfileTextures()}
  *   >14.11 <14.14-SNAPSHOT-336: {@code THREAD_POOL.execute()}
  *   <=14.11: {@code THREAD_POOL.submit()}
  */
-@Restriction(require = @Condition(value = ModIds.custom_skin_loader, versionPredicates = ">=14.14-SNAPSHOT-336 <14.15-SNAPSHOT-350"))
+@Restriction(require = @Condition(value = ModIds.custom_skin_loader, versionPredicates = ">=14.15-SNAPSHOT-350"))
 @Pseudo
 @Mixin(targets = "customskinloader.fake.FakeSkinManager")
-public abstract class FakeSkinManagerMixin_New
+public abstract class FakeSkinManagerMixin_Newer
 {
 	@SuppressWarnings("UnresolvedMixinReference")
 	@ModifyArg(
@@ -31,7 +31,7 @@ public abstract class FakeSkinManagerMixin_New
 			),
 			remap = false
 	)
-	private Runnable playerSkinBlockingLoading_blockingProfileFetching(Runnable runnable)
+	private static Runnable playerSkinBlockingLoading_blockingProfileFetching(Runnable runnable)
 	{
 		if (TweakerMoreConfigs.PLAYER_SKIN_BLOCKING_LOADING.getBooleanValue())
 		{

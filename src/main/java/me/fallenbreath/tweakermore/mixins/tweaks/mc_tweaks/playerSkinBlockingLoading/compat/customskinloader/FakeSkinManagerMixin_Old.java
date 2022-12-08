@@ -12,7 +12,8 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 /**
  * The way to submit Runnable in {@link customskinloader.fake.FakeSkinManager#loadProfileTextures}
- *   >=14.14-SNAPSHOT-336: {@code CustomSkinLoader.loadProfileTextures()}
+ *   >=14.15-SNAPSHOT-350: {@code CustomSkinLoader.loadProfileTextures()}, static
+ *   >=14.14-SNAPSHOT-336 <14.15-SNAPSHOT-350: {@code CustomSkinLoader.loadProfileTextures()}
  *   >14.11 <14.14-SNAPSHOT-336: {@code THREAD_POOL.execute()}    <--------
  *   <=14.11: {@code THREAD_POOL.submit()}
  */

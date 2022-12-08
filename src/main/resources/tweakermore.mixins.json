@@ -87,6 +87,7 @@
     "tweaks.mc_tweaks.playerSkinBlockingLoading.PlayerSkinTextureMixin",
     "tweaks.mc_tweaks.playerSkinBlockingLoading.compat.customskinloader.FakeSkinManagerMixin_Ancient",
     "tweaks.mc_tweaks.playerSkinBlockingLoading.compat.customskinloader.FakeSkinManagerMixin_New",
+    "tweaks.mc_tweaks.playerSkinBlockingLoading.compat.customskinloader.FakeSkinManagerMixin_Newer",
     "tweaks.mc_tweaks.playerSkinBlockingLoading.compat.customskinloader.FakeSkinManagerMixin_Old",
     "tweaks.mc_tweaks.prioritizedCommandSuggestions.CommandSuggestorMixin",
     "tweaks.mc_tweaks.scoreboardSideBarScale.InGameHudMixin",
