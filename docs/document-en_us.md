@@ -811,6 +811,17 @@ Affects stuffs that use vanilla block mirror logic, e.g. vanilla structure place
 - Default value: `false`
 
 
+### fixHoverTextScale
+
+Fixed hover text in chat HUD is not scaled when the chat hud is scaled with vanilla chat scale setting
+
+This option make the hover texts scale with the same scaling ratio as the chat HUD
+
+- Category: MC Tweaks
+- Type: boolean
+- Default value: `false`
+
+
 ### flyDrag
 
 Overwrite the drag factor when flying in creative or spectator mode

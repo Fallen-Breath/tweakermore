@@ -333,6 +333,11 @@ tweakermore:
       comment: |-
         Fixed chest type is not properly transformed when chest block is mirrored
         Affects stuffs that use vanilla block mirror logic, e.g. vanilla structure placement, litematica mod schematic placement
+    fixHoverTextScale:
+      .: fixHoverTextScale
+      comment: |-
+        Fixed hover text in chat HUD is not scaled when the chat hud is scaled with vanilla chat scale setting
+        This option make the hover texts scale with the same scaling ratio as the chat HUD
     flyDrag:
       .: flyDrag
       comment: |-

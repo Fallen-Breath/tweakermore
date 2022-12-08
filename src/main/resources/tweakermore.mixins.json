@@ -57,6 +57,7 @@
     "tweaks.mc_tweaks.disableCameraSubmersionFog.BackgroundRendererMixin",
     "tweaks.mc_tweaks.disableCreativeFlyClimbingCheck.LivingEntityMixin",
     "tweaks.mc_tweaks.disableDarkSkyRendering.ClientWorldMixin",
+    "tweaks.mc_tweaks.disableEntityModelRendering.EntityRenderDispatcherMixin",
     "tweaks.mc_tweaks.disableEntityRenderInterpolation.AbstractMinecartEntityMixin",
     "tweaks.mc_tweaks.disableEntityRenderInterpolation.BoatEntityMixin",
     "tweaks.mc_tweaks.disableEntityRenderInterpolation.LivingEntityMixin",
@@ -75,6 +76,8 @@
     "tweaks.mc_tweaks.disableSlimeBlockBouncing.SlimeBlockMixin",
     "tweaks.mc_tweaks.disableVignetteDarkness.InGameHudMixin",
     "tweaks.mc_tweaks.fixChestMirroring.ChestBlockMixin",
+    "tweaks.mc_tweaks.fixHoverTextScale.ChatScreenMixin",
+    "tweaks.mc_tweaks.fixHoverTextScale.ScreenMixin",
     "tweaks.mc_tweaks.flyDrag.LivingEntityMixin",
     "tweaks.mc_tweaks.legacyF3NLogic.KeyboardMixin",
     "tweaks.mc_tweaks.maxChatHudHeight.ChatHudMixin",
@@ -131,7 +134,6 @@
     "util.render.TextHandlerAccessor"
   ],
   "client": [
-    "tweaks.mc_tweaks.disableEntityModelRendering.EntityRenderDispatcherMixin"
   ],
   "injectors": {
     "defaultRequire": 1

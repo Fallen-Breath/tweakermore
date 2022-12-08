@@ -299,6 +299,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.FIX, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean FIX_CHEST_MIRRORING = newConfigBoolean("fixChestMirroring", false);
 
+	@Config(type = Config.Type.FIX, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean FIX_HOVER_TEXT_SCALE = newConfigBoolean("fixHoverTextScale", false);
+
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigDouble FLY_DRAG = newConfigDouble("flyDrag", 0.09, 0, 1);
 

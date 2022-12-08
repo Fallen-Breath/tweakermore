@@ -811,6 +811,17 @@ tweakmSchematicBlockPlacement的严格模式
 - 默认值: `false`
 
 
+### 修复悬浮文本缩放 (fixHoverTextScale)
+
+Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的文本时，其悬浮文本没有被缩放，仍保持100%比例
+
+这个选项让悬浮文本也使用相同的缩放比例进行缩放
+
+- 分类: MC修改
+- 类型: 布尔值
+- 默认值: `false`
+
+
 ### 玩家飞行阻力 (flyDrag)
 
 覆盖玩家在创造模式或旁观模式下的飞行阻力因子
