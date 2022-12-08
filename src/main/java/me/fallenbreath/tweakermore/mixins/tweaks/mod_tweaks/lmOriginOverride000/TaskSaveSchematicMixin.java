@@ -25,7 +25,8 @@ public abstract class TaskSaveSchematicMixin
 			//#endif
 			at = @At(
 					value = "INVOKE",
-					target = "Lfi/dy/masa/litematica/selection/AreaSelection;getEffectiveOrigin()Lnet/minecraft/util/math/BlockPos;"
+					target = "Lfi/dy/masa/litematica/selection/AreaSelection;getEffectiveOrigin()Lnet/minecraft/util/math/BlockPos;",
+					remap = true
 			),
 			remap = false
 	)
