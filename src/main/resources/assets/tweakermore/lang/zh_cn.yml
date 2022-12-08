@@ -464,6 +464,13 @@ tweakermore:
     eprHideOnDebugHud:
       .: 额外玩家渲染隐藏于调试界面
       comment: 在调试界面开启（那个按 F3 显示的东西）时，隐藏额外玩家渲染的渲染
+    lmOriginOverride000:
+      .: Litematica原点000覆盖
+      comment: |-
+        在保存litematica的依赖图时，自动将原点设置为[0, 0, 0]
+        除此之外，一个特殊标记会被储存在.litematica文件里
+        当一个.litematica文件被加载时，如果检测到了这个特殊标记，
+        那么这一原理图的将被放置于[0, 0, 0]，而非玩家所在的位置
     minihudDisableLightOverlaySpawnCheck:
       .: MiniHUD禁用光照显示可刷怪检查
       comment: |-
@@ -692,6 +699,9 @@ tweakermore:
       message: 已储存%1$s的方块状态
     infoViewRespawnBlockExplosion:
       damage: '伤害: %1$s'
+    lmOriginOverride000:
+      marked_override: "'%1$s' 的原点将被覆盖为 [0, 0, 0]"
+      placement_tweaked: 已将 '%1$s' 的原点设置为 [0, 0, 0]
     refreshInventory:
       refreshed: 物品栏已刷新
     serverDataSyncer:

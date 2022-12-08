@@ -464,6 +464,13 @@ tweakermore:
     eprHideOnDebugHud:
       .: eprHideOnDebugHud
       comment: Hide extra player renderer rendering when debug hud (the F3 thing) is enabled
+    lmOriginOverride000:
+      .: LitematicaOriginOverride000
+      comment: |-
+        Automatically set origin of litematica schematic to [0, 0, 0] when saving
+        Also, a special flag will be saved into the .litematic file
+        If a .litematic file with the special flag is loaded,
+        the position of the schematic placement will be set to [0, 0, 0] instead of player's position
     minihudDisableLightOverlaySpawnCheck:
       .: minihudDisableLightOverlaySpawnCheck
       comment: |-
@@ -692,6 +699,9 @@ tweakermore:
       message: Block state of %1$s stored
     infoViewRespawnBlockExplosion:
       damage: 'Damage: %1$s'
+    lmOriginOverride000:
+      marked_override: The origin of '%1$s' will be override to [0, 0, 0]
+      placement_tweaked: Set origin of '%1$s' to [0, 0, 0]
     refreshInventory:
       refreshed: Inventory refreshed
     serverDataSyncer:

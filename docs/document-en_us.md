@@ -1171,6 +1171,24 @@ The items that will trigger tweakHandRestock
     - Tweakeroo (`tweakeroo`)
 
 
+### LitematicaOriginOverride000 (lmOriginOverride000)
+
+Automatically set origin of litematica schematic to [0, 0, 0] when saving
+
+Also, a special flag will be saved into the .litematic file
+
+If a .litematic file with the special flag is loaded,
+
+the position of the schematic placement will be set to [0, 0, 0] instead of player's position
+
+- Category: Mods Tweaks
+- Type: boolean
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+
+
 ### minihudDisableLightOverlaySpawnCheck
 
 Mini HUD light level overlay are rendered only on spawn-able block

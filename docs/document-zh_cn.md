@@ -1171,6 +1171,24 @@ tweakHandRestock功能的物品名单约束类型
     - Tweakeroo (`tweakeroo`)
 
 
+### Litematica原点000覆盖 (lmOriginOverride000)
+
+在保存litematica的依赖图时，自动将原点设置为[0, 0, 0]
+
+除此之外，一个特殊标记会被储存在.litematica文件里
+
+当一个.litematica文件被加载时，如果检测到了这个特殊标记，
+
+那么这一原理图的将被放置于[0, 0, 0]，而非玩家所在的位置
+
+- 分类: 模组修改
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+
+
 ### MiniHUD禁用光照显示可刷怪检查 (minihudDisableLightOverlaySpawnCheck)
 
 Mini HUD的光照等级显示仅于可刷怪方块上渲染

@@ -401,6 +401,13 @@ public class TweakerMoreConfigs
 
 	@Config(
 			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(litematica)),
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigBoolean LM_ORIGIN_OVERRIDE_000 = newConfigBoolean("lmOriginOverride000", false);
+
+	@Config(
+			type = Config.Type.GENERIC,
 			restriction = @Restriction(require = @Condition(minihud)),
 			category = Config.Category.MOD_TWEAKS
 	)
