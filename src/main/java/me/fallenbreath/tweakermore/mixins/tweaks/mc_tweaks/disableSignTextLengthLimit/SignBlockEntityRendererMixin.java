@@ -27,8 +27,15 @@ public abstract class SignBlockEntityRendererMixin
 	@SuppressWarnings("UnresolvedMixinReference")
 	@Group(min = 1, max = 1)
 	@ModifyArg(
-			method = {  // lambda method in method render
-					//#if MC >= 11700
+			method = {
+					// lambda method in method
+					//   render (MC < 11903)
+					//   renderText (MC >= 11903)
+
+					//#if MC >= 11903
+					//$$ "method_45799",  // vanilla
+					//$$ "lambda$render$2"  // after being polluted by optifine (TODO fix the method name in optifine environment)
+					//#elseif MC >= 11700
 					//$$ "method_32159",  // vanilla
 					//$$ "lambda$render$2"  // after being polluted by optifine
 					//#else

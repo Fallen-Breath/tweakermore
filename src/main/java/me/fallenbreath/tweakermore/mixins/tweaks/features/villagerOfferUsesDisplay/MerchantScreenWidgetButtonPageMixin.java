@@ -37,9 +37,19 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
 			//#else
 			String message,
 			//#endif
-			PressAction onPress)
+			PressAction onPress
+
+			//#if MC >= 11903
+			//$$ , NarrationSupplier narrationSupplier
+			//#endif
+	)
 	{
-		super(x, y, width, height, message, onPress);
+		super(
+				x, y, width, height, message, onPress
+				//#if MC >= 11903
+				//$$ , narrationSupplier
+				//#endif
+		);
 	}
 
 	@Inject(
@@ -51,8 +61,13 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
 			method = "renderToolTip(II)V",
 			//#endif
 			at = @At(
+					//#if MC >= 11903
+					//$$ value = "INVOKE",
+					//$$ target = "Lnet/minecraft/client/gui/screen/ingame/MerchantScreen$WidgetButtonPage;getX()I",
+					//#else
 					value = "FIELD",
 					target = "Lnet/minecraft/client/gui/screen/ingame/MerchantScreen$WidgetButtonPage;x:I",
+					//#endif
 					ordinal = 0
 			)
 	)
@@ -65,7 +80,13 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
 	{
 		if (TweakerMoreConfigs.VILLAGER_OFFER_USES_DISPLAY.getBooleanValue())
 		{
-			if (this.x + 50 <= mouseX && mouseX <= this.x + 65)
+			int x =
+					//#if MC >= 11903
+					//$$ this.getX();
+					//#else
+					this.x;
+					//#endif
+			if (x + 50 <= mouseX && mouseX <= x + 65)
 			{
 				//#if MC >= 11500
 				int index = this.index;

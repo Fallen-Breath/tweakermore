@@ -4,13 +4,20 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.ingame.SignEditScreen;
 import net.minecraft.client.util.SelectionManager;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.*;
+
+//#if MC >= 11903
+//$$ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+//$$ import net.minecraft.client.gui.screen.ingame.AbstractSignEditScreen;
+//$$ import org.joml.Vector3f;
+//#else
+import net.minecraft.client.gui.screen.ingame.SignEditScreen;
+//#endif
 
 //#if MC >= 11700
 //$$ import net.minecraft.client.render.VertexConsumer;
@@ -30,14 +37,25 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import java.util.List;
 //#endif
 
-@Mixin(SignEditScreen.class)
+@Mixin(
+		//#if MC >= 11903
+		//$$ AbstractSignEditScreen.class
+		//#else
+		SignEditScreen.class
+		//#endif
+)
 public abstract class SignEditScreenMixin extends Screen
 {
 	//#if MC < 11600
 	@Shadow private SelectionManager selectionManager;
 	//#endif
 
-	@Shadow @Final private SignBlockEntity sign;
+	@Shadow @Final private SignBlockEntity
+			//#if MC >= 11903
+			//$$ blockEntity;
+			//#else
+			sign;
+			//#endif
 
 	//#if MC >= 11600
 	//$$ @Shadow @Final private String[] text;
@@ -53,16 +71,39 @@ public abstract class SignEditScreenMixin extends Screen
 	}
 
 	//#if MC >= 11700
-	//$$ @Inject(method = "<init>", at = @At("TAIL"))
-	//$$ private void recordFilteredParam(SignBlockEntity sign, boolean filtered, CallbackInfo ci)
+	//$$ @Inject(
+	//$$ 		//#if MC >= 11903
+	//$$ 		//$$ method = "<init>(Lnet/minecraft/block/entity/SignBlockEntity;ZLnet/minecraft/text/Text;)V",
+	//$$ 		//#else
+	//$$ 		method = "<init>",
+	//$$ 		//#endif
+	//$$ 		at = @At("TAIL")
+	//$$ )
+	//$$ private void recordFilteredParam(
+	//$$ 		SignBlockEntity sign, boolean filtered,
+	//$$ 		//#if MC >= 11903
+	//$$ 		//$$ Text title,
+	//$$ 		//#endif
+	//$$ 		CallbackInfo ci
+	//$$ )
 	//$$ {
 	//$$ 	this.filtered$TKM = filtered;
 	//$$ }
 	//#endif
 
-	//#if MC >= 11600
+	//#if MC >= 11903
+	//$$ @ModifyExpressionValue(
+	//$$ 		method = "method_45658",  // lambda method in init
+	//$$ 		at = @At(
+	//$$ 				value = "INVOKE",
+	//$$ 				target = "Lnet/minecraft/block/entity/SignBlockEntity;getMaxTextWidth()I",
+	//$$ 				remap = true
+	//$$ 		),
+	//$$ 		remap = false
+	//$$ )
+	//#elseif MC >= 11600
 	//$$ @ModifyConstant(
-	//$$ 		method = "method_27611",  // lambda method in <init>
+	//$$ 		method = "method_27611",  // lambda method in init
 	//$$ 		constant = @Constant(intValue = 90),
 	//$$ 		remap = false,
 	//$$ 		require = 0
@@ -108,7 +149,11 @@ public abstract class SignEditScreenMixin extends Screen
 	//#endif  // if MC < 11600
 
 	@Inject(
+			//#if MC >= 11903
+			//$$ method = "renderSignText",
+			//#else
 			method = "render",
+			//#endif
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 11600
@@ -120,7 +165,9 @@ public abstract class SignEditScreenMixin extends Screen
 			),
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
-	//#if MC >= 11700
+	//#if MC >= 11903
+	//$$ private void drawLineOverflowHint(MatrixStack matrices, VertexConsumerProvider.Immediate immediate, CallbackInfo ci, Vector3f vector3f, int i, boolean bl, int j, int k, int l, int m, Matrix4f matrix4f, int lineIdx, String string, float xStart)
+	//#elseif MC >= 11700
 	//$$ private void drawLineOverflowHint(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci, float f, BlockState blockState, boolean bl, boolean bl2, float g, VertexConsumerProvider.Immediate immediate, SpriteIdentifier spriteIdentifier, VertexConsumer vertexConsumer, float h, int i, int j, int k, int l, Matrix4f matrix4f, int lineIdx, String string, float xStart)
 	//#elseif MC >= 11600
 	//$$ private void drawLineOverflowHint(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci, float f, BlockState blockState, boolean bl, boolean bl2, float g, VertexConsumerProvider.Immediate immediate, float h, int i, int j, int k, int l, Matrix4f matrix4f, int lineIdx, String string, float xStart)
@@ -130,26 +177,41 @@ public abstract class SignEditScreenMixin extends Screen
 	{
 		if (TweakerMoreConfigs.DISABLE_SIGN_TEXT_LENGTH_LIMIT.getBooleanValue())
 		{
+			SignBlockEntity sign =
+					//#if MC >= 11903
+					//$$ this.blockEntity;
+					//#else
+					this.sign;
+					//#endif
+
 			//#if MC >= 11600
 			//$$ int textArrayLen = this.text.length;
 			//$$ MinecraftClient mc = this.client;
 			//#else
-			int textArrayLen = this.sign.text.length;
+			int textArrayLen = sign.text.length;
 			MinecraftClient mc = this.minecraft;
 			//#endif
+
 			if (mc != null && 0 <= lineIdx && lineIdx < textArrayLen)
 			{
-				Text text = this.sign.getTextOnRow(
+				Text text = sign.getTextOnRow(
 						lineIdx
 						//#if MC >= 11700
 						//$$ , this.filtered$TKM
 						//#endif
 				);
+				int maxWidth =
+						//#if MC >= 11903
+						//$$ this.blockEntity.getMaxTextWidth();
+						//#else
+						90;
+						//#endif
+
 				List<?> wrapped =
 						//#if MC >= 11600
-						//$$ mc.textRenderer.wrapLines(text, 90);
+						//$$ mc.textRenderer.wrapLines(text, maxWidth);
 						//#else
-						Texts.wrapLines(text, 90,mc.textRenderer, false, true);
+						Texts.wrapLines(text, maxWidth, mc.textRenderer, false, true);
 						//#endif
 				boolean overflowed = wrapped.size() > 1;
 				if (overflowed)

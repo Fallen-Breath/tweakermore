@@ -103,7 +103,13 @@ public class TextRenderer
 			renderContext.translate((float)(x - camX), (float)(y - camY), (float)(z - camZ));
 
 			//#if MC >= 11500
-			renderContext.multMatrix(new Matrix4f(camera.getRotation()));
+			renderContext.multMatrix(
+					//#if MC >= 11903
+					//$$ new Matrix4f().rotation(camera.getRotation())
+					//#else
+					new Matrix4f(camera.getRotation())
+					//#endif
+			);
 			//#endif
 
 			renderContext.scale(this.fontSize, -this.fontSize, this.fontSize);

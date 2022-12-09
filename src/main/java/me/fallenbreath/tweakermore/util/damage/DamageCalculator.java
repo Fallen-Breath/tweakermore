@@ -56,7 +56,14 @@ public class DamageCalculator
 		{
 			damage = 0;
 		}
-		return new DamageCalculator(entity, damage, DamageSource.netherBed());
+		return new DamageCalculator(
+				entity, damage,
+				DamageSource.netherBed(
+						//#if MC >= 11903
+						//$$ explosionCenter
+						//#endif
+				)
+		);
 	}
 
 	/*

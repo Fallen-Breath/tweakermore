@@ -1,7 +1,5 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.fixHoverTextScale;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import me.fallenbreath.tweakermore.impl.mc_tweaks.fixHoverTextScale.RenderTooltipArgs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.fixHoverTextScale.ScaleableHoverTextRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.math.MathHelper;
@@ -13,9 +11,20 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.List;
+
+//#if MC >= 11903
+//$$ import net.minecraft.client.gui.tooltip.TooltipComponent;
+//$$ import net.minecraft.client.gui.tooltip.TooltipPositioner;
+//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import org.joml.Vector2i;
+//$$ import org.spongepowered.asm.mixin.injection.ModifyVariable;
+//#else
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.fixHoverTextScale.RenderTooltipArgs;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+//#endif
 
 //#if MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
@@ -96,6 +105,34 @@ public abstract class ScreenMixin implements ScaleableHoverTextRenderer
 			yBase += (this.height - yBase - 12 - 1) / scale - totalHeight + 6 + 1
 		}
 	 */
+
+	//#if MC >= 11903
+	//$$ @ModifyVariable(method = "renderTooltipFromComponents", at = @At("HEAD"), argsOnly = true)
+	//$$ private TooltipPositioner fixHoverTextScale_modifyPositioner(
+	//$$ 		TooltipPositioner positioner,
+	//$$ 		/* parent method parameters vvv */
+	//$$ 		MatrixStack matrices, List<TooltipComponent> components, int x, int y, TooltipPositioner positioner_
+	//$$ )
+	//$$ {
+	//$$ 	if (this.hoverTextScale$TKM != null)
+	//$$ 	{
+	//$$ 		double scale = this.hoverTextScale$TKM;
+	//$$ 		positioner = (screen, xBase, yBase, width, height) -> {
+	//$$ 			if (xBase + width * scale > screen.width)
+	//$$ 			{
+	//$$ 				xBase = Math.max(xBase - 24 - width, 4);
+	//$$ 			}
+	//$$ 			if (yBase + height * scale + 6 > screen.height)
+	//$$ 			{
+	//$$ 				yBase += (screen.height - yBase - 12 - 1) / scale - height + 6;
+	//$$ 			}
+	//$$ 			return new Vector2i(xBase, yBase);
+	//$$ 		};
+	//$$ 	}
+	//$$ 	return positioner;
+	//$$ }
+	//$$
+	//#else
 
 	private RenderTooltipArgs renderTooltipArgs$TKM = null;
 
@@ -204,4 +241,6 @@ public abstract class ScreenMixin implements ScaleableHoverTextRenderer
 		}
 		return yBase;
 	}
+
+	//#endif
 }

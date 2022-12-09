@@ -34,6 +34,7 @@ def versions = Arrays.asList(
         "1.17.1",
         "1.18.2",
         "1.19.x",
+        "future",
 )
 for (String version : versions) {
     include(":$version")
