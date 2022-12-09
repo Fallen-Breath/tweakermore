@@ -3,14 +3,18 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.lmOriginOverride000
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import fi.dy.masa.litematica.scheduler.tasks.TaskSaveSchematic;
 import fi.dy.masa.litematica.schematic.LitematicaSchematic;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.lmOriginOverride000.LitematicaOriginOverrideGlobals;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.lmOriginOverride000.LitematicaSchematic000Origin;
+import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
+@Restriction(require = @Condition(ModIds.litematica))
 @Mixin(TaskSaveSchematic.class)
 public abstract class TaskSaveSchematicMixin
 {
