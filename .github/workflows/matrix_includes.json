@@ -16,5 +16,8 @@
   },
   {
     "subproject_dir": "1.19.x"
+  },
+  {
+    "subproject_dir": "future"
   }
 ]
