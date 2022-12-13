@@ -77,7 +77,7 @@ public class TextRenderingUtil
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
 		String trimmedText = mc.textRenderer.trimToWidth(text, maxWidth);
-		if (text.length() < trimmedText.length())
+		if (trimmedText.length() < text.length())
 		{
 			trimmedText = postTrimModifier.modify(trimmedText);
 		}
