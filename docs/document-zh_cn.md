@@ -1235,6 +1235,21 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
     - Optifine (`optifabric`)
 
 
+### Optifine圣诞老人帽子 (ofSantaHat)
+
+在渲染玩家实体时，让玩家戴上Optifine的圣诞老人帽子
+
+那是一个圣诞节期间生效的彩蛋
+
+- 分类: 模组修改
+- 类型: 带热键选项列表
+- 默认值: `不修改`
+- 可用选项: `不修改`, `应用于我自己`, `应用于所有人`
+- 模组约束:
+  - 依赖模组:
+    - Optifine (`optifabric`)
+
+
 ### Optifine解锁F3帧数限制 (ofUnlockF3FpsLimit)
 
 移除F3 HUD显示的10FPS帧数限制
@@ -1265,6 +1280,8 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
 ### Optifine女巫帽子 (ofWitchHat)
 
 在渲染玩家实体时，让玩家戴上Optifine的女巫帽子
+
+那是一个万圣节期间生效的彩蛋
 
 - 分类: 模组修改
 - 类型: 带热键选项列表

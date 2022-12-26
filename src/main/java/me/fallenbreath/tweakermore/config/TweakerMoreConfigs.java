@@ -418,6 +418,13 @@ public class TweakerMoreConfigs
 			restriction = @Restriction(require = @Condition(optifine)),
 			category = Config.Category.MOD_TWEAKS
 	)
+	public static final TweakerMoreConfigOptionListHotkeyed OF_SANTA_HAT = newConfigOptionListHotkeyed("ofSantaHat", OptifineExtraModelRenderStrategy.DEFAULT);
+
+	@Config(
+			type = Config.Type.LIST,
+			restriction = @Restriction(require = @Condition(optifine)),
+			category = Config.Category.MOD_TWEAKS
+	)
 	public static final TweakerMoreConfigOptionListHotkeyed OF_WITCH_HAT = newConfigOptionListHotkeyed("ofWitchHat", OptifineExtraModelRenderStrategy.DEFAULT);
 
 	@Config(
@@ -589,6 +596,7 @@ public class TweakerMoreConfigs
 		// value listeners
 		ECRAFT_ITEM_SCROLLER_COMPACT.setValueChangeCallback(EasierCraftingRegistrar::onConfigValueChanged);
 		HIDE_DISABLE_OPTIONS.setValueChangeCallback(redrawConfigGui);
+		OF_SANTA_HAT.setValueChangeCallback(OptifinePlayerExtraModelOverrider::onConfigValueChanged);
 		OF_WITCH_HAT.setValueChangeCallback(OptifinePlayerExtraModelOverrider::onConfigValueChanged);
 		TWEAKM_FLAWLESS_FRAMES.setValueChangeCallback(config -> FlawlessFramesHandler.setEnabled(config.getBooleanValue()));
 

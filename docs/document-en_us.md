@@ -1235,6 +1235,21 @@ Back to vanilla behavior where sign text is always rendered together with the si
     - Optifine (`optifabric`)
 
 
+### ofSantaHat
+
+Let players wear the santa hat from Optifine when rendering player entities
+
+That's an easter egg during Christmas
+
+- Category: Mods Tweaks
+- Type: option list with hotkey
+- Default value: `Untouched`
+- Available options: `Untouched`, `Apply to me`, `Apply to everyone`
+- Mod restrictions:
+  - Required mods:
+    - Optifine (`optifabric`)
+
+
 ### ofUnlockF3FpsLimit
 
 Removed 10 FPS render limit for F3 debug hud
@@ -1265,6 +1280,8 @@ Increases FPS with smooth lighting on for a few
 ### ofWitchHat
 
 Let players wear the witch hat from Optifine when rendering player entities
+
+That's an easter egg during Halloween
 
 - Category: Mods Tweaks
 - Type: option list with hotkey

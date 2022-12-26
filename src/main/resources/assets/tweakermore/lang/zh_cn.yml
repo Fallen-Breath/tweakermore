@@ -477,9 +477,16 @@ tweakermore:
         Mini HUD的光照等级显示仅于可刷怪方块上渲染
         该选项移除了这一可刷怪检查，
         使得光照等级显示会在任何非空气非流体方块上方的非实体方块处渲染
+    ofSantaHat:
+      .: Optifine圣诞老人帽子
+      comment: |-
+        在渲染玩家实体时，让玩家戴上Optifine的圣诞老人帽子
+        那是一个圣诞节期间生效的彩蛋
     ofWitchHat:
       .: Optifine女巫帽子
-      comment: 在渲染玩家实体时，让玩家戴上Optifine的女巫帽子
+      comment: |-
+        在渲染玩家实体时，让玩家戴上Optifine的女巫帽子
+        那是一个万圣节期间生效的彩蛋
     ofRemoveSignTextRenderDistance:
       .: Optifine移除告示牌方块文字渲染距离限制
       comment: |-

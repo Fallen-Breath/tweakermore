@@ -1,0 +1,72 @@
+{
+	"type" : "PlayerItem",
+	"texture": "optifine:textures/features/hat_jingy.png",
+	"textureSize": [96, 26],
+	"models": [
+		{
+			"part": "witch_hat",
+			"type": "ModelBox",
+			"attachTo": "head",
+			"id": "witch_hat",
+			"invertAxis": "xy",
+			"translate": [-2.372, -23.5, -8.5],
+			"rotate": [90, 72.5, 89.5],
+			"submodels": [
+				{
+					"id": "Tip",
+					"invertAxis": "xy",
+					"translate": [-2.3828, 40.3367, 2.1],
+					"rotate": [0, -90, 50],
+					"boxes": [
+						{"coordinates": [-1, -1.5, -1, 2, 3, 2], "textureOffset": [75, 21]}
+					]
+				},
+				{
+					"id": "Top",
+					"invertAxis": "xy",
+					"translate": [-0.2993, 37.9964, 2.1],
+					"rotate": [0, -90, 37.5],
+					"boxes": [
+						{"coordinates": [-2, -2, -2, 4, 4, 4], "textureOffset": [58, 18]}
+					]
+				},
+				{
+					"id": "Middle",
+					"invertAxis": "xy",
+					"translate": [0.5898, 35.475, 2.1],
+					"rotate": [0, -90, 14.5],
+					"boxes": [
+						{"coordinates": [-2.8999, -2.3873, -3, 6, 4, 6], "textureOffset": [33, 16]}
+					]
+				},
+				{
+					"id": "Bottom2",
+					"invertAxis": "xy",
+					"translate": [0.9, 33.05, 2.1],
+					"rotate": [0, -90, -3],
+					"boxes": [
+						{"coordinates": [-4, -1, -4, 8, 2, 8], "textureOffset": [0, 16], "sizeAdd": 0.1}
+					]
+				},
+				{
+					"id": "Bottom1",
+					"invertAxis": "xy",
+					"translate": [0.775, 31.4594, 2.1],
+					"rotate": [0, -90, -7.5],
+					"boxes": [
+						{"coordinates": [-4.9348, -1, -5, 10, 2, 10], "textureOffset": [56, 3]}
+					]
+				},
+				{
+					"id": "Base",
+					"invertAxis": "xy",
+					"translate": [0.775, 30.9636, 2.1],
+					"rotate": [0, 0, -7.5],
+					"boxes": [
+						{"coordinates": [-7.00004, -0.5136, -7, 14, 0, 14], "textureOffset": [0, 0]}
+					]
+				}
+			]
+		}
+	]
+}
