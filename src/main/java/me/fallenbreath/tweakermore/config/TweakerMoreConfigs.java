@@ -148,10 +148,7 @@ public class TweakerMoreConfigs
 
 	@Config(
 			type = Config.Type.TWEAK,
-			restriction = @Restriction(require = {
-					@Condition(tweakeroo),
-					@Condition(litematica)
-			}),
+			restriction = @Restriction(require = @Condition(litematica)),
 			category = Config.Category.FEATURES
 	)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_PICK_SCHEMATIC_BLOCK = newConfigBooleanHotkeyed("tweakmAutoPickSchematicBlock");
@@ -183,10 +180,7 @@ public class TweakerMoreConfigs
 
 	@Config(
 			type = Config.Type.TWEAK,
-			restriction = @Restriction(require = {
-					@Condition(tweakeroo),
-					@Condition(litematica)
-			}),
+			restriction = @Restriction(require = @Condition(litematica)),
 			category = Config.Category.FEATURES
 	)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SCHEMATIC_PRO_PLACE = newConfigBooleanHotkeyed("tweakmSchematicProPlace");
@@ -196,10 +190,7 @@ public class TweakerMoreConfigs
 
 	@Config(
 			type = Config.Type.TWEAK,
-			restriction = @Restriction(require = {
-					@Condition(tweakeroo),
-					@Condition(litematica)
-			}),
+			restriction = @Restriction(require = @Condition(litematica)),
 			category = Config.Category.FEATURES
 	)
 	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION = newConfigBooleanHotkeyed("tweakmSchematicBlockPlacementRestriction");

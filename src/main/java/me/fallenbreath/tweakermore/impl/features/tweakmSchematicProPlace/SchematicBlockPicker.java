@@ -2,13 +2,13 @@ package me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace;
 
 import fi.dy.masa.litematica.config.Configs;
 import fi.dy.masa.litematica.data.DataManager;
-import fi.dy.masa.litematica.materials.MaterialCache;
 import fi.dy.masa.litematica.util.InventoryUtils;
 import fi.dy.masa.litematica.util.ItemUtils;
 import fi.dy.masa.litematica.world.SchematicWorldHandler;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.util.LayerRange;
-import fi.dy.masa.tweakeroo.tweaks.PlacementTweaks;
+import me.fallenbreath.tweakermore.util.FabricUtil;
+import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
@@ -25,6 +25,8 @@ import net.minecraft.world.World;
 
 public class SchematicBlockPicker
 {
+	private static final boolean TWEAKEROO_LOADED = FabricUtil.isModLoaded(ModIds.tweakeroo);
+
 	/**
 	 * Stolen from {@link fi.dy.masa.litematica.util.WorldUtils#doSchematicWorldPickBlock}
 	 */
@@ -91,8 +93,16 @@ public class SchematicBlockPicker
 				//#endif  // if MC < 11700
 
 				// so hand restore works fine
-				PlacementTweaks.cacheStackInHand(hand);
+				fixTweakerooHandRestoreState(hand);
 			}
+		}
+	}
+
+	private static void fixTweakerooHandRestoreState(Hand hand)
+	{
+		if (TWEAKEROO_LOADED)
+		{
+			fi.dy.masa.tweakeroo.tweaks.PlacementTweaks.cacheStackInHand(hand);
 		}
 	}
 }

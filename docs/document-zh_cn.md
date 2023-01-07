@@ -332,7 +332,6 @@ TweakerMore提供的新功能
 - 默认值: *无快捷键*, `false`
 - 模组约束:
   - 依赖模组:
-    - Tweakeroo (`tweakeroo`)
     - Litematica (`litematica`)
 
 
@@ -442,7 +441,6 @@ TweakerMore提供的新功能
 - 默认值: *无快捷键*, `false`
 - 模组约束:
   - 依赖模组:
-    - Tweakeroo (`tweakeroo`)
     - Litematica (`litematica`)
 
 
@@ -540,7 +538,6 @@ tweakmSchematicBlockPlacement的严格模式
 - 默认值: *无快捷键*, `false`
 - 模组约束:
   - 依赖模组:
-    - Tweakeroo (`tweakeroo`)
     - Litematica (`litematica`)
 
 

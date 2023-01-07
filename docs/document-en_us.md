@@ -332,7 +332,6 @@ Does not work with easy place mode
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
-    - Tweakeroo (`tweakeroo`)
     - Litematica (`litematica`)
 
 
@@ -442,7 +441,6 @@ Does not work with litematica's or easy place mode
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
-    - Tweakeroo (`tweakeroo`)
     - Litematica (`litematica`)
 
 
@@ -540,7 +538,6 @@ Compatible with various block placement tweaks from tweakeroo, doesn't work with
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
-    - Tweakeroo (`tweakeroo`)
     - Litematica (`litematica`)
 
 
