@@ -1,4 +1,5 @@
 apply plugin: 'maven-publish'
+apply plugin: 'org.cadixdev.licenser'
 apply plugin: 'fabric-loom'
 apply plugin: 'io.github.juuxel.loom-quiltflower'
 apply plugin: 'com.replaymod.preprocess'
@@ -162,6 +163,18 @@ java {
 jar {
 	from("../../LICENSE") {
 		rename { "${it}_${project.archivesBaseName}"}
+	}
+}
+
+license {
+	// cheatsheet: use "gradle updateLicenses" to apply license headers
+	header = rootProject.file('HEADER.txt')
+	include '**/*.java'
+	skipExistingHeaders = true
+	properties {
+		name = 'TweakerMore'
+		author = 'Fallen_Breath'
+		year = Calendar.getInstance().get(Calendar.YEAR).toString()
 	}
 }
 
