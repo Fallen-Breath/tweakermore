@@ -1,5 +1,5 @@
 apply plugin: 'maven-publish'
-apply plugin: 'org.cadixdev.licenser'
+apply plugin: 'com.github.hierynomus.license'
 apply plugin: 'fabric-loom'
 apply plugin: 'io.github.juuxel.loom-quiltflower'
 apply plugin: 'com.replaymod.preprocess'
@@ -102,10 +102,22 @@ remapJar {
 	remapperIsolation = true
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+if (mcVersion >= 11800) {
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+}
+else if (mcVersion >= 11700) {
+	sourceCompatibility = JavaVersion.VERSION_16
+	targetCompatibility = JavaVersion.VERSION_16
+}
+else {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
+}
 
 String versionSuffix = ''
+// detect github action environment variables
+// https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
 if (System.getenv("BUILD_RELEASE") != "true") {
 	String buildNumber = System.getenv("BUILD_ID")
 	versionSuffix += buildNumber != null ? ('+build.' + buildNumber) : '-SHAPSHOT'
@@ -113,8 +125,8 @@ if (System.getenv("BUILD_RELEASE") != "true") {
 String fullModVersion = project.mod_version + versionSuffix
 
 version = 'v' + fullModVersion
-group = project.parent.maven_group
-archivesBaseName = project.parent.archives_base_name + '-mc' + project.minecraft_version
+group = project.maven_group
+archivesBaseName = project.archives_base_name + '-mc' + project.minecraft_version
 
 processResources {
 	from "tweakermore.accesswidener"
@@ -123,6 +135,8 @@ processResources {
 
 	filesMatching("fabric.mod.json") {
 		def valueMap = [
+				"id": project.mod_id,
+				"name": project.mod_name,
 				"version": fullModVersion,
 				"minecraft_dependency": project.minecraft_dependency,
 				"malilib_dependency": project.malilib_dependency,
@@ -140,9 +154,10 @@ processResources {
 	}
 }
 
+// https://github.com/Fallen-Breath/yamlang
 yamlang {
 	targetSourceSets = [sourceSets.main]
-	inputDir = 'assets/tweakermore/lang'
+	inputDir = "assets/tweakermore/lang"
 }
 
 // ensure that the encoding is set to UTF-8, no matter what the system default is
@@ -166,13 +181,34 @@ jar {
 	}
 }
 
+// https://github.com/hierynomus/license-gradle-plugin
 license {
-	// cheatsheet: use "gradle updateLicenses" to apply license headers
+	// use "gradle licenseFormat" to apply license headers
 	header = rootProject.file('HEADER.txt')
 	include '**/*.java'
 	skipExistingHeaders = true
-	properties {
-		name = 'TweakerMore'
+
+	headerDefinitions {
+		// ref: https://github.com/mathieucarbou/license-maven-plugin/blob/4c42374bb737378f5022a3a36849d5e23ac326ea/license-maven-plugin/src/main/java/com/mycila/maven/plugin/license/header/HeaderType.java#L48
+		// modification: add a newline at the end
+		SLASHSTAR_STYLE_NEWLINE {
+			firstLine = "/*"
+			beforeEachLine = " * "
+			endLine = " */" + System.lineSeparator()
+			afterEachLine = ""
+			skipLinePattern = null
+			firstLineDetectionPattern = "(\\s|\\t)*/\\*.*\$"
+			lastLineDetectionPattern = ".*\\*/(\\s|\\t)*\$"
+			allowBlankLines = false
+			isMultiline = true
+			padLines = false
+		}
+	}
+	mapping {
+		java = 'SLASHSTAR_STYLE_NEWLINE'
+	}
+	ext {
+		name = project.mod_name
 		author = 'Fallen_Breath'
 		year = Calendar.getInstance().get(Calendar.YEAR).toString()
 	}
