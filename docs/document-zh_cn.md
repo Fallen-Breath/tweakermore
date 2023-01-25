@@ -361,7 +361,7 @@ TweakerMore提供的新功能
 - 模组约束:
   - 依赖模组:
     - Item Scroller (`itemscroller`)
-    - Minecraft (`minecraft`) ` >=1.16`
+    - Minecraft (`minecraft`) `>=1.16`
 
 
 ### 自动容器处理提示 (tweakmContainerProcessorHint)
@@ -746,7 +746,7 @@ tweakmSchematicBlockPlacement的严格模式
 - 默认值: *无快捷键*, `false`
 - 模组约束:
   - 依赖模组:
-    - Minecraft (`minecraft`) ` >=1.17`
+    - Minecraft (`minecraft`) `>=1.17`
 
 
 ### 禁用红石粒子效果 (disableRedstoneParticle)
@@ -771,7 +771,7 @@ tweakmSchematicBlockPlacement的严格模式
 - 默认值: *无快捷键*, `false`
 - 模组约束:
   - 冲突模组:
-    - Caxton (`caxton`) ` <0.3.0-beta.2`
+    - Caxton (`caxton`) `<0.3.0-beta.2`
 
 ![disableSignTextLengthLimit](assets/disableSignTextLengthLimit.png)
 
@@ -846,7 +846,7 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 默认值: `false`
 - 模组约束:
   - 依赖模组:
-    - Minecraft (`minecraft`) ` >=1.16`
+    - Minecraft (`minecraft`) `>=1.16`
 
 
 ### 最大聊天界面高度 (maxChatHudHeight)
@@ -1260,7 +1260,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
 - 模组约束:
   - 依赖模组:
     - Optifine (`optifabric`)
-    - Minecraft (`minecraft`) ` >=1.15`
+    - Minecraft (`minecraft`) `>=1.15`
 
 
 ### Optifine使用原版明亮度缓存 (ofUseVanillaBrightnessCache)
@@ -1433,7 +1433,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
 - 模组约束:
   - 依赖模组:
     - Item Scroller (`itemscroller`)
-    - Minecraft (`minecraft`) ` <1.18`
+    - Minecraft (`minecraft`) `<1.18`
 
 
 ### Litematica选择含目标物潜影盒移植 (lmPickBlockShulkersPorting)
@@ -1446,7 +1446,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
 - 模组约束:
   - 依赖模组:
     - Litematica (`litematica`)
-    - Minecraft (`minecraft`) ` <1.16`
+    - Minecraft (`minecraft`) `<1.16`
 
 
 ### Tweakeroo禁用扭曲效果移植 (tkrDisableNauseaEffectPorting)
@@ -1460,7 +1460,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
 - 默认值: *无快捷键*, `false`
 - 模组约束:
   - 依赖模组:
-    - Minecraft (`minecraft`) ` <1.17`
+    - Minecraft (`minecraft`) `<1.17`
 
 
 ## 配置

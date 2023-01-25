@@ -361,7 +361,7 @@ and then close the merchant screen
 - Mod restrictions:
   - Required mods:
     - Item Scroller (`itemscroller`)
-    - Minecraft (`minecraft`) ` >=1.16`
+    - Minecraft (`minecraft`) `>=1.16`
 
 
 ### tweakmContainerProcessorHint
@@ -746,7 +746,7 @@ Remove block breaking particles when pistons break blocks
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
-    - Minecraft (`minecraft`) ` >=1.17`
+    - Minecraft (`minecraft`) `>=1.17`
 
 
 ### disableRedstoneParticle
@@ -771,7 +771,7 @@ A red exclamation mark will be shown on the left side when the limit is exceeded
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Conflicted mods:
-    - Caxton (`caxton`) ` <0.3.0-beta.2`
+    - Caxton (`caxton`) `<0.3.0-beta.2`
 
 ![disableSignTextLengthLimit](assets/disableSignTextLengthLimit.png)
 
@@ -846,7 +846,7 @@ Modify the logic of hotkey F3 + N back to 1.15 and before
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
-    - Minecraft (`minecraft`) ` >=1.16`
+    - Minecraft (`minecraft`) `>=1.16`
 
 
 ### maxChatHudHeight
@@ -1260,7 +1260,7 @@ Removed 10 FPS render limit for F3 debug hud
 - Mod restrictions:
   - Required mods:
     - Optifine (`optifabric`)
-    - Minecraft (`minecraft`) ` >=1.15`
+    - Minecraft (`minecraft`) `>=1.15`
 
 
 ### ofUseVanillaBrightnessCache
@@ -1433,7 +1433,7 @@ The same as masa's fixed in itemscoller commit 0984fe7
 - Mod restrictions:
   - Required mods:
     - Item Scroller (`itemscroller`)
-    - Minecraft (`minecraft`) ` <1.18`
+    - Minecraft (`minecraft`) `<1.18`
 
 
 ### lmPickBlockShulkersPorting
@@ -1446,7 +1446,7 @@ Backports option pickBlockShulkers from Litematica 1.16+
 - Mod restrictions:
   - Required mods:
     - Litematica (`litematica`)
-    - Minecraft (`minecraft`) ` <1.16`
+    - Minecraft (`minecraft`) `<1.16`
 
 
 ### tkrDisableNauseaEffectPorting
@@ -1460,7 +1460,7 @@ Also fixes the nether portal overlay fails to be displayed with this option on
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
-    - Minecraft (`minecraft`) ` <1.17`
+    - Minecraft (`minecraft`) `<1.17`
 
 
 ## Setting

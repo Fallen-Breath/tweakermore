@@ -56,12 +56,12 @@ public class ModPredicate
 
 	public String getVersionPredicatesString()
 	{
-		return this.versionPredicates.isEmpty() ? "" : " " + Joiner.on(" || ").join(this.versionPredicates);
+		return Joiner.on(" || ").join(this.versionPredicates);
 	}
 
 	@Override
 	public String toString()
 	{
-		return this.modId + this.getVersionPredicatesString();
+		return this.modId + (this.versionPredicates.isEmpty() ? "" : " " + this.getVersionPredicatesString());
 	}
 }
