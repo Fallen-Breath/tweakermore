@@ -39,7 +39,7 @@ import org.spongepowered.asm.mixin.injection.Group;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Restriction(conflict = {
-		@Condition(ModIds.caxton)
+		@Condition(value = ModIds.caxton, versionPredicates = "<0.3.0-beta.2")
 		//#if MC < 11500
 		//$$ , @Condition(ModIds.optifine)
 		//#endif

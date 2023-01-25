@@ -771,7 +771,7 @@ tweakmSchematicBlockPlacement的严格模式
 - 默认值: *无快捷键*, `false`
 - 模组约束:
   - 冲突模组:
-    - Caxton (`caxton`)
+    - Caxton (`caxton`) ` <0.3.0-beta.2`
 
 ![disableSignTextLengthLimit](assets/disableSignTextLengthLimit.png)
 

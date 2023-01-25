@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 //#endif
 
-@Restriction(conflict = @Condition(ModIds.caxton))
+@Restriction(conflict = @Condition(value = ModIds.caxton, versionPredicates = "<0.3.0-beta.2"))
 @Mixin(SelectionManager.class)
 public interface SelectionManagerAccessor
 {

@@ -60,7 +60,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import java.util.List;
 //#endif
 
-@Restriction(conflict = @Condition(ModIds.caxton))
+@Restriction(conflict = @Condition(value = ModIds.caxton, versionPredicates = "<0.3.0-beta.2"))
 @Mixin(
 		//#if MC >= 11903
 		//$$ AbstractSignEditScreen.class

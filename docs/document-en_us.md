@@ -771,7 +771,7 @@ A red exclamation mark will be shown on the left side when the limit is exceeded
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Conflicted mods:
-    - Caxton (`caxton`)
+    - Caxton (`caxton`) ` <0.3.0-beta.2`
 
 ![disableSignTextLengthLimit](assets/disableSignTextLengthLimit.png)
 

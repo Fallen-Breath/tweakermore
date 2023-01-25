@@ -47,7 +47,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 				@Condition(ModIds.optifine),
 				@Condition(value = ModIds.minecraft, versionPredicates = "<1.15")
 		},
-		conflict = @Condition(ModIds.caxton)
+		conflict = @Condition(value = ModIds.caxton, versionPredicates = "<0.3.0-beta.2")
 )
 @Mixin(SignBlockEntityRenderer.class)
 public abstract class SignBlockEntityRenderer_optifineMixin
