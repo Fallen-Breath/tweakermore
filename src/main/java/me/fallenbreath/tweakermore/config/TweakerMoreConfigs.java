@@ -298,7 +298,7 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_REDSTONE_PARTICLE = newConfigBooleanHotkeyed("disableRedstoneParticle");
 
-	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.DISABLE, restriction = @Restriction(conflict = @Condition(caxton)), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_SIGN_TEXT_LENGTH_LIMIT = newConfigBooleanHotkeyed("disableSignTextLengthLimit");
 
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)

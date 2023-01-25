@@ -21,16 +21,16 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableSignTextLengthLimit;
 
 //#if MC < 11500
-//$$ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
-//$$ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 //$$ import me.fallenbreath.tweakermore.impl.mc_tweaks.disableSignTextLengthLimit.SignOverflowHintDrawer;
-//$$ import me.fallenbreath.tweakermore.util.ModIds;
 //$$ import net.minecraft.block.entity.SignBlockEntity;
 //$$ import net.minecraft.client.font.TextRenderer;
 //$$ import org.spongepowered.asm.mixin.injection.Inject;
 //$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //$$ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 //#endif
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
+import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,9 +38,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Group;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-//#if MC < 11500
-//$$ @Restriction(conflict = @Condition(ModIds.optifine))
-//#endif
+@Restriction(conflict = {
+		@Condition(ModIds.caxton)
+		//#if MC < 11500
+		//$$ , @Condition(ModIds.optifine)
+		//#endif
+})
 @Mixin(SignBlockEntityRenderer.class)
 public abstract class SignBlockEntityRendererMixin
 {

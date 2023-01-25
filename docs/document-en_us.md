@@ -769,6 +769,9 @@ A red exclamation mark will be shown on the left side when the limit is exceeded
 - Category: MC Tweaks
 - Type: hotkey togglable boolean
 - Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Conflicted mods:
+    - Caxton (`caxton`)
 
 ![disableSignTextLengthLimit](assets/disableSignTextLengthLimit.png)
 

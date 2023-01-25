@@ -42,10 +42,13 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 /**
  * Only used in mc1.14.4
  */
-@Restriction(require = {
-		@Condition(ModIds.optifine),
-		@Condition(value = ModIds.minecraft, versionPredicates = "<1.15")
-})
+@Restriction(
+		require = {
+				@Condition(ModIds.optifine),
+				@Condition(value = ModIds.minecraft, versionPredicates = "<1.15")
+		},
+		conflict = @Condition(ModIds.caxton)
+)
 @Mixin(SignBlockEntityRenderer.class)
 public abstract class SignBlockEntityRenderer_optifineMixin
 {

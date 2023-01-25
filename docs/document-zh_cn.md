@@ -769,6 +769,9 @@ tweakmSchematicBlockPlacement的严格模式
 - 分类: MC修改
 - 类型: 带热键布尔值
 - 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 冲突模组:
+    - Caxton (`caxton`)
 
 ![disableSignTextLengthLimit](assets/disableSignTextLengthLimit.png)
 
