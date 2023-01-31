@@ -552,13 +552,19 @@ tweakermore:
       comment: |-
         Fixed SCROLL_STACKS_FALLBACK of item-scroller ignores the last stack
         The same as masa's fixed in itemscoller commit 0984fe7
+    lmCustomSchematicBaseDirectoryEnabledPorting:
+      .: lmCustomSchematicBaseDirectoryEnabledPorting
+      comment: Backport option customSchematicBaseDirectoryEnabled from Litematica 0.9.0 mc1.17+
+    lmCustomSchematicBaseDirectoryPorting:
+      .: lmCustomSchematicBaseDirectoryPorting
+      comment: Backport option customSchematicBaseDirectory from Litematica 0.9.0 mc1.17+
     lmPickBlockShulkersPorting:
       .: lmPickBlockShulkersPorting
-      comment: Backports option pickBlockShulkers from Litematica 1.16+
+      comment: Backport option pickBlockShulkers from Litematica mc1.16+
     tkrDisableNauseaEffectPorting:
       .: tkrDisableNauseaEffectPorting
       comment: |-
-        Backports option disableNauseaEffect from Tweakeroo 1.17+
+        Backports option disableNauseaEffect from Tweakeroo mc1.17+
         Also fixes the nether portal overlay fails to be displayed with this option on
 
     # ================================ Setting ================================

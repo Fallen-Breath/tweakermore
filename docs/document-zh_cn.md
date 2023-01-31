@@ -1421,7 +1421,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
 
 从其他Minecraft版本的模组中移植的功能
 
-### ItemScroller移动整组物品备用操作修复移植 (isScrollStacksFallbackFixPorting)
+### ItemScroller移动整组物品备用操作修复-移植 (isScrollStacksFallbackFixPorting)
 
 修复ItemScroller的SCROLL_STACKS_FALLBACK未考虑最后一组物品
 
@@ -1436,9 +1436,35 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
     - Minecraft (`minecraft`) `<1.18`
 
 
-### Litematica选择含目标物潜影盒移植 (lmPickBlockShulkersPorting)
+### Litematica自定义原理图根文件夹开关-移植 (lmCustomSchematicBaseDirectoryEnabledPorting)
 
-从Litematica 1.16+移植pickBlockShulkers
+从Litematica 0.9.0 mc1.17+移植customSchematicBaseDirectoryEnabled
+
+- 分类: 移植
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+    - Minecraft (`minecraft`) `<1.17`
+
+
+### Litematica自定义原理图根文件夹路径-移植 (lmCustomSchematicBaseDirectoryPorting)
+
+从Litematica 0.9.0 mc1.17+移植lmCustomSchematicBaseDirectoryPorting
+
+- 分类: 移植
+- 类型: 字符串
+- 默认值: `D:\Codes\Minecraft\[Mod]\tweakermore\run\schematics`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+    - Minecraft (`minecraft`) `<1.17`
+
+
+### Litematica选择含目标物潜影盒-移植 (lmPickBlockShulkersPorting)
+
+从Litematica mc1.16+移植pickBlockShulkers
 
 - 分类: 移植
 - 类型: 布尔值
@@ -1449,9 +1475,9 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
     - Minecraft (`minecraft`) `<1.16`
 
 
-### Tweakeroo禁用扭曲效果移植 (tkrDisableNauseaEffectPorting)
+### Tweakeroo禁用扭曲效果-移植 (tkrDisableNauseaEffectPorting)
 
-从Tweakeroo 1.17+移植disableNauseaEffect
+从Tweakeroo mc1.17+移植disableNauseaEffect
 
 同时修复了玩家在接触地狱门时，地狱门材质覆盖无法显示的问题
 

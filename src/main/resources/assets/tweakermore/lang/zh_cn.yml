@@ -548,17 +548,23 @@ tweakermore:
     # ================================ Porting ================================
 
     isScrollStacksFallbackFixPorting:
-      .: ItemScroller移动整组物品备用操作修复移植
+      .: ItemScroller移动整组物品备用操作修复-移植
       comment: |-
         修复ItemScroller的SCROLL_STACKS_FALLBACK未考虑最后一组物品
         同masa在itemscroller的修复commit 0984fe7相同
+    lmCustomSchematicBaseDirectoryEnabledPorting:
+      .: Litematica自定义原理图根文件夹开关-移植
+      comment: 从Litematica 0.9.0 mc1.17+移植customSchematicBaseDirectoryEnabled
+    lmCustomSchematicBaseDirectoryPorting:
+      .: Litematica自定义原理图根文件夹路径-移植
+      comment: 从Litematica 0.9.0 mc1.17+移植lmCustomSchematicBaseDirectoryPorting
     lmPickBlockShulkersPorting:
-      .: Litematica选择含目标物潜影盒移植
-      comment: 从Litematica 1.16+移植pickBlockShulkers
+      .: Litematica选择含目标物潜影盒-移植
+      comment: 从Litematica mc1.16+移植pickBlockShulkers
     tkrDisableNauseaEffectPorting:
-      .: Tweakeroo禁用扭曲效果移植
+      .: Tweakeroo禁用扭曲效果-移植
       comment: |-
-        从Tweakeroo 1.17+移植disableNauseaEffect
+        从Tweakeroo mc1.17+移植disableNauseaEffect
         同时修复了玩家在接触地狱门时，地狱门材质覆盖无法显示的问题
 
     # ================================ Setting ================================

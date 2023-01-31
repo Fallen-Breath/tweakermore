@@ -1436,9 +1436,35 @@ The same as masa's fixed in itemscoller commit 0984fe7
     - Minecraft (`minecraft`) `<1.18`
 
 
+### lmCustomSchematicBaseDirectoryEnabledPorting
+
+Backport option customSchematicBaseDirectoryEnabled from Litematica 0.9.0 mc1.17+
+
+- Category: Porting
+- Type: boolean
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+    - Minecraft (`minecraft`) `<1.17`
+
+
+### lmCustomSchematicBaseDirectoryPorting
+
+Backport option customSchematicBaseDirectory from Litematica 0.9.0 mc1.17+
+
+- Category: Porting
+- Type: string
+- Default value: `D:\Codes\Minecraft\[Mod]\tweakermore\run\schematics`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+    - Minecraft (`minecraft`) `<1.17`
+
+
 ### lmPickBlockShulkersPorting
 
-Backports option pickBlockShulkers from Litematica 1.16+
+Backport option pickBlockShulkers from Litematica mc1.16+
 
 - Category: Porting
 - Type: boolean
@@ -1451,7 +1477,7 @@ Backports option pickBlockShulkers from Litematica 1.16+
 
 ### tkrDisableNauseaEffectPorting
 
-Backports option disableNauseaEffect from Tweakeroo 1.17+
+Backports option disableNauseaEffect from Tweakeroo mc1.17+
 
 Also fixes the nether portal overlay fails to be displayed with this option on
 

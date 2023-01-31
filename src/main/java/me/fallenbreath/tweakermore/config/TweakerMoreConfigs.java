@@ -47,6 +47,7 @@ import me.fallenbreath.tweakermore.impl.mc_tweaks.tweakmFlawlessFrames.FlawlessF
 import me.fallenbreath.tweakermore.impl.mod_tweaks.eCraftMassCraftCompact.EasierCraftingRegistrar;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.ofPlayerExtraModelOverride.OptifinePlayerExtraModelOverrider;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.serverDataSyncer.ServerDataSyncer;
+import me.fallenbreath.tweakermore.impl.porting.lmCustomSchematicBaseDirectoryPorting.LitematicaCustomSchematicBaseDirectoryPorting;
 import me.fallenbreath.tweakermore.impl.setting.tweakmDebug.TweakerMoreDebugHelper;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
 import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
@@ -520,6 +521,26 @@ public class TweakerMoreConfigs
 	//////////////////////////
 	//        Porting       //
 	//////////////////////////
+
+	@Config(
+			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = {
+					@Condition(litematica),
+					@Condition(value = minecraft, versionPredicates = "<1.17")
+			}),
+			category = Config.Category.PORTING
+	)
+	public static final TweakerMoreConfigBoolean LM_CUSTOM_SCHEMATIC_BASE_DIRECTORY_ENABLED_PORTING = newConfigBoolean("lmCustomSchematicBaseDirectoryEnabledPorting", false);
+
+	@Config(
+			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = {
+					@Condition(litematica),
+					@Condition(value = minecraft, versionPredicates = "<1.17")
+			}),
+			category = Config.Category.PORTING
+	)
+	public static final TweakerMoreConfigString LM_CUSTOM_SCHEMATIC_BASE_DIRECTORY_PORTING = newConfigString( "lmCustomSchematicBaseDirectoryPorting", LitematicaCustomSchematicBaseDirectoryPorting.getDefaultBaseSchematicDirectory().getAbsolutePath());
 
 	@Config(
 			type = Config.Type.GENERIC,
