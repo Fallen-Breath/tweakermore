@@ -37,6 +37,7 @@
     "tweaks.features.tweakmSafeAfk.ClientPlayNetworkHandlerMixin",
     "tweaks.features.tweakmSafeAfk.LivingEntityMixin",
     "tweaks.features.tweakmSchematicProPlace.BlockItemAccessor",
+    "tweaks.features.tweakmSchematicProPlace.ClientPlayerInteractionManagerMixin",
     "tweaks.features.tweakmSchematicProPlace.CoralBlockAccessor",
     "tweaks.features.tweakmSchematicProPlace.CoralFanBlockAccessor",
     "tweaks.features.tweakmSchematicProPlace.CoralWallFanBlockAccessor",

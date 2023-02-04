@@ -20,41 +20,163 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmSchematicProPlace;
 
+import fi.dy.masa.tweakeroo.config.Configs;
+import fi.dy.masa.tweakeroo.config.FeatureToggle;
+import fi.dy.masa.tweakeroo.config.Hotkeys;
+import fi.dy.masa.tweakeroo.tweaks.PlacementTweaks;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.util.ModIds;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-//#if MC < 11900
-import net.minecraft.client.world.ClientWorld;
-//#endif
-
-@Restriction(require = @Condition(ModIds.litematica))
-@Mixin(ClientPlayerInteractionManager.class)
+/**
+ * For injection when tweakeroo is NOT present, see {@link ClientPlayerInteractionManagerMixin}
+ */
+@Restriction(require = {@Condition(ModIds.tweakeroo), @Condition(ModIds.litematica)})
+@Mixin(PlacementTweaks.class)
 public abstract class PlacementTweaksMixin
 {
-	@Inject(method = "interactBlock", at = @At("HEAD"), cancellable = true)
-	private void tweakmSchematicProPlace(
+	@Shadow(remap = false)
+	private static boolean firstWasRotation;
+
+	@Shadow
+	private static boolean isFacingValidFor(Direction facing, ItemStack stack)
+	{
+		return false;
+	}
+
+	@Shadow private static ItemStack[] stackBeforeUse;
+
+	/**
+	 * There's still some final block placement tweaks inside the processRightClickBlockWrapper method.
+	 * We need to simulate them in order to get the final block placement arguments, for compatibilities
+	 * with tweakeroo's tweaks
+	 *
+	 * We cannot delay the injection point until those block placement tweaks, because tweakeroo doesn't
+	 * allow item in player hand tobe  changed after those tweaks, e.g. for hand restore thing
+	 *
+	 * Copied from {@link fi.dy.masa.tweakeroo.tweaks.PlacementTweaks.processRightClickBlockWrapper}.
+	 * Not elegant but that's the only way
+	 */
+	@SuppressWarnings("PointlessBooleanExpression")
+	private static BlockHitResult finalBlockPlacementTweak$TKM(
 			ClientPlayerEntity player,
-			//#if MC < 11900
 			ClientWorld world,
-			//#endif
+			BlockPos posIn,
+			Direction sideIn,
+			Vec3d hitVecIn,
+			Hand hand
+	)
+	{
+		BlockHitResult hitResult = new BlockHitResult(hitVecIn, sideIn, posIn, false);
+		ItemPlacementContext ctx = new ItemPlacementContext(new ItemUsageContext(player, hand, hitResult));
+		BlockState state = world.getBlockState(posIn);
+		ItemStack stackOriginal;
+
+		if (stackBeforeUse[hand.ordinal()].isEmpty() == false &&
+				FeatureToggle.TWEAK_HOTBAR_SLOT_CYCLE.getBooleanValue() == false &&
+				FeatureToggle.TWEAK_HOTBAR_SLOT_RANDOMIZER.getBooleanValue() == false)
+		{
+			stackOriginal = stackBeforeUse[hand.ordinal()];
+		}
+		else
+		{
+			stackOriginal = player.getStackInHand(hand).copy();
+		}
+
+		if (FeatureToggle.TWEAK_PLACEMENT_RESTRICTION.getBooleanValue() &&
+				state.canReplace(ctx) == false && state.getMaterial().isReplaceable())
+		{
+			posIn = posIn.offset(sideIn.getOpposite());
+		}
+
+		final int afterClickerClickCount = MathHelper.clamp(Configs.Generic.AFTER_CLICKER_CLICK_COUNT.getIntegerValue(), 0, 32);
+
+		Direction facing = sideIn;
+		boolean flexible = FeatureToggle.TWEAK_FLEXIBLE_BLOCK_PLACEMENT.getBooleanValue();
+		boolean rotationHeld = Hotkeys.FLEXIBLE_BLOCK_PLACEMENT_ROTATION.getKeybind().isKeybindHeld();
+		boolean rememberFlexible =
+				//#if MC >= 11700
+				//$$ Configs.Generic.REMEMBER_FLEXIBLE.getBooleanValue();
+				//#else
+				FeatureToggle.REMEMBER_FLEXIBLE.getBooleanValue();
+		//#endif
+		boolean rotation = rotationHeld || (rememberFlexible && firstWasRotation);
+		boolean accurate = FeatureToggle.TWEAK_ACCURATE_BLOCK_PLACEMENT.getBooleanValue();
+		boolean keys = Hotkeys.ACCURATE_BLOCK_PLACEMENT_IN.getKeybind().isKeybindHeld() || Hotkeys.ACCURATE_BLOCK_PLACEMENT_REVERSE.getKeybind().isKeybindHeld();
+		accurate = accurate && keys;
+
+		// Carpet-Extra mod accurate block placement protocol support
+		if (flexible && rotation && accurate == false &&
+				//#if MC >= 11700
+				//$$ Configs.Generic.CARPET_ACCURATE_PLACEMENT_PROTOCOL.getBooleanValue() &&
+				//#else
+				FeatureToggle.CARPET_ACCURATE_PLACEMENT_PROTOCOL.getBooleanValue() &&
+				//#endif
+				isFacingValidFor(facing, stackOriginal))
+		{
+			facing = facing.getOpposite(); // go from block face to click on to the requested facing
+			//double relX = hitVecIn.x - posIn.getX();
+			//double x = posIn.getX() + relX + 2 + (facing.getId() * 2);
+			double x = posIn.getX() + 2 + (facing.getId() * 2);
+
+			if (FeatureToggle.TWEAK_AFTER_CLICKER.getBooleanValue())
+			{
+				x += afterClickerClickCount * 16;
+			}
+
+			//System.out.printf("processRightClickBlockWrapper req facing: %s, x: %.3f, pos: %s, sideIn: %s\n", facing, x, posIn, sideIn);
+			hitVecIn = new Vec3d(x, hitVecIn.y, hitVecIn.z);
+		}
+
+		if (FeatureToggle.TWEAK_Y_MIRROR.getBooleanValue() && Hotkeys.PLACEMENT_Y_MIRROR.getKeybind().isKeybindHeld())
+		{
+			double y = 1 - hitVecIn.y + 2 * posIn.getY(); // = 1 - (hitVec.y - pos.getY()) + pos.getY();
+			hitVecIn = new Vec3d(hitVecIn.x, y, hitVecIn.z);
+
+			if (sideIn.getAxis() == Direction.Axis.Y)
+			{
+				posIn = posIn.offset(sideIn);
+				sideIn = sideIn.getOpposite();
+			}
+		}
+
+		return new BlockHitResult(hitVecIn, sideIn, posIn, false);
+	}
+
+
+	@Inject(method = "processRightClickBlockWrapper", at = @At("HEAD"), cancellable = true, remap = false)
+	private static void tweakmSchematicProPlace(
+			ClientPlayerInteractionManager controller,
+			ClientPlayerEntity player,
+			ClientWorld world,
+			BlockPos posIn,
+			Direction sideIn,
+			Vec3d hitVecIn,
 			Hand hand,
-			BlockHitResult hitResult,
 			CallbackInfoReturnable<ActionResult> cir
 	)
 	{
+		BlockHitResult hitResult = finalBlockPlacementTweak$TKM(player, world, posIn, sideIn, hitVecIn, hand);
 		ItemPlacementContext ctx = new ItemPlacementContext(new ItemUsageContext(player, hand, hitResult));
 
 		ProPlaceImpl.handleRightClick(hitResult, ctx, cir);
