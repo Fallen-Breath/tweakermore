@@ -1122,7 +1122,7 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 ![eCraftItemScrollerCompact](assets/eCraftItemScrollerCompact.png)
 
 
-### 额外玩家渲染隐藏于调试界面 (eprHideOnDebugHud)
+### 额外玩家渲染-隐藏于调试界面 (eprHideOnDebugHud)
 
 在调试界面开启（那个按 F3 显示的东西）时，隐藏额外玩家渲染的渲染
 
@@ -1171,7 +1171,7 @@ tweakHandRestock功能的物品名单约束类型
     - Tweakeroo (`tweakeroo`)
 
 
-### Litematica原点000覆盖 (lmOriginOverride000)
+### Litematica-原点000覆盖 (lmOriginOverride000)
 
 在保存litematica的依赖图时，自动将原点设置为[0, 0, 0]
 
@@ -1189,7 +1189,7 @@ tweakHandRestock功能的物品名单约束类型
     - Litematica (`litematica`)
 
 
-### MiniHUD禁用光照显示可刷怪检查 (minihudDisableLightOverlaySpawnCheck)
+### MiniHUD-禁用光照显示可刷怪检查 (minihudDisableLightOverlaySpawnCheck)
 
 Mini HUD的光照等级显示仅于可刷怪方块上渲染
 
@@ -1207,9 +1207,9 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
 ![minihudDisableLightOverlaySpawnCheck](assets/minihudDisableLightOverlaySpawnCheck.png)
 
 
-### MiniHUD-隐藏文本若聊天GUI开启 (minihudHideIfChatScreenOpened)
+### MiniHUD-隐藏于聊天界面 (minihudHideIfChatScreenOpened)
 
-在聊天GUI开启时，隐藏Mini HUD的信息文本渲染
+在聊天界面开启时，隐藏Mini HUD的信息文本渲染
 
 - 分类: 模组修改
 - 类型: 布尔值
@@ -1219,7 +1219,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
     - MiniHUD (`minihud`)
 
 
-### Optifine移除展示框物品渲染距离限制 (ofRemoveItemFrameItemRenderDistance)
+### Optifine-移除展示框物品渲染距离限制 (ofRemoveItemFrameItemRenderDistance)
 
 移除Optifine的展示框物品渲染距离限制
 
@@ -1233,7 +1233,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
     - Optifine (`optifabric`)
 
 
-### Optifine移除告示牌方块文字渲染距离限制 (ofRemoveSignTextRenderDistance)
+### Optifine-移除告示牌方块文字渲染距离限制 (ofRemoveSignTextRenderDistance)
 
 移除Optifine的告示牌文字渲染距离限制
 
@@ -1247,7 +1247,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
     - Optifine (`optifabric`)
 
 
-### Optifine圣诞老人帽子 (ofSantaHat)
+### Optifine-圣诞老人帽子 (ofSantaHat)
 
 在渲染玩家实体时，让玩家戴上Optifine的圣诞老人帽子
 
@@ -1262,7 +1262,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
     - Optifine (`optifabric`)
 
 
-### Optifine解锁F3帧数限制 (ofUnlockF3FpsLimit)
+### Optifine-解锁F3帧数限制 (ofUnlockF3FpsLimit)
 
 移除F3 HUD显示的10FPS帧数限制
 
@@ -1275,11 +1275,11 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
     - Minecraft (`minecraft`) `>=1.15`
 
 
-### Optifine使用原版明亮度缓存 (ofUseVanillaBrightnessCache)
+### Optifine-使用原版明亮度缓存 (ofUseVanillaBrightnessCache)
 
 让Optifine在它的LightCacheOF中使用原版的明亮度缓存
 
-能提升少许平滑光照开启时的帧数
+平滑光照开启时能提升少许的帧数
 
 - 分类: 模组修改
 - 类型: 布尔值
@@ -1289,7 +1289,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
     - Optifine (`optifabric`)
 
 
-### Optifine女巫帽子 (ofWitchHat)
+### Optifine-女巫帽子 (ofWitchHat)
 
 在渲染玩家实体时，让玩家戴上Optifine的女巫帽子
 
@@ -1304,7 +1304,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
     - Optifine (`optifabric`)
 
 
-### Replay精准时间戳显示 (replayAccurateTimelineTimestamp)
+### Replay-精准时间戳显示 (replayAccurateTimelineTimestamp)
 
 在Replay模组的时间线上显示精确到毫秒的时间戳
 
@@ -1318,7 +1318,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
 ![replayAccurateTimelineTimestamp](assets/replayAccurateTimelineTimestamp.png)
 
 
-### Replay飞行速度上限倍率 (replayFlySpeedLimitMultiplier)
+### Replay-飞行速度上限倍率 (replayFlySpeedLimitMultiplier)
 
 将Replay模组中的相机飞行速度上限乘以给定的值
 
@@ -1413,7 +1413,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
     - Iris (`iris`)
 
 
-### xaero世界地图跳过会话结束等待 (xmapNoSessionFinalizationWait)
+### xaero世界地图-跳过会话结束等待 (xmapNoSessionFinalizationWait)
 
 退出一个世界时跳过xaero worldmap的会话结束逻辑
 

@@ -462,57 +462,57 @@ tweakermore:
       .: handRestockBlackList
       comment: The items that will NOT trigger tweakHandRestock
     eprHideOnDebugHud:
-      .: eprHideOnDebugHud
+      .: EPR-HideOnDebugHud
       comment: Hide extra player renderer rendering when debug hud (the F3 thing) is enabled
     lmOriginOverride000:
-      .: LitematicaOriginOverride000
+      .: Litematica-OriginOverride000
       comment: |-
         Automatically set origin of litematica schematic to [0, 0, 0] when saving
         Also, a special flag will be saved into the .litematic file
         If a .litematic file with the special flag is loaded,
         the position of the schematic placement will be set to [0, 0, 0] instead of player's position
     minihudDisableLightOverlaySpawnCheck:
-      .: minihudDisableLightOverlaySpawnCheck
+      .: MiniHUD-DisableLightOverlaySpawnCheck
       comment: |-
         Mini HUD light level overlay are rendered only on spawn-able block
         This option removes the spawn-able check,
         so light overlay will be rendered at every non-solid block above a non-air non-fluid block
     minihudHideIfChatScreenOpened:
-      .: minihudHideIfChatScreenOpened
+      .: MiniHUD-HideIfChatScreenOpened
       comment: Hide minihud text overlay if the chat screen is opened
     ofSantaHat:
-      .: ofSantaHat
+      .: Optifine-SantaHat
       comment: |-
         Let players wear the santa hat from Optifine when rendering player entities
         That's an easter egg during Christmas
     ofWitchHat:
-      .: ofWitchHat
+      .: Optifine-WitchHat
       comment: |-
         Let players wear the witch hat from Optifine when rendering player entities
         That's an easter egg during Halloween
     ofRemoveSignTextRenderDistance:
-      .: ofRemoveSignTextRenderDistance
+      .: Optifine-RemoveSignTextRenderDistance
       comment: |-
         Remove the sign text render distance limit from Optifine
         Back to vanilla behavior where sign text is always rendered together with the sign block
     ofRemoveItemFrameItemRenderDistance:
-      .: ofRemoveItemFrameItemRenderDistance
+      .: Optifine-RemoveItemFrameItemRenderDistance
       comment: |-
         Remove the item frame item render distance limit from Optifine
         Back to vanilla behavior where the displayed item of item frame is always rendered together with the item frame
     ofUnlockF3FpsLimit:
-      .: ofUnlockF3FpsLimit
+      .: Optifine-UnlockF3FpsLimit
       comment: Removed 10 FPS render limit for F3 debug hud
     ofUseVanillaBrightnessCache:
-      .: ofUseVanillaBrightnessCache
+      .: Optifine-UseVanillaBrightnessCache
       comment: |-
         Let optifine make use vanilla's brightness cache in its LightCacheOF
         Increases FPS with smooth lighting on for a few
     replayAccurateTimelineTimestamp:
-      .: replayAccurateTimelineTimestamp
+      .: Replay-AccurateTimelineTimestamp
       comment: Display timestamps accurate to milliseconds on the timeline in replay mod
     replayFlySpeedLimitMultiplier:
-      .: replayFlySpeedLimitMultiplier
+      .: Replay-FlySpeedLimitMultiplier
       comment: |-
         Multiple the camera fly speed upper limit in replay mod with given value
         So the maximum fly speed can be increased
@@ -542,7 +542,7 @@ tweakermore:
         Maximum amount of queries sent with serverDataSyncer per game tick
         Queries exceeding the limit will be delayed
     xmapNoSessionFinalizationWait:
-      .: xmapNoSessionFinalizationWait
+      .: XaeroWorldmap-NoSessionFinalizationWait
       comment: |-
         Skip the session finalization operation of xaero's worldmap when quit a world
         So no lag when quitting server or single player

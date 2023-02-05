@@ -1122,7 +1122,7 @@ e.g. broken mass craft
 ![eCraftItemScrollerCompact](assets/eCraftItemScrollerCompact.png)
 
 
-### eprHideOnDebugHud
+### EPR-HideOnDebugHud (eprHideOnDebugHud)
 
 Hide extra player renderer rendering when debug hud (the F3 thing) is enabled
 
@@ -1171,7 +1171,7 @@ The items that will trigger tweakHandRestock
     - Tweakeroo (`tweakeroo`)
 
 
-### LitematicaOriginOverride000 (lmOriginOverride000)
+### Litematica-OriginOverride000 (lmOriginOverride000)
 
 Automatically set origin of litematica schematic to [0, 0, 0] when saving
 
@@ -1189,7 +1189,7 @@ the position of the schematic placement will be set to [0, 0, 0] instead of play
     - Litematica (`litematica`)
 
 
-### minihudDisableLightOverlaySpawnCheck
+### MiniHUD-DisableLightOverlaySpawnCheck (minihudDisableLightOverlaySpawnCheck)
 
 Mini HUD light level overlay are rendered only on spawn-able block
 
@@ -1207,7 +1207,7 @@ so light overlay will be rendered at every non-solid block above a non-air non-f
 ![minihudDisableLightOverlaySpawnCheck](assets/minihudDisableLightOverlaySpawnCheck.png)
 
 
-### minihudHideIfChatScreenOpened
+### MiniHUD-HideIfChatScreenOpened (minihudHideIfChatScreenOpened)
 
 Hide minihud text overlay if the chat screen is opened
 
@@ -1219,7 +1219,7 @@ Hide minihud text overlay if the chat screen is opened
     - MiniHUD (`minihud`)
 
 
-### ofRemoveItemFrameItemRenderDistance
+### Optifine-RemoveItemFrameItemRenderDistance (ofRemoveItemFrameItemRenderDistance)
 
 Remove the item frame item render distance limit from Optifine
 
@@ -1233,7 +1233,7 @@ Back to vanilla behavior where the displayed item of item frame is always render
     - Optifine (`optifabric`)
 
 
-### ofRemoveSignTextRenderDistance
+### Optifine-RemoveSignTextRenderDistance (ofRemoveSignTextRenderDistance)
 
 Remove the sign text render distance limit from Optifine
 
@@ -1247,7 +1247,7 @@ Back to vanilla behavior where sign text is always rendered together with the si
     - Optifine (`optifabric`)
 
 
-### ofSantaHat
+### Optifine-SantaHat (ofSantaHat)
 
 Let players wear the santa hat from Optifine when rendering player entities
 
@@ -1262,7 +1262,7 @@ That's an easter egg during Christmas
     - Optifine (`optifabric`)
 
 
-### ofUnlockF3FpsLimit
+### Optifine-UnlockF3FpsLimit (ofUnlockF3FpsLimit)
 
 Removed 10 FPS render limit for F3 debug hud
 
@@ -1275,7 +1275,7 @@ Removed 10 FPS render limit for F3 debug hud
     - Minecraft (`minecraft`) `>=1.15`
 
 
-### ofUseVanillaBrightnessCache
+### Optifine-UseVanillaBrightnessCache (ofUseVanillaBrightnessCache)
 
 Let optifine make use vanilla's brightness cache in its LightCacheOF
 
@@ -1289,7 +1289,7 @@ Increases FPS with smooth lighting on for a few
     - Optifine (`optifabric`)
 
 
-### ofWitchHat
+### Optifine-WitchHat (ofWitchHat)
 
 Let players wear the witch hat from Optifine when rendering player entities
 
@@ -1304,7 +1304,7 @@ That's an easter egg during Halloween
     - Optifine (`optifabric`)
 
 
-### replayAccurateTimelineTimestamp
+### Replay-AccurateTimelineTimestamp (replayAccurateTimelineTimestamp)
 
 Display timestamps accurate to milliseconds on the timeline in replay mod
 
@@ -1318,7 +1318,7 @@ Display timestamps accurate to milliseconds on the timeline in replay mod
 ![replayAccurateTimelineTimestamp](assets/replayAccurateTimelineTimestamp.png)
 
 
-### replayFlySpeedLimitMultiplier
+### Replay-FlySpeedLimitMultiplier (replayFlySpeedLimitMultiplier)
 
 Multiple the camera fly speed upper limit in replay mod with given value
 
@@ -1413,7 +1413,7 @@ So with gamerule doDaylightCycle false this timer variable still increases
     - Iris (`iris`)
 
 
-### xmapNoSessionFinalizationWait
+### XaeroWorldmap-NoSessionFinalizationWait (xmapNoSessionFinalizationWait)
 
 Skip the session finalization operation of xaero's worldmap when quit a world
 
