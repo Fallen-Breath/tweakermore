@@ -51,6 +51,7 @@ import me.fallenbreath.tweakermore.impl.porting.lmCustomSchematicBaseDirectoryPo
 import me.fallenbreath.tweakermore.impl.setting.tweakmDebug.TweakerMoreDebugHelper;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
 import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Items;
 
 import java.lang.reflect.Field;
@@ -240,6 +241,18 @@ public class TweakerMoreConfigs
 	////////////////////
 	//    MC Tweaks   //
 	////////////////////
+
+	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed BLOCK_EVENT_THROTTLER = newConfigBooleanHotkeyed("blockEventThrottler");
+
+	@Config(type = Config.Type.LIST, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigStringList BLOCK_EVENT_THROTTLER_TARGET_BLOCKS = newConfigStringList("blockEventThrottlerTargetBlocks", ImmutableList.of(RegistryUtil.getBlockId(Blocks.PISTON), RegistryUtil.getBlockId(Blocks.STICKY_PISTON)));
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigInteger BLOCK_EVENT_THROTTLER_THRESHOLD = newConfigInteger("blockEventThrottlerThreshold", 200, 0, 10000);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigDouble BLOCK_EVENT_THROTTLER_WHITELIST_RANGE = newConfigDouble("blockEventThrottlerWhitelistRange", 8, 0, 256);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigInteger BOSS_BAR_MAX_ENTRY = newConfigInteger("bossBarMaxEntry", -1, -1, 20);

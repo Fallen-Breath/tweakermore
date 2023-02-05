@@ -226,6 +226,25 @@ tweakermore:
 
     # ================================ MC Tweaks ================================
 
+    blockEventThrottler:
+      .: blockEventThrottler
+      comment: |-
+        The switch of the block event throttler tweak
+        Restricts the amount of client-side block event that can be processed in each game tick
+        Future incoming block event exceeding the limit will be discarded
+    blockEventThrottlerTargetBlocks:
+      .: blockEventThrottlerTargetBlocks
+      comment: |-
+        The target block ids for the blockEventThrottler
+        Only block event for these blocks will be throttled
+    blockEventThrottlerThreshold:
+      .: blockEventThrottlerThreshold
+      comment: The maximum amount of client-side block event that can be processed in each game tick
+    blockEventThrottlerWhitelistRange:
+      .: blockEventThrottlerWhitelistRange
+      comment: |-
+        With the player as the center, the given value as the radius, block events within this range will always be processed
+        So you are always able to observe the piston movement right in front of you
     bossBarMaxEntry:
       .: bossBarMaxEntry
       comment: |-

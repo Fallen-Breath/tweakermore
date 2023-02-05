@@ -226,6 +226,25 @@ tweakermore:
 
     # ================================ MC Tweaks ================================
 
+    blockEventThrottler:
+      .: 方块事件节流阀
+      comment: |-
+        方块事件节流阀功能的总开关
+        约束每个游戏刻内，客户端可以处理的方块事件数量
+        超出限制的方块事件将被抛弃
+    blockEventThrottlerTargetBlocks:
+      .: 方块事件节流阀-目标方块
+      comment: |-
+        方块事件节流阀的目标方块种类
+        只有这些方块的方块事件会被节流
+    blockEventThrottlerThreshold:
+      .: 方块事件节流阀-阈值
+      comment: 每个游戏刻内，客户端可以处理的方块事件数量上限
+    blockEventThrottlerWhitelistRange:
+      .: 方块事件节流阀-白名单半径
+      comment: |-
+        以玩家为中心，给定值为半径，那么这个范围内发生的方块事件将总会被处理
+        借此，你总是可以观察到您面前的活塞运动
     bossBarMaxEntry:
       .: Boss栏最大条目数
       comment: |-

@@ -558,6 +558,54 @@ Hover on the arrow of the offer to see it
 
 Tweaks on Minecraft
 
+### blockEventThrottler
+
+The switch of the block event throttler tweak
+
+Restricts the amount of client-side block event that can be processed in each game tick
+
+Future incoming block event exceeding the limit will be discarded
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+
+
+### blockEventThrottlerTargetBlocks
+
+The target block ids for the blockEventThrottler
+
+Only block event for these blocks will be throttled
+
+- Category: MC Tweaks
+- Type: string list
+- Default value: `[minecraft:piston, minecraft:sticky_piston]`
+
+
+### blockEventThrottlerThreshold
+
+The maximum amount of client-side block event that can be processed in each game tick
+
+- Category: MC Tweaks
+- Type: integer
+- Default value: `200`
+- Minimum value: `0`
+- Maximum value: `10000`
+
+
+### blockEventThrottlerWhitelistRange
+
+With the player as the center, the given value as the radius, block events within this range will always be processed
+
+So you are always able to observe the piston movement right in front of you
+
+- Category: MC Tweaks
+- Type: double
+- Default value: `8.0`
+- Minimum value: `0.0`
+- Maximum value: `256.0`
+
+
 ### bossBarMaxEntry
 
 Overwrites the maximum amount of boss bar to be displayed at the same time

@@ -18,28 +18,19 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.util;
+package me.fallenbreath.tweakermore.impl.mc_tweaks.blockEventThrottler;
 
-import me.fallenbreath.tweakermore.TweakerMoreMod;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-
-public class RegistryUtil
+public class TimedCounter
 {
-	public static Identifier id(String path)
-	{
-		return new Identifier(TweakerMoreMod.MOD_ID, path);
-	}
+	public int amount = 0;
+	private long previousGameTick = -1;
 
-	public static String getItemId(Item item)
+	public void updateTime(long currentGameTick)
 	{
-		return Registry.ITEM.getId(item).toString();
-	}
-
-	public static String getBlockId(Block block)
-	{
-		return Registry.BLOCK.getId(block).toString();
+		if (currentGameTick != this.previousGameTick)
+		{
+			this.previousGameTick = currentGameTick;
+			this.amount = 0;
+		}
 	}
 }

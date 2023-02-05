@@ -558,6 +558,54 @@ tweakmSchematicBlockPlacement的严格模式
 
 对Minecraft已有内容修改
 
+### 方块事件节流阀 (blockEventThrottler)
+
+方块事件节流阀功能的总开关
+
+约束每个游戏刻内，客户端可以处理的方块事件数量
+
+超出限制的方块事件将被抛弃
+
+- 分类: MC修改
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+
+
+### 方块事件节流阀-目标方块 (blockEventThrottlerTargetBlocks)
+
+方块事件节流阀的目标方块种类
+
+只有这些方块的方块事件会被节流
+
+- 分类: MC修改
+- 类型: 字符串列表
+- 默认值: `[minecraft:piston, minecraft:sticky_piston]`
+
+
+### 方块事件节流阀-阈值 (blockEventThrottlerThreshold)
+
+每个游戏刻内，客户端可以处理的方块事件数量上限
+
+- 分类: MC修改
+- 类型: 整数
+- 默认值: `200`
+- 最小值: `0`
+- 最大值: `10000`
+
+
+### 方块事件节流阀-白名单半径 (blockEventThrottlerWhitelistRange)
+
+以玩家为中心，给定值为半径，那么这个范围内发生的方块事件将总会被处理
+
+借此，你总是可以观察到您面前的活塞运动
+
+- 分类: MC修改
+- 类型: 实数
+- 默认值: `8.0`
+- 最小值: `0.0`
+- 最大值: `256.0`
+
+
 ### Boss栏最大条目数 (bossBarMaxEntry)
 
 修改最大同时显示的Boss栏条目数量
