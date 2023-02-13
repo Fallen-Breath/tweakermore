@@ -21,6 +21,7 @@
 package me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace;
 
 import com.google.common.collect.Lists;
+import com.mojang.datafixers.util.Pair;
 import fi.dy.masa.litematica.config.Configs;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
@@ -47,7 +48,7 @@ public class ProPlaceImpl
 		return comment.replaceFirst("##CONFIGS##", lines);
 	}
 
-	public static void handleRightClick(BlockHitResult hitResult, ItemPlacementContext ctx, CallbackInfoReturnable<ActionResult> cir)
+	public static void handleRightClick(PlacementContextProvider contextProvider, CallbackInfoReturnable<ActionResult> cir)
 	{
 		if (Configs.Generic.EASY_PLACE_MODE.getBooleanValue())
 		{
@@ -62,16 +63,26 @@ public class ProPlaceImpl
 
 		if (autoPick)
 		{
+			ItemPlacementContext ctx = contextProvider.provide().getSecond();
 			SchematicBlockPicker.doSchematicWorldPickBlock(mc, ctx.getBlockPos(), ctx.getHand());
 		}
 
 		if (restrict)
 		{
-			if (!PlacementRestrictor.canDoBlockPlacement(mc, hitResult, ctx))
+			// for some tweakeroo stuffs
+			Pair<BlockHitResult, ItemPlacementContext> pair = contextProvider.provide();
+
+			if (!PlacementRestrictor.canDoBlockPlacement(mc, pair.getFirst(), pair.getSecond()))
 			{
 				// return fail so no more further actions that might cause issues e.g. water bucket using
 				cir.setReturnValue(ActionResult.FAIL);
 			}
 		}
+	}
+
+	@FunctionalInterface
+	public interface PlacementContextProvider
+	{
+		Pair<BlockHitResult, ItemPlacementContext> provide();
 	}
 }

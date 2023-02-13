@@ -20,6 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmSchematicProPlace;
 
+import com.mojang.datafixers.util.Pair;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.ProPlaceImpl;
@@ -60,6 +61,6 @@ public abstract class ClientPlayerInteractionManagerMixin
 	{
 		ItemPlacementContext ctx = new ItemPlacementContext(new ItemUsageContext(player, hand, hitResult));
 
-		ProPlaceImpl.handleRightClick(hitResult, ctx, cir);
+		ProPlaceImpl.handleRightClick(() -> Pair.of(hitResult, ctx), cir);
 	}
 }

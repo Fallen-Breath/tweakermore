@@ -20,6 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.features.tweakmSchematicProPlace;
 
+import com.mojang.datafixers.util.Pair;
 import fi.dy.masa.tweakeroo.config.Configs;
 import fi.dy.masa.tweakeroo.config.FeatureToggle;
 import fi.dy.masa.tweakeroo.config.Hotkeys;
@@ -176,9 +177,13 @@ public abstract class PlacementTweaksMixin
 			CallbackInfoReturnable<ActionResult> cir
 	)
 	{
-		BlockHitResult hitResult = finalBlockPlacementTweak$TKM(player, world, posIn, sideIn, hitVecIn, hand);
-		ItemPlacementContext ctx = new ItemPlacementContext(new ItemUsageContext(player, hand, hitResult));
-
-		ProPlaceImpl.handleRightClick(hitResult, ctx, cir);
+		ProPlaceImpl.handleRightClick(
+				() -> {
+					BlockHitResult hitResult = finalBlockPlacementTweak$TKM(player, world, posIn, sideIn, hitVecIn, hand);
+					ItemPlacementContext ctx = new ItemPlacementContext(new ItemUsageContext(player, hand, hitResult));
+					return Pair.of(hitResult, ctx);
+				},
+				cir
+		);
 	}
 }
