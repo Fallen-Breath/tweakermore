@@ -39,6 +39,7 @@ import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -89,7 +90,8 @@ public class InfoViewRenderer implements TweakerMoreIRenderer, IClientTickHandle
 
 		MinecraftClient mc = MinecraftClient.getInstance();
 		World world = WorldUtils.getBestWorld(mc);
-		if (world == null || mc.player == null)
+		World clientWorld = mc.world;
+		if (world == null || clientWorld == null || mc.player == null)
 		{
 			return;
 		}
@@ -131,7 +133,7 @@ public class InfoViewRenderer implements TweakerMoreIRenderer, IClientTickHandle
 		{
 			BlockPos blockPos = pair.getFirst();
 			boolean isCrossHairPos = blockPos.equals(crossHairPos);
-			Supplier<BlockState> blockState = Suppliers.memoize(() -> chunkCache.getBlockState(blockPos));  // to avoid async block get --> faster
+			Supplier<BlockState> blockState = Suppliers.memoize(() -> clientWorld.getBlockState(blockPos));  // to avoid async block get --> faster
 			Supplier<BlockEntity> blockEntity = Suppliers.memoize(() -> chunkCache.getBlockEntity(blockPos));
 			ThrowawayRunnable sync = ThrowawayRunnable.of(() -> this.syncBlockEntity(world, blockPos));
 
@@ -140,7 +142,7 @@ public class InfoViewRenderer implements TweakerMoreIRenderer, IClientTickHandle
 				boolean enabled = viewer.isValidTarget(isCrossHairPos);
 				if (enabled && viewer.shouldRenderFor(world, blockPos, blockState.get()))
 				{
-					if (viewer.requireBlockEntitySyncing())
+					if (viewer.requireBlockEntitySyncing() && !(world instanceof ServerWorld))
 					{
 						sync.run();
 					}
