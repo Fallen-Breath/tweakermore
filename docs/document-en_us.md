@@ -2,9 +2,91 @@
 
 New features provided by TweakerMore
 
+### autoCleanContainer
+
+Automatically drops everything in the opened container
+
+and then close the container
+
+- Category: Features
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Item Scroller (`itemscroller`)
+
+
+### autoCleanContainerBlackList
+
+Items that will NOT be thrown out from the container with autoCleanContainer
+
+- Category: Features
+- Type: string list
+- Default value: `[minecraft:shulker_box]`
+- Mod restrictions:
+  - Required mods:
+    - Item Scroller (`itemscroller`)
+
+
+### autoCleanContainerListType
+
+The item restriction type for autoCleanContainer
+
+- Category: Features
+- Type: option list
+- Default value: `None`
+- Available options: `None`, `Black List`, `White List`
+- Mod restrictions:
+  - Required mods:
+    - Item Scroller (`itemscroller`)
+
+
+### autoCleanContainerWhiteList
+
+Items that will be thrown out from the container with autoCleanContainer
+
+- Category: Features
+- Type: string list
+- Default value: `[minecraft:shulker_box]`
+- Mod restrictions:
+  - Required mods:
+    - Item Scroller (`itemscroller`)
+
+
+### autoCollectMaterialListItem
+
+Automatically collect missing items in litematica mod material list in the opened container to player inventory
+
+and then close the container
+
+- Category: Features
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
+### autoFillContainer
+
+Automatically fill the opened container with the most numerous item stack in your inventory
+
+iff the item stack is the only most numerous one
+
+and then close the container
+
+- Category: Features
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Item Scroller (`itemscroller`)
+
+
 ### autoFillContainerThreshold
 
-The minimum occupied slot amount for the item to trigger tweak tweakmAutoFillContainer
+The minimum occupied slot amount for the item to trigger tweak autoFillContainer
 
 e.g. if you always have 2 slots of firework rocket you can set the value to 3,
 
@@ -15,6 +97,91 @@ e.g. if you always have 2 slots of firework rocket you can set the value to 3,
 - Default value: `2`
 - Minimum value: `1`
 - Maximum value: `36`
+
+
+### autoPickSchematicBlock
+
+Pick block from schematic automatically before block placement
+
+It's logic is the same as the pickBlock tweaks in litematica mod, you need to enable pickBlockEnabled option in litematica
+
+Does not work with easy place mode
+
+- Category: Features
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+
+
+### autoPutBackExistedItem
+
+Automatically put back all items which also exist in the container from your inventory into the container
+
+and then close the container
+
+- Category: Features
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Item Scroller (`itemscroller`)
+
+
+### autoVillagerTradeFavorites
+
+Automatically trigger item scroller's villagerTradeFavorites feature when a merchant screen is opened
+
+and then close the merchant screen
+
+- Category: Features
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Item Scroller (`itemscroller`)
+    - Minecraft (`minecraft`) `>=1.16`
+
+
+### containerProcessorHint
+
+Displays the enabling status of auto container processing related features, including:
+
+- autoCleanContainer
+
+- autoFillContainer
+
+- autoPutBackExistedItem
+
+- autoCollectMaterialListItem
+
+- Category: Features
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+
+![containerProcessorHint](assets/containerProcessorHint-en_us.png)
+
+
+### containerProcessorHintPos
+
+The displayed position of the auto container processor enable status hint
+
+- Category: Features
+- Type: option list
+- Default value: `Top Right`
+- Available options: `Top Left`, `Top Right`, `Bottom Left`, `Bottom Right`, `Center`
+
+
+### containerProcessorHintScale
+
+The font scale of the auto container processor enable status hint
+
+- Category: Features
+- Type: double
+- Default value: `1.0`
+- Minimum value: `0.25`
+- Maximum value: `4.0`
 
 
 ### copySignTextToClipBoard
@@ -39,6 +206,17 @@ So the block state can be restored when you place blocks with the picked item
 - Category: Features
 - Type: hotkey with switch
 - Default value: `LEFT_ALT`
+
+
+### infoView
+
+The main switch of the info view feature
+
+Search "infoView" to see related features
+
+- Category: Features
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
 
 
 ### infoViewBeamAngle
@@ -224,6 +402,17 @@ so the server think that the inventory is out of sync then do resync
 - Default value: *no hotkey*
 
 
+### safeAfk
+
+Disconnect when receive damage
+
+Health threshold to disconnect can be set via safeAfkHealthThreshold
+
+- Category: Features
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+
+
 ### safeAfkHealthThreshold
 
 The threshold of the health of the player which triggers the safe afk disconnecting feature
@@ -237,196 +426,7 @@ Disconnect when player takes damage and its health becomes less than the given v
 - Maximum value: `100.0`
 
 
-### tweakmAutoCleanContainer
-
-Automatically drops everything in the opened container
-
-and then close the container
-
-- Category: Features
-- Type: hotkey togglable boolean
-- Default value: *no hotkey*, `false`
-- Mod restrictions:
-  - Required mods:
-    - Item Scroller (`itemscroller`)
-
-
-### tweakmAutoCleanContainerBlackList
-
-Items that will NOT be thrown out from the container with tweakmAutoCleanContainer
-
-- Category: Features
-- Type: string list
-- Default value: `[minecraft:shulker_box]`
-- Mod restrictions:
-  - Required mods:
-    - Item Scroller (`itemscroller`)
-
-
-### tweakmAutoCleanContainerListType
-
-The item restriction type for tweakmAutoCleanContainer
-
-- Category: Features
-- Type: option list
-- Default value: `None`
-- Available options: `None`, `Black List`, `White List`
-- Mod restrictions:
-  - Required mods:
-    - Item Scroller (`itemscroller`)
-
-
-### tweakmAutoCleanContainerWhiteList
-
-Items that will be thrown out from the container with tweakmAutoCleanContainer
-
-- Category: Features
-- Type: string list
-- Default value: `[minecraft:shulker_box]`
-- Mod restrictions:
-  - Required mods:
-    - Item Scroller (`itemscroller`)
-
-
-### tweakmAutoCollectMaterialListItem
-
-Automatically collect missing items in litematica mod material list in the opened container to player inventory
-
-and then close the container
-
-- Category: Features
-- Type: hotkey togglable boolean
-- Default value: *no hotkey*, `false`
-- Mod restrictions:
-  - Required mods:
-    - Litematica (`litematica`)
-    - Item Scroller (`itemscroller`)
-
-
-### tweakmAutoFillContainer
-
-Automatically fill the opened container with the most numerous item stack in your inventory
-
-iff the item stack is the only most numerous one
-
-and then close the container
-
-- Category: Features
-- Type: hotkey togglable boolean
-- Default value: *no hotkey*, `false`
-- Mod restrictions:
-  - Required mods:
-    - Item Scroller (`itemscroller`)
-
-
-### tweakmAutoPickSchematicBlock
-
-Pick block from schematic automatically before block placement
-
-It's logic is the same as the pickBlock tweaks in litematica mod, you need to enable pickBlockEnabled option in litematica
-
-Does not work with easy place mode
-
-- Category: Features
-- Type: hotkey togglable boolean
-- Default value: *no hotkey*, `false`
-- Mod restrictions:
-  - Required mods:
-    - Litematica (`litematica`)
-
-
-### tweakmAutoPutBackExistedItem
-
-Automatically put back all items which also exist in the container from your inventory into the container
-
-and then close the container
-
-- Category: Features
-- Type: hotkey togglable boolean
-- Default value: *no hotkey*, `false`
-- Mod restrictions:
-  - Required mods:
-    - Item Scroller (`itemscroller`)
-
-
-### tweakmAutoVillagerTradeFavorites
-
-Automatically trigger item scroller's villagerTradeFavorites feature when a merchant screen is opened
-
-and then close the merchant screen
-
-- Category: Features
-- Type: hotkey togglable boolean
-- Default value: *no hotkey*, `false`
-- Mod restrictions:
-  - Required mods:
-    - Item Scroller (`itemscroller`)
-    - Minecraft (`minecraft`) `>=1.16`
-
-
-### tweakmContainerProcessorHint
-
-Displays the enabling status of auto container processing related features, including:
-
-- tweakmAutoCleanContainer
-
-- tweakmAutoFillContainer
-
-- tweakmAutoPutBackExistedItem
-
-- tweakmAutoCollectMaterialListItem
-
-- Category: Features
-- Type: hotkey togglable boolean
-- Default value: *no hotkey*, `false`
-
-![tweakmContainerProcessorHint](assets/tweakmContainerProcessorHint-en_us.png)
-
-
-### tweakmContainerProcessorHintPos
-
-The displayed position of the auto container processor enable status hint
-
-- Category: Features
-- Type: option list
-- Default value: `Top Right`
-- Available options: `Top Left`, `Top Right`, `Bottom Left`, `Bottom Right`, `Center`
-
-
-### tweakmContainerProcessorHintScale
-
-The font scale of the auto container processor enable status hint
-
-- Category: Features
-- Type: double
-- Default value: `1.0`
-- Minimum value: `0.25`
-- Maximum value: `4.0`
-
-
-### tweakmInfoView
-
-The main switch of the info view feature
-
-Search "infoView" to see related features
-
-- Category: Features
-- Type: hotkey togglable boolean
-- Default value: *no hotkey*, `false`
-
-
-### tweakmSafeAfk
-
-Disconnect when receive damage
-
-Health threshold to disconnect can be set via safeAfkHealthThreshold
-
-- Category: Features
-- Type: hotkey togglable boolean
-- Default value: *no hotkey*, `false`
-
-
-### tweakmSchematicBlockPlaceRS (tweakmSchematicBlockPlacementRestriction)
+### schematicBlockPlacementRestriction
 
 Similar to litematica's placementRestriction option, it cancels block placement when the placement doesn't match current schematic
 
@@ -444,27 +444,27 @@ Does not work with litematica's or easy place mode
     - Litematica (`litematica`)
 
 
-### tweakmSchematicBlockPlacementRSChkFacing (tweakmSchematicBlockPlacementRestrictionCheckFacing)
+### schematicBlockPlacementRestrictionCheckFacing
 
-Should tweakmSchematicBlockPlacementRestriction check the facing of the to be placed block
-
-- Category: Features
-- Type: hotkey togglable boolean
-- Default value: *no hotkey*, `true`
-
-
-### tweakmSchematicBlockPlacementRSChkSlab (tweakmSchematicBlockPlacementRestrictionCheckSlab)
-
-Should tweakmSchematicBlockPlacementRestriction check the slab type of the to be placed slab block
+Should schematicBlockPlacementRestriction check the facing of the to be placed block
 
 - Category: Features
 - Type: hotkey togglable boolean
 - Default value: *no hotkey*, `true`
 
 
-### tweakmSchematicBlockPlacementRSHint (tweakmSchematicBlockPlacementRestrictionHint)
+### schematicBlockPlacementRestrictionCheckSlab
 
-Switch for displaying hint message when option tweakmSchematicBlockPlacementRestriction cancels a placement
+Should schematicBlockPlacementRestriction check the slab type of the to be placed slab block
+
+- Category: Features
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `true`
+
+
+### schematicBlockPlacementRestrictionHint
+
+Switch for displaying hint message when option schematicBlockPlacementRestriction cancels a placement
 
 - Category: Features
 - Type: option list
@@ -472,9 +472,9 @@ Switch for displaying hint message when option tweakmSchematicBlockPlacementRest
 - Available options: `All`, `Operation not allowed `, `Wrong item only`, `Never`
 
 
-### tweakmSchematicBlockPlacementRSItemWhitelist (tweakmSchematicBlockPlacementRestrictionItemWhitelist)
+### schematicBlockPlacementRestrictionItemWhitelist
 
-When items in the list are being used, the tweakmSchematicBlockPlacementRestriction restriction will be ignored
+When items in the list are being used, the schematicBlockPlacementRestriction restriction will be ignored
 
 These strings should be valid item ids like "ender_chest" or "minecraft:ender_chest"
 
@@ -485,13 +485,13 @@ You can add scaffolding blocks or your carry-on items into this whitelist for mo
 - Default value: `[]`
 
 
-### tweakmSchematicBlockPlacementRSMargin (tweakmSchematicBlockPlacementRestrictionMargin)
+### schematicBlockPlacementRestrictionMargin
 
 The no-block-placement protection margin length from schematic boxes
 
 e.g. with default value 2, block placements within 2 blocks range of any schematic boxes will be cancelled
 
-Used in option tweakmSchematicBlockPlacementRestriction
+Used in option schematicBlockPlacementRestriction
 
 - Category: Features
 - Type: integer
@@ -500,9 +500,9 @@ Used in option tweakmSchematicBlockPlacementRestriction
 - Maximum value: `16`
 
 
-### tweakmSchematicBlockPlacementRSStrict (tweakmSchematicBlockPlacementRestrictionStrict)
+### schematicBlockPlacementRestrictionStrict
 
-Strict mode switch for tweakmSchematicBlockPlacement
+Strict mode switch for schematicBlockPlacement
 
 When on, block placement is allowed only if the to-be-placed block equals to the schematic block
 
@@ -517,13 +517,13 @@ When off, some incorrect but reasonable block placements are allowed, including:
 - Default value: `true`
 
 
-### tweakmSchematicProPlace
+### schematicProPlace
 
 A shortcut option to enable/disable the following options at the same time:
 
-- tweakmAutoPickSchematicBlock
+- autoPickSchematicBlock
 
-- tweakmSchematicBlockPlaceRS (tweakmSchematicBlockPlacementRestriction)
+- schematicBlockPlacementRestriction
 
 With these options enabled, you can have a not-cheaty version of "easy place" from litematica,
 
@@ -667,9 +667,20 @@ Basically it stably adds your ping to the server with the given value
 - Maximum value: `15000`
 
 
+### daytimeOverride
+
+Override the time of day in the client world
+
+Does not affect server-side daytime
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+
+
 ### daytimeOverrideValue
 
-The client-side daytime value to be overridden by tweak tweakmDaytimeOverride
+The client-side daytime value to be overridden by tweak daytimeOverride
 
 - Category: MC Tweaks
 - Type: integer
@@ -848,6 +859,15 @@ when the light level at player's eyes is not the maximum light level
 - Default value: *no hotkey*, `false`
 
 
+### fakeNightVision
+
+Always use night vision for game rendering, regardless of whether the player actually has night vision
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+
+
 ### fixChestMirroring
 
 Fixed chest type is not properly transformed when chest block is mirrored
@@ -868,6 +888,22 @@ This option make the hover texts scale with the same scaling ratio as the chat H
 - Category: MC Tweaks
 - Type: boolean
 - Default value: `false`
+
+
+### flawlessFrames
+
+Forced client to render all changes in loaded chunk for each frames
+
+using the logic from replay mod which is used in its rendering tasks
+
+WARNING: Expect client lag spike with enabled
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Replay mod (`replaymod`)
 
 
 ### flyDrag
@@ -1061,43 +1097,7 @@ Spectators will be listed at the end of the menu with gray and italic name
 - Default value: `false`
 
 
-### tweakmDaytimeOverride
-
-Override the time of day in the client world
-
-Does not affect server-side daytime
-
-- Category: MC Tweaks
-- Type: hotkey togglable boolean
-- Default value: *no hotkey*, `false`
-
-
-### tweakmFakeNightVision
-
-Always use night vision for game rendering, regardless of whether the player actually has night vision
-
-- Category: MC Tweaks
-- Type: hotkey togglable boolean
-- Default value: *no hotkey*, `false`
-
-
-### tweakmFlawlessFrames
-
-Forced client to render all changes in loaded chunk for each frames
-
-using the logic from replay mod which is used in its rendering tasks
-
-WARNING: Expect client lag spike with enabled
-
-- Category: MC Tweaks
-- Type: hotkey togglable boolean
-- Default value: *no hotkey*, `false`
-- Mod restrictions:
-  - Required mods:
-    - Replay mod (`replaymod`)
-
-
-### tweakmUnlimitedBlockEntityRenderDistance
+### unlimitedBlockEntityRenderDistance
 
 Set client-side block entity render distance to unlimited
 
@@ -1108,7 +1108,7 @@ Affect block entities like chests, shulker boxes and skulls
 - Default value: *no hotkey*, `false`
 
 
-### tweakmUnlimitedEntityRenderDistance
+### unlimitedEntityRenderDistance
 
 Set client-side entity render distance to unlimited
 
@@ -1119,7 +1119,7 @@ Still requires the server to send entity packets via EntityTracker properly
 - Default value: *no hotkey*, `false`
 
 
-### tweakmWeatherOverride
+### weatherOverride
 
 Override the weather of the world in the client world
 
@@ -1132,7 +1132,7 @@ Does not affect server-side weather
 
 ### weatherOverrideValue
 
-The client-side weather value to be overridden by tweak tweakmWeatherOverride
+The client-side weather value to be overridden by tweak weatherOverride
 
 - Category: MC Tweaks
 - Type: option list

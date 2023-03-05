@@ -2,9 +2,91 @@
 
 TweakerMore提供的新功能
 
+### 自动清空容器 (autoCleanContainer)
+
+打开容器后，自动将容器内的所有物品扔出
+
+然后关闭容器
+
+- 分类: 功能
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Item Scroller (`itemscroller`)
+
+
+### 自动清空容器-黑名单 (autoCleanContainerBlackList)
+
+使用自动清空容器功能时不会从容器里中扔出的物品类型
+
+- 分类: 功能
+- 类型: 字符串列表
+- 默认值: `[minecraft:shulker_box]`
+- 模组约束:
+  - 依赖模组:
+    - Item Scroller (`itemscroller`)
+
+
+### 自动清空容器-名单约束类型 (autoCleanContainerListType)
+
+触发自动清空容器功能的物品名单约束类型
+
+- 分类: 功能
+- 类型: 选项列表
+- 默认值: `None`
+- 可用选项: `None`, `Black List`, `White List`
+- 模组约束:
+  - 依赖模组:
+    - Item Scroller (`itemscroller`)
+
+
+### 自动清空容器-白名单 (autoCleanContainerWhiteList)
+
+使用自动清空容器功能时从容器里中扔出的物品类型
+
+- 分类: 功能
+- 类型: 字符串列表
+- 默认值: `[minecraft:shulker_box]`
+- 模组约束:
+  - 依赖模组:
+    - Item Scroller (`itemscroller`)
+
+
+### 自动收集材料列表物品 (autoCollectMaterialListItem)
+
+打开容器后，自动收集litematica材料列表中缺失的物品至玩家物品栏
+
+然后关闭容器
+
+- 分类: 功能
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
+### 自动装填容器 (autoFillContainer)
+
+打开容器后，自动使用物品栏中占用格子数最多的物品装填容器
+
+当且仅当占用格子数最多的物品是唯一的
+
+然后关闭容器
+
+- 分类: 功能
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Item Scroller (`itemscroller`)
+
+
 ### 自动装填容器阈值 (autoFillContainerThreshold)
 
-触发功能tweakmAutoFillContainer所需要的最小的物品槽位数
+触发功能autoFillContainer所需要的最小的物品槽位数
 
 例如，如果你总是带着2个格子的烟花火箭，那么你可以将其设置为3，
 
@@ -15,6 +97,91 @@ TweakerMore提供的新功能
 - 默认值: `2`
 - 最小值: `1`
 - 最大值: `36`
+
+
+### 自动选择原理图方块 (autoPickSchematicBlock)
+
+在放置方块前自动选择原理图中的方块对应的物品
+
+逻辑同litematica模组的pickBlock功能，你需要在litematica mod中启用pickBlockEnabled选项
+
+在轻松放置开启时无效
+
+- 分类: 功能
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+
+
+### 自动放回已存在的物品 (autoPutBackExistedItem)
+
+自动将在容器中也存在的背包物品放回容器中
+
+然后关闭容器
+
+- 分类: 功能
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Item Scroller (`itemscroller`)
+
+
+### 自动交易收藏村民交易 (autoVillagerTradeFavorites)
+
+在打开村民交易GUI时自动触发ItemScroller模组的villagerTradeFavorites功能
+
+然后关闭村民交易GUI
+
+- 分类: 功能
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Item Scroller (`itemscroller`)
+    - Minecraft (`minecraft`) `>=1.16`
+
+
+### 自动容器处理提示 (containerProcessorHint)
+
+在界面右上角显示自动容器处理相关功能的开启情况，包括：
+
+- 自动清空容器 (autoCleanContainer)
+
+- 自动装填容器 (autoFillContainer)
+
+- 自动放回已存在的物品 (autoPutBackExistedItem)
+
+- 自动收集材料列表物品 (autoCollectMaterialListItem)
+
+- 分类: 功能
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+
+![containerProcessorHint](assets/containerProcessorHint-zh_cn.png)
+
+
+### 自动容器处理提示-位置 (containerProcessorHintPos)
+
+自动容器处理提示渲染时所用的显示位置
+
+- 分类: 功能
+- 类型: 选项列表
+- 默认值: `Top Right`
+- 可用选项: `Top Left`, `Top Right`, `Bottom Left`, `Bottom Right`, `Center`
+
+
+### 自动容器处理提示-字体大小 (containerProcessorHintScale)
+
+自动容器处理提示渲染时所用的字体相对大小
+
+- 分类: 功能
+- 类型: 实数
+- 默认值: `1.0`
+- 最小值: `0.25`
+- 最大值: `4.0`
 
 
 ### 复制告示牌文本 (copySignTextToClipBoard)
@@ -39,6 +206,17 @@ TweakerMore提供的新功能
 - 分类: 功能
 - 类型: 带开关热键
 - 默认值: `LEFT_ALT`
+
+
+### 信息展示 (infoView)
+
+信息展示相关特性的总开关
+
+搜索"infoView"以查阅相关特性
+
+- 分类: 功能
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
 
 
 ### 信息展示设置-光束渲染策略角度 (infoViewBeamAngle)
@@ -224,6 +402,17 @@ TweakerMore提供的新功能
 - 默认值: *无快捷键*
 
 
+### 安全挂机 (safeAfk)
+
+在受到伤害时断开连接
+
+触发断开连接的玩家血量阈值可以在safeAfkHealthThreshold中设置
+
+- 分类: 功能
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+
+
 ### 安全挂机血量阈值 (safeAfkHealthThreshold)
 
 触发安全挂机功能的玩家的血量阈值
@@ -237,196 +426,7 @@ TweakerMore提供的新功能
 - 最大值: `100.0`
 
 
-### 自动清空容器 (tweakmAutoCleanContainer)
-
-打开容器后，自动将容器内的所有物品扔出
-
-然后关闭容器
-
-- 分类: 功能
-- 类型: 带热键布尔值
-- 默认值: *无快捷键*, `false`
-- 模组约束:
-  - 依赖模组:
-    - Item Scroller (`itemscroller`)
-
-
-### 自动清空容器-黑名单 (tweakmAutoCleanContainerBlackList)
-
-使用自动清空容器功能时不会从容器里中扔出的物品类型
-
-- 分类: 功能
-- 类型: 字符串列表
-- 默认值: `[minecraft:shulker_box]`
-- 模组约束:
-  - 依赖模组:
-    - Item Scroller (`itemscroller`)
-
-
-### 自动清空容器-名单约束类型 (tweakmAutoCleanContainerListType)
-
-触发自动清空容器功能的物品名单约束类型
-
-- 分类: 功能
-- 类型: 选项列表
-- 默认值: `None`
-- 可用选项: `None`, `Black List`, `White List`
-- 模组约束:
-  - 依赖模组:
-    - Item Scroller (`itemscroller`)
-
-
-### 自动清空容器-白名单 (tweakmAutoCleanContainerWhiteList)
-
-使用自动清空容器功能时从容器里中扔出的物品类型
-
-- 分类: 功能
-- 类型: 字符串列表
-- 默认值: `[minecraft:shulker_box]`
-- 模组约束:
-  - 依赖模组:
-    - Item Scroller (`itemscroller`)
-
-
-### 自动收集材料列表物品 (tweakmAutoCollectMaterialListItem)
-
-打开容器后，自动收集litematica材料列表中缺失的物品至玩家物品栏
-
-然后关闭容器
-
-- 分类: 功能
-- 类型: 带热键布尔值
-- 默认值: *无快捷键*, `false`
-- 模组约束:
-  - 依赖模组:
-    - Litematica (`litematica`)
-    - Item Scroller (`itemscroller`)
-
-
-### 自动装填容器 (tweakmAutoFillContainer)
-
-打开容器后，自动使用物品栏中占用格子数最多的物品装填容器
-
-当且仅当占用格子数最多的物品是唯一的
-
-然后关闭容器
-
-- 分类: 功能
-- 类型: 带热键布尔值
-- 默认值: *无快捷键*, `false`
-- 模组约束:
-  - 依赖模组:
-    - Item Scroller (`itemscroller`)
-
-
-### 自动选择原理图方块 (tweakmAutoPickSchematicBlock)
-
-在放置方块前自动选择原理图中的方块对应的物品
-
-逻辑同litematica模组的pickBlock功能，你需要在litematica mod中启用pickBlockEnabled选项
-
-在轻松放置开启时无效
-
-- 分类: 功能
-- 类型: 带热键布尔值
-- 默认值: *无快捷键*, `false`
-- 模组约束:
-  - 依赖模组:
-    - Litematica (`litematica`)
-
-
-### 自动放回已存在的物品 (tweakmAutoPutBackExistedItem)
-
-自动将在容器中也存在的背包物品放回容器中
-
-然后关闭容器
-
-- 分类: 功能
-- 类型: 带热键布尔值
-- 默认值: *无快捷键*, `false`
-- 模组约束:
-  - 依赖模组:
-    - Item Scroller (`itemscroller`)
-
-
-### 自动交易收藏村民交易 (tweakmAutoVillagerTradeFavorites)
-
-在打开村民交易GUI时自动触发ItemScroller模组的villagerTradeFavorites功能
-
-然后关闭村民交易GUI
-
-- 分类: 功能
-- 类型: 带热键布尔值
-- 默认值: *无快捷键*, `false`
-- 模组约束:
-  - 依赖模组:
-    - Item Scroller (`itemscroller`)
-    - Minecraft (`minecraft`) `>=1.16`
-
-
-### 自动容器处理提示 (tweakmContainerProcessorHint)
-
-在界面右上角显示自动容器处理相关功能的开启情况，包括：
-
-- 自动清空容器 (tweakmAutoCleanContainer)
-
-- 自动装填容器 (tweakmAutoFillContainer)
-
-- 自动放回已存在的物品 (tweakmAutoPutBackExistedItem)
-
-- 自动收集材料列表物品 (tweakmAutoCollectMaterialListItem)
-
-- 分类: 功能
-- 类型: 带热键布尔值
-- 默认值: *无快捷键*, `false`
-
-![tweakmContainerProcessorHint](assets/tweakmContainerProcessorHint-zh_cn.png)
-
-
-### 自动容器处理提示-位置 (tweakmContainerProcessorHintPos)
-
-自动容器处理提示渲染时所用的显示位置
-
-- 分类: 功能
-- 类型: 选项列表
-- 默认值: `Top Right`
-- 可用选项: `Top Left`, `Top Right`, `Bottom Left`, `Bottom Right`, `Center`
-
-
-### 自动容器处理提示-字体大小 (tweakmContainerProcessorHintScale)
-
-自动容器处理提示渲染时所用的字体相对大小
-
-- 分类: 功能
-- 类型: 实数
-- 默认值: `1.0`
-- 最小值: `0.25`
-- 最大值: `4.0`
-
-
-### 信息展示 (tweakmInfoView)
-
-信息展示相关特性的总开关
-
-搜索"infoView"以查阅相关特性
-
-- 分类: 功能
-- 类型: 带热键布尔值
-- 默认值: *无快捷键*, `false`
-
-
-### 安全挂机 (tweakmSafeAfk)
-
-在受到伤害时断开连接
-
-触发断开连接的玩家血量阈值可以在safeAfkHealthThreshold中设置
-
-- 分类: 功能
-- 类型: 带热键布尔值
-- 默认值: *无快捷键*, `false`
-
-
-### 原理图方块放置限制 (tweakmSchematicBlockPlacementRestriction)
+### 原理图方块放置限制 (schematicBlockPlacementRestriction)
 
 与litematica的放置限制(placementRestriction)选项类似，它将取消与原理图不匹配的方块的放置
 
@@ -444,7 +444,7 @@ TweakerMore提供的新功能
     - Litematica (`litematica`)
 
 
-### 原理图方块放置限制-检查方块朝向 (tweakmSchematicBlockPlacementRestrictionCheckFacing)
+### 原理图方块放置限制-检查方块朝向 (schematicBlockPlacementRestrictionCheckFacing)
 
 选项“原理图方块放置限制”是否应该检查将要放置的方块的朝向
 
@@ -453,7 +453,7 @@ TweakerMore提供的新功能
 - 默认值: *无快捷键*, `true`
 
 
-### 原理图方块放置限制-检查半砖类型 (tweakmSchematicBlockPlacementRestrictionCheckSlab)
+### 原理图方块放置限制-检查半砖类型 (schematicBlockPlacementRestrictionCheckSlab)
 
 选项“原理图方块放置限制”是否应该检查将要放置的半砖的半砖类型
 
@@ -462,7 +462,7 @@ TweakerMore提供的新功能
 - 默认值: *无快捷键*, `true`
 
 
-### 原理图方块放置限制-提示范围 (tweakmSchematicBlockPlacementRestrictionHint)
+### 原理图方块放置限制-提示范围 (schematicBlockPlacementRestrictionHint)
 
 在“原理图方块放置限制”取消方块放置时是否显示提示信息的策略
 
@@ -472,9 +472,9 @@ TweakerMore提供的新功能
 - 可用选项: `全部`, `不允许的操作`, `仅物品错误`, `总不`
 
 
-### 原理图方块放置限制-物品白名单 (tweakmSchematicBlockPlacementRestrictionItemWhitelist)
+### 原理图方块放置限制-物品白名单 (schematicBlockPlacementRestrictionItemWhitelist)
 
-列表中的物品在被使用时，可以忽略tweakmSchematicBlockPlacementRestriction的限制
+列表中的物品在被使用时，可以忽略schematicBlockPlacementRestriction的限制
 
 这些字符串应该为合法的物品id，如"ender_chest"或"minecraft:ender_chest"
 
@@ -485,13 +485,13 @@ TweakerMore提供的新功能
 - 默认值: `[]`
 
 
-### 原理图方块放置限制-边缘保护 (tweakmSchematicBlockPlacementRestrictionMargin)
+### 原理图方块放置限制-边缘保护 (schematicBlockPlacementRestrictionMargin)
 
 用于阻止位于原理图框附近的方块放置的放置保护距离
 
 例如，在使用默认值为2时，距离任意原理图2米范围内的方块放置将被取消
 
-选项tweakmSchematicBlockPlacementRestriction将使用本规则的值
+选项schematicBlockPlacementRestriction将使用本规则的值
 
 - 分类: 功能
 - 类型: 整数
@@ -500,9 +500,9 @@ TweakerMore提供的新功能
 - 最大值: `16`
 
 
-### 原理图方块放置限制-严格方块检查 (tweakmSchematicBlockPlacementRestrictionStrict)
+### 原理图方块放置限制-严格方块检查 (schematicBlockPlacementRestrictionStrict)
 
-tweakmSchematicBlockPlacement的严格模式
+schematicBlockPlacement的严格模式
 
 若开启，方块放置只在将要放置的方块与原理图中的方块匹配时被允许
 
@@ -517,13 +517,13 @@ tweakmSchematicBlockPlacement的严格模式
 - 默认值: `true`
 
 
-### 专业原理图方块放置 (tweakmSchematicProPlace)
+### 专业原理图方块放置 (schematicProPlace)
 
 同时开启/关闭以下功能的一个快捷选项:
 
-- 自动选择原理图方块 (tweakmAutoPickSchematicBlock)
+- 自动选择原理图方块 (autoPickSchematicBlock)
 
-- 原理图方块放置限制 (tweakmSchematicBlockPlacementRestriction)
+- 原理图方块放置限制 (schematicBlockPlacementRestriction)
 
 启用这些选项后，你就有了一个litematica的轻松放置的非作弊版本，
 
@@ -667,9 +667,20 @@ tweakmSchematicBlockPlacement的严格模式
 - 最大值: `15000`
 
 
+### 覆盖世界时间 (daytimeOverride)
+
+覆盖客户端中的世界时间
+
+对服务端无影响
+
+- 分类: MC修改
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+
+
 ### 覆盖世界时间数值 (daytimeOverrideValue)
 
-用于功能tweakmDaytimeOverride的客户端的世界时间数值
+用于功能daytimeOverride的客户端的世界时间数值
 
 - 分类: MC修改
 - 类型: 整数
@@ -848,6 +859,15 @@ tweakmSchematicBlockPlacement的严格模式
 - 默认值: *无快捷键*, `false`
 
 
+### 伪夜视 (fakeNightVision)
+
+总是运用夜视效果下的游戏渲染，无论玩家是否确实拥有夜视效果
+
+- 分类: MC修改
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+
+
 ### 修复箱子镜像变换 (fixChestMirroring)
 
 修复箱子方块在进行镜像变换时没有正确地处理其chest_type属性
@@ -868,6 +888,22 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 分类: MC修改
 - 类型: 布尔值
 - 默认值: `false`
+
+
+### 无瑕世界渲染 (flawlessFrames)
+
+强制客户端渲染世界时每一帧都更新完毕所有已加载区块中的变化
+
+借用了Replay模组渲染各种任务时所使用的逻辑
+
+警告：这可能会让客户端频繁地卡顿
+
+- 分类: MC修改
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Replay mod (`replaymod`)
 
 
 ### 玩家飞行阻力 (flyDrag)
@@ -1061,43 +1097,7 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 默认值: `false`
 
 
-### 覆盖世界时间 (tweakmDaytimeOverride)
-
-覆盖客户端中的世界时间
-
-对服务端无影响
-
-- 分类: MC修改
-- 类型: 带热键布尔值
-- 默认值: *无快捷键*, `false`
-
-
-### 伪夜视 (tweakmFakeNightVision)
-
-总是运用夜视效果下的游戏渲染，无论玩家是否确实拥有夜视效果
-
-- 分类: MC修改
-- 类型: 带热键布尔值
-- 默认值: *无快捷键*, `false`
-
-
-### 无瑕世界渲染 (tweakmFlawlessFrames)
-
-强制客户端渲染世界时每一帧都更新完毕所有已加载区块中的变化
-
-借用了Replay模组渲染各种任务时所使用的逻辑
-
-警告：这可能会让客户端频繁地卡顿
-
-- 分类: MC修改
-- 类型: 带热键布尔值
-- 默认值: *无快捷键*, `false`
-- 模组约束:
-  - 依赖模组:
-    - Replay mod (`replaymod`)
-
-
-### 无限方块实体渲染距离 (tweakmUnlimitedBlockEntityRenderDistance)
+### 无限方块实体渲染距离 (unlimitedBlockEntityRenderDistance)
 
 将客户端方块实体渲染距离设置为无限制
 
@@ -1108,7 +1108,7 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 默认值: *无快捷键*, `false`
 
 
-### 无限实体渲染距离 (tweakmUnlimitedEntityRenderDistance)
+### 无限实体渲染距离 (unlimitedEntityRenderDistance)
 
 将客户端实体渲染距离设置为无限制
 
@@ -1119,7 +1119,7 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 默认值: *无快捷键*, `false`
 
 
-### 覆盖世界天气 (tweakmWeatherOverride)
+### 覆盖世界天气 (weatherOverride)
 
 覆盖客户端中的世界天气
 
@@ -1132,7 +1132,7 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 
 ### 覆盖世界天气种类 (weatherOverrideValue)
 
-用于功能tweakmWeatherOverride的客户端的世界天气种类
+用于功能weatherOverride的客户端的世界天气种类
 
 - 分类: MC修改
 - 类型: 选项列表

@@ -18,26 +18,23 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.util;
+package me.fallenbreath.tweakermore.impl.setting.debug;
 
-import fi.dy.masa.malilib.event.TickHandler;
-import me.fallenbreath.tweakermore.TweakerMoreMod;
-import me.fallenbreath.tweakermore.impl.setting.debug.TweakerMoreDebugHelper;
-import net.fabricmc.loader.api.FabricLoader;
+import fi.dy.masa.malilib.gui.Message;
+import fi.dy.masa.malilib.util.InfoUtils;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import org.spongepowered.asm.mixin.MixinEnvironment;
 
-public class AutoMixinAuditExecutor
+public class TweakerMoreDebugHelper
 {
-	private static final String KEYWORD_PROPERTY = "tweakermore.mixin_audit";
-
-	public static void run()
+	public static void resetAllConfigStatistic()
 	{
-		if (FabricLoader.getInstance().isDevelopmentEnvironment() && "true".equals(System.getProperty(KEYWORD_PROPERTY)))
-		{
-			TickHandler.getInstance().registerClientTickHandler(mc -> {
-				TweakerMoreMod.LOGGER.info("Triggered auto mixin audit");
-				TweakerMoreDebugHelper.forceLoadAllMixins();
-				System.exit(0);
-			});
-		}
+		TweakerMoreConfigs.getAllOptions().forEach(option -> option.getStatistic().reset());
+	}
+
+	public static void forceLoadAllMixins()
+	{
+		MixinEnvironment.getCurrentEnvironment().audit();
+		InfoUtils.showGuiOrInGameMessage(Message.MessageType.SUCCESS, "tweakermore.impl.tweakerMoreDevMixinAudit.success");
 	}
 }

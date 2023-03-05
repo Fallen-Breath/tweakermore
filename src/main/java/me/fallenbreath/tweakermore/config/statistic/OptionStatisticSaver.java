@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.config.statistic;
 import com.google.gson.JsonObject;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
+import me.fallenbreath.tweakermore.config.migration.ConfigRenameMigration;
 import me.fallenbreath.tweakermore.util.JsonSaveAble;
 
 public class OptionStatisticSaver implements JsonSaveAble
@@ -45,6 +46,15 @@ public class OptionStatisticSaver implements JsonSaveAble
 			if (jsonObject.has(key))
 			{
 				tweakerMoreOption.getStatistic().loadFromJson(jsonObject.get(key));
+			}
+			else
+			{
+				ConfigRenameMigration.newToOld(key).ifPresent(oldKey -> {
+					if (jsonObject.has(oldKey))
+					{
+						tweakerMoreOption.getStatistic().loadFromJson(jsonObject.get(oldKey));
+					}
+				});
 			}
 		}
 	}

@@ -18,26 +18,24 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.util;
+package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.unlimitedEntityRenderDistance;
 
-import fi.dy.masa.malilib.event.TickHandler;
-import me.fallenbreath.tweakermore.TweakerMoreMod;
-import me.fallenbreath.tweakermore.impl.setting.debug.TweakerMoreDebugHelper;
-import net.fabricmc.loader.api.FabricLoader;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import net.minecraft.entity.Entity;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-public class AutoMixinAuditExecutor
+@Mixin(Entity.class)
+public abstract class EntityMixin
 {
-	private static final String KEYWORD_PROPERTY = "tweakermore.mixin_audit";
-
-	public static void run()
+	@Inject(method = "shouldRender(DDD)Z", at = @At("HEAD"), cancellable = true)
+	private void unlimitedEntityRenderDistance(CallbackInfoReturnable<Boolean> cir)
 	{
-		if (FabricLoader.getInstance().isDevelopmentEnvironment() && "true".equals(System.getProperty(KEYWORD_PROPERTY)))
+		if (TweakerMoreConfigs.UNLIMITED_ENTITY_RENDER_DISTANCE.getBooleanValue())
 		{
-			TickHandler.getInstance().registerClientTickHandler(mc -> {
-				TweakerMoreMod.LOGGER.info("Triggered auto mixin audit");
-				TweakerMoreDebugHelper.forceLoadAllMixins();
-				System.exit(0);
-			});
+			cir.setReturnValue(true);
 		}
 	}
 }

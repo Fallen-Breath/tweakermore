@@ -18,26 +18,23 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.util;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.autoContainerProcess;
 
-import fi.dy.masa.malilib.event.TickHandler;
-import me.fallenbreath.tweakermore.TweakerMoreMod;
-import me.fallenbreath.tweakermore.impl.setting.debug.TweakerMoreDebugHelper;
-import net.fabricmc.loader.api.FabricLoader;
+import fi.dy.masa.itemscroller.util.InventoryUtils;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
+import me.fallenbreath.tweakermore.util.ModIds;
+import net.minecraft.container.Slot;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
-public class AutoMixinAuditExecutor
+@Restriction(require = @Condition(ModIds.itemscroller))
+@Mixin(InventoryUtils.class)
+public interface ItemScrollerInventoryUtilsAccessor
 {
-	private static final String KEYWORD_PROPERTY = "tweakermore.mixin_audit";
-
-	public static void run()
+	@Invoker(value = "areSlotsInSameInventory", remap = false)
+	static boolean areSlotsInSameInventory(Slot slot1, Slot slot2)
 	{
-		if (FabricLoader.getInstance().isDevelopmentEnvironment() && "true".equals(System.getProperty(KEYWORD_PROPERTY)))
-		{
-			TickHandler.getInstance().registerClientTickHandler(mc -> {
-				TweakerMoreMod.LOGGER.info("Triggered auto mixin audit");
-				TweakerMoreDebugHelper.forceLoadAllMixins();
-				System.exit(0);
-			});
-		}
+		return false;
 	}
 }

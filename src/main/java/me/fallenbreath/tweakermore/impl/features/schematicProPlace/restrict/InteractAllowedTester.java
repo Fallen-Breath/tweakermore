@@ -18,26 +18,18 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.util;
+package me.fallenbreath.tweakermore.impl.features.schematicProPlace.restrict;
 
-import fi.dy.masa.malilib.event.TickHandler;
-import me.fallenbreath.tweakermore.TweakerMoreMod;
-import me.fallenbreath.tweakermore.impl.setting.debug.TweakerMoreDebugHelper;
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 
-public class AutoMixinAuditExecutor
+import java.util.Optional;
+
+public interface InteractAllowedTester
 {
-	private static final String KEYWORD_PROPERTY = "tweakermore.mixin_audit";
-
-	public static void run()
-	{
-		if (FabricLoader.getInstance().isDevelopmentEnvironment() && "true".equals(System.getProperty(KEYWORD_PROPERTY)))
-		{
-			TickHandler.getInstance().registerClientTickHandler(mc -> {
-				TweakerMoreMod.LOGGER.info("Triggered auto mixin audit");
-				TweakerMoreDebugHelper.forceLoadAllMixins();
-				System.exit(0);
-			});
-		}
-	}
+	/**
+	 * @return null if interaction is allowed,
+	 * not-null if interaction is NOT allowed and the string value is the failure message
+	 */
+	Optional<String> isInteractionAllowed(PlayerEntity player, BlockState worldState, BlockState schematicState);
 }

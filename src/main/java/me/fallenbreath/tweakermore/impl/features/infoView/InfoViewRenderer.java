@@ -75,7 +75,7 @@ public class InfoViewRenderer implements TweakerMoreIRenderer, IClientTickHandle
 	@Override
 	public void onRenderWorldLast(RenderContext context)
 	{
-		if (!TweakerMoreConfigs.TWEAKM_INFO_VIEW.getBooleanValue())
+		if (!TweakerMoreConfigs.INFO_VIEW.getBooleanValue())
 		{
 			return;
 		}

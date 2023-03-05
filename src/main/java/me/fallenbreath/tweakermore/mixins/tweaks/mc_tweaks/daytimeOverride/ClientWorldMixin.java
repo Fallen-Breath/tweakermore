@@ -18,26 +18,28 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.util;
+package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.daytimeOverride;
 
-import fi.dy.masa.malilib.event.TickHandler;
-import me.fallenbreath.tweakermore.TweakerMoreMod;
-import me.fallenbreath.tweakermore.impl.setting.debug.TweakerMoreDebugHelper;
-import net.fabricmc.loader.api.FabricLoader;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import net.minecraft.client.world.ClientWorld;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-public class AutoMixinAuditExecutor
+/**
+ * Modify daytime here too,
+ * so the logic used when the client received a time update packet can be reused by us (gamerule changing etc.)
+ */
+@Mixin(ClientWorld.class)
+public abstract class ClientWorldMixin
 {
-	private static final String KEYWORD_PROPERTY = "tweakermore.mixin_audit";
-
-	public static void run()
+	@ModifyVariable(method = "setTimeOfDay", at = @At("HEAD"), argsOnly = true)
+	private long overwriteDayTime(long timeArg)
 	{
-		if (FabricLoader.getInstance().isDevelopmentEnvironment() && "true".equals(System.getProperty(KEYWORD_PROPERTY)))
+		if (TweakerMoreConfigs.DAYTIME_OVERRIDE.getBooleanValue())
 		{
-			TickHandler.getInstance().registerClientTickHandler(mc -> {
-				TweakerMoreMod.LOGGER.info("Triggered auto mixin audit");
-				TweakerMoreDebugHelper.forceLoadAllMixins();
-				System.exit(0);
-			});
+			timeArg = -TweakerMoreConfigs.DAYTIME_OVERRIDE_VALUE.getIntegerValue();
 		}
+		return timeArg;
 	}
 }

@@ -77,6 +77,7 @@ dependencies {
 	// libraries
 	include(modImplementation("com.github.Fallen-Breath:conditional-mixin:${project.conditionalmixin_version}"))
 	annotationProcessor(include(implementation("com.github.LlamaLad7:MixinExtras:${project.mixin_extra_version}")))
+	testImplementation "junit:junit:${project.junit_version}"
 }
 
 loom {

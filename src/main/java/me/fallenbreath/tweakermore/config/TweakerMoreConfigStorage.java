@@ -21,13 +21,14 @@
 package me.fallenbreath.tweakermore.config;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import fi.dy.masa.malilib.config.ConfigUtils;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IConfigHandler;
 import fi.dy.masa.malilib.util.JsonUtils;
-import fi.dy.masa.malilib.util.restrictions.UsageRestriction;
+import me.fallenbreath.tweakermore.config.migration.ConfigRenameMigration;
 import me.fallenbreath.tweakermore.config.statistic.OptionStatisticSaver;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.util.FabricUtil;
@@ -38,6 +39,10 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+//#if MC < 11800
+import com.google.gson.JsonParser;
+//#endif
 
 public class TweakerMoreConfigStorage implements IConfigHandler
 {
@@ -67,14 +72,6 @@ public class TweakerMoreConfigStorage implements IConfigHandler
 				collect(Collectors.toList());
 	}
 
-	private void onConfigLoaded()
-	{
-		TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.setListType((UsageRestriction.ListType)TweakerMoreConfigs.HAND_RESTORE_LIST_TYPE.getOptionListValue());
-		TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.setListContents(TweakerMoreConfigs.HAND_RESTORE_BLACKLIST.getStrings(), TweakerMoreConfigs.HAND_RESTORE_WHITELIST.getStrings());
-		TweakerMoreConfigs.TWEAKM_AUTO_CLEAN_CONTAINER_RESTRICTION.setListType((UsageRestriction.ListType)TweakerMoreConfigs.TWEAKM_AUTO_CLEAN_CONTAINER_LIST_TYPE.getOptionListValue());
-		TweakerMoreConfigs.TWEAKM_AUTO_CLEAN_CONTAINER_RESTRICTION.setListContents(TweakerMoreConfigs.TWEAKM_AUTO_CLEAN_CONTAINER_BLACKLIST.getStrings(), TweakerMoreConfigs.TWEAKM_AUTO_CLEAN_CONTAINER_WHITELIST.getStrings());
-	}
-
 	@Override
 	public void load()
 	{
@@ -91,13 +88,27 @@ public class TweakerMoreConfigStorage implements IConfigHandler
 		}
 		if (root != null)
 		{
-			this.loadFromJson(root);
+			this.loadFromJson(root, true);
 		}
 	}
 
-	public void loadFromJson(JsonObject root)
+	public void loadFromJson(JsonObject root, boolean isSelfConfig)
 	{
-		this.loadedJson = root;
+		if (isSelfConfig)
+		{
+			//#if MC >= 11800
+			//$$ this.loadedJson = root.deepCopy();
+			//#else
+			// trick to make a deep copy of the root object, cuz JsonObject.deepCopy is not private in gson v2.8.0
+			this.loadedJson = new JsonParser().parse(root.toString()).getAsJsonObject();
+			//#endif
+
+			ConfigRenameMigration.patchConfig(root, Lists.newArrayList(
+					// keys are collected from calls to ConfigUtils in the rest of this method
+					"Generic", "GenericHotkeys", "Lists", "Fixes",
+					"TweakHotkeys", "TweakToggles", "DisableHotkeys", "DisableToggles"
+			));
+		}
 		ConfigUtils.readConfigBase(root, "Generic", getConfigOptions(Config.Type.GENERIC));
 		ConfigUtils.readConfigBase(root, "GenericHotkeys", getConfigOptions(Config.Type.HOTKEY));
 		ConfigUtils.readConfigBase(root, "Lists", getConfigOptions(Config.Type.LIST));
@@ -107,7 +118,7 @@ public class TweakerMoreConfigStorage implements IConfigHandler
 
 		loadInternal(root);
 
-		onConfigLoaded();
+		TweakerMoreConfigs.onConfigLoaded();
 	}
 
 	private void loadInternal(JsonObject jsonObject)

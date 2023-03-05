@@ -18,26 +18,23 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.util;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.autoCollectMaterialListItem;
 
-import fi.dy.masa.malilib.event.TickHandler;
-import me.fallenbreath.tweakermore.TweakerMoreMod;
-import me.fallenbreath.tweakermore.impl.setting.debug.TweakerMoreDebugHelper;
-import net.fabricmc.loader.api.FabricLoader;
+import fi.dy.masa.litematica.materials.MaterialListHudRenderer;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
+import me.fallenbreath.tweakermore.util.ModIds;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
-public class AutoMixinAuditExecutor
+@Restriction(require = @Condition(ModIds.litematica))
+@Mixin(MaterialListHudRenderer.class)
+public interface MaterialListHudRendererAccessor
 {
-	private static final String KEYWORD_PROPERTY = "tweakermore.mixin_audit";
+	@Accessor(remap = false)
+	void setLastUpdateTime(long value);
 
-	public static void run()
-	{
-		if (FabricLoader.getInstance().isDevelopmentEnvironment() && "true".equals(System.getProperty(KEYWORD_PROPERTY)))
-		{
-			TickHandler.getInstance().registerClientTickHandler(mc -> {
-				TweakerMoreMod.LOGGER.info("Triggered auto mixin audit");
-				TweakerMoreDebugHelper.forceLoadAllMixins();
-				System.exit(0);
-			});
-		}
-	}
+	@Invoker(remap = false)
+	String invokeGetFormattedCountString(int count, int maxStackSize);
 }

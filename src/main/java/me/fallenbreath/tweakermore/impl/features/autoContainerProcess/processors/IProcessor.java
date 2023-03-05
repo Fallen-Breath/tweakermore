@@ -18,26 +18,26 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.util;
+package me.fallenbreath.tweakermore.impl.features.autoContainerProcess.processors;
 
-import fi.dy.masa.malilib.event.TickHandler;
-import me.fallenbreath.tweakermore.TweakerMoreMod;
-import me.fallenbreath.tweakermore.impl.setting.debug.TweakerMoreDebugHelper;
-import net.fabricmc.loader.api.FabricLoader;
+import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
+import net.minecraft.client.gui.screen.ingame.ContainerScreen;
+import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.container.Slot;
 
-public class AutoMixinAuditExecutor
+import java.util.List;
+
+public interface IProcessor
 {
-	private static final String KEYWORD_PROPERTY = "tweakermore.mixin_audit";
-
-	public static void run()
+	default boolean isEnabled()
 	{
-		if (FabricLoader.getInstance().isDevelopmentEnvironment() && "true".equals(System.getProperty(KEYWORD_PROPERTY)))
-		{
-			TickHandler.getInstance().registerClientTickHandler(mc -> {
-				TweakerMoreMod.LOGGER.info("Triggered auto mixin audit");
-				TweakerMoreDebugHelper.forceLoadAllMixins();
-				System.exit(0);
-			});
-		}
+		TweakerMoreConfigBooleanHotkeyed config = this.getConfig();
+		return config.getBooleanValue() && config.getTweakerMoreOption().isEnabled();
 	}
+
+	TweakerMoreConfigBooleanHotkeyed getConfig();
+
+	boolean shouldProcess(ContainerScreen<?> containerScreen);
+
+	boolean process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots);
 }

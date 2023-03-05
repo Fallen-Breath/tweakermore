@@ -41,14 +41,14 @@ import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.impl.features.copySignTextToClipBoard.SignTextCopier;
 import me.fallenbreath.tweakermore.impl.features.infoView.InfoViewRenderer;
 import me.fallenbreath.tweakermore.impl.features.refreshInventory.InventoryRefresher;
-import me.fallenbreath.tweakermore.impl.features.tweakmAutoContainerProcess.AutoContainerProcessorHintRenderer;
-import me.fallenbreath.tweakermore.impl.features.tweakmSchematicProPlace.ProPlaceImpl;
-import me.fallenbreath.tweakermore.impl.mc_tweaks.tweakmFlawlessFrames.FlawlessFramesHandler;
+import me.fallenbreath.tweakermore.impl.features.autoContainerProcess.AutoContainerProcessorHintRenderer;
+import me.fallenbreath.tweakermore.impl.features.schematicProPlace.ProPlaceImpl;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.flawlessFrames.FlawlessFramesHandler;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.eCraftMassCraftCompact.EasierCraftingRegistrar;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.ofPlayerExtraModelOverride.OptifinePlayerExtraModelOverrider;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.impl.porting.lmCustomSchematicBaseDirectoryPorting.LitematicaCustomSchematicBaseDirectoryPorting;
-import me.fallenbreath.tweakermore.impl.setting.tweakmDebug.TweakerMoreDebugHelper;
+import me.fallenbreath.tweakermore.impl.setting.debug.TweakerMoreDebugHelper;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
 import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
 import net.minecraft.block.Blocks;
@@ -78,14 +78,73 @@ public class TweakerMoreConfigs
 	//    Features    //
 	////////////////////
 
+	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed AUTO_CLEAN_CONTAINER = newConfigBooleanHotkeyed("autoCleanContainer");
+
+	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigOptionList AUTO_CLEAN_CONTAINER_LIST_TYPE = newConfigOptionList("autoCleanContainerListType", UsageRestriction.ListType.NONE);
+
+	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigStringList AUTO_CLEAN_CONTAINER_WHITELIST = newConfigStringList("autoCleanContainerWhiteList", ImmutableList.of(RegistryUtil.getItemId(Items.SHULKER_BOX)));
+
+	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigStringList AUTO_CLEAN_CONTAINER_BLACKLIST = newConfigStringList("autoCleanContainerBlackList", ImmutableList.of(RegistryUtil.getItemId(Items.SHULKER_BOX)));
+
+	public static final ItemRestriction AUTO_CLEAN_CONTAINER_RESTRICTION = new ItemRestriction();
+
+	@Config(
+			type = Config.Type.TWEAK,
+			restriction = @Restriction(require = {
+					@Condition(litematica),
+					@Condition(itemscroller)
+			}),
+			category = Config.Category.FEATURES
+	)
+	public static final TweakerMoreConfigBooleanHotkeyed AUTO_COLLECT_MATERIAL_LIST_ITEM = newConfigBooleanHotkeyed("autoCollectMaterialListItem");
+
+	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed AUTO_FILL_CONTAINER = newConfigBooleanHotkeyed("autoFillContainer");
+
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigInteger AUTO_FILL_CONTAINER_THRESHOLD = newConfigInteger("autoFillContainerThreshold", 2, 1, 36);
+
+	@Config(
+			type = Config.Type.TWEAK,
+			restriction = @Restriction(require = @Condition(litematica)),
+			category = Config.Category.FEATURES
+	)
+	public static final TweakerMoreConfigBooleanHotkeyed AUTO_PICK_SCHEMATIC_BLOCK = newConfigBooleanHotkeyed("autoPickSchematicBlock");
+
+	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed AUTO_PUT_BACK_EXISTED_ITEM = newConfigBooleanHotkeyed("autoPutBackExistedItem");
+
+	@Config(
+			type = Config.Type.TWEAK,
+			restriction = @Restriction(require = {
+					@Condition(itemscroller),
+					@Condition(value = minecraft, versionPredicates = ">=1.16")
+			}),
+			category = Config.Category.FEATURES
+	)
+	public static final TweakerMoreConfigBooleanHotkeyed AUTO_VILLAGER_TRADE_FAVORITES = newConfigBooleanHotkeyed("autoVillagerTradeFavorites");
+
+	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed CONTAINER_PROCESSOR_HINT = newConfigBooleanHotkeyed("containerProcessorHint");
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigOptionList CONTAINER_PROCESSOR_HINT_POS = newConfigOptionList("containerProcessorHintPos", HudAlignment.TOP_RIGHT);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigDouble CONTAINER_PROCESSOR_HINT_SCALE = newConfigDouble("containerProcessorHintScale", 1, 0.25, 4);
 
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkey COPY_SIGN_TEXT_TO_CLIPBOARD = newConfigHotKey("copySignTextToClipBoard", "");
 
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkeyWithSwitch CREATIVE_PICK_BLOCK_WITH_STATE = newConfigHotKeyWithSwitch("creativePickBlockWithState", false, "LEFT_ALT", KeybindSettings.MODIFIER_INGAME);
+
+	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW = newConfigBooleanHotkeyed("infoView");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble INFO_VIEW_BEAM_ANGLE = newConfigDouble("infoViewBeamAngle", 40, 1, 120);
@@ -135,105 +194,46 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkey REFRESH_INVENTORY = newConfigHotKey("refreshInventory", "", KEYBIND_SETTINGS_ANY);
 
+	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed SAFE_AFK = newConfigBooleanHotkeyed("safeAfk");
+
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble SAFE_AFK_HEALTH_THRESHOLD = newConfigDouble("safeAfkHealthThreshold", 10, 0, 100);
 
+	@Config(
+			type = Config.Type.TWEAK,
+			restriction = @Restriction(require = @Condition(litematica)),
+			category = Config.Category.FEATURES
+	)
+	public static final TweakerMoreConfigBooleanHotkeyed SCHEMATIC_PRO_PLACE = newConfigBooleanHotkeyed("schematicProPlace");
+
+	@Config(
+			type = Config.Type.TWEAK,
+			restriction = @Restriction(require = @Condition(litematica)),
+			category = Config.Category.FEATURES
+	)
+	public static final TweakerMoreConfigBooleanHotkeyed SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION = newConfigBooleanHotkeyed("schematicBlockPlacementRestriction");
+
+	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigOptionList SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_HINT = newConfigOptionList("schematicBlockPlacementRestrictionHint", SchematicBlockPlacementRestrictionHintType.DEFAULT);
+
+	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigStringList SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_ITEM_WHITELIST = newConfigStringList("schematicBlockPlacementRestrictionItemWhitelist", ImmutableList.of());
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigInteger SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_MARGIN = newConfigInteger("schematicBlockPlacementRestrictionMargin", 2, 0, 16);
+
+	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_CHECK_FACING = newConfigBooleanHotkeyed("schematicBlockPlacementRestrictionCheckFacing", true, "");
+
+	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_CHECK_SLAB = newConfigBooleanHotkeyed("schematicBlockPlacementRestrictionCheckSlab", true, "");
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBoolean SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_STRICT = newConfigBoolean("schematicBlockPlacementRestrictionStrict", true);
+
 	@Config(type = Config.Type.LIST, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigOptionListHotkeyed SERVER_MSPT_METRICS_STATISTIC_TYPE = newConfigOptionListHotkeyed("serverMsptMetricsStatisticType", ServerMsptMetricsStatisticType.DEFAULT);
-
-	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_CLEAN_CONTAINER = newConfigBooleanHotkeyed("tweakmAutoCleanContainer");
-
-	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigOptionList TWEAKM_AUTO_CLEAN_CONTAINER_LIST_TYPE = newConfigOptionList("tweakmAutoCleanContainerListType", UsageRestriction.ListType.NONE);
-
-	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigStringList TWEAKM_AUTO_CLEAN_CONTAINER_WHITELIST = newConfigStringList("tweakmAutoCleanContainerWhiteList", ImmutableList.of(RegistryUtil.getItemId(Items.SHULKER_BOX)));
-
-	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigStringList TWEAKM_AUTO_CLEAN_CONTAINER_BLACKLIST = newConfigStringList("tweakmAutoCleanContainerBlackList", ImmutableList.of(RegistryUtil.getItemId(Items.SHULKER_BOX)));
-
-	public static final ItemRestriction TWEAKM_AUTO_CLEAN_CONTAINER_RESTRICTION = new ItemRestriction();
-
-	@Config(
-			type = Config.Type.TWEAK,
-			restriction = @Restriction(require = {
-					@Condition(litematica),
-					@Condition(itemscroller)
-			}),
-			category = Config.Category.FEATURES
-	)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_COLLECT_MATERIAL_LIST_ITEM = newConfigBooleanHotkeyed("tweakmAutoCollectMaterialListItem");
-
-	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_FILL_CONTAINER = newConfigBooleanHotkeyed("tweakmAutoFillContainer");
-
-	@Config(
-			type = Config.Type.TWEAK,
-			restriction = @Restriction(require = @Condition(litematica)),
-			category = Config.Category.FEATURES
-	)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_PICK_SCHEMATIC_BLOCK = newConfigBooleanHotkeyed("tweakmAutoPickSchematicBlock");
-
-	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_PUT_BACK_EXISTED_ITEM = newConfigBooleanHotkeyed("tweakmAutoPutBackExistedItem");
-
-	@Config(
-			type = Config.Type.TWEAK,
-			restriction = @Restriction(require = {
-					@Condition(itemscroller),
-					@Condition(value = minecraft, versionPredicates = ">=1.16")
-			}),
-			category = Config.Category.FEATURES
-	)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_AUTO_VILLAGER_TRADE_FAVORITES = newConfigBooleanHotkeyed("tweakmAutoVillagerTradeFavorites");
-
-	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_CONTAINER_PROCESSOR_HINT = newConfigBooleanHotkeyed("tweakmContainerProcessorHint");
-
-	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigOptionList TWEAKM_CONTAINER_PROCESSOR_HINT_POS = newConfigOptionList("tweakmContainerProcessorHintPos", HudAlignment.TOP_RIGHT);
-
-	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigDouble TWEAKM_CONTAINER_PROCESSOR_HINT_SCALE = newConfigDouble("tweakmContainerProcessorHintScale", 1, 0.25, 4);
-
-	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_INFO_VIEW = newConfigBooleanHotkeyed("tweakmInfoView");
-
-	@Config(
-			type = Config.Type.TWEAK,
-			restriction = @Restriction(require = @Condition(litematica)),
-			category = Config.Category.FEATURES
-	)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SCHEMATIC_PRO_PLACE = newConfigBooleanHotkeyed("tweakmSchematicProPlace");
-
-	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SAFE_AFK = newConfigBooleanHotkeyed("tweakmSafeAfk");
-
-	@Config(
-			type = Config.Type.TWEAK,
-			restriction = @Restriction(require = @Condition(litematica)),
-			category = Config.Category.FEATURES
-	)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION = newConfigBooleanHotkeyed("tweakmSchematicBlockPlacementRestriction");
-
-	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigOptionList TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_HINT = newConfigOptionList("tweakmSchematicBlockPlacementRestrictionHint", SchematicBlockPlacementRestrictionHintType.DEFAULT);
-
-	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigStringList TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_ITEM_WHITELIST = newConfigStringList("tweakmSchematicBlockPlacementRestrictionItemWhitelist", ImmutableList.of());
-
-	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigInteger TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_MARGIN = newConfigInteger("tweakmSchematicBlockPlacementRestrictionMargin", 2, 0, 16);
-
-	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_CHECK_FACING = newConfigBooleanHotkeyed("tweakmSchematicBlockPlacementRestrictionCheckFacing", true, "");
-
-	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_CHECK_SLAB = newConfigBooleanHotkeyed("tweakmSchematicBlockPlacementRestrictionCheckSlab", true, "");
-
-	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigBoolean TWEAKM_SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_STRICT = newConfigBoolean("tweakmSchematicBlockPlacementRestrictionStrict", true);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBoolean VILLAGER_OFFER_USES_DISPLAY = newConfigBoolean("villagerOfferUsesDisplay", false);
@@ -275,6 +275,9 @@ public class TweakerMoreConfigs
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigInteger CONNECTION_SIMULATED_DELAY = newConfigInteger("connectionSimulatedDelay", 0, 0, 15_000);
+
+	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed DAYTIME_OVERRIDE = newConfigBooleanHotkeyed("daytimeOverride");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigInteger DAYTIME_OVERRIDE_VALUE = newConfigInteger("daytimeOverrideValue", 0, 0, 24000);
@@ -321,11 +324,17 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_VIGNETTE_DARKNESS = newConfigBooleanHotkeyed("disableVignetteDarkness");
 
+	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed FAKE_NIGHT_VISION = newConfigBooleanHotkeyed("fakeNightVision");
+
 	@Config(type = Config.Type.FIX, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean FIX_CHEST_MIRRORING = newConfigBoolean("fixChestMirroring", false);
 
 	@Config(type = Config.Type.FIX, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean FIX_HOVER_TEXT_SCALE = newConfigBoolean("fixHoverTextScale", false);
+
+	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(replay_mod)), category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed FLAWLESS_FRAMES = newConfigBooleanHotkeyed("flawlessFrames");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigDouble FLY_DRAG = newConfigDouble("flyDrag", 0.09, 0, 1);
@@ -373,22 +382,13 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBoolean SPECTATOR_TELEPORT_MENU_INCLUDE_SPECTATOR = newConfigBoolean("spectatorTeleportMenuIncludeSpectator", false);
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_DAYTIME_OVERRIDE = newConfigBooleanHotkeyed("tweakmDaytimeOverride");
+	public static final TweakerMoreConfigBooleanHotkeyed UNLIMITED_BLOCK_ENTITY_RENDER_DISTANCE = newConfigBooleanHotkeyed("unlimitedBlockEntityRenderDistance");
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_FAKE_NIGHT_VISION = newConfigBooleanHotkeyed("tweakmFakeNightVision");
-
-	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(replay_mod)), category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_FLAWLESS_FRAMES = newConfigBooleanHotkeyed("tweakmFlawlessFrames");
+	public static final TweakerMoreConfigBooleanHotkeyed UNLIMITED_ENTITY_RENDER_DISTANCE = newConfigBooleanHotkeyed("unlimitedEntityRenderDistance");
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_UNLIMITED_BLOCK_ENTITY_RENDER_DISTANCE = newConfigBooleanHotkeyed("tweakmUnlimitedBlockEntityRenderDistance");
-
-	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_UNLIMITED_ENTITY_RENDER_DISTANCE = newConfigBooleanHotkeyed("tweakmUnlimitedEntityRenderDistance");
-
-	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigBooleanHotkeyed TWEAKM_WEATHER_OVERRIDE = newConfigBooleanHotkeyed("tweakmWeatherOverride");
+	public static final TweakerMoreConfigBooleanHotkeyed WEATHER_OVERRIDE = newConfigBooleanHotkeyed("weatherOverride");
 
 	@Config(type = Config.Type.LIST, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigOptionList WEATHER_OVERRIDE_VALUE = newConfigOptionList("weatherOverrideValue", WeatherOverrideValue.DEFAULT);
@@ -650,7 +650,7 @@ public class TweakerMoreConfigs
 		HIDE_DISABLE_OPTIONS.setValueChangeCallback(redrawConfigGui);
 		OF_SANTA_HAT.setValueChangeCallback(OptifinePlayerExtraModelOverrider::onConfigValueChanged);
 		OF_WITCH_HAT.setValueChangeCallback(OptifinePlayerExtraModelOverrider::onConfigValueChanged);
-		TWEAKM_FLAWLESS_FRAMES.setValueChangeCallback(config -> FlawlessFramesHandler.setEnabled(config.getBooleanValue()));
+		FLAWLESS_FRAMES.setValueChangeCallback(config -> FlawlessFramesHandler.setEnabled(config.getBooleanValue()));
 
 		// debugs
 		TWEAKERMORE_DEBUG_MODE.setValueChangeCallback(redrawConfigGui);
@@ -666,8 +666,8 @@ public class TweakerMoreConfigs
 
 		//////////// Misc ////////////
 
-		TWEAKM_CONTAINER_PROCESSOR_HINT.setCommentModifier(AutoContainerProcessorHintRenderer::modifyComment);
-		TWEAKM_SCHEMATIC_PRO_PLACE.setCommentModifier(ProPlaceImpl::modifyComment);
+		CONTAINER_PROCESSOR_HINT.setCommentModifier(AutoContainerProcessorHintRenderer::modifyComment);
+		SCHEMATIC_PRO_PLACE.setCommentModifier(ProPlaceImpl::modifyComment);
 	}
 
 	private static void setHotkeyCallback(TweakerMoreConfigHotkey configHotkey, Runnable runnable, boolean cancelFurtherProcess)
@@ -676,6 +676,14 @@ public class TweakerMoreConfigs
 			runnable.run();
 			return cancelFurtherProcess;
 		});
+	}
+
+	static void onConfigLoaded()
+	{
+		TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.setListType((UsageRestriction.ListType)TweakerMoreConfigs.HAND_RESTORE_LIST_TYPE.getOptionListValue());
+		TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.setListContents(TweakerMoreConfigs.HAND_RESTORE_BLACKLIST.getStrings(), TweakerMoreConfigs.HAND_RESTORE_WHITELIST.getStrings());
+		TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_RESTRICTION.setListType((UsageRestriction.ListType)TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_LIST_TYPE.getOptionListValue());
+		TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_RESTRICTION.setListContents(TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_BLACKLIST.getStrings(), TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_WHITELIST.getStrings());
 	}
 
 	// Config fields collecting
