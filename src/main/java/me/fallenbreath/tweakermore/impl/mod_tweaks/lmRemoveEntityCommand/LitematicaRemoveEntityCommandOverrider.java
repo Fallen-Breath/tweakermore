@@ -36,7 +36,7 @@ import java.util.Optional;
 
 public class LitematicaRemoveEntityCommandOverrider
 {
-	private static final String DEFAULT_COMMAND = "kill";
+	public static final String DEFAULT_COMMAND = "kill";
 
 	public static void onCommandOverrideChanged(ConfigString configString)
 	{

@@ -447,7 +447,7 @@ public class TweakerMoreConfigs
 			restriction = @Restriction(require = @Condition(litematica)),
 			category = Config.Category.MOD_TWEAKS
 	)
-	public static final TweakerMoreConfigString LM_REMOVE_ENTITY_COMMAND = newConfigString("lmRemoveEntityCommand", "kill");
+	public static final TweakerMoreConfigString LM_REMOVE_ENTITY_COMMAND = newConfigString("lmRemoveEntityCommand", LitematicaRemoveEntityCommandOverrider.DEFAULT_COMMAND);
 
 	@Config(
 			type = Config.Type.GENERIC,

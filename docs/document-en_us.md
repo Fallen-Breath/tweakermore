@@ -1257,9 +1257,11 @@ Overrides the name of the command to remove entities in litematica delete mode
 
 The command should be able to accept an entity selector as the only parameter
 
+The activate policy of this option can be specified in option lmRemoveEntityCommandPolicy
+
 As an example, you can use "/removeentity" command from Carpet TIS Addition
 
-The activate policy of this option can be specified in option lmRemoveEntityCommandPolicy
+Notes: no "/" prefix
 
 - Category: Mods Tweaks
 - Type: string

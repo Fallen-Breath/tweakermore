@@ -1257,9 +1257,11 @@ tweakHandRestock功能的物品名单约束类型
 
 该指令应当能够接受一个实体选择器作为唯一的参数
 
+该选项的生效策略可在选项lmRemoveEntityCommandPolicy中指定
+
 例如，你可以使用Carpet TIS Addition模组的"/removeentity"指令
 
-该选项的生效策略可在选项lmRemoveEntityCommandPolicy中指定
+注意：无需"/"前缀
 
 - 分类: 模组修改
 - 类型: 字符串

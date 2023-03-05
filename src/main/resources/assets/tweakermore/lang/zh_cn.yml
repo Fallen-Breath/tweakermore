@@ -498,8 +498,9 @@ tweakermore:
       comment: |-
         修改在litematica删除模式中使用的，用于移除实体的指令
         该指令应当能够接受一个实体选择器作为唯一的参数
-        例如，你可以使用Carpet TIS Addition模组的"/removeentity"指令
         该选项的生效策略可在选项lmRemoveEntityCommandPolicy中指定
+        例如，你可以使用Carpet TIS Addition模组的"/removeentity"指令
+        注意：无需"/"前缀
     lmRemoveEntityCommandPolicy:
       .: Litematica-移除实体指令策略
       comment: |-
