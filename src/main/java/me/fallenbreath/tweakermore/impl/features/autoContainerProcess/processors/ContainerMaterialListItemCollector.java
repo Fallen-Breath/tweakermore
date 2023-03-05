@@ -20,6 +20,8 @@
 
 package me.fallenbreath.tweakermore.impl.features.autoContainerProcess.processors;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 import fi.dy.masa.itemscroller.util.InventoryUtils;
 import fi.dy.masa.litematica.data.DataManager;
 import fi.dy.masa.litematica.materials.MaterialListBase;
@@ -28,9 +30,11 @@ import fi.dy.masa.litematica.materials.MaterialListUtils;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.Message;
 import fi.dy.masa.malilib.util.InfoUtils;
+import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
+import me.fallenbreath.tweakermore.config.options.listentries.AutoCollectMaterialListItemLogType;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.autoCollectMaterialListItem.MaterialListHudRendererAccessor;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -45,6 +49,19 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 	public TweakerMoreConfigBooleanHotkeyed getConfig()
 	{
 		return TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM;
+	}
+
+	private static void log(Message.MessageType type, String translationKey, Object... args)
+	{
+		if (TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_MESSAGE_TYPE.getOptionListValue() == AutoCollectMaterialListItemLogType.FULL)
+		{
+			InfoUtils.showGuiOrInGameMessage(type, translationKey, args);
+		}
+		else
+		{
+			String text = type.getFormatting() + StringUtils.translate(translationKey, args) + GuiBase.TXT_RST;
+			InfoUtils.printActionbarMessage(text);
+		}
 	}
 
 	/**
@@ -62,6 +79,9 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 			// refresh before operation starts to make sure it's up-to-date
 			MaterialListUtils.updateAvailableCounts(materialList.getMaterialsAll(), player);
 			List<MaterialListEntry> missingOnly = materialList.getMaterialsMissingOnly(true);
+
+			boolean summaryOnly = TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_MESSAGE_TYPE.getOptionListValue() == AutoCollectMaterialListItemLogType.SUMMARY;
+			List<String> summaries = Lists.newArrayList();
 
 			boolean takenSomething = false;
 			for (MaterialListEntry entry : missingOnly)
@@ -92,25 +112,40 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 				}
 				if (totalTaken > 0)
 				{
-					if (!takenSomething)
+					if (!takenSomething && !summaryOnly)
 					{
-						InfoUtils.showGuiOrInGameMessage(Message.MessageType.INFO, "tweakermore.impl.autoCollectMaterialListItem.info.title", guiTitle);
+						log(Message.MessageType.INFO, "tweakermore.impl.autoCollectMaterialListItem.info.title", guiTitle);
 					}
 					takenSomething = true;
 					String missingColor = missing == 0 ? GuiBase.TXT_GREEN : GuiBase.TXT_GOLD;
-					InfoUtils.showGuiOrInGameMessage(
-							Message.MessageType.INFO,
-							"tweakermore.impl.autoCollectMaterialListItem.info.line",
-							GuiBase.TXT_GOLD + totalTaken + GuiBase.TXT_RST,
-							stack.getRarity().formatting + stack.getName().getString() + GuiBase.TXT_RST,
-							missingColor + hudRendererAccessor.invokeGetFormattedCountString(missing, stack.getMaxCount()) + GuiBase.TXT_RST
-					);
+					String stackName = stack.getRarity().formatting + stack.getName().getString() + GuiBase.TXT_RST;
+					if (summaryOnly)
+					{
+						summaries.add(String.format("%s +%s", stackName, missingColor + totalTaken + GuiBase.TXT_RST));
+					}
+					else
+					{
+						log(
+								Message.MessageType.INFO,
+								"tweakermore.impl.autoCollectMaterialListItem.info.line",
+								GuiBase.TXT_GOLD + totalTaken + GuiBase.TXT_RST,
+								stackName,
+								missingColor + hudRendererAccessor.invokeGetFormattedCountString(missing, stack.getMaxCount()) + GuiBase.TXT_RST
+						);
+					}
 				}
 			}
 
-			if (!takenSomething)
+			if (takenSomething)
 			{
-				InfoUtils.showGuiOrInGameMessage(Message.MessageType.INFO, "tweakermore.impl.autoCollectMaterialListItem.took_nothing", guiTitle);
+				if (summaryOnly)
+				{
+					log(Message.MessageType.INFO, Joiner.on(", ").join(summaries));
+				}
+			}
+			else
+			{
+				log(Message.MessageType.INFO, "tweakermore.impl.autoCollectMaterialListItem.took_nothing", guiTitle);
 			}
 
 			// refresh after operation ends
@@ -118,7 +153,7 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 		}
 		else
 		{
-			InfoUtils.showGuiOrInGameMessage(Message.MessageType.WARNING, "tweakermore.impl.autoCollectMaterialListItem.no_material_list");
+			log(Message.MessageType.WARNING, "tweakermore.impl.autoCollectMaterialListItem.no_material_list");
 		}
 		return true;
 	}

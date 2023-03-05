@@ -68,6 +68,20 @@ TweakerMore提供的新功能
     - Item Scroller (`itemscroller`)
 
 
+### 自动收集材料列表物品-消息类型 (autoCollectMaterialListItemMessageType)
+
+The way to show information when using the autoCollectMaterialListItem feature
+
+- 分类: 功能
+- 类型: 选项列表
+- 默认值: `完整`
+- 可用选项: `完整`, `摘要`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
 ### 自动装填容器 (autoFillContainer)
 
 打开容器后，自动使用物品栏中占用格子数最多的物品装填容器

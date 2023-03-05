@@ -68,6 +68,20 @@ and then close the container
     - Item Scroller (`itemscroller`)
 
 
+### autoCollectMaterialListItemMessageType
+
+The way to show information when using the autoCollectMaterialListItem feature
+
+- Category: Features
+- Type: option list
+- Default value: `Full`
+- Available options: `Full`, `Summary`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
 ### autoFillContainer
 
 Automatically fill the opened container with the most numerous item stack in your inventory

@@ -102,6 +102,16 @@ public class TweakerMoreConfigs
 	)
 	public static final TweakerMoreConfigBooleanHotkeyed AUTO_COLLECT_MATERIAL_LIST_ITEM = newConfigBooleanHotkeyed("autoCollectMaterialListItem");
 
+	@Config(
+			type = Config.Type.LIST,
+			restriction = @Restriction(require = {
+					@Condition(litematica),
+					@Condition(itemscroller)
+			}),
+			category = Config.Category.FEATURES
+	)
+	public static final TweakerMoreConfigOptionList AUTO_COLLECT_MATERIAL_LIST_ITEM_MESSAGE_TYPE = newConfigOptionList("autoCollectMaterialListItemMessageType", AutoCollectMaterialListItemLogType.DEFAULT);
+
 	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed AUTO_FILL_CONTAINER = newConfigBooleanHotkeyed("autoFillContainer");
 

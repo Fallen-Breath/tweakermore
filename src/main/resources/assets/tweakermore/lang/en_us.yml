@@ -23,6 +23,9 @@ tweakermore:
         Automatically collect missing items in litematica mod material list in the opened container to player inventory
         and then close the container
       pretty_name: Auto Collect Material List Item
+    autoCollectMaterialListItemMessageType:
+      .: autoCollectMaterialListItemMessageType
+      comment: The way to show information when using the autoCollectMaterialListItem feature
     autoFillContainer:
       .: autoFillContainer
       comment: |-
@@ -631,6 +634,19 @@ tweakermore:
   # ================================ List entries ================================
 
   list_entry:
+    autoCollectMaterialListItemMessageType:
+      full: Full
+      summary: Summary
+    infoViewRenderStrategy:
+      hotkey_held: View hotkey held
+      always: Always
+    infoViewTargetStrategy:
+      pointed: Pointed
+      beam: Beam
+    optifineExtraModelRenderStrategy:
+      untouched: Untouched
+      me: Apply to me
+      all: Apply to everyone
     restriction_type:
       none: None
       whitelist: Whitelist
@@ -640,26 +656,16 @@ tweakermore:
       operation_not_allowed: 'Operation not allowed '
       wrong_item_only: Wrong item only
       never: Never
-    weatherOverrideValue:
-      clear: Clear sky
-      rain: Rain
-      thunder: Thunderstorm
-    infoViewRenderStrategy:
-      hotkey_held: View hotkey held
-      always: Always
-    infoViewTargetStrategy:
-      pointed: Pointed
-      beam: Beam
     serverMsptMetricsStatistic:
       game_tick: MSPT (vanilla)
       second_avg: Average MSPT per second
       second_max: Maximum MSPT per second
       minute_avg: Average MSPT per minute
       minute_max: Maximum MSPT per minute
-    optifineExtraModelRenderStrategy:
-      untouched: Untouched
-      me: Apply to me
-      all: Apply to everyone
+    weatherOverrideValue:
+      clear: Clear sky
+      rain: Rain
+      thunder: Thunderstorm
 
   # ================================ GUI ================================
 

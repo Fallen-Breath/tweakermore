@@ -23,6 +23,9 @@ tweakermore:
         打开容器后，自动收集litematica材料列表中缺失的物品至玩家物品栏
         然后关闭容器
       pretty_name: 自动收集材料列表物品
+    autoCollectMaterialListItemMessageType:
+      .: 自动收集材料列表物品-消息类型
+      comment: The way to show information when using the autoCollectMaterialListItem feature
     autoFillContainer:
       .: 自动装填容器
       comment: |-
@@ -631,6 +634,19 @@ tweakermore:
   # ================================ List entries ================================
 
   list_entry:
+    autoCollectMaterialListItemMessageType:
+      full: 完整
+      summary: 摘要
+    infoViewRenderStrategy:
+      hotkey_held: 按住展示热键
+      always: 总是
+    infoViewTargetStrategy:
+      pointed: 指向
+      beam: 光束
+    optifineExtraModelRenderStrategy:
+      untouched: 不修改
+      me: 应用于我自己
+      all: 应用于所有人
     restriction_type:
       none: 无
       whitelist: 白名单
@@ -640,26 +656,16 @@ tweakermore:
       operation_not_allowed: 不允许的操作
       wrong_item_only: 仅物品错误
       never: 总不
-    weatherOverrideValue:
-      clear: 晴天
-      rain: 降雨
-      thunder: 雷暴
-    infoViewRenderStrategy:
-      hotkey_held: 按住展示热键
-      always: 总是
-    infoViewTargetStrategy:
-      pointed: 指向
-      beam: 光束
     serverMsptMetricsStatistic:
       game_tick: MSPT (原版)
       second_avg: 每秒MSPT平均值
       second_max: 每秒MSPT最大值
       minute_avg: 每分钟MSPT平均值
       minute_max: 每分钟MSPT最大值
-    optifineExtraModelRenderStrategy:
-      untouched: 不修改
-      me: 应用于我自己
-      all: 应用于所有人
+    weatherOverrideValue:
+      clear: 晴天
+      rain: 降雨
+      thunder: 雷暴
 
   # ================================ GUI ================================
 
