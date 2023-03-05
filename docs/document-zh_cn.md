@@ -1251,6 +1251,41 @@ tweakHandRestock功能的物品名单约束类型
     - Litematica (`litematica`)
 
 
+### Litematica-移除实体指令 (lmRemoveEntityCommand)
+
+修改在litematica删除模式中使用的，用于移除实体的指令
+
+该指令应当能够接受一个实体选择器作为唯一的参数
+
+例如，你可以使用Carpet TIS Addition模组的"/removeentity"指令
+
+该选项的生效策略可在选项lmRemoveEntityCommandPolicy中指定
+
+- 分类: 模组修改
+- 类型: 字符串
+- 默认值: `kill`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+
+
+### Litematica-移除实体指令策略 (lmRemoveEntityCommandPolicy)
+
+选项lmRemoveEntityCommand的生效策略
+
+- auto: 仅在给定指令合法时生效（客户端检查）
+
+- always: 总是生效
+
+- 分类: 模组修改
+- 类型: 选项列表
+- 默认值: `自动`
+- 可用选项: `自动`, `总是`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+
+
 ### MiniHUD-禁用光照显示可刷怪检查 (minihudDisableLightOverlaySpawnCheck)
 
 Mini HUD的光照等级显示仅于可刷怪方块上渲染

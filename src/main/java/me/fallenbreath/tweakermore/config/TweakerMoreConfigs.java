@@ -38,13 +38,14 @@ import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.options.*;
 import me.fallenbreath.tweakermore.config.options.listentries.*;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
+import me.fallenbreath.tweakermore.impl.features.autoContainerProcess.AutoContainerProcessorHintRenderer;
 import me.fallenbreath.tweakermore.impl.features.copySignTextToClipBoard.SignTextCopier;
 import me.fallenbreath.tweakermore.impl.features.infoView.InfoViewRenderer;
 import me.fallenbreath.tweakermore.impl.features.refreshInventory.InventoryRefresher;
-import me.fallenbreath.tweakermore.impl.features.autoContainerProcess.AutoContainerProcessorHintRenderer;
 import me.fallenbreath.tweakermore.impl.features.schematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.flawlessFrames.FlawlessFramesHandler;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.eCraftMassCraftCompact.EasierCraftingRegistrar;
+import me.fallenbreath.tweakermore.impl.mod_tweaks.lmRemoveEntityCommand.LitematicaRemoveEntityCommandOverrider;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.ofPlayerExtraModelOverride.OptifinePlayerExtraModelOverrider;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.impl.porting.lmCustomSchematicBaseDirectoryPorting.LitematicaCustomSchematicBaseDirectoryPorting;
@@ -443,6 +444,20 @@ public class TweakerMoreConfigs
 
 	@Config(
 			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(litematica)),
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigString LM_REMOVE_ENTITY_COMMAND = newConfigString("lmRemoveEntityCommand", "kill");
+
+	@Config(
+			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(litematica)),
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigOptionList LM_REMOVE_ENTITY_COMMAND_POLICY = newConfigOptionList("lmRemoveEntityCommandPolicy", LitematicaRemoveEntityCommandPolicy.DEFAULT);
+
+	@Config(
+			type = Config.Type.GENERIC,
 			restriction = @Restriction(require = @Condition(minihud)),
 			category = Config.Category.MOD_TWEAKS
 	)
@@ -658,6 +673,7 @@ public class TweakerMoreConfigs
 		// value listeners
 		ECRAFT_ITEM_SCROLLER_COMPACT.setValueChangeCallback(EasierCraftingRegistrar::onConfigValueChanged);
 		HIDE_DISABLE_OPTIONS.setValueChangeCallback(redrawConfigGui);
+		LM_REMOVE_ENTITY_COMMAND.setValueChangeCallback(LitematicaRemoveEntityCommandOverrider::onCommandOverrideChanged);
 		OF_SANTA_HAT.setValueChangeCallback(OptifinePlayerExtraModelOverrider::onConfigValueChanged);
 		OF_WITCH_HAT.setValueChangeCallback(OptifinePlayerExtraModelOverrider::onConfigValueChanged);
 		FLAWLESS_FRAMES.setValueChangeCallback(config -> FlawlessFramesHandler.setEnabled(config.getBooleanValue()));

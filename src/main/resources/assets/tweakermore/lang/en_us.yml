@@ -493,6 +493,19 @@ tweakermore:
         Also, a special flag will be saved into the .litematic file
         If a .litematic file with the special flag is loaded,
         the position of the schematic placement will be set to [0, 0, 0] instead of player's position
+    lmRemoveEntityCommand:
+      .: Litematica-RemoveEntityCommand
+      comment: |-
+        Overrides the name of the command to remove entities in litematica delete mode
+        The command should be able to accept an entity selector as the only parameter
+        As an example, you can use "/removeentity" command from Carpet TIS Addition
+        The activate policy of this option can be specified in option lmRemoveEntityCommandPolicy
+    lmRemoveEntityCommandPolicy:
+      .: Litematica-RemoveEntityCommandPolicy
+      comment: |-
+        The activate policy of option lmRemoveEntityCommand
+        - auto: Apply the override if the given command is valid (clientside check)
+        - always: Apply the override in all cases
     minihudDisableLightOverlaySpawnCheck:
       .: MiniHUD-DisableLightOverlaySpawnCheck
       comment: |-
@@ -643,6 +656,9 @@ tweakermore:
     infoViewTargetStrategy:
       pointed: Pointed
       beam: Beam
+    lmRemoveEntityCommandPolicy:
+      auto: Auto
+      always: Always
     optifineExtraModelRenderStrategy:
       untouched: Untouched
       me: Apply to me
@@ -736,26 +752,6 @@ tweakermore:
   # ================================ Feature Implementations ================================
 
   impl:
-    creativePickBlockWithState:
-      message: Block state of %1$s stored
-    infoViewRespawnBlockExplosion:
-      damage: 'Damage: %1$s'
-    lmOriginOverride000:
-      marked_override: The origin of '%1$s' will be override to [0, 0, 0]
-      placement_tweaked: Set origin of '%1$s' to [0, 0, 0]
-    refreshInventory:
-      refreshed: Inventory refreshed
-    serverDataSyncer:
-      schematic_sync:
-        start: Syncing block entities and entities in the selection area %1$s
-        progress: Synced %1$s/%1$s block entities and %3$s/%4$s entities (%5$s)
-        synced: Synced %1$s block entities and %2$s entities from the server
-    serverMsptMetricsStatisticTypeCycle:
-      hint: 'Statistic type: %1$s'
-    shulkerTooltipHintBuilder:
-      more: '... %1$sx'
-    tweakerMoreDevMixinAudit:
-      success: Mixin audit succeeded
     autoCleanContainer:
       container_cleaned: Dropped all items in %1$s slots inside %2$s
     autoCollectMaterialListItem:
@@ -774,6 +770,26 @@ tweakermore:
       no_favorite: "%1$s doesn't have any favorite trades"
     containerProcessorHint:
       title: Enabled auto container processing features
+    creativePickBlockWithState:
+      message: Block state of %1$s stored
+    infoViewRespawnBlockExplosion:
+      damage: 'Damage: %1$s'
+    lmOriginOverride000:
+      marked_override: The origin of '%1$s' will be override to [0, 0, 0]
+      placement_tweaked: Set origin of '%1$s' to [0, 0, 0]
+    lmRemoveEntityCommand:
+      invalid_command: Invalid command "%1$s", wrong value or not enough permission?
+    refreshInventory:
+      refreshed: Inventory refreshed
+    serverDataSyncer:
+      schematic_sync:
+        start: Syncing block entities and entities in the selection area %1$s
+        progress: Synced %1$s/%1$s block entities and %3$s/%4$s entities (%5$s)
+        synced: Synced %1$s block entities and %2$s entities from the server
+    serverMsptMetricsStatisticTypeCycle:
+      hint: 'Statistic type: %1$s'
+    shulkerTooltipHintBuilder:
+      more: '... %1$sx'
     safeAfk:
       received_damage: |-
         Received damage at %1$
@@ -791,6 +807,8 @@ tweakermore:
         interact_not_allow:
           not_allowed: operation not allowed
           property_protection: block property protection
+    tweakerMoreDevMixinAudit:
+      success: Mixin audit succeeded
 
   # ================================ Misc ================================
 

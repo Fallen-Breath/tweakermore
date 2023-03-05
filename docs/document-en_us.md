@@ -1251,6 +1251,41 @@ the position of the schematic placement will be set to [0, 0, 0] instead of play
     - Litematica (`litematica`)
 
 
+### Litematica-RemoveEntityCommand (lmRemoveEntityCommand)
+
+Overrides the name of the command to remove entities in litematica delete mode
+
+The command should be able to accept an entity selector as the only parameter
+
+As an example, you can use "/removeentity" command from Carpet TIS Addition
+
+The activate policy of this option can be specified in option lmRemoveEntityCommandPolicy
+
+- Category: Mods Tweaks
+- Type: string
+- Default value: `kill`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+
+
+### Litematica-RemoveEntityCommandPolicy (lmRemoveEntityCommandPolicy)
+
+The activate policy of option lmRemoveEntityCommand
+
+- auto: Apply the override if the given command is valid (clientside check)
+
+- always: Apply the override in all cases
+
+- Category: Mods Tweaks
+- Type: option list
+- Default value: `Auto`
+- Available options: `Auto`, `Always`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+
+
 ### MiniHUD-DisableLightOverlaySpawnCheck (minihudDisableLightOverlaySpawnCheck)
 
 Mini HUD light level overlay are rendered only on spawn-able block
