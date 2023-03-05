@@ -30,3 +30,4 @@ More features/tweaks will be enabled with these mods
 - [ReplayMod](https://www.replaymod.com/)
 - [Tweakeroo](https://www.curseforge.com/minecraft/mc-mods/tweakeroo)
 - [Xaero's World Map](https://www.curseforge.com/minecraft/mc-mods/xaeros-world-map)
+- And more...
