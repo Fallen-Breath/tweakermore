@@ -34,6 +34,10 @@ import net.minecraft.world.explosion.Explosion;
 
 import java.util.Objects;
 
+//#if MC >= 11904
+//$$ import net.minecraft.registry.tag.DamageTypeTags;
+//#endif
+
 public class DamageCalculator
 {
 	private final LivingEntity entity;
@@ -78,11 +82,15 @@ public class DamageCalculator
 		}
 		return new DamageCalculator(
 				entity, damage,
+				//#if MC >= 11904
+				//$$ entity.getDamageSources().badRespawnPoint(explosionCenter)
+				//#else
 				DamageSource.netherBed(
 						//#if MC >= 11903
 						//$$ explosionCenter
 						//#endif
 				)
+				//#endif
 		);
 	}
 
@@ -148,10 +156,16 @@ public class DamageCalculator
 		this.checkAndSetStage(ApplyStage.ARMOR);
 		float amount = this.damageAmount;
 
-		// ref: net.minecraft.entity.LivingEntity.applyDamage
+		// ref: net.minecraft.entity.LivingEntity#applyDamage
 		{
-			// ref: net.minecraft.entity.LivingEntity.applyArmorToDamage
-			if (!this.damageSource.bypassesArmor())
+			// ref: net.minecraft.entity.LivingEntity#applyArmorToDamage
+			if (!(
+					//#if MC >= 11904
+					//$$ this.damageSource.isIn(DamageTypeTags.BYPASSES_ARMOR)
+					//#else
+					this.damageSource.bypassesArmor()
+					//#endif
+			))
 			{
 				amount = DamageUtil.getDamageLeft(
 						amount, this.entity.getArmor(),
@@ -159,10 +173,23 @@ public class DamageCalculator
 				);
 			}
 
-			// ref: net.minecraft.entity.LivingEntity.applyEnchantmentsToDamage
-			if (!this.damageSource.isUnblockable())
+			// ref: net.minecraft.entity.LivingEntity#applyEnchantmentsToDamage (mc < 1.19)
+			//      net.minecraft.entity.LivingEntity#modifyAppliedDamage (mc > 1.19)
+			if (!(
+					//#if MC >= 11904
+					//$$ this.damageSource.isIn(DamageTypeTags.BYPASSES_EFFECTS)
+					//#else
+					this.damageSource.isUnblockable()
+					//#endif
+			))
 			{
-				if (this.entity.hasStatusEffect(StatusEffects.RESISTANCE) && this.damageSource != DamageSource.OUT_OF_WORLD)
+				if (this.entity.hasStatusEffect(StatusEffects.RESISTANCE) && this.damageSource !=
+						//#if MC >= 11904
+						//$$ this.entity.getDamageSources().outOfWorld()
+						//#else
+						DamageSource.OUT_OF_WORLD
+						//#endif
+				)
 				{
 					int level = Objects.requireNonNull(this.entity.getStatusEffect(StatusEffects.RESISTANCE)).getAmplifier() + 1;
 					amount = Math.max(amount * (1 - level / 5.0F), 0.0F);

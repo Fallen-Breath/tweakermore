@@ -152,7 +152,11 @@ public class TextRenderer
 			{
 				renderContext.enableDepthTest();
 			}
+
+			//#if MC < 11904
 			renderContext.enableTexture();
+			//#endif
+
 			renderContext.depthMask(true);
 			renderContext.scale(-1.0, 1.0, 1.0);
 
@@ -190,7 +194,15 @@ public class TextRenderer
 				{
 					VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
 					Matrix4f matrix4f = Rotation3.identity().getMatrix();
-					client.textRenderer.draw(holder.text, textX, textY, this.color, this.shadow, matrix4f, immediate, this.seeThrough, backgroundColor, 0xF000F0);
+					client.textRenderer.draw(
+							holder.text, textX, textY, this.color, this.shadow, matrix4f, immediate,
+							//#if MC >= 11904
+							//$$ this.seeThrough ? net.minecraft.client.font.TextRenderer.TextLayerType.NORMAL : net.minecraft.client.font.TextRenderer.TextLayerType.SEE_THROUGH,
+							//#else
+							this.seeThrough,
+							//#endif
+							backgroundColor, 0xF000F0
+					);
 					immediate.draw();
 
 					// draw twice when having background

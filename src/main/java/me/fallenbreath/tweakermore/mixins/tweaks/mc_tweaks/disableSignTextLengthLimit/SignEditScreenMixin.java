@@ -34,6 +34,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.*;
 
+//#if MC >= 11904
+//$$ import net.minecraft.client.font.TextRenderer;
+//#endif
+
 //#if MC >= 11903
 //$$ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 //$$ import net.minecraft.client.gui.screen.ingame.AbstractSignEditScreen;
@@ -181,6 +185,8 @@ public abstract class SignEditScreenMixin extends Screen
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 11600
+					//$$ target = "Lnet/minecraft/client/font/TextRenderer;draw(Ljava/lang/String;FFIZLorg/joml/Matrix4f;Lnet/minecraft/client/render/VertexConsumerProvider;Lnet/minecraft/client/font/TextRenderer$TextLayerType;IIZ)I",
+					//#elseif MC >= 11600
 					//$$ target = "Lnet/minecraft/client/font/TextRenderer;draw(Ljava/lang/String;FFIZLnet/minecraft/util/math/Matrix4f;Lnet/minecraft/client/render/VertexConsumerProvider;ZIIZ)I",
 					//#else
 					target = "Lnet/minecraft/client/font/TextRenderer;draw(Ljava/lang/String;FFIZLnet/minecraft/client/util/math/Matrix4f;Lnet/minecraft/client/render/VertexConsumerProvider;ZII)I",
@@ -241,7 +247,15 @@ public abstract class SignEditScreenMixin extends Screen
 				if (overflowed)
 				{
 					assert Formatting.RED.getColorValue() != null;
-					mc.textRenderer.draw("!", xStart - 10, lineIdx * 10 - textArrayLen * 5, Formatting.RED.getColorValue(), false, matrix4f, immediate, false, 0, 15728880);
+					mc.textRenderer.draw(
+							"!", xStart - 10, lineIdx * 10 - textArrayLen * 5, Formatting.RED.getColorValue(), false, matrix4f, immediate,
+							//#if MC >= 11904
+							//$$ TextRenderer.TextLayerType.NORMAL,
+							//#else
+							false,
+							//#endif
+							0, 15728880
+					);
 				}
 			}
 		}

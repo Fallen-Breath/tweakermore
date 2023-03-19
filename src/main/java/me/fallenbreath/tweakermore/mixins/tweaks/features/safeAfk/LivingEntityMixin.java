@@ -31,13 +31,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class LivingEntityMixin
 {
 	@Inject(
+			//#if MC >= 11904
+			//$$ method = "onDamaged",
+			//#else
 			method = "handleStatus",
+			//#endif
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"
 			)
 	)
-	private void playerGetsHurtHook(byte status, CallbackInfo ci)
+	private void playerGetsHurtHook(CallbackInfo ci)
 	{
 		SafeAfkHelper.onEntityEnterDamageStatus((LivingEntity)(Object)this);
 	}
