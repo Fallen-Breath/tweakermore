@@ -184,7 +184,7 @@ public abstract class SignEditScreenMixin extends Screen
 			//#endif
 			at = @At(
 					value = "INVOKE",
-					//#if MC >= 11600
+					//#if MC >= 11904
 					//$$ target = "Lnet/minecraft/client/font/TextRenderer;draw(Ljava/lang/String;FFIZLorg/joml/Matrix4f;Lnet/minecraft/client/render/VertexConsumerProvider;Lnet/minecraft/client/font/TextRenderer$TextLayerType;IIZ)I",
 					//#elseif MC >= 11600
 					//$$ target = "Lnet/minecraft/client/font/TextRenderer;draw(Ljava/lang/String;FFIZLnet/minecraft/util/math/Matrix4f;Lnet/minecraft/client/render/VertexConsumerProvider;ZIIZ)I",
