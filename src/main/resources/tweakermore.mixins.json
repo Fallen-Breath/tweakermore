@@ -14,6 +14,7 @@
     "core.gui.WidgetListConfigOptionsAccessor",
     "core.gui.WidgetListConfigOptionsMixin",
     "core.gui.WidgetSearchBarAccessor",
+    "core.hook.WorldRendererMixin",
     "core.migration.ConfigBooleanHotkeyedMixin",
     "core.migration.ConfigsMixin",
     "doc.MinecraftClientMixin",

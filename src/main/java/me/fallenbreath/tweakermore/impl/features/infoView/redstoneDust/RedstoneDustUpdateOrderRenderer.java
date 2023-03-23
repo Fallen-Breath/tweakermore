@@ -75,17 +75,17 @@ public class RedstoneDustUpdateOrderRenderer extends AbstractInfoViewer
 		List<BlockPos> order = getDustUpdateOrderAt(blockPos);
 		for (int i = 0; i < order.size(); i++)
 		{
-			this.renderTextAtPos(order.get(i), String.valueOf(i + 1), color);
+			this.renderTextAtPos(context, order.get(i), String.valueOf(i + 1), color);
 		}
 	}
 
-	private void renderTextAtPos(BlockPos pos, String text, int color)
+	private void renderTextAtPos(RenderContext context, BlockPos pos, String text, int color)
 	{
 		TextRenderer.create().
 				text(text).atCenter(pos).
 				color(color).
 				shadow().seeThrough().
-				render();
+				render(context);
 	}
 
 	/**

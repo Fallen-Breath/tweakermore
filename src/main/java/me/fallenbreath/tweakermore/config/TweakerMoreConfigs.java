@@ -52,6 +52,7 @@ import me.fallenbreath.tweakermore.impl.porting.lmCustomSchematicBaseDirectoryPo
 import me.fallenbreath.tweakermore.impl.setting.debug.TweakerMoreDebugHelper;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
 import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
+import me.fallenbreath.tweakermore.util.render.TweakerMoreRenderEventHandler;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Items;
 
@@ -687,7 +688,7 @@ public class TweakerMoreConfigs
 		//////////// Event Listeners ////////////
 
 		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
-		RenderEventHandler.getInstance().registerWorldLastRenderer(InfoViewRenderer.getInstance());
+		TweakerMoreRenderEventHandler.register(InfoViewRenderer.getInstance());
 		RenderEventHandler.getInstance().registerGameOverlayRenderer(new AutoContainerProcessorHintRenderer());
 
 		//////////// Misc ////////////

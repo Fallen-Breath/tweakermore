@@ -22,6 +22,7 @@ package me.fallenbreath.tweakermore.util.render;
 
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.GlStateManager;
+import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.util.PositionUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
@@ -94,7 +95,7 @@ public class TextRenderer
 	 * - 1.14 doesn't support shadow = true
 	 */
 	@SuppressWarnings("UnnecessaryLocalVariable")
-	public void render()
+	public void render(RenderContext renderContext)
 	{
 		if (this.lines.isEmpty())
 		{
@@ -111,13 +112,9 @@ public class TextRenderer
 			double camY = camera.getPos().y;
 			double camZ = camera.getPos().z;
 
-			RenderContext renderContext = new RenderContext(
-					//#if MC >= 11700
-					//$$ RenderSystem.getModelViewStack()
-					//#elseif MC >= 11600
-					//$$ new MatrixStack()
-					//#endif
-			);
+			//#if 11700 <= MC && MC < 11904
+			//$$ renderContext = new RenderContext(RenderSystem.getModelViewStack());
+			//#endif
 
 			renderContext.pushMatrix();
 			renderContext.translate((float)(x - camX), (float)(y - camY), (float)(z - camZ));
@@ -166,9 +163,9 @@ public class TextRenderer
 			double totalTextY = RenderUtil.TEXT_HEIGHT * lineNum + (this.lineHeight - 1) * (lineNum - 1);
 			renderContext.translate(-totalTextX * 0.5, -totalTextY * 0.5, 0);
 
-			//#if MC >= 11700
+			//#if MC >= 11700 && MC < 11904
 			//$$ RenderSystem.applyModelViewMatrix();
-			//#else
+			//#elseif MC < 11700
 			renderContext.enableAlphaTest();
 			//#endif
 
@@ -193,11 +190,15 @@ public class TextRenderer
 				while (true)
 				{
 					VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
+					//#if MC >= 11904
+					//$$ Matrix4f matrix4f = renderContext.getMatrixStack().peek().getPositionMatrix();
+					//#else
 					Matrix4f matrix4f = Rotation3.identity().getMatrix();
+					//#endif
 					client.textRenderer.draw(
 							holder.text, textX, textY, this.color, this.shadow, matrix4f, immediate,
 							//#if MC >= 11904
-							//$$ this.seeThrough ? net.minecraft.client.font.TextRenderer.TextLayerType.NORMAL : net.minecraft.client.font.TextRenderer.TextLayerType.SEE_THROUGH,
+							//$$ this.seeThrough ? net.minecraft.client.font.TextRenderer.TextLayerType.SEE_THROUGH : net.minecraft.client.font.TextRenderer.TextLayerType.NORMAL,
 							//#else
 							this.seeThrough,
 							//#endif
@@ -224,7 +225,10 @@ public class TextRenderer
 			renderContext.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 			//#endif
 
+			//#if MC < 11904
 			renderContext.enableDepthTest();
+			//#endif
+
 			renderContext.popMatrix();
 		}
 	}

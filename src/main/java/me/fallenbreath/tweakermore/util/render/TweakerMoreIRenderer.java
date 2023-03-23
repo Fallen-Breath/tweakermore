@@ -33,6 +33,10 @@ import net.minecraft.client.util.math.MatrixStack;
 
 public interface TweakerMoreIRenderer extends IRenderer
 {
+	/**
+	 * Deprecated: Go register to {@link me.fallenbreath.tweakermore.util.render.TweakerMoreRenderEventHandler}
+	 * instead of malilib's {@link fi.dy.masa.malilib.event.RenderEventHandler}
+	 */
 	@Deprecated
 	@Override
 	default void onRenderWorldLast(
