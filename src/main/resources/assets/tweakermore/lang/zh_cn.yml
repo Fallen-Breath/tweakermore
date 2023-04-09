@@ -418,6 +418,16 @@ tweakermore:
     scoreboardSideBarScale:
       .: 计分板侧边栏缩放
       comment: 将计分板侧边栏按照给定参数进行缩放显示
+    shulkerItemContentHint:
+      .: 潜影盒物品内容提示
+      comment: |-
+        在渲染潜影盒物品时，在潜影盒的左下角显示一个盒中内容的提示
+        若潜影盒仅包含1种物品类型，将显示盒中的那一种物品
+        若潜影盒包含多种物品类型，将显示“...”
+        若潜影盒为空，则不显示内容提示
+    shulkerItemContentHintScale:
+      .: 潜影盒物品内容提示-缩放
+      comment: 选项shulkerItemContentHint内容提示的缩放比例
     shulkerTooltipEnchantmentHint:
       .: 潜影盒物品附魔提示
       comment: 在潜影盒物品的工具提示中显示物品的附魔

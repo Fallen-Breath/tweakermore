@@ -61,7 +61,7 @@ public abstract class BossBarHudMixin
 		this.scaler = null;
 		if (TweakerMoreConfigs.BOSS_BAR_SCALE.isModified())
 		{
-			this.scaler = RenderUtil.createScaler(windowsWidth / 2, 0, TweakerMoreConfigs.BOSS_BAR_SCALE.getDoubleValue());
+			this.scaler = RenderUtil.createScaler(windowsWidth / 2.0, 0, TweakerMoreConfigs.BOSS_BAR_SCALE.getDoubleValue());
 			this.scaler.apply(
 					//#if MC >= 11600
 					//$$ matrices

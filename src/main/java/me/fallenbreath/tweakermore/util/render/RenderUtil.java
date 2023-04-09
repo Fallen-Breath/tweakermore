@@ -46,20 +46,20 @@ public class RenderUtil
 	//$$ }
 	//#endif
 
-	public static Scaler createScaler(int anchorX, int anchorY, double factor)
+	public static Scaler createScaler(double anchorX, double anchorY, double factor)
 	{
 		return new Scaler(anchorX, anchorY, factor);
 	}
 
 	public static class Scaler
 	{
-		private final int anchorX;
-		private final int anchorY;
+		private final double anchorX;
+		private final double anchorY;
 		private final double factor;
 
 		private RenderContext renderContext;
 
-		private Scaler(int anchorX, int anchorY, double factor)
+		private Scaler(double anchorX, double anchorY, double factor)
 		{
 			this.anchorX = anchorX;
 			this.anchorY = anchorY;

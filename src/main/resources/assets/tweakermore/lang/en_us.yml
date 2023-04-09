@@ -418,6 +418,16 @@ tweakermore:
     scoreboardSideBarScale:
       .: scoreboardSideBarScale
       comment: Scale the scoreboard side bar hud with given factor
+    shulkerItemContentHint:
+      .: shulkerItemContentHint
+      comment: |-
+        Show a hint of content of shulker box item at the lower-left corner of the shulker box
+        If the shulker box contains only 1 item type, then that item in the box will be shown 
+        If the shulker box contains multiple types of item, then "..." will be shown
+        If the shulker box is empty, no hint will be shown
+    shulkerItemContentHintScale:
+      .: shulkerItemContentHintScale
+      comment: The scale of the hint stuffs in option shulkerItemContentHint
     shulkerTooltipEnchantmentHint:
       .: shulkerTooltipEnchantmentHint
       comment: Display enchantments of items in the tooltip of shulker box items
