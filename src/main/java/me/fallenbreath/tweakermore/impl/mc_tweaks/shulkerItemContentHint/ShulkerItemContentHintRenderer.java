@@ -83,7 +83,7 @@ public class ShulkerItemContentHintRenderer
 				{
 					std = stack;
 				}
-				else if (!std.isItemEqual(stack))
+				else if (!(ItemStack.areItemsEqual(stack, std) && ItemStack.areTagsEqual(stack, std)))
 				{
 					useQuestionMark = true;
 					break;
