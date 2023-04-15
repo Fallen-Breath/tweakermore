@@ -99,6 +99,11 @@ public class ShulkerItemContentHintRenderer
 		final int SLOT_WIDTH = 16;
 		double scale = TweakerMoreConfigs.SHULKER_ITEM_CONTENT_HINT_SCALE.getDoubleValue();
 
+		if (scale <= 0)
+		{
+			return;
+		}
+
 		//#if MC >= 11904
 		//$$ MatrixStack textMatrixStack = matrices;
 		//$$ textMatrixStack.push();
@@ -188,6 +193,10 @@ public class ShulkerItemContentHintRenderer
 				//$$ matrices.translate(0, 0, 10);
 				//#else
 				itemRenderer.zOffset += 10;
+				// scale the z axis, so the lighting of the item can render correctly
+				// see net.minecraft.client.render.item.ItemRenderer.renderGuiItemModel for z offset applying
+				scaler.getRenderContext().scale(1, 1, scale);
+				scaler.getRenderContext().translate(0, 0, (100.0F + itemRenderer.zOffset) * (1 / scale - 1));
 				//#endif
 
 				// we do this manually so no need to care about extra z-offset modification of itemRenderer in its ItemRenderer#renderGuiItem

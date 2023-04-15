@@ -23,6 +23,8 @@ package me.fallenbreath.tweakermore.util.render;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 
+import java.util.Objects;
+
 //#if MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //$$ import net.minecraft.text.OrderedText;
@@ -94,6 +96,11 @@ public class RenderUtil
 				throw new RuntimeException("RenderUtil.Scaler: Calling restore before calling apply");
 			}
 			this.renderContext.popMatrix();
+		}
+
+		public RenderContext getRenderContext()
+		{
+			return Objects.requireNonNull(this.renderContext);
 		}
 	}
 }
