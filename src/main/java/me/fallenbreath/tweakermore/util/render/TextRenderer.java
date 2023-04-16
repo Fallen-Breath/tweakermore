@@ -92,7 +92,6 @@ public class TextRenderer
 	 * Reference: {@link DebugRenderer#drawString(String, double, double, double, int, float, boolean, float, boolean)}
 	 * Note:
 	 * - shadow=true + seeThrough=false might result in weird rendering
-	 * - 1.14 doesn't support shadow = true
 	 */
 	@SuppressWarnings("UnnecessaryLocalVariable")
 	public void render(RenderContext renderContext)
@@ -217,7 +216,14 @@ public class TextRenderer
 					}
 				}
 				//#else
-				//$$ client.textRenderer.draw(holder.text, textX, textY, this.color);
+				//$$ if (this.shadow)
+				//$$ {
+				//$$ 	client.textRenderer.drawWithShadow(holder.text, textX, textY, this.color);
+				//$$ }
+				//$$ else
+				//$$ {
+				//$$ 	client.textRenderer.draw(holder.text, textX, textY, this.color);
+				//$$ }
 				//#endif
 			}
 
