@@ -21,12 +21,14 @@
 package me.fallenbreath.tweakermore.util;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ItemUtil
@@ -36,4 +38,10 @@ public class ItemUtil
 					filter(item -> item instanceof BlockItem && ((BlockItem)item).getBlock() instanceof ShulkerBoxBlock).
 					collect(Collectors.toList())
 	);
+	private static final Set<Item> SHULKER_BOX_ITEMS_SET = ImmutableSet.copyOf(SHULKER_BOX_ITEMS);
+
+	public static boolean isShulkerBox(Item item)
+	{
+		return SHULKER_BOX_ITEMS_SET.contains(item);
+	}
 }

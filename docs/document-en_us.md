@@ -1043,6 +1043,34 @@ Set to "Game tick" to keep vanilla behavior
 - Available options: `MSPT (vanilla)`, `Average MSPT per second`, `Maximum MSPT per second`, `Average MSPT per minute`, `Maximum MSPT per minute`
 
 
+### shulkerItemContentHint
+
+Show a hint of content of shulker box item at the lower-left corner of the shulker box
+
+If the shulker box contains only 1 item type, then that item in the box will be shown 
+
+If the shulker box contains multiple types of item, then "..." will be shown
+
+If the shulker box is empty, no hint will be shown
+
+- Category: MC Tweaks
+- Type: boolean
+- Default value: `false`
+
+![shulkerItemContentHint](assets/shulkerItemContentHint.png)
+
+
+### shulkerItemContentHintScale
+
+The scale of the hint stuffs in option shulkerItemContentHint
+
+- Category: MC Tweaks
+- Type: double
+- Default value: `0.5`
+- Minimum value: `0.01`
+- Maximum value: `1.0`
+
+
 ### shulkerTooltipEnchantmentHint
 
 Display enchantments of items in the tooltip of shulker box items

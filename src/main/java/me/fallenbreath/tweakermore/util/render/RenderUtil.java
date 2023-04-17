@@ -23,6 +23,8 @@ package me.fallenbreath.tweakermore.util.render;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 
+import java.util.Objects;
+
 //#if MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //$$ import net.minecraft.text.OrderedText;
@@ -46,20 +48,20 @@ public class RenderUtil
 	//$$ }
 	//#endif
 
-	public static Scaler createScaler(int anchorX, int anchorY, double factor)
+	public static Scaler createScaler(double anchorX, double anchorY, double factor)
 	{
 		return new Scaler(anchorX, anchorY, factor);
 	}
 
 	public static class Scaler
 	{
-		private final int anchorX;
-		private final int anchorY;
+		private final double anchorX;
+		private final double anchorY;
 		private final double factor;
 
 		private RenderContext renderContext;
 
-		private Scaler(int anchorX, int anchorY, double factor)
+		private Scaler(double anchorX, double anchorY, double factor)
 		{
 			this.anchorX = anchorX;
 			this.anchorY = anchorY;
@@ -94,6 +96,11 @@ public class RenderUtil
 				throw new RuntimeException("RenderUtil.Scaler: Calling restore before calling apply");
 			}
 			this.renderContext.popMatrix();
+		}
+
+		public RenderContext getRenderContext()
+		{
+			return Objects.requireNonNull(this.renderContext);
 		}
 	}
 }

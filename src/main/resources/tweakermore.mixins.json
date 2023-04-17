@@ -98,6 +98,7 @@
     "tweaks.mc_tweaks.playerSkinBlockingLoading.compat.customskinloader.FakeSkinManagerMixin_Old",
     "tweaks.mc_tweaks.prioritizedCommandSuggestions.CommandSuggestorMixin",
     "tweaks.mc_tweaks.scoreboardSideBarScale.InGameHudMixin",
+    "tweaks.mc_tweaks.shulkerItemContentHint.ItemRendererMixin",
     "tweaks.mc_tweaks.signMultilinePasteSupport.SelectionManagerMixin",
     "tweaks.mc_tweaks.signMultilinePasteSupport.SignEditScreenMixin",
     "tweaks.mc_tweaks.spectatorTeleportMenuIncludeSpectator.TeleportSpectatorMenuMixin",

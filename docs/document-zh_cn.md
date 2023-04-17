@@ -1043,6 +1043,34 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 可用选项: `MSPT (原版)`, `每秒MSPT平均值`, `每秒MSPT最大值`, `每分钟MSPT平均值`, `每分钟MSPT最大值`
 
 
+### 潜影盒物品内容提示 (shulkerItemContentHint)
+
+在渲染潜影盒物品时，在潜影盒的左下角显示一个盒中内容的提示
+
+若潜影盒仅包含1种物品类型，将显示盒中的那一种物品
+
+若潜影盒包含多种物品类型，将显示“...”
+
+若潜影盒为空，则不显示内容提示
+
+- 分类: MC修改
+- 类型: 布尔值
+- 默认值: `false`
+
+![shulkerItemContentHint](assets/shulkerItemContentHint.png)
+
+
+### 潜影盒物品内容提示-缩放 (shulkerItemContentHintScale)
+
+选项shulkerItemContentHint内容提示的缩放比例
+
+- 分类: MC修改
+- 类型: 实数
+- 默认值: `0.5`
+- 最小值: `0.01`
+- 最大值: `1.0`
+
+
 ### 潜影盒物品附魔提示 (shulkerTooltipEnchantmentHint)
 
 在潜影盒物品的工具提示中显示物品的附魔
