@@ -189,7 +189,7 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 					addLine(lineModifier.apply(line2)).
 					color(0x00FFFFFF | textAlphaBits, 0x00000000 | bgAlphaBits).
 					seeThrough().shadow().
-					render(context);
+					render();
 		}
 	}
 

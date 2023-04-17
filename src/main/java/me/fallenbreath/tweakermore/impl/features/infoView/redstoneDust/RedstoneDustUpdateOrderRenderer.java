@@ -85,7 +85,7 @@ public class RedstoneDustUpdateOrderRenderer extends AbstractInfoViewer
 				text(text).atCenter(pos).
 				color(color).
 				shadow().seeThrough().
-				render(context);
+				render();
 	}
 
 	/**

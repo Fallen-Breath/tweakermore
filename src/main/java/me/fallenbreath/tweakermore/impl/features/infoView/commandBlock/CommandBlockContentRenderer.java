@@ -137,6 +137,6 @@ public class CommandBlockContentRenderer extends AbstractInfoViewer
 			textRenderer.addLine(trimmedLastOutput);
 		}
 
-		textRenderer.render(context);
+		textRenderer.render();
 	}
 }

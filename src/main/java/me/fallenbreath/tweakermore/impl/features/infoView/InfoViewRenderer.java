@@ -117,7 +117,7 @@ public class InfoViewRenderer implements TweakerMoreIRenderer, IClientTickHandle
 			double maxDis = positions.stream().map(distanceGetter).mapToDouble(x -> x).max().orElse(1);
 			positions.forEach(pos -> me.fallenbreath.tweakermore.util.render.TextRenderer.create().
 					color(0xFFFFFF00 | (int)(255.0 * distanceGetter.apply(pos) / maxDis)).
-					atCenter(pos).text("x").render(context)
+					atCenter(pos).text("x").render()
 			);
 		}
 

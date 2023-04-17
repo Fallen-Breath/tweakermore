@@ -22,7 +22,6 @@ package me.fallenbreath.tweakermore.util.render;
 
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.GlStateManager;
-import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.util.PositionUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
@@ -94,7 +93,7 @@ public class TextRenderer
 	 * - shadow=true + seeThrough=false might result in weird rendering
 	 */
 	@SuppressWarnings("UnnecessaryLocalVariable")
-	public void render(RenderContext renderContext)
+	public void render()
 	{
 		if (this.lines.isEmpty())
 		{
@@ -111,9 +110,13 @@ public class TextRenderer
 			double camY = camera.getPos().y;
 			double camZ = camera.getPos().z;
 
-			//#if 11700 <= MC && MC < 11904
-			//$$ renderContext = new RenderContext(RenderSystem.getModelViewStack());
-			//#endif
+			RenderContext renderContext = new RenderContext(
+					//#if MC >= 11700
+					//$$ RenderSystem.getModelViewStack()
+					//#elseif MC >= 11600
+					//$$ new MatrixStack()
+					//#endif
+			);
 
 			renderContext.pushMatrix();
 			renderContext.translate((float)(x - camX), (float)(y - camY), (float)(z - camZ));
@@ -162,9 +165,9 @@ public class TextRenderer
 			double totalTextY = RenderUtil.TEXT_HEIGHT * lineNum + (this.lineHeight - 1) * (lineNum - 1);
 			renderContext.translate(-totalTextX * 0.5, -totalTextY * 0.5, 0);
 
-			//#if MC >= 11700 && MC < 11904
+			//#if MC >= 11700
 			//$$ RenderSystem.applyModelViewMatrix();
-			//#elseif MC < 11700
+			//#else
 			renderContext.enableAlphaTest();
 			//#endif
 
@@ -189,11 +192,7 @@ public class TextRenderer
 				while (true)
 				{
 					VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
-					//#if MC >= 11904
-					//$$ Matrix4f matrix4f = renderContext.getMatrixStack().peek().getPositionMatrix();
-					//#else
 					Matrix4f matrix4f = Rotation3.identity().getMatrix();
-					//#endif
 					client.textRenderer.draw(
 							holder.text, textX, textY, this.color, this.shadow, matrix4f, immediate,
 							//#if MC >= 11904
