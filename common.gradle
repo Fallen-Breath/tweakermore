@@ -92,6 +92,7 @@ loom {
 
 	runConfigs.all {
 		runDir '../../run'
+		vmArgs '-Dmixin.debug.export=true'
 	}
 	runConfigs.client {
 		// to make sure it generates all "Minecraft Client (:subproject_name)" applications
