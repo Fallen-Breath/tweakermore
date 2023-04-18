@@ -59,6 +59,9 @@ import java.util.List;
 public class BeaconEffectRenderer extends AbstractInfoViewer
 {
 	private static final double FONT_SCALE = TextRenderer.DEFAULT_FONT_SCALE;
+	private static final double MARGIN = 5;  // margin between icon and text
+	private static final int ICON_SIZE = 18;  // the status effect icon texture is a 18x18 square
+	private static final int ICON_RENDERED_SIZE = RenderUtil.TEXT_HEIGHT;
 
 	public BeaconEffectRenderer()
 	{
@@ -100,26 +103,33 @@ public class BeaconEffectRenderer extends AbstractInfoViewer
 				effects.add(Pair.of(secondary, 0));
 			}
 
+			Vec3d pos = new Vec3d(blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5);
+			double maxWidth = effects.stream().
+					mapToDouble(pair -> this.calculateRowWidth(pair.getFirst(), pair.getSecond())).
+					max().orElse(0);
 			for (int i = 0; i < effects.size(); i++)
 			{
 				Pair<StatusEffect, Integer> pair = effects.get(i);
-				Vec3d vec3d = new Vec3d(blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5);
-				this.renderStatusEffect(vec3d, pair.getFirst(), pair.getSecond(), i, effects.size());
+				StatusEffect statusEffect = pair.getFirst();
+				int amplifier = pair.getSecond();
+
+				double deltaX = -maxWidth / 2;  // unit: pixel (in scale=FONT_SCALE context)
+				double kDeltaY = i - (effects.size() - 1) / 2.0;  // unit: ratio
+
+				this.renderStatusEffectIcon(pos, statusEffect, amplifier, deltaX, kDeltaY);
+				this.renderStatusEffectText(pos, statusEffect, amplifier, deltaX, kDeltaY);
 			}
 		}
 	}
 
-	private void renderStatusEffect(Vec3d pos, StatusEffect statusEffect, int amplifier, int index, int lineNum)
+	private double calculateRowWidth(StatusEffect statusEffect, int amplifier)
 	{
-		double margin = 2.5;
-		double kDeltaY = index - (lineNum - 1) / 2.0;
-
-		this.renderStatusEffectIcon(pos, statusEffect, amplifier, margin, kDeltaY);
-		this.renderStatusEffectText(pos, statusEffect, amplifier, margin, kDeltaY);
+		double textWidth = RenderUtil.getRenderWidth(getStatusEffectText(statusEffect, amplifier));
+		return ICON_RENDERED_SIZE + MARGIN + textWidth;
 	}
 
 	@SuppressWarnings("AccessStaticViaInstance")
-	private void renderStatusEffectIcon(Vec3d pos, StatusEffect statusEffect, int amplifier, double margin, double kDeltaY)
+	private void renderStatusEffectIcon(Vec3d pos, StatusEffect statusEffect, int amplifier, double deltaX, double kDeltaY)
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
 		Sprite sprite = mc.getStatusEffectSpriteManager().getSprite(statusEffect);
@@ -140,11 +150,14 @@ public class BeaconEffectRenderer extends AbstractInfoViewer
 			//#endif
 
 			// ref: net.minecraft.client.gui.hud.InGameHud.renderStatusEffectOverlay
-			final int TEXTURE_SIZE = 18;
-			double scale = FONT_SCALE * RenderUtil.TEXT_HEIGHT / TEXTURE_SIZE;
 
-			renderContext.scale(-scale, -scale, scale);
-			renderContext.translate(-TEXTURE_SIZE - margin, TEXTURE_SIZE * (-0.5 + kDeltaY), 0);
+			renderContext.scale(-FONT_SCALE, -FONT_SCALE, FONT_SCALE);
+			renderContext.translate(deltaX, 0, 0);
+
+			// scale 2: make the rendered texture height == expected height (line height)
+			double k = 1.0 * ICON_RENDERED_SIZE / ICON_SIZE;
+			renderContext.scale(k, k, k);
+			renderContext.translate(0, ICON_SIZE * (-0.5 + kDeltaY), 0);
 
 			//#if MC >= 11900
 			//$$ RenderSystem.setShaderTexture(0, sprite.getAtlasId());
@@ -163,22 +176,27 @@ public class BeaconEffectRenderer extends AbstractInfoViewer
 			//#else
 			renderContext.blit(
 			//#endif
-					0, 0, 0, TEXTURE_SIZE, TEXTURE_SIZE, sprite
+					0, 0, 0, ICON_SIZE, ICON_SIZE, sprite
 			);
 			renderContext.enableDepthTest();
 		}
 		positionTransformer.restore();
 	}
 
-	private void renderStatusEffectText(Vec3d pos, StatusEffect statusEffect, int amplifier, double margin, double kDeltaY)
+	private void renderStatusEffectText(Vec3d pos, StatusEffect statusEffect, int amplifier, double deltaX, double kDeltaY)
 	{
-		String description = StringUtils.translate(statusEffect.getTranslationKey()) + ' ' + StringUtils.translate("enchantment.level." + (amplifier + 1));
+		String description = getStatusEffectText(statusEffect, amplifier);
 		TextRenderer textRenderer = TextRenderer.create().
 				at(pos).
 				text(description).fontScale(FONT_SCALE).
 				align(TextRenderer.HorizontalAlignment.LEFT).
 				seeThrough().shadow();
-		textRenderer.shift(margin, kDeltaY * textRenderer.getLineHeight());
+		textRenderer.shift(deltaX + ICON_RENDERED_SIZE + MARGIN, kDeltaY * textRenderer.getLineHeight());
 		textRenderer.render();
+	}
+
+	private static String getStatusEffectText(StatusEffect statusEffect, int amplifier)
+	{
+		return StringUtils.translate(statusEffect.getTranslationKey()) + ' ' + StringUtils.translate("enchantment.level." + (amplifier + 1));
 	}
 }
