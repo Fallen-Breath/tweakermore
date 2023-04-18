@@ -233,6 +233,37 @@ Search "infoView" to see related features
 - Default value: *no hotkey*, `false`
 
 
+### infoViewBeacon
+
+View the status effects of beacons
+
+- Category: Features
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+
+![infoViewBeacon](assets/infoViewBeacon-en_us.png)
+
+
+### infoViewBeaconRenderST (infoViewBeaconRenderStrategy)
+
+The view rendering strategy of infoViewBeacon
+
+- Category: Features
+- Type: option list
+- Default value: `Always`
+- Available options: `View hotkey held`, `Always`
+
+
+### infoViewBeaconTargetST (infoViewBeaconTargetStrategy)
+
+The target selecting strategy of infoViewBeacon
+
+- Category: Features
+- Type: option list
+- Default value: `Pointed`
+- Available options: `Pointed`, `Beam`
+
+
 ### infoViewBeamAngle
 
 The angle of the initialed cone used in info view strategy "Beam"

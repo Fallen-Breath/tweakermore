@@ -87,7 +87,7 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 	}
 
 	@Override
-	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState)
+	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity)
 	{
 		for (BlockHandlerProvider factory : BLOCK_HANDLER_FACTORIES)
 		{

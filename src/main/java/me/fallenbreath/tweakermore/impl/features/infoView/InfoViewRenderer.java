@@ -27,6 +27,7 @@ import fi.dy.masa.malilib.event.TickHandler;
 import fi.dy.masa.malilib.interfaces.IClientTickHandler;
 import fi.dy.masa.malilib.util.WorldUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.impl.features.infoView.beacon.BeaconEffectRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.commandBlock.CommandBlockContentRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.redstoneDust.RedstoneDustUpdateOrderRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.RespawnBlockExplosionViewer;
@@ -59,7 +60,8 @@ public class InfoViewRenderer implements TweakerMoreIRenderer, IClientTickHandle
 	private static final List<AbstractInfoViewer> CONTENT_PREVIEWERS = Lists.newArrayList(
 			new RedstoneDustUpdateOrderRenderer(),
 			new CommandBlockContentRenderer(),
-			new RespawnBlockExplosionViewer()
+			new RespawnBlockExplosionViewer(),
+			new BeaconEffectRenderer()
 	);
 
 	private InfoViewRenderer()
@@ -140,7 +142,7 @@ public class InfoViewRenderer implements TweakerMoreIRenderer, IClientTickHandle
 			for (AbstractInfoViewer viewer : viewers)
 			{
 				boolean enabled = viewer.isValidTarget(isCrossHairPos);
-				if (enabled && viewer.shouldRenderFor(world, blockPos, blockState.get()))
+				if (enabled && viewer.shouldRenderFor(world, blockPos, blockState.get(), blockEntity.get()))
 				{
 					if (viewer.requireBlockEntitySyncing() && !(world instanceof ServerWorld))
 					{

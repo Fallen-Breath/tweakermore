@@ -30,6 +30,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
@@ -57,11 +58,12 @@ public abstract class AbstractInfoViewer
 	/**
 	 * If this viewer works for and should render for given context
 	 *
-	 * @param world      The current world get from {@link fi.dy.masa.malilib.util.WorldUtils#getBestWorld}
-	 * @param blockPos   The block pos the player looking at
-	 * @param blockState The block state the player looking at
+	 * @param world       The current world get from {@link fi.dy.masa.malilib.util.WorldUtils#getBestWorld}
+	 * @param blockPos    The block pos the player looking at
+	 * @param blockState  The block state the player looking at
+	 * @param blockEntity The block entity the player looking at, nullable
 	 */
-	public abstract boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState);
+	public abstract boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity);
 
 	public abstract boolean requireBlockEntitySyncing();
 

@@ -52,7 +52,7 @@ import net.minecraft.client.util.math.Rotation3;
 
 public class TextRenderer
 {
-	public static final double DEFAULT_FONT_SCALE = 0.02;
+	public static final double DEFAULT_FONT_SCALE = 0.025;
 
 	private final List<TextHolder> lines;
 	private Vec3d pos;
@@ -216,6 +216,9 @@ public class TextRenderer
 			//#endif
 		}
 		positionTransformer.restore();
+		//#if MC >= 11700
+		//$$ RenderSystem.applyModelViewMatrix();
+		//#endif
 	}
 
 	/**

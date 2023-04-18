@@ -101,6 +101,15 @@ tweakermore:
         The rendering hotkey for info viewers
         When the render strategy is "View hotkey held", press to enable rendering
         When the render strategy is "Always", it will always rendering ignoring the hotkey's state
+    infoViewBeacon:
+      .: infoViewBeacon
+      comment: View the status effects of beacons
+    infoViewBeaconRenderStrategy:
+      .: infoViewBeaconRenderST
+      comment: The view rendering strategy of infoViewBeacon
+    infoViewBeaconTargetStrategy:
+      .: infoViewBeaconTargetST
+      comment: The target selecting strategy of infoViewBeacon
     infoViewCommandBlock:
       .: infoViewCommandBlock
       comment: |-

@@ -40,6 +40,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.CommandBlockExecutor;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 //#if MC >= 11600
 //$$ import me.fallenbreath.tweakermore.util.render.TextRenderingUtil;
@@ -58,7 +59,7 @@ public class CommandBlockContentRenderer extends AbstractInfoViewer
 	}
 
 	@Override
-	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState)
+	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity)
 	{
 		return blockState.getBlock() instanceof CommandBlock;
 	}
@@ -116,7 +117,7 @@ public class CommandBlockContentRenderer extends AbstractInfoViewer
 		// render
 		TextRenderer textRenderer = TextRenderer.create().
 				text(displayText).atCenter(blockPos).
-				fontSize(0.025 * TweakerMoreConfigs.INFO_VIEW_COMMAND_BLOCK_TEXT_SCALE.getDoubleValue()).
+				fontScale(0.025 * TweakerMoreConfigs.INFO_VIEW_COMMAND_BLOCK_TEXT_SCALE.getDoubleValue()).
 				bgColor(0x3F000000).
 				shadow().seeThrough();
 		if (!lastOutput.getString().isEmpty())

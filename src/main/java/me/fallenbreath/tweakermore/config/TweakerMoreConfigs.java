@@ -168,6 +168,15 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigHotkey INFO_VIEW_RENDERING_KEY = newConfigHotKey("infoViewRenderingKey", "RIGHT_ALT", KeybindSettings.MODIFIER_INGAME);
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW_BEACON = newConfigBooleanHotkeyed("infoViewBeacon");
+
+	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigOptionList INFO_VIEW_BEACON_RENDER_STRATEGY = newConfigOptionList("infoViewBeaconRenderStrategy", InfoViewRenderStrategy.ALWAYS);
+
+	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigOptionList INFO_VIEW_BEACON_TARGET_STRATEGY = newConfigOptionList("infoViewBeaconTargetStrategy", InfoViewTargetStrategy.DEFAULT);
+
+	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW_COMMAND_BLOCK = newConfigBooleanHotkeyed("infoViewCommandBlock");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)

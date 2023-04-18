@@ -24,10 +24,10 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.Objects;
+
 //#if MC >= 11500
 import net.minecraft.client.util.math.Matrix4f;
-
-import java.util.Objects;
 //#else
 //$$ import com.mojang.blaze3d.platform.GlStateManager;
 //$$ import net.minecraft.client.render.entity.EntityRenderDispatcher;

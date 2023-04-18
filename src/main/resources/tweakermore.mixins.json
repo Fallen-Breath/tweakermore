@@ -28,6 +28,7 @@
     "tweaks.features.creativePickBlockWithState.MinecraftClientMixin",
     "tweaks.features.flawlessFrames.ScreenshotRendererMixin",
     "tweaks.features.flawlessFrames.VideoRendererMixin",
+    "tweaks.features.infoView.beacon.BeaconBlockEntityAccessor",
     "tweaks.features.infoView.commandBlock.CommandSuggestorAccessor",
     "tweaks.features.safeAfk.ClientPlayNetworkHandlerMixin",
     "tweaks.features.safeAfk.LivingEntityMixin",

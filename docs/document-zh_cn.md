@@ -233,6 +233,37 @@ The way to show information when using the autoCollectMaterialListItem feature
 - 默认值: *无快捷键*, `false`
 
 
+### 信息展示-信标 (infoViewBeacon)
+
+展示信标的状态效果
+
+- 分类: 功能
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+
+![infoViewBeacon](assets/infoViewBeacon-zh_cn.png)
+
+
+### 信息展示-信标-渲染策略 (infoViewBeaconRenderStrategy)
+
+选项infoViewBeacon的渲染策略
+
+- 分类: 功能
+- 类型: 选项列表
+- 默认值: `总是`
+- 可用选项: `按住展示热键`, `总是`
+
+
+### 信息展示-信标-目标策略 (infoViewBeaconTargetStrategy)
+
+选项infoViewBeacon的目标选择策略
+
+- 分类: 功能
+- 类型: 选项列表
+- 默认值: `指向`
+- 可用选项: `指向`, `光束`
+
+
 ### 信息展示设置-光束渲染策略角度 (infoViewBeamAngle)
 
 在信息展示渲染策略 "光束" 中使用的初始圆锥角度
