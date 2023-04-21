@@ -40,9 +40,9 @@ public abstract class InfoViewRendererMixin
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{
-			if (!MinecraftClient.getInstance().isIntegratedServerRunning())
+			if (!MinecraftClient.getInstance().isIntegratedServerRunning() && ServerDataSyncer.hasEnoughPermission())
 			{
-				ServerDataSyncer.getInstance().syncBlockEntity(blockPos);
+				ServerDataSyncer.getInstance().syncBlockEntityAt(blockPos);
 			}
 		}
 	}

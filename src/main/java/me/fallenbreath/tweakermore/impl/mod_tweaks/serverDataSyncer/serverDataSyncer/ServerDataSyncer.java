@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.serverDataSyncer;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Maps;
 import fi.dy.masa.malilib.interfaces.IClientTickHandler;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
@@ -30,10 +30,13 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.DoubleInventory;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Set;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -41,8 +44,8 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 {
 	private static final ServerDataSyncer INSTANCE = new ServerDataSyncer();
 
-	private final Set<BlockPos> syncBlockEntityPos = Sets.newHashSet();
-	private final Set<Integer> syncedEntityId = Sets.newHashSet();
+	private final Map<BlockPos, CompletableFuture<CompoundTag>> syncBlockEntityPos = Maps.newHashMap();
+	private final Map<Integer, CompletableFuture<CompoundTag>> syncedEntityId = Maps.newHashMap();
 	private final DataQueryHandlerPro queryHandler = new DataQueryHandlerPro();
 
 	private ServerDataSyncer()
@@ -98,109 +101,185 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 		this.queryHandler.clearCallbacks();
 	}
 
-	public CompletableFuture<Void> syncEntity(Entity entity)
+	/**
+	 * Fetch nbt of the given entity from the server
+	 *
+	 * @return An optional nbt future that produces a nullable nbt of the entity.
+	 * The future completes on main thread.
+	 * If the operation fails, return {@code Optional.empty()}
+	 */
+	public Optional<CompletableFuture<@Nullable CompoundTag>> fetchEntity(Entity entity)
 	{
 		if (hasEnoughPermission())
 		{
-			int entityId = entity.getEntityId();
-			if (!this.syncedEntityId.contains(entityId))
-			{
-				this.syncedEntityId.add(entityId);
-				CompletableFuture<Void> future = new CompletableFuture<>();
-				this.addTask(() -> {
-					TweakerMoreMod.LOGGER.debug("Syncing entity data of {}", entity);
-					this.queryHandler.queryEntityNbt(entityId, nbt -> {
-						if (nbt != null)
+			return Optional.of(this.syncedEntityId.computeIfAbsent(
+					entity.getEntityId(),
+					entityId -> {
+						CompletableFuture<CompoundTag> future = new CompletableFuture<>();
+						this.addTask(() -> {
+							TweakerMoreMod.LOGGER.debug("Fetching entity data of {}", entity);
+							this.queryHandler.queryEntityNbt(entityId, future::complete);
+						});
+						return future;
+					}
+			));
+		}
+		return Optional.empty();
+	}
+
+	/**
+	 * Fetch nbt of the given block entity from the server
+	 *
+	 * @return An optional nbt future that produces a nullable nbt of the block entity.
+	 * The future completes on main thread.
+	 * If the operation fails, return {@code Optional.empty()}
+	 */
+	public Optional<CompletableFuture<@Nullable CompoundTag>> fetchBlockEntity(BlockEntity blockEntity)
+	{
+		if (hasEnoughPermission())
+		{
+			return Optional.of(this.syncBlockEntityPos.computeIfAbsent(
+					blockEntity.getPos(),
+					pos -> {
+						CompletableFuture<CompoundTag> future = new CompletableFuture<>();
+						this.addTask(() -> {
+							TweakerMoreMod.LOGGER.debug("Syncing block entity data at {}", pos);
+							this.queryHandler.queryBlockNbt(blockEntity.getPos(), future::complete);
+						});
+						return future;
+					}
+			));
+		}
+		return Optional.empty();
+	}
+
+	/**
+	 * Sync the given entity data from the server
+	 *
+	 * @return a future indicating when the sync operation completes
+	 *   - If succeeded: future completes when syncing done
+	 *   - If failed: future completes immediately
+	 */
+	public CompletableFuture<Void> syncEntity(Entity entity)
+	{
+		Optional<CompletableFuture<CompoundTag>> opt = fetchEntity(entity);
+		if (opt.isPresent())
+		{
+			return opt.get().thenAccept(nbt -> {
+				if (nbt != null)
+				{
+					// net.minecraft.entity.Entity.fromTag is designed to be used server-side
+					// so things like casting e.g. (ServerWorld)this.world might happen
+					// that will definitely cause an exception since this.world is a ClientWorld
+					// so a try-catch is required here
+					try
+					{
+						entity.fromTag(nbt);
+						TweakerMoreMod.LOGGER.debug("Synced entity data of {}", entity);
+					}
+					catch (Exception exception)
+					{
+						TweakerMoreMod.LOGGER.warn("Failed to sync entity data of {}: {}", entity, exception);
+						if (TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
 						{
-							// net.minecraft.entity.Entity.fromTag is designed to be used server-side
-							// so things like casting e.g. (ServerWorld)this.world might happen
-							// that will definitely cause an exception since this.world is a ClientWorld
-							// so a try-catch is required here
-							try
+							TweakerMoreMod.LOGGER.warn("[TweakerMore Debug] ServerDataSyncer#syncEntity", exception);
+						}
+					}
+				}
+			});
+		}
+		else
+		{
+			return CompletableFuture.allOf();
+		}
+	}
+
+	/**
+	 * Sync the given block entity data from the server
+	 *
+	 * @return a future indicating when the sync operation completes
+	 *   - If succeeded: future completes when syncing done
+	 *   - If failed: future completes immediately
+	 */
+	public CompletableFuture<Void> syncBlockEntity(BlockEntity blockEntity)
+	{
+		if (hasEnoughPermission())
+		{
+			Optional<CompletableFuture<CompoundTag>> opt = fetchBlockEntity(blockEntity);
+			if (opt.isPresent())
+			{
+				return opt.get().thenAccept(nbt -> {
+					if (nbt != null)
+					{
+						BlockPos pos = blockEntity.getPos();
+						try
+						{
+							//#if MC >= 11700
+							//$$ blockEntity.readNbt(nbt);
+							//#elseif MC >= 11600
+							//$$ blockEntity.fromTag(world.getBlockState(pos), nbt);
+							//#else
+							blockEntity.fromTag(nbt);
+							//#endif
+							TweakerMoreMod.LOGGER.debug("Synced block entity data at {}", pos);
+						}
+						catch (Exception exception)
+						{
+							TweakerMoreMod.LOGGER.warn("Failed to sync block entity data at {}: {}", pos, exception);
+							if (TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
 							{
-								entity.fromTag(nbt);
-								TweakerMoreMod.LOGGER.debug("Synced entity data of {}", entity);
-							}
-							catch (Exception exception)
-							{
-								TweakerMoreMod.LOGGER.warn("Failed to sync entity data of {}: {}", entity, exception);
-								if (TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
-								{
-									TweakerMoreMod.LOGGER.warn("[TweakerMore Debug]", exception);
-								}
+								TweakerMoreMod.LOGGER.warn("[TweakerMore Debug] ServerDataSyncer#syncBlockEntity", exception);
 							}
 						}
-						future.complete(null);
-					});
+					}
 				});
-				return future;
 			}
 		}
 		return CompletableFuture.allOf();
 	}
 
-	public CompletableFuture<Void> syncBlockEntity(BlockPos pos)
+	/**
+	 * Sync the data of the block entity at given position from the server
+	 *
+	 * @return a future indicating when the sync operation completes
+	 *   - If succeeded: future completes when syncing done
+	 *   - If failed: future completes immediately
+	 */
+	public CompletableFuture<Void> syncBlockEntityAt(BlockPos pos)
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
 		if (hasEnoughPermission() && mc.player != null)
 		{
-			if (!this.syncBlockEntityPos.contains(pos))
+			World world = mc.player.clientWorld;
+			BlockEntity blockEntity = world.getBlockEntity(pos);
+			if (blockEntity != null && pos.equals(blockEntity.getPos()))
 			{
-				this.syncBlockEntityPos.add(pos);
-
-				World world = mc.player.clientWorld;
-				BlockEntity blockEntity = world.getBlockEntity(pos);
-				if (blockEntity != null)
-				{
-					CompletableFuture<Void> future = new CompletableFuture<>();
-					this.addTask(() -> {
-						TweakerMoreMod.LOGGER.debug("Syncing block entity data at {}", pos);
-						this.queryHandler.queryBlockNbt(blockEntity.getPos(), nbt -> {
-							if (nbt != null)
-							{
-								try
-								{
-									//#if MC >= 11700
-									//$$ blockEntity.readNbt(nbt);
-									//#elseif MC >= 11600
-									//$$ blockEntity.fromTag(world.getBlockState(pos), nbt);
-									//#else
-									blockEntity.fromTag(nbt);
-									//#endif
-									TweakerMoreMod.LOGGER.debug("Synced block entity data at {}", pos);
-								}
-								catch (Exception exception)
-								{
-									TweakerMoreMod.LOGGER.warn("Failed to sync block entity data at {}: {}", pos, exception);
-									if (TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
-									{
-										TweakerMoreMod.LOGGER.warn("[TweakerMore Debug]", exception);
-									}
-								}
-							}
-							future.complete(null);
-						});
-					});
-					return future;
-				}
+				return syncBlockEntity(blockEntity);
 			}
 		}
 		return CompletableFuture.allOf();
 	}
 
-	public void syncBlockInventory(Inventory inventory)
+	/**
+	 * Sync the data of the underlying block entities from given inventory from the server
+	 *
+	 * @return a future indicating when all required sync operation completes
+	 */
+	public CompletableFuture<Void> syncBlockInventory(Inventory inventory)
 	{
 		if (inventory instanceof BlockEntity)
 		{
-			BlockEntity blockEntity = (BlockEntity)inventory;
-			this.syncBlockEntity(blockEntity.getPos());
+			return this.syncBlockEntity((BlockEntity)inventory);
 		}
 		else if (inventory instanceof DoubleInventory)
 		{
 			DoubleInventoryAccessor accessor = (DoubleInventoryAccessor)inventory;
-			syncBlockInventory(accessor.getFirst());
-			syncBlockInventory(accessor.getSecond());
+			return CompletableFuture.allOf(
+					syncBlockInventory(accessor.getFirst()),
+					syncBlockInventory(accessor.getSecond())
+			);
 		}
+		return CompletableFuture.allOf();
 	}
 
 	public CompletableFuture<Void> syncEverything(TargetPair pair, ProgressCallback callback)
@@ -209,7 +288,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 		AtomicInteger entityCounter = new AtomicInteger(0);
 		CompletableFuture<Void> beSynced = CompletableFuture.allOf(
 				pair.getBlockEntityPositions().stream().
-						map(this::syncBlockEntity).
+						map(this::syncBlockEntityAt).
 						map(f -> f.thenRun(
 								() -> callback.apply(beCounter.addAndGet(1), entityCounter.get())
 						)).

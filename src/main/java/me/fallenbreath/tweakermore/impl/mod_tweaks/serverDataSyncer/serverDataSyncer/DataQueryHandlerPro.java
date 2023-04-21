@@ -100,6 +100,6 @@ public class DataQueryHandlerPro
 	@FunctionalInterface
 	public interface Callback
 	{
-		void accept(CompoundTag nbt);
+		void accept(@Nullable CompoundTag nbt);
 	}
 }

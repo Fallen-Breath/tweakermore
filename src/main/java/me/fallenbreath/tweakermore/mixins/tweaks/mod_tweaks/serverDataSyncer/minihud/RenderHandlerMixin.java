@@ -66,7 +66,7 @@ public abstract class RenderHandlerMixin
 		{
 			if (blockEntity instanceof BeehiveBlockEntity && !MinecraftClient.getInstance().isIntegratedServerRunning())
 			{
-				ServerDataSyncer.getInstance().syncBlockEntity(blockEntity.getPos());
+				ServerDataSyncer.getInstance().syncBlockEntity(blockEntity);
 			}
 		}
 		return blockEntity;
