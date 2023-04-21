@@ -45,7 +45,7 @@ import java.util.UUID;
 public abstract class EnderChestItemFetcherMixin
 {
 	private static final Map<UUID, EnderChestInventory> CACHE$SDS = new ExpiringMap<>(Maps.newHashMap(), 30_000);
-	private static final long COOLDOWN_MS$SDS = 500;  // 0.5s
+	private static final long COOLDOWN_MS$SDS = 50;  // 0.05s (1gt)
 	private static long prevMilli$SDS = 0;
 
 	static
@@ -72,7 +72,7 @@ public abstract class EnderChestItemFetcherMixin
 			}
 
 			// syncing the complete data of a player is a bit costly,
-			// so we slow it down and only do it every 0.5s (10gt)
+			// so we slow it down and only do it every 0.05s (1gt)
 			long now = System.currentTimeMillis();
 			if (now - prevMilli$SDS >= COOLDOWN_MS$SDS)
 			{
