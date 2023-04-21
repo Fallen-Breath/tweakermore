@@ -68,27 +68,27 @@ public abstract class EnderChestItemFetcherMixin
 			if (inventory != null)
 			{
 				cir.setReturnValue(Optional.ofNullable(((BasicInventoryAccessor)inventory).getStackList()));
+				return;
 			}
 
 			// syncing the complete data of a player is a bit costly,
 			// so we slow it down and only do it every 0.5s (10gt)
 			long now = System.currentTimeMillis();
-			if (now - prevMilli$SDS < COOLDOWN_MS$SDS)
+			if (now - prevMilli$SDS >= COOLDOWN_MS$SDS)
 			{
-				return;
-			}
-			prevMilli$SDS = now;
+				prevMilli$SDS = now;
 
-			ServerDataSyncer.getInstance().fetchEntity(entity).
-					ifPresent(future -> future.thenAccept(nbt -> {
-						// ref: net.minecraft.entity.player.PlayerEntity.readCustomDataFromTag
-						if (nbt != null && nbt.contains("EnderItems", 9))
-						{
-							EnderChestInventory enderChestInventory = new EnderChestInventory();
-							enderChestInventory.readTags(nbt.getList("EnderItems", 10));
-							CACHE$SDS.put(uuid, enderChestInventory);
-						}
-					}));
+				ServerDataSyncer.getInstance().fetchEntity(entity).
+						ifPresent(future -> future.thenAccept(nbt -> {
+							// ref: net.minecraft.entity.player.PlayerEntity.readCustomDataFromTag
+							if (nbt != null && nbt.contains("EnderItems", 9))
+							{
+								EnderChestInventory enderChestInventory = new EnderChestInventory();
+								enderChestInventory.readTags(nbt.getList("EnderItems", 10));
+								CACHE$SDS.put(uuid, enderChestInventory);
+							}
+						}));
+			}
 		}
 	}
 }
