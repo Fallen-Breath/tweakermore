@@ -118,7 +118,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 					entity.getEntityId(),
 					entityId -> {
 						CompletableFuture<CompoundTag> future = new CompletableFuture<>();
-						this.addTask(() -> {
+						this.runOrEnqueueTask(() -> {
 							TweakerMoreMod.LOGGER.debug("Fetching entity data of {}", entity);
 							this.queryHandler.queryEntityNbt(entityId, future::complete);
 						});
@@ -144,7 +144,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 					blockEntity.getPos(),
 					pos -> {
 						CompletableFuture<CompoundTag> future = new CompletableFuture<>();
-						this.addTask(() -> {
+						this.runOrEnqueueTask(() -> {
 							TweakerMoreMod.LOGGER.debug("Syncing block entity data at {}", pos);
 							this.queryHandler.queryBlockNbt(blockEntity.getPos(), future::complete);
 						});

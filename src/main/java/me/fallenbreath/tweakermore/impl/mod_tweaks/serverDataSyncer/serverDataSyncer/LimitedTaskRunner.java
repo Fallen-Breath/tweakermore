@@ -31,7 +31,7 @@ import java.util.Queue;
  */
 public abstract class LimitedTaskRunner
 {
-	protected final Queue<Runnable> tasks = Queues.newArrayDeque();
+	protected final Queue<Runnable> queuedTasks = Queues.newArrayDeque();
 	protected int taskExecutedThisRound = 0;
 	private int cooldown = 0;
 
@@ -55,15 +55,15 @@ public abstract class LimitedTaskRunner
 	}
 
 	/**
-	 * Add a task
+	 * Run or enqueue a task
 	 * If the limit is not exceeded, execute the task immediately
 	 * Otherwise the task will be queued
 	 */
-	public void addTask(Runnable runnable)
+	public void runOrEnqueueTask(Runnable runnable)
 	{
 		if (!this.runTask(runnable))
 		{
-			this.tasks.add(runnable);
+			this.queuedTasks.add(runnable);
 		}
 	}
 
@@ -76,12 +76,12 @@ public abstract class LimitedTaskRunner
 		}
 		this.cooldown = this.getTaskExecuteCooldown();
 		this.taskExecutedThisRound = 0;
-		while (!this.tasks.isEmpty())
+		while (!this.queuedTasks.isEmpty())
 		{
-			Runnable task = this.tasks.peek();
+			Runnable task = this.queuedTasks.peek();
 			if (this.runTask(task))
 			{
-				this.tasks.poll();
+				this.queuedTasks.poll();
 			}
 			else
 			{
