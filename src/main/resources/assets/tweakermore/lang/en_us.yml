@@ -535,6 +535,11 @@ tweakermore:
     minihudHideIfChatScreenOpened:
       .: MiniHUD-HideIfChatScreenOpened
       comment: Hide minihud text overlay if the chat screen is opened
+    mlShulkerBoxPreviewSupportEnderChest:
+      .: Malilib-ShulkerBoxPreviewSupportEnderChest
+      comment: |-
+        Add ender chest support, for the shulker box (inventory item) preview functionality of malilib
+        In multiplayer server, player's ender chest data can be synced to client using option serverDataSyncer
     ofSantaHat:
       .: Optifine-SantaHat
       comment: |-

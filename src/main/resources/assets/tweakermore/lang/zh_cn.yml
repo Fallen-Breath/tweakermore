@@ -535,6 +535,11 @@ tweakermore:
     minihudHideIfChatScreenOpened:
       .: MiniHUD-隐藏于聊天界面
       comment: 在聊天界面开启时，隐藏Mini HUD的信息文本渲染
+    mlShulkerBoxPreviewSupportEnderChest:
+      .: Malilib-潜影盒内容预览支持末影箱
+      comment: |-
+        为malilib中的潜影盒预览功能添加对末影箱支持
+        在多人服务器中，玩家的末影箱数据可以通过选项serverDataSyncer同步至客户端
     ofSantaHat:
       .: Optifine-圣诞老人帽子
       comment: |-

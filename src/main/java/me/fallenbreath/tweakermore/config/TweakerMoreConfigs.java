@@ -486,6 +486,9 @@ public class TweakerMoreConfigs
 	)
 	public static final TweakerMoreConfigBoolean MINIHUD_HIDE_IF_CHAT_SCREEN_OPENED = newConfigBoolean("minihudHideIfChatScreenOpened", false);
 
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MOD_TWEAKS)
+	public static final TweakerMoreConfigBoolean ML_SHULKER_BOX_PREVIEW_SUPPORT_ENDER_CHEST = newConfigBoolean("mlShulkerBoxPreviewSupportEnderChest", false);
+
 	@Config(
 			type = Config.Type.LIST,
 			restriction = @Restriction(require = @Condition(optifine)),

@@ -1377,6 +1377,19 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
     - MiniHUD (`minihud`)
 
 
+### Malilib-潜影盒内容预览支持末影箱 (mlShulkerBoxPreviewSupportEnderChest)
+
+为malilib中的潜影盒预览功能添加对末影箱支持
+
+在多人服务器中，玩家的末影箱数据可以通过选项serverDataSyncer同步至客户端
+
+- 分类: 模组修改
+- 类型: 布尔值
+- 默认值: `false`
+
+![mlShulkerBoxPreviewSupportEnderChest](assets/mlShulkerBoxPreviewSupportEnderChest.png)
+
+
 ### Optifine-移除展示框物品渲染距离限制 (ofRemoveItemFrameItemRenderDistance)
 
 移除Optifine的展示框物品渲染距离限制

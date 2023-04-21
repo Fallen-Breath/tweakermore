@@ -1377,6 +1377,19 @@ Hide minihud text overlay if the chat screen is opened
     - MiniHUD (`minihud`)
 
 
+### Malilib-ShulkerBoxPreviewSupportEnderChest (mlShulkerBoxPreviewSupportEnderChest)
+
+Add ender chest support, for the shulker box (inventory item) preview functionality of malilib
+
+In multiplayer server, player's ender chest data can be synced to client using option serverDataSyncer
+
+- Category: Mods Tweaks
+- Type: boolean
+- Default value: `false`
+
+![mlShulkerBoxPreviewSupportEnderChest](assets/mlShulkerBoxPreviewSupportEnderChest.png)
+
+
 ### Optifine-RemoveItemFrameItemRenderDistance (ofRemoveItemFrameItemRenderDistance)
 
 Remove the item frame item render distance limit from Optifine
