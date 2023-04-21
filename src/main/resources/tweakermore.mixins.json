@@ -130,7 +130,6 @@
     "tweaks.mod_tweaks.replayAccurateTimelineTimestamp.AbstractGuiTimelineMixin",
     "tweaks.mod_tweaks.replayFlySpeedLimit.ClassicCameraControllerMixin",
     "tweaks.mod_tweaks.replayFlySpeedLimit.VanillaCameraControllerMixin",
-    "tweaks.mod_tweaks.serverDataSyncer.ClientPlayNetworkHandlerMixin",
     "tweaks.mod_tweaks.serverDataSyncer.DataQueryHandlerAccessor",
     "tweaks.mod_tweaks.serverDataSyncer.DataQueryHandlerMixin",
     "tweaks.mod_tweaks.serverDataSyncer.DoubleInventoryAccessor",
@@ -147,6 +146,7 @@
     "tweaks.porting.lmPickBlockShulkersPorting.WorldUtilsMixin",
     "tweaks.porting.tkrDisableNauseaEffectPorting.ClientPlayerEntityMixin",
     "tweaks.porting.tkrDisableNauseaEffectPorting.InGameHudMixin",
+    "util.event.ClientPlayNetworkHandlerMixin",
     "util.render.GameRendererMixin",
     "util.render.TextHandlerAccessor"
   ],

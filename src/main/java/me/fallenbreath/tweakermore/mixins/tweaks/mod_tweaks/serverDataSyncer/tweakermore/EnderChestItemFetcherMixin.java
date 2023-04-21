@@ -26,6 +26,7 @@ import me.fallenbreath.tweakermore.impl.mod_tweaks.mlShulkerBoxPreviewSupportEnd
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.mlShulkerBoxPreviewSupportEnderChest.BasicInventoryAccessor;
 import me.fallenbreath.tweakermore.util.collection.ExpiringMap;
+import me.fallenbreath.tweakermore.util.event.TweakerMoreEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.EnderChestInventory;
 import net.minecraft.item.ItemStack;
@@ -47,12 +48,28 @@ public abstract class EnderChestItemFetcherMixin
 	private static final long COOLDOWN_MS$SDS = 500;  // 0.5s
 	private static long prevMilli$SDS = 0;
 
+	static
+	{
+		TweakerMoreEvents.registerDimensionChangedCallback(() -> {
+			CACHE$SDS.clear();
+			prevMilli$SDS = 0;
+		});
+	}
+
 	@SuppressWarnings("UnresolvedMixinReference")
 	@Inject(method = "getEntityData", at = @At("HEAD"), remap = false, cancellable = true)
 	private static void serverDataSyncer4mlShulkerBoxPreviewSupportEnderChest(@Coerce Entity entity, CallbackInfoReturnable<Optional<DefaultedList<ItemStack>>> cir)
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue() && ServerDataSyncer.hasEnoughPermission())
 		{
+			UUID uuid = entity.getUuid();
+
+			EnderChestInventory inventory = CACHE$SDS.get(uuid);
+			if (inventory != null)
+			{
+				cir.setReturnValue(Optional.ofNullable(((BasicInventoryAccessor)inventory).getStackList()));
+			}
+
 			// syncing the complete data of a player is a bit costly,
 			// so we slow it down and only do it every 0.5s (10gt)
 			long now = System.currentTimeMillis();
@@ -62,7 +79,6 @@ public abstract class EnderChestItemFetcherMixin
 			}
 			prevMilli$SDS = now;
 
-			UUID uuid = entity.getUuid();
 			ServerDataSyncer.getInstance().fetchEntity(entity).
 					ifPresent(future -> future.thenAccept(nbt -> {
 						// ref: net.minecraft.entity.player.PlayerEntity.readCustomDataFromTag
@@ -73,12 +89,6 @@ public abstract class EnderChestItemFetcherMixin
 							CACHE$SDS.put(uuid, enderChestInventory);
 						}
 					}));
-
-			EnderChestInventory inventory = CACHE$SDS.get(uuid);
-			if (inventory != null)
-			{
-				cir.setReturnValue(Optional.ofNullable(((BasicInventoryAccessor)inventory).getStackList()));
-			}
 		}
 	}
 }

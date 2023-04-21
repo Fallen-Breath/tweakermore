@@ -1,2 +1,3 @@
 net.minecraft.block.BlockState onBlockAction() net.minecraft.block.AbstractBlock.AbstractBlockState onSyncedBlockEvent()
 net.minecraft.entity.attribute.EntityAttributes ARMOR_TOUGHNESS GENERIC_ARMOR_TOUGHNESS
+net.minecraft.inventory.EnderChestInventory readTags() readNbtList()

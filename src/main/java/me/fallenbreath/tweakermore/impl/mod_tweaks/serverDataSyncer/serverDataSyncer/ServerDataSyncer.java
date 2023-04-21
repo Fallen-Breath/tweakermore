@@ -25,6 +25,7 @@ import fi.dy.masa.malilib.interfaces.IClientTickHandler;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.DoubleInventoryAccessor;
+import me.fallenbreath.tweakermore.util.event.TweakerMoreEvents;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
@@ -50,6 +51,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 
 	private ServerDataSyncer()
 	{
+		TweakerMoreEvents.registerDimensionChangedCallback(this::onDimensionChanged);
 	}
 
 	@Override
@@ -217,7 +219,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 							//#if MC >= 11700
 							//$$ blockEntity.readNbt(nbt);
 							//#elseif MC >= 11600
-							//$$ blockEntity.fromTag(world.getBlockState(pos), nbt);
+							//$$ blockEntity.fromTag(blockEntity.getCachedState(), nbt);
 							//#else
 							blockEntity.fromTag(nbt);
 							//#endif

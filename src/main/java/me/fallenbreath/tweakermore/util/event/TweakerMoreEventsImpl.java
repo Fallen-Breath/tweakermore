@@ -18,21 +18,19 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer;
+package me.fallenbreath.tweakermore.util.event;
 
-import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.serverDataSyncer.ServerDataSyncer;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import com.google.common.collect.Lists;
+import me.fallenbreath.tweakermore.util.event.callbacks.DimensionChangedCallback;
 
-@Mixin(ClientPlayNetworkHandler.class)
-public abstract class ClientPlayNetworkHandlerMixin
+import java.util.List;
+
+public abstract class TweakerMoreEventsImpl
 {
-	@Inject(method = "onPlayerRespawn", at = @At("TAIL"))
-	private void resetserverDataSyncerSyncLimiter(CallbackInfo ci)
+	static final List<DimensionChangedCallback> dimensionChangedCallbacks = Lists.newArrayList();
+
+	public static void onDimensionChanged()
 	{
-		ServerDataSyncer.getInstance().onDimensionChanged();
+		dimensionChangedCallbacks.forEach(DimensionChangedCallback::onDimensionChanged);
 	}
 }
