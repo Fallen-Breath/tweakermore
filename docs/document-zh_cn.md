@@ -1294,7 +1294,7 @@ tweakHandRestock功能的物品名单约束类型
 
 ### Litematica-原点000覆盖 (lmOriginOverride000)
 
-在保存litematica的依赖图时，自动将原点设置为[0, 0, 0]
+在保存litematica的原理图时，自动将原点设置为[0, 0, 0]
 
 除此之外，一个特殊标记会被储存在.litematica文件里
 
