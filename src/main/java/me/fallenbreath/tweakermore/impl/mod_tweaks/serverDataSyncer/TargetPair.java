@@ -18,7 +18,7 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.serverDataSyncer;
+package me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.entity.Entity;

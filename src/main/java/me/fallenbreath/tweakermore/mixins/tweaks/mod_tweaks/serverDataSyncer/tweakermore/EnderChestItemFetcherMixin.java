@@ -23,7 +23,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.tw
 import com.google.common.collect.Maps;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.mlShulkerBoxPreviewSupportEnderChest.EnderChestItemFetcher;
-import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.serverDataSyncer.ServerDataSyncer;
+import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.mlShulkerBoxPreviewSupportEnderChest.BasicInventoryAccessor;
 import me.fallenbreath.tweakermore.util.collection.ExpiringMap;
 import me.fallenbreath.tweakermore.util.event.TweakerMoreEvents;

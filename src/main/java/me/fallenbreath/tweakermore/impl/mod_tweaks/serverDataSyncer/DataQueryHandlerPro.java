@@ -18,7 +18,7 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.serverDataSyncer;
+package me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer;
 
 import com.google.common.collect.Maps;
 import me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.DataQueryHandlerAccessor;
