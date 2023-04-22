@@ -79,15 +79,17 @@ public abstract class EnderChestItemFetcherMixin
 				prevMilli$SDS = now;
 
 				ServerDataSyncer.getInstance().fetchEntity(entity).
-						ifPresent(future -> future.thenAccept(nbt -> {
-							// ref: net.minecraft.entity.player.PlayerEntity.readCustomDataFromTag
-							if (nbt != null && nbt.contains("EnderItems", 9))
-							{
-								EnderChestInventory enderChestInventory = new EnderChestInventory();
-								enderChestInventory.readTags(nbt.getList("EnderItems", 10));
-								CACHE$SDS.put(uuid, enderChestInventory);
-							}
-						}));
+						ifPresent(future -> {
+							EnderChestInventory enderChestInventory = new EnderChestInventory();
+							CACHE$SDS.put(uuid, enderChestInventory);
+							future.thenAccept(nbt -> {
+								// ref: net.minecraft.entity.player.PlayerEntity.readCustomDataFromTag
+								if (nbt != null && nbt.contains("EnderItems", 9))
+								{
+									enderChestInventory.readTags(nbt.getList("EnderItems", 10));
+								}
+							});
+						});
 			}
 		}
 	}
