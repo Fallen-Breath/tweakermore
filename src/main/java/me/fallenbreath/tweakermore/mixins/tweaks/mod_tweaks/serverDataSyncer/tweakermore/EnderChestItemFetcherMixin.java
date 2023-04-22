@@ -37,15 +37,14 @@ import org.spongepowered.asm.mixin.injection.Coerce;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
 @Mixin(EnderChestItemFetcher.class)
 public abstract class EnderChestItemFetcherMixin
 {
-	private static final Map<UUID, EnderChestInventory> CACHE$SDS = new ExpiringMap<>(Maps.newHashMap(), 30_000);
-	private static final long COOLDOWN_MS$SDS = 50;  // 0.05s (1gt)
+	private static final ExpiringMap<UUID, EnderChestInventory> CACHE$SDS = new ExpiringMap<>(Maps.newHashMap(), 5_000);
+	private static final long COOLDOWN_MS$SDS = 250;  // 0.25s (5gt)
 	private static long prevMilli$SDS = 0;
 
 	static
@@ -64,15 +63,8 @@ public abstract class EnderChestItemFetcherMixin
 		{
 			UUID uuid = entity.getUuid();
 
-			EnderChestInventory inventory = CACHE$SDS.get(uuid);
-			if (inventory != null)
-			{
-				cir.setReturnValue(Optional.ofNullable(((BasicInventoryAccessor)inventory).getStackList()));
-				return;
-			}
-
 			// syncing the complete data of a player is a bit costly,
-			// so we slow it down and only do it every 0.05s (1gt)
+			// so we slow it down and only do it every 5 gt
 			long now = System.currentTimeMillis();
 			if (now - prevMilli$SDS >= COOLDOWN_MS$SDS)
 			{
@@ -80,8 +72,8 @@ public abstract class EnderChestItemFetcherMixin
 
 				ServerDataSyncer.getInstance().fetchEntity(entity).
 						ifPresent(future -> {
-							EnderChestInventory enderChestInventory = new EnderChestInventory();
-							CACHE$SDS.put(uuid, enderChestInventory);
+							EnderChestInventory enderChestInventory = CACHE$SDS.computeIfAbsent(uuid, k -> new EnderChestInventory());
+							CACHE$SDS.keepAlive(uuid);
 							future.thenAccept(nbt -> {
 								// ref: net.minecraft.entity.player.PlayerEntity.readCustomDataFromTag
 								if (nbt != null && nbt.contains("EnderItems", 9))
@@ -90,6 +82,12 @@ public abstract class EnderChestItemFetcherMixin
 								}
 							});
 						});
+			}
+
+			EnderChestInventory inventory = CACHE$SDS.get(uuid);
+			if (inventory != null)
+			{
+				cir.setReturnValue(Optional.ofNullable(((BasicInventoryAccessor)inventory).getStackList()));
 			}
 		}
 	}

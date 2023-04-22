@@ -64,6 +64,15 @@ public class ExpiringMap<K, V> implements Map<K, V>
         }
     }
 
+    // keep alive the given key, if the given key exists in the map
+    public void keepAlive(K key)
+    {
+        if (this.delegate.containsKey(key))
+        {
+            this.times.put(key, getCurrentMs());
+        }
+    }
+
     @Override
     public int size()
     {
