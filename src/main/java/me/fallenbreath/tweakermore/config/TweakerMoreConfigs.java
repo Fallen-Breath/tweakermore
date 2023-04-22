@@ -737,6 +737,7 @@ public class TweakerMoreConfigs
 	private static final Map<Config.Category, List<TweakerMoreOption>> CATEGORY_TO_OPTION = Maps.newLinkedHashMap();
 	private static final Map<Config.Type, List<TweakerMoreOption>> TYPE_TO_OPTION = Maps.newLinkedHashMap();
 	private static final Map<IConfigBase, TweakerMoreOption> CONFIG_TO_OPTION = Maps.newLinkedHashMap();
+	private static final Map<String, TweakerMoreOption> NAME_TO_OPTION = Maps.newLinkedHashMap();
 
 	static
 	{
@@ -758,6 +759,7 @@ public class TweakerMoreConfigs
 					CATEGORY_TO_OPTION.computeIfAbsent(tweakerMoreOption.getCategory(), k -> Lists.newArrayList()).add(tweakerMoreOption);
 					TYPE_TO_OPTION.computeIfAbsent(tweakerMoreOption.getType(), k -> Lists.newArrayList()).add(tweakerMoreOption);
 					CONFIG_TO_OPTION.put(tweakerMoreOption.getConfig(), tweakerMoreOption);
+					NAME_TO_OPTION.put(tweakerMoreOption.getConfig().getName(), tweakerMoreOption);
 				}
 				catch (IllegalAccessException e)
 				{
@@ -794,6 +796,11 @@ public class TweakerMoreConfigs
 	public static Optional<TweakerMoreOption> getOptionFromConfig(IConfigBase iConfigBase)
 	{
 		return Optional.ofNullable(CONFIG_TO_OPTION.get(iConfigBase));
+	}
+
+	public static Optional<TweakerMoreOption> getOptionByName(String configName)
+	{
+		return Optional.ofNullable(NAME_TO_OPTION.get(configName));
 	}
 
 	public static boolean hasConfig(IConfigBase iConfigBase)

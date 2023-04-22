@@ -25,7 +25,7 @@ tweakermore:
       pretty_name: Auto Collect Material List Item
     autoCollectMaterialListItemMessageType:
       .: autoCollectMaterialListItemMessageType
-      comment: The way to show information when using the autoCollectMaterialListItem feature
+      comment: The way to show information when using the @option#autoCollectMaterialListItem@ feature
     autoFillContainer:
       .: autoFillContainer
       comment: |-
@@ -36,7 +36,7 @@ tweakermore:
     autoFillContainerThreshold:
       .: autoFillContainerThreshold
       comment: |-
-        The minimum occupied slot amount for the item to trigger tweak autoFillContainer
+        The minimum occupied slot amount for the item to trigger tweak @option#autoFillContainer@
         e.g. if you always have 2 slots of firework rocket you can set the value to 3,
          then your rockets will never be used to fill the container
     autoPickSchematicBlock:
@@ -114,30 +114,30 @@ tweakermore:
       .: infoViewCommandBlock
       comment: |-
         Show the command and the output of command blocks
-        In multiplayer server, command block data can be synced to client using option serverDataSyncer
+        In multiplayer server, command block data can be synced to client using option @option#serverDataSyncer@
       pretty_name: Info View Command Block
     infoViewCommandBlockMaxWidth:
       .: infoViewCommandBlockMaxWidth
-      comment: Maximum width of the displayed text rendered by infoViewCommandBlock
+      comment: Maximum width of the displayed text rendered by @option#infoViewCommandBlock@
     infoViewCommandBlockRenderStrategy:
       .: infoViewCommandBlockRenderST
-      comment: The view rendering strategy of infoViewCommandBlock
+      comment: The view rendering strategy of @option#infoViewCommandBlock@
     infoViewCommandBlockTargetStrategy:
       .: infoViewCommandBlockTargetST
-      comment: The target selecting strategy of infoViewCommandBlock
+      comment: The target selecting strategy of @option#infoViewCommandBlock@
     infoViewCommandBlockTextScale:
       .: infoViewCommandBlockTextScale
-      comment: Scale of the displayed text rendered by infoViewCommandBlock
+      comment: Scale of the displayed text rendered by @option#infoViewCommandBlock@
     infoViewRedstoneDustUpdateOrder:
       .: infoViewRedstoneDustUpdateOrder
       comment: Show the block update order of the redstone dust
       pretty_name: Info View Redstone Dust Update Order
     infoViewRedstoneDustUpdateOrderRenderStrategy:
       .: infoViewRedstoneDustUpdateOrderRenderST
-      comment: The view rendering strategy of infoViewRedstoneDustUpdateOrder
+      comment: The view rendering strategy of @option#infoViewRedstoneDustUpdateOrder@
     infoViewRedstoneDustUpdateOrderTextAlpha:
       .: infoViewRedstoneDustUpdateOrderTextAlpha
-      comment: The alpha value of the floating text used in infoViewRedstoneDustUpdateOrder
+      comment: The alpha value of the floating text used in @option#infoViewRedstoneDustUpdateOrder@
     infoViewRespawnBlockExplosion:
       .: infoViewRespawnBlockExplosion
       comment: |-
@@ -146,13 +146,13 @@ tweakermore:
       pretty_name: Info View Respawn Block Explosion
     infoViewRespawnBlockExplosionTextAlpha:
       .: infoViewRespawnBlockExplosionTextAlpha
-      comment: The alpha value of the floating text used in infoViewRespawnBlockExplosion
+      comment: The alpha value of the floating text used in @option#infoViewRespawnBlockExplosion@
     infoViewRespawnBlockExplosionRenderStrategy:
       .: infoViewRespawnBlockExplosionRenderST
-      comment: The view rendering strategy of infoViewRespawnBlockExplosion
+      comment: The view rendering strategy of @option#infoViewRespawnBlockExplosion@
     infoViewRespawnBlockExplosionTargetStrategy:
       .: infoViewRespawnBlockExplosionTargetST
-      comment: The target selecting strategy of infoViewRespawnBlockExplosion
+      comment: The target selecting strategy of @option#infoViewRespawnBlockExplosion@
     refreshInventory:
       .: refreshInventory
       comment: |-
@@ -163,7 +163,7 @@ tweakermore:
       .: safeAfk
       comment: |-
         Disconnect when receive damage
-        Health threshold to disconnect can be set via safeAfkHealthThreshold
+        Health threshold to disconnect can be set via @option#safeAfkHealthThreshold@
       pretty_name: Safe AFK
     safeAfkHealthThreshold:
       .: safeAfkHealthThreshold
@@ -190,12 +190,12 @@ tweakermore:
       pretty_name: Schematic Block Placement Restriction
     schematicBlockPlacementRestrictionHint:
       .: schematicBlockPlacementRestrictionHint
-      comment: Switch for displaying hint message when option schematicBlockPlacementRestriction cancels a placement
+      comment: Switch for displaying hint message when option @option#schematicBlockPlacementRestriction@ cancels a placement
       pretty_name: Schematic Block Placement Restriction Hint
     schematicBlockPlacementRestrictionItemWhitelist:
       .: schematicBlockPlacementRestrictionItemWhitelist
       comment: |-
-        When items in the list are being used, the schematicBlockPlacementRestriction restriction will be ignored
+        When items in the list are being used, the @option#schematicBlockPlacementRestriction@ restriction will be ignored
         These strings should be valid item ids like "ender_chest" or "minecraft:ender_chest"
         You can add scaffolding blocks or your carry-on items into this whitelist for more ease
       pretty_name: Schematic Block Placement Restriction Whitelist
@@ -204,7 +204,7 @@ tweakermore:
       comment: |-
         The no-block-placement protection margin length from schematic boxes
         e.g. with default value 2, block placements within 2 blocks range of any schematic boxes will be cancelled
-        Used in option schematicBlockPlacementRestriction
+        Used in option @option#schematicBlockPlacementRestriction@
       pretty_name: Schematic Block Placement Restriction Margin
     schematicBlockPlacementRestrictionCheckFacing:
       .: schematicBlockPlacementRestrictionCheckFacing
@@ -217,7 +217,7 @@ tweakermore:
     schematicBlockPlacementRestrictionStrict:
       .: schematicBlockPlacementRestrictionStrict
       comment: |-
-        Strict mode switch for schematicBlockPlacement
+        Strict mode switch for @option#schematicBlockPlacement@
         When on, block placement is allowed only if the to-be-placed block equals to the schematic block
         When off, some incorrect but reasonable block placements are allowed, including:
         - place living coral for dead coral
@@ -227,9 +227,6 @@ tweakermore:
       comment: |-
         Type of the server mspt metrics statistic display in debug hud
         Set to "Game tick" to keep vanilla behavior
-    serverMsptMetricsStatisticTypeCycle:  # TODO YEET
-      .: serverMsptMetricsStatisticTypeCycle
-      comment: A hotkey to quickly cycle forward the value of serverMsptMetricsStatisticType
     villagerOfferUsesDisplay:
       .: villagerOfferUsesDisplay
       comment: |-
@@ -283,7 +280,7 @@ tweakermore:
       pretty_name: Daytime Override
     daytimeOverrideValue:
       .: daytimeOverrideValue
-      comment: The client-side daytime value to be overridden by tweak daytimeOverride
+      comment: The client-side daytime value to be overridden by tweak @option#daytimeOverride@
     disableBeaconBeamRendering:
       .: disableBeaconBeamRendering
       comment: |-
@@ -314,7 +311,7 @@ tweakermore:
       .: disableDarkSkyRendering
       comment: |-
         Prevent the bottom of the sky from turning dark when you are under sea level
-        See also: option disableHorizonShadingRendering
+        See also: option @option#disableHorizonShadingRendering@
       pretty_name: Disable Dark Sky Rendering Effect
     disableEntityModelRendering:
       .: disableEntityModelRendering
@@ -330,7 +327,7 @@ tweakermore:
       .: disableHorizonShadingRendering
       comment: |-
         Prevent the horizon from turning dark when you are nearby the world's bottom y
-        See also: option disableDarkSkyRendering
+        See also: option @option#disableDarkSkyRendering@
       pretty_name: Disable Horizon Shading Rendering
     disableLightUpdates:
       .: disableLightUpdates
@@ -436,7 +433,7 @@ tweakermore:
         If the shulker box is empty, no hint will be shown
     shulkerItemContentHintScale:
       .: shulkerItemContentHintScale
-      comment: The scale of the hint stuffs in option shulkerItemContentHint
+      comment: The scale of the hint stuffs in option @option#shulkerItemContentHint@
     shulkerTooltipEnchantmentHint:
       .: shulkerTooltipEnchantmentHint
       comment: Display enchantments of items in the tooltip of shulker box items
@@ -481,7 +478,7 @@ tweakermore:
       pretty_name: Weather Override
     weatherOverrideValue:
       .: weatherOverrideValue
-      comment: The client-side weather value to be overridden by tweak weatherOverride
+      comment: The client-side weather value to be overridden by tweak @option#weatherOverride@
 
     # ================================ Mod Tweaks ================================
 
@@ -517,14 +514,14 @@ tweakermore:
       comment: |-
         Overrides the name of the command to remove entities in litematica delete mode
         The command should be able to accept an entity selector as the only parameter
-        The activate policy of this option can be specified in option lmRemoveEntityCommandPolicy
+        The activate policy of this option can be specified in option @option#lmRemoveEntityCommandPolicy@
         As an example, you can use "/removeentity" command from Carpet TIS Addition
         Notes: no "/" prefix
     lmRemoveEntityCommandPolicy:
       .: Litematica-RemoveEntityCommandPolicy
       comment: |-
-        The activate policy of option lmRemoveEntityCommand
-        - auto: Apply the override if the given command is valid (clientside check)
+        The activate policy of option @option#lmRemoveEntityCommand@
+        - auto: Apply the override iif. the given command is valid (clientside check)
         - always: Apply the override in all cases
     minihudDisableLightOverlaySpawnCheck:
       .: MiniHUD-DisableLightOverlaySpawnCheck
@@ -539,7 +536,7 @@ tweakermore:
       .: Malilib-ShulkerBoxPreviewSupportEnderChest
       comment: |-
         Add ender chest support, for the shulker box (inventory item) preview functionality of malilib
-        In multiplayer server, player's ender chest data can be synced to client using option serverDataSyncer
+        In multiplayer server, player's ender chest data can be synced to client using option @option#serverDataSyncer@
     ofSantaHat:
       .: Optifine-SantaHat
       comment: |-

@@ -25,7 +25,7 @@ tweakermore:
       pretty_name: 自动收集材料列表物品
     autoCollectMaterialListItemMessageType:
       .: 自动收集材料列表物品-消息类型
-      comment: The way to show information when using the autoCollectMaterialListItem feature
+      comment: 在使用@option#autoCollectMaterialListItem@功能时展示信息的方法
     autoFillContainer:
       .: 自动装填容器
       comment: |-
@@ -36,7 +36,7 @@ tweakermore:
     autoFillContainerThreshold:
       .: 自动装填容器阈值
       comment: |-
-        触发功能autoFillContainer所需要的最小的物品槽位数
+        触发功能@option#autoFillContainer@所需要的最小的物品槽位数
         例如，如果你总是带着2个格子的烟花火箭，那么你可以将其设置为3，
         那么这些烟花物品将必定不会被用于填充容器
     autoPickSchematicBlock:
@@ -114,30 +114,30 @@ tweakermore:
       .: 信息展示-命令方块
       comment: |-
         展示命令方块的指令及其输出
-        在多人服务器中，命令方块的数据可以通过选项serverDataSyncer同步至客户端
+        在多人服务器中，命令方块的数据可以通过选项@option#serverDataSyncer@同步至客户端
       pretty_name: 信息展示-命令方块
     infoViewCommandBlockMaxWidth:
       .: 信息展示-命令方块-文本宽度最大值
-      comment: 选项infoViewCommandBlock渲染的文本宽度的最大值
+      comment: 选项@option#infoViewCommandBlock@渲染的文本宽度的最大值
     infoViewCommandBlockRenderStrategy:
       .: 信息展示-命令方块-渲染策略
-      comment: 选项infoViewCommandBlock的渲染策略
+      comment: 选项@option#infoViewCommandBlock@的渲染策略
     infoViewCommandBlockTargetStrategy:
       .: 信息展示-命令方块-目标策略
-      comment: 选项infoViewCommandBlock的目标选择策略
+      comment: 选项@option#infoViewCommandBlock@的目标选择策略
     infoViewCommandBlockTextScale:
       .: 信息展示-命令方块-文本缩放
-      comment: 选项infoViewCommandBlock渲染的文本的缩放比例
+      comment: 选项@option#infoViewCommandBlock@渲染的文本的缩放比例
     infoViewRedstoneDustUpdateOrder:
       .: 信息展示-红石粉更新顺序
       comment: 展示红石粉的方块更新顺序
       pretty_name: 信息展示-红石粉更新顺序
     infoViewRedstoneDustUpdateOrderRenderStrategy:
       .: 信息展示-红石粉更新顺序-渲染策略
-      comment: 选项infoViewRedstoneDustUpdateOrder的渲染策略
+      comment: 选项@option#infoViewRedstoneDustUpdateOrder@的渲染策略
     infoViewRedstoneDustUpdateOrderTextAlpha:
       .: 信息展示-红石粉更新顺序-文本透明度
-      comment: 用于渲染infoViewRedstoneDustUpdateOrder文本的透明度
+      comment: 用于渲染@option#infoViewRedstoneDustUpdateOrder@文本的透明度
     infoViewRespawnBlockExplosion:
       .: 信息展示-重生方块爆炸伤害
       comment: |-
@@ -146,13 +146,13 @@ tweakermore:
       pretty_name: 信息展示-重生方块爆炸伤害
     infoViewRespawnBlockExplosionTextAlpha:
       .: 信息展示-重生方块爆炸伤害-文本透明度
-      comment: 用于渲染infoViewRespawnBlockExplosion文本的透明度
+      comment: 用于渲染@option#infoViewRespawnBlockExplosion@文本的透明度
     infoViewRespawnBlockExplosionRenderStrategy:
       .: 信息展示-重生方块爆炸伤害-渲染策略
-      comment: 选项infoViewRespawnBlockExplosion的渲染策略
+      comment: 选项@option#infoViewRespawnBlockExplosion@的渲染策略
     infoViewRespawnBlockExplosionTargetStrategy:
       .: 信息展示-重生方块爆炸伤害-目标选择策略
-      comment: 选项infoViewRespawnBlockExplosion的目标选择策略
+      comment: 选项@option#infoViewRespawnBlockExplosion@的目标选择策略
     refreshInventory:
       .: 刷新物品栏
       comment: |-
@@ -163,7 +163,7 @@ tweakermore:
       .: 安全挂机
       comment: |-
         在受到伤害时断开连接
-        触发断开连接的玩家血量阈值可以在safeAfkHealthThreshold中设置
+        触发断开连接的玩家血量阈值可以在@option#safeAfkHealthThreshold@中设置
       pretty_name: 安全挂机
     safeAfkHealthThreshold:
       .: 安全挂机血量阈值
@@ -189,13 +189,13 @@ tweakermore:
         在litematica的放置限制或轻松放置开启时无效
       pretty_name: 原理图方块放置限制
     schematicBlockPlacementRestrictionHint:
-      .: 原理图方块放置限制-提示范围
-      comment: 在“原理图方块放置限制”取消方块放置时是否显示提示信息的策略
-      pretty_name: 原理图方块放置限制提示
+      .: 原理图方块放置限制-提示
+      comment: 在@option#schematicBlockPlacementRestriction@取消方块放置时提示信息的开关
+      pretty_name: 原理图方块放置限制-提示
     schematicBlockPlacementRestrictionItemWhitelist:
       .: 原理图方块放置限制-物品白名单
       comment: |-
-        列表中的物品在被使用时，可以忽略schematicBlockPlacementRestriction的限制
+        列表中的物品在被使用时，可以忽略@option#schematicBlockPlacementRestriction@的限制
         这些字符串应该为合法的物品id，如"ender_chest"或"minecraft:ender_chest"
         你可以把脚手架方块或者随身物品添加进这个白名单里，这样会有更加舒适的体验
       pretty_name: 原理图方块放置限制-物品白名单
@@ -204,7 +204,7 @@ tweakermore:
       comment: |-
         用于阻止位于原理图框附近的方块放置的放置保护距离
         例如，在使用默认值为2时，距离任意原理图2米范围内的方块放置将被取消
-        选项schematicBlockPlacementRestriction将使用本规则的值
+        选项@option#schematicBlockPlacementRestriction@将使用本规则的值
       pretty_name: 原理图方块放置限制边缘保护
     schematicBlockPlacementRestrictionCheckFacing:
       .: 原理图方块放置限制-检查方块朝向
@@ -217,7 +217,7 @@ tweakermore:
     schematicBlockPlacementRestrictionStrict:
       .: 原理图方块放置限制-严格方块检查
       comment: |-
-        schematicBlockPlacement的严格模式
+        @option#schematicBlockPlacement@的严格模式
         若开启，方块放置只在将要放置的方块与原理图中的方块匹配时被允许
         若关闭，一些错误但又有道理的的方块放置将被允许，包括：
         - 使用活珊瑚来“放置”死珊瑚
@@ -227,9 +227,6 @@ tweakermore:
       comment: |-
         调试界面中服务端mspt指标统计的类型
         设置为"游戏刻"以使用原版表现
-    serverMsptMetricsStatisticTypeCycle:
-      .: 服务端mspt指标统计类型循环
-      comment: 一个快速循环切换选项serverMsptMetricsStatisticType的值的快捷键
     villagerOfferUsesDisplay:
       .: 村民交易次数显示
       comment: |-
@@ -283,7 +280,7 @@ tweakermore:
       pretty_name: 覆盖世界时间
     daytimeOverrideValue:
       .: 覆盖世界时间数值
-      comment: 用于功能daytimeOverride的客户端的世界时间数值
+      comment: 用于功能@option#daytimeOverride@的客户端的世界时间数值
     disableBeaconBeamRendering:
       .: 禁用信标光束渲染
       comment: |-
@@ -314,7 +311,7 @@ tweakermore:
       .: 禁用天空渲染变暗
       comment: |-
         阻止天空的下半部分在玩家位于海平面以下时变暗的渲染效果
-        另见: 选项disableHorizonShadingRendering
+        另见: 选项@option#disableHorizonShadingRendering@
       pretty_name: 禁用天空渲染变暗
     disableEntityModelRendering:
       .: 禁用实体模型渲染
@@ -330,7 +327,7 @@ tweakermore:
       .: 禁用地平线渲染变暗
       comment: |-
         阻止地平线在玩家接近世界最低y值时变暗的渲染效果
-        另见: 选项disableDarkSkyRendering
+        另见: 选项@option#disableDarkSkyRendering@
       pretty_name: 禁用地平线渲染变暗
     disableLightUpdates:
       .: 禁用光照更新
@@ -357,7 +354,7 @@ tweakermore:
       comment: |-
         禁用玩家落在史莱姆方块或床上的反弹效果
         就像你潜行了一样
-      pretty_name: Disable Slime Block Bouncing
+      pretty_name: 禁用史莱姆方块弹跳
     disableVignetteDarkness:
       .: 禁用暗角渲染
       comment: |-
@@ -436,7 +433,7 @@ tweakermore:
         若潜影盒为空，则不显示内容提示
     shulkerItemContentHintScale:
       .: 潜影盒物品内容提示-缩放
-      comment: 选项shulkerItemContentHint内容提示的缩放比例
+      comment: 选项@option#shulkerItemContentHint@内容提示的缩放比例
     shulkerTooltipEnchantmentHint:
       .: 潜影盒物品附魔提示
       comment: 在潜影盒物品的工具提示中显示物品的附魔
@@ -481,7 +478,7 @@ tweakermore:
       pretty_name: 覆盖世界天气
     weatherOverrideValue:
       .: 覆盖世界天气种类
-      comment: 用于功能weatherOverride的客户端的世界天气种类
+      comment: 用于功能@option#weatherOverride@的客户端的世界天气种类
 
     # ================================ Mod Tweaks ================================
 
@@ -517,13 +514,13 @@ tweakermore:
       comment: |-
         修改在litematica删除模式中使用的，用于移除实体的指令
         该指令应当能够接受一个实体选择器作为唯一的参数
-        该选项的生效策略可在选项lmRemoveEntityCommandPolicy中指定
+        该选项的生效策略可在选项@option#lmRemoveEntityCommandPolicy@中指定
         例如，你可以使用Carpet TIS Addition模组的"/removeentity"指令
         注意：无需"/"前缀
     lmRemoveEntityCommandPolicy:
       .: Litematica-移除实体指令策略
       comment: |-
-        选项lmRemoveEntityCommand的生效策略
+        选项@option#lmRemoveEntityCommand@的生效策略
         - auto: 仅在给定指令合法时生效（客户端检查）
         - always: 总是生效
     minihudDisableLightOverlaySpawnCheck:
@@ -539,7 +536,7 @@ tweakermore:
       .: Malilib-潜影盒内容预览支持末影箱
       comment: |-
         为malilib中的潜影盒预览功能添加对末影箱支持
-        在多人服务器中，玩家的末影箱数据可以通过选项serverDataSyncer同步至客户端
+        在多人服务器中，玩家的末影箱数据可以通过选项@option#serverDataSyncer@同步至客户端
     ofSantaHat:
       .: Optifine-圣诞老人帽子
       comment: |-

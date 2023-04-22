@@ -70,7 +70,7 @@ TweakerMore提供的新功能
 
 ### 自动收集材料列表物品-消息类型 (autoCollectMaterialListItemMessageType)
 
-The way to show information when using the autoCollectMaterialListItem feature
+在使用自动收集材料列表物品功能时展示信息的方法
 
 - 分类: 功能
 - 类型: 选项列表
@@ -100,7 +100,7 @@ The way to show information when using the autoCollectMaterialListItem feature
 
 ### 自动装填容器阈值 (autoFillContainerThreshold)
 
-触发功能autoFillContainer所需要的最小的物品槽位数
+触发功能自动装填容器所需要的最小的物品槽位数
 
 例如，如果你总是带着2个格子的烟花火箭，那么你可以将其设置为3，
 
@@ -283,7 +283,7 @@ The way to show information when using the autoCollectMaterialListItem feature
 
 展示命令方块的指令及其输出
 
-在多人服务器中，命令方块的数据可以通过选项serverDataSyncer同步至客户端
+在多人服务器中，命令方块的数据可以通过选项服务端数据同步器同步至客户端
 
 - 分类: 功能
 - 类型: 带热键布尔值
@@ -294,7 +294,7 @@ The way to show information when using the autoCollectMaterialListItem feature
 
 ### 信息展示-命令方块-文本宽度最大值 (infoViewCommandBlockMaxWidth)
 
-选项infoViewCommandBlock渲染的文本宽度的最大值
+选项信息展示-命令方块渲染的文本宽度的最大值
 
 - 分类: 功能
 - 类型: 整数
@@ -305,7 +305,7 @@ The way to show information when using the autoCollectMaterialListItem feature
 
 ### 信息展示-命令方块-渲染策略 (infoViewCommandBlockRenderStrategy)
 
-选项infoViewCommandBlock的渲染策略
+选项信息展示-命令方块的渲染策略
 
 - 分类: 功能
 - 类型: 选项列表
@@ -315,7 +315,7 @@ The way to show information when using the autoCollectMaterialListItem feature
 
 ### 信息展示-命令方块-目标策略 (infoViewCommandBlockTargetStrategy)
 
-选项infoViewCommandBlock的目标选择策略
+选项信息展示-命令方块的目标选择策略
 
 - 分类: 功能
 - 类型: 选项列表
@@ -325,7 +325,7 @@ The way to show information when using the autoCollectMaterialListItem feature
 
 ### 信息展示-命令方块-文本缩放 (infoViewCommandBlockTextScale)
 
-选项infoViewCommandBlock渲染的文本的缩放比例
+选项信息展示-命令方块渲染的文本的缩放比例
 
 - 分类: 功能
 - 类型: 实数
@@ -347,7 +347,7 @@ The way to show information when using the autoCollectMaterialListItem feature
 
 ### 信息展示-红石粉更新顺序-渲染策略 (infoViewRedstoneDustUpdateOrderRenderStrategy)
 
-选项infoViewRedstoneDustUpdateOrder的渲染策略
+选项信息展示-红石粉更新顺序的渲染策略
 
 - 分类: 功能
 - 类型: 选项列表
@@ -357,7 +357,7 @@ The way to show information when using the autoCollectMaterialListItem feature
 
 ### 信息展示-红石粉更新顺序-文本透明度 (infoViewRedstoneDustUpdateOrderTextAlpha)
 
-用于渲染infoViewRedstoneDustUpdateOrder文本的透明度
+用于渲染信息展示-红石粉更新顺序文本的透明度
 
 - 分类: 功能
 - 类型: 实数
@@ -394,7 +394,7 @@ The way to show information when using the autoCollectMaterialListItem feature
 
 ### 信息展示-重生方块爆炸伤害-渲染策略 (infoViewRespawnBlockExplosionRenderStrategy)
 
-选项infoViewRespawnBlockExplosion的渲染策略
+选项信息展示-重生方块爆炸伤害的渲染策略
 
 - 分类: 功能
 - 类型: 选项列表
@@ -404,7 +404,7 @@ The way to show information when using the autoCollectMaterialListItem feature
 
 ### 信息展示-重生方块爆炸伤害-目标选择策略 (infoViewRespawnBlockExplosionTargetStrategy)
 
-选项infoViewRespawnBlockExplosion的目标选择策略
+选项信息展示-重生方块爆炸伤害的目标选择策略
 
 - 分类: 功能
 - 类型: 选项列表
@@ -414,7 +414,7 @@ The way to show information when using the autoCollectMaterialListItem feature
 
 ### 信息展示-重生方块爆炸伤害-文本透明度 (infoViewRespawnBlockExplosionTextAlpha)
 
-用于渲染infoViewRespawnBlockExplosion文本的透明度
+用于渲染信息展示-重生方块爆炸伤害文本的透明度
 
 - 分类: 功能
 - 类型: 实数
@@ -451,7 +451,7 @@ The way to show information when using the autoCollectMaterialListItem feature
 
 在受到伤害时断开连接
 
-触发断开连接的玩家血量阈值可以在safeAfkHealthThreshold中设置
+触发断开连接的玩家血量阈值可以在安全挂机血量阈值中设置
 
 - 分类: 功能
 - 类型: 带热键布尔值
@@ -507,9 +507,9 @@ The way to show information when using the autoCollectMaterialListItem feature
 - 默认值: *无快捷键*, `true`
 
 
-### 原理图方块放置限制-提示范围 (schematicBlockPlacementRestrictionHint)
+### 原理图方块放置限制-提示 (schematicBlockPlacementRestrictionHint)
 
-在“原理图方块放置限制”取消方块放置时是否显示提示信息的策略
+在原理图方块放置限制取消方块放置时提示信息的开关
 
 - 分类: 功能
 - 类型: 选项列表
@@ -519,7 +519,7 @@ The way to show information when using the autoCollectMaterialListItem feature
 
 ### 原理图方块放置限制-物品白名单 (schematicBlockPlacementRestrictionItemWhitelist)
 
-列表中的物品在被使用时，可以忽略schematicBlockPlacementRestriction的限制
+列表中的物品在被使用时，可以忽略原理图方块放置限制的限制
 
 这些字符串应该为合法的物品id，如"ender_chest"或"minecraft:ender_chest"
 
@@ -536,7 +536,7 @@ The way to show information when using the autoCollectMaterialListItem feature
 
 例如，在使用默认值为2时，距离任意原理图2米范围内的方块放置将被取消
 
-选项schematicBlockPlacementRestriction将使用本规则的值
+选项原理图方块放置限制将使用本规则的值
 
 - 分类: 功能
 - 类型: 整数
@@ -725,7 +725,7 @@ schematicBlockPlacement的严格模式
 
 ### 覆盖世界时间数值 (daytimeOverrideValue)
 
-用于功能daytimeOverride的客户端的世界时间数值
+用于功能覆盖世界时间的客户端的世界时间数值
 
 - 分类: MC修改
 - 类型: 整数
@@ -788,7 +788,7 @@ schematicBlockPlacement的严格模式
 
 阻止天空的下半部分在玩家位于海平面以下时变暗的渲染效果
 
-另见: 选项disableHorizonShadingRendering
+另见: 选项禁用地平线渲染变暗
 
 - 分类: MC修改
 - 类型: 带热键布尔值
@@ -823,7 +823,7 @@ schematicBlockPlacement的严格模式
 
 阻止地平线在玩家接近世界最低y值时变暗的渲染效果
 
-另见: 选项disableDarkSkyRendering
+另见: 选项禁用天空渲染变暗
 
 - 分类: MC修改
 - 类型: 带热键布尔值
@@ -1093,7 +1093,7 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 
 ### 潜影盒物品内容提示-缩放 (shulkerItemContentHintScale)
 
-选项shulkerItemContentHint内容提示的缩放比例
+选项潜影盒物品内容提示内容提示的缩放比例
 
 - 分类: MC修改
 - 类型: 实数
@@ -1205,7 +1205,7 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 
 ### 覆盖世界天气种类 (weatherOverrideValue)
 
-用于功能weatherOverride的客户端的世界天气种类
+用于功能覆盖世界天气的客户端的世界天气种类
 
 - 分类: MC修改
 - 类型: 选项列表
@@ -1316,7 +1316,7 @@ tweakHandRestock功能的物品名单约束类型
 
 该指令应当能够接受一个实体选择器作为唯一的参数
 
-该选项的生效策略可在选项lmRemoveEntityCommandPolicy中指定
+该选项的生效策略可在选项Litematica-移除实体指令策略中指定
 
 例如，你可以使用Carpet TIS Addition模组的"/removeentity"指令
 
@@ -1332,7 +1332,7 @@ tweakHandRestock功能的物品名单约束类型
 
 ### Litematica-移除实体指令策略 (lmRemoveEntityCommandPolicy)
 
-选项lmRemoveEntityCommand的生效策略
+选项Litematica-移除实体指令的生效策略
 
 - auto: 仅在给定指令合法时生效（客户端检查）
 
@@ -1381,7 +1381,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
 
 为malilib中的潜影盒预览功能添加对末影箱支持
 
-在多人服务器中，玩家的末影箱数据可以通过选项serverDataSyncer同步至客户端
+在多人服务器中，玩家的末影箱数据可以通过选项服务端数据同步器同步至客户端
 
 - 分类: 模组修改
 - 类型: 布尔值

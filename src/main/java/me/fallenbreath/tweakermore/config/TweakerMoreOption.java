@@ -24,6 +24,7 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.util.StringUtils;
+import me.fallenbreath.tweakermore.config.comment.TagProcessor;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.config.statistic.OptionStatistic;
 import me.fallenbreath.tweakermore.util.ModIds;
@@ -185,6 +186,8 @@ public class TweakerMoreOption
 						);
 			}
 		}
+
+		comment = TagProcessor.processReferences(comment);
 
 		return comment;
 	}
