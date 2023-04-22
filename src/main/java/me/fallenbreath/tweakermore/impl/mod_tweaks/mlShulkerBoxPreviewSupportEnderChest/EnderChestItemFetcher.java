@@ -56,7 +56,7 @@ public class EnderChestItemFetcher
 	}
 
 	// do hacks here
-	// return false: nope; true: fetching / fetched
+	// return empty: nope; not-empty: fetching / fetched
 	private static Optional<DefaultedList<ItemStack>> getEntityData(PlayerEntity player)
 	{
 		return Optional.empty();
