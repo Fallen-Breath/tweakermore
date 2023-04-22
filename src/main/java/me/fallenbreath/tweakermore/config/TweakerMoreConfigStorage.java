@@ -28,6 +28,7 @@ import fi.dy.masa.malilib.config.ConfigUtils;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IConfigHandler;
 import fi.dy.masa.malilib.util.JsonUtils;
+import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.migration.ConfigRenameMigration;
 import me.fallenbreath.tweakermore.config.statistic.OptionStatisticSaver;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
@@ -39,6 +40,11 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+//#if MC < 11700
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+//#endif
 
 //#if MC < 11800
 import com.google.gson.JsonParser;
@@ -139,19 +145,33 @@ public class TweakerMoreConfigStorage implements IConfigHandler
 	@Override
 	public void save()
 	{
-		File configFile = FileUtil.getConfigFile();
-		JsonObject root = TweakerMoreConfigs.PRESERVE_CONFIG_UNKNOWN_ENTRIES.getBooleanValue() ? loadedJson : new JsonObject();
+		try
+		{
+			JsonObject root = TweakerMoreConfigs.PRESERVE_CONFIG_UNKNOWN_ENTRIES.getBooleanValue() ? loadedJson : new JsonObject();
 
-		ConfigUtils.writeConfigBase(root, "Generic", getConfigOptions(Config.Type.GENERIC));
-		ConfigUtils.writeConfigBase(root, "GenericHotkeys", getConfigOptions(Config.Type.HOTKEY));
-		ConfigUtils.writeConfigBase(root, "Lists", getConfigOptions(Config.Type.LIST));
-		ConfigUtils.writeHotkeyToggleOptions(root, "TweakHotkeys", "TweakToggles", getConfigOptions(Config.Type.TWEAK));
-		ConfigUtils.writeHotkeyToggleOptions(root, "DisableHotkeys", "DisableToggles", getConfigOptions(Config.Type.DISABLE));
-		ConfigUtils.writeConfigBase(root, "Fixes", getConfigOptions(Config.Type.FIX));
+			ConfigUtils.writeConfigBase(root, "Generic", getConfigOptions(Config.Type.GENERIC));
+			ConfigUtils.writeConfigBase(root, "GenericHotkeys", getConfigOptions(Config.Type.HOTKEY));
+			ConfigUtils.writeConfigBase(root, "Lists", getConfigOptions(Config.Type.LIST));
+			ConfigUtils.writeHotkeyToggleOptions(root, "TweakHotkeys", "TweakToggles", getConfigOptions(Config.Type.TWEAK));
+			ConfigUtils.writeHotkeyToggleOptions(root, "DisableHotkeys", "DisableToggles", getConfigOptions(Config.Type.DISABLE));
+			ConfigUtils.writeConfigBase(root, "Fixes", getConfigOptions(Config.Type.FIX));
 
-		saveInternal(root);
+			saveInternal(root);
 
-		JsonUtils.writeJsonToFile(root, configFile);
+			File configFile = FileUtil.getConfigFile();
+			// malilib in <mc1.17 doesn't have the "save to temp then rename" operation, so we do it ourself
+			//#if MC >= 11700
+			//$$ JsonUtils.writeJsonToFile(root, configFile);
+			//#else
+			File tempFile = new File(configFile.getParent(), configFile.getName() + ".tmp");
+			JsonUtils.writeJsonToFile(root, tempFile);
+			Files.move(tempFile.toPath(), configFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			//#endif
+		}
+		catch (Exception e)
+		{
+			TweakerMoreMod.LOGGER.error("Failed to save the config file of TweakerMore", e);
+		}
 	}
 
 	private void saveInternal(JsonObject jsonObject)
