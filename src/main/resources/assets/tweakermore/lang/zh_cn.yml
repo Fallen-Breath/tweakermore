@@ -431,6 +431,8 @@ tweakermore:
         若潜影盒仅包含1种物品类型，将显示盒中的那一种物品
         若潜影盒包含多种物品类型，将显示“...”
         若潜影盒为空，则不显示内容提示
+        除此之外，若潜影盒非空且非全满，
+        潜影盒的右下角还会显示一个代表其填充率的容量条
     shulkerItemContentHintScale:
       .: 潜影盒物品内容提示-缩放
       comment: 选项@option#shulkerItemContentHint@内容提示的缩放比例

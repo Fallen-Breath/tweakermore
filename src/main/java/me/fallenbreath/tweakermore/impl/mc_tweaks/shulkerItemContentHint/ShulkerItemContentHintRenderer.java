@@ -23,21 +23,27 @@ package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerItemContentHint;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.InventoryUtil;
 import me.fallenbreath.tweakermore.util.ItemUtil;
+import me.fallenbreath.tweakermore.util.render.RenderContext;
 import me.fallenbreath.tweakermore.util.render.RenderUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DefaultedList;
+import net.minecraft.util.math.MathHelper;
 
 import java.util.Optional;
 
-//#if MC >= 11700
-//$$ import com.mojang.blaze3d.systems.RenderSystem;
+//#if MC >= 11904
+//$$ import net.minecraft.client.gui.DrawableHelper;
+//#else
+import me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.shulkerItemContentHint.ItemRendererAccessor;
+import net.minecraft.client.render.BufferBuilder;
 //#endif
 
 //#if MC >= 11500
-import net.minecraft.client.render.Tessellator;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 //#else
@@ -46,6 +52,8 @@ import net.minecraft.client.util.math.MatrixStack;
 
 public class ShulkerItemContentHintRenderer
 {
+	// the display width of an item slot
+	private static final int SLOT_WIDTH = 16;
 	private static final ThreadLocal<Boolean> isRendering = ThreadLocal.withInitial(() -> false);
 
 	public static void render(
@@ -59,7 +67,7 @@ public class ShulkerItemContentHintRenderer
 		{
 			return;
 		}
-		if (isRendering.get())
+		if (isRendering.get())  // no hint if it's rendering our hint item
 		{
 			return;
 		}
@@ -95,8 +103,6 @@ public class ShulkerItemContentHintRenderer
 			return;
 		}
 
-		// the display width of a slot
-		final int SLOT_WIDTH = 16;
 		double scale = TweakerMoreConfigs.SHULKER_ITEM_CONTENT_HINT_SCALE.getDoubleValue();
 
 		if (scale <= 0)
@@ -111,8 +117,7 @@ public class ShulkerItemContentHintRenderer
 		MatrixStack textMatrixStack = new MatrixStack();
 		//#endif
 
-		RenderUtil.Scaler scaler = RenderUtil.createScaler(x, y + SLOT_WIDTH, scale);
-		scaler.apply(
+		RenderContext renderContext = new RenderContext(
 				//#if MC >= 11904
 				//$$ textMatrixStack
 				//#elseif MC >= 11700
@@ -121,6 +126,9 @@ public class ShulkerItemContentHintRenderer
 				//$$ textMatrixStack
 				//#endif
 		);
+
+		RenderUtil.Scaler scaler = RenderUtil.createScaler(x, y + SLOT_WIDTH, scale);
+		scaler.apply(renderContext);
 
 		if (useQuestionMark)
 		{
@@ -195,8 +203,8 @@ public class ShulkerItemContentHintRenderer
 				itemRenderer.zOffset += 10;
 				// scale the z axis, so the lighting of the item can render correctly
 				// see net.minecraft.client.render.item.ItemRenderer.renderGuiItemModel for z offset applying
-				scaler.getRenderContext().scale(1, 1, scale);
-				scaler.getRenderContext().translate(0, 0, (100.0F + itemRenderer.zOffset) * (1 / scale - 1));
+				renderContext.scale(1, 1, scale);
+				renderContext.translate(0, 0, (100.0F + itemRenderer.zOffset) * (1 / scale - 1));
 				//#endif
 
 				// we do this manually so no need to care about extra z-offset modification of itemRenderer in its ItemRenderer#renderGuiItem
@@ -224,8 +232,110 @@ public class ShulkerItemContentHintRenderer
 		//$$ RenderSystem.applyModelViewMatrix();
 		//#endif
 
+		renderBar(renderContext, itemRenderer, itemStack, x, y, stackList.get());
+
 		//#if MC >= 11904
 		//$$ textMatrixStack.pop();
 		//#endif
+	}
+
+	@FunctionalInterface
+	private interface GuiQuadDrawer
+	{
+		void draw(int x, int y, int width, int height, int color);
+	}
+
+	//#if 11600 <= MC && MC < 11700
+	//$$ @SuppressWarnings("deprecation")
+	//#endif
+	private static void renderBar(RenderContext renderContext, ItemRenderer itemRenderer, ItemStack shulkerItem, int x, int y, DefaultedList<ItemStack> stackList)
+	{
+		// 1. checks & calc
+
+		int slotAmount = InventoryUtil.getInventorySlotAmount(shulkerItem);
+		if (slotAmount == -1)
+		{
+			return;
+		}
+		double sum = 0;
+		for (ItemStack stack : stackList)
+		{
+			sum += 1.0D * stack.getCount() / stack.getMaxCount();
+		}
+
+		double ratio = sum / slotAmount;
+		if (ratio <= 0 || ratio >= 1)
+		{
+			return;
+		}
+
+		// 2. render
+
+		final int HEIGHT = SLOT_WIDTH / 2;
+		final int WIDTH = 1;
+
+		x = x + SLOT_WIDTH - WIDTH;
+		y = y + SLOT_WIDTH - HEIGHT;
+
+		// ====== [begin] ref: net.minecraft.client.render.item.ItemRenderer#renderGuiItemOverlay ======
+
+		//#if MC >= 11500
+
+		RenderSystem.disableDepthTest();
+		//#if MC < 11700
+		RenderSystem.disableAlphaTest();
+		//#endif
+		//#if MC < 11904
+		RenderSystem.disableBlend();
+		RenderSystem.disableTexture();
+		//#endif
+
+		//#else
+		//$$ GlStateManager.disableLighting();
+		//$$ GlStateManager.disableDepthTest();
+		//$$ GlStateManager.disableTexture();
+		//$$ GlStateManager.disableAlphaTest();
+		//$$ GlStateManager.disableBlend();
+		//#endif
+
+		int h = (int)Math.ceil(ratio * HEIGHT);  // make sure h > 0 so it's visible enough
+		int color = MathHelper.hsvToRgb((float)(ratio / 3), 1.0F, 1.0F);
+
+		//#if MC < 11904
+		ItemRendererAccessor accessor = (ItemRendererAccessor)itemRenderer;
+		Tessellator tessellator = Tessellator.getInstance();
+		BufferBuilder bufferBuilder = tessellator.getBuffer();
+		GuiQuadDrawer drawer = (x_, y_, width_, height_, color_) -> {
+			accessor.invokeRenderGuiQuad(bufferBuilder, x_, y_, width_ , height_,color_ >> 16 & 0xFF, color_ >> 8 & 0xFF, color_ & 0xFF, 0xFF);
+		};
+		//#else
+		//$$ GuiQuadDrawer drawer = (x_, y_, width_, height_, color_) -> {
+		//$$ 	DrawableHelper.fill(renderContext.getMatrixStack(), x_, y_, x_ + width_, y_ + height_, color_ | 0xFF000000);
+		//$$ };
+		//#endif
+
+		drawer.draw( x, y, WIDTH, HEIGHT, 0x040404);
+		drawer.draw(x, y + HEIGHT - h, WIDTH, h, color);
+
+		//#if MC >= 11500
+
+		RenderSystem.enableDepthTest();
+		//#if MC < 11700
+		RenderSystem.enableAlphaTest();
+		//#endif
+		//#if MC < 11904
+		RenderSystem.enableBlend();
+		RenderSystem.enableTexture();
+		//#endif
+
+		//#else
+		//$$ GlStateManager.enableBlend();
+		//$$ GlStateManager.enableAlphaTest();
+		//$$ GlStateManager.enableTexture();
+		//$$ GlStateManager.enableLighting();
+		//$$ GlStateManager.enableDepthTest();
+		//#endif
+
+		// ====== [end] ref: net.minecraft.client.render.item.ItemRenderer#renderGuiItemOverlay ======
 	}
 }

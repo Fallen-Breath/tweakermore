@@ -75,21 +75,26 @@ public class RenderUtil
 			this.factor = factor;
 		}
 
+		public void apply(RenderContext renderContext)
+		{
+			this.renderContext = renderContext;
+			this.renderContext.pushMatrix();
+			this.renderContext.translate(-anchorX * factor, -anchorY * factor, 0);
+			this.renderContext.scale(factor, factor, 1);
+			this.renderContext.translate(anchorX / factor, anchorY / factor, 0);
+		}
+
 		public void apply(
 				//#if MC >= 11600
 				//$$ MatrixStack matrixStack
 				//#endif
 		)
 		{
-			this.renderContext = new RenderContext(
+			this.apply(new RenderContext(
 					//#if MC >= 11600
 					//$$ matrixStack
 					//#endif
-			);
-			this.renderContext.pushMatrix();
-			this.renderContext.translate(-anchorX * factor, -anchorY * factor, 0);
-			this.renderContext.scale(factor, factor, 1);
-			this.renderContext.translate(anchorX / factor, anchorY / factor, 0);
+			));
 		}
 
 		public void restore()

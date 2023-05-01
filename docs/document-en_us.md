@@ -1084,6 +1084,10 @@ If the shulker box contains multiple types of item, then "..." will be shown
 
 If the shulker box is empty, no hint will be shown
 
+Also, a fill level bar will be rendered at the lower-right corner,
+
+if the shulker box is neither completely full nor empty
+
 - Category: MC Tweaks
 - Type: boolean
 - Default value: `false`

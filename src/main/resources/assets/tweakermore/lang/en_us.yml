@@ -431,6 +431,8 @@ tweakermore:
         If the shulker box contains only 1 item type, then that item in the box will be shown 
         If the shulker box contains multiple types of item, then "..." will be shown
         If the shulker box is empty, no hint will be shown
+        Also, a fill level bar will be rendered at the lower-right corner,
+        if the shulker box is neither completely full nor empty
     shulkerItemContentHintScale:
       .: shulkerItemContentHintScale
       comment: The scale of the hint stuffs in option @option#shulkerItemContentHint@
