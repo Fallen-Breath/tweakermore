@@ -964,6 +964,17 @@ Overwrites fabric-carpet's rule creativeFlyDrag when the value is modified
 - Maximum value: `1.0`
 
 
+### itemTooltipHideUntilMouseMove
+
+Hide item tooltips in container screens until the mouse has moved
+
+With this option, no more need to worry about item tooltips covering too much information in container screens
+
+- Category: MC Tweaks
+- Type: boolean
+- Default value: `false`
+
+
 ### legacyF3NLogic
 
 Modify the logic of hotkey F3 + N back to 1.15 and before

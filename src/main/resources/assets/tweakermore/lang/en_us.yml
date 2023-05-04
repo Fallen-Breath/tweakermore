@@ -388,6 +388,11 @@ tweakermore:
       comment: |-
         Overwrite the drag factor when flying in creative or spectator mode
         Overwrites fabric-carpet's rule creativeFlyDrag when the value is modified
+    itemTooltipHideUntilMouseMove:
+      .: itemTooltipHideUntilMouseMove
+      comment: |-
+        Hide item tooltips in container screens until the mouse has moved
+        With this option, no more need to worry about item tooltips covering too much information in container screens
     legacyF3NLogic:
       .: legacyF3NLogic
       comment: |-

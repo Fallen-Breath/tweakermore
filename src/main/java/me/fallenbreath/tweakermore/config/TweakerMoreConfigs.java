@@ -360,6 +360,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigDouble FLY_DRAG = newConfigDouble("flyDrag", 0.09, 0, 1);
 
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean ITEM_TOOLTIP_HIDE_UNTIL_MOUSE_MOVE = newConfigBoolean("itemTooltipHideUntilMouseMove", false);
+
 	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.16")), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean LEGACY_F3_N_LOGIC = newConfigBoolean("legacyF3NLogic", false);
 

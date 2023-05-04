@@ -87,6 +87,7 @@
     "tweaks.mc_tweaks.fixHoverTextScale.ChatScreenMixin",
     "tweaks.mc_tweaks.fixHoverTextScale.ScreenMixin",
     "tweaks.mc_tweaks.flyDrag.LivingEntityMixin",
+    "tweaks.mc_tweaks.itemTooltipHideUntilMouseMove.ContainerScreenMixin",
     "tweaks.mc_tweaks.legacyF3NLogic.KeyboardMixin",
     "tweaks.mc_tweaks.maxChatHudHeight.ChatHudMixin",
     "tweaks.mc_tweaks.nameTagRenderStrategy.EntityRendererMixin",

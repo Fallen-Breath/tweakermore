@@ -388,6 +388,11 @@ tweakermore:
       comment: |-
         覆盖玩家在创造模式或旁观模式下的飞行阻力因子
         在该选项被修改时，fabric-carpet规则creativeFlyDrag的效果将被覆盖
+    itemTooltipHideUntilMouseMove:
+      .: 隐藏物品悬浮文本直至鼠标移动
+      comment: |-
+        在容器GUI中隐藏物品的悬浮文本，直至鼠标移动
+        借此，无需再担心物品的悬浮文本遮挡过多容器GUI中的物品图标信息
     legacyF3NLogic:
       .: 旧版F3+N逻辑
       comment: |-
