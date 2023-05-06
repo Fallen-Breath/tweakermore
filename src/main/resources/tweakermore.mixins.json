@@ -149,6 +149,7 @@
     "tweaks.porting.tkrDisableNauseaEffectPorting.ClientPlayerEntityMixin",
     "tweaks.porting.tkrDisableNauseaEffectPorting.InGameHudMixin",
     "util.event.ClientPlayNetworkHandlerMixin",
+    "util.qol.MinecraftClientMixin",
     "util.render.GameRendererMixin",
     "util.render.TextHandlerAccessor"
   ],
