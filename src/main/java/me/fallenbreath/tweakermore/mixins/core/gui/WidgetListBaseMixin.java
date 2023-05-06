@@ -37,6 +37,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(WidgetListBase.class)
 public abstract class WidgetListBaseMixin<TYPE, WIDGET extends WidgetListEntryBase<TYPE>>
 {
+	// to make sure it only once gets rendered
 	private boolean shouldRenderTweakerMoreConfigGuiDropDownList = false;
 
 	@Inject(method = "drawContents", at = @At("HEAD"), remap = false)
@@ -45,6 +46,7 @@ public abstract class WidgetListBaseMixin<TYPE, WIDGET extends WidgetListEntryBa
 		shouldRenderTweakerMoreConfigGuiDropDownList = true;
 	}
 
+	//#if MC < 11904
 	@Inject(
 			method = "drawContents",
 			at = @At(
@@ -73,6 +75,7 @@ public abstract class WidgetListBaseMixin<TYPE, WIDGET extends WidgetListEntryBa
 				mouseX, mouseY
 		);
 	}
+	//#endif
 
 	@Inject(method = "drawContents", at = @At("TAIL"), remap = false)
 	private void drawTweakerMoreConfigGuiDropDownListAgainAfterHover(
