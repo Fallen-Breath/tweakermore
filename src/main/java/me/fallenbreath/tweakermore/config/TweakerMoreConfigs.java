@@ -141,6 +141,9 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBooleanHotkeyed AUTO_VILLAGER_TRADE_FAVORITES = newConfigBooleanHotkeyed("autoVillagerTradeFavorites");
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed AUTO_RESPAWN = newConfigBooleanHotkeyed("autoRespawn");
+
+	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed CONTAINER_PROCESSOR_HINT = newConfigBooleanHotkeyed("containerProcessorHint");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)

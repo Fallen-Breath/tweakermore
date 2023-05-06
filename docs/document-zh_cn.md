@@ -143,6 +143,15 @@ TweakerMore提供的新功能
     - Item Scroller (`itemscroller`)
 
 
+### 自动重生 (autoRespawn)
+
+自动在死亡界面的旁观世界/重生按钮变为可用时进行重生
+
+- 分类: 功能
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+
+
 ### 自动交易收藏村民交易 (autoVillagerTradeFavorites)
 
 在打开村民交易GUI时自动触发ItemScroller模组的villagerTradeFavorites功能

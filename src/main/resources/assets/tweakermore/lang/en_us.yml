@@ -58,6 +58,9 @@ tweakermore:
         Automatically trigger item scroller's villagerTradeFavorites feature when a merchant screen is opened
         and then close the merchant screen
       pretty_name: Auto Villager Trade Favorites
+    autoRespawn:
+      .: autoRespawn
+      comment: Automatically perform respawn when the @tr#deathScreen.spectate@/@tr#deathScreen.respawn@ button in death screen is available
     containerProcessorHint:
       .: containerProcessorHint
       comment: 'Displays the enabling status of auto container processing related features, including:'

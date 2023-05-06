@@ -143,6 +143,15 @@ and then close the container
     - Item Scroller (`itemscroller`)
 
 
+### autoRespawn
+
+Automatically perform respawn when the Spectate world/Respawn button in death screen is available
+
+- Category: Features
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+
+
 ### autoVillagerTradeFavorites
 
 Automatically trigger item scroller's villagerTradeFavorites feature when a merchant screen is opened

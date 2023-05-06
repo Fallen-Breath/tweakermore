@@ -23,6 +23,7 @@
     "tweaks.features.autoContainerProcess.ContainerMixin",
     "tweaks.features.autoContainerProcess.ItemScrollerInventoryUtilsAccessor",
     "tweaks.features.autoContainerProcess.ScreenMixin",
+    "tweaks.features.autoRespawn.DeathScreenMixin",
     "tweaks.features.autoVillagerTradeFavorites.ClientPlayNetworkHandlerMixin",
     "tweaks.features.copySignTextToClipBoard.SignBlockEntityAccessor",
     "tweaks.features.creativePickBlockWithState.MinecraftClientMixin",

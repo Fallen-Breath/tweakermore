@@ -68,12 +68,7 @@ public abstract class ChatScreenMixin extends Screen
 	{
 		if (TweakerMoreConfigs.FIX_HOVER_TEXT_SCALE.getBooleanValue())
 		{
-			MinecraftClient mc =
-					//#if MC >= 11600
-					//$$ this.client;
-					//#else
-					this.minecraft;
-					//#endif
+			MinecraftClient mc = this.minecraft;
 
 			if (mc != null)
 			{
