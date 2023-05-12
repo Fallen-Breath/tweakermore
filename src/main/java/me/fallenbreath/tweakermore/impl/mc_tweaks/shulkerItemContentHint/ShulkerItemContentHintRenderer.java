@@ -232,7 +232,10 @@ public class ShulkerItemContentHintRenderer
 		//$$ RenderSystem.applyModelViewMatrix();
 		//#endif
 
-		renderBar(renderContext, itemRenderer, itemStack, x, y, stackList.get());
+		if (!useQuestionMark)
+		{
+			renderBar(renderContext, itemRenderer, itemStack, x, y, stackList.get());
+		}
 
 		//#if MC >= 11904
 		//$$ textMatrixStack.pop();
