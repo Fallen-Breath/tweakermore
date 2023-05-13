@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerItemContentHint;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.InventoryUtil;
 import me.fallenbreath.tweakermore.util.ItemUtil;
+import me.fallenbreath.tweakermore.util.render.ColorHolder;
 import me.fallenbreath.tweakermore.util.render.RenderContext;
 import me.fallenbreath.tweakermore.util.render.RenderUtil;
 import net.minecraft.client.MinecraftClient;
@@ -301,8 +302,19 @@ public class ShulkerItemContentHintRenderer
 		//$$ GlStateManager.disableBlend();
 		//#endif
 
-		int h = (int)Math.ceil(ratio * HEIGHT);  // make sure h > 0 so it's visible enough
+		int h = (int)Math.round(ratio * HEIGHT);
 		int color = MathHelper.hsvToRgb((float)(ratio / 3), 1.0F, 1.0F);
+		if (h == 0)
+		{
+			// make sure h > 0 so it's visible enough
+			h = 1;
+			// make the color darker
+			ColorHolder holder = ColorHolder.of(color);
+			holder.red /= 2;
+			holder.green /= 2;
+			holder.blue /= 2;
+			color = holder.pack();
+		}
 
 		//#if MC < 11904
 		ItemRendererAccessor accessor = (ItemRendererAccessor)itemRenderer;
