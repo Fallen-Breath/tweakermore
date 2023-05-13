@@ -631,6 +631,11 @@ tweakermore:
     lmPickBlockShulkersPorting:
       .: Litematica选择含目标物潜影盒-移植
       comment: 从Litematica mc1.16+移植pickBlockShulkers
+    mcSpectatorEnterSinkingFixPorting:
+      .: Minecraft旁观者切换时下移修复-移植
+      comment: |-
+        对MC-146582的修复，移植自mc1.20
+        修复了玩家站在地面上切换旁观者模式后出现的意料外下移
     tkrDisableNauseaEffectPorting:
       .: Tweakeroo禁用扭曲效果-移植
       comment: |-
@@ -746,7 +751,7 @@ tweakermore:
         description: 对模组已有内容修改
       porting:
         .: 移植
-        description: 从其他Minecraft版本的模组中移植的功能
+        description: 从其他Minecraft版本中移植的原版或模组功能
       setting:
         .: 配置
         description: 与TweakerMore相关的配置

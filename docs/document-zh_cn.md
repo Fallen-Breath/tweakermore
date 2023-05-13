@@ -1626,7 +1626,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
 
 ## 移植
 
-从其他Minecraft版本的模组中移植的功能
+从其他Minecraft版本中移植的原版或模组功能
 
 ### ItemScroller移动整组物品备用操作修复-移植 (isScrollStacksFallbackFixPorting)
 
@@ -1680,6 +1680,20 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
   - 依赖模组:
     - Litematica (`litematica`)
     - Minecraft (`minecraft`) `<1.16`
+
+
+### Minecraft旁观者切换时下移修复-移植 (mcSpectatorEnterSinkingFixPorting)
+
+对MC-146582的修复，移植自mc1.20
+
+修复了玩家站在地面上切换旁观者模式后出现的意料外下移
+
+- 分类: 移植
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Minecraft (`minecraft`) `<1.20`
 
 
 ### Tweakeroo禁用扭曲效果-移植 (tkrDisableNauseaEffectPorting)

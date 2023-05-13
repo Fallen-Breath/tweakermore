@@ -623,6 +623,13 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBoolean LM_PICK_BLOCK_SHULKERS_PORTING = newConfigBoolean("lmPickBlockShulkersPorting", false);
 
 	@Config(
+			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = "<1.20")),
+			category = Config.Category.PORTING
+	)
+	public static final TweakerMoreConfigBoolean MC_SPECTATOR_ENTER_SINKING_FIX_PORTING = newConfigBoolean("mcSpectatorEnterSinkingFixPorting", false);
+
+	@Config(
 			type = Config.Type.FIX,
 			restriction = @Restriction(require = {
 					@Condition(itemscroller),

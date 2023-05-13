@@ -145,7 +145,7 @@ and then close the container
 
 ### autoRespawn
 
-Automatically perform respawn when the Spectate world/Respawn button in death screen is available
+Automatically perform respawn when the Spectate World/Respawn button in death screen is available
 
 - Category: Features
 - Type: hotkey togglable boolean
@@ -1626,7 +1626,7 @@ Might have some side effects though
 
 ## Porting
 
-Stuffs porting from mods from other Minecraft versions
+Stuffs porting from vanilla or mods from other Minecraft versions
 
 ### isScrollStacksFallbackFixPorting
 
@@ -1680,6 +1680,20 @@ Backport option pickBlockShulkers from Litematica mc1.16+
   - Required mods:
     - Litematica (`litematica`)
     - Minecraft (`minecraft`) `<1.16`
+
+
+### mcSpectatorEnterSinkingFixPorting
+
+Backport fix for MC-146582 from mc1.20
+
+It fixes player moving down unexpectedly after entering spectator mode if the player was standing on the ground
+
+- Category: Porting
+- Type: boolean
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Minecraft (`minecraft`) `<1.20`
 
 
 ### tkrDisableNauseaEffectPorting

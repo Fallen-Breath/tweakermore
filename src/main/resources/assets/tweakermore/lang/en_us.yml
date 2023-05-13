@@ -631,6 +631,11 @@ tweakermore:
     lmPickBlockShulkersPorting:
       .: lmPickBlockShulkersPorting
       comment: Backport option pickBlockShulkers from Litematica mc1.16+
+    mcSpectatorEnterSinkingFixPorting:
+      .: mcSpectatorEnterSinkingFixPorting
+      comment: |-
+        Backport fix for MC-146582 from mc1.20
+        It fixes player moving down unexpectedly after entering spectator mode if the player was standing on the ground
     tkrDisableNauseaEffectPorting:
       .: tkrDisableNauseaEffectPorting
       comment: |-
@@ -746,7 +751,7 @@ tweakermore:
         description: Tweaks on mods
       porting:
         .: Porting
-        description: Stuffs porting from mods from other Minecraft versions
+        description: Stuffs porting from vanilla or mods from other Minecraft versions
       setting:
         .: Setting
         description: Settings of TweakMore itself
