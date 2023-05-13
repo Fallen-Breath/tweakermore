@@ -31,7 +31,7 @@ preprocess {
     mc1193.link(mc1194, file('versions/mapping-1.19.3-1.19.4.txt'))
 }
 
-task buildAndGather {
+tasks.register('buildAndGather') {
     subprojects {
         dependsOn project.name + ':build'
     }

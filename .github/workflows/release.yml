@@ -18,6 +18,17 @@ on:
 
 
 jobs:
+  show_action_parameters:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show action parameters
+        run: |
+          cat <<EOF > $GITHUB_STEP_SUMMARY
+          ## Action Parameters
+          - target_subproject: `${{ github.event.inputs.target_subproject }}`
+          - target_release_tag: `${{ github.event.inputs.target_release_tag }}`
+          EOF
+
   matrix_prep:
     uses: ./.github/workflows/matrix_prep.yml
     with:
@@ -50,7 +61,7 @@ jobs:
       - name: Get github release information
         if: ${{ github.event_name == 'workflow_dispatch' }}
         id: get_release
-        uses: cardinalby/git-get-release-action@v1.1
+        uses: cardinalby/git-get-release-action@1.2.4
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
