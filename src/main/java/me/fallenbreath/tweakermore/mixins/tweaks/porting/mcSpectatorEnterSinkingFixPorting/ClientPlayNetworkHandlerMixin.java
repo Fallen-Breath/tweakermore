@@ -41,7 +41,7 @@ public abstract class ClientPlayNetworkHandlerMixin
 {
 	@Shadow private MinecraftClient client;
 
-	//#if MC >= 11900
+	//#if MC >= 11903
 	//$$ @Inject(
 	//$$ 		method = "handlePlayerListAction",
 	//$$ 		at = @At(
@@ -68,7 +68,7 @@ public abstract class ClientPlayNetworkHandlerMixin
 
 			// is the client's player
 			if (player != null && player.getUuid().equals(
-					//#if MC >= 11900
+					//#if MC >= 11903
 					//$$ packetEntry.profileId()
 					//#else
 					packetEntry.getProfile().getId()
@@ -76,7 +76,7 @@ public abstract class ClientPlayNetworkHandlerMixin
 			))
 			{
 				GameMode newGameMode =
-						//#if MC >= 11900
+						//#if MC >= 11903
 						//$$ packetEntry.gameMode();
 						//#else
 						packetEntry.getGameMode();

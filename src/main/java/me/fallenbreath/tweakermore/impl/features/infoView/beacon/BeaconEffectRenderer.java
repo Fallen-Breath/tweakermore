@@ -159,7 +159,7 @@ public class BeaconEffectRenderer extends AbstractInfoViewer
 			renderContext.scale(k, k, k);
 			renderContext.translate(0, ICON_SIZE * (-0.5 + kDeltaY), 0);
 
-			//#if MC >= 11900
+			//#if MC >= 11903
 			//$$ RenderSystem.setShaderTexture(0, sprite.getAtlasId());
 			//#elseif MC >= 11700
 			//$$ RenderSystem.setShaderTexture(0, sprite.getAtlas().getId());

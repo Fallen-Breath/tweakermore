@@ -72,6 +72,8 @@ public abstract class KeyboardMixin
 			Consumer<String> commandSender =
 					//#if MC >= 11903
 					//$$ this.client.player.networkHandler::sendCommand;
+					//#elseif MC >= 11900
+					//$$ this.client.player::sendCommand;
 					//#else
 					cmd -> this.client.player.sendChatMessage("/" + cmd);
 					//#endif

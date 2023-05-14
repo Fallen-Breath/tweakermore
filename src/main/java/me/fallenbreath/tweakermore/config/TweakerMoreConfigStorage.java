@@ -60,9 +60,7 @@ public class TweakerMoreConfigStorage implements IConfigHandler
 
 	private JsonObject loadedJson = new JsonObject();
 
-	private TweakerMoreConfigStorage()
-	{
-	}
+	private TweakerMoreConfigStorage() {}
 
 	public static TweakerMoreConfigStorage getInstance()
 	{
