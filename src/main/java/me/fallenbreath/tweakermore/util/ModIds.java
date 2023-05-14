@@ -44,6 +44,7 @@ public class ModIds
 	// others
 	public static final String carpet_tis_addition = "carpet-tis-addition";
 	public static final String caxton = "caxton";
+	public static final String custom_skin_loader = "customskinloader";
 	public static final String easier_crafting = "easiercrafting";
 	public static final String extra_player_renderer = "explayerenderer";
 	public static final String fabric_carpet = "carpet";
@@ -51,6 +52,6 @@ public class ModIds
 	public static final String optifine = "optifabric";
 	public static final String replay_mod = "replaymod";
 	public static final String sodium = "sodium";
+	public static final String xaero_minimap = "xaerominimap";
 	public static final String xaero_worldmap = "xaeroworldmap";
-	public static final String custom_skin_loader = "customskinloader";
 }

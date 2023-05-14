@@ -614,6 +614,9 @@ tweakermore:
         Skip the session finalization operation of xaero's worldmap when quit a world
         So no lag when quitting server or single player
         Might have some side effects though
+    xmapWaypointFreecamCompact:
+      .: XaeroMinimap-WaypointFreecamCompact
+      comment: Make the in-game waypoints render correctly when free camera from tweakeroo is enabled
 
     # ================================ Porting ================================
 
@@ -877,6 +880,7 @@ tweakermore:
       sodium: Sodium
       tweakeroo: Tweakeroo
       wmch: Where's My Chat History
+      xaero_minimap: Xaero's Minimap
       xaeroworldmap: Xaero's World Map
 
   # ================================ Document generator ================================

@@ -1624,6 +1624,19 @@ Might have some side effects though
     - Xaero's World Map (`xaeroworldmap`)
 
 
+### XaeroMinimap-WaypointFreecamCompact (xmapWaypointFreecamCompact)
+
+Make the in-game waypoints render correctly when free camera from tweakeroo is enabled
+
+- Category: Mods Tweaks
+- Type: boolean
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - tweakermore.util.mod.xaerominimap (`xaerominimap`)
+    - Tweakeroo (`tweakeroo`)
+
+
 ## Porting
 
 Stuffs porting from vanilla or mods from other Minecraft versions

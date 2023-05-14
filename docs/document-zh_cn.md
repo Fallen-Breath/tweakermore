@@ -1624,6 +1624,19 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
     - Xaero's World Map (`xaeroworldmap`)
 
 
+### xaero小地图-Freecam兼容 (xmapWaypointFreecamCompact)
+
+在tweakeroo的freecam开启时，让xaero小地图的游戏内路径点正确地渲染
+
+- 分类: 模组修改
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - tweakermore.util.mod.xaerominimap (`xaerominimap`)
+    - Tweakeroo (`tweakeroo`)
+
+
 ## 移植
 
 从其他Minecraft版本中移植的原版或模组功能

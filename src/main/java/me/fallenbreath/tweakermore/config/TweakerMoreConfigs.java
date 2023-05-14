@@ -588,6 +588,16 @@ public class TweakerMoreConfigs
 	)
 	public static final TweakerMoreConfigBoolean XMAP_NO_SESSION_FINALIZATION_WAIT = newConfigBoolean("xmapNoSessionFinalizationWait", false);
 
+	@Config(
+			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = {
+					@Condition(xaero_minimap),
+					@Condition(tweakeroo),
+			}),
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigBoolean XMAP_WAYPOINT_FREECAM_COMPACT = newConfigBoolean("xmapWaypointFreecamCompact", false);
+
 	//////////////////////////
 	//        Porting       //
 	//////////////////////////

@@ -614,6 +614,9 @@ tweakermore:
         退出一个世界时跳过xaero worldmap的会话结束逻辑
         因此在退出服务器或单人游戏时不会出现卡顿
         不过可能会有一些副作用，但暂时没发现
+    xmapWaypointFreecamCompact:
+      .: xaero小地图-Freecam兼容
+      comment: 在tweakeroo的freecam开启时，让xaero小地图的游戏内路径点正确地渲染
 
     # ================================ Porting ================================
 
@@ -877,6 +880,7 @@ tweakermore:
       sodium: Sodium
       tweakeroo: Tweakeroo
       wmch: Where's My Chat History
+      xaero_minimap: Xaero's Minimap
       xaeroworldmap: Xaero's World Map
 
   # ================================ Document generator ================================
