@@ -25,7 +25,7 @@ public enum AutoCollectMaterialListItemLogType implements EnumOptionEntry
 	FULL,
 	SUMMARY;
 
-	public static final AutoCollectMaterialListItemLogType DEFAULT = FULL;
+	public static final AutoCollectMaterialListItemLogType DEFAULT = SUMMARY;
 
 	@Override
 	public EnumOptionEntry[] getAllValues()

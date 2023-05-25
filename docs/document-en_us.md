@@ -74,7 +74,7 @@ The way to show information when using the autoCollectMaterialListItem feature
 
 - Category: Features
 - Type: option list
-- Default value: `Full`
+- Default value: `Summary`
 - Available options: `Full`, `Summary`
 - Mod restrictions:
   - Required mods:
