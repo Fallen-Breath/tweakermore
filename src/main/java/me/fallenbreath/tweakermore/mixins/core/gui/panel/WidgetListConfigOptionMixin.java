@@ -62,6 +62,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 		super(x, y, width, height, parent, entry, listIndex);
 	}
 
+	@Unique
 	private boolean isTweakerMoreConfigGui()
 	{
 		return this.parent instanceof WidgetListConfigOptions && ((WidgetListConfigOptionsAccessor)this.parent).getParent() instanceof TweakerMoreConfigGui;
