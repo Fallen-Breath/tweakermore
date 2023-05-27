@@ -730,6 +730,7 @@ tweakermore:
       main: TweakerMore
   gui:
     title: TweakerMore v%1$s 配置界面
+    bottom_stat: '总数: %1$s, 可用: %2$s, 已修改: %3$s, 已禁用: %4$s'
     selector_drop_down_list:
       all: 全部
     trigger_button:

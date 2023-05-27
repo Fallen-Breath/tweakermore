@@ -730,6 +730,7 @@ tweakermore:
       main: TweakerMore
   gui:
     title: TweakerMore v%1$s Config GUI
+    bottom_stat: 'Total: %1$s, Available: %2$s, Modified: %3$s, Disabled: %4$s'
     selector_drop_down_list:
       all: All
     trigger_button:

@@ -24,6 +24,7 @@ import com.google.common.collect.Lists;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import fi.dy.masa.malilib.config.IConfigBase;
+import fi.dy.masa.malilib.config.IConfigResettable;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.GuiTextFieldGeneric;
@@ -36,16 +37,20 @@ import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.Config;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
+import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.mixins.core.gui.access.WidgetSearchBarAccessor;
 import me.fallenbreath.tweakermore.util.FabricUtil;
 import me.fallenbreath.tweakermore.util.JsonSaveAble;
+import me.fallenbreath.tweakermore.util.render.RenderUtil;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 //#if MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
@@ -121,11 +126,79 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		x = this.initSortingStrategyDropDownList(x) - 5;
 		if (this.searchBar != null)
 		{
-			GuiTextFieldGeneric searchBox = ((WidgetSearchBarAccessor) this.searchBar).getSearchBox();
+			GuiTextFieldGeneric searchBox = ((WidgetSearchBarAccessor)this.searchBar).getSearchBox();
 			int deltaWidth = Math.max(50, x - this.searchBar.getX()) - this.searchBar.getWidth();
 			this.searchBar.setWidth(this.searchBar.getWidth() + deltaWidth);
 			searchBox.setWidth(searchBox.getWidth() + deltaWidth);
 		}
+
+		initBottomStatLine();
+	}
+
+	// filtered by category and filterType
+	private Stream<TweakerMoreOption> getCurrentOptions()
+	{
+		return TweakerMoreConfigs.getOptions(SETTING.category).stream().
+				filter(option -> {
+					// drop down list filtering logic
+					return this.filteredType == null || option.getType() == this.filteredType;
+				});
+	}
+
+	private Stream<TweakerMoreOption> getCurrentValidOptions()
+	{
+		return this.getCurrentOptions().filter(this::isValidOption);
+	}
+
+	// dev & debug check
+	@SuppressWarnings("RedundantIfStatement")
+	private boolean isValidOption(TweakerMoreOption option)
+	{
+		// hide debug options unless debug mode on
+		if (option.isDebug() && !TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
+		{
+			return false;
+		}
+		// hide dev only options unless debug mode on and is dev env
+		if (option.isDevOnly() && !(TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue() && FabricUtil.isDevelopmentEnvironment()))
+		{
+			return false;
+		}
+		return true;
+	}
+
+	private void initBottomStatLine()
+	{
+		AtomicInteger enabled = new AtomicInteger(0);
+		AtomicInteger disabled = new AtomicInteger(0);
+		AtomicInteger modified = new AtomicInteger(0);
+		this.getCurrentValidOptions().forEach(option -> {
+			TweakerMoreIConfigBase config = option.getConfig();
+			if (option.isEnabled())
+			{
+				enabled.getAndIncrement();
+				if (config instanceof IConfigResettable && ((IConfigResettable)config).isModified())
+				{
+					modified.getAndIncrement();
+				}
+			}
+			else
+			{
+				disabled.getAndIncrement();
+			}
+		});
+
+		int total = enabled.get() + disabled.get();
+		String bottomLine = StringUtils.translate(
+				"tweakermore.gui.bottom_stat",
+				total, enabled.get(), modified.get(), disabled.get()
+		);
+
+		int width = RenderUtil.getRenderWidth(bottomLine);
+		int height = RenderUtil.TEXT_HEIGHT;
+		int x = this.width - (this.width - this.getBrowserWidth()) / 2 - width;
+		int y = this.height - height - TOP;
+		this.addLabel(x, y, width, height, 0xFFCCCCCC, bottomLine);
 	}
 
 	private <T> void setDisplayParameter(T currentValue, T newValue, Runnable valueSetter, boolean keepSearchBar)
@@ -171,7 +244,9 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 
 	private int initTypeFilterDropDownList(int x)
 	{
-		Set<Config.Type> possibleTypes = TweakerMoreConfigs.getOptions(SETTING.category).stream().map(TweakerMoreOption::getType).collect(Collectors.toSet());
+		Set<Config.Type> possibleTypes = this.getCurrentValidOptions().
+				map(TweakerMoreOption::getType).
+				collect(Collectors.toSet());
 		List<Config.Type> items = Arrays.stream(Config.Type.values()).filter(possibleTypes::contains).collect(Collectors.toList());
 		items.add(0, null);
 
@@ -231,14 +306,12 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 			int mouseX, int mouseY
 	)
 	{
-		this.hoveringWidgets.forEach(widget -> {
-			widget.render(
-					mouseX, mouseY, widget.isMouseOver(mouseX, mouseY)
-					//#if MC >= 11600
-					//$$ , matrixStack
-					//#endif
-			);
-		});
+		this.hoveringWidgets.forEach(widget -> widget.render(
+				mouseX, mouseY, widget.isMouseOver(mouseX, mouseY)
+				//#if MC >= 11600
+				//$$ , matrixStack
+				//#endif
+		));
 	}
 
 	public Pair<Integer, Integer> adjustWidths(int guiWidth, int maxTextWidth)
@@ -271,43 +344,25 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 	{
 		Comparator<TweakerMoreOption> nameComparator = Comparator.comparing(c -> c.getConfig().getName(), String::compareToIgnoreCase);
 
-		List<IConfigBase> configs = TweakerMoreConfigs.getOptions(SETTING.category).stream().
-				filter(this::shouldShowOption).
+		List<IConfigBase> configs = this.getCurrentValidOptions().
+				filter(option -> {
+					// hide disable options if config hideDisabledOptions is enabled
+					if (TweakerMoreConfigs.HIDE_DISABLE_OPTIONS.getBooleanValue() && !option.isEnabled())
+					{
+						return false;
+					}
+					// hide options that don't work with current Minecraft versions, unless debug mode on
+					if (!option.worksForCurrentMCVersion() && !TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
+					{
+						return false;
+					}
+					return true;
+				}).
 				sorted(SETTING.sortingStrategy.getComparator().thenComparing(nameComparator)).
 				map(TweakerMoreOption::getConfig).
 				collect(Collectors.toList());
 
 		return ConfigOptionWrapper.createFor(configs);
-	}
-
-	private boolean shouldShowOption(TweakerMoreOption option)
-	{
-		// drop down list filtering logic
-		if (this.filteredType != null && option.getType() != this.filteredType)
-		{
-			return false;
-		}
-		// hide disable options if config hideDisabledOptions is enabled
-		if (TweakerMoreConfigs.HIDE_DISABLE_OPTIONS.getBooleanValue() && !option.isEnabled())
-		{
-			return false;
-		}
-		// hide options that don't work with current Minecraft versions, unless debug mode on
-		if (!option.worksForCurrentMCVersion() && !TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
-		{
-			return false;
-		}
-		// hide debug options unless debug mode on
-		if (option.isDebug() && !TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
-		{
-			return false;
-		}
-		// hide dev only options unless debug mode on and is dev env
-		if (option.isDevOnly() && !(TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue() && FabricUtil.isDevelopmentEnvironment()))
-		{
-			return false;
-		}
-		return true;
 	}
 
 	private static class Setting implements JsonSaveAble
