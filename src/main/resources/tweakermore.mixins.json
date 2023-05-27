@@ -12,9 +12,13 @@
     "core.gui.element.ConfigButtonOptionListMixin",
     "core.gui.element.WidgetDropDownListMixin",
     "core.gui.element.WidgetLabelMixin",
-    "core.gui.panel.WidgetListBaseMixin",
     "core.gui.panel.WidgetListConfigOptionMixin",
-    "core.gui.panel.WidgetListConfigOptionsMixin",
+    "core.gui.panel.dropDownListRedraw.WidgetListBaseMixin",
+    "core.gui.panel.labelWithOriginalText.WidgetListConfigOptionMixin",
+    "core.gui.panel.labelWithOriginalText.WidgetListConfigOptionsMixin",
+    "core.gui.panel.ocd.WidgetListConfigOptionMixin",
+    "core.gui.panel.searchBar.WidgetListConfigOptionsMixin",
+    "core.gui.panel.widthTweak.WidgetListConfigOptionsMixin",
     "core.hook.WorldRendererMixin",
     "core.migration.ConfigBooleanHotkeyedMixin",
     "core.migration.ConfigsMixin",
@@ -102,6 +106,7 @@
     "tweaks.mc_tweaks.playerSkinBlockingLoading.compat.customskinloader.FakeSkinManagerMixin_Old",
     "tweaks.mc_tweaks.prioritizedCommandSuggestions.CommandSuggestorMixin",
     "tweaks.mc_tweaks.scoreboardSideBarScale.InGameHudMixin",
+    "tweaks.mc_tweaks.shulkerItemContentHint.ItemRendererAccessor",
     "tweaks.mc_tweaks.shulkerItemContentHint.ItemRendererMixin",
     "tweaks.mc_tweaks.signMultilinePasteSupport.SelectionManagerMixin",
     "tweaks.mc_tweaks.signMultilinePasteSupport.SignEditScreenMixin",
@@ -157,7 +162,6 @@
     "util.render.TextHandlerAccessor"
   ],
   "client": [
-    "tweaks.mc_tweaks.shulkerItemContentHint.ItemRendererAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -20,11 +20,6 @@
 
 package me.fallenbreath.tweakermore.mixins.core.gui.panel;
 
-//#if MC >= 11800
-//$$ import fi.dy.masa.malilib.config.IConfigBoolean;
-//$$ import fi.dy.masa.malilib.config.IConfigResettable;
-//#endif
-
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IConfigBoolean;
 import fi.dy.masa.malilib.config.IConfigResettable;
@@ -47,10 +42,8 @@ import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import java.util.Objects;
-import java.util.function.Function;
 
 @Mixin(WidgetConfigOption.class)
 public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase<GuiConfigsBase.ConfigOptionWrapper>
@@ -72,87 +65,6 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	private boolean isTweakerMoreConfigGui()
 	{
 		return this.parent instanceof WidgetListConfigOptions && ((WidgetListConfigOptionsAccessor)this.parent).getParent() instanceof TweakerMoreConfigGui;
-	}
-
-	private boolean showOriginalTextsThisTime;
-
-	@ModifyArgs(
-			method = "addConfigOption",
-			at = @At(
-					value = "INVOKE",
-					target = "Lfi/dy/masa/malilib/gui/widgets/WidgetConfigOption;addLabel(IIIII[Ljava/lang/String;)V",
-					remap = false
-			),
-			remap = false
-	)
-	private void useMyBetterOptionLabelForTweakerMore(Args args, int x_, int y_, float zLevel, int labelWidth, int configWidth, IConfigBase config)
-	{
-		if (isTweakerMoreConfigGui() || TweakerMoreConfigs.APPLY_TWEAKERMORE_OPTION_LABEL_GLOBALLY.getBooleanValue())
-		{
-			int x = args.get(0);
-			int y = args.get(1);
-			int width = args.get(2);
-			int height = args.get(3);
-			int textColor = args.get(4);
-			String[] lines = args.get(5);
-			if (lines.length != 1)
-			{
-				return;
-			}
-
-			args.set(5, null);  // cancel original call
-
-			Function<String, String> modifier = s -> s;
-			if (config instanceof TweakerMoreIConfigBase)
-			{
-				modifier = ((TweakerMoreIConfigBase)config).getGuiDisplayLineModifier();
-			}
-			TweakerMoreOptionLabel label = new TweakerMoreOptionLabel(x, y, width, height, textColor, lines, new String[]{config.getName()}, modifier);
-			this.addWidget(label);
-			this.showOriginalTextsThisTime = label.shouldShowOriginalLines();
-		}
-		else
-		{
-			this.showOriginalTextsThisTime = false;
-		}
-	}
-
-	@ModifyArg(
-			method = "addConfigOption",
-			at = @At(
-					value = "INVOKE",
-					target = "Lfi/dy/masa/malilib/gui/widgets/WidgetConfigOption;addConfigComment(IIIILjava/lang/String;)V",
-					remap = false
-			),
-			index = 1,
-			remap = false
-	)
-	private int tweaksCommentHeight_minY(int y)
-	{
-		if (this.showOriginalTextsThisTime)
-		{
-			y -= 4;
-		}
-		return y;
-	}
-
-	@ModifyArg(
-			method = "addConfigOption",
-			at = @At(
-					value = "INVOKE",
-					target = "Lfi/dy/masa/malilib/gui/widgets/WidgetConfigOption;addConfigComment(IIIILjava/lang/String;)V",
-					remap = false
-			),
-			index = 3,
-			remap = false
-	)
-	private int tweaksCommentHeight_height(int height)
-	{
-		if (this.showOriginalTextsThisTime)
-		{
-			height += 6;
-		}
-		return height;
 	}
 
 	//#if MC >= 11800
@@ -430,65 +342,4 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	/*
 	 * Compact panel thing ends
 	 */
-
-	// some ocd alignment things xd
-	//#if MC < 11800
-	@ModifyArg(
-			method = "addConfigOption",
-			at = @At(
-					value = "INVOKE",
-					target = "Lfi/dy/masa/malilib/gui/widgets/WidgetKeybindSettings;<init>(IIIILfi/dy/masa/malilib/hotkeys/IKeybind;Ljava/lang/String;Lfi/dy/masa/malilib/gui/widgets/WidgetListBase;Lfi/dy/masa/malilib/gui/interfaces/IDialogHandler;)V",
-					remap = false
-			),
-			index = 0,
-			remap = false
-	)
-	private int whyNotAlignTheHotkeyConfigButtonWidthWithOthers(int x)
-	{
-		if (isTweakerMoreConfigGui())
-		{
-			x += 1;
-		}
-		return x;
-	}
-	//#endif
-
-	//#if MC >= 11800
-	//$$ @ModifyVariable(
-	//$$ 		method = "addBooleanAndHotkeyWidgets",
-	//$$ 		at = @At(
-	//$$ 				value = "STORE",
-	//$$ 				ordinal = 0
-	//$$ 		),
-	//$$ 		ordinal = 3,
-	//$$ 		remap = false
-	//$$ )
-	//$$ private int tweakerMoreDynamicBooleanButtonWidth(int booleanBtnWidth, int x, int y, int configWidth, IConfigResettable resettableConfig, IConfigBoolean booleanConfig, IKeybind keybind)
-	//$$ {
-	//$$ 	if (this.isTweakerMoreConfigGui())
-	//$$ 	{
-	//$$ 		booleanBtnWidth = (configWidth - 24) / 2;
-	//$$ 	}
-	//$$ 	return booleanBtnWidth;
-	//$$ }
-	//#else
-	@ModifyArg(
-			method = "addConfigOption",
-			at = @At(
-					value = "INVOKE",
-					target = "Lfi/dy/masa/malilib/gui/button/ConfigButtonKeybind;<init>(IIIILfi/dy/masa/malilib/hotkeys/IKeybind;Lfi/dy/masa/malilib/gui/interfaces/IKeybindConfigGui;)V",
-					remap = false
-			),
-			index = 2,
-			remap = false
-	)
-	private int whyNotAlignTheHotkeySetterButtonWidthWithOthers(int width)
-	{
-		if (isTweakerMoreConfigGui())
-		{
-			width += 3;
-		}
-		return width;
-	}
-	//#endif
 }
