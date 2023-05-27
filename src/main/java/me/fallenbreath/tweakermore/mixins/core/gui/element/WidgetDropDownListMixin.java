@@ -18,7 +18,7 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.mixins.core.gui;
+package me.fallenbreath.tweakermore.mixins.core.gui.element;
 
 import fi.dy.masa.malilib.gui.widgets.WidgetDropDownList;
 import me.fallenbreath.tweakermore.gui.SelectorDropDownList;

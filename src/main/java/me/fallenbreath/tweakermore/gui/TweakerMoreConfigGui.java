@@ -36,7 +36,7 @@ import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.Config;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
-import me.fallenbreath.tweakermore.mixins.core.gui.WidgetSearchBarAccessor;
+import me.fallenbreath.tweakermore.mixins.core.gui.access.WidgetSearchBarAccessor;
 import me.fallenbreath.tweakermore.util.FabricUtil;
 import me.fallenbreath.tweakermore.util.JsonSaveAble;
 import net.minecraft.util.math.MathHelper;

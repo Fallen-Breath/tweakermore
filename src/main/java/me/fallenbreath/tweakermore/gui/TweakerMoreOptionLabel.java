@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.gui;
 import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
+import me.fallenbreath.tweakermore.mixins.core.gui.element.WidgetLabelMixin;
 import me.fallenbreath.tweakermore.util.StringUtil;
 
 import java.util.Arrays;
@@ -30,7 +31,7 @@ import java.util.function.Function;
 
 /**
  * Only works perfectly with 1 line tho
- * See {@link me.fallenbreath.tweakermore.mixins.core.gui.WidgetLabelMixin} for more details
+ * See {@link WidgetLabelMixin} for more details
  */
 public class TweakerMoreOptionLabel extends WidgetLabel
 {

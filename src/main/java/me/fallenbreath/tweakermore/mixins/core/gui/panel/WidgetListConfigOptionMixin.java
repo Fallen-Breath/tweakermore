@@ -18,7 +18,7 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.mixins.core.gui;
+package me.fallenbreath.tweakermore.mixins.core.gui.panel;
 
 //#if MC >= 11800
 //$$ import fi.dy.masa.malilib.config.IConfigBoolean;
@@ -41,6 +41,8 @@ import me.fallenbreath.tweakermore.config.options.IHotkeyWithSwitch;
 import me.fallenbreath.tweakermore.config.options.IOptionListHotkeyed;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.gui.*;
+import me.fallenbreath.tweakermore.mixins.core.gui.access.KeybindMultiAccessor;
+import me.fallenbreath.tweakermore.mixins.core.gui.access.WidgetListConfigOptionsAccessor;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;

@@ -18,16 +18,16 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.mixins.core.gui;
+package me.fallenbreath.tweakermore.mixins.core.gui.access;
 
-import fi.dy.masa.malilib.gui.GuiConfigsBase;
-import fi.dy.masa.malilib.gui.widgets.WidgetListConfigOptions;
+import fi.dy.masa.malilib.hotkeys.IHotkeyCallback;
+import fi.dy.masa.malilib.hotkeys.KeybindMulti;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(WidgetListConfigOptions.class)
-public interface WidgetListConfigOptionsAccessor
+@Mixin(KeybindMulti.class)
+public interface KeybindMultiAccessor
 {
 	@Accessor(remap = false)
-	GuiConfigsBase getParent();
+	IHotkeyCallback getCallback();
 }

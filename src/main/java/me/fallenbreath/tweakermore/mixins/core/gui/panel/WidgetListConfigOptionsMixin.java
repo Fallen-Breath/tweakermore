@@ -18,7 +18,7 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.mixins.core.gui;
+package me.fallenbreath.tweakermore.mixins.core.gui.panel;
 
 import com.mojang.datafixers.util.Pair;
 import fi.dy.masa.malilib.config.IConfigBase;
