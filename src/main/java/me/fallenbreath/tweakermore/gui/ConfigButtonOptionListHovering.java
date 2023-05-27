@@ -27,6 +27,9 @@ import fi.dy.masa.malilib.gui.GuiBase;
 
 import java.util.List;
 
+/**
+ * See class {@link fi.dy.masa.malilib.gui.button.ConfigButtonOptionList} for the implementation details
+ */
 public interface ConfigButtonOptionListHovering
 {
 	void setEnableValueHovering();

@@ -24,7 +24,6 @@ import fi.dy.masa.malilib.gui.widgets.WidgetDropDownList;
 import fi.dy.masa.malilib.interfaces.IStringValue;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.StringUtils;
-import me.fallenbreath.tweakermore.mixins.core.gui.element.WidgetDropDownListMixin;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
@@ -44,7 +43,7 @@ import java.util.function.Consumer;
  * - Does not respond to key input
  * - Supports custom null entry display
  * - Supports hover text, display hover text when the drop-down list is not opened
- * See {@link WidgetDropDownListMixin}
+ * See {@link me.fallenbreath.tweakermore.mixins.core.gui.element.WidgetDropDownListMixin}
  */
 public class SelectorDropDownList<T extends IStringValue> extends WidgetDropDownList<T>
 {
