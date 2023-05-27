@@ -780,6 +780,8 @@ tweakermore:
       config_button_boolean_switch:
         enabled: Enabled
         disabled: Disabled
+      config_button_option_list_hovering:
+        title: 'Available values:'
 
   # ================================ Statistic ================================
 

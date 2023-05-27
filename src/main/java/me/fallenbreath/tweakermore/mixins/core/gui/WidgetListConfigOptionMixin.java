@@ -27,13 +27,11 @@ package me.fallenbreath.tweakermore.mixins.core.gui;
 
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IConfigBoolean;
+import fi.dy.masa.malilib.config.IConfigResettable;
 import fi.dy.masa.malilib.config.IHotkeyTogglable;
 import fi.dy.masa.malilib.config.gui.ConfigOptionChangeListenerButton;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
-import fi.dy.masa.malilib.gui.button.ButtonGeneric;
-import fi.dy.masa.malilib.gui.button.ConfigButtonBoolean;
-import fi.dy.masa.malilib.gui.button.ConfigButtonKeybind;
-import fi.dy.masa.malilib.gui.button.ConfigButtonOptionList;
+import fi.dy.masa.malilib.gui.button.*;
 import fi.dy.masa.malilib.gui.interfaces.IKeybindConfigGui;
 import fi.dy.masa.malilib.gui.widgets.*;
 import fi.dy.masa.malilib.hotkeys.*;
@@ -42,10 +40,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.IHotkeyWithSwitch;
 import me.fallenbreath.tweakermore.config.options.IOptionListHotkeyed;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
-import me.fallenbreath.tweakermore.gui.ConfigButtonBooleanSwitch;
-import me.fallenbreath.tweakermore.gui.HotkeyedResetListener;
-import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
-import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
+import me.fallenbreath.tweakermore.gui.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -246,6 +241,15 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	}
 	//#endif
 
+	@Inject(method = "addConfigButtonEntry", at = @At("HEAD"), remap = false)
+	private void enableEnableValueHoveringForConfigButtonOptionList(int xReset, int yReset, IConfigResettable config, ButtonBase optionButton, CallbackInfo ci)
+	{
+		if (optionButton instanceof ConfigButtonOptionListHovering)
+		{
+			((ConfigButtonOptionListHovering)optionButton).setEnableValueHovering();
+		}
+	}
+
 	/**
 	 * For regular IHotkey
 	 */
@@ -363,6 +367,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	{
 		int optionBtnWidth = (configWidth - 24) / 2;
 		ConfigButtonOptionList optionButton = new ConfigButtonOptionList(x, y, optionBtnWidth, 20, config);
+		((ConfigButtonOptionListHovering)optionButton).setEnableValueHovering();
 		this.addValueWithKeybindWidgets(x, y, configWidth, config, optionButton);
 	}
 
