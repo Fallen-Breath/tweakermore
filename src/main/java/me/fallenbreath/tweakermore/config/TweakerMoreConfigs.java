@@ -267,6 +267,9 @@ public class TweakerMoreConfigs
 	////////////////////
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed BARRIER_PARTICLE_ALWAYS_VISIBLE = newConfigBooleanHotkeyed("barrierParticleAlwaysVisible");
+
+	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed BLOCK_EVENT_THROTTLER = newConfigBooleanHotkeyed("blockEventThrottler");
 
 	@Config(type = Config.Type.LIST, category = Config.Category.MC_TWEAKS)

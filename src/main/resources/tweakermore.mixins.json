@@ -52,6 +52,7 @@
     "tweaks.features.shulkerTooltipHints.ShulkerBoxBlockMixin",
     "tweaks.features.villagerOfferUsesDisplay.MerchantScreenAccessor",
     "tweaks.features.villagerOfferUsesDisplay.MerchantScreenWidgetButtonPageMixin",
+    "tweaks.mc_tweaks.barrierParticleAlwaysVisible.ClientWorldMixin",
     "tweaks.mc_tweaks.blockEventThrottler.WorldMixin",
     "tweaks.mc_tweaks.bossBarMaxEntry.BossBarHudMixin",
     "tweaks.mc_tweaks.bossBarScale.BossBarHudMixin",

@@ -238,6 +238,11 @@ tweakermore:
 
     # ================================ MC Tweaks ================================
 
+    barrierParticleAlwaysVisible:
+      .: barrierParticleAlwaysVisible
+      comment: |-
+        Make barrier particles visible without the requirement to hold a barrier item in your hands
+        Of course, you still need to be in creative mode to see the barrier particles
     blockEventThrottler:
       .: blockEventThrottler
       comment: |-

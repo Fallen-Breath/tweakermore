@@ -612,6 +612,17 @@ Hover on the arrow of the offer to see it
 
 Tweaks on Minecraft
 
+### barrierParticleAlwaysVisible
+
+Make barrier particles visible without the requirement to hold a barrier item in your hands
+
+Of course, you still need to be in creative mode to see the barrier particles
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+
+
 ### blockEventThrottler
 
 The switch of the block event throttler tweak

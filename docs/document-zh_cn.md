@@ -612,6 +612,17 @@ schematicBlockPlacement的严格模式
 
 对Minecraft已有内容修改
 
+### 屏障粒子始终可见 (barrierParticleAlwaysVisible)
+
+让屏障的粒子效果在玩家未手持屏障物品时也依然可被渲染
+
+当然，你还是需要处于创造模式才能让屏障粒子显形
+
+- 分类: MC修改
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+
+
 ### 方块事件节流阀 (blockEventThrottler)
 
 方块事件节流阀功能的总开关
