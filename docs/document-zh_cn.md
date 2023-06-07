@@ -911,6 +911,15 @@ schematicBlockPlacement的严格模式
 - 默认值: *无快捷键*, `false`
 
 
+### 禁用受伤时屏幕倾斜效果 (disableTiltViewWhenHurt)
+
+禁用当前实体受伤时屏幕的倾斜抖动效果
+
+- 分类: MC修改
+- 类型: 带热键布尔值
+- 默认值: *无快捷键*, `false`
+
+
 ### 禁用暗角渲染 (disableVignetteDarkness)
 
 禁用暗角渲染覆盖层

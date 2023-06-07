@@ -363,6 +363,10 @@ tweakermore:
         禁用玩家落在史莱姆方块或床上的反弹效果
         就像你潜行了一样
       pretty_name: 禁用史莱姆方块弹跳
+    disableTiltViewWhenHurt:
+      .: 禁用受伤时屏幕倾斜效果
+      comment: 禁用当前实体受伤时屏幕的倾斜抖动效果
+      pretty_name: 禁用受伤时屏幕倾斜效果
     disableVignetteDarkness:
       .: 禁用暗角渲染
       comment: |-

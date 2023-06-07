@@ -911,6 +911,15 @@ Just like you are sneaking
 - Default value: *no hotkey*, `false`
 
 
+### disableTiltViewWhenHurt
+
+Disable the screen tilting effect when the current entity is being hurt
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean
+- Default value: *no hotkey*, `false`
+
+
 ### disableVignetteDarkness
 
 Disable the vignette darkness overlay

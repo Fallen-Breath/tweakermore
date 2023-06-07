@@ -349,6 +349,9 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_SLIME_BLOCK_BOUNCING = newConfigBooleanHotkeyed("disableSlimeBlockBouncing");
 
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_TILT_VIEW_WHEN_HURT = newConfigBooleanHotkeyed("disableTiltViewWhenHurt");
+
+	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_VIGNETTE_DARKNESS = newConfigBooleanHotkeyed("disableVignetteDarkness");
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)

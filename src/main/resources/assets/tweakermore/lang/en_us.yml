@@ -363,6 +363,10 @@ tweakermore:
         Disable the bouncing effect on player lands on slime block or bed
         Just like you are sneaking
       pretty_name: Disable Slime Block Bouncing
+    disableTiltViewWhenHurt:
+      .: disableTiltViewWhenHurt
+      comment: Disable the screen tilting effect when the current entity is being hurt
+      pretty_name: Disable Tilt View When Hurt
     disableVignetteDarkness:
       .: disableVignetteDarkness
       comment: |-
