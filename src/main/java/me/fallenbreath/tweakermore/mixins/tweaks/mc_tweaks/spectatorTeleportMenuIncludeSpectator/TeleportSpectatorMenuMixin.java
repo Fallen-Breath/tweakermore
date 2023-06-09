@@ -20,6 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.spectatorTeleportMenuIncludeSpectator;
 
+import com.google.common.collect.Lists;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.spectatorTeleportMenuIncludeSpectator.CommandEntryWithSpectatorMark;
 import net.minecraft.client.gui.hud.spectator.SpectatorMenuCommand;
@@ -29,6 +30,7 @@ import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.world.GameMode;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -37,25 +39,39 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Collection;
 import java.util.List;
 
+//#if MC >= 11903
+//$$ import java.util.Collections;
+//#endif
+
 @Mixin(TeleportSpectatorMenu.class)
 public abstract class TeleportSpectatorMenuMixin
 {
-	@Shadow @Final private List<SpectatorMenuCommand> elements;
+	@Shadow @Final @Mutable
+	private List<SpectatorMenuCommand> elements;
 
 	@Inject(method = "<init>(Ljava/util/Collection;)V", at = @At("TAIL"), require = 0)
 	private void spectatorTeleportMenuIncludeSpectator_alwaysEnterIfStatement(Collection<PlayerListEntry> entries, CallbackInfo ci)
 	{
 		if (TweakerMoreConfigs.SPECTATOR_TELEPORT_MENU_INCLUDE_SPECTATOR.getBooleanValue())
 		{
+			// mc1.19.3 make the elements list immutable, so we need to reassign the field
+			List<SpectatorMenuCommand> extendedElements = Lists.newArrayList(this.elements);
+
 			for (PlayerListEntry entry : entries)
 			{
 				if (entry.getGameMode() == GameMode.SPECTATOR)
 				{
 					TeleportToSpecificPlayerSpectatorCommand command = new TeleportToSpecificPlayerSpectatorCommand(entry.getProfile());
 					((CommandEntryWithSpectatorMark)command).setIsSpectator(true);
-					this.elements.add(command);
+					extendedElements.add(command);
 				}
 			}
+
+			this.elements = extendedElements;
+
+			//#if MC >= 11903
+			//$$ this.elements = Collections.unmodifiableList(this.elements);
+			//#endif
 		}
 	}
 }
