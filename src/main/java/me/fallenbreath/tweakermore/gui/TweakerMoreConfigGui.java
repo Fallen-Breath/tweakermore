@@ -52,7 +52,9 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-//#if MC >= 11600
+//#if MC >= 12000
+//$$ import net.minecraft.client.gui.DrawContext;
+//#elseif MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //#endif
 
@@ -300,8 +302,10 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 	}
 
 	public void renderDropDownList(
-			//#if MC >= 11600
-			//$$ MatrixStack matrixStack,
+			//#if MC >= 12000
+			//$$ DrawContext matrixStackOrDrawContext,
+			//#elseif MC >= 11600
+			//$$ MatrixStack matrixStackOrDrawContext,
 			//#endif
 			int mouseX, int mouseY
 	)
@@ -309,7 +313,7 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		this.hoveringWidgets.forEach(widget -> widget.render(
 				mouseX, mouseY, widget.isMouseOver(mouseX, mouseY)
 				//#if MC >= 11600
-				//$$ , matrixStack
+				//$$ , matrixStackOrDrawContext
 				//#endif
 		));
 	}

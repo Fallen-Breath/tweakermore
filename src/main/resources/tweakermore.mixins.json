@@ -52,6 +52,7 @@
     "tweaks.features.shulkerTooltipHints.ShulkerBoxBlockMixin",
     "tweaks.features.villagerOfferUsesDisplay.MerchantScreenAccessor",
     "tweaks.features.villagerOfferUsesDisplay.MerchantScreenWidgetButtonPageMixin",
+    "tweaks.features.villagerOfferUsesDisplay.ScreenAccessor",
     "tweaks.mc_tweaks.barrierParticleAlwaysVisible.ClientWorldMixin",
     "tweaks.mc_tweaks.blockEventThrottler.WorldMixin",
     "tweaks.mc_tweaks.bossBarMaxEntry.BossBarHudMixin",
@@ -158,8 +159,10 @@
     "tweaks.porting.mcSpectatorEnterSinkingFixPorting.ClientPlayNetworkHandlerMixin",
     "tweaks.porting.tkrDisableNauseaEffectPorting.ClientPlayerEntityMixin",
     "tweaks.porting.tkrDisableNauseaEffectPorting.InGameHudMixin",
+    "util.TrapdoorBlockAccessor",
     "util.event.ClientPlayNetworkHandlerMixin",
     "util.qol.MinecraftClientMixin",
+    "util.render.DrawContextAccessor",
     "util.render.GameRendererMixin",
     "util.render.TextHandlerAccessor"
   ],

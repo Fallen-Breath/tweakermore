@@ -20,8 +20,11 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.porting.tkrDisableNauseaEffectPorting;
 
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.porting.tkrDisableNauseaEffectPorting.ClientPlayerEntityWithRealNauseaStrength;
+import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -36,6 +39,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //#endif
 
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.17"))
 @Mixin(InGameHud.class)
 public abstract class InGameHudMixin
 {

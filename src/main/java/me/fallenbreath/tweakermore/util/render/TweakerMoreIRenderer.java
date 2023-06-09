@@ -22,6 +22,10 @@ package me.fallenbreath.tweakermore.util.render;
 
 import fi.dy.masa.malilib.interfaces.IRenderer;
 
+//#if MC >= 12000
+//$$ import net.minecraft.client.gui.DrawContext;
+//#endif
+
 //#if MC >= 11700
 //$$ import com.mojang.blaze3d.systems.RenderSystem;
 //$$ import net.minecraft.util.math.Matrix4f;
@@ -65,10 +69,12 @@ public interface TweakerMoreIRenderer extends IRenderer
 	@Deprecated
 	@Override
 	default void onRenderGameOverlayPost(
-			//#if MC >= 11700
-			//$$ MatrixStack matrixStack
+			//#if MC >= 12000
+			//$$ DrawContext matrixStackOrDrawContext
+			//#elseif MC >= 11700
+			//$$ MatrixStack matrixStackOrDrawContext
 			//#elseif MC >= 11600
-			//$$ float partialTicks, MatrixStack matrixStack
+			//$$ float partialTicks, MatrixStack matrixStackOrDrawContext
 			//#else
 			float partialTicks
 			//#endif
@@ -77,7 +83,7 @@ public interface TweakerMoreIRenderer extends IRenderer
 		this.onRenderGameOverlayPost(
 				new RenderContext(
 						//#if MC >= 11600
-						//$$ matrixStack
+						//$$ matrixStackOrDrawContext
 						//#endif
 				)
 		);

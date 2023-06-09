@@ -27,7 +27,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import java.util.Map;
 import java.util.Optional;
 
-import static me.fallenbreath.tweakermore.impl.features.schematicProPlace.restrict.InteractAbleTester.notMetal;
+import static me.fallenbreath.tweakermore.impl.features.schematicProPlace.restrict.InteractAbleTester.canOpenByHand;
 import static me.fallenbreath.tweakermore.impl.features.schematicProPlace.restrict.InteractAbleTester.playerCanModifyWorld;
 import static me.fallenbreath.tweakermore.impl.features.schematicProPlace.restrict.InteractAllowedTesters.unequalProperty;
 
@@ -101,7 +101,7 @@ public class BlockInteractionRestrictor
 		interactAble(CraftingTableBlock.class    );
 		interactAble(DaylightDetectorBlock.class ).when(playerCanModifyWorld()).allowIf(unequalProperty(DaylightDetectorBlock.INVERTED));
 		interactAble(DispenserBlock.class        );
-		interactAble(DoorBlock.class             ).when(notMetal()).allowIf(unequalProperty(DoorBlock.OPEN));
+		interactAble(DoorBlock.class             ).when(canOpenByHand()).allowIf(unequalProperty(DoorBlock.OPEN));
 		interactAble(EnchantingTableBlock.class  );
 		interactAble(EnderChestBlock.class       );
 		interactAble(FenceGateBlock.class        ).allowIf(unequalProperty(FenceGateBlock.OPEN));
@@ -112,7 +112,7 @@ public class BlockInteractionRestrictor
 		interactAble(RepeaterBlock.class         ).when(playerCanModifyWorld()).allowIf(unequalProperty(RepeaterBlock.DELAY));
 		interactAble(ShulkerBoxBlock.class       );
 		interactAble(StonecutterBlock.class      );
-		interactAble(TrapdoorBlock.class         ).when(notMetal()).allowIf(unequalProperty(DoorBlock.OPEN));
+		interactAble(TrapdoorBlock.class         ).when(canOpenByHand()).allowIf(unequalProperty(DoorBlock.OPEN));
 	}
 
 	public static Result checkInteract(PlayerEntity player, BlockState worldState, BlockState schematicState)

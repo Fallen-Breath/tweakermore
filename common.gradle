@@ -29,6 +29,8 @@ repositories {
 
 // list of (dependencyNotation -> should use modImplementation)
 def mod_dependencies = [
+		["fi.dy.masa.malilib:${project.malilib_version}", true],
+
 		// - loom doesn't remap base class method (method_10263) call of fi.dy.masa.malilib.util.SubChunkPos in
 		//   fi.dy.masa.litematica.render.schematic.WorldRendererSchematic.setupTerrain, resulting in a crash in dev env
 		//   so we have to disable litematica in [1.15, 1.17) at runtime
@@ -41,9 +43,25 @@ def mod_dependencies = [
 		["com.terraformersmc:modmenu:${project.mod_menu_version}"          , mcVersion >= 11500],
 ]
 
+// mc1.20 temp unofficial workround
+if (mcVersion == 12000) {
+	mod_dependencies = [
+			["com.github.kosmolot-mods:malilib:11e09ac4c5", true],
+			["com.terraformersmc:modmenu:${project.mod_menu_version}", true],
+
+			["curse.maven:tweakeroo-297344:${project.tweakeroo_file_id}", false],
+			["curse.maven:item-scroller-242064:${project.itemscroller_file_id}", false],
+			["curse.maven:minihud-244260:${project.minihud_file_id}", false],
+			["curse.maven:litematica-308892:${project.litematica_file_id}", false],
+	]
+}
+
 // https://github.com/FabricMC/fabric-loader/issues/783
 configurations {
 	modRuntimeOnly.exclude group: 'net.fabricmc', module: 'fabric-loader'
+}
+configurations {
+	modImplementation.exclude group: 'io.github.prospector', module: 'modmenu'
 }
 
 dependencies {
@@ -63,11 +81,6 @@ dependencies {
 	// runtime mods
 	if (mcVersion < 11904) {
 		modRuntimeOnly(mcVersion < 11900 ? "com.github.astei:lazydfu:0.1.2" : "com.github.Fallen-Breath:lazydfu:a7cfc44c0c")
-	}
-
-	// dependencies
-	modImplementation("fi.dy.masa.malilib:${project.malilib_version}") {
-		exclude group: 'io.github.prospector', module: 'modmenu'
 	}
 
 	mod_dependencies.forEach {item ->

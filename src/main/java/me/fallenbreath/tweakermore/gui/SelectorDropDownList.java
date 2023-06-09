@@ -30,7 +30,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
-//#if MC >= 11600
+//#if MC >= 12000
+//$$ import net.minecraft.client.gui.DrawContext;
+//#elseif MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //#endif
 
@@ -130,15 +132,17 @@ public class SelectorDropDownList<T extends IStringValue> extends WidgetDropDown
 	@Override
 	public void postRenderHovered(
 			int mouseX, int mouseY, boolean selected
-			//#if MC >= 11600
-			//$$ , MatrixStack matrixStack
+			//#if MC >= 12000
+			//$$ , DrawContext matrixStackOrDrawContext
+			//#elseif MC >= 11600
+			//$$ , MatrixStack matrixStackOrDrawContext
 			//#endif
 	)
 	{
 		super.postRenderHovered(
 				mouseX, mouseY, selected
 				//#if MC >= 11600
-				//$$ , matrixStack
+				//$$ , matrixStackOrDrawContext
 				//#endif
 		);
 
@@ -147,7 +151,7 @@ public class SelectorDropDownList<T extends IStringValue> extends WidgetDropDown
 			RenderUtils.drawHoverText(
 					mouseX, mouseY, Collections.singletonList(this.hoverText.getStringValue())
 					//#if MC >= 11600
-					//$$ , matrixStack
+					//$$ , matrixStackOrDrawContext
 					//#endif
 			);
 			//#if MC >= 11500

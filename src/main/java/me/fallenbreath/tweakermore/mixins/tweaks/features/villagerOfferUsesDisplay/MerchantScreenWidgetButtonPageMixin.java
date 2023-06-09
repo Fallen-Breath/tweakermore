@@ -31,6 +31,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//#if MC >= 12000
+//$$ import net.minecraft.client.gui.DrawContext;
+//#endif
+
 //#if MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //$$ import net.minecraft.text.Text;
@@ -73,7 +77,9 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
 	}
 
 	@Inject(
-			//#if MC >= 11700
+			//#if MC >= 12000
+			//$$ method = "renderTooltip(Lnet/minecraft/client/gui/DrawContext;II)V",
+			//#elseif MC >= 11700
 			//$$ method = "renderTooltip(Lnet/minecraft/client/util/math/MatrixStack;II)V",
 			//#elseif MC >= 11600
 			//$$ method = "renderToolTip(Lnet/minecraft/client/util/math/MatrixStack;II)V",
@@ -92,7 +98,9 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
 			)
 	)
 	private void renderMaxUsesAmount(
-			//#if MC >= 11600
+			//#if MC >= 12000
+			//$$ DrawContext context,
+			//#elseif MC >= 11600
 			//$$ MatrixStack matrices,
 			//#endif
 			int mouseX, int mouseY, CallbackInfo ci
@@ -116,14 +124,19 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
 				TradeOffer offer = this.field_19166.getContainer().getRecipes().get(index + ((MerchantScreenAccessor)this.field_19166).getIndexStartOffset());
 
 				String text = String.format("%d / %d", offer.getUses(), offer.getMaxUses());
+
+				//#if MC >= 12000
+				//$$ context.drawTooltip(((ScreenAccessor)this.field_19166).getTextRenderer(), Messenger.s(text), mouseX, mouseY);
+				//#else
 				this.field_19166.renderTooltip(
 						//#if MC >= 11600
 						//$$ matrices, Messenger.s(text),
 						//#else
 						text,
 						//#endif
-						mouseX, mouseY)
-				;
+						mouseX, mouseY
+				);
+				//#endif
 			}
 		}
 	}

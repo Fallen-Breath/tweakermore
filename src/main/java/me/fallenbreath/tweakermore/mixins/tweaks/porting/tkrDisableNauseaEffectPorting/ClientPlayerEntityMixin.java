@@ -24,6 +24,7 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.porting.tkrDisableNauseaEffectPorting.ClientPlayerEntityWithRealNauseaStrength;
+import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.network.ClientPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,9 +32,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static me.fallenbreath.tweakermore.util.ModIds.minecraft;
-
-@Restriction(require = @Condition(value = minecraft, versionPredicates = "<1.17"))
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.17"))
 @Mixin(ClientPlayerEntity.class)
 public abstract class ClientPlayerEntityMixin implements ClientPlayerEntityWithRealNauseaStrength
 {

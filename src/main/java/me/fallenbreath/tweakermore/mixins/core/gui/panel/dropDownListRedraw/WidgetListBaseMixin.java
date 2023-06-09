@@ -31,7 +31,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-//#if MC >= 11600
+//#if MC >= 12000
+//$$ import net.minecraft.client.gui.DrawContext;
+//#elseif MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //#endif
 
@@ -80,15 +82,17 @@ public abstract class WidgetListBaseMixin<TYPE, WIDGET extends WidgetListEntryBa
 
 	@Inject(method = "drawContents", at = @At("TAIL"), remap = false)
 	private void drawTweakerMoreConfigGuiDropDownListAgainAfterHover(
-			//#if MC >= 11600
-			//$$ MatrixStack matrixStack,
+			//#if MC >= 12000
+			//$$ DrawContext matrixStackOrDrawContext,
+			//#elseif MC >= 11600
+			//$$ MatrixStack matrixStackOrDrawContext,
 			//#endif
 			int mouseX, int mouseY, float partialTicks, CallbackInfo ci
 	)
 	{
 		this.drawTweakerMoreConfigGuiDropDownListAgain(
 				//#if MC >= 11600
-				//$$ matrixStack,
+				//$$ matrixStackOrDrawContext,
 				//#endif
 				mouseX, mouseY
 		);
@@ -106,8 +110,10 @@ public abstract class WidgetListBaseMixin<TYPE, WIDGET extends WidgetListEntryBa
 	}
 
 	private void drawTweakerMoreConfigGuiDropDownListAgain(
-			//#if MC >= 11600
-			//$$ MatrixStack matrixStack,
+			//#if MC >= 12000
+			//$$ DrawContext matrixStackOrDrawContext,
+			//#elseif MC >= 11600
+			//$$ MatrixStack matrixStackOrDrawContext,
 			//#endif
 			int mouseX, int mouseY
 	)
@@ -119,7 +125,7 @@ public abstract class WidgetListBaseMixin<TYPE, WIDGET extends WidgetListEntryBa
 			// render it again to make sure it's on the top but below hovering widgets
 			((TweakerMoreConfigGui)guiConfig).renderDropDownList(
 					//#if MC >= 11600
-					//$$ matrixStack,
+					//$$ matrixStackOrDrawContext,
 					//#endif
 					mouseX, mouseY
 			);

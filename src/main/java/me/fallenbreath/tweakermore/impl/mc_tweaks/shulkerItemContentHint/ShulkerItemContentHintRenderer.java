@@ -61,7 +61,14 @@ public class ShulkerItemContentHintRenderer
 			//#if MC >= 11904
 			//$$ MatrixStack matrices,
 			//#endif
-			ItemRenderer itemRenderer, ItemStack itemStack, int x, int y
+
+			//#if MC >= 12000
+			//$$ DrawContext drawContext,
+			//#else
+			ItemRenderer itemRenderer,
+			//#endif
+
+			ItemStack itemStack, int x, int y
 	)
 	{
 		if (!TweakerMoreConfigs.SHULKER_ITEM_CONTENT_HINT.getBooleanValue())
@@ -92,7 +99,12 @@ public class ShulkerItemContentHintRenderer
 				{
 					std = stack;
 				}
+				// to be equal: item type equals, item nbt equals
+				//#if MC >= 12000
+				//$$ else if (!ItemStack.canCombine(stack, std))
+				//#else
 				else if (!(ItemStack.areItemsEqual(stack, std) && ItemStack.areTagsEqual(stack, std)))
+				//#endif
 				{
 					useQuestionMark = true;
 					break;
@@ -119,7 +131,9 @@ public class ShulkerItemContentHintRenderer
 		//#endif
 
 		RenderContext renderContext = new RenderContext(
-				//#if MC >= 11904
+				//#if MC >= 12000
+				//$$ drawContext
+				//#elseif MC >= 11904
 				//$$ textMatrixStack
 				//#elseif MC >= 11700
 				//$$ useQuestionMark ? textMatrixStack : RenderSystem.getModelViewStack()
@@ -208,6 +222,9 @@ public class ShulkerItemContentHintRenderer
 				renderContext.translate(0, 0, (100.0F + itemRenderer.zOffset) * (1 / scale - 1));
 				//#endif
 
+				//#if MC >= 12000
+				//$$ drawContext.drawItemWithoutEntity(std, x, y);
+				//#else
 				// we do this manually so no need to care about extra z-offset modification of itemRenderer in its ItemRenderer#renderGuiItem
 				itemRenderer.renderGuiItemIcon(
 						//#if MC >= 11904
@@ -215,6 +232,7 @@ public class ShulkerItemContentHintRenderer
 						//#endif
 						std, x, y
 				);
+				//#endif
 			}
 			finally
 			{
@@ -235,7 +253,13 @@ public class ShulkerItemContentHintRenderer
 
 		if (!useQuestionMark)
 		{
-			renderBar(renderContext, itemRenderer, itemStack, x, y, stackList.get());
+			renderBar(
+					renderContext,
+					//#if MC < 12000
+					itemRenderer,
+					//#endif
+					itemStack, x, y, stackList.get()
+			);
 		}
 
 		//#if MC >= 11904
@@ -252,7 +276,12 @@ public class ShulkerItemContentHintRenderer
 	//#if 11600 <= MC && MC < 11700
 	//$$ @SuppressWarnings("deprecation")
 	//#endif
-	private static void renderBar(RenderContext renderContext, ItemRenderer itemRenderer, ItemStack shulkerItem, int x, int y, DefaultedList<ItemStack> stackList)
+	private static void renderBar(
+			RenderContext renderContext,
+			//#if MC < 12000
+			ItemRenderer itemRenderer,
+			//#endif
+			ItemStack shulkerItem, int x, int y, DefaultedList<ItemStack> stackList)
 	{
 		// 1. checks & calc
 
@@ -282,6 +311,7 @@ public class ShulkerItemContentHintRenderer
 		y = y + SLOT_WIDTH - HEIGHT;
 
 		// ====== [begin] ref: net.minecraft.client.render.item.ItemRenderer#renderGuiItemOverlay ======
+		// (mc1.20+) net.minecraft.client.gui.DrawContext.drawItemInSlot
 
 		//#if MC >= 11500
 
@@ -316,17 +346,21 @@ public class ShulkerItemContentHintRenderer
 			color = holder.pack();
 		}
 
-		//#if MC < 11904
+		//#if MC >= 12000
+		//$$ GuiQuadDrawer drawer = (x_, y_, width_, height_, color_) -> {
+		//$$ 	renderContext.getDrawContext().fill(x_, y_, x_ + width_, y_ + height_, color_ | 0xFF000000);
+		//$$ };
+		//#elseif MC >= 11904
+		//$$ GuiQuadDrawer drawer = (x_, y_, width_, height_, color_) -> {
+		//$$ 	DrawableHelper.fill(renderContext.getMatrixStack(), x_, y_, x_ + width_, y_ + height_, color_ | 0xFF000000);
+		//$$ };
+		//#else
 		ItemRendererAccessor accessor = (ItemRendererAccessor)itemRenderer;
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder bufferBuilder = tessellator.getBuffer();
 		GuiQuadDrawer drawer = (x_, y_, width_, height_, color_) -> {
 			accessor.invokeRenderGuiQuad(bufferBuilder, x_, y_, width_ , height_,color_ >> 16 & 0xFF, color_ >> 8 & 0xFF, color_ & 0xFF, 0xFF);
 		};
-		//#else
-		//$$ GuiQuadDrawer drawer = (x_, y_, width_, height_, color_) -> {
-		//$$ 	DrawableHelper.fill(renderContext.getMatrixStack(), x_, y_, x_ + width_, y_ + height_, color_ | 0xFF000000);
-		//$$ };
 		//#endif
 
 		drawer.draw( x, y, WIDTH, HEIGHT, 0x040404);

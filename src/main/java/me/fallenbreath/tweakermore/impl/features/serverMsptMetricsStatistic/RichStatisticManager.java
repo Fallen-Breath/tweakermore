@@ -28,7 +28,9 @@ import me.fallenbreath.tweakermore.util.render.RenderUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.MetricsData;
 
-//#if MC >= 11600
+//#if MC >= 12000
+//$$ import net.minecraft.client.gui.DrawContext;
+//#elseif MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //#endif
 
@@ -79,7 +81,9 @@ public class RichStatisticManager
 	}
 
 	public void renderExtraOnDebugHud(
-			//#if MC >= 11600
+			//#if MC >= 12000
+			//$$ DrawContext drawContext,
+			//#elseif MC >= 11600
 			//$$ MatrixStack matrices,
 			//#endif
 			int x, int width
@@ -99,10 +103,15 @@ public class RichStatisticManager
 				//#else
 				//$$ mc.window.getScaledHeight();
 				//#endif
+
+		//#if MC >= 12000
+		//$$ drawContext.drawTextWithShadow(mc.textRenderer,
+		//#else
 		mc.textRenderer.draw(
 				//#if MC >= 11600
 				//$$ matrices,
 				//#endif
+		//#endif
 				text,
 				x + width - 2 - RenderUtil.getRenderWidth(text),
 				height - 60 + 2,

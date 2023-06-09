@@ -21,8 +21,14 @@
 package me.fallenbreath.tweakermore.impl.features.schematicProPlace.restrict;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Material;
 import net.minecraft.entity.player.PlayerEntity;
+
+//#if MC >= 12000
+//$$ import me.fallenbreath.tweakermore.util.BlockUtil;
+//$$ import net.minecraft.block.BlockSetType;
+//#else
+import net.minecraft.block.Material;
+//#endif
 
 /**
  * Test if the block is interact-able
@@ -49,8 +55,12 @@ public interface InteractAbleTester
 	/**
 	 * For doors / trapdoors
 	 */
-	static InteractAbleTester notMetal()
+	static InteractAbleTester canOpenByHand()
 	{
+		//#if MC >= 12000
+		//$$ return (player, worldState) -> BlockUtil.getBlockSetType(worldState.getBlock()).map(BlockSetType::canOpenByHand).orElse(false);
+		//#else
 		return (player, worldState) -> worldState.getMaterial() != Material.METAL;
+		//#endif
 	}
 }

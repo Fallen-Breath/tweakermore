@@ -20,15 +20,6 @@
 
 package me.fallenbreath.tweakermore.mixins.core.gui.element;
 
-//#if MC >= 11500
-//#else
-//$$ import com.mojang.blaze3d.platform.GlStateManager;
-//#endif
-
-//#if MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
-//#endif
-
 import fi.dy.masa.malilib.gui.widgets.WidgetBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
 import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
@@ -43,6 +34,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.List;
+
+//#if MC >= 12000
+//$$ import net.minecraft.client.gui.DrawContext;
+//#endif
+
+//#if MC >= 11600
+//$$ import net.minecraft.client.util.math.MatrixStack;
+//#endif
+
+//#if MC < 11500
+//$$ import com.mojang.blaze3d.platform.GlStateManager;
+//#endif
 
 @Mixin(WidgetLabel.class)
 public abstract class WidgetLabelMixin extends WidgetBase
@@ -101,8 +104,10 @@ public abstract class WidgetLabelMixin extends WidgetBase
 	)
 	private void translatedOptionLabelRenderTranslation(
 			int mouseX, int mouseY, boolean selected,
-			//#if MC >= 11600
-			//$$ MatrixStack matrixStackd,
+			//#if MC >= 12000
+			//$$ DrawContext matrixStackOrDrawContext,
+			//#elseif MC >= 11600
+			//$$ MatrixStack matrixStackOrDrawContext,
 			//#endif
 			CallbackInfo ci,
 			int fontHeight, int yCenter, int yTextStart, int i, String text
@@ -118,7 +123,7 @@ public abstract class WidgetLabelMixin extends WidgetBase
 
 			RenderContext renderContext = new RenderContext(
 					//#if MC >= 11600
-					//$$ matrixStackd
+					//$$ matrixStackOrDrawContext
 					//#endif
 			);
 
@@ -133,7 +138,7 @@ public abstract class WidgetLabelMixin extends WidgetBase
 				this.drawCenteredStringWithShadow(
 						x, y, color, originText
 						//#if MC >= 11600
-						//$$ , matrixStackd
+						//$$ , matrixStackOrDrawContext
 						//#endif
 				);
 			}
@@ -142,7 +147,7 @@ public abstract class WidgetLabelMixin extends WidgetBase
 				this.drawStringWithShadow(
 						x, y, color, originText
 						//#if MC >= 11600
-						//$$ , matrixStackd
+						//$$ , matrixStackOrDrawContext
 						//#endif
 				);
 			}

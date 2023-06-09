@@ -100,7 +100,9 @@ public abstract class SignEditScreenMixin extends Screen
 
 	//#if MC >= 11700
 	//$$ @Inject(
-	//$$ 		//#if MC >= 11903
+	//$$ 		//#if MC >= 12000
+	//$$ 		//$$ method = "<init>(Lnet/minecraft/block/entity/SignBlockEntity;ZZLnet/minecraft/text/Text;)V",
+	//$$ 		//#elseif MC >= 11903
 	//$$ 		//$$ method = "<init>(Lnet/minecraft/block/entity/SignBlockEntity;ZLnet/minecraft/text/Text;)V",
 	//$$ 		//#else
 	//$$ 		method = "<init>",
@@ -108,7 +110,11 @@ public abstract class SignEditScreenMixin extends Screen
 	//$$ 		at = @At("TAIL")
 	//$$ )
 	//$$ private void recordFilteredParam(
-	//$$ 		SignBlockEntity sign, boolean filtered,
+	//$$ 		SignBlockEntity sign,
+	//$$ 		//#if MC >= 12000
+	//$$ 		//$$ boolean front,
+	//$$ 		//#endif
+	//$$ 		boolean filtered,
 	//$$ 		//#if MC >= 11903
 	//$$ 		//$$ Text title,
 	//$$ 		//#endif
@@ -184,7 +190,9 @@ public abstract class SignEditScreenMixin extends Screen
 			//#endif
 			at = @At(
 					value = "INVOKE",
-					//#if MC >= 11904
+					//#if MC >= 12000
+					//$$ target = "Lnet/minecraft/client/gui/DrawContext;drawText(Lnet/minecraft/client/font/TextRenderer;Ljava/lang/String;IIIZ)I",
+					//#elseif MC >= 11904
 					//$$ target = "Lnet/minecraft/client/font/TextRenderer;draw(Ljava/lang/String;FFIZLorg/joml/Matrix4f;Lnet/minecraft/client/render/VertexConsumerProvider;Lnet/minecraft/client/font/TextRenderer$TextLayerType;IIZ)I",
 					//#elseif MC >= 11600
 					//$$ target = "Lnet/minecraft/client/font/TextRenderer;draw(Ljava/lang/String;FFIZLnet/minecraft/util/math/Matrix4f;Lnet/minecraft/client/render/VertexConsumerProvider;ZIIZ)I",

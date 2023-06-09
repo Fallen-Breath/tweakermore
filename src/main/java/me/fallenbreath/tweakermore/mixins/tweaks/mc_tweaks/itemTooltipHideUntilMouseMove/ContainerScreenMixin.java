@@ -29,7 +29,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import org.spongepowered.asm.mixin.injection.Coerce;
 //#endif
 
 @Mixin(ContainerScreen.class)
@@ -40,7 +40,7 @@ public abstract class ContainerScreenMixin
 	@Inject(method = "drawMouseoverTooltip", at = @At("HEAD"), cancellable = true)
 	private void itemTooltipHideUntilMouseMove_impl(
 			//#if MC >= 11600
-			//$$ MatrixStack matrices,
+			//$$ @Coerce Object whatever,
 			//#endif
 			int mouseX, int mouseY, CallbackInfo ci
 	)

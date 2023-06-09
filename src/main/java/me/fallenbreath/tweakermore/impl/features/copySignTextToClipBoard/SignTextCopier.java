@@ -47,7 +47,7 @@ public class SignTextCopier
 	public static void copySignText()
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
-		if (mc.world != null && mc.crosshairTarget != null && mc.crosshairTarget.getType() == HitResult.Type.BLOCK)
+		if (mc.player != null && mc.world != null && mc.crosshairTarget != null && mc.crosshairTarget.getType() == HitResult.Type.BLOCK)
 		{
 			BlockPos blockPos = ((BlockHitResult)mc.crosshairTarget).getBlockPos();
 			BlockState blockState = mc.world.getBlockState(blockPos);
@@ -56,7 +56,9 @@ public class SignTextCopier
 				BlockEntity blockEntity = mc.world.getBlockEntity(blockPos);
 				if (blockEntity instanceof SignBlockEntity)
 				{
-					//#if MC >= 11600
+					//#if MC >= 12000
+					//$$ Text[] texts = ((SignBlockEntity)blockEntity).getTextFacing(mc.player).getMessages(false);
+					//#elseif MC >= 11600
 					//$$ Text[] texts = ((SignBlockEntityAccessor)blockEntity).getTexts();
 					//#else
 					Text[] texts = ((SignBlockEntity)blockEntity).text;

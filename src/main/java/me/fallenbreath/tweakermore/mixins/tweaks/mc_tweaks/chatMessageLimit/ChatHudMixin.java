@@ -72,7 +72,9 @@ public abstract class ChatHudMixin
 			method = "render",
 			at = @At(
 					value = "INVOKE",
-					//#if MC >= 11600
+					//#if MC >= 12000
+					//$$ target = "Lnet/minecraft/client/gui/DrawContext;fill(IIIII)V"
+					//#elseif MC >= 11600
 					//$$ target = "Lnet/minecraft/client/gui/hud/ChatHud;fill(Lnet/minecraft/client/util/math/MatrixStack;IIIII)V"
 					//#else
 					target = "Lnet/minecraft/client/gui/hud/ChatHud;fill(IIIII)V"
@@ -81,7 +83,7 @@ public abstract class ChatHudMixin
 	)
 	private void makeSureTheScrollBarIsVisible(Args args)
 	{
-		//#if MC >= 11600
+		//#if 11600 <= MC && MC < 12000
 		//$$ int y1Idx = 2;
 		//$$ int y2Idx = 4;
 		//#else

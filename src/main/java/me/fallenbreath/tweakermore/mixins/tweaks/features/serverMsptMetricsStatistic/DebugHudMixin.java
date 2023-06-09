@@ -30,7 +30,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-//#if MC >= 11600
+//#if MC >= 12000
+//$$ import net.minecraft.client.gui.DrawContext;
+//#elseif MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //#endif
 
@@ -43,8 +45,10 @@ public abstract class DebugHudMixin
 	private MetricsData serverMsptMetricsStatistic_modify(
 			MetricsData metricsData,
 			/* parent method parameters vvv */
-			//#if MC >= 11600
-			//$$ MatrixStack matrices,
+			//#if MC >= 12000
+			//$$ DrawContext matrixStackOrDrawContext,
+			//#elseif MC >= 11600
+			//$$ MatrixStack matrixStackOrDrawContext,
 			//#endif
 			MetricsData metricsData_, int x, int width, boolean showFps
 	)
@@ -63,6 +67,9 @@ public abstract class DebugHudMixin
 
 	@Inject(
 			method = "drawMetricsData",
+			//#if MC >= 12000
+			//$$ at = @At("TAIL")
+			//#else
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 11500
@@ -72,10 +79,13 @@ public abstract class DebugHudMixin
 					//#endif
 					remap = false
 			)
+			//#endif
 	)
 	private void serverMsptMetricsStatistic_renderExtra(
-			//#if MC >= 11600
-			//$$ MatrixStack matrices,
+			//#if MC >= 12000
+			//$$ DrawContext matrixStackOrDrawContext,
+			//#elseif MC >= 11600
+			//$$ MatrixStack matrixStackOrDrawContext,
 			//#endif
 			MetricsData metricsData, int x, int width, boolean showFps, CallbackInfo ci
 	)
@@ -91,7 +101,7 @@ public abstract class DebugHudMixin
 
 				manager.renderExtraOnDebugHud(
 						//#if MC >= 11600
-						//$$ matrices,
+						//$$ matrixStackOrDrawContext,
 						//#endif
 						x, n
 				);

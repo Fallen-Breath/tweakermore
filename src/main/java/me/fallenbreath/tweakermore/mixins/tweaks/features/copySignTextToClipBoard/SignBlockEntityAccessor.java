@@ -23,15 +23,16 @@ package me.fallenbreath.tweakermore.mixins.tweaks.features.copySignTextToClipBoa
 import net.minecraft.block.entity.SignBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 
-//#if MC >= 11600
+//#if 11600 <= MC && MC < 12000
 //$$ import net.minecraft.text.Text;
 //$$ import org.spongepowered.asm.mixin.gen.Accessor;
 //#endif
 
+// used in [1.16, 1.20)
 @Mixin(SignBlockEntity.class)
 public interface SignBlockEntityAccessor
 {
-	//#if MC >= 11600
+	//#if 11600 <= MC && MC < 12000
 	//$$ @Accessor
 	//$$ Text[] getTexts();
 	//#endif

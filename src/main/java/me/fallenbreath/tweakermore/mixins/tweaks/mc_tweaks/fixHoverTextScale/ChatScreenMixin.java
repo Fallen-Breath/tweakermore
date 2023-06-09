@@ -33,7 +33,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-//#if MC >= 11600
+//#if MC >= 12000
+//$$ import net.minecraft.client.gui.DrawContext;
+//#elseif MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //#endif
 
@@ -52,7 +54,9 @@ public abstract class ChatScreenMixin extends Screen
 			method = "render",
 			at = @At(
 					value = "INVOKE",
-					//#if MC >= 11600
+					//#if MC >= 12000
+					//$$ target = "Lnet/minecraft/client/gui/DrawContext;drawOrderedTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;II)V"
+					//#elseif MC >= 11600
 					//$$ target = "Lnet/minecraft/client/gui/screen/ChatScreen;renderTextHoverEffect(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/text/Style;II)V"
 					//#else
 					target = "Lnet/minecraft/client/gui/screen/ChatScreen;renderComponentHoverEffect(Lnet/minecraft/text/Text;II)V"
@@ -60,8 +64,10 @@ public abstract class ChatScreenMixin extends Screen
 			)
 	)
 	private void fixHoverTextScale_doScale(
-			//#if MC >= 11600
-			//$$ MatrixStack matrices,
+			//#if MC >= 12000
+			//$$ DrawContext matrixStackOrDrawContext,
+			//#elseif MC >= 11600
+			//$$ MatrixStack matrixStackOrDrawContext,
 			//#endif
 			int mouseX, int mouseY, float delta, CallbackInfo ci
 	)
@@ -76,7 +82,7 @@ public abstract class ChatScreenMixin extends Screen
 				this.hoverScaler$TKM = RenderUtil.createScaler(mouseX, mouseY, scale);
 				this.hoverScaler$TKM.apply(
 						//#if MC >= 11600
-						//$$ matrices
+						//$$ matrixStackOrDrawContext
 						//#endif
 				);
 
@@ -89,7 +95,9 @@ public abstract class ChatScreenMixin extends Screen
 			method = "render",
 			at = @At(
 					value = "INVOKE",
-					//#if MC >= 11600
+					//#if MC >= 12000
+					//$$ target = "Lnet/minecraft/client/gui/DrawContext;drawOrderedTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;II)V",
+					//#elseif MC >= 11600
 					//$$ target = "Lnet/minecraft/client/gui/screen/ChatScreen;renderTextHoverEffect(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/text/Style;II)V",
 					//#else
 					target = "Lnet/minecraft/client/gui/screen/ChatScreen;renderComponentHoverEffect(Lnet/minecraft/text/Text;II)V",

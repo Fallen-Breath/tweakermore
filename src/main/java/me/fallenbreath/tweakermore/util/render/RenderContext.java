@@ -24,6 +24,15 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.Matrix4f;
 
+//#if MC >= 12000
+//$$ import me.fallenbreath.tweakermore.mixins.util.render.DrawContextAccessor;
+//$$ import net.minecraft.client.MinecraftClient;
+//$$ import net.minecraft.client.gui.DrawContext;
+//$$ import net.minecraft.client.render.Tessellator;
+//$$ import net.minecraft.client.render.VertexConsumerProvider;
+//$$ import java.util.Objects;
+//#endif
+
 //#if MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //$$ import org.jetbrains.annotations.NotNull;
@@ -38,8 +47,16 @@ import com.mojang.blaze3d.systems.RenderSystem;
 //#if 11600 <= MC && MC < 11700
 //$$ @SuppressWarnings("deprecation")
 //#endif
-public class RenderContext extends DrawableHelper
+public class RenderContext
+		//#if MC < 12000
+		extends DrawableHelper
+		//#endif
 {
+	//#if MC >= 12000
+	//$$ @NotNull
+	//$$ private final DrawContext drawContext;
+	//#endif
+
 	//#if MC >= 11600
 	//$$ @NotNull
 	//$$ private final MatrixStack matrixStack;
@@ -51,6 +68,10 @@ public class RenderContext extends DrawableHelper
 			//#endif
 	)
 	{
+		//#if MC >= 12000
+		//$$ this.drawContext = new DrawContext(MinecraftClient.getInstance(), VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer()));
+		//$$ ((DrawContextAccessor)this.drawContext).setMatrices(matrixStack);
+		//#endif
 		//#if MC >= 11600
 		//$$ this.matrixStack = matrixStack;
 		//#endif
@@ -60,6 +81,19 @@ public class RenderContext extends DrawableHelper
 	//$$ public MatrixStack getMatrixStack()
 	//$$ {
 	//$$ 	return this.matrixStack;
+	//$$ }
+	//#endif
+
+	//#if MC >= 12000
+	//$$ public RenderContext(DrawContext drawContext)
+	//$$ {
+	//$$ 	this.drawContext = drawContext;
+	//$$ 	this.matrixStack = drawContext.getMatrices();
+	//$$ }
+	//$$
+	//$$ public DrawContext getDrawContext()
+	//$$ {
+	//$$ 	return Objects.requireNonNull(this.drawContext);
 	//$$ }
 	//#endif
 

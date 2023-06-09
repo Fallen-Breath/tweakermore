@@ -62,7 +62,12 @@ public abstract class LivingEntityMixin extends Entity
 		LivingEntity self = (LivingEntity)(Object)this;
 		if (self == MinecraftClient.getInstance().player && TweakerMoreConfigs.FLY_DRAG.isModified())
 		{
-			if (EntityUtil.isFlyingCreativePlayer(self) && !this.onGround)
+			//#if MC >= 12000
+			//$$ boolean onGround = this.isOnGround();
+			//#else
+			boolean onGround = this.onGround;
+			//#endif
+			if (EntityUtil.isFlyingCreativePlayer(self) && !onGround)
 			{
 				dragFactor = (float)(1.0 - TweakerMoreConfigs.FLY_DRAG.getDoubleValue());
 			}

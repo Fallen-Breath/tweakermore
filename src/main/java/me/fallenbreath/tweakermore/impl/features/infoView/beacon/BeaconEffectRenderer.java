@@ -170,7 +170,9 @@ public class BeaconEffectRenderer extends AbstractInfoViewer
 			//#endif
 			renderContext.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-			//#if MC >= 11600
+			//#if MC >= 12000
+			//$$ renderContext.getDrawContext().drawSprite(
+			//#elseif MC >= 11600
 			//$$ renderContext.drawSprite(
 			//$$ 		renderContext.getMatrixStack(),
 			//#else

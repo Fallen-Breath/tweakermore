@@ -25,6 +25,10 @@ import net.minecraft.client.font.TextRenderer;
 
 import java.util.Objects;
 
+//#if MC >= 12000
+//$$ import net.minecraft.client.gui.DrawContext;
+//#endif
+
 //#if MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //$$ import net.minecraft.text.OrderedText;
@@ -96,6 +100,13 @@ public class RenderUtil
 					//#endif
 			));
 		}
+
+		//#if MC >= 12000
+		//$$ public void apply(DrawContext drawContext)
+		//$$ {
+		//$$ 	this.apply(new RenderContext(drawContext));
+		//$$ }
+		//#endif
 
 		public void restore()
 		{
