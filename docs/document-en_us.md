@@ -1029,6 +1029,22 @@ The maximum height of the chat hud
 - Maximum value: `1000`
 
 
+### multiplayerForcedEnabled
+
+Make the multiplayer functionality of Minecraft forced enabled
+
+With this enabled, you can always access the multiplayer screen despite the status of
+
+your Microsoft / game account, or whether the game is in online or offline mode
+
+- Category: MC Tweaks
+- Type: boolean
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Minecraft (`minecraft`) `>=1.16`
+
+
 ### netherPortalSoundChance
 
 The chance for a nether portal block to play sound

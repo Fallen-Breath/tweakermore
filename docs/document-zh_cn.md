@@ -1029,6 +1029,22 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 最大值: `1000`
 
 
+### 强制启用多人游戏 (multiplayerForcedEnabled)
+
+令Minecraft的多人游戏功能始终可用
+
+在启用该选项时，无论你的微软/游戏账户状态如何，
+
+不管游戏是在正版还是离线模式下，你都可以访问多人游戏界面
+
+- 分类: MC修改
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Minecraft (`minecraft`) `>=1.16`
+
+
 ### 地狱门音效概率 (netherPortalSoundChance)
 
 地狱门方块播放音效的概率

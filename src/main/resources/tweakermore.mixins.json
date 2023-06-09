@@ -164,6 +164,7 @@
     "util.render.TextHandlerAccessor"
   ],
   "client": [
+    "tweaks.mc_tweaks.multiplayerForcedEnabled.MinecraftClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1
