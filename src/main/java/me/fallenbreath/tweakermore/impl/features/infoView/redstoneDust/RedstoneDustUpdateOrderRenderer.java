@@ -25,7 +25,7 @@ import com.google.common.collect.Sets;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.listentries.InfoViewTargetStrategy;
 import me.fallenbreath.tweakermore.impl.features.infoView.AbstractInfoViewer;
-import me.fallenbreath.tweakermore.util.render.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.RedstoneWireBlock;

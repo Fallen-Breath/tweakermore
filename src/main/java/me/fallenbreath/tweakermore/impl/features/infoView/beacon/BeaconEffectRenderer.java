@@ -27,9 +27,10 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.AbstractInfoViewer;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.beacon.BeaconBlockEntityAccessor;
 import me.fallenbreath.tweakermore.util.render.InWorldPositionTransformer;
-import me.fallenbreath.tweakermore.util.render.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.RenderUtil;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
+import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 import net.minecraft.block.BeaconBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BeaconBlockEntity;
@@ -134,7 +135,7 @@ public class BeaconEffectRenderer extends AbstractInfoViewer
 		MinecraftClient mc = MinecraftClient.getInstance();
 		Sprite sprite = mc.getStatusEffectSpriteManager().getSprite(statusEffect);
 
-		RenderContext renderContext = new RenderContext(
+		RenderContext renderContext = RenderContext.of(
 				//#if MC >= 11600
 				//$$ new MatrixStack()
 				//#endif
@@ -143,10 +144,10 @@ public class BeaconEffectRenderer extends AbstractInfoViewer
 		InWorldPositionTransformer positionTransformer = new InWorldPositionTransformer(pos);
 		positionTransformer.apply(renderContext);
 		{
-			renderContext.disableDepthTest();
-			renderContext.enableBlend();  // maybe useful
+			RenderGlobals.disableDepthTest();
+			RenderGlobals.enableBlend();  // maybe useful
 			//#if MC < 11700
-			renderContext.disableLighting();
+			RenderGlobals.disableLighting();
 			//#endif
 
 			// ref: net.minecraft.client.gui.hud.InGameHud.renderStatusEffectOverlay
@@ -168,19 +169,19 @@ public class BeaconEffectRenderer extends AbstractInfoViewer
 			//#else
 			//$$ mc.getTextureManager().bindTexture(SpriteAtlasTexture.STATUS_EFFECT_ATLAS_TEX);
 			//#endif
-			renderContext.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+			RenderGlobals.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 			//#if MC >= 12000
-			//$$ renderContext.getDrawContext().drawSprite(
+			//$$ renderContext.getGuiDrawer().drawSprite(
 			//#elseif MC >= 11600
-			//$$ renderContext.drawSprite(
+			//$$ renderContext.getGuiDrawer().drawSprite(
 			//$$ 		renderContext.getMatrixStack(),
 			//#else
-			renderContext.blit(
+			renderContext.getGuiDrawer().blit(
 			//#endif
 					0, 0, 0, ICON_SIZE, ICON_SIZE, sprite
 			);
-			renderContext.enableDepthTest();
+			RenderGlobals.enableDepthTest();
 		}
 		positionTransformer.restore();
 	}

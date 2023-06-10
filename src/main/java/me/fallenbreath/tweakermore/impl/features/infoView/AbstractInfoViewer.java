@@ -25,7 +25,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigOptionList;
 import me.fallenbreath.tweakermore.config.options.listentries.InfoViewRenderStrategy;
 import me.fallenbreath.tweakermore.config.options.listentries.InfoViewTargetStrategy;
-import me.fallenbreath.tweakermore.util.render.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;

@@ -23,6 +23,8 @@ package me.fallenbreath.tweakermore.util.render;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.GlStateManager;
 import me.fallenbreath.tweakermore.util.PositionUtil;
+import me.fallenbreath.tweakermore.util.render.context.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.debug.DebugRenderer;
 import net.minecraft.client.util.math.Matrix4f;
@@ -106,7 +108,7 @@ public class TextRenderer
 			return;
 		}
 		MinecraftClient client = MinecraftClient.getInstance();
-		RenderContext renderContext = new RenderContext(
+		RenderContext renderContext = RenderContext.of(
 				//#if MC >= 11700
 				//$$ RenderSystem.getModelViewStack()
 				//#elseif MC >= 11600
@@ -120,23 +122,23 @@ public class TextRenderer
 			renderContext.scale(-this.fontScale, -this.fontScale, this.fontScale);
 
 			//#if MC < 11700
-			renderContext.disableLighting();
+			RenderGlobals.disableLighting();
 			//#endif
 
 			if (this.seeThrough)
 			{
-				renderContext.disableDepthTest();
+				RenderGlobals.disableDepthTest();
 			}
 			else
 			{
-				renderContext.enableDepthTest();
+				RenderGlobals.enableDepthTest();
 			}
 
 			//#if MC < 11904
-			renderContext.enableTexture();
+			RenderGlobals.enableTexture();
 			//#endif
 
-			renderContext.depthMask(true);
+			RenderGlobals.depthMask(true);
 
 			int lineNum = this.lines.size();
 			double maxTextWidth = this.lines.stream().mapToInt(TextHolder::getWidth).max().orElse(0);
@@ -148,12 +150,12 @@ public class TextRenderer
 			//#if MC >= 11700
 			//$$ RenderSystem.applyModelViewMatrix();
 			//#else
-			renderContext.enableAlphaTest();
+			RenderGlobals.enableAlphaTest();
 			//#endif
 
 			// enable transparent-able text rendering
-			renderContext.enableBlend();
-			renderContext.blendFunc(
+			RenderGlobals.enableBlend();
+			RenderGlobals.blendFunc(
 					//#if MC >= 11500
 					GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA
 					//#else
@@ -207,12 +209,12 @@ public class TextRenderer
 			}
 
 			//#if MC < 11600
-			renderContext.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+			RenderGlobals.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 			//#endif
 			//TODO check color4f, see if it can replace blendFunc
 
 			//#if MC < 11904
-			renderContext.enableDepthTest();
+			RenderGlobals.enableDepthTest();
 			//#endif
 		}
 		positionTransformer.restore();

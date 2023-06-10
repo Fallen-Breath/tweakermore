@@ -32,7 +32,7 @@ import me.fallenbreath.tweakermore.util.Messenger;
 import me.fallenbreath.tweakermore.util.TemporaryBlockReplacer;
 import me.fallenbreath.tweakermore.util.damage.DamageCalculator;
 import me.fallenbreath.tweakermore.util.damage.DamageUtil;
-import me.fallenbreath.tweakermore.util.render.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;

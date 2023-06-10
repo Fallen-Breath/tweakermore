@@ -24,7 +24,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.InventoryUtil;
 import me.fallenbreath.tweakermore.util.ItemUtil;
 import me.fallenbreath.tweakermore.util.render.ColorHolder;
-import me.fallenbreath.tweakermore.util.render.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.RenderUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
@@ -134,7 +134,7 @@ public class ShulkerItemContentHintRenderer
 		MatrixStack textMatrixStack = new MatrixStack();
 		//#endif
 
-		RenderContext renderContext = new RenderContext(
+		RenderContext renderContext = RenderContext.of(
 				//#if MC >= 12000
 				//$$ drawContext
 				//#elseif MC >= 11904
@@ -159,11 +159,11 @@ public class ShulkerItemContentHintRenderer
 			int color = 0xDDDDDD;
 
 			RenderUtil.Scaler textScaler = RenderUtil.createScaler(textX + width * 0.5, textY + height * 0.5, SLOT_WIDTH / height * 0.7);
-			textScaler.apply(
+			textScaler.apply(RenderContext.of(
 					//#if MC >= 11600
 					//$$ textMatrixStack
 					//#endif
-			);
+			));
 			TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
 
 			//#if MC >= 11500
@@ -182,7 +182,12 @@ public class ShulkerItemContentHintRenderer
 					textY,
 					color,
 					true,
+					// TODO: check why this doesn't get remapped
+					//#if MC >= 11800
+					//$$ textMatrixStack.peek().getPositionMatrix(),
+					//#else
 					textMatrixStack.peek().getModel(),
+					//#endif
 					immediate,
 					//#if MC >= 11904
 					//$$ TextRenderer.TextLayerType.NORMAL,
@@ -353,7 +358,7 @@ public class ShulkerItemContentHintRenderer
 		//#if MC >= 12000
 		//$$ GuiQuadDrawer drawer = (x_, y_, width_, height_, color_) -> {
 		//$$ 	// see net.minecraft.client.gui.DrawContext#drawItemInSlot
-		//$$ 	renderContext.getDrawContext().fill(RenderLayer.getGuiOverlay(), x_, y_, x_ + width_, y_ + height_, color_ | 0xFF000000);
+		//$$ 	renderContext.getGuiDrawer().fill(RenderLayer.getGuiOverlay(), x_, y_, x_ + width_, y_ + height_, color_ | 0xFF000000);
 		//$$ };
 		//#elseif MC >= 11904
 		//$$ GuiQuadDrawer drawer = (x_, y_, width_, height_, color_) -> {

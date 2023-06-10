@@ -21,6 +21,7 @@
 package me.fallenbreath.tweakermore.util.render;
 
 import com.google.common.collect.Lists;
+import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import net.minecraft.client.MinecraftClient;
 
 //#if MC >= 11600
@@ -46,7 +47,7 @@ public abstract class TweakerMoreRenderEventHandler
 	)
 	{
 		mc.getProfiler().swap("TweakerMore_WorldRenderPostHook");
-		RenderContext renderContext = new RenderContext(
+		RenderContext renderContext = RenderContext.of(
 				//#if MC >= 11600
 				//$$ matrixStack
 				//#endif

@@ -20,14 +20,11 @@
 
 package me.fallenbreath.tweakermore.util.render;
 
+import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 
 import java.util.Objects;
-
-//#if MC >= 12000
-//$$ import net.minecraft.client.gui.DrawContext;
-//#endif
 
 //#if MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
@@ -87,26 +84,6 @@ public class RenderUtil
 			this.renderContext.scale(factor, factor, 1);
 			this.renderContext.translate(anchorX / factor, anchorY / factor, 0);
 		}
-
-		public void apply(
-				//#if MC >= 11600
-				//$$ MatrixStack matrixStack
-				//#endif
-		)
-		{
-			this.apply(new RenderContext(
-					//#if MC >= 11600
-					//$$ matrixStack
-					//#endif
-			));
-		}
-
-		//#if MC >= 12000
-		//$$ public void apply(DrawContext drawContext)
-		//$$ {
-		//$$ 	this.apply(new RenderContext(drawContext));
-		//$$ }
-		//#endif
 
 		public void restore()
 		{

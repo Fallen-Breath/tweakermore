@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.fixHoverTextScale;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.fixHoverTextScale.ScaleableHoverTextRenderer;
 import me.fallenbreath.tweakermore.util.render.RenderUtil;
+import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.gui.screen.Screen;
@@ -80,11 +81,11 @@ public abstract class ChatScreenMixin extends Screen
 			{
 				double scale = mc.inGameHud.getChatHud().getChatScale();
 				this.hoverScaler$TKM = RenderUtil.createScaler(mouseX, mouseY, scale);
-				this.hoverScaler$TKM.apply(
+				this.hoverScaler$TKM.apply(RenderContext.of(
 						//#if MC >= 11600
 						//$$ matrixStackOrDrawContext
 						//#endif
-				);
+				));
 
 				//#if MC >= 12000
 				//$$ ScaleableHoverTextRenderer shtr = (ScaleableHoverTextRenderer)matrixStackOrDrawContext;

@@ -28,7 +28,7 @@ import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.autoContainerProcess.processors.IProcessor;
 import me.fallenbreath.tweakermore.util.StringUtil;
-import me.fallenbreath.tweakermore.util.render.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
 
 import java.util.List;
@@ -66,7 +66,7 @@ public class AutoContainerProcessorHintRenderer implements TweakerMoreIRenderer
 				false, true,
 				lines
 				//#if MC >= 12000
-				//$$ , context.getDrawContext()
+				//$$ , context.getGuiDrawer()
 				//#elseif MC >= 11600
 				//$$ , context.getMatrixStack()
 				//#endif

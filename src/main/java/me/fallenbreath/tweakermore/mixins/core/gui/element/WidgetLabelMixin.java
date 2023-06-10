@@ -23,7 +23,7 @@ package me.fallenbreath.tweakermore.mixins.core.gui.element;
 import fi.dy.masa.malilib.gui.widgets.WidgetBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
 import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
-import me.fallenbreath.tweakermore.util.render.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -121,7 +121,7 @@ public abstract class WidgetLabelMixin extends WidgetBase
 			int x = this.x + (this.centered ? this.width / 2 : 0);
 			int y = (int)(yTextStart + (this.labels.size() + i * scale + 0.2) * fontHeight);
 
-			RenderContext renderContext = new RenderContext(
+			RenderContext renderContext = RenderContext.of(
 					//#if MC >= 11600
 					//$$ matrixStackOrDrawContext
 					//#endif

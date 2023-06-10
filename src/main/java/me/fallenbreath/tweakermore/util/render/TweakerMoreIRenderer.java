@@ -21,6 +21,7 @@
 package me.fallenbreath.tweakermore.util.render;
 
 import fi.dy.masa.malilib.interfaces.IRenderer;
+import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 
 //#if MC >= 12000
 //$$ import net.minecraft.client.gui.DrawContext;
@@ -54,7 +55,7 @@ public interface TweakerMoreIRenderer extends IRenderer
 	)
 	{
 		this.onRenderWorldLast(
-				new RenderContext(
+				RenderContext.of(
 						//#if MC >= 11600
 						//$$ matrixStack
 						//#endif
@@ -81,7 +82,7 @@ public interface TweakerMoreIRenderer extends IRenderer
 	)
 	{
 		this.onRenderGameOverlayPost(
-				new RenderContext(
+				RenderContext.of(
 						//#if MC >= 11600
 						//$$ matrixStackOrDrawContext
 						//#endif
