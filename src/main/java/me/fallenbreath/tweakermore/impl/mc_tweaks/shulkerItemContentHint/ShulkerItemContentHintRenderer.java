@@ -68,6 +68,10 @@ public class ShulkerItemContentHintRenderer
 	)
 	{
 		ShulkerItemContentHintCommon.Info info = ShulkerItemContentHintCommon.prepareInformation(itemStack);
+		if (!info.enabled)
+		{
+			return;
+		}
 
 		//#if MC >= 11904
 		//$$ MatrixStack textMatrixStack = matrices;
