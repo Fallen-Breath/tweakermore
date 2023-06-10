@@ -41,7 +41,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 //#if MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import org.spongepowered.asm.mixin.injection.Coerce;
 //#endif
 
 @Restriction(require = @Condition(ModIds.litematica))
@@ -61,7 +61,7 @@ public abstract class OverlayRendererMixin
 	private void serverDataSyncer4InfoOverlay(
 			RayTraceUtils.RayTraceWrapper traceWrapper, MinecraftClient mc,
 			//#if MC >= 11600
-			//$$ MatrixStack matrixStack,
+			//$$ @Coerce Object whatever,
 			//#endif
 			CallbackInfo ci,
 			BlockState air, World worldSchematic, World worldClient, BlockPos pos

@@ -20,9 +20,13 @@
 
 package me.fallenbreath.tweakermore.util;
 
+import fi.dy.masa.tweakeroo.util.CameraEntity;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
+import org.jetbrains.annotations.Nullable;
 
 public class EntityUtil
 {
@@ -43,5 +47,21 @@ public class EntityUtil
 			return player.isCreative() && getPlayerAbilities(player).flying;
 		}
 		return false;
+	}
+
+	private static final boolean TWEAKEROO_LOADED = FabricUtil.isModLoaded(ModIds.tweakeroo);
+
+	@Nullable
+	public static ClientPlayerEntity getCurrentPlayerOrFreeCameraEntity()
+	{
+		if (TWEAKEROO_LOADED)
+		{
+			ClientPlayerEntity freecam = CameraEntity.getCamera();
+			if (freecam != null)
+			{
+				return freecam;
+			}
+		}
+		return MinecraftClient.getInstance().player;
 	}
 }

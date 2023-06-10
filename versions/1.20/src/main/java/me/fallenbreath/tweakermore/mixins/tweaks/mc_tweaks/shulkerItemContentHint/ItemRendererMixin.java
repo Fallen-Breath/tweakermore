@@ -37,8 +37,8 @@ public abstract class ItemRendererMixin
 			method = "drawItem(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;IIII)V",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/util/math/MatrixStack;multiplyPositionMatrix(Lorg/joml/Matrix4f;)V",
-					ordinal = 0
+					target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V",
+					shift = At.Shift.AFTER
 			)
 	)
 	private void shulkerItemContentHint_impl(LivingEntity entity, World world, ItemStack itemStack, int x, int y, int seed, int z, CallbackInfo ci)

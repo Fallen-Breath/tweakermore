@@ -36,6 +36,10 @@ import net.minecraft.util.math.MathHelper;
 
 import java.util.Optional;
 
+//#if MC >= 12000
+//$$ import net.minecraft.client.render.RenderLayer;
+//#endif
+
 //#if MC >= 11904
 //$$ import net.minecraft.client.gui.DrawableHelper;
 //#else
@@ -166,7 +170,7 @@ public class ShulkerItemContentHintRenderer
 			textMatrixStack.translate(
 					0.0, 0.0,
 					//#if MC >= 11904
-					//$$ 150
+					//$$ 150 + 10
 					//#else
 					itemRenderer.zOffset + 150
 					//#endif
@@ -348,7 +352,8 @@ public class ShulkerItemContentHintRenderer
 
 		//#if MC >= 12000
 		//$$ GuiQuadDrawer drawer = (x_, y_, width_, height_, color_) -> {
-		//$$ 	renderContext.getDrawContext().fill(x_, y_, x_ + width_, y_ + height_, color_ | 0xFF000000);
+		//$$ 	// see net.minecraft.client.gui.DrawContext#drawItemInSlot
+		//$$ 	renderContext.getDrawContext().fill(RenderLayer.getGuiOverlay(), x_, y_, x_ + width_, y_ + height_, color_ | 0xFF000000);
 		//$$ };
 		//#elseif MC >= 11904
 		//$$ GuiQuadDrawer drawer = (x_, y_, width_, height_, color_) -> {

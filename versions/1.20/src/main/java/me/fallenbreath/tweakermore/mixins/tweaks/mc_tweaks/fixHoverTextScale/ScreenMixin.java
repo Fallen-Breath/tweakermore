@@ -79,28 +79,6 @@ public abstract class ScreenMixin implements ScaleableHoverTextRenderer
 		return width;
 	}
 
-	/*
-		// vanilla
-		if (x + maxWidth > this.width)
-		 {
-			x -= 28 + maxWidth;
-		}
-		if (y + totalHeight + 6 > this.height)
-		{
-			y = this.height - totalHeight - 6;
-		}
-
-		// what we want
-		if (xBase + maxWidth * scale > this.width)
-		{
-			xBase -= 28 + maxWidth;
-		}
-		if (yBase + totalHeight * scale + 6 > this.height)
-		{
-			yBase += (this.height - yBase - 12 - 1) / scale - totalHeight + 6 + 1
-		}
-	 */
-
 	@ModifyVariable(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;)V", at = @At("HEAD"), argsOnly = true)
 	private TooltipPositioner fixHoverTextScale_modifyPositioner(
 			TooltipPositioner positioner,
@@ -112,6 +90,9 @@ public abstract class ScreenMixin implements ScaleableHoverTextRenderer
 		{
 			double scale = this.hoverTextScale$TKM;
 			positioner = (screenWidth, screenHeight, xBase, yBase, width, height) -> {
+				// vanilla: net.minecraft.client.gui.tooltip.HoveredTooltipPositioner
+				xBase += 12;
+				yBase -= 12;
 				if (xBase + width * scale > screenWidth)
 				{
 					xBase = Math.max(xBase - 24 - width, 4);
@@ -125,5 +106,4 @@ public abstract class ScreenMixin implements ScaleableHoverTextRenderer
 		}
 		return positioner;
 	}
-
 }

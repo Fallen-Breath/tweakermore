@@ -55,7 +55,7 @@ public abstract class ChatScreenMixin extends Screen
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12000
-					//$$ target = "Lnet/minecraft/client/gui/DrawContext;drawOrderedTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;II)V"
+					//$$ target = "Lnet/minecraft/client/gui/DrawContext;drawHoverEvent(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/Style;II)V"
 					//#elseif MC >= 11600
 					//$$ target = "Lnet/minecraft/client/gui/screen/ChatScreen;renderTextHoverEffect(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/text/Style;II)V"
 					//#else
@@ -86,7 +86,12 @@ public abstract class ChatScreenMixin extends Screen
 						//#endif
 				);
 
-				((ScaleableHoverTextRenderer)this).setHoverTextScale(scale);
+				//#if MC >= 12000
+				//$$ ScaleableHoverTextRenderer shtr = (ScaleableHoverTextRenderer)matrixStackOrDrawContext;
+				//#else
+				ScaleableHoverTextRenderer shtr = (ScaleableHoverTextRenderer)this;
+				//#endif
+				shtr.setHoverTextScale(scale);
 			}
 		}
 	}
@@ -96,7 +101,7 @@ public abstract class ChatScreenMixin extends Screen
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12000
-					//$$ target = "Lnet/minecraft/client/gui/DrawContext;drawOrderedTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;II)V",
+					//$$ target = "Lnet/minecraft/client/gui/DrawContext;drawHoverEvent(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/Style;II)V",
 					//#elseif MC >= 11600
 					//$$ target = "Lnet/minecraft/client/gui/screen/ChatScreen;renderTextHoverEffect(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/text/Style;II)V",
 					//#else
@@ -105,14 +110,26 @@ public abstract class ChatScreenMixin extends Screen
 					shift = At.Shift.AFTER
 			)
 	)
-	private void fixHoverTextScale_restoreScale(CallbackInfo ci)
+	private void fixHoverTextScale_restoreScale(
+			//#if MC >= 12000
+			//$$ DrawContext matrixStackOrDrawContext,
+			//#elseif MC >= 11600
+			//$$ MatrixStack matrixStackOrDrawContext,
+			//#endif
+			int mouseX, int mouseY, float delta, CallbackInfo ci
+	)
 	{
 		if (this.hoverScaler$TKM != null)
 		{
 			this.hoverScaler$TKM.restore();
 			this.hoverScaler$TKM = null;
 
-			((ScaleableHoverTextRenderer)this).setHoverTextScale(null);
+			//#if MC >= 12000
+			//$$ ScaleableHoverTextRenderer shtr = (ScaleableHoverTextRenderer)matrixStackOrDrawContext;
+			//#else
+			ScaleableHoverTextRenderer shtr = (ScaleableHoverTextRenderer)this;
+			//#endif
+			shtr.setHoverTextScale(null);
 		}
 	}
 }

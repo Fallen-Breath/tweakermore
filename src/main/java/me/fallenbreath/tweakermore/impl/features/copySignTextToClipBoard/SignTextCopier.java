@@ -21,19 +21,18 @@
 package me.fallenbreath.tweakermore.impl.features.copySignTextToClipBoard;
 
 import com.google.common.base.Joiner;
-import fi.dy.masa.malilib.hotkeys.IKeybind;
-import fi.dy.masa.malilib.hotkeys.KeyAction;
 import fi.dy.masa.malilib.util.InfoUtils;
+import me.fallenbreath.tweakermore.util.EntityUtil;
 import net.minecraft.block.AbstractSignBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
-import org.apache.commons.lang3.StringUtils;
 
 //#if MC >= 11600
 //$$ import me.fallenbreath.tweakermore.mixins.tweaks.features.copySignTextToClipBoard.SignBlockEntityAccessor;
@@ -47,7 +46,8 @@ public class SignTextCopier
 	public static void copySignText()
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
-		if (mc.player != null && mc.world != null && mc.crosshairTarget != null && mc.crosshairTarget.getType() == HitResult.Type.BLOCK)
+		ClientPlayerEntity player = EntityUtil.getCurrentPlayerOrFreeCameraEntity();
+		if (player != null && mc.world != null && mc.crosshairTarget != null && mc.crosshairTarget.getType() == HitResult.Type.BLOCK)
 		{
 			BlockPos blockPos = ((BlockHitResult)mc.crosshairTarget).getBlockPos();
 			BlockState blockState = mc.world.getBlockState(blockPos);
@@ -57,7 +57,7 @@ public class SignTextCopier
 				if (blockEntity instanceof SignBlockEntity)
 				{
 					//#if MC >= 12000
-					//$$ Text[] texts = ((SignBlockEntity)blockEntity).getTextFacing(mc.player).getMessages(false);
+					//$$ Text[] texts = ((SignBlockEntity)blockEntity).getTextFacing(player).getMessages(false);
 					//#elseif MC >= 11600
 					//$$ Text[] texts = ((SignBlockEntityAccessor)blockEntity).getTexts();
 					//#else
