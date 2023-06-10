@@ -20,9 +20,6 @@
 
 package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerItemContentHint;
 
-import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.util.InventoryUtil;
-import me.fallenbreath.tweakermore.util.ItemUtil;
 import me.fallenbreath.tweakermore.util.render.ColorHolder;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.RenderUtil;
@@ -31,10 +28,7 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DefaultedList;
 import net.minecraft.util.math.MathHelper;
-
-import java.util.Optional;
 
 //#if MC >= 12000
 //$$ import net.minecraft.client.render.RenderLayer;
@@ -59,73 +53,21 @@ public class ShulkerItemContentHintRenderer
 {
 	// the display width of an item slot
 	private static final int SLOT_WIDTH = 16;
-	private static final ThreadLocal<Boolean> isRendering = ThreadLocal.withInitial(() -> false);
+	static final ThreadLocal<Boolean> isRendering = ThreadLocal.withInitial(() -> false);
 
 	public static void render(
 			//#if MC >= 11904
 			//$$ MatrixStack matrices,
 			//#endif
-
 			//#if MC >= 12000
 			//$$ DrawContext drawContext,
 			//#else
 			ItemRenderer itemRenderer,
 			//#endif
-
 			ItemStack itemStack, int x, int y
 	)
 	{
-		if (!TweakerMoreConfigs.SHULKER_ITEM_CONTENT_HINT.getBooleanValue())
-		{
-			return;
-		}
-		if (isRendering.get())  // no hint if it's rendering our hint item
-		{
-			return;
-		}
-		if (!ItemUtil.isShulkerBox(itemStack.getItem()))
-		{
-			return;
-		}
-		Optional<DefaultedList<ItemStack>> stackList = InventoryUtil.getStoredItems(itemStack);
-		if (!stackList.isPresent())
-		{
-			return;
-		}
-
-		ItemStack std = null;
-		boolean useQuestionMark = false;
-		for (ItemStack stack : stackList.get())
-		{
-			if (!stack.isEmpty())
-			{
-				if (std == null)
-				{
-					std = stack;
-				}
-				// to be equal: item type equals, item nbt equals
-				//#if MC >= 12000
-				//$$ else if (!ItemStack.canCombine(stack, std))
-				//#else
-				else if (!(ItemStack.areItemsEqual(stack, std) && ItemStack.areTagsEqual(stack, std)))
-				//#endif
-				{
-					useQuestionMark = true;
-					break;
-				}
-			}
-		}
-		if (std == null)
-		{
-			return;
-		}
-
-		double scale = TweakerMoreConfigs.SHULKER_ITEM_CONTENT_HINT_SCALE.getDoubleValue();
-
-		if (scale <= 0)
-		{
-			return;
-		}
+		ShulkerItemContentHintCommon.Info info = ShulkerItemContentHintCommon.prepareInformation(itemStack);
 
 		//#if MC >= 11904
 		//$$ MatrixStack textMatrixStack = matrices;
@@ -140,119 +82,40 @@ public class ShulkerItemContentHintRenderer
 				//#elseif MC >= 11904
 				//$$ textMatrixStack
 				//#elseif MC >= 11700
-				//$$ useQuestionMark ? textMatrixStack : RenderSystem.getModelViewStack()
+				//$$ info.allItemSame ? RenderSystem.getModelViewStack() : textMatrixStack
 				//#elseif MC >= 11600
 				//$$ textMatrixStack
 				//#endif
 		);
 
-		RenderUtil.Scaler scaler = RenderUtil.createScaler(x, y + SLOT_WIDTH, scale);
+		RenderUtil.Scaler scaler = RenderUtil.createScaler(x, y + SLOT_WIDTH, info.scale);
 		scaler.apply(renderContext);
 
-		if (useQuestionMark)
+		if (info.allItemSame)
 		{
-			String text = "...";
-			float width = RenderUtil.getRenderWidth(text);
-			float height = RenderUtil.TEXT_HEIGHT;
-			float textX = x + (SLOT_WIDTH - width) * 0.5F;
-			float textY = y + SLOT_WIDTH - height - 3;
-			int color = 0xDDDDDD;
-
-			RenderUtil.Scaler textScaler = RenderUtil.createScaler(textX + width * 0.5, textY + height * 0.5, SLOT_WIDTH / height * 0.7);
-			textScaler.apply(RenderContext.of(
-					//#if MC >= 11600
-					//$$ textMatrixStack
-					//#endif
-			));
-			TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-
-			//#if MC >= 11500
-			textMatrixStack.translate(
-					0.0, 0.0,
-					//#if MC >= 11904
-					//$$ 150 + 10
+			renderMiniItem(
+					renderContext,
+					//#if MC >= 12000
+					//$$ drawContext,
 					//#else
-					itemRenderer.zOffset + 150
+					itemRenderer,
 					//#endif
+					info, x, y
 			);
-			VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
-			textRenderer.draw(
-					text,
-					textX,
-					textY,
-					color,
-					true,
-					// TODO: check why this doesn't get remapped
-					//#if MC >= 11800
-					//$$ textMatrixStack.peek().getPositionMatrix(),
-					//#else
-					textMatrixStack.peek().getModel(),
-					//#endif
-					immediate,
-					//#if MC >= 11904
-					//$$ TextRenderer.TextLayerType.NORMAL,
-					//#else
-					false,
-					//#endif
-					0,
-					0xF000F0
-			);
-			immediate.draw();
-			//#else
-			//$$ GlStateManager.disableLighting();
-			//$$ GlStateManager.disableDepthTest();
-			//$$ GlStateManager.disableBlend();
-			//$$ textRenderer.drawWithShadow(text, textX, textY, color);
-			//$$ GlStateManager.enableBlend();
-			//$$ GlStateManager.enableLighting();
-			//$$ GlStateManager.enableDepthTest();
-			//#endif
-
-			textScaler.restore();
 		}
 		else
 		{
-			isRendering.set(true);
-
-			//#if MC < 11904
-			float zOffset = itemRenderer.zOffset;
-			//#endif
-
-			try
-			{
-				//#if MC >= 11904
-				//$$ matrices.push();
-				//$$ matrices.translate(0, 0, 10);
-				//#else
-				itemRenderer.zOffset += 10;
-				// scale the z axis, so the lighting of the item can render correctly
-				// see net.minecraft.client.render.item.ItemRenderer.renderGuiItemModel for z offset applying
-				renderContext.scale(1, 1, scale);
-				renderContext.translate(0, 0, (100.0F + itemRenderer.zOffset) * (1 / scale - 1));
-				//#endif
-
-				//#if MC >= 12000
-				//$$ drawContext.drawItemWithoutEntity(std, x, y);
-				//#else
-				// we do this manually so no need to care about extra z-offset modification of itemRenderer in its ItemRenderer#renderGuiItem
-				itemRenderer.renderGuiItemIcon(
-						//#if MC >= 11904
-						//$$ matrices,
-						//#endif
-						std, x, y
-				);
-				//#endif
-			}
-			finally
-			{
-				isRendering.set(false);
-
-				//#if MC >= 11904
-				//$$ matrices.pop();
-				//#else
-				itemRenderer.zOffset = zOffset;
-				//#endif
-			}
+			renderQuestionMark(
+					//#if MC >= 11500
+					textMatrixStack,
+					//#endif
+					//#if MC >= 11904
+					//$$ 150 + 10,
+					//#else
+					itemRenderer.zOffset + 150,
+					//#endif
+					info, x, y
+			);
 		}
 
 		scaler.restore();
@@ -260,20 +123,132 @@ public class ShulkerItemContentHintRenderer
 		//$$ RenderSystem.applyModelViewMatrix();
 		//#endif
 
-		if (!useQuestionMark)
+		if (info.allItemSame && info.fillRatio >= 0)
 		{
 			renderBar(
 					renderContext,
 					//#if MC < 12000
 					itemRenderer,
 					//#endif
-					itemStack, x, y, stackList.get()
+					info.fillRatio, x, y
 			);
 		}
 
 		//#if MC >= 11904
 		//$$ textMatrixStack.pop();
 		//#endif
+	}
+
+	private static void renderMiniItem(
+			RenderContext renderContext,
+			//#if MC >= 12000
+			//$$ DrawContext drawContext,
+			//#else
+			ItemRenderer itemRenderer,
+			//#endif
+			ShulkerItemContentHintCommon.Info info, int x, int y)
+	{
+		isRendering.set(true);
+
+		//#if MC < 11904
+		float zOffset = itemRenderer.zOffset;
+		//#endif
+
+		try
+		{
+			//#if MC >= 11904
+			//$$ renderContext.getMatrixStack().push();
+			//$$ renderContext.getMatrixStack().translate(0, 0, 10);
+			//#else
+			itemRenderer.zOffset += 10;
+			// scale the z axis, so the lighting of the item can render correctly
+			// see net.minecraft.client.render.item.ItemRenderer.renderGuiItemModel for z offset applying
+			renderContext.scale(1, 1, info.scale);
+			renderContext.translate(0, 0, (100.0F + itemRenderer.zOffset) * (1 / info.scale - 1));
+			//#endif
+
+			//#if MC >= 12000
+			//$$ drawContext.drawItemWithoutEntity(info.stack, x, y);
+			//#else
+			// we do this manually so no need to care about extra z-offset modification of itemRenderer in its ItemRenderer#renderGuiItem
+			itemRenderer.renderGuiItemIcon(
+					//#if MC >= 11904
+					//$$ renderContext.getMatrixStack(),
+					//#endif
+					info.stack, x, y
+			);
+			//#endif
+		}
+		finally
+		{
+			isRendering.set(false);
+
+			//#if MC >= 11904
+			//$$ renderContext.getMatrixStack().pop();
+			//#else
+			itemRenderer.zOffset = zOffset;
+			//#endif
+		}
+	}
+
+	private static void renderQuestionMark(
+			//#if MC >= 11500
+			MatrixStack textMatrixStack,
+			//#endif
+			double zOffset, ShulkerItemContentHintCommon.Info info, int x, int y
+	)
+	{
+		String text = "...";
+		float width = RenderUtil.getRenderWidth(text);
+		float height = RenderUtil.TEXT_HEIGHT;
+		float textX = x + (SLOT_WIDTH - width) * 0.5F;
+		float textY = y + SLOT_WIDTH - height - 3;
+		int color = 0xDDDDDD;
+
+		RenderUtil.Scaler textScaler = RenderUtil.createScaler(textX + width * 0.5, textY + height * 0.5, SLOT_WIDTH / height * 0.7);
+		textScaler.apply(RenderContext.of(
+				//#if MC >= 11600
+				//$$ textMatrixStack
+				//#endif
+		));
+		TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+
+		//#if MC >= 11500
+		textMatrixStack.translate(0.0, 0.0, zOffset);
+		VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
+		textRenderer.draw(
+				text,
+				textX,
+				textY,
+				color,
+				true,
+				// TODO: check why this doesn't get remapped
+				//#if MC >= 11800
+				//$$ textMatrixStack.peek().getPositionMatrix(),
+				//#else
+				textMatrixStack.peek().getModel(),
+				//#endif
+				immediate,
+				//#if MC >= 11904
+				//$$ TextRenderer.TextLayerType.NORMAL,
+				//#else
+				false,
+				//#endif
+				0,
+				0xF000F0
+		);
+		immediate.draw();
+		//#else
+		//$$ GlStateManager.disableLighting();
+		//$$ GlStateManager.disableDepthTest();
+		//$$ GlStateManager.disableBlend();
+		//$$ textRenderer.drawWithShadow(text, textX, textY, color);
+		//$$ GlStateManager.enableBlend();
+		//$$ GlStateManager.enableLighting();
+		//$$ GlStateManager.enableDepthTest();
+		//#endif
+
+		textScaler.restore();
 	}
 
 	@FunctionalInterface
@@ -290,29 +265,8 @@ public class ShulkerItemContentHintRenderer
 			//#if MC < 12000
 			ItemRenderer itemRenderer,
 			//#endif
-			ItemStack shulkerItem, int x, int y, DefaultedList<ItemStack> stackList)
+			double fillRatio, int x, int y)
 	{
-		// 1. checks & calc
-
-		int slotAmount = InventoryUtil.getInventorySlotAmount(shulkerItem);
-		if (slotAmount == -1)
-		{
-			return;
-		}
-		double sum = 0;
-		for (ItemStack stack : stackList)
-		{
-			sum += 1.0D * stack.getCount() / stack.getMaxCount();
-		}
-
-		double ratio = sum / slotAmount;
-		if (ratio <= 0 || ratio >= 1)
-		{
-			return;
-		}
-
-		// 2. render
-
 		final int HEIGHT = SLOT_WIDTH / 2;
 		final int WIDTH = 1;
 
@@ -341,8 +295,8 @@ public class ShulkerItemContentHintRenderer
 		//$$ GlStateManager.disableBlend();
 		//#endif
 
-		int h = (int)Math.round(ratio * HEIGHT);
-		int color = MathHelper.hsvToRgb((float)(ratio / 3), 1.0F, 1.0F);
+		int h = (int)Math.round(fillRatio * HEIGHT);
+		int color = MathHelper.hsvToRgb((float)(fillRatio / 3), 1.0F, 1.0F);
 		if (h == 0)
 		{
 			// make sure h > 0 so it's visible enough
