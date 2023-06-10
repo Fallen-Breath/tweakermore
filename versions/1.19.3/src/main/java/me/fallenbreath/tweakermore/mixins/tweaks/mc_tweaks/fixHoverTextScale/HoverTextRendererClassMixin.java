@@ -21,36 +21,40 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.fixHoverTextScale;
 
 import me.fallenbreath.tweakermore.impl.mc_tweaks.fixHoverTextScale.ScaleableHoverTextRenderer;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.tooltip.TooltipComponent;
 import net.minecraft.client.gui.tooltip.TooltipPositioner;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector2i;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.List;
+//#if MC >= 12000
+//$$ import net.minecraft.client.gui.DrawContext;
+//#else
+import net.minecraft.client.gui.screen.Screen;
+//#endif
 
 /**
- * The implementation for mc [1.19.3, 1.19.4]
- * See subproject 1.15.2 or 1.20 for implementation for other version range
+ * The implementation for mc [1.19.3, ~)
+ * See subproject 1.15.2 for implementation for other version range
  *
  * Targeted class:
  *   mc < 1.20: {@link net.minecraft.client.gui.screen.Screen}
  *   mc >= 1.20: {@link net.minecraft.client.gui.DrawContext}
  */
-@Mixin(Screen.class)
+@Mixin(
+		//#if MC >= 12000
+		//$$ DrawContext.class
+		//#else
+		Screen.class
+		//#endif
+)
 public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextRenderer
 {
-	@Shadow public int width;
-	@Shadow public int height;
 	private Double hoverTextScale$TKM = null;
 
 	@Override
@@ -66,14 +70,25 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 		}
 	}
 
-	@Inject(method = "renderTextHoverEffect", at = @At("TAIL"))
+	@Inject(
+			//#if MC >= 12000
+			//$$ method = "drawHoverEvent",
+			//#else
+			method = "renderTextHoverEffect",
+			//#endif
+			at = @At("TAIL")
+	)
 	private void fixHoverTextScale_cleanup(CallbackInfo ci)
 	{
 		this.hoverTextScale$TKM = null;
 	}
 
 	@ModifyArg(
+			//#if MC >= 12000
+			//$$ method = "drawHoverEvent",
+			//#else
 			method = "renderTextHoverEffect",
+			//#endif
 			at = @At(
 					value = "INVOKE",
 					target = "Ljava/lang/Math;max(II)I"
@@ -89,26 +104,48 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 		return width;
 	}
 
-	@ModifyVariable(method = "renderTooltipFromComponents", at = @At("HEAD"), argsOnly = true)
-	private TooltipPositioner fixHoverTextScale_modifyPositioner(
-			TooltipPositioner positioner,
-			/* parent method parameters vvv */
-			MatrixStack matrices, List<TooltipComponent> components, int x, int y, TooltipPositioner positioner_
+	@ModifyVariable(
+			//#if MC >= 12000
+			//$$ method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;)V",
+			//#else
+			method = "renderTooltipFromComponents",
+			//#endif
+			at = @At("HEAD"),
+			argsOnly = true
 	)
+	private TooltipPositioner fixHoverTextScale_modifyPositioner(TooltipPositioner positioner)
 	{
 		if (this.hoverTextScale$TKM != null)
 		{
 			double scale = this.hoverTextScale$TKM;
-			positioner = (screen, xBase, yBase, width, height) -> {
-				if (xBase + width * scale > screen.width)
+			positioner = (
+					//#if MC >= 12000
+					//$$ screenWidth, screenHeight,
+					//#else
+					screen,
+					//#endif
+					x, y, width, height
+			) -> {
+				//#if MC < 12000
+				int screenWidth = screen.width;
+				int screenHeight = screen.height;
+				//#endif
+
+				//#if MC >= 11904
+				//$$ // see vanilla: net.minecraft.client.gui.tooltip.HoveredTooltipPositioner#getPosition
+				//$$ x += 12;
+				//$$ y -= 12;
+				//#endif
+
+				if (x + width * scale > screenWidth)
 				{
-					xBase = Math.max(xBase - 24 - width, 4);
+					x = Math.max(x - 24 - width, 4);
 				}
-				if (yBase + height * scale + 6 > screen.height)
+				if (y + height * scale + 6 > screenHeight)
 				{
-					yBase += (screen.height - yBase - 12 - 1) / scale - height + 6;
+					y += (screenHeight - y - 12 - 1) / scale - height + 6;
 				}
-				return new Vector2i(xBase, yBase);
+				return new Vector2i(x, y);
 			};
 		}
 		return positioner;

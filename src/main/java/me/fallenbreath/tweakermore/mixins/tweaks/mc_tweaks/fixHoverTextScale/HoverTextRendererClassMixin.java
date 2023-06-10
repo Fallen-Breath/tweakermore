@@ -43,7 +43,7 @@ import java.util.List;
 
 /**
  * The implementation for mc (~, 1.19.2]
- * See subproject 1.19.3 or 1.20 for implementation for other version range
+ * See subproject 1.19.3 for implementation for other version range
  *
  * Targeted class:
  *   mc < 1.20: {@link net.minecraft.client.gui.screen.Screen}
