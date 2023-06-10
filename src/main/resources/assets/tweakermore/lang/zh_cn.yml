@@ -483,6 +483,11 @@ tweakermore:
       comment: |-
         允许旁观者传送菜单列出玩家列表中的旁观者玩家
         旁观者玩家将在位于菜单列表的尾部，其玩家名将以灰色斜体的形式显示
+    steveAlexOnlyDefaultSkins:
+      .: 仅Steve/Alex默认皮肤
+      comment: |-
+        让那些没有自定义皮肤的玩家只使用Steve或Alex作为他们的默认皮肤
+        这将带回Minecraft 1.19.3版本以前那个经典的只有Steve/Alex皮肤的世界
     unlimitedBlockEntityRenderDistance:
       .: 无限方块实体渲染距离
       comment: |- 

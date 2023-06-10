@@ -424,6 +424,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean SPECTATOR_TELEPORT_MENU_INCLUDE_SPECTATOR = newConfigBoolean("spectatorTeleportMenuIncludeSpectator", false);
 
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.19.3")), category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean STEVE_ALEX_ONLY_DEFAULT_SKINS = newConfigBoolean("steveAlexOnlyDefaultSkins", false);
+
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed UNLIMITED_BLOCK_ENTITY_RENDER_DISTANCE = newConfigBooleanHotkeyed("unlimitedBlockEntityRenderDistance");
 

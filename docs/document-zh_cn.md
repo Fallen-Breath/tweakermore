@@ -1231,6 +1231,20 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 默认值: `false`
 
 
+### 仅Steve/Alex默认皮肤 (steveAlexOnlyDefaultSkins)
+
+让那些没有自定义皮肤的玩家只使用Steve或Alex作为他们的默认皮肤
+
+这将带回Minecraft 1.19.3版本以前那个经典的只有Steve/Alex皮肤的世界
+
+- 分类: MC修改
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Minecraft (`minecraft`) `>=1.19.3`
+
+
 ### 无限方块实体渲染距离 (unlimitedBlockEntityRenderDistance)
 
 将客户端方块实体渲染距离设置为无限制

@@ -1231,6 +1231,20 @@ Spectators will be listed at the end of the menu with gray and italic name
 - Default value: `false`
 
 
+### steveAlexOnlyDefaultSkins
+
+Make those players who don't have custom skins use only Steve or Alex as their default skins
+
+This brings back the classic behavior from Minecraft < 1.19.3
+
+- Category: MC Tweaks
+- Type: boolean
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Minecraft (`minecraft`) `>=1.19.3`
+
+
 ### unlimitedBlockEntityRenderDistance
 
 Set client-side block entity render distance to unlimited

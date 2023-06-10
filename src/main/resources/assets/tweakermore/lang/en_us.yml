@@ -483,6 +483,11 @@ tweakermore:
       comment: |-
         Allow spectator players in the player list to be listed in the spectator teleport menu
         Spectators will be listed at the end of the menu with gray and italic name
+    steveAlexOnlyDefaultSkins:
+      .: steveAlexOnlyDefaultSkins
+      comment: |-
+        Make those players who don't have custom skins use only Steve or Alex as their default skins
+        This brings back the classic behavior from Minecraft < 1.19.3
     unlimitedBlockEntityRenderDistance:
       .: unlimitedBlockEntityRenderDistance
       comment: |-
