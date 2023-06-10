@@ -23,7 +23,7 @@ package me.fallenbreath.tweakermore.util;
 /**
  * All variables in this class are mod id
  * <p>
- * See also: translation "tweakermore.util.mod", which stores these mods';' name
+ * See also: translation "tweakermore.util.mod", which stores the mod names
  */
 public class ModIds
 {
