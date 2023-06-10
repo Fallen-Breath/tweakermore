@@ -290,6 +290,7 @@ public class TweakerMoreConfigs
 	@Config(
 			type = Config.Type.GENERIC,
 			restriction = @Restriction(conflict = {
+					@Condition(cheat_utils),
 					@Condition(compact_chat),
 					@Condition(more_chat_history),
 					@Condition(parachute),

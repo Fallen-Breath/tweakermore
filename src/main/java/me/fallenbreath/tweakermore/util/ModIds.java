@@ -20,9 +20,14 @@
 
 package me.fallenbreath.tweakermore.util;
 
+/**
+ * All variables in this class are mod id
+ * <p>
+ * See also: translation "tweakermore.util.mod", which stores these mods';' name
+ */
 public class ModIds
 {
-	// basics
+	// Basics
 	public static final String minecraft = "minecraft";
 	public static final String fabric_loader = "fabricloader";
 	public static final String fabric_api = "fabric";
@@ -34,14 +39,15 @@ public class ModIds
 	public static final String litematica = "litematica";
 	public static final String minihud = "minihud";
 
-	// those who modify chat limit
+	// Those who modify chat limit. They're conflicted with option chatMessageLimit
+	public static final String cheat_utils = "cheatutils";  // https://github.com/Fallen-Breath/tweakermore/issues/37
 	public static final String compact_chat = "compactchat";
 	public static final String more_chat_history = "morechathistory";
 	public static final String parachute = "parachute";
 	public static final String raise_chat_limit = "raise-chat-limit";
 	public static final String wheres_my_chat_history = "wmch";
 
-	// others
+	// Other
 	public static final String carpet_tis_addition = "carpet-tis-addition";
 	public static final String caxton = "caxton";
 	public static final String custom_skin_loader = "customskinloader";

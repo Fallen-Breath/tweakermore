@@ -37,6 +37,7 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 import java.util.List;
 
 @Restriction(conflict = {
+		@Condition(ModIds.cheat_utils),
 		@Condition(ModIds.compact_chat),
 		@Condition(ModIds.more_chat_history),
 		@Condition(ModIds.parachute),

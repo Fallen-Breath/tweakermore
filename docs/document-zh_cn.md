@@ -710,6 +710,7 @@ schematicBlockPlacement的严格模式
 - 最大值: `10000`
 - 模组约束:
   - 冲突模组:
+    - CheatUtils (`cheatutils`)
     - CompactChat (`compactchat`)
     - MoreChatHistory (`morechathistory`)
     - Parachute (`parachute`)

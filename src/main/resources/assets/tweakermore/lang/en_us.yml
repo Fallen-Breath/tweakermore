@@ -875,10 +875,12 @@ tweakermore:
       cycled_message: Cycled option %1$s to %2$s
 
   util:
+    # Mod names in their fabric.mod.json
     mod:
       carpet: Fabric Carpet
       carpet-tis-addition: Carpet TIS Addition
       caxton: Caxton
+      cheatutils: CheatUtils
       compactchat: CompactChat
       customskinloader: CustomSkinLoader
       easiercrafting: EasierCrafting
