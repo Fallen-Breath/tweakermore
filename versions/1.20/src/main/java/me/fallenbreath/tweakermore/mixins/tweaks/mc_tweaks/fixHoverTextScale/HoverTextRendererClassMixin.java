@@ -37,9 +37,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
-// 1.20+ specialized version
+/**
+ * The implementation for mc [1.20, ~)
+ * See subproject 1.15.2 or 1.19.3 for implementation for other version range
+ *
+ * Targeted class:
+ *   mc < 1.20: {@link net.minecraft.client.gui.screen.Screen}
+ *   mc >= 1.20: {@link net.minecraft.client.gui.DrawContext}
+ */
 @Mixin(DrawContext.class)
-public abstract class ScreenMixin implements ScaleableHoverTextRenderer
+public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextRenderer
 {
 	private Double hoverTextScale$TKM = null;
 
