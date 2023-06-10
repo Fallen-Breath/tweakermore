@@ -44,7 +44,10 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.List;
 
-// 1.20+ specialized version
+/**
+ * The implementation for mc [1.20, ~)
+ * See subproject 1.14.4 or 1.15.2 for implementation for other version range
+ */
 @Restriction(conflict = @Condition(value = ModIds.caxton, versionPredicates = "<0.3.0-beta.2"))
 @Mixin(AbstractSignEditScreen.class)
 public abstract class SignEditScreenMixin extends Screen

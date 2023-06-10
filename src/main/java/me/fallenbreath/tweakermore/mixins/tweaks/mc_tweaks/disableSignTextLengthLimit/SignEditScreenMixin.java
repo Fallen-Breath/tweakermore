@@ -24,15 +24,25 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.SelectionManager;
+import net.minecraft.client.util.Texts;
+import net.minecraft.client.util.math.Matrix4f;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+
+import java.util.List;
 
 //#if MC >= 11904
 //$$ import net.minecraft.client.font.TextRenderer;
@@ -51,19 +61,10 @@ import net.minecraft.client.gui.screen.ingame.SignEditScreen;
 //$$ import net.minecraft.client.util.SpriteIdentifier;
 //#endif
 
-//#if MC >= 11500
-import net.minecraft.block.BlockState;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.util.Texts;
-import net.minecraft.client.util.math.Matrix4f;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Formatting;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-
-import java.util.List;
-//#endif
-
+/**
+ * The implementation for mc [1.15.2, 1.20)
+ * See subproject 1.14.4 or 1.20 for implementation for other version range
+ */
 @Restriction(conflict = @Condition(value = ModIds.caxton, versionPredicates = "<0.3.0-beta.2"))
 @Mixin(
 		//#if MC >= 11903
@@ -160,7 +161,6 @@ public abstract class SignEditScreenMixin extends Screen
 		return maxLength;
 	}
 
-	//#if MC >= 11500
 	//#if MC < 11600
 	@ModifyArg(
 			method = "method_23773",  // lambda method in method render
@@ -190,9 +190,7 @@ public abstract class SignEditScreenMixin extends Screen
 			//#endif
 			at = @At(
 					value = "INVOKE",
-					//#if MC >= 12000
-					//$$ target = "Lnet/minecraft/client/gui/DrawContext;drawText(Lnet/minecraft/client/font/TextRenderer;Ljava/lang/String;IIIZ)I",
-					//#elseif MC >= 11904
+					//#if MC >= 11904
 					//$$ target = "Lnet/minecraft/client/font/TextRenderer;draw(Ljava/lang/String;FFIZLorg/joml/Matrix4f;Lnet/minecraft/client/render/VertexConsumerProvider;Lnet/minecraft/client/font/TextRenderer$TextLayerType;IIZ)I",
 					//#elseif MC >= 11600
 					//$$ target = "Lnet/minecraft/client/font/TextRenderer;draw(Ljava/lang/String;FFIZLnet/minecraft/util/math/Matrix4f;Lnet/minecraft/client/render/VertexConsumerProvider;ZIIZ)I",
@@ -262,11 +260,10 @@ public abstract class SignEditScreenMixin extends Screen
 							//#else
 							false,
 							//#endif
-							0, 15728880
+							0, 0xF000F0
 					);
 				}
 			}
 		}
 	}
-	//#endif  // if MC >= 11500
 }
