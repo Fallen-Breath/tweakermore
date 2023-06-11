@@ -194,15 +194,18 @@ public class DocumentPrinter
 
 	private static Optional<String> getScreenShotFileName(String configId, String lang)
 	{
-		String fileName = String.format("%s-%s.png", configId, lang);
-		if (ASSETS_DIRECTORY.resolve(fileName).toFile().isFile())
+		for (String extension : new String[]{"png", "gif"})
 		{
-			return Optional.of(fileName);
-		}
-		fileName = String.format("%s.png", configId);
-		if (ASSETS_DIRECTORY.resolve(fileName).toFile().isFile())
-		{
-			return Optional.of(fileName);
+			String fileName = String.format("%s-%s.%s", configId, lang, extension);
+			if (ASSETS_DIRECTORY.resolve(fileName).toFile().isFile())
+			{
+				return Optional.of(fileName);
+			}
+			fileName = String.format("%s.%s", configId, extension);
+			if (ASSETS_DIRECTORY.resolve(fileName).toFile().isFile())
+			{
+				return Optional.of(fileName);
+			}
 		}
 		return Optional.empty();
 	}

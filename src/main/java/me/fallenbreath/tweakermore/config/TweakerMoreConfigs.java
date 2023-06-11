@@ -394,6 +394,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean PLAYER_SKIN_BLOCKING_LOADING = newConfigBoolean("playerSkinBlockingLoading", false);
 
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.19.4")), category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean POTION_ITEM_SHOULD_HAVE_ENCHANTMENT_GLINT = newConfigBoolean("potionItemShouldHaveEnchantmentGlint", false);
+
 	@Config(type = Config.Type.LIST, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigStringList PRIORITIZED_COMMAND_SUGGESTIONS = newConfigStringList("prioritizedCommandSuggestions", ImmutableList.of());
 

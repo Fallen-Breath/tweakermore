@@ -1093,6 +1093,22 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 默认值: `false`
 
 
+### 药水物品得有附魔光效 (potionItemShouldHaveEnchantmentGlint)
+
+让具有效果的药水再次拥有附魔光效。闪闪发光的药水，好！
+
+撤销了Mojang在mc1.19.4-pre1版本中应用的药水物品渲染修改
+
+- 分类: MC修改
+- 类型: 布尔值
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Minecraft (`minecraft`) `>=1.19.4`
+
+![potionItemShouldHaveEnchantmentGlint](assets/potionItemShouldHaveEnchantmentGlint.gif)
+
+
 ### 指令补全优先列表 (prioritizedCommandSuggestions)
 
 此列表中的命令建议将在命令补全列表中更靠前

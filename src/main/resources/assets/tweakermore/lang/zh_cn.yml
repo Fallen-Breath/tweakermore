@@ -438,6 +438,11 @@ tweakermore:
         让加载玩家皮肤这一操作阻塞客户端的运行
         客户端卡住，直到玩家的皮肤下载完毕并被成功加载
         如果你希望玩家的皮肤永远处于已加载的状态，比如用replay渲染视频时，该选项会很有用
+    potionItemShouldHaveEnchantmentGlint:
+      .: 药水物品得有附魔光效
+      comment: |-
+        让具有效果的药水再次拥有附魔光效。闪闪发光的药水，好！
+        撤销了Mojang在mc1.19.4-pre1版本中应用的药水物品渲染修改
     prioritizedCommandSuggestions:
       .: 指令补全优先列表
       comment: |-

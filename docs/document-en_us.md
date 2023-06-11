@@ -1093,6 +1093,22 @@ It's useful when you want player skins to always be loaded, e.g. replay video re
 - Default value: `false`
 
 
+### potionItemShouldHaveEnchantmentGlint
+
+Make potion items with effects have enchantment glint overlay again, shinny potions yes!
+
+Reverted the change that Mojang applies in mc1.19.4-pre1
+
+- Category: MC Tweaks
+- Type: boolean
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Minecraft (`minecraft`) `>=1.19.4`
+
+![potionItemShouldHaveEnchantmentGlint](assets/potionItemShouldHaveEnchantmentGlint.gif)
+
+
 ### prioritizedCommandSuggestions
 
 Command suggestions in this list will be more forward in the command completion list

@@ -107,6 +107,7 @@
     "tweaks.mc_tweaks.playerSkinBlockingLoading.compat.customskinloader.FakeSkinManagerMixin_New",
     "tweaks.mc_tweaks.playerSkinBlockingLoading.compat.customskinloader.FakeSkinManagerMixin_Newer",
     "tweaks.mc_tweaks.playerSkinBlockingLoading.compat.customskinloader.FakeSkinManagerMixin_Old",
+    "tweaks.mc_tweaks.potionItemShouldHaveEnchantmentGlint.ItemStackMixin",
     "tweaks.mc_tweaks.prioritizedCommandSuggestions.CommandSuggestorMixin",
     "tweaks.mc_tweaks.scoreboardSideBarScale.InGameHudMixin",
     "tweaks.mc_tweaks.shulkerItemContentHint.ItemRendererAccessor",
