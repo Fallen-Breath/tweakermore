@@ -7,7 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       target_subproject:
-        description: The subproject name of the specified Minecraft version to be released.
+        description: |-
+          The subproject name(s) of the specified Minecraft version to be released, seperated with ",".
+          By default all subprojects will be released
         type: string
         required: false
         default: ''
@@ -25,8 +27,8 @@ jobs:
         run: |
           cat <<EOF > $GITHUB_STEP_SUMMARY
           ## Action Parameters
-          - target_subproject: `${{ github.event.inputs.target_subproject }}`
-          - target_release_tag: `${{ github.event.inputs.target_release_tag }}`
+          - target_subproject: \`${{ github.event.inputs.target_subproject }}\`
+          - target_release_tag: \`${{ github.event.inputs.target_release_tag }}\`
           EOF
 
   matrix_prep:
@@ -51,6 +53,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Display context
+        run: |
+          echo ref_name = ${{ github.ref_name }}
+          echo target_subproject = ${{ github.event.inputs.target_subproject }}
+          echo target_release_tag = ${{ github.event.inputs.target_release_tag }}
 
       - name: Download build artifacts
         uses: actions/download-artifact@v3
@@ -92,7 +100,7 @@ jobs:
         id: properties_v
         uses: christian-draeger/read-properties@1.1.1
         with:
-          path: ${{ format('versions/{0}/gradle.properties', matrix.subproject_dir) }}
+          path: ${{ format('versions/{0}/gradle.properties', matrix.subproject) }}
           properties: 'minecraft_version game_versions'
 
       - name: Fix game version
@@ -107,7 +115,7 @@ jobs:
         id: file_info
         run: |
           shopt -s extglob
-          FILE_PATHS=$(ls ${{ format('build-artifacts/{0}/build/libs/!(*-@(dev|sources)).jar', matrix.subproject_dir) }})
+          FILE_PATHS=$(ls ${{ format('build-artifacts/{0}/build/libs/!(*-@(dev|sources)).jar', matrix.subproject) }})
           if (( ${#FILE_PATHS[@]} != 1 )); then
               echo "Error: Found ${#FILE_PATHS[@]} files, expected exactly 1"
               exit 1
