@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurper
+
 pluginManagement {
 	repositories {
 		maven {
@@ -23,13 +25,7 @@ pluginManagement {
 	}
 }
 
-buildscript {
-	repositories { mavenCentral() }
-	dependencies { classpath 'org.yaml:snakeyaml:2.0' }
-}
-
-import org.yaml.snakeyaml.Yaml
-def settings = new Yaml().load(file('settings.yml').text)
+def settings = new JsonSlurper().parseText(file('settings.json').text)
 for (String version : settings.versions) {
 	include(":$version")
 
