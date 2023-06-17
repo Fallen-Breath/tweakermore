@@ -41,6 +41,7 @@ import java.util.Optional;
 public class DataQueryHandlerPro
 {
 	private final Map<Integer, Callback> callbacks = new ExpiringMap<>(Maps.newHashMap(), 30_000);
+	private int idCounter = 0;
 
 	private static Optional<ClientPlayNetworkHandler> getNetworkHandler()
 	{
@@ -50,8 +51,8 @@ public class DataQueryHandlerPro
 	public int generateTransactionId(ClientPlayNetworkHandler networkHandler)
 	{
 		DataQueryHandlerAccessor accessor = (DataQueryHandlerAccessor)networkHandler.getDataQueryHandler();
-		int id = accessor.getExpectedTransactionId();
-		accessor.setExpectedTransactionId(id + 1);
+		int id = (accessor.getExpectedTransactionId() ^ 0x80000000) + this.idCounter;  // make sure it's far enough from vanilla's id
+		this.idCounter = (this.idCounter + 1) % (1 << 20);  // 10M concurrency is enough
 		return id;
 	}
 

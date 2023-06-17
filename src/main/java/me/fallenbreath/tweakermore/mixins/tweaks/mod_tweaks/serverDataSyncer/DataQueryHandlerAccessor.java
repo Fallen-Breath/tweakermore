@@ -29,7 +29,4 @@ public interface DataQueryHandlerAccessor
 {
 	@Accessor
 	int getExpectedTransactionId();
-
-	@Accessor
-	void setExpectedTransactionId(int id);
 }
