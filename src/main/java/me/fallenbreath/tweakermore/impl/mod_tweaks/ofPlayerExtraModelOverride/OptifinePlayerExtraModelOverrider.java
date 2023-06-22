@@ -67,7 +67,7 @@ public class OptifinePlayerExtraModelOverrider
 		// so optifine will try to fetch player config again
 		// which means our PlayerConfigurationReceiverMixin mixin can do its job
 		ReflectionUtil.getClass("net.optifine.player.PlayerConfigurations").ifPresent(clazz -> {
-			ReflectionUtil.getField(clazz, "mapConfigurations").ifPresent(map -> {
+			ReflectionUtil.getStaticField(clazz, "mapConfigurations").ifPresent(map -> {
 				if (map instanceof Map)
 				{
 					((Map<?, ?>)map).clear();

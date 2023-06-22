@@ -24,11 +24,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class ReflectionUtil
 {
@@ -45,7 +42,7 @@ public class ReflectionUtil
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> ValueWrapper<T> getField(Class<?> clazz, String fieldName)
+	public static <T> ValueWrapper<T> getStaticField(Class<?> clazz, String fieldName)
 	{
 		try
 		{
@@ -55,31 +52,7 @@ public class ReflectionUtil
 		}
 		catch (Exception e)
 		{
-			return ValueWrapper.empty();
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	public static <T> Supplier<T> getStaticFieldGetter(Class<?> clazz, String fieldName)
-	{
-		try
-		{
-			Field field = clazz.getDeclaredField(fieldName);
-			field.setAccessible(true);
-			return () -> {
-				try
-				{
-					return (T)field.get(null);
-				}
-				catch (Exception e)
-				{
-					throw new RuntimeException("cannot get field value " + fieldName);
-				}
-			};
-		}
-		catch (Exception e)
-		{
-			throw new RuntimeException("cannot access " + fieldName);
+			return ValueWrapper.error(e);
 		}
 	}
 
@@ -96,33 +69,41 @@ public class ReflectionUtil
 					return ValueWrapper.of((T)method.invoke(object, args));
 				}
 			}
+			return ValueWrapper.notFound();
 		}
-		catch (Exception ignored)
+		catch (Exception error)
 		{
+			return ValueWrapper.error(error);
 		}
-		return ValueWrapper.empty();
 	}
 
 	public static class ValueWrapper<T>
 	{
-		@Nullable
 		private final T value;
 		private final boolean existed;
+		@Nullable
+		private final Throwable error;
 
-		private ValueWrapper(@Nullable T value, boolean existed)
+		private ValueWrapper(T value, boolean existed, @Nullable Throwable error)
 		{
 			this.value = value;
 			this.existed = existed;
+			this.error = error;
 		}
 
-		public static <T> ValueWrapper<T> of(@Nullable T value)
+		public static <T> ValueWrapper<T> of(T value)
 		{
-			return new ValueWrapper<>(value, true);
+			return new ValueWrapper<>(value, true, null);
 		}
 
-		public static <T> ValueWrapper<T> empty()
+		public static <T> ValueWrapper<T> notFound()
 		{
-			return new ValueWrapper<>(null, false);
+			return new ValueWrapper<>(null, false, null);
+		}
+
+		public static <T> ValueWrapper<T> error(Throwable error)
+		{
+			return new ValueWrapper<>(null, false, error);
 		}
 
 		public boolean isPresent()
@@ -131,6 +112,11 @@ public class ReflectionUtil
 		}
 
 		@Nullable
+		public Throwable getError()
+		{
+			return this.error;
+		}
+
 		public T get()
 		{
 			if (!this.isPresent())
@@ -140,12 +126,18 @@ public class ReflectionUtil
 			return this.value;
 		}
 
-		public void ifPresent(Consumer<@Nullable T> action)
+		public void ifPresent(Consumer<T> action)
 		{
 			if (this.existed)
 			{
 				action.accept(this.value);
 			}
+		}
+
+		@Override
+		public String toString()
+		{
+			return "ValueWrapper[value=" + this.value + ",existed=" + this.existed + ",error=" + this.error + "]";
 		}
 	}
 }
