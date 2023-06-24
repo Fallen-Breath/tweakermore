@@ -71,12 +71,12 @@ tweakermore:
     containerProcessorHintScale:
       .: 自动容器处理提示-字体大小
       comment: 自动容器处理提示渲染时所用的字体相对大小
+    copyItemDataToClipBoard:
+      .: 复制物品数据
+      comment: Copy the data of the pointed item in the current gui to the clipboard, as a /give command把当前GUI中指向的物品数据复制到剪贴板
     copySignTextToClipBoard:
       .: 复制告示牌文本
       comment: 将玩家指向的告示牌中的文本复制到剪贴板
-      sign_copied: 已从%1$s中复制了文本
-      no_sign: 玩家未指向告示牌方块
-      empty_sign: '%1$s不包含任何文本'
     creativePickBlockWithState:
       .: 创造模式提取方块带方块状态
       comment: |-
@@ -848,6 +848,12 @@ tweakermore:
       no_favorite: '%1$s没有收藏的交易'
     containerProcessorHint:
       title: 启用的自动容器处理功能
+    copyItemDataToClipBoard:
+      item_copied: 已将物品%1$s的数据复制到剪贴板
+    copySignTextToClipBoard:
+      sign_copied: 已从%1$s中复制了文本
+      no_sign: 玩家未指向告示牌方块
+      empty_sign: '%1$s不包含任何文本'
     creativePickBlockWithState:
       message: 已储存%1$s的方块状态
     infoViewRespawnBlockExplosion:

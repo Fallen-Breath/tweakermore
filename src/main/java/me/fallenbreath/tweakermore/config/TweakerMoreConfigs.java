@@ -39,6 +39,7 @@ import me.fallenbreath.tweakermore.config.options.*;
 import me.fallenbreath.tweakermore.config.options.listentries.*;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.impl.features.autoContainerProcess.AutoContainerProcessorHintRenderer;
+import me.fallenbreath.tweakermore.impl.features.copyItemDataToClipBoard.ItemDataCopier;
 import me.fallenbreath.tweakermore.impl.features.copySignTextToClipBoard.SignTextCopier;
 import me.fallenbreath.tweakermore.impl.features.infoView.InfoViewRenderer;
 import me.fallenbreath.tweakermore.impl.features.refreshInventory.InventoryRefresher;
@@ -151,6 +152,9 @@ public class TweakerMoreConfigs
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble CONTAINER_PROCESSOR_HINT_SCALE = newConfigDouble("containerProcessorHintScale", 1, 0.25, 4);
+
+	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigHotkeyWithSwitch COPY_ITEM_DATA_TO_CLIPBOARD = newConfigHotKeyWithSwitch("copyItemDataToClipBoard", false, "F3,I", KeybindSettings.GUI);
 
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkey COPY_SIGN_TEXT_TO_CLIPBOARD = newConfigHotKey("copySignTextToClipBoard", "");
@@ -730,6 +734,7 @@ public class TweakerMoreConfigs
 		IValueChangeCallback<ConfigBoolean> redrawConfigGui = newValue -> TweakerMoreConfigGui.getCurrentInstance().ifPresent(TweakerMoreConfigGui::reDraw);
 
 		// hotkeys
+		setHotkeyCallback(COPY_ITEM_DATA_TO_CLIPBOARD, ItemDataCopier::copyItemData, false);
 		setHotkeyCallback(COPY_SIGN_TEXT_TO_CLIPBOARD, SignTextCopier::copySignText, false);
 		setHotkeyCallback(OPEN_TWEAKERMORE_CONFIG_GUI, TweakerMoreConfigGui::openGui, true);
 		setHotkeyCallback(REFRESH_INVENTORY, InventoryRefresher::refresh, false);

@@ -30,6 +30,7 @@
     "tweaks.features.autoContainerProcess.ScreenMixin",
     "tweaks.features.autoRespawn.DeathScreenMixin",
     "tweaks.features.autoVillagerTradeFavorites.ClientPlayNetworkHandlerMixin",
+    "tweaks.features.copyItemData.ContainerScreenAccessor",
     "tweaks.features.copySignTextToClipBoard.SignBlockEntityAccessor",
     "tweaks.features.creativePickBlockWithState.MinecraftClientMixin",
     "tweaks.features.flawlessFrames.ScreenshotRendererMixin",

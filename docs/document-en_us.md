@@ -733,6 +733,15 @@ Basically it stably adds your ping to the server with the given value
 - Maximum value: `15000`
 
 
+### copyItemDataToClipBoard
+
+Copy the data of the pointed item in the current gui to the clipboard, as a /give command
+
+- Category: MC Tweaks
+- Type: hotkey with switch
+- Default value: `F3,I`
+
+
 ### daytimeOverride
 
 Override the time of day in the client world

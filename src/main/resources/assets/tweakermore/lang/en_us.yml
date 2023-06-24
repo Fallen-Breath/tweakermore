@@ -71,12 +71,12 @@ tweakermore:
     containerProcessorHintScale:
       .: containerProcessorHintScale
       comment: The font scale of the auto container processor enable status hint
+    copyItemDataToClipBoard:
+      .: copyItemDataToClipBoard
+      comment: Copy the data of the pointed item in the current gui to the clipboard, as a /give command
     copySignTextToClipBoard:
       .: copySignTextToClipBoard
       comment: Copy texts in the sign you are pointing to into the clipboard
-      sign_copied: Copied texts from %1$s
-      no_sign: You are not pointing to a sign block
-      empty_sign: '%1$s does not contain any text'
     creativePickBlockWithState:
       .: creativePickBlockWithState
       comment: |-
@@ -848,6 +848,12 @@ tweakermore:
       no_favorite: "%1$s doesn't have any favorite trades"
     containerProcessorHint:
       title: Enabled auto container processing features
+    copyItemDataToClipBoard:
+      item_copied: Copied data of %1$s to clipboard
+    copySignTextToClipBoard:
+      sign_copied: Copied texts from %1$s
+      no_sign: You are not pointing to a sign block
+      empty_sign: '%1$s does not contain any text'
     creativePickBlockWithState:
       message: Block state of %1$s stored
     infoViewRespawnBlockExplosion:

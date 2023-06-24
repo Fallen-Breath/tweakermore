@@ -733,6 +733,15 @@ schematicBlockPlacement的严格模式
 - 最大值: `15000`
 
 
+### 复制物品数据 (copyItemDataToClipBoard)
+
+Copy the data of the pointed item in the current gui to the clipboard, as a /give command把当前GUI中指向的物品数据复制到剪贴板
+
+- 分类: MC修改
+- 类型: 带开关热键
+- 默认值: `F3,I`
+
+
 ### 覆盖世界时间 (daytimeOverride)
 
 覆盖客户端中的世界时间
