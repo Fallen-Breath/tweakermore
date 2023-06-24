@@ -934,6 +934,28 @@ schematicBlockPlacement的严格模式
 - 默认值: *无快捷键*, `false`
 
 
+### F3+I使用相对坐标 (f3IUseRelatedCoordinate)
+
+在F3+I复制指令时，使用相对坐标 ~ ~ ~
+
+影响复制的方块/setblock指令和实体/summon指令
+
+另见选项F3+I使用相对坐标-上移1m来把相对坐标上移一格，即使用 ~ ~1 ~
+
+- 分类: MC修改
+- 类型: 布尔值
+- 默认值: `false`
+
+
+### F3+I使用相对坐标-上移1m (f3IUseRelatedCoordinateShift1)
+
+在选项F3+I使用相对坐标中，使用坐标 ~ ~1 ~ 代替 ~ ~ ~
+
+- 分类: MC修改
+- 类型: 布尔值
+- 默认值: `true`
+
+
 ### 伪夜视 (fakeNightVision)
 
 总是运用夜视效果下的游戏渲染，无论玩家是否确实拥有夜视效果

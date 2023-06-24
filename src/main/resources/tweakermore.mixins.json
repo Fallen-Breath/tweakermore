@@ -90,6 +90,7 @@
     "tweaks.mc_tweaks.disableSlimeBlockBouncing.SlimeBlockMixin",
     "tweaks.mc_tweaks.disableTiltViewWhenHurt.GameRendererMixin",
     "tweaks.mc_tweaks.disableVignetteDarkness.InGameHudMixin",
+    "tweaks.mc_tweaks.f3IUseRelatedCoordinate.KeyboardMixin",
     "tweaks.mc_tweaks.fakeNightVision.GameRendererMixin",
     "tweaks.mc_tweaks.fakeNightVision.LivingEntityMixin",
     "tweaks.mc_tweaks.fixChestMirroring.ChestBlockMixin",
@@ -99,6 +100,7 @@
     "tweaks.mc_tweaks.itemTooltipHideUntilMouseMove.ContainerScreenMixin",
     "tweaks.mc_tweaks.legacyF3NLogic.KeyboardMixin",
     "tweaks.mc_tweaks.maxChatHudHeight.ChatHudMixin",
+    "tweaks.mc_tweaks.multiplayerForcedEnabled.MinecraftClientMixin",
     "tweaks.mc_tweaks.nameTagRenderStrategy.EntityRendererMixin",
     "tweaks.mc_tweaks.netherPortalSoundChance.NetherPortalBlockMixin",
     "tweaks.mc_tweaks.playerSkinBlockingLoading.PlayerSkinProviderMixin",
@@ -169,7 +171,6 @@
     "util.render.TextHandlerAccessor"
   ],
   "client": [
-    "tweaks.mc_tweaks.multiplayerForcedEnabled.MinecraftClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1

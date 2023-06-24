@@ -368,6 +368,12 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBooleanHotkeyed FLAWLESS_FRAMES = newConfigBooleanHotkeyed("flawlessFrames");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean F3_I_USE_RELATED_COORDINATE = newConfigBoolean("f3IUseRelatedCoordinate", false);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean F3_I_USE_RELATED_COORDINATE_SHIFT_1 = newConfigBoolean("f3IUseRelatedCoordinateShift1", true);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigDouble FLY_DRAG = newConfigDouble("flyDrag", 0.09, 0, 1);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)

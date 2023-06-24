@@ -934,6 +934,28 @@ when the light level at player's eyes is not the maximum light level
 - Default value: *no hotkey*, `false`
 
 
+### f3IUseRelatedCoordinate
+
+Use related coordinate "~ ~ ~" in the command copied by F3 + I
+
+Affects both /setblock command for blocks and /summon command for entities
+
+See option f3IUseRelatedCoordinateShift1 to shift the related coordinate up by 1 block, i.e. use "~ ~1 ~"
+
+- Category: MC Tweaks
+- Type: boolean
+- Default value: `false`
+
+
+### f3IUseRelatedCoordinateShift1
+
+Use coordinate "~ ~1 ~" instead of "~ ~ ~" in option f3IUseRelatedCoordinate
+
+- Category: MC Tweaks
+- Type: boolean
+- Default value: `true`
+
+
 ### fakeNightVision
 
 Always use night vision for game rendering, regardless of whether the player actually has night vision

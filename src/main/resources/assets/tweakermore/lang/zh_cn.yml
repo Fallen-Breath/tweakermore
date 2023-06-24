@@ -395,6 +395,16 @@ tweakermore:
         借用了Replay模组渲染各种任务时所使用的逻辑
         警告：这可能会让客户端频繁地卡顿
       pretty_name: 无瑕世界渲染
+    f3IUseRelatedCoordinate:
+      .: F3+I使用相对坐标
+      comment: |-
+        在F3+I复制指令时，使用相对坐标 ~ ~ ~
+        影响复制的方块/setblock指令和实体/summon指令
+        另见选项@option#f3IUseRelatedCoordinateShift1@来把相对坐标上移一格，即使用 ~ ~1 ~
+    f3IUseRelatedCoordinateShift1:
+      .: F3+I使用相对坐标-上移1m
+      comment: |-
+        在选项@option#f3IUseRelatedCoordinate@中，使用坐标 ~ ~1 ~ 代替 ~ ~ ~
     flyDrag:
       .: 玩家飞行阻力
       comment: |-
