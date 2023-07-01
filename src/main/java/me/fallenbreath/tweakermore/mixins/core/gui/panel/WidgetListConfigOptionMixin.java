@@ -159,7 +159,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	@Inject(method = "addConfigButtonEntry", at = @At("HEAD"), remap = false)
 	private void enableEnableValueHoveringForConfigButtonOptionList(int xReset, int yReset, IConfigResettable config, ButtonBase optionButton, CallbackInfo ci)
 	{
-		if (optionButton instanceof ConfigButtonOptionListHovering)
+		if (this.isTweakerMoreConfigGui() && optionButton instanceof ConfigButtonOptionListHovering)
 		{
 			((ConfigButtonOptionListHovering)optionButton).setEnableValueHovering();
 		}
