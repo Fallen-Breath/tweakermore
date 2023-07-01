@@ -102,7 +102,7 @@ public class CarpetModAccess
 		Object trm = trmWrapper.get();
 
 		ReflectionUtil.ValueWrapper<Boolean> runsNormally = ReflectionUtil.invoke(trm.getClass(), "runsNormally", trm);
-		if (!runsNormally.get())
+		if (!runsNormally.isPresent())
 		{
 			TweakerMoreMod.LOGGER.warn("failed to invoked carpet.helpers.TickRateManager#runsNormally(): {}", runsNormally);
 			return Optional.empty();
