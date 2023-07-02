@@ -9,7 +9,7 @@ Automatically drops everything in the opened container
 and then close the container
 
 - Category: Features
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -21,7 +21,7 @@ and then close the container
 Items that will NOT be thrown out from the container with autoCleanContainer
 
 - Category: Features
-- Type: string list
+- Type: string list (List)
 - Default value: `[minecraft:shulker_box]`
 - Mod restrictions:
   - Required mods:
@@ -33,7 +33,7 @@ Items that will NOT be thrown out from the container with autoCleanContainer
 The item restriction type for autoCleanContainer
 
 - Category: Features
-- Type: option list
+- Type: option list (List)
 - Default value: `None`
 - Available options: `None`, `Black List`, `White List`
 - Mod restrictions:
@@ -46,7 +46,7 @@ The item restriction type for autoCleanContainer
 Items that will be thrown out from the container with autoCleanContainer
 
 - Category: Features
-- Type: string list
+- Type: string list (List)
 - Default value: `[minecraft:shulker_box]`
 - Mod restrictions:
   - Required mods:
@@ -60,7 +60,7 @@ Automatically collect missing items in litematica mod material list in the opene
 and then close the container
 
 - Category: Features
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -73,7 +73,7 @@ and then close the container
 The way to show information when using the autoCollectMaterialListItem feature
 
 - Category: Features
-- Type: option list
+- Type: option list (List)
 - Default value: `Summary`
 - Available options: `Full`, `Summary`
 - Mod restrictions:
@@ -91,7 +91,7 @@ iff the item stack is the only most numerous one
 and then close the container
 
 - Category: Features
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -107,7 +107,7 @@ e.g. if you always have 2 slots of firework rocket you can set the value to 3,
  then your rockets will never be used to fill the container
 
 - Category: Features
-- Type: integer
+- Type: integer (Generic)
 - Default value: `2`
 - Minimum value: `1`
 - Maximum value: `36`
@@ -122,7 +122,7 @@ It's logic is the same as the pickBlock tweaks in litematica mod, you need to en
 Does not work with easy place mode
 
 - Category: Features
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -136,7 +136,7 @@ Automatically put back all items which also exist in the container from your inv
 and then close the container
 
 - Category: Features
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -148,7 +148,7 @@ and then close the container
 Automatically perform respawn when the Spectate World/Respawn button in death screen is available
 
 - Category: Features
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 
 
@@ -159,7 +159,7 @@ Automatically trigger item scroller's villagerTradeFavorites feature when a merc
 and then close the merchant screen
 
 - Category: Features
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -180,7 +180,7 @@ Displays the enabling status of auto container processing related features, incl
 - autoCollectMaterialListItem
 
 - Category: Features
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 
 ![containerProcessorHint](assets/containerProcessorHint-en_us.png)
@@ -191,7 +191,7 @@ Displays the enabling status of auto container processing related features, incl
 The displayed position of the auto container processor enable status hint
 
 - Category: Features
-- Type: option list
+- Type: option list (Generic)
 - Default value: `Top Right`
 - Available options: `Top Left`, `Top Right`, `Bottom Left`, `Bottom Right`, `Center`
 
@@ -201,7 +201,7 @@ The displayed position of the auto container processor enable status hint
 The font scale of the auto container processor enable status hint
 
 - Category: Features
-- Type: double
+- Type: double (Generic)
 - Default value: `1.0`
 - Minimum value: `0.25`
 - Maximum value: `4.0`
@@ -212,7 +212,7 @@ The font scale of the auto container processor enable status hint
 Copy texts in the sign you are pointing to into the clipboard
 
 - Category: Features
-- Type: hotkey
+- Type: hotkey (Hotkey)
 - Default value: *no hotkey*
 
 ![copySignTextToClipBoard](assets/copySignTextToClipBoard-en_us.png)
@@ -227,7 +227,7 @@ store the target block's block state into the nbt named "BlockStateTag" of the p
 So the block state can be restored when you place blocks with the picked item
 
 - Category: Features
-- Type: hotkey with switch
+- Type: hotkey with switch (Hotkey)
 - Default value: `LEFT_ALT`
 
 
@@ -238,7 +238,7 @@ The main switch of the info view feature
 Search "infoView" to see related features
 
 - Category: Features
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 
 
@@ -247,7 +247,7 @@ Search "infoView" to see related features
 View the status effects of beacons
 
 - Category: Features
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 
 ![infoViewBeacon](assets/infoViewBeacon-en_us.png)
@@ -258,7 +258,7 @@ View the status effects of beacons
 The view rendering strategy of infoViewBeacon
 
 - Category: Features
-- Type: option list
+- Type: option list (List)
 - Default value: `Always`
 - Available options: `View hotkey held`, `Always`
 
@@ -268,7 +268,7 @@ The view rendering strategy of infoViewBeacon
 The target selecting strategy of infoViewBeacon
 
 - Category: Features
-- Type: option list
+- Type: option list (List)
 - Default value: `Pointed`
 - Available options: `Pointed`, `Beam`
 
@@ -282,7 +282,7 @@ Info of blocks within the given degree to player's slight vector will be shown, 
 Using degree measure
 
 - Category: Features
-- Type: double
+- Type: double (Generic)
 - Default value: `40.0`
 - Minimum value: `1.0`
 - Maximum value: `120.0`
@@ -295,7 +295,7 @@ Show the command and the output of command blocks
 In multiplayer server, command block data can be synced to client using option serverDataSyncer
 
 - Category: Features
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 
 ![infoViewCommandBlock](assets/infoViewCommandBlock-en_us.png)
@@ -306,7 +306,7 @@ In multiplayer server, command block data can be synced to client using option s
 Maximum width of the displayed text rendered by infoViewCommandBlock
 
 - Category: Features
-- Type: integer
+- Type: integer (Generic)
 - Default value: `200`
 - Minimum value: `10`
 - Maximum value: `2000`
@@ -317,7 +317,7 @@ Maximum width of the displayed text rendered by infoViewCommandBlock
 The view rendering strategy of infoViewCommandBlock
 
 - Category: Features
-- Type: option list
+- Type: option list (List)
 - Default value: `View hotkey held`
 - Available options: `View hotkey held`, `Always`
 
@@ -327,7 +327,7 @@ The view rendering strategy of infoViewCommandBlock
 The target selecting strategy of infoViewCommandBlock
 
 - Category: Features
-- Type: option list
+- Type: option list (List)
 - Default value: `Pointed`
 - Available options: `Pointed`, `Beam`
 
@@ -337,7 +337,7 @@ The target selecting strategy of infoViewCommandBlock
 Scale of the displayed text rendered by infoViewCommandBlock
 
 - Category: Features
-- Type: double
+- Type: double (Generic)
 - Default value: `1.0`
 - Minimum value: `0.1`
 - Maximum value: `3.0`
@@ -348,7 +348,7 @@ Scale of the displayed text rendered by infoViewCommandBlock
 Show the block update order of the redstone dust
 
 - Category: Features
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 
 ![infoViewRedstoneDustUpdateOrder](assets/infoViewRedstoneDustUpdateOrder.png)
@@ -359,7 +359,7 @@ Show the block update order of the redstone dust
 The view rendering strategy of infoViewRedstoneDustUpdateOrder
 
 - Category: Features
-- Type: option list
+- Type: option list (List)
 - Default value: `View hotkey held`
 - Available options: `View hotkey held`, `Always`
 
@@ -369,7 +369,7 @@ The view rendering strategy of infoViewRedstoneDustUpdateOrder
 The alpha value of the floating text used in infoViewRedstoneDustUpdateOrder
 
 - Category: Features
-- Type: double
+- Type: double (Generic)
 - Default value: `0.8`
 - Minimum value: `0.0`
 - Maximum value: `1.0`
@@ -384,7 +384,7 @@ When the render strategy is "View hotkey held", press to enable rendering
 When the render strategy is "Always", it will always rendering ignoring the hotkey's state
 
 - Category: Features
-- Type: hotkey
+- Type: hotkey (Hotkey)
 - Default value: `RIGHT_ALT`
 
 
@@ -395,7 +395,7 @@ Show the explosion damage of respawn blocks located in wrong dimension
 It will also estimate and display your remaining health if it explodes
 
 - Category: Features
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 
 ![infoViewRespawnBlockExplosion](assets/infoViewRespawnBlockExplosion-en_us.png)
@@ -406,7 +406,7 @@ It will also estimate and display your remaining health if it explodes
 The view rendering strategy of infoViewRespawnBlockExplosion
 
 - Category: Features
-- Type: option list
+- Type: option list (List)
 - Default value: `Always`
 - Available options: `View hotkey held`, `Always`
 
@@ -416,7 +416,7 @@ The view rendering strategy of infoViewRespawnBlockExplosion
 The target selecting strategy of infoViewRespawnBlockExplosion
 
 - Category: Features
-- Type: option list
+- Type: option list (List)
 - Default value: `Beam`
 - Available options: `Pointed`, `Beam`
 
@@ -426,7 +426,7 @@ The target selecting strategy of infoViewRespawnBlockExplosion
 The alpha value of the floating text used in infoViewRespawnBlockExplosion
 
 - Category: Features
-- Type: double
+- Type: double (Generic)
 - Default value: `0.8`
 - Minimum value: `0.0`
 - Maximum value: `1.0`
@@ -437,7 +437,7 @@ The alpha value of the floating text used in infoViewRespawnBlockExplosion
 The maximum target distance of info view
 
 - Category: Features
-- Type: double
+- Type: double (Generic)
 - Default value: `8.0`
 - Minimum value: `4.0`
 - Maximum value: `32.0`
@@ -452,7 +452,7 @@ It's done by simulating an invalid inventory dragging operation,
 so the server think that the inventory is out of sync then do resync
 
 - Category: Features
-- Type: hotkey
+- Type: hotkey (Hotkey)
 - Default value: *no hotkey*
 
 
@@ -463,7 +463,7 @@ Disconnect when receive damage
 Health threshold to disconnect can be set via safeAfkHealthThreshold
 
 - Category: Features
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 
 
@@ -474,7 +474,7 @@ The threshold of the health of the player which triggers the safe afk disconnect
 Disconnect when player takes damage and its health becomes less than the given value
 
 - Category: Features
-- Type: double
+- Type: double (Generic)
 - Default value: `10.0`
 - Minimum value: `0.0`
 - Maximum value: `100.0`
@@ -491,7 +491,7 @@ it works nicely with tweakeroo's placement tweaks
 Does not work with litematica's or easy place mode
 
 - Category: Features
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -503,7 +503,7 @@ Does not work with litematica's or easy place mode
 Should schematicBlockPlacementRestriction check the facing of the to be placed block
 
 - Category: Features
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `true`
 
 
@@ -512,7 +512,7 @@ Should schematicBlockPlacementRestriction check the facing of the to be placed b
 Should schematicBlockPlacementRestriction check the slab type of the to be placed slab block
 
 - Category: Features
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `true`
 
 
@@ -521,7 +521,7 @@ Should schematicBlockPlacementRestriction check the slab type of the to be place
 Switch for displaying hint message when option schematicBlockPlacementRestriction cancels a placement
 
 - Category: Features
-- Type: option list
+- Type: option list (List)
 - Default value: `All`
 - Available options: `All`, `Operation not allowed `, `Wrong item only`, `Never`
 
@@ -535,7 +535,7 @@ These strings should be valid item ids like "ender_chest" or "minecraft:ender_ch
 You can add scaffolding blocks or your carry-on items into this whitelist for more ease
 
 - Category: Features
-- Type: string list
+- Type: string list (List)
 - Default value: `[]`
 
 
@@ -548,7 +548,7 @@ e.g. with default value 2, block placements within 2 blocks range of any schemat
 Used in option schematicBlockPlacementRestriction
 
 - Category: Features
-- Type: integer
+- Type: integer (Generic)
 - Default value: `2`
 - Minimum value: `0`
 - Maximum value: `16`
@@ -567,7 +567,7 @@ When off, some incorrect but reasonable block placements are allowed, including:
 - place ice for water / bubble column / waterlogged block
 
 - Category: Features
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `true`
 
 
@@ -588,7 +588,7 @@ Has all the functions of easy place except for the floating block placing
 Compatible with various block placement tweaks from tweakeroo, doesn't work with easy place mode
 
 - Category: Features
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -602,7 +602,7 @@ Display villager offer use and limit amount on villager offer list
 Hover on the arrow of the offer to see it
 
 - Category: Features
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 
 ![villagerOfferUsesDisplay](assets/villagerOfferUsesDisplay.png)
@@ -619,7 +619,7 @@ Make barrier particles visible without the requirement to hold a barrier item in
 Of course, you still need to be in creative mode to see the barrier particles
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 
 
@@ -632,7 +632,7 @@ Restricts the amount of client-side block event that can be processed in each ga
 Future incoming block event exceeding the limit will be discarded
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 
 
@@ -643,7 +643,7 @@ The target block ids for the blockEventThrottler
 Only block event for these blocks will be throttled
 
 - Category: MC Tweaks
-- Type: string list
+- Type: string list (List)
 - Default value: `[minecraft:piston, minecraft:sticky_piston]`
 
 
@@ -652,7 +652,7 @@ Only block event for these blocks will be throttled
 The maximum amount of client-side block event that can be processed in each game tick
 
 - Category: MC Tweaks
-- Type: integer
+- Type: integer (Generic)
 - Default value: `200`
 - Minimum value: `0`
 - Maximum value: `10000`
@@ -665,7 +665,7 @@ With the player as the center, the given value as the radius, block events withi
 So you are always able to observe the piston movement right in front of you
 
 - Category: MC Tweaks
-- Type: double
+- Type: double (Generic)
 - Default value: `8.0`
 - Minimum value: `0.0`
 - Maximum value: `256.0`
@@ -680,7 +680,7 @@ It will also skip the vanilla windowHeight/3 limit check
 Set it to -1 to disabled (use vanilla logic)
 
 - Category: MC Tweaks
-- Type: integer
+- Type: integer (Generic)
 - Default value: `-1`
 - Minimum value: `-1`
 - Maximum value: `20`
@@ -693,7 +693,7 @@ Set it to -1 to disabled (use vanilla logic)
 Scale the boss bar hud with given factor
 
 - Category: MC Tweaks
-- Type: double
+- Type: double (Generic)
 - Default value: `1.0`
 - Minimum value: `0.001`
 - Maximum value: `2.0`
@@ -704,7 +704,7 @@ Scale the boss bar hud with given factor
 Modify the maximum number of history messages stored in the chat hud
 
 - Category: MC Tweaks
-- Type: integer
+- Type: integer (Generic)
 - Default value: `100`
 - Minimum value: `100`
 - Maximum value: `10000`
@@ -727,7 +727,7 @@ Adds given delay (in milliseconds) before any packet processing
 Basically it stably adds your ping to the server with the given value
 
 - Category: MC Tweaks
-- Type: integer
+- Type: integer (Generic)
 - Default value: `0`
 - Minimum value: `0`
 - Maximum value: `15000`
@@ -738,7 +738,7 @@ Basically it stably adds your ping to the server with the given value
 Copy the data of the pointed item in the current gui to the clipboard, as a /give command
 
 - Category: MC Tweaks
-- Type: hotkey with switch
+- Type: hotkey with switch (Hotkey)
 - Default value: `F3,I`
 
 
@@ -749,7 +749,7 @@ Override the time of day in the client world
 Does not affect server-side daytime
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 
 
@@ -758,7 +758,7 @@ Does not affect server-side daytime
 The client-side daytime value to be overridden by tweak daytimeOverride
 
 - Category: MC Tweaks
-- Type: integer
+- Type: integer (Generic)
 - Default value: `0`
 - Minimum value: `0`
 - Maximum value: `24000`
@@ -771,7 +771,7 @@ Prevents rendering beacon beams
 So beacon beams can never suddenly come out when recording / rendering
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Disable)
 - Default value: *no hotkey*, `false`
 
 
@@ -786,7 +786,7 @@ A use case is to ensure the integrity of shadows when using shaders
 Has significant impact on framerate
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Disable)
 - Default value: *no hotkey*, `false`
 
 
@@ -797,7 +797,7 @@ Disable fog effect caused by camera being submerged in block or fluid, including
 It will use the render distance fog instead, just like the camera is in the air
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Disable)
 - Default value: *no hotkey*, `false`
 
 ![disableCameraSubmersionFog](assets/disableCameraSubmersionFog.png)
@@ -810,7 +810,7 @@ Prevent creative flying player from entering "ladder climbing" state,
 so player's flying movement will not be affected by ladder things
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Disable)
 - Default value: *no hotkey*, `false`
 
 
@@ -821,7 +821,7 @@ Prevent the bottom of the sky from turning dark when you are under sea level
 See also: option disableHorizonShadingRendering
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Disable)
 - Default value: *no hotkey*, `false`
 
 ![disableDarkSkyRendering](assets/disableDarkSkyRendering.png)
@@ -834,7 +834,7 @@ Prevent the model of the entity to be rendered
 So you can have a clean view of entity collision boxes without being disturbed by entities' random poses
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Disable)
 - Default value: *no hotkey*, `false`
 
 ![disableEntityModelRendering](assets/disableEntityModelRendering.png)
@@ -845,7 +845,7 @@ So you can have a clean view of entity collision boxes without being disturbed b
 Disable the entity animation interpolation during rendering
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Disable)
 - Default value: *no hotkey*, `false`
 
 
@@ -858,7 +858,7 @@ This may resolve the issue when using carpet mod's /tick [freeze|step] command,
 that it may take up to 60gt for the entity's position / angles to be correctly displayed on the client side.
 
 - Category: MC Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 
 
@@ -869,7 +869,7 @@ Prevent the horizon from turning dark when you are nearby the world's bottom y
 See also: option disableDarkSkyRendering
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Disable)
 - Default value: *no hotkey*, `false`
 
 ![disableHorizonShadingRendering](assets/disableHorizonShadingRendering.png)
@@ -880,7 +880,7 @@ See also: option disableDarkSkyRendering
 Yeets client-side light updates
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Disable)
 - Default value: *no hotkey*, `false`
 
 
@@ -889,7 +889,7 @@ Yeets client-side light updates
 Remove block breaking particles when pistons break blocks
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Disable)
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -903,7 +903,7 @@ Disable all redstone particles
 i.e. particles from redstone dust, redstone torch, redstone repeater etc.
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Disable)
 - Default value: *no hotkey*, `false`
 
 
@@ -914,7 +914,7 @@ Disable the text length limit based on character width when editing or rendering
 A red exclamation mark will be shown on the left side when the limit is exceeded during the editing of the sign
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Disable)
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Conflicted mods:
@@ -930,7 +930,7 @@ Disable the bouncing effect on player lands on slime block or bed
 Just like you are sneaking
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Disable)
 - Default value: *no hotkey*, `false`
 
 
@@ -939,7 +939,7 @@ Just like you are sneaking
 Disable the screen tilting effect when the current entity is being hurt
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Disable)
 - Default value: *no hotkey*, `false`
 
 
@@ -952,7 +952,7 @@ i.e. the darkness effect on the screen corner that accumulates slowly
 when the light level at player's eyes is not the maximum light level
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Disable)
 - Default value: *no hotkey*, `false`
 
 
@@ -965,7 +965,7 @@ Affects both /setblock command for blocks and /summon command for entities
 See option f3IUseRelatedCoordinateShift1 to shift the related coordinate up by 1 block, i.e. use "~ ~1 ~"
 
 - Category: MC Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 
 
@@ -974,7 +974,7 @@ See option f3IUseRelatedCoordinateShift1 to shift the related coordinate up by 1
 Use coordinate "~ ~1 ~" instead of "~ ~ ~" in option f3IUseRelatedCoordinate
 
 - Category: MC Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `true`
 
 
@@ -983,7 +983,7 @@ Use coordinate "~ ~1 ~" instead of "~ ~ ~" in option f3IUseRelatedCoordinate
 Always use night vision for game rendering, regardless of whether the player actually has night vision
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 
 
@@ -994,7 +994,7 @@ Fixed chest type is not properly transformed when chest block is mirrored
 Affects stuffs that use vanilla block mirror logic, e.g. vanilla structure placement, litematica mod schematic placement
 
 - Category: MC Tweaks
-- Type: boolean
+- Type: boolean (Fix)
 - Default value: `false`
 
 
@@ -1005,7 +1005,7 @@ Fixed hover text in chat HUD is not scaled when the chat hud is scaled with vani
 This option make the hover texts scale with the same scaling ratio as the chat HUD
 
 - Category: MC Tweaks
-- Type: boolean
+- Type: boolean (Fix)
 - Default value: `false`
 
 
@@ -1018,7 +1018,7 @@ using the logic from replay mod which is used in its rendering tasks
 WARNING: Expect client lag spike with enabled
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -1032,7 +1032,7 @@ Overwrite the drag factor when flying in creative or spectator mode
 Overwrites fabric-carpet's rule creativeFlyDrag when the value is modified
 
 - Category: MC Tweaks
-- Type: double
+- Type: double (Generic)
 - Default value: `0.09`
 - Minimum value: `0.0`
 - Maximum value: `1.0`
@@ -1045,7 +1045,7 @@ Hide item tooltips in container screens until the mouse has moved
 With this option, no more need to worry about item tooltips covering too much information in container screens
 
 - Category: MC Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 
 
@@ -1056,7 +1056,7 @@ Modify the logic of hotkey F3 + N back to 1.15 and before
 1.15- logic cheat sheet: creative -> spectator, other -> creative
 
 - Category: MC Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1068,7 +1068,7 @@ Modify the logic of hotkey F3 + N back to 1.15 and before
 The maximum height of the chat hud
 
 - Category: MC Tweaks
-- Type: integer
+- Type: integer (Generic)
 - Default value: `160`
 - Minimum value: `160`
 - Maximum value: `1000`
@@ -1083,7 +1083,7 @@ With this enabled, you can always access the multiplayer screen despite the stat
 your Microsoft / game account, or whether the game is in online or offline mode
 
 - Category: MC Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1097,7 +1097,7 @@ The chance for a nether portal block to play sound
 Set it to 0.001 or 0.0001 for less noisy portal
 
 - Category: MC Tweaks
-- Type: double
+- Type: double (Generic)
 - Default value: `0.01`
 - Minimum value: `0.0`
 - Maximum value: `0.01`
@@ -1110,7 +1110,7 @@ The whitelist / blacklist used in playerNameTagRenderStrategyList
 Matching using player's id, case-sensitive
 
 - Category: MC Tweaks
-- Type: string list
+- Type: string list (List)
 - Default value: `[]`
 
 
@@ -1119,7 +1119,7 @@ Matching using player's id, case-sensitive
 Use whitelist / blacklist to control whether the name tag of the player will be rendered
 
 - Category: MC Tweaks
-- Type: option list
+- Type: option list (List)
 - Default value: `None`
 - Available options: `None`, `Whitelist`, `Blacklist`
 
@@ -1133,7 +1133,7 @@ Client will freeze until player skins is downloaded and loaded
 It's useful when you want player skins to always be loaded, e.g. replay video rendering
 
 - Category: MC Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 
 
@@ -1144,7 +1144,7 @@ Make potion items with effects have enchantment glint overlay again, shinny poti
 Reverted the change that Mojang applies in mc1.19.4-pre1
 
 - Category: MC Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1162,7 +1162,7 @@ You can put those command completions you always prefer to choose in this list
 so they will always be at the head of the command completion list
 
 - Category: MC Tweaks
-- Type: string list
+- Type: string list (List)
 - Default value: `[]`
 
 ![prioritizedCommandSuggestions](assets/prioritizedCommandSuggestions.png)
@@ -1173,7 +1173,7 @@ so they will always be at the head of the command completion list
 Scale the scoreboard side bar hud with given factor
 
 - Category: MC Tweaks
-- Type: double
+- Type: double (Generic)
 - Default value: `1.0`
 - Minimum value: `0.001`
 - Maximum value: `2.0`
@@ -1186,7 +1186,7 @@ Type of the server mspt metrics statistic display in debug hud
 Set to "Game tick" to keep vanilla behavior
 
 - Category: MC Tweaks
-- Type: option list with hotkey
+- Type: option list with hotkey (List)
 - Default value: `MSPT (vanilla)`
 - Available options: `MSPT (vanilla)`, `Average MSPT per second`, `Maximum MSPT per second`, `Average MSPT per minute`, `Maximum MSPT per minute`
 
@@ -1206,7 +1206,7 @@ Also, a fill level bar will be rendered at the lower-right corner,
 if the shulker box is neither completely full nor empty
 
 - Category: MC Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 
 ![shulkerItemContentHint](assets/shulkerItemContentHint.png)
@@ -1217,7 +1217,7 @@ if the shulker box is neither completely full nor empty
 The scale of the hint stuffs in option shulkerItemContentHint
 
 - Category: MC Tweaks
-- Type: double
+- Type: double (Generic)
 - Default value: `0.5`
 - Minimum value: `0.01`
 - Maximum value: `1.0`
@@ -1228,7 +1228,7 @@ The scale of the hint stuffs in option shulkerItemContentHint
 Display enchantments of items in the tooltip of shulker box items
 
 - Category: MC Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 
 ![shulkerTooltipEnchantmentHint](assets/shulkerTooltipEnchantmentHint-en_us.png)
@@ -1239,7 +1239,7 @@ Display enchantments of items in the tooltip of shulker box items
 Display content fill level in first line of the tooltip of shulker box items
 
 - Category: MC Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 
 ![shulkerTooltipFillLevelHint](assets/shulkerTooltipFillLevelHint-en_us.png)
@@ -1252,7 +1252,7 @@ The text length limit used during displaying extra information of items in the t
 When exceed, remaining information will be folded
 
 - Category: MC Tweaks
-- Type: integer
+- Type: integer (Generic)
 - Default value: `120`
 - Minimum value: `0`
 - Maximum value: `600`
@@ -1263,7 +1263,7 @@ When exceed, remaining information will be folded
 Display potion information of items in the tooltip of shulker box items
 
 - Category: MC Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 
 ![shulkerTooltipPotionInfoHint](assets/shulkerTooltipPotionInfoHint-en_us.png)
@@ -1276,7 +1276,7 @@ Add support for the sign editing screen
 to correctly paste multiple lines from clipboard
 
 - Category: MC Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 
 
@@ -1287,7 +1287,7 @@ Allow spectator players in the player list to be listed in the spectator telepor
 Spectators will be listed at the end of the menu with gray and italic name
 
 - Category: MC Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 
 
@@ -1298,7 +1298,7 @@ Make those players who don't have custom skins use only Steve or Alex as their d
 This brings back the classic behavior from Minecraft < 1.19.3
 
 - Category: MC Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1312,7 +1312,7 @@ Set client-side block entity render distance to unlimited
 Affect block entities like chests, shulker boxes and skulls
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 
 
@@ -1323,7 +1323,7 @@ Set client-side entity render distance to unlimited
 Still requires the server to send entity packets via EntityTracker properly
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 
 
@@ -1334,7 +1334,7 @@ Override the weather of the world in the client world
 Does not affect server-side weather
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 
 
@@ -1343,7 +1343,7 @@ Does not affect server-side weather
 The client-side weather value to be overridden by tweak weatherOverride
 
 - Category: MC Tweaks
-- Type: option list
+- Type: option list (List)
 - Default value: `Clear sky`
 - Available options: `Clear sky`, `Rain`, `Thunderstorm`
 
@@ -1357,7 +1357,7 @@ Tweaks on mods
 Apply the TweakerMore style translated text + original text label to all config GUIs using malilib
 
 - Category: Mods Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 
 
@@ -1368,7 +1368,7 @@ Fixed some item scroller functionality doesn't work with easier crafting mod
 e.g. broken mass craft
 
 - Category: Mods Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1383,7 +1383,7 @@ e.g. broken mass craft
 Hide extra player renderer rendering when debug hud (the F3 thing) is enabled
 
 - Category: Mods Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1395,7 +1395,7 @@ Hide extra player renderer rendering when debug hud (the F3 thing) is enabled
 The items that will NOT trigger tweakHandRestock
 
 - Category: Mods Tweaks
-- Type: string list
+- Type: string list (List)
 - Default value: `[minecraft:lava_bucket]`
 - Mod restrictions:
   - Required mods:
@@ -1407,7 +1407,7 @@ The items that will NOT trigger tweakHandRestock
 The item restriction type for tweakHandRestock
 
 - Category: Mods Tweaks
-- Type: option list
+- Type: option list (List)
 - Default value: `None`
 - Available options: `None`, `Black List`, `White List`
 - Mod restrictions:
@@ -1420,7 +1420,7 @@ The item restriction type for tweakHandRestock
 The items that will trigger tweakHandRestock
 
 - Category: Mods Tweaks
-- Type: string list
+- Type: string list (List)
 - Default value: `[minecraft:bucket]`
 - Mod restrictions:
   - Required mods:
@@ -1438,7 +1438,7 @@ If a .litematic file with the special flag is loaded,
 the position of the schematic placement will be set to [0, 0, 0] instead of player's position
 
 - Category: Mods Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1458,7 +1458,7 @@ As an example, you can use "/removeentity" command from Carpet TIS Addition
 Notes: no "/" prefix
 
 - Category: Mods Tweaks
-- Type: string
+- Type: string (Generic)
 - Default value: `kill`
 - Mod restrictions:
   - Required mods:
@@ -1474,7 +1474,7 @@ The activate policy of option Litematica-RemoveEntityCommand
 - always: Apply the override in all cases
 
 - Category: Mods Tweaks
-- Type: option list
+- Type: option list (Generic)
 - Default value: `Auto`
 - Available options: `Auto`, `Always`
 - Mod restrictions:
@@ -1491,7 +1491,7 @@ This option removes the spawn-able check,
 so light overlay will be rendered at every non-solid block above a non-air non-fluid block
 
 - Category: Mods Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1505,7 +1505,7 @@ so light overlay will be rendered at every non-solid block above a non-air non-f
 Hide minihud text overlay if the chat screen is opened
 
 - Category: Mods Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1519,7 +1519,7 @@ Add ender chest support, for the shulker box (inventory item) preview functional
 In multiplayer server, player's ender chest data can be synced to client using option serverDataSyncer
 
 - Category: Mods Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 
 ![mlShulkerBoxPreviewSupportEnderChest](assets/mlShulkerBoxPreviewSupportEnderChest.png)
@@ -1532,7 +1532,7 @@ Remove the item frame item render distance limit from Optifine
 Back to vanilla behavior where the displayed item of item frame is always rendered together with the item frame
 
 - Category: Mods Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1546,7 +1546,7 @@ Remove the sign text render distance limit from Optifine
 Back to vanilla behavior where sign text is always rendered together with the sign block
 
 - Category: Mods Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1560,7 +1560,7 @@ Let players wear the santa hat from Optifine when rendering player entities
 That's an easter egg during Christmas
 
 - Category: Mods Tweaks
-- Type: option list with hotkey
+- Type: option list with hotkey (List)
 - Default value: `Untouched`
 - Available options: `Untouched`, `Apply to me`, `Apply to everyone`
 - Mod restrictions:
@@ -1573,7 +1573,7 @@ That's an easter egg during Christmas
 Removed 10 FPS render limit for F3 debug hud
 
 - Category: Mods Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1588,7 +1588,7 @@ Let optifine make use vanilla's brightness cache in its LightCacheOF
 Increases FPS with smooth lighting on for a few
 
 - Category: Mods Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1602,7 +1602,7 @@ Let players wear the witch hat from Optifine when rendering player entities
 That's an easter egg during Halloween
 
 - Category: Mods Tweaks
-- Type: option list with hotkey
+- Type: option list with hotkey (List)
 - Default value: `Untouched`
 - Available options: `Untouched`, `Apply to me`, `Apply to everyone`
 - Mod restrictions:
@@ -1615,7 +1615,7 @@ That's an easter egg during Halloween
 Display timestamps accurate to milliseconds on the timeline in replay mod
 
 - Category: Mods Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1631,7 +1631,7 @@ Multiple the camera fly speed upper limit in replay mod with given value
 So the maximum fly speed can be increased
 
 - Category: Mods Tweaks
-- Type: integer
+- Type: integer (Generic)
 - Default value: `1`
 - Minimum value: `1`
 - Maximum value: `30`
@@ -1657,7 +1657,7 @@ Sync when following actions happen:
 Requires player having OP permission (permission level 2) for it to work
 
 - Category: Mods Tweaks
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -1681,7 +1681,7 @@ The query interval of serverDataSyncer for each batch of queries in game tick
 With default value 1 it will send a batch of query every game tick
 
 - Category: Mods Tweaks
-- Type: integer
+- Type: integer (Generic)
 - Default value: `1`
 - Minimum value: `1`
 - Maximum value: `100`
@@ -1694,7 +1694,7 @@ Maximum amount of queries sent with serverDataSyncer per game tick
 Queries exceeding the limit will be delayed
 
 - Category: Mods Tweaks
-- Type: integer
+- Type: integer (Generic)
 - Default value: `512`
 - Minimum value: `1`
 - Maximum value: `8192`
@@ -1707,7 +1707,7 @@ Use game time instead of day time as uniform value "worldTime" for Optifine/Iris
 So with gamerule doDaylightCycle false this timer variable still increases
 
 - Category: Mods Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1728,7 +1728,7 @@ So no lag when quitting server or single player
 Might have some side effects though
 
 - Category: Mods Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1740,7 +1740,7 @@ Might have some side effects though
 Make the in-game waypoints render correctly when free camera from tweakeroo is enabled
 
 - Category: Mods Tweaks
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1759,7 +1759,7 @@ Fixed SCROLL_STACKS_FALLBACK of item-scroller ignores the last stack
 The same as masa's fixed in itemscoller commit 0984fe7
 
 - Category: Porting
-- Type: boolean
+- Type: boolean (Fix)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1772,7 +1772,7 @@ The same as masa's fixed in itemscoller commit 0984fe7
 Backport option customSchematicBaseDirectoryEnabled from Litematica 0.9.0 mc1.17+
 
 - Category: Porting
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1785,7 +1785,7 @@ Backport option customSchematicBaseDirectoryEnabled from Litematica 0.9.0 mc1.17
 Backport option customSchematicBaseDirectory from Litematica 0.9.0 mc1.17+
 
 - Category: Porting
-- Type: string
+- Type: string (Generic)
 - Default value: `D:\Codes\Minecraft\[Mod]\tweakermore\run\schematics`
 - Mod restrictions:
   - Required mods:
@@ -1798,7 +1798,7 @@ Backport option customSchematicBaseDirectory from Litematica 0.9.0 mc1.17+
 Backport option pickBlockShulkers from Litematica mc1.16+
 
 - Category: Porting
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1813,7 +1813,7 @@ Backport fix for MC-146582 from mc1.20
 It fixes player moving down unexpectedly after entering spectator mode if the player was standing on the ground
 
 - Category: Porting
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
@@ -1827,7 +1827,7 @@ Backports option disableNauseaEffect from Tweakeroo mc1.17+
 Also fixes the nether portal overlay fails to be displayed with this option on
 
 - Category: Porting
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Disable)
 - Default value: *no hotkey*, `false`
 - Mod restrictions:
   - Required mods:
@@ -1843,7 +1843,7 @@ Settings of TweakMore itself
 Hide options which are disabled due to mod relations unsatisfied in the config GUI
 
 - Category: Setting
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `false`
 
 
@@ -1852,7 +1852,7 @@ Hide options which are disabled due to mod relations unsatisfied in the config G
 Open the config GUI of TweakerMore
 
 - Category: Setting
-- Type: hotkey
+- Type: hotkey (Hotkey)
 - Default value: `K,C`
 
 
@@ -1863,7 +1863,7 @@ Preserve unknown config entries in TweakerMore's config file
 If set to false, unknown entries will be removed on config being written
 
 - Category: Setting
-- Type: boolean
+- Type: boolean (Generic)
 - Default value: `true`
 
 
@@ -1876,7 +1876,7 @@ When enabled, debug parameter options and options not supported by the current M
 and debugging related functions will be enabled
 
 - Category: Setting
-- Type: hotkey togglable boolean
+- Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 
 

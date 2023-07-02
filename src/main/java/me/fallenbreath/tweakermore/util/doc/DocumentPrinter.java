@@ -234,7 +234,7 @@ public class DocumentPrinter
 		writeln.accept(getComment(config).replace("\n", "\n\n"));
 		writeln.accept("");
 		writeln.accept(String.format("- %s: %s", tr("category"), tweakerMoreOption.getCategory().getDisplayName()));
-		writeln.accept(String.format("- %s: %s", tr("type"), getConfigType(config)));
+		writeln.accept(String.format("- %s: %s (%s)", tr("type"), getConfigType(config), tweakerMoreOption.getType().getStringValue()));
 		writeln.accept(String.format("- %s: %s", tr("default_value"), getDefaultValue(config)));
 
 		getMinValue(config).ifPresent(min -> writeln.accept(String.format("- %s: `%s`", tr("minimum_value"), min)));
