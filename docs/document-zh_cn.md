@@ -849,6 +849,19 @@ Copy the data of the pointed item in the current gui to the clipboard, as a /giv
 - 默认值: *无快捷键*, `false`
 
 
+### 禁用实体渲染插值-强制同步 (disableEntityRenderInterpolationForcedSync)
+
+在客户端接收到生物/载具的位置/朝向更新数据包时，总是直接设置该实体的位置/朝向
+
+这可缓解在carpet mod的/tick [freeze|step]操作下，
+
+可能需要等待最长60gt，才能在客户端正确显示实体位置/朝向的问题
+
+- 分类: MC修改
+- 类型: 布尔值
+- 默认值: `false`
+
+
 ### 禁用地平线渲染变暗 (disableHorizonShadingRendering)
 
 阻止地平线在玩家接近世界最低y值时变暗的渲染效果

@@ -849,6 +849,19 @@ Disable the entity animation interpolation during rendering
 - Default value: *no hotkey*, `false`
 
 
+### disableEntityRenderInterpolationForcedSync
+
+Always set entity's position / angles directly, when receives position / angles update packets of creatures / vehicles
+
+This may resolve the issue when using carpet mod's /tick [freeze|step] command, 
+
+that it may take up to 60gt for the entity's position / angles to be correctly displayed on the client side.
+
+- Category: MC Tweaks
+- Type: boolean
+- Default value: `false`
+
+
 ### disableHorizonShadingRendering
 
 Prevent the horizon from turning dark when you are nearby the world's bottom y

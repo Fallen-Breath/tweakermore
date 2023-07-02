@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableEntityRenderInterpolation;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.util.compat.carpet.CarpetModAccess;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.disableEntityRenderInterpolation.DisableEntityRenderInterpolationHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.BoatEntity;
@@ -49,10 +49,7 @@ public abstract class BoatEntityMixin extends Entity
 		{
 			this.field_7708 = 1;
 
-			// carpet's tick freeze state also freezes client world entity ticking,
-			// which cancels the client-side entity position interpolation logic,
-			// so we need to manually setting the entity's position & rotation to the correct values
-			if (CarpetModAccess.isTickFrozen())
+			if (DisableEntityRenderInterpolationHelper.shouldUpdatePositionOrAnglesDirectly())
 			{
 				super.updateTrackedPositionAndAngles(x, y, z, yaw, pitch, interpolationSteps, interpolate);
 			}

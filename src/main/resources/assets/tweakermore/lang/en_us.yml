@@ -331,6 +331,12 @@ tweakermore:
       .: disableEntityRenderInterpolation
       comment: Disable the entity animation interpolation during rendering
       pretty_name: Disable Entity Render Interpolation
+    disableEntityRenderInterpolationForcedSync:
+      .: disableEntityRenderInterpolationForcedSync
+      comment: |-
+        Always set entity's position / angles directly, when receives position / angles update packets of creatures / vehicles
+        This may resolve the issue when using carpet mod's /tick [freeze|step] command, 
+        that it may take up to 60gt for the entity's position / angles to be correctly displayed on the client side.
     disableHorizonShadingRendering:
       .: disableHorizonShadingRendering
       comment: |-
