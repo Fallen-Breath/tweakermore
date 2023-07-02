@@ -25,6 +25,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import fi.dy.masa.malilib.config.HudAlignment;
 import fi.dy.masa.malilib.config.IConfigBase;
+import fi.dy.masa.malilib.config.IHotkeyTogglable;
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import fi.dy.masa.malilib.event.RenderEventHandler;
 import fi.dy.masa.malilib.event.TickHandler;
@@ -153,7 +154,7 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble CONTAINER_PROCESSOR_HINT_SCALE = newConfigDouble("containerProcessorHintScale", 1, 0.25, 4);
 
-	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.HOTKEY, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigHotkeyWithSwitch COPY_ITEM_DATA_TO_CLIPBOARD = newConfigHotKeyWithSwitch("copyItemDataToClipBoard", false, "F3,I", KeybindSettings.GUI);
 
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
@@ -804,6 +805,15 @@ public class TweakerMoreConfigs
 						TweakerMoreMod.LOGGER.warn("[TweakerMore] {} is not a subclass of TweakerMoreIConfigBase", config);
 						continue;
 					}
+
+					if ((annotation.type() == Config.Type.TWEAK || annotation.type() == Config.Type.DISABLE) && !(config instanceof IHotkeyTogglable))
+					{
+						throw new IllegalStateException(String.format(
+								"Config %s annotated with type %s should be a IHotkeyTogglable, but found class %s",
+								field.getName(), annotation.type(), config.getClass().getName()
+						));
+					}
+
 					TweakerMoreOption tweakerMoreOption = new TweakerMoreOption(annotation, (TweakerMoreIConfigBase)config);
 					OPTIONS.add(tweakerMoreOption);
 					CATEGORY_TO_OPTION.computeIfAbsent(tweakerMoreOption.getCategory(), k -> Lists.newArrayList()).add(tweakerMoreOption);
