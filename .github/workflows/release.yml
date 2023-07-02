@@ -170,7 +170,8 @@ jobs:
           loaders: fabric
           game-versions: ${{ steps.game_versions.outputs.value }}
           game-version-filter: any
-          dependencies: ''  # declare the dependencies explicitly, so mc-publish won't try to load from fabric.mod.json
+          dependencies: |  # declare the dependencies explicitly, so mc-publish won't try to load from fabric.mod.json
+            malilib(required)
 
           modrinth-changelog: ${{ steps.changelog.outputs.result }}
           curseforge-changelog: ${{ steps.changelog.outputs.result }}
