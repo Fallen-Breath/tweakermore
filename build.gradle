@@ -60,7 +60,7 @@ tasks.register('buildAndGather') {
 	}
 }
 
-task cleanPreprocessSources {
+tasks.register('cleanPreprocessSources') {
 	doFirst {
 		subprojects {
 			def path = project.projectDir.toPath().resolve('build/preprocessed')

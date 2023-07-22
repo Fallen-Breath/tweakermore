@@ -26,6 +26,9 @@ tweakermore:
     autoCollectMaterialListItemMessageType:
       .: 自动收集材料列表物品-消息类型
       comment: 在使用@option#autoCollectMaterialListItem@功能时展示信息的方法
+    autoCollectMaterialListItemCloseGui:
+      .: 自动收集材料列表物品-关闭GUI
+      comment: 在使用@option#autoCollectMaterialListItem@功能后，是否关闭容器的GUI
     autoFillContainer:
       .: 自动装填容器
       comment: |-

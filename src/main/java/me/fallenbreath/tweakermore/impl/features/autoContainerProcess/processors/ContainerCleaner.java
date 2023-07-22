@@ -39,7 +39,7 @@ public class ContainerCleaner implements IContainerProcessor
 	}
 
 	@Override
-	public boolean process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
+	public ProcessResult process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
 	{
 		int counter = 0;
 		for (Slot slot : containerInvSlots)
@@ -51,6 +51,6 @@ public class ContainerCleaner implements IContainerProcessor
 			}
 		}
 		InfoUtils.printActionbarMessage("tweakermore.impl.autoCleanContainer.container_cleaned", counter, containerScreen.getTitle());
-		return true;
+		return ProcessResult.terminated();
 	}
 }

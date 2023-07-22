@@ -26,6 +26,9 @@ tweakermore:
     autoCollectMaterialListItemMessageType:
       .: autoCollectMaterialListItemMessageType
       comment: The way to show information when using the @option#autoCollectMaterialListItem@ feature
+    autoCollectMaterialListItemCloseGui:
+      .: autoCollectMaterialListItemCloseGui
+      comment: If the container gui should be closed after using the @option#autoCollectMaterialListItem@ feature
     autoFillContainer:
       .: autoFillContainer
       comment: |-

@@ -68,6 +68,19 @@ and then close the container
     - Item Scroller (`itemscroller`)
 
 
+### autoCollectMaterialListItemCloseGui
+
+If the container gui should be closed after using the autoCollectMaterialListItem feature
+
+- Category: Features
+- Type: boolean (Generic)
+- Default value: `true`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
 ### autoCollectMaterialListItemMessageType
 
 The way to show information when using the autoCollectMaterialListItem feature

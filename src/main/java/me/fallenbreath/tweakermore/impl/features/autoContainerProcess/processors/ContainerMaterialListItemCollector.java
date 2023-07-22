@@ -68,7 +68,7 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 	 * Requires litematica mod
 	 */
 	@Override
-	public boolean process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
+	public ProcessResult process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
 	{
 		MaterialListBase materialList = DataManager.getMaterialList();
 		if (materialList != null)
@@ -155,7 +155,7 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 		{
 			log(Message.MessageType.WARNING, "tweakermore.impl.autoCollectMaterialListItem.no_material_list");
 		}
-		return true;
+		return new ProcessResult(true, TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_CLOSE_GUI.getBooleanValue());
 	}
 
 	private void moveToPlayerInventory(ContainerScreen<?> containerScreen, List<Slot> playerInvSlots, Slot fromSlot, int amount)

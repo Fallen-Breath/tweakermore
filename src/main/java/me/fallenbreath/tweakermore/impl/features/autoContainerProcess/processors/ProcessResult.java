@@ -20,24 +20,28 @@
 
 package me.fallenbreath.tweakermore.impl.features.autoContainerProcess.processors;
 
-import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
-import net.minecraft.client.gui.screen.ingame.ContainerScreen;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.container.Slot;
-
-import java.util.List;
-
-public interface IProcessor
+public class ProcessResult
 {
-	default boolean isEnabled()
+	public final boolean cancelProcessing;
+	public final boolean closeGui;
+
+	/**
+	 * @param cancelProcessing cancel other container processors, i.e. other processors are useless now after the current process
+	 * @param closeGui close the gui after the process
+	 */
+	public ProcessResult(boolean cancelProcessing, boolean closeGui)
 	{
-		TweakerMoreConfigBooleanHotkeyed config = this.getConfig();
-		return config.getBooleanValue() && config.getTweakerMoreOption().isEnabled();
+		this.cancelProcessing = cancelProcessing;
+		this.closeGui = closeGui;
 	}
 
-	TweakerMoreConfigBooleanHotkeyed getConfig();
+	public static ProcessResult skipped()
+	{
+		return new ProcessResult(false, false);
+	}
 
-	boolean shouldProcess(ContainerScreen<?> containerScreen);
-
-	ProcessResult process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots);
+	public static ProcessResult terminated()
+	{
+		return new ProcessResult(true, true);
+	}
 }

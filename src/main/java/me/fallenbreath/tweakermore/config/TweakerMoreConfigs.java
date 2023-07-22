@@ -116,6 +116,16 @@ public class TweakerMoreConfigs
 	)
 	public static final TweakerMoreConfigOptionList AUTO_COLLECT_MATERIAL_LIST_ITEM_MESSAGE_TYPE = newConfigOptionList("autoCollectMaterialListItemMessageType", AutoCollectMaterialListItemLogType.DEFAULT);
 
+	@Config(
+			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = {
+					@Condition(litematica),
+					@Condition(itemscroller)
+			}),
+			category = Config.Category.FEATURES
+	)
+	public static final TweakerMoreConfigBoolean AUTO_COLLECT_MATERIAL_LIST_ITEM_CLOSE_GUI = newConfigBoolean("autoCollectMaterialListItemCloseGui", true);
+
 	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed AUTO_FILL_CONTAINER = newConfigBooleanHotkeyed("autoFillContainer");
 

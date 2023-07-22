@@ -44,7 +44,7 @@ public class ContainerItemPutBackProcessor implements IContainerProcessor
 	}
 
 	@Override
-	public boolean process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
+	public ProcessResult process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
 	{
 		Set<ItemType> inventoryItems = Sets.newHashSet();
 		for (Slot containerInvSlot : containerInvSlots)
@@ -73,6 +73,7 @@ public class ContainerItemPutBackProcessor implements IContainerProcessor
 				"tweakermore.impl.autoPutBackExistedItem.result",
 				percentage, containerScreen.getTitle()
 		);
-		return true;
+
+		return ProcessResult.terminated();
 	}
 }

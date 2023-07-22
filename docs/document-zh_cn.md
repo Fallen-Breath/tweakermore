@@ -68,6 +68,19 @@ TweakerMore提供的新功能
     - Item Scroller (`itemscroller`)
 
 
+### 自动收集材料列表物品-关闭GUI (autoCollectMaterialListItemCloseGui)
+
+在使用自动收集材料列表物品功能后，是否关闭容器的GUI
+
+- 分类: 功能
+- 类型: 布尔值 (通用)
+- 默认值: `true`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
 ### 自动收集材料列表物品-消息类型 (autoCollectMaterialListItemMessageType)
 
 在使用自动收集材料列表物品功能时展示信息的方法

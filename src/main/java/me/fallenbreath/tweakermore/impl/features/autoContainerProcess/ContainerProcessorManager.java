@@ -84,20 +84,20 @@ public class ContainerProcessorManager
 					return;
 				}
 
-				boolean hasProcessed = false;
+				boolean closeGui = false;
 				for (IProcessor processor : CONTAINER_PROCESSORS)
 				{
 					if (processor.isEnabled() && processor.shouldProcess(containerScreen))
 					{
-						hasProcessed = true;
-						boolean cancelProcessing = processor.process(player, containerScreen, allSlots, playerInvSlots, containerInvSlots);
-						if (cancelProcessing)
+						ProcessResult result = processor.process(player, containerScreen, allSlots, playerInvSlots, containerInvSlots);
+						closeGui |= result.closeGui;
+						if (result.cancelProcessing)
 						{
 							break;
 						}
 					}
 				}
-				if (hasProcessed)
+				if (closeGui)
 				{
 					player.closeContainer();
 				}
