@@ -324,6 +324,10 @@ tweakermore:
         阻止天空的下半部分在玩家位于海平面以下时变暗的渲染效果
         另见: 选项@option#disableHorizonShadingRendering@
       pretty_name: 禁用天空渲染变暗
+    disableDarknessEffect:
+      .: 禁用黑暗状态效果
+      comment: 禁用黑暗状态效果所提供的客户端渲染效果
+      pretty_name: 禁用黑暗状态效果
     disableEntityModelRendering:
       .: 禁用实体模型渲染
       comment: |-

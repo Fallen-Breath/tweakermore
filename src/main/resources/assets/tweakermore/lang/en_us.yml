@@ -324,6 +324,10 @@ tweakermore:
         Prevent the bottom of the sky from turning dark when you are under sea level
         See also: option @option#disableHorizonShadingRendering@
       pretty_name: Disable Dark Sky Rendering Effect
+    disableDarknessEffect:
+      .: disableDarknessEffect
+      comment: Disable the client-side rendering effect when you have the darkness effect
+      pretty_name: Disable Darkness Effect
     disableEntityModelRendering:
       .: disableEntityModelRendering
       comment: |-

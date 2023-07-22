@@ -827,6 +827,18 @@ so player's flying movement will not be affected by ladder things
 - Default value: *no hotkey*, `false`
 
 
+### disableDarknessEffect
+
+Disable the client-side rendering effect when you have the darkness effect
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean (Disable)
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Minecraft (`minecraft`) `>=1.19`
+
+
 ### disableDarkSkyRendering
 
 Prevent the bottom of the sky from turning dark when you are under sea level

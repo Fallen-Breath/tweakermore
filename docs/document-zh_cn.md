@@ -827,6 +827,18 @@ Copy the data of the pointed item in the current gui to the clipboard, as a /giv
 - 默认值: *无快捷键*, `false`
 
 
+### 禁用黑暗状态效果 (disableDarknessEffect)
+
+禁用黑暗状态效果所提供的客户端渲染效果
+
+- 分类: MC修改
+- 类型: 带热键布尔值 (禁用)
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Minecraft (`minecraft`) `>=1.19`
+
+
 ### 禁用天空渲染变暗 (disableDarkSkyRendering)
 
 阻止天空的下半部分在玩家位于海平面以下时变暗的渲染效果
