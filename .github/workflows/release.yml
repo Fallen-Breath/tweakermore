@@ -155,7 +155,7 @@ jobs:
           modrinth-id: GBeCx05I  # https://modrinth.com/mod/tweakermore
           modrinth-token: ${{ secrets.MODRINTH_API_TOKEN }}
 
-          curseforge-id: 531235  # https://www.curseforge.com/minecraft/mc-mods/tweakermore
+          curseforge-id: 531235  # https://legacy.curseforge.com/minecraft/mc-mods/tweakermore
           curseforge-token: ${{ secrets.CF_API_TOKEN }}
 
           github-tag: ${{ steps.release_info.outputs.tag_name }}
