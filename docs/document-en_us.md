@@ -1373,6 +1373,21 @@ The client-side weather value to be overridden by tweak weatherOverride
 - Available options: `Clear sky`, `Rain`, `Thunderstorm`
 
 
+### yeetServerIpReversedDnsLookup
+
+For servers whose addresses are represented solely by IP, disable reverse DNS lookups in the InetAddress object
+
+Many non-loopback IPs lack associated domain names, which makes reverse lookups time-consuming
+
+This option sets the domain of those servers directly to their IP, bypassing the reverse DNS check
+
+This results in a 1s ~ 5s reduction in time for server list pinging and connections to those servers
+
+- Category: MC Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+
+
 ## Mods Tweaks
 
 Tweaks on mods

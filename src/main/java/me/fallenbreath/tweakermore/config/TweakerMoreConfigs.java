@@ -469,6 +469,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.LIST, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigOptionList WEATHER_OVERRIDE_VALUE = newConfigOptionList("weatherOverrideValue", WeatherOverrideValue.DEFAULT);
 
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean YEET_SERVER_IP_REVERSED_DNS_LOOKUP = newConfigBoolean("yeetServerIpReversedDnsLookup", false);
+
 	////////////////////
 	//   Mod Tweaks   //
 	////////////////////

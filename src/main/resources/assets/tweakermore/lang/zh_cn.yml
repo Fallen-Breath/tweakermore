@@ -537,6 +537,13 @@ tweakermore:
     weatherOverrideValue:
       .: 覆盖世界天气种类
       comment: 用于功能@option#weatherOverride@的客户端的世界天气种类
+    yeetServerIpReversedDnsLookup:
+      .: 禁止服务器IP地址DNS反查
+      comment: |-
+        对于用纯IP表示的服务器地址，阻止其InetAddress对象进行逆向DNS查询操作
+        很多非本地回环的IP地址并没有对应的域名，这将使逆向查询它们域名的操作消耗不少时间
+        该选项直接将这些服务器的域名设置为其IP地址，从而跳过不必要的DNS反查操作
+        取决于具体环境，这能为这类服务器地址带来1s~5s的提速。影响场景：服务器列表刷新、服务器连接
 
     # ================================ Mod Tweaks ================================
 
