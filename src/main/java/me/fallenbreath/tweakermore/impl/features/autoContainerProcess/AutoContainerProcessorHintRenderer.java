@@ -26,10 +26,10 @@ import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.impl.features.autoContainerProcess.processors.IProcessor;
+import me.fallenbreath.tweakermore.impl.features.autoContainerProcess.processors.IContainerProcessor;
 import me.fallenbreath.tweakermore.util.StringUtil;
-import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
+import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -78,7 +78,7 @@ public class AutoContainerProcessorHintRenderer implements TweakerMoreIRenderer
 		String lines = StringUtil.configsToListLines(
 				ContainerProcessorManager.getProcessors().
 						stream().
-						map(IProcessor::getConfig).
+						map(IContainerProcessor::getConfig).
 						collect(Collectors.toList())
 		);
 		return comment + '\n' + lines;

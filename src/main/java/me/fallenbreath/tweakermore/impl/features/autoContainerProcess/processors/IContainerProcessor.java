@@ -20,15 +20,22 @@
 
 package me.fallenbreath.tweakermore.impl.features.autoContainerProcess.processors;
 
-import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
+import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
-import net.minecraft.client.gui.screen.ingame.CraftingTableScreen;
+import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.container.Slot;
 
-public interface IContainerProcessor extends IProcessor
+import java.util.List;
+
+public interface IContainerProcessor
 {
-	@Override
-	default boolean shouldProcess(ContainerScreen<?> containerScreen)
+	default boolean isEnabled()
 	{
-		return !(containerScreen instanceof AbstractInventoryScreen) && !(containerScreen instanceof CraftingTableScreen);
+		TweakerMoreConfigBooleanHotkeyed config = this.getConfig();
+		return config.getBooleanValue() && config.getTweakerMoreOption().isEnabled();
 	}
+
+	TweakerMoreConfigBooleanHotkeyed getConfig();
+
+	ProcessResult process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots);
 }

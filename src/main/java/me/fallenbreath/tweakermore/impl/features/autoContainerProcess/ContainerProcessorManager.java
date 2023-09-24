@@ -25,7 +25,10 @@ import me.fallenbreath.tweakermore.impl.features.autoContainerProcess.processors
 import me.fallenbreath.tweakermore.mixins.tweaks.features.autoContainerProcess.ItemScrollerInventoryUtilsAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
+import net.minecraft.client.gui.screen.ingame.CraftingTableScreen;
+import net.minecraft.client.gui.screen.ingame.MerchantScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.container.Container;
 import net.minecraft.container.Slot;
@@ -36,7 +39,7 @@ import java.util.stream.Collectors;
 
 public class ContainerProcessorManager
 {
-	private static final List<IProcessor> CONTAINER_PROCESSORS = ImmutableList.of(
+	private static final List<IContainerProcessor> CONTAINER_PROCESSORS = ImmutableList.of(
 			new ContainerCleaner(),
 			new ContainerFiller(),
 			new ContainerItemPutBackProcessor(),
@@ -45,10 +48,10 @@ public class ContainerProcessorManager
 
 	private static boolean hasTweakEnabled()
 	{
-		return CONTAINER_PROCESSORS.stream().anyMatch(IProcessor::isEnabled);
+		return CONTAINER_PROCESSORS.stream().anyMatch(IContainerProcessor::isEnabled);
 	}
 
-	public static List<IProcessor> getProcessors()
+	public static List<IContainerProcessor> getProcessors()
 	{
 		return CONTAINER_PROCESSORS;
 	}
@@ -59,18 +62,23 @@ public class ContainerProcessorManager
 		{
 			Screen screen = MinecraftClient.getInstance().currentScreen;
 			ClientPlayerEntity player = MinecraftClient.getInstance().player;
-			// not inventory and not crafting table
 			if (player != null && screen instanceof ContainerScreen<?>)
 			{
 				if (player.isSpectator())
 				{
 					return;
 				}
+
 				ContainerScreen<?> containerScreen = (ContainerScreen<?>)screen;
 				if (containerScreen.getContainer() != container || !((AutoProcessableScreen)screen).shouldProcess())
 				{
 					return;
 				}
+				if (isInBlackList(containerScreen))
+				{
+					return;
+				}
+
 				((AutoProcessableScreen)screen).setShouldProcess(false);
 				List<Slot> allSlots = container.slots;
 				List<Slot> playerInvSlots = allSlots.stream().filter(slot -> slot.inventory instanceof PlayerInventory).collect(Collectors.toList());
@@ -85,9 +93,9 @@ public class ContainerProcessorManager
 				}
 
 				boolean closeGui = false;
-				for (IProcessor processor : CONTAINER_PROCESSORS)
+				for (IContainerProcessor processor : CONTAINER_PROCESSORS)
 				{
-					if (processor.isEnabled() && processor.shouldProcess(containerScreen))
+					if (processor.isEnabled())
 					{
 						ProcessResult result = processor.process(player, containerScreen, allSlots, playerInvSlots, containerInvSlots);
 						closeGui |= result.closeGui;
@@ -103,5 +111,12 @@ public class ContainerProcessorManager
 				}
 			}
 		}
+	}
+
+	private static <T extends Container> boolean isInBlackList(ContainerScreen<T> containerScreen)
+	{
+		return containerScreen instanceof AbstractInventoryScreen ||  // not screen with inventory only
+				containerScreen instanceof CraftingTableScreen ||   // not crafting table
+				containerScreen instanceof MerchantScreen;  // not villager trading screen
 	}
 }
