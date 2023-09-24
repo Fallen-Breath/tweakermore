@@ -112,10 +112,19 @@ tweakermore:
       comment: View the status effects of beacons
     infoViewBeaconRenderStrategy:
       .: infoViewBeaconRenderST
-      comment: The view rendering strategy of infoViewBeacon
+      comment: The view rendering strategy of @option#infoViewBeacon@
     infoViewBeaconTargetStrategy:
       .: infoViewBeaconTargetST
-      comment: The target selecting strategy of infoViewBeacon
+      comment: The target selecting strategy of @option#infoViewBeacon@
+    infoViewComparator:
+      .: infoViewComparator
+      comment: View the signal level of beacons
+    infoViewComparatorRenderStrategy:
+      .: infoViewComparatorRenderST
+      comment: The view rendering strategy of @option#infoViewComparator@
+    infoViewComparatorTargetStrategy:
+      .: infoViewComparatorTargetST
+      comment: The target selecting strategy of @option#infoViewComparator@
     infoViewCommandBlock:
       .: infoViewCommandBlock
       comment: |-

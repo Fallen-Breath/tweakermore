@@ -29,6 +29,7 @@ import fi.dy.masa.malilib.util.WorldUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.beacon.BeaconEffectRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.commandBlock.CommandBlockContentRenderer;
+import me.fallenbreath.tweakermore.impl.features.infoView.comparator.ComparatorLevelRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.redstoneDust.RedstoneDustUpdateOrderRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.RespawnBlockExplosionViewer;
 import me.fallenbreath.tweakermore.util.FabricUtil;
@@ -58,10 +59,11 @@ public class InfoViewRenderer implements TweakerMoreIRenderer, IClientTickHandle
 {
 	private static final InfoViewRenderer INSTANCE = new InfoViewRenderer();
 	private static final List<AbstractInfoViewer> CONTENT_PREVIEWERS = Lists.newArrayList(
-			new RedstoneDustUpdateOrderRenderer(),
+			new BeaconEffectRenderer(),
 			new CommandBlockContentRenderer(),
-			new RespawnBlockExplosionViewer(),
-			new BeaconEffectRenderer()
+			new ComparatorLevelRenderer(),
+			new RedstoneDustUpdateOrderRenderer(),
+			new RespawnBlockExplosionViewer()
 	);
 
 	private InfoViewRenderer()

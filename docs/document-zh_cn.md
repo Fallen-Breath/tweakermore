@@ -268,7 +268,7 @@ TweakerMore提供的新功能
 
 ### 信息展示-信标-渲染策略 (infoViewBeaconRenderStrategy)
 
-选项infoViewBeacon的渲染策略
+选项信息展示-信标的渲染策略
 
 - 分类: 功能
 - 类型: 选项列表 (列表)
@@ -278,7 +278,7 @@ TweakerMore提供的新功能
 
 ### 信息展示-信标-目标策略 (infoViewBeaconTargetStrategy)
 
-选项infoViewBeacon的目标选择策略
+选项信息展示-信标的目标选择策略
 
 - 分类: 功能
 - 类型: 选项列表 (列表)
@@ -354,6 +354,35 @@ TweakerMore提供的新功能
 - 默认值: `1.0`
 - 最小值: `0.1`
 - 最大值: `3.0`
+
+
+### 信息展示-比较器 (infoViewComparator)
+
+展示比较器的信号强度
+
+- 分类: 功能
+- 类型: 带热键布尔值 (工具)
+- 默认值: *无快捷键*, `false`
+
+
+### 信息展示-比较器-渲染策略 (infoViewComparatorRenderStrategy)
+
+选项信息展示-比较器的渲染策略
+
+- 分类: 功能
+- 类型: 选项列表 (列表)
+- 默认值: `总是`
+- 可用选项: `按住展示热键`, `总是`
+
+
+### 信息展示-比较器-目标策略 (infoViewComparatorTargetStrategy)
+
+选项信息展示-比较器的目标选择策略
+
+- 分类: 功能
+- 类型: 选项列表 (列表)
+- 默认值: `光束`
+- 可用选项: `指向`, `光束`
 
 
 ### 信息展示-红石粉更新顺序 (infoViewRedstoneDustUpdateOrder)

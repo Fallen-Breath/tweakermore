@@ -356,6 +356,35 @@ Scale of the displayed text rendered by infoViewCommandBlock
 - Maximum value: `3.0`
 
 
+### infoViewComparator
+
+View the signal level of beacons
+
+- Category: Features
+- Type: hotkey togglable boolean (Tweak)
+- Default value: *no hotkey*, `false`
+
+
+### infoViewComparatorRenderST (infoViewComparatorRenderStrategy)
+
+The view rendering strategy of infoViewComparator
+
+- Category: Features
+- Type: option list (List)
+- Default value: `Always`
+- Available options: `View hotkey held`, `Always`
+
+
+### infoViewComparatorTargetST (infoViewComparatorTargetStrategy)
+
+The target selecting strategy of infoViewComparator
+
+- Category: Features
+- Type: option list (List)
+- Default value: `Beam`
+- Available options: `Pointed`, `Beam`
+
+
 ### infoViewRedstoneDustUpdateOrder
 
 Show the block update order of the redstone dust

@@ -112,10 +112,19 @@ tweakermore:
       comment: 展示信标的状态效果
     infoViewBeaconRenderStrategy:
       .: 信息展示-信标-渲染策略
-      comment: 选项infoViewBeacon的渲染策略
+      comment: 选项@option#infoViewBeacon@的渲染策略
     infoViewBeaconTargetStrategy:
       .: 信息展示-信标-目标策略
-      comment: 选项infoViewBeacon的目标选择策略
+      comment: 选项@option#infoViewBeacon@的目标选择策略
+    infoViewComparator:
+      .: 信息展示-比较器
+      comment: 展示比较器的信号强度
+    infoViewComparatorRenderStrategy:
+      .: 信息展示-比较器-渲染策略
+      comment: 选项@option#infoViewComparator@的渲染策略
+    infoViewComparatorTargetStrategy:
+      .: 信息展示-比较器-目标策略
+      comment: 选项@option#infoViewComparator@的目标选择策略
     infoViewCommandBlock:
       .: 信息展示-命令方块
       comment: |-
