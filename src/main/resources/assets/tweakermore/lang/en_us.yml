@@ -118,7 +118,9 @@ tweakermore:
       comment: The target selecting strategy of @option#infoViewBeacon@
     infoViewComparator:
       .: infoViewComparator
-      comment: View the signal level of beacons
+      comment: |
+        View the signal level of comparator
+        In multiplayer server, comparator block entity data can be synced to client using option @option#serverDataSyncer@
     infoViewComparatorRenderStrategy:
       .: infoViewComparatorRenderST
       comment: The view rendering strategy of @option#infoViewComparator@
@@ -143,6 +145,17 @@ tweakermore:
     infoViewCommandBlockTextScale:
       .: infoViewCommandBlockTextScale
       comment: Scale of the displayed text rendered by @option#infoViewCommandBlock@
+    infoViewHopper:
+      .: infoViewHopper
+      comment: |
+        View the cooldown of hopper
+        In multiplayer server, hopper block entity data can be synced to client using option @option#serverDataSyncer@
+    infoViewHopperRenderStrategy:
+      .: infoViewHopperRenderST
+      comment: The view rendering strategy of @option#infoViewHopper@
+    infoViewHopperTargetStrategy:
+      .: infoViewHopperTargetST
+      comment: The target selecting strategy of @option#infoViewHopper@
     infoViewRedstoneDustUpdateOrder:
       .: infoViewRedstoneDustUpdateOrder
       comment: Show the block update order of the redstone dust

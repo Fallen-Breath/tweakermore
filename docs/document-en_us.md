@@ -358,7 +358,11 @@ Scale of the displayed text rendered by infoViewCommandBlock
 
 ### infoViewComparator
 
-View the signal level of beacons
+View the signal level of comparator
+
+In multiplayer server, comparator block entity data can be synced to client using option serverDataSyncer
+
+
 
 - Category: Features
 - Type: hotkey togglable boolean (Tweak)
@@ -378,6 +382,39 @@ The view rendering strategy of infoViewComparator
 ### infoViewComparatorTargetST (infoViewComparatorTargetStrategy)
 
 The target selecting strategy of infoViewComparator
+
+- Category: Features
+- Type: option list (List)
+- Default value: `Beam`
+- Available options: `Pointed`, `Beam`
+
+
+### infoViewHopper
+
+View the cooldown of hopper
+
+In multiplayer server, hopper block entity data can be synced to client using option serverDataSyncer
+
+
+
+- Category: Features
+- Type: hotkey togglable boolean (Tweak)
+- Default value: *no hotkey*, `false`
+
+
+### infoViewHopperRenderST (infoViewHopperRenderStrategy)
+
+The view rendering strategy of infoViewHopper
+
+- Category: Features
+- Type: option list (List)
+- Default value: `Always`
+- Available options: `View hotkey held`, `Always`
+
+
+### infoViewHopperTargetST (infoViewHopperTargetStrategy)
+
+The target selecting strategy of infoViewHopper
 
 - Category: Features
 - Type: option list (List)

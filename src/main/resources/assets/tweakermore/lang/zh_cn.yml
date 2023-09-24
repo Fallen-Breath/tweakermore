@@ -118,7 +118,9 @@ tweakermore:
       comment: 选项@option#infoViewBeacon@的目标选择策略
     infoViewComparator:
       .: 信息展示-比较器
-      comment: 展示比较器的信号强度
+      comment: |-
+        展示比较器的信号强度
+        在多人服务器中，比较器方块实体的数据可以通过选项@option#serverDataSyncer@同步至客户端
     infoViewComparatorRenderStrategy:
       .: 信息展示-比较器-渲染策略
       comment: 选项@option#infoViewComparator@的渲染策略
@@ -143,6 +145,17 @@ tweakermore:
     infoViewCommandBlockTextScale:
       .: 信息展示-命令方块-文本缩放
       comment: 选项@option#infoViewCommandBlock@渲染的文本的缩放比例
+    infoViewHopper:
+      .: 信息展示-漏斗
+      comment: |-
+        展示漏斗的冷却时间
+        在多人服务器中，漏斗方块实体的数据可以通过选项@option#serverDataSyncer@同步至客户端
+    infoViewHopperRenderStrategy:
+      .: 信息展示-漏斗-渲染策略
+      comment: 选项@option#infoViewComparator@的渲染策略
+    infoViewHopperTargetStrategy:
+      .: 信息展示-漏斗-目标策略
+      comment: 选项@option#infoViewComparator@的目标选择策略
     infoViewRedstoneDustUpdateOrder:
       .: 信息展示-红石粉更新顺序
       comment: 展示红石粉的方块更新顺序

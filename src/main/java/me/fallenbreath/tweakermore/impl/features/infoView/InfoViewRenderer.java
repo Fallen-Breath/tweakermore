@@ -30,6 +30,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.beacon.BeaconEffectRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.commandBlock.CommandBlockContentRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.comparator.ComparatorLevelRenderer;
+import me.fallenbreath.tweakermore.impl.features.infoView.hopper.HopperCooldownRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.redstoneDust.RedstoneDustUpdateOrderRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.RespawnBlockExplosionViewer;
 import me.fallenbreath.tweakermore.util.FabricUtil;
@@ -62,6 +63,7 @@ public class InfoViewRenderer implements TweakerMoreIRenderer, IClientTickHandle
 			new BeaconEffectRenderer(),
 			new CommandBlockContentRenderer(),
 			new ComparatorLevelRenderer(),
+			new HopperCooldownRenderer(),
 			new RedstoneDustUpdateOrderRenderer(),
 			new RespawnBlockExplosionViewer()
 	);
