@@ -26,15 +26,13 @@ jobs:
           java-version: 17
 
       - name: Cache gradle files
-        uses: actions/cache@v3
+        uses: maxnowack/local-cache@v1
         with:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
             ./.gradle/loom-cache
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle', '**/gradle.properties', '**/*.accesswidener', 'settings.json') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
 
       - name: Build with gradle
         run: |
@@ -73,7 +71,7 @@ jobs:
           FALLENS_MAVEN_TOKEN: ${{ secrets.FALLENS_MAVEN_TOKEN }}
 
   summary:
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
     needs:
       - build
 
