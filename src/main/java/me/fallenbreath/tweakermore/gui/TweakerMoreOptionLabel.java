@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.gui;
 import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.StringUtil;
 
 import java.util.Arrays;
@@ -34,7 +35,6 @@ import java.util.function.Function;
  */
 public class TweakerMoreOptionLabel extends WidgetLabel
 {
-	public static final double TRANSLATION_SCALE = 0.65;
 	private final String[] originalLines;
 	private final boolean showOriginalLines;
 
@@ -59,6 +59,11 @@ public class TweakerMoreOptionLabel extends WidgetLabel
 		}
 	}
 
+	public static double getConfigOriginalNameScale()
+	{
+		return TweakerMoreConfigs.CONFIG_ORIGINAL_NAME_SCALE.getDoubleValue();
+	}
+
 	public static boolean willShowOriginalLines(String[] displayLines, String[] originalLines)
 	{
 		return !Arrays.equals(
@@ -77,6 +82,6 @@ public class TweakerMoreOptionLabel extends WidgetLabel
 
 	public boolean shouldShowOriginalLines()
 	{
-		return this.showOriginalLines;
+		return this.showOriginalLines && getConfigOriginalNameScale() > 0;
 	}
 }

@@ -724,6 +724,9 @@ tweakermore:
 
     # ================================ Setting ================================
 
+    configOriginalNameScale:
+      .: configOriginalNameScale
+      comment: The scaling factor of the original text label in the option list GUI
     hideDisabledOptions:
       .: hideDisabledOptions
       comment: Hide options which are disabled due to mod relations unsatisfied in the config GUI

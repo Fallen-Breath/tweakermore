@@ -62,6 +62,12 @@ public abstract class WidgetListConfigOptionsMixin extends WidgetListConfigOptio
 	{
 		if (this.parent instanceof TweakerMoreConfigGui || TweakerMoreConfigs.APPLY_TWEAKERMORE_OPTION_LABEL_GLOBALLY.getBooleanValue())
 		{
+			double scale = TweakerMoreOptionLabel.getConfigOriginalNameScale();
+			if (scale <= 0)
+			{
+				return;
+			}
+
 			int maxWidth = 0;
 			for (GuiConfigsBase.ConfigOptionWrapper wrapper : wrappers)
 			{
@@ -71,7 +77,7 @@ public abstract class WidgetListConfigOptionsMixin extends WidgetListConfigOptio
 					maxWidth = Math.max(maxWidth, this.getStringWidth(config.getConfigGuiDisplayName()));
 					if (TweakerMoreOptionLabel.willShowOriginalLines(new String[]{config.getConfigGuiDisplayName()}, new String[]{config.getName()}))
 					{
-						maxWidth = Math.max(maxWidth, (int)Math.ceil(this.getStringWidth(config.getName()) * TweakerMoreOptionLabel.TRANSLATION_SCALE));
+						maxWidth = Math.max(maxWidth, (int)Math.ceil(this.getStringWidth(config.getName()) * scale));
 					}
 				}
 			}

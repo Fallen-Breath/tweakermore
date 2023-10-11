@@ -1944,6 +1944,17 @@ Also fixes the nether portal overlay fails to be displayed with this option on
 
 Settings of TweakMore itself
 
+### configOriginalNameScale
+
+The scaling factor of the original text label in the option list GUI
+
+- Category: Setting
+- Type: double (Generic)
+- Default value: `0.65`
+- Minimum value: `0.0`
+- Maximum value: `1.0`
+
+
 ### hideDisabledOptions
 
 Hide options which are disabled due to mod relations unsatisfied in the config GUI

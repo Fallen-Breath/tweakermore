@@ -727,6 +727,9 @@ public class TweakerMoreConfigs
 	//////////////////////////
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.SETTING)
+	public static final TweakerMoreConfigDouble CONFIG_ORIGINAL_NAME_SCALE = newConfigDouble("configOriginalNameScale", 0.65, 0, 1);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.SETTING)
 	public static final TweakerMoreConfigBoolean HIDE_DISABLE_OPTIONS = newConfigBoolean("hideDisabledOptions", false);
 
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.SETTING)

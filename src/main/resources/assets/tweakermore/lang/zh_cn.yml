@@ -724,6 +724,9 @@ tweakermore:
 
     # ================================ Setting ================================
 
+    configOriginalNameScale:
+      .: 选项原名缩放
+      comment: 配置界面中，选项原始文本的缩放比例
     hideDisabledOptions:
       .: 隐藏禁用的选项
       comment: 在配置界面中隐藏因模组约束关系不被满足而被禁用的选项

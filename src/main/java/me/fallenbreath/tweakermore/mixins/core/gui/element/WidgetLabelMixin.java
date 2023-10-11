@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.mixins.core.gui.element;
 import fi.dy.masa.malilib.gui.widgets.WidgetBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
 import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
+import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -81,7 +82,12 @@ public abstract class WidgetLabelMixin extends WidgetBase
 	{
 		if (this.shouldUseTranslatedOptionLabelLogic())
 		{
-			yTextStart -= this.fontHeight * TweakerMoreOptionLabel.TRANSLATION_SCALE * 0.6;
+			double scale = TweakerMoreOptionLabel.getConfigOriginalNameScale();
+			if (scale > 0)
+			{
+				double deltaK = -0.1 / 0.35 * scale + 0.1 / 0.35 + 0.5;
+				yTextStart -= (int)(this.fontHeight * scale * deltaK);
+			}
 		}
 		return yTextStart;
 	}
@@ -113,13 +119,13 @@ public abstract class WidgetLabelMixin extends WidgetBase
 			int fontHeight, int yCenter, int yTextStart, int i, String text
 	)
 	{
-		if (this.shouldUseTranslatedOptionLabelLogic())
+		double scale = TweakerMoreOptionLabel.getConfigOriginalNameScale();
+		if (this.shouldUseTranslatedOptionLabelLogic() && scale > 0)
 		{
 			int color = darkerColor(this.textColor);
-			double scale = TweakerMoreOptionLabel.TRANSLATION_SCALE;
 			String originText = ((TweakerMoreOptionLabel)(Object)this).getOriginalLines()[i];
-			int x = this.x + (this.centered ? this.width / 2 : 0);
-			int y = (int)(yTextStart + (this.labels.size() + i * scale + 0.2) * fontHeight);
+			double x = this.x + (this.centered ? this.width / 2.0 : 0);
+			double y = (int)(yTextStart + (this.labels.size() + i * scale + 0.2) * fontHeight);
 
 			RenderContext renderContext = RenderContext.of(
 					//#if MC >= 11600
@@ -136,7 +142,7 @@ public abstract class WidgetLabelMixin extends WidgetBase
 			if (this.centered)
 			{
 				this.drawCenteredStringWithShadow(
-						x, y, color, originText
+						(int)x, (int)y, color, originText
 						//#if MC >= 11600
 						//$$ , matrixStackOrDrawContext
 						//#endif
@@ -145,7 +151,7 @@ public abstract class WidgetLabelMixin extends WidgetBase
 			else
 			{
 				this.drawStringWithShadow(
-						x, y, color, originText
+						(int)x, (int)y, color, originText
 						//#if MC >= 11600
 						//$$ , matrixStackOrDrawContext
 						//#endif
