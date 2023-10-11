@@ -85,7 +85,7 @@ dependencies {
 	testImplementation "junit:junit:${project.junit_version}"
 }
 
-String MIXIN_CONFIG_PATHS = ['tweakermore.mixins.json', 'tweakermore.optifine_mixins.json']
+def MIXIN_CONFIG_PATHS = ['tweakermore.mixins.json', 'tweakermore.optifine_mixins.json']
 String LANG_DIR = 'assets/tweakermore/lang'
 JavaVersion JAVA_COMPATIBILITY
 if (mcVersion >= 11800) {
