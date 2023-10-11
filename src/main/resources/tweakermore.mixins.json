@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "me.fallenbreath.tweakermore.mixins",
   "plugin": "me.fallenbreath.tweakermore.util.mixin.TweakerMoreMixinConfigPlugin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "{{COMPATIBILITY_LEVEL}}",
   "mixins": [
     "core.config.ConfigBaseMixin",
     "core.gui.access.KeybindMultiAccessor",

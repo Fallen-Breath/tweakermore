@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "me.fallenbreath.tweakermore.mixins",
   "plugin": "me.fallenbreath.tweakermore.util.mixin.TweakerMoreOptifineMixinConfigPlugin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "{{COMPATIBILITY_LEVEL}}",
   "mixins": [
     "tweaks.mod_tweaks.ofPlayerExtraModelOverride.PlayerConfigurationParserMixin",
     "tweaks.mod_tweaks.ofPlayerExtraModelOverride.PlayerConfigurationReceiverMixin",
