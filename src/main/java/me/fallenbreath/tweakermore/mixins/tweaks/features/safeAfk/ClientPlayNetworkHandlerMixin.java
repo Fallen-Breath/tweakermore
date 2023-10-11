@@ -24,15 +24,32 @@ import me.fallenbreath.tweakermore.impl.features.safeAfk.SafeAfkHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//#if MC >= 12002
+//$$ import net.minecraft.client.network.ClientCommonNetworkHandler;
+//$$ import net.minecraft.client.network.ClientConnectionState;
+//$$ import net.minecraft.network.ClientConnection;
+//#else
+import org.spongepowered.asm.mixin.Shadow;
+//#endif
+
 @Mixin(ClientPlayNetworkHandler.class)
 public abstract class ClientPlayNetworkHandlerMixin
+		//#if MC >= 12002
+		//$$ extends ClientCommonNetworkHandler
+		//#endif
 {
+	//#if MC >= 12002
+	//$$ protected ClientPlayNetworkHandlerMixin(MinecraftClient client, ClientConnection connection, ClientConnectionState connectionState)
+	//$$ {
+	//$$ 	super(client, connection, connectionState);
+	//$$ }
+	//#else
 	@Shadow private MinecraftClient client;
+	//#endif
 
 	@Inject(method = "onHealthUpdate", at = @At("TAIL"))
 	private void tweakerMoreSafeAfkHook(CallbackInfo ci)

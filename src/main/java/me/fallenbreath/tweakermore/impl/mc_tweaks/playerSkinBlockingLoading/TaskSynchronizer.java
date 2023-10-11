@@ -32,7 +32,7 @@ public class TaskSynchronizer
 	}
 
 	/**
-	 * Submit a runnable to the client , to make the client wait for the execution of the given task
+	 * Submit a runnable to the client, to make the client wait for the execution of the given task
 	 * @param task a to-be-executed task
 	 */
 	public static Runnable createSyncedTask(Runnable task)
@@ -44,5 +44,15 @@ public class TaskSynchronizer
 		};
 		runOnClientThread(future::join);
 		return wrapper;
+	}
+
+	public static <T> CompletableFuture<T> createSyncedFuture(CompletableFuture<T> completableFuture)
+	{
+		CompletableFuture<Void> future = new CompletableFuture<>();
+		runOnClientThread(future::join);
+		return completableFuture.thenApply(v -> {
+			future.complete(null);
+			return v;
+		});
 	}
 }

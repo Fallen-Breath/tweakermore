@@ -35,15 +35,38 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.UUID;
 
+//#if MC >= 12002
+//$$ import net.minecraft.client.util.SkinTextures;
+//#endif
+
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.19.3"))
 @Mixin(DefaultSkinHelper.class)
 public abstract class DefaultSkinHelperMixin
 {
 	@Shadow @Final
+	//#if MC >= 12002
+	//$$ private static SkinTextures[] SKINS;
+	//#else
 	private static DefaultSkinHelper.Skin[] SKINS;
+	//#endif
 
-	@Inject(method = "getSkin", at = @At("HEAD"), cancellable = true)
-	private static void steveAlexOnlyDefaultSkins_overrideAlgorithm(UUID uuid, CallbackInfoReturnable<DefaultSkinHelper.Skin> cir)
+	@Inject(
+			//#if MC >= 12002
+			//$$ method = "getSkinTextures(Ljava/util/UUID;)Lnet/minecraft/client/util/SkinTextures;",
+			//#else
+			method = "getSkin",
+			//#endif
+			at = @At("HEAD"),
+			cancellable = true
+	)
+	private static void steveAlexOnlyDefaultSkins_overrideAlgorithm(
+			UUID uuid,
+			//#if MC >= 12002
+			//$$ CallbackInfoReturnable<SkinTextures> cir
+			//#else
+			CallbackInfoReturnable<DefaultSkinHelper.Skin> cir
+			//#endif
+	)
 	{
 		if (TweakerMoreConfigs.STEVE_ALEX_ONLY_DEFAULT_SKINS.getBooleanValue())
 		{

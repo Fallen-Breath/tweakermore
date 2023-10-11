@@ -18,29 +18,16 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.impl.mod_tweaks.eprHideOnDebugHud;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.serverMsptMetricsStatistic;
 
-import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.MinecraftClient;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
+import me.fallenbreath.tweakermore.util.ModIds;
+import me.fallenbreath.tweakermore.util.mixin.DummyClass;
+import org.spongepowered.asm.mixin.Mixin;
 
-public class EprHideOnDebugHudImpl
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.20.2"))
+@Mixin(DummyClass.class)
+public abstract class DebugChartAccessor
 {
-	public static void applyHide(CallbackInfo ci)
-	{
-		if (TweakerMoreConfigs.EPR_HIDE_ON_DEBUG_HUD.getBooleanValue())
-		{
-			MinecraftClient mc = MinecraftClient.getInstance();
-			if (
-					//#if MC >= 12002
-					//$$ mc.getDebugHud().shouldShowDebugHud()
-					//#else
-					mc.options.debugEnabled
-					//#endif
-			)
-			{
-				ci.cancel();
-			}
-		}
-	}
 }

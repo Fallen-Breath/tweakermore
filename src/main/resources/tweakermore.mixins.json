@@ -46,6 +46,7 @@
     "tweaks.features.schematicProPlace.CoralFanBlockAccessor",
     "tweaks.features.schematicProPlace.CoralWallFanBlockAccessor",
     "tweaks.features.schematicProPlace.PlacementTweaksMixin",
+    "tweaks.features.serverMsptMetricsStatistic.DebugChartAccessor",
     "tweaks.features.serverMsptMetricsStatistic.DebugHudMixin",
     "tweaks.features.serverMsptMetricsStatistic.MetricsDataMixin",
     "tweaks.features.serverMsptMetricsStatistic.MinecraftServerMixin",

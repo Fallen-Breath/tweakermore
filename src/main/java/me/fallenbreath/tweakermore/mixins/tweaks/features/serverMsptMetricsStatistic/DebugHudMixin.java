@@ -25,6 +25,7 @@ import me.fallenbreath.tweakermore.impl.features.serverMsptMetricsStatistic.Rich
 import net.minecraft.client.gui.hud.DebugHud;
 import net.minecraft.util.MetricsData;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -36,10 +37,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //#endif
 
+/**
+ * <= mc1.20.1: subproject 1.15.2 (main project)        <--------
+ * >= mc1.20.2: subproject 1.20.2
+ */
 @Mixin(DebugHud.class)
 public abstract class DebugHudMixin
 {
-	private MetricsData originMetricsData$TKM = null;
+	@Unique private MetricsData originMetricsData$TKM = null;
 
 	@ModifyVariable(method = "drawMetricsData", at = @At("HEAD"), argsOnly = true)
 	private MetricsData serverMsptMetricsStatistic_modify(

@@ -48,7 +48,13 @@ public abstract class AbstractMinecartEntityMixin extends Entity
 			//#endif
 
 	@Inject(method = "updateTrackedPositionAndAngles", at = @At("TAIL"))
-	private void disableEntityRenderInterpolation_noExtraInterpolationSteps(double x, double y, double z, float yaw, float pitch, int interpolationSteps, boolean interpolate, CallbackInfo ci)
+	private void disableEntityRenderInterpolation_noExtraInterpolationSteps(
+			double x, double y, double z, float yaw, float pitch, int interpolationSteps,
+			//#if MC < 12002
+			boolean interpolate,
+			//#endif
+			CallbackInfo ci
+	)
 	{
 		if (TweakerMoreConfigs.DISABLE_ENTITY_RENDER_INTERPOLATION.getBooleanValue())
 		{
@@ -60,7 +66,12 @@ public abstract class AbstractMinecartEntityMixin extends Entity
 
 			if (DisableEntityRenderInterpolationHelper.shouldUpdatePositionOrAnglesDirectly())
 			{
-				super.updateTrackedPositionAndAngles(x, y, z, yaw, pitch, interpolationSteps, interpolate);
+				super.updateTrackedPositionAndAngles(
+						x, y, z, yaw, pitch, interpolationSteps
+						//#if MC < 12002
+						, interpolate
+						//#endif
+				);
 			}
 		}
 	}

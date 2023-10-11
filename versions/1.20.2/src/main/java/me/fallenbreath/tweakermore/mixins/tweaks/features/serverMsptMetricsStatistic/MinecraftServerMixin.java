@@ -18,29 +18,15 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.impl.mod_tweaks.eprHideOnDebugHud;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.serverMsptMetricsStatistic;
 
-import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.MinecraftClient;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import me.fallenbreath.tweakermore.util.mixin.DummyClass;
+import org.spongepowered.asm.mixin.Mixin;
 
-public class EprHideOnDebugHudImpl
+/**
+ * See {@link DebugHudMixin#enableRichStatisticForTickNanosLog}
+ */
+@Mixin(DummyClass.class)
+public abstract class MinecraftServerMixin
 {
-	public static void applyHide(CallbackInfo ci)
-	{
-		if (TweakerMoreConfigs.EPR_HIDE_ON_DEBUG_HUD.getBooleanValue())
-		{
-			MinecraftClient mc = MinecraftClient.getInstance();
-			if (
-					//#if MC >= 12002
-					//$$ mc.getDebugHud().shouldShowDebugHud()
-					//#else
-					mc.options.debugEnabled
-					//#endif
-			)
-			{
-				ci.cancel();
-			}
-		}
-	}
 }

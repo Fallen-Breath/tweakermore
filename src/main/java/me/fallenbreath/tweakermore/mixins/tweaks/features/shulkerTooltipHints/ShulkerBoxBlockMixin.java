@@ -20,6 +20,8 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.features.shulkerTooltipHints;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.ModifyReceiver;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerTooltipHints.ShulkerToolTipEnhancer;
 import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.client.item.TooltipContext;
@@ -29,8 +31,10 @@ import net.minecraft.text.Text;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.world.BlockView;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
@@ -45,7 +49,9 @@ import java.util.List;
 @Mixin(ShulkerBoxBlock.class)
 public abstract class ShulkerBoxBlockMixin
 {
-	@Inject(
+	@Unique private ItemStack currentItemStack = null;
+
+	@ModifyReceiver(
 			//#if MC >= 11600
 			//$$ method = "appendTooltip",
 			//#else
@@ -54,27 +60,54 @@ public abstract class ShulkerBoxBlockMixin
 			slice = @Slice(
 					from = @At(
 							value = "CONSTANT",
+							args = "stringValue=Items"
+					)
+			),
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/item/ItemStack;isEmpty()Z",
+					ordinal = 0
+			)
+	)
+	private ItemStack shulkerTooltipHints_storeCurrentItemStack(ItemStack itemStack)
+	{
+		this.currentItemStack = itemStack;
+		return itemStack;
+	}
+
+	@ModifyArg(
+			//#if MC >= 11600
+			//$$ method = "appendTooltip",
+			//#else
+			method = "buildTooltip",
+			//#endif
+			slice = @Slice(
+					from = @At(
+							value = "CONSTANT",
+							//#if MC >= 11600
+							//$$ args = "stringValue=container.shulkerBox.itemCount"
+							//#else
 							args = "stringValue= x"
+							//#endif
 					)
 			),
 			at = @At(
 					value = "INVOKE",
 					target = "Ljava/util/List;add(Ljava/lang/Object;)Z",
 					ordinal = 0
-			),
-			locals = LocalCapture.CAPTURE_FAILHARD
+			)
 	)
-	private void shulkerTooltipHints(
-			ItemStack shulker, BlockView view, List<Text> tooltip, TooltipContext options,
-			CallbackInfo ci,
-			CompoundTag compoundTag, DefaultedList<ItemStack> defaultedList, int i_, int j_, Iterator<ItemStack> var9, ItemStack itemStack,
-			//#if MC >= 11600
-			//$$ MutableText text
-			//#else
-			Text text
-			//#endif
-	)
+	private Object shulkerTooltipHints(Object textObj)
 	{
-		ShulkerToolTipEnhancer.appendContentHints(itemStack, text);
+		if (this.currentItemStack != null)
+		{
+			//#if MC >= 11600
+			//$$ MutableText text = (MutableText)textObj;
+			//#else
+			Text text = (Text)textObj;
+			//#endif
+			ShulkerToolTipEnhancer.appendContentHints(this.currentItemStack, text);
+		}
+		return textObj;
 	}
 }

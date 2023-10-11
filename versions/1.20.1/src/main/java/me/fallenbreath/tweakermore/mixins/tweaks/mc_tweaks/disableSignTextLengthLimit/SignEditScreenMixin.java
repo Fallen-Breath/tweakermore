@@ -100,7 +100,13 @@ public abstract class SignEditScreenMixin extends Screen
 			),
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
-	private void drawLineOverflowHint(DrawContext context, CallbackInfo ci, Vector3f vector3f, int i, boolean bl, int j, int k, int l, int m, int lineIdx, String string, int xStart)
+	private void drawLineOverflowHint(
+			DrawContext context, CallbackInfo ci,
+			//#if MC < 12002
+			Vector3f vector3f,
+			//#endif
+			int i, boolean bl, int j, int k, int l, int m, int lineIdx, String string, int xStart
+	)
 	{
 		if (TweakerMoreConfigs.DISABLE_SIGN_TEXT_LENGTH_LIMIT.getBooleanValue())
 		{

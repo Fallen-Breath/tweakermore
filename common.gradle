@@ -35,7 +35,7 @@ def mod_dependencies = [
 		//   so we have to disable litematica in [1.15, 1.17) at runtime
 		["curse.maven:tweakeroo-297344:${project.tweakeroo_file_id}"       , true],
 		["curse.maven:item-scroller-242064:${project.itemscroller_file_id}", true],
-		["curse.maven:minihud-244260:${project.minihud_file_id}"           , true],
+		["curse.maven:minihud-244260:${project.minihud_file_id}"           , mcVersion < 12002],
 		["curse.maven:litematica-308892:${project.litematica_file_id}"     , mcVersion < 11500 || 11700 <= mcVersion],
 
 		// we're using modmenu for mc 1.15.2 for 1.14.4, so we use modCompileOnly
@@ -58,7 +58,7 @@ dependencies {
 
 	// compact stuffs
 	if (11700 <= mcVersion && mcVersion < 11800) {
-		configurations.all {
+		configurations.configureEach {
 			// 1.17 litematica mod crashes in dev env due to guava's version is set to 27.1-jre
 			resolutionStrategy.force 'com.google.guava:guava:21.0'
 		}

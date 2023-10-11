@@ -20,56 +20,36 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.playerSkinBlockingLoading;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.playerSkinBlockingLoading.TaskSynchronizer;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.texture.PlayerSkinProvider;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-//#if MC >= 11500
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
-//#else
-//$$ import org.spongepowered.asm.mixin.injection.ModifyArg;
-//#endif
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Custom skin loader mod @Overwrite / @Inject cancel onto the loadSkin method
  * So don't apply mixin when that mod is loaded
  * <p>
  * Versions:
- *   mc1.19.3 ~ mc1.20.1: subproject 1.15.2 (main project)        <--------
- *   >= mc1.20.2        : subproject 1.20.2
+ *   mc1.19.3 ~ mc1.20.1: subproject 1.15.2 (main project)
+ *   >= mc1.20.2        : subproject 1.20.2        <--------
  */
 @Restriction(conflict = @Condition(ModIds.custom_skin_loader))
-@Mixin(PlayerSkinProvider.class)
+@Mixin(targets = "net/minecraft/client/texture/PlayerSkinProvider$1")  // the CacheLoader subclass in PlayerSkinProvider's constructor
 public abstract class PlayerSkinProviderMixin
 {
-	//#if MC >= 11500
-	@ModifyVariable(
-	//#else
-	//$$ @ModifyArg(
-	//#endif
-			method = "loadSkin(Lcom/mojang/authlib/GameProfile;Lnet/minecraft/client/texture/PlayerSkinProvider$SkinTextureAvailableCallback;Z)V",
-			at = @At(
-					value = "INVOKE",
-					//#if MC >= 11800
-					//$$ target = "Lnet/minecraft/util/Util;getMainWorkerExecutor()Ljava/util/concurrent/ExecutorService;"
-					//#elseif MC >= 11500
-					target = "Lnet/minecraft/util/Util;getServerWorkerExecutor()Ljava/util/concurrent/Executor;"
-					//#else
-					//$$ target = "Ljava/util/concurrent/ExecutorService;submit(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;"
-					//#endif
-			)
-	)
-	private Runnable playerSkinBlockingLoading_blockingProfileFetching(Runnable runnable)
+	@ModifyReturnValue(method = "load(Ljava/lang/Object;)Ljava/lang/Object;", at = @At(value = "TAIL"))
+	private Object playerSkinBlockingLoading_blockingProfileFetching(Object completableFuture)
 	{
 		if (TweakerMoreConfigs.PLAYER_SKIN_BLOCKING_LOADING.getBooleanValue())
 		{
-			runnable = TaskSynchronizer.createSyncedTask(runnable);
+			completableFuture = TaskSynchronizer.createSyncedFuture((CompletableFuture<?>)completableFuture);
 		}
-		return runnable;
+		return completableFuture;
 	}
 }
