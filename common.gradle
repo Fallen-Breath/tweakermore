@@ -108,7 +108,7 @@ loom {
 		ideConfigGenerated = true
 	}
 	runs {
-		mixinAuditClient {
+		clientMixinAudit {
 			client()
 			vmArgs '-Dtweakermore.mixin_audit=true'
 			ideConfigGenerated false
