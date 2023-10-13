@@ -25,6 +25,7 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
+import me.fallenbreath.tweakermore.util.mixin.testers.XaeroCommonMinimapWaypointsIngameRendererTester;
 import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
@@ -34,8 +35,8 @@ import org.spongepowered.asm.mixin.injection.Group;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Restriction(require = {
-		@Condition(ModIds.xaero_minimap),
 		@Condition(ModIds.tweakeroo),
+		@Condition(type = Condition.Type.TESTER, tester = XaeroCommonMinimapWaypointsIngameRendererTester.class),
 })
 @Pseudo
 @Mixin(targets = "xaero.common.minimap.waypoints.render.WaypointsIngameRenderer", remap = false)

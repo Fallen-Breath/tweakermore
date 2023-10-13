@@ -654,10 +654,10 @@ public class TweakerMoreConfigs
 
 	@Config(
 			type = Config.Type.GENERIC,
-			restriction = @Restriction(require = {
-					@Condition(xaero_minimap),
-					@Condition(tweakeroo),
-			}),
+			restriction = {
+					@Restriction(require = {@Condition(tweakeroo), @Condition(xaero_minimap)}),
+					@Restriction(require = {@Condition(tweakeroo), @Condition(xaero_betterpvp)}),
+			},
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigBoolean XMAP_WAYPOINT_FREECAM_COMPACT = newConfigBoolean("xmapWaypointFreecamCompact", false);
