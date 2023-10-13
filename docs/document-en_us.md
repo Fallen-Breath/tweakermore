@@ -1850,8 +1850,14 @@ Make the in-game waypoints render correctly when free camera from tweakeroo is e
 - Default value: `false`
 - Mod restrictions:
   - Required mods:
-    - tweakermore.util.mod.xaerominimap (`xaerominimap`)
     - Tweakeroo (`tweakeroo`)
+    - Xaero's Minimap (`xaerominimap`)
+
+  *or*
+
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
+    - Better PVP Mod (`xaerobetterpvp`)
 
 
 ## Porting
