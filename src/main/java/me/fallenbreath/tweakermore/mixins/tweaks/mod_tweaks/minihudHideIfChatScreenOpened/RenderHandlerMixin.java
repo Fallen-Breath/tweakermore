@@ -40,7 +40,11 @@ public abstract class RenderHandlerMixin
 			method = "onRenderGameOverlayPost",
 			at = @At(
 					value = "FIELD",
+					//#if MC >= 12002
+					//$$ target = "Lnet/minecraft/client/option/GameOptions;hudHidden:Z",
+					//#else
 					target = "Lnet/minecraft/client/options/GameOptions;debugEnabled:Z",
+					//#endif
 					remap = true
 			),
 			cancellable = true,
