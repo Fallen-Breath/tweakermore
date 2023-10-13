@@ -23,6 +23,9 @@ repositories {
 	maven {
 		url 'https://jitpack.io'
 	}
+	maven {
+		url 'https://maven.fallenbreath.me/releases'
+	}
 }
 
 // list of (dependencyNotation -> should use modImplementation)
@@ -80,7 +83,7 @@ dependencies {
 	}
 
 	// libraries
-	include(modImplementation("com.github.Fallen-Breath:conditional-mixin:${project.conditionalmixin_version}"))
+	include(modImplementation("me.fallenbreath:conditional-mixin:${project.conditionalmixin_version}"))
 	annotationProcessor(include(implementation("com.github.LlamaLad7:MixinExtras:${project.mixin_extra_version}")))
 	testImplementation "junit:junit:${project.junit_version}"
 }
