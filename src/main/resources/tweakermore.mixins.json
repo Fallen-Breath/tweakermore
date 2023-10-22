@@ -61,6 +61,7 @@
     "tweaks.mc_tweaks.bossBarMaxEntry.BossBarHudMixin",
     "tweaks.mc_tweaks.bossBarScale.BossBarHudMixin",
     "tweaks.mc_tweaks.chatMessageLimit.ChatHudMixin",
+    "tweaks.mc_tweaks.connectionProxy.ClientConnection_ChannelInitializerMixin",
     "tweaks.mc_tweaks.connectionSimulatedDelay.ClientConnection_ChannelInitializerMixin",
     "tweaks.mc_tweaks.daytimeOverride.ClientWorldMixin",
     "tweaks.mc_tweaks.daytimeOverride.WorldMixin",

@@ -45,6 +45,7 @@ import me.fallenbreath.tweakermore.impl.features.copySignTextToClipBoard.SignTex
 import me.fallenbreath.tweakermore.impl.features.infoView.InfoViewRenderer;
 import me.fallenbreath.tweakermore.impl.features.refreshInventory.InventoryRefresher;
 import me.fallenbreath.tweakermore.impl.features.schematicProPlace.ProPlaceImpl;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.connectionProxy.ConnectionProxyImpl;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.flawlessFrames.FlawlessFramesHandler;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.eCraftMassCraftCompact.EasierCraftingRegistrar;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.lmRemoveEntityCommand.LitematicaRemoveEntityCommandOverrider;
@@ -333,6 +334,12 @@ public class TweakerMoreConfigs
 			category = Config.Category.MC_TWEAKS
 	)
 	public static final TweakerMoreConfigInteger CHAT_MESSAGE_LIMIT = newConfigInteger("chatMessageLimit", 100, 100, 10000);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean CONNECTION_PROXY = newConfigBoolean("connectionProxy", false);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigString CONNECTION_PROXY_URL = newConfigString("connectionProxyUrl", "");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigInteger CONNECTION_SIMULATED_DELAY = newConfigInteger("connectionSimulatedDelay", 0, 0, 15_000);
@@ -781,6 +788,7 @@ public class TweakerMoreConfigs
 		setHotkeyCallback(REFRESH_INVENTORY, InventoryRefresher::refresh, false);
 
 		// value listeners
+		CONNECTION_PROXY_URL.setValueChangeCallback(ConnectionProxyImpl::onConfigValueChanged);
 		ECRAFT_ITEM_SCROLLER_COMPACT.setValueChangeCallback(EasierCraftingRegistrar::onConfigValueChanged);
 		HIDE_DISABLE_OPTIONS.setValueChangeCallback(redrawConfigGui);
 		LM_REMOVE_ENTITY_COMMAND.setValueChangeCallback(LitematicaRemoveEntityCommandOverrider::onCommandOverrideChanged);

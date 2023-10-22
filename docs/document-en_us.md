@@ -797,6 +797,40 @@ Modify the maximum number of history messages stored in the chat hud
     - Where's My Chat History (`wmch`)
 
 
+### connectionProxy
+
+The proxy url to be used for the connection to the Minecraft server
+
+This option is a switch. Set the actual url in option connectionProxyUrl
+
+Notes:
+
+- You need to configure the proxy before connecting to the server
+
+- The proxy only affects the connection to the server. Connections to Mojang Authentication servers are not affected
+
+Known issue: The server list screen might be come laggy, depends on the handshake time cost to the proxy server
+
+- Category: MC Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+
+
+### connectionProxyUrl
+
+Supported protocol: sock4, sock5, http
+
+Format: "procotol://[username:password@]hostname:port"
+
+Examples: "socks://localhost:1080", "http://foo:bar@192.168.1.1:8080"
+
+See also: connectionProxy
+
+- Category: MC Tweaks
+- Type: string (Generic)
+- Default value: ``
+
+
 ### connectionSimulatedDelay
 
 Client network delay simulator. Enabled when the value is greater than 0

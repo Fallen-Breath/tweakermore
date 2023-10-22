@@ -86,6 +86,20 @@ dependencies {
 	include(modImplementation("me.fallenbreath:conditional-mixin:${project.conditionalmixin_version}"))
 	annotationProcessor(include(implementation("com.github.LlamaLad7:MixinExtras:${project.mixin_extra_version}")))
 	testImplementation "junit:junit:${project.junit_version}"
+
+	// for option connectionProxy
+	if (mcVersion >= 11900) {
+		String nettyVersion
+		if (mcVersion >= 12002) {
+			nettyVersion = '4.1.97.Final'
+		} else if (mcVersion >= 11903) {
+			nettyVersion = '4.1.82.Final'
+		} else {
+			nettyVersion = '4.1.77.Final'
+		}
+		include(implementation("io.netty:netty-handler-proxy:${nettyVersion}"))
+		include(implementation("io.netty:netty-codec-http:${nettyVersion}"))
+	}
 }
 
 def MIXIN_CONFIG_PATHS = ['tweakermore.mixins.json', 'tweakermore.optifine_mixins.json']
