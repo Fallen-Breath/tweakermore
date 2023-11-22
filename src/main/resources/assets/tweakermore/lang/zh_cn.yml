@@ -305,6 +305,9 @@ tweakermore:
         客户端网络延迟模拟器，于给定值大于0时启用
         在任何数据包处理前插入给定的延迟 (单位毫秒)
         可以认为它会稳定地将你的网络延迟ping值增加给定的值
+    customPayloadMemoryLeakFix:
+      .: customPayload内存泄漏修复
+      comment: 修复CustomPayloadS2CPacket数据包中netty ByteBuf未被释放而导致的堆外内存泄露（MC-121884）
     daytimeOverride:
       .: 覆盖世界时间
       comment: |-

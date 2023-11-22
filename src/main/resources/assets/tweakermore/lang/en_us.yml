@@ -305,6 +305,9 @@ tweakermore:
         Client network delay simulator. Enabled when the value is greater than 0
         Adds given delay (in milliseconds) before any packet processing
         Basically it stably adds your ping to the server with the given value
+    customPayloadMemoryLeakFix:
+      .: customPayloadMemoryLeakFix
+      comment: Fixed un-released netty ByteBuf in CustomPayloadS2CPacket being causing off-heap memory leak (MC-121884)
     daytimeOverride:
       .: daytimeOverride
       comment: |-

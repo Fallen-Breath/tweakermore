@@ -821,6 +821,18 @@ Copy the data of the pointed item in the current gui to the clipboard, as a /giv
 - Default value: `F3,I`
 
 
+### customPayloadMemoryLeakFix
+
+Fixed un-released netty ByteBuf in CustomPayloadS2CPacket being causing off-heap memory leak (MC-121884)
+
+- Category: MC Tweaks
+- Type: boolean (Fix)
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Minecraft (`minecraft`) `<1.20.2`
+
+
 ### daytimeOverride
 
 Override the time of day in the client world
@@ -1898,7 +1910,7 @@ Backport option customSchematicBaseDirectory from Litematica 0.9.0 mc1.17+
 
 - Category: Porting
 - Type: string (Generic)
-- Default value: `D:\Codes\Minecraft\[Mod]\tweakermore\run\schematics`
+- Default value: `D:\Ext\repos\tweakermore\run\schematics`
 - Mod restrictions:
   - Required mods:
     - Litematica (`litematica`)

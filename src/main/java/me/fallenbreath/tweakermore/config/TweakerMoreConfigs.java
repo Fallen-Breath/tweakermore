@@ -337,6 +337,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigInteger CONNECTION_SIMULATED_DELAY = newConfigInteger("connectionSimulatedDelay", 0, 0, 15_000);
 
+	@Config(type = Config.Type.FIX, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = "<1.20.2")), category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean CUSTOM_PAYLOAD_MEMORY_LEAK_FIX = newConfigBoolean("customPayloadMemoryLeakFix", false);
+
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DAYTIME_OVERRIDE = newConfigBooleanHotkeyed("daytimeOverride");
 

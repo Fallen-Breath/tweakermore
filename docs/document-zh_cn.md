@@ -817,6 +817,18 @@ Copy the data of the pointed item in the current gui to the clipboard, as a /giv
 - 默认值: `F3,I`
 
 
+### customPayload内存泄漏修复 (customPayloadMemoryLeakFix)
+
+修复CustomPayloadS2CPacket数据包中netty ByteBuf未被释放而导致的堆外内存泄露（MC-121884）
+
+- 分类: MC修改
+- 类型: 布尔值 (修复)
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Minecraft (`minecraft`) `<1.20.2`
+
+
 ### 覆盖世界时间 (daytimeOverride)
 
 覆盖客户端中的世界时间
@@ -1894,7 +1906,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
 
 - 分类: 移植
 - 类型: 字符串 (通用)
-- 默认值: `D:\Codes\Minecraft\[Mod]\tweakermore\run\schematics`
+- 默认值: `D:\Ext\repos\tweakermore\run\schematics`
 - 模组约束:
   - 依赖模组:
     - Litematica (`litematica`)
