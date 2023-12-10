@@ -40,7 +40,11 @@ public abstract class BoatEntityMixin extends Entity
 		super(type, world);
 	}
 
+	//#if MC >= 12004
+	//$$ @Shadow private int lerpTicks;
+	//#else
 	@Shadow private int field_7708;
+	//#endif
 
 	@Inject(method = "updateTrackedPositionAndAngles", at = @At("TAIL"))
 	private void disableEntityRenderInterpolation_noExtraInterpolationSteps(
@@ -53,7 +57,11 @@ public abstract class BoatEntityMixin extends Entity
 	{
 		if (TweakerMoreConfigs.DISABLE_ENTITY_RENDER_INTERPOLATION.getBooleanValue())
 		{
+			//#if MC >= 12004
+			//$$ this.lerpTicks = 1;
+			//#else
 			this.field_7708 = 1;
+			//#endif
 
 			if (DisableEntityRenderInterpolationHelper.shouldUpdatePositionOrAnglesDirectly())
 			{

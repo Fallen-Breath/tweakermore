@@ -21,6 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableSignTextLengthLimit;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
@@ -37,6 +38,7 @@ import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -102,10 +104,8 @@ public abstract class SignEditScreenMixin extends Screen
 	)
 	private void drawLineOverflowHint(
 			DrawContext context, CallbackInfo ci,
-			//#if MC < 12002
-			Vector3f vector3f,
-			//#endif
-			int i, boolean bl, int j, int k, int l, int m, int lineIdx, String string, int xStart
+			@Local(ordinal = 5) int lineIdx,
+			@Local(ordinal = 6) int xStart
 	)
 	{
 		if (TweakerMoreConfigs.DISABLE_SIGN_TEXT_LENGTH_LIMIT.getBooleanValue())

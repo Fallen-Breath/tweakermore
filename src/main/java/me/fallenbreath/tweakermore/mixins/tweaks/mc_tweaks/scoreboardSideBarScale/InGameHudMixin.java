@@ -27,6 +27,7 @@ import net.minecraft.client.gui.hud.InGameHud;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -39,7 +40,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#endif
 
 //#if MC >= 11600
-//$$ import net.minecraft.scoreboard.ScoreboardObjective;
+//$$ import com.llamalad7.mixinextras.sugar.Local;
 //#endif
 
 @Mixin(InGameHud.class)
@@ -47,11 +48,16 @@ public abstract class InGameHudMixin
 {
 	@Shadow private int scaledWidth;
 
+	@Unique
 	@Nullable
 	private RenderUtil.Scaler scaler = null;
 
 	@ModifyVariable(
+			//#if MC >= 12004
+			//$$ method = "method_55440",  // lambda method as the context.draw() callback in method renderScoreboardSidebar
+			//#else
 			method = "renderScoreboardSidebar",
+			//#endif
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 11600
@@ -61,17 +67,14 @@ public abstract class InGameHudMixin
 					//#endif
 					ordinal = 0
 			),
-			ordinal = 3
+			ordinal = 3  // the lv that stores `this.scaledHeight / 2 + h / 3`
 	)
 	private int tweakerMore_scoreboardSideBarScale_push(
 			int centerY
 			//#if MC >= 12000
-			//$$ , DrawContext matrixStackOrDrawContext
+			//$$ , @Local(argsOnly = true) DrawContext matrixStackOrDrawContext
 			//#elseif MC >= 11600
-			//$$ , MatrixStack matrixStackOrDrawContext
-			//#endif
-			//#if MC >= 11600
-			//$$ , ScoreboardObjective objective
+			//$$ , @Local(argsOnly = true) MatrixStack matrixStackOrDrawContext
 			//#endif
 	)
 	{

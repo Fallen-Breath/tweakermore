@@ -56,7 +56,9 @@ public class SignTextCopier
 				BlockEntity blockEntity = mc.world.getBlockEntity(blockPos);
 				if (blockEntity instanceof SignBlockEntity)
 				{
-					//#if MC >= 12000
+					//#if MC >= 12004
+					//$$ Text[] texts = ((SignBlockEntity)blockEntity).getText(((SignBlockEntity)blockEntity).isPlayerFacingFront(player)).getMessages(false);
+					//#elseif MC >= 12000
 					//$$ Text[] texts = ((SignBlockEntity)blockEntity).getTextFacing(player).getMessages(false);
 					//#elseif MC >= 11600
 					//$$ Text[] texts = ((SignBlockEntityAccessor)blockEntity).getTexts();

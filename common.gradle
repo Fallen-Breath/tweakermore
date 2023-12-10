@@ -84,7 +84,7 @@ dependencies {
 
 	// libraries
 	include(modImplementation("me.fallenbreath:conditional-mixin:${project.conditionalmixin_version}"))
-	annotationProcessor(include(implementation("com.github.LlamaLad7:MixinExtras:${project.mixin_extra_version}")))
+	include(annotationProcessor(implementation("io.github.llamalad7:mixinextras-fabric:${project.mixinextras_version}")))
 	testImplementation "junit:junit:${project.junit_version}"
 }
 

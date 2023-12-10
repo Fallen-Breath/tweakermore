@@ -26,7 +26,6 @@ import me.fallenbreath.tweakermore.util.Messenger;
 import net.minecraft.item.*;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.text.BaseText;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,7 +44,16 @@ public class PotionHintBuilder extends AbstractHintBuilder
 			if (ratio > 0 && PotionUtil.getPotionEffects(itemStack).size() > 0)
 			{
 				List<Text> potionTexts = Lists.newArrayList();
-				PotionUtil.buildTooltip(itemStack, potionTexts, ratio);
+				//#if MC >= 12004
+				//$$ var world = net.minecraft.client.MinecraftClient.getInstance().world;
+				//$$ float tickRate = world != null ? world.getTickManager().getTickRate() : 20.0f;
+				//#endif
+				PotionUtil.buildTooltip(
+						itemStack, potionTexts, ratio
+						//#if MC >= 12004
+						//$$ , tickRate
+						//#endif
+				);
 
 				int i = 0;
 				BaseText newLine = Messenger.s("");
