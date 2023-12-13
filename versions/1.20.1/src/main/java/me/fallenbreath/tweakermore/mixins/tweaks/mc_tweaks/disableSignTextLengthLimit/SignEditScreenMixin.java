@@ -122,7 +122,10 @@ public abstract class SignEditScreenMixin extends Screen
 				if (overflowed)
 				{
 					assert Formatting.RED.getColorValue() != null;
-					context.drawText(this.textRenderer, "!", xStart - 10, lineIdx * 10 - textArrayLen * 5, Formatting.RED.getColorValue(), false);
+					int lineHeight = this.blockEntity.getTextLineHeight();
+					int x = xStart - 10;
+					int y = lineIdx * lineHeight - (4 * lineHeight / 2);
+					context.drawText(this.textRenderer, "!", x, y, Formatting.RED.getColorValue(), false);
 				}
 			}
 		}
