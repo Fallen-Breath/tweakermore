@@ -1244,6 +1244,34 @@ Reverted the change that Mojang applies in mc1.19.4-pre1
 ![potionItemShouldHaveEnchantmentGlint](assets/potionItemShouldHaveEnchantmentGlint.gif)
 
 
+### preciseItemEntityModel
+
+Precisely render the item entity model by:
+
+1. Removing the item's hovering and rotating animation
+
+2. Removing the extra stacked item models when the stack contains more than one item
+
+3. Adjusting the model's position and size to ensure the model matches the bounding box precisely
+
+4. Forcing the item model to face south, alternatively configurable with the option preciseItemEntityModelYawSnap
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean (Tweak)
+- Default value: *no hotkey*, `false`
+
+
+### preciseItemEntityModelYawSnap
+
+Works when the option preciseItemEntityModel is on
+
+Snaps the item model to face north, east, south, or west based on the entity's yaw
+
+- Category: MC Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+
+
 ### prioritizedCommandSuggestions
 
 Command suggestions in this list will be more forward in the command completion list

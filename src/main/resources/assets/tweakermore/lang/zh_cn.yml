@@ -488,6 +488,19 @@ tweakermore:
       comment: |-
         让具有效果的药水再次拥有附魔光效。闪闪发光的药水，好！
         撤销了Mojang在mc1.19.4-pre1版本中应用的药水物品渲染修改
+    preciseItemEntityModel:
+      .: 精准物品实体模型
+      comment: |-
+        通过以下手段，精准地渲染物品实体的模型：
+        1. 移除物品的上下悬浮和水平旋转动画
+        2. 当物品实体包含大于1个物品时，移除额外渲染的那些堆叠模型
+        3. 调整模型位置和大小，确保模型与物品实体的碰撞箱精确匹配
+        4. 强制物品模型面向南方。可以通过选项@option#preciseItemEntityModelYawSnap@来替代
+    preciseItemEntityModelYawSnap:
+      .: 精准物品实体模型-朝向吸附
+      comment: |-
+        仅在选项@option#preciseItemEntityModel@开启时生效
+        基于物品实体的朝向，将物品模型朝向往东南西北进行吸附对齐
     prioritizedCommandSuggestions:
       .: 指令补全优先列表
       comment: |-

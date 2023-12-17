@@ -1240,6 +1240,34 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 ![potionItemShouldHaveEnchantmentGlint](assets/potionItemShouldHaveEnchantmentGlint.gif)
 
 
+### 精准物品实体模型 (preciseItemEntityModel)
+
+通过以下手段，精准地渲染物品实体的模型：
+
+1. 移除物品的上下悬浮和水平旋转动画
+
+2. 当物品实体包含大于1个物品时，移除额外渲染的那些堆叠模型
+
+3. 调整模型位置和大小，确保模型与物品实体的碰撞箱精确匹配
+
+4. 强制物品模型面向南方。可以通过选项精准物品实体模型-朝向吸附来替代
+
+- 分类: MC修改
+- 类型: 带热键布尔值 (工具)
+- 默认值: *无快捷键*, `false`
+
+
+### 精准物品实体模型-朝向吸附 (preciseItemEntityModelYawSnap)
+
+仅在选项精准物品实体模型开启时生效
+
+基于物品实体的朝向，将物品模型朝向往东南西北进行吸附对齐
+
+- 分类: MC修改
+- 类型: 布尔值 (通用)
+- 默认值: `false`
+
+
 ### 指令补全优先列表 (prioritizedCommandSuggestions)
 
 此列表中的命令建议将在命令补全列表中更靠前

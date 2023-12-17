@@ -488,6 +488,19 @@ tweakermore:
       comment: |-
         Make potion items with effects have enchantment glint overlay again, shinny potions yes!
         Reverted the change that Mojang applies in mc1.19.4-pre1
+    preciseItemEntityModel:
+      .: preciseItemEntityModel
+      comment: |-
+        Precisely render the item entity model by:
+        1. Removing the item's hovering and rotating animation
+        2. Removing the extra stacked item models when the stack contains more than one item
+        3. Adjusting the model's position and size to ensure the model matches the bounding box precisely
+        4. Forcing the item model to face south, alternatively configurable with the option @option#preciseItemEntityModelYawSnap@
+    preciseItemEntityModelYawSnap:
+      .: preciseItemEntityModelYawSnap
+      comment: |-
+        Works when the option @option#preciseItemEntityModel@ is on
+        Snaps the item model to face north, east, south, or west based on the entity's yaw
     prioritizedCommandSuggestions:
       .: prioritizedCommandSuggestions
       comment: |-

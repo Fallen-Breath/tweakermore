@@ -442,6 +442,12 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.19.4")), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean POTION_ITEM_SHOULD_HAVE_ENCHANTMENT_GLINT = newConfigBoolean("potionItemShouldHaveEnchantmentGlint", false);
 
+	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed PRECISE_ITEM_ENTITY_MODEL = newConfigBooleanHotkeyed("preciseItemEntityModel");
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean PRECISE_ITEM_ENTITY_MODEL_YAW_SNAP = newConfigBoolean("preciseItemEntityModelYawSnap", false);
+
 	@Config(type = Config.Type.LIST, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigStringList PRIORITIZED_COMMAND_SUGGESTIONS = newConfigStringList("prioritizedCommandSuggestions", ImmutableList.of());
 
