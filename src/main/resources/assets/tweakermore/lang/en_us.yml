@@ -536,6 +536,12 @@ tweakermore:
     shulkerTooltipPotionInfoHint:
       .: shulkerTooltipPotionInfoHint
       comment: Display potion information of items in the tooltip of shulker box items
+    signEditScreenCancelButton:
+      .: signEditScreenCancelButton
+      comment: Add a cancel button to the sign edit screen that cancels the editing and discard all changes
+    signEditScreenEscDiscard:
+      .: signEditScreenEscDiscard
+      comment: When the sign edit screen is closed by ESC key, discard all changes made
     signMultilinePasteSupport:
       .: signMultilinePasteSupport
       comment: |-
@@ -923,15 +929,6 @@ tweakermore:
       invalid_command: Invalid command "%1$s", wrong value or not enough permission?
     refreshInventory:
       refreshed: Inventory refreshed
-    serverDataSyncer:
-      schematic_sync:
-        start: Syncing block entities and entities in the selection area %1$s
-        progress: Synced %1$s/%1$s block entities and %3$s/%4$s entities (%5$s)
-        synced: Synced %1$s block entities and %2$s entities from the server
-    serverMsptMetricsStatisticTypeCycle:
-      hint: 'Statistic type: %1$s'
-    shulkerTooltipHintBuilder:
-      more: '... %1$sx'
     safeAfk:
       received_damage: |-
         Received damage at %1$
@@ -949,6 +946,15 @@ tweakermore:
         interact_not_allow:
           not_allowed: operation not allowed
           property_protection: block property protection
+    serverDataSyncer:
+      schematic_sync:
+        start: Syncing block entities and entities in the selection area %1$s
+        progress: Synced %1$s/%1$s block entities and %3$s/%4$s entities (%5$s)
+        synced: Synced %1$s block entities and %2$s entities from the server
+    serverMsptMetricsStatisticTypeCycle:
+      hint: 'Statistic type: %1$s'
+    shulkerTooltipHintBuilder:
+      more: '... %1$sx'
     tweakerMoreDevMixinAudit:
       success: Mixin audit succeeded
 

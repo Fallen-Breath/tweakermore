@@ -1388,6 +1388,24 @@ Display potion information of items in the tooltip of shulker box items
 ![shulkerTooltipPotionInfoHint](assets/shulkerTooltipPotionInfoHint-en_us.png)
 
 
+### signEditScreenCancelButton
+
+Add a cancel button to the sign edit screen that cancels the editing and discard all changes
+
+- Category: MC Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+
+
+### signEditScreenEscDiscard
+
+When the sign edit screen is closed by ESC key, discard all changes made
+
+- Category: MC Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+
+
 ### signMultilinePasteSupport
 
 Add support for the sign editing screen

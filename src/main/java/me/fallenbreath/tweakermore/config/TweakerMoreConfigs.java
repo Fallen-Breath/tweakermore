@@ -476,6 +476,12 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBoolean SIGN_MULTILINE_PASTE_SUPPORT = newConfigBoolean("signMultilinePasteSupport", false);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean SIGN_EDIT_SCREEN_CANCEL_BUTTON = newConfigBoolean("signEditScreenCancelButton", false);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean SIGN_EDIT_SCREEN_ESC_DISCARD = newConfigBoolean("signEditScreenEscDiscard", false);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean SPECTATOR_TELEPORT_MENU_INCLUDE_SPECTATOR = newConfigBoolean("spectatorTeleportMenuIncludeSpectator", false);
 
 	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.19.3")), category = Config.Category.MC_TWEAKS)

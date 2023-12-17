@@ -1384,6 +1384,24 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 ![shulkerTooltipPotionInfoHint](assets/shulkerTooltipPotionInfoHint-zh_cn.png)
 
 
+### 告示牌编辑界面取消按钮 (signEditScreenCancelButton)
+
+在标牌编辑界面添加一个取消按钮，用于取消编辑并丢弃所有更改
+
+- 分类: MC修改
+- 类型: 布尔值 (通用)
+- 默认值: `false`
+
+
+### 告示牌编辑界面在ESC时丢弃更改 (signEditScreenEscDiscard)
+
+在告示牌编辑界面被ESC键关闭时，丢弃所有更改，还原回编辑前的状态
+
+- 分类: MC修改
+- 类型: 布尔值 (通用)
+- 默认值: `false`
+
+
 ### 告示牌多行粘贴支持 (signMultilinePasteSupport)
 
 让告示牌编辑界面可以支持
