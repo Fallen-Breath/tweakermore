@@ -162,7 +162,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 	 *   - If succeeded: future completes when syncing done
 	 *   - If failed: future completes immediately
 	 */
-	public CompletableFuture<Void> syncEntity(Entity entity)
+	public CompletableFuture<Void> syncEntity(Entity entity, boolean syncMotionState)
 	{
 		Optional<CompletableFuture<CompoundTag>> opt = fetchEntity(entity);
 		if (opt.isPresent())
@@ -170,6 +170,12 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 			return opt.get().thenAccept(nbt -> {
 				if (nbt != null)
 				{
+					EntityMotionStateRestorer restorer = null;
+					if (!syncMotionState)
+					{
+						restorer = new EntityMotionStateRestorer(entity);
+					}
+
 					// net.minecraft.entity.Entity.fromTag is designed to be used server-side
 					// so things like casting e.g. (ServerWorld)this.world might happen
 					// that will definitely cause an exception since this.world is a ClientWorld
@@ -177,6 +183,10 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 					try
 					{
 						entity.fromTag(nbt);
+						if (restorer != null)
+						{
+							restorer.restore();
+						}
 						TweakerMoreMod.LOGGER.debug("Synced entity data of {}", entity);
 					}
 					catch (Exception exception)
@@ -194,6 +204,10 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 		{
 			return CompletableFuture.allOf();
 		}
+	}
+	public CompletableFuture<Void> syncEntity(Entity entity)
+	{
+		return this.syncEntity(entity, true);
 	}
 
 	/**

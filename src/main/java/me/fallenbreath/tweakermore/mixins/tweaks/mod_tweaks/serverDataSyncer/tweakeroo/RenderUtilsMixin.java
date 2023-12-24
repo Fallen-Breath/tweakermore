@@ -77,7 +77,7 @@ public abstract class RenderUtilsMixin
 		{
 			if (!MinecraftClient.getInstance().isIntegratedServerRunning())
 			{
-				ServerDataSyncer.getInstance().syncEntity(entity);
+				ServerDataSyncer.getInstance().syncEntity(entity, false);
 			}
 		}
 		return entity;
