@@ -1054,6 +1054,15 @@ Copy the data of the pointed item in the current gui to the clipboard, as a /giv
 ![disableDarkSkyRendering](assets/disableDarkSkyRendering.png)
 
 
+### 禁用实体死亡倾斜 (disableEntityDeathTilting)
+
+禁用生物实体死亡时的倾斜渲染效果
+
+- 分类: MC修改
+- 类型: 带热键布尔值 (禁用)
+- 默认值: *无快捷键*, `false`
+
+
 ### 禁用实体模型渲染 (disableEntityModelRendering)
 
 阻止游戏渲染实体的模型

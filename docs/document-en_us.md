@@ -1058,6 +1058,15 @@ See also: option disableHorizonShadingRendering
 ![disableDarkSkyRendering](assets/disableDarkSkyRendering.png)
 
 
+### disableEntityDeathTilting
+
+Disable the tilting rendering effect of death living entities
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean (Disable)
+- Default value: *no hotkey*, `false`
+
+
 ### disableEntityModelRendering
 
 Prevent the model of the entity to be rendered

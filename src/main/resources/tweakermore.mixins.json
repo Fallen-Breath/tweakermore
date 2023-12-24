@@ -81,6 +81,7 @@
     "tweaks.mc_tweaks.disableDarknessEffect.LightmapTextureManagerMixin",
     "tweaks.mc_tweaks.disableDarknessEffect.WorldRendererMixin",
     "tweaks.mc_tweaks.disableDarkSkyRendering.ClientWorldMixin",
+    "tweaks.mc_tweaks.disableEntityDeathTilting.LivingEntityRendererMixin",
     "tweaks.mc_tweaks.disableEntityModelRendering.EntityRenderDispatcherMixin",
     "tweaks.mc_tweaks.disableEntityRenderInterpolation.AbstractMinecartEntityMixin",
     "tweaks.mc_tweaks.disableEntityRenderInterpolation.BoatEntityMixin",

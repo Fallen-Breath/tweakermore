@@ -398,6 +398,10 @@ tweakermore:
       .: 禁用黑暗状态效果
       comment: 禁用黑暗状态效果所提供的客户端渲染效果
       pretty_name: 禁用黑暗状态效果
+    disableEntityDeathTilting:
+      .: 禁用实体死亡倾斜
+      comment: 禁用生物实体死亡时的倾斜渲染效果
+      pretty_name: 禁用实体死亡倾斜
     disableEntityModelRendering:
       .: 禁用实体模型渲染
       comment: |-

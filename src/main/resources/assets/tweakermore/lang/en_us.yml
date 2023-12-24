@@ -398,6 +398,10 @@ tweakermore:
       .: disableDarknessEffect
       comment: Disable the client-side rendering effect when you have the darkness effect
       pretty_name: Disable Darkness Effect
+    disableEntityDeathTilting:
+      .: disableEntityDeathTilting
+      comment: Disable the tilting rendering effect of death living entities
+      pretty_name: Disable Entity Death Tilting
     disableEntityModelRendering:
       .: disableEntityModelRendering
       comment: |-
