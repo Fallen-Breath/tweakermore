@@ -187,6 +187,54 @@ tweakermore:
         Request a player inventory refresh to the server
         It's done by simulating an invalid inventory dragging operation,
         so the server think that the inventory is out of sync then do resync
+    pistorder:
+      .: pistorder
+      comment: |-
+        Shows the block movement order of a piston. Ported from the Pistorder mod
+        Right-click a piston base block with an empty hand to show what will happen when the piston pushes / retracts
+        Nothing will happen if you are sneaking when clicking
+        For detailed behavior, see https://github.com/Fallen-Breath/pistorder
+    pistorderClearDisplay:
+      .: pistorderClearDisplay
+      comment: |-
+        An sub-option for @option#pistorder@
+        The hotkey to remove all existing order displays
+    pistorderDynamicallyInfoUpdate:
+      .: pistorderDynamicallyInfoUpdate
+      comment: |-
+        An sub-option for @option#pistorder@
+        If existing order displays should dynamically calculate and update their information
+    pistorderMaxRenderDistance:
+      .: pistorderMaxRenderDistance
+      comment: |-
+        An sub-option for @option#pistorder@
+        The maximum render distance for the information texts
+    pistorderMaxSimulationPushLimit:
+      .: pistorderMaxSimulationPushLimit
+      comment: |-
+        An sub-option for @option#pistorder@
+        When the piston fails to push / retract due to being out of push limit, 
+        the push limit will be temporarily modified to the given value for calculate all affected blocks
+    pistorderSwingHand:
+      .: pistorderSwingHand
+      comment: |-
+        An sub-option for @option#pistorder@
+        Should the player swing its hand when successfully interact with the piston block for order display
+    pistorderTextScale:
+      .: pistorderTextScale
+      comment: |-
+        An sub-option for @option#pistorder@
+        Scale of the information text
+    pistorderTextAlpha:
+      .: pistorderTextAlpha
+      comment: |-
+        An sub-option for @option#pistorder@
+        Alpha of the information text
+    pistorderTextShadow:
+      .: pistorderTextShadow
+      comment: |-
+        An sub-option for @option#pistorder@
+        If the information text should be rendered with shadow
     safeAfk:
       .: safeAfk
       comment: |-
@@ -927,6 +975,12 @@ tweakermore:
       placement_tweaked: Set origin of '%1$s' to [0, 0, 0]
     lmRemoveEntityCommand:
       invalid_command: Invalid command "%1$s", wrong value or not enough permission?
+    pistorder:
+      push: Push
+      retract: Retract
+      block_count.pre: ''
+      block_count.post: ' blocks'
+      display_cleared: Pistorder information display cleared
     refreshInventory:
       refreshed: Inventory refreshed
     safeAfk:
@@ -985,6 +1039,7 @@ tweakermore:
       morechathistory: MoreChatHistory
       optifabric: Optifine
       parachute: Parachute
+      pistorder: Pistorder
       raise-chat-limit: Raise Chat Limit
       replaymod: Replay mod
       sodium: Sodium

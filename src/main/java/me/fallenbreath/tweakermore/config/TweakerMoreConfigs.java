@@ -43,6 +43,7 @@ import me.fallenbreath.tweakermore.impl.features.autoContainerProcess.AutoContai
 import me.fallenbreath.tweakermore.impl.features.copyItemDataToClipBoard.ItemDataCopier;
 import me.fallenbreath.tweakermore.impl.features.copySignTextToClipBoard.SignTextCopier;
 import me.fallenbreath.tweakermore.impl.features.infoView.InfoViewRenderer;
+import me.fallenbreath.tweakermore.impl.features.pistorder.PistorderRenderer;
 import me.fallenbreath.tweakermore.impl.features.refreshInventory.InventoryRefresher;
 import me.fallenbreath.tweakermore.impl.features.schematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.flawlessFrames.FlawlessFramesHandler;
@@ -247,6 +248,33 @@ public class TweakerMoreConfigs
 
 	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigOptionList INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_TARGET_STRATEGY = newConfigOptionList("infoViewRespawnBlockExplosionTargetStrategy", InfoViewTargetStrategy.BEAM);
+
+	@Config(type = Config.Type.TWEAK, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed PISTORDER = newConfigBooleanHotkeyed("pistorder");
+
+	@Config(type = Config.Type.HOTKEY, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigHotkey PISTORDER_CLEAR_DISPLAY = newConfigHotKey("pistorderClearDisplay", "P");
+
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBoolean PISTORDER_DYNAMICALLY_INFO_UPDATE = newConfigBoolean("pistorderDynamicallyInfoUpdate", true);
+
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigInteger PISTORDER_MAX_RENDER_DISTANCE = newConfigInteger("pistorderMaxRenderDistance", 256, 0, 2048);
+
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigInteger PISTORDER_MAX_SIMULATION_PUSH_LIMIT = newConfigInteger("pistorderMaxSimulationPushLimit", 128, 12, 1024);
+
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBoolean PISTORDER_SWING_HAND = newConfigBoolean("pistorderSwingHand", true);
+
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigDouble PISTORDER_TEXT_ALPHA = newConfigDouble("pistorderTextAlpha", 1, 0, 1);
+
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigDouble PISTORDER_TEXT_SCALE = newConfigDouble("pistorderTextScale", 1, 0.1, 3);
+
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBoolean PISTORDER_TEXT_SHADOW = newConfigBoolean("pistorderTextShadow", true);
 
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkey REFRESH_INVENTORY = newConfigHotKey("refreshInventory", "", KEYBIND_SETTINGS_ANY);
@@ -790,6 +818,7 @@ public class TweakerMoreConfigs
 		setHotkeyCallback(COPY_ITEM_DATA_TO_CLIPBOARD, ItemDataCopier::copyItemData, false);
 		setHotkeyCallback(COPY_SIGN_TEXT_TO_CLIPBOARD, SignTextCopier::copySignText, false);
 		setHotkeyCallback(OPEN_TWEAKERMORE_CONFIG_GUI, TweakerMoreConfigGui::openGui, true);
+		setHotkeyCallback(PISTORDER_CLEAR_DISPLAY, PistorderRenderer.getInstance()::clearDisplay, false);
 		setHotkeyCallback(REFRESH_INVENTORY, InventoryRefresher::refresh, false);
 
 		// value listeners
@@ -808,9 +837,11 @@ public class TweakerMoreConfigs
 
 		//////////// Event Listeners ////////////
 
-		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
-		TweakerMoreRenderEventHandler.register(InfoViewRenderer.getInstance());
 		RenderEventHandler.getInstance().registerGameOverlayRenderer(new AutoContainerProcessorHintRenderer());
+		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
+		TickHandler.getInstance().registerClientTickHandler(PistorderRenderer.getInstance());
+		TweakerMoreRenderEventHandler.register(InfoViewRenderer.getInstance());
+		TweakerMoreRenderEventHandler.register(PistorderRenderer.getInstance());
 
 		//////////// Misc ////////////
 

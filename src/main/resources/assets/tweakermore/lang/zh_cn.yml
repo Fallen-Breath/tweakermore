@@ -187,6 +187,54 @@ tweakermore:
         向服务端请求一次玩家物品栏刷新
         它将模拟一次无效的物品栏拖动操作，
         让服务器认为玩家的物品栏已失去同步并刷新玩家物品栏
+    pistorder:
+      .: 活塞顺序展示
+      comment: |-
+        展示活塞的方块移动顺序。移植自Pistorder模组
+        使用空手右键点击活塞底座以展示活塞推动/收回时将会发生的情况
+        潜行时点击不会发生任何事情
+        该选项的详细行为另见 https://github.com/Fallen-Breath/pistorder
+    pistorderClearDisplay:
+      .: 活塞顺序展示-清空显示
+      comment: |-
+        选项@option#pistorder@的子选项
+        用于移出所有活塞顺序展示的快捷键
+    pistorderDynamicallyInfoUpdate:
+      .: 活塞顺序展示-动态信息更新
+      comment: |-
+        选项@option#pistorder@的子选项
+        已存在的活塞顺序展示是否应该动态地计算并更新他们的信息
+    pistorderMaxRenderDistance:
+      .: 活塞顺序展示-最大渲染距离
+      comment: |-
+        选项@option#pistorder@的子选项
+        展示文本的最大渲染距离
+    pistorderMaxSimulationPushLimit:
+      .: 活塞顺序展示-最大模拟推动上限
+      comment: |-
+        选项@option#pistorder@的子选项
+        在活塞因超出推动上限而无法推出/收回方块时，
+        将临时把活塞推动上限修改为该选项的值，以完整计算活塞动作将影响的方块
+    pistorderSwingHand:
+      .: 活塞顺序展示-挥动手臂
+      comment: |-
+        选项@option#pistorder@的子选项
+        在空手右键点击活塞底座的操作成功后，玩家是否应该挥一下手
+    pistorderTextAlpha:
+      .: 活塞顺序展示-文本透明度
+      comment: |-
+        选项@option#pistorder@的子选项
+        展示文本的透明度
+    pistorderTextScale:
+      .: 活塞顺序展示-文本缩放
+      comment: |-
+        选项@option#pistorder@的子选项
+        展示文本的缩放比例
+    pistorderTextShadow:
+      .: 活塞顺序展示-文本阴影
+      comment: |-
+        选项@option#pistorder@的子选项
+        展示文本是否启用阴影
     safeAfk:
       .: 安全挂机
       comment: |-
@@ -927,6 +975,12 @@ tweakermore:
       placement_tweaked: 已将 '%1$s' 的原点设置为 [0, 0, 0]
     lmRemoveEntityCommand:
       invalid_command: '"%1$s"是未知的指令，是指令有误还是权限不够？'
+    pistorder:
+      push: 推动
+      retract: 拉回
+      block_count.pre: ''
+      block_count.post: 个方块
+      display_cleared: 已清空活塞顺序展示
     refreshInventory:
       refreshed: 物品栏已刷新
     safeAfk:
@@ -985,6 +1039,7 @@ tweakermore:
       morechathistory: MoreChatHistory
       optifabric: Optifine
       parachute: Parachute
+      pistorder: Pistorder
       raise-chat-limit: Raise Chat Limit
       replaymod: Replay mod
       sodium: Sodium

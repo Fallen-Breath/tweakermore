@@ -194,7 +194,7 @@ public class BeaconEffectRenderer extends AbstractInfoViewer
 				text(description).fontScale(FONT_SCALE).
 				align(TextRenderer.HorizontalAlignment.LEFT).
 				seeThrough().shadow();
-		textRenderer.shift(deltaX + ICON_RENDERED_SIZE + MARGIN, kDeltaY * textRenderer.getLineHeight());
+		textRenderer.shift(deltaX + ICON_RENDERED_SIZE + MARGIN, kDeltaY * TextRenderer.getLineHeight());
 		textRenderer.render();
 	}
 

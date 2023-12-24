@@ -55,13 +55,13 @@ import net.minecraft.client.util.math.Rotation3;
 public class TextRenderer
 {
 	public static final double DEFAULT_FONT_SCALE = 0.025;
+	private static double lineHeightRatio = 1.0 * RenderUtil.TEXT_LINE_HEIGHT / RenderUtil.TEXT_HEIGHT;
 
 	private final List<TextHolder> lines;
 	private Vec3d pos;
 	private double shiftX;
 	private double shiftY;
 	private double fontScale;
-	private double lineHeightRatio;
 	private int color;
 	private int backgroundColor;
 	private boolean shadow;
@@ -74,7 +74,6 @@ public class TextRenderer
 		this.lines = Lists.newArrayList();
 		this.shiftX = this.shiftY = 0.0;
 		this.fontScale = DEFAULT_FONT_SCALE;
-		this.lineHeightRatio = 1.0 * RenderUtil.TEXT_LINE_HEIGHT / RenderUtil.TEXT_HEIGHT;
 		this.color = 0xFFFFFFFF;
 		this.backgroundColor = 0x00000000;
 		this.shadow = false;
@@ -143,7 +142,7 @@ public class TextRenderer
 			int lineNum = this.lines.size();
 			double maxTextWidth = this.lines.stream().mapToInt(TextHolder::getWidth).max().orElse(0);
 			double totalTextWidth = maxTextWidth;
-			double totalTextHeight = RenderUtil.TEXT_HEIGHT * lineNum + (this.lineHeightRatio - 1) * (lineNum - 1);
+			double totalTextHeight = RenderUtil.TEXT_HEIGHT * lineNum + (lineHeightRatio - 1) * (lineNum - 1);
 			renderContext.translate(this.horizontalAlignment.getTranslateX(totalTextWidth), this.verticalAlignment.getTranslateY(totalTextHeight), 0);
 			renderContext.translate(this.shiftX, this.shiftY, 0);
 
@@ -167,7 +166,7 @@ public class TextRenderer
 			{
 				TextHolder holder = this.lines.get(i);
 				float textX = (float)this.horizontalAlignment.getTextX(maxTextWidth, holder.getWidth());
-				float textY = (float)(this.getLineHeight() * i);
+				float textY = (float)(getLineHeight() * i);
 
 				//#if MC >= 11500
 				int backgroundColor = this.backgroundColor;
@@ -383,9 +382,9 @@ public class TextRenderer
 	 * ============================
 	 */
 
-	public double getLineHeight()
+	public static double getLineHeight()
 	{
-		return RenderUtil.TEXT_HEIGHT * this.lineHeightRatio;
+		return RenderUtil.TEXT_HEIGHT * lineHeightRatio;
 	}
 
 	/**

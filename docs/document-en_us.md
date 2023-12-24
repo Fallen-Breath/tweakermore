@@ -522,6 +522,146 @@ The maximum target distance of info view
 - Maximum value: `32.0`
 
 
+### pistorder
+
+Shows the block movement order of a piston. Ported from the Pistorder mod
+
+Right-click a piston base block with an empty hand to show what will happen when the piston pushes / retracts
+
+Nothing will happen if you are sneaking when clicking
+
+For detailed behavior, see https://github.com/Fallen-Breath/pistorder
+
+- Category: Features
+- Type: hotkey togglable boolean (Tweak)
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Conflicted mods:
+    - Pistorder (`pistorder`) `<=1.6.0`
+
+
+### pistorderClearDisplay
+
+An sub-option for pistorder
+
+The hotkey to remove all existing order displays
+
+- Category: Features
+- Type: hotkey (Hotkey)
+- Default value: `P`
+- Mod restrictions:
+  - Conflicted mods:
+    - Pistorder (`pistorder`) `<=1.6.0`
+
+
+### pistorderDynamicallyInfoUpdate
+
+An sub-option for pistorder
+
+If existing order displays should dynamically calculate and update their information
+
+- Category: Features
+- Type: boolean (Generic)
+- Default value: `true`
+- Mod restrictions:
+  - Conflicted mods:
+    - Pistorder (`pistorder`) `<=1.6.0`
+
+
+### pistorderMaxRenderDistance
+
+An sub-option for pistorder
+
+The maximum render distance for the information texts
+
+- Category: Features
+- Type: integer (Generic)
+- Default value: `256`
+- Minimum value: `0`
+- Maximum value: `2048`
+- Mod restrictions:
+  - Conflicted mods:
+    - Pistorder (`pistorder`) `<=1.6.0`
+
+
+### pistorderMaxSimulationPushLimit
+
+An sub-option for pistorder
+
+When the piston fails to push / retract due to being out of push limit, 
+
+the push limit will be temporarily modified to the given value for calculate all affected blocks
+
+- Category: Features
+- Type: integer (Generic)
+- Default value: `128`
+- Minimum value: `12`
+- Maximum value: `1024`
+- Mod restrictions:
+  - Conflicted mods:
+    - Pistorder (`pistorder`) `<=1.6.0`
+
+
+### pistorderSwingHand
+
+An sub-option for pistorder
+
+Should the player swing its hand when successfully interact with the piston block for order display
+
+- Category: Features
+- Type: boolean (Generic)
+- Default value: `true`
+- Mod restrictions:
+  - Conflicted mods:
+    - Pistorder (`pistorder`) `<=1.6.0`
+
+
+### pistorderTextAlpha
+
+An sub-option for pistorder
+
+Alpha of the information text
+
+- Category: Features
+- Type: double (Generic)
+- Default value: `1.0`
+- Minimum value: `0.0`
+- Maximum value: `1.0`
+- Mod restrictions:
+  - Conflicted mods:
+    - Pistorder (`pistorder`) `<=1.6.0`
+
+
+### pistorderTextScale
+
+An sub-option for pistorder
+
+Scale of the information text
+
+- Category: Features
+- Type: double (Generic)
+- Default value: `1.0`
+- Minimum value: `0.1`
+- Maximum value: `3.0`
+- Mod restrictions:
+  - Conflicted mods:
+    - Pistorder (`pistorder`) `<=1.6.0`
+
+
+### pistorderTextShadow
+
+An sub-option for pistorder
+
+If the information text should be rendered with shadow
+
+- Category: Features
+- Type: boolean (Generic)
+- Default value: `true`
+- Mod restrictions:
+  - Conflicted mods:
+    - Pistorder (`pistorder`) `<=1.6.0`
+
+
 ### refreshInventory
 
 Request a player inventory refresh to the server
