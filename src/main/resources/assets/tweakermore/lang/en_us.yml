@@ -220,16 +220,16 @@ tweakermore:
       comment: |-
         An sub-option for @option#pistorder@
         Should the player swing its hand when successfully interact with the piston block for order display
-    pistorderTextScale:
-      .: pistorderTextScale
-      comment: |-
-        An sub-option for @option#pistorder@
-        Scale of the information text
     pistorderTextAlpha:
       .: pistorderTextAlpha
       comment: |-
         An sub-option for @option#pistorder@
         Alpha of the information text
+    pistorderTextScale:
+      .: pistorderTextScale
+      comment: |-
+        An sub-option for @option#pistorder@
+        Scale of the information text
     pistorderTextShadow:
       .: pistorderTextShadow
       comment: |-
