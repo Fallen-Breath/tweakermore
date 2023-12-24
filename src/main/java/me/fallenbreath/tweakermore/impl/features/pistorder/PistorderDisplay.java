@@ -43,12 +43,14 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.WorldChunk;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class PistorderDisplay
 {
@@ -215,24 +217,16 @@ public class PistorderDisplay
 		}
 	}
 
-	private static void drawString(BlockPos pos, float offsetY, BaseText text, int color)
+	private static TextRenderer drawString(BlockPos pos, float offsetY, BaseText text, int color)
 	{
-		MinecraftClient client = MinecraftClient.getInstance();
-		double maxDistance = TweakerMoreConfigs.PISTORDER_MAX_RENDER_DISTANCE.getIntegerValue();
-		if (client.player == null || client.player.squaredDistanceTo(PositionUtil.centerOf(pos)) > maxDistance * maxDistance)
-		{
-			return;
-		}
-
 		ColorHolder colorHolder = ColorHolder.of(color).modify(h -> h.alpha = (int)(0xFF * TweakerMoreConfigs.PISTORDER_TEXT_ALPHA.getDoubleValue()));
-		TextRenderer.create().
+		return TextRenderer.create().
 				at(PositionUtil.centerOf(pos)).
 				shift(0, offsetY * TextRenderer.getLineHeight()).
 				text(text).color(colorHolder.pack()).
 				fontScale(TextRenderer.DEFAULT_FONT_SCALE * TweakerMoreConfigs.PISTORDER_TEXT_SCALE.getDoubleValue()).
 				seeThrough().
-				shadow(TweakerMoreConfigs.PISTORDER_TEXT_SHADOW.getBooleanValue()).
-				render();
+				shadow(TweakerMoreConfigs.PISTORDER_TEXT_SHADOW.getBooleanValue());
 	}
 
 	private boolean checkState(World world)
@@ -250,26 +244,28 @@ public class PistorderDisplay
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	public void render(RenderContext context)
+	public List<@NotNull TextRenderer> render()
 	{
+		List<TextRenderer> texts = Lists.newArrayList();
+
 		if (!this.isDisabled())
 		{
 			MinecraftClient client = MinecraftClient.getInstance();
 			if (!this.checkState(client.world))
 			{
 				this.disable();
-				return;
+				return Collections.emptyList();
 			}
 
 			String actionKey = this.actionType.isPush() ? "tweakermore.impl.pistorder.push" : "tweakermore.impl.pistorder.retract";
 			String actionResult = this.moveSuccess ? INDICATOR_SUCCESS : INDICATOR_FAIL;
 
-			drawString(
+			texts.add(drawString(
 					this.pistonPos, -0.5F,
 					Messenger.s(String.format("%s %s", I18n.translate(actionKey), actionResult), Formatting.GOLD),
 					this.color
-			);
-			drawString(
+			));
+			texts.add(drawString(
 					this.pistonPos, 0.5F,
 					Messenger.c(
 							Messenger.formatting(Messenger.tr("tweakermore.impl.pistorder.block_count.pre"), Formatting.GOLD),
@@ -277,22 +273,24 @@ public class PistorderDisplay
 							Messenger.formatting(Messenger.tr("tweakermore.impl.pistorder.block_count.post"), Formatting.GOLD)
 					),
 					this.color
-			);
+			));
 
 			for (int i = 0; i < this.movedBlocks.size(); i++)
 			{
-				drawString(this.movedBlocks.get(i), 0.0F, Messenger.s(i + 1), this.color);
+				texts.add(drawString(this.movedBlocks.get(i), 0.0F, Messenger.s(i + 1), this.color));
 			}
 			for (int i = 0; i < this.brokenBlocks.size(); i++)
 			{
-				drawString(this.brokenBlocks.get(i), 0.0F, Messenger.s(i + 1), Formatting.RED.getColorValue());
+				texts.add(drawString(this.brokenBlocks.get(i), 0.0F, Messenger.s(i + 1), Formatting.RED.getColorValue()));
 			}
 
 			if (this.immovableBlockPos != null)
 			{
-				drawString(this.immovableBlockPos, 0.0F, Messenger.s("×"), Formatting.DARK_RED.getColorValue());
+				texts.add(drawString(this.immovableBlockPos, 0.0F, Messenger.s("×"), Formatting.DARK_RED.getColorValue()));
 			}
 		}
+
+		return texts.stream().filter(Objects::nonNull).collect(Collectors.toList());
 	}
 
 	public void tick()

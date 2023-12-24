@@ -27,6 +27,7 @@ import fi.dy.masa.malilib.interfaces.IClientTickHandler;
 import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.pistorder.PistonBlockAccessor;
+import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import net.minecraft.block.Block;
@@ -35,7 +36,6 @@ import net.minecraft.block.PistonBlock;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.property.Properties;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -43,6 +43,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -115,15 +117,29 @@ public class PistorderRenderer implements TweakerMoreIRenderer, IClientTickHandl
 			return;
 		}
 
+		MinecraftClient client = MinecraftClient.getInstance();
+		if (client.player == null)
+		{
+			return;
+		}
+
 		List<Pair<World, BlockPos>> removeList = Lists.newArrayList();
+		List<TextRenderer> texts = Lists.newArrayList();
 		this.displayMap.forEach((key, display) -> {
-			display.render(context);
+			texts.addAll(display.render());
 			if (display.isDisabled())
 			{
 				removeList.add(key);
 			}
 		});
 		removeList.forEach(this.displayMap::remove);
+
+		double maxDistance = TweakerMoreConfigs.PISTORDER_MAX_RENDER_DISTANCE.getIntegerValue();
+		texts.stream().
+				map(tr -> Pair.of(client.player.squaredDistanceTo(tr.getPos()), tr)).
+				filter(p -> p.getFirst() <= maxDistance * maxDistance).
+				sorted(Collections.reverseOrder(Comparator.comparingDouble(Pair::getFirst))).
+				forEach(p -> p.getSecond().render());
 	}
 
 	@Override

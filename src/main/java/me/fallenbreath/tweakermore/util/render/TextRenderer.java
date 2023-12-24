@@ -387,6 +387,11 @@ public class TextRenderer
 		return RenderUtil.TEXT_HEIGHT * lineHeightRatio;
 	}
 
+	public Vec3d getPos()
+	{
+		return this.pos;
+	}
+
 	/**
 	 * ============================
 	 */
