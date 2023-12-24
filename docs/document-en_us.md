@@ -533,8 +533,8 @@ Nothing will happen if you are sneaking when clicking
 For detailed behavior, see https://github.com/Fallen-Breath/pistorder
 
 - Category: Features
-- Type: hotkey togglable boolean (Tweak)
-- Default value: *no hotkey*, `false`
+- Type: boolean (Generic)
+- Default value: `false`
 - Mod restrictions:
   - Conflicted mods:
     - Pistorder (`pistorder`) `<=1.6.0`

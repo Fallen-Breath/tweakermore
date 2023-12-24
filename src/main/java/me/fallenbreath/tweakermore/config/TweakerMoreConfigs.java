@@ -249,8 +249,8 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigOptionList INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_TARGET_STRATEGY = newConfigOptionList("infoViewRespawnBlockExplosionTargetStrategy", InfoViewTargetStrategy.BEAM);
 
-	@Config(type = Config.Type.TWEAK, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigBooleanHotkeyed PISTORDER = newConfigBooleanHotkeyed("pistorder");
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBoolean PISTORDER = newConfigBoolean("pistorder", false);
 
 	@Config(type = Config.Type.HOTKEY, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkey PISTORDER_CLEAR_DISPLAY = newConfigHotKey("pistorderClearDisplay", "P");

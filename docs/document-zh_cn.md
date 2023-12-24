@@ -529,8 +529,8 @@ TweakerMore提供的新功能
 该选项的详细行为另见 https://github.com/Fallen-Breath/pistorder
 
 - 分类: 功能
-- 类型: 带热键布尔值 (工具)
-- 默认值: *无快捷键*, `false`
+- 类型: 布尔值 (通用)
+- 默认值: `false`
 - 模组约束:
   - 冲突模组:
     - Pistorder (`pistorder`) `<=1.6.0`
