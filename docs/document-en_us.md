@@ -511,6 +511,59 @@ The alpha value of the floating text used in infoViewRespawnBlockExplosion
 - Maximum value: `1.0`
 
 
+### infoViewStructureBlock
+
+Show the mode and the structure name of structure blocks
+
+In multiplayer server, structure block data can be synced to client using option serverDataSyncer
+
+- Category: Features
+- Type: hotkey togglable boolean (Tweak)
+- Default value: *no hotkey*, `false`
+
+
+### infoViewStructureBlockMaxWidth
+
+Maximum width of the displayed text rendered by infoViewStructureBlock
+
+- Category: Features
+- Type: integer (Generic)
+- Default value: `200`
+- Minimum value: `10`
+- Maximum value: `2000`
+
+
+### infoViewStructureBlockRenderST (infoViewStructureBlockRenderStrategy)
+
+The view rendering strategy of infoViewStructureBlock
+
+- Category: Features
+- Type: option list (List)
+- Default value: `Always`
+- Available options: `View hotkey held`, `Always`
+
+
+### infoViewStructureBlockTargetST (infoViewStructureBlockTargetStrategy)
+
+The target selecting strategy of infoViewStructureBlock
+
+- Category: Features
+- Type: option list (List)
+- Default value: `Pointed`
+- Available options: `Pointed`, `Beam`
+
+
+### infoViewStructureBlockTextScale
+
+Scale of the displayed text rendered by infoViewStructureBlock
+
+- Category: Features
+- Type: double (Generic)
+- Default value: `1.0`
+- Minimum value: `0.1`
+- Maximum value: `3.0`
+
+
 ### infoViewTargetDistance
 
 The maximum target distance of info view

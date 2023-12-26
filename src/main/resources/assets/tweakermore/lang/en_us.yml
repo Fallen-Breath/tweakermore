@@ -181,6 +181,24 @@ tweakermore:
     infoViewRespawnBlockExplosionTargetStrategy:
       .: infoViewRespawnBlockExplosionTargetST
       comment: The target selecting strategy of @option#infoViewRespawnBlockExplosion@
+    infoViewStructureBlock:
+      .: infoViewStructureBlock
+      comment: |-
+        Show the mode and the structure name of structure blocks
+        In multiplayer server, structure block data can be synced to client using option @option#serverDataSyncer@
+      pretty_name: Info View Structure Block
+    infoViewStructureBlockMaxWidth:
+      .: infoViewStructureBlockMaxWidth
+      comment: Maximum width of the displayed text rendered by @option#infoViewStructureBlock@
+    infoViewStructureBlockRenderStrategy:
+      .: infoViewStructureBlockRenderST
+      comment: The view rendering strategy of @option#infoViewStructureBlock@
+    infoViewStructureBlockTargetStrategy:
+      .: infoViewStructureBlockTargetST
+      comment: The target selecting strategy of @option#infoViewStructureBlock@
+    infoViewStructureBlockTextScale:
+      .: infoViewStructureBlockTextScale
+      comment: Scale of the displayed text rendered by @option#infoViewStructureBlock@
     refreshInventory:
       .: refreshInventory
       comment: |-

@@ -33,6 +33,7 @@ import me.fallenbreath.tweakermore.impl.features.infoView.comparator.ComparatorL
 import me.fallenbreath.tweakermore.impl.features.infoView.hopper.HopperCooldownRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.redstoneDust.RedstoneDustUpdateOrderRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.RespawnBlockExplosionViewer;
+import me.fallenbreath.tweakermore.impl.features.infoView.structureBlock.StructureBlockContentRenderer;
 import me.fallenbreath.tweakermore.util.FabricUtil;
 import me.fallenbreath.tweakermore.util.PositionUtil;
 import me.fallenbreath.tweakermore.util.ThrowawayRunnable;
@@ -65,7 +66,8 @@ public class InfoViewRenderer implements TweakerMoreIRenderer, IClientTickHandle
 			new ComparatorLevelRenderer(),
 			new HopperCooldownRenderer(),
 			new RedstoneDustUpdateOrderRenderer(),
-			new RespawnBlockExplosionViewer()
+			new RespawnBlockExplosionViewer(),
+			new StructureBlockContentRenderer()
 	);
 
 	private InfoViewRenderer()

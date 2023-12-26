@@ -249,6 +249,21 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigOptionList INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_TARGET_STRATEGY = newConfigOptionList("infoViewRespawnBlockExplosionTargetStrategy", InfoViewTargetStrategy.BEAM);
 
+	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW_STRUCTURE_BLOCK = newConfigBooleanHotkeyed("infoViewStructureBlock");
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigInteger INFO_VIEW_STRUCTURE_BLOCK_MAX_WIDTH = newConfigInteger("infoViewStructureBlockMaxWidth", 200, 10, 2000);
+
+	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigOptionList INFO_VIEW_STRUCTURE_BLOCK_RENDER_STRATEGY = newConfigOptionList("infoViewStructureBlockRenderStrategy", InfoViewRenderStrategy.ALWAYS);
+
+	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigOptionList INFO_VIEW_STRUCTURE_BLOCK_TARGET_STRATEGY = newConfigOptionList("infoViewStructureBlockTargetStrategy", InfoViewTargetStrategy.DEFAULT);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigDouble INFO_VIEW_STRUCTURE_BLOCK_TEXT_SCALE = newConfigDouble("infoViewStructureBlockTextScale", 1, 0.1, 3);
+
 	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBoolean PISTORDER = newConfigBoolean("pistorder", false);
 

@@ -181,6 +181,24 @@ tweakermore:
     infoViewRespawnBlockExplosionTargetStrategy:
       .: 信息展示-重生方块爆炸伤害-目标选择策略
       comment: 选项@option#infoViewRespawnBlockExplosion@的目标选择策略
+    infoViewStructureBlock:
+      .: 信息展示-结构方块
+      comment: |-
+        展示结构方块的类型及其结构名
+        在多人服务器中，结构方块的数据可以通过选项@option#serverDataSyncer@同步至客户端
+      pretty_name: 信息展示-结构方块
+    infoViewStructureBlockMaxWidth:
+      .: 信息展示-结构方块-文本宽度最大值
+      comment: 选项@option#infoViewStructureBlock@渲染的文本宽度的最大值
+    infoViewStructureBlockRenderStrategy:
+      .: 信息展示-结构方块-渲染策略
+      comment: 选项@option#infoViewStructureBlock@的渲染策略
+    infoViewStructureBlockTargetStrategy:
+      .: 信息展示-结构方块-目标策略
+      comment: 选项@option#infoViewStructureBlock@的目标选择策略
+    infoViewStructureBlockTextScale:
+      .: 信息展示-结构方块-文本缩放
+      comment: 选项@option#infoViewStructureBlock@渲染的文本的缩放比例
     refreshInventory:
       .: 刷新物品栏
       comment: |-
