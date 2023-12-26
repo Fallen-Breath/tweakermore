@@ -521,6 +521,8 @@ In multiplayer server, structure block data can be synced to client using option
 - Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 
+![infoViewStructureBlock](assets/infoViewStructureBlock.png)
+
 
 ### infoViewStructureBlockMaxWidth
 
@@ -591,6 +593,8 @@ For detailed behavior, see https://github.com/Fallen-Breath/pistorder
 - Mod restrictions:
   - Conflicted mods:
     - Pistorder (`pistorder`) `<=1.6.0`
+
+![pistorder](assets/pistorder.png)
 
 
 ### pistorderClearDisplay
@@ -1462,6 +1466,8 @@ Precisely render the item entity model by:
 - Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
 
+![preciseItemEntityModel](assets/preciseItemEntityModel.png)
+
 
 ### preciseItemEntityModelYawSnap
 
@@ -1597,6 +1603,8 @@ Add a cancel button to the sign edit screen that cancels the editing and discard
 - Category: MC Tweaks
 - Type: boolean (Generic)
 - Default value: `false`
+
+![signEditScreenCancelButton](assets/signEditScreenCancelButton.png)
 
 
 ### signEditScreenEscDiscard

@@ -517,6 +517,8 @@ TweakerMore提供的新功能
 - 类型: 带热键布尔值 (工具)
 - 默认值: *无快捷键*, `false`
 
+![infoViewStructureBlock](assets/infoViewStructureBlock.png)
+
 
 ### 信息展示-结构方块-文本宽度最大值 (infoViewStructureBlockMaxWidth)
 
@@ -587,6 +589,8 @@ TweakerMore提供的新功能
 - 模组约束:
   - 冲突模组:
     - Pistorder (`pistorder`) `<=1.6.0`
+
+![pistorder](assets/pistorder.png)
 
 
 ### 活塞顺序展示-清空显示 (pistorderClearDisplay)
@@ -1458,6 +1462,8 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 类型: 带热键布尔值 (工具)
 - 默认值: *无快捷键*, `false`
 
+![preciseItemEntityModel](assets/preciseItemEntityModel.png)
+
 
 ### 精准物品实体模型-朝向吸附 (preciseItemEntityModelYawSnap)
 
@@ -1593,6 +1599,8 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 分类: MC修改
 - 类型: 布尔值 (通用)
 - 默认值: `false`
+
+![signEditScreenCancelButton](assets/signEditScreenCancelButton.png)
 
 
 ### 告示牌编辑界面在ESC时丢弃更改 (signEditScreenEscDiscard)
