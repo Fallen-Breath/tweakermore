@@ -38,6 +38,7 @@
     "tweaks.features.infoView.beacon.BeaconBlockEntityAccessor",
     "tweaks.features.infoView.commandBlock.CommandSuggestorAccessor",
     "tweaks.features.infoView.hopper.HopperBlockEntityAccessor",
+    "tweaks.features.infoView.structureBlock.StructureBlockScreenAccessor",
     "tweaks.features.pistorder.AbstractBlockStateMixin",
     "tweaks.features.pistorder.PistonBlockAccessor",
     "tweaks.features.pistorder.PistonHandlerMixin",

@@ -22,6 +22,7 @@ package me.fallenbreath.tweakermore.impl.features.infoView.structureBlock;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.AbstractInfoViewer;
+import me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.structureBlock.StructureBlockScreenAccessor;
 import me.fallenbreath.tweakermore.util.Messenger;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.TextRenderingUtil;
@@ -30,8 +31,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.StructureBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.StructureBlockBlockEntity;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.BaseText;
-import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -55,8 +57,19 @@ public class StructureBlockContentRenderer extends AbstractInfoViewer
 	}
 
 	@Override
-	public boolean requireBlockEntitySyncing()
+	public boolean requireBlockEntitySyncing(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity)
 	{
+		// don't sync block entity if the player is operating the structure block
+		// or the player might not be able to switch the structure block mode
+		Screen currentScreen = MinecraftClient.getInstance().currentScreen;
+		if (currentScreen instanceof StructureBlockScreenAccessor)
+		{
+			//noinspection RedundantIfStatement
+			if (blockPos.equals(((StructureBlockScreenAccessor)currentScreen).getStructureBlock().getPos()))
+			{
+				return false;
+			}
+		}
 		return true;
 	}
 

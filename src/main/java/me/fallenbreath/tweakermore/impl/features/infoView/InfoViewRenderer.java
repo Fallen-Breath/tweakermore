@@ -150,7 +150,7 @@ public class InfoViewRenderer implements TweakerMoreIRenderer, IClientTickHandle
 				boolean enabled = viewer.isValidTarget(isCrossHairPos);
 				if (enabled && viewer.shouldRenderFor(world, blockPos, blockState.get(), blockEntity.get()))
 				{
-					if (viewer.requireBlockEntitySyncing() && !(world instanceof ServerWorld))
+					if (!(world instanceof ServerWorld) && viewer.requireBlockEntitySyncing(world, blockPos, blockState.get(), blockEntity.get()))
 					{
 						sync.run();
 					}

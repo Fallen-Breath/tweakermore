@@ -58,7 +58,7 @@ public class RedstoneDustUpdateOrderRenderer extends AbstractInfoViewer
 	}
 
 	@Override
-	public boolean requireBlockEntitySyncing()
+	public boolean requireBlockEntitySyncing(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity)
 	{
 		return false;
 	}

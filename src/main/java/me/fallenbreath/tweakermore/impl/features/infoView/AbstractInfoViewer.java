@@ -65,7 +65,7 @@ public abstract class AbstractInfoViewer
 	 */
 	public abstract boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity);
 
-	public abstract boolean requireBlockEntitySyncing();
+	public abstract boolean requireBlockEntitySyncing(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity);
 
 	public abstract void render(RenderContext context, World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity);
 
