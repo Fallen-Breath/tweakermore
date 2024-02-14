@@ -29,12 +29,16 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import org.jetbrains.annotations.Nullable;
 
-public class ChunkCachedWorldAccess
+import java.util.Optional;
+
+public class CachedWorldAccess
 {
 	private final World world;
-	private final Long2ObjectOpenHashMap<Chunk> cache = new Long2ObjectOpenHashMap<>();  // chunkPos -> chunk
+	private final Long2ObjectOpenHashMap<Chunk> chunkCache = new Long2ObjectOpenHashMap<>();  // chunkPos -> chunk
+	private final Long2ObjectOpenHashMap<BlockState> stateCache = new Long2ObjectOpenHashMap<>();  // blockPos -> blockState
+	private final Long2ObjectOpenHashMap<Optional<BlockEntity>> blockEntityCache = new Long2ObjectOpenHashMap<>();  // blockPos -> blockEntity
 
-	public ChunkCachedWorldAccess(World world)
+	public CachedWorldAccess(World world)
 	{
 		this.world = world;
 	}
@@ -42,17 +46,26 @@ public class ChunkCachedWorldAccess
 	public Chunk getChunk(BlockPos blockPos)
 	{
 		ChunkPos chunkPos = new ChunkPos(blockPos);
-		return this.cache.computeIfAbsent(chunkPos.toLong(), k -> this.world.getChunk(chunkPos.x, chunkPos.z));
+		return this.chunkCache.computeIfAbsent(
+				chunkPos.toLong(),
+				k -> this.world.getChunk(chunkPos.x, chunkPos.z)
+		);
 	}
 
 	public BlockState getBlockState(BlockPos blockPos)
 	{
-		return this.getChunk(blockPos).getBlockState(blockPos);
+		return this.stateCache.computeIfAbsent(
+				blockPos.asLong(),
+				bp -> this.getChunk(blockPos).getBlockState(blockPos)
+		);
 	}
 
 	@Nullable
 	public BlockEntity getBlockEntity(BlockPos blockPos)
 	{
-		return this.getChunk(blockPos).getBlockEntity(blockPos);
+		return this.blockEntityCache.computeIfAbsent(
+				blockPos.asLong(),
+				bp -> Optional.ofNullable(this.getChunk(blockPos).getBlockEntity(blockPos))
+		).orElse(null);
 	}
 }

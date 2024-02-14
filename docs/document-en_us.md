@@ -511,6 +511,21 @@ The alpha value of the floating text used in infoViewRespawnBlockExplosion
 - Maximum value: `1.0`
 
 
+### infoViewScanningPerSecond
+
+The update-per-second limiter for the info view features
+
+Only affects the block scanning and data fetching part. Information displays remain real-time
+
+Set it to 0 for unlimited updates per seconds
+
+- Category: Features
+- Type: integer (Generic)
+- Default value: `20`
+- Minimum value: `0`
+- Maximum value: `120`
+
+
 ### infoViewStructureBlock
 
 Show the mode and the structure name of structure blocks

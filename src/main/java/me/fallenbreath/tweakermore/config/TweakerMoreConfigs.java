@@ -186,6 +186,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkey INFO_VIEW_RENDERING_KEY = newConfigHotKey("infoViewRenderingKey", "RIGHT_ALT", KeybindSettings.MODIFIER_INGAME);
 
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigInteger INFO_VIEW_SCANNING_PER_SECOND  = newConfigInteger("infoViewScanningPerSecond", 20, 0, 120);
+
 	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW_BEACON = newConfigBooleanHotkeyed("infoViewBeacon");
 

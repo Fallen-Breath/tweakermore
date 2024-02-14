@@ -107,6 +107,12 @@ tweakermore:
         The rendering hotkey for info viewers
         When the render strategy is "View hotkey held", press to enable rendering
         When the render strategy is "Always", it will always rendering ignoring the hotkey's state
+    infoViewScanningPerSecond:
+      .: infoViewScanningPerSecond
+      comment: |-
+        The update-per-second limiter for the info view features
+        Only affects the block scanning and data fetching part. Information displays remain real-time
+        Set it to 0 for unlimited updates per seconds
     infoViewBeacon:
       .: infoViewBeacon
       comment: View the status effects of beacons
