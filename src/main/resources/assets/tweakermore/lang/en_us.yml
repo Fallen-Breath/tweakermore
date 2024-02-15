@@ -633,6 +633,12 @@ tweakermore:
       comment: |-
         Make those players who don't have custom skins use only Steve or Alex as their default skins
         This brings back the classic behavior from Minecraft < 1.19.3
+    tickFreezeAutoReplaceWithUnfreeze:
+      .: tickFreezeAutoReplaceWithUnfreeze
+      comment: |-
+        When the game is frozen with the `/tick freeze` command, if you enter another `/tick freeze` 
+        command in the chat hud, automatically replace the command content with `/tick unfreeze` command.
+        Basically, it brings back the behavior of pre-mc1.20.3 fabric-carpet mod behavior of the `/tick freeze` subcommand
     unlimitedBlockEntityRenderDistance:
       .: unlimitedBlockEntityRenderDistance
       comment: |-

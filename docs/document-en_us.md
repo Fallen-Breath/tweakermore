@@ -1667,6 +1667,22 @@ This brings back the classic behavior from Minecraft < 1.19.3
     - Minecraft (`minecraft`) `>=1.19.3`
 
 
+### tickFreezeAutoReplaceWithUnfreeze
+
+When the game is frozen with the /tick freeze command, if you enter another /tick freeze 
+
+command in the chat hud, automatically replace the command content with /tick unfreeze command.
+
+Basically, it brings back the behavior of pre-mc1.20.3 fabric-carpet mod behavior of the /tick freeze subcommand
+
+- Category: MC Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Minecraft (`minecraft`) `>=1.20.3`
+
+
 ### unlimitedBlockEntityRenderDistance
 
 Set client-side block entity render distance to unlimited

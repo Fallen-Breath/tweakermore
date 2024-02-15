@@ -633,6 +633,12 @@ tweakermore:
       comment: |-
         让那些没有自定义皮肤的玩家只使用Steve或Alex作为他们的默认皮肤
         这将带回Minecraft 1.19.3版本以前那个经典的只有Steve/Alex皮肤的世界
+    tickFreezeAutoReplaceWithUnfreeze:
+      .: tickFreeze自动替换为unfreeze
+      comment: |-
+        当游戏被`/tick freeze`冻结后，若在聊天栏再次输入`/tick freeze`命令，
+        则将自动把命令内容替换为`/tick unfreeze`。
+        可以认为该选项还原了mc1.20.3前，carpet模组中`/tick unfreeze`子命令的行为
     unlimitedBlockEntityRenderDistance:
       .: 无限方块实体渲染距离
       comment: |- 

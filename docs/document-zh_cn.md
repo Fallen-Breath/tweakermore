@@ -1663,6 +1663,22 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
     - Minecraft (`minecraft`) `>=1.19.3`
 
 
+### tickFreeze自动替换为unfreeze (tickFreezeAutoReplaceWithUnfreeze)
+
+当游戏被/tick freeze冻结后，若在聊天栏再次输入/tick freeze命令，
+
+则将自动把命令内容替换为/tick unfreeze。
+
+可以认为该选项还原了mc1.20.3前，carpet模组中/tick unfreeze子命令的行为
+
+- 分类: MC修改
+- 类型: 布尔值 (通用)
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Minecraft (`minecraft`) `>=1.20.3`
+
+
 ### 无限方块实体渲染距离 (unlimitedBlockEntityRenderDistance)
 
 将客户端方块实体渲染距离设置为无限制
