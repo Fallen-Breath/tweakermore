@@ -21,18 +21,15 @@
 package me.fallenbreath.tweakermore.impl.features.infoView.comparator;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.impl.features.infoView.AbstractInfoViewer;
+import me.fallenbreath.tweakermore.impl.features.infoView.CommonScannerInfoViewer;
+import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.ComparatorBlock;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ComparatorBlockEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
-public class ComparatorLevelRenderer extends AbstractInfoViewer
+public class ComparatorLevelRenderer extends CommonScannerInfoViewer
 {
 	private static final int FONT_COLOR = 0xFFFFFFFF;
 	private static final int BACKGROUND_COLOR = 0x3F000000;
@@ -47,24 +44,24 @@ public class ComparatorLevelRenderer extends AbstractInfoViewer
 	}
 
 	@Override
-	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity)
+	public boolean shouldRenderFor(RenderVisitorWorldView world, BlockPos pos)
 	{
-		return blockState.getBlock() instanceof ComparatorBlock && blockEntity instanceof ComparatorBlockEntity;
+		return world.getBlockState(pos).getBlock() instanceof ComparatorBlock && world.getBlockEntity(pos) instanceof ComparatorBlockEntity;
 	}
 
 	@Override
-	public boolean requireBlockEntitySyncing(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity)
+	public boolean requireBlockEntitySyncing(RenderVisitorWorldView world, BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public void render(RenderContext context, World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity)
+	protected void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
-		int level = ((ComparatorBlockEntity)blockEntity).getOutputSignal();
+		int level = ((ComparatorBlockEntity)world.getBlockEntityNonNull(pos)).getOutputSignal();
 
 		TextRenderer.create().
-				text(String.valueOf(level)).atCenter(blockPos).
+				text(String.valueOf(level)).atCenter(pos).
 				color(FONT_COLOR, BACKGROUND_COLOR).
 				shadow().seeThrough().
 				render();

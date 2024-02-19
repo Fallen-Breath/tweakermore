@@ -223,6 +223,18 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigDouble INFO_VIEW_COMMAND_BLOCK_TEXT_SCALE = newConfigDouble("infoViewCommandBlockTextScale", 1, 0.1, 3);
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW_GROWTH_SPEED = newConfigBooleanHotkeyed("infoViewGrowthSpeed");
+
+	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigOptionList INFO_VIEW_GROWTH_SPEED_RENDER_STRATEGY = newConfigOptionList("infoViewGrowthSpeedRenderStrategy", InfoViewRenderStrategy.ALWAYS);
+
+	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigOptionList INFO_VIEW_GROWTH_SPEED_TARGET_STRATEGY = newConfigOptionList("infoViewGrowthSpeedTargetStrategy", InfoViewTargetStrategy.RANGE);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigDouble INFO_VIEW_GROWTH_SPEED_TEXT_SCALE = newConfigDouble("infoViewGrowthSpeedTextScale", 0.6, 0.1, 3);
+
+	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW_HOPPER = newConfigBooleanHotkeyed("infoViewHopper");
 
 	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)

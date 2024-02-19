@@ -151,6 +151,20 @@ tweakermore:
     infoViewCommandBlockTextScale:
       .: 信息展示-命令方块-文本缩放
       comment: 选项@option#infoViewCommandBlock@渲染的文本的缩放比例
+    infoViewGrowthSpeed:
+      .: 信息展示-生长速度
+      comment: |-
+        展示作物类方块的生长速度、铜块的锈蚀速度，以及相关的信息
+        注：展示的概率是随机刻选择后的概率
+    infoViewGrowthSpeedRenderStrategy:
+      .: 信息展示-生长速度-渲染策略
+      comment: 选项@option#infoViewGrowthSpeed@的渲染策略
+    infoViewGrowthSpeedTargetStrategy:
+      .: 信息展示-生长速度-目标策略
+      comment: 选项@option#infoViewGrowthSpeed@的目标选择策略
+    infoViewGrowthSpeedTextScale:
+      .: 信息展示-生长速度-文本缩放
+      comment: 选项@option#infoViewGrowthSpeed@渲染的文本的缩放比例
     infoViewHopper:
       .: 信息展示-漏斗
       comment: |-
@@ -877,6 +891,7 @@ tweakermore:
     infoViewTargetStrategy:
       pointed: 指向
       beam: 光束
+      range: 范围
     lmRemoveEntityCommandPolicy:
       auto: 自动
       always: 总是
@@ -1002,6 +1017,19 @@ tweakermore:
       empty_sign: '%1$s不包含任何文本'
     creativePickBlockWithState:
       message: 已储存%1$s的方块状态
+    infoViewGrowthSpeed:
+      copper:
+        chance: 锈蚀概率
+        lower: 更低级
+        same: 同等级
+        higher: 更高级
+      crop:
+        base: 基础速度
+        chance: 生长概率
+        light: 光照等级
+      mushroom:
+        count: 附近蘑菇数
+        can_grow: 可传播
     infoViewRespawnBlockExplosion:
       damage: '伤害: %1$s'
     lmOriginOverride000:

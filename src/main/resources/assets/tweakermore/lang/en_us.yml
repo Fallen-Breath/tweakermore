@@ -151,6 +151,20 @@ tweakermore:
     infoViewCommandBlockTextScale:
       .: infoViewCommandBlockTextScale
       comment: Scale of the displayed text rendered by @option#infoViewCommandBlock@
+    infoViewGrowthSpeed:
+      .: infoViewGrowthSpeed
+      comment: |-
+        Display growth speed of crop blocks, weathering speed of copper blocks, and related information
+        Note: The chance displayed is the probability after a random tick selection
+    infoViewGrowthSpeedRenderStrategy:
+      .: infoViewGrowthSpeedRenderST
+      comment: The view rendering strategy of @option#infoViewGrowthSpeed@
+    infoViewGrowthSpeedTargetStrategy:
+      .: infoViewGrowthSpeedTargetST
+      comment: The target selecting strategy of @option#infoViewGrowthSpeed@
+    infoViewGrowthSpeedTextScale:
+      .: infoViewGrowthSpeedTextScale
+      comment: Scale of the displayed text rendered by @option#infoViewGrowthSpeed@
     infoViewHopper:
       .: infoViewHopper
       comment: |
@@ -877,6 +891,7 @@ tweakermore:
     infoViewTargetStrategy:
       pointed: Pointed
       beam: Beam
+      range: Range
     lmRemoveEntityCommandPolicy:
       auto: Auto
       always: Always
@@ -1002,6 +1017,19 @@ tweakermore:
       empty_sign: '%1$s does not contain any text'
     creativePickBlockWithState:
       message: Block state of %1$s stored
+    infoViewGrowthSpeed:
+      copper:
+        chance: Chance
+        lower: Lower level
+        same: Same level
+        higher: Higher level
+      crop:
+        base: Base speed
+        chance: Growth chance
+        light: Light level
+      mushroom:
+        count: Count
+        can_grow: Can grow
     infoViewRespawnBlockExplosion:
       damage: 'Damage: %1$s'
     lmOriginOverride000:

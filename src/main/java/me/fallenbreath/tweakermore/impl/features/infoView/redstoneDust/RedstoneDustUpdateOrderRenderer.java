@@ -24,23 +24,20 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.listentries.InfoViewTargetStrategy;
-import me.fallenbreath.tweakermore.impl.features.infoView.AbstractInfoViewer;
+import me.fallenbreath.tweakermore.impl.features.infoView.CommonScannerInfoViewer;
+import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.RedstoneWireBlock;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-public class RedstoneDustUpdateOrderRenderer extends AbstractInfoViewer
+public class RedstoneDustUpdateOrderRenderer extends CommonScannerInfoViewer
 {
 	public RedstoneDustUpdateOrderRenderer()
 	{
@@ -52,19 +49,19 @@ public class RedstoneDustUpdateOrderRenderer extends AbstractInfoViewer
 	}
 
 	@Override
-	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity)
+	public boolean shouldRenderFor(RenderVisitorWorldView world, BlockPos pos)
 	{
-		return blockState.getBlock() instanceof RedstoneWireBlock;
+		return world.getBlockState(pos).getBlock() instanceof RedstoneWireBlock;
 	}
 
 	@Override
-	public boolean requireBlockEntitySyncing(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity)
+	public boolean requireBlockEntitySyncing(RenderVisitorWorldView world, BlockPos pos)
 	{
 		return false;
 	}
 
 	@Override
-	public void render(RenderContext context, World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity)
+	protected void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
 		int alphaBits = (int)Math.round(255 * TweakerMoreConfigs.INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER_TEXT_ALPHA.getDoubleValue());
 		if (alphaBits == 0)
@@ -73,7 +70,7 @@ public class RedstoneDustUpdateOrderRenderer extends AbstractInfoViewer
 		}
 		int color = Objects.requireNonNull(Formatting.RED.getColorValue()) | ((alphaBits & 0xFF) << 24);
 
-		List<BlockPos> order = getDustUpdateOrderAt(blockPos);
+		List<BlockPos> order = getDustUpdateOrderAt(pos);
 		for (int i = 0; i < order.size(); i++)
 		{
 			this.renderTextAtPos(context, order.get(i), String.valueOf(i + 1), color);

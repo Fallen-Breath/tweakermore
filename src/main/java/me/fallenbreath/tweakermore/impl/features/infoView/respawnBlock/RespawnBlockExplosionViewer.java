@@ -24,7 +24,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.impl.features.infoView.AbstractInfoViewer;
+import me.fallenbreath.tweakermore.impl.features.infoView.CommonScannerInfoViewer;
+import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.handler.AbstractBlockHandler;
 import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.handler.BedHandler;
 import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.handler.RespawnAnchorHandler;
@@ -35,7 +36,6 @@ import me.fallenbreath.tweakermore.util.damage.DamageUtil;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.damage.DamageSource;
@@ -43,7 +43,6 @@ import net.minecraft.text.BaseText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -51,7 +50,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class RespawnBlockExplosionViewer extends AbstractInfoViewer
+public class RespawnBlockExplosionViewer extends CommonScannerInfoViewer
 {
 	private static final List<BlockHandlerProvider> BLOCK_HANDLER_FACTORIES = ImmutableList.of(
 			BedHandler::new,
@@ -87,11 +86,11 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 	}
 
 	@Override
-	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity)
+	public boolean shouldRenderFor(RenderVisitorWorldView world, BlockPos pos)
 	{
 		for (BlockHandlerProvider factory : BLOCK_HANDLER_FACTORIES)
 		{
-			if (factory.construct(world, blockPos, blockState).isValid())
+			if (factory.construct(world, pos, world.getBlockState(pos)).isValid())
 			{
 				return true;
 			}
@@ -100,13 +99,13 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 	}
 
 	@Override
-	public boolean requireBlockEntitySyncing(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity)
+	public boolean requireBlockEntitySyncing(RenderVisitorWorldView world, BlockPos pos)
 	{
 		return false;
 	}
 
 	@Override
-	public void render(RenderContext context, World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity)
+	protected void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
 		ClientWorld clientWorld = mc.world;
@@ -115,7 +114,7 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 			return;
 		}
 		Optional<AbstractBlockHandler> optionalBlockHandler = BLOCK_HANDLER_FACTORIES.stream().
-				map(fac -> fac.construct(world, blockPos, blockState)).
+				map(fac -> fac.construct(world, pos, world.getBlockState(pos))).
 				filter(AbstractBlockHandler::isValid).
 				findFirst();
 		if (!optionalBlockHandler.isPresent())
@@ -138,7 +137,7 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 					DamageCalculator calculator = DamageCalculator.explosion(explosionCenter, handler.getExplosionPower(), mc.player);
 					replacer.restoreBlocks();
 
-					calculator.applyDifficulty(world.getDifficulty());
+					calculator.applyDifficulty(world.getBestWorld().getDifficulty());
 					float baseAmount = calculator.getDamageAmount();
 					calculator.applyArmorAndResistanceAndEnchantment();
 					float appliedAmount = calculator.getDamageAmount();
@@ -155,7 +154,7 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 		);
 		Formatting lineFmt = stagedColor(
 				cache.baseAmount,
-				new float[]{1E-6F, DamageUtil.modifyDamageForDifficulty(1.0F, world.getDifficulty(), cache.damageSource)},
+				new float[]{1E-6F, DamageUtil.modifyDamageForDifficulty(1.0F, world.getBestWorld().getDifficulty(), cache.damageSource)},
 				new Formatting[]{Formatting.DARK_GRAY, Formatting.GRAY}
 		);
 
@@ -208,7 +207,7 @@ public class RespawnBlockExplosionViewer extends AbstractInfoViewer
 	@FunctionalInterface
 	private interface BlockHandlerProvider
 	{
-		AbstractBlockHandler construct(World world, BlockPos blockPos, BlockState blockState);
+		AbstractBlockHandler construct(RenderVisitorWorldView world, BlockPos blockPos, BlockState blockState);
 	}
 
 	private static class DamageCache

@@ -21,20 +21,17 @@
 package me.fallenbreath.tweakermore.impl.features.infoView.hopper;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.impl.features.infoView.AbstractInfoViewer;
+import me.fallenbreath.tweakermore.impl.features.infoView.CommonScannerInfoViewer;
+import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.hopper.HopperBlockEntityAccessor;
 import me.fallenbreath.tweakermore.util.render.ColorHolder;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.HopperBlock;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
-public class HopperCooldownRenderer extends AbstractInfoViewer
+public class HopperCooldownRenderer extends CommonScannerInfoViewer
 {
 	public HopperCooldownRenderer()
 	{
@@ -46,21 +43,21 @@ public class HopperCooldownRenderer extends AbstractInfoViewer
 	}
 
 	@Override
-	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity)
+	public boolean shouldRenderFor(RenderVisitorWorldView world, BlockPos pos)
 	{
-		return blockState.getBlock() instanceof HopperBlock && blockEntity instanceof HopperBlockEntity;
+		return world.getBlockState(pos).getBlock() instanceof HopperBlock && world.getBlockEntity(pos) instanceof HopperBlockEntity;
 	}
 
 	@Override
-	public boolean requireBlockEntitySyncing(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity)
+	public boolean requireBlockEntitySyncing(RenderVisitorWorldView world, BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public void render(RenderContext context, World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity)
+	protected void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
-		int cooldown = ((HopperBlockEntityAccessor)blockEntity).getTransferCooldown();
+		int cooldown = ((HopperBlockEntityAccessor)world.getBlockEntityNonNull(pos)).getTransferCooldown();
 
 		// cooldown will be -1 if the hopper block entity data is not synced
 		if (cooldown < 0)
@@ -72,7 +69,7 @@ public class HopperCooldownRenderer extends AbstractInfoViewer
 		ColorHolder color = ColorHolder.of(0xCC, 0xCC, 0xCC, (int)(0xFF * alpha));
 
 		TextRenderer.create().
-				text(String.valueOf(cooldown)).atCenter(blockPos).
+				text(String.valueOf(cooldown)).atCenter(pos).
 				color(color.pack()).
 				shadow().seeThrough().
 				render();

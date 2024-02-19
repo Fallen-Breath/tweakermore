@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2024  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,50 +18,26 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.handler;
+package me.fallenbreath.tweakermore.impl.features.infoView.growthSpeed.handlers;
 
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
-import me.fallenbreath.tweakermore.util.TemporaryBlockReplacer;
-import net.minecraft.block.BlockState;
+import net.minecraft.block.Block;
+import net.minecraft.text.BaseText;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 
-public class RespawnAnchorHandler extends AbstractBlockHandler
+import java.util.List;
+
+// impl in mc1.17+
+public class CopperGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHandler
 {
-	public RespawnAnchorHandler(RenderVisitorWorldView world, BlockPos blockPos, BlockState blockState)
-	{
-		super(world, blockPos, blockState);
-	}
-
 	@Override
-	public boolean isValid()
+	public boolean isTarget(Block block)
 	{
-		// mc1.16+ only
 		return false;
 	}
 
 	@Override
-	public Vec3d getExplosionCenter()
+	public void addInfoLines(RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos, List<BaseText> lines)
 	{
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public BlockPos getDeduplicationKey()
-	{
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void addBlocksToRemove(TemporaryBlockReplacer replacer)
-	{
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public float getExplosionPower()
-	{
-		throw new UnsupportedOperationException();
 	}
 }

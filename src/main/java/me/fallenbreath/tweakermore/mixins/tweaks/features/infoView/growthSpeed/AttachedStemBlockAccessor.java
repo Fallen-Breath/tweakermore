@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2024  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,31 +18,26 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.config.options.listentries;
+package me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.growthSpeed;
 
-public enum InfoViewTargetStrategy implements EnumOptionEntry
+import net.minecraft.block.AttachedStemBlock;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
+
+//#if MC >= 12004
+//$$ import net.minecraft.block.Block;
+//$$ import net.minecraft.registry.RegistryKey;
+//#else
+import net.minecraft.block.GourdBlock;
+//#endif
+
+@Mixin(AttachedStemBlock.class)
+public interface AttachedStemBlockAccessor
 {
-	POINTED,
-	BEAM,
-	RANGE;
-
-	public static final InfoViewTargetStrategy DEFAULT = POINTED;
-
-	@Override
-	public EnumOptionEntry[] getAllValues()
-	{
-		return values();
-	}
-
-	@Override
-	public EnumOptionEntry getDefault()
-	{
-		return DEFAULT;
-	}
-
-	@Override
-	public String getTranslationPrefix()
-	{
-		return "tweakermore.list_entry.infoViewTargetStrategy.";
-	}
+	@Accessor
+	//#if MC >= 12004
+	//$$ RegistryKey<Block> getStemBlock();
+	//#else
+	GourdBlock getGourdBlock();
+	//#endif
 }

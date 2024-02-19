@@ -21,13 +21,13 @@
 package me.fallenbreath.tweakermore.impl.features.infoView.structureBlock;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.impl.features.infoView.AbstractInfoViewer;
+import me.fallenbreath.tweakermore.impl.features.infoView.CommonScannerInfoViewer;
+import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.structureBlock.StructureBlockScreenAccessor;
 import me.fallenbreath.tweakermore.util.Messenger;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.TextRenderingUtil;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.StructureBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.StructureBlockBlockEntity;
@@ -36,10 +36,8 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.BaseText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
-public class StructureBlockContentRenderer extends AbstractInfoViewer
+public class StructureBlockContentRenderer extends CommonScannerInfoViewer
 {
 	public StructureBlockContentRenderer()
 	{
@@ -51,13 +49,13 @@ public class StructureBlockContentRenderer extends AbstractInfoViewer
 	}
 
 	@Override
-	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity)
+	public boolean shouldRenderFor(RenderVisitorWorldView world, BlockPos pos)
 	{
-		return blockState.getBlock() instanceof StructureBlock;
+		return world.getBlockState(pos).getBlock() instanceof StructureBlock;
 	}
 
 	@Override
-	public boolean requireBlockEntitySyncing(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity)
+	public boolean requireBlockEntitySyncing(RenderVisitorWorldView world, BlockPos pos)
 	{
 		// don't sync block entity if the player is operating the structure block
 		// or the player might not be able to switch the structure block mode
@@ -65,7 +63,7 @@ public class StructureBlockContentRenderer extends AbstractInfoViewer
 		if (currentScreen instanceof StructureBlockScreenAccessor)
 		{
 			//noinspection RedundantIfStatement
-			if (blockPos.equals(((StructureBlockScreenAccessor)currentScreen).getStructureBlock().getPos()))
+			if (pos.equals(((StructureBlockScreenAccessor)currentScreen).getStructureBlock().getPos()))
 			{
 				return false;
 			}
@@ -74,8 +72,9 @@ public class StructureBlockContentRenderer extends AbstractInfoViewer
 	}
 
 	@Override
-	public void render(RenderContext context, World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity)
+	protected void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
+		BlockEntity blockEntity = world.getBlockEntity(pos);
 		if (!(blockEntity instanceof StructureBlockBlockEntity))
 		{
 			return;
@@ -110,8 +109,8 @@ public class StructureBlockContentRenderer extends AbstractInfoViewer
 		}
 
 		TextRenderer textRenderer = TextRenderer.create().
-				atCenter(blockPos).
-				fontScale(0.025 * TweakerMoreConfigs.INFO_VIEW_STRUCTURE_BLOCK_TEXT_SCALE.getDoubleValue()).
+				atCenter(pos).
+				fontScale(TextRenderer.DEFAULT_FONT_SCALE * TweakerMoreConfigs.INFO_VIEW_STRUCTURE_BLOCK_TEXT_SCALE.getDoubleValue()).
 				bgColor(0x3F000000).
 				shadow().seeThrough();
 

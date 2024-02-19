@@ -25,19 +25,17 @@ import fi.dy.masa.malilib.event.TickHandler;
 import fi.dy.masa.malilib.interfaces.IClientTickHandler;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.beacon.BeaconEffectRenderer;
+import me.fallenbreath.tweakermore.impl.features.infoView.cache.InfoViewCachedRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.commandBlock.CommandBlockContentRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.comparator.ComparatorLevelRenderer;
+import me.fallenbreath.tweakermore.impl.features.infoView.growthSpeed.GrowthSpeedRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.hopper.HopperCooldownRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.redstoneDust.RedstoneDustUpdateOrderRenderer;
 import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.RespawnBlockExplosionViewer;
 import me.fallenbreath.tweakermore.impl.features.infoView.structureBlock.StructureBlockContentRenderer;
-import me.fallenbreath.tweakermore.util.ThrowawayRunnable;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,17 +43,18 @@ import java.util.stream.Collectors;
 public class InfoViewRenderer implements TweakerMoreIRenderer, IClientTickHandler
 {
 	private static final InfoViewRenderer INSTANCE = new InfoViewRenderer();
-	private static final List<AbstractInfoViewer> CONTENT_PREVIEWERS = Lists.newArrayList(
+	private static final List<InfoViewer> CONTENT_PREVIEWERS = Lists.newArrayList(
 			new BeaconEffectRenderer(),
 			new CommandBlockContentRenderer(),
 			new ComparatorLevelRenderer(),
 			new HopperCooldownRenderer(),
+			new GrowthSpeedRenderer(),
 			new RedstoneDustUpdateOrderRenderer(),
 			new RespawnBlockExplosionViewer(),
 			new StructureBlockContentRenderer()
 	);
 
-	private final InfoViewContextCache contextCache = new InfoViewContextCache();
+	private final InfoViewCachedRenderer cachedRenderer = new InfoViewCachedRenderer();
 
 	private InfoViewRenderer()
 	{
@@ -75,43 +74,23 @@ public class InfoViewRenderer implements TweakerMoreIRenderer, IClientTickHandle
 			return;
 		}
 
-		List<AbstractInfoViewer> viewers = CONTENT_PREVIEWERS.stream().
-				filter(AbstractInfoViewer::isRenderEnabled).
+		List<InfoViewer> viewers = CONTENT_PREVIEWERS.stream().
+				filter(InfoViewer::isRenderEnabled).
 				collect(Collectors.toList());
 		if (viewers.isEmpty())
 		{
 			return;
 		}
 
-		viewers.forEach(AbstractInfoViewer::onInfoViewStart);
-		this.contextCache.iterate((world, blockPos, blockState, blockEntity, isCrossHairPos, isFirstUpdate) -> {
-			ThrowawayRunnable sync = ThrowawayRunnable.of(() -> this.syncBlockEntity(world, blockPos));
-			for (AbstractInfoViewer viewer : viewers)
-			{
-				boolean enabled = viewer.isValidTarget(isCrossHairPos);
-				if (enabled && viewer.shouldRenderFor(world, blockPos, blockState.get(), blockEntity.get()))
-				{
-					if (isFirstUpdate && !(world instanceof ServerWorld) && viewer.requireBlockEntitySyncing(world, blockPos, blockState.get(), blockEntity.get()))
-					{
-						sync.run();
-					}
-					viewer.render(context, world, blockPos, blockState.get(), blockEntity.get());
-				}
-			}
-		});
-		viewers.forEach(AbstractInfoViewer::onInfoViewEnd);
-	}
-
-	@SuppressWarnings("unused")
-	private void syncBlockEntity(World world, BlockPos blockPos)
-	{
-		// serverDataSyncer do your job here
+		viewers.forEach(InfoViewer::onInfoViewStart);
+		this.cachedRenderer.render(context, viewers);
+		viewers.forEach(InfoViewer::onInfoViewEnd);
 	}
 
 	@Override
 	public void onClientTick(MinecraftClient client)
 	{
-		this.contextCache.onClientTick();
-		CONTENT_PREVIEWERS.forEach(AbstractInfoViewer::onClientTick);
+		this.cachedRenderer.onClientTick();
+		CONTENT_PREVIEWERS.forEach(InfoViewer::onClientTick);
 	}
 }

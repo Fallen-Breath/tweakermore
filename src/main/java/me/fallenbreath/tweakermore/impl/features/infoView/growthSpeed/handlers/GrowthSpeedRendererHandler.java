@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2024  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,31 +18,18 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.config.options.listentries;
+package me.fallenbreath.tweakermore.impl.features.infoView.growthSpeed.handlers;
 
-public enum InfoViewTargetStrategy implements EnumOptionEntry
+import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
+import net.minecraft.block.Block;
+import net.minecraft.text.BaseText;
+import net.minecraft.util.math.BlockPos;
+
+import java.util.List;
+
+public interface GrowthSpeedRendererHandler
 {
-	POINTED,
-	BEAM,
-	RANGE;
+	boolean isTarget(Block block);
 
-	public static final InfoViewTargetStrategy DEFAULT = POINTED;
-
-	@Override
-	public EnumOptionEntry[] getAllValues()
-	{
-		return values();
-	}
-
-	@Override
-	public EnumOptionEntry getDefault()
-	{
-		return DEFAULT;
-	}
-
-	@Override
-	public String getTranslationPrefix()
-	{
-		return "tweakermore.list_entry.infoViewTargetStrategy.";
-	}
+	void addInfoLines(RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos, List<BaseText> lines);
 }

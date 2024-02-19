@@ -23,14 +23,13 @@ package me.fallenbreath.tweakermore.impl.features.infoView.commandBlock;
 import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.StringReader;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.impl.features.infoView.AbstractInfoViewer;
+import me.fallenbreath.tweakermore.impl.features.infoView.CommonScannerInfoViewer;
+import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.commandBlock.CommandSuggestorAccessor;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.TextRenderingUtil;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.CommandBlock;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.CommandBlockBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -39,15 +38,13 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.CommandBlockExecutor;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 //#if MC >= 11600
 //$$ import me.fallenbreath.tweakermore.util.render.TextRenderingUtil;
 //$$ import net.minecraft.text.OrderedText;
 //#endif
 
-public class CommandBlockContentRenderer extends AbstractInfoViewer
+public class CommandBlockContentRenderer extends CommonScannerInfoViewer
 {
 	public CommandBlockContentRenderer()
 	{
@@ -59,25 +56,21 @@ public class CommandBlockContentRenderer extends AbstractInfoViewer
 	}
 
 	@Override
-	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity)
+	public boolean shouldRenderFor(RenderVisitorWorldView world, BlockPos pos)
 	{
-		return blockState.getBlock() instanceof CommandBlock;
+		return world.getBlockState(pos).getBlock() instanceof CommandBlock;
 	}
 
 	@Override
-	public boolean requireBlockEntitySyncing(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity)
+	public boolean requireBlockEntitySyncing(RenderVisitorWorldView world, BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public void render(RenderContext context, World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity)
+	protected void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
-		if (!(blockEntity instanceof CommandBlockBlockEntity))
-		{
-			return;
-		}
-		CommandBlockExecutor executor = ((CommandBlockBlockEntity) blockEntity).getCommandExecutor();
+		CommandBlockExecutor executor = ((CommandBlockBlockEntity)world.getBlockEntityNonNull(pos)).getCommandExecutor();
 		String command = executor.getCommand();
 		Text lastOutput = executor.getLastOutput();
 		final int MAX_WIDTH = TweakerMoreConfigs.INFO_VIEW_COMMAND_BLOCK_MAX_WIDTH.getIntegerValue();
@@ -116,8 +109,8 @@ public class CommandBlockContentRenderer extends AbstractInfoViewer
 
 		// render
 		TextRenderer textRenderer = TextRenderer.create().
-				text(displayText).atCenter(blockPos).
-				fontScale(0.025 * TweakerMoreConfigs.INFO_VIEW_COMMAND_BLOCK_TEXT_SCALE.getDoubleValue()).
+				text(displayText).atCenter(pos).
+				fontScale(TextRenderer.DEFAULT_FONT_SCALE * TweakerMoreConfigs.INFO_VIEW_COMMAND_BLOCK_TEXT_SCALE.getDoubleValue()).
 				bgColor(0x3F000000).
 				shadow().seeThrough();
 		if (!lastOutput.getString().isEmpty())

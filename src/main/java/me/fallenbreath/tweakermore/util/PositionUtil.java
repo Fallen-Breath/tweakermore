@@ -33,6 +33,15 @@ import java.util.function.Consumer;
 
 public class PositionUtil
 {
+	public static BlockPos floored(Vec3d vec3d)
+	{
+		//#if MC >= 11904
+		//$$ return BlockPos.ofFloored(vec3d);
+		//#else
+		return new BlockPos(vec3d);
+		//#endif
+	}
+
 	public static Vec3d centerOf(BlockPos blockPos)
 	{
 		return new Vec3d(blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5);

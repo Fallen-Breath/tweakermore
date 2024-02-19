@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2024  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,31 +18,17 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.config.options.listentries;
+package me.fallenbreath.tweakermore.impl.features.infoView.cache;
 
-public enum InfoViewTargetStrategy implements EnumOptionEntry
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.LightType;
+
+public interface SimpleWorldView extends BlockView
 {
-	POINTED,
-	BEAM,
-	RANGE;
+	int getLightLevel(BlockPos pos);
 
-	public static final InfoViewTargetStrategy DEFAULT = POINTED;
+	int getLightLevel(LightType type, BlockPos pos);
 
-	@Override
-	public EnumOptionEntry[] getAllValues()
-	{
-		return values();
-	}
-
-	@Override
-	public EnumOptionEntry getDefault()
-	{
-		return DEFAULT;
-	}
-
-	@Override
-	public String getTranslationPrefix()
-	{
-		return "tweakermore.list_entry.infoViewTargetStrategy.";
-	}
+	int getBaseLightLevel(BlockPos pos, int ambientDarkness);
 }

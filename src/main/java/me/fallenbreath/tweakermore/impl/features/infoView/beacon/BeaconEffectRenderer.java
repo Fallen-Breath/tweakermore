@@ -24,15 +24,16 @@ import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Pair;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.impl.features.infoView.AbstractInfoViewer;
+import me.fallenbreath.tweakermore.impl.features.infoView.CommonScannerInfoViewer;
+import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.beacon.BeaconBlockEntityAccessor;
+import me.fallenbreath.tweakermore.util.PositionUtil;
 import me.fallenbreath.tweakermore.util.render.InWorldPositionTransformer;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.RenderUtil;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 import net.minecraft.block.BeaconBlock;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
@@ -40,8 +41,6 @@ import net.minecraft.client.texture.Sprite;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -57,7 +56,7 @@ import java.util.List;
 //$$ import net.minecraft.client.texture.SpriteAtlasTexture;
 //#endif
 
-public class BeaconEffectRenderer extends AbstractInfoViewer
+public class BeaconEffectRenderer extends CommonScannerInfoViewer
 {
 	private static final double FONT_SCALE = TextRenderer.DEFAULT_FONT_SCALE;
 	private static final double MARGIN = 5;  // margin between icon and text
@@ -74,20 +73,26 @@ public class BeaconEffectRenderer extends AbstractInfoViewer
 	}
 
 	@Override
-	public boolean shouldRenderFor(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity)
+	public boolean shouldRenderFor(RenderVisitorWorldView world, BlockPos pos)
 	{
-		return blockState.getBlock() instanceof BeaconBlock && blockEntity instanceof BeaconBlockEntity;
+		return world.getBlockState(pos).getBlock() instanceof BeaconBlock && world.getBlockEntity(pos) instanceof BeaconBlockEntity;
 	}
 
 	@Override
-	public boolean requireBlockEntitySyncing(World world, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity)
+	public boolean requireBlockEntitySyncing(RenderVisitorWorldView world, BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public void render(RenderContext context, World world, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity)
+	protected void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
+		BlockEntity blockEntity = world.getBlockEntity(pos);
+		if (blockEntity == null)
+		{
+			return;
+		}
+
 		BeaconBlockEntityAccessor accessor = (BeaconBlockEntityAccessor)blockEntity;
 		int beaconLevel = accessor.getLevel();
 		StatusEffect primary = accessor.getPrimary();
@@ -104,7 +109,7 @@ public class BeaconEffectRenderer extends AbstractInfoViewer
 				effects.add(Pair.of(secondary, 0));
 			}
 
-			Vec3d pos = new Vec3d(blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5);
+			Vec3d centerPos = PositionUtil.centerOf(pos);
 			double maxWidth = effects.stream().
 					mapToDouble(pair -> this.calculateRowWidth(pair.getFirst(), pair.getSecond())).
 					max().orElse(0);
@@ -117,8 +122,8 @@ public class BeaconEffectRenderer extends AbstractInfoViewer
 				double deltaX = -maxWidth / 2;  // unit: pixel (in scale=FONT_SCALE context)
 				double kDeltaY = i - (effects.size() - 1) / 2.0;  // unit: ratio
 
-				this.renderStatusEffectIcon(pos, statusEffect, amplifier, deltaX, kDeltaY);
-				this.renderStatusEffectText(pos, statusEffect, amplifier, deltaX, kDeltaY);
+				this.renderStatusEffectIcon(centerPos, statusEffect, amplifier, deltaX, kDeltaY);
+				this.renderStatusEffectText(centerPos, statusEffect, amplifier, deltaX, kDeltaY);
 			}
 		}
 	}

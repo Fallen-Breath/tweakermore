@@ -33,18 +33,7 @@ public class Messenger
 	 * ----------------------------
 	 */
 
-	// compound text
-	public static BaseText c(Object ... fields)
-	{
-		BaseText text = s("");
-		for (Object field : fields)
-		{
-			text.append(field instanceof BaseText ? (BaseText) field : Messenger.s(field));
-		}
-		return text;
-	}
-
-	// Simple Text
+	// simple Text
 	public static BaseText s(Object text)
 	{
 		return
@@ -54,6 +43,23 @@ public class Messenger
 				new LiteralText
 				//#endif
 						(text.toString());
+	}
+
+	// textfy
+	public static BaseText tf(Object text)
+	{
+		return text instanceof BaseText ? (BaseText)text : s(text);
+	}
+
+	// compound text
+	public static BaseText c(Object ... fields)
+	{
+		BaseText text = s("");
+		for (Object field : fields)
+		{
+			text.append(Messenger.tf(field));
+		}
+		return text;
 	}
 
 	// Simple Text with formatting

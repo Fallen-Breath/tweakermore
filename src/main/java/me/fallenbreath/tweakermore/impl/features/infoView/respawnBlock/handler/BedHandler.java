@@ -20,6 +20,7 @@
 
 package me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.handler;
 
+import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.util.PositionUtil;
 import me.fallenbreath.tweakermore.util.TemporaryBlockReplacer;
 import net.minecraft.block.BedBlock;
@@ -29,7 +30,6 @@ import net.minecraft.block.enums.BedPart;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.Biomes;
 
 /**
@@ -45,7 +45,7 @@ public class BedHandler extends AbstractBlockHandler
 	private Direction toBedRootDirection;
 	private BlockPos bedRootPos;
 
-	public BedHandler(World world, BlockPos blockPos, BlockState blockState)
+	public BedHandler(RenderVisitorWorldView world, BlockPos blockPos, BlockState blockState)
 	{
 		super(world, blockPos, blockState);
 		this.bedHeadPos = null;
@@ -86,9 +86,9 @@ public class BedHandler extends AbstractBlockHandler
 		if (this.bedHeadPos != null)  // isBed check
 		{
 			//#if MC >= 11600
-			//$$ return !BedBlock.isOverworld(world);
+			//$$ return !BedBlock.isOverworld(world.getBestWorld());
 			//#else
-			return !world.dimension.canPlayersSleep() || world.getBiome(blockPos) == Biomes.NETHER;
+			return !this.world.getBestWorld().dimension.canPlayersSleep() || this.world.getBestWorld().getBiome(blockPos) == Biomes.NETHER;
 			//#endif
 		}
 		return false;

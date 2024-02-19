@@ -283,7 +283,7 @@ The target selecting strategy of infoViewBeacon
 - Category: Features
 - Type: option list (List)
 - Default value: `Pointed`
-- Available options: `Pointed`, `Beam`
+- Available options: `Pointed`, `Beam`, `Range`
 
 
 ### infoViewBeamAngle
@@ -342,7 +342,7 @@ The target selecting strategy of infoViewCommandBlock
 - Category: Features
 - Type: option list (List)
 - Default value: `Pointed`
-- Available options: `Pointed`, `Beam`
+- Available options: `Pointed`, `Beam`, `Range`
 
 
 ### infoViewCommandBlockTextScale
@@ -386,7 +386,51 @@ The target selecting strategy of infoViewComparator
 - Category: Features
 - Type: option list (List)
 - Default value: `Beam`
-- Available options: `Pointed`, `Beam`
+- Available options: `Pointed`, `Beam`, `Range`
+
+
+### infoViewGrowthSpeed
+
+Display growth speed of crop blocks, weathering speed of copper blocks, and related information
+
+Note: The chance displayed is the probability after a random tick selection
+
+- Category: Features
+- Type: hotkey togglable boolean (Tweak)
+- Default value: *no hotkey*, `false`
+
+![infoViewGrowthSpeed](assets/infoViewGrowthSpeed-en_us.png)
+
+
+### infoViewGrowthSpeedRenderST (infoViewGrowthSpeedRenderStrategy)
+
+The view rendering strategy of infoViewGrowthSpeed
+
+- Category: Features
+- Type: option list (List)
+- Default value: `Always`
+- Available options: `View hotkey held`, `Always`
+
+
+### infoViewGrowthSpeedTargetST (infoViewGrowthSpeedTargetStrategy)
+
+The target selecting strategy of infoViewGrowthSpeed
+
+- Category: Features
+- Type: option list (List)
+- Default value: `Range`
+- Available options: `Pointed`, `Beam`, `Range`
+
+
+### infoViewGrowthSpeedTextScale
+
+Scale of the displayed text rendered by infoViewGrowthSpeed
+
+- Category: Features
+- Type: double (Generic)
+- Default value: `0.6`
+- Minimum value: `0.1`
+- Maximum value: `3.0`
 
 
 ### infoViewHopper
@@ -419,7 +463,7 @@ The target selecting strategy of infoViewHopper
 - Category: Features
 - Type: option list (List)
 - Default value: `Beam`
-- Available options: `Pointed`, `Beam`
+- Available options: `Pointed`, `Beam`, `Range`
 
 
 ### infoViewRedstoneDustUpdateOrder
@@ -497,7 +541,7 @@ The target selecting strategy of infoViewRespawnBlockExplosion
 - Category: Features
 - Type: option list (List)
 - Default value: `Beam`
-- Available options: `Pointed`, `Beam`
+- Available options: `Pointed`, `Beam`, `Range`
 
 
 ### infoViewRespawnBlockExplosionTextAlpha
@@ -567,7 +611,7 @@ The target selecting strategy of infoViewStructureBlock
 - Category: Features
 - Type: option list (List)
 - Default value: `Pointed`
-- Available options: `Pointed`, `Beam`
+- Available options: `Pointed`, `Beam`, `Range`
 
 
 ### infoViewStructureBlockTextScale

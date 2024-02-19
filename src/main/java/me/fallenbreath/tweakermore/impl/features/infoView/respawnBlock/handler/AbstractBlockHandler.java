@@ -20,6 +20,7 @@
 
 package me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.handler;
 
+import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.util.TemporaryBlockReplacer;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -28,11 +29,11 @@ import net.minecraft.world.World;
 
 public abstract class AbstractBlockHandler
 {
-	protected final World world;
+	protected final RenderVisitorWorldView world;
 	protected final BlockPos blockPos;
 	protected final BlockState blockState;
 
-	public AbstractBlockHandler(World world, BlockPos blockPos, BlockState blockState)
+	public AbstractBlockHandler(RenderVisitorWorldView world, BlockPos blockPos, BlockState blockState)
 	{
 		this.world = world;
 		this.blockPos = blockPos;
