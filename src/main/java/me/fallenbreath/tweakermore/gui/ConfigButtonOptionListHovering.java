@@ -25,6 +25,7 @@ import fi.dy.masa.malilib.config.IConfigOptionList;
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
 import fi.dy.masa.malilib.gui.GuiBase;
 
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -34,8 +35,6 @@ public interface ConfigButtonOptionListHovering
 {
 	void setEnableValueHovering();
 
-	int MAX_ENTRIES = 128;
-
 	default List<String> makeHoveringLines(IConfigOptionList config)
 	{
 		List<String> lines = Lists.newArrayList();
@@ -43,10 +42,26 @@ public interface ConfigButtonOptionListHovering
 		IConfigOptionListEntry current = config.getOptionListValue();
 		int cnt = 0;
 
+		// in case it loops forever
+		final int MAX_ENTRIES = 128;
+
 		lines.add("tweakermore.gui.element.config_button_option_list_hovering.title");
+		List<IConfigOptionListEntry> entries = Lists.newArrayList();
+		boolean allEnum = true;
 		for (IConfigOptionListEntry entry = head; (cnt == 0 || entry != head) && cnt < MAX_ENTRIES && entry != null; entry = entry.cycle(true))
 		{
 			cnt++;
+			entries.add(entry);
+			allEnum &= entry instanceof Enum<?>;
+		}
+
+		if (allEnum)
+		{
+			entries.sort(Comparator.comparingInt(e -> ((Enum<?>)e).ordinal()));
+		}
+
+		for (IConfigOptionListEntry entry : entries)
+		{
 			String line = "  " + entry.getDisplayName();
 			if (entry.equals(current))
 			{
@@ -54,7 +69,6 @@ public interface ConfigButtonOptionListHovering
 			}
 			lines.add(line);
 		}
-
 		return lines;
 	}
 }
