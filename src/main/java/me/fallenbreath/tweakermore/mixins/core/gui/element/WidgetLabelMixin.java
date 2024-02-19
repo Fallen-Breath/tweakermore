@@ -23,11 +23,11 @@ package me.fallenbreath.tweakermore.mixins.core.gui.element;
 import fi.dy.masa.malilib.gui.widgets.WidgetBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
 import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
-import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -62,6 +62,7 @@ public abstract class WidgetLabelMixin extends WidgetBase
 		super(x, y, width, height);
 	}
 
+	@Unique
 	private boolean shouldUseTranslatedOptionLabelLogic()
 	{
 		WidgetLabel self = (WidgetLabel)(Object)this;
@@ -163,15 +164,16 @@ public abstract class WidgetLabelMixin extends WidgetBase
 	}
 
 	@SuppressWarnings("PointlessBitwiseExpression")
+	@Unique
 	private static int darkerColor(int color)
 	{
 		int a = (color >> 24) & 0xFF;
 		int r = (color >> 16) & 0xFF;
 		int g = (color >> 8) & 0xFF;
 		int b = (color >> 0) & 0xFF;
-		r *= 0.6;
-		g *= 0.6;
-		b *= 0.6;
+		r = (int)(r * 0.6);
+		g = (int)(g * 0.6);
+		b = (int)(b * 0.6);
 		return (a << 24) | (r << 16) | (g << 8) | (b << 0);
 	}
 }

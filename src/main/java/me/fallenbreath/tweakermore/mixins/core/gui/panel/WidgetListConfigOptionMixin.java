@@ -161,13 +161,14 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	{
 		if (this.isTweakerMoreConfigGui() && optionButton instanceof ConfigButtonOptionListHovering)
 		{
-			((ConfigButtonOptionListHovering)optionButton).setEnableValueHovering();
+			((ConfigButtonOptionListHovering)optionButton).setEnableValueHovering$TKM();
 		}
 	}
 
 	/**
 	 * For regular IHotkey
 	 */
+	@Unique
 	private void addButtonAndHotkeyWidgets(int x, int y, int configWidth, IHotkey config)
 	{
 		IKeybind keybind = config.getKeybind();
@@ -227,6 +228,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	 * Common logic used for IHotkeyTogglable, IHotkeyWithSwitch and IOptionListHotkeyed
 	 * whose layouts all are [some button] [keybind button] [reset button]
 	 */
+	@Unique
 	private void addValueWithKeybindWidgets(int x, int y, int configWidth, IHotkey config, ButtonGeneric valueButton)
 	{
 		IKeybind keybind = config.getKeybind();
@@ -264,6 +266,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 		this.addButton(resetButton, resetListener);
 	}
 
+	@Unique
 	private void addHotkeyTogglableButtons(int x, int y, int configWidth, IHotkeyTogglable config)
 	{
 		int booleanBtnWidth = (configWidth - 24) / 2;
@@ -271,6 +274,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 		this.addValueWithKeybindWidgets(x, y, configWidth, config, booleanButton);
 	}
 
+	@Unique
 	private void addHotkeyWithSwitchButtons(int x, int y, int configWidth, IHotkeyWithSwitch config)
 	{
 		int booleanBtnWidth = (configWidth - 24) / 2;
@@ -278,11 +282,12 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 		this.addValueWithKeybindWidgets(x, y, configWidth, config, booleanButton);
 	}
 
+	@Unique
 	private void addOptionListWithHotkey(int x, int y, int configWidth, IOptionListHotkeyed config)
 	{
 		int optionBtnWidth = (configWidth - 24) / 2;
 		ConfigButtonOptionList optionButton = new ConfigButtonOptionList(x, y, optionBtnWidth, 20, config);
-		((ConfigButtonOptionListHovering)optionButton).setEnableValueHovering();
+		((ConfigButtonOptionListHovering)optionButton).setEnableValueHovering$TKM();
 		this.addValueWithKeybindWidgets(x, y, configWidth, config, optionButton);
 	}
 

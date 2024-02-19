@@ -27,6 +27,7 @@ import fi.dy.masa.malilib.gui.widgets.WidgetListEntryBase;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.mixins.core.gui.access.WidgetListConfigOptionsAccessor;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -41,6 +42,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class WidgetListBaseMixin<TYPE, WIDGET extends WidgetListEntryBase<TYPE>>
 {
 	// to make sure it only once gets rendered
+	@Unique
 	private boolean shouldRenderTweakerMoreConfigGuiDropDownList = false;
 
 	@Inject(method = "drawContents", at = @At("HEAD"), remap = false)
@@ -99,6 +101,7 @@ public abstract class WidgetListBaseMixin<TYPE, WIDGET extends WidgetListEntryBa
 	}
 
 	@SuppressWarnings("ConstantConditions")
+	@Unique
 	private boolean isTweakerMoreConfigGui()
 	{
 		if ((WidgetListBase<?, ?>)(Object)this instanceof WidgetListConfigOptions)
@@ -109,6 +112,7 @@ public abstract class WidgetListBaseMixin<TYPE, WIDGET extends WidgetListEntryBa
 		return false;
 	}
 
+	@Unique
 	private void drawTweakerMoreConfigGuiDropDownListAgain(
 			//#if MC >= 12000
 			//$$ DrawContext matrixStackOrDrawContext,

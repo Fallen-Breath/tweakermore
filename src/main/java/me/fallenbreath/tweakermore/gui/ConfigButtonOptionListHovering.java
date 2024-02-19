@@ -33,7 +33,7 @@ import java.util.List;
  */
 public interface ConfigButtonOptionListHovering
 {
-	void setEnableValueHovering();
+	void setEnableValueHovering$TKM();
 
 	default List<String> makeHoveringLines(IConfigOptionList config)
 	{

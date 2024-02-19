@@ -27,6 +27,7 @@ import me.fallenbreath.tweakermore.gui.ConfigButtonOptionListHovering;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -42,10 +43,11 @@ public abstract class ConfigButtonOptionListMixin extends ButtonGeneric implemen
 	@Shadow(remap = false) @Final private IConfigOptionList config;
 	@Shadow(remap = false) public abstract void updateDisplayString();
 
+	@Unique
 	private boolean enableValueHovering = false;
 
 	@Override
-	public void setEnableValueHovering()
+	public void setEnableValueHovering$TKM()
 	{
 		this.enableValueHovering = true;
 		this.updateDisplayString();

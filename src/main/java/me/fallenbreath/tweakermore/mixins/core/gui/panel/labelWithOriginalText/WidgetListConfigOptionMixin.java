@@ -54,6 +54,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 		return this.parent instanceof WidgetListConfigOptions && ((WidgetListConfigOptionsAccessor)this.parent).getParent() instanceof TweakerMoreConfigGui;
 	}
 
+	@Unique
 	private boolean showOriginalTextsThisTime;
 
 	@ModifyArgs(
