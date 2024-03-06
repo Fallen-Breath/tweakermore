@@ -77,7 +77,7 @@ public abstract class KeyboardMixin
 			}
 
 			String deltaY = TweakerMoreConfigs.F3_I_USE_RELATED_COORDINATE_SHIFT_1.getBooleanValue() ? "~1" : "~";
-			String id = (String)arr[0];
+			String id = arr[0].toString();  // it might be an Identifier, or a String. Whatever, toString() it
 			String command;
 			if (arr.length == 5)  // "/summon %s %.2f %.2f %.2f %s"
 			{
