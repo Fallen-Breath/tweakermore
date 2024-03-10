@@ -393,6 +393,9 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigInteger CHAT_MESSAGE_LIMIT = newConfigInteger("chatMessageLimit", 100, 100, 10000);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed CLIENT_ENTITY_TARGETING_SUPPORT_ALL = newConfigBooleanHotkeyed("clientEntityTargetingSelectAll");
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigInteger CONNECTION_SIMULATED_DELAY = newConfigInteger("connectionSimulatedDelay", 0, 0, 15_000);
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)

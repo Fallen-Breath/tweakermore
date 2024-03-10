@@ -385,6 +385,18 @@ tweakermore:
     chatMessageLimit:
       .: 聊天信息数量上限
       comment: 修改聊天栏的历史信息储存数量上限
+    clientEntityTargetingSelectAll:
+      .: 客户端实体目标选择所有实体
+      comment: |-
+        令下述客户端实体选择的功能可以选中所有类型的实体：
+        1. F3 + I 实体数据查询
+        2. 客户端指令补全中的实体UUID选项
+        3. 鼠标中键物品提取。支持提取物品实体、经验球实体和重力方块实体
+        用法举例：
+        1. 获取一个物品实体对应的/summon指令 (F3 + I)
+        2. 输入/kill然后tab补全面前的投掷物实体（UUID补全） 
+        3. 把一个物品实体用鼠标中间拎进物品栏 (实体物品提取)
+        注：原版环境下，只能选中有碰撞箱且非旁观者的实体
     connectionSimulatedDelay:
       .: 网络连接延迟模拟
       comment: |-

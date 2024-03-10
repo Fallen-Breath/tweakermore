@@ -1,0 +1,66 @@
+/*
+ * This file is part of the TweakerMore project, licensed under the
+ * GNU Lesser General Public License v3.0
+ *
+ * Copyright (C) 2024  Fallen_Breath and contributors
+ *
+ * TweakerMore is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * TweakerMore is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.clientEntityTargetingSelectAll;
+
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.clientEntityTargetingSelectAll.MinecraftClientWithExtendedTargetEntity;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+
+import java.util.function.Predicate;
+
+@Mixin(GameRenderer.class)
+public abstract class GameRendererMixin
+{
+	@Shadow @Final private MinecraftClient client;
+
+	@WrapOperation(
+			method = "updateTargetedEntity",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/entity/ProjectileUtil;rayTrace(Lnet/minecraft/entity/Entity;Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/Box;Ljava/util/function/Predicate;D)Lnet/minecraft/util/hit/EntityHitResult;"
+			)
+	)
+	private @Nullable EntityHitResult clientEntityTargetingSelectAll_makeExtendedTarget(Entity entity, Vec3d vecStart, Vec3d vecEnd, Box box, Predicate<Entity> predicate, double reach, Operation<EntityHitResult> original)
+	{
+		MinecraftClientWithExtendedTargetEntity access = (MinecraftClientWithExtendedTargetEntity)this.client;
+		if (TweakerMoreConfigs.CLIENT_ENTITY_TARGETING_SUPPORT_ALL.getBooleanValue())
+		{
+			access.setExtendedEntityHitResult$TKM(original.call(entity, vecStart, vecEnd, box, (Predicate<Entity>)e -> true, reach));
+		}
+		else
+		{
+			access.setExtendedEntityHitResult$TKM(null);
+		}
+		return original.call(entity, vecStart, vecEnd, box, predicate, reach);
+	}
+}

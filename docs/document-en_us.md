@@ -1053,6 +1053,31 @@ Modify the maximum number of history messages stored in the chat hud
     - Where's My Chat History (`wmch`)
 
 
+### clientEntityTargetingSelectAll
+
+Make the following client-side entity targeting stuffs being able to select all types of entities:
+
+1. F3 + I entity data querying
+
+2. Client-side command suggestion with target entity UUID
+
+3. Mouse middle-click item picking. Supports picking items, xp orbs and falling blocks
+
+Example use cases:
+
+1. Get a /summon command for an item entity (F3 + I)
+
+2. Enter /kill and tab-suggested a projectile entity (UUID suggestion)
+
+3. Pick the item stack from the item entity to your inventory (pick entity)
+
+Notes: In vanilla, client can only select collide-able and non-spectator entities
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean (Generic)
+- Default value: *no hotkey*, `false`
+
+
 ### connectionSimulatedDelay
 
 Client network delay simulator. Enabled when the value is greater than 0
