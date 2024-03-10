@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableEntityModelRendering;
 
-import com.llamalad7.mixinextras.injector.WrapWithCondition;
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRenderer;
