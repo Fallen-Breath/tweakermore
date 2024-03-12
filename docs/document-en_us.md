@@ -244,6 +244,26 @@ So the block state can be restored when you place blocks with the picked item
 - Default value: `LEFT_ALT`
 
 
+### fireworkRocketThrottler
+
+Limits the maximum frequency of firework rocket usage, to avoid setting off rockets with auto-clicker
+
+- Category: Features
+- Type: hotkey togglable boolean (Tweak)
+- Default value: *no hotkey*, `false`
+
+
+### fireworkRocketThrottlerCooldown
+
+The cooldown value of option fireworkRocketThrottler in seconds
+
+- Category: Features
+- Type: double (Generic)
+- Default value: `1.0`
+- Minimum value: `0.0`
+- Maximum value: `5.0`
+
+
 ### infoView
 
 The main switch of the info view feature

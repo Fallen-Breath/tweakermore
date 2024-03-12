@@ -86,6 +86,12 @@ tweakermore:
         When performing creative pick block action (middle click) with hotkey pressed,
         store the target block's block state into the nbt named "BlockStateTag" of the picked item.
         So the block state can be restored when you place blocks with the picked item
+    fireworkRocketThrottler:
+      .: fireworkRocketThrottler
+      comment: Limits the maximum frequency of firework rocket usage, to avoid setting off rockets with auto-clicker
+    fireworkRocketThrottlerCooldown:
+      .: fireworkRocketThrottlerCooldown
+      comment: The cooldown value of option @option#fireworkRocketThrottler@ in seconds
     infoView:
       .: infoView
       comment: |-
@@ -1029,6 +1035,8 @@ tweakermore:
       empty_sign: '%1$s does not contain any text'
     creativePickBlockWithState:
       message: Block state of %1$s stored
+    fireworkRocketThrottler:
+      throttled: Firework rocket usage throttled (CD %ss)
     infoViewGrowthSpeed:
       copper:
         chance: Chance

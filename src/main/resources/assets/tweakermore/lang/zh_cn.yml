@@ -86,6 +86,12 @@ tweakermore:
         当执行创造模式的提取方块（按下中键）时，如果热键处于按下状态，
         则将目标方块的方块状态存储到提取的物品的nbt中，名为“BlockStateTag”
         因此，在你用提取的物品放置方块时，你可以直接放下与之前被选择的方块状态相同的方块
+    fireworkRocketThrottler:
+      .: 烟花火箭限速器
+      comment: 限制烟花火箭的最大使用频率，防止连点器放烟花
+    fireworkRocketThrottlerCooldown:
+      .: 烟花火箭限速器-冷却时间
+      comment: 选项@option#fireworkRocketThrottler@的冷却时间，单位秒
     infoView:
       .: 信息展示
       comment: |-
@@ -1029,6 +1035,8 @@ tweakermore:
       empty_sign: '%1$s不包含任何文本'
     creativePickBlockWithState:
       message: 已储存%1$s的方块状态
+    fireworkRocketThrottler:
+      throttled: 触发烟花火箭使用限速 (冷却 %ss)
     infoViewGrowthSpeed:
       copper:
         chance: 锈蚀概率

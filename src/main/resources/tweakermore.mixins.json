@@ -33,6 +33,7 @@
     "tweaks.features.copyItemData.ContainerScreenAccessor",
     "tweaks.features.copySignTextToClipBoard.SignBlockEntityAccessor",
     "tweaks.features.creativePickBlockWithState.MinecraftClientMixin",
+    "tweaks.features.fireworkRocketThrottler.ClientPlayerInteractionManagerMixin",
     "tweaks.features.flawlessFrames.ScreenshotRendererMixin",
     "tweaks.features.flawlessFrames.VideoRendererMixin",
     "tweaks.features.infoView.beacon.BeaconBlockEntityAccessor",

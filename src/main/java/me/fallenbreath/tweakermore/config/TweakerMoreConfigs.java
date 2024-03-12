@@ -175,6 +175,12 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigHotkeyWithSwitch CREATIVE_PICK_BLOCK_WITH_STATE = newConfigHotKeyWithSwitch("creativePickBlockWithState", false, "LEFT_ALT", KeybindSettings.MODIFIER_INGAME);
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed FIREWORK_ROCKET_THROTTLER = newConfigBooleanHotkeyed("fireworkRocketThrottler");
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigDouble FIREWORK_ROCKET_THROTTLER_COOLDOWN = newConfigDouble("fireworkRocketThrottlerCooldown", 1, 0, 5);
+
+	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW = newConfigBooleanHotkeyed("infoView");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
