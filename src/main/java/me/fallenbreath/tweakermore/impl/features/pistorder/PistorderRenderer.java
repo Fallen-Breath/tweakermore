@@ -150,7 +150,10 @@ public class PistorderRenderer implements TweakerMoreIRenderer, IClientTickHandl
 
 	public void clearDisplay()
 	{
-		InfoUtils.printActionbarMessage("tweakermore.impl.pistorder.display_cleared");
-		this.displayMap.clear();
+		if (TweakerMoreConfigs.PISTORDER.getBooleanValue())
+		{
+			InfoUtils.printActionbarMessage("tweakermore.impl.pistorder.display_cleared");
+			this.displayMap.clear();
+		}
 	}
 }
