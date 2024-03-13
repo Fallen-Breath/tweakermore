@@ -525,22 +525,22 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigDouble SCOREBOARD_SIDE_BAR_SCALE = newConfigDouble("scoreboardSideBarScale", 1, 0.001, 2);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigBoolean SHULKER_ITEM_CONTENT_HINT = newConfigBoolean("shulkerItemContentHint", false);
+	public static final TweakerMoreConfigBoolean SHULKER_BOX_ITEM_CONTENT_HINT = newConfigBoolean("shulkerBoxItemContentHint", false);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigDouble SHULKER_ITEM_CONTENT_HINT_SCALE = newConfigDouble("shulkerItemContentHintScale", 0.5, 0.01, 1);
+	public static final TweakerMoreConfigDouble SHULKER_BOX_ITEM_CONTENT_HINT_SCALE = newConfigDouble("shulkerBoxItemContentHintScale", 0.5, 0.01, 1);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigBoolean SHULKER_TOOLTIP_ENCHANTMENT_HINT = newConfigBoolean("shulkerTooltipEnchantmentHint", false);
+	public static final TweakerMoreConfigBoolean SHULKER_BOX_TOOLTIP_ENCHANTMENT_HINT = newConfigBoolean("shulkerBoxTooltipEnchantmentHint", false);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigBoolean SHULKER_TOOLTIP_FILL_LEVEL_HINT = newConfigBoolean("shulkerTooltipFillLevelHint", false);
+	public static final TweakerMoreConfigBoolean SHULKER_BOX_TOOLTIP_FILL_LEVEL_HINT = newConfigBoolean("shulkerBoxTooltipFillLevelHint", false);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigInteger SHULKER_TOOLTIP_HINT_LENGTH_LIMIT = newConfigInteger("shulkerTooltipHintLengthLimit", 120, 0, 600);
+	public static final TweakerMoreConfigInteger SHULKER_BOX_TOOLTIP_HINT_LENGTH_LIMIT = newConfigInteger("shulkerBoxTooltipHintLengthLimit", 120, 0, 600);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigBoolean SHULKER_TOOLTIP_POTION_INFO_HINT = newConfigBoolean("shulkerTooltipPotionInfoHint", false);
+	public static final TweakerMoreConfigBoolean SHULKER_BOX_TOOLTIP_POTION_INFO_HINT = newConfigBoolean("shulkerBoxTooltipPotionInfoHint", false);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean SIGN_MULTILINE_PASTE_SUPPORT = newConfigBoolean("signMultilinePasteSupport", false);

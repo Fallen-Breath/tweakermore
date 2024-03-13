@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.features.shulkerTooltipFillLevelHint;
 
-import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerTooltipHints.ShulkerToolTipEnhancer;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.ShulkerBoxToolTipEnhancer;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -39,6 +39,6 @@ public abstract class ItemStackMixin
 	@Inject(method = "getTooltip", at = @At("TAIL"))
 	private void shulkerTooltipFillLevelHint(@Nullable PlayerEntity player, TooltipContext context, CallbackInfoReturnable<List<Text>> cir)
 	{
-		ShulkerToolTipEnhancer.applyFillLevelHint((ItemStack)(Object)this, cir.getReturnValue());
+		ShulkerBoxToolTipEnhancer.applyFillLevelHint((ItemStack)(Object)this, cir.getReturnValue());
 	}
 }

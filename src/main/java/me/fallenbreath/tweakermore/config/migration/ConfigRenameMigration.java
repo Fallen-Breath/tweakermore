@@ -69,6 +69,19 @@ public class ConfigRenameMigration
 			newName = newName.substring(0, 1).toLowerCase() + newName.substring(1);
 			map.put(oldName, newName);
 		});
+
+		// v3.17: add the "box" word to some shulker box item options
+		Lists.newArrayList(
+				"shulkerItemContentHint",
+				"shulkerItemContentHintScale",
+				"shulkerTooltipEnchantmentHint",
+				"shulkerTooltipFillLevelHint",
+				"shulkerTooltipHintLengthLimit",
+				"shulkerTooltipPotionInfoHint"
+		).forEach(oldName -> {
+			String newName = oldName.replaceFirst("^shulker", "shulkerBox");
+			map.put(oldName, newName);
+		});
 	});
 
 	public static Optional<String> oldToNew(String oldConfigName)

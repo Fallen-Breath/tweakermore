@@ -18,14 +18,14 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerTooltipHints;
+package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints;
 
 import com.google.common.collect.ImmutableList;
 import fi.dy.masa.malilib.util.InventoryUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerTooltipHints.builder.PotionHintBuilder;
-import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerTooltipHints.builder.EnchantmentHintBuilder;
-import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerTooltipHints.builder.AbstractHintBuilder;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builder.PotionHintBuilder;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builder.EnchantmentHintBuilder;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builder.AbstractHintBuilder;
 import me.fallenbreath.tweakermore.util.InventoryUtil;
 import me.fallenbreath.tweakermore.util.Messenger;
 import net.minecraft.client.MinecraftClient;
@@ -43,7 +43,7 @@ import java.util.function.ToIntFunction;
 //$$ import net.minecraft.text.MutableText;
 //#endif
 
-public class ShulkerToolTipEnhancer
+public class ShulkerBoxToolTipEnhancer
 {
 	private static final List<AbstractHintBuilder> HINT_BUILDERS = ImmutableList.of(
 			new EnchantmentHintBuilder(),
@@ -67,7 +67,7 @@ public class ShulkerToolTipEnhancer
 
 	public static void applyFillLevelHint(ItemStack skulker, List<Text> tooltip)
 	{
-		if (TweakerMoreConfigs.SHULKER_TOOLTIP_FILL_LEVEL_HINT.getBooleanValue() && tooltip.size() > 0)
+		if (TweakerMoreConfigs.SHULKER_BOX_TOOLTIP_FILL_LEVEL_HINT.getBooleanValue() && tooltip.size() > 0)
 		{
 			int slotAmount = InventoryUtil.getInventorySlotAmount(skulker);
 			if (slotAmount == -1)

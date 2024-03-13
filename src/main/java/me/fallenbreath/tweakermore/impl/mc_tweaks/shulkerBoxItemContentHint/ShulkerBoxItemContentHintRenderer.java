@@ -18,7 +18,7 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerItemContentHint;
+package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxItemContentHint;
 
 import me.fallenbreath.tweakermore.util.render.ColorHolder;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
@@ -49,7 +49,7 @@ import net.minecraft.client.util.math.MatrixStack;
 //$$ import com.mojang.blaze3d.platform.GlStateManager;
 //#endif
 
-public class ShulkerItemContentHintRenderer
+public class ShulkerBoxItemContentHintRenderer
 {
 	// the display width of an item slot
 	private static final int SLOT_WIDTH = 16;
@@ -67,7 +67,7 @@ public class ShulkerItemContentHintRenderer
 			ItemStack itemStack, int x, int y
 	)
 	{
-		ShulkerItemContentHintCommon.Info info = ShulkerItemContentHintCommon.prepareInformation(itemStack);
+		ShulkerBoxItemContentHintCommon.Info info = ShulkerBoxItemContentHintCommon.prepareInformation(itemStack);
 		if (!info.enabled)
 		{
 			return;
@@ -150,7 +150,7 @@ public class ShulkerItemContentHintRenderer
 			//#else
 			ItemRenderer itemRenderer,
 			//#endif
-			ShulkerItemContentHintCommon.Info info, int x, int y)
+			ShulkerBoxItemContentHintCommon.Info info, int x, int y)
 	{
 		isRendering.set(true);
 
@@ -199,7 +199,7 @@ public class ShulkerItemContentHintRenderer
 			//#if MC >= 11500
 			MatrixStack textMatrixStack,
 			//#endif
-			double zOffset, ShulkerItemContentHintCommon.Info info, int x, int y
+			double zOffset, ShulkerBoxItemContentHintCommon.Info info, int x, int y
 	)
 	{
 		String text = "...";

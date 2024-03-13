@@ -618,7 +618,7 @@ tweakermore:
     scoreboardSideBarScale:
       .: 计分板侧边栏缩放
       comment: 将计分板侧边栏按照给定参数进行缩放显示
-    shulkerItemContentHint:
+    shulkerBoxItemContentHint:
       .: 潜影盒物品内容提示
       comment: |-
         在渲染潜影盒物品时，在潜影盒的左下角显示一个盒中内容的提示
@@ -627,21 +627,21 @@ tweakermore:
         若潜影盒为空，则不显示内容提示
         除此之外，若潜影盒非空且非全满，
         潜影盒的右下角还会显示一个代表其填充率的容量条
-    shulkerItemContentHintScale:
+    shulkerBoxItemContentHintScale:
       .: 潜影盒物品内容提示-缩放
-      comment: 选项@option#shulkerItemContentHint@内容提示的缩放比例
-    shulkerTooltipEnchantmentHint:
+      comment: 选项@option#shulkerBoxItemContentHint@内容提示的缩放比例
+    shulkerBoxTooltipEnchantmentHint:
       .: 潜影盒物品附魔提示
       comment: 在潜影盒物品的工具提示中显示物品的附魔
-    shulkerTooltipFillLevelHint:
+    shulkerBoxTooltipFillLevelHint:
       .: 潜影盒物品填充率提示
       comment: 在潜影盒物品工具提示的第一行显示其内容物填充率
-    shulkerTooltipHintLengthLimit:
+    shulkerBoxTooltipHintLengthLimit:
       .: 潜影盒物品提示长度限制
       comment: |-
         在显示潜影盒工具提示中的额外信息时，文本长度的限制
         在超出限制时，剩余未显示的信息将被折叠
-    shulkerTooltipPotionInfoHint:
+    shulkerBoxTooltipPotionInfoHint:
       .: 潜影盒物品药水提示
       comment: 在潜影盒物品的工具提示中显示物品提供的药水效果
     signEditScreenCancelButton:
@@ -1089,7 +1089,7 @@ tweakermore:
         synced: 已从服务端同步%1$s个方块实体及%2$s个实体的数据
     serverMsptMetricsStatisticTypeCycle:
       hint: '统计类型: %1$s'
-    shulkerTooltipHintBuilder:
+    shulkerBoxTooltipHintBuilder:
       more: '... %1$sx'
     tweakerMoreDevMixinAudit:
       success: Mixin审计成功

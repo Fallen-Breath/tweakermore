@@ -1618,7 +1618,7 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 可用选项: `MSPT (原版)`, `每秒MSPT平均值`, `每秒MSPT最大值`, `每分钟MSPT平均值`, `每分钟MSPT最大值`
 
 
-### 潜影盒物品内容提示 (shulkerItemContentHint)
+### 潜影盒物品内容提示 (shulkerBoxItemContentHint)
 
 在渲染潜影盒物品时，在潜影盒的左下角显示一个盒中内容的提示
 
@@ -1636,10 +1636,10 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 类型: 布尔值 (通用)
 - 默认值: `false`
 
-![shulkerItemContentHint](assets/shulkerItemContentHint.png)
+![shulkerBoxItemContentHint](assets/shulkerBoxItemContentHint.png)
 
 
-### 潜影盒物品内容提示-缩放 (shulkerItemContentHintScale)
+### 潜影盒物品内容提示-缩放 (shulkerBoxItemContentHintScale)
 
 选项潜影盒物品内容提示内容提示的缩放比例
 
@@ -1650,7 +1650,7 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 最大值: `1.0`
 
 
-### 潜影盒物品附魔提示 (shulkerTooltipEnchantmentHint)
+### 潜影盒物品附魔提示 (shulkerBoxTooltipEnchantmentHint)
 
 在潜影盒物品的工具提示中显示物品的附魔
 
@@ -1658,10 +1658,10 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 类型: 布尔值 (通用)
 - 默认值: `false`
 
-![shulkerTooltipEnchantmentHint](assets/shulkerTooltipEnchantmentHint-zh_cn.png)
+![shulkerBoxTooltipEnchantmentHint](assets/shulkerBoxTooltipEnchantmentHint-zh_cn.png)
 
 
-### 潜影盒物品填充率提示 (shulkerTooltipFillLevelHint)
+### 潜影盒物品填充率提示 (shulkerBoxTooltipFillLevelHint)
 
 在潜影盒物品工具提示的第一行显示其内容物填充率
 
@@ -1669,10 +1669,10 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 类型: 布尔值 (通用)
 - 默认值: `false`
 
-![shulkerTooltipFillLevelHint](assets/shulkerTooltipFillLevelHint-zh_cn.png)
+![shulkerBoxTooltipFillLevelHint](assets/shulkerBoxTooltipFillLevelHint-zh_cn.png)
 
 
-### 潜影盒物品提示长度限制 (shulkerTooltipHintLengthLimit)
+### 潜影盒物品提示长度限制 (shulkerBoxTooltipHintLengthLimit)
 
 在显示潜影盒工具提示中的额外信息时，文本长度的限制
 
@@ -1685,7 +1685,7 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 最大值: `600`
 
 
-### 潜影盒物品药水提示 (shulkerTooltipPotionInfoHint)
+### 潜影盒物品药水提示 (shulkerBoxTooltipPotionInfoHint)
 
 在潜影盒物品的工具提示中显示物品提供的药水效果
 
@@ -1693,7 +1693,7 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 类型: 布尔值 (通用)
 - 默认值: `false`
 
-![shulkerTooltipPotionInfoHint](assets/shulkerTooltipPotionInfoHint-zh_cn.png)
+![shulkerBoxTooltipPotionInfoHint](assets/shulkerBoxTooltipPotionInfoHint-zh_cn.png)
 
 
 ### 告示牌编辑界面取消按钮 (signEditScreenCancelButton)

@@ -18,7 +18,7 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerTooltipHints.builder;
+package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builder;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.Messenger;
@@ -52,7 +52,7 @@ public abstract class AbstractHintBuilder
 		}
 		BaseText extraText = getDivider();
 
-		int maxLength = TweakerMoreConfigs.SHULKER_TOOLTIP_HINT_LENGTH_LIMIT.getIntegerValue();
+		int maxLength = TweakerMoreConfigs.SHULKER_BOX_TOOLTIP_HINT_LENGTH_LIMIT.getIntegerValue();
 		TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
 		int idx;
 		for (idx = 0; idx < amount; idx++)
@@ -69,7 +69,7 @@ public abstract class AbstractHintBuilder
 		}
 		if (idx < amount)
 		{
-			extraText.append(Messenger.formatting(Messenger.tr("tweakermore.impl.shulkerTooltipHintBuilder.more", amount - idx), Formatting.GRAY));
+			extraText.append(Messenger.formatting(Messenger.tr("tweakermore.impl.shulkerBoxTooltipHintBuilder.more", amount - idx), Formatting.GRAY));
 		}
 
 		return extraText;

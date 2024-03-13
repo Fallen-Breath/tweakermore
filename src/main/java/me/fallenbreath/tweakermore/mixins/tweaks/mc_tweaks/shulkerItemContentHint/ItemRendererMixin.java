@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.shulkerItemContentHint;
 
-import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerItemContentHint.ShulkerItemContentHintRenderer;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxItemContentHint.ShulkerBoxItemContentHintRenderer;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -73,7 +73,7 @@ public abstract class ItemRendererMixin
 			CallbackInfo ci
 	)
 	{
-		ShulkerItemContentHintRenderer.render(
+		ShulkerBoxItemContentHintRenderer.render(
 				//#if MC >= 11904
 				//$$ matrices,
 				//#endif

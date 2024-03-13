@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.shulkerItemContentHint;
 
-import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerItemContentHint.ShulkerItemContentHintRenderer;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxItemContentHint.ShulkerBoxItemContentHintRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -44,6 +44,6 @@ public abstract class ItemRendererMixin
 	private void shulkerItemContentHint_impl(LivingEntity entity, World world, ItemStack itemStack, int x, int y, int seed, int z, CallbackInfo ci)
 	{
 		DrawContext self = (DrawContext)(Object)this;
-		ShulkerItemContentHintRenderer.render(self.getMatrices(), self, itemStack, x, y);
+		ShulkerBoxItemContentHintRenderer.render(self.getMatrices(), self, itemStack, x, y);
 	}
 }

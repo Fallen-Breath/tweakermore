@@ -20,27 +20,16 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.features.shulkerTooltipHints;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReceiver;
-import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerTooltipHints.ShulkerToolTipEnhancer;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.ShulkerBoxToolTipEnhancer;
 import net.minecraft.block.ShulkerBoxBlock;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.text.Text;
-import net.minecraft.util.DefaultedList;
-import net.minecraft.world.BlockView;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Slice;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-
-import java.util.Iterator;
-import java.util.List;
 
 //#if MC >= 11600
 //$$ import net.minecraft.text.MutableText;
@@ -106,7 +95,7 @@ public abstract class ShulkerBoxBlockMixin
 			//#else
 			Text text = (Text)textObj;
 			//#endif
-			ShulkerToolTipEnhancer.appendContentHints(this.currentItemStack, text);
+			ShulkerBoxToolTipEnhancer.appendContentHints(this.currentItemStack, text);
 		}
 		return textObj;
 	}

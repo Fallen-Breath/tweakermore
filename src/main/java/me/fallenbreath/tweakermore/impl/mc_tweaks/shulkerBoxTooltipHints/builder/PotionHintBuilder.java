@@ -18,7 +18,7 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerTooltipHints.builder;
+package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builder;
 
 import com.google.common.collect.Lists;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
@@ -37,7 +37,7 @@ public class PotionHintBuilder extends AbstractHintBuilder
 	@Nullable
 	public BaseText build(ItemStack itemStack)
 	{
-		if (TweakerMoreConfigs.SHULKER_TOOLTIP_POTION_INFO_HINT.getBooleanValue())
+		if (TweakerMoreConfigs.SHULKER_BOX_TOOLTIP_POTION_INFO_HINT.getBooleanValue())
 		{
 			Item item = itemStack.getItem();
 			float ratio = getPotionDurationRatio(item);

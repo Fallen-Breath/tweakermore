@@ -618,8 +618,8 @@ tweakermore:
     scoreboardSideBarScale:
       .: scoreboardSideBarScale
       comment: Scale the scoreboard side bar hud with given factor
-    shulkerItemContentHint:
-      .: shulkerItemContentHint
+    shulkerBoxItemContentHint:
+      .: shulkerBoxItemContentHint
       comment: |-
         Show a hint of content of shulker box item at the lower-left corner of the shulker box
         If the shulker box contains only 1 item type, then that item in the box will be shown 
@@ -627,22 +627,22 @@ tweakermore:
         If the shulker box is empty, no hint will be shown
         Also, a fill level bar will be rendered at the lower-right corner,
         if the shulker box is neither completely full nor empty
-    shulkerItemContentHintScale:
-      .: shulkerItemContentHintScale
-      comment: The scale of the hint stuffs in option @option#shulkerItemContentHint@
-    shulkerTooltipEnchantmentHint:
-      .: shulkerTooltipEnchantmentHint
+    shulkerBoxItemContentHintScale:
+      .: shulkerBoxItemContentHintScale
+      comment: The scale of the hint stuffs in option @option#shulkerBoxItemContentHint@
+    shulkerBoxTooltipEnchantmentHint:
+      .: shulkerBoxTooltipEnchantmentHint
       comment: Display enchantments of items in the tooltip of shulker box items
-    shulkerTooltipFillLevelHint:
-      .: shulkerTooltipFillLevelHint
+    shulkerBoxTooltipFillLevelHint:
+      .: shulkerBoxTooltipFillLevelHint
       comment: Display content fill level in first line of the tooltip of shulker box items
-    shulkerTooltipHintLengthLimit:
-      .: shulkerTooltipHintLengthLimit
+    shulkerBoxTooltipHintLengthLimit:
+      .: shulkerBoxTooltipHintLengthLimit
       comment: |-
         The text length limit used during displaying extra information of items in the tooltip of shulker box items
         When exceed, remaining information will be folded
-    shulkerTooltipPotionInfoHint:
-      .: shulkerTooltipPotionInfoHint
+    shulkerBoxTooltipPotionInfoHint:
+      .: shulkerBoxTooltipPotionInfoHint
       comment: Display potion information of items in the tooltip of shulker box items
     signEditScreenCancelButton:
       .: signEditScreenCancelButton
@@ -1089,7 +1089,7 @@ tweakermore:
         synced: Synced %1$s block entities and %2$s entities from the server
     serverMsptMetricsStatisticTypeCycle:
       hint: 'Statistic type: %1$s'
-    shulkerTooltipHintBuilder:
+    shulkerBoxTooltipHintBuilder:
       more: '... %1$sx'
     tweakerMoreDevMixinAudit:
       success: Mixin audit succeeded

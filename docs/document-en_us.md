@@ -1622,7 +1622,7 @@ Set to "Game tick" to keep vanilla behavior
 - Available options: `MSPT (vanilla)`, `Average MSPT per second`, `Maximum MSPT per second`, `Average MSPT per minute`, `Maximum MSPT per minute`
 
 
-### shulkerItemContentHint
+### shulkerBoxItemContentHint
 
 Show a hint of content of shulker box item at the lower-left corner of the shulker box
 
@@ -1640,12 +1640,12 @@ if the shulker box is neither completely full nor empty
 - Type: boolean (Generic)
 - Default value: `false`
 
-![shulkerItemContentHint](assets/shulkerItemContentHint.png)
+![shulkerBoxItemContentHint](assets/shulkerBoxItemContentHint.png)
 
 
-### shulkerItemContentHintScale
+### shulkerBoxItemContentHintScale
 
-The scale of the hint stuffs in option shulkerItemContentHint
+The scale of the hint stuffs in option shulkerBoxItemContentHint
 
 - Category: MC Tweaks
 - Type: double (Generic)
@@ -1654,7 +1654,7 @@ The scale of the hint stuffs in option shulkerItemContentHint
 - Maximum value: `1.0`
 
 
-### shulkerTooltipEnchantmentHint
+### shulkerBoxTooltipEnchantmentHint
 
 Display enchantments of items in the tooltip of shulker box items
 
@@ -1662,10 +1662,10 @@ Display enchantments of items in the tooltip of shulker box items
 - Type: boolean (Generic)
 - Default value: `false`
 
-![shulkerTooltipEnchantmentHint](assets/shulkerTooltipEnchantmentHint-en_us.png)
+![shulkerBoxTooltipEnchantmentHint](assets/shulkerBoxTooltipEnchantmentHint-en_us.png)
 
 
-### shulkerTooltipFillLevelHint
+### shulkerBoxTooltipFillLevelHint
 
 Display content fill level in first line of the tooltip of shulker box items
 
@@ -1673,10 +1673,10 @@ Display content fill level in first line of the tooltip of shulker box items
 - Type: boolean (Generic)
 - Default value: `false`
 
-![shulkerTooltipFillLevelHint](assets/shulkerTooltipFillLevelHint-en_us.png)
+![shulkerBoxTooltipFillLevelHint](assets/shulkerBoxTooltipFillLevelHint-en_us.png)
 
 
-### shulkerTooltipHintLengthLimit
+### shulkerBoxTooltipHintLengthLimit
 
 The text length limit used during displaying extra information of items in the tooltip of shulker box items
 
@@ -1689,7 +1689,7 @@ When exceed, remaining information will be folded
 - Maximum value: `600`
 
 
-### shulkerTooltipPotionInfoHint
+### shulkerBoxTooltipPotionInfoHint
 
 Display potion information of items in the tooltip of shulker box items
 
@@ -1697,7 +1697,7 @@ Display potion information of items in the tooltip of shulker box items
 - Type: boolean (Generic)
 - Default value: `false`
 
-![shulkerTooltipPotionInfoHint](assets/shulkerTooltipPotionInfoHint-en_us.png)
+![shulkerBoxTooltipPotionInfoHint](assets/shulkerBoxTooltipPotionInfoHint-en_us.png)
 
 
 ### signEditScreenCancelButton

@@ -18,7 +18,7 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerItemContentHint;
+package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxItemContentHint;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.InventoryUtil;
@@ -28,7 +28,7 @@ import net.minecraft.util.DefaultedList;
 
 import java.util.Optional;
 
-public class ShulkerItemContentHintCommon
+public class ShulkerBoxItemContentHintCommon
 {
 	public static class Info
 	{
@@ -43,11 +43,11 @@ public class ShulkerItemContentHintCommon
 	{
 		Info info = new Info();
 		info.enabled = false;
-		if (!TweakerMoreConfigs.SHULKER_ITEM_CONTENT_HINT.getBooleanValue())
+		if (!TweakerMoreConfigs.SHULKER_BOX_ITEM_CONTENT_HINT.getBooleanValue())
 		{
 			return info;
 		}
-		if (ShulkerItemContentHintRenderer.isRendering.get())  // no hint if it's rendering our hint item
+		if (ShulkerBoxItemContentHintRenderer.isRendering.get())  // no hint if it's rendering our hint item
 		{
 			return info;
 		}
@@ -89,7 +89,7 @@ public class ShulkerItemContentHintCommon
 		}
 
 		info.stack = std;
-		info.scale = TweakerMoreConfigs.SHULKER_ITEM_CONTENT_HINT_SCALE.getDoubleValue();
+		info.scale = TweakerMoreConfigs.SHULKER_BOX_ITEM_CONTENT_HINT_SCALE.getDoubleValue();
 		if (info.scale <= 0)
 		{
 			return info;

@@ -18,7 +18,7 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerTooltipHints.builder;
+package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builder;
 
 import com.google.common.collect.Lists;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
@@ -37,7 +37,7 @@ public class EnchantmentHintBuilder extends AbstractHintBuilder
 	@Nullable
 	public BaseText build(ItemStack itemStack)
 	{
-		if (TweakerMoreConfigs.SHULKER_TOOLTIP_ENCHANTMENT_HINT.getBooleanValue())
+		if (TweakerMoreConfigs.SHULKER_BOX_TOOLTIP_ENCHANTMENT_HINT.getBooleanValue())
 		{
 			List<Text> enchantmentTexts = Lists.newArrayList();
 			ListTag enchantmentTag = itemStack.getItem() instanceof EnchantedBookItem ? EnchantedBookItem.getEnchantmentTag(itemStack) : itemStack.getEnchantments();
