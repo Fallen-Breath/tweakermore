@@ -25,6 +25,7 @@ import fi.dy.masa.malilib.interfaces.IClientTickHandler;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.DoubleInventoryAccessor;
+import me.fallenbreath.tweakermore.util.compat.carpettisaddition.CarpetTISAdditionAccess;
 import me.fallenbreath.tweakermore.util.event.TweakerMoreEvents;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
@@ -81,7 +82,11 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 	public static boolean hasEnoughPermission()
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
-		return mc.player != null && mc.player.allowsPermissionLevel(2);
+		if (mc.player != null && mc.player.allowsPermissionLevel(2))
+		{
+			return true;
+		}
+		return CarpetTISAdditionAccess.getBooleanRule("debugNbtQueryNoPermission").orElse(false);
 	}
 
 	public void resetSyncLimiter()
