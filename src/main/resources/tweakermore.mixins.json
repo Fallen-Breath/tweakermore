@@ -117,6 +117,8 @@
     "tweaks.mc_tweaks.fixHoverTextScale.HoverTextRendererClassMixin",
     "tweaks.mc_tweaks.flyDrag.LivingEntityMixin",
     "tweaks.mc_tweaks.itemTooltipHideUntilMouseMove.ContainerScreenMixin",
+    "tweaks.mc_tweaks.keepMessageHistoryOnReconfiguration.InGameHudMixin",
+    "tweaks.mc_tweaks.keepMessageHistoryOnReconfiguration.MinecraftClientMixin",
     "tweaks.mc_tweaks.legacyF3NLogic.KeyboardMixin",
     "tweaks.mc_tweaks.maxChatHudHeight.ChatHudMixin",
     "tweaks.mc_tweaks.multiplayerForcedEnabled.MinecraftClientMixin",

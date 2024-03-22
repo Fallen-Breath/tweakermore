@@ -1450,6 +1450,24 @@ With this option, no more need to worry about item tooltips covering too much in
 - Default value: `false`
 
 
+### keepMessageHistoryOnReconfiguration
+
+Prevent the chat messages in the chat hud from being cleared when then client enters the reconfiguration network state
+
+Proxy servers like BungeeCord and Velocity might let the client enter the reconfiguration network state
+
+when the client is switching between different backend Minecraft servers.
+
+With this option, you can keep your chat history with switching between different servers
+
+- Category: MC Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Minecraft (`minecraft`) `>=1.20.2`
+
+
 ### legacyF3NLogic
 
 Modify the logic of hotkey F3 + N back to 1.15 and before

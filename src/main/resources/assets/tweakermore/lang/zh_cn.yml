@@ -558,6 +558,13 @@ tweakermore:
       comment: |-
         在容器GUI中隐藏物品的悬浮文本，直至鼠标移动
         借此，无需再担心物品的悬浮文本遮挡过多容器GUI中的物品图标信息
+    keepMessageHistoryOnReconfiguration:
+      .: 在重配置网络阶段保留消息历史
+      comment: |-
+        防止聊天记录在客户端进入重新配置网络状态时被清除
+        像BungeeCord和Velocity这样的代理服务器，可能会在客户端在不同的
+        后端Minecraft服务器之间切换时，让客户端进入重新配置网络状态
+        借助该选项，你可以在切换服务器的时候保留你的聊天信息
     legacyF3NLogic:
       .: 旧版F3+N逻辑
       comment: |-

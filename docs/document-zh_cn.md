@@ -1446,6 +1446,24 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 默认值: `false`
 
 
+### 在重配置网络阶段保留消息历史 (keepMessageHistoryOnReconfiguration)
+
+防止聊天记录在客户端进入重新配置网络状态时被清除
+
+像BungeeCord和Velocity这样的代理服务器，可能会在客户端在不同的
+
+后端Minecraft服务器之间切换时，让客户端进入重新配置网络状态
+
+借助该选项，你可以在切换服务器的时候保留你的聊天信息
+
+- 分类: MC修改
+- 类型: 布尔值 (通用)
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Minecraft (`minecraft`) `>=1.20.2`
+
+
 ### 旧版F3+N逻辑 (legacyF3NLogic)
 
 修改快捷键F3+N的逻辑至1.15及之前的逻辑
