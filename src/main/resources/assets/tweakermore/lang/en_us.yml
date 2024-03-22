@@ -835,6 +835,11 @@ tweakermore:
       comment: |-
         Fixed SCROLL_STACKS_FALLBACK of item-scroller ignores the last stack
         The same as masa's fixed in itemscoller commit 0984fe7
+    keepMessage:
+      .: keepMessage
+      comment: |-
+        Keep your chat messages
+        With this option, When you use "/server", the client retains your chat message
     lmCustomSchematicBaseDirectoryEnabledPorting:
       .: lmCustomSchematicBaseDirectoryEnabledPorting
       comment: Backport option customSchematicBaseDirectoryEnabled from Litematica 0.9.0 mc1.17+

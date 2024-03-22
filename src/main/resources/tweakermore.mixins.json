@@ -188,6 +188,7 @@
     "tweaks.mod_tweaks.xmapNoSessionFinalizationWait.WorldMapSessionMixin",
     "tweaks.mod_tweaks.xmapWaypointFreecamCompact.WorldMapSessionMixin",
     "tweaks.porting.isScrollStacksFallbackFixPorting.InventoryUtilsMixin",
+    "tweaks.porting.keepMessage.MinecraftClientMixin",
     "tweaks.porting.lmCustomSchematicBaseDirectoryPorting.DataManagerMixin",
     "tweaks.porting.lmPickBlockShulkersPorting.WorldUtilsMixin",
     "tweaks.porting.mcSpectatorEnterSinkingFixPorting.ClientPlayNetworkHandlerMixin",

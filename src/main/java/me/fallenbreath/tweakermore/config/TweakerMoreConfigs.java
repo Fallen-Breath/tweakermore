@@ -753,6 +753,12 @@ public class TweakerMoreConfigs
 
 	@Config(
 			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.20.4")),
+			category = Config.Category.PORTING
+	)
+	public static final TweakerMoreConfigBoolean KEEP_MESSAGE = newConfigBoolean("keepMessage", false);
+	@Config(
+			type = Config.Type.GENERIC,
 			restriction = @Restriction(require = {
 					@Condition(litematica),
 					@Condition(value = minecraft, versionPredicates = "<1.17")

@@ -835,6 +835,11 @@ tweakermore:
       comment: |-
         修复ItemScroller的SCROLL_STACKS_FALLBACK未考虑最后一组物品
         同masa在itemscroller的修复commit 0984fe7相同
+    keepMessage:
+      .: 保留聊天信息
+      comment: |-
+        保留你的聊天信息
+        借此, 当你使用"/server"切换服务器时, 客户端会保留你的聊天信息
     lmCustomSchematicBaseDirectoryEnabledPorting:
       .: Litematica自定义原理图根文件夹开关-移植
       comment: 从Litematica 0.9.0 mc1.17+移植customSchematicBaseDirectoryEnabled
