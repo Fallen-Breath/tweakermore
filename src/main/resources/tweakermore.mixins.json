@@ -69,6 +69,7 @@
     "tweaks.mc_tweaks.bossBarMaxEntry.BossBarHudMixin",
     "tweaks.mc_tweaks.bossBarScale.BossBarHudMixin",
     "tweaks.mc_tweaks.chatMessageLimit.ChatHudMixin",
+    "tweaks.mc_tweaks.clientEntityTargetingSelectAll.ClientCommandSourceMixin",
     "tweaks.mc_tweaks.clientEntityTargetingSelectAll.GameRendererMixin",
     "tweaks.mc_tweaks.clientEntityTargetingSelectAll.KeyboardMixin",
     "tweaks.mc_tweaks.clientEntityTargetingSelectAll.MinecraftClient_extendedTargetMixin",
@@ -124,6 +125,8 @@
     "tweaks.mc_tweaks.multiplayerForcedEnabled.MinecraftClientMixin",
     "tweaks.mc_tweaks.nameTagRenderStrategy.EntityRendererMixin",
     "tweaks.mc_tweaks.netherPortalSoundChance.NetherPortalBlockMixin",
+    "tweaks.mc_tweaks.particleLimit.ParticleManagerAccessor",
+    "tweaks.mc_tweaks.particleLimit.ParticleManagerMixin",
     "tweaks.mc_tweaks.playerSkinBlockingLoading.PlayerSkinProviderMixin",
     "tweaks.mc_tweaks.playerSkinBlockingLoading.PlayerSkinTextureMixin",
     "tweaks.mc_tweaks.playerSkinBlockingLoading.compat.customskinloader.FakeSkinManagerMixin_Ancient",
@@ -203,9 +206,6 @@
     "util.render.TextHandlerAccessor"
   ],
   "client": [
-    "tweaks.mc_tweaks.clientEntityTargetingSelectAll.ClientCommandSourceMixin",
-    "tweaks.mc_tweaks.particleLimit.ParticleManagerAccessor",
-    "tweaks.mc_tweaks.particleLimit.ParticleManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
