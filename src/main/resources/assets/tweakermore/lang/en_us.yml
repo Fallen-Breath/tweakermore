@@ -584,6 +584,9 @@ tweakermore:
       comment: |-
         The chance for a nether portal block to play sound
         Set it to 0.001 or 0.0001 for less noisy portal
+    particleLimit:
+      .: particleLimit
+      comment: Modify the client-side particle limit. Affects both ticking limit and rendering limit
     playerNameTagRenderStrategyList:
       .: playerNameTagRenderStrategyList
       comment: |-

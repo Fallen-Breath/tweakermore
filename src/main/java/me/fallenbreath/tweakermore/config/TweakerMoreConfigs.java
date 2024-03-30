@@ -47,6 +47,7 @@ import me.fallenbreath.tweakermore.impl.features.pistorder.PistorderRenderer;
 import me.fallenbreath.tweakermore.impl.features.refreshInventory.InventoryRefresher;
 import me.fallenbreath.tweakermore.impl.features.schematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.flawlessFrames.FlawlessFramesHandler;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.particleLimit.ParticleLimitHelper;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.eCraftMassCraftCompact.EasierCraftingRegistrar;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.lmRemoveEntityCommand.LitematicaRemoveEntityCommandOverrider;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.ofPlayerExtraModelOverride.OptifinePlayerExtraModelOverrider;
@@ -503,6 +504,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigDouble NETHER_PORTAL_SOUND_CHANCE = newConfigDouble("netherPortalSoundChance", 0.01D, 0.0D, 0.01D);
 
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigInteger PARTICLE_LIMIT = newConfigInteger("particleLimit", 16384, 0, 1000000);
+
 	@Config(type = Config.Type.LIST, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigStringList PLAYER_NAME_TAG_RENDER_STRATEGY_LIST = newConfigStringList("playerNameTagRenderStrategyList", ImmutableList.of());
 
@@ -875,6 +879,7 @@ public class TweakerMoreConfigs
 		LM_REMOVE_ENTITY_COMMAND.setValueChangeCallback(LitematicaRemoveEntityCommandOverrider::onCommandOverrideChanged);
 		OF_SANTA_HAT.setValueChangeCallback(OptifinePlayerExtraModelOverrider::onConfigValueChanged);
 		OF_WITCH_HAT.setValueChangeCallback(OptifinePlayerExtraModelOverrider::onConfigValueChanged);
+		PARTICLE_LIMIT.setValueChangeCallback(ParticleLimitHelper::onConfigValueChanged);
 		FLAWLESS_FRAMES.setValueChangeCallback(config -> FlawlessFramesHandler.setEnabled(config.getBooleanValue()));
 
 		// debugs

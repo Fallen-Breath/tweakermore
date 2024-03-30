@@ -584,6 +584,9 @@ tweakermore:
       comment: |-
         地狱门方块播放音效的概率
         将其设为0.001或0.0001来让地狱门没那么吵
+    particleLimit:
+      .: 粒子数量上限
+      comment: 修改客户端的粒子数量上限。同时影响运算的上限和渲染的上限
     playerNameTagRenderStrategyList:
       .: 玩家名称标签渲染策略-列表
       comment: |-

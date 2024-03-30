@@ -1522,6 +1522,17 @@ Set it to 0.001 or 0.0001 for less noisy portal
 - Maximum value: `0.01`
 
 
+### particleLimit
+
+Modify the client-side particle limit. Affects both ticking limit and rendering limit
+
+- Category: MC Tweaks
+- Type: integer (Generic)
+- Default value: `16384`
+- Minimum value: `0`
+- Maximum value: `1000000`
+
+
 ### playerNameTagRenderStrategyList
 
 The whitelist / blacklist used in playerNameTagRenderStrategyList

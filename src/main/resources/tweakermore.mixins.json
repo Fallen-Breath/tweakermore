@@ -203,7 +203,9 @@
     "util.render.TextHandlerAccessor"
   ],
   "client": [
-    "tweaks.mc_tweaks.clientEntityTargetingSelectAll.ClientCommandSourceMixin"
+    "tweaks.mc_tweaks.clientEntityTargetingSelectAll.ClientCommandSourceMixin",
+    "tweaks.mc_tweaks.particleLimit.ParticleManagerAccessor",
+    "tweaks.mc_tweaks.particleLimit.ParticleManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
