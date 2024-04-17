@@ -83,7 +83,7 @@ dependencies {
 	}
 
 	// libraries
-	include(modImplementation("me.fallenbreath:conditional-mixin:${project.conditionalmixin_version}"))
+	include(modImplementation("me.fallenbreath:conditional-mixin-fabric:${project.conditionalmixin_version}"))
 	include(annotationProcessor(implementation("io.github.llamalad7:mixinextras-fabric:${project.mixinextras_version}")))
 	testImplementation "junit:junit:${project.junit_version}"
 }
@@ -91,12 +91,20 @@ dependencies {
 def MIXIN_CONFIG_PATHS = ['tweakermore.mixins.json', 'tweakermore.optifine_mixins.json']
 String LANG_DIR = 'assets/tweakermore/lang'
 JavaVersion JAVA_COMPATIBILITY
-if (mcVersion >= 11800) {
+if (mcVersion >= 12005) {
+	JAVA_COMPATIBILITY = JavaVersion.VERSION_21
+} else if (mcVersion >= 11800) {
 	JAVA_COMPATIBILITY = JavaVersion.VERSION_17
 } else if (mcVersion >= 11700) {
 	JAVA_COMPATIBILITY = JavaVersion.VERSION_16
 } else {
 	JAVA_COMPATIBILITY = JavaVersion.VERSION_1_8
+}
+
+// mixin does not support java 21 yet
+JavaVersion MIXIN_COMPATIBILITY_LEVEL = JAVA_COMPATIBILITY
+if (MIXIN_COMPATIBILITY_LEVEL > JavaVersion.VERSION_17) {
+	MIXIN_COMPATIBILITY_LEVEL = JavaVersion.VERSION_17
 }
 
 loom {
@@ -174,7 +182,7 @@ processResources {
 
 	MIXIN_CONFIG_PATHS.each {mixinConfigPath ->
 		filesMatching(mixinConfigPath) {
-			filter { s -> s.replace('{{COMPATIBILITY_LEVEL}}', "JAVA_${JAVA_COMPATIBILITY.ordinal() + 1}") }
+			filter { s -> s.replace('{{COMPATIBILITY_LEVEL}}', "JAVA_${MIXIN_COMPATIBILITY_LEVEL.ordinal() + 1}") }
 		}
 	}
 }
@@ -191,6 +199,10 @@ yamlang {
 tasks.withType(JavaCompile).configureEach {
 	options.encoding = "UTF-8"
     options.compilerArgs << "-Xlint:deprecation" << "-Xlint:unchecked"
+    if (JAVA_COMPATIBILITY <= JavaVersion.VERSION_1_8) {
+        // suppressed "source/target value 8 is obsolete and will be removed in a future release"
+        options.compilerArgs << '-Xlint:-options'
+    }
 }
 
 java {

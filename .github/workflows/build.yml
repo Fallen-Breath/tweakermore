@@ -19,11 +19,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: 17
+          java-version: 21
 
       - name: Cache gradle files
         uses: actions/cache@v4
@@ -69,6 +69,7 @@ jobs:
               ./gradlew $args
           fi
         env:
+          BUILD_ID: ${{ github.run_number }}
           BUILD_RELEASE: ${{ inputs.release }}
           FALLENS_MAVEN_TOKEN: ${{ secrets.FALLENS_MAVEN_TOKEN }}
 
