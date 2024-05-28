@@ -154,6 +154,7 @@
     "tweaks.mc_tweaks.unlimitedBlockEntityRenderDistance.BlockEntityRenderDispatcherMixin",
     "tweaks.mc_tweaks.unlimitedEntityRenderDistance.EntityMixin",
     "tweaks.mc_tweaks.weatherOverride.WorldMixin",
+    "tweaks.mc_tweaks.windowSize.WindowMixin",
     "tweaks.mc_tweaks.yeetServerIpReversedDnsLookup.AddressResolverMixin",
     "tweaks.mc_tweaks.yeetServerIpReversedDnsLookup.ConnectScreenThreadMixin",
     "tweaks.mc_tweaks.yeetServerIpReversedDnsLookup.MultiplayerServerListPingerMixin",

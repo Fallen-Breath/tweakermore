@@ -47,6 +47,7 @@ import me.fallenbreath.tweakermore.impl.features.pistorder.PistorderRenderer;
 import me.fallenbreath.tweakermore.impl.features.refreshInventory.InventoryRefresher;
 import me.fallenbreath.tweakermore.impl.features.schematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.flawlessFrames.FlawlessFramesHandler;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.windowSize.WindowSizeHelper;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.particleLimit.ParticleLimitHelper;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.eCraftMassCraftCompact.EasierCraftingRegistrar;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.lmRemoveEntityCommand.LitematicaRemoveEntityCommandOverrider;
@@ -582,6 +583,18 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean YEET_SERVER_IP_REVERSED_DNS_LOOKUP = newConfigBoolean("yeetServerIpReversedDnsLookup", false);
 
+	@Config(type = Config.Type.HOTKEY, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigHotkey WINDOW_SIZE_APPLY = newConfigHotKey("windowSizeApply", "");
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigInteger WINDOW_SIZE_WIDTH = newConfigInteger("windowSizeWidth", 854, 160, 15360);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigInteger WINDOW_SIZE_HEIGHT = newConfigInteger("windowSizeHeight", 480, 90, 8640);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean WINDOW_SIZE_PINNED = newConfigBoolean("windowSizePinned", false);
+
 	////////////////////
 	//   Mod Tweaks   //
 	////////////////////
@@ -872,6 +885,7 @@ public class TweakerMoreConfigs
 		setHotkeyCallback(OPEN_TWEAKERMORE_CONFIG_GUI, TweakerMoreConfigGui::openGui, true);
 		setHotkeyCallback(PISTORDER_CLEAR_DISPLAY, PistorderRenderer.getInstance()::clearDisplay, false);
 		setHotkeyCallback(REFRESH_INVENTORY, InventoryRefresher::refresh, false);
+		setHotkeyCallback(WINDOW_SIZE_APPLY, WindowSizeHelper::applyWindowSize, false);
 
 		// value listeners
 		ECRAFT_ITEM_SCROLLER_COMPACT.setValueChangeCallback(EasierCraftingRegistrar::onConfigValueChanged);

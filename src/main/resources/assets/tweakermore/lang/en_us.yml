@@ -709,6 +709,32 @@ tweakermore:
         Many non-loopback IPs lack associated domain names, which makes reverse lookups time-consuming
         This option sets the domain of those servers directly to their IP, bypassing the reverse DNS check
         This results in a 1s ~ 5s reduction in time for server list pinging and connections to those servers
+    windowSizeApply:
+      .: windowSizeApply
+      comment: |-
+        Change the size of the game window to @option#windowSizeHeight@ and @option#windowSizeWidth@
+        Does not work in full screen
+        See also: option @option#windowSizeHeight@, @option#windowSizeWidth@, @option#windowSizePinned@
+    windowSizeWidth:
+      .: windowSizeWidth
+      comment: |-
+        Width to set for the game window
+        To apply the desired width, use option @option#windowSizeApply@
+        See also: option @option#windowSizeApply@, @option#windowSizeHeight@, @option#windowSizePinned@
+    windowSizeHeight:
+      .: windowSizeHeight
+      comment: |-
+        Height to set for the game window
+        To apply the desired height, use option @option#windowSizeApply@
+        See also: option @option#windowSizeApply@, @option#windowSizeWidth@, @option#windowSizePinned@
+    windowSizePinned:
+      .: windowSizePinned
+      comment: |-
+        Pin the size of the game window to @option#windowSizeHeight@ and @option#windowSizeWidth@
+        Actually it will revert any window size changed from a user action,
+        since it's not possible to complete disable windows resize after the window is created
+        Does not work in full screen
+        See also: option @option#windowSizeApply@, @option#windowSizeHeight@, @option#windowSizeWidth@
 
     # ================================ Mod Tweaks ================================
 
@@ -1103,6 +1129,8 @@ tweakermore:
       more: '... %1$sx'
     tweakerMoreDevMixinAudit:
       success: Mixin audit succeeded
+    windowSize:
+      full_screen_nope: Cannot perform window resize in full screen
 
   # ================================ Misc ================================
 

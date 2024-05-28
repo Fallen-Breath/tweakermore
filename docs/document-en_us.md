@@ -1844,6 +1844,66 @@ The client-side weather value to be overridden by tweak weatherOverride
 - Available options: `Clear sky`, `Rain`, `Thunderstorm`
 
 
+### windowSizeApply
+
+Change the size of the game window to windowSizeHeight and windowSizeWidth
+
+Does not work in full screen
+
+See also: option windowSizeHeight, windowSizeWidth, windowSizePinned
+
+- Category: MC Tweaks
+- Type: hotkey (Hotkey)
+- Default value: *no hotkey*
+
+
+### windowSizeHeight
+
+Height to set for the game window
+
+To apply the desired height, use option windowSizeApply
+
+See also: option windowSizeApply, windowSizeWidth, windowSizePinned
+
+- Category: MC Tweaks
+- Type: integer (Generic)
+- Default value: `480`
+- Minimum value: `90`
+- Maximum value: `8640`
+
+
+### windowSizePinned
+
+Pin the size of the game window to windowSizeHeight and windowSizeWidth
+
+Actually it will revert any window size changed from a user action,
+
+since it's not possible to complete disable windows resize after the window is created
+
+Does not work in full screen
+
+See also: option windowSizeApply, windowSizeHeight, windowSizeWidth
+
+- Category: MC Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+
+
+### windowSizeWidth
+
+Width to set for the game window
+
+To apply the desired width, use option windowSizeApply
+
+See also: option windowSizeApply, windowSizeHeight, windowSizePinned
+
+- Category: MC Tweaks
+- Type: integer (Generic)
+- Default value: `854`
+- Minimum value: `160`
+- Maximum value: `15360`
+
+
 ### yeetServerIpReversedDnsLookup
 
 For servers whose addresses are represented solely by IP, disable reverse DNS lookups in the InetAddress object
