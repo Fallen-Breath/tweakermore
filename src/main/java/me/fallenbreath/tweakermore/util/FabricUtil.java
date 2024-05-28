@@ -20,11 +20,12 @@
 
 package me.fallenbreath.tweakermore.util;
 
-import me.fallenbreath.conditionalmixin.api.util.VersionChecker;
+import me.fallenbreath.tweakermore.TweakerMoreMod;
 import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.Version;
 
+import java.lang.reflect.Method;
 import java.util.Collection;
-import java.util.Collections;
 
 public class FabricUtil
 {
@@ -41,11 +42,38 @@ public class FabricUtil
 	public static boolean doesModFitsAnyPredicate(String modId, Collection<String> versionPredicates)
 	{
 		return FabricLoader.getInstance().getModContainer(modId).
-				map(mod -> VersionChecker.doesVersionSatisfyPredicate(mod.getMetadata().getVersion(), versionPredicates)).
+				map(mod -> {
+					Version version = mod.getMetadata().getVersion();
+					return versionPredicates.isEmpty() || versionPredicates.stream().anyMatch(vp -> doesVersionSatisfyPredicate(version, vp));
+				}).
 				orElse(false);
 	}
-	public static boolean doesModFitsAnyPredicate(String modId, String versionPredicate)
+
+	public static boolean doesVersionSatisfyPredicate(Version version, String versionPredicate)
 	{
-		return doesModFitsAnyPredicate(modId, Collections.singleton(versionPredicate));
+		try
+		{
+			// fabric loader >=0.12
+			return net.fabricmc.loader.api.metadata.version.VersionPredicate.parse(versionPredicate).test(version);
+		}
+		catch (NoClassDefFoundError e)
+		{
+			// fabric loader >=0.10.4 <0.12
+			try
+			{
+				Class<?> clazz = Class.forName("net.fabricmc.loader.util.version.VersionPredicateParser");
+				Method matches = clazz.getMethod("matches", Version.class, String.class);
+				return (boolean)matches.invoke(null, version, versionPredicate);
+			}
+			catch (Exception ex)
+			{
+				TweakerMoreMod.LOGGER.error("Failed to invoke VersionPredicateParser#matches", ex);
+			}
+		}
+		catch (Exception e)
+		{
+			TweakerMoreMod.LOGGER.error("Failed to parse version or version predicate {} {}: {}", version.getFriendlyString(), versionPredicate, e);
+		}
+		return false;
 	}
 }

@@ -21,8 +21,8 @@
 package me.fallenbreath.tweakermore.util.compat.carpet;
 
 import com.google.common.collect.Lists;
-import me.fallenbreath.conditionalmixin.api.util.VersionChecker;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
+import me.fallenbreath.tweakermore.util.FabricUtil;
 import me.fallenbreath.tweakermore.util.ReflectionUtil;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
@@ -47,7 +47,7 @@ public class CarpetModAccess
 		return FabricLoader.getInstance().getModContainer("carpet").
 				map(ModContainer::getMetadata).
 				map(ModMetadata::getVersion).
-				map(version -> VersionChecker.doesVersionSatisfyPredicate(version, predicate)).
+				map(version -> FabricUtil.doesVersionSatisfyPredicate(version, predicate)).
 				orElse(false);
 	}
 
