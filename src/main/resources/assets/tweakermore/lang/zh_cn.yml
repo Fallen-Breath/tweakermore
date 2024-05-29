@@ -1167,6 +1167,7 @@ tweakermore:
       iris: Iris
       itemscroller: Item Scroller
       litematica: Litematica
+      locked_window_size: Locked Window Size
       minecraft: Minecraft
       minihud: MiniHUD
       morechathistory: MoreChatHistory

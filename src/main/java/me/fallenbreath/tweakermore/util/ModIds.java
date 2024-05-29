@@ -55,6 +55,7 @@ public class ModIds
 	public static final String extra_player_renderer = "explayerenderer";
 	public static final String fabric_carpet = "carpet";
 	public static final String iris = "iris";
+	public static final String locked_window_size = "locked_window_size";
 	public static final String optifine = "optifabric";
 	public static final String pistorder = "pistorder";
 	public static final String replay_mod = "replaymod";

@@ -56,6 +56,7 @@ import me.fallenbreath.tweakermore.impl.mod_tweaks.ofPlayerExtraModelOverride.Op
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.impl.porting.lmCustomSchematicBaseDirectoryPorting.LitematicaCustomSchematicBaseDirectoryPorting;
 import me.fallenbreath.tweakermore.impl.setting.debug.TweakerMoreDebugHelper;
+import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.util.RegistryUtil;
 import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreRenderEventHandler;
@@ -590,16 +591,16 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean YEET_SERVER_IP_REVERSED_DNS_LOOKUP = newConfigBoolean("yeetServerIpReversedDnsLookup", false);
 
-	@Config(type = Config.Type.HOTKEY, category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.HOTKEY, restriction = @Restriction(conflict = @Condition(ModIds.locked_window_size)), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigHotkey WINDOW_SIZE_APPLY = newConfigHotKey("windowSizeApply", "");
 
-	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(ModIds.locked_window_size)), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigInteger WINDOW_SIZE_WIDTH = newConfigInteger("windowSizeWidth", 854, 160, 15360);
 
-	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(ModIds.locked_window_size)), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigInteger WINDOW_SIZE_HEIGHT = newConfigInteger("windowSizeHeight", 480, 90, 8640);
 
-	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(ModIds.locked_window_size)), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean WINDOW_SIZE_PINNED = newConfigBoolean("windowSizePinned", false);
 
 	////////////////////
