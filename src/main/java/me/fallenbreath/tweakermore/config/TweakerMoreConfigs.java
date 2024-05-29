@@ -71,8 +71,8 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import static me.fallenbreath.tweakermore.config.ConfigFactory.*;
-import static me.fallenbreath.tweakermore.util.ModIds.*;
 
+@SuppressWarnings("unused")
 public class TweakerMoreConfigs
 {
 	/**
@@ -87,16 +87,16 @@ public class TweakerMoreConfigs
 	//    Features    //
 	////////////////////
 
-	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
+	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(ModIds.itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed AUTO_CLEAN_CONTAINER = newConfigBooleanHotkeyed("autoCleanContainer");
 
-	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
+	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(ModIds.itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigOptionList AUTO_CLEAN_CONTAINER_LIST_TYPE = newConfigOptionList("autoCleanContainerListType", UsageRestriction.ListType.NONE);
 
-	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
+	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(ModIds.itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigStringList AUTO_CLEAN_CONTAINER_WHITELIST = newConfigStringList("autoCleanContainerWhiteList", ImmutableList.of(RegistryUtil.getItemId(Items.SHULKER_BOX)));
 
-	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
+	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(ModIds.itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigStringList AUTO_CLEAN_CONTAINER_BLACKLIST = newConfigStringList("autoCleanContainerBlackList", ImmutableList.of(RegistryUtil.getItemId(Items.SHULKER_BOX)));
 
 	public static final ItemRestriction AUTO_CLEAN_CONTAINER_RESTRICTION = new ItemRestriction();
@@ -104,8 +104,8 @@ public class TweakerMoreConfigs
 	@Config(
 			type = Config.Type.TWEAK,
 			restriction = @Restriction(require = {
-					@Condition(litematica),
-					@Condition(itemscroller)
+					@Condition(ModIds.litematica),
+					@Condition(ModIds.itemscroller)
 			}),
 			category = Config.Category.FEATURES
 	)
@@ -114,8 +114,8 @@ public class TweakerMoreConfigs
 	@Config(
 			type = Config.Type.LIST,
 			restriction = @Restriction(require = {
-					@Condition(litematica),
-					@Condition(itemscroller)
+					@Condition(ModIds.litematica),
+					@Condition(ModIds.itemscroller)
 			}),
 			category = Config.Category.FEATURES
 	)
@@ -124,14 +124,14 @@ public class TweakerMoreConfigs
 	@Config(
 			type = Config.Type.GENERIC,
 			restriction = @Restriction(require = {
-					@Condition(litematica),
-					@Condition(itemscroller)
+					@Condition(ModIds.litematica),
+					@Condition(ModIds.itemscroller)
 			}),
 			category = Config.Category.FEATURES
 	)
 	public static final TweakerMoreConfigBoolean AUTO_COLLECT_MATERIAL_LIST_ITEM_CLOSE_GUI = newConfigBoolean("autoCollectMaterialListItemCloseGui", true);
 
-	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
+	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(ModIds.itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed AUTO_FILL_CONTAINER = newConfigBooleanHotkeyed("autoFillContainer");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
@@ -139,19 +139,19 @@ public class TweakerMoreConfigs
 
 	@Config(
 			type = Config.Type.TWEAK,
-			restriction = @Restriction(require = @Condition(litematica)),
+			restriction = @Restriction(require = @Condition(ModIds.litematica)),
 			category = Config.Category.FEATURES
 	)
 	public static final TweakerMoreConfigBooleanHotkeyed AUTO_PICK_SCHEMATIC_BLOCK = newConfigBooleanHotkeyed("autoPickSchematicBlock");
 
-	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(itemscroller)), category = Config.Category.FEATURES)
+	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(ModIds.itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed AUTO_PUT_BACK_EXISTED_ITEM = newConfigBooleanHotkeyed("autoPutBackExistedItem");
 
 	@Config(
 			type = Config.Type.TWEAK,
 			restriction = @Restriction(require = {
-					@Condition(itemscroller),
-					@Condition(value = minecraft, versionPredicates = ">=1.16")
+					@Condition(ModIds.itemscroller),
+					@Condition(value = ModIds.minecraft, versionPredicates = ">=1.16")
 			}),
 			category = Config.Category.FEATURES
 	)
@@ -289,31 +289,31 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble INFO_VIEW_STRUCTURE_BLOCK_TEXT_SCALE = newConfigDouble("infoViewStructureBlockTextScale", 1, 0.1, 3);
 
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = ModIds.pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBoolean PISTORDER = newConfigBoolean("pistorder", false);
 
-	@Config(type = Config.Type.HOTKEY, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	@Config(type = Config.Type.HOTKEY, restriction = @Restriction(conflict = @Condition(value = ModIds.pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkey PISTORDER_CLEAR_DISPLAY = newConfigHotKey("pistorderClearDisplay", "P");
 
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = ModIds.pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBoolean PISTORDER_DYNAMICALLY_INFO_UPDATE = newConfigBoolean("pistorderDynamicallyInfoUpdate", true);
 
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = ModIds.pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigInteger PISTORDER_MAX_RENDER_DISTANCE = newConfigInteger("pistorderMaxRenderDistance", 256, 0, 2048);
 
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = ModIds.pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigInteger PISTORDER_MAX_SIMULATION_PUSH_LIMIT = newConfigInteger("pistorderMaxSimulationPushLimit", 128, 12, 1024);
 
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = ModIds.pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBoolean PISTORDER_SWING_HAND = newConfigBoolean("pistorderSwingHand", true);
 
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = ModIds.pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble PISTORDER_TEXT_ALPHA = newConfigDouble("pistorderTextAlpha", 1, 0, 1);
 
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = ModIds.pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble PISTORDER_TEXT_SCALE = newConfigDouble("pistorderTextScale", 1, 0.1, 3);
 
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(conflict = @Condition(value = ModIds.pistorder, versionPredicates = "<=1.6.0")), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBoolean PISTORDER_TEXT_SHADOW = newConfigBoolean("pistorderTextShadow", true);
 
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
@@ -327,14 +327,14 @@ public class TweakerMoreConfigs
 
 	@Config(
 			type = Config.Type.TWEAK,
-			restriction = @Restriction(require = @Condition(litematica)),
+			restriction = @Restriction(require = @Condition(ModIds.litematica)),
 			category = Config.Category.FEATURES
 	)
 	public static final TweakerMoreConfigBooleanHotkeyed SCHEMATIC_PRO_PLACE = newConfigBooleanHotkeyed("schematicProPlace");
 
 	@Config(
 			type = Config.Type.TWEAK,
-			restriction = @Restriction(require = @Condition(litematica)),
+			restriction = @Restriction(require = @Condition(ModIds.litematica)),
 			category = Config.Category.FEATURES
 	)
 	public static final TweakerMoreConfigBooleanHotkeyed SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION = newConfigBooleanHotkeyed("schematicBlockPlacementRestriction");
@@ -360,10 +360,10 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.LIST, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigOptionListHotkeyed SERVER_MSPT_METRICS_STATISTIC_TYPE = newConfigOptionListHotkeyed("serverMsptMetricsStatisticType", ServerMsptMetricsStatisticType.DEFAULT);
 
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.16")), category = Config.Category.FEATURES)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.16")), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBoolean SPECTATOR_TELEPORT_COMMAND = newConfigBoolean("spectatorTeleportCommand", false);
 
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.16")), category = Config.Category.FEATURES)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.16")), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigString SPECTATOR_TELEPORT_COMMAND_PREFIX = newConfigString("spectatorTeleportCommandPrefix", "stp");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
@@ -397,12 +397,12 @@ public class TweakerMoreConfigs
 	@Config(
 			type = Config.Type.GENERIC,
 			restriction = @Restriction(conflict = {
-					@Condition(cheat_utils),
-					@Condition(compact_chat),
-					@Condition(more_chat_history),
-					@Condition(parachute),
-					@Condition(raise_chat_limit),
-					@Condition(wheres_my_chat_history)
+					@Condition(ModIds.cheat_utils),
+					@Condition(ModIds.compact_chat),
+					@Condition(ModIds.more_chat_history),
+					@Condition(ModIds.parachute),
+					@Condition(ModIds.raise_chat_limit),
+					@Condition(ModIds.wheres_my_chat_history)
 			}),
 			category = Config.Category.MC_TWEAKS
 	)
@@ -435,7 +435,7 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_DARK_SKY_RENDERING = newConfigBooleanHotkeyed("disableDarkSkyRendering");
 
-	@Config(type = Config.Type.DISABLE, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.19")), category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.DISABLE, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.19")), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_DARKNESS_EFFECT = newConfigBooleanHotkeyed("disableDarknessEffect");
 
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
@@ -456,13 +456,13 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_LIGHT_UPDATES = newConfigBooleanHotkeyed("disableLightUpdates");
 
-	@Config(type = Config.Type.DISABLE, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.17")), category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.DISABLE, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.17")), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_PISTON_BLOCK_BREAKING_PARTICLE = newConfigBooleanHotkeyed("disablePistonBlockBreakingParticle");
 
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_REDSTONE_PARTICLE = newConfigBooleanHotkeyed("disableRedstoneParticle");
 
-	@Config(type = Config.Type.DISABLE, restriction = @Restriction(conflict = @Condition(value = caxton, versionPredicates = "<0.3.0-beta.2")), category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.DISABLE, restriction = @Restriction(conflict = @Condition(value = ModIds.caxton, versionPredicates = "<0.3.0-beta.2")), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_SIGN_TEXT_LENGTH_LIMIT = newConfigBooleanHotkeyed("disableSignTextLengthLimit");
 
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
@@ -483,7 +483,7 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.FIX, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean FIX_HOVER_TEXT_SCALE = newConfigBoolean("fixHoverTextScale", false);
 
-	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(replay_mod)), category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(ModIds.replay_mod)), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed FLAWLESS_FRAMES = newConfigBooleanHotkeyed("flawlessFrames");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
@@ -498,16 +498,16 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean ITEM_TOOLTIP_HIDE_UNTIL_MOUSE_MOVE = newConfigBoolean("itemTooltipHideUntilMouseMove", false);
 
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.20.2")), category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.20.2")), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean KEEP_MESSAGE_HISTORY_ON_RECONFIGURATION = newConfigBoolean("keepMessageHistoryOnReconfiguration", false);
 
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.16")), category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.16")), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean LEGACY_F3_N_LOGIC = newConfigBoolean("legacyF3NLogic", false);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigInteger MAX_CHAT_HUD_HEIGHT = newConfigInteger("maxChatHudHeight", 160, 160, 1000);
 
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.16")), category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.16")), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean MULTIPLAYER_FORCED_ENABLED = newConfigBoolean("multiplayerForcedEnabled", false);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
@@ -525,7 +525,7 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean PLAYER_SKIN_BLOCKING_LOADING = newConfigBoolean("playerSkinBlockingLoading", false);
 
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.19.4")), category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.19.4")), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean POTION_ITEM_SHOULD_HAVE_ENCHANTMENT_GLINT = newConfigBoolean("potionItemShouldHaveEnchantmentGlint", false);
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
@@ -570,10 +570,10 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean SPECTATOR_TELEPORT_MENU_INCLUDE_SPECTATOR = newConfigBoolean("spectatorTeleportMenuIncludeSpectator", false);
 
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.19.3")), category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.19.3")), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean STEVE_ALEX_ONLY_DEFAULT_SKINS = newConfigBoolean("steveAlexOnlyDefaultSkins", false);
 
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.20.3")), category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.20.3")), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean TICK_FREEZE_AUTO_REPLACE_WITH_UNFREEZE = newConfigBoolean("tickFreezeAutoReplaceWithUnfreeze", false);
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
@@ -613,58 +613,58 @@ public class TweakerMoreConfigs
 	@Config(
 			type = Config.Type.GENERIC,
 			restriction = @Restriction(require = {
-					@Condition(easier_crafting),
-					@Condition(itemscroller)
+					@Condition(ModIds.easier_crafting),
+					@Condition(ModIds.itemscroller)
 			}),
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigBoolean ECRAFT_ITEM_SCROLLER_COMPACT = newConfigBoolean("eCraftItemScrollerCompact", false);
 
-	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(extra_player_renderer)), category = Config.Category.MOD_TWEAKS)
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(ModIds.extra_player_renderer)), category = Config.Category.MOD_TWEAKS)
 	public static final TweakerMoreConfigBoolean EPR_HIDE_ON_DEBUG_HUD = newConfigBoolean("eprHideOnDebugHud", false);
 
-	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(tweakeroo)), category = Config.Category.MOD_TWEAKS)
+	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(ModIds.tweakeroo)), category = Config.Category.MOD_TWEAKS)
 	public static final TweakerMoreConfigOptionList HAND_RESTORE_LIST_TYPE = newConfigOptionList("handRestockListType", UsageRestriction.ListType.NONE);
 
-	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(tweakeroo)), category = Config.Category.MOD_TWEAKS)
+	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(ModIds.tweakeroo)), category = Config.Category.MOD_TWEAKS)
 	public static final TweakerMoreConfigStringList HAND_RESTORE_WHITELIST = newConfigStringList("handRestockWhiteList", ImmutableList.of(RegistryUtil.getItemId(Items.BUCKET)));
 
-	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(tweakeroo)), category = Config.Category.MOD_TWEAKS)
+	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(ModIds.tweakeroo)), category = Config.Category.MOD_TWEAKS)
 	public static final TweakerMoreConfigStringList HAND_RESTORE_BLACKLIST = newConfigStringList("handRestockBlackList", ImmutableList.of(RegistryUtil.getItemId(Items.LAVA_BUCKET)));
 
 	public static final ItemRestriction HAND_RESTORE_RESTRICTION = new ItemRestriction();
 
 	@Config(
 			type = Config.Type.GENERIC,
-			restriction = @Restriction(require = @Condition(litematica)),
+			restriction = @Restriction(require = @Condition(ModIds.litematica)),
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigBoolean LM_ORIGIN_OVERRIDE_000 = newConfigBoolean("lmOriginOverride000", false);
 
 	@Config(
 			type = Config.Type.GENERIC,
-			restriction = @Restriction(require = @Condition(litematica)),
+			restriction = @Restriction(require = @Condition(ModIds.litematica)),
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigString LM_REMOVE_ENTITY_COMMAND = newConfigString("lmRemoveEntityCommand", LitematicaRemoveEntityCommandOverrider.DEFAULT_COMMAND);
 
 	@Config(
 			type = Config.Type.GENERIC,
-			restriction = @Restriction(require = @Condition(litematica)),
+			restriction = @Restriction(require = @Condition(ModIds.litematica)),
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigOptionList LM_REMOVE_ENTITY_COMMAND_POLICY = newConfigOptionList("lmRemoveEntityCommandPolicy", LitematicaRemoveEntityCommandPolicy.DEFAULT);
 
 	@Config(
 			type = Config.Type.GENERIC,
-			restriction = @Restriction(require = @Condition(minihud)),
+			restriction = @Restriction(require = @Condition(ModIds.minihud)),
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigBoolean MINIHUD_DISABLE_LIGHT_OVERLAY_SPAWN_CHECK = newConfigBoolean("minihudDisableLightOverlaySpawnCheck", false);
 
 	@Config(
 			type = Config.Type.GENERIC,
-			restriction = @Restriction(require = @Condition(minihud)),
+			restriction = @Restriction(require = @Condition(ModIds.minihud)),
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigBoolean MINIHUD_HIDE_IF_CHAT_SCREEN_OPENED = newConfigBoolean("minihudHideIfChatScreenOpened", false);
@@ -674,28 +674,28 @@ public class TweakerMoreConfigs
 
 	@Config(
 			type = Config.Type.LIST,
-			restriction = @Restriction(require = @Condition(optifine)),
+			restriction = @Restriction(require = @Condition(ModIds.optifine)),
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigOptionListHotkeyed OF_SANTA_HAT = newConfigOptionListHotkeyed("ofSantaHat", OptifineExtraModelRenderStrategy.DEFAULT);
 
 	@Config(
 			type = Config.Type.LIST,
-			restriction = @Restriction(require = @Condition(optifine)),
+			restriction = @Restriction(require = @Condition(ModIds.optifine)),
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigOptionListHotkeyed OF_WITCH_HAT = newConfigOptionListHotkeyed("ofWitchHat", OptifineExtraModelRenderStrategy.DEFAULT);
 
 	@Config(
 			type = Config.Type.GENERIC,
-			restriction = @Restriction(require = @Condition(optifine)),
+			restriction = @Restriction(require = @Condition(ModIds.optifine)),
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigBoolean OF_REMOVE_SIGN_TEXT_RENDER_DISTANCE = newConfigBoolean("ofRemoveSignTextRenderDistance", false);
 
 	@Config(
 			type = Config.Type.GENERIC,
-			restriction = @Restriction(require = @Condition(optifine)),
+			restriction = @Restriction(require = @Condition(ModIds.optifine)),
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigBoolean OF_REMOVE_ITEM_FRAME_ITEM_RENDER_DISTANCE = newConfigBoolean("ofRemoveItemFrameItemRenderDistance", false);
@@ -703,8 +703,8 @@ public class TweakerMoreConfigs
 	@Config(
 			type = Config.Type.GENERIC,
 			restriction = @Restriction(require = {
-					@Condition(optifine),
-					@Condition(value = minecraft, versionPredicates = ">=1.15")
+					@Condition(ModIds.optifine),
+					@Condition(value = ModIds.minecraft, versionPredicates = ">=1.15")
 			}),
 			category = Config.Category.MOD_TWEAKS
 	)
@@ -712,21 +712,21 @@ public class TweakerMoreConfigs
 
 	@Config(
 			type = Config.Type.GENERIC,
-			restriction = @Restriction(require = @Condition(optifine)),
+			restriction = @Restriction(require = @Condition(ModIds.optifine)),
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigBoolean OF_USE_VANILLA_BRIGHTNESS_CACHE = newConfigBoolean("ofUseVanillaBrightnessCache", false);
 
 	@Config(
 			type = Config.Type.GENERIC,
-			restriction = @Restriction(require = @Condition(replay_mod)),
+			restriction = @Restriction(require = @Condition(ModIds.replay_mod)),
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigInteger REPLAY_FLY_SPEED_LIMIT_MULTIPLIER = newConfigInteger("replayFlySpeedLimitMultiplier", 1, 1, 30);
 
 	@Config(
 			type = Config.Type.GENERIC,
-			restriction = @Restriction(require = @Condition(replay_mod)),
+			restriction = @Restriction(require = @Condition(ModIds.replay_mod)),
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigBoolean REPLAY_ACCURATE_TIMELINE_TIMESTAMP = newConfigBoolean("replayAccurateTimelineTimestamp", false);
@@ -734,9 +734,9 @@ public class TweakerMoreConfigs
 	@Config(
 			type = Config.Type.TWEAK,
 			restriction = {
-					@Restriction(require = @Condition(tweakeroo)),
-					@Restriction(require = @Condition(litematica)),
-					@Restriction(require = @Condition(minihud))
+					@Restriction(require = @Condition(ModIds.tweakeroo)),
+					@Restriction(require = @Condition(ModIds.litematica)),
+					@Restriction(require = @Condition(ModIds.minihud))
 			},
 			category = Config.Category.MOD_TWEAKS
 	)
@@ -751,8 +751,8 @@ public class TweakerMoreConfigs
 	@Config(
 			type = Config.Type.GENERIC,
 			restriction = {
-					@Restriction(require = @Condition(optifine)),
-					@Restriction(require = @Condition(iris))
+					@Restriction(require = @Condition(ModIds.optifine)),
+					@Restriction(require = @Condition(ModIds.iris))
 			},
 			category = Config.Category.MOD_TWEAKS
 	)
@@ -760,7 +760,7 @@ public class TweakerMoreConfigs
 
 	@Config(
 			type = Config.Type.GENERIC,
-			restriction = @Restriction(require = @Condition(xaero_worldmap)),
+			restriction = @Restriction(require = @Condition(ModIds.xaero_worldmap)),
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigBoolean XMAP_NO_SESSION_FINALIZATION_WAIT = newConfigBoolean("xmapNoSessionFinalizationWait", false);
@@ -768,8 +768,8 @@ public class TweakerMoreConfigs
 	@Config(
 			type = Config.Type.GENERIC,
 			restriction = {
-					@Restriction(require = {@Condition(tweakeroo), @Condition(xaero_minimap)}),
-					@Restriction(require = {@Condition(tweakeroo), @Condition(xaero_betterpvp)}),
+					@Restriction(require = {@Condition(ModIds.tweakeroo), @Condition(ModIds.xaero_minimap)}),
+					@Restriction(require = {@Condition(ModIds.tweakeroo), @Condition(ModIds.xaero_betterpvp)}),
 			},
 			category = Config.Category.MOD_TWEAKS
 	)
@@ -782,8 +782,8 @@ public class TweakerMoreConfigs
 	@Config(
 			type = Config.Type.GENERIC,
 			restriction = @Restriction(require = {
-					@Condition(litematica),
-					@Condition(value = minecraft, versionPredicates = "<1.17")
+					@Condition(ModIds.litematica),
+					@Condition(value = ModIds.minecraft, versionPredicates = "<1.17")
 			}),
 			category = Config.Category.PORTING
 	)
@@ -792,8 +792,8 @@ public class TweakerMoreConfigs
 	@Config(
 			type = Config.Type.GENERIC,
 			restriction = @Restriction(require = {
-					@Condition(litematica),
-					@Condition(value = minecraft, versionPredicates = "<1.17")
+					@Condition(ModIds.litematica),
+					@Condition(value = ModIds.minecraft, versionPredicates = "<1.17")
 			}),
 			category = Config.Category.PORTING
 	)
@@ -802,8 +802,8 @@ public class TweakerMoreConfigs
 	@Config(
 			type = Config.Type.GENERIC,
 			restriction = @Restriction(require = {
-					@Condition(litematica),
-					@Condition(value = minecraft, versionPredicates = "<1.16")
+					@Condition(ModIds.litematica),
+					@Condition(value = ModIds.minecraft, versionPredicates = "<1.16")
 			}),
 			category = Config.Category.PORTING
 	)
@@ -811,7 +811,7 @@ public class TweakerMoreConfigs
 
 	@Config(
 			type = Config.Type.GENERIC,
-			restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = "<1.20")),
+			restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.20")),
 			category = Config.Category.PORTING
 	)
 	public static final TweakerMoreConfigBoolean MC_SPECTATOR_ENTER_SINKING_FIX_PORTING = newConfigBoolean("mcSpectatorEnterSinkingFixPorting", false);
@@ -819,8 +819,8 @@ public class TweakerMoreConfigs
 	@Config(
 			type = Config.Type.FIX,
 			restriction = @Restriction(require = {
-					@Condition(itemscroller),
-					@Condition(value = minecraft, versionPredicates = "<1.18")
+					@Condition(ModIds.itemscroller),
+					@Condition(value = ModIds.minecraft, versionPredicates = "<1.18")
 			}),
 			category = Config.Category.PORTING
 	)
@@ -829,7 +829,7 @@ public class TweakerMoreConfigs
 	@Config(
 			type = Config.Type.DISABLE,
 			restriction = @Restriction(require = {
-					@Condition(value = minecraft, versionPredicates = "<1.17")
+					@Condition(value = ModIds.minecraft, versionPredicates = "<1.17")
 			}),
 			category = Config.Category.PORTING
 	)
@@ -981,9 +981,10 @@ public class TweakerMoreConfigs
 					CONFIG_TO_OPTION.put(tweakerMoreOption.getConfig(), tweakerMoreOption);
 					NAME_TO_OPTION.put(tweakerMoreOption.getConfig().getName(), tweakerMoreOption);
 				}
-				catch (IllegalAccessException e)
+				catch (Exception e)
 				{
-					e.printStackTrace();
+					TweakerMoreMod.LOGGER.error("TweakerMoreConfigs init failed", e);
+					throw new RuntimeException(e);
 				}
 			}
 		}

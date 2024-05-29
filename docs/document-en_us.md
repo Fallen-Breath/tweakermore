@@ -1885,6 +1885,9 @@ See also: option windowSizeHeight, windowSizeWidth, windowSizePinned
 - Category: MC Tweaks
 - Type: hotkey (Hotkey)
 - Default value: *no hotkey*
+- Mod restrictions:
+  - Conflicted mods:
+    - Locked Window Size (`locked_window_size`)
 
 
 ### windowSizeHeight
@@ -1900,6 +1903,9 @@ See also: option windowSizeApply, windowSizeWidth, windowSizePinned
 - Default value: `480`
 - Minimum value: `90`
 - Maximum value: `8640`
+- Mod restrictions:
+  - Conflicted mods:
+    - Locked Window Size (`locked_window_size`)
 
 
 ### windowSizePinned
@@ -1917,6 +1923,9 @@ See also: option windowSizeApply, windowSizeHeight, windowSizeWidth
 - Category: MC Tweaks
 - Type: boolean (Generic)
 - Default value: `false`
+- Mod restrictions:
+  - Conflicted mods:
+    - Locked Window Size (`locked_window_size`)
 
 
 ### windowSizeWidth
@@ -1932,6 +1941,9 @@ See also: option windowSizeApply, windowSizeHeight, windowSizePinned
 - Default value: `854`
 - Minimum value: `160`
 - Maximum value: `15360`
+- Mod restrictions:
+  - Conflicted mods:
+    - Locked Window Size (`locked_window_size`)
 
 
 ### yeetServerIpReversedDnsLookup

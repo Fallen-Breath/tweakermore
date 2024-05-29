@@ -1881,6 +1881,9 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 分类: MC修改
 - 类型: 热键 (热键)
 - 默认值: *无快捷键*
+- 模组约束:
+  - 冲突模组:
+    - Locked Window Size (`locked_window_size`)
 
 
 ### 窗口大小-高度 (windowSizeHeight)
@@ -1896,6 +1899,9 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 默认值: `480`
 - 最小值: `90`
 - 最大值: `8640`
+- 模组约束:
+  - 冲突模组:
+    - Locked Window Size (`locked_window_size`)
 
 
 ### 窗口大小-固定 (windowSizePinned)
@@ -1913,6 +1919,9 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 分类: MC修改
 - 类型: 布尔值 (通用)
 - 默认值: `false`
+- 模组约束:
+  - 冲突模组:
+    - Locked Window Size (`locked_window_size`)
 
 
 ### 窗口大小-宽度 (windowSizeWidth)
@@ -1928,6 +1937,9 @@ Format error: 修复使用原版聊天缩放设置来缩放聊天信息HUD中的
 - 默认值: `854`
 - 最小值: `160`
 - 最大值: `15360`
+- 模组约束:
+  - 冲突模组:
+    - Locked Window Size (`locked_window_size`)
 
 
 ### 禁止服务器IP地址DNS反查 (yeetServerIpReversedDnsLookup)
