@@ -37,7 +37,7 @@ import org.spongepowered.asm.mixin.Mixin;
 //#endif
 
 /**
- * ConfigBooleanHotkeyed in malilib 1.18 does not accepts single json primitive (boolean)
+ * ConfigBooleanHotkeyed in malilib 1.18 does not accept single json primitive (boolean)
  * which breaks compatibility of config files generated in previous mc versions
  * here comes a hacky fix, still for tweakermore's config only xd
  */

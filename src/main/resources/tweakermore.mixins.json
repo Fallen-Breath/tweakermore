@@ -21,7 +21,6 @@
     "core.gui.panel.widthTweak.WidgetListConfigOptionsMixin",
     "core.hook.WorldRendererMixin",
     "core.migration.ConfigBooleanHotkeyedMixin",
-    "core.migration.ConfigsMixin",
     "doc.MinecraftClientMixin",
     "tweaks.features.autoCollectMaterialListItem.MaterialListHudRendererAccessor",
     "tweaks.features.autoContainerProcess.ClientPlayNetworkHandlerMixin",
