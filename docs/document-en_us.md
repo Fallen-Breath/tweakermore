@@ -950,6 +950,36 @@ Compatible with various block placement tweaks from tweakeroo, doesn't work with
     - Litematica (`litematica`)
 
 
+### spectatorTeleportCommand
+
+Create a client-side only spectator teleport command, that can teleport yourself to any entity if you are in spectator mode
+
+Command syntax: /stp <target>, where the "stp" prefix can be modified with spectatorTeleportCommandPrefix, and <target> is a entity selector
+
+After enabling / disabling, a world-rejoin might be required to sync the command tree state
+
+- Category: Features
+- Type: boolean (Generic)
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Minecraft (`minecraft`) `>=1.16`
+
+
+### spectatorTeleportCommandPrefix
+
+Modify the command prefix of spectatorTeleportCommand
+
+You need to restart the game (<1.19) / rejoin the world (>=1.19) to apply the prefix modification
+
+- Category: Features
+- Type: string (Generic)
+- Default value: `stp`
+- Mod restrictions:
+  - Required mods:
+    - Minecraft (`minecraft`) `>=1.16`
+
+
 ### villagerOfferUsesDisplay
 
 Display villager offer use and limit amount on villager offer list

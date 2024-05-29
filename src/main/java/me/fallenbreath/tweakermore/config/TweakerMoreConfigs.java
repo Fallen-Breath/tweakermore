@@ -46,6 +46,7 @@ import me.fallenbreath.tweakermore.impl.features.infoView.InfoViewRenderer;
 import me.fallenbreath.tweakermore.impl.features.pistorder.PistorderRenderer;
 import me.fallenbreath.tweakermore.impl.features.refreshInventory.InventoryRefresher;
 import me.fallenbreath.tweakermore.impl.features.schematicProPlace.ProPlaceImpl;
+import me.fallenbreath.tweakermore.impl.features.spectatorTeleportCommand.SpectatorTeleportCommand;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.flawlessFrames.FlawlessFramesHandler;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.windowSize.WindowSizeHelper;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.particleLimit.ParticleLimitHelper;
@@ -357,6 +358,12 @@ public class TweakerMoreConfigs
 
 	@Config(type = Config.Type.LIST, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigOptionListHotkeyed SERVER_MSPT_METRICS_STATISTIC_TYPE = newConfigOptionListHotkeyed("serverMsptMetricsStatisticType", ServerMsptMetricsStatisticType.DEFAULT);
+
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.16")), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBoolean SPECTATOR_TELEPORT_COMMAND = newConfigBoolean("spectatorTeleportCommand", false);
+
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.16")), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigString SPECTATOR_TELEPORT_COMMAND_PREFIX = newConfigString("spectatorTeleportCommandPrefix", "stp");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBoolean VILLAGER_OFFER_USES_DISPLAY = newConfigBoolean("villagerOfferUsesDisplay", false);
@@ -930,6 +937,8 @@ public class TweakerMoreConfigs
 		TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.setListContents(TweakerMoreConfigs.HAND_RESTORE_BLACKLIST.getStrings(), TweakerMoreConfigs.HAND_RESTORE_WHITELIST.getStrings());
 		TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_RESTRICTION.setListType((UsageRestriction.ListType)TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_LIST_TYPE.getOptionListValue());
 		TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_RESTRICTION.setListContents(TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_BLACKLIST.getStrings(), TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_WHITELIST.getStrings());
+
+		SpectatorTeleportCommand.init();
 	}
 
 	// Config fields collecting

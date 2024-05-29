@@ -347,6 +347,17 @@ tweakermore:
       comment: |-
         Type of the server mspt metrics statistic display in debug hud
         Set to "Game tick" to keep vanilla behavior
+    spectatorTeleportCommand:
+      .: spectatorTeleportCommand
+      comment: |-
+        Create a client-side only spectator teleport command, that can teleport yourself to any entity if you are in spectator mode
+        Command syntax: /stp <target>, where the "stp" prefix can be modified with @option#spectatorTeleportCommandPrefix@, and <target> is a entity selector
+        After enabling / disabling, a world-rejoin might be required to sync the command tree state
+    spectatorTeleportCommandPrefix:
+      .: spectatorTeleportCommandPrefix
+      comment: |-
+        Modify the command prefix of @option#spectatorTeleportCommand@
+        You need to restart the game (<1.19) / rejoin the world (>=1.19) to apply the prefix modification
     villagerOfferUsesDisplay:
       .: villagerOfferUsesDisplay
       comment: |-
@@ -1127,6 +1138,8 @@ tweakermore:
       hint: 'Statistic type: %1$s'
     shulkerBoxTooltipHintBuilder:
       more: '... %1$sx'
+    spectatorTeleportCommand:
+      need_spectator: You need to be in spectator mode to use this command
     tweakerMoreDevMixinAudit:
       success: Mixin audit succeeded
     windowSize:

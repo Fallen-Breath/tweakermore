@@ -82,9 +82,15 @@ dependencies {
 		}
 	}
 
-	// libraries
+	// library mods
+	if (mcVersion >= 11600) {
+		// the client-side command
+		include(modImplementation(fabricApi.module("fabric-commands-v0", project.fabric_api_version)))
+	}
 	include(modImplementation("me.fallenbreath:conditional-mixin-fabric:${project.conditionalmixin_version}"))
 	include(annotationProcessor(implementation("io.github.llamalad7:mixinextras-fabric:${project.mixinextras_version}")))
+
+	// libraries
 	testImplementation "junit:junit:${project.junit_version}"
 }
 

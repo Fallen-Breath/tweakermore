@@ -60,6 +60,7 @@
     "tweaks.features.serverMsptMetricsStatistic.compat.carpettisaddition.ServerMsptMetricsDataSyncerMixin",
     "tweaks.features.shulkerTooltipFillLevelHint.ItemStackMixin",
     "tweaks.features.shulkerTooltipHints.ShulkerBoxBlockMixin",
+    "tweaks.features.spectatorTeleportCommand.EntitySelectorAccessor",
     "tweaks.features.villagerOfferUsesDisplay.MerchantScreenAccessor",
     "tweaks.features.villagerOfferUsesDisplay.MerchantScreenWidgetButtonPageMixin",
     "tweaks.features.villagerOfferUsesDisplay.ScreenAccessor",

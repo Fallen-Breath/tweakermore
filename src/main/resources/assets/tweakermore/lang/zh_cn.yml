@@ -347,6 +347,17 @@ tweakermore:
       comment: |-
         调试界面中服务端mspt指标统计的类型
         设置为"游戏刻"以使用原版表现
+    spectatorTeleportCommand:
+      .: 旁观者传送指令
+      comment: |-
+        创建一个仅客户端的旁观者传送指令，可用于传送至任何实体，需要玩家处于旁观者模式
+        指令格式：/stp <target>，其中 stp 前缀可通过@option#spectatorTeleportCommandPrefix@设置，<target>为实体选择器
+        在开启/关闭后，可能需要重新加入世界，才能同步该指令的开启状态
+    spectatorTeleportCommandPrefix:
+      .: 旁观者传送指令-指令前缀
+      comment: |-
+        调整@option#spectatorTeleportCommand@的指令前缀
+        需重启游戏 (<1.19) / 重进世界 (>=1.19) 才能应用修改
     villagerOfferUsesDisplay:
       .: 村民交易次数显示
       comment: |-
@@ -1127,6 +1138,8 @@ tweakermore:
       hint: '统计类型: %1$s'
     shulkerBoxTooltipHintBuilder:
       more: '... %1$sx'
+    spectatorTeleportCommand:
+      need_spectator: 你需要在旁观者模式下才能使用该指令
     tweakerMoreDevMixinAudit:
       success: Mixin审计成功
     windowSize:

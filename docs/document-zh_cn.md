@@ -946,6 +946,36 @@ schematicBlockPlacement的严格模式
     - Litematica (`litematica`)
 
 
+### 旁观者传送指令 (spectatorTeleportCommand)
+
+创建一个仅客户端的旁观者传送指令，可用于传送至任何实体，需要玩家处于旁观者模式
+
+指令格式：/stp <target>，其中 stp 前缀可通过旁观者传送指令-指令前缀设置，<target>为实体选择器
+
+在开启/关闭后，可能需要重新加入世界，才能同步该指令的开启状态
+
+- 分类: 功能
+- 类型: 布尔值 (通用)
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Minecraft (`minecraft`) `>=1.16`
+
+
+### 旁观者传送指令-指令前缀 (spectatorTeleportCommandPrefix)
+
+调整旁观者传送指令的指令前缀
+
+需重启游戏 (<1.19) / 重进世界 (>=1.19) 才能应用修改
+
+- 分类: 功能
+- 类型: 字符串 (通用)
+- 默认值: `stp`
+- 模组约束:
+  - 依赖模组:
+    - Minecraft (`minecraft`) `>=1.16`
+
+
 ### 村民交易次数显示 (villagerOfferUsesDisplay)
 
 在村民交易列表中显示当前交易的次数以及上限
