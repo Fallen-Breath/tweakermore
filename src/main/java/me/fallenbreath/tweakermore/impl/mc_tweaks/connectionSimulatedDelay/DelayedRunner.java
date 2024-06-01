@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2024  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -21,39 +21,32 @@
 package me.fallenbreath.tweakermore.impl.mc_tweaks.connectionSimulatedDelay;
 
 import com.google.common.collect.Queues;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.HashedWheelTimer;
-import io.netty.util.Timeout;
 import io.netty.util.Timer;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
-public class ChannelDelayer extends ChannelInboundHandlerAdapter
+class DelayedRunner
 {
-	private static final Timer TIMER = new HashedWheelTimer();
+	private final Timer timer = new HashedWheelTimer(10, TimeUnit.MILLISECONDS);
 	private final Queue<Runnable> queue = Queues.newConcurrentLinkedQueue();
 
-	@Override
-	public void channelRead(ChannelHandlerContext ctx, Object msg)
+	public void delayedRun(Function<Integer, Integer> delayTransformer, Runnable task)
 	{
-		Runnable task = () -> ctx.fireChannelRead(msg);
-		if (TweakerMoreConfigs.CONNECTION_SIMULATED_DELAY.isModified() || !this.queue.isEmpty())
+		int optionValue = TweakerMoreConfigs.CONNECTION_SIMULATED_DELAY.getIntegerValue();
+		int delayMs = delayTransformer.apply(optionValue);
+
+		if ((delayMs > 0 && TweakerMoreConfigs.CONNECTION_SIMULATED_DELAY.isModified()) || !this.queue.isEmpty())
 		{
 			this.queue.add(task);
-			int delayMs = TweakerMoreConfigs.CONNECTION_SIMULATED_DELAY.getIntegerValue();
-			TIMER.newTimeout(this::actualChannelRead, delayMs, TimeUnit.MILLISECONDS);
+			this.timer.newTimeout(t -> this.queue.remove().run(), delayMs, TimeUnit.MILLISECONDS);
 		}
 		else
 		{
 			task.run();
 		}
-	}
-
-	private void actualChannelRead(Timeout timeout)
-	{
-		this.queue.remove().run();
 	}
 }

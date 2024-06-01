@@ -418,7 +418,7 @@ tweakermore:
       .: connectionSimulatedDelay
       comment: |-
         Client network delay simulator. Enabled when the value is greater than 0
-        Adds given delay (in milliseconds) before any packet processing
+        Adds half of given delay (in milliseconds) before packet read / write, so the total delay increases with the given value
         Basically it stably adds your ping to the server with the given value
     daytimeOverride:
       .: daytimeOverride

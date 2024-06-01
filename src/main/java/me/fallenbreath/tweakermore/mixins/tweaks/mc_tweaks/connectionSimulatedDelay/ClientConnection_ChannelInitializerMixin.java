@@ -21,7 +21,8 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.connectionSimulatedDelay;
 
 import io.netty.channel.Channel;
-import me.fallenbreath.tweakermore.impl.mc_tweaks.connectionSimulatedDelay.ChannelDelayer;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.connectionSimulatedDelay.ChannelInboundDelayer;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.connectionSimulatedDelay.ChannelOutboundDelayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -36,6 +37,7 @@ public abstract class ClientConnection_ChannelInitializerMixin
 	@Inject(method = "initChannel(Lio/netty/channel/Channel;)V", at = @At("HEAD"))
 	private void connectionSimulatedDelay(Channel channel, CallbackInfo ci)
 	{
-		channel.pipeline().addLast(new ChannelDelayer());
+		channel.pipeline().addLast(new ChannelInboundDelayer());
+		channel.pipeline().addLast(new ChannelOutboundDelayer());
 	}
 }
