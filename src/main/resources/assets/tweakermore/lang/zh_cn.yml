@@ -564,6 +564,16 @@ tweakermore:
       comment: |-
         覆盖玩家在创造模式或旁观模式下的飞行阻力因子
         在该选项被修改时，fabric-carpet规则creativeFlyDrag的效果将被覆盖
+    fovOverrideEnabled:
+      .: FOV覆盖-开关
+      comment: |-
+        FOV覆盖的开关
+        另见：选项 @option#fovOverrideValue@，即FOV覆盖的取值
+    fovOverrideValue:
+      .: FOV覆盖-取值
+      comment: |-
+        要应用FOV覆盖的，FOV实际取值
+        另见：选项 @option#fovOverrideEnabled@，即FOV覆盖的开关
     itemTooltipHideUntilMouseMove:
       .: 隐藏物品悬浮文本直至鼠标移动
       comment: |-

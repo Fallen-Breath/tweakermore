@@ -1132,7 +1132,7 @@ Notes: In vanilla, client can only select collide-able and non-spectator entitie
 
 Client network delay simulator. Enabled when the value is greater than 0
 
-Adds given delay (in milliseconds) before any packet processing
+Adds half of given delay (in milliseconds) before packet read / write, so the total delay increases with the given value
 
 Basically it stably adds your ping to the server with the given value
 
@@ -1467,6 +1467,30 @@ Overwrites fabric-carpet's rule creativeFlyDrag when the value is modified
 - Default value: `0.09`
 - Minimum value: `0.0`
 - Maximum value: `1.0`
+
+
+### fovOverrideEnabled
+
+The switch of the FOV override
+
+See also: option fovOverrideValue for the overridden value
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean (Tweak)
+- Default value: *no hotkey*, `false`
+
+
+### fovOverrideValue
+
+The FOV value to be applied
+
+See also: option fovOverrideEnabled for the switch
+
+- Category: MC Tweaks
+- Type: double (Generic)
+- Default value: `70.0`
+- Minimum value: `0.01`
+- Maximum value: `179.99`
 
 
 ### itemTooltipHideUntilMouseMove

@@ -117,6 +117,7 @@
     "tweaks.mc_tweaks.fixHoverTextScale.ChatScreenMixin",
     "tweaks.mc_tweaks.fixHoverTextScale.HoverTextRendererClassMixin",
     "tweaks.mc_tweaks.flyDrag.LivingEntityMixin",
+    "tweaks.mc_tweaks.fovOverride.GameRendererMixin",
     "tweaks.mc_tweaks.itemTooltipHideUntilMouseMove.ContainerScreenMixin",
     "tweaks.mc_tweaks.keepMessageHistoryOnReconfiguration.InGameHudMixin",
     "tweaks.mc_tweaks.keepMessageHistoryOnReconfiguration.MinecraftClientMixin",

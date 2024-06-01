@@ -564,6 +564,16 @@ tweakermore:
       comment: |-
         Overwrite the drag factor when flying in creative or spectator mode
         Overwrites fabric-carpet's rule creativeFlyDrag when the value is modified
+    fovOverrideEnabled:
+      .: fovOverrideEnabled
+      comment: |-
+        The switch of the FOV override
+        See also: option @option#fovOverrideValue@ for the overridden value
+    fovOverrideValue:
+      .: fovOverrideValue
+      comment: |-
+        The FOV value to be applied
+        See also: option @option#fovOverrideEnabled@ for the switch
     itemTooltipHideUntilMouseMove:
       .: itemTooltipHideUntilMouseMove
       comment: |-
