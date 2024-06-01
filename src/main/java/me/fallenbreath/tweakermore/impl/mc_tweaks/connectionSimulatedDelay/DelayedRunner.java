@@ -39,7 +39,7 @@ class DelayedRunner
 		int optionValue = TweakerMoreConfigs.CONNECTION_SIMULATED_DELAY.getIntegerValue();
 		int delayMs = delayTransformer.apply(optionValue);
 
-		if ((delayMs > 0 && TweakerMoreConfigs.CONNECTION_SIMULATED_DELAY.isModified()) || !this.queue.isEmpty())
+		if (delayMs > 0 && TweakerMoreConfigs.CONNECTION_SIMULATED_DELAY.isModified())
 		{
 			this.queue.add(task);
 			this.timer.newTimeout(t -> this.queue.remove().run(), delayMs, TimeUnit.MILLISECONDS);
