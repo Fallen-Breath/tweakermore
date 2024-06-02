@@ -918,9 +918,9 @@ public class TweakerMoreConfigs
 
 		//////////// Event Listeners ////////////
 
-		RenderEventHandler.getInstance().registerGameOverlayRenderer(new AutoContainerProcessorHintRenderer());
 		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
 		TickHandler.getInstance().registerClientTickHandler(PistorderRenderer.getInstance());
+		TweakerMoreRenderEventHandler.register(new AutoContainerProcessorHintRenderer());
 		TweakerMoreRenderEventHandler.register(InfoViewRenderer.getInstance());
 		TweakerMoreRenderEventHandler.register(PistorderRenderer.getInstance());
 

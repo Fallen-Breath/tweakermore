@@ -26,6 +26,10 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
+//#if MC >= 12006
+//$$ import net.minecraft.registry.entry.RegistryEntry;
+//#endif
+
 @Mixin(BeaconBlockEntity.class)
 public interface BeaconBlockEntityAccessor
 {
@@ -34,9 +38,17 @@ public interface BeaconBlockEntityAccessor
 
 	@Nullable
 	@Accessor
+	//#if MC >= 12006
+	//$$ RegistryEntry<StatusEffect> getPrimary();
+	//#else
 	StatusEffect getPrimary();
+	//#endif
 
 	@Nullable
 	@Accessor
+	//#if MC >= 12006
+	//$$ RegistryEntry<StatusEffect> getSecondary();
+	//#else
 	StatusEffect getSecondary();
+	//#endif
 }

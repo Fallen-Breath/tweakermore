@@ -20,76 +20,17 @@
 
 package me.fallenbreath.tweakermore.util.render;
 
-import fi.dy.masa.malilib.interfaces.IRenderer;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 
-//#if MC >= 12000
-//$$ import net.minecraft.client.gui.DrawContext;
-//#endif
-
-//#if MC >= 11700
-//$$ import com.mojang.blaze3d.systems.RenderSystem;
-//$$ import net.minecraft.util.math.Matrix4f;
-//#endif
-
-//#if MC >= 11500
-import net.minecraft.client.util.math.MatrixStack;
-//#endif
-
-public interface TweakerMoreIRenderer extends IRenderer
+public interface TweakerMoreIRenderer
 {
 	/**
-	 * Deprecated: Go register to {@link me.fallenbreath.tweakermore.util.render.TweakerMoreRenderEventHandler}
-	 * instead of malilib's {@link fi.dy.masa.malilib.event.RenderEventHandler}
+	 * A hook like {@link fi.dy.masa.malilib.interfaces.IRenderer#onRenderWorldLast}
 	 */
-	@Deprecated
-	@Override
-	default void onRenderWorldLast(
-			//#if MC >= 11700
-			//$$ MatrixStack matrixStack, Matrix4f positionMatrix
-			//#elseif MC >= 11500
-			float partialTicks, MatrixStack matrixStack
-			//#else
-			//$$ float partialTicks
-			//#endif
-	)
-	{
-		this.onRenderWorldLast(
-				RenderContext.of(
-						//#if MC >= 11600
-						//$$ matrixStack
-						//#endif
-				)
-		);
-		//#if MC >= 11700
-		//$$ // to prevent rain rendering got messed up
-		//$$ RenderSystem.applyModelViewMatrix();
-		//#endif
-	}
-
-	@Deprecated
-	@Override
-	default void onRenderGameOverlayPost(
-			//#if MC >= 12000
-			//$$ DrawContext matrixStackOrDrawContext
-			//#elseif MC >= 11700
-			//$$ MatrixStack matrixStackOrDrawContext
-			//#elseif MC >= 11600
-			//$$ float partialTicks, MatrixStack matrixStackOrDrawContext
-			//#else
-			float partialTicks
-			//#endif
-	)
-	{
-		this.onRenderGameOverlayPost(
-				RenderContext.of(
-						//#if MC >= 11600
-						//$$ matrixStackOrDrawContext
-						//#endif
-				)
-		);
-	}
-
 	default void onRenderWorldLast(RenderContext context) {}
+
+	/**
+	 * A hook like {@link fi.dy.masa.malilib.interfaces.IRenderer#onRenderGameOverlayPost}
+	 */
 	default void onRenderGameOverlayPost(RenderContext context) {}
 }

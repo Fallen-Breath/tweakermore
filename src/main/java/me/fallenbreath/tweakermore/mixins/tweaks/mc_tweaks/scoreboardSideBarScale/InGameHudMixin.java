@@ -46,7 +46,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(InGameHud.class)
 public abstract class InGameHudMixin
 {
+	//#if MC < 12006
 	@Shadow private int scaledWidth;
+	//#endif
 
 	@Unique
 	@Nullable
@@ -81,7 +83,10 @@ public abstract class InGameHudMixin
 		this.scaler = null;
 		if (TweakerMoreConfigs.SCOREBOARD_SIDE_BAR_SCALE.isModified())
 		{
-			this.scaler = RenderUtil.createScaler(this.scaledWidth, centerY, TweakerMoreConfigs.SCOREBOARD_SIDE_BAR_SCALE.getDoubleValue());
+			//#if MC >= 12006
+			//$$ int scaledWidth = matrixStackOrDrawContext.getScaledWindowWidth();
+			//#endif
+			this.scaler = RenderUtil.createScaler(scaledWidth, centerY, TweakerMoreConfigs.SCOREBOARD_SIDE_BAR_SCALE.getDoubleValue());
 			this.scaler.apply(RenderContext.of(
 					//#if MC >= 11600
 					//$$ matrixStackOrDrawContext

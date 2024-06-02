@@ -72,7 +72,22 @@ public class PistorderRenderer implements TweakerMoreIRenderer, IClientTickHandl
 			return ActionResult.FAIL;
 		}
 
-		if (hand == Hand.MAIN_HAND && player.getMainHandStack().isEmpty() && !player.isSneaking())
+		// click with empty main hand, not sneaking
+		if (hand == Hand.MAIN_HAND)
+		{
+			return this.onPlayerRightClickBlockWithMainHand(world, player, hit);
+		}
+		return ActionResult.FAIL;
+	}
+
+	public ActionResult onPlayerRightClickBlockWithMainHand(World world, PlayerEntity player, BlockHitResult hit)
+	{
+		if (!this.isEnabled())
+		{
+			return ActionResult.FAIL;
+		}
+
+		if (player.getMainHandStack().isEmpty() && !player.isSneaking())
 		{
 			BlockPos pos = hit.getBlockPos();
 			BlockState blockState = world.getBlockState(pos);
@@ -87,6 +102,7 @@ public class PistorderRenderer implements TweakerMoreIRenderer, IClientTickHandl
 				}
 			}
 		}
+
 		return ActionResult.FAIL;
 	}
 

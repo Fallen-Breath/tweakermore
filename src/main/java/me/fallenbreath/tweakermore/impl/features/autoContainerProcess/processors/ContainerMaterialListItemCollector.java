@@ -40,6 +40,7 @@ import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Formatting;
 
 import java.util.List;
 
@@ -118,7 +119,13 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 					}
 					takenSomething = true;
 					String missingColor = missing == 0 ? GuiBase.TXT_GREEN : GuiBase.TXT_GOLD;
-					String stackName = stack.getRarity().formatting + stack.getName().getString() + GuiBase.TXT_RST;
+					Formatting formatting = stack.getRarity().
+							//#if MC >= 12006
+							//$$ getFormatting();
+							//#else
+							formatting;
+							//#endif
+					String stackName = formatting + stack.getName().getString() + GuiBase.TXT_RST;
 					if (summaryOnly)
 					{
 						summaries.add(String.format("%s +%s", stackName, missingColor + totalTaken + GuiBase.TXT_RST));

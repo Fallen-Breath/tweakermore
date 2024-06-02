@@ -28,6 +28,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.packet.c2s.play.ClickWindowC2SPacket;
 
+//#if MC >= 12006
+//$$ import net.minecraft.component.DataComponentTypes;
+//$$ import net.minecraft.component.type.NbtComponent;
+//$$ import net.minecraft.nbt.NbtCompound;
+//#endif
+
 //#if MC >= 11700
 //$$ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 //#endif
@@ -45,7 +51,16 @@ public class InventoryRefresher
 		if (networkHandler != null && mc.player != null)
 		{
 			ItemStack uniqueItem = new ItemStack(Items.STONE);
-			uniqueItem.getOrCreateTag().putDouble("force_resync", Double.NaN);  // Tags with NaN are not equal
+
+			// Tags with NaN are not equal, so the server will find an inventory desync and send an inventory refresh to the client
+			//#if MC >= 12006
+			//$$ var nbt = new NbtCompound();
+			//$$ nbt.putDouble("force_sync", Double.NaN);
+			//$$ NbtComponent.set(DataComponentTypes.CUSTOM_DATA, uniqueItem, nbt);
+			//#else
+			uniqueItem.getOrCreateTag().putDouble("force_resync", Double.NaN);
+			//#endif
+
 			networkHandler.sendPacket(new ClickWindowC2SPacket(
 					mc.player.container.syncId,
 					//#if MC >= 11700

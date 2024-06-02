@@ -44,6 +44,11 @@ import net.minecraft.util.math.Vec3d;
 
 import java.util.List;
 
+//#if MC >= 12006
+//$$ import net.minecraft.registry.entry.RegistryEntry;
+//$$ import java.util.Optional;
+//#endif
+
 //#if MC >= 11700
 //$$ import com.mojang.blaze3d.systems.RenderSystem;
 //#endif
@@ -95,8 +100,14 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 
 		BeaconBlockEntityAccessor accessor = (BeaconBlockEntityAccessor)blockEntity;
 		int beaconLevel = accessor.getLevel();
+
+		//#if MC >= 12006
+		//$$ StatusEffect primary = Optional.ofNullable(accessor.getPrimary()).map(RegistryEntry::value).orElse(null);
+		//$$ StatusEffect secondary = Optional.ofNullable(accessor.getSecondary()).map(RegistryEntry::value).orElse(null);
+		//#else
 		StatusEffect primary = accessor.getPrimary();
 		StatusEffect secondary = accessor.getSecondary();
+		//#endif
 
 		if (primary != null)
 		{
@@ -138,7 +149,13 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 	private void renderStatusEffectIcon(Vec3d pos, StatusEffect statusEffect, int amplifier, double deltaX, double kDeltaY)
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
-		Sprite sprite = mc.getStatusEffectSpriteManager().getSprite(statusEffect);
+		Sprite sprite = mc.getStatusEffectSpriteManager().getSprite(
+				//#if MC >= 12006
+				//$$ RegistryEntry.of(statusEffect)
+				//#else
+				statusEffect
+				//#endif
+		);
 
 		RenderContext renderContext = RenderContext.of(
 				//#if MC >= 11600

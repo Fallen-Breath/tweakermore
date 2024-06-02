@@ -39,6 +39,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.ToIntFunction;
 
+//#if MC >= 12006
+//$$ import net.minecraft.item.Item;
+//#endif
+
 //#if MC >= 11600
 //$$ import net.minecraft.text.MutableText;
 //#endif
@@ -51,6 +55,9 @@ public class ShulkerBoxToolTipEnhancer
 	);
 
 	public static void appendContentHints(
+			//#if MC >= 12006
+			//$$ Item.TooltipContext context,
+			//#endif
 			ItemStack itemStack,
 			//#if MC >= 11600
 			//$$ MutableText text
@@ -60,7 +67,12 @@ public class ShulkerBoxToolTipEnhancer
 	)
 	{
 		HINT_BUILDERS.stream().
-				map(builder -> builder.build(itemStack)).
+				map(builder -> builder.build(
+						//#if MC >= 12006
+						//$$ context,
+						//#endif
+						itemStack
+				)).
 				filter(Objects::nonNull).
 				forEach(text::append);
 	}

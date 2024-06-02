@@ -28,6 +28,7 @@ import me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.mlShulkerBoxPreviewS
 import me.fallenbreath.tweakermore.util.collection.ExpiringMap;
 import me.fallenbreath.tweakermore.util.event.TweakerMoreEvents;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EnderChestInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DefaultedList;
@@ -59,9 +60,10 @@ public abstract class EnderChestItemFetcherMixin
 	@Inject(method = "getEntityData", at = @At("HEAD"), remap = false, cancellable = true)
 	private static void serverDataSyncer4mlShulkerBoxPreviewSupportEnderChest(@Coerce Entity entity, CallbackInfoReturnable<Optional<DefaultedList<ItemStack>>> cir)
 	{
-		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue() && ServerDataSyncer.hasEnoughPermission())
+		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue() && ServerDataSyncer.hasEnoughPermission() && entity instanceof PlayerEntity)
 		{
-			UUID uuid = entity.getUuid();
+			PlayerEntity player = (PlayerEntity)entity;
+			UUID uuid = player.getUuid();
 
 			// syncing the complete data of a player is a bit costly,
 			// so we slow it down and only do it every 5 gt
@@ -70,7 +72,7 @@ public abstract class EnderChestItemFetcherMixin
 			{
 				prevMilli$SDS = now;
 
-				ServerDataSyncer.getInstance().fetchEntity(entity).
+				ServerDataSyncer.getInstance().fetchEntity(player).
 						ifPresent(future -> {
 							EnderChestInventory enderChestInventory = CACHE$SDS.computeIfAbsent(uuid, k -> new EnderChestInventory());
 							CACHE$SDS.keepAlive(uuid);
@@ -78,7 +80,12 @@ public abstract class EnderChestItemFetcherMixin
 								// ref: net.minecraft.entity.player.PlayerEntity.readCustomDataFromTag
 								if (nbt != null && nbt.contains("EnderItems", 9))
 								{
-									enderChestInventory.readTags(nbt.getList("EnderItems", 10));
+									enderChestInventory.readTags(
+											nbt.getList("EnderItems", 10)
+											//#if MC >= 12006
+											//$$ , player.getRegistryManager()
+											//#endif
+									);
 								}
 							});
 						});

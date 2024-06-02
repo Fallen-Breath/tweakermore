@@ -24,18 +24,34 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.gui.hud.debug.DebugChart;
-import net.minecraft.util.profiler.PerformanceLog;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.gen.Accessor;
+
+//#if MC >= 12006
+//$$ import net.minecraft.util.profiler.log.MultiValueDebugSampleLog;
+//#else
+import net.minecraft.util.profiler.PerformanceLog;
+//#endif
 
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.20.2"))
 @Mixin(DebugChart.class)
 public interface DebugChartAccessor
 {
 	@Accessor
-	PerformanceLog getLog();
+	//#if MC >= 12006
+	//$$ MultiValueDebugSampleLog
+	//#else
+	PerformanceLog
+	//#endif
+	getLog();
 
 	@Accessor @Mutable
-	void setLog(PerformanceLog log);
+	void setLog(
+			//#if MC >= 12006
+			//$$ MultiValueDebugSampleLog log
+			//#else
+			PerformanceLog log
+			//#endif
+	);
 }

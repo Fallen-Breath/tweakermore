@@ -37,6 +37,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
+//#if MC >= 12006
+//$$ import com.google.common.collect.Maps;
+//$$ import net.minecraft.component.DataComponentTypes;
+//$$ import net.minecraft.component.type.BlockStateComponent;
+//$$ import java.util.Map;
+//#endif
+
 @Mixin(MinecraftClient.class)
 public abstract class MinecraftClientMixin
 {
@@ -63,11 +70,19 @@ public abstract class MinecraftClientMixin
 					return;
 				}
 
+				//#if MC >= 12006
+				//$$ Map<String, String> properties = Maps.newLinkedHashMap();
+				//$$ blockState.getEntries().forEach((property, value) -> {
+				//$$ 	properties.put(property.getName(), value.toString());
+				//$$ });
+				//$$ itemStack.set(DataComponentTypes.BLOCK_STATE, new BlockStateComponent(properties));
+				//#else
 				CompoundTag nbt = new CompoundTag();
 				blockState.getEntries().forEach((property, value) -> {
 					nbt.putString(property.getName(), value.toString());
 				});
 				itemStack.getOrCreateTag().put("BlockStateTag", nbt);
+				//#endif
 
 				InfoUtils.printActionbarMessage("tweakermore.impl.creativePickBlockWithState.message", block.getName());
 			}

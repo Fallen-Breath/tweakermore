@@ -31,11 +31,21 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
+//#if MC >= 12006
+//$$ import net.minecraft.registry.entry.RegistryEntry;
+//#endif
+
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.19"))
 @Mixin(targets = "net.minecraft.client.render.BackgroundRenderer$StatusEffectFogModifier")
 public interface BackgroundRendererStatusEffectFogModifierMixin
 {
-	@Shadow StatusEffect getStatusEffect();
+	@Shadow
+	//#if MC >= 12006
+	//$$ RegistryEntry<StatusEffect>
+	//#else
+	StatusEffect
+	//#endif
+	getStatusEffect();
 
 	@ModifyReturnValue(method = "shouldApply", at = @At("TAIL"))
 	default boolean disableDarknessEffect_doNotApplyIfItIsDarknessEffect(boolean shouldApply)

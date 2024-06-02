@@ -24,6 +24,7 @@ import fi.dy.masa.malilib.config.ConfigManager;
 import fi.dy.masa.malilib.event.InitializationHandler;
 import fi.dy.masa.malilib.event.InputEventHandler;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
+import me.fallenbreath.tweakermore.util.render.TweakerMoreRenderEventHandler;
 
 public class MalilibStuffsInitializer
 {
@@ -34,6 +35,7 @@ public class MalilibStuffsInitializer
 
 			InputEventHandler.getKeybindManager().registerKeybindProvider(new KeybindProvider());
 
+			TweakerMoreRenderEventHandler.init();
 			TweakerMoreConfigs.initConfigs();
 		});
 	}

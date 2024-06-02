@@ -29,8 +29,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(targets = {
-		"net/minecraft/network/ClientConnection$1", // anonymous class in connect
-		"net/minecraft/network/ClientConnection$2"  // anonymous class in connectLocal
+		"net/minecraft/network/ClientConnection$1",  // anonymous class in connect
+		"net/minecraft/network/ClientConnection$" +  // anonymous class in connectLocal
+				//#if MC >= 12006
+				//$$ "3"
+				//#else
+				"2"
+				//#endif
 })
 public abstract class ClientConnection_ChannelInitializerMixin
 {

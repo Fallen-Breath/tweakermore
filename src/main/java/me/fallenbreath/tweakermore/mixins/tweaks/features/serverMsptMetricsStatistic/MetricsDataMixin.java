@@ -22,14 +22,25 @@ package me.fallenbreath.tweakermore.mixins.tweaks.features.serverMsptMetricsStat
 
 import me.fallenbreath.tweakermore.impl.features.serverMsptMetricsStatistic.MetricsDataWithRichStatistic;
 import me.fallenbreath.tweakermore.impl.features.serverMsptMetricsStatistic.RichStatisticManager;
-import net.minecraft.util.MetricsData;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(MetricsData.class)
+//#if MC >= 12006
+//$$ import net.minecraft.util.profiler.log.ArrayDebugSampleLog;
+//#else
+import net.minecraft.util.MetricsData;
+//#endif
+
+@Mixin(
+		//#if MC >= 12006
+		//$$ ArrayDebugSampleLog.class
+		//#else
+		MetricsData.class
+		//#endif
+)
 public abstract class MetricsDataMixin implements MetricsDataWithRichStatistic
 {
 	private RichStatisticManager richStatisticManager$TKM = null;
@@ -50,7 +61,14 @@ public abstract class MetricsDataMixin implements MetricsDataWithRichStatistic
 		return this.richStatisticManager$TKM;
 	}
 
-	@Inject(method = "pushSample", at = @At("TAIL"))
+	@Inject(
+			//#if MC >= 12006
+			//$$ method = "push(J)V",
+			//#else
+			method = "pushSample",
+			//#endif
+			at = @At("TAIL")
+	)
 	private void serverMsptMetricsStatistic_callback(long time, CallbackInfo ci)
 	{
 		if (this.richStatisticManager$TKM != null)

@@ -20,16 +20,19 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.features.shulkerTooltipHints;
 
-import com.llamalad7.mixinextras.injector.ModifyReceiver;
+import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.ShulkerBoxToolTipEnhancer;
 import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Slice;
+
+//#if MC >= 12006
+//$$ import net.minecraft.item.Item;
+//#endif
 
 //#if MC >= 11600
 //$$ import net.minecraft.text.MutableText;
@@ -38,32 +41,6 @@ import org.spongepowered.asm.mixin.injection.Slice;
 @Mixin(ShulkerBoxBlock.class)
 public abstract class ShulkerBoxBlockMixin
 {
-	@Unique private ItemStack currentItemStack = null;
-
-	@ModifyReceiver(
-			//#if MC >= 11600
-			//$$ method = "appendTooltip",
-			//#else
-			method = "buildTooltip",
-			//#endif
-			slice = @Slice(
-					from = @At(
-							value = "CONSTANT",
-							args = "stringValue=Items"
-					)
-			),
-			at = @At(
-					value = "INVOKE",
-					target = "Lnet/minecraft/item/ItemStack;isEmpty()Z",
-					ordinal = 0
-			)
-	)
-	private ItemStack shulkerTooltipHints_storeCurrentItemStack(ItemStack itemStack)
-	{
-		this.currentItemStack = itemStack;
-		return itemStack;
-	}
-
 	@ModifyArg(
 			//#if MC >= 11600
 			//$$ method = "appendTooltip",
@@ -73,7 +50,7 @@ public abstract class ShulkerBoxBlockMixin
 			slice = @Slice(
 					from = @At(
 							value = "CONSTANT",
-							//#if MC >= 11600
+							//#if MC >= 12002
 							//$$ args = "stringValue=container.shulkerBox.itemCount"
 							//#else
 							args = "stringValue= x"
@@ -86,17 +63,25 @@ public abstract class ShulkerBoxBlockMixin
 					ordinal = 0
 			)
 	)
-	private Object shulkerTooltipHints(Object textObj)
-	{
-		if (this.currentItemStack != null)
-		{
-			//#if MC >= 11600
-			//$$ MutableText text = (MutableText)textObj;
-			//#else
-			Text text = (Text)textObj;
+	private Object shulkerTooltipHints_addHints(
+			Object textObj,
+			@Local(ordinal = 1) ItemStack stackInTheContainer
+			//#if MC >= 12006
+			//$$ , @Local(argsOnly = true) Item.TooltipContext context
 			//#endif
-			ShulkerBoxToolTipEnhancer.appendContentHints(this.currentItemStack, text);
-		}
+	)
+	{
+		//#if MC >= 11600
+		//$$ MutableText text = (MutableText)textObj;
+		//#else
+		Text text = (Text)textObj;
+		//#endif
+		ShulkerBoxToolTipEnhancer.appendContentHints(
+				//#if MC >= 12006
+				//$$ context,
+				//#endif
+				stackInTheContainer, text
+		);
 		return textObj;
 	}
 }

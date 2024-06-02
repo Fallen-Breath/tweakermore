@@ -21,8 +21,14 @@
 package me.fallenbreath.tweakermore.util.render;
 
 import com.google.common.collect.Lists;
+import fi.dy.masa.malilib.event.RenderEventHandler;
+import fi.dy.masa.malilib.interfaces.IRenderer;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import net.minecraft.client.MinecraftClient;
+
+//#if MC >= 12000
+//$$ import net.minecraft.client.gui.DrawContext;
+//#endif
 
 //#if MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
@@ -37,6 +43,11 @@ public abstract class TweakerMoreRenderEventHandler
 	public static void register(TweakerMoreIRenderer renderer)
 	{
 		renderers.add(renderer);
+	}
+
+	public static void init()
+	{
+		RenderEventHandler.getInstance().registerGameOverlayRenderer(new MalilibRendererHook());
 	}
 
 	public static void dispatchRenderWorldPostEvent(
@@ -54,5 +65,35 @@ public abstract class TweakerMoreRenderEventHandler
 		);
 		renderers.forEach(renderer -> renderer.onRenderWorldLast(renderContext));
 		mc.getProfiler().pop();
+	}
+
+	private static void dispatchRenderGameOverlayPost(RenderContext renderContext)
+	{
+		renderers.forEach(renderer -> renderer.onRenderGameOverlayPost(renderContext));
+	}
+
+	private static class MalilibRendererHook implements IRenderer
+	{
+		@Override
+		public void onRenderGameOverlayPost(
+				//#if MC >= 12000
+				//$$ DrawContext matrixStackOrDrawContext
+				//#elseif MC >= 11700
+				//$$ MatrixStack matrixStackOrDrawContext
+				//#elseif MC >= 11600
+				//$$ float partialTicks, MatrixStack matrixStackOrDrawContext
+				//#else
+				float partialTicks
+				//#endif
+		)
+		{
+			dispatchRenderGameOverlayPost(
+					RenderContext.of(
+							//#if MC >= 11600
+							//$$ matrixStackOrDrawContext
+							//#endif
+					)
+			);
+		}
 	}
 }

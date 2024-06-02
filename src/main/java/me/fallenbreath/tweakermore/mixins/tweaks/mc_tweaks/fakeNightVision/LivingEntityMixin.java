@@ -30,6 +30,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+//#if MC >= 12006
+//$$ import net.minecraft.registry.entry.RegistryEntry;
+//#endif
+
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin
 {
@@ -38,7 +42,14 @@ public abstract class LivingEntityMixin
 			at = @At("HEAD"),
 			cancellable = true
 	)
-	private void fakeNightVision(StatusEffect effect, CallbackInfoReturnable<Boolean> cir)
+	private void fakeNightVision(
+			//#if MC >= 12006
+			//$$ RegistryEntry<StatusEffect> effect,
+			//#else
+			StatusEffect effect,
+			//#endif
+			CallbackInfoReturnable<Boolean> cir
+	)
 	{
 		if (TweakerMoreConfigs.FAKE_NIGHT_VISION.getBooleanValue())
 		{

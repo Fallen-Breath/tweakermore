@@ -37,11 +37,15 @@ public abstract class RenderUtilsMixin
 			method = "renderShulkerBoxPreview",
 			at = @At(
 					value = "INVOKE",
+					//#if MC >= 12006
+					//$$ target = "Lnet/minecraft/component/ComponentMap;contains(Lnet/minecraft/component/DataComponentType;)Z",
+					//#else
 					target = "Lnet/minecraft/item/ItemStack;hasTag()Z",
+					//#endif
 					ordinal = 0
 			)
 	)
-	private static boolean mlShulkerBoxPreviewSupportEnderChest(boolean hasTag, ItemStack stack, int x, int y, boolean useBgColors)
+	private static boolean mlShulkerBoxPreviewSupportEnderChest_skipNbtCheck(boolean hasTag, ItemStack stack, int x, int y, boolean useBgColors)
 	{
 		return hasTag || EnderChestItemFetcher.enableFor(stack);
 	}
@@ -71,7 +75,7 @@ public abstract class RenderUtilsMixin
 					shift = At.Shift.AFTER
 			)
 	)
-	private static InventoryOverlay.InventoryRenderType mlShulkerBoxPreviewSupportEnderChest_modify(InventoryOverlay.InventoryRenderType type, ItemStack stack, int x, int y, boolean useBgColors)
+	private static InventoryOverlay.InventoryRenderType mlShulkerBoxPreviewSupportEnderChest_modifyInventoryType(InventoryOverlay.InventoryRenderType type, ItemStack stack, int x, int y, boolean useBgColors)
 	{
 		if (EnderChestItemFetcher.enableFor(stack))
 		{

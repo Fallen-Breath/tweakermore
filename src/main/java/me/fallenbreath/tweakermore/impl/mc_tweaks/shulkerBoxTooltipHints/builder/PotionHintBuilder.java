@@ -31,29 +31,51 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+//#if MC >= 12006
+//$$ import net.minecraft.component.DataComponentTypes;
+//$$ import net.minecraft.item.Item;
+//#endif
+
 public class PotionHintBuilder extends AbstractHintBuilder
 {
 	@Override
 	@Nullable
-	public BaseText build(ItemStack itemStack)
+	public BaseText build(
+			//#if MC >= 12006
+			//$$ Item.TooltipContext context,
+			//#endif
+			ItemStack itemStack
+	)
 	{
 		if (TweakerMoreConfigs.SHULKER_BOX_TOOLTIP_POTION_INFO_HINT.getBooleanValue())
 		{
 			Item item = itemStack.getItem();
 			float ratio = getPotionDurationRatio(item);
-			if (ratio > 0 && PotionUtil.getPotionEffects(itemStack).size() > 0)
+
+			//#if MC >= 12006
+			//$$ var potions = itemStack.get(DataComponentTypes.POTION_CONTENTS);
+			//$$ if (ratio > 0 && potions != null)
+			//#else
+			if (ratio > 0 && !PotionUtil.getPotionEffects(itemStack).isEmpty())
+			//#endif
+
 			{
 				List<Text> potionTexts = Lists.newArrayList();
 				//#if MC >= 12004
 				//$$ var world = net.minecraft.client.MinecraftClient.getInstance().world;
 				//$$ float tickRate = world != null ? world.getTickManager().getTickRate() : 20.0f;
 				//#endif
+
+				//#if MC >= 12006
+				//$$ potions.buildTooltip(potionTexts::add, ratio, tickRate);
+				//#else
 				PotionUtil.buildTooltip(
 						itemStack, potionTexts, ratio
 						//#if MC >= 12004
 						//$$ , tickRate
 						//#endif
 				);
+				//#endif
 
 				int i = 0;
 				BaseText newLine = Messenger.s("");

@@ -108,9 +108,7 @@ public class TextRenderer
 		}
 		MinecraftClient client = MinecraftClient.getInstance();
 		RenderContext renderContext = RenderContext.of(
-				//#if MC >= 11700
-				//$$ RenderSystem.getModelViewStack()
-				//#elseif MC >= 11600
+				//#if MC >= 11600
 				//$$ new MatrixStack()
 				//#endif
 		);

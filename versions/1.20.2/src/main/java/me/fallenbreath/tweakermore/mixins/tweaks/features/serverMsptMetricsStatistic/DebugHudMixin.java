@@ -25,7 +25,6 @@ import me.fallenbreath.tweakermore.impl.features.serverMsptMetricsStatistic.Rich
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.DebugHud;
 import net.minecraft.client.gui.hud.debug.TickChart;
-import net.minecraft.util.profiler.PerformanceLog;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -36,6 +35,12 @@ import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
+//#if MC >= 12006
+//$$ import net.minecraft.util.profiler.MultiValueDebugSampleLogImpl;
+//#else
+import net.minecraft.util.profiler.PerformanceLog;
+//#endif
+
 /**
  * <= mc1.20.1: subproject 1.15.2 (main project)
  * >= mc1.20.2: subproject 1.20.2        <--------
@@ -45,7 +50,13 @@ public abstract class DebugHudMixin
 {
 	// ============================ enabling ============================
 
-	@Shadow @Final private PerformanceLog tickNanosLog;
+	@Shadow @Final private
+	//#if MC >= 12006
+	//$$ MultiValueDebugSampleLogImpl
+	//#else
+	PerformanceLog
+	//#endif
+			tickNanosLog;
 
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void enableRichStatisticForTickNanosLog(CallbackInfo ci)
@@ -56,7 +67,15 @@ public abstract class DebugHudMixin
 	// ============================ render ============================
 
 	@Shadow @Final private TickChart tickChart;
-	@Unique private PerformanceLog originMetricsData$TKM = null;
+
+	@Unique private
+	//#if MC >= 12006
+	//$$ MultiValueDebugSampleLogImpl
+	//#else
+	PerformanceLog
+	//#endif
+			originMetricsData$TKM = null;
+
 	@Unique private int tickChartX$TKM = 0;
 	@Unique private int tickChartWidth$TKM = 0;
 
@@ -70,7 +89,16 @@ public abstract class DebugHudMixin
 	private void serverMsptMetricsStatistic_modify(Args args)
 	{
 		DebugChartAccessor chart = (DebugChartAccessor)this.tickChart;
+		//#if MC >= 12006
+		//$$ var chartLog = chart.getLog();
+		//$$ if (!(chartLog instanceof MultiValueDebugSampleLogImpl))
+		//$$ {
+		//$$ 	return;
+		//$$ }
+		//$$ var metricsData = (MultiValueDebugSampleLogImpl)chartLog;
+		//#else
 		PerformanceLog metricsData = chart.getLog();
+		//#endif
 
 		RichStatisticManager manager = ((MetricsDataWithRichStatistic)metricsData).getRichStatisticManager();
 		if (manager != null)

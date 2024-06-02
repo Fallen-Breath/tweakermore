@@ -54,7 +54,12 @@ public abstract class ChatHudMixin
 	@Shadow @Final private List<?> visibleMessages;
 
 	@ModifyConstant(
-			//#if MC >= 11901
+			//#if MC >= 12006
+			//$$ method = {
+			//$$ 		"addVisibleMessage",
+			//$$ 		"addMessage(Lnet/minecraft/client/gui/hud/ChatHudLine;)V"
+			//$$ },
+			//#elseif MC >= 11901
 			//$$ method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;ILnet/minecraft/client/gui/hud/MessageIndicator;Z)V",
 			//#else
 			method = "addMessage(Lnet/minecraft/text/Text;IIZ)V",

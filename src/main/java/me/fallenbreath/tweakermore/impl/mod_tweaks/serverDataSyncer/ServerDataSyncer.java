@@ -227,7 +227,8 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 		if (hasEnoughPermission())
 		{
 			Optional<CompletableFuture<CompoundTag>> opt = fetchBlockEntity(blockEntity);
-			if (opt.isPresent())
+			World world = blockEntity.getWorld();
+			if (opt.isPresent() && world != null)
 			{
 				return opt.get().thenAccept(nbt -> {
 					if (nbt != null)
@@ -235,7 +236,9 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 						BlockPos pos = blockEntity.getPos();
 						try
 						{
-							//#if MC >= 11700
+							//#if MC >= 12006
+							//$$ blockEntity.read(nbt, blockEntity.getWorld().getRegistryManager());
+							//#elseif MC >= 11700
 							//$$ blockEntity.readNbt(nbt);
 							//#elseif MC >= 11600
 							//$$ blockEntity.fromTag(blockEntity.getCachedState(), nbt);

@@ -26,7 +26,13 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.listentries.ServerMsptMetricsStatisticType;
 import me.fallenbreath.tweakermore.util.render.RenderUtil;
 import net.minecraft.client.MinecraftClient;
+
+//#if MC >= 12006
+//$$ import net.minecraft.util.profiler.MultiValueDebugSampleLogImpl;
+//#else
 import net.minecraft.util.MetricsData;
+//#endif
+
 
 //#if MC >= 12000
 //$$ import net.minecraft.client.gui.DrawContext;
@@ -61,7 +67,19 @@ public class RichStatisticManager
 		this.statGameTick.addData(msThisTick);
 	}
 
-	public MetricsData modifyServerMsptMetricsStatistic(MetricsData metricsData)
+	public
+	//#if MC >= 12006
+	//$$ MultiValueDebugSampleLogImpl
+	//#else
+	MetricsData
+	//#endif
+	modifyServerMsptMetricsStatistic(
+			//#if MC >= 12006
+			//$$ MultiValueDebugSampleLogImpl metricsData
+			//#else
+			MetricsData metricsData
+			//#endif
+	)
 	{
 		switch ((ServerMsptMetricsStatisticType)TweakerMoreConfigs.SERVER_MSPT_METRICS_STATISTIC_TYPE.getOptionListValue())
 		{

@@ -31,17 +31,34 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+//#if MC >= 12006
+//$$ import net.minecraft.client.item.TooltipType;
+//$$ import net.minecraft.item.Item;
+//#endif
+
 public class EnchantmentHintBuilder extends AbstractHintBuilder
 {
 	@Override
 	@Nullable
-	public BaseText build(ItemStack itemStack)
+	public BaseText build(
+			//#if MC >= 12006
+			//$$ Item.TooltipContext context,
+			//#endif
+			ItemStack itemStack
+	)
 	{
 		if (TweakerMoreConfigs.SHULKER_BOX_TOOLTIP_ENCHANTMENT_HINT.getBooleanValue())
 		{
 			List<Text> enchantmentTexts = Lists.newArrayList();
+
+			//#if MC >= 12006
+			//$$ var enchantmentTag = itemStack.getEnchantments();
+			//$$ enchantmentTag.appendTooltip(context, enchantmentTexts::add, TooltipType.ADVANCED);
+			//#else
 			ListTag enchantmentTag = itemStack.getItem() instanceof EnchantedBookItem ? EnchantedBookItem.getEnchantmentTag(itemStack) : itemStack.getEnchantments();
 			ItemStack.appendEnchantments(enchantmentTexts, enchantmentTag);
+			//#endif
+
 			return buildSegments(enchantmentTexts);
 		}
 		return null;

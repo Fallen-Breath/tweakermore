@@ -168,7 +168,11 @@ public class DamageCalculator
 			))
 			{
 				amount = DamageUtil.getDamageLeft(
-						amount, this.entity.getArmor(),
+						amount,
+						//#if MC >= 12006
+						//$$ this.damageSource,
+						//#endif
+						this.entity.getArmor(),
 						(float)this.entity.getAttributeInstance(EntityAttributes.ARMOR_TOUGHNESS).getValue()
 				);
 			}

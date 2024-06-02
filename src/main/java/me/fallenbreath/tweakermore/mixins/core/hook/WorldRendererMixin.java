@@ -20,13 +20,10 @@
 
 package me.fallenbreath.tweakermore.mixins.core.hook;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreRenderEventHandler;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.WorldRenderer;
-import net.minecraft.client.util.math.Matrix4f;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -58,7 +55,12 @@ public abstract class WorldRendererMixin
 	//$$ 		),
 	//$$ 		at = @At(
 	//$$ 				value = "INVOKE",
+	//$$ 				//#if MC >= 12006
+	//$$ 				//$$ target = "Lorg/joml/Matrix4fStack;popMatrix()Lorg/joml/Matrix4fStack;",
+	//$$ 				//$$ remap = false,
+	//$$ 				//#else
 	//$$ 				target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V",
+	//$$ 				//#endif
 	//$$ 				ordinal = 0
 	//$$ 		)
 	//$$ )
@@ -71,7 +73,14 @@ public abstract class WorldRendererMixin
 			)
 	)
 	//#endif
-	private void worldRenderPostHook$TKM(MatrixStack matrices, float tickDelta, long limitTime, boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmapTextureManager, Matrix4f matrix4f, CallbackInfo ci)
+	private void worldRenderPostHook$TKM(
+			CallbackInfo ci,
+			@Local(
+					//#if MC < 12006
+					argsOnly = true
+					//#endif
+			) MatrixStack matrices
+	)
 	{
 		TweakerMoreRenderEventHandler.dispatchRenderWorldPostEvent(
 				this.client

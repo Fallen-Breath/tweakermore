@@ -28,31 +28,50 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.LongStream;
 
+//#if MC >= 12006
+//$$ import net.minecraft.util.profiler.MultiValueDebugSampleLogImpl;
+//#endif
+
 public class MetricsStatistic
 {
 	private final Type type;
-	private MetricsData metricsData;
 	private final long[] buffer;
-	private int index;
 	private final List<NewSampleCallback> newSampleCallbacks;
+
+	//#if MC >= 12006
+	//$$ private MultiValueDebugSampleLogImpl
+	//#else
+	private MetricsData
+	//#endif
+			metricsData;
+
+	private int index;
 
 	public MetricsStatistic(Type type, int n)
 	{
 		this.type = type;
-		this.metricsData = new MetricsData();
 		this.buffer = new long[n];
-		this.index = 0;
 		this.newSampleCallbacks = Lists.newArrayList();
+		this.reset();
 	}
 
-	public MetricsData getMetricsData()
+	//#if MC >= 12006
+	//$$ public MultiValueDebugSampleLogImpl
+	//#else
+	public MetricsData
+	//#endif
+	getMetricsData()
 	{
 		return this.metricsData;
 	}
 
 	public void reset()
 	{
+		//#if MC >= 12006
+		//$$ this.metricsData = new MultiValueDebugSampleLogImpl(MultiValueDebugSampleLogImpl.LOG_SIZE);
+		//#else
 		this.metricsData = new MetricsData();
+		//#endif
 		this.index = 0;
 	}
 

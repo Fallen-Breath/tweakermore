@@ -61,7 +61,13 @@ public abstract class AbstractBlockStateMixin
 			cancellable = true
 	)
 	private void tkmPistorder_onPlayerRightClickBlock(
-			World world, PlayerEntity player, Hand hand, BlockHitResult hit,
+			World world,
+			PlayerEntity player,
+			//#if MC < 12006
+			Hand hand,
+			//#endif
+			BlockHitResult hit,
+
 			//#if MC >= 11500
 			CallbackInfoReturnable<ActionResult> cir
 			//#else
@@ -76,7 +82,12 @@ public abstract class AbstractBlockStateMixin
 
 		if (world.isClient)
 		{
-			ActionResult result = PistorderRenderer.getInstance().onPlayerRightClickBlock(world, player, hand, hit);
+			ActionResult result = PistorderRenderer.getInstance().
+					//#if MC >= 12006
+					//$$ onPlayerRightClickBlockWithMainHand(world, player, hit);
+					//#else
+					onPlayerRightClickBlock(world, player, hand, hit);
+					//#endif
 
 			//#if MC >= 11500
 			boolean ok = result.isAccepted();

@@ -43,6 +43,17 @@ def mod_dependencies = [
 		// we're using modmenu for mc 1.15.2 for 1.14.4, so we use modCompileOnly
 		["com.terraformersmc:modmenu:${project.mod_menu_version}"          , mcVersion >= 11500],
 ]
+if (mcVersion == 12006) {
+	mod_dependencies = [
+	        ["com.github.sakura-ryoko:malilib:a2c5251ea2", true],
+			["curse.maven:tweakeroo-297344:${project.tweakeroo_file_id}"       , false],
+			["curse.maven:item-scroller-242064:${project.itemscroller_file_id}", false],
+			["curse.maven:minihud-244260:${project.minihud_file_id}"           , false],
+			["curse.maven:litematica-308892:${project.litematica_file_id}"     , false],
+			["com.terraformersmc:modmenu:${project.mod_menu_version}", true],
+	]
+}
+
 
 // https://github.com/FabricMC/fabric-loader/issues/783
 configurations {
@@ -69,6 +80,12 @@ dependencies {
 	// runtime mods
 	if (mcVersion < 11904) {
 		modRuntimeOnly(mcVersion < 11900 ? "com.github.astei:lazydfu:0.1.2" : "com.github.Fallen-Breath:lazydfu:a7cfc44c0c")
+	}
+	if (mcVersion >= 12006) {
+		// modmenu needs these
+		modRuntimeOnly fabricApi.module("fabric-screen-api-v1", project.fabric_api_version)
+		modRuntimeOnly fabricApi.module("fabric-key-binding-api-v1", project.fabric_api_version)
+		modRuntimeOnly fabricApi.module("fabric-lifecycle-events-v1", project.fabric_api_version)
 	}
 
 	mod_dependencies.forEach {item ->

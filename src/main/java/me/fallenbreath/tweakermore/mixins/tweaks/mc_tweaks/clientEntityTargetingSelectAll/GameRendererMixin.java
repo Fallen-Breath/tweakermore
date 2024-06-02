@@ -44,7 +44,11 @@ public abstract class GameRendererMixin
 	@Shadow @Final private MinecraftClient client;
 
 	@WrapOperation(
+			//#if MC >= 12006
+			//$$ method = "findCrosshairTarget",
+			//#else
 			method = "updateTargetedEntity",
+			//#endif
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/entity/ProjectileUtil;rayTrace(Lnet/minecraft/entity/Entity;Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/Box;Ljava/util/function/Predicate;D)Lnet/minecraft/util/hit/EntityHitResult;"

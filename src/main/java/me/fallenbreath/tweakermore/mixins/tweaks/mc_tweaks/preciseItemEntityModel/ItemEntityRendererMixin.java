@@ -36,17 +36,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ItemEntityRendererMixin
 {
 	@ModifyExpressionValue(
-			//#if MC >= 11500
+			//#if MC >= 12006
+			//$$ method = "renderStack(Lnet/minecraft/client/render/item/ItemRenderer;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/BakedModel;ZLnet/minecraft/util/math/random/Random;)V",
+			//#elseif MC >= 11500
 			method = "render(Lnet/minecraft/entity/ItemEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
 			//#else
 			//$$ method = "method_3997",
 			//#endif
 			at = @At(
 					value = "INVOKE",
+					//#if MC >= 12006
+					//$$ target = "Lnet/minecraft/client/render/entity/ItemEntityRenderer;getRenderedAmount(I)I"
+					//#else
 					target = "Lnet/minecraft/client/render/entity/ItemEntityRenderer;getRenderedAmount(Lnet/minecraft/item/ItemStack;)I"
+					//#endif
 			)
 	)
-	private int preciseItemEntityModel_setRenderedAmountTo1(int amount)
+	private
+	//#if MC >= 12006
+	//$$ static
+	//#endif
+	int preciseItemEntityModel_setRenderedAmountTo1(int amount)
 	{
 		if (TweakerMoreConfigs.PRECISE_ITEM_ENTITY_MODEL.getBooleanValue())
 		{
@@ -156,7 +166,9 @@ public abstract class ItemEntityRendererMixin
 			//#endif
 			at = @At(
 					value = "INVOKE",
-					//#if MC >= 11904
+					//#if MC >= 12006
+					//$$ target = "Lnet/minecraft/client/render/entity/ItemEntityRenderer;renderStack(Lnet/minecraft/client/render/item/ItemRenderer;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/BakedModel;ZLnet/minecraft/util/math/random/Random;)V"
+					//#elseif MC >= 11904
 					//$$ target = "Lnet/minecraft/client/render/item/ItemRenderer;renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V"
 					//#elseif MC >= 11500
 					target = "Lnet/minecraft/client/render/item/ItemRenderer;renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformation$Mode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V"
@@ -181,7 +193,9 @@ public abstract class ItemEntityRendererMixin
 			//#endif
 			at = @At(
 					value = "INVOKE",
-					//#if MC >= 11904
+					//#if MC >= 12006
+					//$$ target = "Lnet/minecraft/client/render/entity/ItemEntityRenderer;renderStack(Lnet/minecraft/client/render/item/ItemRenderer;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/BakedModel;ZLnet/minecraft/util/math/random/Random;)V",
+					//#elseif MC >= 11904
 					//$$ target = "Lnet/minecraft/client/render/item/ItemRenderer;renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V",
 					//#elseif MC >= 11500
 					target = "Lnet/minecraft/client/render/item/ItemRenderer;renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformation$Mode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V",
