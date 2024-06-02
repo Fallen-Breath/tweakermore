@@ -32,6 +32,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 //#if MC >= 12006
+//$$ import net.minecraft.component.DataComponentTypes;
+//$$ import net.minecraft.component.type.ItemEnchantmentsComponent;
 //$$ import net.minecraft.client.item.TooltipType;
 //$$ import net.minecraft.item.Item;
 //#endif
@@ -52,7 +54,7 @@ public class EnchantmentHintBuilder extends AbstractHintBuilder
 			List<Text> enchantmentTexts = Lists.newArrayList();
 
 			//#if MC >= 12006
-			//$$ var enchantmentTag = itemStack.getEnchantments();
+			//$$ var enchantmentTag = itemStack.getOrDefault( itemStack.getItem() instanceof EnchantedBookItem ? DataComponentTypes.STORED_ENCHANTMENTS : DataComponentTypes.ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT);
 			//$$ enchantmentTag.appendTooltip(context, enchantmentTexts::add, TooltipType.ADVANCED);
 			//#else
 			ListTag enchantmentTag = itemStack.getItem() instanceof EnchantedBookItem ? EnchantedBookItem.getEnchantmentTag(itemStack) : itemStack.getEnchantments();

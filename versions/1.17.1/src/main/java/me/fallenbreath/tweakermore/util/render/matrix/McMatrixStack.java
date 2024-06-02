@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2024  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,55 +18,25 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.util.render.context;
+package me.fallenbreath.tweakermore.util.render.matrix;
 
-import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Matrix4f;
-import org.jetbrains.annotations.NotNull;
 
-/**
- * The implementation for mc [1.17, ~)
- * See subproject 1.14.4 or 1.15.2 for implementation for other version range
- */
-public class RenderContextImpl implements RenderContext
+// see other impls in subproject 1.14.4, 1.15.2
+public class McMatrixStack implements IMatrixStack
 {
-	//#if MC >= 12000
-	//$$ @NotNull
-	//$$ private final DrawContext drawContext;
-	//#endif
-
-	@NotNull
 	private final MatrixStack matrixStack;
 
-	RenderContextImpl(
-			//#if MC >= 12000
-			//$$ @NotNull DrawContext drawContext,
-			//#endif
-			@NotNull MatrixStack matrixStack
-	)
+	public McMatrixStack(MatrixStack matrixStack)
 	{
-		//#if MC >= 12000
-		//$$ this.drawContext = drawContext;
-		//#endif
 		this.matrixStack = matrixStack;
 	}
 
 	@Override
-	@NotNull
-	public MatrixStack getMatrixStack()
+	public MatrixStack asMcRaw()
 	{
 		return this.matrixStack;
-	}
-
-	@Override
-	public DrawableHelper getGuiDrawer()
-	{
-		//#if MC >= 12000
-		//$$ return this.drawContext;
-		//#else
-		return new DrawableHelper(){};
-		//#endif
 	}
 
 	@Override
@@ -94,7 +64,7 @@ public class RenderContextImpl implements RenderContext
 	}
 
 	@Override
-	public void multMatrix(Matrix4f matrix4f)
+	public void mul(Matrix4f matrix4f)
 	{
 		this.matrixStack.method_34425(matrix4f);
 	}

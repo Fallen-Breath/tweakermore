@@ -20,80 +20,98 @@
 
 package me.fallenbreath.tweakermore.util.render.context;
 
-import com.mojang.blaze3d.systems.RenderSystem;
+import me.fallenbreath.tweakermore.util.render.matrix.IMatrixStack;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.Matrix4f;
+import org.jetbrains.annotations.NotNull;
 
-//#if MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
-//$$ import org.jetbrains.annotations.NotNull;
+//#if MC >= 12000
+//$$ import org.jetbrains.annotations.Nullable;
+//#endif
+
+//#if MC >= 11903
+//$$ import me.fallenbreath.tweakermore.util.render.matrix.JomlMatrixStack;
+//$$ import org.joml.Matrix4fStack;
 //#endif
 
 //#if 11600 <= MC && MC < 11700
 //$$ @SuppressWarnings("deprecation")
 //#endif
 /**
- * The implementation for mc [1.15, 1.16]
- * See subproject 1.14.4 or 1.17.1 for implementation for other version range
+ * The implementation for mc [1.15, ~)
+ * See subproject 1.14.4 or for implementation for other version range
  */
 public class RenderContextImpl implements RenderContext
 {
-	//#if MC >= 11600
-	//$$ @NotNull
-	//$$ private final MatrixStack matrixStack;
+	//#if MC >= 12000
+	//$$ @Nullable
+	//$$ private final DrawContext drawContext;
 	//#endif
+
+	@NotNull
+	private final IMatrixStack matrixStack;
 
 	RenderContextImpl(
-			//#if MC >= 11600
-			//$$ @NotNull MatrixStack matrixStack
+			//#if MC >= 12000
+			//$$ @Nullable DrawContext drawContext,
 			//#endif
+			@NotNull IMatrixStack matrixStack
 	)
 	{
-		//#if MC >= 11600
-		//$$ this.matrixStack = matrixStack;
+		//#if MC >= 12000
+		//$$ this.drawContext = drawContext;
 		//#endif
+		this.matrixStack = matrixStack;
 	}
 
-	//#if MC >= 11600
-	//$$ public MatrixStack getMatrixStack()
-	//$$ {
-	//$$ 	return this.matrixStack;
-	//$$ }
-	//#endif
+	@NotNull
+	public IMatrixStack getMatrixStack()
+	{
+		return this.matrixStack;
+	}
 
+	//#if MC >= 12000
+	//$$ @Nullable
+	//#else
+	@NotNull
+	//#endif
 	@Override
 	public DrawableHelper getGuiDrawer()
 	{
+		//#if MC >= 12000
+		//$$ return this.drawContext;
+		//#else
 		return new DrawableHelper(){};
+		//#endif
 	}
 
 	@Override
 	public void pushMatrix()
 	{
-		RenderSystem.pushMatrix();
+		this.matrixStack.pushMatrix();
 	}
 
 	@Override
 	public void popMatrix()
 	{
-		RenderSystem.popMatrix();
+		this.matrixStack.popMatrix();
 	}
 
 	@Override
 	public void translate(double x, double y, double z)
 	{
-		RenderSystem.translated(x, y, z);
+		this.matrixStack.translate(x, y, z);
 	}
 
 	@Override
 	public void scale(double x, double y, double z)
 	{
-		RenderSystem.scaled(x, y, z);
+		this.matrixStack.scale(x, y, z);
 	}
 
 	@Override
 	public void multMatrix(Matrix4f matrix4f)
 	{
-		RenderSystem.multMatrix(matrix4f);
+		this.matrixStack.mul(matrix4f);
 	}
 }

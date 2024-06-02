@@ -161,7 +161,7 @@ public class ShulkerBoxItemContentHintRenderer
 		try
 		{
 			//#if MC >= 11904
-			//$$ renderContext.getMatrixStack().push();
+			//$$ renderContext.getMatrixStack().pushMatrix();
 			//$$ renderContext.getMatrixStack().translate(0, 0, 10);
 			//#else
 			itemRenderer.zOffset += 10;
@@ -177,7 +177,7 @@ public class ShulkerBoxItemContentHintRenderer
 			// we do this manually so no need to care about extra z-offset modification of itemRenderer in its ItemRenderer#renderGuiItem
 			itemRenderer.renderGuiItemIcon(
 					//#if MC >= 11904
-					//$$ renderContext.getMatrixStack(),
+					//$$ renderContext.getMatrixStack().asMcRaw(),
 					//#endif
 					info.stack, x, y
 			);
@@ -188,7 +188,7 @@ public class ShulkerBoxItemContentHintRenderer
 			isRendering.set(false);
 
 			//#if MC >= 11904
-			//$$ renderContext.getMatrixStack().pop();
+			//$$ renderContext.getMatrixStack().popMatrix();
 			//#else
 			itemRenderer.zOffset = zOffset;
 			//#endif
@@ -320,7 +320,7 @@ public class ShulkerBoxItemContentHintRenderer
 		//$$ };
 		//#elseif MC >= 11904
 		//$$ GuiQuadDrawer drawer = (x_, y_, width_, height_, color_) -> {
-		//$$ 	DrawableHelper.fill(renderContext.getMatrixStack(), x_, y_, x_ + width_, y_ + height_, color_ | 0xFF000000);
+		//$$ 	DrawableHelper.fill(renderContext.getMatrixStack().asMcRaw(), x_, y_, x_ + width_, y_ + height_, color_ | 0xFF000000);
 		//$$ };
 		//#else
 		ItemRendererAccessor accessor = (ItemRendererAccessor)itemRenderer;

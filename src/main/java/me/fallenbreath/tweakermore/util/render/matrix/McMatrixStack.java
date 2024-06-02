@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2024  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,53 +18,68 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.util.render.context;
+package me.fallenbreath.tweakermore.util.render.matrix;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.client.gui.DrawableHelper;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.util.math.Matrix4f;
+import net.minecraft.client.util.math.MatrixStack;
 
-/**
- * The implementation for mc (~, 1.14]
- * See subproject 1.15.2 or 1.17.1 for implementation for other version range
- */
-public class RenderContextImpl implements RenderContext
+//#if MC >= 11600
+//$$ import net.minecraft.client.util.math.MatrixStack;
+//#endif
+
+// see other impls in subproject 1.14.4, 1.17.1
+//#if 11600 <= MC && MC < 11700
+//$$ @SuppressWarnings("deprecation")
+//#endif
+public class McMatrixStack implements IMatrixStack
 {
-	RenderContextImpl() {}
+	//#if MC >= 11600
+	//$$ private final MatrixStack matrixStack;
+	//$$
+	//$$ public McMatrixStack(MatrixStack matrixStack)
+	//$$ {
+	//$$ 	this.matrixStack = matrixStack;
+	//$$ }
+	//#endif
 
 	@Override
-	public DrawableHelper getGuiDrawer()
+	public MatrixStack asMcRaw()
 	{
-		return new DrawableHelper(){};
+		//#if MC >= 11600
+		//$$ return this.matrixStack;
+		//#else
+		throw new RuntimeException("McMatrixStack < mc1.16 does not support asMcRaw()");
+		//#endif
 	}
 
 	@Override
 	public void pushMatrix()
 	{
-		GlStateManager.pushMatrix();
+		RenderSystem.pushMatrix();
 	}
 
 	@Override
 	public void popMatrix()
 	{
-		GlStateManager.popMatrix();
+		RenderSystem.popMatrix();
 	}
 
 	@Override
 	public void translate(double x, double y, double z)
 	{
-		GlStateManager.translated(x, y, z);
+		RenderSystem.translated(x, y, z);
 	}
 
 	@Override
 	public void scale(double x, double y, double z)
 	{
-		GlStateManager.scaled(x, y, z);
+		RenderSystem.scaled(x, y, z);
 	}
 
 	@Override
-	public void multMatrix(Matrix4f matrix4f)
+	public void mul(Matrix4f matrix4f)
 	{
-		GlStateManager.multMatrix(matrix4f);
+		RenderSystem.multMatrix(matrix4f);
 	}
 }

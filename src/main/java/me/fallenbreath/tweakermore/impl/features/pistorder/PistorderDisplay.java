@@ -29,7 +29,6 @@ import me.fallenbreath.tweakermore.util.PositionUtil;
 import me.fallenbreath.tweakermore.util.TemporaryBlockReplacer;
 import me.fallenbreath.tweakermore.util.render.ColorHolder;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
-import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.piston.PistonHandler;
@@ -220,13 +219,14 @@ public class PistorderDisplay
 	private static TextRenderer drawString(BlockPos pos, float offsetY, BaseText text, int color)
 	{
 		ColorHolder colorHolder = ColorHolder.of(color).modify(h -> h.alpha = (int)(0xFF * TweakerMoreConfigs.PISTORDER_TEXT_ALPHA.getDoubleValue()));
-		return TextRenderer.create().
+		TextRenderer renderer =  TextRenderer.create().
 				at(PositionUtil.centerOf(pos)).
-				shift(0, offsetY * TextRenderer.getLineHeight()).
 				text(text).color(colorHolder.pack()).
 				fontScale(TextRenderer.DEFAULT_FONT_SCALE * TweakerMoreConfigs.PISTORDER_TEXT_SCALE.getDoubleValue()).
 				seeThrough().
 				shadow(TweakerMoreConfigs.PISTORDER_TEXT_SHADOW.getBooleanValue());
+		renderer.shift(0, offsetY * renderer.getLineHeight());
+		return renderer;
 	}
 
 	private boolean checkState(World world)

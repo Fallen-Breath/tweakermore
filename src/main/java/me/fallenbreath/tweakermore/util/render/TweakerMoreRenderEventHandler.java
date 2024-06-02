@@ -24,7 +24,12 @@ import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.event.RenderEventHandler;
 import fi.dy.masa.malilib.interfaces.IRenderer;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContextImpl;
 import net.minecraft.client.MinecraftClient;
+
+//#if MC >= 12006
+//$$ import org.joml.Matrix4fStack;
+//#endif
 
 //#if MC >= 12000
 //$$ import net.minecraft.client.gui.DrawContext;
@@ -52,13 +57,15 @@ public abstract class TweakerMoreRenderEventHandler
 
 	public static void dispatchRenderWorldPostEvent(
 			MinecraftClient mc
-			//#if MC >= 11600
+			//#if MC >= 12006
+			//$$ , Matrix4fStack matrixStack
+			//#elseif MC >= 11600
 			//$$ , MatrixStack matrixStack
 			//#endif
 	)
 	{
 		mc.getProfiler().swap("TweakerMore_WorldRenderPostHook");
-		RenderContext renderContext = RenderContext.of(
+		WorldRenderContextImpl renderContext = RenderContext.createWorldRenderContext(
 				//#if MC >= 11600
 				//$$ matrixStack
 				//#endif

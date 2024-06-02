@@ -55,13 +55,14 @@ import net.minecraft.client.util.math.Rotation3;
 public class TextRenderer
 {
 	public static final double DEFAULT_FONT_SCALE = 0.025;
-	private static double lineHeightRatio = 1.0 * RenderUtil.TEXT_LINE_HEIGHT / RenderUtil.TEXT_HEIGHT;
+	private static final double DEFAULT_LINE_HEIGHT_RATIO = 1.0 * RenderUtil.TEXT_LINE_HEIGHT / RenderUtil.TEXT_HEIGHT;
 
 	private final List<TextHolder> lines;
 	private Vec3d pos;
 	private double shiftX;
 	private double shiftY;
 	private double fontScale;
+	private double lineHeightRatio = DEFAULT_LINE_HEIGHT_RATIO;
 	private int color;
 	private int backgroundColor;
 	private boolean shadow;
@@ -93,6 +94,22 @@ public class TextRenderer
 	 * ============================
 	 */
 
+	private static RenderContext createGlobalMatrixRenderContext()
+	{
+		// if transformation is applied to the RenderContext's matrix,
+		// and the context's matrix (instead of an identity matrix) is used in TextRenderer.draw(),
+		// then the z index might be wrongly apply, making background-ed texts really weird,
+		// so just apply the transformation on the global matrix
+		// FIXME: why
+		return RenderContext.of(
+				//#if MC >= 11700
+				//$$ RenderSystem.getModelViewStack()
+				//#elseif MC >= 11600
+				//$$ new MatrixStack()  // dummy matrix, will not be used for transformations
+				//#endif
+		);
+	}
+
 	/**
 	 * Draw given lines with centered format
 	 * Reference: {@link DebugRenderer#drawString(String, double, double, double, int, float, boolean, float, boolean)}
@@ -106,12 +123,9 @@ public class TextRenderer
 		{
 			return;
 		}
-		MinecraftClient client = MinecraftClient.getInstance();
-		RenderContext renderContext = RenderContext.of(
-				//#if MC >= 11600
-				//$$ new MatrixStack()
-				//#endif
-		);
+		RenderContext renderContext = createGlobalMatrixRenderContext();
+
+		MinecraftClient mc = MinecraftClient.getInstance();
 
 		InWorldPositionTransformer positionTransformer = new InWorldPositionTransformer(this.pos);
 		positionTransformer.apply(renderContext);
@@ -140,7 +154,7 @@ public class TextRenderer
 			int lineNum = this.lines.size();
 			double maxTextWidth = this.lines.stream().mapToInt(TextHolder::getWidth).max().orElse(0);
 			double totalTextWidth = maxTextWidth;
-			double totalTextHeight = RenderUtil.TEXT_HEIGHT * lineNum + (lineHeightRatio - 1) * (lineNum - 1);
+			double totalTextHeight = RenderUtil.TEXT_HEIGHT * lineNum + (this.lineHeightRatio - 1) * (lineNum - 1);
 			renderContext.translate(this.horizontalAlignment.getTranslateX(totalTextWidth), this.verticalAlignment.getTranslateY(totalTextHeight), 0);
 			renderContext.translate(this.shiftX, this.shiftY, 0);
 
@@ -164,7 +178,7 @@ public class TextRenderer
 			{
 				TextHolder holder = this.lines.get(i);
 				float textX = (float)this.horizontalAlignment.getTextX(maxTextWidth, holder.getWidth());
-				float textY = (float)(getLineHeight() * i);
+				float textY = (float)(this.getLineHeight() * i);
 
 				//#if MC >= 11500
 				int backgroundColor = this.backgroundColor;
@@ -172,7 +186,7 @@ public class TextRenderer
 				{
 					VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
 					Matrix4f matrix4f = Rotation3.identity().getMatrix();
-					client.textRenderer.draw(
+					mc.textRenderer.draw(
 							holder.text, textX, textY, this.color, this.shadow, matrix4f, immediate,
 							//#if MC >= 11904
 							//$$ this.seeThrough ? net.minecraft.client.font.TextRenderer.TextLayerType.SEE_THROUGH : net.minecraft.client.font.TextRenderer.TextLayerType.NORMAL,
@@ -196,11 +210,11 @@ public class TextRenderer
 				//#else
 				//$$ if (this.shadow)
 				//$$ {
-				//$$ 	client.textRenderer.drawWithShadow(holder.text, textX, textY, this.color);
+				//$$ 	mc.textRenderer.drawWithShadow(holder.text, textX, textY, this.color);
 				//$$ }
 				//$$ else
 				//$$ {
-				//$$ 	client.textRenderer.draw(holder.text, textX, textY, this.color);
+				//$$ 	mc.textRenderer.draw(holder.text, textX, textY, this.color);
 				//$$ }
 				//#endif
 			}
@@ -380,9 +394,9 @@ public class TextRenderer
 	 * ============================
 	 */
 
-	public static double getLineHeight()
+	public double getLineHeight()
 	{
-		return RenderUtil.TEXT_HEIGHT * lineHeightRatio;
+		return RenderUtil.TEXT_HEIGHT * this.lineHeightRatio;
 	}
 
 	public Vec3d getPos()

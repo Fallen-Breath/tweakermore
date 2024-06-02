@@ -29,7 +29,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.pistorder.PistonBlockAccessor;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
-import me.fallenbreath.tweakermore.util.render.context.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContextImpl;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PistonBlock;
@@ -125,7 +125,7 @@ public class PistorderRenderer implements TweakerMoreIRenderer, IClientTickHandl
 	}
 
 	@Override
-	public void onRenderWorldLast(RenderContext context)
+	public void onRenderWorldLast(WorldRenderContextImpl context)
 	{
 		if (!this.isEnabled())
 		{

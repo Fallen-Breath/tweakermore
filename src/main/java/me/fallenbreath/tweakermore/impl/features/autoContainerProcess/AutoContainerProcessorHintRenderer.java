@@ -34,6 +34,10 @@ import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//#if MC >= 11600
+//$$ import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
+//#endif
+
 public class AutoContainerProcessorHintRenderer implements TweakerMoreIRenderer
 {
 	@Override
@@ -68,7 +72,7 @@ public class AutoContainerProcessorHintRenderer implements TweakerMoreIRenderer
 				//#if MC >= 12000
 				//$$ , context.getGuiDrawer()
 				//#elseif MC >= 11600
-				//$$ , context.getMatrixStack()
+				//$$ , context.getMatrixStack().asMcRaw()
 				//#endif
 		);
 	}

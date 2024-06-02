@@ -45,6 +45,7 @@ import net.minecraft.util.math.Vec3d;
 import java.util.List;
 
 //#if MC >= 12006
+//$$ import net.minecraft.registry.Registries;
 //$$ import net.minecraft.registry.entry.RegistryEntry;
 //$$ import java.util.Optional;
 //#endif
@@ -54,6 +55,7 @@ import java.util.List;
 //#endif
 
 //#if MC >= 11600
+//$$ import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //#endif
 
@@ -151,7 +153,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 		MinecraftClient mc = MinecraftClient.getInstance();
 		Sprite sprite = mc.getStatusEffectSpriteManager().getSprite(
 				//#if MC >= 12006
-				//$$ RegistryEntry.of(statusEffect)
+				//$$ Registries.STATUS_EFFECT.getEntry(statusEffect)
 				//#else
 				statusEffect
 				//#endif
@@ -197,7 +199,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 			//$$ renderContext.getGuiDrawer().drawSprite(
 			//#elseif MC >= 11600
 			//$$ renderContext.getGuiDrawer().drawSprite(
-			//$$ 		renderContext.getMatrixStack(),
+			//$$ 		renderContext.getMatrixStack().asMcRaw(),
 			//#else
 			renderContext.getGuiDrawer().blit(
 			//#endif
@@ -216,7 +218,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 				text(description).fontScale(FONT_SCALE).
 				align(TextRenderer.HorizontalAlignment.LEFT).
 				seeThrough().shadow();
-		textRenderer.shift(deltaX + ICON_RENDERED_SIZE + MARGIN, kDeltaY * TextRenderer.getLineHeight());
+		textRenderer.shift(deltaX + ICON_RENDERED_SIZE + MARGIN, kDeltaY * textRenderer.getLineHeight());
 		textRenderer.render();
 	}
 

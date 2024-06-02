@@ -35,23 +35,17 @@ def mod_dependencies = [
 		// - loom doesn't remap base class method (method_10263) call of fi.dy.masa.malilib.util.SubChunkPos in
 		//   fi.dy.masa.litematica.render.schematic.WorldRendererSchematic.setupTerrain, resulting in a crash in dev env
 		//   so we have to disable litematica in [1.15, 1.17) at runtime
-		["curse.maven:tweakeroo-297344:${project.tweakeroo_file_id}"       , true],
-		["curse.maven:item-scroller-242064:${project.itemscroller_file_id}", true],
-		["curse.maven:minihud-244260:${project.minihud_file_id}"           , true],
-		["curse.maven:litematica-308892:${project.litematica_file_id}"     , mcVersion < 11500 || 11700 <= mcVersion],
+		["curse.maven:tweakeroo-297344:${project.tweakeroo_file_id}"       , mcVersion < 12006],
+		["curse.maven:item-scroller-242064:${project.itemscroller_file_id}", mcVersion < 12006],
+		["curse.maven:minihud-244260:${project.minihud_file_id}"           , mcVersion < 12006],
+		["curse.maven:litematica-308892:${project.litematica_file_id}"     , mcVersion < 11500 || 11700 <= mcVersion && mcVersion < 12006],
 
 		// we're using modmenu for mc 1.15.2 for 1.14.4, so we use modCompileOnly
 		["com.terraformersmc:modmenu:${project.mod_menu_version}"          , mcVersion >= 11500],
 ]
 if (mcVersion == 12006) {
-	mod_dependencies = [
-	        ["com.github.sakura-ryoko:malilib:a2c5251ea2", true],
-			["curse.maven:tweakeroo-297344:${project.tweakeroo_file_id}"       , false],
-			["curse.maven:item-scroller-242064:${project.itemscroller_file_id}", false],
-			["curse.maven:minihud-244260:${project.minihud_file_id}"           , false],
-			["curse.maven:litematica-308892:${project.litematica_file_id}"     , false],
-			["com.terraformersmc:modmenu:${project.mod_menu_version}", true],
-	]
+	def commitSha = "a2c5251ea2"
+	mod_dependencies.set(0, ["com.github.sakura-ryoko:malilib:${commitSha}", true])
 }
 
 
