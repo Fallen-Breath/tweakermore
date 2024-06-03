@@ -127,6 +127,10 @@ public abstract class DebugHudMixin
 			{
 				manager.renderExtraOnDebugHud(drawContext, this.tickChartX$TKM, this.tickChartWidth$TKM);
 			}
+
+			DebugChartAccessor chart = (DebugChartAccessor)this.tickChart;
+			chart.setLog(this.originMetricsData$TKM);
+			this.originMetricsData$TKM = null;
 		}
 	}
 }
