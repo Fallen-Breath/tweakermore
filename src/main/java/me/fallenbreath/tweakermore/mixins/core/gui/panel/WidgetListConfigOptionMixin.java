@@ -20,10 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.core.gui.panel;
 
-import fi.dy.masa.malilib.config.IConfigBase;
-import fi.dy.masa.malilib.config.IConfigBoolean;
-import fi.dy.masa.malilib.config.IConfigResettable;
-import fi.dy.masa.malilib.config.IHotkeyTogglable;
+import fi.dy.masa.malilib.config.*;
 import fi.dy.masa.malilib.config.gui.ConfigOptionChangeListenerButton;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.button.*;
@@ -56,6 +53,8 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 
 	@Unique
 	private boolean initialBoolean$TKM;
+	@Unique
+	private IConfigOptionListEntry initialOptionListEntry$TKM;
 
 	public WidgetListConfigOptionMixin(int x, int y, int width, int height, WidgetListConfigOptionsBase<?, ?> parent, GuiConfigsBase.ConfigOptionWrapper entry, int listIndex)
 	{
@@ -299,7 +298,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 
 	/*
 	 * Stolen from malilib 1.18 v0.11.4
-	 * to make IHotkeyWithSwitch option panel works
+	 * to make IHotkeyWithSwitch and IOptionListHotkeyed option panel works
 	 * and also to make compact ConfigBooleanHotkeyed option panel works in <1.18
 	 *
 	 * Compact panel thing starts
@@ -311,11 +310,19 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 		if (isTweakerMoreConfigGui() && this.wrapper.getType() == GuiConfigsBase.ConfigOptionWrapper.Type.CONFIG)
 		{
 			IConfigBase config = wrapper.getConfig();
-			if (config instanceof IConfigBoolean && config instanceof IHotkey)
+			if (config instanceof IHotkeyWithSwitch)
 			{
-				this.initialBoolean$TKM = ((IConfigBoolean)config).getBooleanValue();
-				this.initialStringValue = ((IHotkey)config).getKeybind().getStringValue();
-				this.initialKeybindSettings = ((IHotkey)config).getKeybind().getSettings();
+				IHotkeyWithSwitch cfg = (IHotkeyWithSwitch)config;
+				this.initialBoolean$TKM = cfg.getEnableState();
+				this.initialStringValue = cfg.getKeybind().getStringValue();
+				this.initialKeybindSettings = cfg.getKeybind().getSettings();
+			}
+			else if (config instanceof IOptionListHotkeyed)
+			{
+				IOptionListHotkeyed cfg = (IOptionListHotkeyed)config;
+				this.initialOptionListEntry$TKM = cfg.getOptionListValue();
+				this.initialStringValue = cfg.getKeybind().getStringValue();
+				this.initialKeybindSettings = cfg.getKeybind().getSettings();
 			}
 		}
 	}
@@ -334,11 +341,27 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	private void specialJudgeCustomConfigBooleanHotkeyed(CallbackInfoReturnable<Boolean> cir)
 	{
 		IConfigBase config = this.wrapper.getConfig();
-		if (config instanceof IConfigBoolean && config instanceof IHotkey && TweakerMoreConfigs.hasConfig(config))
+		if (!TweakerMoreConfigs.hasConfig(config))
 		{
-			IKeybind keybind = ((IHotkey)config).getKeybind();
+			return;
+		}
+
+		if (config instanceof IHotkeyWithSwitch)
+		{
+			IHotkeyWithSwitch cfg = (IHotkeyWithSwitch)config;
+			IKeybind keybind = cfg.getKeybind();
 			cir.setReturnValue(
-					this.initialBoolean$TKM != ((IConfigBoolean)config).getBooleanValue() ||
+					this.initialBoolean$TKM != cfg.getEnableState() ||
+					!Objects.equals(this.initialStringValue, keybind.getStringValue()) ||
+					!Objects.equals(this.initialKeybindSettings, keybind.getSettings())
+			);
+		}
+		if (config instanceof IOptionListHotkeyed)
+		{
+			IOptionListHotkeyed cfg = (IOptionListHotkeyed)config;
+			IKeybind keybind = cfg.getKeybind();
+			cir.setReturnValue(
+					!Objects.equals(this.initialOptionListEntry$TKM, cfg.getOptionListValue()) ||
 					!Objects.equals(this.initialStringValue, keybind.getStringValue()) ||
 					!Objects.equals(this.initialKeybindSettings, keybind.getSettings())
 			);
