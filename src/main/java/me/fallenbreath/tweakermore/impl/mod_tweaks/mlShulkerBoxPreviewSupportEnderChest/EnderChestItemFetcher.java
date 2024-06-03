@@ -37,6 +37,14 @@ public class EnderChestItemFetcher
 		return TweakerMoreConfigs.ML_SHULKER_BOX_PREVIEW_SUPPORT_ENDER_CHEST.getBooleanValue() && itemStack.getItem() == Items.ENDER_CHEST;
 	}
 
+	// make a copy to ensure the original list is unchanged
+	public static DefaultedList<ItemStack> makeCopy(DefaultedList<ItemStack> items)
+	{
+		DefaultedList<ItemStack> copied = DefaultedList.of();
+		items.forEach(itemStack -> copied.add(itemStack.copy()));
+		return copied;
+	}
+
 	public static Optional<DefaultedList<ItemStack>> fetch()
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
@@ -46,13 +54,17 @@ public class EnderChestItemFetcher
 			return Optional.empty();
 		}
 
-		if (mc.getServer() != null)  // single player
+		if (mc.getServer() != null)
 		{
+			// single player
 			PlayerEntity serverPlayer = mc.getServer().getPlayerManager().getPlayer(player.getUuid());
-			return Optional.ofNullable(serverPlayer).map(p -> ((BasicInventoryAccessor)p.getEnderChestInventory()).getStackList());
+			return Optional.ofNullable(serverPlayer)
+					.map(p -> ((BasicInventoryAccessor)p.getEnderChestInventory()).getStackList())
+					.map(EnderChestItemFetcher::makeCopy);
 		}
 
-		return getEntityData(player);  // try fetch
+		// try fetch
+		return getEntityData(player).map(EnderChestItemFetcher::makeCopy);
 	}
 
 	// do hacks here
