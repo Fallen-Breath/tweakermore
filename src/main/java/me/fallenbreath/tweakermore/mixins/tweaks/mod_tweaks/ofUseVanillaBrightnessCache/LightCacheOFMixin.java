@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@SuppressWarnings("UnresolvedMixinReference")
+@SuppressWarnings({"UnresolvedMixinReference", "UnusedMixin"})
 @Restriction(require = @Condition(ModIds.optifine))
 @Pseudo
 @Mixin(targets = "net.optifine.render.LightCacheOF")

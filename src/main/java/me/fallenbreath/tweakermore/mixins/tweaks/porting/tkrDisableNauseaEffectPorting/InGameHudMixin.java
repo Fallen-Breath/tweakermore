@@ -69,8 +69,8 @@ public abstract class InGameHudMixin
 			// necessary instanceof check, since that mixin might not be applied
 			if (player instanceof ClientPlayerEntityWithRealNauseaStrength)
 			{
-				float lastNauseaStrength = ((ClientPlayerEntityWithRealNauseaStrength)player).getRealLastNauseaStrength();
-				float nextNauseaStrength = ((ClientPlayerEntityWithRealNauseaStrength)player).getRealNextNauseaStrength();
+				float lastNauseaStrength = ((ClientPlayerEntityWithRealNauseaStrength)player).getRealLastNauseaStrength$TKM();
+				float nextNauseaStrength = ((ClientPlayerEntityWithRealNauseaStrength)player).getRealNextNauseaStrength$TKM();
 				value = MathHelper.lerp(tickDelta, lastNauseaStrength, nextNauseaStrength);
 			}
 		}

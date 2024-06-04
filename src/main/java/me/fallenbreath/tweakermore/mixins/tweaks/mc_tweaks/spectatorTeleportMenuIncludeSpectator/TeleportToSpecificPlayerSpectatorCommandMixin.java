@@ -27,6 +27,7 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -34,12 +35,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(TeleportToSpecificPlayerSpectatorCommand.class)
 public abstract class TeleportToSpecificPlayerSpectatorCommandMixin implements CommandEntryWithSpectatorMark
 {
-	private boolean isSpectator$tkm = false;
+	@Unique
+	private boolean isSpectator = false;
 
 	@Override
-	public void setIsSpectator(boolean value)
+	public void setIsSpectator$TKM(boolean value)
 	{
-		this.isSpectator$tkm = value;
+		this.isSpectator = value;
 	}
 
 	/**
@@ -48,7 +50,7 @@ public abstract class TeleportToSpecificPlayerSpectatorCommandMixin implements C
 	@Inject(method = "getName", at = @At("TAIL"))
 	private void spectatorTeleportMenuIncludeSpectator_modifyEntryNameForSpectator(CallbackInfoReturnable<Text> cir)
 	{
-		if (this.isSpectator$tkm)
+		if (this.isSpectator)
 		{
 			BaseText text = (BaseText)cir.getReturnValue();
 			Style style = text.getStyle();

@@ -29,23 +29,25 @@ import me.fallenbreath.tweakermore.util.ReflectionUtil;
 import org.apache.commons.lang3.mutable.MutableObject;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import java.net.Proxy;
 
-@SuppressWarnings("UnresolvedMixinReference")
+@SuppressWarnings({"UnresolvedMixinReference", "UnusedMixin"})
 @Restriction(require = @Condition(ModIds.optifine))
 @Pseudo
 @Mixin(targets = "net.optifine.player.PlayerConfigurationParser")
 public abstract class PlayerConfigurationParserMixin implements PlayerConfigurationParserWithOverride
 {
-	private OverrideImpl override$TKM = null;
+	@Unique
+	private OverrideImpl override = null;
 
 	@Override
 	public void setOverride$TKM(OverrideImpl override)
 	{
-		this.override$TKM = override;
+		this.override = override;
 	}
 
 	@Redirect(
@@ -59,13 +61,13 @@ public abstract class PlayerConfigurationParserMixin implements PlayerConfigurat
 	)
 	private byte[] downloadModelOverride$TKM(String urlStr, Proxy proxy)
 	{
-		if (this.override$TKM != null && this.override$TKM.model != null)
+		if (this.override != null && this.override.model != null)
 		{
-			return this.override$TKM.model;
+			return this.override.model;
 		}
 
 		// original logic
-		return invokeHttpPipelineGet$TKM(urlStr, proxy);
+		return invokeHttpPipelineGet(urlStr, proxy);
 	}
 
 	@Redirect(
@@ -79,16 +81,17 @@ public abstract class PlayerConfigurationParserMixin implements PlayerConfigurat
 	)
 	private byte[] downloadTextureOverride$TKM(String urlStr, Proxy proxy)
 	{
-		if (this.override$TKM != null && this.override$TKM.texture != null)
+		if (this.override != null && this.override.texture != null)
 		{
-			return this.override$TKM.texture;
+			return this.override.texture;
 		}
 
 		// original logic
-		return invokeHttpPipelineGet$TKM(urlStr, proxy);
+		return invokeHttpPipelineGet(urlStr, proxy);
 	}
 
-	private static byte[] invokeHttpPipelineGet$TKM(String urlStr, Proxy proxy)
+	@Unique
+	private static byte[] invokeHttpPipelineGet(String urlStr, Proxy proxy)
 	{
 		// HttpPipeline.get(urlStr, proxy)
 		MutableObject<byte[]> ret = new MutableObject<>();

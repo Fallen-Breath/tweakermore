@@ -33,6 +33,7 @@ import net.minecraft.inventory.EnderChestInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DefaultedList;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Coerce;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -44,15 +45,18 @@ import java.util.UUID;
 @Mixin(EnderChestItemFetcher.class)
 public abstract class EnderChestItemFetcherMixin
 {
-	private static final ExpiringMap<UUID, EnderChestInventory> CACHE$SDS = new ExpiringMap<>(Maps.newHashMap(), 5_000);
-	private static final long COOLDOWN_MS$SDS = 250;  // 0.25s (5gt)
-	private static long prevMilli$SDS = 0;
+	@Unique
+	private static final ExpiringMap<UUID, EnderChestInventory> CACHE = new ExpiringMap<>(Maps.newHashMap(), 5_000);
+	@Unique
+	private static final long COOLDOWN_MS = 250;  // 0.25s (5gt)
+	@Unique
+	private static long prevMilli = 0;
 
 	static
 	{
 		TweakerMoreEvents.registerDimensionChangedCallback(() -> {
-			CACHE$SDS.clear();
-			prevMilli$SDS = 0;
+			CACHE.clear();
+			prevMilli = 0;
 		});
 	}
 
@@ -68,14 +72,14 @@ public abstract class EnderChestItemFetcherMixin
 			// syncing the complete data of a player is a bit costly,
 			// so we slow it down and only do it every 5 gt
 			long now = System.currentTimeMillis();
-			if (now - prevMilli$SDS >= COOLDOWN_MS$SDS)
+			if (now - prevMilli >= COOLDOWN_MS)
 			{
-				prevMilli$SDS = now;
+				prevMilli = now;
 
 				ServerDataSyncer.getInstance().fetchEntity(player).
 						ifPresent(future -> {
-							EnderChestInventory enderChestInventory = CACHE$SDS.computeIfAbsent(uuid, k -> new EnderChestInventory());
-							CACHE$SDS.keepAlive(uuid);
+							EnderChestInventory enderChestInventory = CACHE.computeIfAbsent(uuid, k -> new EnderChestInventory());
+							CACHE.keepAlive(uuid);
 							future.thenAccept(nbt -> {
 								// ref: net.minecraft.entity.player.PlayerEntity.readCustomDataFromTag
 								if (nbt != null && nbt.contains("EnderItems", 9))
@@ -91,7 +95,7 @@ public abstract class EnderChestItemFetcherMixin
 						});
 			}
 
-			EnderChestInventory inventory = CACHE$SDS.get(uuid);
+			EnderChestInventory inventory = CACHE.get(uuid);
 			if (inventory != null)
 			{
 				cir.setReturnValue(Optional.ofNullable(((BasicInventoryAccessor)inventory).getStackList()));

@@ -26,6 +26,7 @@ import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -33,11 +34,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = World.class, priority = 500)
 public abstract class WorldMixin
 {
-	private final TimedCounter blockEventThrottlerCounter$TKM = new TimedCounter();
+	@Unique
+	private final TimedCounter blockEventThrottlerCounter = new TimedCounter();
 
 	@Inject(method = "addBlockAction", at = @At("HEAD"), cancellable = true)
 	private void blockEventThrottler_throttle$TKM(BlockPos pos, Block block, int type, int data, CallbackInfo ci)
 	{
-		BlockEventThrottler.throttle((World)(Object)this, pos, block, this.blockEventThrottlerCounter$TKM, ci);
+		BlockEventThrottler.throttle((World)(Object)this, pos, block, this.blockEventThrottlerCounter, ci);
 	}
 }

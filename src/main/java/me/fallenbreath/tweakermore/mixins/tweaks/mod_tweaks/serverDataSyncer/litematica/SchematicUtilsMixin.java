@@ -20,6 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.litematica;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import fi.dy.masa.litematica.selection.AreaSelection;
 import fi.dy.masa.litematica.util.SchematicUtils;
 import fi.dy.masa.malilib.gui.Message;
@@ -36,7 +37,6 @@ import net.minecraft.util.Util;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicLong;
@@ -45,10 +45,10 @@ import java.util.concurrent.atomic.AtomicLong;
 @Mixin(SchematicUtils.class)
 public abstract class SchematicUtilsMixin
 {
-	@ModifyVariable(
+	@ModifyExpressionValue(
 			method = "saveSchematic",
 			at = @At(
-					value = "INVOKE_ASSIGN",
+					value = "INVOKE",
 					target = "Lfi/dy/masa/litematica/selection/SelectionManager;getCurrentSelection()Lfi/dy/masa/litematica/selection/AreaSelection;",
 					remap = false
 			),

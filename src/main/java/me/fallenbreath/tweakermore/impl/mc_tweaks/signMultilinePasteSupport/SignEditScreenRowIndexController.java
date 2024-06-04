@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.impl.mc_tweaks.signMultilinePasteSupport;
 
 public interface SignEditScreenRowIndexController
 {
-	boolean canAddCurrentRowIndex(int delta);
+	boolean canAddCurrentRowIndex$TKM(int delta);
 
-	void addCurrentRowIndex(int delta);
+	void addCurrentRowIndex$TKM(int delta);
 }

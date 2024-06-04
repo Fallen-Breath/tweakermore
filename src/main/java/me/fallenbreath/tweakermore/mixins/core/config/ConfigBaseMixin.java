@@ -33,8 +33,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 //$$ import org.spongepowered.asm.mixin.injection.ModifyArg;
 //#endif
 
-import java.util.List;
-
 @Mixin(ConfigBase.class)
 public abstract class ConfigBaseMixin
 {

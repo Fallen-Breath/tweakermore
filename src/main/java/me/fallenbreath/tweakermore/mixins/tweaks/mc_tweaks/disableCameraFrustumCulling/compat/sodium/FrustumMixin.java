@@ -47,6 +47,6 @@ public abstract class FrustumMixin
 	private void disableCameraFrustumCulling_implementAlwaysVisible(CallbackInfoReturnable<? extends CouldBeAlwaysVisibleFrustum> cir)
 	{
 		CouldBeAlwaysVisibleFrustum self = (CouldBeAlwaysVisibleFrustum)this;
-		cir.getReturnValue().setAlwaysVisible(self.getAlwaysVisible());
+		cir.getReturnValue().setAlwaysVisible$TKM(self.getAlwaysVisible$TKM());
 	}
 }

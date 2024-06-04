@@ -60,7 +60,7 @@ public abstract class DebugHudMixin
 	{
 		if (!showFps)
 		{
-			RichStatisticManager manager = ((MetricsDataWithRichStatistic)metricsData).getRichStatisticManager();
+			RichStatisticManager manager = ((MetricsDataWithRichStatistic)metricsData).getRichStatisticManager$TKM();
 			if (manager != null)
 			{
 				this.originMetricsData$TKM = metricsData;
@@ -97,7 +97,7 @@ public abstract class DebugHudMixin
 	{
 		if (!showFps && this.originMetricsData$TKM != null)
 		{
-			RichStatisticManager manager = ((MetricsDataWithRichStatistic)this.originMetricsData$TKM).getRichStatisticManager();
+			RichStatisticManager manager = ((MetricsDataWithRichStatistic)this.originMetricsData$TKM).getRichStatisticManager$TKM();
 			if (manager != null)
 			{
 				long[] ls = metricsData.getSamples();

@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.Group;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Slice;
 
-@SuppressWarnings("UnresolvedMixinReference")
+@SuppressWarnings({"UnresolvedMixinReference", "UnusedMixin"})
 @Restriction(require = @Condition(ModIds.optifine))
 @Pseudo
 @Mixin(targets = "net.optifine.shaders.Shaders")

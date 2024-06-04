@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableCameraFrustum
 import me.fallenbreath.tweakermore.impl.mc_tweaks.disableFrustumChunkCulling.CouldBeAlwaysVisibleFrustum;
 import net.minecraft.client.render.FrustumWithOrigin;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -30,12 +31,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(FrustumWithOrigin.class)
 public abstract class FrustumMixin implements CouldBeAlwaysVisibleFrustum
 {
-	private boolean alwaysVisible$TKM = false;
+	@Unique
+	private boolean alwaysVisible = false;
 
 	@Override
-	public void setAlwaysVisible(boolean alwaysVisible)
+	public void setAlwaysVisible$TKM(boolean alwaysVisible)
 	{
-		this.alwaysVisible$TKM = alwaysVisible;
+		this.alwaysVisible = alwaysVisible;
+	}
+
+	@Override
+	public boolean getAlwaysVisible$TKM()
+	{
+		return this.alwaysVisible;
 	}
 
 	@Inject(
@@ -45,7 +53,7 @@ public abstract class FrustumMixin implements CouldBeAlwaysVisibleFrustum
 	)
 	private void disableCameraFrustumCulling_implementAlwaysVisible(double minX, double minY, double minZ, double maxX, double maxY, double maxZ, CallbackInfoReturnable<Boolean> cir)
 	{
-		if (this.alwaysVisible$TKM)
+		if (this.alwaysVisible)
 		{
 			cir.setReturnValue(true);
 		}

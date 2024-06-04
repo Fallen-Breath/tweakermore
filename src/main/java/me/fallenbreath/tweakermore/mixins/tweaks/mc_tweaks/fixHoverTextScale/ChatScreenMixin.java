@@ -30,6 +30,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -48,6 +49,7 @@ public abstract class ChatScreenMixin extends Screen
 		super(title);
 	}
 
+	@Unique
 	@Nullable
 	private RenderUtil.Scaler hoverScaler$TKM = null;
 
@@ -92,7 +94,7 @@ public abstract class ChatScreenMixin extends Screen
 				//#else
 				ScaleableHoverTextRenderer shtr = (ScaleableHoverTextRenderer)this;
 				//#endif
-				shtr.setHoverTextScale(scale);
+				shtr.setHoverTextScale$TKM(scale);
 			}
 		}
 	}
@@ -130,7 +132,7 @@ public abstract class ChatScreenMixin extends Screen
 			//#else
 			ScaleableHoverTextRenderer shtr = (ScaleableHoverTextRenderer)this;
 			//#endif
-			shtr.setHoverTextScale(null);
+			shtr.setHoverTextScale$TKM(null);
 		}
 	}
 }

@@ -54,16 +54,16 @@ public abstract class SignEditScreenMixin implements SignEditScreenRowIndexContr
 	}
 
 	@Override
-	public boolean canAddCurrentRowIndex(int delta)
+	public boolean canAddCurrentRowIndex$TKM(int delta)
 	{
 		int newIndex = this.currentRow + delta;
 		return 0 <= newIndex && newIndex <= 3;
 	}
 
 	@Override
-	public void addCurrentRowIndex(int delta)
+	public void addCurrentRowIndex$TKM(int delta)
 	{
-		if (this.canAddCurrentRowIndex(delta))
+		if (this.canAddCurrentRowIndex$TKM(delta))
 		{
 			this.currentRow += delta;
 		}

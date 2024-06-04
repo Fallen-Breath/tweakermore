@@ -46,6 +46,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -72,13 +73,14 @@ public abstract class PlacementTweaksMixin
 	 * There's still some final block placement tweaks inside the processRightClickBlockWrapper method.
 	 * We need to simulate them in order to get the final block placement arguments, for compatibilities
 	 * with tweakeroo's tweaks
-	 *
+	 * <p>
 	 * We cannot delay the injection point until those block placement tweaks, because tweakeroo doesn't
 	 * allow item in player hand tobe  changed after those tweaks, e.g. for hand restore thing
-	 *
+	 * <p>
 	 * Copied from {@link fi.dy.masa.tweakeroo.tweaks.PlacementTweaks.processRightClickBlockWrapper}.
 	 * Not elegant but that's the only way
 	 */
+	@Unique
 	@SuppressWarnings("PointlessBooleanExpression")
 	private static BlockHitResult finalBlockPlacementTweak$TKM(
 			ClientPlayerEntity player,

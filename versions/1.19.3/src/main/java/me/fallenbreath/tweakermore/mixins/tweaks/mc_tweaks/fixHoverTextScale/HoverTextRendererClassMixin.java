@@ -26,6 +26,7 @@ import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector2i;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -41,7 +42,7 @@ import net.minecraft.client.gui.screen.Screen;
 /**
  * The implementation for mc [1.19.3, ~)
  * See subproject 1.15.2 for implementation for other version range
- *
+ * <p>
  * Targeted class:
  *   mc < 1.20: {@link net.minecraft.client.gui.screen.Screen}
  *   mc >= 1.20: {@link net.minecraft.client.gui.DrawContext}
@@ -55,18 +56,19 @@ import net.minecraft.client.gui.screen.Screen;
 )
 public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextRenderer
 {
-	private Double hoverTextScale$TKM = null;
+	@Unique
+	private Double hoverTextScale = null;
 
 	@Override
-	public void setHoverTextScale(@Nullable Double scale)
+	public void setHoverTextScale$TKM(@Nullable Double scale)
 	{
 		if (scale != null)
 		{
-			this.hoverTextScale$TKM = MathHelper.clamp(scale, 0.01, 1);
+			this.hoverTextScale = MathHelper.clamp(scale, 0.01, 1);
 		}
 		else
 		{
-			this.hoverTextScale$TKM = null;
+			this.hoverTextScale = null;
 		}
 	}
 
@@ -80,7 +82,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 	)
 	private void fixHoverTextScale_cleanup(CallbackInfo ci)
 	{
-		this.hoverTextScale$TKM = null;
+		this.hoverTextScale = null;
 	}
 
 	@ModifyArg(
@@ -97,9 +99,9 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 	)
 	private int fixHoverTextScale_modifyEquivalentMaxScreenWidth(int width)
 	{
-		if (this.hoverTextScale$TKM != null)
+		if (this.hoverTextScale != null)
 		{
-			width /= this.hoverTextScale$TKM;
+			width /= this.hoverTextScale;
 		}
 		return width;
 	}
@@ -115,9 +117,9 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 	)
 	private TooltipPositioner fixHoverTextScale_modifyPositioner(TooltipPositioner positioner)
 	{
-		if (this.hoverTextScale$TKM != null)
+		if (this.hoverTextScale != null)
 		{
-			double scale = this.hoverTextScale$TKM;
+			double scale = this.hoverTextScale;
 			positioner = (
 					//#if MC >= 12000
 					//$$ screenWidth, screenHeight,
@@ -143,7 +145,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 				}
 				if (y + height * scale + 6 > screenHeight)
 				{
-					y += (screenHeight - y - 12 - 1) / scale - height + 6;
+					y += (int)((screenHeight - y - 12 - 1) / scale - height + 6);
 				}
 				return new Vector2i(x, y);
 			};

@@ -25,6 +25,7 @@ import me.fallenbreath.tweakermore.config.options.listentries.WeatherOverrideVal
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -46,6 +47,7 @@ public abstract class WorldMixin
 		this.weatherOverride_common(cir, WeatherOverrideValue::getThunderGradient);
 	}
 
+	@Unique
 	private void weatherOverride_common(CallbackInfoReturnable<Float> cir, Function<WeatherOverrideValue, Float> overrider)
 	{
 		if (TweakerMoreConfigs.WEATHER_OVERRIDE.getBooleanValue())

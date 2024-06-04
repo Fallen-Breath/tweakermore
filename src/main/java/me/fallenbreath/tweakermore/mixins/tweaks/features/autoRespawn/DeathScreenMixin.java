@@ -26,6 +26,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -58,6 +59,7 @@ public abstract class DeathScreenMixin extends Screen
 		}
 	}
 
+	@Unique
 	private void autoRespawn$TKM$impl()
 	{
 		if (this.minecraft != null && this.minecraft.player != null && this.minecraft.currentScreen == this)

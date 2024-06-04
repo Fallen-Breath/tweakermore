@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.impl.features.autoContainerProcess;
 
 public interface AutoProcessableScreen
 {
-	void setShouldProcess(boolean value);
+	void setShouldProcess$TKM(boolean value);
 
-	boolean shouldProcess();
+	boolean shouldProcess$TKM();
 }

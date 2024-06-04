@@ -32,6 +32,7 @@ import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -42,16 +43,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LitematicaSchematic.class)
 public abstract class LitematicaSchematicMixin implements LitematicaSchematic000Origin
 {
+	@Unique
 	private boolean flag000Origin = false;
 
 	@Override
-	public void set000Origin(boolean value)
+	public void set000Origin$TKM(boolean value)
 	{
 		this.flag000Origin = value;
 	}
 
 	@Override
-	public boolean is000Origin()
+	public boolean is000Origin$TKM()
 	{
 		return this.flag000Origin;
 	}
@@ -67,7 +69,7 @@ public abstract class LitematicaSchematicMixin implements LitematicaSchematic000
 	{
 		if (TweakerMoreConfigs.LM_ORIGIN_OVERRIDE_000.getBooleanValue())
 		{
-			((LitematicaSchematic000Origin)schematic).set000Origin(true);
+			((LitematicaSchematic000Origin)schematic).set000Origin$TKM(true);
 		}
 		return schematic;
 	}
@@ -77,7 +79,7 @@ public abstract class LitematicaSchematicMixin implements LitematicaSchematic000
 	{
 		if (TweakerMoreConfigs.LM_ORIGIN_OVERRIDE_000.getBooleanValue())
 		{
-			if (schematic != null && ((LitematicaSchematic000Origin)schematic).is000Origin())
+			if (schematic != null && ((LitematicaSchematic000Origin)schematic).is000Origin$TKM())
 			{
 				InfoUtils.showGuiMessage(Message.MessageType.INFO, "tweakermore.impl.lmOriginOverride000.marked_override", schematic.getMetadata().getName());
 			}
@@ -106,7 +108,7 @@ public abstract class LitematicaSchematicMixin implements LitematicaSchematic000
 	{
 		if (TweakerMoreConfigs.LM_ORIGIN_OVERRIDE_000.getBooleanValue())
 		{
-			if (((LitematicaSchematic000Origin)this).is000Origin())
+			if (((LitematicaSchematic000Origin)this).is000Origin$TKM())
 			{
 				nbt.putBoolean(LitematicaOriginOverrideGlobals.ORIGIN_OVERRIDE_FLAG, true);
 			}
@@ -121,7 +123,7 @@ public abstract class LitematicaSchematicMixin implements LitematicaSchematic000
 		{
 			if (nbt.getBoolean(LitematicaOriginOverrideGlobals.ORIGIN_OVERRIDE_FLAG))
 			{
-				((LitematicaSchematic000Origin)this).set000Origin(true);
+				((LitematicaSchematic000Origin)this).set000Origin$TKM(true);
 			}
 		}
 	}

@@ -70,7 +70,7 @@ public class ContainerProcessorManager
 				}
 
 				ContainerScreen<?> containerScreen = (ContainerScreen<?>)screen;
-				if (containerScreen.getContainer() != container || !((AutoProcessableScreen)screen).shouldProcess())
+				if (containerScreen.getContainer() != container || !((AutoProcessableScreen)screen).shouldProcess$TKM())
 				{
 					return;
 				}
@@ -79,7 +79,7 @@ public class ContainerProcessorManager
 					return;
 				}
 
-				((AutoProcessableScreen)screen).setShouldProcess(false);
+				((AutoProcessableScreen)screen).setShouldProcess$TKM(false);
 				List<Slot> allSlots = container.slots;
 				List<Slot> playerInvSlots = allSlots.stream().filter(slot -> slot.inventory instanceof PlayerInventory).collect(Collectors.toList());
 				if (allSlots.isEmpty() || playerInvSlots.isEmpty())

@@ -61,7 +61,7 @@ public abstract class DebugHudMixin
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void enableRichStatisticForTickNanosLog(CallbackInfo ci)
 	{
-		((MetricsDataWithRichStatistic)this.tickNanosLog).enableRichStatistic();
+		((MetricsDataWithRichStatistic)this.tickNanosLog).enableRichStatistic$TKM();
 	}
 
 	// ============================ render ============================
@@ -100,7 +100,7 @@ public abstract class DebugHudMixin
 		PerformanceLog metricsData = chart.getLog();
 		//#endif
 
-		RichStatisticManager manager = ((MetricsDataWithRichStatistic)metricsData).getRichStatisticManager();
+		RichStatisticManager manager = ((MetricsDataWithRichStatistic)metricsData).getRichStatisticManager$TKM();
 		if (manager != null)
 		{
 			this.originMetricsData$TKM = metricsData;
@@ -122,7 +122,7 @@ public abstract class DebugHudMixin
 	{
 		if (this.originMetricsData$TKM != null)
 		{
-			RichStatisticManager manager = ((MetricsDataWithRichStatistic)this.originMetricsData$TKM).getRichStatisticManager();
+			RichStatisticManager manager = ((MetricsDataWithRichStatistic)this.originMetricsData$TKM).getRichStatisticManager$TKM();
 			if (manager != null)
 			{
 				manager.renderExtraOnDebugHud(drawContext, this.tickChartX$TKM, this.tickChartWidth$TKM);

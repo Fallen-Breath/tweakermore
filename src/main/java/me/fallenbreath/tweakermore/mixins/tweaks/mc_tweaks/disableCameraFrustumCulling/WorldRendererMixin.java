@@ -45,7 +45,7 @@ public abstract class WorldRendererMixin
 	private Frustum disableCameraFrustumCulling(Frustum frustum)
 	{
 		boolean alwaysVisible = TweakerMoreConfigs.DISABLE_CAMERA_FRUSTUM_CULLING.getBooleanValue();
-		((CouldBeAlwaysVisibleFrustum)frustum).setAlwaysVisible(alwaysVisible);
+		((CouldBeAlwaysVisibleFrustum)frustum).setAlwaysVisible$TKM(alwaysVisible);
 		return frustum;
 	}
 }

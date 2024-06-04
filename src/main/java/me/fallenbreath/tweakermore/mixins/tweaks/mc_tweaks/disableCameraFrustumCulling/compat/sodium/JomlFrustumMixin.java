@@ -26,6 +26,7 @@ import me.fallenbreath.tweakermore.impl.mc_tweaks.disableFrustumChunkCulling.Cou
 import me.fallenbreath.tweakermore.util.ModIds;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -37,18 +38,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(targets = "me.jellysquid.mods.sodium.client.util.frustum.JomlFrustum")
 public abstract class JomlFrustumMixin implements CouldBeAlwaysVisibleFrustum
 {
-	private boolean alwaysVisible$TKM = false;
+	@Unique
+	private boolean alwaysVisible = false;
 
 	@Override
-	public void setAlwaysVisible(boolean alwaysVisible)
+	public void setAlwaysVisible$TKM(boolean alwaysVisible)
 	{
-		this.alwaysVisible$TKM = alwaysVisible;
+		this.alwaysVisible = alwaysVisible;
 	}
 
 	@Override
-	public boolean getAlwaysVisible()
+	public boolean getAlwaysVisible$TKM()
 	{
-		return this.alwaysVisible$TKM;
+		return this.alwaysVisible;
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked", "UnresolvedMixinReference"})
@@ -60,7 +62,7 @@ public abstract class JomlFrustumMixin implements CouldBeAlwaysVisibleFrustum
 	)
 	private void disableCameraFrustumCulling_implementAlwaysVisible(float minX, float minY, float minZ, float maxX, float maxY, float maxZ, CallbackInfoReturnable cir)
 	{
-		if (this.alwaysVisible$TKM)
+		if (this.alwaysVisible)
 		{
 			try
 			{

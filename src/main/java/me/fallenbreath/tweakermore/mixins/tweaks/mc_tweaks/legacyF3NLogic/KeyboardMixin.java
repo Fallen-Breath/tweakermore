@@ -42,6 +42,9 @@ public abstract class KeyboardMixin
 {
 	@Shadow @Final private MinecraftClient client;
 
+	//#if MC < 11600
+	@SuppressWarnings("MixinAnnotationTarget")
+	//#endif
 	@Inject(
 			method = "processF3",
 			slice = @Slice(

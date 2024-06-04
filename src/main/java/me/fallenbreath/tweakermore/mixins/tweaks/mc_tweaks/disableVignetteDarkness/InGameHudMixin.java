@@ -20,6 +20,8 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableVignetteDarkness;
 
+import com.llamalad7.mixinextras.sugar.Share;
+import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.gui.hud.InGameHud;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,32 +40,30 @@ public abstract class InGameHudMixin
 			//$$ field_2013;
 			//#endif
 
-	private Float prevVignetteDarkness$TKM = null;
-
 	@Inject(method = "renderVignetteOverlay", at = @At(value = "HEAD"))
-	private void disableVignetteDarkness_modifyVignetteDarkness( CallbackInfo ci)
+	private void disableVignetteDarkness_modifyVignetteDarkness(CallbackInfo ci, @Share("pvd") LocalRef<Float> prevVignetteDarkness)
 	{
 		if (TweakerMoreConfigs.DISABLE_VIGNETTE_DARKNESS.getBooleanValue())
 		{
 			//#if MC >= 11500
-			this.prevVignetteDarkness$TKM = this.vignetteDarkness;
+			prevVignetteDarkness.set(this.vignetteDarkness);
 			this.vignetteDarkness = 0.0F;
 			//#else
-			//$$ this.prevVignetteDarkness$TKM = this.field_2013;
+			//$$ prevVignetteDarkness.set(this.field_2013);
 			//$$ this.field_2013 = 0.0F;
 			//#endif
 		}
 	}
 
 	@Inject(method = "renderVignetteOverlay", at = @At(value = "TAIL"))
-	private void disableVignetteDarkness_restoreVignetteDarkness( CallbackInfo ci)
+	private void disableVignetteDarkness_restoreVignetteDarkness(CallbackInfo ci, @Share("pvd") LocalRef<Float> prevVignetteDarkness)
 	{
-		if (this.prevVignetteDarkness$TKM != null)
+		if (prevVignetteDarkness.get() != null)
 		{
 			//#if MC >= 11500
-			this.vignetteDarkness = this.prevVignetteDarkness$TKM;
+			this.vignetteDarkness = prevVignetteDarkness.get();
 			//#else
-			//$$ this.field_2013 = this.prevVignetteDarkness$TKM;
+			//$$ this.field_2013 = prevVignetteDarkness.get();
 			//#endif
 		}
 	}

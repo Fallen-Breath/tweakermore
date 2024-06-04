@@ -24,8 +24,8 @@ import org.jetbrains.annotations.Nullable;
 
 public interface MetricsDataWithRichStatistic
 {
-	void enableRichStatistic();
+	void enableRichStatistic$TKM();
 
 	@Nullable
-	RichStatisticManager getRichStatisticManager();
+	RichStatisticManager getRichStatisticManager$TKM();
 }

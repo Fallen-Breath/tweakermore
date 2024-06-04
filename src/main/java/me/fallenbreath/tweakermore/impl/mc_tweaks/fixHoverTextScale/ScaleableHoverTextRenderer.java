@@ -27,5 +27,5 @@ public interface ScaleableHoverTextRenderer
 	/**
 	 * @param scale null: no scale; other: scale value
 	 */
-	void setHoverTextScale(@Nullable Double scale);
+	void setHoverTextScale$TKM(@Nullable Double scale);
 }

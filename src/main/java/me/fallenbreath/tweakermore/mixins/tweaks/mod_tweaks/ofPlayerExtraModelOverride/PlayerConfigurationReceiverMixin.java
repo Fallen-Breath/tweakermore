@@ -32,14 +32,14 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import java.util.Optional;
 
-@SuppressWarnings("UnresolvedMixinReference")
+@SuppressWarnings({"UnresolvedMixinReference", "UnusedMixin"})
 @Restriction(require = @Condition(ModIds.optifine))
 @Pseudo
 @Mixin(targets = "net.optifine.player.PlayerConfigurationReceiver")
@@ -48,8 +48,9 @@ public abstract class PlayerConfigurationReceiverMixin
 	@Shadow(remap = false)
 	private String player;
 
+	@Unique
 	@Nullable
-	private OverrideImpl currentOverrideImpl$TKM = null;
+	private OverrideImpl currentOverrideImpl = null;
 
 	@ModifyVariable(
 			method = "fileDownloadFinished",
@@ -60,11 +61,11 @@ public abstract class PlayerConfigurationReceiverMixin
 	private byte[] replacePlayerCfgContent$TKM(byte[] bytes)
 	{
 		Optional<OverrideImpl> override = OptifinePlayerExtraModelOverrider.overridePlayerConfig(this.player);
-		this.currentOverrideImpl$TKM = null;
+		this.currentOverrideImpl = null;
 
 		if (override.isPresent())
 		{
-			this.currentOverrideImpl$TKM = override.get();
+			this.currentOverrideImpl = override.get();
 			bytes = override.get().cfg;
 		}
 
@@ -87,9 +88,9 @@ public abstract class PlayerConfigurationReceiverMixin
 			@Coerce Object playerconfigurationparser
 	)
 	{
-		if (this.currentOverrideImpl$TKM != null)
+		if (this.currentOverrideImpl != null)
 		{
-			((PlayerConfigurationParserWithOverride)playerconfigurationparser).setOverride$TKM(this.currentOverrideImpl$TKM);
+			((PlayerConfigurationParserWithOverride)playerconfigurationparser).setOverride$TKM(this.currentOverrideImpl);
 		}
 	}
 }

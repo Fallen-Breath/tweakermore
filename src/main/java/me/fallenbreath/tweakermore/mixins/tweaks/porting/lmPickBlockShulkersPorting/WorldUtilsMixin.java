@@ -37,6 +37,7 @@ import net.minecraft.util.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -62,13 +63,17 @@ public abstract class WorldUtilsMixin
 			//#endif
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
-	private static void lmPickBlockShulkersPorting(boolean closest, MinecraftClient mc, CallbackInfoReturnable<Boolean> cir, BlockPos pos, World world, BlockState state, ItemStack stack, PlayerInventory inv, int slot)
+	private static void lmPickBlockShulkersPorting(
+			boolean closest, MinecraftClient mc,
+			CallbackInfoReturnable<Boolean> cir,
+			BlockPos pos, World world, BlockState state, ItemStack stack, PlayerInventory inv, int slot
+	)
 	{
 		if (TweakerMoreConfigs.LM_PICK_BLOCK_SHULKERS_PORTING.getBooleanValue())
 		{
 			if (slot == -1 && mc.player != null)
 			{
-				slot = findSlotWithBoxWithItem$TKM(mc.player.container, stack);
+				slot = findSlotWithBoxWithItem(mc.player.container, stack);
 
 				if (slot != -1)
 				{
@@ -79,13 +84,15 @@ public abstract class WorldUtilsMixin
 		}
 	}
 
-	private static boolean doesShulkerBoxContainItem$TKM(ItemStack stack, ItemStack referenceItem)
+	@Unique
+	private static boolean doesShulkerBoxContainItem(ItemStack stack, ItemStack referenceItem)
 	{
 		DefaultedList<ItemStack> items = fi.dy.masa.malilib.util.InventoryUtils.getStoredItems(stack);
 		return items.stream().anyMatch(item -> fi.dy.masa.malilib.util.InventoryUtils.areStacksEqual(item, referenceItem));
 	}
 
-	private static int findSlotWithBoxWithItem$TKM(Container container, ItemStack stackReference)
+	@Unique
+	private static int findSlotWithBoxWithItem(Container container, ItemStack stackReference)
 	{
 		final boolean isPlayerInv = container instanceof PlayerContainer;
 
@@ -94,7 +101,7 @@ public abstract class WorldUtilsMixin
 			Slot slot = container.slots.get(slotNum);
 			if (
 					(!isPlayerInv || fi.dy.masa.malilib.util.InventoryUtils.isRegularInventorySlot(slot.id, false)) &&
-							doesShulkerBoxContainItem$TKM(slot.getStack(), stackReference)
+							doesShulkerBoxContainItem(slot.getStack(), stackReference)
 			)
 			{
 				return slot.id;

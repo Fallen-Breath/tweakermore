@@ -38,6 +38,6 @@ public abstract class MinecraftServerMixin
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void serverMsptMetricsStatistic_hookMetricsData(CallbackInfo ci)
 	{
-		((MetricsDataWithRichStatistic)this.metricsData).enableRichStatistic();
+		((MetricsDataWithRichStatistic)this.metricsData).enableRichStatistic$TKM();
 	}
 }

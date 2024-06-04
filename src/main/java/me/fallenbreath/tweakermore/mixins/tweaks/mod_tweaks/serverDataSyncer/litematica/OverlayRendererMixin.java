@@ -20,51 +20,38 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.litematica;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import fi.dy.masa.litematica.render.OverlayRenderer;
-import fi.dy.masa.litematica.util.RayTraceUtils;
 import fi.dy.masa.malilib.util.InventoryUtils;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-
-//#if MC >= 11600
-//$$ import org.spongepowered.asm.mixin.injection.Coerce;
-//#endif
 
 @Restriction(require = @Condition(ModIds.litematica))
 @Mixin(OverlayRenderer.class)
 public abstract class OverlayRendererMixin
 {
-	@Inject(
+	@ModifyExpressionValue(
 			method = "renderBlockInfoOverlay",
 			at = @At(
-					value = "INVOKE_ASSIGN",
+					value = "INVOKE",
 					target = "Lnet/minecraft/util/hit/BlockHitResult;getBlockPos()Lnet/minecraft/util/math/BlockPos;",
 					remap = true
 			),
-			locals = LocalCapture.CAPTURE_FAILHARD,
 			remap = false
 	)
-	private void serverDataSyncer4InfoOverlay(
-			RayTraceUtils.RayTraceWrapper traceWrapper, MinecraftClient mc,
-			//#if MC >= 11600
-			//$$ @Coerce Object whatever,
-			//#endif
-			CallbackInfo ci,
-			BlockState air, World worldSchematic, World worldClient, BlockPos pos
+	private BlockPos serverDataSyncer4InfoOverlay(
+			BlockPos pos,
+			@Local(ordinal = 1) World worldClient
 	)
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
@@ -78,5 +65,6 @@ public abstract class OverlayRendererMixin
 				}
 			}
 		}
+		return pos;
 	}
 }

@@ -27,6 +27,7 @@ import net.minecraft.SharedConstants;
 import net.minecraft.client.util.SelectionManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -47,13 +48,15 @@ public abstract class SelectionManagerMixin implements SelectionManagerInSignEdi
 
 	@Shadow public abstract void moveCaretToEnd();
 
-	private SignEditScreenRowIndexController signEditScreen$TKM;
-	private String pastingString$TKM;
+	@Unique
+	private SignEditScreenRowIndexController signEditScreen;
+	@Unique
+	private String pastingString;
 
 	@Override
 	public void setSignEditScreen$TKM(SignEditScreenRowIndexController signEditScreen)
 	{
-		this.signEditScreen$TKM = signEditScreen;
+		this.signEditScreen = signEditScreen;
 	}
 
 	@ModifyArg(
@@ -76,7 +79,7 @@ public abstract class SelectionManagerMixin implements SelectionManagerInSignEdi
 	{
 		if (TweakerMoreConfigs.SIGN_MULTILINE_PASTE_SUPPORT.getBooleanValue())
 		{
-			this.pastingString$TKM = string;
+			this.pastingString = string;
 		}
 		return string;
 	}
@@ -94,10 +97,10 @@ public abstract class SelectionManagerMixin implements SelectionManagerInSignEdi
 	{
 		if (TweakerMoreConfigs.SIGN_MULTILINE_PASTE_SUPPORT.getBooleanValue())
 		{
-			String string = this.pastingString$TKM;
-			this.pastingString$TKM = null;
+			String string = this.pastingString;
+			this.pastingString = null;
 
-			if (string == null || string.indexOf('\n') == -1 || this.signEditScreen$TKM == null)
+			if (string == null || string.indexOf('\n') == -1 || this.signEditScreen == null)
 			{
 				return;
 			}
@@ -118,10 +121,10 @@ public abstract class SelectionManagerMixin implements SelectionManagerInSignEdi
 				//$$ lines[i] = lines[i].replaceAll("\\r", "");
 				//#endif
 
-				if (this.signEditScreen$TKM.canAddCurrentRowIndex(1))
+				if (this.signEditScreen.canAddCurrentRowIndex$TKM(1))
 				{
 					inserter.accept(lines[i]);
-					this.signEditScreen$TKM.addCurrentRowIndex(1);
+					this.signEditScreen.addCurrentRowIndex$TKM(1);
 					this.moveCaretToEnd();
 				}
 				else

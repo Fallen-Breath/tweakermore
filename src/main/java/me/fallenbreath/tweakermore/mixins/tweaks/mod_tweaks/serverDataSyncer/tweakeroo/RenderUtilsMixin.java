@@ -20,6 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.tweakeroo;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import fi.dy.masa.tweakeroo.renderer.RenderUtils;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
@@ -31,16 +32,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.inventory.Inventory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Restriction(require = @Condition(ModIds.tweakeroo))
 @Mixin(RenderUtils.class)
 public abstract class RenderUtilsMixin
 {
-	@ModifyVariable(
+	@ModifyExpressionValue(
 			method = "renderInventoryOverlay",
 			at = @At(
-					value = "INVOKE_ASSIGN",
+					value = "INVOKE",
 					target = "Lfi/dy/masa/malilib/util/InventoryUtils;getInventory(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/inventory/Inventory;",
 					ordinal = 0,
 					remap = true
@@ -59,16 +59,13 @@ public abstract class RenderUtilsMixin
 		return inventory;
 	}
 
-	@ModifyVariable(
+	@ModifyExpressionValue(
 			method = "renderInventoryOverlay",
 			at = @At(
-					value = "INVOKE_ASSIGN",
+					value = "INVOKE",
 					target = "Lnet/minecraft/util/hit/EntityHitResult;getEntity()Lnet/minecraft/entity/Entity;",
 					remap = true
 			),
-			//#if MC >= 11700
-			//$$ ordinal = 1,
-			//#endif
 			remap = false
 	)
 	private static Entity serverDataSyncer4InventoryOverlay(Entity entity)

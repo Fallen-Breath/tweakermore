@@ -52,7 +52,7 @@ public abstract class SchematicPlacementMixin
 	{
 		if (TweakerMoreConfigs.LM_ORIGIN_OVERRIDE_000.getBooleanValue())
 		{
-			if (((LitematicaSchematic000Origin)this.schematic).is000Origin() && LitematicaOriginOverrideGlobals.IS_USER_LOADING_SCHEMATIC.get())
+			if (((LitematicaSchematic000Origin)this.schematic).is000Origin$TKM() && LitematicaOriginOverrideGlobals.IS_USER_LOADING_SCHEMATIC.get())
 			{
 				InfoUtils.showGuiMessage(Message.MessageType.SUCCESS, "tweakermore.impl.lmOriginOverride000.placement_tweaked", this.schematic.getMetadata().getName());
 				this.origin = LitematicaOriginOverrideGlobals.POS_000;

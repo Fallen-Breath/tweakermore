@@ -28,6 +28,7 @@ import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -44,7 +45,7 @@ import java.util.List;
 /**
  * The implementation for mc (~, 1.19.2]
  * See subproject 1.19.3 for implementation for other version range
- *
+ * <p>
  * Targeted class:
  *   mc < 1.20: {@link net.minecraft.client.gui.screen.Screen}
  *   mc >= 1.20: {@link net.minecraft.client.gui.DrawContext}
@@ -54,18 +55,19 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 {
 	@Shadow public int width;
 	@Shadow public int height;
-	private Double hoverTextScale$TKM = null;
+	@Unique
+	private Double hoverTextScale = null;
 
 	@Override
-	public void setHoverTextScale(@Nullable Double scale)
+	public void setHoverTextScale$TKM(@Nullable Double scale)
 	{
 		if (scale != null)
 		{
-			this.hoverTextScale$TKM = MathHelper.clamp(scale, 0.01, 1);
+			this.hoverTextScale = MathHelper.clamp(scale, 0.01, 1);
 		}
 		else
 		{
-			this.hoverTextScale$TKM = null;
+			this.hoverTextScale = null;
 		}
 	}
 
@@ -79,7 +81,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 	)
 	private void fixHoverTextScale_cleanup(CallbackInfo ci)
 	{
-		this.hoverTextScale$TKM = null;
+		this.hoverTextScale = null;
 	}
 
 	@ModifyArg(
@@ -96,9 +98,9 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 	)
 	private int fixHoverTextScale_modifyEquivalentMaxScreenWidth(int width)
 	{
-		if (this.hoverTextScale$TKM != null)
+		if (this.hoverTextScale != null)
 		{
-			width /= this.hoverTextScale$TKM;
+			width /= this.hoverTextScale;
 		}
 		return width;
 	}
@@ -125,7 +127,8 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 		}
 	 */
 
-	private RenderTooltipArgs renderTooltipArgs$TKM = null;
+	@Unique
+	private RenderTooltipArgs renderTooltipArgs = null;
 
 	@Inject(
 			//#if MC >= 11700
@@ -151,7 +154,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 			int maxWidth, int xBase, int yBase, int j, int totalHeight
 	)
 	{
-		this.renderTooltipArgs$TKM = new RenderTooltipArgs(xBase, yBase, maxWidth, totalHeight);
+		this.renderTooltipArgs = new RenderTooltipArgs(xBase, yBase, maxWidth, totalHeight);
 	}
 
 	@ModifyExpressionValue(
@@ -170,10 +173,10 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 	)
 	private int fixHoverTextScale_tweakWidthAdjust(int width)
 	{
-		if (this.hoverTextScale$TKM != null)
+		if (this.hoverTextScale != null)
 		{
-			RenderTooltipArgs args = this.renderTooltipArgs$TKM;
-			boolean shouldAdjust = args.xBase + args.maxWidth * this.hoverTextScale$TKM > this.width;
+			RenderTooltipArgs args = this.renderTooltipArgs;
+			boolean shouldAdjust = args.xBase + args.maxWidth * this.hoverTextScale > this.width;
 
 			return shouldAdjust ? Integer.MIN_VALUE : Integer.MAX_VALUE;
 		}
@@ -196,7 +199,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 	)
 	private int fixHoverTextScale_cancelVanillaHeightAdjust(int height)
 	{
-		if (this.hoverTextScale$TKM != null)
+		if (this.hoverTextScale != null)
 		{
 			height = Integer.MAX_VALUE;
 		}
@@ -220,14 +223,14 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 	)
 	private int fixHoverTextScale_applyHeightAdjust(int yBase)
 	{
-		if (this.hoverTextScale$TKM != null)
+		if (this.hoverTextScale != null)
 		{
-			int totalHeight = this.renderTooltipArgs$TKM.totalHeight;
-			double scale = this.hoverTextScale$TKM;
+			int totalHeight = this.renderTooltipArgs.totalHeight;
+			double scale = this.hoverTextScale;
 
 			if (yBase + totalHeight * scale + 6 > this.height)
 			{
-				yBase += (this.height - yBase - 12 - 1) / scale - totalHeight + 6 + 1;
+				yBase += (int)((this.height - yBase - 12 - 1) / scale - totalHeight + 6 + 1);
 			}
 		}
 		return yBase;

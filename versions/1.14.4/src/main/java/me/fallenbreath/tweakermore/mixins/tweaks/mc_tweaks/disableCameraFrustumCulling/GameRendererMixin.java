@@ -49,7 +49,7 @@ public abstract class GameRendererMixin
 			if (visibleRegion instanceof CouldBeAlwaysVisibleFrustum)
 			{
 				boolean alwaysVisible = TweakerMoreConfigs.DISABLE_CAMERA_FRUSTUM_CULLING.getBooleanValue();
-				((CouldBeAlwaysVisibleFrustum)visibleRegion).setAlwaysVisible(alwaysVisible);
+				((CouldBeAlwaysVisibleFrustum)visibleRegion).setAlwaysVisible$TKM(alwaysVisible);
 			}
 		}
 		return visibleRegion;

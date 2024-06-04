@@ -22,5 +22,5 @@ package me.fallenbreath.tweakermore.impl.mc_tweaks.spectatorTeleportMenuIncludeS
 
 public interface CommandEntryWithSpectatorMark
 {
-	void setIsSpectator(boolean value);
+	void setIsSpectator$TKM(boolean value);
 }

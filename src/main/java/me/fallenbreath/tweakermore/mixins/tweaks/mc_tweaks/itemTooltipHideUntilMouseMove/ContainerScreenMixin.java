@@ -24,6 +24,7 @@ import com.mojang.datafixers.util.Pair;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -35,7 +36,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ContainerScreen.class)
 public abstract class ContainerScreenMixin
 {
-	private Pair<Integer, Integer> previousMousePos$TKM = null;
+	@Unique
+	private Pair<Integer, Integer> previousMousePos = null;
 
 	@Inject(method = "drawMouseoverTooltip", at = @At("HEAD"), cancellable = true)
 	private void itemTooltipHideUntilMouseMove_impl(
@@ -48,11 +50,11 @@ public abstract class ContainerScreenMixin
 		if (TweakerMoreConfigs.ITEM_TOOLTIP_HIDE_UNTIL_MOUSE_MOVE.getBooleanValue())
 		{
 			Pair<Integer, Integer> mousePos = Pair.of(mouseX, mouseY);
-			if (this.previousMousePos$TKM == null)
+			if (this.previousMousePos == null)
 			{
-				this.previousMousePos$TKM = mousePos;
+				this.previousMousePos = mousePos;
 			}
-			if (mousePos.equals(this.previousMousePos$TKM))
+			if (mousePos.equals(this.previousMousePos))
 			{
 				ci.cancel();
 			}

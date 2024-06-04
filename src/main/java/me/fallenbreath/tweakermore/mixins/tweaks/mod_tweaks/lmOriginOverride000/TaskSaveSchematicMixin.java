@@ -56,7 +56,7 @@ public abstract class TaskSaveSchematicMixin
 	)
 	private BlockPos lmOriginOverride000_modifyTaskOrigin(BlockPos origin)
 	{
-		if (((LitematicaSchematic000Origin)this.schematic).is000Origin())
+		if (((LitematicaSchematic000Origin)this.schematic).is000Origin$TKM())
 		{
 			origin = LitematicaOriginOverrideGlobals.POS_000;
 		}

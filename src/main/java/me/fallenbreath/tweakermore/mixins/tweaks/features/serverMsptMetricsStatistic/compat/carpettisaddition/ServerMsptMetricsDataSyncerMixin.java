@@ -59,6 +59,6 @@ public abstract class ServerMsptMetricsDataSyncerMixin
 	)
 	private void serverMsptMetricsStatistic_hookMetricsData(CallbackInfo ci)
 	{
-		((MetricsDataWithRichStatistic)this.metricsData).enableRichStatistic();
+		((MetricsDataWithRichStatistic)this.metricsData).enableRichStatistic$TKM();
 	}
 }

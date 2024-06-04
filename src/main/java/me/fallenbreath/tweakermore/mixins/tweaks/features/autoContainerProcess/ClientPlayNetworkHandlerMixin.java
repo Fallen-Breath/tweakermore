@@ -49,7 +49,7 @@ public abstract class ClientPlayNetworkHandlerMixin
 		Screen screen = MinecraftClient.getInstance().currentScreen;
 		if (screen != null)
 		{
-			((AutoProcessableScreen)screen).setShouldProcess(true);
+			((AutoProcessableScreen)screen).setShouldProcess$TKM(true);
 		}
 	}
 }

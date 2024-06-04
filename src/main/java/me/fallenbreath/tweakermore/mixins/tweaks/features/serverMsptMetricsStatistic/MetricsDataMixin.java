@@ -24,6 +24,7 @@ import me.fallenbreath.tweakermore.impl.features.serverMsptMetricsStatistic.Metr
 import me.fallenbreath.tweakermore.impl.features.serverMsptMetricsStatistic.RichStatisticManager;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -43,10 +44,11 @@ import net.minecraft.util.MetricsData;
 )
 public abstract class MetricsDataMixin implements MetricsDataWithRichStatistic
 {
+	@Unique
 	private RichStatisticManager richStatisticManager$TKM = null;
 
 	@Override
-	public void enableRichStatistic()
+	public void enableRichStatistic$TKM()
 	{
 		if (this.richStatisticManager$TKM == null)
 		{
@@ -56,7 +58,7 @@ public abstract class MetricsDataMixin implements MetricsDataWithRichStatistic
 
 	@Override
 	@Nullable
-	public RichStatisticManager getRichStatisticManager()
+	public RichStatisticManager getRichStatisticManager$TKM()
 	{
 		return this.richStatisticManager$TKM;
 	}

@@ -30,6 +30,7 @@ import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Group;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -65,7 +66,7 @@ public abstract class WorldMapSessionMixin
 	/**
 	 * {@link #adjustCameraEntityForFreecam1} may fail if xmap choose to directly access field {@link net.minecraft.client.MinecraftClient#cameraEntity}
 	 * here comes a possible fallback
-	 *
+	 * <p>
 	 * Since function {@link #adjustCameraEntityForFreecamImpl} is reentrant, it's ok to do ModifyVariable twice
 	 */
 	@Dynamic
@@ -86,6 +87,7 @@ public abstract class WorldMapSessionMixin
 		return adjustCameraEntityForFreecamImpl(cameraEntity);
 	}
 
+	@Unique
 	private Entity adjustCameraEntityForFreecamImpl(Entity cameraEntity)
 	{
 		if (TweakerMoreConfigs.XMAP_WAYPOINT_FREECAM_COMPACT.getBooleanValue())
