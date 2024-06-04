@@ -69,11 +69,25 @@ public abstract class MetricsDataMixin implements MetricsDataWithRichStatistic
 			//#endif
 			at = @At("TAIL")
 	)
-	private void serverMsptMetricsStatistic_callback(long time, CallbackInfo ci)
+	private void serverMsptMetricsStatistic_callback1(long time, CallbackInfo ci)
 	{
 		if (this.richStatisticManager$TKM != null)
 		{
 			this.richStatisticManager$TKM.recordGameTickMetrics(time);
 		}
 	}
+
+	//#if MC >= 12006
+	//$$ @Inject(
+	//$$ 		method = "push(JI)V",
+	//$$ 		at = @At("TAIL")
+	//$$ )
+	//$$ private void serverMsptMetricsStatistic_callback2(long value, int column, CallbackInfo ci)
+	//$$ {
+	//$$ 	if (this.richStatisticManager$TKM != null)
+	//$$ 	{
+	//$$ 		this.richStatisticManager$TKM.recordGameTickMetricsExtra(value, column);
+	//$$ 	}
+	//$$ }
+	//#endif
 }

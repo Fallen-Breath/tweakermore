@@ -56,15 +56,20 @@ public class RichStatisticManager
 		this.statMinuteAvg = new MetricsStatistic(MetricsStatistic.Type.AVG, 60);  // 60s -> 1min
 		this.statMinuteMax = new MetricsStatistic(MetricsStatistic.Type.AVG, 60);  // 60s -> 1min
 
-		this.statGameTick.addNewSampleCallback(this.statSecondAvg::addData);
-		this.statGameTick.addNewSampleCallback(this.statSecondMax::addData);
-		this.statSecondAvg.addNewSampleCallback(this.statMinuteAvg::addData);
-		this.statSecondMax.addNewSampleCallback(this.statMinuteMax::addData);
+		this.statGameTick.addNewSampleCallback(this.statSecondAvg);
+		this.statGameTick.addNewSampleCallback(this.statSecondMax);
+		this.statSecondAvg.addNewSampleCallback(this.statMinuteAvg);
+		this.statSecondMax.addNewSampleCallback(this.statMinuteMax);
 	}
 
 	public void recordGameTickMetrics(long msThisTick)
 	{
 		this.statGameTick.addData(msThisTick);
+	}
+
+	public void recordGameTickMetricsExtra(long ms, int column)
+	{
+		this.statGameTick.addDataExtra(ms, column);
 	}
 
 	public

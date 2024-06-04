@@ -30,13 +30,22 @@ import java.util.stream.LongStream;
 
 //#if MC >= 12006
 //$$ import net.minecraft.util.profiler.MultiValueDebugSampleLogImpl;
+//$$ import net.minecraft.util.profiler.ServerTickType;
 //#endif
 
 public class MetricsStatistic
 {
-	private final Type type;
-	private final long[] buffer;
-	private final List<NewSampleCallback> newSampleCallbacks;
+	private final Type aggregationType;
+	private final int aggregationLen;
+	private final long[][] buffer;
+	private final List<MetricsStatistic> newSampleChildren;
+
+	private static final int COLUMN_NUM =
+			//#if MC >= 12006
+			//$$ ServerTickType.values().length;
+			//#else
+			4;
+			//#endif
 
 	//#if MC >= 12006
 	//$$ private MultiValueDebugSampleLogImpl
@@ -47,11 +56,12 @@ public class MetricsStatistic
 
 	private int index;
 
-	public MetricsStatistic(Type type, int n)
+	public MetricsStatistic(Type aggregationType, int aggregationLen)
 	{
-		this.type = type;
-		this.buffer = new long[n];
-		this.newSampleCallbacks = Lists.newArrayList();
+		this.aggregationType = aggregationType;
+		this.aggregationLen = aggregationLen;
+		this.buffer = new long[COLUMN_NUM][aggregationLen];
+		this.newSampleChildren = Lists.newArrayList();
 		this.reset();
 	}
 
@@ -68,33 +78,60 @@ public class MetricsStatistic
 	public void reset()
 	{
 		//#if MC >= 12006
-		//$$ this.metricsData = new MultiValueDebugSampleLogImpl(MultiValueDebugSampleLogImpl.LOG_SIZE);
+		//$$ this.metricsData = new MultiValueDebugSampleLogImpl(COLUMN_NUM);
 		//#else
 		this.metricsData = new MetricsData();
 		//#endif
 		this.index = 0;
 	}
 
-	public void addData(long value)
+	public void addData(long ms)
 	{
-		this.buffer[this.index++] = value;
-		if (this.index == this.buffer.length)
+		this.buffer[0][this.index++] = ms;
+		if (this.index == this.aggregationLen)
 		{
 			this.harvestBuffer();
 		}
 	}
 
-	public void addNewSampleCallback(NewSampleCallback callback)
+	public void addDataExtra(long ms, int column)
 	{
-		this.newSampleCallbacks.add(callback);
+		if (1 <= column && column < COLUMN_NUM)
+		{
+			this.buffer[column][this.index] = ms;
+		}
+	}
+
+	public void addNewSampleCallback(MetricsStatistic child)
+	{
+		this.newSampleChildren.add(child);
 	}
 
 	private void harvestBuffer()
 	{
-		long sample = this.type.process(this.buffer);
+		long[] samples = new long[COLUMN_NUM];
+		for (int cl = 0; cl < samples.length; cl++)
+		{
+			samples[cl] = this.aggregationType.process(this.buffer[cl]);
+			Arrays.fill(this.buffer[cl], 0L);
+		}
 		this.index = 0;
-		this.metricsData.pushSample(sample);
-		this.newSampleCallbacks.forEach(callback -> callback.onNewSample(sample));
+
+		//#if MC >= 12006
+		//$$ for (int cl = 1; cl < COLUMN_NUM; cl++)
+		//$$ {
+		//$$ 	this.metricsData.push(samples[cl], cl);
+		//$$ }
+		//#endif
+		this.metricsData.pushSample(samples[0]);
+
+		this.newSampleChildren.forEach(child -> {
+			for (int cl = 1; cl < samples.length; cl++)
+			{
+				child.addDataExtra(samples[cl], cl);
+			}
+			child.addData(samples[0]);
+		});
 	}
 
 	public enum Type
@@ -113,11 +150,5 @@ public class MetricsStatistic
 		{
 			return this.harvester.apply(Arrays.stream(buffer));
 		}
-	}
-
-	@FunctionalInterface
-	public interface NewSampleCallback
-	{
-		void onNewSample(long sampleValue);
 	}
 }
