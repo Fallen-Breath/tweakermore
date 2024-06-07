@@ -22,6 +22,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.weatherOverride;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.listentries.WeatherOverrideValue;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.weatherOverride.WeatherOverrideHelper;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -52,6 +53,11 @@ public abstract class WorldMixin
 	{
 		if (TweakerMoreConfigs.WEATHER_OVERRIDE.getBooleanValue())
 		{
+			if (WeatherOverrideHelper.disableOverride.get())
+			{
+				return;
+			}
+
 			World self = (World)(Object)this;
 			if (self instanceof ClientWorld)
 			{
