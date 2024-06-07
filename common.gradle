@@ -44,7 +44,7 @@ def mod_dependencies = [
 		["com.terraformersmc:modmenu:${project.mod_menu_version}"          , mcVersion >= 11500],
 ]
 if (mcVersion == 12006) {
-	def commitSha = "a2c5251ea2"
+	def commitSha = project.malilib_version
 	mod_dependencies.set(0, ["com.github.sakura-ryoko:malilib:${commitSha}", true])
 }
 
