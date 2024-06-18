@@ -95,7 +95,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 	protected void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
 		BlockEntity blockEntity = world.getBlockEntity(pos);
-		if (blockEntity == null)
+		if (!(blockEntity instanceof BeaconBlockEntity))
 		{
 			return;
 		}

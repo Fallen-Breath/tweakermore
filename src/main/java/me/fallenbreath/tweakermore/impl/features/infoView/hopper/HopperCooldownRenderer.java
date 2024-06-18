@@ -28,6 +28,7 @@ import me.fallenbreath.tweakermore.util.render.ColorHolder;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import net.minecraft.block.HopperBlock;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.util.math.BlockPos;
 
@@ -57,7 +58,13 @@ public class HopperCooldownRenderer extends CommonScannerInfoViewer
 	@Override
 	protected void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
-		int cooldown = ((HopperBlockEntityAccessor)world.getBlockEntityNonNull(pos)).getTransferCooldown();
+		BlockEntity blockEntity = world.getBlockEntity(pos);
+		if (!(blockEntity instanceof HopperBlockEntity))
+		{
+			return;
+		}
+
+		int cooldown = ((HopperBlockEntityAccessor)blockEntity).getTransferCooldown();
 
 		// cooldown will be -1 if the hopper block entity data is not synced
 		if (cooldown < 0)

@@ -94,12 +94,6 @@ public class RenderVisitorWorldView implements SimpleWorldView
 		return this.bestWorldView.getBlockEntity(pos);
 	}
 
-	@NotNull
-	public BlockEntity getBlockEntityNonNull(BlockPos pos)
-	{
-		return Objects.requireNonNull(this.getBlockEntity(pos));
-	}
-
 	@Override
 	public int getHeight()
 	{

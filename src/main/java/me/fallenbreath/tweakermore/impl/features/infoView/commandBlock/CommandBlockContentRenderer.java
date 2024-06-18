@@ -30,6 +30,7 @@ import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.TextRenderingUtil;
 import net.minecraft.block.CommandBlock;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.CommandBlockBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -58,7 +59,7 @@ public class CommandBlockContentRenderer extends CommonScannerInfoViewer
 	@Override
 	public boolean shouldRenderFor(RenderVisitorWorldView world, BlockPos pos)
 	{
-		return world.getBlockState(pos).getBlock() instanceof CommandBlock;
+		return world.getBlockState(pos).getBlock() instanceof CommandBlock && world.getBlockEntity(pos) instanceof CommandBlockBlockEntity;
 	}
 
 	@Override
@@ -70,7 +71,13 @@ public class CommandBlockContentRenderer extends CommonScannerInfoViewer
 	@Override
 	protected void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
-		CommandBlockExecutor executor = ((CommandBlockBlockEntity)world.getBlockEntityNonNull(pos)).getCommandExecutor();
+		BlockEntity blockEntity = world.getBlockEntity(pos);
+		if (!(blockEntity instanceof CommandBlockBlockEntity))
+		{
+			return;
+		}
+
+		CommandBlockExecutor executor = ((CommandBlockBlockEntity)blockEntity).getCommandExecutor();
 		String command = executor.getCommand();
 		Text lastOutput = executor.getLastOutput();
 		final int MAX_WIDTH = TweakerMoreConfigs.INFO_VIEW_COMMAND_BLOCK_MAX_WIDTH.getIntegerValue();

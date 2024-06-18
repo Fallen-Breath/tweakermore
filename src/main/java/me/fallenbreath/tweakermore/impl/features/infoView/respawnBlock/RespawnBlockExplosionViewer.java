@@ -39,10 +39,12 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.BaseText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -137,7 +139,13 @@ public class RespawnBlockExplosionViewer extends CommonScannerInfoViewer
 					DamageCalculator calculator = DamageCalculator.explosion(explosionCenter, handler.getExplosionPower(), mc.player);
 					replacer.restoreBlocks();
 
-					calculator.applyDifficulty(world.getBestWorld().getDifficulty());
+					World bestWorld = world.getBestWorld();
+					if (bestWorld instanceof ServerWorld)
+					{
+						calculator.setServerWorld((ServerWorld)bestWorld);
+					}
+
+					calculator.applyDifficulty(bestWorld.getDifficulty());
 					float baseAmount = calculator.getDamageAmount();
 					calculator.applyArmorAndResistanceAndEnchantment();
 					float appliedAmount = calculator.getDamageAmount();
