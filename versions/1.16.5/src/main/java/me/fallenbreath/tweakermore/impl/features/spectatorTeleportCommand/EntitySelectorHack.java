@@ -86,7 +86,12 @@ public class EntitySelectorHack
 		else
 		{
 			Vec3d pos = selector.getPositionOffset().apply(source.getPosition());
-			Predicate<Entity> predicate = getPositionPredicate(selector, pos);
+			Predicate<Entity> predicate = selector.invokeGetPositionPredicate(
+					pos
+					//#if MC >= 12100
+					//$$ , selector.invokeGetOffsetBox(pos), source.getEnabledFeatures()
+					//#endif
+			);
 			if (selector.getSenderOnly())
 			{
 				if (source.getEntity() != null && predicate.test(source.getEntity()))
@@ -144,22 +149,5 @@ public class EntitySelectorHack
 			}
 			return entities;
 		}
-	}
-
-	private static Predicate<Entity> getPositionPredicate(EntitySelectorAccessor selector, Vec3d pos)
-	{
-		Predicate<Entity> predicate = selector.getBasePredicate();
-		if (selector.getBox() != null)
-		{
-			Box box = selector.getBox().offset(pos);
-			predicate = predicate.and(entity -> box.intersects(entity.getBoundingBox()));
-		}
-
-		if (!selector.getDistance().isDummy())
-		{
-			predicate = predicate.and(entity -> selector.getDistance().testSqrt(entity.squaredDistanceTo(pos)));
-		}
-
-		return predicate;
 	}
 }

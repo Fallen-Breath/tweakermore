@@ -219,7 +219,7 @@ public class ShulkerBoxItemContentHintRenderer
 
 		//#if MC >= 11500
 		textMatrixStack.translate(0.0, 0.0, zOffset);
-		VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
+		VertexConsumerProvider.Immediate immediate = RenderUtil.getVertexConsumer();
 		textRenderer.draw(
 				text,
 				textX,

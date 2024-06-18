@@ -26,9 +26,19 @@ import net.minecraft.client.font.TextRenderer;
 
 import java.util.Objects;
 
+//#if MC >= 12100
+//$$ import net.minecraft.client.render.RenderLayer;
+//$$ import net.minecraft.client.util.BufferAllocator;
+//#endif
+
 //#if MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //$$ import net.minecraft.text.OrderedText;
+//#endif
+
+//#if MC >= 11500
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexConsumerProvider;
 //#endif
 
 public class RenderUtil
@@ -50,6 +60,17 @@ public class RenderUtil
 	//$$ {
 	//$$ 	return TEXT_RENDERER.getWidth(text);
 	//$$ }
+	//#endif
+
+	//#if MC >= 11500
+	public static VertexConsumerProvider.Immediate getVertexConsumer()
+	{
+		//#if MC >= 12100
+		//$$ return VertexConsumerProvider.immediate(new BufferAllocator(RenderLayer.DEFAULT_BUFFER_SIZE));
+		//#else
+		return VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
+		//#endif
+	}
 	//#endif
 
 	public static Scaler createScaler(double anchorX, double anchorY, double factor)

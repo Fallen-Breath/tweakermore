@@ -28,12 +28,17 @@ import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+
+//#if MC >= 12100
+//$$ import net.minecraft.resource.featuretoggle.FeatureSet;
+//#endif
 
 //#if MC >= 11700
 //$$ import net.minecraft.util.TypeFilter;
@@ -45,7 +50,11 @@ import net.minecraft.entity.EntityType;
 public interface EntitySelectorAccessor
 {
 	@Accessor
+	//#if MC >= 12100
+	//$$ List<Predicate<Entity>> getPredicates();
+	//#else
 	Predicate<Entity> getBasePredicate();
+	//#endif
 
 	@Accessor
 	NumberRange.FloatRange getDistance();
@@ -77,5 +86,18 @@ public interface EntitySelectorAccessor
 	//$$ TypeFilter<Entity, ?> getEntityFilter();
 	//#else
 	EntityType<?> getType();
+	//#endif
+
+	@Invoker
+	Predicate<Entity> invokeGetPositionPredicate(
+			Vec3d pos
+			//#if MC >= 12100
+			//$$ , @Nullable Box box, @Nullable FeatureSet enabledFeatures
+			//#endif
+	);
+
+	//#if MC >= 12100
+	//$$ @Invoker
+	//$$ Box invokeGetOffsetBox(Vec3d offset);
 	//#endif
 }

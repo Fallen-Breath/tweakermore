@@ -23,12 +23,12 @@ package me.fallenbreath.tweakermore.impl.features.schematicProPlace.restrict;
 import fi.dy.masa.malilib.util.LayerRange;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.schematicProPlace.BlockItemAccessor;
+import me.fallenbreath.tweakermore.util.IdentifierUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 
@@ -40,7 +40,7 @@ class RestrictionUtils
 	{
 		return TweakerMoreConfigs.SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_ITEM_WHITELIST.getStrings().
 				stream().
-				map(itemId -> Registry.ITEM.get(new Identifier(itemId))).
+				map(itemId -> Registry.ITEM.get(IdentifierUtil.of(itemId))).
 				anyMatch(item -> item == itemStack.getItem());
 	}
 

@@ -28,6 +28,11 @@ import net.minecraft.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 
+//#if MC >= 12100
+//$$ import net.minecraft.component.ComponentChanges;
+//$$ import net.minecraft.util.Util;
+//#endif
+
 //#if MC >= 12006
 //$$ import net.minecraft.command.argument.ItemStackArgument;
 //#endif
@@ -45,7 +50,18 @@ public class ItemDataCopier
 				ItemStack itemStack = slot.getStack();
 
 				//#if MC >= 12006
-				//$$ var arg = new ItemStackArgument(itemStack.getRegistryEntry(), itemStack.getComponents());
+				//$$ var arg = new ItemStackArgument(
+				//$$ 		itemStack.getRegistryEntry(),
+				//$$ 		//#if MC >= 12100
+				//$$ 		//$$ Util.make(() -> {
+				//$$ 		//$$ 	var builder = ComponentChanges.builder();
+				//$$ 		//$$ 	itemStack.getComponents().forEach(builder::add);
+				//$$ 		//$$ 	return builder.build();
+				//$$ 		//$$ })
+				//$$ 		//#else
+				//$$ 		itemStack.getComponents()
+				//$$ 		//#endif
+				//$$ );
 				//$$ String command = String.format("/give @s %s", arg.asString(mc.world.getRegistryManager()));
 				//#else
 				String command = String.format("/give @s %s", itemStack.getItem());

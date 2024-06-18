@@ -28,21 +28,32 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.explosion.Explosion;
 
 import java.util.Objects;
 
+//#if MC >= 12100
+//$$ import net.minecraft.enchantment.Enchantments;
+//#endif
+
 //#if MC >= 11904
 //$$ import net.minecraft.registry.tag.DamageTypeTags;
 //#endif
 
+@SuppressWarnings("UnusedReturnValue")
 public class DamageCalculator
 {
 	private final LivingEntity entity;
 	private float damageAmount;
 	private final DamageSource damageSource;
+
+	//#if MC < 12100
+	@SuppressWarnings("FieldCanBeLocal")
+	//#endif
+	private ServerWorld serverWorld = null;
 
 	private ApplyStage currentStage;
 
@@ -52,6 +63,12 @@ public class DamageCalculator
 		this.damageAmount = damageAmount;
 		this.damageSource = damageSource;
 		this.currentStage = ApplyStage.NONE;
+	}
+
+	// mc1.21+ EPF calculation needs this
+	public void setServerWorld(ServerWorld serverWorld)
+	{
+		this.serverWorld = serverWorld;
 	}
 
 	/*
@@ -168,12 +185,21 @@ public class DamageCalculator
 			))
 			{
 				amount = DamageUtil.getDamageLeft(
+						//#if MC >= 12100
+						//$$ this.entity,
+						//#endif
 						amount,
 						//#if MC >= 12006
 						//$$ this.damageSource,
 						//#endif
 						this.entity.getArmor(),
-						(float)this.entity.getAttributeInstance(EntityAttributes.ARMOR_TOUGHNESS).getValue()
+
+						(float)this.entity.
+								//#if MC >= 11600
+								//$$ getAttributeValue(EntityAttributes.GENERIC_ARMOR_TOUGHNESS)
+								//#else
+								getAttributeInstance(EntityAttributes.ARMOR_TOUGHNESS).getValue()
+								//#endif
 				);
 			}
 
@@ -199,12 +225,21 @@ public class DamageCalculator
 					amount = Math.max(amount * (1 - level / 5.0F), 0.0F);
 				}
 
-				if (amount > 0.0F)
+				//noinspection PointlessBooleanExpression
+				if (amount > 0.0F && !(
+						//#if MC >= 11904
+						//$$ this.damageSource.isIn(DamageTypeTags.BYPASSES_ENCHANTMENTS)
+						//#elseif MC >= 11902
+						//$$ this.damageSource.bypassesProtection()
+						//#else
+						false
+						//#endif
+				))
 				{
-					int level = EnchantmentHelper.getProtectionAmount(this.entity.getArmorItems(), this.damageSource);
+					float level = this.calculateProtectionEnchantmentAmount();
 					if (level > 0)
 					{
-						amount = DamageUtil.getInflictedDamage(amount, (float) level);
+						amount = DamageUtil.getInflictedDamage(amount, level);
 					}
 				}
 			}
@@ -212,6 +247,61 @@ public class DamageCalculator
 
 		this.damageAmount = amount;
 		return this;
+	}
+
+	private float calculateProtectionEnchantmentAmount()
+	{
+		//#if MC >= 12100
+		//$$ if (this.serverWorld != null)
+		//$$ {
+		//$$ 	return EnchantmentHelper.getProtectionAmount(this.serverWorld, this.entity, this.damageSource);
+		//$$ }
+		//$$ else
+		//$$ {
+		//$$ 	// it's impossible do this client-side
+		//$$ 	// what we can do best, is to simulate the basic legacy vanilla behavior
+		//$$
+		//$$ 	// reference: mc1.20.6 net.minecraft.enchantment.ProtectionEnchantment.getProtectionAmount
+		//$$ 	var source = this.damageSource;
+		//$$ 	if (source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
+		//$$ 	{
+		//$$ 		return 0;
+		//$$ 	}
+		//$$
+		//$$ 	float epf = 0;
+		//$$ 	for (var item : this.entity.getAllArmorItems())
+		//$$ 	{
+		//$$ 		for (var enchantmentEntry : item.getEnchantments().getEnchantmentEntries())
+		//$$ 		{
+		//$$ 			var enchantment = enchantmentEntry.getKey();
+		//$$ 			int level = enchantmentEntry.getIntValue();
+		//$$ 			if (enchantment == Enchantments.PROTECTION)
+		//$$ 			{
+		//$$ 				epf += level;
+		//$$ 			}
+		//$$ 			else if (enchantment == Enchantments.FIRE_PROTECTION && source.isIn(DamageTypeTags.IS_FIRE))
+		//$$ 			{
+		//$$ 				epf += level * 2;
+		//$$ 			}
+		//$$ 			else if (enchantment == Enchantments.FEATHER_FALLING && source.isIn(DamageTypeTags.IS_FALL))
+		//$$ 			{
+		//$$ 				epf += level * 3;
+		//$$ 			}
+		//$$ 			else if (enchantment == Enchantments.BLAST_PROTECTION && source.isIn(DamageTypeTags.IS_EXPLOSION))
+		//$$ 			{
+		//$$ 				epf += level * 2;
+		//$$ 			}
+		//$$ 			else if (enchantment == Enchantments.PROJECTILE_PROTECTION && source.isIn(DamageTypeTags.IS_PROJECTILE))
+		//$$ 			{
+		//$$ 				epf += level * 2;
+		//$$ 			}
+		//$$ 		}
+		//$$ 	}
+		//$$ 	return epf;
+		//$$ }
+		//#else
+		return EnchantmentHelper.getProtectionAmount(this.entity.getArmorItems(), this.damageSource);
+		//#endif
 	}
 
 	public DamageCalculator applyAbsorption()

@@ -20,23 +20,7 @@
 
 package me.fallenbreath.tweakermore.util.render.context;
 
-//#if MC >= 12000
-//$$ import me.fallenbreath.tweakermore.mixins.util.render.DrawContextAccessor;
-//$$ import net.minecraft.client.MinecraftClient;
-//$$ import net.minecraft.client.gui.DrawContext;
-//$$ import net.minecraft.client.render.Tessellator;
-//$$ import net.minecraft.client.render.VertexConsumerProvider;
-//$$ import net.minecraft.client.util.math.MatrixStack;
-//#endif
-
 class RenderContextUtil
 {
-	//#if MC >= 12000
-	//$$ public static DrawContext createDrawContext(MatrixStack matrixStack)
-	//$$ {
-	//$$ 	var drawContext = new DrawContext(MinecraftClient.getInstance(), VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer()));
-	//$$ 	((DrawContextAccessor)drawContext).setMatrices(matrixStack);
-	//$$ 	return drawContext;
-	//$$ }
-	//#endif
+	// impl in mc1.20 (subproject 1.20.1)
 }

@@ -31,7 +31,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class BeaconBlockEntityRendererMixin
 {
 	@Inject(
-			//#if MC >= 11700
+			//#if MC >= 12100
+			//$$ method = "renderBeam(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;Lnet/minecraft/util/Identifier;FFJIIIFF)V",
+			//#elseif MC >= 11700
 			//$$ method = "renderBeam(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;FJII[F)V",
 			//#elseif MC >= 11500
 			method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;FJII[F)V",

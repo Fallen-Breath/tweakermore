@@ -96,7 +96,14 @@ public abstract class InGameHudMixin
 		return centerY;
 	}
 
-	@Inject(method = "renderScoreboardSidebar", at = @At("RETURN"))
+	@Inject(
+			//#if MC >= 12006
+			//$$ method = "renderScoreboardSidebar(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/scoreboard/ScoreboardObjective;)V",
+			//#else
+			method = "renderScoreboardSidebar",
+			//#endif
+			at = @At("RETURN")
+	)
 	private void tweakerMore_scoreboardSideBarScale_pop(CallbackInfo ci)
 	{
 		if (this.scaler != null)

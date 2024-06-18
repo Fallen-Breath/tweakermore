@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2024  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,21 +18,20 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.util;
+package me.fallenbreath.tweakermore.util.render.context;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.util.registry.Registry;
+import me.fallenbreath.tweakermore.mixins.util.render.DrawContextAccessor;
+import me.fallenbreath.tweakermore.util.render.RenderUtil;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 
-public class RegistryUtil
+class RenderContextUtil
 {
-	public static String getItemId(Item item)
+	public static DrawContext createDrawContext(MatrixStack matrixStack)
 	{
-		return Registry.ITEM.getId(item).toString();
-	}
-
-	public static String getBlockId(Block block)
-	{
-		return Registry.BLOCK.getId(block).toString();
+		var drawContext = new DrawContext(MinecraftClient.getInstance(), RenderUtil.getVertexConsumer());
+		((DrawContextAccessor)drawContext).setMatrices(matrixStack);
+		return drawContext;
 	}
 }

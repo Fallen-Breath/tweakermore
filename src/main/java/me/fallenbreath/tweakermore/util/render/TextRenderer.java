@@ -47,7 +47,6 @@ import java.util.function.Function;
 //#endif
 
 //#if MC >= 11500
-import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.Rotation3;
 //#endif
@@ -184,7 +183,7 @@ public class TextRenderer
 				int backgroundColor = this.backgroundColor;
 				while (true)
 				{
-					VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
+					VertexConsumerProvider.Immediate immediate = RenderUtil.getVertexConsumer();
 					Matrix4f matrix4f = Rotation3.identity().getMatrix();
 					mc.textRenderer.draw(
 							holder.text, textX, textY, this.color, this.shadow, matrix4f, immediate,

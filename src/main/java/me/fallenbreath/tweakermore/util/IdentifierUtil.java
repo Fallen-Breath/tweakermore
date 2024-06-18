@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2024  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -20,19 +20,25 @@
 
 package me.fallenbreath.tweakermore.util;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.Identifier;
 
-public class RegistryUtil
+public class IdentifierUtil
 {
-	public static String getItemId(Item item)
+	public static Identifier of(String id)
 	{
-		return Registry.ITEM.getId(item).toString();
+		//#if MC >= 12100
+		//$$ return Identifier.of(id);
+		//#else
+		return new Identifier(id);
+		//#endif
 	}
 
-	public static String getBlockId(Block block)
+	public static Identifier of(String namespace, String path)
 	{
-		return Registry.BLOCK.getId(block).toString();
+		//#if MC >= 12100
+		//$$ return Identifier.of(namespace, path);
+		//#else
+		return new Identifier(namespace, path);
+		//#endif
 	}
 }
