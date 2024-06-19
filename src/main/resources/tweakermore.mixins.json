@@ -16,6 +16,8 @@
     "core.gui.panel.dropDownListRedraw.WidgetListBaseMixin",
     "core.gui.panel.labelWithOriginalText.WidgetListConfigOptionMixin",
     "core.gui.panel.labelWithOriginalText.WidgetListConfigOptionsMixin",
+    "core.gui.panel.noDoubleCommentTranslate.WidgetConfigOptionMixin",
+    "core.gui.panel.noDoubleCommentTranslate.WidgetHoverInfoMixin",
     "core.gui.panel.ocd.WidgetListConfigOptionMixin",
     "core.gui.panel.searchBar.WidgetListConfigOptionsMixin",
     "core.gui.panel.widthTweak.WidgetListConfigOptionsMixin",
