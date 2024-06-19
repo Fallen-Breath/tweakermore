@@ -55,6 +55,16 @@ public class RenderUtil
 		return TEXT_RENDERER.getStringWidth(text);
 	}
 
+	public static int getSizeScalingXSign()
+	{
+		// stupid change in 24w21a
+		//#if MC >= 12100
+		//$$ return 1;
+		//#else
+		return -1;
+		//#endif
+	}
+
 	//#if MC >= 11600
 	//$$ public static int getRenderWidth(OrderedText text)
 	//$$ {
@@ -66,7 +76,7 @@ public class RenderUtil
 	public static VertexConsumerProvider.Immediate getVertexConsumer()
 	{
 		//#if MC >= 12100
-		//$$ return VertexConsumerProvider.immediate(new BufferAllocator(RenderLayer.DEFAULT_BUFFER_SIZE));
+		//$$ return MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
 		//#else
 		return VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
 		//#endif

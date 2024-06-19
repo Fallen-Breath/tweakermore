@@ -26,4 +26,9 @@ public class PushLimitOperateException extends Exception
 	{
 		super(cause);
 	}
+
+	public PushLimitOperateException()
+	{
+		super();
+	}
 }

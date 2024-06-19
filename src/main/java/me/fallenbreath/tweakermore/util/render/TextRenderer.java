@@ -129,7 +129,7 @@ public class TextRenderer
 		InWorldPositionTransformer positionTransformer = new InWorldPositionTransformer(this.pos);
 		positionTransformer.apply(renderContext);
 		{
-			renderContext.scale(-this.fontScale, -this.fontScale, this.fontScale);
+			renderContext.scale(this.fontScale * RenderUtil.getSizeScalingXSign(), -this.fontScale, this.fontScale);
 
 			//#if MC < 11700
 			RenderGlobals.disableLighting();
@@ -183,8 +183,8 @@ public class TextRenderer
 				int backgroundColor = this.backgroundColor;
 				while (true)
 				{
-					VertexConsumerProvider.Immediate immediate = RenderUtil.getVertexConsumer();
 					Matrix4f matrix4f = Rotation3.identity().getMatrix();
+					VertexConsumerProvider.Immediate immediate = RenderUtil.getVertexConsumer();
 					mc.textRenderer.draw(
 							holder.text, textX, textY, this.color, this.shadow, matrix4f, immediate,
 							//#if MC >= 11904
@@ -206,6 +206,7 @@ public class TextRenderer
 						backgroundColor = 0;
 					}
 				}
+
 				//#else
 				//$$ if (this.shadow)
 				//$$ {

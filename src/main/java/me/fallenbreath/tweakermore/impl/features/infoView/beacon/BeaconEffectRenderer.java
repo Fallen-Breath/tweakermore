@@ -176,7 +176,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 
 			// ref: net.minecraft.client.gui.hud.InGameHud.renderStatusEffectOverlay
 
-			renderContext.scale(-FONT_SCALE, -FONT_SCALE, FONT_SCALE);
+			renderContext.scale(FONT_SCALE * RenderUtil.getSizeScalingXSign(), -FONT_SCALE, FONT_SCALE);
 			renderContext.translate(deltaX, 0, 0);
 
 			// scale 2: make the rendered texture height == expected height (line height)

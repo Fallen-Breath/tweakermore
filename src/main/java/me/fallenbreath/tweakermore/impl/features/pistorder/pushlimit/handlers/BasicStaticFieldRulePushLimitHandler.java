@@ -20,30 +20,47 @@
 
 package me.fallenbreath.tweakermore.impl.features.pistorder.pushlimit.handlers;
 
+import net.fabricmc.loader.api.FabricLoader;
+
 import java.lang.reflect.Field;
 
 public abstract class BasicStaticFieldRulePushLimitHandler implements PushLimitHandler
 {
 	private final String className;
 	private final String fieldName;
+	private final boolean modLoaded;
+	private Field ruleField;
 
 	public BasicStaticFieldRulePushLimitHandler(String className, String fieldName)
 	{
 		this.className = className;
 		this.fieldName = fieldName;
+		this.modLoaded = FabricLoader.getInstance().isModLoaded(this.getModId());
+		this.ruleField = null;
 	}
 
 	private Field getRuleField() throws ClassNotFoundException, NoSuchFieldException
 	{
-		Class<?> clazz = Class.forName(className);
-		Field field = clazz.getField(fieldName);
+		if (this.ruleField != null)
+		{
+			return this.ruleField;
+		}
+
+		Class<?> clazz = Class.forName(this.className);
+		Field field = clazz.getField(this.fieldName);
 		field.setAccessible(true);
+
+		this.ruleField = field;
 		return field;
 	}
 
 	@Override
 	public void setPushLimit(int pushLimit) throws PushLimitOperateException
 	{
+		if (!this.modLoaded)
+		{
+			throw new PushLimitOperateException();
+		}
 		try
 		{
 			this.getRuleField().setInt(null, pushLimit);
@@ -57,6 +74,10 @@ public abstract class BasicStaticFieldRulePushLimitHandler implements PushLimitH
 	@Override
 	public int getPushLimit() throws PushLimitOperateException
 	{
+		if (!this.modLoaded)
+		{
+			throw new PushLimitOperateException();
+		}
 		try
 		{
 			return this.getRuleField().getInt(null);
