@@ -28,6 +28,24 @@ Items that will NOT be thrown out from the container with autoCleanContainer
     - Item Scroller (`itemscroller`)
 
 
+### autoCleanContainerIgnoreEnderChest
+
+Ignore ender chest container for autoCleanContainer
+
+Notes: The way to check if a container GUI is from an ender chest, is by checking its title and size
+
+with a normal ender chest GUI, which might not be 100% accurate if the server is not that vanilla
+
+See also: option autoFillContainerIgnoreEnderChest
+
+- Category: Features
+- Type: hotkey togglable boolean (Tweak)
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Item Scroller (`itemscroller`)
+
+
 ### autoCleanContainerListType
 
 The item restriction type for autoCleanContainer
@@ -102,6 +120,24 @@ Automatically fill the opened container with the most numerous item stack in you
 iff the item stack is the only most numerous one
 
 and then close the container
+
+- Category: Features
+- Type: hotkey togglable boolean (Tweak)
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Item Scroller (`itemscroller`)
+
+
+### autoFillContainerIgnoreEnderChest
+
+Ignore ender chest container for autoFillContainer
+
+Notes: The way to check if a container GUI is from an ender chest, is by checking its title and size
+
+with a normal ender chest GUI, which might not be 100% accurate if the server is not that vanilla
+
+See also: option autoCleanContainerIgnoreEnderChest
 
 - Category: Features
 - Type: hotkey togglable boolean (Tweak)

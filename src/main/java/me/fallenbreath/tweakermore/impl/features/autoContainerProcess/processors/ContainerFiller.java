@@ -44,6 +44,11 @@ public class ContainerFiller implements IContainerProcessor
 	@Override
 	public ProcessResult process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
 	{
+		if (ContainerProcessorUtils.shouldSkipForEnderChest(containerScreen, TweakerMoreConfigs.AUTO_FILL_CONTAINER_IGNORE_ENDER_CHEST))
+		{
+			return ProcessResult.skipped();
+		}
+
 		Slot bestSlot = null;
 		long maxCount = TweakerMoreConfigs.AUTO_FILL_CONTAINER_THRESHOLD.getIntegerValue() - 1;
 		for (Slot slot : playerInvSlots)

@@ -8,15 +8,23 @@ tweakermore:
         Automatically drops everything in the opened container
         and then close the container
       pretty_name: Auto Clean Container
+    autoCleanContainerIgnoreEnderChest:
+      .: autoCleanContainerIgnoreEnderChest
+      comment: |-
+        Ignore ender chest container for @option#autoCleanContainer@
+        Notes: The way to check if a container GUI is from an ender chest, is by checking its title and size
+        with a normal ender chest GUI, which might not be 100%% accurate if the server is not that vanilla
+        See also: option @option#autoFillContainerIgnoreEnderChest@
+      pretty_name: Auto Clean Container Ignore Ender Chest
     autoCleanContainerListType:
       .: autoCleanContainerListType
-      comment: The item restriction type for autoCleanContainer
+      comment: The item restriction type for @option#autoCleanContainer@
     autoCleanContainerWhiteList:
       .: autoCleanContainerWhiteList
-      comment: Items that will be thrown out from the container with autoCleanContainer
+      comment: Items that will be thrown out from the container with @option#autoCleanContainer@
     autoCleanContainerBlackList:
       .: autoCleanContainerBlackList
-      comment: Items that will NOT be thrown out from the container with autoCleanContainer
+      comment: Items that will NOT be thrown out from the container with @option#autoCleanContainer@
     autoCollectMaterialListItem:
       .: autoCollectMaterialListItem
       comment: |-
@@ -36,6 +44,14 @@ tweakermore:
         iff the item stack is the only most numerous one
         and then close the container
       pretty_name: Auto Fill Container
+    autoFillContainerIgnoreEnderChest:
+      .: autoFillContainerIgnoreEnderChest
+      comment: |-
+        Ignore ender chest container for @option#autoFillContainer@
+        Notes: The way to check if a container GUI is from an ender chest, is by checking its title and size
+        with a normal ender chest GUI, which might not be 100%% accurate if the server is not that vanilla
+        See also: option @option#autoCleanContainerIgnoreEnderChest@
+      pretty_name: Auto Fill Container Ignore Ender Chest
     autoFillContainerThreshold:
       .: autoFillContainerThreshold
       comment: |-

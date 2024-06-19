@@ -25,6 +25,7 @@
     "tweaks.features.autoCollectMaterialListItem.MaterialListHudRendererAccessor",
     "tweaks.features.autoContainerProcess.ClientPlayNetworkHandlerMixin",
     "tweaks.features.autoContainerProcess.ContainerMixin",
+    "tweaks.features.autoContainerProcess.EnderChestBlockAccessor",
     "tweaks.features.autoContainerProcess.ItemScrollerInventoryUtilsAccessor",
     "tweaks.features.autoContainerProcess.ScreenMixin",
     "tweaks.features.autoRespawn.DeathScreenMixin",

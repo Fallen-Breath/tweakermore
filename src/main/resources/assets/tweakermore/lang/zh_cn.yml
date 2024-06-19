@@ -8,15 +8,23 @@ tweakermore:
         打开容器后，自动将容器内的所有物品扔出
         然后关闭容器
       pretty_name: 自动清空容器
+    autoCleanContainerIgnoreEnderChest:
+      .: 自动清空容器-忽略末影箱
+      comment: |-
+        使用@option#autoCleanContainer@功能时，忽略末影箱
+        注意：这里使用的末影箱检测方式是，检查打开的容器GUI的标题和大小，
+        判断是否与末影箱GUI的匹配，因此可能无法做到100%%的准确识别
+        另见：选项 @option#autoFillContainerIgnoreEnderChest@
+      pretty_name: 自动清空容器-忽略末影箱
     autoCleanContainerListType:
       .: 自动清空容器-名单约束类型
-      comment: 触发自动清空容器功能的物品名单约束类型
+      comment: 触发@option#autoCleanContainer@的物品名单约束类型
     autoCleanContainerWhiteList:
       .: 自动清空容器-白名单
-      comment: 使用自动清空容器功能时从容器里中扔出的物品类型
+      comment: 使用@option#autoCleanContainer@时从容器里中扔出的物品类型
     autoCleanContainerBlackList:
       .: 自动清空容器-黑名单
-      comment: 使用自动清空容器功能时不会从容器里中扔出的物品类型
+      comment: 使用@option#autoCleanContainer@时不会从容器里中扔出的物品类型
     autoCollectMaterialListItem:
       .: 自动收集材料列表物品
       comment: |-
@@ -36,6 +44,14 @@ tweakermore:
         当且仅当占用格子数最多的物品是唯一的
         然后关闭容器
       pretty_name: 自动装填容器
+    autoFillContainerIgnoreEnderChest:
+      .: 自动装填容器-忽略末影箱
+      comment: |-
+        使用@option#autoFillContainer@功能时，忽略末影箱
+        注意：这里使用的末影箱检测方式是，检查打开的容器GUI的标题和大小，
+        判断是否与末影箱GUI的匹配，因此可能无法做到100%%的准确识别
+        另见：选项 @option#autoCleanContainerIgnoreEnderChest@
+      pretty_name: 自动装填容器-忽略末影箱
     autoFillContainerThreshold:
       .: 自动装填容器阈值
       comment: |-

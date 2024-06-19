@@ -89,6 +89,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(ModIds.itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed AUTO_CLEAN_CONTAINER = newConfigBooleanHotkeyed("autoCleanContainer");
 
+	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(ModIds.itemscroller)), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed AUTO_CLEAN_CONTAINER_IGNORE_ENDER_CHEST = newConfigBooleanHotkeyed("autoCleanContainerIgnoreEnderChest");
+
 	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(ModIds.itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigOptionList AUTO_CLEAN_CONTAINER_LIST_TYPE = newConfigOptionList("autoCleanContainerListType", UsageRestriction.ListType.NONE);
 
@@ -132,6 +135,9 @@ public class TweakerMoreConfigs
 
 	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(ModIds.itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed AUTO_FILL_CONTAINER = newConfigBooleanHotkeyed("autoFillContainer");
+
+	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(ModIds.itemscroller)), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed AUTO_FILL_CONTAINER_IGNORE_ENDER_CHEST = newConfigBooleanHotkeyed("autoFillContainerIgnoreEnderChest");
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigInteger AUTO_FILL_CONTAINER_THRESHOLD = newConfigInteger("autoFillContainerThreshold", 2, 1, 36);

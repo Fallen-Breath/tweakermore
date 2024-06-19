@@ -41,6 +41,11 @@ public class ContainerCleaner implements IContainerProcessor
 	@Override
 	public ProcessResult process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
 	{
+		if (ContainerProcessorUtils.shouldSkipForEnderChest(containerScreen, TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_IGNORE_ENDER_CHEST))
+		{
+			return ProcessResult.skipped();
+		}
+
 		int counter = 0;
 		for (Slot slot : containerInvSlots)
 		{
