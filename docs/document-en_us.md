@@ -1747,6 +1747,8 @@ Show a hint of content of shulker box item at the lower-left corner of the shulk
 
 If the shulker box contains only 1 item type, then that item in the box will be shown 
 
+If the shulker box contains only 1 item type with different nbt, then "*" will be appended
+
 If the shulker box contains multiple types of item, then "..." will be shown
 
 If the shulker box is empty, no hint will be shown
@@ -1770,7 +1772,7 @@ The scale of the hint stuffs in option shulkerBoxItemContentHint
 - Type: double (Generic)
 - Default value: `0.5`
 - Minimum value: `0.01`
-- Maximum value: `1.0`
+- Maximum value: `0.75`
 
 
 ### shulkerBoxItemContentHintShowBarOnMixed

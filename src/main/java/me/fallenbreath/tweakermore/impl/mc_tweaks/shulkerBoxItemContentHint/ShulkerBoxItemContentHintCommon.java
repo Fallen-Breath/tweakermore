@@ -34,6 +34,7 @@ public class ShulkerBoxItemContentHintCommon
 	{
 		public boolean enabled;
 		public boolean allItemSame;
+		public boolean allItemSameIgnoreNbt;
 		public double scale;
 		public ItemStack stack;
 		public double fillRatio;
@@ -63,6 +64,7 @@ public class ShulkerBoxItemContentHintCommon
 
 		ItemStack std = null;
 		info.allItemSame = true;
+		info.allItemSameIgnoreNbt = true;
 		for (ItemStack stack : stackList.get())
 		{
 			if (!stack.isEmpty())
@@ -70,16 +72,24 @@ public class ShulkerBoxItemContentHintCommon
 				if (std == null)
 				{
 					std = stack;
+					continue;
 				}
-				// to be equal: item type equals, item nbt equals
-				//#if MC >= 12000
-				//$$ else if (!ItemStack.canCombine(stack, std))
-				//#else
-				else if (!(ItemStack.areItemsEqual(stack, std) && ItemStack.areTagsEqual(stack, std)))
+
+				boolean itemEqual = ItemStack.areItemsEqual(stack, std);
+				boolean itemAndNbtEqual =
+						//#if MC >= 12000
+						//$$ ItemStack.canCombine(stack, std)
+						//#else
+						itemEqual && ItemStack.areTagsEqual(stack, std);
 				//#endif
+
+				if (!itemAndNbtEqual)
 				{
 					info.allItemSame = false;
-					break;
+				}
+				if (!itemEqual)
+				{
+					info.allItemSameIgnoreNbt = false;
 				}
 			}
 		}

@@ -555,7 +555,7 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBoolean SHULKER_BOX_ITEM_CONTENT_HINT = newConfigBoolean("shulkerBoxItemContentHint", false);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigDouble SHULKER_BOX_ITEM_CONTENT_HINT_SCALE = newConfigDouble("shulkerBoxItemContentHintScale", 0.5, 0.01, 1);
+	public static final TweakerMoreConfigDouble SHULKER_BOX_ITEM_CONTENT_HINT_SCALE = newConfigDouble("shulkerBoxItemContentHintScale", 0.5, 0.01, 0.75);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean SHULKER_BOX_ITEM_CONTENT_HINT_SHOW_BAR_ON_MIXED = newConfigBoolean("shulkerBoxItemContentHintShowBarOnMixed", false);
