@@ -20,25 +20,33 @@
 
 package me.fallenbreath.tweakermore.util;
 
+import me.fallenbreath.tweakermore.TweakerMoreMod;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
 public class ReflectionUtil
 {
+	private static final Map<String, Optional<Class<?>>> classCache = new ConcurrentHashMap<>();
+
 	public static Optional<Class<?>> getClass(String className)
 	{
-		try
-		{
-			return Optional.of(Class.forName(className));
-		}
-		catch (ClassNotFoundException e)
-		{
-			return Optional.empty();
-		}
+		return classCache.computeIfAbsent(className, k -> {
+			try
+			{
+				return Optional.of(Class.forName(className));
+			}
+			catch (ClassNotFoundException e)
+			{
+				TweakerMoreMod.LOGGER.debug("ReflectionUtil.getClass '{}' not found", className);
+				return Optional.empty();
+			}
+		});
 	}
 
 	@SuppressWarnings("unchecked")
