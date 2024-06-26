@@ -29,7 +29,7 @@ import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FireworkRocketItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.Packet;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import org.apache.commons.lang3.mutable.MutableObject;
@@ -116,7 +116,7 @@ public abstract class ClientPlayerInteractionManagerMixin
 			method = "sendSequencedPacket",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/network/SequencedPacketCreator;predict(I)Lnet/minecraft/network/Packet;",
+					target = "Lnet/minecraft/client/network/SequencedPacketCreator;predict(I)Lnet/minecraft/network/packet/Packet;",
 					shift = At.Shift.AFTER
 			),
 			cancellable = true

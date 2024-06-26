@@ -1,4 +1,0 @@
-accessWidener	v1	named
-
-accessible  class   net/minecraft/client/render/block/BlockModelRenderer$BrightnessCache
-accessible  class   net/minecraft/client/util/DefaultSkinHelper$Skin

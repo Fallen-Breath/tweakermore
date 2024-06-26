@@ -229,8 +229,6 @@ public class DamageCalculator
 				if (amount > 0.0F && !(
 						//#if MC >= 11904
 						//$$ this.damageSource.isIn(DamageTypeTags.BYPASSES_ENCHANTMENTS)
-						//#elseif MC >= 11902
-						//$$ this.damageSource.bypassesProtection()
 						//#else
 						false
 						//#endif

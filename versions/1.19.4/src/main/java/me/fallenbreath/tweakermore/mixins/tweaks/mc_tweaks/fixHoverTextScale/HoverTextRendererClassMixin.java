@@ -133,11 +133,9 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 				int screenHeight = screen.height;
 				//#endif
 
-				//#if MC >= 11904
-				//$$ // see vanilla: net.minecraft.client.gui.tooltip.HoveredTooltipPositioner#getPosition
-				//$$ x += 12;
-				//$$ y -= 12;
-				//#endif
+				// see vanilla: net.minecraft.client.gui.tooltip.HoveredTooltipPositioner#getPosition
+				x += 12;
+				y -= 12;
 
 				if (x + width * scale > screenWidth)
 				{

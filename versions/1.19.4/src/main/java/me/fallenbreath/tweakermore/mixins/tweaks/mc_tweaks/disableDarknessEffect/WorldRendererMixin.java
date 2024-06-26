@@ -34,11 +34,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class WorldRendererMixin
 {
 	@ModifyExpressionValue(
-			//#if MC >= 11904
-			//$$ method = "hasBlindnessOrDarkness",
-			//#else
-			method = "method_43788",
-			//#endif
+			method = "hasBlindnessOrDarkness",
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12006
