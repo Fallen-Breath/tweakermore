@@ -78,10 +78,10 @@ public class ShulkerBoxItemContentHintCommon
 				boolean itemEqual = ItemStack.areItemsEqual(stack, std);
 				boolean itemAndNbtEqual =
 						//#if MC >= 12000
-						//$$ ItemStack.canCombine(stack, std)
+						//$$ ItemStack.canCombine(stack, std);
 						//#else
 						itemEqual && ItemStack.areTagsEqual(stack, std);
-				//#endif
+						//#endif
 
 				if (!itemAndNbtEqual)
 				{
