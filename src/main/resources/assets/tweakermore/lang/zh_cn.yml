@@ -92,7 +92,7 @@ tweakermore:
       comment: 自动容器处理提示渲染时所用的字体相对大小
     copyItemDataToClipBoard:
       .: 复制物品数据
-      comment: Copy the data of the pointed item in the current gui to the clipboard, as a /give command把当前GUI中指向的物品数据复制到剪贴板
+      comment: 把当前GUI中指向的物品数据复制到剪贴板
     copySignTextToClipBoard:
       .: 复制告示牌文本
       comment: 将玩家指向的告示牌中的文本复制到剪贴板
@@ -677,6 +677,11 @@ tweakermore:
     shulkerBoxItemContentHintScale:
       .: 潜影盒物品内容提示-缩放
       comment: 选项@option#shulkerBoxItemContentHint@内容提示的缩放比例
+    shulkerBoxItemContentHintShowBarOnMixed:
+      .: 潜影盒物品内容提示-杂盒也有容量条
+      comment: |-
+        让选项@option#shulkerBoxItemContentHint@为含有混杂物品的潜影盒也展示填充率条
+        默认情况下，填充率条只会为非混杂盒子展示
     shulkerBoxTooltipEnchantmentHint:
       .: 潜影盒物品附魔提示
       comment: 在潜影盒物品的工具提示中显示物品的附魔

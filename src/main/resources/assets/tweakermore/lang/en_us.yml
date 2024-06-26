@@ -672,11 +672,16 @@ tweakermore:
         If the shulker box contains only 1 item type, then that item in the box will be shown 
         If the shulker box contains multiple types of item, then "..." will be shown
         If the shulker box is empty, no hint will be shown
-        Also, a fill level bar will be rendered at the lower-right corner,
+        Also, a fill-level bar will be rendered at the lower-right corner,
         if the shulker box is neither completely full nor empty
     shulkerBoxItemContentHintScale:
       .: shulkerBoxItemContentHintScale
       comment: The scale of the hint stuffs in option @option#shulkerBoxItemContentHint@
+    shulkerBoxItemContentHintShowBarOnMixed:
+      .: shulkerBoxItemContentHintShowBarOnMixed
+      comment: |-
+        Show the fill-level bar on mixed box as well, for @option#shulkerBoxItemContentHint@
+        By default, the fill-level bar will only show up for non-mixed boxes
     shulkerBoxTooltipEnchantmentHint:
       .: shulkerBoxTooltipEnchantmentHint
       comment: Display enchantments of items in the tooltip of shulker box items

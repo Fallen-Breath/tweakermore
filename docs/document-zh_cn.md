@@ -1177,7 +1177,7 @@ schematicBlockPlacement的严格模式
 
 ### 复制物品数据 (copyItemDataToClipBoard)
 
-Copy the data of the pointed item in the current gui to the clipboard, as a /give command把当前GUI中指向的物品数据复制到剪贴板
+把当前GUI中指向的物品数据复制到剪贴板
 
 - 分类: MC修改
 - 类型: 带开关热键 (热键)
@@ -1767,6 +1767,17 @@ FOV覆盖的开关
 - 默认值: `0.5`
 - 最小值: `0.01`
 - 最大值: `1.0`
+
+
+### 潜影盒物品内容提示-杂盒也有容量条 (shulkerBoxItemContentHintShowBarOnMixed)
+
+让选项潜影盒物品内容提示为含有混杂物品的潜影盒也展示填充率条
+
+默认情况下，填充率条只会为非混杂盒子展示
+
+- 分类: MC修改
+- 类型: 布尔值 (通用)
+- 默认值: `false`
 
 
 ### 潜影盒物品附魔提示 (shulkerBoxTooltipEnchantmentHint)

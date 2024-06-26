@@ -20,6 +20,7 @@
 
 package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxItemContentHint;
 
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.render.ColorHolder;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.RenderUtil;
@@ -127,7 +128,10 @@ public class ShulkerBoxItemContentHintRenderer
 		//$$ RenderSystem.applyModelViewMatrix();
 		//#endif
 
-		if (info.allItemSame && info.fillRatio >= 0)
+		if (
+				(info.allItemSame || TweakerMoreConfigs.SHULKER_BOX_ITEM_CONTENT_HINT_SHOW_BAR_ON_MIXED.getBooleanValue())
+				&& (0 < info.fillRatio && info.fillRatio < 1)
+		)
 		{
 			renderBar(
 					renderContext,

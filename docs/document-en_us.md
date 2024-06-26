@@ -1751,7 +1751,7 @@ If the shulker box contains multiple types of item, then "..." will be shown
 
 If the shulker box is empty, no hint will be shown
 
-Also, a fill level bar will be rendered at the lower-right corner,
+Also, a fill-level bar will be rendered at the lower-right corner,
 
 if the shulker box is neither completely full nor empty
 
@@ -1771,6 +1771,17 @@ The scale of the hint stuffs in option shulkerBoxItemContentHint
 - Default value: `0.5`
 - Minimum value: `0.01`
 - Maximum value: `1.0`
+
+
+### shulkerBoxItemContentHintShowBarOnMixed
+
+Show the fill-level bar on mixed box as well, for shulkerBoxItemContentHint
+
+By default, the fill-level bar will only show up for non-mixed boxes
+
+- Category: MC Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
 
 
 ### shulkerBoxTooltipEnchantmentHint

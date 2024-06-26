@@ -108,7 +108,7 @@ public class ShulkerBoxItemContentHintCommon
 			}
 
 			double ratio = sum / slotAmount;
-			if (ratio > 0 && ratio < 1)
+			if (ratio >= 0 && ratio <= 1)
 			{
 				info.fillRatio = ratio;
 			}
