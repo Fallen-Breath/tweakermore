@@ -31,12 +31,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @SuppressWarnings("UnresolvedMixinReference")
-@Restriction(require = @Condition(value = ModIds.extra_player_renderer, versionPredicates = ">=2.0.0"))
+@Restriction(require = @Condition(value = ModIds.extra_player_renderer, versionPredicates = "^2.0.0"))
 @Pseudo
 @Mixin(targets = "github.io.lucunji.explayerenderer.client.render.PlayerHUDRenderer")
 public abstract class PlayerHUDRenderer_v2Mixin
 {
-	@Inject(method = "doRender", at = @At("HEAD"), remap = false, cancellable = true)
+	@Inject(method = "doRender", at = @At("HEAD"), remap = false, cancellable = true, require = 0)
 	private void eprHideOnDebugHud(CallbackInfo ci)
 	{
 		EprHideOnDebugHudImpl.applyHide(ci);
