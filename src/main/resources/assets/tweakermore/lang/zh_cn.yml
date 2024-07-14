@@ -1166,6 +1166,7 @@ tweakermore:
         start: 正在同步选区%1$s中方块实体及实体的数据
         progress: 已同步%1$s/%2$s个方块实体及%3$s/%4$s个实体的数据 (%5$s)
         synced: 已从服务端同步%1$s个方块实体及%2$s个实体的数据
+        clone_syncing: 请等待克隆区域 '%1s' 的同步完成
     serverMsptMetricsStatisticTypeCycle:
       hint: '统计类型: %1$s'
     shulkerBoxTooltipHintBuilder:

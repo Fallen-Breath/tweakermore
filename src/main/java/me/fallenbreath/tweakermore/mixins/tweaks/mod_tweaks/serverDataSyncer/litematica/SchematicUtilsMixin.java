@@ -21,6 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.litematica;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import fi.dy.masa.litematica.selection.AreaSelection;
 import fi.dy.masa.litematica.util.SchematicUtils;
 import fi.dy.masa.malilib.gui.Message;
@@ -34,9 +35,12 @@ import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.TargetPair;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Util;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicLong;
@@ -54,35 +58,89 @@ public abstract class SchematicUtilsMixin
 			),
 			remap = false
 	)
-	private static AreaSelection serverDataSyncer4Schematic(AreaSelection area)
+	private static AreaSelection serverDataSyncer4SchematicSave(AreaSelection area)
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{
 			MinecraftClient mc = MinecraftClient.getInstance();
 			if (area != null && !mc.isIntegratedServerRunning() && ServerDataSyncer.hasEnoughPermission())
 			{
-				MinecraftClient.getInstance().send(() -> {
-					showMessage$TKM(Message.MessageType.INFO, "start", area.getName());
-
-					TargetPair pair = AreaSelectionUtil.extractBlockEntitiesAndEntities(area, true);
-					final int beTotal = pair.getBlockEntityAmount();
-					final int eTotal = pair.getEntityAmount();
-
-					AtomicLong lastUpdateTime = new AtomicLong(Util.getMeasuringTimeMs());
-					CompletableFuture<Void> future = ServerDataSyncer.getInstance().syncEverything(pair, (be, e) -> {
-						long currentTime = Util.getMeasuringTimeMs();
-						if (currentTime - lastUpdateTime.get() > 500)
-						{
-							lastUpdateTime.set(currentTime);
-							String percent = String.format("%.1f%%", 100.0D * (be + e) / (beTotal + eTotal));
-							showMessage$TKM(Message.MessageType.INFO, "progress", be, beTotal, e, eTotal, percent);
-						}
-					});
-					future.thenRun(() -> showMessage$TKM(Message.MessageType.SUCCESS, "synced", beTotal, eTotal));
-				});
+				MinecraftClient.getInstance().send(() -> syncEverything(area));
 			}
 		}
 		return area;
+	}
+
+	@Unique
+	@Nullable
+	private static String currentSyncingArenaName = null;
+
+	@Unique
+	private static final ThreadLocal<Boolean> dontInjectClone = ThreadLocal.withInitial(() -> false);
+
+	@Inject(
+			method = "cloneSelectionArea",
+			at = @At(
+					value = "INVOKE_ASSIGN",
+					target = "Lfi/dy/masa/litematica/selection/SelectionManager;getCurrentSelection()Lfi/dy/masa/litematica/selection/AreaSelection;",
+					shift = At.Shift.AFTER,
+					remap = false
+			),
+			cancellable = true,
+			remap = false
+	)
+	private static void serverDataSyncer4SelectionClone(MinecraftClient mc, CallbackInfo ci, @Local AreaSelection area)
+	{
+		if (dontInjectClone.get())
+		{
+			return;
+		}
+
+		ci.cancel();
+
+		String name = currentSyncingArenaName;
+		if (name != null)  // prevent duplicated sync
+		{
+			showMessage$TKM(Message.MessageType.INFO, "clone_syncing", currentSyncingArenaName);
+			return;
+		}
+
+		MinecraftClient.getInstance().send(() -> {
+			try
+			{
+				currentSyncingArenaName = area.getName();
+				syncEverything(area);
+				dontInjectClone.set(true);
+				SchematicUtils.cloneSelectionArea(mc);
+			}
+			finally
+			{
+				currentSyncingArenaName = null;
+				dontInjectClone.remove();
+			}
+		});
+	}
+
+	@Unique
+	private static void syncEverything(AreaSelection area)
+	{
+		showMessage$TKM(Message.MessageType.INFO, "start", area.getName());
+
+		TargetPair pair = AreaSelectionUtil.extractBlockEntitiesAndEntities(area, true);
+		final int beTotal = pair.getBlockEntityAmount();
+		final int eTotal = pair.getEntityAmount();
+
+		AtomicLong lastUpdateTime = new AtomicLong(Util.getMeasuringTimeMs());
+		CompletableFuture<Void> future = ServerDataSyncer.getInstance().syncEverything(pair, (be, e) -> {
+			long currentTime = Util.getMeasuringTimeMs();
+			if (currentTime - lastUpdateTime.get() > 500)
+			{
+				lastUpdateTime.set(currentTime);
+				String percent = String.format("%.1f%%", 100.0D * (be + e) / (beTotal + eTotal));
+				showMessage$TKM(Message.MessageType.INFO, "progress", be, beTotal, e, eTotal, percent);
+			}
+		});
+		future.thenRun(() -> showMessage$TKM(Message.MessageType.SUCCESS, "synced", beTotal, eTotal));
 	}
 
 	@Unique

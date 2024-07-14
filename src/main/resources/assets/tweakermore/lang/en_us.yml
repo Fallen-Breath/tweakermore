@@ -1166,6 +1166,7 @@ tweakermore:
         start: Syncing block entities and entities in the selection area %1$s
         progress: Synced %1$s/%1$s block entities and %3$s/%4$s entities (%5$s)
         synced: Synced %1$s block entities and %2$s entities from the server
+        clone_syncing: Please wait for the clone syncing for area '%1s' to be completed
     serverMsptMetricsStatisticTypeCycle:
       hint: 'Statistic type: %1$s'
     shulkerBoxTooltipHintBuilder:
