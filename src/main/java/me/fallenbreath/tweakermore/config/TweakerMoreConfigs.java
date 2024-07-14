@@ -954,6 +954,7 @@ public class TweakerMoreConfigs
 		TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_RESTRICTION.setListContents(TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_BLACKLIST.getStrings(), TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_WHITELIST.getStrings());
 
 		SpectatorTeleportCommand.init();
+		WindowSizeHelper.onConfigLoaded();
 	}
 
 	// Config fields collecting

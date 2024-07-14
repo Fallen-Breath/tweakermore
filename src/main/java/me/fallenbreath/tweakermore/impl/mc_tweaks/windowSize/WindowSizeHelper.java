@@ -32,12 +32,7 @@ public class WindowSizeHelper
 {
 	public static void applyWindowSize()
 	{
-		MinecraftClient mc = MinecraftClient.getInstance();
-		//#if MC >= 11500
-		Window window = mc.getWindow();
-		//#else
-		//$$ Window window = mc.window;
-		//#endif
+		Window window = getMcWindow();
 
 		if (window == null)
 		{
@@ -50,25 +45,6 @@ public class WindowSizeHelper
 		}
 
 		applyWindowSizeImpl(window);
-	}
-
-	private static int getConfigWidth()
-	{
-		return Math.max(1, TweakerMoreConfigs.WINDOW_SIZE_WIDTH.getIntegerValue());
-	}
-
-	private static int getConfigHeight()
-	{
-		return Math.max(1, TweakerMoreConfigs.WINDOW_SIZE_HEIGHT.getIntegerValue());
-	}
-
-	private static void applyWindowSizeImpl(Window window)
-	{
-		if (window.isFullscreen())
-		{
-			throw new RuntimeException("resize in full screen");
-		}
-		GLFW.glfwSetWindowSize(window.getHandle(), getConfigWidth(), getConfigHeight());
 	}
 
 	public static void onWindowSizeChanged(Window window)
@@ -95,5 +71,49 @@ public class WindowSizeHelper
 			);
 			applyWindowSizeImpl(window);
 		}
+	}
+
+	public static void onConfigLoaded()
+	{
+		Window window = getMcWindow();
+		if (canPerformSizeChange(window))
+		{
+			onWindowSizeChanged(window);
+		}
+	}
+
+	private static Window getMcWindow()
+	{
+		MinecraftClient mc = MinecraftClient.getInstance();
+		//#if MC >= 11500
+		return mc.getWindow();
+		//#else
+		//$$ return mc.window;
+		//#endif
+	}
+
+	private static boolean canPerformSizeChange(Window window)
+	{
+		return window != null && !window.isFullscreen();
+	}
+
+	private static int getConfigWidth()
+	{
+		return Math.max(1, TweakerMoreConfigs.WINDOW_SIZE_WIDTH.getIntegerValue());
+	}
+
+	private static int getConfigHeight()
+	{
+		return Math.max(1, TweakerMoreConfigs.WINDOW_SIZE_HEIGHT.getIntegerValue());
+	}
+
+	private static void applyWindowSizeImpl(Window window)
+	{
+		if (window.isFullscreen())
+		{
+			// remember to check this before calling applyWindowSizeImpl()
+			throw new RuntimeException("resize in full screen");
+		}
+		GLFW.glfwSetWindowSize(window.getHandle(), getConfigWidth(), getConfigHeight());
 	}
 }
