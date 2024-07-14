@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.impl.features.copySignTextToClipBoard;
 import com.google.common.base.Joiner;
 import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.util.EntityUtil;
+import me.fallenbreath.tweakermore.util.compat.litematica.LitematicaUtils;
 import net.minecraft.block.AbstractSignBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -33,13 +34,15 @@ import net.minecraft.text.Text;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 //#if MC >= 11600
 //$$ import me.fallenbreath.tweakermore.mixins.tweaks.features.copySignTextToClipBoard.SignBlockEntityAccessor;
 //#endif
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class SignTextCopier
 {
@@ -47,43 +50,77 @@ public class SignTextCopier
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
 		ClientPlayerEntity player = EntityUtil.getCurrentPlayerOrFreeCameraEntity();
-		if (player != null && mc.world != null && mc.crosshairTarget != null && mc.crosshairTarget.getType() == HitResult.Type.BLOCK)
+		if (player != null && mc.world != null)
 		{
-			BlockPos blockPos = ((BlockHitResult)mc.crosshairTarget).getBlockPos();
-			BlockState blockState = mc.world.getBlockState(blockPos);
-			if (blockState.getBlock() instanceof AbstractSignBlock)
+			BlockPos blockPos = null;
+			SignBlockEntity blockEntity = null;
+			String copiedTextKey = null;
+			if (LitematicaUtils.isRenderingEnabled())
 			{
-				BlockEntity blockEntity = mc.world.getBlockEntity(blockPos);
-				if (blockEntity instanceof SignBlockEntity)
-				{
-					//#if MC >= 12004
-					//$$ Text[] texts = ((SignBlockEntity)blockEntity).getText(((SignBlockEntity)blockEntity).isPlayerFacingFront(player)).getMessages(false);
-					//#elseif MC >= 12000
-					//$$ Text[] texts = ((SignBlockEntity)blockEntity).getTextFacing(player).getMessages(false);
-					//#elseif MC >= 11600
-					//$$ Text[] texts = ((SignBlockEntityAccessor)blockEntity).getTexts();
-					//#else
-					Text[] texts = ((SignBlockEntity)blockEntity).text;
-					//#endif
+				blockPos = LitematicaUtils.getSchematicWorldCrosshairTargetPos(player);
+				blockEntity = tryGetSignBlockEntity(LitematicaUtils.getSchematicWorld(), blockPos);
+				copiedTextKey = "sign_copied_schematic";
+			}
+			if (blockEntity == null && mc.crosshairTarget != null && mc.crosshairTarget.getType() == HitResult.Type.BLOCK)
+			{
+				blockPos = ((BlockHitResult)mc.crosshairTarget).getBlockPos();
+				blockEntity = tryGetSignBlockEntity(mc.world, blockPos);
+				copiedTextKey = "sign_copied";
+			}
 
-					String text = Joiner.on("\n").join(
-							Arrays.stream(texts).
-									map(Text::getString).
-									collect(Collectors.toList())
-					);
-					if (!text.isEmpty())
-					{
-						mc.keyboard.setClipboard(text);
-						InfoUtils.printActionbarMessage("tweakermore.impl.copySignTextToClipBoard.sign_copied", blockState.getBlock().getName());
-					}
-					else
-					{
-						InfoUtils.printActionbarMessage("tweakermore.impl.copySignTextToClipBoard.empty_sign", blockState.getBlock().getName());
-					}
-					return;
+			if (blockEntity != null)
+			{
+				BlockState blockState = blockEntity.getCachedState();
+				Text[] texts = getSignTexts(blockEntity, player);
+
+				String text = Joiner.on("\n").join(
+						Arrays.stream(texts).
+								map(Text::getString).
+								collect(Collectors.toList())
+				);
+				if (!text.isEmpty())
+				{
+					mc.keyboard.setClipboard(text);
+					InfoUtils.printActionbarMessage("tweakermore.impl.copySignTextToClipBoard." + copiedTextKey, blockState.getBlock().getName());
 				}
+				else
+				{
+					InfoUtils.printActionbarMessage("tweakermore.impl.copySignTextToClipBoard.empty_sign", blockState.getBlock().getName());
+				}
+				return;
 			}
 		}
 		InfoUtils.printActionbarMessage("tweakermore.impl.copySignTextToClipBoard.no_sign");
+	}
+
+	private static Text[] getSignTexts(SignBlockEntity blockEntity, ClientPlayerEntity player)
+	{
+		//#if MC >= 12004
+		//$$ return blockEntity.getText((blockEntity).isPlayerFacingFront(player)).getMessages(false);
+		//#elseif MC >= 12000
+		//$$ return blockEntity.getTextFacing(player).getMessages(false);
+		//#elseif MC >= 11600
+		//$$ return ((SignBlockEntityAccessor)blockEntity).getTexts();
+		//#else
+		return blockEntity.text;
+		//#endif
+	}
+
+	@Nullable
+	private static SignBlockEntity tryGetSignBlockEntity(@Nullable World world, @Nullable BlockPos pos)
+	{
+		if (world != null && pos != null)
+		{
+			BlockState blockState = world.getBlockState(pos);
+			if (blockState.getBlock() instanceof AbstractSignBlock)
+			{
+				BlockEntity blockEntity = world.getBlockEntity(pos);
+				if (blockEntity instanceof SignBlockEntity)
+				{
+					return (SignBlockEntity)blockEntity;
+				}
+			}
+		}
+		return null;
 	}
 }

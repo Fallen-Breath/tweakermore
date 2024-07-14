@@ -1110,6 +1110,7 @@ tweakermore:
       item_copied: 已将物品%1$s的数据复制到剪贴板
     copySignTextToClipBoard:
       sign_copied: 已从%1$s中复制了文本
+      sign_copied_schematic: 已从%1$s中复制了文本 (原理图)
       no_sign: 玩家未指向告示牌方块
       empty_sign: '%1$s不包含任何文本'
     creativePickBlockWithState:

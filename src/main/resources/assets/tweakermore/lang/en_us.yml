@@ -1110,6 +1110,7 @@ tweakermore:
       item_copied: Copied data of %1$s to clipboard
     copySignTextToClipBoard:
       sign_copied: Copied texts from %1$s
+      sign_copied_schematic: Copied texts from %1$s (schematic)
       no_sign: You are not pointing to a sign block
       empty_sign: '%1$s does not contain any text'
     creativePickBlockWithState:
