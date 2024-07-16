@@ -131,7 +131,9 @@ public abstract class PlacementTweaksMixin
 
 		// Carpet-Extra mod accurate block placement protocol support
 		if (flexible && rotation && accurate == false &&
-				//#if MC >= 11700
+				//#if MC >= 12100
+				//$$ Configs.Generic.ACCURATE_PLACEMENT_PROTOCOL.getBooleanValue() &&
+				//#elseif MC >= 11700
 				//$$ Configs.Generic.CARPET_ACCURATE_PLACEMENT_PROTOCOL.getBooleanValue() &&
 				//#else
 				FeatureToggle.CARPET_ACCURATE_PLACEMENT_PROTOCOL.getBooleanValue() &&
