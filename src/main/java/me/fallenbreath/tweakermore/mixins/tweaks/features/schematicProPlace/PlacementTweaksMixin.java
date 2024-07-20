@@ -30,6 +30,7 @@ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.features.schematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.util.BlockUtil;
 import me.fallenbreath.tweakermore.util.ModIds;
+import me.fallenbreath.tweakermore.util.compat.tweakermore.TweakerooAccess;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
@@ -131,7 +132,9 @@ public abstract class PlacementTweaksMixin
 
 		// Carpet-Extra mod accurate block placement protocol support
 		if (flexible && rotation && accurate == false &&
-				//#if MC >= 11700
+				//#if MC >= 12100
+				//$$ TweakerooAccess.getAccuratePlacementProtocolValue() &&
+				//#elseif MC >= 11700
 				//$$ Configs.Generic.CARPET_ACCURATE_PLACEMENT_PROTOCOL.getBooleanValue() &&
 				//#else
 				FeatureToggle.CARPET_ACCURATE_PLACEMENT_PROTOCOL.getBooleanValue() &&
