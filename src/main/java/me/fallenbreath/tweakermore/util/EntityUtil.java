@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.util;
 
-import me.fallenbreath.tweakermore.util.compat.tweakermore.TweakerooAccess;
+import me.fallenbreath.tweakermore.util.compat.tweakeroo.TweakerooAccess;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;

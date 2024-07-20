@@ -18,7 +18,7 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.util.compat.tweakermore;
+package me.fallenbreath.tweakermore.util.compat.tweakeroo;
 
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import fi.dy.masa.tweakeroo.config.Configs;

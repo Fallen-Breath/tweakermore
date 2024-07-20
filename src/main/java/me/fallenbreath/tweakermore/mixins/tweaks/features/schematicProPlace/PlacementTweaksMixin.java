@@ -30,7 +30,6 @@ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.features.schematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.util.BlockUtil;
 import me.fallenbreath.tweakermore.util.ModIds;
-import me.fallenbreath.tweakermore.util.compat.tweakermore.TweakerooAccess;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
@@ -51,6 +50,10 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+//#if MC >= 12100
+//$$ import me.fallenbreath.tweakermore.util.compat.tweakeroo.TweakerooAccess;
+//#endif
 
 /**
  * For injection when tweakeroo is NOT present, see {@link ClientPlayerInteractionManagerMixin}
