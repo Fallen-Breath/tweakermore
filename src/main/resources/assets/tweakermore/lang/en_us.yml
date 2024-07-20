@@ -501,6 +501,12 @@ tweakermore:
         Always set entity's position / angles directly, when receives position / angles update packets of creatures / vehicles
         This may resolve the issue when using carpet mod's /tick [freeze|step] command, 
         that it may take up to 60gt for the entity's position / angles to be correctly displayed on the client side.
+    disableF3BEntityFacingVector:
+      .: disableF3BEntityFacingVector
+      comment: |-
+        Disable the rendered entity facing vector line when F3 + B is on
+        See also: option @option#f3BEntityFacingVectorLength@
+      pretty_name: Disable F3+B Entity Facing Vector
     disableHorizonShadingRendering:
       .: disableHorizonShadingRendering
       comment: |-
@@ -565,6 +571,11 @@ tweakermore:
         using the logic from replay mod which is used in its rendering tasks
         WARNING: Expect client lag spike with enabled
       pretty_name: Flawless Frames
+    f3BEntityFacingVectorLength:
+      .: f3BEntityFacingVectorLength
+      comment: |-
+        Adjust the length of the rendered entity facing vector line when F3 + B is on
+        See also: option @option#disableF3BEntityFacingVector@
     f3IUseRelatedCoordinate:
       .: f3IUseRelatedCoordinate
       comment: |-

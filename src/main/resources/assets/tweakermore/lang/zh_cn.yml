@@ -501,6 +501,12 @@ tweakermore:
         在客户端接收到生物/载具的位置/朝向更新数据包时，总是直接设置该实体的位置/朝向
         这可缓解在carpet mod的/tick [freeze|step]操作下，
         可能需要等待最长60gt，才能在客户端正确显示实体位置/朝向的问题
+    disableF3BEntityFacingVector:
+      .: 禁用F3+B实体朝向线段渲染
+      comment: |-
+        在启用F3+B实体碰撞箱显示后，禁用渲染代表实体朝向的线段
+        另见：选项 @option#f3BEntityFacingVectorLength@
+      pretty_name: 禁用F3+B实体朝向线段渲染
     disableHorizonShadingRendering:
       .: 禁用地平线渲染变暗
       comment: |-
@@ -565,6 +571,11 @@ tweakermore:
         借用了Replay模组渲染各种任务时所使用的逻辑
         警告：这可能会让客户端频繁地卡顿
       pretty_name: 无瑕世界渲染
+    f3BEntityFacingVectorLength:
+      .: F3+B实体朝向线段长度
+      comment: |-
+        在启用F3+B实体碰撞箱显示后，调整代表实体朝向的线段的长度
+        另见：选项 @option#disableF3BEntityFacingVector@
     f3IUseRelatedCoordinate:
       .: F3+I使用相对坐标
       comment: |-

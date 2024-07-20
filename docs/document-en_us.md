@@ -1329,6 +1329,17 @@ that it may take up to 60gt for the entity's position / angles to be correctly d
 - Default value: `false`
 
 
+### disableF3BEntityFacingVector
+
+Disable the rendered entity facing vector line when F3 + B is on
+
+See also: option f3BEntityFacingVectorLength
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean (Tweak)
+- Default value: *no hotkey*, `false`
+
+
 ### disableHorizonShadingRendering
 
 Prevent the horizon from turning dark when you are nearby the world's bottom y
@@ -1421,6 +1432,19 @@ when the light level at player's eyes is not the maximum light level
 - Category: MC Tweaks
 - Type: hotkey togglable boolean (Disable)
 - Default value: *no hotkey*, `false`
+
+
+### f3BEntityFacingVectorLength
+
+Adjust the length of the rendered entity facing vector line when F3 + B is on
+
+See also: option disableF3BEntityFacingVector
+
+- Category: MC Tweaks
+- Type: double (Generic)
+- Default value: `2.0`
+- Minimum value: `0.0`
+- Maximum value: `16.0`
 
 
 ### f3IUseRelatedCoordinate

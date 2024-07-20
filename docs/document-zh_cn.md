@@ -1325,6 +1325,17 @@ schematicBlockPlacement的严格模式
 - 默认值: `false`
 
 
+### 禁用F3+B实体朝向线段渲染 (disableF3BEntityFacingVector)
+
+在启用F3+B实体碰撞箱显示后，禁用渲染代表实体朝向的线段
+
+另见：选项 F3+B实体朝向线段长度
+
+- 分类: MC修改
+- 类型: 带热键布尔值 (工具)
+- 默认值: *无快捷键*, `false`
+
+
 ### 禁用地平线渲染变暗 (disableHorizonShadingRendering)
 
 阻止地平线在玩家接近世界最低y值时变暗的渲染效果
@@ -1417,6 +1428,19 @@ schematicBlockPlacement的严格模式
 - 分类: MC修改
 - 类型: 带热键布尔值 (禁用)
 - 默认值: *无快捷键*, `false`
+
+
+### F3+B实体朝向线段长度 (f3BEntityFacingVectorLength)
+
+在启用F3+B实体碰撞箱显示后，调整代表实体朝向的线段的长度
+
+另见：选项 禁用F3+B实体朝向线段渲染
+
+- 分类: MC修改
+- 类型: 实数 (通用)
+- 默认值: `2.0`
+- 最小值: `0.0`
+- 最大值: `16.0`
 
 
 ### F3+I使用相对坐标 (f3IUseRelatedCoordinate)
