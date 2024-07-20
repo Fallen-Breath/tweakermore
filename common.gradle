@@ -85,10 +85,14 @@ dependencies {
 		def dependencyNotation = item[0]
 		def activatedInRuntime = item[1]
 		if (activatedInRuntime) {
-			modImplementation dependencyNotation
+			modImplementation(dependencyNotation) {
+				exclude group: 'com.github.sakura-ryoko', module: 'malilib'
+			}
 		}
 		else {
-			modCompileOnly dependencyNotation
+			modCompileOnly(dependencyNotation) {
+				exclude group: 'com.github.sakura-ryoko', module: 'malilib'
+			}
 		}
 	}
 
