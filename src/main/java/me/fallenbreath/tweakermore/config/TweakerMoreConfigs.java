@@ -482,6 +482,15 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_VIGNETTE_DARKNESS = newConfigBooleanHotkeyed("disableVignetteDarkness");
 
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigDouble F3_B_ENTITY_FACING_VECTOR_LENGTH = newConfigDouble("f3BEntityFacingVectorLength", 2.0, 0, 16);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean F3_I_USE_RELATED_COORDINATE = newConfigBoolean("f3IUseRelatedCoordinate", false);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean F3_I_USE_RELATED_COORDINATE_SHIFT_1 = newConfigBoolean("f3IUseRelatedCoordinateShift1", true);
+
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed FAKE_NIGHT_VISION = newConfigBooleanHotkeyed("fakeNightVision");
 
@@ -493,15 +502,6 @@ public class TweakerMoreConfigs
 
 	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(ModIds.replay_mod)), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed FLAWLESS_FRAMES = newConfigBooleanHotkeyed("flawlessFrames");
-
-	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigDouble F3_B_ENTITY_FACING_VECTOR_LENGTH = newConfigDouble("f3BEntityFacingVectorLength", 2.0, 0, 16);
-
-	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigBoolean F3_I_USE_RELATED_COORDINATE = newConfigBoolean("f3IUseRelatedCoordinate", false);
-
-	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigBoolean F3_I_USE_RELATED_COORDINATE_SHIFT_1 = newConfigBoolean("f3IUseRelatedCoordinateShift1", true);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigDouble FLY_DRAG = newConfigDouble("flyDrag", 0.09, 0, 1);

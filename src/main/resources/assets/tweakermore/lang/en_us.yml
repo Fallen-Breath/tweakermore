@@ -550,6 +550,21 @@ tweakermore:
         i.e. the darkness effect on the screen corner that accumulates slowly
         when the light level at player's eyes is not the maximum light level
       pretty_name: Disable Vignette Darkness
+    f3BEntityFacingVectorLength:
+      .: f3BEntityFacingVectorLength
+      comment: |-
+        Adjust the length of the rendered entity facing vector line when F3 + B is on
+        See also: option @option#disableF3BEntityFacingVector@
+    f3IUseRelatedCoordinate:
+      .: f3IUseRelatedCoordinate
+      comment: |-
+        Use related coordinate "~ ~ ~" in the command copied by F3 + I
+        Affects both /setblock command for blocks and /summon command for entities
+        See option @option#f3IUseRelatedCoordinateShift1@ to shift the related coordinate up by 1 block, i.e. use "~ ~1 ~"
+    f3IUseRelatedCoordinateShift1:
+      .: f3IUseRelatedCoordinateShift1
+      comment: |-
+        Use coordinate "~ ~1 ~" instead of "~ ~ ~" in option @option#f3IUseRelatedCoordinate@
     fakeNightVision:
       .: fakeNightVision
       comment: Always use night vision for game rendering, regardless of whether the player actually has night vision
@@ -571,21 +586,6 @@ tweakermore:
         using the logic from replay mod which is used in its rendering tasks
         WARNING: Expect client lag spike with enabled
       pretty_name: Flawless Frames
-    f3BEntityFacingVectorLength:
-      .: f3BEntityFacingVectorLength
-      comment: |-
-        Adjust the length of the rendered entity facing vector line when F3 + B is on
-        See also: option @option#disableF3BEntityFacingVector@
-    f3IUseRelatedCoordinate:
-      .: f3IUseRelatedCoordinate
-      comment: |-
-        Use related coordinate "~ ~ ~" in the command copied by F3 + I
-        Affects both /setblock command for blocks and /summon command for entities
-        See option @option#f3IUseRelatedCoordinateShift1@ to shift the related coordinate up by 1 block, i.e. use "~ ~1 ~"
-    f3IUseRelatedCoordinateShift1:
-      .: f3IUseRelatedCoordinateShift1
-      comment: |-
-        Use coordinate "~ ~1 ~" instead of "~ ~ ~" in option @option#f3IUseRelatedCoordinate@
     flyDrag:
       .: flyDrag
       comment: |-
