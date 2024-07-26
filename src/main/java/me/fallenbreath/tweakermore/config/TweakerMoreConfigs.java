@@ -922,7 +922,7 @@ public class TweakerMoreConfigs
 		OF_SANTA_HAT.setValueChangeCallback(OptifinePlayerExtraModelOverrider::onConfigValueChanged);
 		OF_WITCH_HAT.setValueChangeCallback(OptifinePlayerExtraModelOverrider::onConfigValueChanged);
 		PARTICLE_LIMIT.setValueChangeCallback(ParticleLimitHelper::onConfigValueChanged);
-		FLAWLESS_FRAMES.setValueChangeCallback(config -> FlawlessFramesHandler.setEnabled(config.getBooleanValue()));
+		FLAWLESS_FRAMES.setValueChangeCallback(FlawlessFramesHandler::onConfigValueChanged);
 
 		// debugs
 		TWEAKERMORE_DEBUG_MODE.setValueChangeCallback(redrawConfigGui);

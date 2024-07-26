@@ -21,8 +21,8 @@
 package me.fallenbreath.tweakermore.impl.mc_tweaks.flawlessFrames;
 
 import com.google.common.collect.ImmutableList;
+import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
-import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.WorldRenderer;
 
@@ -77,14 +77,12 @@ public class FlawlessFramesHandler
 		{
 			TweakerMoreMod.LOGGER.error("Failed to invoke method uninstall of replay flawless rendering hook {}", hook, e);
 		}
+		hook = null;
 	}
 
-	public static void setEnabled(boolean enabled)
+	public static void onConfigValueChanged(ConfigBoolean config)
 	{
-		if (!TweakerMoreConfigs.FLAWLESS_FRAMES.getTweakerMoreOption().isEnabled())
-		{
-			return;
-		}
+		boolean enabled = config.getBooleanValue();
 		if (hook == null && enabled)
 		{
 			installHook();
