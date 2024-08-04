@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.util.compat.litematica;
 import fi.dy.masa.litematica.config.Configs;
 import fi.dy.masa.litematica.util.RayTraceUtils;
 import fi.dy.masa.litematica.world.SchematicWorldHandler;
+import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.util.FabricUtil;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.MinecraftClient;
@@ -66,18 +67,24 @@ public class LitematicaUtils
 			MinecraftClient mc = MinecraftClient.getInstance();
 			if (mc.world != null)
 			{
-				return Optional.ofNullable(RayTraceUtils.getGenericTrace(
-								mc.world, cameraEntity, 10, true
-								//#if MC >= 11600
-								//$$ , Configs.InfoOverlays.INFO_OVERLAYS_TARGET_FLUIDS.getBooleanValue()
-								//#endif
-								//#if MC >= 11700
-								//$$ , false  // includeVerifier
-								//#endif
-						))
-						.map(RayTraceUtils.RayTraceWrapper::getBlockHitResult)
-						.map(BlockHitResult::getBlockPos)
-						.orElse(null);
+				try
+				{
+					return Optional.ofNullable(RayTraceUtils.getGenericTrace(
+									mc.world, cameraEntity, 10, true
+									//#if MC >= 11600
+									//$$ , Configs.InfoOverlays.INFO_OVERLAYS_TARGET_FLUIDS.getBooleanValue()
+									//$$ , false  // includeVerifier
+									//#endif
+							))
+							.map(RayTraceUtils.RayTraceWrapper::getBlockHitResult)
+							.map(BlockHitResult::getBlockPos)
+							.orElse(null);
+				}
+				catch (NoSuchMethodError e)
+				{
+					TweakerMoreMod.LOGGER.warn("LitematicaUtils.getSchematicWorldCrosshairTargetPos failed: {}", e.toString());
+					return null;
+				}
 			}
 		}
 		return null;
