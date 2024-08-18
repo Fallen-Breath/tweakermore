@@ -100,6 +100,8 @@
     "tweaks.mc_tweaks.disableEntityRenderInterpolation.LivingEntityMixin",
     "tweaks.mc_tweaks.disableEntityRenderInterpolation.WorldRendererMixin",
     "tweaks.mc_tweaks.disableF3BEntityFacingVector.EntityRenderDispatcherMixin",
+    "tweaks.mc_tweaks.disableHoneyBlockEffect.BlockMixin",
+    "tweaks.mc_tweaks.disableHoneyBlockEffect.HoneyBlockMixin",
     "tweaks.mc_tweaks.disableHorizonShadingRendering.BackgroundRendererMixin",
     "tweaks.mc_tweaks.disableLightUpdates.ClientChunkManagerMixin",
     "tweaks.mc_tweaks.disableLightUpdates.LightingProviderMixin",
