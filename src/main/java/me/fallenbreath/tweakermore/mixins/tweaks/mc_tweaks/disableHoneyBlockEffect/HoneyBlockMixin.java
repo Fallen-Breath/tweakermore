@@ -20,34 +20,37 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableHoneyBlockEffect;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.block.BlockState;
+import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.block.HoneyBlock;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static me.fallenbreath.tweakermore.util.ModIds.minecraft;
-
-@Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.15"))
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.15"))
 @Mixin(HoneyBlock.class)
 public abstract class HoneyBlockMixin
 {
-  @Inject(method = "onEntityCollision", at = @At("HEAD"), cancellable = true)
-  private void disableHoneyBlockEffect(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci) {
-    if (TweakerMoreConfigs.DISABLE_HONEY_BLOCK_EFFECT.getBooleanValue())
+  @ModifyExpressionValue(
+      method = "onEntityCollision",
+      at = @At(value = "INVOKE", target = "Lnet/minecraft/block/HoneyBlock;isSliding(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/Entity;)Z")
+  )
+  private boolean isSliding(boolean original, @Local(argsOnly = true) Entity entity)
+  {
+    if (original
+        && TweakerMoreConfigs.DISABLE_HONEY_BLOCK_EFFECT.getBooleanValue()
+        && entity == MinecraftClient.getInstance().player)
     {
-      if (entity == MinecraftClient.getInstance().player)
-      {
-        ci.cancel();
-      }
+      return false;
+    }
+    else
+    {
+      return original;
     }
   }
 }
