@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableHoneyBlockEff
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,14 +31,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static me.fallenbreath.tweakermore.util.ModIds.minecraft;
-
-@Restriction(require = @Condition(value = minecraft, versionPredicates = ">=1.15"))
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.15"))
 @Mixin(Block.class)
 public abstract class BlockMixin
 {
 	@Inject(method = "getJumpVelocityMultiplier", at = @At("HEAD"), cancellable = true)
-	private void getJumpVelocityMultiplier(CallbackInfoReturnable<Float> cir) {
+	private void getJumpVelocityMultiplier(CallbackInfoReturnable<Float> cir)
+	{
 		if (TweakerMoreConfigs.DISABLE_HONEY_BLOCK_EFFECT.getBooleanValue())
 		{
 			Block self = (Block) (Object) this;
@@ -48,7 +48,8 @@ public abstract class BlockMixin
 		}
 	}
 	@Inject(method = "getVelocityMultiplier", at = @At("HEAD"), cancellable = true)
-	private void getVelocityMultiplier(CallbackInfoReturnable<Float> cir) {
+	private void getVelocityMultiplier(CallbackInfoReturnable<Float> cir)
+	{
 		if (TweakerMoreConfigs.DISABLE_HONEY_BLOCK_EFFECT.getBooleanValue())
 		{
 			Block self = (Block) (Object) this;
