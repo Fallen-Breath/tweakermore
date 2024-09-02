@@ -1336,6 +1336,18 @@ schematicBlockPlacement的严格模式
 - 默认值: *无快捷键*, `false`
 
 
+### 禁用蜂蜜块效果 (disableHoneyBlockEffect)
+
+禁用蜂蜜块对玩家造成的各类效果，如移动减速、跳跃阻止等
+
+- 分类: MC修改
+- 类型: 带热键布尔值 (禁用)
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Minecraft (`minecraft`) `>=1.15`
+
+
 ### 禁用地平线渲染变暗 (disableHorizonShadingRendering)
 
 阻止地平线在玩家接近世界最低y值时变暗的渲染效果

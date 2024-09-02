@@ -510,8 +510,8 @@ tweakermore:
     disableHoneyBlockEffect:
       .: disableHoneyBlockEffect
       comment: |-
-        Disable HoneyBlock effects such as "slowdown", "cannot jump".
-      pretty_name: Disable HoneyBlock Effect
+        Disable honey block effects such as "slowdown", "cannot jump"
+      pretty_name: Disable Honey Block Effect
     disableHorizonShadingRendering:
       .: disableHorizonShadingRendering
       comment: |-
