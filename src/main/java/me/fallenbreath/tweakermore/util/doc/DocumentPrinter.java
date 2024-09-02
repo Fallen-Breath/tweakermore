@@ -118,6 +118,12 @@ public class DocumentPrinter
 			}
 		}
 
+		// special cases
+		if (config == TweakerMoreConfigs.LM_CUSTOM_SCHEMATIC_BASE_DIRECTORY_PORTING)
+		{
+			return codeBlock("<path_to_mc_dir>/schematics");
+		}
+
 		if (config instanceof IHotkeyTogglable)
 		{
 			return hotkey + ", " + codeBlock(String.valueOf(((IHotkeyTogglable)config).getDefaultBooleanValue()));

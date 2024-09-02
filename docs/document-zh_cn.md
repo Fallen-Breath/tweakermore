@@ -2498,7 +2498,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
 
 - 分类: 移植
 - 类型: 字符串 (通用)
-- 默认值: `D:\Codes\Minecraft\[Mod]\tweakermore\run\schematics`
+- 默认值: `<path_to_mc_dir>/schematics`
 - 模组约束:
   - 依赖模组:
     - Litematica (`litematica`)

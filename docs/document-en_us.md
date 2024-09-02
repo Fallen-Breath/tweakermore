@@ -2502,7 +2502,7 @@ Backport option customSchematicBaseDirectory from Litematica 0.9.0 mc1.17+
 
 - Category: Porting
 - Type: string (Generic)
-- Default value: `D:\Codes\Minecraft\[Mod]\tweakermore\run\schematics`
+- Default value: `<path_to_mc_dir>/schematics`
 - Mod restrictions:
   - Required mods:
     - Litematica (`litematica`)
