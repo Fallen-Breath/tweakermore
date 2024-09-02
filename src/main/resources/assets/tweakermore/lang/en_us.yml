@@ -507,6 +507,11 @@ tweakermore:
         Disable the rendered entity facing vector line when F3 + B is on
         See also: option @option#f3BEntityFacingVectorLength@
       pretty_name: Disable F3+B Entity Facing Vector
+    disableHoneyBlockEffect:
+      .: disableHoneyBlockEffect
+      comment: |-
+        Disable HoneyBlock effects such as "slowdown", "cannot jump".
+      pretty_name: Disable HoneyBlock Effect
     disableHorizonShadingRendering:
       .: disableHorizonShadingRendering
       comment: |-
