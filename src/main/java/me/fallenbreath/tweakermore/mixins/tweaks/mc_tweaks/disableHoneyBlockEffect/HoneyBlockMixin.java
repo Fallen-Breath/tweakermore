@@ -36,21 +36,21 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(HoneyBlock.class)
 public abstract class HoneyBlockMixin
 {
-  @ModifyExpressionValue(
-      method = "onEntityCollision",
-      at = @At(value = "INVOKE", target = "Lnet/minecraft/block/HoneyBlock;isSliding(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/Entity;)Z")
-  )
-  private boolean isSliding(boolean original, @Local(argsOnly = true) Entity entity)
-  {
-    if (original
-        && TweakerMoreConfigs.DISABLE_HONEY_BLOCK_EFFECT.getBooleanValue()
-        && entity == MinecraftClient.getInstance().player)
-    {
-      return false;
-    }
-    else
-    {
-      return original;
-    }
-  }
+	@ModifyExpressionValue(
+			method = "onEntityCollision",
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/block/HoneyBlock;isSliding(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/Entity;)Z")
+	)
+	private boolean isSliding(boolean original, @Local(argsOnly = true) Entity entity)
+	{
+		if (original
+				&& TweakerMoreConfigs.DISABLE_HONEY_BLOCK_EFFECT.getBooleanValue()
+				&& entity == MinecraftClient.getInstance().player)
+		{
+			return false;
+		}
+		else
+		{
+			return original;
+		}
+	}
 }
