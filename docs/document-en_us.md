@@ -1340,6 +1340,18 @@ See also: option f3BEntityFacingVectorLength
 - Default value: *no hotkey*, `false`
 
 
+### disableHoneyBlockEffect
+
+Disable honey block effects such as "slowdown", "cannot jump"
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean (Disable)
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Minecraft (`minecraft`) `>=1.15`
+
+
 ### disableHorizonShadingRendering
 
 Prevent the horizon from turning dark when you are nearby the world's bottom y

@@ -458,6 +458,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_F3_B_ENTITY_FACING_VECTOR = newConfigBooleanHotkeyed("disableF3BEntityFacingVector");
 
+	@Config(type = Config.Type.DISABLE, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.15")), category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_HONEY_BLOCK_EFFECT = newConfigBooleanHotkeyed("disableHoneyBlockEffect");
+
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_HORIZON_SHADING_RENDERING = newConfigBooleanHotkeyed("disableHorizonShadingRendering");
 

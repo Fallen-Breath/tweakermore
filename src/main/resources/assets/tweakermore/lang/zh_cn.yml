@@ -507,6 +507,11 @@ tweakermore:
         在启用F3+B实体碰撞箱显示后，禁用渲染代表实体朝向的线段
         另见：选项 @option#f3BEntityFacingVectorLength@
       pretty_name: 禁用F3+B实体朝向线段渲染
+    disableHoneyBlockEffect:
+      .: 禁用蜂蜜块效果
+      comment: |-
+        禁用蜂蜜块对玩家造成的各类效果，如移动减速、跳跃阻止等
+      pretty_name: 禁用蜂蜜块效果
     disableHorizonShadingRendering:
       .: 禁用地平线渲染变暗
       comment: |-
