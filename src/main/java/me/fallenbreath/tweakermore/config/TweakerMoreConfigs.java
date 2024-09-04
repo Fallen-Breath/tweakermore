@@ -494,6 +494,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean F3_I_USE_RELATED_COORDINATE_SHIFT_1 = newConfigBoolean("f3IUseRelatedCoordinateShift1", true);
 
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigDouble F3_TEXT_SCALE = newConfigDouble("f3TextScale", 1, 0.01, 4);
+
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed FAKE_NIGHT_VISION = newConfigBooleanHotkeyed("fakeNightVision");
 

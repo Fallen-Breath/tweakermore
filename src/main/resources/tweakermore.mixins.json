@@ -217,6 +217,7 @@
     "util.render.TextHandlerAccessor"
   ],
   "client": [
+    "tweaks.mc_tweaks.f3TextScale.DebugHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1

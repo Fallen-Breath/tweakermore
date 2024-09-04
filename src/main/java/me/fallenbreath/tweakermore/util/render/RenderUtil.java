@@ -107,6 +107,11 @@ public class RenderUtil
 			this.factor = factor;
 		}
 
+		public double getScaleFactor()
+		{
+			return this.factor;
+		}
+
 		public void apply(RenderContext renderContext)
 		{
 			this.renderContext = renderContext;

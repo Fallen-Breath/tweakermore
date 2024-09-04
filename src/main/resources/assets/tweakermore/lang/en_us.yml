@@ -570,6 +570,9 @@ tweakermore:
       .: f3IUseRelatedCoordinateShift1
       comment: |-
         Use coordinate "~ ~1 ~" instead of "~ ~ ~" in option @option#f3IUseRelatedCoordinate@
+    f3TextScale:
+      .: f3TextScale
+      comment: Scale the texts in the F3 debug hud with given factor
     fakeNightVision:
       .: fakeNightVision
       comment: Always use night vision for game rendering, regardless of whether the player actually has night vision

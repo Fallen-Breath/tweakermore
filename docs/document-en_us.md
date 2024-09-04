@@ -1481,6 +1481,17 @@ Use coordinate "~ ~1 ~" instead of "~ ~ ~" in option f3IUseRelatedCoordinate
 - Default value: `true`
 
 
+### f3TextScale
+
+Scale the texts in the F3 debug hud with given factor
+
+- Category: MC Tweaks
+- Type: double (Generic)
+- Default value: `1.0`
+- Minimum value: `0.01`
+- Maximum value: `4.0`
+
+
 ### fakeNightVision
 
 Always use night vision for game rendering, regardless of whether the player actually has night vision

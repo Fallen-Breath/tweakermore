@@ -570,6 +570,9 @@ tweakermore:
       .: F3+I使用相对坐标-上移1m
       comment: |-
         在选项@option#f3IUseRelatedCoordinate@中，使用坐标 ~ ~1 ~ 代替 ~ ~ ~
+    f3TextScale:
+      .: F3字体大小缩放
+      comment: 将F3界面的文本按照给定参数进行缩放
     fakeNightVision:
       .: 伪夜视
       comment: 总是运用夜视效果下的游戏渲染，无论玩家是否确实拥有夜视效果
