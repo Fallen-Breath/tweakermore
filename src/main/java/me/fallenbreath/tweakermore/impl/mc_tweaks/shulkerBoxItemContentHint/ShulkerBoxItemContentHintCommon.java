@@ -103,9 +103,9 @@ public class ShulkerBoxItemContentHintCommon
 
 		// If option activated and box is not custom named
 		if (TweakerMoreConfigs.SHULKER_BOX_ITEM_CONTENT_HINT_CUSTOM_NAMES_OVERRIDE_ITEM.getBooleanValue() && 
-		!itemStack.getName().getString().equals(itemStack.getItem().getName().getString()) )
+			!itemStack.getName().getString().equals(itemStack.getItem().getName().getString()) )
 		{
-			std = getCustomNameOrDefault(itemStack, std);
+			std = getFromCustomNameOrDefault(itemStack, info, std);
 		}
 
 		if (std == null)
@@ -143,35 +143,37 @@ public class ShulkerBoxItemContentHintCommon
 	}
 
 
-	private static ItemStack getCustomNameOrDefault(ItemStack itemStack, ItemStack def)
+	/**
+	 * Try to get a stack with the name or "minecraft:" + the name. In case the stack has a valid name, the info.allItemSame gets ovewritten to true.
+	 * 
+	 */
+	private static ItemStack getFromCustomNameOrDefault(ItemStack itemStack, Info info, ItemStack def)
 	{
+
 		//#if MC >= 12020
 		//$$ Identifier itemId = Identifier.tryParse("", itemStack.getName().getString());
 		//#else
 		Identifier itemId = Identifier.tryParse(itemStack.getName().getString());
 		//#endif
 		
-		if(itemId == null){
+		if(!Registry.ITEM.containsId(itemId)){
 			//#if MC >= 12020
 			//$$ itemId = Identifier.tryParse(itemStack.getName().getString());
 			//#else
 			itemId = Identifier.tryParse("minecraft:"+ itemStack.getName().getString());
 			//#endif
-		}
-
-		if(itemId == null)
+		}		
+		
+		if(!Registry.ITEM.containsId(itemId))
 		{
 			return def;
 		}
-
-
+		
+		// Overwrite info
+		info.allItemSame = true;
+		info.allItemSameIgnoreNbt = true;
+		
 		Item item = Registry.ITEM.get(itemId);
-
-		if(item == null)
-		{
-			return def;
-		}
-
 		return new ItemStack(item);
 	}
 }
