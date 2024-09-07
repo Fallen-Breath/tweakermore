@@ -27,13 +27,10 @@ import me.fallenbreath.tweakermore.util.ItemUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.item.Item;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import java.util.Optional;
-
-import fi.dy.masa.malilib.util.InfoUtils;
 
 public class ShulkerBoxItemContentHintCommon
 {
