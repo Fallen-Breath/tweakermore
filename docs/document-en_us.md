@@ -1809,6 +1809,17 @@ By default, the fill-level bar will only show up for non-mixed boxes
 - Type: boolean (Generic)
 - Default value: `false`
 
+### shulkerBoxItemContentHintCustomNamesOverrideItem
+
+This allows you to override the icon that is shown in the hint by renaming the box in an anvil with the name of the item to be shwon, when shulkerBoxItemContentHint is enabled.
+
+For example, renaming a box "redstone_dust" will make it show the item "minecraft:redstone_dust"
+If you want to use the item of a mod, you can specify the namespace in the name (both "redstone_dust" and "minecraft:redstone_dust" work).
+
+- Category: MC Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+
 
 ### shulkerBoxTooltipEnchantmentHint
 

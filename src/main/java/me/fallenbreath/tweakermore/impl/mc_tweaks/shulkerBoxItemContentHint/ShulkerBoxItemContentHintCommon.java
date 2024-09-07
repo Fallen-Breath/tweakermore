@@ -20,13 +20,20 @@
 
 package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxItemContentHint;
 
+import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.InventoryUtil;
 import me.fallenbreath.tweakermore.util.ItemUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DefaultedList;
+import net.minecraft.item.Item;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 import java.util.Optional;
+
+import fi.dy.masa.malilib.util.InfoUtils;
 
 public class ShulkerBoxItemContentHintCommon
 {
@@ -93,6 +100,43 @@ public class ShulkerBoxItemContentHintCommon
 				}
 			}
 		}
+		//#if MC >= 12100
+		//$$ InfoUtils.sendVanillaMessage(Text.literal("Name is " + itemStack.getName().getString()));
+		//#endif
+		// If option activated and box is custom named
+		if (TweakerMoreConfigs.SHULKER_BOX_ITEM_CONTENT_HINT_CUSTOM_NAMES_OVERRIDE_ITEM.getBooleanValue() && 
+		!itemStack.getName().getString().equals(itemStack.getItem().getName().getString()) )
+		{
+			// Get the id of "minecraft:" + name
+			//#if MC >= 12020
+			//$$ Identifier itemId = Identifier.tryParse(itemStack.getName().getString());
+			//#else
+			Identifier itemId = Identifier.tryParse("minecraft:"+itemStack.getName().getString());
+			//#endif
+			//#if MC >= 12100
+			//$$ InfoUtils.sendVanillaMessage(Text.literal("The identifier is " + itemId));
+			//#endif
+
+
+			if(itemId != null && Registry.ITEM.containsId(itemId))
+			{
+				Item item = Registry.ITEM.get(itemId);
+				std = new ItemStack(item);
+			}	
+
+			// Get the id of name (without "minecraft:")
+			//#if MC >= 12020
+			// $$ itemId = Identifier.tryParse(null,itemStack.getName().getString());
+			//#else
+			itemId = Identifier.tryParse(itemStack.getName().getString());
+			//#endif
+			if(itemId != null && Registry.ITEM.containsId(itemId))
+			{
+				Item item = Registry.ITEM.get(itemId);
+				std = new ItemStack(item);
+			}
+		}
+
 		if (std == null)
 		{
 			return info;

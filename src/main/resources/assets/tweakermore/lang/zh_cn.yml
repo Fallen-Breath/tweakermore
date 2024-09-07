@@ -708,6 +708,12 @@ tweakermore:
     shulkerBoxTooltipPotionInfoHint:
       .: 潜影盒物品药水提示
       comment: 在潜影盒物品的工具提示中显示物品提供的药水效果
+    shulkerBoxItemContentHintCustomNamesOverrideItem:
+      .: shulkerBoxItemContentHintCustomNamesOverrideItem
+      comment: |-
+        启用潜影盒物品内容提示时，通过在铁砧中将盒子重命名为要显示的物品名称，可以覆盖提示中显示的图标。
+        例如，将盒子重命名为 "redstone_dust" 将使其显示物品 "minecraft:redstone_dust"。
+        如果要使用模组的物品，可以在名称中指定命名空间（“redstone_dust” 和 “minecraft:redstone_dust” 都有效）。
     signEditScreenCancelButton:
       .: 告示牌编辑界面取消按钮
       comment: 在标牌编辑界面添加一个取消按钮，用于取消编辑并丢弃所有更改
