@@ -145,9 +145,6 @@ public class ShulkerBoxItemContentHintCommon
 
 	private static ItemStack getCustomNameOrDefault(ItemStack itemStack, ItemStack def)
 	{
-		ChatLogger.logToChat("Name is " + itemStack.getName().getString());
-		ChatLogger.logToChat("Name of item is " + itemStack.getItem().getName().getString());
-
 		//#if MC >= 12020
 		//$$ Identifier itemId = Identifier.tryParse("", itemStack.getName().getString());
 		//#else
@@ -174,10 +171,6 @@ public class ShulkerBoxItemContentHintCommon
 		{
 			return def;
 		}
-
-		ChatLogger.logToChat("The identifier is " + itemId);
-		ChatLogger.logToChat("The result of the getter is " + Registry.ITEM.get(itemId)); 
-		ChatLogger.logToChat("The new itemStack is " + new ItemStack(item)); 
 
 		return new ItemStack(item);
 	}
