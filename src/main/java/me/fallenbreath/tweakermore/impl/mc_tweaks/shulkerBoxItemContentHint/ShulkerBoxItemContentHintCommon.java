@@ -153,7 +153,7 @@ public class ShulkerBoxItemContentHintCommon
 		
 		if(itemId == null){
 			//#if MC >= 12020
-			//$$ Identifier itemId = Identifier.tryParse(itemStack.getName().getString());
+			//$$ itemId = Identifier.tryParse(itemStack.getName().getString());
 			//#else
 			itemId = Identifier.tryParse("minecraft:"+ itemStack.getName().getString());
 			//#endif
