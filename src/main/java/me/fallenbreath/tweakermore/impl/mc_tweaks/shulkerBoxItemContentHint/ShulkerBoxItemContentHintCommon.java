@@ -100,41 +100,12 @@ public class ShulkerBoxItemContentHintCommon
 				}
 			}
 		}
-		//#if MC >= 12100
-		//$$ InfoUtils.sendVanillaMessage(Text.literal("Name is " + itemStack.getName().getString()));
-		//#endif
-		// If option activated and box is custom named
+
+		// If option activated and box is not custom named
 		if (TweakerMoreConfigs.SHULKER_BOX_ITEM_CONTENT_HINT_CUSTOM_NAMES_OVERRIDE_ITEM.getBooleanValue() && 
 		!itemStack.getName().getString().equals(itemStack.getItem().getName().getString()) )
 		{
-			// Get the id of "minecraft:" + name
-			//#if MC >= 12020
-			//$$ Identifier itemId = Identifier.tryParse(itemStack.getName().getString());
-			//#else
-			Identifier itemId = Identifier.tryParse("minecraft:"+itemStack.getName().getString());
-			//#endif
-			//#if MC >= 12100
-			//$$ InfoUtils.sendVanillaMessage(Text.literal("The identifier is " + itemId));
-			//#endif
-
-
-			if(itemId != null && Registry.ITEM.containsId(itemId))
-			{
-				Item item = Registry.ITEM.get(itemId);
-				std = new ItemStack(item);
-			}	
-
-			// Get the id of name (without "minecraft:")
-			//#if MC >= 12020
-			// $$ itemId = Identifier.tryParse(null,itemStack.getName().getString());
-			//#else
-			itemId = Identifier.tryParse(itemStack.getName().getString());
-			//#endif
-			if(itemId != null && Registry.ITEM.containsId(itemId))
-			{
-				Item item = Registry.ITEM.get(itemId);
-				std = new ItemStack(item);
-			}
+			std = getCustomNameOrDefault(itemStack, std);
 		}
 
 		if (std == null)
@@ -169,5 +140,45 @@ public class ShulkerBoxItemContentHintCommon
 		}
 
 		return info;
+	}
+
+
+	private static ItemStack getCustomNameOrDefault(ItemStack itemStack, ItemStack def)
+	{
+		ChatLogger.logToChat("Name is " + itemStack.getName().getString());
+		ChatLogger.logToChat("Name of item is " + itemStack.getItem().getName().getString());
+
+		//#if MC >= 12020
+		//$$ Identifier itemId = Identifier.tryParse("", itemStack.getName().getString());
+		//#else
+		Identifier itemId = Identifier.tryParse(itemStack.getName().getString());
+		//#endif
+		
+		if(itemId == null){
+			//#if MC >= 12020
+			//$$ Identifier itemId = Identifier.tryParse(itemStack.getName().getString());
+			//#else
+			itemId = Identifier.tryParse("minecraft:"+ itemStack.getName().getString());
+			//#endif
+		}
+
+		if(itemId == null)
+		{
+			return def;
+		}
+
+
+		Item item = Registry.ITEM.get(itemId);
+
+		if(item == null)
+		{
+			return def;
+		}
+
+		ChatLogger.logToChat("The identifier is " + itemId);
+		ChatLogger.logToChat("The result of the getter is " + Registry.ITEM.get(itemId)); 
+		ChatLogger.logToChat("The new itemStack is " + new ItemStack(item)); 
+
+		return new ItemStack(item);
 	}
 }
