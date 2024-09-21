@@ -28,20 +28,21 @@ repositories {
 	}
 }
 
+static String curseForgeOrOther(version, curseForge, other) {
+	return ((version as String).isNumber() ? curseForge  : other) + ':' + version
+}
+
 // list of (dependencyNotation -> should use modImplementation)
 def mod_dependencies = [
-		[(mcVersion >= 12100 ? 'com.github.sakura-ryoko:malilib:'      : 'fi.dy.masa.malilib:'               ) + "${project.malilib_version}"     , true],
-		[(mcVersion >= 12006 ? 'com.github.sakura-ryoko:tweakeroo:'    : 'curse.maven:tweakeroo-297344:'     ) + "${project.tweakeroo_file_id}"   , true],
-		[(mcVersion >= 12006 ? 'com.github.sakura-ryoko:itemscroller:' : 'curse.maven:item-scroller-242064:' ) + "${project.itemscroller_file_id}", true],
-		[(mcVersion >= 12006 ? 'com.github.sakura-ryoko:minihud:'      : 'curse.maven:minihud-244260:'       ) + "${project.minihud_file_id}"     , true],
+		["fi.dy.masa.malilib:${project.malilib_version}", true],
+		[curseForgeOrOther(project.tweakeroo_file_id   , 'curse.maven:tweakeroo-297344'    , 'com.github.sakura-ryoko:tweakeroo'   ), true],
+		[curseForgeOrOther(project.itemscroller_file_id, 'curse.maven:item-scroller-242064', 'com.github.sakura-ryoko:itemscroller'), true],
+		[curseForgeOrOther(project.minihud_file_id     , 'curse.maven:minihud-244260'      , 'com.github.sakura-ryoko:minihud'     ), true],
 
 		// - loom doesn't remap base class method (method_10263) call of fi.dy.masa.malilib.util.SubChunkPos in
 		//   fi.dy.masa.litematica.render.schematic.WorldRendererSchematic.setupTerrain, resulting in a crash in dev env
 		//   so we have to disable litematica in [1.15, 1.17) at runtime
-		[
-				(mcVersion >= 12006 ? 'com.github.sakura-ryoko:litematica:': 'curse.maven:litematica-308892:') + "${project.litematica_file_id}",
-				mcVersion < 11500 || 11700 <= mcVersion
-		],
+		[curseForgeOrOther(project.litematica_file_id, 'curse.maven:litematica-308892', 'com.github.sakura-ryoko:litematica'), mcVersion < 11500 || 11700 <= mcVersion],
 
 		// we're using modmenu for mc 1.15.2 for 1.14.4, so we use modCompileOnly
 		["com.terraformersmc:modmenu:${project.mod_menu_version}"          , mcVersion >= 11500],
