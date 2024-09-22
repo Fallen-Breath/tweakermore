@@ -127,9 +127,10 @@ JavaVersion MIXIN_COMPATIBILITY_LEVEL = JAVA_COMPATIBILITY
 loom {
 	accessWidenerPath = file("tweakermore.accesswidener")
 
+    def commonVmArgs = ['-Dmixin.debug.export=true', '-Dmixin.debug.countInjections=true']
 	runConfigs.configureEach {
 		runDir '../../run'
-		vmArgs '-Dmixin.debug.export=true'
+		vmArgs commonVmArgs
 	}
 	runConfigs.client {
 		// to make sure it generates all "Minecraft Client (:subproject_name)" applications
