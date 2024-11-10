@@ -23,10 +23,7 @@ package me.fallenbreath.tweakermore.impl.features.infoView.growthSpeed.handlers;
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.growthSpeed.AttachedStemBlockAccessor;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.growthSpeed.CropBlockAccessor;
-import net.minecraft.block.AttachedStemBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.CropBlock;
-import net.minecraft.block.StemBlock;
+import net.minecraft.block.*;
 import net.minecraft.text.BaseText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
@@ -43,8 +40,9 @@ import static me.fallenbreath.tweakermore.util.Messenger.s;
 public class CropGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHandler
 {
 	@Override
-	public boolean isTarget(Block block)
+	public boolean isTarget(BlockState blockState)
 	{
+		Block block = blockState.getBlock();
 		return block instanceof CropBlock || block instanceof StemBlock || block instanceof AttachedStemBlock;
 	}
 

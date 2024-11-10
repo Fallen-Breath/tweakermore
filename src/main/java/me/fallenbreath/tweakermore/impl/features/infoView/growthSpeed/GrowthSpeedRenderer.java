@@ -52,8 +52,8 @@ public class GrowthSpeedRenderer extends CommonScannerInfoViewer
 	@Override
 	public boolean shouldRenderFor(RenderVisitorWorldView world, BlockPos pos)
 	{
-		Block block = world.getBlockState(pos).getBlock();
-		return this.handlers.stream().anyMatch(h -> h.isTarget(block));
+		BlockState blockState = world.getBlockState(pos);
+		return this.handlers.stream().anyMatch(h -> h.isTarget(blockState));
 	}
 
 	@Override
@@ -65,11 +65,11 @@ public class GrowthSpeedRenderer extends CommonScannerInfoViewer
 	@Override
 	protected void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
-		Block block = world.getBlockState(pos).getBlock();
+		BlockState blockState = world.getBlockState(pos);
 		List<BaseText> lines = Lists.newArrayList();
 		for (GrowthSpeedRendererHandler handler : this.handlers)
 		{
-			if (handler.isTarget(block))
+			if (handler.isTarget(blockState))
 			{
 				handler.addInfoLines(world, pos, isCrossHairPos, lines);
 				break;

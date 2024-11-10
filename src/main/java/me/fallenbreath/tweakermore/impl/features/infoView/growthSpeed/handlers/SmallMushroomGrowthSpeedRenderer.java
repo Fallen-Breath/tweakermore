@@ -22,6 +22,7 @@ package me.fallenbreath.tweakermore.impl.features.infoView.growthSpeed.handlers;
 
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.MushroomPlantBlock;
 import net.minecraft.text.BaseText;
 import net.minecraft.util.Formatting;
@@ -34,9 +35,9 @@ import static me.fallenbreath.tweakermore.util.Messenger.s;
 public class SmallMushroomGrowthSpeedRenderer extends BasicGrowthSpeedRendererHandler
 {
 	@Override
-	public boolean isTarget(Block block)
+	public boolean isTarget(BlockState blockState)
 	{
-		return block instanceof MushroomPlantBlock;
+		return blockState.getBlock() instanceof MushroomPlantBlock;
 	}
 
 	@Override

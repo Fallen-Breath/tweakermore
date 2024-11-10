@@ -22,8 +22,9 @@ package me.fallenbreath.tweakermore.impl.features.infoView.growthSpeed.handlers;
 
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Degradable;
-import net.minecraft.block.OxidizableBlock;
+import net.minecraft.block.Oxidizable;
 import net.minecraft.text.BaseText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
@@ -33,12 +34,29 @@ import java.util.List;
 import static me.fallenbreath.tweakermore.util.Messenger.s;
 import static me.fallenbreath.tweakermore.util.Messenger.style;
 
+//#if MC >= 12004
+//$$ import net.minecraft.block.OxidizableDoorBlock;
+//$$ import net.minecraft.block.enums.DoubleBlockHalf;
+//#endif
+
 public class CopperGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHandler
 {
 	@Override
-	public boolean isTarget(Block block)
+	public boolean isTarget(BlockState blockState)
 	{
-		return block instanceof OxidizableBlock;
+		return blockState.getBlock() instanceof Oxidizable && canDegrade(blockState);
+	}
+
+	private static boolean canDegrade(BlockState blockState)
+	{
+		//#if MC >= 12004
+		//$$ // see net.minecraft.block.OxidizableDoorBlock#randomTick
+		//$$ if (blockState.getBlock() instanceof OxidizableDoorBlock)
+		//$$ {
+		//$$ 	return blockState.get(OxidizableDoorBlock.HALF) == DoubleBlockHalf.LOWER;
+		//$$ }
+		//#endif
+		return true;
 	}
 
 	/**
