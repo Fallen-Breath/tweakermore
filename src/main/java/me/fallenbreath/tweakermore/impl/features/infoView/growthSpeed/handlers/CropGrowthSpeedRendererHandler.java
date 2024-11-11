@@ -37,13 +37,22 @@ import static me.fallenbreath.tweakermore.util.Messenger.s;
 //$$ import net.minecraft.registry.RegistryKeys;
 //#endif
 
+//#if MC >= 12001
+//$$ import net.minecraft.block.PitcherCropBlock;
+//$$ import net.minecraft.block.enums.DoubleBlockHalf;
+//#endif
+
 public class CropGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHandler
 {
 	@Override
 	public boolean isTarget(BlockState blockState)
 	{
 		Block block = blockState.getBlock();
-		return block instanceof CropBlock || block instanceof StemBlock || block instanceof AttachedStemBlock;
+		return block instanceof CropBlock || block instanceof StemBlock || block instanceof AttachedStemBlock
+				//#if MC >= 12001
+				//$$ || (block instanceof PitcherCropBlock && blockState.get(PitcherCropBlock.HALF) == DoubleBlockHalf.LOWER)
+				//#endif
+				;
 	}
 
 	/**
