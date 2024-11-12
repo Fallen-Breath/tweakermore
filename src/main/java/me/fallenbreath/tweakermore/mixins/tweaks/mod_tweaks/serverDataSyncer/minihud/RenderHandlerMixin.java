@@ -38,8 +38,8 @@ import org.spongepowered.asm.mixin.injection.Slice;
 //#endif
 
 //#if MC >= 12101
-//$$  import com.llamalad7.mixinextras.lib.apache.commons.tuple.Pair;
-//$$  import net.minecraft.nbt.NbtCompound;
+//$$ import com.llamalad7.mixinextras.lib.apache.commons.tuple.Pair;
+//$$ import net.minecraft.nbt.NbtCompound;
 //#endif
 
 @Restriction(require = @Condition(ModIds.minihud))
@@ -62,7 +62,7 @@ public abstract class RenderHandlerMixin
 					//#if MC < 12101
 					target = "Lfi/dy/masa/minihud/event/RenderHandler;getTargetedBlockEntity(Lnet/minecraft/world/World;Lnet/minecraft/client/MinecraftClient;)Lnet/minecraft/block/entity/BlockEntity;",
 					//#else
-					//$$  target = "Lfi/dy/masa/minihud/event/RenderHandler;getTargetedBlockEntity(Lnet/minecraft/world/World;Lnet/minecraft/client/MinecraftClient;)Lcom/llamalad7/mixinextras/lib/apache/commons/tuple/Pair;",
+					//$$ target = "Lfi/dy/masa/minihud/event/RenderHandler;getTargetedBlockEntity(Lnet/minecraft/world/World;Lnet/minecraft/client/MinecraftClient;)Lcom/llamalad7/mixinextras/lib/apache/commons/tuple/Pair;",
 					//#endif
 					ordinal = 0,
 					remap = true
@@ -72,13 +72,13 @@ public abstract class RenderHandlerMixin
 	//#if MC < 12101
 	private BlockEntity serverDataSyncer4BeehiveBeeCount(BlockEntity blockEntity)
 	//#else
-	//$$  private Pair<BlockEntity, NbtCompound> serverDataSyncer4BeehiveBeeCount(Pair<BlockEntity, NbtCompound> original)
+	//$$ private Pair<BlockEntity, NbtCompound> serverDataSyncer4BeehiveBeeCount(Pair<BlockEntity, NbtCompound> original)
 	//#endif
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{
 			//#if MC >= 12101
-			//$$  BlockEntity blockEntity = original.getLeft();
+			//$$ BlockEntity blockEntity = original.getLeft();
 			//#endif
 			if (blockEntity instanceof BeehiveBlockEntity && !MinecraftClient.getInstance().isIntegratedServerRunning())
 			{
@@ -88,7 +88,7 @@ public abstract class RenderHandlerMixin
 		//#if MC < 12101
 		return blockEntity;
 		//#else
-		//$$  return original;
+		//$$ return original;
 		//#endif
 	}
 	//#endif
