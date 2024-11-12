@@ -61,7 +61,7 @@ public abstract class RenderHandlerMixin {
         if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
         {
             BlockEntity blockEntity = original.getLeft();
-            if (blockEntity instanceof BeehiveBlockEntity && MinecraftClient.getInstance().isIntegratedServerRunning())
+            if (blockEntity instanceof BeehiveBlockEntity && !MinecraftClient.getInstance().isIntegratedServerRunning())
             {
                 ServerDataSyncer.getInstance().syncBlockEntity(blockEntity);
             }
