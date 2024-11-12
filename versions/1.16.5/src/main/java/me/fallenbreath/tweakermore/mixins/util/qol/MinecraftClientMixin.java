@@ -29,6 +29,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Coerce;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+// impl in mc [1.16, 1.20.4)
 @Restriction(require = @Condition(type = Condition.Type.TESTER, tester = DevelopmentEnvironmentTester.class))
 @Mixin(MinecraftClient.class)
 public abstract class MinecraftClientMixin
