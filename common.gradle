@@ -127,7 +127,12 @@ JavaVersion MIXIN_COMPATIBILITY_LEVEL = JAVA_COMPATIBILITY
 loom {
 	accessWidenerPath = file("tweakermore.accesswidener")
 
-    def commonVmArgs = ['-Dmixin.debug.export=true', '-Dmixin.debug.countInjections=true']
+    def commonVmArgs = ['-Dmixin.debug.export=true']
+	var enableCountInjections = false
+	if (enableCountInjections) {
+		// Notes: most tweakeroo versions cannot pass this check
+		commonVmArgs.add('-Dmixin.debug.countInjections=true')
+	}
 	runConfigs.configureEach {
 		runDir '../../run'
 		vmArgs commonVmArgs
