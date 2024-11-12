@@ -59,20 +59,20 @@ public abstract class RenderHandlerMixin
 			),
 			at = @At(
 					value = "INVOKE",
-					//#if MC < 12101
-					target = "Lfi/dy/masa/minihud/event/RenderHandler;getTargetedBlockEntity(Lnet/minecraft/world/World;Lnet/minecraft/client/MinecraftClient;)Lnet/minecraft/block/entity/BlockEntity;",
-					//#else
+					//#if MC >= 12101
 					//$$ target = "Lfi/dy/masa/minihud/event/RenderHandler;getTargetedBlockEntity(Lnet/minecraft/world/World;Lnet/minecraft/client/MinecraftClient;)Lcom/llamalad7/mixinextras/lib/apache/commons/tuple/Pair;",
+					//#else
+					target = "Lfi/dy/masa/minihud/event/RenderHandler;getTargetedBlockEntity(Lnet/minecraft/world/World;Lnet/minecraft/client/MinecraftClient;)Lnet/minecraft/block/entity/BlockEntity;",
 					//#endif
 					ordinal = 0,
 					remap = true
 			),
 			remap = false
 	)
-	//#if MC < 12101
-	private BlockEntity serverDataSyncer4BeehiveBeeCount(BlockEntity blockEntity)
-	//#else
+	//#if MC >= 12101
 	//$$ private Pair<BlockEntity, NbtCompound> serverDataSyncer4BeehiveBeeCount(Pair<BlockEntity, NbtCompound> original)
+	//#else
+	private BlockEntity serverDataSyncer4BeehiveBeeCount(BlockEntity blockEntity)
 	//#endif
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
@@ -85,10 +85,10 @@ public abstract class RenderHandlerMixin
 				ServerDataSyncer.getInstance().syncBlockEntity(blockEntity);
 			}
 		}
-		//#if MC < 12101
-		return blockEntity;
-		//#else
+		//#if MC >= 12101
 		//$$ return original;
+		//#else
+		return blockEntity;
 		//#endif
 	}
 	//#endif
