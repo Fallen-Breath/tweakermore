@@ -37,6 +37,11 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import org.spongepowered.asm.mixin.injection.Slice;
 //#endif
 
+//#if MC >= 12101
+//$$ import com.llamalad7.mixinextras.lib.apache.commons.tuple.Pair;
+//$$ import net.minecraft.nbt.NbtCompound;
+//#endif
+
 @Restriction(require = @Condition(ModIds.minihud))
 @Mixin(RenderHandler.class)
 public abstract class RenderHandlerMixin
@@ -54,22 +59,37 @@ public abstract class RenderHandlerMixin
 			),
 			at = @At(
 					value = "INVOKE",
+					//#if MC >= 12101
+					//$$ target = "Lfi/dy/masa/minihud/event/RenderHandler;getTargetedBlockEntity(Lnet/minecraft/world/World;Lnet/minecraft/client/MinecraftClient;)Lcom/llamalad7/mixinextras/lib/apache/commons/tuple/Pair;",
+					//#else
 					target = "Lfi/dy/masa/minihud/event/RenderHandler;getTargetedBlockEntity(Lnet/minecraft/world/World;Lnet/minecraft/client/MinecraftClient;)Lnet/minecraft/block/entity/BlockEntity;",
+					//#endif
 					ordinal = 0,
 					remap = true
 			),
 			remap = false
 	)
+	//#if MC >= 12101
+	//$$ private Pair<BlockEntity, NbtCompound> serverDataSyncer4BeehiveBeeCount(Pair<BlockEntity, NbtCompound> original)
+	//#else
 	private BlockEntity serverDataSyncer4BeehiveBeeCount(BlockEntity blockEntity)
+	//#endif
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{
+			//#if MC >= 12101
+			//$$ BlockEntity blockEntity = original.getLeft();
+			//#endif
 			if (blockEntity instanceof BeehiveBlockEntity && !MinecraftClient.getInstance().isIntegratedServerRunning())
 			{
 				ServerDataSyncer.getInstance().syncBlockEntity(blockEntity);
 			}
 		}
+		//#if MC >= 12101
+		//$$ return original;
+		//#else
 		return blockEntity;
+		//#endif
 	}
 	//#endif
 }

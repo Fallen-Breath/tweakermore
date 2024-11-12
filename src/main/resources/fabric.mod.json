@@ -32,6 +32,9 @@
     "tweakermore.mixins.json"
   ],
 
+  "breaks": {
+    "minihud": "${minihud_conflict}"
+  },
   "depends": {
     "fabricloader": ">=0.11.4",
     "minecraft": "${minecraft_dependency}",
