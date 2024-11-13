@@ -157,7 +157,9 @@ public class TextRenderer
 			renderContext.translate(this.horizontalAlignment.getTranslateX(totalTextWidth), this.verticalAlignment.getTranslateY(totalTextHeight), 0);
 			renderContext.translate(this.shiftX, this.shiftY, 0);
 
-			//#if MC >= 11700
+			//#if MC >= 12103
+			//$$ // no op
+			//#elseif MC >= 11700
 			//$$ RenderSystem.applyModelViewMatrix();
 			//#else
 			RenderGlobals.enableAlphaTest();
@@ -229,7 +231,7 @@ public class TextRenderer
 			//#endif
 		}
 		positionTransformer.restore();
-		//#if MC >= 11700
+		//#if MC >= 11700 && MC < 12103
 		//$$ RenderSystem.applyModelViewMatrix();
 		//#endif
 	}

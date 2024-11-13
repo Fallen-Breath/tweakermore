@@ -20,11 +20,18 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.daytimeOverride;
 
+import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalLongRef;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.world.ClientWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+//#if MC >= 12103
+//$$ import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
+//#endif
 
 /**
  * Modify daytime here too,
@@ -33,13 +40,32 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(ClientWorld.class)
 public abstract class ClientWorldMixin
 {
-	@ModifyVariable(method = "setTimeOfDay", at = @At("HEAD"), argsOnly = true)
-	private long overwriteDayTime(long timeArg)
+	@Inject(
+			//#if MC >= 12103
+			//$$ method = "setTime",
+			//#else
+			method = "setTimeOfDay",
+			//#endif
+			at = @At("HEAD")
+	)
+	private void overwriteDayTime(
+			CallbackInfo ci,
+			//#if MC >= 12103
+			//$$ @Local(argsOnly = true, ordinal = 1) LocalLongRef timeOfDay,
+			//$$ @Local(argsOnly = true) LocalBooleanRef shouldTickTimeOfDay
+			//#else
+			@Local(argsOnly = true) LocalLongRef timeOfDay
+			//#endif
+	)
 	{
 		if (TweakerMoreConfigs.DAYTIME_OVERRIDE.getBooleanValue())
 		{
-			timeArg = -TweakerMoreConfigs.DAYTIME_OVERRIDE_VALUE.getIntegerValue();
+			//#if MC >= 12103
+			//$$ timeOfDay.set(TweakerMoreConfigs.DAYTIME_OVERRIDE_VALUE.getIntegerValue());
+			//$$ shouldTickTimeOfDay.set(false);
+			//#else
+			timeOfDay.set(-TweakerMoreConfigs.DAYTIME_OVERRIDE_VALUE.getIntegerValue());
+			//#endif
 		}
-		return timeArg;
 	}
 }

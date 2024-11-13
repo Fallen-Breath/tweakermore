@@ -97,6 +97,8 @@
     "tweaks.mc_tweaks.disableEntityModelRendering.EntityRenderDispatcherMixin",
     "tweaks.mc_tweaks.disableEntityRenderInterpolation.AbstractMinecartEntityMixin",
     "tweaks.mc_tweaks.disableEntityRenderInterpolation.BoatEntityMixin",
+    "tweaks.mc_tweaks.disableEntityRenderInterpolation.DefaultMinecartControllerAccessor",
+    "tweaks.mc_tweaks.disableEntityRenderInterpolation.ExperimentalMinecartControllerAccessor",
     "tweaks.mc_tweaks.disableEntityRenderInterpolation.LivingEntityMixin",
     "tweaks.mc_tweaks.disableEntityRenderInterpolation.WorldRendererMixin",
     "tweaks.mc_tweaks.disableF3BEntityFacingVector.EntityRenderDispatcherMixin",

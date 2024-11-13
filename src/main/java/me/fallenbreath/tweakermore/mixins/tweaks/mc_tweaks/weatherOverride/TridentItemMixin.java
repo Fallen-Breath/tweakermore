@@ -20,81 +20,85 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.weatherOverride;
 
-import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.weatherOverride.WeatherOverrideHelper;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.TridentItem;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(TridentItem.class)
 public abstract class TridentItemMixin
 {
-	@Inject(
+	@ModifyVariable(
 			method = "onStoppedUsing",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/entity/player/PlayerEntity;isTouchingWaterOrRain()Z"
-			)
+			),
+			argsOnly = true
 	)
-	private void weatherOverride_dontOverrideTheRiptideCondition_1_begin(CallbackInfo ci, @Local(argsOnly = true) World world)
+	private World weatherOverride_dontOverrideTheRiptideCondition_1_begin(World world)
 	{
 		if (TweakerMoreConfigs.WEATHER_OVERRIDE.getBooleanValue() && world instanceof ClientWorld)
 		{
 			WeatherOverrideHelper.disableOverride.set(true);
 		}
+		return world;
 	}
 
-	@Inject(
+	@ModifyVariable(
 			method = "onStoppedUsing",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/entity/player/PlayerEntity;isTouchingWaterOrRain()Z",
 					shift = At.Shift.AFTER
-			)
+			),
+			argsOnly = true
 	)
-	private void weatherOverride_dontOverrideTheRiptideCondition_1_end(CallbackInfo ci, @Local(argsOnly = true) World world)
+	private World weatherOverride_dontOverrideTheRiptideCondition_1_end(World world)
 	{
 		if (TweakerMoreConfigs.WEATHER_OVERRIDE.getBooleanValue() && world instanceof ClientWorld)
 		{
 			WeatherOverrideHelper.disableOverride.remove();
 		}
+		return world;
 	}
-	@Inject(
+
+	@ModifyVariable(
 			method = "use",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/entity/player/PlayerEntity;isTouchingWaterOrRain()Z"
-			)
+			),
+			argsOnly = true
 	)
-	private void weatherOverride_dontOverrideTheRiptideCondition_2_begin(CallbackInfoReturnable<TypedActionResult<ItemStack>> cir, @Local(argsOnly = true) World world)
+	private World weatherOverride_dontOverrideTheRiptideCondition_2_begin(World world)
 	{
 		if (TweakerMoreConfigs.WEATHER_OVERRIDE.getBooleanValue() && world instanceof ClientWorld)
 		{
 			WeatherOverrideHelper.disableOverride.set(true);
 		}
+		return world;
 	}
 
-	@Inject(
+	@ModifyVariable(
 			method = "use",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/entity/player/PlayerEntity;isTouchingWaterOrRain()Z",
 					shift = At.Shift.AFTER
-			)
+			),
+			argsOnly = true
 	)
-	private void weatherOverride_dontOverrideTheRiptideCondition_2_end(CallbackInfoReturnable<TypedActionResult<ItemStack>> cir, @Local(argsOnly = true) World world)
+	private World weatherOverride_dontOverrideTheRiptideCondition_2_end(World world)
 	{
 		if (TweakerMoreConfigs.WEATHER_OVERRIDE.getBooleanValue() && world instanceof ClientWorld)
 		{
 			WeatherOverrideHelper.disableOverride.remove();
 		}
+		return world;
 	}
 }

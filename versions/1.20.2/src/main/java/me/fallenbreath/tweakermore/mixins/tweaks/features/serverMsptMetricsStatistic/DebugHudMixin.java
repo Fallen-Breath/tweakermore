@@ -80,7 +80,11 @@ public abstract class DebugHudMixin
 	@Unique private int tickChartWidth$TKM = 0;
 
 	@ModifyArgs(
+			//#if MC >= 12103
+			//$$ method = "render",
+			//#else
 			method = "method_51746",  // lambda method in tickChart()
+			//#endif
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/client/gui/hud/debug/TickChart;render(Lnet/minecraft/client/gui/DrawContext;II)V"
@@ -111,7 +115,11 @@ public abstract class DebugHudMixin
 	}
 
 	@Inject(
+			//#if MC >= 12103
+			//$$ method = "render",
+			//#else
 			method = "method_51746",  // lambda method in tickChart()
+			//#endif
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/client/gui/hud/debug/TickChart;render(Lnet/minecraft/client/gui/DrawContext;II)V",

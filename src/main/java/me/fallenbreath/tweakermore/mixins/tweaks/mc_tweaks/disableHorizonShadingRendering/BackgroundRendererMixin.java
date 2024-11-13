@@ -31,7 +31,9 @@ import org.spongepowered.asm.mixin.injection.Slice;
 public abstract class BackgroundRendererMixin
 {
 	@ModifyVariable(
-			//#if MC >= 11500
+			//#if MC >= 12103
+			//$$ method = "getFogColor",
+			//#elseif MC >= 11500
 			method = "render",
 			//#else
 			//$$ method = "renderBackground",
@@ -63,7 +65,9 @@ public abstract class BackgroundRendererMixin
 
 					//#endif
 			),
-			//#if MC >= 11800
+			//#if MC >= 12103
+			//$$ ordinal = 5
+			//#elseif MC >= 11800
 			//$$ ordinal = 2
 			//#else
 			ordinal = 0

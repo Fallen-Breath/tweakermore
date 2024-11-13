@@ -66,7 +66,9 @@ public abstract class ItemEntityRendererMixin
 	}
 
 	@ModifyArg(
-			//#if MC >= 11500
+			//#if MC >= 12103
+			//$$ method = "render(Lnet/minecraft/client/render/entity/state/EntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
+			//#elseif MC >= 11500
 			method = "render(Lnet/minecraft/entity/ItemEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
 			//#else
 			//$$ method = "method_3997",
@@ -104,7 +106,9 @@ public abstract class ItemEntityRendererMixin
 	}
 
 	@ModifyArg(
-			//#if MC >= 11500
+			//#if MC >= 12103
+			//$$ method = "render(Lnet/minecraft/client/render/entity/state/EntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
+			//#elseif MC >= 11500
 			method = "render(Lnet/minecraft/entity/ItemEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
 			//#else
 			//$$ method = "method_3997",
@@ -123,8 +127,9 @@ public abstract class ItemEntityRendererMixin
 			index = 0
 	)
 	private float preciseItemEntityModel_tweakItemEntityRotation(
-			float rotation,
-			@Local(argsOnly = true) ItemEntity itemEntity,
+			float rotation
+			//#if MC < 12103
+			, @Local(argsOnly = true) ItemEntity itemEntity,
 			@Local(
 					argsOnly = true,
 					//#if MC >= 11500
@@ -134,6 +139,7 @@ public abstract class ItemEntityRendererMixin
 					//#endif
 			)
 			float tickDelta
+			//#endif
 	)
 	{
 		if (TweakerMoreConfigs.PRECISE_ITEM_ENTITY_MODEL.getBooleanValue())
@@ -141,7 +147,12 @@ public abstract class ItemEntityRendererMixin
 			rotation = 0;
 			if (TweakerMoreConfigs.PRECISE_ITEM_ENTITY_MODEL_YAW_SNAP.getBooleanValue())
 			{
-				float yaw = (itemEntity.getYaw(tickDelta) + 360) % 360;
+				//#if MC >= 12103
+				//$$ float yaw = 0;  // FIXME: carry the yaw info from the ItemEntityRenderState
+				//#else
+				float yaw = itemEntity.getYaw(tickDelta);
+				//#endif
+				yaw = (yaw + 360) % 360;
 				for (int r : new int[]{0, 90, 180, 270, 360})
 				{
 					if (r - 45 <= yaw && yaw < r + 45)
@@ -159,7 +170,9 @@ public abstract class ItemEntityRendererMixin
 	}
 
 	@Inject(
-			//#if MC >= 11500
+			//#if MC >= 12103
+			//$$ method = "render(Lnet/minecraft/client/render/entity/state/EntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
+			//#elseif MC >= 11500
 			method = "render(Lnet/minecraft/entity/ItemEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
 			//#else
 			//$$ method = "render(Lnet/minecraft/entity/ItemEntity;DDDFF)V",
@@ -186,7 +199,9 @@ public abstract class ItemEntityRendererMixin
 	}
 
 	@Inject(
-			//#if MC >= 11500
+			//#if MC >= 12103
+			//$$ method = "render(Lnet/minecraft/client/render/entity/state/EntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
+			//#elseif MC >= 11500
 			method = "render(Lnet/minecraft/entity/ItemEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
 			//#else
 			//$$ method = "render(Lnet/minecraft/entity/ItemEntity;DDDFF)V",

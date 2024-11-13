@@ -31,9 +31,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.explosion.Explosion;
 
 import java.util.Objects;
+
+//#if MC >= 12103
+//$$ import net.minecraft.world.explosion.ExplosionImpl;
+//#else
+import net.minecraft.world.explosion.Explosion;
+//#endif
 
 //#if MC >= 12100
 //$$ import net.minecraft.enchantment.Enchantments;
@@ -84,7 +89,13 @@ public class DamageCalculator
 
 	public static DamageCalculator explosion(Vec3d explosionCenter, float explosionPower, LivingEntity entity)
 	{
-		float exposure = Explosion.getExposure(explosionCenter, entity);
+		float exposure =
+				//#if MC >= 12103
+				//$$ ExplosionImpl.calculateReceivedDamage
+				//#else
+				Explosion.getExposure
+				//#endif
+						(explosionCenter, entity);
 		float maxRange = explosionPower * 2.0F;
 		double distanceRatio = Math.sqrt(entity.squaredDistanceTo(explosionCenter)) / (double) maxRange;
 		int damage;

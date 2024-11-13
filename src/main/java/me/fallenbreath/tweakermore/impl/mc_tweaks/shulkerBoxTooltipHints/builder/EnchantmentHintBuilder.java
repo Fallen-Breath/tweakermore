@@ -22,7 +22,6 @@ package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builde
 
 import com.google.common.collect.Lists;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.item.EnchantedBookItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.text.BaseText;
@@ -36,6 +35,8 @@ import java.util.List;
 //$$ import net.minecraft.component.type.ItemEnchantmentsComponent;
 //$$ import net.minecraft.client.item.TooltipType;
 //$$ import net.minecraft.item.Item;
+//#else
+import net.minecraft.item.EnchantedBookItem;
 //#endif
 
 public class EnchantmentHintBuilder extends AbstractHintBuilder
@@ -54,7 +55,11 @@ public class EnchantmentHintBuilder extends AbstractHintBuilder
 			List<Text> enchantmentTexts = Lists.newArrayList();
 
 			//#if MC >= 12006
-			//$$ var enchantmentTag = itemStack.getOrDefault( itemStack.getItem() instanceof EnchantedBookItem ? DataComponentTypes.STORED_ENCHANTMENTS : DataComponentTypes.ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT);
+			//$$ var enchantmentTag = itemStack.getOrDefault(DataComponentTypes.STORED_ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT);
+			//$$ if (enchantmentTag == ItemEnchantmentsComponent.DEFAULT)
+			//$$ {
+			//$$ 	enchantmentTag = itemStack.getOrDefault(DataComponentTypes.ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT);
+			//$$ }
 			//$$ enchantmentTag.appendTooltip(context, enchantmentTexts::add, TooltipType.ADVANCED);
 			//#else
 			ListTag enchantmentTag = itemStack.getItem() instanceof EnchantedBookItem ? EnchantedBookItem.getEnchantmentTag(itemStack) : itemStack.getEnchantments();

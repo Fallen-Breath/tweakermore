@@ -51,6 +51,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+//#if MC >= 12103
+//$$import fi.dy.masa.malilib.util.BlockUtils;
+//#endif
+
 //#if MC >= 12100
 //$$ import me.fallenbreath.tweakermore.util.compat.tweakeroo.TweakerooAccess;
 //#endif
@@ -65,11 +69,13 @@ public abstract class PlacementTweaksMixin
 	@Shadow(remap = false)
 	private static boolean firstWasRotation;
 
+	//#if MC < 12103
 	@Shadow
 	private static boolean isFacingValidFor(Direction facing, ItemStack stack)
 	{
 		return false;
 	}
+	//#endif
 
 	@Shadow private static ItemStack[] stackBeforeUse;
 
@@ -79,9 +85,9 @@ public abstract class PlacementTweaksMixin
 	 * with tweakeroo's tweaks
 	 * <p>
 	 * We cannot delay the injection point until those block placement tweaks, because tweakeroo doesn't
-	 * allow item in player hand tobe  changed after those tweaks, e.g. for hand restore thing
+	 * allow item in player hand to be changed after those tweaks, e.g. for hand restore thing
 	 * <p>
-	 * Copied from {@link fi.dy.masa.tweakeroo.tweaks.PlacementTweaks.processRightClickBlockWrapper}.
+	 * Copied from {@link fi.dy.masa.tweakeroo.tweaks.PlacementTweaks#processRightClickBlockWrapper}.
 	 * Not elegant but that's the only way
 	 */
 	@Unique
@@ -127,7 +133,7 @@ public abstract class PlacementTweaksMixin
 				//$$ Configs.Generic.REMEMBER_FLEXIBLE.getBooleanValue();
 				//#else
 				FeatureToggle.REMEMBER_FLEXIBLE.getBooleanValue();
-		//#endif
+				//#endif
 		boolean rotation = rotationHeld || (rememberFlexible && firstWasRotation);
 		boolean accurate = FeatureToggle.TWEAK_ACCURATE_BLOCK_PLACEMENT.getBooleanValue();
 		boolean keys = Hotkeys.ACCURATE_BLOCK_PLACEMENT_IN.getKeybind().isKeybindHeld() || Hotkeys.ACCURATE_BLOCK_PLACEMENT_REVERSE.getKeybind().isKeybindHeld();
@@ -142,7 +148,11 @@ public abstract class PlacementTweaksMixin
 				//#else
 				FeatureToggle.CARPET_ACCURATE_PLACEMENT_PROTOCOL.getBooleanValue() &&
 				//#endif
+				//#if MC >= 12103
+				//$$ BlockUtils.isFacingValidForDirection(stackOriginal, facing))
+				//#else
 				isFacingValidFor(facing, stackOriginal))
+				//#endif
 		{
 			facing = facing.getOpposite(); // go from block face to click on to the requested facing
 			//double relX = hitVecIn.x - posIn.getX();
@@ -157,6 +167,35 @@ public abstract class PlacementTweaksMixin
 			//System.out.printf("processRightClickBlockWrapper req facing: %s, x: %.3f, pos: %s, sideIn: %s\n", facing, x, posIn, sideIn);
 			hitVecIn = new Vec3d(x, hitVecIn.y, hitVecIn.z);
 		}
+		//#if MC >= 12103
+		//$$ else if (flexible && rotation && accurate == false &&
+		//$$ 		TweakerooAccess.getAccuratePlacementProtocolValue() &&
+		//$$ 		BlockUtils.isFacingValidForOrientation(stackOriginal, facing))
+		//$$ {
+		//$$ 	facing = facing.getOpposite(); // go from block face to click on to the requested facing
+		//$$ 	//double relX = hitVecIn.x - posIn.getX();
+		//$$ 	//double x = posIn.getX() + relX + 2 + (facing.getId() * 2);
+		//$$
+		//$$ 	int facingIndex = BlockUtils.getOrientationFacingIndex(stackOriginal, facing);
+		//$$ 	double x;
+		//$$ 	if (facingIndex >= 0)
+		//$$ 	{
+		//$$ 		x = posIn.getX() + 2 + (facingIndex * 2);
+		//$$ 	}
+		//$$ 	else
+		//$$ 	{
+		//$$ 		x = posIn.getX() + 2 + (facing.getId() * 2);
+		//$$ 	}
+		//$$
+		//$$ 	if (FeatureToggle.TWEAK_AFTER_CLICKER.getBooleanValue())
+		//$$ 	{
+		//$$ 		x += afterClickerClickCount * 16;
+		//$$ 	}
+		//$$
+		//$$ 	//System.out.printf("processRightClickBlockWrapper/Orientation req facing: %s, x: %.3f, pos: %s, sideIn: %s\n", facing, x, posIn, sideIn);
+		//$$ 	hitVecIn = new Vec3d(x, hitVecIn.y, hitVecIn.z);
+		//$$ }
+		//#endif
 
 		if (FeatureToggle.TWEAK_Y_MIRROR.getBooleanValue() && Hotkeys.PLACEMENT_Y_MIRROR.getKeybind().isKeybindHeld())
 		{

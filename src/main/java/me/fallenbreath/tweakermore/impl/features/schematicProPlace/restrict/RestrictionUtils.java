@@ -32,6 +32,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 
+import java.util.Objects;
 import java.util.Optional;
 
 class RestrictionUtils
@@ -41,7 +42,14 @@ class RestrictionUtils
 		return TweakerMoreConfigs.SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_ITEM_WHITELIST.getStrings().
 				stream().
 				map(itemId -> Registry.ITEM.get(IdentifierUtil.of(itemId))).
-				anyMatch(item -> item == itemStack.getItem());
+				anyMatch(item -> Objects.equals(
+						//#if MC >= 12103
+						//$$ item.map(r -> r.value()).orElse(null),
+						//#else
+						item,
+						//#endif
+						itemStack.getItem()
+				));
 	}
 
 	public static boolean isWithinLayerRange(LayerRange layerRange, BlockPos pos, int margin)

@@ -44,6 +44,10 @@ import net.minecraft.util.math.Vec3d;
 
 import java.util.List;
 
+//#if MC >= 12103
+//$$ import net.minecraft.client.render.RenderLayer;
+//#endif
+
 //#if MC >= 12006
 //$$ import net.minecraft.registry.Registries;
 //$$ import net.minecraft.registry.entry.RegistryEntry;
@@ -195,16 +199,16 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 			//#endif
 			RenderGlobals.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-			//#if MC >= 12000
-			//$$ renderContext.getGuiDrawer().drawSprite(
+			//#if MC >= 12103
+			//$$ renderContext.getGuiDrawer().drawSpriteStretched(RenderLayer::getGuiTextured, sprite, 0, 0, ICON_SIZE, ICON_SIZE, 0xFFFFFFFF);
+			//#elseif MC >= 12000
+			//$$ renderContext.getGuiDrawer().drawSprite(0, 0, 0, ICON_SIZE, ICON_SIZE, sprite);
 			//#elseif MC >= 11600
-			//$$ renderContext.getGuiDrawer().drawSprite(
-			//$$ 		renderContext.getMatrixStack().asMcRaw(),
+			//$$ renderContext.getGuiDrawer().drawSprite(renderContext.getMatrixStack().asMcRaw(), 0, 0, 0, ICON_SIZE, ICON_SIZE, sprite);
 			//#else
-			renderContext.getGuiDrawer().blit(
+			renderContext.getGuiDrawer().blit(0, 0, 0, ICON_SIZE, ICON_SIZE, sprite);
 			//#endif
-					0, 0, 0, ICON_SIZE, ICON_SIZE, sprite
-			);
+
 			RenderGlobals.enableDepthTest();
 		}
 		positionTransformer.restore();

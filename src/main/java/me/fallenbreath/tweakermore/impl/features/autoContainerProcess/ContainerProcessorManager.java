@@ -25,10 +25,7 @@ import me.fallenbreath.tweakermore.impl.features.autoContainerProcess.processors
 import me.fallenbreath.tweakermore.mixins.tweaks.features.autoContainerProcess.ItemScrollerInventoryUtilsAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
-import net.minecraft.client.gui.screen.ingame.ContainerScreen;
-import net.minecraft.client.gui.screen.ingame.CraftingTableScreen;
-import net.minecraft.client.gui.screen.ingame.MerchantScreen;
+import net.minecraft.client.gui.screen.ingame.*;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.container.Container;
 import net.minecraft.container.Slot;
@@ -115,7 +112,9 @@ public class ContainerProcessorManager
 
 	private static <T extends Container> boolean isInBlackList(ContainerScreen<T> containerScreen)
 	{
-		return containerScreen instanceof AbstractInventoryScreen ||  // not screen with inventory only
+		return
+				containerScreen instanceof InventoryScreen || // not screen with inventory only (1)
+				containerScreen instanceof CreativeInventoryScreen ||  // not screen with inventory only (2)
 				containerScreen instanceof CraftingTableScreen ||   // not crafting table
 				containerScreen instanceof MerchantScreen;  // not villager trading screen
 	}

@@ -55,7 +55,9 @@ public abstract class InGameHudMixin
 	private RenderUtil.Scaler scaler = null;
 
 	@ModifyVariable(
-			//#if MC >= 12004
+			//#if MC >= 12103
+			//$$ method = "renderScoreboardSidebar(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/scoreboard/ScoreboardObjective;)V",  // lambda method as the context.draw() callback in method renderScoreboardSidebar
+			//#elseif MC >= 12004
 			//$$ method = "method_55440",  // lambda method as the context.draw() callback in method renderScoreboardSidebar
 			//#else
 			method = "renderScoreboardSidebar",

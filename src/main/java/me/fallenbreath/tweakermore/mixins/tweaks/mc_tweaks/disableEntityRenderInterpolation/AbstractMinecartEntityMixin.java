@@ -32,6 +32,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//#if MC >= 12103
+//$$ import net.minecraft.entity.vehicle.MinecartController;
+//$$ import org.spongepowered.asm.mixin.Final;
+//#endif
+
 @Mixin(AbstractMinecartEntity.class)
 public abstract class AbstractMinecartEntityMixin extends Entity
 {
@@ -40,12 +45,16 @@ public abstract class AbstractMinecartEntityMixin extends Entity
 		super(type, world);
 	}
 
+	//#if MC >= 12103
+	//$$ @Shadow @Final private MinecartController controller;
+	//#else
 	@Shadow private int
 			//#if MC >= 11500
 			clientInterpolationSteps;
 			//#else
 			//$$ field_7669;
 			//#endif
+	//#endif
 
 	@Inject(method = "updateTrackedPositionAndAngles", at = @At("TAIL"))
 	private void disableEntityRenderInterpolation_noExtraInterpolationSteps(
@@ -58,7 +67,17 @@ public abstract class AbstractMinecartEntityMixin extends Entity
 	{
 		if (TweakerMoreConfigs.DISABLE_ENTITY_RENDER_INTERPOLATION.getBooleanValue())
 		{
-			//#if MC >= 11500
+			//#if MC >= 12103
+			//$$ if (this.controller instanceof DefaultMinecartControllerAccessor dmca)
+			//$$ {
+			//$$ 	dmca.setLerpStep(1);
+			//$$ }
+			//$$ else if (this.controller instanceof ExperimentalMinecartControllerAccessor emca)
+			//$$ {
+			//$$ 	// TODO: check if this works
+			//$$ 	emca.setTicksToNextRefresh(1);
+			//$$ }
+			//#elseif MC >= 11500
 			this.clientInterpolationSteps = 1;
 			//#else
 			//$$ this.field_7669 = 1;
