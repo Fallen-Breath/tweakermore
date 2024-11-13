@@ -30,7 +30,7 @@ static String curseForgeOrOther(version, curseForge, other) {
 
 // list of (dependencyNotation -> should use modImplementation)
 def mod_dependencies = [
-		[mcVersion == 12101 ? "com.github.sakura-ryoko:malilib:${project.malilib_version}" : "fi.dy.masa.malilib:${project.malilib_version}", true],
+		[mcVersion >= 12101 ? "com.github.sakura-ryoko:malilib:${project.malilib_version}" : "fi.dy.masa.malilib:${project.malilib_version}", true],
 		[curseForgeOrOther(project.tweakeroo_file_id   , 'curse.maven:tweakeroo-297344'    , 'com.github.sakura-ryoko:tweakeroo'   ), true],
 		[curseForgeOrOther(project.itemscroller_file_id, 'curse.maven:item-scroller-242064', 'com.github.sakura-ryoko:itemscroller'), true],
 		[curseForgeOrOther(project.minihud_file_id     , 'curse.maven:minihud-244260'      , 'com.github.sakura-ryoko:minihud'     ), true],
