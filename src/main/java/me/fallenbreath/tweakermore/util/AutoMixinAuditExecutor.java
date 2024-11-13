@@ -34,8 +34,9 @@ public class AutoMixinAuditExecutor
 		if (FabricLoader.getInstance().isDevelopmentEnvironment() && "true".equals(System.getProperty(KEYWORD_PROPERTY)))
 		{
 			TickHandler.getInstance().registerClientTickHandler(mc -> {
-				TweakerMoreMod.LOGGER.info("Triggered auto mixin audit");
+				TweakerMoreMod.LOGGER.info("Mixin audit started");
 				TweakerMoreDebugHelper.forceLoadAllMixins();
+				TweakerMoreMod.LOGGER.info("Mixin audit passed");
 				System.exit(0);
 			});
 		}
