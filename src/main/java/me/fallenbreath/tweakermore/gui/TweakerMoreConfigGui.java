@@ -287,9 +287,13 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		// restoring search bar data
 		if (this.searchBar != null && previousSearchBarText != null)
 		{
+			GuiTextFieldGeneric searchBox = ((WidgetSearchBarAccessor)this.searchBar).getSearchBox();
 			this.searchBar.setSearchOpen(true);
-			((WidgetSearchBarAccessor)this.searchBar).getSearchBox().setText(previousSearchBarText);
-			((WidgetSearchBarAccessor)this.searchBar).getSearchBox().setFocused(previousSearchBoxFocus);
+			searchBox.setText(previousSearchBarText);
+			// malilib-fabric-1.19.4-0.15.4-sources.jar wrongly renames setFocused() to method_25365(), misleading the remap
+			//#disable-remap
+			searchBox.setFocused(previousSearchBoxFocus);
+			//#enable-remap
 		}
 
 		Objects.requireNonNull(this.getListWidget()).resetScrollbarPosition();
