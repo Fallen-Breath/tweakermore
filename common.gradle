@@ -6,10 +6,6 @@ apply plugin: 'me.fallenbreath.yamlang'
 
 int mcVersion = project.mcVersion
 
-preprocess {
-	tabIndentation = true
-}
-
 repositories {
 	maven {
 		url 'https://masa.dy.fi/maven'
@@ -142,16 +138,13 @@ loom {
 		ideConfigGenerated = true
 	}
 	runs {
+        def auditVmArgs = [*commonVmArgs, '-Dtweakermore.mixin_audit=true']
 		clientMixinAudit {
 			client()
-			vmArgs '-Dtweakermore.mixin_audit=true'
+			vmArgs auditVmArgs
 			ideConfigGenerated false
 		}
 	}
-}
-
-remapJar {
-	remapperIsolation = true
 }
 
 String modVersionSuffix = ''
