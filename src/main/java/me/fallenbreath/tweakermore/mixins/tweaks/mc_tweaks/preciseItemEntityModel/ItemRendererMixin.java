@@ -35,7 +35,9 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class ItemRendererMixin
 {
 	@ModifyExpressionValue(
-			//#if MC >= 11904
+			//#if MC >= 12103
+			//$$ method = "renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;ZF)V",
+			//#elseif MC >= 11904
 			//$$ method = "renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V",
 			//#elseif MC >= 11500
 			method = "renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformation$Mode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V",
@@ -44,7 +46,9 @@ public abstract class ItemRendererMixin
 			//#endif
 			at = @At(
 					value = "INVOKE",
-					//#if MC >= 11904
+					//#if MC >= 12103
+					//$$ target = "Lnet/minecraft/client/render/model/json/ModelTransformation;getTransformation(Lnet/minecraft/item/ModelTransformationMode;)Lnet/minecraft/client/render/model/json/Transformation;"
+					//#elseif MC >= 11904
 					//$$ target = "Lnet/minecraft/client/render/model/json/ModelTransformation;getTransformation(Lnet/minecraft/client/render/model/json/ModelTransformationMode;)Lnet/minecraft/client/render/model/json/Transformation;"
 					//#else
 					target = "Lnet/minecraft/client/render/model/json/ModelTransformation;getTransformation(Lnet/minecraft/client/render/model/json/ModelTransformation$Mode;)Lnet/minecraft/client/render/model/json/Transformation;"

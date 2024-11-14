@@ -33,8 +33,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
+//#if MC >= 12103
+//$$ import net.minecraft.client.render.entity.state.EntityRenderState;
+//$$ import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
+//#endif
+
 @Mixin(EntityRenderer.class)
 public abstract class EntityRendererMixin
+		//#if MC >= 12103
+		//$$ <T extends Entity, S extends EntityRenderState>
+		//#endif
 {
 	@Inject(
 			//#if MC >= 11500
@@ -47,13 +55,28 @@ public abstract class EntityRendererMixin
 	)
 	private void nameTagRenderStrategy(
 			CallbackInfo ci,
+			//#if MC >= 12103
+			//$$ @Local(argsOnly = true) S entityState
+			//#else
 			@Local(argsOnly = true) Entity entity
+			//#endif
 	)
 	{
 		RestrictionType strategyType = (RestrictionType)TweakerMoreConfigs.PLAYER_NAME_TAG_RENDER_STRATEGY_TYPE.getOptionListValue();
-		if (strategyType != RestrictionType.NONE && entity instanceof PlayerEntity)
+		if (
+				strategyType != RestrictionType.NONE &&
+				//#if MC >= 12103
+				//$$ entityState instanceof PlayerEntityRenderState playerEntityRenderState
+				//#else
+				entity instanceof PlayerEntity
+				//#endif
+		)
 		{
+			//#if MC >= 12103
+			//$$ String playerName = playerEntityRenderState.name;
+			//#else
 			String playerName = ((PlayerEntity)entity).getGameProfile().getName();
+			//#endif
 			List<String> list = TweakerMoreConfigs.PLAYER_NAME_TAG_RENDER_STRATEGY_LIST.getStrings();
 			boolean shouldRender = strategyType.testEquality(playerName, list);
 			if (!shouldRender)

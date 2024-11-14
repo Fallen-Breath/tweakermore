@@ -37,7 +37,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class RenderHandlerMixin
 {
 	@Inject(
+			//#if MC >= 12103
+			//$$ method = "onRenderGameOverlayPostAdvanced",
+			//#else
 			method = "onRenderGameOverlayPost",
+			//#endif
 			at = @At(
 					value = "FIELD",
 					//#if MC >= 12002

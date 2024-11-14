@@ -47,7 +47,9 @@ public abstract class EntityRenderDispatcherMixin
 			method = "renderHitbox",
 			at = @At(
 					value = "INVOKE",
-					//#if MC >= 12100
+					//#if MC >= 12103
+					//$$ target = "Lnet/minecraft/client/render/VertexRendering;drawVector(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;Lorg/joml/Vector3f;Lnet/minecraft/util/math/Vec3d;I)V",
+					//#elseif MC >= 12100
 					//$$ target = "Lnet/minecraft/client/render/entity/EntityRenderDispatcher;drawVector(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;Lorg/joml/Vector3f;Lnet/minecraft/util/math/Vec3d;I)V",
 					//#else
 					target = "Lnet/minecraft/entity/Entity;getRotationVec(F)Lnet/minecraft/util/math/Vec3d;",

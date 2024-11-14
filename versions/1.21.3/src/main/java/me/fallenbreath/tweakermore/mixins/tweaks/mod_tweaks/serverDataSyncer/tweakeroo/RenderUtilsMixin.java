@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2024  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,32 +18,15 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableEntityRenderInterpolation;
+package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.tweakeroo;
 
-import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.render.WorldRenderer;
+import me.fallenbreath.tweakermore.util.mixin.DummyClass;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-@Mixin(WorldRenderer.class)
-public abstract class WorldRendererMixin
+/**
+ * Moved to {@link RayTraceUtilsMixin} for mc 1.21.3+
+ */
+@Mixin(DummyClass.class)
+public abstract class RenderUtilsMixin
 {
-	@ModifyVariable(
-			//#if MC >= 11500
-			method = "renderEntity",
-			//#else
-			//$$ method = "renderEntities",
-			//#endif
-			at = @At("HEAD"),
-			argsOnly = true
-	)
-	private float disableEntityRenderInterpolation(float tickDelta)
-	{
-		if (TweakerMoreConfigs.DISABLE_ENTITY_RENDER_INTERPOLATION.getBooleanValue())
-		{
-			tickDelta = 1.0F;
-		}
-		return tickDelta;
-	}
 }

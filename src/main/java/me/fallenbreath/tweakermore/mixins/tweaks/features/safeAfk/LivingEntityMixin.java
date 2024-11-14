@@ -37,8 +37,12 @@ public abstract class LivingEntityMixin
 			method = "handleStatus",
 			//#endif
 			at = @At(
+					//#if MC >= 11904
+					//$$ value = "TAIL"
+					//#else
 					value = "INVOKE",
 					target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"
+					//#endif
 			)
 	)
 	private void playerGetsHurtHook(CallbackInfo ci)

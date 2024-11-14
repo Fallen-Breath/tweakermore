@@ -149,7 +149,11 @@ public abstract class ClientPlayerInteractionManagerMixin
 			method = "method_41929",  // lambda method in interactItem
 			at = @At(
 					value = "INVOKE",
+					//#if MC >= 12103
+					//$$ target = "Lnet/minecraft/item/ItemStack;use(Lnet/minecraft/world/World;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResult;"
+					//#else
 					target = "Lnet/minecraft/util/TypedActionResult;getResult()Lnet/minecraft/util/ActionResult;"
+					//#endif
 			)
 	)
 	private ActionResult fireworkRocketThrottler_updateCooldown_useAtAir(ActionResult actionResult)
