@@ -22,47 +22,41 @@ package me.fallenbreath.tweakermore.mixins.core.config;
 
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigBase;
+import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-//#if MC >= 11800
-//$$ import org.spongepowered.asm.mixin.Shadow;
-//$$ import org.spongepowered.asm.mixin.injection.ModifyArg;
-//#endif
-
 @Mixin(ConfigBase.class)
 public abstract class ConfigBaseMixin
 {
-	//#if MC >= 11800
-	//$$ @Shadow(remap = false) private String comment;
- //$$
-	//$$ @ModifyArg(
-	//$$ 		method = "getComment",
-	//$$ 		at = @At(
-	//$$ 				value = "INVOKE",
-	//$$ 				target = "Lfi/dy/masa/malilib/util/StringUtils;getTranslatedOrFallback(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;"
-	//$$ 		),
-	//$$ 		index = 0,
-	//$$ 		remap = false
-	//$$ )
-	//$$ private String tweakerMoreConfigCommentIsTheTranslationKey(String key)
-	//$$ {
-	//$$ 	if (TweakerMoreConfigs.hasConfig((IConfigBase)this))
-	//$$ 	{
-	//$$ 		key = this.comment;
-	//$$ 	}
-	//$$ 	return key;
-	//$$ }
-	//#endif
+	@Shadow(remap = false) @Final
+	private String prettyName;
 
-	@Inject(method = "getComment", at = @At("TAIL"), cancellable = true, remap = false)
-	private void appendModRequirementHeader(CallbackInfoReturnable<String> cir)
+	@Shadow(remap = false)
+	private String comment;
+
+	@Inject(method = "getPrettyName", at = @At("HEAD"), cancellable = true, remap = false)
+	private void tweakerMoreUseMyPrettyName(CallbackInfoReturnable<String> cir)
 	{
-		TweakerMoreConfigs.getOptionFromConfig((IConfigBase)this).ifPresent(tweakerMoreOption -> {
-			cir.setReturnValue(tweakerMoreOption.modifyComment(cir.getReturnValue()));
-		});
+		TweakerMoreConfigs.getOptionFromConfig((IConfigBase)this).
+				ifPresent(tweakerMoreOption -> {
+					cir.setReturnValue(StringUtils.translate(this.prettyName));
+				});
+	}
+
+	@Inject(method = "getComment", at = @At("HEAD"), cancellable = true, remap = false)
+	private void tweakerMoreUseMyComment(CallbackInfoReturnable<String> cir)
+	{
+		TweakerMoreConfigs.getOptionFromConfig((IConfigBase)this).
+				ifPresent(tweakerMoreOption -> {
+					String translatedComment = StringUtils.translate(this.comment);
+					translatedComment = tweakerMoreOption.modifyComment(translatedComment);
+					cir.setReturnValue(translatedComment);
+				});
 	}
 }
