@@ -32,6 +32,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//#if MC >= 12103
+//$$ import me.fallenbreath.tweakermore.impl.mc_tweaks.preciseItemEntityModel.ItemEntityRenderStateExtra;
+//$$ import net.minecraft.client.render.entity.state.ItemEntityRenderState;
+//$$ import net.minecraft.entity.ItemEntity;
+//$$ import org.spongepowered.asm.mixin.injection.Inject;
+//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//#endif
+
 @Mixin(ItemEntityRenderer.class)
 public abstract class ItemEntityRendererMixin
 {
@@ -127,9 +135,11 @@ public abstract class ItemEntityRendererMixin
 			index = 0
 	)
 	private float preciseItemEntityModel_tweakItemEntityRotation(
-			float rotation
-			//#if MC < 12103
-			, @Local(argsOnly = true) ItemEntity itemEntity,
+			float rotation,
+			//#if MC >= 12103
+			//$$ @Local(argsOnly = true) ItemEntityRenderState itemEntityRenderState
+			//#else
+			@Local(argsOnly = true) ItemEntity itemEntity,
 			@Local(
 					argsOnly = true,
 					//#if MC >= 11500
@@ -148,7 +158,11 @@ public abstract class ItemEntityRendererMixin
 			if (TweakerMoreConfigs.PRECISE_ITEM_ENTITY_MODEL_YAW_SNAP.getBooleanValue())
 			{
 				//#if MC >= 12103
-				//$$ float yaw = 0;  // FIXME: carry the yaw info from the ItemEntityRenderState
+				//$$ float yaw = 0;
+				//$$ if (itemEntityRenderState instanceof ItemEntityRenderStateExtra itemEntityRenderStateExtra)
+				//$$ {
+				//$$ 	yaw = itemEntityRenderStateExtra.getEntityYaw$TKM();
+				//$$ }
 				//#else
 				float yaw = itemEntity.getYaw(tickDelta);
 				//#endif
@@ -227,4 +241,21 @@ public abstract class ItemEntityRendererMixin
 			PreciseItemEntityModelUtils.transformOverrideFlag.set(false);
 		}
 	}
+
+	//#if MC >= 12103
+	//$$ @Inject(
+	//$$ 		method = "updateRenderState(Lnet/minecraft/entity/ItemEntity;Lnet/minecraft/client/render/entity/state/ItemEntityRenderState;F)V",
+	//$$ 		at = @At("TAIL")
+	//$$ )
+	//$$ private void preciseItemEntityModel_storeTheYawInfo(ItemEntity itemEntity, ItemEntityRenderState itemEntityRenderState, float tickDelta, CallbackInfo ci)
+	//$$ {
+	//$$ 	if (TweakerMoreConfigs.PRECISE_ITEM_ENTITY_MODEL.getBooleanValue())
+	//$$ 	{
+	//$$ 		if (itemEntityRenderState instanceof ItemEntityRenderStateExtra itemEntityRenderStateExtra)
+	//$$ 		{
+	//$$ 			itemEntityRenderStateExtra.setEntityYaw$TKM(itemEntity.getYaw(tickDelta));
+	//$$ 		}
+	//$$ 	}
+	//$$ }
+	//#endif
 }
