@@ -178,7 +178,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 			RenderGlobals.disableLighting();
 			//#endif
 
-			// ref: net.minecraft.client.gui.hud.InGameHud.renderStatusEffectOverlay
+			// ref: net.minecraft.client.gui.hud.InGameHud#renderStatusEffectOverlay
 
 			renderContext.scale(FONT_SCALE * RenderUtil.getSizeScalingXSign(), -FONT_SCALE, FONT_SCALE);
 			renderContext.translate(deltaX, 0, 0);
@@ -188,7 +188,9 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 			renderContext.scale(k, k, k);
 			renderContext.translate(0, ICON_SIZE * (-0.5 + kDeltaY), 0);
 
-			//#if MC >= 11903
+			//#if MC >= 12103
+			//$$ // no op
+			//#elseif MC >= 11903
 			//$$ RenderSystem.setShaderTexture(0, sprite.getAtlasId());
 			//#elseif MC >= 11700
 			//$$ RenderSystem.setShaderTexture(0, sprite.getAtlas().getId());
@@ -197,10 +199,13 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 			//#else
 			//$$ mc.getTextureManager().bindTexture(SpriteAtlasTexture.STATUS_EFFECT_ATLAS_TEX);
 			//#endif
+			//#if MC < 12103
 			RenderGlobals.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+			//#endif
 
 			//#if MC >= 12103
-			//$$ renderContext.getGuiDrawer().drawSpriteStretched(RenderLayer::getGuiTextured, sprite, 0, 0, ICON_SIZE, ICON_SIZE, 0xFFFFFFFF);
+			//$$ renderContext.getGuiDrawer().drawSpriteStretched(RenderLayer::getGuiTexturedOverlay, sprite, 0, 0, ICON_SIZE, ICON_SIZE, 0xFFFFFFFF);
+			//$$ renderContext.getGuiDrawer().draw();
 			//#elseif MC >= 12000
 			//$$ renderContext.getGuiDrawer().drawSprite(0, 0, 0, ICON_SIZE, ICON_SIZE, sprite);
 			//#elseif MC >= 11600

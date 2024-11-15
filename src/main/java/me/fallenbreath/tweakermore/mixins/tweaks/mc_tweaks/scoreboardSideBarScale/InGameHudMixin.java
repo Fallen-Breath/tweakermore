@@ -71,7 +71,11 @@ public abstract class InGameHudMixin
 					//#endif
 					ordinal = 0
 			),
+			//#if MC >= 12103
+			//$$ ordinal = 5  // the lv that stores `drawContext.getScaledWindowHeight() / 2 + n / 3`
+			//#else
 			ordinal = 3  // the lv that stores `this.scaledHeight / 2 + h / 3`
+			//#endif
 	)
 	private int tweakerMore_scoreboardSideBarScale_push(
 			int centerY
