@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.impl.mod_tweaks.ofPlayerExtraModelOverride;
 
 import fi.dy.masa.malilib.config.options.ConfigOptionList;
-import me.fallenbreath.tweakermore.util.ReflectionUtil;
+import me.fallenbreath.tweakermore.util.ReflectionUtils;
 import net.minecraft.client.MinecraftClient;
 
 import java.util.Map;
@@ -66,8 +66,8 @@ public class OptifinePlayerExtraModelOverrider
 		// clean optifine's player config cache map,
 		// so optifine will try to fetch player config again
 		// which means our PlayerConfigurationReceiverMixin mixin can do its job
-		ReflectionUtil.getClass("net.optifine.player.PlayerConfigurations").ifPresent(clazz -> {
-			ReflectionUtil.getStaticField(clazz, "mapConfigurations").ifPresent(map -> {
+		ReflectionUtils.getClass("net.optifine.player.PlayerConfigurations").ifPresent(clazz -> {
+			ReflectionUtils.getStaticField(clazz, "mapConfigurations").ifPresent(map -> {
 				if (map instanceof Map)
 				{
 					((Map<?, ?>)map).clear();

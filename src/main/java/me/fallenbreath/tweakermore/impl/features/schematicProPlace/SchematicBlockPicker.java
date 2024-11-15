@@ -27,7 +27,7 @@ import fi.dy.masa.litematica.util.ItemUtils;
 import fi.dy.masa.litematica.world.SchematicWorldHandler;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.util.LayerRange;
-import me.fallenbreath.tweakermore.util.FabricUtil;
+import me.fallenbreath.tweakermore.util.FabricUtils;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -45,7 +45,7 @@ import net.minecraft.world.World;
 
 public class SchematicBlockPicker
 {
-	private static final boolean TWEAKEROO_LOADED = FabricUtil.isModLoaded(ModIds.tweakeroo);
+	private static final boolean TWEAKEROO_LOADED = FabricUtils.isModLoaded(ModIds.tweakeroo);
 
 	/**
 	 * Stolen from {@link fi.dy.masa.litematica.util.WorldUtils#doSchematicWorldPickBlock}

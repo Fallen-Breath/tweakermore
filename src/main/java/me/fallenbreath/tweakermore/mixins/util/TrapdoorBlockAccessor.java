@@ -23,7 +23,7 @@ package me.fallenbreath.tweakermore.mixins.util;
 import me.fallenbreath.tweakermore.util.mixin.DummyClass;
 import org.spongepowered.asm.mixin.Mixin;
 
-// used in mc1.20+, BlockUtil class, for accessing the blockSetType field
+// used in mc1.20+, BlockUtils class, for accessing the blockSetType field
 @Mixin(DummyClass.class)
 public interface TrapdoorBlockAccessor
 {

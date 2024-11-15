@@ -56,7 +56,7 @@ import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSy
 import me.fallenbreath.tweakermore.impl.porting.lmCustomSchematicBaseDirectoryPorting.LitematicaCustomSchematicBaseDirectoryPorting;
 import me.fallenbreath.tweakermore.impl.setting.debug.TweakerMoreDebugHelper;
 import me.fallenbreath.tweakermore.util.ModIds;
-import me.fallenbreath.tweakermore.util.RegistryUtil;
+import me.fallenbreath.tweakermore.util.RegistryUtils;
 import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreRenderEventHandler;
 import net.minecraft.block.Blocks;
@@ -96,10 +96,10 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigOptionList AUTO_CLEAN_CONTAINER_LIST_TYPE = newConfigOptionList("autoCleanContainerListType", UsageRestriction.ListType.NONE);
 
 	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(ModIds.itemscroller)), category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigStringList AUTO_CLEAN_CONTAINER_WHITELIST = newConfigStringList("autoCleanContainerWhiteList", ImmutableList.of(RegistryUtil.getItemId(Items.SHULKER_BOX)));
+	public static final TweakerMoreConfigStringList AUTO_CLEAN_CONTAINER_WHITELIST = newConfigStringList("autoCleanContainerWhiteList", ImmutableList.of(RegistryUtils.getItemId(Items.SHULKER_BOX)));
 
 	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(ModIds.itemscroller)), category = Config.Category.FEATURES)
-	public static final TweakerMoreConfigStringList AUTO_CLEAN_CONTAINER_BLACKLIST = newConfigStringList("autoCleanContainerBlackList", ImmutableList.of(RegistryUtil.getItemId(Items.SHULKER_BOX)));
+	public static final TweakerMoreConfigStringList AUTO_CLEAN_CONTAINER_BLACKLIST = newConfigStringList("autoCleanContainerBlackList", ImmutableList.of(RegistryUtils.getItemId(Items.SHULKER_BOX)));
 
 	public static final ItemRestriction AUTO_CLEAN_CONTAINER_RESTRICTION = new ItemRestriction();
 
@@ -385,7 +385,7 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBooleanHotkeyed BLOCK_EVENT_THROTTLER = newConfigBooleanHotkeyed("blockEventThrottler");
 
 	@Config(type = Config.Type.LIST, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigStringList BLOCK_EVENT_THROTTLER_TARGET_BLOCKS = newConfigStringList("blockEventThrottlerTargetBlocks", ImmutableList.of(RegistryUtil.getBlockId(Blocks.PISTON), RegistryUtil.getBlockId(Blocks.STICKY_PISTON)));
+	public static final TweakerMoreConfigStringList BLOCK_EVENT_THROTTLER_TARGET_BLOCKS = newConfigStringList("blockEventThrottlerTargetBlocks", ImmutableList.of(RegistryUtils.getBlockId(Blocks.PISTON), RegistryUtils.getBlockId(Blocks.STICKY_PISTON)));
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigInteger BLOCK_EVENT_THROTTLER_THRESHOLD = newConfigInteger("blockEventThrottlerThreshold", 200, 0, 10000);
@@ -653,10 +653,10 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigOptionList HAND_RESTORE_LIST_TYPE = newConfigOptionList("handRestockListType", UsageRestriction.ListType.NONE);
 
 	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(ModIds.tweakeroo)), category = Config.Category.MOD_TWEAKS)
-	public static final TweakerMoreConfigStringList HAND_RESTORE_WHITELIST = newConfigStringList("handRestockWhiteList", ImmutableList.of(RegistryUtil.getItemId(Items.BUCKET)));
+	public static final TweakerMoreConfigStringList HAND_RESTORE_WHITELIST = newConfigStringList("handRestockWhiteList", ImmutableList.of(RegistryUtils.getItemId(Items.BUCKET)));
 
 	@Config(type = Config.Type.LIST, restriction = @Restriction(require = @Condition(ModIds.tweakeroo)), category = Config.Category.MOD_TWEAKS)
-	public static final TweakerMoreConfigStringList HAND_RESTORE_BLACKLIST = newConfigStringList("handRestockBlackList", ImmutableList.of(RegistryUtil.getItemId(Items.LAVA_BUCKET)));
+	public static final TweakerMoreConfigStringList HAND_RESTORE_BLACKLIST = newConfigStringList("handRestockBlackList", ImmutableList.of(RegistryUtils.getItemId(Items.LAVA_BUCKET)));
 
 	public static final ItemRestriction HAND_RESTORE_RESTRICTION = new ItemRestriction();
 

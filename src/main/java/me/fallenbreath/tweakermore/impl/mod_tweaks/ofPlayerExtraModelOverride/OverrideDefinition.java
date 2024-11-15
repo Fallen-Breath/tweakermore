@@ -23,13 +23,10 @@ package me.fallenbreath.tweakermore.impl.mod_tweaks.ofPlayerExtraModelOverride;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigOptionList;
 import me.fallenbreath.tweakermore.config.options.listentries.OptifineExtraModelRenderStrategy;
-import me.fallenbreath.tweakermore.util.FileUtil;
-import org.apache.commons.io.IOUtils;
+import me.fallenbreath.tweakermore.util.FileUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Base64;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -57,7 +54,7 @@ public class OverrideDefinition
 	{
 		try
 		{
-			return Optional.ofNullable(FileUtil.readResourceFileAsBytes(resourcePath));
+			return Optional.ofNullable(FileUtils.readResourceFileAsBytes(resourcePath));
 		}
 		catch (IOException e)
 		{

@@ -22,8 +22,8 @@ package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxItemContentHint;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.render.ColorHolder;
+import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
-import me.fallenbreath.tweakermore.util.render.RenderUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.Tessellator;
@@ -93,7 +93,7 @@ public class ShulkerBoxItemContentHintRenderer
 				//#endif
 		);
 
-		RenderUtil.Scaler scaler = RenderUtil.createScaler(x, y + SLOT_WIDTH, info.scale);
+		RenderUtils.Scaler scaler = RenderUtils.createScaler(x, y + SLOT_WIDTH, info.scale);
 		scaler.apply(renderContext);
 
 		if (info.allItemSame || info.allItemSameIgnoreNbt)
@@ -209,14 +209,14 @@ public class ShulkerBoxItemContentHintRenderer
 	{
 		String text = info.allItemSameIgnoreNbt ? "*" : "...";
 		boolean putTextOnRight = info.allItemSameIgnoreNbt && info.scale <= 0.75;
-		float width = RenderUtil.getRenderWidth(text);
-		float height = RenderUtil.TEXT_HEIGHT;
+		float width = RenderUtils.getRenderWidth(text);
+		float height = RenderUtils.TEXT_HEIGHT;
 		float textX = putTextOnRight ? x + SLOT_WIDTH + 0.5F : x + (SLOT_WIDTH - width) * 0.5F;
 		float textY = putTextOnRight ? y + (SLOT_WIDTH - height) * 0.5F : y + SLOT_WIDTH - height - 3;
 		double textScale = SLOT_WIDTH / height * 0.7 * (putTextOnRight ? 0.9 : 1);
 		int textColor = 0xDDDDDD;
 
-		RenderUtil.Scaler textScaler = RenderUtil.createScaler(textX + width * 0.5, textY + height * 0.5, textScale);
+		RenderUtils.Scaler textScaler = RenderUtils.createScaler(textX + width * 0.5, textY + height * 0.5, textScale);
 		textScaler.apply(RenderContext.of(
 				//#if MC >= 11600
 				//$$ textMatrixStack
@@ -226,7 +226,7 @@ public class ShulkerBoxItemContentHintRenderer
 
 		//#if MC >= 11500
 		textMatrixStack.translate(0.0, 0.0, zOffset);
-		VertexConsumerProvider.Immediate immediate = RenderUtil.getVertexConsumer();
+		VertexConsumerProvider.Immediate immediate = RenderUtils.getVertexConsumer();
 		textRenderer.draw(
 				text,
 				textX,

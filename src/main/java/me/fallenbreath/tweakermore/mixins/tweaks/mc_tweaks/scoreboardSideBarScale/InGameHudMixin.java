@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.scoreboardSideBarScale;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.util.render.RenderUtil;
+import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import org.jetbrains.annotations.Nullable;
@@ -52,7 +52,7 @@ public abstract class InGameHudMixin
 
 	@Unique
 	@Nullable
-	private RenderUtil.Scaler scaler = null;
+	private RenderUtils.Scaler scaler = null;
 
 	@ModifyVariable(
 			//#if MC >= 12103
@@ -92,7 +92,7 @@ public abstract class InGameHudMixin
 			//#if MC >= 12006
 			//$$ int scaledWidth = matrixStackOrDrawContext.getScaledWindowWidth();
 			//#endif
-			this.scaler = RenderUtil.createScaler(scaledWidth, centerY, TweakerMoreConfigs.SCOREBOARD_SIDE_BAR_SCALE.getDoubleValue());
+			this.scaler = RenderUtils.createScaler(scaledWidth, centerY, TweakerMoreConfigs.SCOREBOARD_SIDE_BAR_SCALE.getDoubleValue());
 			this.scaler.apply(RenderContext.of(
 					//#if MC >= 11600
 					//$$ matrixStackOrDrawContext

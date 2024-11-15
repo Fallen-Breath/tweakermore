@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024  Fallen_Breath and contributors
+ * Copyright (C) 2023  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,20 +18,22 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.util.render.context;
+package me.fallenbreath.tweakermore.util;
 
-import me.fallenbreath.tweakermore.mixins.util.render.DrawContextAccessor;
-import me.fallenbreath.tweakermore.util.render.RenderUtil;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-class RenderContextUtil
+public class WorldUtils
 {
-	public static DrawContext createDrawContext(MatrixStack matrixStack)
+	/**
+	 * getBlockEntity, but bypasses the on-ServerThread check,
+	 * so you can use it on RenderThread
+	 */
+	@Nullable
+	public static BlockEntity getBlockEntity(World world, BlockPos pos)
 	{
-		var drawContext = new DrawContext(MinecraftClient.getInstance(), RenderUtil.getVertexConsumer());
-		((DrawContextAccessor)drawContext).setMatrices(matrixStack);
-		return drawContext;
+		return world.getChunk(pos).getBlockEntity(pos);
 	}
 }

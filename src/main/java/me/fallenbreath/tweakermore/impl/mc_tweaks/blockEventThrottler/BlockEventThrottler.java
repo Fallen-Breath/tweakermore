@@ -21,8 +21,8 @@
 package me.fallenbreath.tweakermore.impl.mc_tweaks.blockEventThrottler;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.util.PositionUtil;
-import me.fallenbreath.tweakermore.util.RegistryUtil;
+import me.fallenbreath.tweakermore.util.PositionUtils;
+import me.fallenbreath.tweakermore.util.RegistryUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.math.BlockPos;
@@ -47,7 +47,7 @@ public class BlockEventThrottler
 		}
 
 		// target block check
-		String blockId = RegistryUtil.getBlockId(block);
+		String blockId = RegistryUtils.getBlockId(block);
 		if (TweakerMoreConfigs.BLOCK_EVENT_THROTTLER_TARGET_BLOCKS.getStrings().
 				stream().noneMatch(target -> target.equals(blockId))
 		)
@@ -67,7 +67,7 @@ public class BlockEventThrottler
 		}
 
 		// whitelist range
-		double disSqr = mc.player.squaredDistanceTo(PositionUtil.centerOf(pos));
+		double disSqr = mc.player.squaredDistanceTo(PositionUtils.centerOf(pos));
 		double whitelistRange = TweakerMoreConfigs.BLOCK_EVENT_THROTTLER_WHITELIST_RANGE.getDoubleValue();
 		if (disSqr < whitelistRange * whitelistRange)
 		{

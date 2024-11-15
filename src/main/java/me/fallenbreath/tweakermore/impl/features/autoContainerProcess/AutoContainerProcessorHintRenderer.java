@@ -24,10 +24,9 @@ import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.config.HudAlignment;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.render.RenderUtils;
-import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.autoContainerProcess.processors.IContainerProcessor;
-import me.fallenbreath.tweakermore.util.StringUtil;
+import me.fallenbreath.tweakermore.util.StringUtils;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 
@@ -60,7 +59,7 @@ public class AutoContainerProcessorHintRenderer implements TweakerMoreIRenderer
 		{
 			return;
 		}
-		lines.add(0, GuiBase.TXT_UNDERLINE + StringUtils.translate("tweakermore.impl.containerProcessorHint.title"));
+		lines.add(0, GuiBase.TXT_UNDERLINE + fi.dy.masa.malilib.util.StringUtils.translate("tweakermore.impl.containerProcessorHint.title"));
 
 		RenderUtils.renderText(
 				0, 0,
@@ -79,7 +78,7 @@ public class AutoContainerProcessorHintRenderer implements TweakerMoreIRenderer
 
 	public static String modifyComment(String comment)
 	{
-		String lines = StringUtil.configsToListLines(
+		String lines = StringUtils.configsToListLines(
 				ContainerProcessorManager.getProcessors().
 						stream().
 						map(IContainerProcessor::getConfig).

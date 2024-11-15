@@ -23,7 +23,7 @@ package me.fallenbreath.tweakermore.util.compat.tweakeroo;
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import fi.dy.masa.tweakeroo.config.Configs;
 import fi.dy.masa.tweakeroo.util.CameraEntity;
-import me.fallenbreath.tweakermore.util.ReflectionUtil;
+import me.fallenbreath.tweakermore.util.ReflectionUtils;
 import net.minecraft.client.network.ClientPlayerEntity;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,12 +40,12 @@ public class TweakerooAccess
 	public static boolean getAccuratePlacementProtocolValue()
 	{
 		Class<?> genericClass = Configs.Generic.class;
-		ReflectionUtil.ValueWrapper<ConfigBoolean> newAccField = ReflectionUtil.getStaticField(genericClass, "ACCURATE_PLACEMENT_PROTOCOL");
+		ReflectionUtils.ValueWrapper<ConfigBoolean> newAccField = ReflectionUtils.getStaticField(genericClass, "ACCURATE_PLACEMENT_PROTOCOL");
 		if (newAccField.isPresent())
 		{
 			return newAccField.get().getBooleanValue();
 		}
-		ReflectionUtil.ValueWrapper<ConfigBoolean> oldAccField = ReflectionUtil.getStaticField(genericClass, "CARPET_ACCURATE_PLACEMENT_PROTOCOL");
+		ReflectionUtils.ValueWrapper<ConfigBoolean> oldAccField = ReflectionUtils.getStaticField(genericClass, "CARPET_ACCURATE_PLACEMENT_PROTOCOL");
 		if (oldAccField.isPresent())
 		{
 			return oldAccField.get().getBooleanValue();

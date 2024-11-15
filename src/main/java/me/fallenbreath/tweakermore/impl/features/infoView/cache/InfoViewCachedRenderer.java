@@ -26,9 +26,9 @@ import com.mojang.datafixers.util.Pair;
 import fi.dy.masa.malilib.util.WorldUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.InfoViewer;
-import me.fallenbreath.tweakermore.util.FabricUtil;
-import me.fallenbreath.tweakermore.util.PositionUtil;
-import me.fallenbreath.tweakermore.util.render.RenderUtil;
+import me.fallenbreath.tweakermore.util.FabricUtils;
+import me.fallenbreath.tweakermore.util.PositionUtils;
+import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
@@ -60,8 +60,8 @@ public class InfoViewCachedRenderer
 			return;
 		}
 
-		Vec3d camPos = mc.player.getCameraPosVec(RenderUtil.tickDelta);
-		Vec3d camVec = mc.player.getRotationVec(RenderUtil.tickDelta);
+		Vec3d camPos = mc.player.getCameraPosVec(RenderUtils.tickDelta);
+		Vec3d camVec = mc.player.getRotationVec(RenderUtils.tickDelta);
 
 		long now = System.nanoTime();
 		long ups = TweakerMoreConfigs.INFO_VIEW_SCANNING_PER_SECOND.getIntegerValue();
@@ -87,7 +87,7 @@ public class InfoViewCachedRenderer
 			}
 
 			renderingPositions.keySet().stream().
-					map(pos -> Pair.of(pos, camPos.squaredDistanceTo(PositionUtil.centerOf(pos)))).
+					map(pos -> Pair.of(pos, camPos.squaredDistanceTo(PositionUtils.centerOf(pos)))).
 					// sort by distance in descending order, so we render block info from far to near (simulating depth test)
 					sorted(Collections.reverseOrder(Comparator.comparingDouble(Pair::getSecond))).
 					forEach(pair -> {
@@ -97,9 +97,9 @@ public class InfoViewCachedRenderer
 		}
 
 		// debug
-		if (TweakerMoreConfigs.TWEAKERMORE_DEBUG_BOOL.getBooleanValue() && FabricUtil.isDevelopmentEnvironment())
+		if (TweakerMoreConfigs.TWEAKERMORE_DEBUG_BOOL.getBooleanValue() && FabricUtils.isDevelopmentEnvironment())
 		{
-			Function<BlockPos, Double> distanceGetter = pos -> camPos.distanceTo(PositionUtil.centerOf(pos));
+			Function<BlockPos, Double> distanceGetter = pos -> camPos.distanceTo(PositionUtils.centerOf(pos));
 			Collection<BlockPos> positions = this.cacheData.renderingPositions.keySet();
 			double maxDis = positions.stream().map(distanceGetter).mapToDouble(x -> x).max().orElse(1);
 			positions.forEach(pos -> me.fallenbreath.tweakermore.util.render.TextRenderer.create().

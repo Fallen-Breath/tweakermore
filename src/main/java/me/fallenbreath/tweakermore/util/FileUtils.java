@@ -20,40 +20,34 @@
 
 package me.fallenbreath.tweakermore.util;
 
-import fi.dy.masa.malilib.gui.GuiBase;
-import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
-import net.minecraft.util.Formatting;
+import me.fallenbreath.tweakermore.TweakerMoreMod;
+import net.fabricmc.loader.api.FabricLoader;
+import org.apache.commons.io.IOUtils;
 
-public class StringUtil
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
+public class FileUtils
 {
-	public static String removeFormattingCode(String string)
+	private static final String CONFIG_FILE_NAME = TweakerMoreMod.MOD_ID + ".json";
+
+	/**
+	 * Use deprecation API for better old fabric loader version compatibility
+	 */
+	@SuppressWarnings("deprecation")
+	public static File getConfigFile()
 	{
-		return Formatting.strip(string);
+		return FabricLoader.getInstance().getConfigDirectory().toPath().resolve(CONFIG_FILE_NAME).toFile();
 	}
 
-	public static String configsToListLines(Iterable<? extends TweakerMoreIConfigBase> configs)
+	public static byte[] readResourceFileAsBytes(String path) throws IOException
 	{
-		StringBuilder builder = new StringBuilder();
-		boolean isFirst = true;
-		for (TweakerMoreIConfigBase config : configs)
+		InputStream inputStream = FileUtils.class.getClassLoader().getResourceAsStream(path);
+		if (inputStream == null)
 		{
-			String id = config.getName();
-			String name = config.getConfigGuiDisplayName();
-
-			if (!isFirst)
-			{
-				builder.append("\n");
-			}
-			isFirst = false;
-
-			builder.append(GuiBase.TXT_GRAY).append("- ");
-			builder.append(GuiBase.TXT_RST).append(name);
-
-			if (!id.equals(name))
-			{
-				builder.append(GuiBase.TXT_GRAY).append(" (").append(id).append(")").append(GuiBase.TXT_RST);
-			}
+			throw new IOException("Null input stream from path " + path);
 		}
-		return builder.toString();
+		return IOUtils.toByteArray(inputStream);
 	}
 }

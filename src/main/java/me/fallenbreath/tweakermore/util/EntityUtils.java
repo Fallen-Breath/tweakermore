@@ -28,7 +28,7 @@ import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
 import org.jetbrains.annotations.Nullable;
 
-public class EntityUtil
+public class EntityUtils
 {
 	public static PlayerAbilities getPlayerAbilities(PlayerEntity player)
 	{
@@ -49,7 +49,7 @@ public class EntityUtil
 		return false;
 	}
 
-	private static final boolean TWEAKEROO_LOADED = FabricUtil.isModLoaded(ModIds.tweakeroo);
+	private static final boolean TWEAKEROO_LOADED = FabricUtils.isModLoaded(ModIds.tweakeroo);
 
 	@Nullable
 	public static ClientPlayerEntity getCurrentPlayerOrFreeCameraEntity()

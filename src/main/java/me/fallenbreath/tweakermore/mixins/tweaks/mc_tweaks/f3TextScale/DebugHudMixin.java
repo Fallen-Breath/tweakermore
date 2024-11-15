@@ -24,7 +24,7 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.util.render.RenderUtil;
+import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import net.minecraft.client.gui.hud.DebugHud;
 import org.spongepowered.asm.mixin.Mixin;
@@ -60,12 +60,12 @@ public abstract class DebugHudMixin
 			//#elseif MC >= 11600
 			//$$ @Local(argsOnly = true) MatrixStack matrixStackOrDrawContext,
 			//#endif
-			@Share("scaler") LocalRef<RenderUtil.Scaler> scaler
+			@Share("scaler") LocalRef<RenderUtils.Scaler> scaler
 	)
 	{
 		if (TweakerMoreConfigs.F3_TEXT_SCALE.isModified())
 		{
-			scaler.set(RenderUtil.createScaler(0, 0, TweakerMoreConfigs.F3_TEXT_SCALE.getDoubleValue()));
+			scaler.set(RenderUtils.createScaler(0, 0, TweakerMoreConfigs.F3_TEXT_SCALE.getDoubleValue()));
 			scaler.get().apply(RenderContext.of(
 					//#if MC >= 11600
 					//$$ matrixStackOrDrawContext
@@ -89,7 +89,7 @@ public abstract class DebugHudMixin
 					//#endif
 			)
 	)
-	private int f3TextScale_renderRightText_fixWindowScaledWidth(int width, @Share("scaler") LocalRef<RenderUtil.Scaler> scaler)
+	private int f3TextScale_renderRightText_fixWindowScaledWidth(int width, @Share("scaler") LocalRef<RenderUtils.Scaler> scaler)
 	{
 		if (scaler.get() != null)
 		{
@@ -106,7 +106,7 @@ public abstract class DebugHudMixin
 			//#endif
 			at = @At("TAIL")
 	)
-	private void f3TextScale_renderLeftRightText_scalingRestore(CallbackInfo ci, @Share("scaler") LocalRef<RenderUtil.Scaler> scaler)
+	private void f3TextScale_renderLeftRightText_scalingRestore(CallbackInfo ci, @Share("scaler") LocalRef<RenderUtils.Scaler> scaler)
 	{
 		if (scaler.get() != null)
 		{

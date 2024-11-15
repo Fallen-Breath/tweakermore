@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.impl.features.copySignTextToClipBoard;
 
 import com.google.common.base.Joiner;
 import fi.dy.masa.malilib.util.InfoUtils;
-import me.fallenbreath.tweakermore.util.EntityUtil;
+import me.fallenbreath.tweakermore.util.EntityUtils;
 import me.fallenbreath.tweakermore.util.compat.litematica.LitematicaUtils;
 import net.minecraft.block.AbstractSignBlock;
 import net.minecraft.block.BlockState;
@@ -49,7 +49,7 @@ public class SignTextCopier
 	public static void copySignText()
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
-		ClientPlayerEntity player = EntityUtil.getCurrentPlayerOrFreeCameraEntity();
+		ClientPlayerEntity player = EntityUtils.getCurrentPlayerOrFreeCameraEntity();
 		if (player != null && mc.world != null)
 		{
 			BlockPos blockPos = null;

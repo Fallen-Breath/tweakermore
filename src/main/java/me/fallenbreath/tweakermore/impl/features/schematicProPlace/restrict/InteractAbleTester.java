@@ -24,7 +24,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 
 //#if MC >= 12000
-//$$ import me.fallenbreath.tweakermore.util.BlockUtil;
+//$$ import me.fallenbreath.tweakermore.util.BlockUtils;
 //$$ import net.minecraft.block.BlockSetType;
 //#else
 import net.minecraft.block.Material;
@@ -58,7 +58,7 @@ public interface InteractAbleTester
 	static InteractAbleTester canOpenByHand()
 	{
 		//#if MC >= 12000
-		//$$ return (player, worldState) -> BlockUtil.getBlockSetType(worldState.getBlock()).map(BlockSetType::canOpenByHand).orElse(false);
+		//$$ return (player, worldState) -> BlockUtils.getBlockSetType(worldState.getBlock()).map(BlockSetType::canOpenByHand).orElse(false);
 		//#else
 		return (player, worldState) -> worldState.getMaterial() != Material.METAL;
 		//#endif

@@ -24,7 +24,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
 
-public class RegistryUtil
+public class RegistryUtils
 {
 	public static String getItemId(Item item)
 	{

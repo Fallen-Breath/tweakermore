@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.flyDrag;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.util.EntityUtil;
+import me.fallenbreath.tweakermore.util.EntityUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -69,7 +69,7 @@ public abstract class LivingEntityMixin extends Entity
 			//#else
 			boolean onGround = this.onGround;
 			//#endif
-			if (EntityUtil.isFlyingCreativePlayer(self) && !onGround)
+			if (EntityUtils.isFlyingCreativePlayer(self) && !onGround)
 			{
 				dragFactor = (float)(1.0 - TweakerMoreConfigs.FLY_DRAG.getDoubleValue());
 			}

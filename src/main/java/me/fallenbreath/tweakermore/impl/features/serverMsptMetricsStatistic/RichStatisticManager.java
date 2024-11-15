@@ -24,7 +24,7 @@ import fi.dy.masa.malilib.config.IConfigOptionListEntry;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.listentries.ServerMsptMetricsStatisticType;
-import me.fallenbreath.tweakermore.util.render.RenderUtil;
+import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import net.minecraft.client.MinecraftClient;
 
 //#if MC >= 12006
@@ -136,7 +136,7 @@ public class RichStatisticManager
 				//#endif
 		//#endif
 				text,
-				x + width - 2 - RenderUtil.getRenderWidth(text),
+				x + width - 2 - RenderUtils.getRenderWidth(text),
 				height - 60 + 2,
 				0x00E0E0E0
 		);

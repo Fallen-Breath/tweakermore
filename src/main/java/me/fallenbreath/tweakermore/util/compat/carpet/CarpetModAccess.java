@@ -22,8 +22,8 @@ package me.fallenbreath.tweakermore.util.compat.carpet;
 
 import com.google.common.collect.Lists;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
-import me.fallenbreath.tweakermore.util.FabricUtil;
-import me.fallenbreath.tweakermore.util.ReflectionUtil;
+import me.fallenbreath.tweakermore.util.FabricUtils;
+import me.fallenbreath.tweakermore.util.ReflectionUtils;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.metadata.ModMetadata;
@@ -47,7 +47,7 @@ public class CarpetModAccess
 		return FabricLoader.getInstance().getModContainer("carpet").
 				map(ModContainer::getMetadata).
 				map(ModMetadata::getVersion).
-				map(version -> FabricUtil.doesVersionSatisfyPredicate(version, predicate)).
+				map(version -> FabricUtils.doesVersionSatisfyPredicate(version, predicate)).
 				orElse(false);
 	}
 
@@ -59,7 +59,7 @@ public class CarpetModAccess
 			return Optional.empty();
 		}
 
-		Optional<Class<?>> tickSpeedOpt = ReflectionUtil.getClass("carpet.helpers.TickSpeed");
+		Optional<Class<?>> tickSpeedOpt = ReflectionUtils.getClass("carpet.helpers.TickSpeed");
 		if (!tickSpeedOpt.isPresent())
 		{
 			TweakerMoreMod.LOGGER.warn("failed to get field carpet.helpers.TickSpeed: {}", tickSpeedOpt);
@@ -67,7 +67,7 @@ public class CarpetModAccess
 		}
 
 		Class<?> tickSpeedClass = tickSpeedOpt.get();
-		ReflectionUtil.ValueWrapper<Boolean> flagWrapper = ReflectionUtil.getStaticField(tickSpeedClass, "process_entities");
+		ReflectionUtils.ValueWrapper<Boolean> flagWrapper = ReflectionUtils.getStaticField(tickSpeedClass, "process_entities");
 		if (!flagWrapper.isPresent())
 		{
 			TweakerMoreMod.LOGGER.warn("failed to get field carpet.helpers.TickSpeed#process_entities: {}", flagWrapper);
@@ -93,7 +93,7 @@ public class CarpetModAccess
 			return Optional.of(false);  // not in world, tick is not frozen ofc
 		}
 
-		ReflectionUtil.ValueWrapper<Object> trmWrapper = ReflectionUtil.invoke(world.getClass(), "tickRateManager", world);
+		ReflectionUtils.ValueWrapper<Object> trmWrapper = ReflectionUtils.invoke(world.getClass(), "tickRateManager", world);
 		if (!trmWrapper.isPresent())
 		{
 			TweakerMoreMod.LOGGER.warn("failed to invoked carpet.fakes.LevelInterface#tickRateManager() from a ClientWorld: {}", trmWrapper);
@@ -101,7 +101,7 @@ public class CarpetModAccess
 		}
 		Object trm = trmWrapper.get();
 
-		ReflectionUtil.ValueWrapper<Boolean> runsNormally = ReflectionUtil.invoke(trm.getClass(), "runsNormally", trm);
+		ReflectionUtils.ValueWrapper<Boolean> runsNormally = ReflectionUtils.invoke(trm.getClass(), "runsNormally", trm);
 		if (!runsNormally.isPresent())
 		{
 			TweakerMoreMod.LOGGER.warn("failed to invoked carpet.helpers.TickRateManager#runsNormally(): {}", runsNormally);

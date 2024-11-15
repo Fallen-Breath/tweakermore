@@ -27,10 +27,10 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.CommonScannerInfoViewer;
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.beacon.BeaconBlockEntityAccessor;
-import me.fallenbreath.tweakermore.util.PositionUtil;
+import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.render.InWorldPositionTransformer;
+import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
-import me.fallenbreath.tweakermore.util.render.RenderUtil;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 import net.minecraft.block.BeaconBlock;
@@ -72,7 +72,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 	private static final double FONT_SCALE = TextRenderer.DEFAULT_FONT_SCALE;
 	private static final double MARGIN = 5;  // margin between icon and text
 	private static final int ICON_SIZE = 18;  // the status effect icon texture is a 18x18 square
-	private static final int ICON_RENDERED_SIZE = RenderUtil.TEXT_HEIGHT;
+	private static final int ICON_RENDERED_SIZE = RenderUtils.TEXT_HEIGHT;
 
 	public BeaconEffectRenderer()
 	{
@@ -126,7 +126,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 				effects.add(Pair.of(secondary, 0));
 			}
 
-			Vec3d centerPos = PositionUtil.centerOf(pos);
+			Vec3d centerPos = PositionUtils.centerOf(pos);
 			double maxWidth = effects.stream().
 					mapToDouble(pair -> this.calculateRowWidth(pair.getFirst(), pair.getSecond())).
 					max().orElse(0);
@@ -147,7 +147,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 
 	private double calculateRowWidth(StatusEffect statusEffect, int amplifier)
 	{
-		double textWidth = RenderUtil.getRenderWidth(getStatusEffectText(statusEffect, amplifier));
+		double textWidth = RenderUtils.getRenderWidth(getStatusEffectText(statusEffect, amplifier));
 		return ICON_RENDERED_SIZE + MARGIN + textWidth;
 	}
 
@@ -180,7 +180,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 
 			// ref: net.minecraft.client.gui.hud.InGameHud#renderStatusEffectOverlay
 
-			renderContext.scale(FONT_SCALE * RenderUtil.getSizeScalingXSign(), -FONT_SCALE, FONT_SCALE);
+			renderContext.scale(FONT_SCALE * RenderUtils.getSizeScalingXSign(), -FONT_SCALE, FONT_SCALE);
 			renderContext.translate(deltaX, 0, 0);
 
 			// scale 2: make the rendered texture height == expected height (line height)

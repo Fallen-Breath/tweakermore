@@ -32,8 +32,8 @@ import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.migration.ConfigRenameMigration;
 import me.fallenbreath.tweakermore.config.statistic.OptionStatisticSaver;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
-import me.fallenbreath.tweakermore.util.FabricUtil;
-import me.fallenbreath.tweakermore.util.FileUtil;
+import me.fallenbreath.tweakermore.util.FabricUtils;
+import me.fallenbreath.tweakermore.util.FileUtils;
 import me.fallenbreath.tweakermore.util.JsonSaveAble;
 
 import java.io.File;
@@ -71,7 +71,7 @@ public class TweakerMoreConfigStorage implements IConfigHandler
 	private static <T extends IConfigBase> List<T> getConfigOptions(Config.Type optionType)
 	{
 		return (List<T>)TweakerMoreConfigs.getOptions(optionType).stream().
-				filter(o -> !o.isDevOnly() || FabricUtil.isDevelopmentEnvironment()).
+				filter(o -> !o.isDevOnly() || FabricUtils.isDevelopmentEnvironment()).
 				map(TweakerMoreOption::getConfig).
 				collect(Collectors.toList());
 	}
@@ -80,7 +80,7 @@ public class TweakerMoreConfigStorage implements IConfigHandler
 	public void load()
 	{
 		JsonObject root = null;
-		File configFile = FileUtil.getConfigFile();
+		File configFile = FileUtils.getConfigFile();
 		if (configFile.exists() && configFile.isFile() && configFile.canRead())
 		{
 			JsonElement element = JsonUtils.parseJsonFile(configFile);
@@ -156,7 +156,7 @@ public class TweakerMoreConfigStorage implements IConfigHandler
 
 			saveInternal(root);
 
-			File configFile = FileUtil.getConfigFile();
+			File configFile = FileUtils.getConfigFile();
 			// malilib in <mc1.17 doesn't have the "save to temp then rename" operation, so we do it ourself
 			//#if MC >= 11700
 			//$$ JsonUtils.writeJsonToFile(root, configFile);

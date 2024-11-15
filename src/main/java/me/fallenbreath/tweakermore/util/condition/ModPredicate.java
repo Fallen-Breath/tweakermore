@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.util.condition;
 
 import com.google.common.base.Joiner;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
-import me.fallenbreath.tweakermore.util.FabricUtil;
+import me.fallenbreath.tweakermore.util.FabricUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,7 +37,7 @@ public class ModPredicate
 	{
 		this.modId = modId;
 		this.versionPredicates = versionPredicates;
-		this.satisfied = FabricUtil.isModLoaded(this.modId) && FabricUtil.doesModFitsAnyPredicate(this.modId, this.versionPredicates);
+		this.satisfied = FabricUtils.isModLoaded(this.modId) && FabricUtils.doesModFitsAnyPredicate(this.modId, this.versionPredicates);
 	}
 
 	public static ModPredicate of(Condition condition)

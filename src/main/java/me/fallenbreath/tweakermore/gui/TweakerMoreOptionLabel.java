@@ -21,10 +21,9 @@
 package me.fallenbreath.tweakermore.gui;
 
 import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
-import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.util.StringUtil;
+import me.fallenbreath.tweakermore.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.function.Function;
@@ -46,7 +45,7 @@ public class TweakerMoreOptionLabel extends WidgetLabel
 		for (int i = 0; i < this.originalLines.length; i++)
 		{
 			String linesToDisplay = this.labels.get(i);
-			if (!this.originalLines[i].equals(StringUtil.removeFormattingCode(linesToDisplay)))
+			if (!this.originalLines[i].equals(StringUtils.removeFormattingCode(linesToDisplay)))
 			{
 				showOriginalLines = true;
 			}
@@ -69,8 +68,8 @@ public class TweakerMoreOptionLabel extends WidgetLabel
 		return !Arrays.equals(
 				originalLines,
 				Arrays.stream(displayLines).
-						map(StringUtils::translate).
-						map(StringUtil::removeFormattingCode).
+						map(fi.dy.masa.malilib.util.StringUtils::translate).
+						map(StringUtils::removeFormattingCode).
 						toArray(String[]::new)
 		);
 	}

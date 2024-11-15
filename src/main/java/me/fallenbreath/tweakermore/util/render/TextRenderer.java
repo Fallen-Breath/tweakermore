@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.util.render;
 
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.GlStateManager;
-import me.fallenbreath.tweakermore.util.PositionUtil;
+import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 import net.minecraft.client.MinecraftClient;
@@ -54,7 +54,7 @@ import net.minecraft.client.util.math.Rotation3;
 public class TextRenderer
 {
 	public static final double DEFAULT_FONT_SCALE = 0.025;
-	private static final double DEFAULT_LINE_HEIGHT_RATIO = 1.0 * RenderUtil.TEXT_LINE_HEIGHT / RenderUtil.TEXT_HEIGHT;
+	private static final double DEFAULT_LINE_HEIGHT_RATIO = 1.0 * RenderUtils.TEXT_LINE_HEIGHT / RenderUtils.TEXT_HEIGHT;
 
 	private final List<TextHolder> lines;
 	private Vec3d pos;
@@ -129,7 +129,7 @@ public class TextRenderer
 		InWorldPositionTransformer positionTransformer = new InWorldPositionTransformer(this.pos);
 		positionTransformer.apply(renderContext);
 		{
-			renderContext.scale(this.fontScale * RenderUtil.getSizeScalingXSign(), -this.fontScale, this.fontScale);
+			renderContext.scale(this.fontScale * RenderUtils.getSizeScalingXSign(), -this.fontScale, this.fontScale);
 
 			//#if MC < 11700
 			RenderGlobals.disableLighting();
@@ -153,7 +153,7 @@ public class TextRenderer
 			int lineNum = this.lines.size();
 			double maxTextWidth = this.lines.stream().mapToInt(TextHolder::getWidth).max().orElse(0);
 			double totalTextWidth = maxTextWidth;
-			double totalTextHeight = RenderUtil.TEXT_HEIGHT * lineNum + (this.lineHeightRatio - 1) * (lineNum - 1);
+			double totalTextHeight = RenderUtils.TEXT_HEIGHT * lineNum + (this.lineHeightRatio - 1) * (lineNum - 1);
 			renderContext.translate(this.horizontalAlignment.getTranslateX(totalTextWidth), this.verticalAlignment.getTranslateY(totalTextHeight), 0);
 			renderContext.translate(this.shiftX, this.shiftY, 0);
 
@@ -186,7 +186,7 @@ public class TextRenderer
 				while (true)
 				{
 					Matrix4f matrix4f = Rotation3.identity().getMatrix();
-					VertexConsumerProvider.Immediate immediate = RenderUtil.getVertexConsumer();
+					VertexConsumerProvider.Immediate immediate = RenderUtils.getVertexConsumer();
 					mc.textRenderer.draw(
 							holder.text, textX, textY, this.color, this.shadow, matrix4f, immediate,
 							//#if MC >= 11904
@@ -308,7 +308,7 @@ public class TextRenderer
 
 	public TextRenderer atCenter(BlockPos blockPos)
 	{
-		return this.at(PositionUtil.centerOf(blockPos));
+		return this.at(PositionUtils.centerOf(blockPos));
 	}
 
 	/**
@@ -398,7 +398,7 @@ public class TextRenderer
 
 	public double getLineHeight()
 	{
-		return RenderUtil.TEXT_HEIGHT * this.lineHeightRatio;
+		return RenderUtils.TEXT_HEIGHT * this.lineHeightRatio;
 	}
 
 	public Vec3d getPos()
@@ -458,7 +458,7 @@ public class TextRenderer
 
 		public int getWidth()
 		{
-			return RenderUtil.getRenderWidth(this.text);
+			return RenderUtils.getRenderWidth(this.text);
 		}
 	}
 

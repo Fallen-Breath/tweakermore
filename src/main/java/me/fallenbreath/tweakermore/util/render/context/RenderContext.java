@@ -48,7 +48,7 @@ public interface RenderContext
 	)
 	{
 		//#if MC >= 12000
-		//$$ return new RenderContextImpl(RenderContextUtil.createDrawContext(matrixStack), new McMatrixStack(matrixStack));
+		//$$ return new RenderContextImpl(RenderContextUtils.createDrawContext(matrixStack), new McMatrixStack(matrixStack));
 		//#elseif MC >= 11600
 		//$$ return new RenderContextImpl(new McMatrixStack(matrixStack));
 		//#else
@@ -65,9 +65,9 @@ public interface RenderContext
 	)
 	{
 		//#if MC >= 12006
-		//$$ return new WorldRenderContextImpl(RenderContextUtil.createDrawContext(new MatrixStack()), new JomlMatrixStack(matrixStack));
+		//$$ return new WorldRenderContextImpl(RenderContextUtils.createDrawContext(new MatrixStack()), new JomlMatrixStack(matrixStack));
 		//#elseif MC >= 12000
-		//$$ return new WorldRenderContextImpl(RenderContextUtil.createDrawContext(matrixStack), new McMatrixStack(matrixStack));
+		//$$ return new WorldRenderContextImpl(RenderContextUtils.createDrawContext(matrixStack), new McMatrixStack(matrixStack));
 		//#elseif MC >= 11600
 		//$$ return new WorldRenderContextImpl(new McMatrixStack(matrixStack));
 		//#else
@@ -85,7 +85,7 @@ public interface RenderContext
 	//#if MC >= 12006
 	//$$ static RenderContext of(@NotNull Matrix4fStack matrixStack)
 	//$$ {
-	//$$ 	return new RenderContextImpl(RenderContextUtil.createDrawContext(new MatrixStack()), new JomlMatrixStack(matrixStack));
+	//$$ 	return new RenderContextImpl(RenderContextUtils.createDrawContext(new MatrixStack()), new JomlMatrixStack(matrixStack));
 	//$$ }
 	//#endif
 

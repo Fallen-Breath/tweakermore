@@ -30,7 +30,7 @@ package me.fallenbreath.tweakermore.util;
 
 import net.minecraft.block.BlockState;
 
-public class BlockUtil
+public class BlockUtils
 {
 	public static boolean isReplaceable(BlockState state)
 	{

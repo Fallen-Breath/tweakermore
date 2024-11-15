@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.bossBarScale;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.util.render.RenderUtil;
+import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import net.minecraft.client.gui.hud.BossBarHud;
 import org.jetbrains.annotations.Nullable;
@@ -44,7 +44,7 @@ public abstract class BossBarHudMixin
 {
 	@Unique
 	@Nullable
-	private RenderUtil.Scaler scaler = null;
+	private RenderUtils.Scaler scaler = null;
 
 	@ModifyVariable(
 			method = "render",
@@ -68,7 +68,7 @@ public abstract class BossBarHudMixin
 		this.scaler = null;
 		if (TweakerMoreConfigs.BOSS_BAR_SCALE.isModified())
 		{
-			this.scaler = RenderUtil.createScaler(windowsWidth / 2.0, 0, TweakerMoreConfigs.BOSS_BAR_SCALE.getDoubleValue());
+			this.scaler = RenderUtils.createScaler(windowsWidth / 2.0, 0, TweakerMoreConfigs.BOSS_BAR_SCALE.getDoubleValue());
 			this.scaler.apply(RenderContext.of(
 					//#if MC >= 11600
 					//$$ matrixStackOrDrawContext

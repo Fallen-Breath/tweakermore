@@ -41,13 +41,13 @@ import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexConsumerProvider;
 //#endif
 
-public class RenderUtil
+public class RenderUtils
 {
 	private static final TextRenderer TEXT_RENDERER = MinecraftClient.getInstance().textRenderer;
 
 	public static final int TEXT_HEIGHT = TEXT_RENDERER.fontHeight;
 	// text with background has 1 extra height at the top
-	public static final int TEXT_LINE_HEIGHT = RenderUtil.TEXT_HEIGHT + 1;
+	public static final int TEXT_LINE_HEIGHT = RenderUtils.TEXT_HEIGHT + 1;
 	public static float tickDelta = 1.0F;
 
 	public static int getRenderWidth(String text)
@@ -125,7 +125,7 @@ public class RenderUtil
 		{
 			if (this.renderContext == null)
 			{
-				throw new RuntimeException("RenderUtil.Scaler: Calling restore before calling apply");
+				throw new RuntimeException("RenderUtils.Scaler: Calling restore before calling apply");
 			}
 			this.renderContext.popMatrix();
 		}

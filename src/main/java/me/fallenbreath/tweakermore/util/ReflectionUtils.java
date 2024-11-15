@@ -30,7 +30,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
-public class ReflectionUtil
+public class ReflectionUtils
 {
 	private static final Map<String, Optional<Class<?>>> classCache = new ConcurrentHashMap<>();
 
@@ -43,7 +43,7 @@ public class ReflectionUtil
 			}
 			catch (ClassNotFoundException e)
 			{
-				TweakerMoreMod.LOGGER.debug("ReflectionUtil.getClass '{}' not found", className);
+				TweakerMoreMod.LOGGER.debug("ReflectionUtils.getClass '{}' not found", className);
 				return Optional.empty();
 			}
 		});

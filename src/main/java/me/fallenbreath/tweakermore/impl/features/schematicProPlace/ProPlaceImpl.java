@@ -26,7 +26,7 @@ import fi.dy.masa.litematica.config.Configs;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
 import me.fallenbreath.tweakermore.impl.features.schematicProPlace.restrict.PlacementRestrictor;
-import me.fallenbreath.tweakermore.util.StringUtil;
+import me.fallenbreath.tweakermore.util.StringUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.util.ActionResult;
@@ -44,7 +44,7 @@ public class ProPlaceImpl
 
 	public static String modifyComment(String comment)
 	{
-		String lines = StringUtil.configsToListLines(PRO_PLACE_CONFIGS);
+		String lines = StringUtils.configsToListLines(PRO_PLACE_CONFIGS);
 		return comment.replaceFirst("##CONFIGS##", lines);
 	}
 

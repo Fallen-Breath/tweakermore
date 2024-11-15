@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.handler;
 
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
-import me.fallenbreath.tweakermore.util.PositionUtil;
+import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.TemporaryBlockReplacer;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
@@ -97,7 +97,7 @@ public class BedHandler extends AbstractBlockHandler
 	@Override
 	public Vec3d getExplosionCenter()
 	{
-		return PositionUtil.centerOf(this.bedHeadPos);
+		return PositionUtils.centerOf(this.bedHeadPos);
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public class BedHandler extends AbstractBlockHandler
 	@Override
 	public Vec3d getTextPosition()
 	{
-		Vec3d headCenter = PositionUtil.centerOf(this.bedHeadPos);
+		Vec3d headCenter = PositionUtils.centerOf(this.bedHeadPos);
 		Vec3d shiftToMiddle =
 				//#if MC >= 11600
 				//$$ Vec3d.of

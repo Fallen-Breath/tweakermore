@@ -18,27 +18,9 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.util;
+package me.fallenbreath.tweakermore.util.render.context;
 
-import net.minecraft.util.Identifier;
-
-public class IdentifierUtil
+class RenderContextUtils
 {
-	public static Identifier of(String id)
-	{
-		//#if MC >= 12100
-		//$$ return Identifier.of(id);
-		//#else
-		return new Identifier(id);
-		//#endif
-	}
-
-	public static Identifier of(String namespace, String path)
-	{
-		//#if MC >= 12100
-		//$$ return Identifier.of(namespace, path);
-		//#else
-		return new Identifier(namespace, path);
-		//#endif
-	}
+	// impl in mc1.20 (subproject 1.20.1)
 }

@@ -28,7 +28,7 @@ import me.fallenbreath.tweakermore.config.options.listentries.InfoViewRenderStra
 import me.fallenbreath.tweakermore.config.options.listentries.InfoViewTargetStrategy;
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.ScanningCache;
-import me.fallenbreath.tweakermore.util.PositionUtil;
+import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -77,7 +77,7 @@ public abstract class CommonScannerInfoViewer extends AbstractInfoViewer
 				break;
 			case BEAM:
 				Vec3d beamEnd = camPos.add(camVec.normalize().multiply(reach));
-				for (BlockPos blockPos : cache.beam(camPos, beamEnd, angle, PositionUtil.BeamMode.BEAM))
+				for (BlockPos blockPos : cache.beam(camPos, beamEnd, angle, PositionUtils.BeamMode.BEAM))
 				{
 					result.put(blockPos, this.getRendererFor(false));
 				}
@@ -87,7 +87,7 @@ public abstract class CommonScannerInfoViewer extends AbstractInfoViewer
 				for (BlockPos pos : cache.sphere(camPos, reach))
 				{
 					// in the same direction of the camera vector
-					if (PositionUtil.centerOf(pos).add(camPos.negate()).dotProduct(camVec) > 0)
+					if (PositionUtils.centerOf(pos).add(camPos.negate()).dotProduct(camVec) > 0)
 					{
 						result.put(pos, this.getRendererFor(pos.equals(crossHairPos)));
 					}

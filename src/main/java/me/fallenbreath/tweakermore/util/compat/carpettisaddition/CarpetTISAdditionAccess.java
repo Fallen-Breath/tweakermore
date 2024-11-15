@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.util.compat.carpettisaddition;
 
-import me.fallenbreath.tweakermore.util.ReflectionUtil;
+import me.fallenbreath.tweakermore.util.ReflectionUtils;
 
 import java.util.Optional;
 
@@ -28,8 +28,8 @@ public class CarpetTISAdditionAccess
 {
 	public static Optional<Boolean> getBooleanRule(String ruleName)
 	{
-		return ReflectionUtil.getClass("carpettisaddition.CarpetTISAdditionSettings")
-				.map(clazz -> ReflectionUtil.getStaticField(clazz, ruleName))
+		return ReflectionUtils.getClass("carpettisaddition.CarpetTISAdditionSettings")
+				.map(clazz -> ReflectionUtils.getStaticField(clazz, ruleName))
 				.map(vw -> vw.isPresent() ? vw.get() : null)
 				.map(value -> value instanceof Boolean ? (Boolean)value : null);
 	}

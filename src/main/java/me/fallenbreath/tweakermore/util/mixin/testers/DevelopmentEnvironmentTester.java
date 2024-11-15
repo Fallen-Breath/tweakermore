@@ -21,13 +21,13 @@
 package me.fallenbreath.tweakermore.util.mixin.testers;
 
 import me.fallenbreath.conditionalmixin.api.mixin.ConditionTester;
-import me.fallenbreath.tweakermore.util.FabricUtil;
+import me.fallenbreath.tweakermore.util.FabricUtils;
 
 public class DevelopmentEnvironmentTester implements ConditionTester
 {
 	@Override
 	public boolean isSatisfied(String mixinClassName)
 	{
-		return FabricUtil.isDevelopmentEnvironment();
+		return FabricUtils.isDevelopmentEnvironment();
 	}
 }

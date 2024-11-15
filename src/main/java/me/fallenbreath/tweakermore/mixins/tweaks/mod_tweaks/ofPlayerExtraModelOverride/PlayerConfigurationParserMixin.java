@@ -25,7 +25,7 @@ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.ofPlayerExtraModelOverride.OverrideImpl;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.ofPlayerExtraModelOverride.PlayerConfigurationParserWithOverride;
 import me.fallenbreath.tweakermore.util.ModIds;
-import me.fallenbreath.tweakermore.util.ReflectionUtil;
+import me.fallenbreath.tweakermore.util.ReflectionUtils;
 import org.apache.commons.lang3.mutable.MutableObject;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
@@ -95,8 +95,8 @@ public abstract class PlayerConfigurationParserMixin implements PlayerConfigurat
 	{
 		// HttpPipeline.get(urlStr, proxy)
 		MutableObject<byte[]> ret = new MutableObject<>();
-		ReflectionUtil.getClass("net.optifine.http.HttpPipeline").ifPresent(clazz -> {
-			byte[] b = ReflectionUtil.<byte[]>invoke(clazz, "get", null, urlStr, proxy).get();
+		ReflectionUtils.getClass("net.optifine.http.HttpPipeline").ifPresent(clazz -> {
+			byte[] b = ReflectionUtils.<byte[]>invoke(clazz, "get", null, urlStr, proxy).get();
 			ret.setValue(b);
 		});
 		return ret.getValue();

@@ -26,7 +26,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.util.FabricUtil;
+import me.fallenbreath.tweakermore.util.FabricUtils;
 import me.fallenbreath.tweakermore.util.Messenger;
 import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
@@ -60,7 +60,7 @@ public class SpectatorTeleportCommand
 				//#else
 				1;
 				//#endif
-		if (!FabricUtil.isModLoaded(fapiModId))
+		if (!FabricUtils.isModLoaded(fapiModId))
 		{
 			TweakerMoreMod.LOGGER.warn("{} does not exist, SpectatorTeleportCommand init skipped", fapiModId);
 			return;

@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ItemUtil
+public class ItemUtils
 {
 	public static final List<Item> SHULKER_BOX_ITEMS = ImmutableList.copyOf(
 			Registry.ITEM.stream().

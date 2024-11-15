@@ -25,7 +25,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.pistorder.pushlimit.PushLimitManager;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.pistorder.PistonBlockAccessor;
 import me.fallenbreath.tweakermore.util.Messenger;
-import me.fallenbreath.tweakermore.util.PositionUtil;
+import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.TemporaryBlockReplacer;
 import me.fallenbreath.tweakermore.util.render.ColorHolder;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
@@ -220,7 +220,7 @@ public class PistorderDisplay
 	{
 		ColorHolder colorHolder = ColorHolder.of(color).modify(h -> h.alpha = (int)(0xFF * TweakerMoreConfigs.PISTORDER_TEXT_ALPHA.getDoubleValue()));
 		TextRenderer renderer =  TextRenderer.create().
-				at(PositionUtil.centerOf(pos)).
+				at(PositionUtils.centerOf(pos)).
 				text(text).color(colorHolder.pack()).
 				fontScale(TextRenderer.DEFAULT_FONT_SCALE * TweakerMoreConfigs.PISTORDER_TEXT_SCALE.getDoubleValue()).
 				seeThrough().

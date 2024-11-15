@@ -39,9 +39,9 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.mixins.core.gui.access.WidgetSearchBarAccessor;
-import me.fallenbreath.tweakermore.util.FabricUtil;
+import me.fallenbreath.tweakermore.util.FabricUtils;
 import me.fallenbreath.tweakermore.util.JsonSaveAble;
-import me.fallenbreath.tweakermore.util.render.RenderUtil;
+import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 
@@ -162,7 +162,7 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 			return false;
 		}
 		// hide dev only options unless debug mode on and is dev env
-		if (option.isDevOnly() && !(TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue() && FabricUtil.isDevelopmentEnvironment()))
+		if (option.isDevOnly() && !(TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue() && FabricUtils.isDevelopmentEnvironment()))
 		{
 			return false;
 		}
@@ -196,8 +196,8 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 				total, enabled.get(), modified.get(), disabled.get()
 		);
 
-		int width = RenderUtil.getRenderWidth(bottomLine);
-		int height = RenderUtil.TEXT_HEIGHT;
+		int width = RenderUtils.getRenderWidth(bottomLine);
+		int height = RenderUtils.TEXT_HEIGHT;
 		int x = this.width - (this.width - this.getBrowserWidth()) / 2 - width;
 		int y = this.height - height - TOP;
 		this.addLabel(x, y, width, height, 0xFFCCCCCC, bottomLine);

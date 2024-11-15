@@ -21,8 +21,8 @@
 package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxItemContentHint;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.util.InventoryUtil;
-import me.fallenbreath.tweakermore.util.ItemUtil;
+import me.fallenbreath.tweakermore.util.InventoryUtils;
+import me.fallenbreath.tweakermore.util.ItemUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DefaultedList;
 
@@ -52,11 +52,11 @@ public class ShulkerBoxItemContentHintCommon
 		{
 			return info;
 		}
-		if (!ItemUtil.isShulkerBox(itemStack.getItem()))
+		if (!ItemUtils.isShulkerBox(itemStack.getItem()))
 		{
 			return info;
 		}
-		Optional<DefaultedList<ItemStack>> stackList = InventoryUtil.getStoredItems(itemStack);
+		Optional<DefaultedList<ItemStack>> stackList = InventoryUtils.getStoredItems(itemStack);
 		if (!stackList.isPresent())
 		{
 			return info;
@@ -108,7 +108,7 @@ public class ShulkerBoxItemContentHintCommon
 		info.enabled = true;
 		info.fillRatio = -1;
 
-		int slotAmount = InventoryUtil.getInventorySlotAmount(itemStack);
+		int slotAmount = InventoryUtils.getInventorySlotAmount(itemStack);
 		if (slotAmount != -1)
 		{
 			double sum = 0;

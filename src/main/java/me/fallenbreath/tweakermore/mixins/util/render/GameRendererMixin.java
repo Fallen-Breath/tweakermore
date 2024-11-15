@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.util.render;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import me.fallenbreath.tweakermore.util.render.RenderUtil;
+import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import net.minecraft.client.render.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -45,7 +45,7 @@ public abstract class GameRendererMixin
 			//#endif
 	)
 	{
-		RenderUtil.tickDelta =
+		RenderUtils.tickDelta =
 				//#if MC >= 12100
 				//$$ tickCounter.getTickDelta(false);
 				//#else
@@ -56,6 +56,6 @@ public abstract class GameRendererMixin
 	@Inject(method = "render", at = @At("TAIL"))
 	private void recordTickDelta_renderEnd(CallbackInfo ci)
 	{
-		RenderUtil.tickDelta = 1.0F;
+		RenderUtils.tickDelta = 1.0F;
 	}
 }

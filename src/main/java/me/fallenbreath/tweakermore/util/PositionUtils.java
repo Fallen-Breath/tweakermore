@@ -31,7 +31,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class PositionUtil
+public class PositionUtils
 {
 	public static BlockPos floored(Vec3d vec3d)
 	{
@@ -118,7 +118,7 @@ public class PositionUtil
 
 			if (lastMin != null)
 			{
-				// optimize increasing PositionUtil.boxSurface
+				// optimize increasing PositionUtils.boxSurface
 				int minX = pos1.getX();
 				int minY = pos1.getY();
 				int minZ = pos1.getZ();
@@ -164,7 +164,7 @@ public class PositionUtil
 			}
 			else
 			{
-				for (BlockPos pos : PositionUtil.boxSurface(pos1, pos2))
+				for (BlockPos pos : PositionUtils.boxSurface(pos1, pos2))
 				{
 					positions.putIfAbsent(pos.asLong(), angle);
 				}
@@ -187,7 +187,7 @@ public class PositionUtil
 		List<BlockPos> result = Lists.newArrayList();
 		positions.forEach((l, a) -> {
 			BlockPos pos = BlockPos.fromLong(l);
-			Vec3d vec3d = PositionUtil.centerOf(pos).subtract(startPos);
+			Vec3d vec3d = PositionUtils.centerOf(pos).subtract(startPos);
 			if (vec3d.length() <= maxLen)
 			{
 				Vec3d dir2 = vec3d.normalize();

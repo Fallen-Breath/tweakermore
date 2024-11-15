@@ -23,8 +23,8 @@ package me.fallenbreath.tweakermore.impl.features.infoView.cache;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.mojang.datafixers.util.Pair;
-import me.fallenbreath.tweakermore.util.PositionUtil;
-import me.fallenbreath.tweakermore.util.render.RenderUtil;
+import me.fallenbreath.tweakermore.util.PositionUtils;
+import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -50,7 +50,7 @@ public class ScanningCache
 		{
 			return null;
 		}
-		return this.rayTraceCache.computeIfAbsent(reach, k -> mc.player.rayTrace(reach, RenderUtil.tickDelta, false));
+		return this.rayTraceCache.computeIfAbsent(reach, k -> mc.player.rayTrace(reach, RenderUtils.tickDelta, false));
 	}
 
 	@Nullable
@@ -60,10 +60,10 @@ public class ScanningCache
 		return hitResult instanceof BlockHitResult ? ((BlockHitResult)hitResult).getBlockPos() : null;
 	}
 
-	public Collection<BlockPos> beam(Vec3d startPos, Vec3d endPos, double coneAngle, PositionUtil.BeamMode mode)
+	public Collection<BlockPos> beam(Vec3d startPos, Vec3d endPos, double coneAngle, PositionUtils.BeamMode mode)
 	{
 		BeamKey key = new BeamKey(startPos, endPos, coneAngle, mode);
-		return this.beamCache.computeIfAbsent(key, k -> PositionUtil.beam(startPos, endPos, coneAngle, mode));
+		return this.beamCache.computeIfAbsent(key, k -> PositionUtils.beam(startPos, endPos, coneAngle, mode));
 	}
 
 	public Collection<BlockPos> box(Vec3d center, double radius)
@@ -75,7 +75,7 @@ public class ScanningCache
 	{
 		return this.boxCache.computeIfAbsent(Pair.of(pos1, pos2), k -> {
 			List<BlockPos> result = Lists.newArrayList();
-			for (BlockPos pos : BlockPos.iterate(PositionUtil.floored(pos1), PositionUtil.floored(pos2)))
+			for (BlockPos pos : BlockPos.iterate(PositionUtils.floored(pos1), PositionUtils.floored(pos2)))
 			{
 				result.add(pos.toImmutable());
 			}
@@ -88,7 +88,7 @@ public class ScanningCache
 		return this.sphereCache.computeIfAbsent(
 				Pair.of(center, radius),
 				k -> this.box(center, radius).stream().
-						filter(pos -> PositionUtil.centerOf(pos).squaredDistanceTo(center) <= radius * radius).
+						filter(pos -> PositionUtils.centerOf(pos).squaredDistanceTo(center) <= radius * radius).
 						collect(Collectors.toList())
 		);
 	}
@@ -98,9 +98,9 @@ public class ScanningCache
 		private final Vec3d startPos;
 		private final Vec3d endPos;
 		private final double coneAngle;
-		private final PositionUtil.BeamMode mode;
+		private final PositionUtils.BeamMode mode;
 
-		private BeamKey(Vec3d startPos, Vec3d endPos, double coneAngle, PositionUtil.BeamMode mode)
+		private BeamKey(Vec3d startPos, Vec3d endPos, double coneAngle, PositionUtils.BeamMode mode)
 		{
 			this.startPos = startPos;
 			this.endPos = endPos;

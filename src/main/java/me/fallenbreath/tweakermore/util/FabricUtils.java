@@ -27,7 +27,7 @@ import net.fabricmc.loader.api.Version;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
-public class FabricUtil
+public class FabricUtils
 {
 	public static boolean isModLoaded(String modId)
 	{

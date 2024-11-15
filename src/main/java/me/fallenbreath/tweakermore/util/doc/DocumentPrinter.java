@@ -24,7 +24,6 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.config.*;
 import fi.dy.masa.malilib.hotkeys.IHotkey;
-import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.Config;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
@@ -32,7 +31,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreOption;
 import me.fallenbreath.tweakermore.config.options.IHotkeyWithSwitch;
 import me.fallenbreath.tweakermore.config.options.IOptionListHotkeyed;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
-import me.fallenbreath.tweakermore.util.StringUtil;
+import me.fallenbreath.tweakermore.util.StringUtils;
 import me.fallenbreath.tweakermore.util.condition.ModPredicate;
 import me.fallenbreath.tweakermore.util.condition.ModRestriction;
 import net.fabricmc.loader.api.FabricLoader;
@@ -66,7 +65,7 @@ public class DocumentPrinter
 
 	private static String prettyPredicate(ModPredicate modPredicate)
 	{
-		String ret = String.format("%s (`%s`)", StringUtils.translate("tweakermore.util.mod." + modPredicate.modId), modPredicate.modId);
+		String ret = String.format("%s (`%s`)", fi.dy.masa.malilib.util.StringUtils.translate("tweakermore.util.mod." + modPredicate.modId), modPredicate.modId);
 		String predicate = modPredicate.getVersionPredicatesString();
 		if (!predicate.isEmpty())
 		{
@@ -94,12 +93,12 @@ public class DocumentPrinter
 		{
 			id = config.getType().name().toLowerCase();
 		}
-		return StringUtils.translate("tweakermore.doc_gen.type." + id);
+		return fi.dy.masa.malilib.util.StringUtils.translate("tweakermore.doc_gen.type." + id);
 	}
 
 	private static String getComment(TweakerMoreIConfigBase config)
 	{
-		return StringUtil.removeFormattingCode(config.getCommentNoFooter());
+		return StringUtils.removeFormattingCode(config.getCommentNoFooter());
 	}
 
 	private static String getDefaultValue(IConfigBase config)
@@ -110,7 +109,7 @@ public class DocumentPrinter
 			hotkey = ((IHotkey)config).getKeybind().getDefaultStringValue();
 			if (hotkey.isEmpty())
 			{
-				hotkey = italic(StringUtils.translate("tweakermore.doc_gen.value.no_hotkey"));
+				hotkey = italic(fi.dy.masa.malilib.util.StringUtils.translate("tweakermore.doc_gen.value.no_hotkey"));
 			}
 			else
 			{
@@ -221,7 +220,7 @@ public class DocumentPrinter
 	 */
 	private static String tr(String key)
 	{
-		return StringUtils.translate("tweakermore.doc_gen.text." + key);
+		return fi.dy.masa.malilib.util.StringUtils.translate("tweakermore.doc_gen.text." + key);
 	}
 
 	private static void printOption(Consumer<String> writeln, TweakerMoreOption tweakerMoreOption, String lang)
@@ -257,7 +256,7 @@ public class DocumentPrinter
 				if (!first)
 				{
 					writeln.accept("");
-					writeln.accept(String.format("  *%s*", StringUtils.translate("tweakermore.gui.mod_relation_footer.or")));
+					writeln.accept(String.format("  *%s*", fi.dy.masa.malilib.util.StringUtils.translate("tweakermore.gui.mod_relation_footer.or")));
 					writeln.accept("");
 				}
 				first = false;

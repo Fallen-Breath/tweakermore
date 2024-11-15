@@ -20,7 +20,6 @@
 
 package me.fallenbreath.tweakermore.util;
 
-import fi.dy.masa.malilib.util.InventoryUtils;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
@@ -28,7 +27,7 @@ import net.minecraft.util.DefaultedList;
 
 import java.util.Optional;
 
-public class InventoryUtil
+public class InventoryUtils
 {
 	public static int getInventorySlotAmount(ItemStack itemStack)
 	{
@@ -57,11 +56,11 @@ public class InventoryUtil
 
 	public static Optional<DefaultedList<ItemStack>> getStoredItems(ItemStack itemStack)
 	{
-		int slotAmount = InventoryUtil.getInventorySlotAmount(itemStack);
+		int slotAmount = InventoryUtils.getInventorySlotAmount(itemStack);
 		if (slotAmount == -1)
 		{
 			return Optional.empty();
 		}
-		return Optional.ofNullable(InventoryUtils.getStoredItems(itemStack, slotAmount));
+		return Optional.ofNullable(fi.dy.masa.malilib.util.InventoryUtils.getStoredItems(itemStack, slotAmount));
 	}
 }

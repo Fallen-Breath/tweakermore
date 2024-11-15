@@ -21,12 +21,11 @@
 package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints;
 
 import com.google.common.collect.ImmutableList;
-import fi.dy.masa.malilib.util.InventoryUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builder.PotionHintBuilder;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builder.EnchantmentHintBuilder;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builder.AbstractHintBuilder;
-import me.fallenbreath.tweakermore.util.InventoryUtil;
+import me.fallenbreath.tweakermore.util.InventoryUtils;
 import me.fallenbreath.tweakermore.util.Messenger;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
@@ -81,13 +80,13 @@ public class ShulkerBoxToolTipEnhancer
 	{
 		if (TweakerMoreConfigs.SHULKER_BOX_TOOLTIP_FILL_LEVEL_HINT.getBooleanValue() && tooltip.size() > 0)
 		{
-			int slotAmount = InventoryUtil.getInventorySlotAmount(skulker);
+			int slotAmount = InventoryUtils.getInventorySlotAmount(skulker);
 			if (slotAmount == -1)
 			{
 				return;
 			}
 
-			DefaultedList<ItemStack> stackList = InventoryUtils.getStoredItems(skulker, slotAmount);
+			DefaultedList<ItemStack> stackList = fi.dy.masa.malilib.util.InventoryUtils.getStoredItems(skulker, slotAmount);
 			if (stackList.isEmpty())
 			{
 				return;

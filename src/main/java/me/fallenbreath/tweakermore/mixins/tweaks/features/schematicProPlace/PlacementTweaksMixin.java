@@ -28,7 +28,6 @@ import fi.dy.masa.tweakeroo.tweaks.PlacementTweaks;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.features.schematicProPlace.ProPlaceImpl;
-import me.fallenbreath.tweakermore.util.BlockUtil;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -118,7 +117,7 @@ public abstract class PlacementTweaksMixin
 		}
 
 		if (FeatureToggle.TWEAK_PLACEMENT_RESTRICTION.getBooleanValue() &&
-				state.canReplace(ctx) == false && BlockUtil.isReplaceable(state))
+				state.canReplace(ctx) == false && me.fallenbreath.tweakermore.util.BlockUtils.isReplaceable(state))
 		{
 			posIn = posIn.offset(sideIn.getOpposite());
 		}

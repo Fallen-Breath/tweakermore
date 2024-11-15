@@ -24,7 +24,7 @@ import fi.dy.masa.litematica.config.Configs;
 import fi.dy.masa.litematica.util.RayTraceUtils;
 import fi.dy.masa.litematica.world.SchematicWorldHandler;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
-import me.fallenbreath.tweakermore.util.FabricUtil;
+import me.fallenbreath.tweakermore.util.FabricUtils;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
@@ -37,7 +37,7 @@ import java.util.Optional;
 
 public class LitematicaUtils
 {
-	private static final boolean LITEMATICA_LOADED = FabricUtil.isModLoaded(ModIds.litematica);
+	private static final boolean LITEMATICA_LOADED = FabricUtils.isModLoaded(ModIds.litematica);
 
 	@Nullable
 	public static World getSchematicWorld()

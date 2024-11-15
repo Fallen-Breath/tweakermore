@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.util.doc;
 
 import com.google.common.collect.ImmutableList;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
-import me.fallenbreath.tweakermore.util.FabricUtil;
+import me.fallenbreath.tweakermore.util.FabricUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.LanguageDefinition;
 import net.minecraft.client.resource.language.LanguageManager;
@@ -113,7 +113,7 @@ public class DocumentGenerator
 	public static void onClientInitFinished()
 	{
 		// -Dtweakermore.gen_doc=true
-		if (FabricUtil.isDevelopmentEnvironment() && "true".equals(System.getProperty(TweakerMoreMod.MOD_ID + ".gen_doc")))
+		if (FabricUtils.isDevelopmentEnvironment() && "true".equals(System.getProperty(TweakerMoreMod.MOD_ID + ".gen_doc")))
 		{
 			TweakerMoreMod.LOGGER.info("Starting Tweakermore automatic doc generating");
 			generateDoc(true);

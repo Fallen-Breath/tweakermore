@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableCreativeFlyClimbingCheck;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.util.EntityUtil;
+import me.fallenbreath.tweakermore.util.EntityUtils;
 import net.minecraft.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -40,7 +40,7 @@ public abstract class LivingEntityMixin
 	{
 		if (TweakerMoreConfigs.DISABLE_CREATIVE_FLY_CLIMBING_CHECK.getBooleanValue())
 		{
-			if (EntityUtil.isFlyingCreativePlayer((LivingEntity)(Object)this))
+			if (EntityUtils.isFlyingCreativePlayer((LivingEntity)(Object)this))
 			{
 				cir.setReturnValue(false);
 			}
