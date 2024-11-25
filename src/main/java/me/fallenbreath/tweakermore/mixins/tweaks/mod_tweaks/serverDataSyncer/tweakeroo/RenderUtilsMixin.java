@@ -30,9 +30,20 @@ import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.Inventory;
-import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.Mixin;
 
+/**
+ * Moved to {@link RayTraceUtilsMixin} for mc 1.21.1+
+ */
+//#if MC >= 12101
+//$$ import me.fallenbreath.tweakermore.util.mixin.DummyClass;
+
+//$$ @Mixin(DummyClass.class)
+//$$ public abstract class RenderUtilsMixin
+//$$ {
+//$$ }
+//#else
 @Restriction(require = @Condition(ModIds.tweakeroo))
 @Mixin(RenderUtils.class)
 public abstract class RenderUtilsMixin
@@ -80,3 +91,4 @@ public abstract class RenderUtilsMixin
 		return entity;
 	}
 }
+//#endif

@@ -20,11 +20,66 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.tweakeroo;
 
+//#if MC >= 12101
+//$$ import com.llamalad7.mixinextras.injector.ModifyReceiver;
+//$$ import com.llamalad7.mixinextras.sugar.Local;
+//$$ import fi.dy.masa.tweakeroo.util.RayTraceUtils;
+//$$ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+//$$ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
+//$$ import me.fallenbreath.tweakermore.util.ModIds;
+//$$ import net.minecraft.nbt.NbtCompound;
+//$$ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+//$$ import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSyncer;
+//$$ import net.minecraft.block.entity.BlockEntity;
+//$$ import net.minecraft.entity.Entity;
+//$$ import net.minecraft.registry.RegistryWrapper;
+//$$ import org.spongepowered.asm.mixin.injection.At;
+//$$ import org.spongepowered.asm.mixin.injection.ModifyVariable;
+//#else
 import me.fallenbreath.tweakermore.util.mixin.DummyClass;
+//#endif
 import org.spongepowered.asm.mixin.Mixin;
 
+//#if MC >= 12101
+//$$ @Restriction(require = @Condition(ModIds.tweakeroo))
+//$$ @Mixin(RayTraceUtils.class)
+//#else
 @Mixin(DummyClass.class)
+//#endif
 public abstract class RayTraceUtilsMixin
 {
-	// used in mc1.20.3+
+    //#if MC >= 12101
+    //$$ @ModifyReceiver(
+        //$$ method = "getTargetInventoryFromBlock",
+        //$$ at = @At(
+            //$$ value = "INVOKE",
+            //$$ target = "Lnet/minecraft/block/entity/BlockEntity;createNbtWithIdentifyingData(Lnet/minecraft/registry/RegistryWrapper$WrapperLookup;)Lnet/minecraft/nbt/NbtCompound;"
+        //$$ )
+    //$$ )
+    //$$ private static BlockEntity serverDataSyncer4InventoryOverlay_blockEntity(BlockEntity blockEntity, RegistryWrapper.WrapperLookup wrapperLookup)
+    //$$ {
+        //$$ if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
+        //$$ {
+            //$$ if (blockEntity != null)
+            //$$ {
+                //$$ ServerDataSyncer.getInstance().syncBlockEntity(blockEntity);
+            //$$ }
+        //$$ }
+        //$$ return blockEntity;
+    //$$ }
+
+    //$$ @ModifyVariable(method = "getTargetInventoryFromEntity", at = @At("HEAD"), argsOnly = true)
+    //$$ private static Entity serverDataSyncer4InventoryOverlay_entity(Entity entity, @Local(argsOnly = true) NbtCompound nbt)
+    //$$ {
+        //$$ if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
+        //$$ {
+            // if nbt != null, tweakeroo itself has already fetched the entity data from wherever else
+            //$$ if (nbt == null)
+            //$$ {
+                //$$ ServerDataSyncer.getInstance().syncEntity(entity, false);
+            //$$ }
+        //$$ }
+        //$$ return entity;
+    //$$ }
+    //#endif
 }
