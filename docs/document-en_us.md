@@ -2478,13 +2478,13 @@ Make the in-game waypoints render correctly when free camera from tweakeroo is e
 - Mod restrictions:
   - Required mods:
     - Tweakeroo (`tweakeroo`)
-    - Xaero's Minimap (`xaerominimap`)
+    - Xaero's Minimap (`xaerominimap`) `<24.6`
 
   *or*
 
   - Required mods:
     - Tweakeroo (`tweakeroo`)
-    - Better PVP Mod (`xaerobetterpvp`)
+    - Better PVP Mod (`xaerobetterpvp`) `<24.6`
 
 
 ## Porting
