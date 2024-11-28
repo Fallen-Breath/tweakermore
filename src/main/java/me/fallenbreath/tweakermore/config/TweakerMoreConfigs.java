@@ -794,8 +794,8 @@ public class TweakerMoreConfigs
 	@Config(
 			type = Config.Type.GENERIC,
 			restriction = {
-					@Restriction(require = {@Condition(ModIds.tweakeroo), @Condition(value = ModIds.xaero_minimap, versionPredicates = "<24.6")}),
-					@Restriction(require = {@Condition(ModIds.tweakeroo), @Condition(value = ModIds.xaero_betterpvp, versionPredicates = "<24.6")}),
+					@Restriction(require = {@Condition(ModIds.tweakeroo), @Condition(ModIds.xaero_minimap)}),
+					@Restriction(require = {@Condition(ModIds.tweakeroo), @Condition(ModIds.xaero_betterpvp)}),
 			},
 			category = Config.Category.MOD_TWEAKS
 	)
