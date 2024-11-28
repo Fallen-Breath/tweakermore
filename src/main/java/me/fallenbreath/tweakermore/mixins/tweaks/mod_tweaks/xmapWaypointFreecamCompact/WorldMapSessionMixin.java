@@ -41,7 +41,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 })
 @Pseudo
 @Mixin(targets = "xaero.common.minimap.waypoints.render.WaypointsIngameRenderer", remap = false)
-public abstract class WaypointsIngameRendererMixin
+public abstract class WorldMapSessionMixin
 {
 	/**
 	 * The most accurate injection position
