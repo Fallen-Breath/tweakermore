@@ -20,59 +20,52 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.tweakeroo;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import fi.dy.masa.tweakeroo.renderer.RenderUtils;
+import com.llamalad7.mixinextras.injector.ModifyReceiver;
+import com.llamalad7.mixinextras.sugar.Local;
+import fi.dy.masa.tweakeroo.util.RayTraceUtils;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.inventory.Inventory;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Restriction(require = @Condition(ModIds.tweakeroo))
-@Mixin(RenderUtils.class)
-public abstract class RenderUtilsMixin
+@Mixin(RayTraceUtils.class)
+public abstract class RayTraceUtilsMixin
 {
-	@ModifyExpressionValue(
-			method = "renderInventoryOverlay",
+	@ModifyReceiver(
+			method = "getTargetInventoryFromBlock",
 			at = @At(
 					value = "INVOKE",
-					target = "Lfi/dy/masa/malilib/util/InventoryUtils;getInventory(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/inventory/Inventory;",
-					ordinal = 0,
-					remap = true
-			),
-			remap = false
+					target = "Lnet/minecraft/block/entity/BlockEntity;createNbtWithIdentifyingData(Lnet/minecraft/registry/RegistryWrapper$WrapperLookup;)Lnet/minecraft/nbt/NbtCompound;"
+			)
 	)
-	private static Inventory serverDataSyncer4InventoryOverlay_blockEntity(Inventory inventory)
+	private static BlockEntity serverDataSyncer4InventoryOverlay_blockEntity(BlockEntity blockEntity, RegistryWrapper.WrapperLookup wrapperLookup)
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{
-			if (!MinecraftClient.getInstance().isIntegratedServerRunning())
+			if (blockEntity != null)
 			{
-				ServerDataSyncer.getInstance().syncBlockInventory(inventory);
+				ServerDataSyncer.getInstance().syncBlockEntity(blockEntity);
 			}
 		}
-		return inventory;
+		return blockEntity;
 	}
 
-	@ModifyExpressionValue(
-			method = "renderInventoryOverlay",
-			at = @At(
-					value = "INVOKE",
-					target = "Lnet/minecraft/util/hit/EntityHitResult;getEntity()Lnet/minecraft/entity/Entity;",
-					remap = true
-			),
-			remap = false
-	)
-	private static Entity serverDataSyncer4InventoryOverlay_entity(Entity entity)
+	@ModifyVariable(method = "getTargetInventoryFromEntity", at = @At("HEAD"), argsOnly = true)
+	private static Entity serverDataSyncer4InventoryOverlay_entity(Entity entity, @Local(argsOnly = true) NbtCompound nbt)
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{
-			if (!MinecraftClient.getInstance().isIntegratedServerRunning())
+			// if nbt != null, tweakeroo itself has already fetched the entity data from wherever else
+			if (nbt == null)
 			{
 				ServerDataSyncer.getInstance().syncEntity(entity, false);
 			}
