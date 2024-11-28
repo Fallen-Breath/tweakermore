@@ -40,36 +40,36 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(RayTraceUtils.class)
 public abstract class RayTraceUtilsMixin
 {
-        @ModifyReceiver(
-                method = "getTargetInventoryFromBlock",
-                at = @At(
-                        value = "INVOKE",
-                        target = "Lnet/minecraft/block/entity/BlockEntity;createNbtWithIdentifyingData(Lnet/minecraft/registry/RegistryWrapper$WrapperLookup;)Lnet/minecraft/nbt/NbtCompound;"
-                )
-        )
-        private static BlockEntity serverDataSyncer4InventoryOverlay_blockEntity(BlockEntity blockEntity, RegistryWrapper.WrapperLookup wrapperLookup)
-        {
-                if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
-                {
-                        if (blockEntity != null)
-                        {
-                                ServerDataSyncer.getInstance().syncBlockEntity(blockEntity);
-                        }
-                }
-                return blockEntity;
-        }
+	@ModifyReceiver(
+			method = "getTargetInventoryFromBlock",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/block/entity/BlockEntity;createNbtWithIdentifyingData(Lnet/minecraft/registry/RegistryWrapper$WrapperLookup;)Lnet/minecraft/nbt/NbtCompound;"
+			)
+	)
+	private static BlockEntity serverDataSyncer4InventoryOverlay_blockEntity(BlockEntity blockEntity, RegistryWrapper.WrapperLookup wrapperLookup)
+	{
+		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
+		{
+			if (blockEntity != null)
+			{
+				ServerDataSyncer.getInstance().syncBlockEntity(blockEntity);
+			}
+		}
+		return blockEntity;
+	}
 
-        @ModifyVariable(method = "getTargetInventoryFromEntity", at = @At("HEAD"), argsOnly = true)
-        private static Entity serverDataSyncer4InventoryOverlay_entity(Entity entity, @Local(argsOnly = true) NbtCompound nbt)
-        {
-                if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
-                {
-                        // if nbt != null, tweakeroo itself has already fetched the entity data from wherever else
-                        if (nbt == null)
-                        {
-                                ServerDataSyncer.getInstance().syncEntity(entity, false);
-                        }
-                }
-                return entity;
-        }
+	@ModifyVariable(method = "getTargetInventoryFromEntity", at = @At("HEAD"), argsOnly = true)
+	private static Entity serverDataSyncer4InventoryOverlay_entity(Entity entity, @Local(argsOnly = true) NbtCompound nbt)
+	{
+		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
+		{
+			// if nbt != null, tweakeroo itself has already fetched the entity data from wherever else
+			if (nbt == null)
+			{
+				ServerDataSyncer.getInstance().syncEntity(entity, false);
+			}
+		}
+		return entity;
+	}
 }
