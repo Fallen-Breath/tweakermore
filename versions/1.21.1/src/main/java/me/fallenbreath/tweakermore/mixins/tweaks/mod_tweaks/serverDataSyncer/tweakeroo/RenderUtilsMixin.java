@@ -21,11 +21,9 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.tweakeroo;
 
 import me.fallenbreath.tweakermore.util.mixin.DummyClass;
+
 import org.spongepowered.asm.mixin.Mixin;
 
-/**
- * Moved to {@link RayTraceUtilsMixin} for mc 1.21.3+
- */
 @Mixin(DummyClass.class)
 public abstract class RenderUtilsMixin
 {
