@@ -32,6 +32,6 @@ public class XaeroCommonMinimapWaypointsIngameRendererTester implements Conditio
 	@Override
 	public boolean isSatisfied(String mixinClassName)
 	{
-		return FabricLoader.getInstance().isModLoaded(ModIds.xaero_betterpvp) || FabricLoader.getInstance().isModLoaded(ModIds.xaero_betterpvp);
+		return FabricLoader.getInstance().isModLoaded(ModIds.xaero_betterpvp) || FabricLoader.getInstance().isModLoaded(ModIds.xaero_minimap);
 	}
 }
