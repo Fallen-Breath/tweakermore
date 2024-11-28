@@ -2474,13 +2474,13 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
 - 模组约束:
   - 依赖模组:
     - Tweakeroo (`tweakeroo`)
-    - Xaero's Minimap (`xaerominimap`)
+    - Xaero's Minimap (`xaerominimap`) `<24.6`
 
   *或*
 
   - 依赖模组:
     - Tweakeroo (`tweakeroo`)
-    - Better PVP Mod (`xaerobetterpvp`)
+    - Better PVP Mod (`xaerobetterpvp`) `<24.6`
 
 
 ## 移植

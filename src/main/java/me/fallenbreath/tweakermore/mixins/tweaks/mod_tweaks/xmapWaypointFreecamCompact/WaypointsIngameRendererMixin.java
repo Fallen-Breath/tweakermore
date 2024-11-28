@@ -35,10 +35,17 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Group;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-@Restriction(require = {
-		@Condition(ModIds.tweakeroo),
-		@Condition(type = Condition.Type.TESTER, tester = XaeroCommonMinimapWaypointsIngameRendererTester.class),
-})
+@Restriction(
+		require = {
+				@Condition(ModIds.tweakeroo),
+				@Condition(type = Condition.Type.TESTER, tester = XaeroCommonMinimapWaypointsIngameRendererTester.class),
+		},
+		// No more freecam issue with xaero's mod >= 24.6
+		conflict = {
+				@Condition(value = ModIds.xaero_betterpvp, versionPredicates = ">=24.6"),
+				@Condition(value = ModIds.xaero_minimap, versionPredicates = ">=24.6")
+		}
+)
 @Pseudo
 @Mixin(targets = "xaero.common.minimap.waypoints.render.WaypointsIngameRenderer", remap = false)
 public abstract class WaypointsIngameRendererMixin
