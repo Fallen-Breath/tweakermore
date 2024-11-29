@@ -26,5 +26,5 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(DummyClass.class)
 public abstract class RayTraceUtilsMixin
 {
-	// used in mc1.20.3+
+	// used in mc1.20.1+
 }
