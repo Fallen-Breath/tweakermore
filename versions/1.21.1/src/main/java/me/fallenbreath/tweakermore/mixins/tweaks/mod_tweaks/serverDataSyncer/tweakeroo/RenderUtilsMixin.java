@@ -24,7 +24,7 @@ import me.fallenbreath.tweakermore.util.mixin.DummyClass;
 import org.spongepowered.asm.mixin.Mixin;
 
 /**
- * Moved to {@link RayTraceUtilsMixin} for mc 1.21.3+
+ * Moved to {@link RayTraceUtilsMixin} for mc 1.21.1+
  */
 @Mixin(DummyClass.class)
 public abstract class RenderUtilsMixin

@@ -33,7 +33,8 @@
   ],
 
   "breaks": {
-    "minihud": "${minihud_conflict}"
+    "minihud": "${minihud_conflict}",
+    "tweakeroo": "${tweakeroo_conflict}"
   },
   "depends": {
     "fabricloader": ">=0.11.4",
