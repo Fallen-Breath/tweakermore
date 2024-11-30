@@ -560,6 +560,9 @@ tweakermore:
       comment: |-
         Adjust the length of the rendered entity facing vector line when F3 + B is on
         See also: option @option#disableF3BEntityFacingVector@
+    f3GSimplify:
+      .: f3GSimplify
+      comment: Disable the yellow / blue lines in the chunk section boundary rendering when F3+G is on
     f3IUseRelatedCoordinate:
       .: f3IUseRelatedCoordinate
       comment: |-

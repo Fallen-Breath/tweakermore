@@ -1455,6 +1455,15 @@ schematicBlockPlacement的严格模式
 - 最大值: `16.0`
 
 
+### F3+G简化显示 (f3GSimplify)
+
+禁用F3+G的区块边界渲染里的黄色/青色线条，只保留区段/区块的边界线
+
+- 分类: MC修改
+- 类型: 布尔值 (通用)
+- 默认值: `false`
+
+
 ### F3+I使用相对坐标 (f3IUseRelatedCoordinate)
 
 在F3+I复制指令时，使用相对坐标 ~ ~ ~

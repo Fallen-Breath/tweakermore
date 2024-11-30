@@ -222,6 +222,7 @@
     "util.render.TextHandlerAccessor"
   ],
   "client": [
+    "tweaks.mc_tweaks.f3GSimplify.ChunkBorderDebugRendererMixin",
     "tweaks.mc_tweaks.f3TextScale.DebugHudMixin"
   ],
   "injectors": {

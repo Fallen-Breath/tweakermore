@@ -1459,6 +1459,15 @@ See also: option disableF3BEntityFacingVector
 - Maximum value: `16.0`
 
 
+### f3GSimplify
+
+Disable the yellow / blue lines in the chunk section boundary rendering when F3+G is on
+
+- Category: MC Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+
+
 ### f3IUseRelatedCoordinate
 
 Use related coordinate "~ ~ ~" in the command copied by F3 + I

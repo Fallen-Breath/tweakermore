@@ -489,6 +489,9 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigDouble F3_B_ENTITY_FACING_VECTOR_LENGTH = newConfigDouble("f3BEntityFacingVectorLength", 2.0, 0, 16);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean F3_G_SIMPLIFY = newConfigBoolean("f3GSimplify", false);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean F3_I_USE_RELATED_COORDINATE = newConfigBoolean("f3IUseRelatedCoordinate", false);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)

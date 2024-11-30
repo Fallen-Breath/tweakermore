@@ -560,6 +560,9 @@ tweakermore:
       comment: |-
         在启用F3+B实体碰撞箱显示后，调整代表实体朝向的线段的长度
         另见：选项 @option#disableF3BEntityFacingVector@
+    f3GSimplify:
+      .: F3+G简化显示
+      comment: 禁用F3+G的区块边界渲染里的黄色/青色线条，只保留区段/区块的边界线
     f3IUseRelatedCoordinate:
       .: F3+I使用相对坐标
       comment: |-
