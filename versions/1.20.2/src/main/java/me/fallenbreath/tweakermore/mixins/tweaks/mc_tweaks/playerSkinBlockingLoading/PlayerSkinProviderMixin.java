@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.playerSkinBlockingLoading;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
@@ -43,12 +43,18 @@ import java.util.concurrent.CompletableFuture;
 @Mixin(targets = "net/minecraft/client/texture/PlayerSkinProvider$1")  // the CacheLoader subclass in PlayerSkinProvider's constructor
 public abstract class PlayerSkinProviderMixin
 {
-	@ModifyReturnValue(method = "load(Ljava/lang/Object;)Ljava/lang/Object;", at = @At(value = "TAIL"))
-	private Object playerSkinBlockingLoading_blockingProfileFetching(Object completableFuture)
+	@ModifyExpressionValue(
+			method = "load(Lnet/minecraft/client/texture/PlayerSkinProvider$Key;)Ljava/util/concurrent/CompletableFuture;",
+			at = @At(
+					value = "INVOKE",
+					target = "Ljava/util/concurrent/CompletableFuture;supplyAsync(Ljava/util/function/Supplier;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;"
+			)
+	)
+	private CompletableFuture<?> playerSkinBlockingLoading_blockingProfileFetching(CompletableFuture<?> completableFuture)
 	{
 		if (TweakerMoreConfigs.PLAYER_SKIN_BLOCKING_LOADING.getBooleanValue())
 		{
-			completableFuture = TaskSynchronizer.createSyncedFuture((CompletableFuture<?>)completableFuture);
+			completableFuture = TaskSynchronizer.createSyncedFuture(completableFuture);
 		}
 		return completableFuture;
 	}
