@@ -21,7 +21,10 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.features.creativePickBlockWithState;
 
 import fi.dy.masa.malilib.util.InfoUtils;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
@@ -44,6 +47,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 //$$ import java.util.Map;
 //#endif
 
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.21.4"))
 @Mixin(MinecraftClient.class)
 public abstract class MinecraftClientMixin
 {

@@ -278,6 +278,9 @@ So the block state can be restored when you place blocks with the picked item
 - Category: Features
 - Type: hotkey with switch (Hotkey)
 - Default value: `LEFT_ALT`
+- Mod restrictions:
+  - Required mods:
+    - Minecraft (`minecraft`) `<1.21.4`
 
 
 ### fireworkRocketThrottler
@@ -1147,7 +1150,7 @@ Make the following client-side entity targeting stuffs being able to select all 
 
 2. Client-side command suggestion with target entity UUID
 
-3. Mouse middle-click item picking. Supports picking items, xp orbs and falling blocks
+3. Mouse middle-click item picking. Supports picking items, xp orbs and falling blocks (MC < 1.21.4)
 
 Example use cases:
 

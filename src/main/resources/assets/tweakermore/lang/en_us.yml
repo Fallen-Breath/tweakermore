@@ -424,7 +424,7 @@ tweakermore:
         Make the following client-side entity targeting stuffs being able to select all types of entities:
         1. F3 + I entity data querying
         2. Client-side command suggestion with target entity UUID
-        3. Mouse middle-click item picking. Supports picking items, xp orbs and falling blocks
+        3. Mouse middle-click item picking. Supports picking items, xp orbs and falling blocks (MC < 1.21.4)
         Example use cases:
         1. Get a /summon command for an item entity (F3 + I)
         2. Enter /kill and tab-suggested a projectile entity (UUID suggestion)

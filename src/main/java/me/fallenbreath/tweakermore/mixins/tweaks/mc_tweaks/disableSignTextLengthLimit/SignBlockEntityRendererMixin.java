@@ -19,6 +19,20 @@
  */
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableSignTextLengthLimit;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
+import me.fallenbreath.tweakermore.util.ModIds;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Group;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+
+//#if MC >= 12104
+//$$ import net.minecraft.client.render.block.entity.AbstractSignBlockEntityRenderer;
+//#else
+import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
+//#endif
 
 //#if MC < 11500
 //$$ import me.fallenbreath.tweakermore.impl.mc_tweaks.disableSignTextLengthLimit.SignOverflowHintDrawer;
@@ -28,15 +42,6 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableSignTextLengt
 //$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //$$ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 //#endif
-import me.fallenbreath.conditionalmixin.api.annotation.Condition;
-import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
-import me.fallenbreath.tweakermore.util.ModIds;
-import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Group;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Restriction(conflict = {
 		@Condition(value = ModIds.caxton, versionPredicates = "<0.3.0-beta.2")
@@ -44,7 +49,13 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 		//$$ , @Condition(ModIds.optifine)
 		//#endif
 })
-@Mixin(SignBlockEntityRenderer.class)
+@Mixin(
+		//#if MC >= 12104
+		//$$ AbstractSignBlockEntityRenderer.class
+		//#else
+		SignBlockEntityRenderer.class
+		//#endif
+)
 public abstract class SignBlockEntityRendererMixin
 {
 	@SuppressWarnings("UnresolvedMixinReference")
@@ -55,9 +66,11 @@ public abstract class SignBlockEntityRendererMixin
 					//   render (MC < 11903)
 					//   renderText (MC >= 11903)
 
-					//#if MC >= 11903
+					// TODO: update optifine name in mc1.19.3+
+					//#if MC >= 12104
+					//$$ "method_65819",  // vanilla
+					//#elseif MC >= 11903
 					//$$ "method_45799",  // vanilla
-					//$$ "lambda$render$2"  // after being polluted by optifine (TODO fix the method name in optifine environment)
 					//#elseif MC >= 11700
 					//$$ "method_32159",  // vanilla
 					//$$ "lambda$render$2"  // after being polluted by optifine

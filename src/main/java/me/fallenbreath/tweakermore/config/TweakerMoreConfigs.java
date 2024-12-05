@@ -180,7 +180,7 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkey COPY_SIGN_TEXT_TO_CLIPBOARD = newConfigHotKey("copySignTextToClipBoard", "");
 
-	@Config(type = Config.Type.HOTKEY, category = Config.Category.FEATURES)
+	@Config(type = Config.Type.HOTKEY, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.21.4")), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigHotkeyWithSwitch CREATIVE_PICK_BLOCK_WITH_STATE = newConfigHotKeyWithSwitch("creativePickBlockWithState", false, "LEFT_ALT", KeybindSettings.MODIFIER_INGAME);
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)

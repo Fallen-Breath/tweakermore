@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2024  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -20,33 +20,36 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.playerSkinBlockingLoading;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.playerSkinBlockingLoading.TaskSynchronizer;
-import net.minecraft.client.texture.PlayerSkinTexture;
+import net.minecraft.client.texture.PlayerSkinTextureDownloader;
+import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
+
+import java.util.concurrent.CompletableFuture;
 
 /**
- *  <  mc1.21.3: subproject 1.15.2 (main project)        <--------
- *  >= mc1.21.4: subproject 1.21.4
+ *  <  mc1.21.3: subproject 1.15.2 (main project)
+ *  >= mc1.21.4: subproject 1.21.4        <--------
  */
-@Mixin(PlayerSkinTexture.class)
+@Mixin(PlayerSkinTextureDownloader.class)
 public abstract class PlayerSkinTextureMixin
 {
-	@ModifyArg(
-			method = "load",
+	@ModifyExpressionValue(
+			method = "downloadAndRegisterTexture",
 			at = @At(
 					value = "INVOKE",
-					target = "Ljava/util/concurrent/CompletableFuture;runAsync(Ljava/lang/Runnable;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;"
+					target = "Ljava/util/concurrent/CompletableFuture;supplyAsync(Ljava/util/function/Supplier;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;"
 			)
 	)
-	private Runnable playerSkinBlockingLoading_blockingTextureDownloading(Runnable runnable)
+	private static CompletableFuture<Identifier> playerSkinBlockingLoading_blockingTextureDownloading(CompletableFuture<Identifier> future)
 	{
 		if (TweakerMoreConfigs.PLAYER_SKIN_BLOCKING_LOADING.getBooleanValue())
 		{
-			runnable = TaskSynchronizer.createSyncedTask(runnable);
+			future = TaskSynchronizer.createSyncedFuture(future);
 		}
-		return runnable;
+		return future;
 	}
 }

@@ -61,7 +61,9 @@ public abstract class MinecraftClient_pickEntityMixin
 		return crosshairTarget;
 	}
 
-	//#if MC >= 11700
+	//#if MC >= 12104
+	//$$ // now it's done on the serverside, we can't perform any tweak on this anymore :(
+	//#elseif MC >= 11700
 	//$$ @ModifyExpressionValue(
 	//$$ 		method = "doItemPick",
 	//$$ 		at = @At(
