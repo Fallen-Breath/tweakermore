@@ -840,6 +840,13 @@ public class TweakerMoreConfigs
 
 	@Config(
 			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.21.4")),
+			category = Config.Category.PORTING
+	)
+	public static final TweakerMoreConfigBoolean MC_FLYING_CLIMB_DRAG_FIX_PORTING = newConfigBoolean("mcFlyingClimbDragFixPorting", false);
+
+	@Config(
+			type = Config.Type.GENERIC,
 			restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.20")),
 			category = Config.Category.PORTING
 	)

@@ -211,6 +211,7 @@
     "tweaks.porting.isScrollStacksFallbackFixPorting.InventoryUtilsMixin",
     "tweaks.porting.lmCustomSchematicBaseDirectoryPorting.DataManagerMixin",
     "tweaks.porting.lmPickBlockShulkersPorting.WorldUtilsMixin",
+    "tweaks.porting.mcFlyingClimbDragFixPorting.LivingEntityMixin",
     "tweaks.porting.mcSpectatorEnterSinkingFixPorting.ClientPlayNetworkHandlerMixin",
     "tweaks.porting.tkrDisableNauseaEffectPorting.ClientPlayerEntityMixin",
     "tweaks.porting.tkrDisableNauseaEffectPorting.InGameHudMixin",
