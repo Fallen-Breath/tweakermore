@@ -945,6 +945,11 @@ tweakermore:
     lmPickBlockShulkersPorting:
       .: lmPickBlockShulkersPorting
       comment: Backport option pickBlockShulkers from Litematica mc1.16+
+    mcFlyingClimbDragFixPorting:
+      .: mcFlyingClimbDragFixPorting
+      comment: |-
+        Backport fix for MC-12829 from mc1.21.4
+        Fix the slowdown caused when flying through climbable blocks in Creative mode
     mcSpectatorEnterSinkingFixPorting:
       .: mcSpectatorEnterSinkingFixPorting
       comment: |-
