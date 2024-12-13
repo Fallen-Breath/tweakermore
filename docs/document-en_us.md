@@ -2557,6 +2557,20 @@ Backport option pickBlockShulkers from Litematica mc1.16+
     - Minecraft (`minecraft`) `<1.16`
 
 
+### mcFlyingClimbDragFixPorting
+
+Backport fix for [MC-12829](https://bugs.mojang.com/browse/MC-12829) from mc1.21.4
+
+Fix the slowdown caused when flying through climbable blocks in Creative mode
+
+- Category: Porting
+- Type: boolean (Generic)
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Minecraft (`minecraft`) `<1.21.4`
+
+
 ### mcSpectatorEnterSinkingFixPorting
 
 Backport fix for MC-146582 from mc1.20
