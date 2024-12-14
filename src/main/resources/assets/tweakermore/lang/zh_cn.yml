@@ -632,6 +632,11 @@ tweakermore:
     maxChatHudHeight:
       .: 最大聊天界面高度
       comment: 聊天界面高度的最大值
+    movingPistonBlockSelectable:
+      .: 移动的活塞可被选择
+      comment: |-
+        让移动的活塞（b36）可被选中，这样就可以方便地把它破坏掉了
+        移动的活塞的outline shape将被统一设置为完整方块
     multiplayerForcedEnabled:
       .: 强制启用多人游戏
       comment: |-

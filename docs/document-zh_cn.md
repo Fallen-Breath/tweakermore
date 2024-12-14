@@ -1638,6 +1638,17 @@ FOV覆盖的开关
 - 最大值: `1000`
 
 
+### 移动的活塞可被选择 (movingPistonBlockSelectable)
+
+让移动的活塞（b36）可被选中，这样就可以方便地把它破坏掉了
+
+移动的活塞的outline shape将被统一设置为完整方块
+
+- 分类: MC修改
+- 类型: 布尔值 (通用)
+- 默认值: `false`
+
+
 ### 强制启用多人游戏 (multiplayerForcedEnabled)
 
 令Minecraft的多人游戏功能始终可用

@@ -632,6 +632,11 @@ tweakermore:
     maxChatHudHeight:
       .: maxChatHudHeight
       comment: The maximum height of the chat hud
+    movingPistonBlockSelectable:
+      .: movingPistonBlockSelectable
+      comment: |-
+        Make the moving piston block (b36) selectable, so you can interact with it easily
+        The outline shape of a moving piston block will be set to a full cube
     multiplayerForcedEnabled:
       .: multiplayerForcedEnabled
       comment: |-

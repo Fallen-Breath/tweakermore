@@ -1642,6 +1642,17 @@ The maximum height of the chat hud
 - Maximum value: `1000`
 
 
+### movingPistonBlockSelectable
+
+Make the moving piston block (b36) selectable, so you can interact with it easily
+
+The outline shape of a moving piston block will be set to a full cube
+
+- Category: MC Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+
+
 ### multiplayerForcedEnabled
 
 Make the multiplayer functionality of Minecraft forced enabled
