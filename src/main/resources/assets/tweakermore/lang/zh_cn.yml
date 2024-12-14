@@ -637,6 +637,10 @@ tweakermore:
       comment: |-
         让移动的活塞（b36）可被选中，这样就可以方便地把它破坏掉了
         移动的活塞的outline shape将被统一设置为完整方块
+        另见：@option#movingPistonBlockSelectableCreativeOnly@
+    movingPistonBlockSelectableCreativeOnly:
+      .: 移动的活塞可被选择-仅创造模式
+      comment: 仅当当前玩家是创造模式时，启用选项 @option#movingPistonBlockSelectable@
     multiplayerForcedEnabled:
       .: 强制启用多人游戏
       comment: |-

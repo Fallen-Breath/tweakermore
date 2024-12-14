@@ -1648,9 +1648,20 @@ Make the moving piston block (b36) selectable, so you can interact with it easil
 
 The outline shape of a moving piston block will be set to a full cube
 
+See also: movingPistonBlockSelectableCreativeOnly
+
 - Category: MC Tweaks
 - Type: boolean (Generic)
 - Default value: `false`
+
+
+### movingPistonBlockSelectableCreativeOnly
+
+Enable option movingPistonBlockSelectable only if the current player is in creative mode
+
+- Category: MC Tweaks
+- Type: boolean (Generic)
+- Default value: `true`
 
 
 ### multiplayerForcedEnabled

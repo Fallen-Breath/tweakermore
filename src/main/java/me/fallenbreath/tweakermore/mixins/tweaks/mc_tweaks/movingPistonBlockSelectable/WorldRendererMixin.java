@@ -43,7 +43,7 @@ public abstract class WorldRendererMixin
 	)
 	private void movingPistonBlockSelectable_blockOutlineRender_start(CallbackInfo ci, @Share("") LocalBooleanRef hasSet)
 	{
-		if (TweakerMoreConfigs.MOVING_PISTON_BLOCK_SELECTABLE.getBooleanValue())
+		if (MovingPistonBlockSelectableHelper.shouldEnableFeature())
 		{
 			MovingPistonBlockSelectableHelper.applyOutlineShapeOverride.set(true);
 			hasSet.set(true);

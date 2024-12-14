@@ -55,7 +55,7 @@ public abstract class GameRendererMixin
 			@Share("") LocalBooleanRef hasSet
 	)
 	{
-		if (TweakerMoreConfigs.MOVING_PISTON_BLOCK_SELECTABLE.getBooleanValue())
+		if (MovingPistonBlockSelectableHelper.shouldEnableFeature())
 		{
 			MovingPistonBlockSelectableHelper.applyOutlineShapeOverride.set(true);
 			hasSet.set(true);

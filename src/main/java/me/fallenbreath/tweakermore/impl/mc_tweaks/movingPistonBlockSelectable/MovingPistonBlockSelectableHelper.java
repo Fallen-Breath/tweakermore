@@ -20,8 +20,28 @@
 
 package me.fallenbreath.tweakermore.impl.mc_tweaks.movingPistonBlockSelectable;
 
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import net.minecraft.client.MinecraftClient;
+
 public class MovingPistonBlockSelectableHelper
 {
 	public static boolean enabled = false;
 	public static final ThreadLocal<Boolean> applyOutlineShapeOverride = ThreadLocal.withInitial(() -> false);
+
+	public static boolean shouldEnableFeature()
+	{
+		return enabled &&
+				TweakerMoreConfigs.MOVING_PISTON_BLOCK_SELECTABLE.getBooleanValue() &&
+				!(TweakerMoreConfigs.MOVING_PISTON_BLOCK_SELECTABLE_CREATE_ONLY.getBooleanValue() && !currentPlayerIsCreative());
+	}
+
+	private static boolean currentPlayerIsCreative()
+	{
+		MinecraftClient mc = MinecraftClient.getInstance();
+		if (mc != null && mc.player != null)
+		{
+			return mc.player.isCreative();
+		}
+		return false;
+	}
 }

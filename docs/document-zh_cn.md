@@ -1644,9 +1644,20 @@ FOV覆盖的开关
 
 移动的活塞的outline shape将被统一设置为完整方块
 
+另见：移动的活塞可被选择-仅创造模式
+
 - 分类: MC修改
 - 类型: 布尔值 (通用)
 - 默认值: `false`
+
+
+### 移动的活塞可被选择-仅创造模式 (movingPistonBlockSelectableCreativeOnly)
+
+仅当当前玩家是创造模式时，启用选项 移动的活塞可被选择
+
+- 分类: MC修改
+- 类型: 布尔值 (通用)
+- 默认值: `true`
 
 
 ### 强制启用多人游戏 (multiplayerForcedEnabled)

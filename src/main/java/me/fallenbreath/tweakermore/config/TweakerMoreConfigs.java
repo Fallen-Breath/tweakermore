@@ -537,6 +537,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean MOVING_PISTON_BLOCK_SELECTABLE = newConfigBoolean("movingPistonBlockSelectable", false);
 
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean MOVING_PISTON_BLOCK_SELECTABLE_CREATE_ONLY = newConfigBoolean("movingPistonBlockSelectableCreativeOnly", true);
+
 	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.16")), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean MULTIPLAYER_FORCED_ENABLED = newConfigBoolean("multiplayerForcedEnabled", false);
 
