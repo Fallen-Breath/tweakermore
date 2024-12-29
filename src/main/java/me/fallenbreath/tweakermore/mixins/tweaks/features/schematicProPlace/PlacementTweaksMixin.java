@@ -50,11 +50,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-//#if MC >= 12103
-//$$import fi.dy.masa.malilib.util.BlockUtils;
-//#endif
-
 //#if MC >= 12100
+//$$ import fi.dy.masa.malilib.util.BlockUtils;
 //$$ import me.fallenbreath.tweakermore.util.compat.tweakeroo.TweakerooAccess;
 //#endif
 
@@ -68,7 +65,7 @@ public abstract class PlacementTweaksMixin
 	@Shadow(remap = false)
 	private static boolean firstWasRotation;
 
-	//#if MC < 12103
+	//#if MC < 12100
 	@Shadow
 	private static boolean isFacingValidFor(Direction facing, ItemStack stack)
 	{
@@ -147,7 +144,7 @@ public abstract class PlacementTweaksMixin
 				//#else
 				FeatureToggle.CARPET_ACCURATE_PLACEMENT_PROTOCOL.getBooleanValue() &&
 				//#endif
-				//#if MC >= 12103
+				//#if MC >= 12100
 				//$$ BlockUtils.isFacingValidForDirection(stackOriginal, facing))
 				//#else
 				isFacingValidFor(facing, stackOriginal))
