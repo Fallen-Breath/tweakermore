@@ -69,7 +69,7 @@ public abstract class InventoryOverlayHandlerMixin
 			// if nbt != null, tweakeroo itself has already fetched the entity data from wherever else
 			if (nbt == null)
 			{
-					ServerDataSyncer.getInstance().syncEntity(entity, false);
+				ServerDataSyncer.getInstance().syncEntity(entity, false);
 			}
 		}
 		return entity;
