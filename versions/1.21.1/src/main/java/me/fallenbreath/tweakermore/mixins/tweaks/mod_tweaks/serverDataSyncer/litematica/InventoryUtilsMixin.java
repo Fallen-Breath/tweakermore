@@ -38,22 +38,22 @@ import fi.dy.masa.litematica.util.InventoryUtils;
 @Mixin(InventoryUtils.class)
 public abstract class InventoryUtilsMixin
 {
-    @ModifyReceiver(
-        method = "getTargetInventoryFromBlock",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/block/entity/BlockEntity;createNbtWithIdentifyingData(Lnet/minecraft/registry/RegistryWrapper$WrapperLookup;)Lnet/minecraft/nbt/NbtCompound;"
-        )
-    )
-    private static BlockEntity serverDataSyncer4InventoryOverlay_blockEntity(BlockEntity blockEntity, RegistryWrapper.WrapperLookup wrapperLookup)
-    {
-        if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
-        {
-            if (blockEntity != null)
-            {
-                ServerDataSyncer.getInstance().syncBlockEntity(blockEntity);
-            }
-        }
-        return blockEntity;
-    }
+	@ModifyReceiver(
+			method = "getTargetInventoryFromBlock",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/block/entity/BlockEntity;createNbtWithIdentifyingData(Lnet/minecraft/registry/RegistryWrapper$WrapperLookup;)Lnet/minecraft/nbt/NbtCompound;"
+			)
+	)
+	private static BlockEntity serverDataSyncer4InventoryOverlay_blockEntity(BlockEntity blockEntity, RegistryWrapper.WrapperLookup wrapperLookup)
+	{
+		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
+		{
+			if (blockEntity != null)
+			{
+				ServerDataSyncer.getInstance().syncBlockEntity(blockEntity);
+			}
+		}
+		return blockEntity;
+	}
 }
