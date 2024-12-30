@@ -38,7 +38,7 @@ import org.spongepowered.asm.mixin.injection.Slice;
 //#endif
 
 //#if MC >= 12101
-//$$ import com.llamalad7.mixinextras.lib.apache.commons.tuple.Pair;
+//$$ import org.apache.commons.lang3.tuple.Pair;
 //$$ import net.minecraft.nbt.NbtCompound;
 //#endif
 
@@ -60,7 +60,7 @@ public abstract class RenderHandlerMixin
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12101
-					//$$ target = "Lfi/dy/masa/minihud/event/RenderHandler;getTargetedBlockEntity(Lnet/minecraft/world/World;Lnet/minecraft/client/MinecraftClient;)Lcom/llamalad7/mixinextras/lib/apache/commons/tuple/Pair;",
+					//$$ target = "Lfi/dy/masa/minihud/event/RenderHandler;getTargetedBlockEntity(Lnet/minecraft/world/World;Lnet/minecraft/client/MinecraftClient;)Lorg/apache/commons/lang3/tuple/Pair;",
 					//#else
 					target = "Lfi/dy/masa/minihud/event/RenderHandler;getTargetedBlockEntity(Lnet/minecraft/world/World;Lnet/minecraft/client/MinecraftClient;)Lnet/minecraft/block/entity/BlockEntity;",
 					//#endif

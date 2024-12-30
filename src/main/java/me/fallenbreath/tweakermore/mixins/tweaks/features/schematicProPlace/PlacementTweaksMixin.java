@@ -50,8 +50,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-//#if MC >= 12103
-//$$import fi.dy.masa.malilib.util.BlockUtils;
+//#if MC >= 12101
+//$$import fi.dy.masa.malilib.util.game.BlockUtils;
 //#endif
 
 //#if MC >= 12100
@@ -68,7 +68,7 @@ public abstract class PlacementTweaksMixin
 	@Shadow(remap = false)
 	private static boolean firstWasRotation;
 
-	//#if MC < 12103
+	//#if MC < 12101
 	@Shadow
 	private static boolean isFacingValidFor(Direction facing, ItemStack stack)
 	{
@@ -147,7 +147,7 @@ public abstract class PlacementTweaksMixin
 				//#else
 				FeatureToggle.CARPET_ACCURATE_PLACEMENT_PROTOCOL.getBooleanValue() &&
 				//#endif
-				//#if MC >= 12103
+				//#if MC >= 12101
 				//$$ BlockUtils.isFacingValidForDirection(stackOriginal, facing))
 				//#else
 				isFacingValidFor(facing, stackOriginal))
@@ -166,7 +166,7 @@ public abstract class PlacementTweaksMixin
 			//System.out.printf("processRightClickBlockWrapper req facing: %s, x: %.3f, pos: %s, sideIn: %s\n", facing, x, posIn, sideIn);
 			hitVecIn = new Vec3d(x, hitVecIn.y, hitVecIn.z);
 		}
-		//#if MC >= 12103
+		//#if MC >= 12101
 		//$$ else if (flexible && rotation && accurate == false &&
 		//$$ 		TweakerooAccess.getAccuratePlacementProtocolValue() &&
 		//$$ 		BlockUtils.isFacingValidForOrientation(stackOriginal, facing))

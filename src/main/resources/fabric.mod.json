@@ -33,6 +33,7 @@
   ],
 
   "breaks": {
+    "litematica": "${litematica_conflict}",
     "minihud": "${minihud_conflict}",
     "tweakeroo": "${tweakeroo_conflict}"
   },
