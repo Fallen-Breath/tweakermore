@@ -39,11 +39,11 @@ import fi.dy.masa.litematica.util.InventoryUtils;
 public abstract class InventoryUtilsMixin
 {
     @ModifyReceiver(
-            method = "getTargetInventoryFromBlock",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/block/entity/BlockEntity;createNbtWithIdentifyingData(Lnet/minecraft/registry/RegistryWrapper$WrapperLookup;)Lnet/minecraft/nbt/NbtCompound;"
-            )
+        method = "getTargetInventoryFromBlock",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/block/entity/BlockEntity;createNbtWithIdentifyingData(Lnet/minecraft/registry/RegistryWrapper$WrapperLookup;)Lnet/minecraft/nbt/NbtCompound;"
+        )
     )
     private static BlockEntity serverDataSyncer4InventoryOverlay_blockEntity(BlockEntity blockEntity, RegistryWrapper.WrapperLookup wrapperLookup)
     {

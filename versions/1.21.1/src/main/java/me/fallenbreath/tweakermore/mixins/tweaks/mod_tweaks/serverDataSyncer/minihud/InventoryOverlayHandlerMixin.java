@@ -43,11 +43,11 @@ import fi.dy.masa.minihud.renderer.InventoryOverlayHandler;
 public abstract class InventoryOverlayHandlerMixin
 {
     @ModifyReceiver(
-            method = "getTargetInventoryFromBlock",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/block/entity/BlockEntity;createNbtWithIdentifyingData(Lnet/minecraft/registry/RegistryWrapper$WrapperLookup;)Lnet/minecraft/nbt/NbtCompound;"
-            )
+    method = "getTargetInventoryFromBlock",
+    at = @At(
+        value = "INVOKE",
+        target = "Lnet/minecraft/block/entity/BlockEntity;createNbtWithIdentifyingData(Lnet/minecraft/registry/RegistryWrapper$WrapperLookup;)Lnet/minecraft/nbt/NbtCompound;"
+        )
     )
     private BlockEntity serverDataSyncer4InventoryOverlay_blockEntity(BlockEntity blockEntity, RegistryWrapper.WrapperLookup wrapperLookup)
     {
