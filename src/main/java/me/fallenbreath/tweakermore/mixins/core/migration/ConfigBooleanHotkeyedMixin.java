@@ -29,7 +29,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 //#if MC >= 11800
 //$$ import com.google.gson.JsonElement;
-//$$ import fi.dy.masa.malilib.MaLiLib;
+//$$ import me.fallenbreath.tweakermore.TweakerMoreMod;
 //$$ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 //$$ import org.spongepowered.asm.mixin.injection.At;
 //$$ import org.spongepowered.asm.mixin.injection.Inject;
@@ -73,7 +73,7 @@ public abstract class ConfigBooleanHotkeyedMixin extends ConfigBoolean
 	//$$ 			}
 	//$$ 			catch (Exception e)
 	//$$ 			{
-	//$$ 				MaLiLib.logger.warn("Failed to set config value for '{}' from the JSON element '{}'", this.getName(), obj, e);
+	//$$ 				TweakerMoreMod.LOGGER.warn("Failed to set config value for '{}' from the JSON element '{}'", this.getName(), obj, e);
 	//$$ 			}
 	//$$ 			ci.cancel();
 	//$$ 		}
