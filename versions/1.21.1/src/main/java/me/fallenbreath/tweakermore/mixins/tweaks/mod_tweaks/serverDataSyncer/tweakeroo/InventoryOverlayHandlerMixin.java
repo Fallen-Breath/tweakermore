@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2024  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -22,12 +22,12 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.tw
 
 import com.llamalad7.mixinextras.injector.ModifyReceiver;
 import com.llamalad7.mixinextras.sugar.Local;
-import fi.dy.masa.tweakeroo.util.RayTraceUtils;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.util.ModIds;
+
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
@@ -36,9 +36,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
+import fi.dy.masa.tweakeroo.renderer.InventoryOverlayHandler;
+
 @Restriction(require = @Condition(ModIds.tweakeroo))
-@Mixin(RayTraceUtils.class)
-public abstract class RayTraceUtilsMixin
+@Mixin(InventoryOverlayHandler.class)
+public abstract class InventoryOverlayHandlerMixin
 {
 	@ModifyReceiver(
 			method = "getTargetInventoryFromBlock",
@@ -47,7 +49,7 @@ public abstract class RayTraceUtilsMixin
 					target = "Lnet/minecraft/block/entity/BlockEntity;createNbtWithIdentifyingData(Lnet/minecraft/registry/RegistryWrapper$WrapperLookup;)Lnet/minecraft/nbt/NbtCompound;"
 			)
 	)
-	private static BlockEntity serverDataSyncer4InventoryOverlay_blockEntity(BlockEntity blockEntity, RegistryWrapper.WrapperLookup wrapperLookup)
+	private BlockEntity serverDataSyncer4InventoryOverlay_blockEntity(BlockEntity blockEntity, RegistryWrapper.WrapperLookup wrapperLookup)
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{
@@ -60,7 +62,7 @@ public abstract class RayTraceUtilsMixin
 	}
 
 	@ModifyVariable(method = "getTargetInventoryFromEntity", at = @At("HEAD"), argsOnly = true)
-	private static Entity serverDataSyncer4InventoryOverlay_entity(Entity entity, @Local(argsOnly = true) NbtCompound nbt)
+	private Entity serverDataSyncer4InventoryOverlay_entity(Entity entity, @Local(argsOnly = true) NbtCompound nbt)
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{

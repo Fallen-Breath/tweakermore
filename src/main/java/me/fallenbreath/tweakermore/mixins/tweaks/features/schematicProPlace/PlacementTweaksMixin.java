@@ -51,7 +51,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 //#if MC >= 12100
-//$$ import fi.dy.masa.malilib.util.BlockUtils;
+//$$ import fi.dy.masa.malilib.util.game.BlockUtils;
 //$$ import me.fallenbreath.tweakermore.util.compat.tweakeroo.TweakerooAccess;
 //#endif
 

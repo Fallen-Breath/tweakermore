@@ -18,15 +18,14 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.tweakeroo;
+package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.litematica;
 
 import me.fallenbreath.tweakermore.util.mixin.DummyClass;
+
 import org.spongepowered.asm.mixin.Mixin;
 
-/**
- * Moved to {@link InventoryOverlayHandlerMixin} for mc 1.21.1+
- */
 @Mixin(DummyClass.class)
-public abstract class RenderUtilsMixin
+public abstract class InventoryUtilsMixin
 {
+	// used in mc1.21.1+
 }
