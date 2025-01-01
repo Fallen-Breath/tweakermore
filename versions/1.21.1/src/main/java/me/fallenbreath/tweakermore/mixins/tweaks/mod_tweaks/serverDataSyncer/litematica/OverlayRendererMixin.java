@@ -21,7 +21,6 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.litematica;
 
 import me.fallenbreath.tweakermore.util.mixin.DummyClass;
-
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(DummyClass.class)

@@ -22,12 +22,12 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.mi
 
 import com.llamalad7.mixinextras.injector.ModifyReceiver;
 import com.llamalad7.mixinextras.sugar.Local;
+import fi.dy.masa.minihud.renderer.InventoryOverlayHandler;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.util.ModIds;
-
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
@@ -35,8 +35,6 @@ import net.minecraft.registry.RegistryWrapper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-
-import fi.dy.masa.minihud.renderer.InventoryOverlayHandler;
 
 @Restriction(require = @Condition(ModIds.minihud))
 @Mixin(InventoryOverlayHandler.class)
