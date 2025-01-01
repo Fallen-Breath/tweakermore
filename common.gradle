@@ -198,7 +198,7 @@ processResources {
 				"version": fullModVersion,
 				"minecraft_dependency": project.minecraft_dependency,
 				"malilib_dependency": project.malilib_dependency,
-				"litematica_conflict": project.getProperties().getOrDefault("litematica_conflict", "<0.0.0"),
+				"litematica_conflict": project.getProperties().getOrDefault("litematica_conflict", "<0.0.0-"),
 				"minihud_conflict": project.getProperties().getOrDefault("minihud_conflict", "<0.0.0"),
 				"tweakeroo_conflict": project.getProperties().getOrDefault("tweakeroo_conflict", "<0.0.0"),
 		]
