@@ -50,14 +50,14 @@ abstract class BasicGrowthSpeedRendererHandler implements GrowthSpeedRendererHan
 		return String.valueOf(Math.round(value * base) / base);
 	}
 
-	protected static Formatting boolColor(boolean value)
-	{
-		return value ? Formatting.GREEN : Formatting.RED;
-	}
-
 	protected static BaseText bool(boolean value)
 	{
-		return value ? s("√", Formatting.GREEN) : s("x", Formatting.RED);
+		return bool(value, value ? Formatting.GREEN : Formatting.RED);
+	}
+
+	protected static BaseText bool(boolean value, Formatting colorOverride)
+	{
+		return s(value ? "√" : "x", colorOverride);
 	}
 
 	protected static Formatting heatColor(double value)

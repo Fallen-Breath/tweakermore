@@ -91,11 +91,34 @@ public class CropGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHand
 			attributes.add(tr("crop.chance"), s("1/" + randomBound, color));
 
 			int light = world.getBaseLightLevel(pos, 0);
-			boolean lightOk = light >= 9;
-			BaseText value = c(s(light + " ", boolColor(lightOk)), bool(lightOk));
+			boolean lightToLiveOk = light >= getMinimumRequiredLightLevelToSurvive(cropBlock);
+			boolean lightToGrowOk = light >= getMinimumRequiredLightLevelToGrowNaturally(cropBlock);
+			boolean lightOk = lightToLiveOk && lightToGrowOk;
+			Formatting lightColor = lightOk ? Formatting.GREEN : lightToLiveOk ? Formatting.GOLD : Formatting.RED;
+			BaseText value = c(s(light + " ", lightColor), bool(lightOk, lightColor));
 			attributes.add(tr("crop.light"), value, lightOk);
 		}
 
 		attributes.export(lines, isCrossHairPos);
+	}
+
+	private int getMinimumRequiredLightLevelToGrowNaturally(Block block)
+	{
+		// net.minecraft.block.PitcherCropBlock#randomTick  --  no check
+		// net.minecraft.block.CropBlock#randomTick         --  9
+		// net.minecraft.block.CropBlock#hasEnoughLightAt   --  8
+		//#if MC >= 12001
+		//$$ if (block instanceof PitcherCropBlock)
+		//$$ {
+		//$$    return 8;
+		//$$ }
+		//#endif
+		return 9;
+	}
+
+	private int getMinimumRequiredLightLevelToSurvive(Block block)
+	{
+		// net.minecraft.block.CropBlock#hasEnoughLightAt
+		return 8;
 	}
 }
