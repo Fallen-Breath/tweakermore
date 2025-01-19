@@ -1863,6 +1863,18 @@ FOV覆盖的开关
 - 默认值: `false`
 
 
+### 潜影盒物品内容提示-自定义名称覆盖物品 (shulkerBoxItemContentHintCustomNamesOverrideItem)
+
+启用潜影盒物品内容提示时，通过在铁砧中将盒子重命名为要显示的物品名称，可以覆盖提示中显示的图标。
+
+例如，将盒子重命名为 "redstone_dust" 将使其显示物品 "minecraft:redstone_dust"。
+如果要使用模组的物品，可以在名称中指定命名空间（“redstone_dust” 和 “minecraft:redstone_dust” 都有效）。
+
+- 分类: MC修改
+- 类型: 布尔值 (通用)
+- 默认值: `false`
+
+
 ### 潜影盒物品附魔提示 (shulkerBoxTooltipEnchantmentHint)
 
 在潜影盒物品的工具提示中显示物品的附魔
