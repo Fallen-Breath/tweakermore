@@ -17,10 +17,10 @@ repositories {
         url 'https://www.cursemaven.com'
 	}
 	maven {
-		url 'https://jitpack.io'
+		url = 'https://jitpack.io'
 	}
 	maven {
-		url 'https://maven.fallenbreath.me/releases'
+		url = 'https://maven.fallenbreath.me/releases'
 	}
 }
 
@@ -294,9 +294,9 @@ testClasses.dependsOn licenseFormatTest
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
-			artifactId base.archivesName.get()
 			from components.java
-            version = fullArtifactVersion
+			artifactId = base.archivesName.get()
+			version = fullArtifactVersion
 		}
 	}
 
