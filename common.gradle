@@ -8,13 +8,13 @@ int mcVersion = project.mcVersion
 
 repositories {
 	maven {
-		url 'https://masa.dy.fi/maven'
+		url = 'https://masa.dy.fi/maven'
 	}
 	maven {
-		url 'https://maven.terraformersmc.com/releases'
+		url = 'https://maven.terraformersmc.com/releases'
 	}
 	maven {
-        url 'https://www.cursemaven.com'
+        url = 'https://www.cursemaven.com'
 	}
 	maven {
 		url = 'https://maven.fallenbreath.me/jitpack'
