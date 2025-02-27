@@ -38,11 +38,22 @@ public abstract class GameRendererMixin
 			),
 			cancellable = true
 	)
-	private void applyFovOverride_fovOverride(CallbackInfoReturnable<Double> cir)
+	private void applyFovOverride_fovOverride(
+			//#if MC >= 12103
+			//$$ CallbackInfoReturnable<Float> cir
+			//#else
+			CallbackInfoReturnable<Double> cir
+			//#endif
+	)
 	{
 		if (TweakerMoreConfigs.FOV_OVERRIDE_ENABLED.getBooleanValue())
 		{
-			cir.setReturnValue(TweakerMoreConfigs.FOV_OVERRIDE_VALUE.getDoubleValue());
+			double override = TweakerMoreConfigs.FOV_OVERRIDE_VALUE.getDoubleValue();
+			//#if MC >= 12103
+			//$$ cir.setReturnValue((float)override);
+			//#else
+			cir.setReturnValue(override);
+			//#endif
 		}
 	}
 }
