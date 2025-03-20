@@ -282,7 +282,11 @@ public class DamageCalculator
 		//$$ 	{
 		//$$ 		for (var enchantmentEntry : item.getEnchantments().getEnchantmentEntries())
 		//$$ 		{
-		//$$ 			var enchantment = enchantmentEntry.getKey();
+		//$$ 			var enchantment = enchantmentEntry.getKey().getKey().orElse(null);
+		//$$ 			if (enchantment == null)
+		//$$ 			{
+		//$$ 				continue;
+		//$$ 			}
 		//$$ 			int level = enchantmentEntry.getIntValue();
 		//$$ 			if (enchantment == Enchantments.PROTECTION)
 		//$$ 			{
