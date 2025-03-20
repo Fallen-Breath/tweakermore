@@ -25,7 +25,7 @@ repositories {
 }
 
 static String curseForgeOrOther(version, curseForge, other) {
-	return ((version as String).isNumber() ? curseForge  : other) + ':' + version
+	return ((version as String) ==~ /\d+/ ? curseForge  : other) + ':' + version
 }
 
 // list of (dependencyNotation -> should use modImplementation)
