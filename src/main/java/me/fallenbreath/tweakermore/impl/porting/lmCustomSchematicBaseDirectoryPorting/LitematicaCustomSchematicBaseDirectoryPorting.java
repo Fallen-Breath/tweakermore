@@ -32,10 +32,18 @@ public class LitematicaCustomSchematicBaseDirectoryPorting
 {
 	/**
 	 * The same as {@link fi.dy.masa.litematica.data.DataManager#getDefaultBaseSchematicDirectory} in mc1.17+
+	 * We can't just call {@code DataManager.getDefaultBaseSchematicDirectory()},
+	 * cuz we are mixin-ing into the DataManager class
 	 */
 	public static File getDefaultBaseSchematicDirectory()
 	{
-		return FileUtils.getCanonicalFileIfPossible(new File(FileUtils.getMinecraftDirectory(), "schematics"));
+		return FileUtils.getCanonicalFileIfPossible(
+				//#if MC >= 12105
+				//$$ FileUtils.getMinecraftDirectoryAsPath().resolve("schematics").toFile()
+				//#else
+				new File(FileUtils.getMinecraftDirectory(), "schematics")
+				//#endif
+		);
 	}
 
 	/**

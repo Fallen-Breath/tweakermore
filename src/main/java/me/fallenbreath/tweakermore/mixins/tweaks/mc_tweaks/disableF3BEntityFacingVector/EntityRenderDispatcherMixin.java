@@ -44,7 +44,11 @@ public abstract class EntityRenderDispatcherMixin
 	//#else
 	@Inject(
 	//#endif
+			//#if MC >= 12105
+			//$$ method = "renderHitboxes(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/entity/state/EntityHitboxAndView;Lnet/minecraft/client/render/VertexConsumer;F)V",
+			//#else
 			method = "renderHitbox",
+			//#endif
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12103
@@ -68,7 +72,7 @@ public abstract class EntityRenderDispatcherMixin
 	//#else
 
 	private
-	//#if MC >= 11700
+	//#if 11700 <= MC && MC < 12105
 	//$$ static
 	//#endif
 	void f3BDisableFacingVector_cancelFollowingStuffs(CallbackInfo ci)

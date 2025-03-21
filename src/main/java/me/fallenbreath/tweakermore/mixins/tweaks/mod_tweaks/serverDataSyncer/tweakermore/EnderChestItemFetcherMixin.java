@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.tw
 import com.google.common.collect.Maps;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.mlShulkerBoxPreviewSupportEnderChest.EnderChestItemFetcher;
+import me.fallenbreath.tweakermore.impl.mod_tweaks.mlShulkerBoxPreviewSupportEnderChest.EnderItemNbtUtils;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.mlShulkerBoxPreviewSupportEnderChest.BasicInventoryAccessor;
 import me.fallenbreath.tweakermore.util.collection.ExpiringMap;
@@ -81,11 +82,11 @@ public abstract class EnderChestItemFetcherMixin
 							EnderChestInventory enderChestInventory = CACHE.computeIfAbsent(uuid, k -> new EnderChestInventory());
 							CACHE.keepAlive(uuid);
 							future.thenAccept(nbt -> {
-								// ref: net.minecraft.entity.player.PlayerEntity.readCustomDataFromTag
-								if (nbt != null && nbt.contains("EnderItems", 9))
+								// ref: net.minecraft.entity.player.PlayerEntity#readCustomDataFromTag
+								if (nbt != null && EnderItemNbtUtils.containsList(nbt, "EnderItems"))
 								{
 									enderChestInventory.readTags(
-											nbt.getList("EnderItems", 10)
+											EnderItemNbtUtils.getNbtListOrEmpty(nbt, "EnderItems")
 											//#if MC >= 12006
 											//$$ , player.getRegistryManager()
 											//#endif

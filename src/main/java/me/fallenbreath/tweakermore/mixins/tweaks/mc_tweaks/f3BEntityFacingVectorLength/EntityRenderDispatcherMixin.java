@@ -40,6 +40,9 @@ public abstract class EntityRenderDispatcherMixin
 	//#else
 	@ModifyExpressionValue(
 	//#endif
+			//#if MC >= 12105
+			//$$ method = "renderHitboxes(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/entity/state/EntityHitboxAndView;Lnet/minecraft/client/render/VertexConsumer;F)V",
+			//#else
 			method = "renderHitbox",
 			slice = @Slice(
 					from = @At(
@@ -48,6 +51,7 @@ public abstract class EntityRenderDispatcherMixin
 							ordinal = 0
 					)
 			),
+			//#endif
 			at = @At(
 					//#if MC >= 12100
 					//$$ value = "INVOKE",

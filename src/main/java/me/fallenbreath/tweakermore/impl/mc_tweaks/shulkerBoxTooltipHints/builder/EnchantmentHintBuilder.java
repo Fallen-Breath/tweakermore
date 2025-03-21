@@ -60,7 +60,12 @@ public class EnchantmentHintBuilder extends AbstractHintBuilder
 			//$$ {
 			//$$ 	enchantmentTag = itemStack.getOrDefault(DataComponentTypes.ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT);
 			//$$ }
-			//$$ enchantmentTag.appendTooltip(context, enchantmentTexts::add, TooltipType.ADVANCED);
+			//$$ enchantmentTag.appendTooltip(
+			//$$ 		context, enchantmentTexts::add, TooltipType.ADVANCED
+			//$$ 		//#if MC >= 12105
+			//$$ 		//$$ , itemStack
+			//$$ 		//#endif
+			//$$ );
 			//#else
 			ListTag enchantmentTag = itemStack.getItem() instanceof EnchantedBookItem ? EnchantedBookItem.getEnchantmentTag(itemStack) : itemStack.getEnchantments();
 			ItemStack.appendEnchantments(enchantmentTexts, enchantmentTag);

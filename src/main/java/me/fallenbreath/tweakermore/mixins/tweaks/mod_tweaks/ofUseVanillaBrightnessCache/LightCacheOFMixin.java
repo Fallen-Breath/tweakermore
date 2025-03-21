@@ -76,7 +76,12 @@ public class LightCacheOFMixin
 			return BlockModelRendererAccessor.getBrightnessCache().get().getInt(state, view, pos);
 		}
 		//#if MC >= 11500
-		return WorldRenderer.getLightmapCoordinates(view, state, pos);
+		return WorldRenderer.getLightmapCoordinates(
+				//#if MC >= 12105
+				//$$ WorldRenderer.BrightnessGetter.DEFAULT,
+				//#endif
+				view, state, pos
+		);
 		//#else
 		//$$ return state.getBlockBrightness(view, pos);
 		//#endif

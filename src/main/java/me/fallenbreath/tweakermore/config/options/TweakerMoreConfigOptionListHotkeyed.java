@@ -78,7 +78,6 @@ public class TweakerMoreConfigOptionListHotkeyed extends TweakerMoreConfigOption
 		this.keybind.resetToDefault();
 	}
 
-
 	@Override
 	public void setValueFromJsonElement(JsonElement element)
 	{

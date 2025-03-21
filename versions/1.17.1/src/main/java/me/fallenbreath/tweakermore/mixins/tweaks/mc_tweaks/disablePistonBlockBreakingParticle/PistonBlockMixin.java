@@ -20,15 +20,41 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disablePistonBlockBreakingParticle;
 
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import me.fallenbreath.tweakermore.util.mixin.DummyClass;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.PistonBlock;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.17"))
-@Mixin(DummyClass.class)
+@Mixin(PistonBlock.class)
 public abstract class PistonBlockMixin
 {
-	// impl in mc1.17+
+	@WrapWithCondition(
+			method = "move",
+			at = @At(
+					value = "INVOKE",
+					//#if MC >= 12105
+					//$$ target = "Lnet/minecraft/world/World;syncWorldEvent(ILnet/minecraft/util/math/BlockPos;I)V"
+					//#else
+					target = "Lnet/minecraft/world/World;addBlockBreakParticles(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V"
+					//#endif
+			)
+	)
+	private boolean disablePistonBlockBreakingParticle(
+			//#if MC >= 12105
+			//$$ World instance, int eventId, BlockPos pos, int data
+			//#else
+			World instance, BlockPos pos, BlockState state
+			//#endif
+	)
+	{
+		return !TweakerMoreConfigs.DISABLE_PISTON_BLOCK_BREAKING_PARTICLE.getBooleanValue();
+	}
 }

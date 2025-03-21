@@ -23,10 +23,15 @@ package me.fallenbreath.tweakermore.impl.features.refreshInventory;
 import fi.dy.masa.malilib.util.InfoUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.container.Container;
 import net.minecraft.container.SlotActionType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.packet.c2s.play.ClickWindowC2SPacket;
+
+//#if MC >= 12105
+//$$ import net.minecraft.screen.sync.ItemStackHash;
+//#endif
 
 //#if MC >= 12006
 //$$ import net.minecraft.component.DataComponentTypes;
@@ -61,19 +66,28 @@ public class InventoryRefresher
 			uniqueItem.getOrCreateTag().putDouble("force_resync", Double.NaN);
 			//#endif
 
+			Container csh = mc.player.container;
+			//#if MC >= 12105
+			//$$ ItemStackHash itemStackHash = ItemStackHash.fromItemStack(uniqueItem, networkHandler.method_68823());
+			//#endif
 			networkHandler.sendPacket(new ClickWindowC2SPacket(
-					mc.player.container.syncId,
+					csh.syncId,
 					//#if MC >= 11700
-					//$$ mc.player.currentScreenHandler.getRevision(),
+					//$$ csh.getRevision(),
 					//#endif
-					-999, 2,
+					(short)-999, (byte)2,
 					SlotActionType.QUICK_CRAFT,
+					//#if MC < 12105
 					uniqueItem,
+					//#endif
 
 					//#if MC >= 11700
 					//$$ new Int2ObjectOpenHashMap<>()
+					//$$ //#if MC >= 12105
+					//$$ //$$ , itemStackHash
+					//$$ //#endif
 					//#else
-					mc.player.container.getNextActionId(mc.player.inventory)
+					csh.getNextActionId(mc.player.inventory)
 					//#endif
 			));
 

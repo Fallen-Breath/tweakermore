@@ -167,13 +167,7 @@ public class TextRenderer
 
 			// enable transparent-able text rendering
 			RenderGlobals.enableBlend();
-			RenderGlobals.blendFunc(
-					//#if MC >= 11500
-					GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA
-					//#else
-					//$$ GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA
-					//#endif
-			);
+			RenderGlobals.blendFuncForAlpha();
 
 			for (int i = 0; i < lineNum; i++)
 			{
@@ -185,7 +179,11 @@ public class TextRenderer
 				int backgroundColor = this.backgroundColor;
 				while (true)
 				{
+					//#if MC >= 12105
+					//$$ Matrix4f matrix4f = new Matrix4f(AffineTransformation.identity().getMatrix());
+					//#else
 					Matrix4f matrix4f = Rotation3.identity().getMatrix();
+					//#endif
 					VertexConsumerProvider.Immediate immediate = RenderUtils.getVertexConsumer();
 					mc.textRenderer.draw(
 							holder.text, textX, textY, this.color, this.shadow, matrix4f, immediate,

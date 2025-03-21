@@ -50,7 +50,9 @@ public abstract class EntityRenderDispatcherMixin
 			//#endif
 			at = @At(
 					value = "INVOKE",
-					//#if MC >= 12103
+					//#if MC >= 12105
+					//$$ target = "Lnet/minecraft/client/render/entity/EntityRenderDispatcher;render(Lnet/minecraft/client/render/entity/state/EntityRenderState;DDDLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/render/entity/EntityRenderer;)V"
+					//#elseif MC >= 12103
 					//$$ target = "Lnet/minecraft/client/render/entity/EntityRenderer;render(Lnet/minecraft/client/render/entity/state/EntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V"
 					//#elseif MC >= 11500
 					target = "Lnet/minecraft/client/render/entity/EntityRenderer;render(Lnet/minecraft/entity/Entity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V"
@@ -64,7 +66,9 @@ public abstract class EntityRenderDispatcherMixin
 	//$$ <E extends Entity, S extends EntityRenderState>
 	//#endif
 	boolean disableEntityModelRendering$TKM
-			//#if MC >= 12103
+			//#if MC >= 12105
+			//$$ (EntityRenderDispatcher instance, S entityRenderState, double x, double y, double z, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, EntityRenderer<? super E, S> entityRenderer)
+			//#elseif MC >= 12103
 			//$$ (EntityRenderer<? super E, S> instance, S entityRenderState, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light)
 			//#elseif MC >= 11500
 			(EntityRenderer<Entity> instance, Entity entity, float yaw, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light)

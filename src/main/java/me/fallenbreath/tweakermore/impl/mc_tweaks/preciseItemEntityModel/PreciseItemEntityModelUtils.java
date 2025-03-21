@@ -33,7 +33,11 @@ public class PreciseItemEntityModelUtils
 		{
 			float len = 0.25f;  // size of the item entity
 			transformation = new Transformation(
+					//#if MC >= 12105
+					//$$ transformation.rotation(),
+					//#else
 					transformation.rotation,
+					//#endif
 					new Vector3f(0, len / 2.0f, 0),
 					new Vector3f(len, len, len)
 			);

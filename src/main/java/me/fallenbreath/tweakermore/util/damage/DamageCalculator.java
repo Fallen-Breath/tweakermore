@@ -34,6 +34,12 @@ import net.minecraft.world.Difficulty;
 
 import java.util.Objects;
 
+//#if MC >= 12105
+//$$ import com.google.common.collect.Lists;
+//$$ import net.minecraft.component.type.AttributeModifierSlot;
+//$$ import net.minecraft.entity.EquipmentSlot;
+//#endif
+
 //#if MC >= 12103
 //$$ import net.minecraft.world.explosion.ExplosionImpl;
 //#else
@@ -42,6 +48,8 @@ import net.minecraft.world.explosion.Explosion;
 
 //#if MC >= 12100
 //$$ import net.minecraft.enchantment.Enchantments;
+//$$ import net.minecraft.item.ItemStack;
+//$$ import java.util.List;
 //#endif
 
 //#if MC >= 11904
@@ -258,6 +266,22 @@ public class DamageCalculator
 		return this;
 	}
 
+	//#if MC >= 12100
+	//$$ private static Iterable<ItemStack> getEntityAllArmorItems(LivingEntity entity)
+	//$$ {
+	//$$ 	//#if MC >= 12105
+	//$$ 	//$$ List<ItemStack> armorItems = Lists.newArrayList();
+	//$$ 	//$$ for (EquipmentSlot equipmentSlot : AttributeModifierSlot.ARMOR)
+	//$$ 	//$$ {
+	//$$ 	//$$ 	armorItems.add(entity.getEquippedStack(equipmentSlot));
+	//$$ 	//$$ }
+	//$$ 	//$$ return armorItems;
+	//$$ 	//#else
+	//$$ 	return entity.getArmorItems();
+	//$$ 	//#endif
+	//$$ }
+	//#endif
+
 	private float calculateProtectionEnchantmentAmount()
 	{
 		//#if MC >= 12100
@@ -267,7 +291,7 @@ public class DamageCalculator
 		//$$ }
 		//$$ else
 		//$$ {
-		//$$ 	// it's impossible do this client-side
+		//$$ 	// it's impossible do this client-side (Enchantment#modifyDamageProtection requires a ServerWorld)
 		//$$ 	// what we can do best, is to simulate the basic legacy vanilla behavior
 		//$$
 		//$$ 	// reference: mc1.20.6 net.minecraft.enchantment.ProtectionEnchantment.getProtectionAmount
@@ -278,7 +302,7 @@ public class DamageCalculator
 		//$$ 	}
 		//$$
 		//$$ 	float epf = 0;
-		//$$ 	for (var item : this.entity.getAllArmorItems())
+		//$$ 	for (var item : getEntityAllArmorItems(this.entity))
 		//$$ 	{
 		//$$ 		for (var enchantmentEntry : item.getEnchantments().getEnchantmentEntries())
 		//$$ 		{

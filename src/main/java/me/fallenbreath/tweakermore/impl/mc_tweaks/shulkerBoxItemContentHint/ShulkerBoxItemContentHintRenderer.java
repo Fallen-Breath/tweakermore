@@ -24,6 +24,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.render.ColorHolder;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.Tessellator;
@@ -289,7 +290,7 @@ public class ShulkerBoxItemContentHintRenderer
 
 		//#if MC >= 11500
 
-		RenderSystem.disableDepthTest();
+		RenderGlobals.disableDepthTest();
 		//#if MC < 11700
 		RenderSystem.disableAlphaTest();
 		//#endif
@@ -343,7 +344,7 @@ public class ShulkerBoxItemContentHintRenderer
 
 		//#if MC >= 11500
 
-		RenderSystem.enableDepthTest();
+		RenderGlobals.enableDepthTest();
 		//#if MC < 11700
 		RenderSystem.enableAlphaTest();
 		//#endif

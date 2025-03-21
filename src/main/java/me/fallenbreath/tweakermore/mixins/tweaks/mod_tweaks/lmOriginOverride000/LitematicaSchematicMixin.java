@@ -29,6 +29,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.lmOriginOverride000.LitematicaOriginOverrideGlobals;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.lmOriginOverride000.LitematicaSchematic000Origin;
 import me.fallenbreath.tweakermore.util.ModIds;
+import me.fallenbreath.tweakermore.util.NbtUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
@@ -108,7 +109,7 @@ public abstract class LitematicaSchematicMixin implements LitematicaSchematic000
 	{
 		if (TweakerMoreConfigs.LM_ORIGIN_OVERRIDE_000.getBooleanValue())
 		{
-			if (((LitematicaSchematic000Origin)this).is000Origin$TKM())
+			if (this.is000Origin$TKM())
 			{
 				nbt.putBoolean(LitematicaOriginOverrideGlobals.ORIGIN_OVERRIDE_FLAG, true);
 			}
@@ -121,9 +122,9 @@ public abstract class LitematicaSchematicMixin implements LitematicaSchematic000
 	{
 		if (TweakerMoreConfigs.LM_ORIGIN_OVERRIDE_000.getBooleanValue())
 		{
-			if (nbt.getBoolean(LitematicaOriginOverrideGlobals.ORIGIN_OVERRIDE_FLAG))
+			if (NbtUtils.getBooleanOrFalse(nbt, LitematicaOriginOverrideGlobals.ORIGIN_OVERRIDE_FLAG))
 			{
-				((LitematicaSchematic000Origin)this).set000Origin$TKM(true);
+				this.set000Origin$TKM(true);
 			}
 		}
 	}

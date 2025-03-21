@@ -128,7 +128,14 @@ public class Messenger
 
 	public static BaseText hover(BaseText text, BaseText hoverText)
 	{
-		return hover(text, new HoverEvent(HoverEvent.Action.SHOW_TEXT, hoverText));
+		return hover(
+				text,
+				//#if MC >= 12105
+				//$$ new HoverEvent.ShowText(hoverText)
+				//#else
+				new HoverEvent(HoverEvent.Action.SHOW_TEXT, hoverText)
+				//#endif
+		);
 	}
 
 	public static BaseText click(BaseText text, ClickEvent clickEvent)

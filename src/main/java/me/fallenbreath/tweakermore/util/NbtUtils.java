@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2025  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,17 +18,28 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disablePistonBlockBreakingParticle;
+package me.fallenbreath.tweakermore.util;
 
-import me.fallenbreath.conditionalmixin.api.annotation.Condition;
-import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
-import me.fallenbreath.tweakermore.util.ModIds;
-import me.fallenbreath.tweakermore.util.mixin.DummyClass;
-import org.spongepowered.asm.mixin.Mixin;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 
-@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.17"))
-@Mixin(DummyClass.class)
-public abstract class PistonBlockMixin
+public class NbtUtils
 {
-	// impl in mc1.17+
+	public static boolean getBooleanOrFalse(CompoundTag nbt, String key)
+	{
+		//#if MC >= 12105
+		//$$ return nbt.getBoolean(key).orElse(false);
+		//#else
+		return nbt.getBoolean(key);
+		//#endif
+	}
+
+	public static CompoundTag getNbtOrEmpty(CompoundTag nbt, String key)
+	{
+		//#if MC >= 12105
+		//$$ return nbt.getCompound(key).orElseGet(NbtCompound::new);
+		//#else
+		return nbt.getCompound(key);
+		//#endif
+	}
 }

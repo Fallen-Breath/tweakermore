@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2025  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -20,7 +20,11 @@
 
 package me.fallenbreath.tweakermore.util.render.context;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.opengl.GlConst;
+import com.mojang.blaze3d.opengl.GlStateManager;
+import com.mojang.blaze3d.platform.DestFactor;
+import com.mojang.blaze3d.platform.SourceFactor;
+import com.mojang.blaze3d.systems.RenderSystem;
 
 public class RenderGlobals
 {
@@ -28,51 +32,46 @@ public class RenderGlobals
 
 	public static void enableDepthTest()
 	{
-		GlStateManager.enableDepthTest();
+		GlStateManager._enableDepthTest();
 	}
 
 	public static void disableDepthTest()
 	{
-		GlStateManager.disableDepthTest();
-	}
-
-	public static void enableTexture()
-	{
-		GlStateManager.enableTexture();
-	}
-
-	public static void enableAlphaTest()
-	{
-		GlStateManager.enableAlphaTest();
+		GlStateManager._disableDepthTest();
 	}
 
 	public static void depthMask(boolean mask)
 	{
-		GlStateManager.depthMask(mask);
+		GlStateManager._depthMask(mask);
 	}
 
 	public static void color4f(float red, float green, float blue, float alpha)
 	{
-		GlStateManager.color4f(red, green, blue, alpha);
+		RenderSystem.setShaderColor(red, green, blue, alpha);
 	}
 
 	public static void enableBlend()
 	{
-		GlStateManager.enableBlend();
+		GlStateManager._enableBlend();
 	}
 
-	public static void blendFunc(GlStateManager.SourceFactor srcFactor, GlStateManager.DestFactor dstFactor)
+	public static void blendFunc(int srcFactorRGB, int dstFactorRgb, int srcFactorAlpha, int dstFactorAlpha)
 	{
-		GlStateManager.blendFunc(srcFactor, dstFactor);
+		GlStateManager._blendFuncSeparate(srcFactorRGB, dstFactorRgb, srcFactorAlpha, dstFactorAlpha);
 	}
 
+	/**
+	 * references:
+	 * - {@link com.mojang.blaze3d.pipeline.BlendFunction.TRANSLUCENT}
+	 * - {@link net.minecraft.client.gl.GlResourceManager#setPipelineAndApplyState}
+	 */
 	public static void blendFuncForAlpha()
 	{
-		blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-	}
-
-	public static void disableLighting()
-	{
-		GlStateManager.disableLighting();
+		blendFunc(
+				GlConst.toGl(SourceFactor.SRC_ALPHA),
+				GlConst.toGl(DestFactor.ONE_MINUS_SRC_ALPHA),
+				GlConst.toGl(SourceFactor.ONE),
+				GlConst.toGl(DestFactor.ONE_MINUS_SRC_ALPHA)
+		);
 	}
 }

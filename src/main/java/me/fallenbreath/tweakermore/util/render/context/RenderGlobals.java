@@ -21,10 +21,7 @@
 package me.fallenbreath.tweakermore.util.render.context;
 
 import com.mojang.blaze3d.platform.GlStateManager;
-
-//#if MC >= 11500
 import com.mojang.blaze3d.systems.RenderSystem;
-//#endif
 
 //#if 11600 <= MC && MC < 11700
 //$$ @SuppressWarnings("deprecation")
@@ -35,96 +32,61 @@ public class RenderGlobals
 
 	public static void enableDepthTest()
 	{
-		//#if MC >= 11500
 		RenderSystem.enableDepthTest();
-		//#else
-		//$$ GlStateManager.enableDepthTest();
-		//#endif
 	}
 
 	public static void disableDepthTest()
 	{
-		//#if MC >= 11500
 		RenderSystem.disableDepthTest();
-		//#else
-		//$$ GlStateManager.disableDepthTest();
-		//#endif
 	}
 
 	//#if MC < 11904
 	public static void enableTexture()
 	{
-		//#if MC >= 11500
 		RenderSystem.enableTexture();
-		//#else
-		//$$ GlStateManager.enableTexture();
-		//#endif
 	}
 	//#endif
 
 	//#if MC < 11700
 	public static void enableAlphaTest()
 	{
-		//#if MC >= 11500
 		RenderSystem.enableAlphaTest();
-		//#else
-		//$$ GlStateManager.enableAlphaTest();
-		//#endif
 	}
 	//#endif
 
 	public static void depthMask(boolean mask)
 	{
-		//#if MC >= 11500
 		RenderSystem.depthMask(mask);
-		//#else
-		//$$ GlStateManager.depthMask(mask);
-		//#endif
 	}
 
 	public static void color4f(float red, float green, float blue, float alpha)
 	{
 		//#if MC >= 11700
 		//$$ RenderSystem.setShaderColor(red, green, blue, alpha);
-		//#elseif MC >= 11500
-		RenderSystem.color4f(red, green, blue, alpha);
 		//#else
-		//$$ GlStateManager.color4f(red, green, blue, alpha);
+		RenderSystem.color4f(red, green, blue, alpha);
 		//#endif
 	}
 
 	public static void enableBlend()
 	{
-		//#if MC >= 11500
 		RenderSystem.enableBlend();
-		//#else
-		//$$ GlStateManager.enableBlend();
-		//#endif
 	}
 
-	public static void blendFunc(
-			//#if MC >= 11500
-			GlStateManager.SrcFactor srcFactor, GlStateManager.DstFactor dstFactor
-			//#else
-			//$$ GlStateManager.SourceFactor srcFactor, GlStateManager.DestFactor dstFactor
-			//#endif
-	)
+	public static void blendFunc(GlStateManager.SrcFactor srcFactor, GlStateManager.DstFactor dstFactor)
 	{
-		//#if MC >= 11500
 		RenderSystem.blendFunc(srcFactor, dstFactor);
-		//#else
-		//$$ GlStateManager.blendFunc(srcFactor, dstFactor);
-		//#endif
+	}
+
+	public static void blendFuncForAlpha()
+	{
+		blendFunc(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
 	}
 
 	//#if MC < 11700
 	public static void disableLighting()
 	{
-		//#if MC >= 11500
 		RenderSystem.disableLighting();
-		//#else
-		//$$ GlStateManager.disableLighting();
-		//#endif
 	}
 	//#endif
 }

@@ -42,7 +42,9 @@ public abstract class TaskSaveSchematicMixin
 	private LitematicaSchematic schematic;
 
 	@ModifyExpressionValue(
-			//#if MC >= 11600
+			//#if MC >= 12105
+			//$$ method = "<init>(Ljava/nio/file/Path;Ljava/lang/String;Lfi/dy/masa/litematica/schematic/LitematicaSchematic;Lfi/dy/masa/litematica/selection/AreaSelection;Lfi/dy/masa/litematica/schematic/LitematicaSchematic$SchematicSaveInfo;Z)V",
+			//#elseif MC >= 11600
 			//$$ method = "<init>(Ljava/io/File;Ljava/lang/String;Lfi/dy/masa/litematica/schematic/LitematicaSchematic;Lfi/dy/masa/litematica/selection/AreaSelection;Lfi/dy/masa/litematica/schematic/LitematicaSchematic$SchematicSaveInfo;Z)V",
 			//#else
 			method = "<init>(Ljava/io/File;Ljava/lang/String;Lfi/dy/masa/litematica/schematic/LitematicaSchematic;Lfi/dy/masa/litematica/selection/AreaSelection;ZZ)V",

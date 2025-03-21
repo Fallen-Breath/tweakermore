@@ -22,13 +22,17 @@ package me.fallenbreath.tweakermore.mixins.tweaks.features.shulkerTooltipHints;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.ShulkerBoxToolTipEnhancer;
-import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Slice;
+
+//#if MC >= 12105
+//$$ import net.minecraft.component.type.ContainerComponent;
+//#else
+import net.minecraft.block.ShulkerBoxBlock;
+//#endif
 
 //#if MC >= 12006
 //$$ import net.minecraft.item.Item;
@@ -36,9 +40,17 @@ import org.spongepowered.asm.mixin.injection.Slice;
 
 //#if MC >= 11600
 //$$ import net.minecraft.text.MutableText;
+//#else
+import net.minecraft.text.Text;
 //#endif
 
-@Mixin(ShulkerBoxBlock.class)
+@Mixin(
+		//#if MC >= 12105
+		//$$ ContainerComponent.class
+		//#else
+		ShulkerBoxBlock.class
+		//#endif
+)
 public abstract class ShulkerBoxBlockMixin
 {
 	@ModifyArg(
@@ -50,7 +62,9 @@ public abstract class ShulkerBoxBlockMixin
 			slice = @Slice(
 					from = @At(
 							value = "CONSTANT",
-							//#if MC >= 12002
+							//#if MC >= 12105
+							//$$ args = "stringValue=item.container.item_count"
+							//#elseif MC >= 12002
 							//$$ args = "stringValue=container.shulkerBox.itemCount"
 							//#else
 							args = "stringValue= x"
@@ -59,13 +73,21 @@ public abstract class ShulkerBoxBlockMixin
 			),
 			at = @At(
 					value = "INVOKE",
+					//#if MC >= 12105
+					//$$ target = "Ljava/util/function/Consumer;accept(Ljava/lang/Object;)V",
+					//#else
 					target = "Ljava/util/List;add(Ljava/lang/Object;)Z",
+					//#endif
 					ordinal = 0
 			)
 	)
 	private Object shulkerTooltipHints_addHints(
 			Object textObj,
-			@Local(ordinal = 1) ItemStack stackInTheContainer
+			@Local(
+					//#if MC < 12105
+					ordinal = 1
+					//#endif
+			) ItemStack stackInTheContainer
 			//#if MC >= 12006
 			//$$ , @Local(argsOnly = true) Item.TooltipContext context
 			//#endif

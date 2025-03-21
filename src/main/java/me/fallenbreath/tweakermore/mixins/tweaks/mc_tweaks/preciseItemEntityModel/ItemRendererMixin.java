@@ -58,6 +58,11 @@ public abstract class ItemRendererMixin
 			//$$ method = "renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/BakedModel;Lnet/minecraft/client/render/model/json/ModelTransformation$Type;Z)V",
 			//#endif
 			at = @At(
+					//#if MC >= 12105
+					//$$ value = "FIELD",
+					//$$ target = "Lnet/minecraft/client/render/item/ItemRenderState$LayerRenderState;transform:Lnet/minecraft/client/render/model/json/Transformation;"
+					//#else
+
 					value = "INVOKE",
 					//#if MC >= 12104
 					//$$ target = "Lnet/minecraft/client/render/item/ItemRenderState$LayerRenderState;getTransformation()Lnet/minecraft/client/render/model/json/Transformation;"
@@ -67,6 +72,8 @@ public abstract class ItemRendererMixin
 					//$$ target = "Lnet/minecraft/client/render/model/json/ModelTransformation;getTransformation(Lnet/minecraft/client/render/model/json/ModelTransformationMode;)Lnet/minecraft/client/render/model/json/Transformation;"
 					//#else
 					target = "Lnet/minecraft/client/render/model/json/ModelTransformation;getTransformation(Lnet/minecraft/client/render/model/json/ModelTransformation$Mode;)Lnet/minecraft/client/render/model/json/Transformation;"
+					//#endif
+
 					//#endif
 			)
 	)
