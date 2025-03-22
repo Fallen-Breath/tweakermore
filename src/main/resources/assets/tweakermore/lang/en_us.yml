@@ -1178,7 +1178,7 @@ tweakermore:
       refreshed: Inventory refreshed
     safeAfk:
       received_damage: |-
-        Received damage at %1$
+        Received damage at %1$s
         Health remaining: %2$s
     schematicBlockPlacementRestriction:
       info:
