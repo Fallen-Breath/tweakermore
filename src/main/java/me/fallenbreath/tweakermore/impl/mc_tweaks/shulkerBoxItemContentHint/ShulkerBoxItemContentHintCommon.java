@@ -20,8 +20,8 @@
 
 package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxItemContentHint;
 
-import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.IdentifierUtils;
 import me.fallenbreath.tweakermore.util.InventoryUtils;
 import me.fallenbreath.tweakermore.util.ItemUtils;
 import net.minecraft.item.ItemStack;
@@ -31,6 +31,11 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import java.util.Optional;
+import java.util.function.Predicate;
+
+//#if MC >= 12006
+//$$ import net.minecraft.component.DataComponentTypes;
+//#endif
 
 public class ShulkerBoxItemContentHintCommon
 {
@@ -66,43 +71,48 @@ public class ShulkerBoxItemContentHintCommon
 			return info;
 		}
 
+		Predicate<ItemStack> stackFilter = stack -> true;
+		if (TweakerMoreConfigs.SHULKER_BOX_ITEM_CONTENT_HINT_CUSTOM_NAMES_OVERRIDE_ITEM.getBooleanValue())
+		{
+			Optional<ItemStack> override = computeCustomNameOverride(itemStack);
+			if (override.isPresent())
+			{
+				stackFilter = stack -> ItemStack.areItemsEqual(stack, override.get());
+			}
+		}
+
 		ItemStack std = null;
 		info.allItemSame = true;
 		info.allItemSameIgnoreNbt = true;
 		for (ItemStack stack : stackList.get())
 		{
-			if (!stack.isEmpty())
+			if (stack.isEmpty() || !stackFilter.test(stack))
 			{
-				if (std == null)
-				{
-					std = stack;
-					continue;
-				}
-
-				boolean itemEqual = ItemStack.areItemsEqual(stack, std);
-				boolean itemAndNbtEqual =
-						//#if MC >= 12000
-						//$$ ItemStack.canCombine(stack, std);
-						//#else
-						itemEqual && ItemStack.areTagsEqual(stack, std);
-						//#endif
-
-				if (!itemAndNbtEqual)
-				{
-					info.allItemSame = false;
-				}
-				if (!itemEqual)
-				{
-					info.allItemSameIgnoreNbt = false;
-				}
+				continue;
 			}
-		}
 
-		// If option activated and box is not custom named
-		if (TweakerMoreConfigs.SHULKER_BOX_ITEM_CONTENT_HINT_CUSTOM_NAMES_OVERRIDE_ITEM.getBooleanValue() && 
-			!itemStack.getName().getString().equals(itemStack.getItem().getName().getString()) )
-		{
-			std = getFromCustomNameOrDefault(itemStack, info, std);
+			if (std == null)
+			{
+				std = stack;
+				continue;
+			}
+
+			boolean itemEqual = ItemStack.areItemsEqual(stack, std);
+			boolean itemAndNbtEqual =
+					//#if MC >= 12000
+					//$$ ItemStack.canCombine(stack, std);
+					//#else
+					itemEqual && ItemStack.areTagsEqual(stack, std);
+					//#endif
+
+			if (!itemAndNbtEqual)
+			{
+				info.allItemSame = false;
+			}
+			if (!itemEqual)
+			{
+				info.allItemSameIgnoreNbt = false;
+			}
 		}
 
 		if (std == null)
@@ -139,38 +149,33 @@ public class ShulkerBoxItemContentHintCommon
 		return info;
 	}
 
-
-	/**
-	 * Try to get a stack with the name or "minecraft:" + the name. In case the stack has a valid name, the info.allItemSame gets ovewritten to true.
-	 * 
-	 */
-	private static ItemStack getFromCustomNameOrDefault(ItemStack itemStack, Info info, ItemStack def)
+	private static Optional<ItemStack> computeCustomNameOverride(ItemStack shulkerBoxItemStack)
 	{
-
-		//#if MC >= 12020
-		//$$ Identifier itemId = Identifier.tryParse("", itemStack.getName().getString());
+		//#if MC >= 12006
+		//$$ if (!shulkerBoxItemStack.contains(DataComponentTypes.CUSTOM_NAME))
 		//#else
-		Identifier itemId = Identifier.tryParse(itemStack.getName().getString());
+		if (!shulkerBoxItemStack.hasCustomName())
 		//#endif
-		
-		if(!Registry.ITEM.containsId(itemId)){
-			//#if MC >= 12020
-			//$$ itemId = Identifier.tryParse(itemStack.getName().getString());
-			//#else
-			itemId = Identifier.tryParse("minecraft:"+ itemStack.getName().getString());
-			//#endif
-		}		
-		
-		if(!Registry.ITEM.containsId(itemId))
 		{
-			return def;
+			return Optional.empty();
 		}
-		
-		// Overwrite info
-		info.allItemSame = true;
-		info.allItemSameIgnoreNbt = true;
-		
-		Item item = Registry.ITEM.get(itemId);
-		return new ItemStack(item);
+
+		Optional<Identifier> itemIdOpt = IdentifierUtils.tryParse(shulkerBoxItemStack.getName().getString());
+		if (!itemIdOpt.isPresent())
+		{
+			return Optional.empty();
+		}
+
+		if (!Registry.ITEM.containsId(itemIdOpt.get()))
+		{
+			return Optional.empty();
+		}
+
+		Item item = Registry.ITEM.
+				// remapping from low version to mc1.21.3 will rename the `get` to `getEntry`, which is bad
+				//#disable-remap
+				get(itemIdOpt.get());
+				//#enable-remap
+		return Optional.of(new ItemStack(item));
 	}
 }

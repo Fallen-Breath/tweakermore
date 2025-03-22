@@ -21,9 +21,16 @@
 package me.fallenbreath.tweakermore.util;
 
 import net.minecraft.util.Identifier;
+import net.minecraft.util.InvalidIdentifierException;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class IdentifierUtils
 {
+	/**
+	 * @throws InvalidIdentifierException if the identifier string is invalid
+	 */
 	public static Identifier of(String id)
 	{
 		//#if MC >= 12100
@@ -33,6 +40,9 @@ public class IdentifierUtils
 		//#endif
 	}
 
+	/**
+	 * @throws InvalidIdentifierException if the identifier string is invalid
+	 */
 	public static Identifier of(String namespace, String path)
 	{
 		//#if MC >= 12100
@@ -40,5 +50,23 @@ public class IdentifierUtils
 		//#else
 		return new Identifier(namespace, path);
 		//#endif
+	}
+
+	public static Optional<Identifier> tryParse(String id)
+	{
+		try
+		{
+			return Optional.of(of(id));
+		}
+		catch (InvalidIdentifierException e)
+		{
+			return Optional.empty();
+		}
+	}
+
+	@Nullable
+	public static Identifier tryParseOrNull(String id)
+	{
+		return tryParse(id).orElse(null);
 	}
 }

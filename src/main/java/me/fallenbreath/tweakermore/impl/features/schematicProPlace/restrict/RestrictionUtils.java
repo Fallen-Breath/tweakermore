@@ -41,7 +41,9 @@ class RestrictionUtils
 	{
 		return TweakerMoreConfigs.SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_ITEM_WHITELIST.getStrings().
 				stream().
-				map(itemId -> Registry.ITEM.get(IdentifierUtils.of(itemId))).
+				map(IdentifierUtils::tryParseOrNull).
+				filter(Objects::nonNull).
+				map(Registry.ITEM::get).
 				anyMatch(item -> Objects.equals(
 						//#if MC >= 12103
 						//$$ item.map(r -> r.value()).orElse(null),

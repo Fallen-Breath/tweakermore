@@ -1845,6 +1845,21 @@ if the shulker box is neither completely full nor empty
 ![shulkerBoxItemContentHint](assets/shulkerBoxItemContentHint.png)
 
 
+### shulkerBoxItemContentHintCustomNamesOverrideItem
+
+This allows you to override the icon that is shown in the 
+
+hint by renaming the box in an anvil with the ID of the item to be shown, when shulkerBoxItemContentHint is enabled
+
+For example, renaming a box "minecraft:redstone_block" will make it show the item "@tr#block.minecraft.redstone_block@".
+
+The "minecraft:" prefix can be omitted for vanilla items, i.e. "redstone_block" also works
+
+- Category: MC Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+
+
 ### shulkerBoxItemContentHintScale
 
 The scale of the hint stuffs in option shulkerBoxItemContentHint
@@ -1861,17 +1876,6 @@ The scale of the hint stuffs in option shulkerBoxItemContentHint
 Show the fill-level bar on mixed box as well, for shulkerBoxItemContentHint
 
 By default, the fill-level bar will only show up for non-mixed boxes
-
-- Category: MC Tweaks
-- Type: boolean (Generic)
-- Default value: `false`
-
-### shulkerBoxItemContentHintCustomNamesOverrideItem
-
-This allows you to override the icon that is shown in the hint by renaming the box in an anvil with the name of the item to be shwon, when shulkerBoxItemContentHint is enabled.
-
-For example, renaming a box "redstone_dust" will make it show the item "minecraft:redstone_dust"
-If you want to use the item of a mod, you can specify the namespace in the name (both "redstone_dust" and "minecraft:redstone_dust" work).
 
 - Category: MC Tweaks
 - Type: boolean (Generic)

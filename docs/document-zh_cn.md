@@ -1841,6 +1841,19 @@ FOV覆盖的开关
 ![shulkerBoxItemContentHint](assets/shulkerBoxItemContentHint.png)
 
 
+### 潜影盒物品内容提示-自定义名称覆盖提示物品 (shulkerBoxItemContentHintCustomNamesOverrideItem)
+
+启用潜影盒物品内容提示时，通过在铁砧中将盒子重命名为要显示的物品名称，可以覆盖提示中显示的图标
+
+例如，将盒子重命名为 "minecraft:redstone_block" 将使其显示物品 "@tr#block.minecraft.redstone_block@"
+
+对于原版的物品，可以省略 "minecraft:" 前缀，即 "redstone_block" 也可行
+
+- 分类: MC修改
+- 类型: 布尔值 (通用)
+- 默认值: `false`
+
+
 ### 潜影盒物品内容提示-缩放 (shulkerBoxItemContentHintScale)
 
 选项潜影盒物品内容提示内容提示的缩放比例
@@ -1857,18 +1870,6 @@ FOV覆盖的开关
 让选项潜影盒物品内容提示为含有混杂物品的潜影盒也展示填充率条
 
 默认情况下，填充率条只会为非混杂盒子展示
-
-- 分类: MC修改
-- 类型: 布尔值 (通用)
-- 默认值: `false`
-
-
-### 潜影盒物品内容提示-自定义名称覆盖物品 (shulkerBoxItemContentHintCustomNamesOverrideItem)
-
-启用潜影盒物品内容提示时，通过在铁砧中将盒子重命名为要显示的物品名称，可以覆盖提示中显示的图标。
-
-例如，将盒子重命名为 "redstone_dust" 将使其显示物品 "minecraft:redstone_dust"。
-如果要使用模组的物品，可以在名称中指定命名空间（“redstone_dust” 和 “minecraft:redstone_dust” 都有效）。
 
 - 分类: MC修改
 - 类型: 布尔值 (通用)
