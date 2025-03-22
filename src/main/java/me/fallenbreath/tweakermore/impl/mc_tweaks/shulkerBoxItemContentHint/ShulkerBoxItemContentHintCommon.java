@@ -20,11 +20,15 @@
 
 package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxItemContentHint;
 
+import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.InventoryUtils;
 import me.fallenbreath.tweakermore.util.ItemUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DefaultedList;
+import net.minecraft.item.Item;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 import java.util.Optional;
 
@@ -93,6 +97,14 @@ public class ShulkerBoxItemContentHintCommon
 				}
 			}
 		}
+
+		// If option activated and box is not custom named
+		if (TweakerMoreConfigs.SHULKER_BOX_ITEM_CONTENT_HINT_CUSTOM_NAMES_OVERRIDE_ITEM.getBooleanValue() && 
+			!itemStack.getName().getString().equals(itemStack.getItem().getName().getString()) )
+		{
+			std = getFromCustomNameOrDefault(itemStack, info, std);
+		}
+
 		if (std == null)
 		{
 			return info;
@@ -125,5 +137,40 @@ public class ShulkerBoxItemContentHintCommon
 		}
 
 		return info;
+	}
+
+
+	/**
+	 * Try to get a stack with the name or "minecraft:" + the name. In case the stack has a valid name, the info.allItemSame gets ovewritten to true.
+	 * 
+	 */
+	private static ItemStack getFromCustomNameOrDefault(ItemStack itemStack, Info info, ItemStack def)
+	{
+
+		//#if MC >= 12020
+		//$$ Identifier itemId = Identifier.tryParse("", itemStack.getName().getString());
+		//#else
+		Identifier itemId = Identifier.tryParse(itemStack.getName().getString());
+		//#endif
+		
+		if(!Registry.ITEM.containsId(itemId)){
+			//#if MC >= 12020
+			//$$ itemId = Identifier.tryParse(itemStack.getName().getString());
+			//#else
+			itemId = Identifier.tryParse("minecraft:"+ itemStack.getName().getString());
+			//#endif
+		}		
+		
+		if(!Registry.ITEM.containsId(itemId))
+		{
+			return def;
+		}
+		
+		// Overwrite info
+		info.allItemSame = true;
+		info.allItemSameIgnoreNbt = true;
+		
+		Item item = Registry.ITEM.get(itemId);
+		return new ItemStack(item);
 	}
 }
