@@ -37,7 +37,11 @@ public abstract class WidgetDropDownListMixin
 			method = "render",
 			at = @At(
 					value = "INVOKE",
+					//#if MC >= 12105
+					//$$ target = "Lfi/dy/masa/malilib/render/RenderUtils;drawRect(IIIIIZ)V",
+					//#else
 					target = "Lfi/dy/masa/malilib/render/RenderUtils;drawRect(IIIII)V",
+					//#endif
 					remap = false
 			),
 			remap = false
