@@ -69,6 +69,7 @@ public class ComparatorLevelRenderer extends CommonScannerInfoViewer
 
 		TextRenderer.create().
 				text(String.valueOf(level)).atCenter(pos).
+				fontScale(TextRenderer.DEFAULT_FONT_SCALE * TweakerMoreConfigs.INFO_VIEW_COMPARATOR_TEXT_SCALE.getDoubleValue()).
 				color(FONT_COLOR, BACKGROUND_COLOR).
 				shadow().seeThrough().
 				render();

@@ -164,6 +164,9 @@ tweakermore:
     infoViewComparatorTargetStrategy:
       .: infoViewComparatorTargetST
       comment: The target selecting strategy of @option#infoViewComparator@
+    infoViewComparatorTextScale:
+      .: infoViewComparatorTextScale
+      comment: Scale of the displayed text rendered by @option#infoViewComparator@
     infoViewCommandBlock:
       .: infoViewCommandBlock
       comment: |-

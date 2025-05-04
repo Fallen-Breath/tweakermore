@@ -243,6 +243,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigOptionList INFO_VIEW_COMPARATOR_TARGET_STRATEGY = newConfigOptionList("infoViewComparatorTargetStrategy", InfoViewTargetStrategy.BEAM);
 
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigDouble INFO_VIEW_COMPARATOR_TEXT_SCALE = newConfigDouble("infoViewComparatorTextScale", 1, 0.1, 3);
+
 	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW_COMMAND_BLOCK = newConfigBooleanHotkeyed("infoViewCommandBlock");
 

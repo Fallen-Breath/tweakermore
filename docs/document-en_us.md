@@ -480,6 +480,17 @@ The target selecting strategy of infoViewComparator
 - Available options: `Pointed`, `Beam`, `Range`
 
 
+### infoViewComparatorTextScale
+
+Scale of the displayed text rendered by infoViewComparator
+
+- Category: Features
+- Type: double (Generic)
+- Default value: `1.0`
+- Minimum value: `0.1`
+- Maximum value: `3.0`
+
+
 ### infoViewGrowthSpeed
 
 Display growth speed of crop blocks, weathering speed of copper blocks, and related information
