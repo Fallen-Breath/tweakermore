@@ -113,6 +113,38 @@ The way to show information when using the autoCollectMaterialListItem feature
     - Item Scroller (`itemscroller`)
 
 
+### autoCollectMaterialListItemRetainItem
+
+If enabled, when using autoCollectMaterialListItem to collect items from a container,
+
+it will not take all items from the container slots. Instead, it will retain a specified amount of items
+
+See also: Option autoCollectMaterialListItemRetainItemAmount
+
+- Category: Features
+- Type: hotkey togglable boolean (Generic)
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
+### autoCollectMaterialListItemRetainItemAmount
+
+The number of items retained by the autoCollectMaterialListItemRetainItem feature
+
+- Category: Features
+- Type: integer (Generic)
+- Default value: `1`
+- Minimum value: `1`
+- Maximum value: `63`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
 ### autoFillContainer
 
 Automatically fill the opened container with the most numerous item stack in your inventory

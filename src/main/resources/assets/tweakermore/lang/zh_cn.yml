@@ -37,6 +37,15 @@ tweakermore:
     autoCollectMaterialListItemCloseGui:
       .: 自动收集材料列表物品-关闭GUI
       comment: 在使用@option#autoCollectMaterialListItem@功能后，是否关闭容器的GUI
+    autoCollectMaterialListItemRetainItem:
+      .: 自动收集材料列表物品-保留容器物品
+      comment: |-
+        若启用，则在使用@option#autoCollectMaterialListItem@从容器中取出物品时，
+        不会取走容器格子中的所有物品，而是会保留指定数量的物品
+        另见：选项 @option#autoCollectMaterialListItemRetainItemAmount@
+    autoCollectMaterialListItemRetainItemAmount:
+      .: 自动收集材料列表物品-保留容器物品数
+      comment: 功能@option#autoCollectMaterialListItemRetainItem@保留的物品数量
     autoFillContainer:
       .: 自动装填容器
       comment: |-

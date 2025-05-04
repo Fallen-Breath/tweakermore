@@ -134,6 +134,26 @@ public class TweakerMoreConfigs
 	)
 	public static final TweakerMoreConfigBoolean AUTO_COLLECT_MATERIAL_LIST_ITEM_CLOSE_GUI = newConfigBoolean("autoCollectMaterialListItemCloseGui", true);
 
+	@Config(
+			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = {
+					@Condition(ModIds.litematica),
+					@Condition(ModIds.itemscroller)
+			}),
+			category = Config.Category.FEATURES
+	)
+	public static final TweakerMoreConfigBooleanHotkeyed AUTO_COLLECT_MATERIAL_LIST_ITEM_RETAIN_ITEM = newConfigBooleanHotkeyed("autoCollectMaterialListItemRetainItem", false);
+
+	@Config(
+			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = {
+					@Condition(ModIds.litematica),
+					@Condition(ModIds.itemscroller)
+			}),
+			category = Config.Category.FEATURES
+	)
+	public static final TweakerMoreConfigInteger AUTO_COLLECT_MATERIAL_LIST_ITEM_KEEP_RETAIN_AMOUNT = newConfigInteger("autoCollectMaterialListItemRetainItemAmount", 1, 1, 63);
+
 	@Config(type = Config.Type.TWEAK, restriction = @Restriction(require = @Condition(ModIds.itemscroller)), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed AUTO_FILL_CONTAINER = newConfigBooleanHotkeyed("autoFillContainer");
 

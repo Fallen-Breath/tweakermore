@@ -47,9 +47,14 @@ public abstract class ConfigFactory
 		return new TweakerMoreConfigHotkeyWithSwitch(name, defaultEnableState, defaultStorageString, settings);
 	}
 
+	public static TweakerMoreConfigBooleanHotkeyed newConfigBooleanHotkeyed(String name, boolean defaultEnableState)
+	{
+		return newConfigBooleanHotkeyed(name, defaultEnableState, "");
+	}
+
 	public static TweakerMoreConfigBooleanHotkeyed newConfigBooleanHotkeyed(String name)
 	{
-		return newConfigBooleanHotkeyed(name, false, "");
+		return newConfigBooleanHotkeyed(name, false);
 	}
 
 	public static TweakerMoreConfigBooleanHotkeyed newConfigBooleanHotkeyed(String name, boolean defaultValue, String defaultStorageString)

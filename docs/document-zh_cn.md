@@ -113,6 +113,38 @@ TweakerMore提供的新功能
     - Item Scroller (`itemscroller`)
 
 
+### 自动收集材料列表物品-保留容器物品 (autoCollectMaterialListItemRetainItem)
+
+若启用，则在使用自动收集材料列表物品从容器中取出物品时，
+
+不会取走容器格子中的所有物品，而是会保留指定数量的物品
+
+另见：选项 自动收集材料列表物品-保留容器物品数
+
+- 分类: 功能
+- 类型: 带热键布尔值 (通用)
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
+### 自动收集材料列表物品-保留容器物品数 (autoCollectMaterialListItemRetainItemAmount)
+
+功能自动收集材料列表物品-保留容器物品保留的物品数量
+
+- 分类: 功能
+- 类型: 整数 (通用)
+- 默认值: `1`
+- 最小值: `1`
+- 最大值: `63`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
 ### 自动装填容器 (autoFillContainer)
 
 打开容器后，自动使用物品栏中占用格子数最多的物品装填容器

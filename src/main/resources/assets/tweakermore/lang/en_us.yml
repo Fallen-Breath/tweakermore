@@ -37,6 +37,15 @@ tweakermore:
     autoCollectMaterialListItemCloseGui:
       .: autoCollectMaterialListItemCloseGui
       comment: If the container gui should be closed after using the @option#autoCollectMaterialListItem@ feature
+    autoCollectMaterialListItemRetainItem:
+      .: autoCollectMaterialListItemRetainItem
+      comment: |-
+        If enabled, when using @option#autoCollectMaterialListItem@ to collect items from a container,
+        it will not take all items from the container slots. Instead, it will retain a specified amount of items
+        See also: Option @option#autoCollectMaterialListItemRetainItemAmount@
+    autoCollectMaterialListItemRetainItemAmount:
+      .: autoCollectMaterialListItemRetainItemAmount
+      comment: The number of items retained by the @option#autoCollectMaterialListItemRetainItem@ feature
     autoFillContainer:
       .: autoFillContainer
       comment: |-
