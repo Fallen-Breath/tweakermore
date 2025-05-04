@@ -210,6 +210,9 @@ tweakermore:
     infoViewHopperTargetStrategy:
       .: infoViewHopperTargetST
       comment: The target selecting strategy of @option#infoViewHopper@
+    infoViewHopperTextScale:
+      .: infoViewHopperTextScale
+      comment: Scale of the displayed text rendered by @option#infoViewHopper@
     infoViewRedstoneDustUpdateOrder:
       .: infoViewRedstoneDustUpdateOrder
       comment: Show the block update order of the redstone dust

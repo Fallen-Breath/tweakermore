@@ -568,6 +568,17 @@ The target selecting strategy of infoViewHopper
 - Available options: `Pointed`, `Beam`, `Range`
 
 
+### infoViewHopperTextScale
+
+Scale of the displayed text rendered by infoViewHopper
+
+- Category: Features
+- Type: double (Generic)
+- Default value: `1.0`
+- Minimum value: `0.1`
+- Maximum value: `3.0`
+
+
 ### infoViewRedstoneDustUpdateOrder
 
 Show the block update order of the redstone dust

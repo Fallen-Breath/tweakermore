@@ -77,6 +77,7 @@ public class HopperCooldownRenderer extends CommonScannerInfoViewer
 
 		TextRenderer.create().
 				text(String.valueOf(cooldown)).atCenter(pos).
+				fontScale(TextRenderer.DEFAULT_FONT_SCALE * TweakerMoreConfigs.INFO_VIEW_HOPPER_TEXT_SCALE.getDoubleValue()).
 				color(color.pack()).
 				shadow().seeThrough().
 				render();

@@ -282,6 +282,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.LIST, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigOptionList INFO_VIEW_HOPPER_TARGET_STRATEGY = newConfigOptionList("infoViewHopperTargetStrategy", InfoViewTargetStrategy.BEAM);
 
+	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigDouble INFO_VIEW_HOPPER_TEXT_SCALE = newConfigDouble("infoViewHopperTextScale", 1, 0.1, 3);
+
 	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER = newConfigBooleanHotkeyed("infoViewRedstoneDustUpdateOrder");
 
