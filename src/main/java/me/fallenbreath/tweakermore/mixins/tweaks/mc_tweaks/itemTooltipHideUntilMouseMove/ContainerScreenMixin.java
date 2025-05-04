@@ -20,8 +20,8 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.itemTooltipHideUntilMouseMove;
 
-import com.mojang.datafixers.util.Pair;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.itemTooltipHideUntilMouseMove.ItemTooltipHideUntilMouseMoveHelper;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -37,7 +37,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ContainerScreenMixin
 {
 	@Unique
-	private Pair<Integer, Integer> previousMousePos = null;
+	private ItemTooltipHideUntilMouseMoveHelper tooltipHideHelper$TKM = null;
 
 	@Inject(method = "drawMouseoverTooltip", at = @At("HEAD"), cancellable = true)
 	private void itemTooltipHideUntilMouseMove_impl(
@@ -49,14 +49,22 @@ public abstract class ContainerScreenMixin
 	{
 		if (TweakerMoreConfigs.ITEM_TOOLTIP_HIDE_UNTIL_MOUSE_MOVE.getBooleanValue())
 		{
-			Pair<Integer, Integer> mousePos = Pair.of(mouseX, mouseY);
-			if (this.previousMousePos == null)
+			if (this.tooltipHideHelper$TKM == null)
 			{
-				this.previousMousePos = mousePos;
+				this.tooltipHideHelper$TKM = new ItemTooltipHideUntilMouseMoveHelper(mouseX, mouseY);
 			}
-			if (mousePos.equals(this.previousMousePos))
+			if (tooltipHideHelper$TKM.mouseHasMoved)
+			{
+				return;
+			}
+
+			if (this.tooltipHideHelper$TKM.mouseHasNotMoved(mouseX, mouseY))
 			{
 				ci.cancel();
+			}
+			else
+			{
+				this.tooltipHideHelper$TKM.mouseHasMoved = true;
 			}
 		}
 	}
