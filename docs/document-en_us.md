@@ -611,6 +611,17 @@ The alpha value of the floating text used in infoViewRedstoneDustUpdateOrder
 - Maximum value: `1.0`
 
 
+### infoViewRedstoneDustUpdateOrderTextScale
+
+Scale of the displayed text rendered by infoViewRedstoneDustUpdateOrder
+
+- Category: Features
+- Type: double (Generic)
+- Default value: `1.0`
+- Minimum value: `0.1`
+- Maximum value: `3.0`
+
+
 ### infoViewRenderingKey
 
 The rendering hotkey for info viewers

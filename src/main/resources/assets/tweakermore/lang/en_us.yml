@@ -223,6 +223,9 @@ tweakermore:
     infoViewRedstoneDustUpdateOrderTextAlpha:
       .: infoViewRedstoneDustUpdateOrderTextAlpha
       comment: The alpha value of the floating text used in @option#infoViewRedstoneDustUpdateOrder@
+    infoViewRedstoneDustUpdateOrderTextScale:
+      .: infoViewRedstoneDustUpdateOrderTextScale
+      comment: Scale of the displayed text rendered by @option#infoViewRedstoneDustUpdateOrder@
     infoViewRespawnBlockExplosion:
       .: infoViewRespawnBlockExplosion
       comment: |-
