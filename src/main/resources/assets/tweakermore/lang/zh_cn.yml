@@ -448,6 +448,9 @@ tweakermore:
         2. 输入/kill然后tab补全面前的投掷物实体（UUID补全） 
         3. 把一个物品实体用鼠标中间拎进物品栏 (实体物品提取)
         注：原版环境下，只能选中有碰撞箱且非旁观者的实体
+    commandHistoryLimit:
+      .: 指令历史数量上限
+      comment: 修改历史命令的最大数量，该历史也会被存储在 "command_history.txt" 文件中
     connectionSimulatedDelay:
       .: 网络连接延迟模拟
       comment: |-

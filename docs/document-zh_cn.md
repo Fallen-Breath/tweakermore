@@ -1228,6 +1228,20 @@ schematicBlockPlacement的严格模式
 - 默认值: *无快捷键*, `false`
 
 
+### 指令历史数量上限 (commandHistoryLimit)
+
+修改历史命令的最大数量，该历史也会被存储在 "command_history.txt" 文件中
+
+- 分类: MC修改
+- 类型: 整数 (通用)
+- 默认值: `50`
+- 最小值: `50`
+- 最大值: `10000`
+- 模组约束:
+  - 依赖模组:
+    - Minecraft (`minecraft`) `>=1.20.2`
+
+
 ### 网络连接延迟模拟 (connectionSimulatedDelay)
 
 客户端网络延迟模拟器，于给定值大于0时启用

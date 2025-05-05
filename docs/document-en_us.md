@@ -1232,6 +1232,20 @@ Notes: In vanilla, client can only select collide-able and non-spectator entitie
 - Default value: *no hotkey*, `false`
 
 
+### commandHistoryLimit
+
+Modify the maximum number of command history entries, which are also saved in the "command_history.txt" file
+
+- Category: MC Tweaks
+- Type: integer (Generic)
+- Default value: `50`
+- Minimum value: `50`
+- Maximum value: `10000`
+- Mod restrictions:
+  - Required mods:
+    - Minecraft (`minecraft`) `>=1.20.2`
+
+
 ### connectionSimulatedDelay
 
 Client network delay simulator. Enabled when the value is greater than 0

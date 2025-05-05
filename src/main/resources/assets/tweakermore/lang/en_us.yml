@@ -448,6 +448,9 @@ tweakermore:
         2. Enter /kill and tab-suggested a projectile entity (UUID suggestion)
         3. Pick the item stack from the item entity to your inventory (pick entity)
         Notes: In vanilla, client can only select collide-able and non-spectator entities
+    commandHistoryLimit:
+      .: commandHistoryLimit
+      comment: Modify the maximum number of command history entries, which are also saved in the "command_history.txt" file
     connectionSimulatedDelay:
       .: connectionSimulatedDelay
       comment: |-

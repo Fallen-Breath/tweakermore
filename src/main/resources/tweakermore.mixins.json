@@ -77,6 +77,7 @@
     "tweaks.mc_tweaks.clientEntityTargetingSelectAll.KeyboardMixin",
     "tweaks.mc_tweaks.clientEntityTargetingSelectAll.MinecraftClient_extendedTargetMixin",
     "tweaks.mc_tweaks.clientEntityTargetingSelectAll.MinecraftClient_pickEntityMixin",
+    "tweaks.mc_tweaks.commandHistoryLimit.CommandHistoryManagerMixin",
     "tweaks.mc_tweaks.connectionSimulatedDelay.ClientConnection_ChannelInitializerMixin",
     "tweaks.mc_tweaks.daytimeOverride.ClientWorldMixin",
     "tweaks.mc_tweaks.daytimeOverride.WorldMixin",
