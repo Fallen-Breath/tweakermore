@@ -499,6 +499,9 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_HORIZON_SHADING_RENDERING = newConfigBooleanHotkeyed("disableHorizonShadingRendering");
 
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_INVENTORY_SCREEN_PLAYER_MODEL_RENDERING = newConfigBooleanHotkeyed("disableInventoryScreenPlayerModelRendering");
+
+	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_LIGHT_UPDATES = newConfigBooleanHotkeyed("disableLightUpdates");
 
 	@Config(type = Config.Type.DISABLE, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.17")), category = Config.Category.MC_TWEAKS)

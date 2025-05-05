@@ -539,6 +539,10 @@ tweakermore:
         Prevent the horizon from turning dark when you are nearby the world's bottom y
         See also: option @option#disableDarkSkyRendering@
       pretty_name: Disable Horizon Shading Rendering
+    disableInventoryScreenPlayerModelRendering:
+      .: disableInventoryScreenPlayerModelRendering
+      comment: Do not render the player entity model inside the inventory screen
+      pretty_name: Disable Inventory Screen Player Model Rendering
     disableLightUpdates:
       .: disableLightUpdates
       comment: Yeets client-side light updates

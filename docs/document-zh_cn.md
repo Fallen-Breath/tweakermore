@@ -1443,6 +1443,15 @@ schematicBlockPlacement的严格模式
 ![disableHorizonShadingRendering](assets/disableHorizonShadingRendering.png)
 
 
+### 禁用物品栏界面玩家模型渲染 (disableInventoryScreenPlayerModelRendering)
+
+在物品栏界面里，不要渲染玩家模型
+
+- 分类: MC修改
+- 类型: 带热键布尔值 (禁用)
+- 默认值: *无快捷键*, `false`
+
+
 ### 禁用光照更新 (disableLightUpdates)
 
 禁用客户端光照更新

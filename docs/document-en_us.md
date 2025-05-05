@@ -1447,6 +1447,15 @@ See also: option disableDarkSkyRendering
 ![disableHorizonShadingRendering](assets/disableHorizonShadingRendering.png)
 
 
+### disableInventoryScreenPlayerModelRendering
+
+Do not render the player entity model inside the inventory screen
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean (Disable)
+- Default value: *no hotkey*, `false`
+
+
 ### disableLightUpdates
 
 Yeets client-side light updates

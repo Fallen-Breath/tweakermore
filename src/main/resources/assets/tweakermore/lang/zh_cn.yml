@@ -539,6 +539,10 @@ tweakermore:
         阻止地平线在玩家接近世界最低y值时变暗的渲染效果
         另见: 选项@option#disableDarkSkyRendering@
       pretty_name: 禁用地平线渲染变暗
+    disableInventoryScreenPlayerModelRendering:
+      .: 禁用物品栏界面玩家模型渲染
+      comment: 在物品栏界面里，不要渲染玩家模型
+      pretty_name: 禁用物品栏界面玩家模型渲染
     disableLightUpdates:
       .: 禁用光照更新
       comment: 禁用客户端光照更新
