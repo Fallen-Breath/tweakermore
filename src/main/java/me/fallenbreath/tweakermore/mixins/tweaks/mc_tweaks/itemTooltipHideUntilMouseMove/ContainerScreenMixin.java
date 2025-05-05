@@ -21,6 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.itemTooltipHideUntilMouseMove;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.itemTooltipHideUntilMouseMove.ContainerScreenWithToolTipHideHelper;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.itemTooltipHideUntilMouseMove.ItemTooltipHideUntilMouseMoveHelper;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import org.spongepowered.asm.mixin.Mixin;
@@ -34,10 +35,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#endif
 
 @Mixin(ContainerScreen.class)
-public abstract class ContainerScreenMixin
+public abstract class ContainerScreenMixin implements ContainerScreenWithToolTipHideHelper
 {
 	@Unique
 	private ItemTooltipHideUntilMouseMoveHelper tooltipHideHelper$TKM = null;
+
+	@Override
+	public ItemTooltipHideUntilMouseMoveHelper getToolTipHideHelper$TKM()
+	{
+		return this.tooltipHideHelper$TKM;
+	}
 
 	@Inject(method = "drawMouseoverTooltip", at = @At("HEAD"), cancellable = true)
 	private void itemTooltipHideUntilMouseMove_impl(

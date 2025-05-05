@@ -20,26 +20,7 @@
 
 package me.fallenbreath.tweakermore.impl.mc_tweaks.itemTooltipHideUntilMouseMove;
 
-public class ItemTooltipHideUntilMouseMoveHelper
+public interface ContainerScreenWithToolTipHideHelper
 {
-	public int firstMouseX;
-	public int firstMouseY;
-	public boolean mouseHasMoved;
-
-	public ItemTooltipHideUntilMouseMoveHelper(int firstMouseX, int firstMouseY)
-	{
-		this.firstMouseX = firstMouseX;
-		this.firstMouseY = firstMouseY;
-		this.mouseHasMoved = false;
-	}
-
-	public boolean mouseHasNotMoved(int mouseX, int mouseY)
-	{
-		return this.firstMouseX == mouseX && this.firstMouseY == mouseY;
-	}
-
-	public boolean shouldHide(int mouseX, int mouseY)
-	{
-		return !this.mouseHasMoved && this.mouseHasNotMoved(mouseX, mouseY);
-	}
+	ItemTooltipHideUntilMouseMoveHelper getToolTipHideHelper$TKM();
 }

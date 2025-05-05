@@ -18,28 +18,17 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.impl.mc_tweaks.itemTooltipHideUntilMouseMove;
+package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.itemTooltipHideUntilMouseMove.compat.malilib;
 
-public class ItemTooltipHideUntilMouseMoveHelper
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
+import me.fallenbreath.tweakermore.util.ModIds;
+import me.fallenbreath.tweakermore.util.mixin.DummyClass;
+import org.spongepowered.asm.mixin.Mixin;
+
+@Restriction(require = @Condition(value = ModIds.malilib, versionPredicates = ">=0.22.0-sakura.4"))
+@Mixin(DummyClass.class)
+public abstract class RenderEventHandlerMixin
 {
-	public int firstMouseX;
-	public int firstMouseY;
-	public boolean mouseHasMoved;
-
-	public ItemTooltipHideUntilMouseMoveHelper(int firstMouseX, int firstMouseY)
-	{
-		this.firstMouseX = firstMouseX;
-		this.firstMouseY = firstMouseY;
-		this.mouseHasMoved = false;
-	}
-
-	public boolean mouseHasNotMoved(int mouseX, int mouseY)
-	{
-		return this.firstMouseX == mouseX && this.firstMouseY == mouseY;
-	}
-
-	public boolean shouldHide(int mouseX, int mouseY)
-	{
-		return !this.mouseHasMoved && this.mouseHasNotMoved(mouseX, mouseY);
-	}
+	// impl in mc1.21.3
 }
