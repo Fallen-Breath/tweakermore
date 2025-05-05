@@ -2274,6 +2274,18 @@ The items that will trigger tweakHandRestock
     - Tweakeroo (`tweakeroo`)
 
 
+### Litematica-KeepMaterialListCrossDimension (lmKeepMaterialListCrossDimension)
+
+Prevent the material list from becoming invalid when crossing dimensions
+
+- Category: Mods Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+
+
 ### Litematica-OriginOverride000 (lmOriginOverride000)
 
 Automatically set origin of litematica schematic to [0, 0, 0] when saving

@@ -707,6 +707,13 @@ public class TweakerMoreConfigs
 			restriction = @Restriction(require = @Condition(ModIds.litematica)),
 			category = Config.Category.MOD_TWEAKS
 	)
+	public static final TweakerMoreConfigBoolean LM_KEEP_MATERIAL_LIST_CROSS_DIMENSION = newConfigBoolean("lmKeepMaterialListCrossDimension", false);
+
+	@Config(
+			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(ModIds.litematica)),
+			category = Config.Category.MOD_TWEAKS
+	)
 	public static final TweakerMoreConfigBoolean LM_ORIGIN_OVERRIDE_000 = newConfigBoolean("lmOriginOverride000", false);
 
 	@Config(

@@ -856,6 +856,9 @@ tweakermore:
     eprHideOnDebugHud:
       .: 额外玩家渲染-隐藏于调试界面
       comment: 在调试界面开启（那个按 F3 显示的东西）时，隐藏额外玩家渲染的渲染
+    lmKeepMaterialListCrossDimension:
+      .: Litematica-跨维度保留材料列表
+      comment: 在跨维度时，不要把当前材料列表无效化
     lmOriginOverride000:
       .: Litematica-原点000覆盖
       comment: |-

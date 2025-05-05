@@ -857,6 +857,9 @@ tweakermore:
     eprHideOnDebugHud:
       .: EPR-HideOnDebugHud
       comment: Hide extra player renderer rendering when debug hud (the F3 thing) is enabled
+    lmKeepMaterialListCrossDimension:
+      .: Litematica-KeepMaterialListCrossDimension
+      comment: Prevent the material list from becoming invalid when crossing dimensions
     lmOriginOverride000:
       .: Litematica-OriginOverride000
       comment: |-

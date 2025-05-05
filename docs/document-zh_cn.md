@@ -2268,6 +2268,18 @@ tweakHandRestock功能的物品名单约束类型
     - Tweakeroo (`tweakeroo`)
 
 
+### Litematica-跨维度保留材料列表 (lmKeepMaterialListCrossDimension)
+
+在跨维度时，不要把当前材料列表无效化
+
+- 分类: 模组修改
+- 类型: 布尔值 (通用)
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+
+
 ### Litematica-原点000覆盖 (lmOriginOverride000)
 
 在保存litematica的原理图时，自动将原点设置为[0, 0, 0]
