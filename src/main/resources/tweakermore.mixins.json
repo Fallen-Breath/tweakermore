@@ -184,6 +184,7 @@
     "tweaks.mod_tweaks.handRestoreRestriction.PlacementTweaksMixin",
     "tweaks.mod_tweaks.lmAutoRefreshMaterialList.SchematicWorldRefresherMixin",
     "tweaks.mod_tweaks.lmKeepMaterialListCrossDimension.DataManagerMixin",
+    "tweaks.mod_tweaks.lmMaterialListIgnoreStateMismatches.TaskCountBlocksPlacementMixin",
     "tweaks.mod_tweaks.lmOriginOverride000.GuiSchematicLoadButtonListenerMixin",
     "tweaks.mod_tweaks.lmOriginOverride000.LitematicaSchematicMixin",
     "tweaks.mod_tweaks.lmOriginOverride000.SchematicPlacementMixin",

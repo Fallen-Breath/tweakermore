@@ -864,6 +864,11 @@ tweakermore:
         will be automatically triggered whenever the render layer range changes
         Note: Frequent changes in the render layer range may cause "refresh material list" tasks to accumulate,
         which might require manual cleanup of redundant tasks.
+    lmMaterialListIgnoreStateMismatches:
+      .: Litematica-MaterialListIgnoreStateMismatches
+      comment: |-
+        When generating the material list, ignore blocks that have the correct type but incorrect block states 
+        Note: This option does not affect the schematic placement verifier
     lmKeepMaterialListCrossDimension:
       .: Litematica-KeepMaterialListCrossDimension
       comment: Prevent the material list from becoming invalid when crossing dimensions

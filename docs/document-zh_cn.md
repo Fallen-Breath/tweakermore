@@ -2298,6 +2298,20 @@ tweakHandRestock功能的物品名单约束类型
     - Litematica (`litematica`)
 
 
+### Litematica-材料列表忽略不匹配的方块状态 (lmMaterialListIgnoreStateMismatches)
+
+在统计材料列表时，忽略那些方块正确但状态错误的方块
+
+注意：“验证原理图”功能不受此选项影响
+
+- 分类: 模组修改
+- 类型: 布尔值 (通用)
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+
+
 ### Litematica-原点000覆盖 (lmOriginOverride000)
 
 在保存litematica的原理图时，自动将原点设置为[0, 0, 0]

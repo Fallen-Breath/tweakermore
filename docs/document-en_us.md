@@ -2304,6 +2304,20 @@ Prevent the material list from becoming invalid when crossing dimensions
     - Litematica (`litematica`)
 
 
+### Litematica-MaterialListIgnoreStateMismatches (lmMaterialListIgnoreStateMismatches)
+
+When generating the material list, ignore blocks that have the correct type but incorrect block states 
+
+Note: This option does not affect the schematic placement verifier
+
+- Category: Mods Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+
+
 ### Litematica-OriginOverride000 (lmOriginOverride000)
 
 Automatically set origin of litematica schematic to [0, 0, 0] when saving

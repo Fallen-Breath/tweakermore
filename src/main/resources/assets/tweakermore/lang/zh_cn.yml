@@ -863,6 +863,11 @@ tweakermore:
         会自动触发一个“刷新材料列表”的任务
         注意：渲染层范围的频繁变化可能会导致“刷新材料列表”任务堆积，
         此时可能需要手动清理多余的任务
+    lmMaterialListIgnoreStateMismatches:
+      .: Litematica-材料列表忽略不匹配的方块状态
+      comment: |-
+        在统计材料列表时，忽略那些方块正确但状态错误的方块
+        注意：“验证原理图”功能不受此选项影响
     lmKeepMaterialListCrossDimension:
       .: Litematica-跨维度保留材料列表
       comment: 在跨维度时，不要把当前材料列表无效化

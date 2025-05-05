@@ -722,6 +722,13 @@ public class TweakerMoreConfigs
 			restriction = @Restriction(require = @Condition(ModIds.litematica)),
 			category = Config.Category.MOD_TWEAKS
 	)
+	public static final TweakerMoreConfigBoolean LM_MATERIAL_LIST_IGNORE_STATE_MISMATCHES = newConfigBoolean("lmMaterialListIgnoreStateMismatches", false);
+
+	@Config(
+			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(ModIds.litematica)),
+			category = Config.Category.MOD_TWEAKS
+	)
 	public static final TweakerMoreConfigBoolean LM_ORIGIN_OVERRIDE_000 = newConfigBoolean("lmOriginOverride000", false);
 
 	@Config(
