@@ -492,6 +492,10 @@ tweakermore:
         Prevent creative flying player from entering "ladder climbing" state,
         so player's flying movement will not be affected by ladder things
       pretty_name: Disable Creative Fly Climbing Check
+    disableCreativeFlyLandingExitFlying:
+      .: disableCreativeFlyLandingExitFlying
+      comment: Do not exit creative flying state when landing on a block
+      pretty_name: Disable Creative Fly Landing Exit Flying
     disableDarkSkyRendering:
       .: disableDarkSkyRendering
       comment: |-

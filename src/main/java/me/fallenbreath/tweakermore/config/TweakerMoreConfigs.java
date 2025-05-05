@@ -472,6 +472,9 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_CREATIVE_FLY_CLIMBING_CHECK = newConfigBooleanHotkeyed("disableCreativeFlyClimbingCheck");
 
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_CREATIVE_FLY_LANDING_EXIT_FLYING = newConfigBooleanHotkeyed("disableCreativeFlyLandingExitFlying");
+
+	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_DARK_SKY_RENDERING = newConfigBooleanHotkeyed("disableDarkSkyRendering");
 
 	@Config(type = Config.Type.DISABLE, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.19")), category = Config.Category.MC_TWEAKS)

@@ -1338,6 +1338,15 @@ schematicBlockPlacement的严格模式
 - 默认值: *无快捷键*, `false`
 
 
+### 禁用创造模式飞行落地时退出飞行 (disableCreativeFlyLandingExitFlying)
+
+在创造模式飞行降落到方块上时，不要退出飞行状态
+
+- 分类: MC修改
+- 类型: 带热键布尔值 (禁用)
+- 默认值: *无快捷键*, `false`
+
+
 ### 禁用黑暗状态效果 (disableDarknessEffect)
 
 禁用黑暗状态效果所提供的客户端渲染效果

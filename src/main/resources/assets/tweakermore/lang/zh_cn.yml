@@ -492,6 +492,10 @@ tweakermore:
         阻止创造模式玩家在飞行时进入"在梯子上攀爬"的状态，
         这样玩家的飞行移动就能不受梯子等方块的影响
       pretty_name: 禁用创造模式飞行攀爬
+    disableCreativeFlyLandingExitFlying:
+      .: 禁用创造模式飞行落地时退出飞行
+      comment: 在创造模式飞行降落到方块上时，不要退出飞行状态
+      pretty_name: 禁用创造模式飞行落地时退出飞行
     disableDarkSkyRendering:
       .: 禁用天空渲染变暗
       comment: |-

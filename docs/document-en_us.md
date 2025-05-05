@@ -1342,6 +1342,15 @@ so player's flying movement will not be affected by ladder things
 - Default value: *no hotkey*, `false`
 
 
+### disableCreativeFlyLandingExitFlying
+
+Do not exit creative flying state when landing on a block
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean (Disable)
+- Default value: *no hotkey*, `false`
+
+
 ### disableDarknessEffect
 
 Disable the client-side rendering effect when you have the darkness effect
