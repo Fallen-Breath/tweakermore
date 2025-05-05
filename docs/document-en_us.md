@@ -2274,6 +2274,24 @@ The items that will trigger tweakHandRestock
     - Tweakeroo (`tweakeroo`)
 
 
+### Litematica-AutoRefreshMaterialList (lmAutoRefreshMaterialList)
+
+If the material list display mode is set to "render layer", a "refresh material list" task
+
+will be automatically triggered whenever the render layer range changes
+
+Note: Frequent changes in the render layer range may cause "refresh material list" tasks to accumulate,
+
+which might require manual cleanup of redundant tasks.
+
+- Category: Mods Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+
+
 ### Litematica-KeepMaterialListCrossDimension (lmKeepMaterialListCrossDimension)
 
 Prevent the material list from becoming invalid when crossing dimensions

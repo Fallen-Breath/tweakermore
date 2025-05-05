@@ -2268,6 +2268,24 @@ tweakHandRestock功能的物品名单约束类型
     - Tweakeroo (`tweakeroo`)
 
 
+### Litematica-自动刷新材料列表 (lmAutoRefreshMaterialList)
+
+如果材料列表的显示模式为“渲染层”，则在渲染层范围发生变化时，
+
+会自动触发一个“刷新材料列表”的任务
+
+注意：渲染层范围的频繁变化可能会导致“刷新材料列表”任务堆积，
+
+此时可能需要手动清理多余的任务
+
+- 分类: 模组修改
+- 类型: 布尔值 (通用)
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+
+
 ### Litematica-跨维度保留材料列表 (lmKeepMaterialListCrossDimension)
 
 在跨维度时，不要把当前材料列表无效化

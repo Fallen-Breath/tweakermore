@@ -51,6 +51,7 @@ import me.fallenbreath.tweakermore.impl.mc_tweaks.movingPistonBlockSelectable.Mo
 import me.fallenbreath.tweakermore.impl.mc_tweaks.particleLimit.ParticleLimitHelper;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.windowSize.WindowSizeHelper;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.eCraftMassCraftCompact.EasierCraftingRegistrar;
+import me.fallenbreath.tweakermore.impl.mod_tweaks.lmAutoRefreshMaterialList.LitematicaAutoRefreshMaterialListHelper;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.lmRemoveEntityCommand.LitematicaRemoveEntityCommandOverrider;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.ofPlayerExtraModelOverride.OptifinePlayerExtraModelOverrider;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSyncer;
@@ -714,6 +715,13 @@ public class TweakerMoreConfigs
 			restriction = @Restriction(require = @Condition(ModIds.litematica)),
 			category = Config.Category.MOD_TWEAKS
 	)
+	public static final TweakerMoreConfigBoolean LM_AUTO_REFRESH_MATERIAL_LIST = newConfigBoolean("lmAutoRefreshMaterialList", false);
+
+	@Config(
+			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(ModIds.litematica)),
+			category = Config.Category.MOD_TWEAKS
+	)
 	public static final TweakerMoreConfigBoolean LM_ORIGIN_OVERRIDE_000 = newConfigBoolean("lmOriginOverride000", false);
 
 	@Config(
@@ -987,6 +995,7 @@ public class TweakerMoreConfigs
 
 		//////////// Event Listeners ////////////
 
+		TickHandler.getInstance().registerClientTickHandler(LitematicaAutoRefreshMaterialListHelper.getInstance());
 		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
 		TickHandler.getInstance().registerClientTickHandler(PistorderRenderer.getInstance());
 		TweakerMoreRenderEventHandler.register(new AutoContainerProcessorHintRenderer());

@@ -857,6 +857,13 @@ tweakermore:
     eprHideOnDebugHud:
       .: EPR-HideOnDebugHud
       comment: Hide extra player renderer rendering when debug hud (the F3 thing) is enabled
+    lmAutoRefreshMaterialList:
+      .: Litematica-AutoRefreshMaterialList
+      comment: |-
+        If the material list display mode is set to "render layer", a "refresh material list" task
+        will be automatically triggered whenever the render layer range changes
+        Note: Frequent changes in the render layer range may cause "refresh material list" tasks to accumulate,
+        which might require manual cleanup of redundant tasks.
     lmKeepMaterialListCrossDimension:
       .: Litematica-KeepMaterialListCrossDimension
       comment: Prevent the material list from becoming invalid when crossing dimensions

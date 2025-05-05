@@ -856,6 +856,13 @@ tweakermore:
     eprHideOnDebugHud:
       .: 额外玩家渲染-隐藏于调试界面
       comment: 在调试界面开启（那个按 F3 显示的东西）时，隐藏额外玩家渲染的渲染
+    lmAutoRefreshMaterialList:
+      .: Litematica-自动刷新材料列表
+      comment: |-
+        如果材料列表的显示模式为“渲染层”，则在渲染层范围发生变化时，
+        会自动触发一个“刷新材料列表”的任务
+        注意：渲染层范围的频繁变化可能会导致“刷新材料列表”任务堆积，
+        此时可能需要手动清理多余的任务
     lmKeepMaterialListCrossDimension:
       .: Litematica-跨维度保留材料列表
       comment: 在跨维度时，不要把当前材料列表无效化
