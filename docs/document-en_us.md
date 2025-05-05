@@ -1488,6 +1488,19 @@ i.e. particles from redstone dust, redstone torch, redstone repeater etc.
 - Default value: *no hotkey*, `false`
 
 
+### disableResourcePackListResetOnFailure
+
+Do not remove all selected resource packs when exception occurs during resource pack loading
+
+WARNING: It might crash the game on every launch due to invalid pack being loaded.
+
+If that happen, you need to manually edit the "options.txt" to remove the invalid packs
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean (Disable)
+- Default value: *no hotkey*, `false`
+
+
 ### disableSignTextLengthLimit
 
 Disable the text length limit based on character width when editing or rendering a sign block

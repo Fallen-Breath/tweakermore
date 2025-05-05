@@ -557,6 +557,13 @@ tweakermore:
         Disable all redstone particles
         i.e. particles from redstone dust, redstone torch, redstone repeater etc.
       pretty_name: Disable Redstone Particle
+    disableResourcePackListResetOnFailure:
+      .: disableResourcePackListResetOnFailure
+      comment: |-
+        Do not remove all selected resource packs when exception occurs during resource pack loading
+        WARNING: It might crash the game on every launch due to invalid pack being loaded.
+        If that happen, you need to manually edit the "options.txt" to remove the invalid packs
+      pretty_name: Disable Resource Pack List Reset On Failure
     disableSignTextLengthLimit:
       .: disableSignTextLengthLimit
       comment: |-

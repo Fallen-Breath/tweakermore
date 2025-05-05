@@ -1484,6 +1484,19 @@ schematicBlockPlacement的严格模式
 - 默认值: *无快捷键*, `false`
 
 
+### 禁用资源包加载失败时的资源包列表重置 (disableResourcePackListResetOnFailure)
+
+在加载资源包时发生异常时，不移除所有已选中的资源包
+
+警告：这可能会由于加载了无效的资源包，而导致游戏每次启动时都崩溃
+
+如果出现这种情况，你需要手动编辑 options.txt 文件以移除无效的资源包
+
+- 分类: MC修改
+- 类型: 带热键布尔值 (禁用)
+- 默认值: *无快捷键*, `false`
+
+
 ### 禁用告示牌文本长度限制 (disableSignTextLengthLimit)
 
 禁用在编辑或渲染告示牌时，告示牌基于字符长度的文本长度限制

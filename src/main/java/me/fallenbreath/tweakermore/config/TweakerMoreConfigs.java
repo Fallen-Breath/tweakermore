@@ -510,6 +510,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_REDSTONE_PARTICLE = newConfigBooleanHotkeyed("disableRedstoneParticle");
 
+	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_RESOURCE_PACK_LIST_RESET_ON_FAILURE = newConfigBooleanHotkeyed("disableResourcePackListResetOnFailure");
+
 	@Config(type = Config.Type.DISABLE, restriction = @Restriction(conflict = @Condition(value = ModIds.caxton, versionPredicates = "<0.3.0-beta.2")), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_SIGN_TEXT_LENGTH_LIMIT = newConfigBooleanHotkeyed("disableSignTextLengthLimit");
 

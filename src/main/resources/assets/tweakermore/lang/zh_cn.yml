@@ -557,6 +557,13 @@ tweakermore:
         禁用所有的红石粒子效果
         即来自红石粉、红石火把、红石中继器等的粒子效果
       pretty_name: 禁用红石粒子效果
+    disableResourcePackListResetOnFailure:
+      .: 禁用资源包加载失败时的资源包列表重置
+      comment: |-
+        在加载资源包时发生异常时，不移除所有已选中的资源包
+        警告：这可能会由于加载了无效的资源包，而导致游戏每次启动时都崩溃
+        如果出现这种情况，你需要手动编辑 options.txt 文件以移除无效的资源包
+      pretty_name: 禁用资源包加载失败时的资源包列表重置
     disableSignTextLengthLimit:
       .: 禁用告示牌文本长度限制
       comment: |-
