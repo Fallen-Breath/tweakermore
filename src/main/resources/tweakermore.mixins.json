@@ -165,6 +165,8 @@
     "tweaks.mc_tweaks.preciseItemEntityModel.ItemRendererMixin",
     "tweaks.mc_tweaks.preciseItemEntityModel.ModelTransformationMixin",
     "tweaks.mc_tweaks.prioritizedCommandSuggestions.CommandSuggestorMixin",
+    "tweaks.mc_tweaks.rememberServerListScrollPositionOnRefresh.MultiplayerScreenAccessor",
+    "tweaks.mc_tweaks.rememberServerListScrollPositionOnRefresh.MultiplayerScreenMixin",
     "tweaks.mc_tweaks.scoreboardSideBarScale.InGameHudMixin",
     "tweaks.mc_tweaks.shulkerItemContentHint.ItemRendererAccessor",
     "tweaks.mc_tweaks.shulkerItemContentHint.ItemRendererMixin",

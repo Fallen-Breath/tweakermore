@@ -732,6 +732,9 @@ tweakermore:
         此列表中的命令建议将在命令补全列表中更靠前
         你可以将那些你总是喜欢选择的命令补全放在此列表中
         它们将总会位于指令补全列表的首位
+    rememberServerListScrollPositionOnRefresh:
+      .: 刷新服务器列表时记住滚动位置
+      comment: 刷新多人服务器列表后，不要重置滚动位置
     scoreboardSideBarScale:
       .: 计分板侧边栏缩放
       comment: 将计分板侧边栏按照给定参数进行缩放显示

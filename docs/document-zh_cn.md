@@ -1914,6 +1914,15 @@ FOV覆盖的开关
 ![prioritizedCommandSuggestions](assets/prioritizedCommandSuggestions.png)
 
 
+### 刷新服务器列表时记住滚动位置 (rememberServerListScrollPositionOnRefresh)
+
+刷新多人服务器列表后，不要重置滚动位置
+
+- 分类: MC修改
+- 类型: 布尔值 (通用)
+- 默认值: `false`
+
+
 ### 计分板侧边栏缩放 (scoreboardSideBarScale)
 
 将计分板侧边栏按照给定参数进行缩放显示

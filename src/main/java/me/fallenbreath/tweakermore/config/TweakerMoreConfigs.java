@@ -616,6 +616,9 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigStringList PRIORITIZED_COMMAND_SUGGESTIONS = newConfigStringList("prioritizedCommandSuggestions", ImmutableList.of());
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean REMEMBER_SERVER_LIST_SCROLL_POSITION_ON_REFRESH = newConfigBoolean("rememberServerListScrollPositionOnRefresh", false);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigDouble SCOREBOARD_SIDE_BAR_SCALE = newConfigDouble("scoreboardSideBarScale", 1, 0.001, 2);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)

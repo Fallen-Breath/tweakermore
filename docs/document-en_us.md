@@ -1918,6 +1918,15 @@ so they will always be at the head of the command completion list
 ![prioritizedCommandSuggestions](assets/prioritizedCommandSuggestions.png)
 
 
+### rememberServerListScrollPositionOnRefresh
+
+Don't reset the scroll position after refreshing the multiplayer server list
+
+- Category: MC Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+
+
 ### scoreboardSideBarScale
 
 Scale the scoreboard side bar hud with given factor
