@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MultiplayerScreen.class)
-public class MultiplayerScreenMixin
+public abstract class MultiplayerScreenMixin
 {
 	@Shadow
 	private ServerList serverList;
@@ -41,7 +41,7 @@ public class MultiplayerScreenMixin
 			method = "connect(Lnet/minecraft/client/network/ServerInfo;)V",
 			at = @At("HEAD")
 	)
-	private void w(ServerInfo entry, CallbackInfo ci)
+	private void moveConnectedServerEntryToTop_recordServerInfoIndex(ServerInfo entry, CallbackInfo ci)
 	{
 		if (!TweakerMoreConfigs.MOVE_CONNECTED_SERVER_ENTRY_TO_TOP.getBooleanValue())
 		{
