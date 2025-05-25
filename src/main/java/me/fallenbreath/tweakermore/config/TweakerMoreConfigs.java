@@ -577,6 +577,9 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigInteger MAX_CHAT_HUD_HEIGHT = newConfigInteger("maxChatHudHeight", 160, 160, 1000);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean MOVE_CONNECTED_SERVER_ENTRY_TO_TOP = newConfigBoolean("moveConnectedServerEntryToTop", false);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean MOVING_PISTON_BLOCK_SELECTABLE = newConfigBoolean("movingPistonBlockSelectable", false);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)

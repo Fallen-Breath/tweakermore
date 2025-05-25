@@ -668,6 +668,9 @@ tweakermore:
     maxChatHudHeight:
       .: 最大聊天界面高度
       comment: 聊天界面高度的最大值
+    moveConnectedServerEntryToTop:
+      .: 将已连接服务器条目移至顶部
+      comment: 在连上服务器时，把相应的服务器条目移到服务器列表的顶部
     movingPistonBlockSelectable:
       .: 移动的活塞可被选择
       comment: |-

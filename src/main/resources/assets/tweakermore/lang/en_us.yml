@@ -668,6 +668,9 @@ tweakermore:
     maxChatHudHeight:
       .: maxChatHudHeight
       comment: The maximum height of the chat hud
+    moveConnectedServerEntryToTop:
+      .: moveConnectedServerEntryToTop
+      comment: When connected to a server, move the corresponding server list entry to the top of the server list
     movingPistonBlockSelectable:
       .: movingPistonBlockSelectable
       comment: |-

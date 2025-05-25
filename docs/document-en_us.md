@@ -1752,6 +1752,15 @@ The maximum height of the chat hud
 - Maximum value: `1000`
 
 
+### moveConnectedServerEntryToTop
+
+When connected to a server, move the corresponding server list entry to the top of the server list
+
+- Category: MC Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+
+
 ### movingPistonBlockSelectable
 
 Make the moving piston block (b36) selectable, so you can interact with it easily
