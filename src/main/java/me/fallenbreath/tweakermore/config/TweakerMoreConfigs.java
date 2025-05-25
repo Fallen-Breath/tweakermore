@@ -217,6 +217,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble INFO_VIEW_BEAM_ANGLE = newConfigDouble("infoViewBeamAngle", 40, 1, 120);
 
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(ModIds.tweakeroo)), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW_FOLLOW_FREECAM = newConfigBooleanHotkeyed("infoViewFollowFreecam", false);
+
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble INFO_VIEW_TARGET_DISTANCE = newConfigDouble("infoViewTargetDistance", 8, 4, 32);
 

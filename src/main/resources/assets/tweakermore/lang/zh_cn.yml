@@ -129,6 +129,9 @@ tweakermore:
         在信息展示渲染策略 "光束" 中使用的初始圆锥角度
         那些位于玩家视线向量给定角度内的方块信息将被渲染，就像手电筒一样
         使用角度制
+    infoViewFollowFreecam:
+      .: 信息展示设置-跟随Freecam
+      comment: 在tweakeroo的freecam开启时，跟随freecam的相机实体来渲染信息展示相关特性
     infoViewTargetDistance:
       .: 信息展示设置-目标距离
       comment: 信息展示目标的最大距离

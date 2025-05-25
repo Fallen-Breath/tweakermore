@@ -129,6 +129,9 @@ tweakermore:
         The angle of the initialed cone used in info view strategy "Beam"
         Info of blocks within the given degree to player's slight vector will be shown, just like a flashlight
         Using degree measure
+    infoViewFollowFreecam:
+      .: infoViewFollowFreecam
+      comment: Wen free camera from tweakeroo is enabled, use freecam's camera to render all info view features
     infoViewTargetDistance:
       .: infoViewTargetDistance
       comment: The maximum target distance of info view

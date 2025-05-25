@@ -26,11 +26,13 @@ import com.mojang.datafixers.util.Pair;
 import fi.dy.masa.malilib.util.WorldUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.InfoViewer;
+import me.fallenbreath.tweakermore.util.EntityUtils;
 import me.fallenbreath.tweakermore.util.FabricUtils;
 import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -55,13 +57,14 @@ public class InfoViewCachedRenderer
 		MinecraftClient mc = MinecraftClient.getInstance();
 		World world = WorldUtils.getBestWorld(mc);
 		World clientWorld = mc.world;
-		if (world == null || clientWorld == null || mc.player == null)
+		ClientPlayerEntity cameraPlayer = InfoViewCameraUtils.getCameraEntity();
+		if (world == null || clientWorld == null || cameraPlayer == null)
 		{
 			return;
 		}
 
-		Vec3d camPos = mc.player.getCameraPosVec(RenderUtils.tickDelta);
-		Vec3d camVec = mc.player.getRotationVec(RenderUtils.tickDelta);
+		Vec3d camPos = cameraPlayer.getCameraPosVec(RenderUtils.tickDelta);
+		Vec3d camVec = cameraPlayer.getRotationVec(RenderUtils.tickDelta);
 
 		long now = System.nanoTime();
 		long ups = TweakerMoreConfigs.INFO_VIEW_SCANNING_PER_SECOND.getIntegerValue();

@@ -491,6 +491,18 @@ Scale of the displayed text rendered by infoViewComparator
 - Maximum value: `3.0`
 
 
+### infoViewFollowFreecam
+
+Wen free camera from tweakeroo is enabled, use freecam's camera to render all info view features
+
+- Category: Features
+- Type: hotkey togglable boolean (Generic)
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
+
+
 ### infoViewGrowthSpeed
 
 Display growth speed of crop blocks, weathering speed of copper blocks, and related information

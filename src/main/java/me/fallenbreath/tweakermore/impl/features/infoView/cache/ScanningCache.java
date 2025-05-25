@@ -26,6 +26,7 @@ import com.mojang.datafixers.util.Pair;
 import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -45,12 +46,12 @@ public class ScanningCache
 	@Nullable
 	public HitResult crossHairTarget(double reach)
 	{
-		MinecraftClient mc = MinecraftClient.getInstance();
-		if (mc.player == null)
+		ClientPlayerEntity camera = InfoViewCameraUtils.getCameraEntity();
+		if (camera == null)
 		{
 			return null;
 		}
-		return this.rayTraceCache.computeIfAbsent(reach, k -> mc.player.rayTrace(reach, RenderUtils.tickDelta, false));
+		return this.rayTraceCache.computeIfAbsent(reach, k -> camera.rayTrace(reach, RenderUtils.tickDelta, false));
 	}
 
 	@Nullable

@@ -489,6 +489,18 @@ TweakerMore提供的新功能
 - 最大值: `3.0`
 
 
+### 信息展示设置-跟随Freecam (infoViewFollowFreecam)
+
+在tweakeroo的freecam开启时，跟随freecam的相机实体来渲染信息展示相关特性
+
+- 分类: 功能
+- 类型: 带热键布尔值 (通用)
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Tweakeroo (`tweakeroo`)
+
+
 ### 信息展示-生长速度 (infoViewGrowthSpeed)
 
 展示作物类方块的生长速度、铜块的锈蚀速度，以及相关的信息
