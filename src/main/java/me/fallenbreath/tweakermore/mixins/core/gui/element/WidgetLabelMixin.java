@@ -143,8 +143,11 @@ public abstract class WidgetLabelMixin extends WidgetBase
 			if (this.centered)
 			{
 				this.drawCenteredStringWithShadow(
+						//#if MC >= 12106
+						//$$ matrixStackOrDrawContext,
+						//#endif
 						(int)x, (int)y, color, originText
-						//#if MC >= 11600
+						//#if 11600 <= MC && MC < 12106
 						//$$ , matrixStackOrDrawContext
 						//#endif
 				);
@@ -152,8 +155,11 @@ public abstract class WidgetLabelMixin extends WidgetBase
 			else
 			{
 				this.drawStringWithShadow(
+						//#if MC >= 12106
+						//$$ matrixStackOrDrawContext,
+						//#endif
 						(int)x, (int)y, color, originText
-						//#if MC >= 11600
+						//#if 11600 <= MC && MC < 12106
 						//$$ , matrixStackOrDrawContext
 						//#endif
 				);

@@ -20,6 +20,7 @@
 
 package me.fallenbreath.tweakermore.impl.mod_tweaks.lmRemoveEntityCommand;
 
+import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.tree.CommandNode;
 import fi.dy.masa.malilib.config.options.ConfigString;
 import fi.dy.masa.malilib.gui.Message;
@@ -61,7 +62,12 @@ public class LitematicaRemoveEntityCommandOverrider
 		ClientPlayNetworkHandler networkHandler = MinecraftClient.getInstance().getNetworkHandler();
 		if (networkHandler != null)
 		{
-			CommandNode<CommandSource> node = networkHandler.getCommandDispatcher().findNode(Collections.singleton(command));
+			//#if MC >= 12106
+			//$$ var node =  // the type is CommandNode<ClientCommandSource>
+			//#else
+			CommandNode<CommandSource> node =
+			//#endif
+					networkHandler.getCommandDispatcher().findNode(Collections.singleton(command));
 			return Optional.of(node != null && node.canUse(networkHandler.getCommandSource()));
 		}
 		return Optional.empty();

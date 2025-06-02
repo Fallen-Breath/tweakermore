@@ -43,6 +43,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Optional;
 import java.util.UUID;
 
+//#if MC >= 12106
+//$$ import me.fallenbreath.tweakermore.TweakerMoreMod;
+//$$ import net.minecraft.inventory.StackWithSlot;
+//$$ import net.minecraft.storage.NbtReadView;
+//$$ import net.minecraft.util.ErrorReporter;
+//#endif
+
 @Mixin(EnderChestItemFetcher.class)
 public abstract class EnderChestItemFetcherMixin
 {
@@ -83,6 +90,17 @@ public abstract class EnderChestItemFetcherMixin
 							CACHE.keepAlive(uuid);
 							future.thenAccept(nbt -> {
 								// ref: net.minecraft.entity.player.PlayerEntity#readCustomDataFromTag
+
+								//#if MC >= 12106
+								//$$ try (ErrorReporter.Logging logging = new ErrorReporter.Logging(player.getErrorReporterContext(), TweakerMoreMod.LOGGER))
+								//$$ {
+								//$$ 	if (nbt != null && EnderItemNbtUtils.containsList(nbt, "EnderItems"))
+								//$$ 	{
+								//$$ 		var nbtView = NbtReadView.create(logging, player.getWorld().getRegistryManager(), nbt);
+								//$$ 		enderChestInventory.readData(nbtView.getTypedListView("EnderItems", StackWithSlot.CODEC));
+								//$$ 	}
+								//$$ }
+								//#else
 								if (nbt != null && EnderItemNbtUtils.containsList(nbt, "EnderItems"))
 								{
 									enderChestInventory.readTags(
@@ -92,6 +110,7 @@ public abstract class EnderChestItemFetcherMixin
 											//#endif
 									);
 								}
+								//#endif
 							});
 						});
 			}

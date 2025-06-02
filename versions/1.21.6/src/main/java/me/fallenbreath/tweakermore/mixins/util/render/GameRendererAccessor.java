@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2025  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,21 +18,16 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableDarknessEffect;
+package me.fallenbreath.tweakermore.mixins.util.render;
 
-import me.fallenbreath.conditionalmixin.api.annotation.Condition;
-import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
-import me.fallenbreath.tweakermore.util.ModIds;
-import me.fallenbreath.tweakermore.util.mixin.DummyClass;
+import net.minecraft.client.gui.render.state.GuiRenderState;
+import net.minecraft.client.render.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
 
-/**
- * mc1.14.4 ~ mc1.19.4: subproject 1.15.2 (main project)        <--------
- * mc1.19.4 ~ mc1.21.5: subproject 1.19.4
- * mc1.21.6+          : subproject 1.21.6
- */
-@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.19"))
-@Mixin(DummyClass.class)
-public abstract class BackgroundRendererStatusEffectFogModifierMixin
+@Mixin(GameRenderer.class)
+public interface GameRendererAccessor
 {
+	@Accessor
+	GuiRenderState getGuiState();
 }

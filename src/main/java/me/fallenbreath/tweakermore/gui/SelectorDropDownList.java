@@ -130,6 +130,16 @@ public class SelectorDropDownList<T extends IStringValue> extends WidgetDropDown
 	 * Hover text rendering logic reference: {@link fi.dy.masa.malilib.gui.button.ButtonBase#postRenderHovered}
 	 */
 	@Override
+	//#if MC >= 12106
+	//$$ public void postRenderHovered(DrawContext drawContext, int mouseX, int mouseY, boolean selected)
+	//$$ {
+	//$$ 	super.postRenderHovered(drawContext, mouseX, mouseY, selected);
+	//$$ 	if (this.hoverText != null && this.isMouseOver(mouseX, mouseY) && !this.isOpen)
+	//$$ 	{
+	//$$ 		RenderUtils.drawHoverText(drawContext, mouseX, mouseY, Collections.singletonList(this.hoverText.getStringValue()));
+	//$$ 	}
+	//$$ }
+	//#else
 	public void postRenderHovered(
 			int mouseX, int mouseY, boolean selected
 			//#if MC >= 12000
@@ -161,4 +171,5 @@ public class SelectorDropDownList<T extends IStringValue> extends WidgetDropDown
 			//#endif
 		}
 	}
+	//#endif
 }

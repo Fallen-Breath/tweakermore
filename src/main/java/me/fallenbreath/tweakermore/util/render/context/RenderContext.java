@@ -27,6 +27,10 @@ import net.minecraft.client.util.math.Matrix4f;
 import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
 import org.jetbrains.annotations.NotNull;
 
+//#if MC >= 12106
+//$$ import me.fallenbreath.tweakermore.util.render.matrix.Joml3x2fMatrixStack;
+//#endif
+
 //#if MC >= 12006
 //$$ import me.fallenbreath.tweakermore.util.render.matrix.JomlMatrixStack;
 //$$ import org.joml.Matrix4fStack;
@@ -48,11 +52,27 @@ public interface RenderContext
 	)
 	{
 		//#if MC >= 12000
-		//$$ return new RenderContextImpl(RenderContextUtils.createDrawContext(matrixStack), new McMatrixStack(matrixStack));
+		//$$ return new RenderContextImpl(null, new McMatrixStack(matrixStack));
 		//#elseif MC >= 11600
 		//$$ return new RenderContextImpl(new McMatrixStack(matrixStack));
 		//#else
 		return new RenderContextImpl(new McMatrixStack());
+		//#endif
+	}
+
+	// for BeaconEffectRenderer, which is the only caller that needs to access an auto-create drawContext
+	static RenderContext createDefault()
+	{
+		//#if MC >= 12106
+		//$$ var matrixStack = new MatrixStack();
+		//$$ return new RenderContextImpl(RenderContextUtils.createDefaultDrawContext(), new McMatrixStack(matrixStack));
+		//#elseif MC >= 12000
+		//$$ var matrixStack = new MatrixStack();
+		//$$ return new RenderContextImpl(RenderContextUtils.createDrawContext(new MatrixStack()), new McMatrixStack(matrixStack));
+		//#elseif MC >= 11600
+		//$$ return new RenderContextImpl(new McMatrixStack(new MatrixStack()));
+		//#else
+		return of();
 		//#endif
 	}
 
@@ -64,10 +84,12 @@ public interface RenderContext
 			//#endif
 	)
 	{
-		//#if MC >= 12006
-		//$$ return new WorldRenderContextImpl(RenderContextUtils.createDrawContext(new MatrixStack()), new JomlMatrixStack(matrixStack));
+		//#if MC >= 12106
+		//$$ return new WorldRenderContextImpl(null, new JomlMatrixStack(matrixStack));
+		//#elseif MC >= 12006
+		//$$ return new WorldRenderContextImpl(null, new JomlMatrixStack(matrixStack));
 		//#elseif MC >= 12000
-		//$$ return new WorldRenderContextImpl(RenderContextUtils.createDrawContext(matrixStack), new McMatrixStack(matrixStack));
+		//$$ return new WorldRenderContextImpl(null, new McMatrixStack(matrixStack));
 		//#elseif MC >= 11600
 		//$$ return new WorldRenderContextImpl(new McMatrixStack(matrixStack));
 		//#else
@@ -78,14 +100,21 @@ public interface RenderContext
 	//#if MC >= 12000
 	//$$ static RenderContext of(@NotNull DrawContext drawContext)
 	//$$ {
-	//$$ 	return new RenderContextImpl(drawContext, new McMatrixStack(drawContext.getMatrices()));
+	//$$ 	return new RenderContextImpl(
+	//$$ 			drawContext,
+	//$$ 			//#if MC >= 12106
+	//$$ 			//$$ new Joml3x2fMatrixStack(drawContext.getMatrices())
+	//$$ 			//#else
+	//$$ 			new McMatrixStack(drawContext.getMatrices())
+	//$$ 			//#endif
+	//$$ 	);
 	//$$ }
 	//#endif
 
 	//#if MC >= 12006
 	//$$ static RenderContext of(@NotNull Matrix4fStack matrixStack)
 	//$$ {
-	//$$ 	return new RenderContextImpl(RenderContextUtils.createDrawContext(new MatrixStack()), new JomlMatrixStack(matrixStack));
+	//$$ 	return new RenderContextImpl(null, new JomlMatrixStack(matrixStack));
 	//$$ }
 	//#endif
 

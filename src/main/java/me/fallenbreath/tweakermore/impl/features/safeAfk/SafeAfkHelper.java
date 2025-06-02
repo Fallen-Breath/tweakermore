@@ -33,6 +33,10 @@ import net.minecraft.text.BaseText;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+//#if MC >= 12106
+//$$ import net.minecraft.text.Text;
+//#endif
+
 public class SafeAfkHelper
 {
 	private static long lastHurtMs = 0;
@@ -71,8 +75,14 @@ public class SafeAfkHelper
 					);
 					resetHurtTime();
 					mc.execute(() -> {
+						//#if MC >= 12106
+						//$$ // ref: mc1.21.5 net.minecraft.client.world.ClientWorld#disconnect
+						//$$ mc.world.disconnect(Text.translatable("multiplayer.status.quitting"));
+						//$$ mc.disconnectWithProgressScreen();
+						//#else
 						mc.world.disconnect();
 						mc.disconnect();
+						//#endif
 						mc.openScreen(new DisconnectedScreen(
 								new MultiplayerScreen(new TitleScreen()),
 								//#if MC >= 11600

@@ -93,9 +93,14 @@ public class CommandBlockContentRenderer extends CommonScannerInfoViewer
 		{
 			stringReader.read();
 		}
-		ParseResults<CommandSource> parse = player.networkHandler.getCommandDispatcher().parse(
-				stringReader, player.networkHandler.getCommandSource()
-		);
+		//#if MC >= 12106
+		//$$ var parse =  // the type is ParseResults<ClientCommandSource>
+		//#else
+		ParseResults<CommandSource> parse =
+		//#endif
+				player.networkHandler.getCommandDispatcher().parse(
+						stringReader, player.networkHandler.getCommandSource()
+				);
 
 		// trim command
 		String trimmedCommand = TextRenderingUtil.trim(command, MAX_WIDTH);

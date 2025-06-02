@@ -20,11 +20,10 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.shulkerItemContentHint;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxItemContentHint.ShulkerBoxItemContentHintRenderer;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -34,16 +33,34 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ItemRendererMixin
 {
 	@Inject(
+			//#if MC >= 12106
+			//$$ method = "drawItem(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;III)V",
+			//#else
 			method = "drawItem(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;IIII)V",
+			//#endif
 			at = @At(
 					value = "INVOKE",
+					//#if MC >= 12106
+					//$$ target = "Lnet/minecraft/client/gui/render/state/GuiRenderState;addItem(Lnet/minecraft/client/gui/render/state/ItemGuiElementRenderState;)V",
+					//#else
 					target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V",
+					//#endif
 					shift = At.Shift.AFTER
 			)
 	)
-	private void shulkerItemContentHint_impl(LivingEntity entity, World world, ItemStack itemStack, int x, int y, int seed, int z, CallbackInfo ci)
+	private void shulkerItemContentHint_impl(
+			CallbackInfo ci,
+			@Local(argsOnly = true) ItemStack itemStack,
+			@Local(argsOnly = true, ordinal = 0) int x,
+			@Local(argsOnly = true, ordinal = 1) int y
+	)
 	{
 		DrawContext self = (DrawContext)(Object)this;
-		ShulkerBoxItemContentHintRenderer.render(self.getMatrices(), self, itemStack, x, y);
+		ShulkerBoxItemContentHintRenderer.render(
+				//#if MC < 12106
+				self.getMatrices(),
+				//#endif
+				self, itemStack, x, y
+		);
 	}
 }

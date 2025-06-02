@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2025  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -20,48 +20,39 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableDarknessEffect;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
+import net.minecraft.client.render.fog.DarknessEffectFogModifier;
 import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.registry.entry.RegistryEntry;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-
-//#if MC >= 12006
-//$$ import net.minecraft.registry.entry.RegistryEntry;
-//#endif
 
 /**
  * mc1.14.4 ~ mc1.19.4: subproject 1.15.2 (main project)
- * mc1.19.4 ~ mc1.21.5: subproject 1.19.4        <--------
- * mc1.21.6+          : subproject 1.21.6
+ * mc1.19.4 ~ mc1.21.5: subproject 1.19.4
+ * mc1.21.6+          : subproject 1.21.6        <--------
  */
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.19"))
-@Mixin(targets = "net.minecraft.client.render.BackgroundRenderer$StatusEffectFogModifier")
-public interface BackgroundRendererStatusEffectFogModifierMixin
+@Mixin(DarknessEffectFogModifier.class)
+public abstract class BackgroundRendererStatusEffectFogModifierMixin
 {
-	@Shadow
-	//#if MC >= 12006
-	//$$ RegistryEntry<StatusEffect>
-	//#else
-	StatusEffect
-	//#endif
-	getStatusEffect();
-
-	@ModifyReturnValue(method = "shouldApply", at = @At("TAIL"))
-	default boolean disableDarknessEffect_doNotApplyIfItIsDarknessEffect(boolean shouldApply)
+	@ModifyExpressionValue(
+			method = "applyDarknessModifier",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/client/render/fog/DarknessEffectFogModifier;getStatusEffect()Lnet/minecraft/registry/entry/RegistryEntry;"
+			)
+	)
+	private RegistryEntry<StatusEffect> disableDarknessEffect_doNotApplyIfItIsDarknessEffect(RegistryEntry<StatusEffect> statusEffect)
 	{
 		if (TweakerMoreConfigs.DISABLE_DARKNESS_EFFECT.getBooleanValue())
 		{
-			if (this.getStatusEffect() == StatusEffects.DARKNESS)
-			{
-				shouldApply = false;
-			}
+			statusEffect = null;
 		}
-		return shouldApply;
+		return statusEffect;
 	}
 }

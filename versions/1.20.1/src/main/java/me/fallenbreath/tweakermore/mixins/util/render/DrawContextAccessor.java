@@ -21,10 +21,15 @@
 package me.fallenbreath.tweakermore.mixins.util.render;
 
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.gen.Accessor;
+
+//#if MC >= 12106
+//$$ import org.joml.Matrix3x2fStack;
+//#else
+import net.minecraft.client.util.math.MatrixStack;
+//#endif
 
 // used in mc1.20+
 @Mixin(DrawContext.class)
@@ -32,5 +37,11 @@ public interface DrawContextAccessor
 {
 	@Mutable
 	@Accessor
-	void setMatrices(MatrixStack matrices);
+	void setMatrices(
+			//#if MC >= 12106
+			//$$ Matrix3x2fStack matrices
+			//#else
+			MatrixStack matrices
+			//#endif
+	);
 }

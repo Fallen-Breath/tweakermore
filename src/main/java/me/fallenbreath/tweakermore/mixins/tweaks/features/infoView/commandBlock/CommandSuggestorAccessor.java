@@ -21,9 +21,14 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.commandBlock;
 
 import com.mojang.brigadier.ParseResults;
-import net.minecraft.server.command.CommandSource;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
+
+//#if MC >= 12106
+//$$ import net.minecraft.client.network.ClientCommandSource;
+//#else
+import net.minecraft.server.command.CommandSource;
+//#endif
 
 //#if MC >= 11600
 //$$ import net.minecraft.text.OrderedText;
@@ -60,7 +65,14 @@ public interface CommandSuggestorAccessor
 	//#else
 	String
 	//#endif
-	invokeHighlight(ParseResults<CommandSource> parse, String original, int firstCharacterIndex)
+	invokeHighlight(
+			//#if MC >= 12106
+			//$$ ParseResults<ClientCommandSource> parse,
+			//#else
+			ParseResults<CommandSource> parse,
+			//#endif
+			String original, int firstCharacterIndex
+	)
 	{
 		throw new RuntimeException();
 	}

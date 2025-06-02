@@ -62,13 +62,17 @@ public class AutoContainerProcessorHintRenderer implements TweakerMoreIRenderer
 		lines.add(0, GuiBase.TXT_UNDERLINE + fi.dy.masa.malilib.util.StringUtils.translate("tweakermore.impl.containerProcessorHint.title"));
 
 		RenderUtils.renderText(
+				//#if MC >= 12106
+				//$$ context.getGuiDrawer(),
+				//#endif
 				0, 0,
 				TweakerMoreConfigs.CONTAINER_PROCESSOR_HINT_SCALE.getDoubleValue(),
 				0xFFFFFFFF, 0x80000000,
 				(HudAlignment)TweakerMoreConfigs.CONTAINER_PROCESSOR_HINT_POS.getOptionListValue(),
 				false, true,
 				lines
-				//#if MC >= 12000
+				//#if MC >= 12106
+				//#elseif MC >= 12000
 				//$$ , context.getGuiDrawer()
 				//#elseif MC >= 11600
 				//$$ , context.getMatrixStack().asMcRaw()

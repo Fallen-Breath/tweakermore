@@ -315,8 +315,11 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 	)
 	{
 		this.hoveringWidgets.forEach(widget -> widget.render(
+				//#if MC >= 12106
+				//$$ matrixStackOrDrawContext,
+				//#endif
 				mouseX, mouseY, widget.isMouseOver(mouseX, mouseY)
-				//#if MC >= 11600
+				//#if 11600 <= MC && MC < 12106
 				//$$ , matrixStackOrDrawContext
 				//#endif
 		));

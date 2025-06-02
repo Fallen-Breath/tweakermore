@@ -26,6 +26,11 @@ import com.mojang.blaze3d.platform.DestFactor;
 import com.mojang.blaze3d.platform.SourceFactor;
 import com.mojang.blaze3d.systems.RenderSystem;
 
+/**
+ * mc1.14           : subproject 1.14.4
+ * mc1.15 ~ mc1.21.4: subproject 1.15.2 (main project)
+ * mc1.21.5+        : subproject 1.21.5        <--------
+ */
 public class RenderGlobals
 {
 	private RenderGlobals() {}
@@ -43,11 +48,6 @@ public class RenderGlobals
 	public static void depthMask(boolean mask)
 	{
 		GlStateManager._depthMask(mask);
-	}
-
-	public static void color4f(float red, float green, float blue, float alpha)
-	{
-		RenderSystem.setShaderColor(red, green, blue, alpha);
 	}
 
 	public static void enableBlend()

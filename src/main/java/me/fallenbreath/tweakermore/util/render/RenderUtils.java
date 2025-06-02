@@ -26,6 +26,10 @@ import net.minecraft.client.font.TextRenderer;
 
 import java.util.Objects;
 
+//#if MC >= 11904
+//$$ import org.joml.Matrix3x2f;
+//#endif
+
 //#if MC >= 12100
 //$$ import net.minecraft.client.render.RenderLayer;
 //$$ import net.minecraft.client.util.BufferAllocator;
@@ -120,6 +124,15 @@ public class RenderUtils
 			this.renderContext.scale(factor, factor, 1);
 			this.renderContext.translate(anchorX / factor, anchorY / factor, 0);
 		}
+
+		//#if MC >= 11904
+		//$$ public void apply(Matrix3x2f matrix)
+		//$$ {
+		//$$ 	matrix.translate((float)(-anchorX * factor), (float)(-anchorY * factor));
+		//$$ 	matrix.scale((float)factor, (float)factor);
+		//$$ 	matrix.translate((float)(anchorX / factor), (float)(anchorY / factor));
+		//$$ }
+		//#endif
 
 		public void restore()
 		{

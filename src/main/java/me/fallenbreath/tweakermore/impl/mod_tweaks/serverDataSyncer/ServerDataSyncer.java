@@ -42,6 +42,11 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
 
+//#if MC >= 12106
+//$$ import net.minecraft.storage.NbtReadView;
+//$$ import net.minecraft.util.ErrorReporter;
+//#endif
+
 public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHandler
 {
 	private static final ServerDataSyncer INSTANCE = new ServerDataSyncer();
@@ -187,7 +192,14 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 					// so a try-catch is required here
 					try
 					{
+						//#if MC >= 12106
+						//$$ try (ErrorReporter.Logging logging = new ErrorReporter.Logging(entity.getErrorReporterContext(), TweakerMoreMod.LOGGER))
+						//$$ {
+						//$$ 	entity.readData(NbtReadView.create(logging, entity.getRegistryManager(), nbt));
+						//$$ }
+						//#else
 						entity.fromTag(nbt);
+						//#endif
 						if (restorer != null)
 						{
 							restorer.restore();
@@ -236,7 +248,12 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 						BlockPos pos = blockEntity.getPos();
 						try
 						{
-							//#if MC >= 12006
+							//#if MC >= 12106
+							//$$ try (ErrorReporter.Logging logging = new ErrorReporter.Logging(blockEntity.getReporterContext(), TweakerMoreMod.LOGGER))
+							//$$ {
+							//$$ 	blockEntity.read(NbtReadView.create(logging, world.getRegistryManager(), nbt));
+							//$$ }
+							//#elseif MC >= 12006
 							//$$ blockEntity.read(nbt, blockEntity.getWorld().getRegistryManager());
 							//#elseif MC >= 11700
 							//$$ blockEntity.readNbt(nbt);

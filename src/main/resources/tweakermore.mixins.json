@@ -168,8 +168,10 @@
     "tweaks.mc_tweaks.rememberServerListScrollPositionOnRefresh.MultiplayerScreenAccessor",
     "tweaks.mc_tweaks.rememberServerListScrollPositionOnRefresh.MultiplayerScreenMixin",
     "tweaks.mc_tweaks.scoreboardSideBarScale.InGameHudMixin",
+    "tweaks.mc_tweaks.shulkerItemContentHint.DrawContextAccessor",
     "tweaks.mc_tweaks.shulkerItemContentHint.ItemRendererAccessor",
     "tweaks.mc_tweaks.shulkerItemContentHint.ItemRendererMixin",
+    "tweaks.mc_tweaks.shulkerItemContentHint.TextGuiElementRenderStateMixin",
     "tweaks.mc_tweaks.signEditScreenCancelButton.SignEditScreenMixin",
     "tweaks.mc_tweaks.signEditScreenCancelCommon.SignBlockEntityAccessor",
     "tweaks.mc_tweaks.signEditScreenCancelCommon.SignEditScreenAccessor",
@@ -241,6 +243,7 @@
     "util.event.ClientPlayNetworkHandlerMixin",
     "util.qol.MinecraftClientMixin",
     "util.render.DrawContextAccessor",
+    "util.render.GameRendererAccessor",
     "util.render.GameRendererMixin",
     "util.render.TextHandlerAccessor"
   ],

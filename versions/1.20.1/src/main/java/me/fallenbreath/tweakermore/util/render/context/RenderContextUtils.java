@@ -20,18 +20,31 @@
 
 package me.fallenbreath.tweakermore.util.render.context;
 
-import me.fallenbreath.tweakermore.mixins.util.render.DrawContextAccessor;
-import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.math.MatrixStack;
 
+//#if MC >= 12106
+//$$ import me.fallenbreath.tweakermore.mixins.util.render.GameRendererAccessor;
+//#else
+import me.fallenbreath.tweakermore.util.render.RenderUtils;
+import me.fallenbreath.tweakermore.mixins.util.render.DrawContextAccessor;
+//#endif
+
 class RenderContextUtils
 {
+	//#if MC >= 12106
+	//$$ public static DrawContext createDefaultDrawContext()
+	//$$ {
+	//$$ 	MinecraftClient mc = MinecraftClient.getInstance();
+	//$$ 	return new DrawContext(MinecraftClient.getInstance(), ((GameRendererAccessor)mc.gameRenderer).getGuiState());
+	//$$ }
+	//#else
 	public static DrawContext createDrawContext(MatrixStack matrixStack)
 	{
 		var drawContext = new DrawContext(MinecraftClient.getInstance(), RenderUtils.getVertexConsumer());
 		((DrawContextAccessor)drawContext).setMatrices(matrixStack);
 		return drawContext;
 	}
+	//#endif
 }

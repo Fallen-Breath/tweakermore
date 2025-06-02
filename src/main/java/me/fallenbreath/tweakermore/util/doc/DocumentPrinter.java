@@ -321,7 +321,7 @@ public class DocumentPrinter
 		}
 		catch (IOException e)
 		{
-			TweakerMoreMod.LOGGER.error(e);
+			TweakerMoreMod.LOGGER.error("Print doc error", e);;
 		}
 	}
 }
