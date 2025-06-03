@@ -34,7 +34,6 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.AbstractSignEditScreen;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -42,7 +41,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.List;
 
@@ -59,7 +57,7 @@ public abstract class SignEditScreenMixin extends Screen
 	@Shadow @Final private String[] messages;
 
 	@Shadow private SignText text;
-	private boolean filtered$TKM;
+	@Unique private boolean filtered$TKM;
 
 	protected SignEditScreenMixin(Text title)
 	{
@@ -97,10 +95,13 @@ public abstract class SignEditScreenMixin extends Screen
 			method = "renderSignText",
 			at = @At(
 					value = "INVOKE",
+					//#if MC >= 12106
+					//$$ target = "Lnet/minecraft/client/gui/DrawContext;drawText(Lnet/minecraft/client/font/TextRenderer;Ljava/lang/String;IIIZ)V",
+					//#else
 					target = "Lnet/minecraft/client/gui/DrawContext;drawText(Lnet/minecraft/client/font/TextRenderer;Ljava/lang/String;IIIZ)I",
+					//#endif
 					ordinal = 0
-			),
-			locals = LocalCapture.CAPTURE_FAILHARD
+			)
 	)
 	private void drawLineOverflowHint(
 			DrawContext context, CallbackInfo ci,

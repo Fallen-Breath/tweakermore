@@ -59,6 +59,7 @@ import net.minecraft.client.gui.screen.ingame.SignEditScreen;
 //#if MC >= 11700
 //$$ import net.minecraft.client.render.VertexConsumer;
 //$$ import net.minecraft.client.util.SpriteIdentifier;
+//$$ import org.spongepowered.asm.mixin.Unique;
 //#endif
 
 /**
@@ -91,7 +92,7 @@ public abstract class SignEditScreenMixin extends Screen
 	//#endif
 
 	//#if MC >= 11700
-	//$$ private boolean filtered$TKM;
+	//$$ @Unique private boolean filtered$TKM;
 	//#endif
 
 	protected SignEditScreenMixin(Text title)

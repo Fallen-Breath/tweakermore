@@ -21,6 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.mlShulkerBoxPreviewSupportEnderChest;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import fi.dy.masa.malilib.render.InventoryOverlay;
 import fi.dy.masa.malilib.render.RenderUtils;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.mlShulkerBoxPreviewSupportEnderChest.EnderChestItemFetcher;
@@ -45,7 +46,7 @@ public abstract class RenderUtilsMixin
 					ordinal = 0
 			)
 	)
-	private static boolean mlShulkerBoxPreviewSupportEnderChest_skipNbtCheck(boolean hasTag, ItemStack stack, int x, int y, boolean useBgColors)
+	private static boolean mlShulkerBoxPreviewSupportEnderChest_skipNbtCheck(boolean hasTag, @Local(argsOnly = true) ItemStack stack)
 	{
 		return hasTag || EnderChestItemFetcher.enableFor(stack);
 	}
@@ -58,7 +59,7 @@ public abstract class RenderUtilsMixin
 					shift = At.Shift.AFTER
 			)
 	)
-	private static DefaultedList<ItemStack> mlShulkerBoxPreviewSupportEnderChest_hackItemList(DefaultedList<ItemStack> items, ItemStack stack, int x, int y, boolean useBgColors)
+	private static DefaultedList<ItemStack> mlShulkerBoxPreviewSupportEnderChest_hackItemList(DefaultedList<ItemStack> items, @Local(argsOnly = true) ItemStack stack)
 	{
 		if (EnderChestItemFetcher.enableFor(stack))
 		{
@@ -75,7 +76,7 @@ public abstract class RenderUtilsMixin
 					shift = At.Shift.AFTER
 			)
 	)
-	private static InventoryOverlay.InventoryRenderType mlShulkerBoxPreviewSupportEnderChest_modifyInventoryType(InventoryOverlay.InventoryRenderType type, ItemStack stack, int x, int y, boolean useBgColors)
+	private static InventoryOverlay.InventoryRenderType mlShulkerBoxPreviewSupportEnderChest_modifyInventoryType(InventoryOverlay.InventoryRenderType type, @Local(argsOnly = true) ItemStack stack)
 	{
 		if (EnderChestItemFetcher.enableFor(stack))
 		{

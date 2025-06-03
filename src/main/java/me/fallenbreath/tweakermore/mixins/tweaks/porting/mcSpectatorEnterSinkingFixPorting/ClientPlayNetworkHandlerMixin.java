@@ -20,7 +20,11 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.porting.mcSpectatorEnterSinkingFixPorting;
 
+import com.llamalad7.mixinextras.sugar.Local;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -28,35 +32,16 @@ import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.network.packet.s2c.play.PlayerListS2CPacket;
 import net.minecraft.world.GameMode;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import java.util.Iterator;
-
-//#if MC >= 12002
-//$$ import net.minecraft.client.network.ClientCommonNetworkHandler;
-//$$ import net.minecraft.client.network.ClientConnectionState;
-//$$ import net.minecraft.network.ClientConnection;
-//#else
-import org.spongepowered.asm.mixin.Shadow;
-//#endif
-
+@Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.20"))
 @Mixin(ClientPlayNetworkHandler.class)
 public abstract class ClientPlayNetworkHandlerMixin
-		//#if MC >= 12002
-		//$$ extends ClientCommonNetworkHandler
-		//#endif
 {
-	//#if MC >= 12002
-	//$$ protected ClientPlayNetworkHandlerMixin(MinecraftClient client, ClientConnection connection, ClientConnectionState connectionState)
-	//$$ {
-	//$$ 	super(client, connection, connectionState);
-	//$$ }
-	//#else
 	@Shadow private MinecraftClient client;
-	//#endif
 
 	//#if MC >= 11903
 	//$$ @Inject(
@@ -73,10 +58,9 @@ public abstract class ClientPlayNetworkHandlerMixin
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/client/network/PlayerListEntry;setGameMode(Lnet/minecraft/world/GameMode;)V"
-			),
-			locals = LocalCapture.CAPTURE_FAILHARD
+			)
 	)
-	private void mcSpectatorEnterSinkingFixPorting_onGameModeUpdate(PlayerListS2CPacket packet, CallbackInfo ci, Iterator<?> iterator, PlayerListS2CPacket.Entry packetEntry, PlayerListEntry playerListEntry)
+	private void mcSpectatorEnterSinkingFixPorting_onGameModeUpdate(PlayerListS2CPacket packet, CallbackInfo ci, @Local PlayerListS2CPacket.Entry packetEntry, @Local PlayerListEntry playerListEntry)
 	//#endif
 	{
 		if (TweakerMoreConfigs.MC_SPECTATOR_ENTER_SINKING_FIX_PORTING.getBooleanValue())

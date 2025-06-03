@@ -53,7 +53,10 @@ public abstract class WorldRendererMixin
 	//$$ 		method = "render",
 	//$$ 		slice = @Slice(
 	//$$ 				from = @At(
-	//$$ 						//#if MC >= 12103
+	//$$ 						//#if MC >= 12106
+	//$$ 						//$$ value = "INVOKE",
+	//$$ 						//$$ target = "Lnet/minecraft/client/render/WorldRenderer;renderWeather(Lnet/minecraft/client/render/FrameGraphBuilder;Lnet/minecraft/util/math/Vec3d;FLcom/mojang/blaze3d/buffers/GpuBufferSlice;)V"
+	//$$ 						//#elseif MC >= 12103
 	//$$ 						//$$ value = "INVOKE",
 	//$$ 						//$$ target = "Lnet/minecraft/client/render/WorldRenderer;renderWeather(Lnet/minecraft/client/render/FrameGraphBuilder;Lnet/minecraft/client/render/LightmapTextureManager;Lnet/minecraft/util/math/Vec3d;FLnet/minecraft/client/render/Fog;)V"
 	//$$ 						//#else

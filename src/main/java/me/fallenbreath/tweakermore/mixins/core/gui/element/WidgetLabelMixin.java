@@ -20,6 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.core.gui.element;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import fi.dy.masa.malilib.gui.widgets.WidgetBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
 import me.fallenbreath.tweakermore.gui.TweakerMoreOptionLabel;
@@ -70,14 +71,22 @@ public abstract class WidgetLabelMixin extends WidgetBase
 	}
 
 	@ModifyVariable(
+			//#if MC >= 12106
+			//$$ method = "drawText",
+			//#else
 			method = "render",
+			//#endif
 			at = @At(
 					value = "CONSTANT",
 					args = "intValue=0",
 					remap = false
 			),
 			remap = false,
+			//#if MC >= 12106
+			//$$ ordinal = 2
+			//#else
 			ordinal = 4
+			//#endif
 	)
 	private int translatedOptionLabelShiftyTextStart(int yTextStart)
 	{
@@ -94,13 +103,17 @@ public abstract class WidgetLabelMixin extends WidgetBase
 	}
 
 	@SuppressWarnings({
-			"ConstantConditions",
+			"InjectLocalCaptureCanBeReplacedWithLocal",
 			//#if MC >= 11600
 			//$$ "deprecation",
 			//#endif
 	})
 	@Inject(
+			//#if MC >= 12106
+			//$$ method = "drawText",
+			//#else
 			method = "render",
+			//#endif
 			at = @At(
 					value = "FIELD",
 					target = "Lfi/dy/masa/malilib/gui/widgets/WidgetLabel;centered:Z",
@@ -110,7 +123,10 @@ public abstract class WidgetLabelMixin extends WidgetBase
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
 	private void translatedOptionLabelRenderTranslation(
+			//#if MC < 12106
 			int mouseX, int mouseY, boolean selected,
+			//#endif
+
 			//#if MC >= 12000
 			//$$ DrawContext matrixStackOrDrawContext,
 			//#elseif MC >= 11600
@@ -123,8 +139,11 @@ public abstract class WidgetLabelMixin extends WidgetBase
 		double scale = TweakerMoreOptionLabel.getConfigOriginalNameScale();
 		if (this.shouldUseTranslatedOptionLabelLogic() && scale > 0)
 		{
+			@SuppressWarnings("ConstantConditions")
+			TweakerMoreOptionLabel self = (TweakerMoreOptionLabel)(Object)this;
+
 			int color = darkerColor(this.textColor);
-			String originText = ((TweakerMoreOptionLabel)(Object)this).getOriginalLines()[i];
+			String originText = self.getOriginalLines()[i];
 			double x = this.x + (this.centered ? this.width / 2.0 : 0);
 			double y = (int)(yTextStart + (this.labels.size() + i * scale + 0.2) * fontHeight);
 
