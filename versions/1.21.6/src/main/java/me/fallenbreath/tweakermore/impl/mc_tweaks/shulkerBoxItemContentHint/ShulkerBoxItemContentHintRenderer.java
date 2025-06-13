@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxItemContentHint;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.render.ColorHolder;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
+import me.fallenbreath.tweakermore.util.render.context.GuiRenderContext;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 import net.minecraft.client.MinecraftClient;
@@ -48,7 +49,7 @@ public class ShulkerBoxItemContentHintRenderer
 			return;
 		}
 
-		var renderContext = RenderContext.of(drawContext);
+		var renderContext = RenderContext.gui(drawContext);
 		var scaler = RenderUtils.createScaler(x, y + SLOT_WIDTH, info.scale);
 		scaler.apply(renderContext);
 
@@ -72,7 +73,7 @@ public class ShulkerBoxItemContentHintRenderer
 		}
 	}
 
-	private static void renderMiniItem(RenderContext renderContext, ShulkerBoxItemContentHintCommon.Info info, int x, int y)
+	private static void renderMiniItem(GuiRenderContext renderContext, ShulkerBoxItemContentHintCommon.Info info, int x, int y)
 	{
 		ItemStack stack = info.stack;
 		if (stack.isEmpty())
@@ -91,7 +92,7 @@ public class ShulkerBoxItemContentHintRenderer
 		}
 	}
 
-	private static void renderText(RenderContext renderContext, ShulkerBoxItemContentHintCommon.Info info, int x, int y)
+	private static void renderText(GuiRenderContext renderContext, ShulkerBoxItemContentHintCommon.Info info, int x, int y)
 	{
 		String text = info.allItemSameIgnoreNbt ? "*" : "...";
 		boolean putTextOnRight = info.allItemSameIgnoreNbt && info.scale <= 0.75;
@@ -106,7 +107,7 @@ public class ShulkerBoxItemContentHintRenderer
 		scaler.apply(renderContext);
 
 		var textRenderer = MinecraftClient.getInstance().textRenderer;
-		renderContext.translate(textX, textY, 0);
+		renderContext.translate(textX, textY);
 		renderContext.getGuiDrawer().drawText(textRenderer, text, 0, 0, textColor, true);
 
 		scaler.restore();
@@ -118,7 +119,7 @@ public class ShulkerBoxItemContentHintRenderer
 		void draw(int x, int y, int width, int height, int color);
 	}
 
-	private static void renderBar(RenderContext renderContext, double fillRatio, int x, int y)
+	private static void renderBar(GuiRenderContext renderContext, double fillRatio, int x, int y)
 	{
 		final int HEIGHT = SLOT_WIDTH / 2;
 		final int WIDTH = 1;

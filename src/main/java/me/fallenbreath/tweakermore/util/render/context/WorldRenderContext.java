@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024  Fallen_Breath and contributors
+ * Copyright (C) 2025  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -24,50 +24,22 @@ import me.fallenbreath.tweakermore.util.render.matrix.IMatrixStack;
 import net.minecraft.client.util.math.Matrix4f;
 import org.jetbrains.annotations.NotNull;
 
-// TODO: resolve those inelegant `getMatrixStack().asMcRaw()` spams
-public class WorldRenderContextImpl implements WorldRenderContext
+public interface WorldRenderContext
 {
-	@NotNull
-	private final IMatrixStack matrixStack;
-
-	public WorldRenderContextImpl(@NotNull IMatrixStack matrixStack)
-	{
-		this.matrixStack = matrixStack;
-	}
+	// ============================= Getters =============================
 
 	@NotNull
-	public IMatrixStack getMatrixStack()
-	{
-		return this.matrixStack;
-	}
+	IMatrixStack getMatrixStack();
 
-	@Override
-	public void pushMatrix()
-	{
-		this.matrixStack.pushMatrix();
-	}
+	// ============================= Manipulators =============================
 
-	@Override
-	public void popMatrix()
-	{
-		this.matrixStack.popMatrix();
-	}
+	void pushMatrix();
 
-	@Override
-	public void translate(double x, double y, double z)
-	{
-		this.matrixStack.translate(x, y, z);
-	}
+	void popMatrix();
 
-	@Override
-	public void scale(double x, double y, double z)
-	{
-		this.matrixStack.scale(x, y, z);
-	}
+	void translate(double x, double y, double z);
 
-	@Override
-	public void multMatrix(Matrix4f matrix4f)
-	{
-		this.matrixStack.mul(matrix4f);
-	}
+	void scale(double x, double y, double z);
+
+	void multMatrix(Matrix4f matrix4f);
 }

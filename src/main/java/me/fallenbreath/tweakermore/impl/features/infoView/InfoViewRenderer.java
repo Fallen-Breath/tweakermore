@@ -34,7 +34,7 @@ import me.fallenbreath.tweakermore.impl.features.infoView.redstoneDust.RedstoneD
 import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.RespawnBlockExplosionViewer;
 import me.fallenbreath.tweakermore.impl.features.infoView.structureBlock.StructureBlockContentRenderer;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
-import me.fallenbreath.tweakermore.util.render.context.WorldRenderContextImpl;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
 
 import java.util.List;
@@ -67,7 +67,7 @@ public class InfoViewRenderer implements TweakerMoreIRenderer, IClientTickHandle
 	}
 
 	@Override
-	public void onRenderWorldLast(WorldRenderContextImpl context)
+	public void onRenderWorldLast(WorldRenderContext context)
 	{
 		if (!TweakerMoreConfigs.INFO_VIEW.getBooleanValue())
 		{

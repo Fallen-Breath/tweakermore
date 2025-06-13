@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.util.render;
 
-import me.fallenbreath.tweakermore.util.render.context.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
 import net.minecraft.util.math.Vec3d;
@@ -37,7 +37,7 @@ import net.minecraft.client.util.math.Matrix4f;
 public class InWorldPositionTransformer
 {
 	private final Vec3d pos;
-	private RenderContext renderContext;
+	private WorldRenderContext renderContext;
 
 	public InWorldPositionTransformer(Vec3d pos)
 	{
@@ -48,7 +48,7 @@ public class InWorldPositionTransformer
 	/**
 	 * Matrix stack of renderContext will be pushed
 	 */
-	public void apply(RenderContext renderContext)
+	public void apply(WorldRenderContext renderContext)
 	{
 		this.renderContext = renderContext;
 		MinecraftClient client = MinecraftClient.getInstance();

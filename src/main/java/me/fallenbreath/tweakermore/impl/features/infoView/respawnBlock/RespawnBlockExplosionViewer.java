@@ -33,8 +33,8 @@ import me.fallenbreath.tweakermore.util.Messenger;
 import me.fallenbreath.tweakermore.util.TemporaryBlockReplacer;
 import me.fallenbreath.tweakermore.util.damage.DamageCalculator;
 import me.fallenbreath.tweakermore.util.damage.DamageUtil;
-import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
@@ -107,7 +107,7 @@ public class RespawnBlockExplosionViewer extends CommonScannerInfoViewer
 	}
 
 	@Override
-	protected void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
+	protected void render(WorldRenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
 		ClientWorld clientWorld = mc.world;

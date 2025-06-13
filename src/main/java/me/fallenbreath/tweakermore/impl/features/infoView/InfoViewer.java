@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.impl.features.infoView;
 
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.ScanningCache;
-import me.fallenbreath.tweakermore.util.render.context.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
@@ -55,7 +55,7 @@ public interface InfoViewer
 
 	interface Renderer
 	{
-		void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos);
+		void render(WorldRenderContext context, RenderVisitorWorldView world, BlockPos pos);
 	}
 
 	// ======== Lifecycle hooks ========

@@ -30,7 +30,7 @@ import me.fallenbreath.tweakermore.util.EntityUtils;
 import me.fallenbreath.tweakermore.util.FabricUtils;
 import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
-import me.fallenbreath.tweakermore.util.render.context.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
@@ -52,7 +52,7 @@ public class InfoViewCachedRenderer
 		return clientWorld == null || this.cacheData == null || clientWorld != this.cacheData.clientWorld;
 	}
 
-	public void render(RenderContext renderContext, List<InfoViewer> viewers)
+	public void render(WorldRenderContext renderContext, List<InfoViewer> viewers)
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
 		World world = WorldUtils.getBestWorld(mc);

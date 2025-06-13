@@ -22,7 +22,6 @@ package me.fallenbreath.tweakermore.impl.features.infoView.beacon;
 
 import com.google.common.base.Suppliers;
 import com.google.common.collect.Lists;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.datafixers.util.Pair;
 import fi.dy.masa.malilib.render.MaLiLibPipelines;
 import fi.dy.masa.malilib.util.StringUtils;
@@ -35,12 +34,11 @@ import me.fallenbreath.tweakermore.util.render.InWorldPositionTransformer;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.context.MixedRenderContext;
-import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.block.BeaconBlock;
 import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.registry.Registries;
@@ -81,7 +79,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 	}
 
 	@Override
-	protected void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
+	protected void render(WorldRenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
 		BlockEntity blockEntity = world.getBlockEntity(pos);
 		if (!(blockEntity instanceof BeaconBlockEntity))
@@ -139,11 +137,10 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 	// TODO: client close handler
 	private final Supplier<MixedRenderContext> renderContext = Suppliers.memoize(MixedRenderContext::create);
 
-	private void renderStatusEffectIcon(RenderContext context, Vec3d pos, StatusEffect statusEffect, int amplifier, double deltaX, double kDeltaY)
+	private void renderStatusEffectIcon(WorldRenderContext context, Vec3d pos, StatusEffect statusEffect, int amplifier, double deltaX, double kDeltaY)
 	{
 		var sprite = InGameHud.getEffectTexture(Registries.STATUS_EFFECT.getEntry(statusEffect));
 		MixedRenderContext mrc = this.renderContext.get();
-		context = RenderContext.of(RenderSystem.getModelViewStack());
 
 		InWorldPositionTransformer positionTransformer = new InWorldPositionTransformer(pos);
 		positionTransformer.apply(context);

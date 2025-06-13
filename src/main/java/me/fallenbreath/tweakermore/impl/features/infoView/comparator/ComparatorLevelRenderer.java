@@ -24,7 +24,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.CommonScannerInfoViewer;
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
-import me.fallenbreath.tweakermore.util.render.context.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.block.ComparatorBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ComparatorBlockEntity;
@@ -57,7 +57,7 @@ public class ComparatorLevelRenderer extends CommonScannerInfoViewer
 	}
 
 	@Override
-	protected void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
+	protected void render(WorldRenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
 		BlockEntity blockEntity = world.getBlockEntity(pos);
 		if (!(blockEntity instanceof ComparatorBlockEntity))

@@ -39,8 +39,11 @@ import java.util.List;
 
 /**
  * For those who needs in-game transformation and guiDrawer drawing (mc1.21.6+) (very hacky)
+ * <p>
+ * mc1.21.6-: subproject 1.15.2 (main project)
+ * mc1.21.6+: subproject 1.21.6        <--------
  */
-public class MixedRenderContext implements RenderContext, AutoCloseable
+public class MixedRenderContext implements GuiRenderContext, WorldRenderContext, AutoCloseable
 {
 	private final DrawContext drawContext;
 	private final GuiRenderState guiState;
@@ -114,6 +117,7 @@ public class MixedRenderContext implements RenderContext, AutoCloseable
 	}
 
 	@Override
+	@NotNull
 	public DrawContext getGuiDrawer()
 	{
 		return this.drawContext;
@@ -148,6 +152,18 @@ public class MixedRenderContext implements RenderContext, AutoCloseable
 	public void scale(double x, double y, double z)
 	{
 		this.matrixStack.scale(x, y, z);
+	}
+
+	@Override
+	public void translate(double x, double y)
+	{
+		this.matrixStack.translate(x, y, 0);
+	}
+
+	@Override
+	public void scale(double x, double y)
+	{
+		this.matrixStack.scale(x, y, 1);
 	}
 
 	@Override

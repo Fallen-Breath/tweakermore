@@ -20,18 +20,18 @@
 
 package me.fallenbreath.tweakermore.util.render;
 
-import me.fallenbreath.tweakermore.util.render.context.RenderContext;
-import me.fallenbreath.tweakermore.util.render.context.WorldRenderContextImpl;
+import me.fallenbreath.tweakermore.util.render.context.GuiRenderContext;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 
 public interface TweakerMoreIRenderer
 {
 	/**
 	 * A hook like {@link fi.dy.masa.malilib.interfaces.IRenderer#onRenderWorldLast}
 	 */
-	default void onRenderWorldLast(WorldRenderContextImpl context) {}
+	default void onRenderWorldLast(WorldRenderContext context) {}
 
 	/**
 	 * A hook like {@link fi.dy.masa.malilib.interfaces.IRenderer#onRenderGameOverlayPost}
 	 */
-	default void onRenderGameOverlayPost(RenderContext context) {}
+	default void onRenderGameOverlayPost(GuiRenderContext context) {}
 }

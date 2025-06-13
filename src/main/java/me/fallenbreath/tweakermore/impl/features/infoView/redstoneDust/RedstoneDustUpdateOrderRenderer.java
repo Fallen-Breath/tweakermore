@@ -26,8 +26,8 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.listentries.InfoViewTargetStrategy;
 import me.fallenbreath.tweakermore.impl.features.infoView.CommonScannerInfoViewer;
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
-import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.block.RedstoneWireBlock;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
@@ -61,7 +61,7 @@ public class RedstoneDustUpdateOrderRenderer extends CommonScannerInfoViewer
 	}
 
 	@Override
-	protected void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
+	protected void render(WorldRenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
 		int alphaBits = (int)Math.round(255 * TweakerMoreConfigs.INFO_VIEW_REDSTONE_DUST_UPDATE_ORDER_TEXT_ALPHA.getDoubleValue());
 		if (alphaBits == 0)
@@ -77,7 +77,7 @@ public class RedstoneDustUpdateOrderRenderer extends CommonScannerInfoViewer
 		}
 	}
 
-	private void renderTextAtPos(RenderContext context, BlockPos pos, String text, int color)
+	private void renderTextAtPos(WorldRenderContext context, BlockPos pos, String text, int color)
 	{
 		TextRenderer.create().
 				text(text).atCenter(pos).

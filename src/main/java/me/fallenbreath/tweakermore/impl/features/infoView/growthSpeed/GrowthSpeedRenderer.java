@@ -29,7 +29,7 @@ import me.fallenbreath.tweakermore.impl.features.infoView.growthSpeed.handlers.C
 import me.fallenbreath.tweakermore.impl.features.infoView.growthSpeed.handlers.GrowthSpeedRendererHandler;
 import me.fallenbreath.tweakermore.impl.features.infoView.growthSpeed.handlers.SmallMushroomGrowthSpeedRenderer;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
-import me.fallenbreath.tweakermore.util.render.context.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.block.*;
 import net.minecraft.text.BaseText;
 import net.minecraft.util.math.BlockPos;
@@ -63,7 +63,7 @@ public class GrowthSpeedRenderer extends CommonScannerInfoViewer
 	}
 
 	@Override
-	protected void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
+	protected void render(WorldRenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
 		BlockState blockState = world.getBlockState(pos);
 		List<BaseText> lines = Lists.newArrayList();

@@ -27,7 +27,7 @@ import me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.structureBloc
 import me.fallenbreath.tweakermore.util.Messenger;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.TextRenderingUtil;
-import me.fallenbreath.tweakermore.util.render.context.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.block.StructureBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.StructureBlockBlockEntity;
@@ -72,7 +72,7 @@ public class StructureBlockContentRenderer extends CommonScannerInfoViewer
 	}
 
 	@Override
-	protected void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
+	protected void render(WorldRenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
 		BlockEntity blockEntity = world.getBlockEntity(pos);
 		if (!(blockEntity instanceof StructureBlockBlockEntity))

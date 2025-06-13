@@ -28,7 +28,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.autoContainerProcess.processors.IContainerProcessor;
 import me.fallenbreath.tweakermore.util.StringUtils;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
-import me.fallenbreath.tweakermore.util.render.context.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.GuiRenderContext;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 public class AutoContainerProcessorHintRenderer implements TweakerMoreIRenderer
 {
 	@Override
-	public void onRenderGameOverlayPost(RenderContext context)
+	public void onRenderGameOverlayPost(GuiRenderContext context)
 	{
 		if (!TweakerMoreConfigs.CONTAINER_PROCESSOR_HINT.getBooleanValue())
 		{

@@ -69,7 +69,7 @@ public abstract class BossBarHudMixin
 		if (TweakerMoreConfigs.BOSS_BAR_SCALE.isModified())
 		{
 			this.scaler = RenderUtils.createScaler(windowsWidth / 2.0, 0, TweakerMoreConfigs.BOSS_BAR_SCALE.getDoubleValue());
-			this.scaler.apply(RenderContext.of(
+			this.scaler.apply(RenderContext.gui(
 					//#if MC >= 11600
 					//$$ matrixStackOrDrawContext
 					//#endif

@@ -20,12 +20,7 @@
 
 package me.fallenbreath.tweakermore.util.render.context;
 
-import me.fallenbreath.tweakermore.util.render.matrix.IMatrixStack;
-import net.minecraft.client.gui.DrawableHelper;  // will be remapped to DrawContext in mc1.20
-import net.minecraft.client.util.math.Matrix4f;
-
 import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
-import org.jetbrains.annotations.NotNull;
 
 //#if MC >= 12106
 //$$ import me.fallenbreath.tweakermore.util.render.matrix.Joml3x2fMatrixStack;
@@ -36,31 +31,23 @@ import org.jetbrains.annotations.NotNull;
 //$$ import org.joml.Matrix4fStack;
 //#endif
 
+//#if MC >= 12000
+//$$ import net.minecraft.client.gui.DrawContext;
+//#endif
+
 //#if MC >= 11600
 //$$ import org.jetbrains.annotations.NotNull;
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //#endif
 
-public interface RenderContext
+/**
+ * Factory class
+ */
+public abstract class RenderContext
 {
 	// ============================= Factories =============================
 
-	static RenderContext of(
-			//#if MC >= 11600
-			//$$ @NotNull MatrixStack matrixStack
-			//#endif
-	)
-	{
-		//#if MC >= 12000
-		//$$ return new RenderContextImpl(null, new McMatrixStack(matrixStack));
-		//#elseif MC >= 11600
-		//$$ return new RenderContextImpl(new McMatrixStack(matrixStack));
-		//#else
-		return new RenderContextImpl(new McMatrixStack());
-		//#endif
-	}
-
-	static WorldRenderContextImpl createWorldRenderContext(
+	public static WorldRenderContext world(
 			//#if MC >= 12006
 			//$$ @NotNull Matrix4fStack matrixStack
 			//#elseif MC >= 11600
@@ -68,12 +55,8 @@ public interface RenderContext
 			//#endif
 	)
 	{
-		//#if MC >= 12106
-		//$$ return new WorldRenderContextImpl(null, new JomlMatrixStack(matrixStack));
-		//#elseif MC >= 12006
-		//$$ return new WorldRenderContextImpl(null, new JomlMatrixStack(matrixStack));
-		//#elseif MC >= 12000
-		//$$ return new WorldRenderContextImpl(null, new McMatrixStack(matrixStack));
+		//#if MC >= 12006
+		//$$ return new WorldRenderContextImpl(new JomlMatrixStack(matrixStack));
 		//#elseif MC >= 11600
 		//$$ return new WorldRenderContextImpl(new McMatrixStack(matrixStack));
 		//#else
@@ -81,44 +64,27 @@ public interface RenderContext
 		//#endif
 	}
 
+	public static GuiRenderContext gui(
+			//#if MC >= 12000
+			//$$ @NotNull DrawContext drawContext
+			//#elseif MC >= 11600
+			//$$ @NotNull MatrixStack matrixStack
+			//#endif
+	)
+	{
+		//#if MC >= 12000
+		//$$ return new GuiRenderContextImpl(drawContext);
+		//#elseif MC >= 11600
+		//$$ return new GuiRenderContextImpl(new McMatrixStack(matrixStack));
+		//#else
+		return new GuiRenderContextImpl(new McMatrixStack());
+		//#endif
+	}
+
 	//#if MC >= 12000
-	//$$ static RenderContext of(@NotNull DrawContext drawContext)
+	//$$ public static GuiRenderContext gui(@NotNull DrawContext drawContext, @NotNull MatrixStack matrixStack)
 	//$$ {
-	//$$ 	return new RenderContextImpl(
-	//$$ 			drawContext,
-	//$$ 			//#if MC >= 12106
-	//$$ 			//$$ new Joml3x2fMatrixStack(drawContext.getMatrices())
-	//$$ 			//#else
-	//$$ 			new McMatrixStack(drawContext.getMatrices())
-	//$$ 			//#endif
-	//$$ 	);
+	//$$ 	return new GuiRenderContextImpl(drawContext, new McMatrixStack(matrixStack));
 	//$$ }
 	//#endif
-
-	//#if MC >= 12006
-	//$$ // NOTES: GUI rendering only
-	//$$ static RenderContext of(@NotNull Matrix4fStack matrixStack)
-	//$$ {
-	//$$ 	return new RenderContextImpl(null, new JomlMatrixStack(matrixStack));
-	//$$ }
-	//#endif
-
-	// ============================= Getters =============================
-
-	DrawableHelper getGuiDrawer();
-
-	@NotNull
-	IMatrixStack getMatrixStack();
-
-	// ============================= Manipulators =============================
-
-	void pushMatrix();
-
-	void popMatrix();
-
-	void translate(double x, double y, double z);
-
-	void scale(double x, double y, double z);
-
-	void multMatrix(Matrix4f matrix4f);
 }

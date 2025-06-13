@@ -30,6 +30,7 @@ import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWor
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.ScanningCache;
 import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
@@ -103,5 +104,5 @@ public abstract class CommonScannerInfoViewer extends AbstractInfoViewer
 		return (context, world, pos) -> this.render(context, world, pos, isCrossHairPos);
 	}
 
-	protected abstract void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos);
+	protected abstract void render(WorldRenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos);
 }

@@ -31,9 +31,9 @@ import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.render.InWorldPositionTransformer;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.MixedRenderContext;
-import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.block.BeaconBlock;
 import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
@@ -102,7 +102,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 	}
 
 	@Override
-	protected void render(RenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
+	protected void render(WorldRenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
 		BlockEntity blockEntity = world.getBlockEntity(pos);
 		if (!(blockEntity instanceof BeaconBlockEntity))
@@ -174,11 +174,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 		);
 		//#endif
 
-		//#if MC >= 12106
-		//$$ MixedRenderContext renderContext = MixedRenderContext.create();
-		//#else
-		RenderContext renderContext = MixedRenderContext.create();
-		//#endif
+		MixedRenderContext renderContext = MixedRenderContext.create();
 
 		InWorldPositionTransformer positionTransformer = new InWorldPositionTransformer(pos);
 		positionTransformer.apply(renderContext);

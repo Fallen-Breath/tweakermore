@@ -20,7 +20,8 @@
 
 package me.fallenbreath.tweakermore.util.render;
 
-import me.fallenbreath.tweakermore.util.render.context.RenderContext;
+import me.fallenbreath.tweakermore.util.render.context.GuiRenderContext;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 
@@ -98,7 +99,7 @@ public class RenderUtils
 		private final double anchorY;
 		private final double factor;
 
-		private RenderContext renderContext;
+		private Runnable restoreFunc;
 
 		private Scaler(double anchorX, double anchorY, double factor)
 		{
@@ -116,13 +117,22 @@ public class RenderUtils
 			return this.factor;
 		}
 
-		public void apply(RenderContext renderContext)
+		public void apply(WorldRenderContext renderContext)
 		{
-			this.renderContext = renderContext;
-			this.renderContext.pushMatrix();
-			this.renderContext.translate(-anchorX * factor, -anchorY * factor, 0);
-			this.renderContext.scale(factor, factor, 1);
-			this.renderContext.translate(anchorX / factor, anchorY / factor, 0);
+			renderContext.pushMatrix();
+			renderContext.translate(-anchorX * factor, -anchorY * factor, 0);
+			renderContext.scale(factor, factor, 1);
+			renderContext.translate(anchorX / factor, anchorY / factor, 0);
+			this.restoreFunc = renderContext::popMatrix;
+		}
+
+		public void apply(GuiRenderContext renderContext)
+		{
+			renderContext.pushMatrix();
+			renderContext.translate(-anchorX * factor, -anchorY * factor);
+			renderContext.scale(factor, factor);
+			renderContext.translate(anchorX / factor, anchorY / factor);
+			this.restoreFunc = renderContext::popMatrix;
 		}
 
 		//#if MC >= 11904
@@ -136,16 +146,12 @@ public class RenderUtils
 
 		public void restore()
 		{
-			if (this.renderContext == null)
+			if (this.restoreFunc == null)
 			{
 				throw new RuntimeException("RenderUtils.Scaler: Calling restore before calling apply");
 			}
-			this.renderContext.popMatrix();
-		}
-
-		public RenderContext getRenderContext()
-		{
-			return Objects.requireNonNull(this.renderContext);
+			this.restoreFunc.run();
+			this.restoreFunc = null;
 		}
 	}
 }

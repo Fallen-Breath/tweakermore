@@ -66,7 +66,7 @@ public abstract class DebugHudMixin
 		if (TweakerMoreConfigs.F3_TEXT_SCALE.isModified())
 		{
 			scaler.set(RenderUtils.createScaler(0, 0, TweakerMoreConfigs.F3_TEXT_SCALE.getDoubleValue()));
-			scaler.get().apply(RenderContext.of(
+			scaler.get().apply(RenderContext.gui(
 					//#if MC >= 11600
 					//$$ matrixStackOrDrawContext
 					//#endif

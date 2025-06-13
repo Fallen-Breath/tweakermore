@@ -83,7 +83,7 @@ public abstract class ChatScreenMixin extends Screen
 			{
 				double scale = mc.inGameHud.getChatHud().getChatScale();
 				this.hoverScaler$TKM = RenderUtils.createScaler(mouseX, mouseY, scale);
-				this.hoverScaler$TKM.apply(RenderContext.of(
+				this.hoverScaler$TKM.apply(RenderContext.gui(
 						//#if MC >= 11600
 						//$$ matrixStackOrDrawContext
 						//#endif

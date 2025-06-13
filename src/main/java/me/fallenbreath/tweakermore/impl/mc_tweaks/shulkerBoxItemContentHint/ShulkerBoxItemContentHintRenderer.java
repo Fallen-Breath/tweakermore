@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxItemContentHint;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.render.ColorHolder;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
+import me.fallenbreath.tweakermore.util.render.context.GuiRenderContext;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 import net.minecraft.client.MinecraftClient;
@@ -86,7 +87,7 @@ public class ShulkerBoxItemContentHintRenderer
 		MatrixStack textMatrixStack = new MatrixStack();
 		//#endif
 
-		RenderContext renderContext = RenderContext.of(
+		GuiRenderContext renderContext = RenderContext.gui(
 				//#if MC >= 12000
 				//$$ drawContext
 				//#elseif MC >= 11904
@@ -118,6 +119,9 @@ public class ShulkerBoxItemContentHintRenderer
 			renderText(
 					//#if MC >= 11500
 					textMatrixStack,
+					//#endif
+					//#if MC >= 12000
+					//$$ drawContext,
 					//#endif
 					//#if MC >= 11904
 					//$$ 150 + 10,
@@ -154,7 +158,7 @@ public class ShulkerBoxItemContentHintRenderer
 	}
 
 	private static void renderMiniItem(
-			RenderContext renderContext,
+			GuiRenderContext renderContext,
 			//#if MC >= 12000
 			//$$ DrawContext drawContext,
 			//#else
@@ -177,8 +181,8 @@ public class ShulkerBoxItemContentHintRenderer
 			itemRenderer.zOffset += 10;
 			// scale the z axis, so the lighting of the item can render correctly
 			// see net.minecraft.client.render.item.ItemRenderer.renderGuiItemModel for z offset applying
-			renderContext.scale(1, 1, info.scale);
-			renderContext.translate(0, 0, (100.0F + itemRenderer.zOffset) * (1 / info.scale - 1));
+			renderContext.scaleDirect(1, 1, info.scale);
+			renderContext.translateDirect(0, 0, (100.0F + itemRenderer.zOffset) * (1 / info.scale - 1));
 			//#endif
 
 			//#if MC >= 12000
@@ -209,6 +213,9 @@ public class ShulkerBoxItemContentHintRenderer
 			//#if MC >= 11500
 			MatrixStack textMatrixStack,
 			//#endif
+			//#if MC >= 12000
+			//$$ DrawContext drawContext,
+			//#endif
 			double zOffset, ShulkerBoxItemContentHintCommon.Info info, int x, int y
 	)
 	{
@@ -222,7 +229,10 @@ public class ShulkerBoxItemContentHintRenderer
 		int textColor = 0xDDDDDD;
 
 		RenderUtils.Scaler textScaler = RenderUtils.createScaler(textX + width * 0.5, textY + height * 0.5, textScale);
-		textScaler.apply(RenderContext.of(
+		textScaler.apply(RenderContext.gui(
+				//#if MC >= 12000
+				//$$ drawContext,
+				//#endif
 				//#if MC >= 11600
 				//$$ textMatrixStack
 				//#endif
@@ -277,7 +287,7 @@ public class ShulkerBoxItemContentHintRenderer
 	//$$ @SuppressWarnings("deprecation")
 	//#endif
 	private static void renderBar(
-			RenderContext renderContext,
+			GuiRenderContext renderContext,
 			//#if MC < 12000
 			ItemRenderer itemRenderer,
 			//#endif

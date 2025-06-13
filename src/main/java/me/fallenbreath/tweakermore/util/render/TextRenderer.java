@@ -21,10 +21,10 @@
 package me.fallenbreath.tweakermore.util.render;
 
 import com.google.common.collect.Lists;
-import com.mojang.blaze3d.platform.GlStateManager;
 import me.fallenbreath.tweakermore.util.PositionUtils;
-import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContextImpl;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.debug.DebugRenderer;
 import net.minecraft.client.util.math.Matrix4f;
@@ -36,6 +36,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+
+//#if MC >= 12006
+//$$ import me.fallenbreath.tweakermore.util.render.matrix.JomlMatrixStack;
+//#else
+import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
+//#endif
 
 //#if MC >= 11700
 //$$ import com.mojang.blaze3d.systems.RenderSystem;
@@ -93,19 +99,25 @@ public class TextRenderer
 	 * ============================
 	 */
 
-	private static RenderContext createGlobalMatrixRenderContext()
+	private static WorldRenderContext createGlobalMatrixRenderContext()
 	{
 		// if transformation is applied to the RenderContext's matrix,
 		// and the context's matrix (instead of an identity matrix) is used in TextRenderer.draw(),
 		// then the z index might be wrongly apply, making background-ed texts really weird,
 		// so just apply the transformation on the global matrix
 		// FIXME: why
-		return RenderContext.of(
-				//#if MC >= 11700
-				//$$ RenderSystem.getModelViewStack()
-				//#elseif MC >= 11600
-				//$$ new MatrixStack()  // dummy matrix, will not be used for transformations
+		return new WorldRenderContextImpl(
+				//#if MC >= 12006
+				//$$ new JomlMatrixStack(
+				//#else
+				new McMatrixStack(
 				//#endif
+						//#if MC >= 11700
+						//$$ RenderSystem.getModelViewStack()
+						//#elseif MC >= 11600
+						//$$ new MatrixStack()  // dummy matrix, will not be used for transformations
+						//#endif
+				)
 		);
 	}
 
@@ -122,7 +134,7 @@ public class TextRenderer
 		{
 			return;
 		}
-		RenderContext renderContext = createGlobalMatrixRenderContext();
+		WorldRenderContext renderContext = createGlobalMatrixRenderContext();
 
 		MinecraftClient mc = MinecraftClient.getInstance();
 

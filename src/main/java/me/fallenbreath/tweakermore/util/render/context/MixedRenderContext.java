@@ -20,6 +20,10 @@
 
 package me.fallenbreath.tweakermore.util.render.context;
 
+import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
+import net.minecraft.client.gui.DrawableHelper;
+import org.jetbrains.annotations.NotNull;
+
 //#if MC >= 11600
 //$$ import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
 //$$ import net.minecraft.client.util.math.MatrixStack;
@@ -27,20 +31,74 @@ package me.fallenbreath.tweakermore.util.render.context;
 
 /**
  * For those who needs in-game transformation and guiDrawer drawing (mc1.21.6+) (very hacky)
+ * <p>
+ * mc1.21.6-: subproject 1.15.2 (main project)        <--------
+ * mc1.21.6+: subproject 1.21.6
  */
-public abstract class MixedRenderContext
+public class MixedRenderContext extends WorldRenderContextImpl implements GuiRenderContext
 {
-	// see full impl in mc1.21.6+
+	//#if MC >= 12000
+	//$$ @NotNull
+	//$$ private final DrawContext drawContext;
+	//#endif
 
-	public static RenderContext create()
+	public MixedRenderContext(
+			//#if MC >= 12000
+			//$$ @NotNull DrawContext drawContext,
+			//#endif
+			@NotNull McMatrixStack matrixStack
+	)
+	{
+		super(matrixStack);
+		//#if MC >= 12000
+		//$$ this.drawContext = drawContext;
+		//#endif
+	}
+
+	public static MixedRenderContext create()
 	{
 		//#if MC >= 12000
 		//$$ var matrixStack = new MatrixStack();
-		//$$ return new RenderContextImpl(RenderContextUtils.createDrawContext(new MatrixStack()), new McMatrixStack(matrixStack));
+		//$$ return new MixedRenderContext(RenderContextUtils.createDrawContext(matrixStack), new McMatrixStack(matrixStack));
 		//#elseif MC >= 11600
-		//$$ return new RenderContextImpl(new McMatrixStack(new MatrixStack()));
+		//$$ return new MixedRenderContext(new McMatrixStack(new MatrixStack()));
 		//#else
-		return RenderContext.of();
+		return new MixedRenderContext(new McMatrixStack());
 		//#endif
+	}
+
+	@Override
+	@NotNull
+	public DrawableHelper getGuiDrawer()
+	{
+		//#if MC >= 12000
+		//$$ return this.drawContext;
+		//#else
+		return new DrawableHelper(){};
+		//#endif
+	}
+
+	@Override
+	public void translate(double x, double y)
+	{
+		this.translate(x, y, 0);
+	}
+
+	@Override
+	public void scale(double x, double y)
+	{
+		this.scale(x, y, 1);
+	}
+
+	@Override
+	public void translateDirect(double x, double y, double z)
+	{
+		this.translate(x, y, z);
+	}
+
+	@Override
+	public void scaleDirect(double x, double y, double z)
+	{
+		this.scale(x, y, z);
 	}
 }
