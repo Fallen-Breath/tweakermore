@@ -20,14 +20,20 @@
 
 package me.fallenbreath.tweakermore.util.render.context;
 
-import me.fallenbreath.tweakermore.util.render.matrix.IMatrixStack;
+import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
 import net.minecraft.client.gui.DrawableHelper;
 import org.jetbrains.annotations.NotNull;
 
 //#if MC >= 12106
 //$$ import me.fallenbreath.tweakermore.util.render.matrix.Joml3x2fMatrixStack;
-//#else if MC >= 12000
-//$$ import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
+//#endif
+
+//#if MC >= 12000
+//$$ import me.fallenbreath.tweakermore.util.render.matrix.IMatrixStack;
+//#endif
+
+//#if 11600 <= MC && MC < 12000
+//$$ import net.minecraft.client.util.math.MatrixStack;
 //#endif
 
 public class GuiRenderContextImpl implements GuiRenderContext
@@ -38,7 +44,11 @@ public class GuiRenderContextImpl implements GuiRenderContext
 	//#endif
 
 	@NotNull
-	private final IMatrixStack matrixStack;
+	//#if MC >= 12000
+	//$$ private final IMatrixStack matrixStack;
+	//#else
+	private final McMatrixStack matrixStack;
+	//#endif
 
 	//#if MC >= 12000
 	//$$ public GuiRenderContextImpl(@NotNull DrawContext drawContext, @NotNull IMatrixStack matrixStack)
@@ -59,18 +69,20 @@ public class GuiRenderContextImpl implements GuiRenderContext
 	//$$ 	);
 	//$$ }
 	//#else
-	public GuiRenderContextImpl(@NotNull IMatrixStack matrixStack)
+	public GuiRenderContextImpl(@NotNull McMatrixStack matrixStack)
 	{
 		this.matrixStack = matrixStack;
 	}
 	//#endif
 
-	@Override
-	@NotNull
-	public IMatrixStack getMatrixStack()
-	{
-		return this.matrixStack;
-	}
+	//#if 11600 <= MC && MC < 12000
+	//$$ @Override
+	//$$ @NotNull
+	//$$ public MatrixStack getMcRawMatrixStack()
+	//$$ {
+	//$$ 	return this.matrixStack.asMcRaw();
+	//$$ }
+	//#endif
 
 	@Override
 	@NotNull

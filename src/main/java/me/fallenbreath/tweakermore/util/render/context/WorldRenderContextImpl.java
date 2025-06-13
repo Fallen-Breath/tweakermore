@@ -24,7 +24,6 @@ import me.fallenbreath.tweakermore.util.render.matrix.IMatrixStack;
 import net.minecraft.client.util.math.Matrix4f;
 import org.jetbrains.annotations.NotNull;
 
-// TODO: resolve those inelegant `getMatrixStack().asMcRaw()` spams
 public class WorldRenderContextImpl implements WorldRenderContext
 {
 	@NotNull
@@ -36,7 +35,7 @@ public class WorldRenderContextImpl implements WorldRenderContext
 	}
 
 	@NotNull
-	public IMatrixStack getMatrixStack()
+	protected IMatrixStack getMatrixStack()
 	{
 		return this.matrixStack;
 	}

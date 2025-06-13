@@ -22,17 +22,8 @@ package me.fallenbreath.tweakermore.util.render.matrix;
 
 import net.minecraft.client.util.math.Matrix4f;
 
-//#if MC >= 11500
-import net.minecraft.client.util.math.MatrixStack;
-//#endif
-
-// TODO: split by RenderContextImpl (e.g. WorldImpl, GuiImpl)
 public interface IMatrixStack
 {
-	//#if MC >= 11500
-	MatrixStack asMcRaw();
-	//#endif
-
 	void pushMatrix();
 
 	void popMatrix();

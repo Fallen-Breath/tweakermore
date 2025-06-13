@@ -22,7 +22,6 @@ package me.fallenbreath.tweakermore.util.render.matrix;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.util.math.Matrix4f;
-import net.minecraft.client.util.math.MatrixStack;
 
 //#if MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;
@@ -43,15 +42,12 @@ public class McMatrixStack implements IMatrixStack
 	//$$ }
 	//#endif
 
-	@Override
-	public MatrixStack asMcRaw()
-	{
-		//#if MC >= 11600
-		//$$ return this.matrixStack;
-		//#else
-		throw new RuntimeException("McMatrixStack < mc1.16 does not support asMcRaw()");
-		//#endif
-	}
+	//#if MC >= 11600
+	//$$ public MatrixStack asMcRaw()
+	//$$ {
+	//$$ 	return this.matrixStack;
+	//$$ }
+	//#endif
 
 	@Override
 	public void pushMatrix()

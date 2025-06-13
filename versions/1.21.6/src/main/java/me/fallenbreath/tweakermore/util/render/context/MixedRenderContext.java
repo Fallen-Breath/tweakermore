@@ -123,13 +123,6 @@ public class MixedRenderContext implements GuiRenderContext, WorldRenderContext,
 		return this.drawContext;
 	}
 
-	@NotNull
-	@Override
-	public IMatrixStack getMatrixStack()
-	{
-		return this.matrixStack;
-	}
-
 	@Override
 	public void pushMatrix()
 	{

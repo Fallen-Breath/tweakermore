@@ -33,7 +33,6 @@ public class McMatrixStack implements IMatrixStack
 		this.matrixStack = matrixStack;
 	}
 
-	@Override
 	public MatrixStack asMcRaw()
 	{
 		return this.matrixStack;

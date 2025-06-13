@@ -24,6 +24,10 @@ import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
 import net.minecraft.client.gui.DrawableHelper;
 import org.jetbrains.annotations.NotNull;
 
+//#if 11600 <= MC && MC < 12000
+//$$ import net.minecraft.client.util.math.MatrixStack;
+//#endif
+
 //#if MC >= 11600
 //$$ import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
 //$$ import net.minecraft.client.util.math.MatrixStack;
@@ -66,6 +70,14 @@ public class MixedRenderContext extends WorldRenderContextImpl implements GuiRen
 		return new MixedRenderContext(new McMatrixStack());
 		//#endif
 	}
+
+	//#if 11600 <= MC && MC < 12000
+	//$$ @Override
+	//$$ public MatrixStack getMcRawMatrixStack()
+	//$$ {
+	//$$ 	return ((McMatrixStack)this.getMatrixStack()).asMcRaw();
+	//$$ }
+	//#endif
 
 	@Override
 	@NotNull

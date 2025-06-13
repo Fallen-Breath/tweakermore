@@ -20,17 +20,10 @@
 
 package me.fallenbreath.tweakermore.util.render.context;
 
-import me.fallenbreath.tweakermore.util.render.matrix.IMatrixStack;
 import net.minecraft.client.util.math.Matrix4f;
-import org.jetbrains.annotations.NotNull;
 
 public interface WorldRenderContext
 {
-	// ============================= Getters =============================
-
-	@NotNull
-	IMatrixStack getMatrixStack();
-
 	// ============================= Manipulators =============================
 
 	void pushMatrix();

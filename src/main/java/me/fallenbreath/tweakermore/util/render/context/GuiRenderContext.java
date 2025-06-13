@@ -20,16 +20,20 @@
 
 package me.fallenbreath.tweakermore.util.render.context;
 
-import me.fallenbreath.tweakermore.util.render.matrix.IMatrixStack;
 import net.minecraft.client.gui.DrawableHelper;  // will be remapped to DrawContext in mc1.20
 import org.jetbrains.annotations.NotNull;
+
+//#if 11600 <= MC && MC < 12000
+//$$ import net.minecraft.client.util.math.MatrixStack;
+//#endif
 
 public interface GuiRenderContext
 {
 	// ============================= Getters =============================
 
-	@NotNull
-	IMatrixStack getMatrixStack();
+	//#if 11600 <= MC && MC < 12000
+	//$$ MatrixStack getMcRawMatrixStack();
+	//#endif
 
 	@NotNull
 	DrawableHelper getGuiDrawer();

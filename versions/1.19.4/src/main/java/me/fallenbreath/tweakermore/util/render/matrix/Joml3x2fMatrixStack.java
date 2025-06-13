@@ -20,7 +20,6 @@
 
 package me.fallenbreath.tweakermore.util.render.matrix;
 
-import net.minecraft.client.util.math.MatrixStack;
 import org.joml.Matrix3x2fStack;
 import org.joml.Matrix4f;
 
@@ -32,12 +31,6 @@ public class Joml3x2fMatrixStack implements IMatrixStack
 	public Joml3x2fMatrixStack(Matrix3x2fStack matrixStack)
 	{
 		this.matrixStack = matrixStack;
-	}
-
-	@Override
-	public MatrixStack asMcRaw()
-	{
-		throw new RuntimeException("Joml3x2fMatrixStack does not support asMcRaw()");
 	}
 
 	public Matrix3x2fStack getRaw()
