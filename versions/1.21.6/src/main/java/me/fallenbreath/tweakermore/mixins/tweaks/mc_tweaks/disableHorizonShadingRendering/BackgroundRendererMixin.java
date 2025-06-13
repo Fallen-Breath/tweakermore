@@ -20,13 +20,40 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableHorizonShadingRendering;
 
-import me.fallenbreath.tweakermore.util.mixin.DummyClass;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import net.minecraft.client.render.fog.FogRenderer;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Slice;
 
 /**
- * Implemented in {@link WorldRendererMixin} since mc1.21.6+
+ * mc1.21.6-: subproject 1.15.2 (main project)
+ * mc1.21.6+: subproject 1.21.6        <--------
  */
-@Mixin(DummyClass.class)
+@Mixin(FogRenderer.class)
 public abstract class BackgroundRendererMixin
 {
+	@ModifyExpressionValue(
+			method = "getFogColor",
+			slice = @Slice(
+					from = @At(
+							value = "INVOKE",
+							target = "Lnet/minecraft/client/world/ClientWorld$Properties;getVoidDarknessRange()F"
+					)
+			),
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/util/math/MathHelper;clamp(FFF)F",
+					ordinal = 0
+			)
+	)
+	private static float disableHorizonShadingRendering(float darkness)
+	{
+		if (TweakerMoreConfigs.DISABLE_HORIZON_SHADING_RENDERING.getBooleanValue())
+		{
+			darkness = 0.0F;
+		}
+		return darkness;
+	}
 }

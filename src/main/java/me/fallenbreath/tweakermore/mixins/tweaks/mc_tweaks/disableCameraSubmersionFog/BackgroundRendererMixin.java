@@ -20,6 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableCameraSubmersionFog;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
@@ -27,7 +28,6 @@ import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.render.BackgroundRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 //#if MC >= 11700
 //$$ import net.minecraft.client.render.CameraSubmersionType;
@@ -40,11 +40,19 @@ import net.minecraft.fluid.Fluids;
 @Mixin(BackgroundRenderer.class)
 public abstract class BackgroundRendererMixin
 {
-	@ModifyVariable(
+	@ModifyExpressionValue(
+			//#if MC >= 12106
+			//$$ method = "getCameraSubmersionType",
+			//#else
 			method = "applyFog",
+			//#endif
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/render/Camera;getFocusedEntity()Lnet/minecraft/entity/Entity;"
+					//#if MC >= 11700
+					//$$ target = "Lnet/minecraft/client/render/Camera;getSubmersionType()Lnet/minecraft/client/render/CameraSubmersionType;"
+					//#else
+					target = "Lnet/minecraft/client/render/Camera;getSubmergedFluidState()Lnet/minecraft/fluid/FluidState;"
+					//#endif
 			)
 	)
 	//#if MC >= 11700

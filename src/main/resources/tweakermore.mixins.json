@@ -108,7 +108,6 @@
     "tweaks.mc_tweaks.disableHoneyBlockEffect.EntityMixin",
     "tweaks.mc_tweaks.disableHoneyBlockEffect.HoneyBlockMixin",
     "tweaks.mc_tweaks.disableHorizonShadingRendering.BackgroundRendererMixin",
-    "tweaks.mc_tweaks.disableHorizonShadingRendering.WorldRendererMixin",
     "tweaks.mc_tweaks.disableInventoryScreenPlayerModelRendering.InventoryScreenMixin",
     "tweaks.mc_tweaks.disableLightUpdates.ClientChunkManagerMixin",
     "tweaks.mc_tweaks.disableLightUpdates.LightingProviderMixin",

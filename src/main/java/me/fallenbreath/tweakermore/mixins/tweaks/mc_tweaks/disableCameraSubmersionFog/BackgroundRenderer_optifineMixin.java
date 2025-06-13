@@ -41,9 +41,9 @@ import net.minecraft.fluid.Fluids;
 @Mixin(BackgroundRenderer.class)
 public abstract class BackgroundRenderer_optifineMixin
 {
-	// @ModifyVariable doesn't work, since mixin will not able to locate method metadata for the "setupFog" method
 	@Dynamic("Added by optifine")
 	@ModifyExpressionValue(
+			// TODO: mc1.21.6 support?
 			method = "setupFog",
 			at = @At(
 					value = "INVOKE",
