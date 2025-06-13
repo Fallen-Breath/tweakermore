@@ -49,7 +49,7 @@ public abstract class ChunkBorderDebugRendererMixin
 	{
 		if (TweakerMoreConfigs.F3_G_SIMPLIFY.getBooleanValue())
 		{
-			forLoopUpperLimit = -1;
+			forLoopUpperLimit = Integer.MIN_VALUE;
 		}
 		return forLoopUpperLimit;
 	}
