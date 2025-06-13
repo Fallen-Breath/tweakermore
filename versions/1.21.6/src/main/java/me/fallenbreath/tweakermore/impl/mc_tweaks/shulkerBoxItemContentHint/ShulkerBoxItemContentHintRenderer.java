@@ -21,36 +21,26 @@
 package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxItemContentHint;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.shulkerItemContentHint.DrawContextAccessor;
 import me.fallenbreath.tweakermore.util.render.ColorHolder;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
+import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.render.state.ItemGuiElementRenderState;
-import net.minecraft.client.gui.render.state.TextGuiElementRenderState;
-import net.minecraft.client.render.item.ItemRenderState;
-import net.minecraft.item.ItemDisplayContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.StringVisitable;
-import net.minecraft.util.Language;
-import net.minecraft.util.crash.CrashException;
-import net.minecraft.util.crash.CrashReport;
-import net.minecraft.util.crash.CrashReportSection;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
-import org.joml.Matrix3x2f;
 
+/**
+ * mc1.21.6-: subproject 1.15.2 (main project)
+ * mc1.21.6+: subproject 1.21.6        <--------
+ */
 public class ShulkerBoxItemContentHintRenderer
 {
 	private static final int SLOT_WIDTH = 16;
 	static final ThreadLocal<Boolean> isRendering = ThreadLocal.withInitial(() -> false);
 
-	public static void render(
-			DrawContext drawContext,
-			ItemStack itemStack, int x, int y
-	)
+	public static void render(DrawContext drawContext, ItemStack itemStack, int x, int y)
 	{
 		ShulkerBoxItemContentHintCommon.Info info = ShulkerBoxItemContentHintCommon.prepareInformation(itemStack);
 		if (!info.enabled)
@@ -58,17 +48,19 @@ public class ShulkerBoxItemContentHintRenderer
 			return;
 		}
 
-		var matrix = new Matrix3x2f(drawContext.getMatrices());
-		RenderUtils.createScaler(x, y + SLOT_WIDTH, info.scale).apply(matrix);
+		var renderContext = RenderContext.of(drawContext);
+		var scaler = RenderUtils.createScaler(x, y + SLOT_WIDTH, info.scale);
+		scaler.apply(renderContext);
 
 		if (info.allItemSame || info.allItemSameIgnoreNbt)
 		{
-			renderMiniItem(drawContext, matrix, info, x, y);
+			renderMiniItem(renderContext, info, x, y);
 		}
 		if (!info.allItemSame)
 		{
-			renderText(drawContext, matrix, info, x, y);
+			renderText(renderContext, info, x, y);
 		}
+		scaler.restore();
 
 		boolean mixedBox = !info.allItemSameIgnoreNbt && !info.allItemSame;
 		if (
@@ -76,44 +68,22 @@ public class ShulkerBoxItemContentHintRenderer
 				&& (0 < info.fillRatio && info.fillRatio < 1)
 		)
 		{
-			renderBar(drawContext, info.fillRatio, x, y);
+			renderBar(renderContext, info.fillRatio, x, y);
 		}
 	}
 
-	private static void renderMiniItem(DrawContext drawContext, Matrix3x2f matrix, ShulkerBoxItemContentHintCommon.Info info, int x, int y)
+	private static void renderMiniItem(RenderContext renderContext, ShulkerBoxItemContentHintCommon.Info info, int x, int y)
 	{
-		// reference: net.minecraft.client.gui.DrawContext#drawItem(net.minecraft.entity.LivingEntity, net.minecraft.world.World, net.minecraft.item.ItemStack, int, int, int)
 		ItemStack stack = info.stack;
-		MinecraftClient mc = MinecraftClient.getInstance();
-		World world = mc.world;
-		if (stack.isEmpty() || world == null)
+		if (stack.isEmpty())
 		{
 			return;
 		}
 
-		var dca = (DrawContextAccessor)drawContext;
 		isRendering.set(true);
-
-		try {
-			ItemRenderState itemRenderState = new ItemRenderState();
-			mc.getItemModelManager().clearAndUpdate(itemRenderState, stack, ItemDisplayContext.GUI, world, null, 0);
-
-			var state = new ItemGuiElementRenderState(
-					stack.getItem().getName().toString(),
-					new Matrix3x2f(matrix), itemRenderState,
-					x, y, dca.getScissorStack().peekLast()
-			);
-			// TODO: add extra
-			dca.getState().addItem(state);
-		}
-		catch (Throwable t)
+		try
 		{
-			CrashReport crashReport = CrashReport.create(t, "Rendering item (TweakerMore)");
-			CrashReportSection crashReportSection = crashReport.addElement("Item being rendered");
-			crashReportSection.add("Item Type", () -> String.valueOf(stack.getItem()));
-			crashReportSection.add("Item Components", () -> String.valueOf(stack.getComponents()));
-			crashReportSection.add("Item Foil", () -> String.valueOf(stack.hasGlint()));
-			throw new CrashException(crashReport);
+			renderContext.getGuiDrawer().drawItem(stack, x, y);
 		}
 		finally
 		{
@@ -121,7 +91,7 @@ public class ShulkerBoxItemContentHintRenderer
 		}
 	}
 
-	private static void renderText(DrawContext drawContext, Matrix3x2f matrix, ShulkerBoxItemContentHintCommon.Info info, int x, int y)
+	private static void renderText(RenderContext renderContext, ShulkerBoxItemContentHintCommon.Info info, int x, int y)
 	{
 		String text = info.allItemSameIgnoreNbt ? "*" : "...";
 		boolean putTextOnRight = info.allItemSameIgnoreNbt && info.scale <= 0.75;
@@ -130,25 +100,16 @@ public class ShulkerBoxItemContentHintRenderer
 		float textX = putTextOnRight ? x + SLOT_WIDTH + 0.5F : x + (SLOT_WIDTH - width) * 0.5F;
 		float textY = putTextOnRight ? y + (SLOT_WIDTH - height) * 0.5F : y + SLOT_WIDTH - height - 3;
 		double textScale = SLOT_WIDTH / height * 0.7 * (putTextOnRight ? 0.9 : 1);
-		int textColor = 0xDDDDDD;
+		int textColor = 0xFFDDDDDD;
 
-		matrix = new Matrix3x2f(matrix);
-		RenderUtils.createScaler(textX + width * 0.5, textY + height * 0.5, textScale).apply(matrix);
+		var scaler = RenderUtils.createScaler(textX + width * 0.5, textY + height * 0.5, textScale);
+		scaler.apply(renderContext);
 
-		// ref: net.minecraft.client.gui.DrawContext.drawText(net.minecraft.client.font.TextRenderer, java.lang.String, int, int, int, boolean)
 		var textRenderer = MinecraftClient.getInstance().textRenderer;
-		var orderedText = Language.getInstance().reorder(StringVisitable.plain(text));
-		var dca = (DrawContextAccessor)drawContext;
-		var textElement = new TextGuiElementRenderState(
-				textRenderer, orderedText,
-				matrix,
-				Math.round(textX), Math.round(textY),
-				textColor, 0, true,
-				dca.getScissorStack().peekLast()
-		);
-		// TODO: see if extra works. if rounded x,y is acceptable then it's not necessary to introduce this extra stuffs
-		((TextGuiElementRenderStatePlus)(Object)textElement).setExtra$TKM(new TextGuiElementRenderStateExtra(textX, textY, textScale));
-		dca.getState().addText(textElement);
+		renderContext.translate(textX, textY, 0);
+		renderContext.getGuiDrawer().drawText(textRenderer, text, 0, 0, textColor, true);
+
+		scaler.restore();
 	}
 
 	@FunctionalInterface
@@ -157,7 +118,7 @@ public class ShulkerBoxItemContentHintRenderer
 		void draw(int x, int y, int width, int height, int color);
 	}
 
-	private static void renderBar(DrawContext drawContext, double fillRatio, int x, int y)
+	private static void renderBar(RenderContext renderContext, double fillRatio, int x, int y)
 	{
 		final int HEIGHT = SLOT_WIDTH / 2;
 		final int WIDTH = 1;
@@ -185,7 +146,7 @@ public class ShulkerBoxItemContentHintRenderer
 		}
 
 		GuiQuadDrawer drawer = (x_, y_, width_, height_, color_) -> {
-			drawContext.fill(RenderPipelines.GUI, x_, y_, x_ + width_, y_ + height_, color_ | 0xFF000000);
+			renderContext.getGuiDrawer().fill(RenderPipelines.GUI, x_, y_, x_ + width_, y_ + height_, color_ | 0xFF000000);
 		};
 
 		drawer.draw( x, y, WIDTH, HEIGHT, 0x040404);

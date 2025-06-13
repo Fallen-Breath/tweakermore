@@ -51,6 +51,10 @@ import net.minecraft.client.util.math.MatrixStack;
 //$$ import com.mojang.blaze3d.platform.GlStateManager;
 //#endif
 
+/**
+ * mc1.21.6-: subproject 1.15.2 (main project)        <--------
+ * mc1.21.6+: subproject 1.21.6
+ */
 public class ShulkerBoxItemContentHintRenderer
 {
 	// the display width of an item slot
