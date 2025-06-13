@@ -39,6 +39,11 @@ public class JomlMatrixStack implements IMatrixStack
 		throw new RuntimeException("JomlMatrixStack does not support asMcRaw()");
 	}
 
+	public Matrix4fStack getRaw()
+	{
+		return this.matrixStack;
+	}
+
 	@Override
 	public void pushMatrix()
 	{

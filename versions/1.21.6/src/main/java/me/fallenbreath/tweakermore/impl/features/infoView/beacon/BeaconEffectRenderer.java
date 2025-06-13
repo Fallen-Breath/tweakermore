@@ -20,8 +20,11 @@
 
 package me.fallenbreath.tweakermore.impl.features.infoView.beacon;
 
+import com.google.common.base.Suppliers;
 import com.google.common.collect.Lists;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.datafixers.util.Pair;
+import fi.dy.masa.malilib.render.MaLiLibPipelines;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.CommonScannerInfoViewer;
@@ -30,48 +33,24 @@ import me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.beacon.Beacon
 import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.render.InWorldPositionTransformer;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
+import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.context.MixedRenderContext;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
-import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 import net.minecraft.block.BeaconBlock;
 import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.texture.Sprite;
+import net.minecraft.client.gl.RenderPipelines;
+import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import java.util.List;
-
-//#if MC >= 12106
-//$$ import net.minecraft.client.gl.RenderPipelines;
-//$$ import net.minecraft.client.gui.hud.InGameHud;
-//#endif
-
-//#if MC >= 12103
-//$$ import net.minecraft.client.render.RenderLayer;
-//#endif
-
-//#if MC >= 12006
-//$$ import net.minecraft.registry.Registries;
-//$$ import net.minecraft.registry.entry.RegistryEntry;
-//$$ import java.util.Optional;
-//#endif
-
-//#if MC >= 11700
-//$$ import com.mojang.blaze3d.systems.RenderSystem;
-//#endif
-
-//#if MC >= 11600
-//$$ import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
-//$$ import net.minecraft.client.util.math.MatrixStack;
-//#endif
-
-//#if MC < 11500
-//$$ import net.minecraft.client.texture.SpriteAtlasTexture;
-//#endif
+import java.util.Optional;
+import java.util.function.Supplier;
 
 public class BeaconEffectRenderer extends CommonScannerInfoViewer
 {
@@ -114,11 +93,11 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 		int beaconLevel = accessor.getLevel();
 
 		//#if MC >= 12006
-		//$$ StatusEffect primary = Optional.ofNullable(accessor.getPrimary()).map(RegistryEntry::value).orElse(null);
-		//$$ StatusEffect secondary = Optional.ofNullable(accessor.getSecondary()).map(RegistryEntry::value).orElse(null);
+		StatusEffect primary = Optional.ofNullable(accessor.getPrimary()).map(RegistryEntry::value).orElse(null);
+		StatusEffect secondary = Optional.ofNullable(accessor.getSecondary()).map(RegistryEntry::value).orElse(null);
 		//#else
-		StatusEffect primary = accessor.getPrimary();
-		StatusEffect secondary = accessor.getSecondary();
+		//$$ StatusEffect primary = accessor.getPrimary();
+		//$$ StatusEffect secondary = accessor.getSecondary();
 		//#endif
 
 		if (primary != null)
@@ -145,7 +124,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 				double deltaX = -maxWidth / 2;  // unit: pixel (in scale=FONT_SCALE context)
 				double kDeltaY = i - (effects.size() - 1) / 2.0;  // unit: ratio
 
-				this.renderStatusEffectIcon(centerPos, statusEffect, amplifier, deltaX, kDeltaY);
+				this.renderStatusEffectIcon(context, centerPos, statusEffect, amplifier, deltaX, kDeltaY);
 				this.renderStatusEffectText(centerPos, statusEffect, amplifier, deltaX, kDeltaY);
 			}
 		}
@@ -157,78 +136,33 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 		return ICON_RENDERED_SIZE + MARGIN + textWidth;
 	}
 
-	@SuppressWarnings("AccessStaticViaInstance")
-	private void renderStatusEffectIcon(Vec3d pos, StatusEffect statusEffect, int amplifier, double deltaX, double kDeltaY)
+	// TODO: client close handler
+	private final Supplier<MixedRenderContext> renderContext = Suppliers.memoize(MixedRenderContext::create);
+
+	private void renderStatusEffectIcon(RenderContext context, Vec3d pos, StatusEffect statusEffect, int amplifier, double deltaX, double kDeltaY)
 	{
-		MinecraftClient mc = MinecraftClient.getInstance();
-
-		//#if MC >= 12106
-		//$$ var sprite = InGameHud.getEffectTexture(Registries.STATUS_EFFECT.getEntry(statusEffect));
-		//#else
-		Sprite sprite = mc.getStatusEffectSpriteManager().getSprite(
-				//#if MC >= 12006
-				//$$ Registries.STATUS_EFFECT.getEntry(statusEffect)
-				//#else
-				statusEffect
-				//#endif
-		);
-		//#endif
-
-		//#if MC >= 12106
-		//$$ MixedRenderContext renderContext = MixedRenderContext.create();
-		//#else
-		RenderContext renderContext = MixedRenderContext.create();
-		//#endif
+		var sprite = InGameHud.getEffectTexture(Registries.STATUS_EFFECT.getEntry(statusEffect));
+		MixedRenderContext mrc = this.renderContext.get();
+		context = RenderContext.of(RenderSystem.getModelViewStack());
 
 		InWorldPositionTransformer positionTransformer = new InWorldPositionTransformer(pos);
-		positionTransformer.apply(renderContext);
+		positionTransformer.apply(context);
 		{
 			RenderGlobals.disableDepthTest();
-			RenderGlobals.enableBlend();  // maybe useful
-			//#if MC < 11700
-			RenderGlobals.disableLighting();
-			//#endif
+			RenderGlobals.enableBlend();
 
-			// ref: net.minecraft.client.gui.hud.InGameHud#renderStatusEffectOverlay
-
-			renderContext.scale(FONT_SCALE * RenderUtils.getSizeScalingXSign(), -FONT_SCALE, FONT_SCALE);
-			renderContext.translate(deltaX, 0, 0);
+			context.scale(FONT_SCALE * RenderUtils.getSizeScalingXSign(), -FONT_SCALE, FONT_SCALE);
+			context.translate(deltaX, 0, 0);
 
 			// scale 2: make the rendered texture height == expected height (line height)
 			double k = 1.0 * ICON_RENDERED_SIZE / ICON_SIZE;
-			renderContext.scale(k, k, k);
-			renderContext.translate(0, ICON_SIZE * (-0.5 + kDeltaY), 0);
+			context.scale(k, k, k);
+			context.translate(0, ICON_SIZE * (-0.5 + kDeltaY), 0);
 
-			//#if MC >= 12103
-			//$$ // no op
-			//#elseif MC >= 11903
-			//$$ RenderSystem.setShaderTexture(0, sprite.getAtlasId());
-			//#elseif MC >= 11700
-			//$$ RenderSystem.setShaderTexture(0, sprite.getAtlas().getId());
-			//#elseif MC >= 11500
-			mc.getTextureManager().bindTexture(sprite.getAtlas().getId());
-			//#else
-			//$$ mc.getTextureManager().bindTexture(SpriteAtlasTexture.STATUS_EFFECT_ATLAS_TEX);
-			//#endif
-			//#if MC < 12103
-			RenderGlobals.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-			//#endif
-
-			//#if MC >= 12106
-			//$$ // TODO: check if this work
-			//$$ renderContext.pushMatrixToGuiDrawer();
-			//$$ renderContext.getGuiDrawer().drawGuiTexture(RenderPipelines.GUI_TEXTURED, sprite, 0, 0, ICON_SIZE, ICON_SIZE, 0xFFFFFFFF);
-			//$$ renderContext.popMatrixFromGuiDrawer();
-			//#elseif MC >= 12103
-			//$$ renderContext.getGuiDrawer().drawSpriteStretched(RenderLayer::getGuiTexturedOverlay, sprite, 0, 0, ICON_SIZE, ICON_SIZE, 0xFFFFFFFF);
-			//$$ renderContext.getGuiDrawer().draw();
-			//#elseif MC >= 12000
-			//$$ renderContext.getGuiDrawer().drawSprite(0, 0, 0, ICON_SIZE, ICON_SIZE, sprite);
-			//#elseif MC >= 11600
-			//$$ renderContext.getGuiDrawer().drawSprite(renderContext.getMatrixStack().asMcRaw(), 0, 0, 0, ICON_SIZE, ICON_SIZE, sprite);
-			//#else
-			renderContext.getGuiDrawer().blit(0, 0, 0, ICON_SIZE, ICON_SIZE, sprite);
-			//#endif
+//			mrc.pushMatrixToGuiDrawer();
+			mrc.getGuiDrawer().drawGuiTexture(MaLiLibPipelines.GUI_TEXTURED_OVERLAY, sprite, 10, 10, ICON_SIZE, ICON_SIZE);
+			mrc.renderGuiElements();
+//			mrc.popMatrixFromGuiDrawer();
 
 			RenderGlobals.enableDepthTest();
 		}

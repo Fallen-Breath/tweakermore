@@ -60,22 +60,6 @@ public interface RenderContext
 		//#endif
 	}
 
-	// for BeaconEffectRenderer, which is the only caller that needs to access an auto-create drawContext
-	static RenderContext createDefault()
-	{
-		//#if MC >= 12106
-		//$$ var matrixStack = new MatrixStack();
-		//$$ return new RenderContextImpl(RenderContextUtils.createDefaultDrawContext(), new McMatrixStack(matrixStack));
-		//#elseif MC >= 12000
-		//$$ var matrixStack = new MatrixStack();
-		//$$ return new RenderContextImpl(RenderContextUtils.createDrawContext(new MatrixStack()), new McMatrixStack(matrixStack));
-		//#elseif MC >= 11600
-		//$$ return new RenderContextImpl(new McMatrixStack(new MatrixStack()));
-		//#else
-		return of();
-		//#endif
-	}
-
 	static WorldRenderContextImpl createWorldRenderContext(
 			//#if MC >= 12006
 			//$$ @NotNull Matrix4fStack matrixStack
@@ -112,6 +96,7 @@ public interface RenderContext
 	//#endif
 
 	//#if MC >= 12006
+	//$$ // NOTES: GUI rendering only
 	//$$ static RenderContext of(@NotNull Matrix4fStack matrixStack)
 	//$$ {
 	//$$ 	return new RenderContextImpl(null, new JomlMatrixStack(matrixStack));

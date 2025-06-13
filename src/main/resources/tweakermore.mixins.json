@@ -243,6 +243,7 @@
     "util.render.DrawContextAccessor",
     "util.render.GameRendererAccessor",
     "util.render.GameRendererMixin",
+    "util.render.GuiRendererMixin",
     "util.render.TextHandlerAccessor"
   ],
   "client": [
