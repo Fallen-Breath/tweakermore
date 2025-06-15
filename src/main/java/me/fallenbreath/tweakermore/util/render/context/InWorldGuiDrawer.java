@@ -20,55 +20,44 @@
 
 package me.fallenbreath.tweakermore.util.render.context;
 
-import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
 import net.minecraft.client.gui.DrawableHelper;
 import org.jetbrains.annotations.NotNull;
 
-//#if MC >= 11600
+//#if MC >= 12000
+//$$ import me.fallenbreath.tweakermore.util.render.RenderUtils;
+//$$ import me.fallenbreath.tweakermore.mixins.util.render.DrawContextAccessor;
+//$$ import net.minecraft.client.MinecraftClient;
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //#endif
 
-/**
- * For those who needs in-game transformation and guiDrawer drawing (mc1.21.6+) (very hacky)
- * <p>
- * mc1.21.6-: subproject 1.15.2 (main project)        <--------
- * mc1.21.6+: subproject 1.21.6
- */
-public class MixedRenderContext extends WorldRenderContextImpl
+public class InWorldGuiDrawer
 {
-	private final InWorldGuiDrawer guiDrawer;
-
-	public MixedRenderContext(
-			@NotNull McMatrixStack matrixStack
-	)
-	{
-		super(matrixStack);
-		this.guiDrawer = new InWorldGuiDrawer(
-				//#if MC >= 12000
-				//$$ matrixStack.asMcRaw()
-				//#endif
-		);
-	}
-
-	public static MixedRenderContext create()
-	{
-		//#if MC >= 11600
-		//$$ return new MixedRenderContext(new McMatrixStack(new MatrixStack()));
-		//#else
-		return new MixedRenderContext(new McMatrixStack());
-		//#endif
-	}
-
-	//#if 11600 <= MC && MC < 12000
-	//$$ public MatrixStack getMcRawMatrixStack()
+	//#if MC >= 12000
+	//$$ @NotNull
+	//$$ private final DrawContext drawContext;
+	//$$
+	//$$ public InWorldGuiDrawer(MatrixStack matrixStack)
 	//$$ {
-	//$$ 	return ((McMatrixStack)this.getMatrixStack()).asMcRaw();
+	//$$ 	this.drawContext = createDrawContext(matrixStack);
 	//$$ }
 	//#endif
 
 	@NotNull
 	public DrawableHelper getGuiDrawer()
 	{
-		return this.guiDrawer.getGuiDrawer();
+		//#if MC >= 12000
+		//$$ return this.drawContext;
+		//#else
+		return new DrawableHelper(){};
+		//#endif
 	}
+
+	//#if MC >= 12000
+	//$$ private static DrawContext createDrawContext(MatrixStack matrixStack)
+	//$$ {
+	//$$ 	var drawContext = new DrawContext(MinecraftClient.getInstance(), RenderUtils.getVertexConsumer());
+	//$$ 	((DrawContextAccessor)drawContext).setMatrices(matrixStack);
+	//$$ 	return drawContext;
+	//$$ }
+	//#endif
 }

@@ -244,6 +244,7 @@
     "util.render.GameRendererAccessor",
     "util.render.GameRendererMixin",
     "util.render.GuiRendererMixin",
+    "util.render.RenderPipelinesMixin",
     "util.render.TextHandlerAccessor"
   ],
   "client": [

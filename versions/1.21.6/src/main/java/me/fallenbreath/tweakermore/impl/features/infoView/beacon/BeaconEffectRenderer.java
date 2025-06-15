@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2025  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -33,12 +33,14 @@ import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.render.InWorldPositionTransformer;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
+import me.fallenbreath.tweakermore.util.render.TweakerMoreRenderPipelines;
 import me.fallenbreath.tweakermore.util.render.context.MixedRenderContext;
 import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.block.BeaconBlock;
 import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.registry.Registries;
@@ -90,13 +92,8 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 		BeaconBlockEntityAccessor accessor = (BeaconBlockEntityAccessor)blockEntity;
 		int beaconLevel = accessor.getLevel();
 
-		//#if MC >= 12006
 		StatusEffect primary = Optional.ofNullable(accessor.getPrimary()).map(RegistryEntry::value).orElse(null);
 		StatusEffect secondary = Optional.ofNullable(accessor.getSecondary()).map(RegistryEntry::value).orElse(null);
-		//#else
-		//$$ StatusEffect primary = accessor.getPrimary();
-		//$$ StatusEffect secondary = accessor.getSecondary();
-		//#endif
 
 		if (primary != null)
 		{
@@ -134,32 +131,27 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 		return ICON_RENDERED_SIZE + MARGIN + textWidth;
 	}
 
-	// TODO: client close handler
-	private final Supplier<MixedRenderContext> renderContext = Suppliers.memoize(MixedRenderContext::create);
-
 	private void renderStatusEffectIcon(WorldRenderContext context, Vec3d pos, StatusEffect statusEffect, int amplifier, double deltaX, double kDeltaY)
 	{
 		var sprite = InGameHud.getEffectTexture(Registries.STATUS_EFFECT.getEntry(statusEffect));
-		MixedRenderContext mrc = this.renderContext.get();
+		MixedRenderContext mrc = MixedRenderContext.create(context);
 
 		InWorldPositionTransformer positionTransformer = new InWorldPositionTransformer(pos);
-		positionTransformer.apply(context);
+		positionTransformer.apply(mrc);
 		{
 			RenderGlobals.disableDepthTest();
 			RenderGlobals.enableBlend();
 
-			context.scale(FONT_SCALE * RenderUtils.getSizeScalingXSign(), -FONT_SCALE, FONT_SCALE);
-			context.translate(deltaX, 0, 0);
+			mrc.scale(FONT_SCALE * RenderUtils.getSizeScalingXSign(), -FONT_SCALE, FONT_SCALE);
+			mrc.translate(deltaX, 0, 0);
 
 			// scale 2: make the rendered texture height == expected height (line height)
 			double k = 1.0 * ICON_RENDERED_SIZE / ICON_SIZE;
-			context.scale(k, k, k);
-			context.translate(0, ICON_SIZE * (-0.5 + kDeltaY), 0);
+			mrc.scale(k, k, k);
+			mrc.translate(0, ICON_SIZE * (-0.5 + kDeltaY), 0);
 
-//			mrc.pushMatrixToGuiDrawer();
-			mrc.getGuiDrawer().drawGuiTexture(MaLiLibPipelines.GUI_TEXTURED_OVERLAY, sprite, 10, 10, ICON_SIZE, ICON_SIZE);
+			mrc.getGuiDrawer().drawGuiTexture(TweakerMoreRenderPipelines.GUI_TEXTURED_NO_DEPTH_TEST, sprite, 0, 0, ICON_SIZE, ICON_SIZE);
 			mrc.renderGuiElements();
-//			mrc.popMatrixFromGuiDrawer();
 
 			RenderGlobals.enableDepthTest();
 		}

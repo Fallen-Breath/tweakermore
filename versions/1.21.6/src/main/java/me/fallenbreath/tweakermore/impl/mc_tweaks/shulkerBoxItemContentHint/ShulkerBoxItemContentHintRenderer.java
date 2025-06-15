@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2025  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by

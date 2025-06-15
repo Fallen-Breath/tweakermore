@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024  Fallen_Breath and contributors
+ * Copyright (C) 2025  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,9 +18,13 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.util.render.context;
+package me.fallenbreath.tweakermore.mixins.util.render;
 
-class RenderContextUtils
+import me.fallenbreath.tweakermore.util.mixin.DummyClass;
+import org.spongepowered.asm.mixin.Mixin;
+
+@Mixin(DummyClass.class)
+public abstract class RenderPipelinesMixin
 {
-	// impl in mc1.20 (subproject 1.20.1)
+	// impl in mc1.21.6+
 }

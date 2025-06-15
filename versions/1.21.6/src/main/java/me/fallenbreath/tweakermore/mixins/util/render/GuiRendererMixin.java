@@ -20,15 +20,19 @@
 
 package me.fallenbreath.tweakermore.mixins.util.render;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.systems.ProjectionType;
+import com.mojang.blaze3d.systems.RenderSystem;
 import me.fallenbreath.tweakermore.util.render.context.InWorldGuiRendererHook;
 import net.minecraft.client.gui.render.GuiRenderer;
+import net.minecraft.client.util.Window;
+import org.joml.Matrix4fc;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(GuiRenderer.class)
 public abstract class GuiRendererMixin implements InWorldGuiRendererHook
@@ -49,24 +53,28 @@ public abstract class GuiRendererMixin implements InWorldGuiRendererHook
 					target = "Lcom/mojang/blaze3d/systems/RenderSystem;setProjectionMatrix(Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lcom/mojang/blaze3d/systems/ProjectionType;)V"
 			)
 	)
-	private boolean skipSetProjectionMatrixForInWorldGuiRendering(GpuBufferSlice gpuBufferSlice, ProjectionType projectionType)
+	private boolean skipSetProjectionMatrixForInWorldGuiRendering(
+			GpuBufferSlice gpuBufferSlice, ProjectionType projectionType,
+			@Local Window window
+	)
 	{
 		return !this.inWorldGuiRender$TKM;
 	}
 
-	@ModifyExpressionValue(
+	@ModifyArg(
 			method = "renderPreparedDraws",
 			at = @At(
-					value = "CONSTANT",
-					args = "floatValue=-11000.0"
-			)
+					value = "INVOKE",
+					target = "Lnet/minecraft/client/gl/DynamicUniforms;write(Lorg/joml/Matrix4fc;Lorg/joml/Vector4fc;Lorg/joml/Vector3fc;Lorg/joml/Matrix4fc;F)Lcom/mojang/blaze3d/buffers/GpuBufferSlice;"
+			),
+			index = 0
 	)
-	private float w(float zOffset)
+	private Matrix4fc w(Matrix4fc matrix4fc)
 	{
 		if (this.inWorldGuiRender$TKM)
 		{
-			zOffset = 0;
+			matrix4fc = RenderSystem.getModelViewMatrix();
 		}
-		return zOffset;
+		return matrix4fc;
 	}
 }

@@ -45,11 +45,6 @@ import net.minecraft.util.math.Vec3d;
 
 import java.util.List;
 
-//#if MC >= 12106
-//$$ import net.minecraft.client.gl.RenderPipelines;
-//$$ import net.minecraft.client.gui.hud.InGameHud;
-//#endif
-
 //#if MC >= 12103
 //$$ import net.minecraft.client.render.RenderLayer;
 //#endif
@@ -145,7 +140,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 				double deltaX = -maxWidth / 2;  // unit: pixel (in scale=FONT_SCALE context)
 				double kDeltaY = i - (effects.size() - 1) / 2.0;  // unit: ratio
 
-				this.renderStatusEffectIcon(centerPos, statusEffect, amplifier, deltaX, kDeltaY);
+				this.renderStatusEffectIcon(context, centerPos, statusEffect, amplifier, deltaX, kDeltaY);
 				this.renderStatusEffectText(centerPos, statusEffect, amplifier, deltaX, kDeltaY);
 			}
 		}
@@ -158,13 +153,10 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 	}
 
 	@SuppressWarnings("AccessStaticViaInstance")
-	private void renderStatusEffectIcon(Vec3d pos, StatusEffect statusEffect, int amplifier, double deltaX, double kDeltaY)
+	private void renderStatusEffectIcon(WorldRenderContext context, Vec3d pos, StatusEffect statusEffect, int amplifier, double deltaX, double kDeltaY)
 	{
 		MinecraftClient mc = MinecraftClient.getInstance();
 
-		//#if MC >= 12106
-		//$$ var sprite = InGameHud.getEffectTexture(Registries.STATUS_EFFECT.getEntry(statusEffect));
-		//#else
 		Sprite sprite = mc.getStatusEffectSpriteManager().getSprite(
 				//#if MC >= 12006
 				//$$ Registries.STATUS_EFFECT.getEntry(statusEffect)
@@ -172,7 +164,6 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 				statusEffect
 				//#endif
 		);
-		//#endif
 
 		MixedRenderContext renderContext = MixedRenderContext.create();
 
@@ -210,12 +201,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 			RenderGlobals.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 			//#endif
 
-			//#if MC >= 12106
-			//$$ // TODO: check if this work
-			//$$ renderContext.pushMatrixToGuiDrawer();
-			//$$ renderContext.getGuiDrawer().drawGuiTexture(RenderPipelines.GUI_TEXTURED, sprite, 0, 0, ICON_SIZE, ICON_SIZE, 0xFFFFFFFF);
-			//$$ renderContext.popMatrixFromGuiDrawer();
-			//#elseif MC >= 12103
+			//#if MC >= 12103
 			//$$ renderContext.getGuiDrawer().drawSpriteStretched(RenderLayer::getGuiTexturedOverlay, sprite, 0, 0, ICON_SIZE, ICON_SIZE, 0xFFFFFFFF);
 			//$$ renderContext.getGuiDrawer().draw();
 			//#elseif MC >= 12000

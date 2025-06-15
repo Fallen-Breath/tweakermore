@@ -28,6 +28,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//#if MC >= 12106
+//$$ import me.fallenbreath.tweakermore.util.render.context.InWorldGuiDrawer;
+//#endif
+
 //#if MC >= 12100
 //$$ import net.minecraft.client.render.RenderTickCounter;
 //#endif
@@ -58,4 +62,12 @@ public abstract class GameRendererMixin
 	{
 		RenderUtils.tickDelta = 1.0F;
 	}
+
+	//#if MC >= 12106
+	//$$ @Inject(method = "close", at = @At("TAIL"))
+	//$$ private void hookGameRendererClose(CallbackInfo ci)
+	//$$ {
+	//$$ 	InWorldGuiDrawer.getInstance().close();
+	//$$ }
+	//#endif
 }
