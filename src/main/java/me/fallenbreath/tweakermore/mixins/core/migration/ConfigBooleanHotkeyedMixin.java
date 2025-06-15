@@ -37,9 +37,16 @@ import org.spongepowered.asm.mixin.Mixin;
 //#endif
 
 /**
- * ConfigBooleanHotkeyed in malilib 1.18 does not accept single json primitive (boolean)
- * which breaks compatibility of config files generated in previous mc versions
- * here comes a hacky fix, still for tweakermore's config only xd
+ * ConfigBooleanHotkeyed stores in different format in malilib < 1.18 and >= 1.18
+ * <p>
+ *   < 1.18: store as boolean primitive: true
+ *   >= 1.18: store as json object: {"enabled": true, "hotkey": {...}}
+ * <p>
+ * This breaks compatibility of config files generated across the 1.18 version boundary
+ * <p>
+ * Here comes a hacky fix, still for tweakermore's config only xd
+ * <p>
+ * See {@link me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed#setValueFromJsonElement} for fix for mc < 1.18
  */
 @Restriction(require = {@Condition(value = ModIds.malilib, versionPredicates = ">=0.11.5")})
 @Mixin(ConfigBooleanHotkeyed.class)

@@ -22,9 +22,16 @@ package me.fallenbreath.tweakermore.config.options;
 
 import com.google.gson.JsonElement;
 import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
+import me.fallenbreath.conditionalmixin.api.util.VersionChecker;
+import me.fallenbreath.tweakermore.util.ModIds;
 
 public class TweakerMoreConfigBooleanHotkeyed extends ConfigBooleanHotkeyed implements TweakerMoreIConfigBase
 {
+	/**
+	 * see also: {@link me.fallenbreath.tweakermore.mixins.core.migration.ConfigBooleanHotkeyedMixin}
+	 */
+	private final boolean OLD_CONFIG_BOOLEAN_HOTKEYED_STORAGE_FORMAT = VersionChecker.doesModVersionSatisfyPredicate(ModIds.malilib, "<0.11.5");
+
 	public TweakerMoreConfigBooleanHotkeyed(String name, boolean defaultValue, String defaultHotkey)
 	{
 		super(name, defaultValue, defaultHotkey, TWEAKERMORE_NAMESPACE_PREFIX + name + COMMENT_SUFFIX, TWEAKERMORE_NAMESPACE_PREFIX + name + PRETTY_NAME_SUFFIX);
@@ -35,6 +42,10 @@ public class TweakerMoreConfigBooleanHotkeyed extends ConfigBooleanHotkeyed impl
 	{
 		boolean oldValue = this.getBooleanValue();
 
+		if (OLD_CONFIG_BOOLEAN_HOTKEYED_STORAGE_FORMAT && element.isJsonObject() && element.getAsJsonObject().has("enabled"))
+		{
+			element = element.getAsJsonObject().get("enabled");
+		}
 		super.setValueFromJsonElement(element);
 
 		if (oldValue != this.getBooleanValue())
