@@ -67,7 +67,7 @@ public abstract class GameRendererMixin
 	//$$ @Inject(method = "close", at = @At("TAIL"))
 	//$$ private void hookGameRendererClose(CallbackInfo ci)
 	//$$ {
-	//$$ 	InWorldGuiDrawer.getInstance().close();
+	//$$ 	InWorldGuiDrawer.closeInstance();
 	//$$ }
 	//#endif
 }

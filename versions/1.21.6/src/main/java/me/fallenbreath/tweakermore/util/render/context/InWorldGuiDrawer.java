@@ -21,6 +21,7 @@
 package me.fallenbreath.tweakermore.util.render.context;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import me.fallenbreath.tweakermore.util.RunOnce;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -34,7 +35,7 @@ import java.util.List;
 
 public class InWorldGuiDrawer implements AutoCloseable
 {
-	private static final InWorldGuiDrawer INSTANCE = new InWorldGuiDrawer();
+	private static final RunOnce<InWorldGuiDrawer> INSTANCE = new RunOnce<>(InWorldGuiDrawer::new);
 
 	private final DrawContext drawContext;
 	private final GuiRenderState guiState;
@@ -55,7 +56,15 @@ public class InWorldGuiDrawer implements AutoCloseable
 
 	public static InWorldGuiDrawer getInstance()
 	{
-		return INSTANCE;
+		return INSTANCE.get();
+	}
+
+	public static void closeInstance()
+	{
+		if (INSTANCE.hasValue())
+		{
+			INSTANCE.get().close();
+		}
 	}
 
 	public void render()

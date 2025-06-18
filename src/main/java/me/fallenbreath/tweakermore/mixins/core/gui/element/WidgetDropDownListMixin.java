@@ -39,12 +39,14 @@ public abstract class WidgetDropDownListMixin
 					value = "INVOKE",
 					//#if MC >= 12106
 					//$$ target = "Lfi/dy/masa/malilib/render/RenderUtils;drawRect(Lnet/minecraft/client/gui/DrawContext;IIIII)V",
+					//$$ remap = true
 					//#elseif MC >= 12105
 					//$$ target = "Lfi/dy/masa/malilib/render/RenderUtils;drawRect(IIIIIZ)V",
+					//$$ remap = false
 					//#else
 					target = "Lfi/dy/masa/malilib/render/RenderUtils;drawRect(IIIII)V",
-					//#endif
 					remap = false
+					//#endif
 			),
 			remap = false
 	)
