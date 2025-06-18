@@ -31,6 +31,7 @@ public class ModIds
 	public static final String minecraft = "minecraft";
 	public static final String fabric_loader = "fabricloader";
 	public static final String fabric_api = "fabric";
+	public static final String fabric_api_rendering_v1 = "fabric-rendering-v1";
 
 	// masa's
 	public static final String malilib = "malilib";

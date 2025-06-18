@@ -245,7 +245,8 @@
     "util.render.GameRendererMixin",
     "util.render.GuiRendererMixin",
     "util.render.RenderPipelinesMixin",
-    "util.render.TextHandlerAccessor"
+    "util.render.TextHandlerAccessor",
+    "util.render.compat.fabricrenderingapi.SpecialGuiElementRegistryImplMixin"
   ],
   "client": [
   ],

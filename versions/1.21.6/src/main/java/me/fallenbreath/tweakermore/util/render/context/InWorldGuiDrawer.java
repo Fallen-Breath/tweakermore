@@ -35,7 +35,13 @@ import java.util.List;
 
 public class InWorldGuiDrawer implements AutoCloseable
 {
-	private static final RunOnce<InWorldGuiDrawer> INSTANCE = new RunOnce<>(InWorldGuiDrawer::new);
+	public static boolean initializing = false;
+	private static final RunOnce<InWorldGuiDrawer> INSTANCE = new RunOnce<>(() -> {
+		initializing = true;
+		var inst = new InWorldGuiDrawer();
+		initializing = false;
+		return inst;
+	});
 
 	private final DrawContext drawContext;
 	private final GuiRenderState guiState;
