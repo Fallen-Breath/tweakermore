@@ -42,12 +42,14 @@ public abstract class EntityMixin
 	{
 		if (TweakerMoreConfigs.DISABLE_ENTITY_RENDER_INTERPOLATION.getBooleanValue())
 		{
-			positionInterpolator.setLerpDuration(0);
-
-			if (!DisableEntityRenderInterpolationHelper.shouldUpdatePositionOrAnglesDirectly())
+			if (positionInterpolator != null)
 			{
-				// adjust the codeflow in the following vanilla code
-				positionInterpolator = null;
+				positionInterpolator.setLerpDuration(0);
+				if (!DisableEntityRenderInterpolationHelper.shouldUpdatePositionOrAnglesDirectly())
+				{
+					// adjust the codeflow in the following vanilla code
+					positionInterpolator = null;
+				}
 			}
 		}
 		return positionInterpolator;
