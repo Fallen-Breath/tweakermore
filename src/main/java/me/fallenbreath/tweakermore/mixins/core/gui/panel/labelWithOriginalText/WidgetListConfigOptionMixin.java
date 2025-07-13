@@ -76,7 +76,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 			int height = args.get(3);
 			int textColor = args.get(4);
 			String[] lines = args.get(5);
-			if (lines.length != 1)
+			if (lines != null && lines.length != 1)
 			{
 				return;
 			}
