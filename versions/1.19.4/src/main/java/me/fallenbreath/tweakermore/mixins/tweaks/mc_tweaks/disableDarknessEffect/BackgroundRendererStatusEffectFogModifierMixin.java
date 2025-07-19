@@ -38,7 +38,7 @@ import org.spongepowered.asm.mixin.injection.At;
 /**
  * mc1.14.4 ~ mc1.19.4: subproject 1.15.2 (main project)
  * mc1.19.4 ~ mc1.21.5: subproject 1.19.4        <--------
- * mc1.21.6+          : subproject 1.21.6
+ * mc1.21.6+          : subproject 1.21.8
  */
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.19"))
 @Mixin(targets = "net.minecraft.client.render.BackgroundRenderer$StatusEffectFogModifier")

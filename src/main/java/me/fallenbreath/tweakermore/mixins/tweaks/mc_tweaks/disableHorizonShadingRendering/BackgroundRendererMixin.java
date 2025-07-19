@@ -29,7 +29,7 @@ import org.spongepowered.asm.mixin.injection.Slice;
 
 /**
  * mc1.21.6-: subproject 1.15.2 (main project)        <--------
- * mc1.21.6+: subproject 1.21.6
+ * mc1.21.6+: subproject 1.21.8
  */
 @Mixin(BackgroundRenderer.class)
 public abstract class BackgroundRendererMixin

@@ -34,7 +34,7 @@ import net.minecraft.util.math.MathHelper;
 
 /**
  * mc1.21.6-: subproject 1.15.2 (main project)
- * mc1.21.6+: subproject 1.21.6        <--------
+ * mc1.21.6+: subproject 1.21.8        <--------
  */
 public class ShulkerBoxItemContentHintRenderer
 {

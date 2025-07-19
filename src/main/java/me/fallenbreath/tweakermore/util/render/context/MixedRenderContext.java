@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
  * For those who needs in-game transformation and guiDrawer drawing (mc1.21.6+) (very hacky)
  * <p>
  * mc1.21.6-: subproject 1.15.2 (main project)        <--------
- * mc1.21.6+: subproject 1.21.6
+ * mc1.21.6+: subproject 1.21.8
  */
 public class MixedRenderContext extends WorldRenderContextImpl
 {
