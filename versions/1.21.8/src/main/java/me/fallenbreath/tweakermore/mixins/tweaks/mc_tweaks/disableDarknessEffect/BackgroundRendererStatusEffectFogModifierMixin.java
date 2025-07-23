@@ -20,14 +20,13 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableDarknessEffect;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.render.fog.DarknessEffectFogModifier;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.client.render.fog.StatusEffectFogModifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -37,22 +36,19 @@ import org.spongepowered.asm.mixin.injection.At;
  * mc1.21.6+          : subproject 1.21.8        <--------
  */
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.19"))
-@Mixin(DarknessEffectFogModifier.class)
+@Mixin(StatusEffectFogModifier.class)
 public abstract class BackgroundRendererStatusEffectFogModifierMixin
 {
-	@ModifyExpressionValue(
-			method = "applyDarknessModifier",
-			at = @At(
-					value = "INVOKE",
-					target = "Lnet/minecraft/client/render/fog/DarknessEffectFogModifier;getStatusEffect()Lnet/minecraft/registry/entry/RegistryEntry;"
-			)
-	)
-	private RegistryEntry<StatusEffect> disableDarknessEffect_doNotApplyIfItIsDarknessEffect(RegistryEntry<StatusEffect> statusEffect)
+	@ModifyReturnValue(method = "shouldApply", at = @At("TAIL"))
+	private boolean disableDarknessEffect_doNotApplyIfItIsDarknessEffect(boolean shouldApply)
 	{
 		if (TweakerMoreConfigs.DISABLE_DARKNESS_EFFECT.getBooleanValue())
 		{
-			statusEffect = null;
+			if ((Object)this instanceof DarknessEffectFogModifier)
+			{
+				shouldApply = false;
+			}
 		}
-		return statusEffect;
+		return shouldApply;
 	}
 }
