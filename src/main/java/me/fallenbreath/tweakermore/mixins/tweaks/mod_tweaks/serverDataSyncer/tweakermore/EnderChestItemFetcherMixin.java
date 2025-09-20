@@ -45,6 +45,7 @@ import java.util.UUID;
 
 //#if MC >= 12106
 //$$ import me.fallenbreath.tweakermore.TweakerMoreMod;
+//$$ import me.fallenbreath.tweakermore.util.EntityUtils;
 //$$ import net.minecraft.inventory.StackWithSlot;
 //$$ import net.minecraft.storage.NbtReadView;
 //$$ import net.minecraft.util.ErrorReporter;
@@ -96,7 +97,7 @@ public abstract class EnderChestItemFetcherMixin
 								//$$ {
 								//$$ 	if (nbt != null && EnderItemNbtUtils.containsList(nbt, "EnderItems"))
 								//$$ 	{
-								//$$ 		var nbtView = NbtReadView.create(logging, player.getWorld().getRegistryManager(), nbt);
+								//$$ 		var nbtView = NbtReadView.create(logging, EntityUtils.getEntityWorld(player).getRegistryManager(), nbt);
 								//$$ 		enderChestInventory.readData(nbtView.getTypedListView("EnderItems", StackWithSlot.CODEC));
 								//$$ 	}
 								//$$ }

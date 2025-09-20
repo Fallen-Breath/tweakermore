@@ -32,7 +32,11 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class EntityMixin
 {
 	@ModifyExpressionValue(
+			//#if MC >= 1.21.9
+			//$$ method = "updateTrackedPositionAndAngles(Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;)V",
+			//#else
 			method = "updateTrackedPositionAndAngles",
+			//#endif
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/entity/Entity;getInterpolator()Lnet/minecraft/entity/PositionInterpolator;"

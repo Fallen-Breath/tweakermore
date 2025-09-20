@@ -37,13 +37,13 @@ public class LitematicaCustomSchematicBaseDirectoryPorting
 	 */
 	public static File getDefaultBaseSchematicDirectory()
 	{
-		return FileUtils.getCanonicalFileIfPossible(
-				//#if MC >= 12105
-				//$$ FileUtils.getMinecraftDirectoryAsPath().resolve("schematics").toFile()
-				//#else
-				new File(FileUtils.getMinecraftDirectory(), "schematics")
-				//#endif
-		);
+		//#if MC >= 12109
+		//$$ return FileUtils.getRealPathIfPossible(FileUtils.getMinecraftDirectoryAsPath().resolve("schematics")).toFile();
+		//#elseif MC >= 12105
+		//$$ return FileUtils.getCanonicalFileIfPossible(FileUtils.getMinecraftDirectoryAsPath().resolve("schematics").toFile());
+		//#else
+		return FileUtils.getCanonicalFileIfPossible(new File(FileUtils.getMinecraftDirectory(), "schematics"));
+		//#endif
 	}
 
 	/**

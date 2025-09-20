@@ -30,6 +30,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
+//#if MC >= 1.21.9
+//$$ import net.minecraft.client.input.CharInput;
+//$$ import net.minecraft.client.input.KeyInput;
+//#endif
+
 //#if MC >= 12000
 //$$ import net.minecraft.client.gui.DrawContext;
 //#elseif MC >= 11600
@@ -105,13 +110,25 @@ public class SelectorDropDownList<T extends IStringValue> extends WidgetDropDown
 	}
 
 	@Override
-	protected boolean onKeyTypedImpl(int keyCode, int scanCode, int modifiers)
+	protected boolean onKeyTypedImpl(
+			//#if MC >= 1.21.9
+			//$$ KeyInput input
+			//#else
+			int keyCode, int scanCode, int modifiers
+			//#endif
+	)
 	{
 		return false;
 	}
 
 	@Override
-	protected boolean onCharTypedImpl(char charIn, int modifiers)
+	protected boolean onCharTypedImpl(
+			//#if MC >= 1.21.9
+			//$$ CharInput input
+			//#else
+			char charIn, int modifiers
+			//#endif
+	)
 	{
 		return false;
 	}

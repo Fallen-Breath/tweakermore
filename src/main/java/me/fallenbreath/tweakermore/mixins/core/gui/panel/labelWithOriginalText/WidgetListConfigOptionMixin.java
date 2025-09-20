@@ -20,6 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.core.gui.panel.labelWithOriginalText;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetConfigOption;
@@ -66,7 +67,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 			),
 			remap = false
 	)
-	private void useMyBetterOptionLabelForTweakerMore(Args args, int x_, int y_, float zLevel, int labelWidth, int configWidth, IConfigBase config)
+	private void useMyBetterOptionLabelForTweakerMore(Args args, @Local(argsOnly = true) IConfigBase config)
 	{
 		if (isTweakerMoreConfigGui() || TweakerMoreConfigs.APPLY_TWEAKERMORE_OPTION_LABEL_GLOBALLY.getBooleanValue())
 		{

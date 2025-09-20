@@ -24,11 +24,25 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.render.WorldRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+
+//#if MC >= 1.21.9
+//$$ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+//#else
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+//#endif
 
 @Mixin(WorldRenderer.class)
 public abstract class WorldRendererMixin
 {
+	//#if MC >= 1.21.9
+	//$$ @ModifyExpressionValue(
+	//$$ 		method = "fillEntityRenderStates",
+	//$$ 		at = @At(
+	//$$ 				value = "INVOKE",
+	//$$ 				target = "Lnet/minecraft/client/render/RenderTickCounter;getTickProgress(Z)F"
+	//$$ 		)
+	//$$ )
+	//#else
 	@ModifyVariable(
 			//#if MC >= 11500
 			method = "renderEntity",
@@ -38,7 +52,8 @@ public abstract class WorldRendererMixin
 			at = @At("HEAD"),
 			argsOnly = true
 	)
-	private float disableEntityRenderInterpolation(float tickDelta)
+	//#endif
+	private float disableEntityRenderInterpolation_setTickDeltaTo1(float tickDelta)
 	{
 		if (TweakerMoreConfigs.DISABLE_ENTITY_RENDER_INTERPOLATION.getBooleanValue())
 		{

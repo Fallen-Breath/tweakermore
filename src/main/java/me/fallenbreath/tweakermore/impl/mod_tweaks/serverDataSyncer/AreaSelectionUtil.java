@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer;
 import com.google.common.collect.Sets;
 import fi.dy.masa.litematica.selection.AreaSelection;
 import fi.dy.masa.litematica.util.PositionUtils;
+import me.fallenbreath.tweakermore.util.EntityUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
@@ -62,7 +63,7 @@ public class AreaSelectionUtil
 		int maxX = Math.max(pos1.getX(), pos2.getX());
 		int maxY = Math.max(pos1.getY(), pos2.getY());
 		int maxZ = Math.max(pos1.getZ(), pos2.getZ());
-		World world = mc.player.clientWorld;
+		World world = EntityUtils.getEntityWorld(mc.player);
 
 		List<BlockPos> bePositions = BlockPos.stream(minX, minY, minZ, maxX, maxY, maxZ).
 				map(BlockPos::toImmutable).

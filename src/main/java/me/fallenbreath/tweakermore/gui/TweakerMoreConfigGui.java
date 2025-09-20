@@ -288,7 +288,11 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		if (this.searchBar != null && previousSearchBarText != null)
 		{
 			GuiTextFieldGeneric searchBox = ((WidgetSearchBarAccessor)this.searchBar).getSearchBox();
+			//#if MC >= 1.21.9
+			//$$ ((WidgetSearchBarSearchOpenStateAccess)this.searchBar).setSearchOpen$TKM(true);
+			//#else
 			this.searchBar.setSearchOpen(true);
+			//#endif
 			searchBox.setText(previousSearchBarText);
 			// malilib-fabric-1.19.4-0.15.4-sources.jar wrongly renames setFocused() to method_25365(), misleading the remap
 			//#disable-remap

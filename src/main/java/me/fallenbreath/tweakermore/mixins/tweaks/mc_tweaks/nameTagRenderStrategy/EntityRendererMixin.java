@@ -33,6 +33,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
+//#if MC >= 1.21.9
+//$$ import me.fallenbreath.tweakermore.impl.mc_tweaks.nameTagRenderStrategy.PlayerEntityRenderStateWithPlayerProfileName;
+//#endif
+
 //#if MC >= 12103
 //$$ import net.minecraft.client.render.entity.state.EntityRenderState;
 //$$ import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
@@ -72,11 +76,19 @@ public abstract class EntityRendererMixin
 				//#endif
 		)
 		{
-			//#if MC >= 12103
+			//#if MC >= 12109
+			//$$ String playerName = ((PlayerEntityRenderStateWithPlayerProfileName)playerEntityRenderState).getPlayerProfileName$TKM();
+			//#elseif MC >= 12103
 			//$$ String playerName = playerEntityRenderState.name;
 			//#else
 			String playerName = ((PlayerEntity)entity).getGameProfile().getName();
 			//#endif
+			if (playerName == null)
+			{
+				// not a player (mc1.21.9+)
+				return;
+			}
+
 			List<String> list = TweakerMoreConfigs.PLAYER_NAME_TAG_RENDER_STRATEGY_LIST.getStrings();
 			boolean shouldRender = strategyType.testEquality(playerName, list);
 			if (!shouldRender)

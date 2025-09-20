@@ -30,7 +30,9 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class BlockEntityRenderDispatcherMixin
 {
 	@ModifyExpressionValue(
-			//#if MC >= 11500
+			//#if MC >= 12109
+			//$$ method = "getRenderState",
+			//#elseif MC >= 11500
 			method = "render(Lnet/minecraft/block/entity/BlockEntity;FLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;)V",
 			//#else
 			//$$ method = "render(Lnet/minecraft/block/entity/BlockEntity;FI)V",
@@ -45,7 +47,7 @@ public abstract class BlockEntityRenderDispatcherMixin
 			)
 	)
 	//#if MC>= 11700
-	//$$ private boolean unlimitedBlockEntityRenderDistance(boolean inRenderDistance)
+	//$$ private boolean unlimitedBlockEntityRenderDistance_impl(boolean inRenderDistance)
 	//$$ {
 	//$$ 	if (TweakerMoreConfigs.UNLIMITED_BLOCK_ENTITY_RENDER_DISTANCE.getBooleanValue())
 	//$$ 	{
@@ -54,7 +56,7 @@ public abstract class BlockEntityRenderDispatcherMixin
 	//$$ 	return inRenderDistance;
 	//$$ }
 	//#else
-	private double unlimitedBlockEntityRenderDistance(double renderDistance)
+	private double unlimitedBlockEntityRenderDistance_impl(double renderDistance)
 	{
 		if (TweakerMoreConfigs.UNLIMITED_BLOCK_ENTITY_RENDER_DISTANCE.getBooleanValue())
 		{

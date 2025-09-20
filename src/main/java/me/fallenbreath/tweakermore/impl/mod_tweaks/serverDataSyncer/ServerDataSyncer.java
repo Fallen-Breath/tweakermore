@@ -25,6 +25,7 @@ import fi.dy.masa.malilib.interfaces.IClientTickHandler;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.DoubleInventoryAccessor;
+import me.fallenbreath.tweakermore.util.EntityUtils;
 import me.fallenbreath.tweakermore.util.compat.carpettisaddition.CarpetTISAdditionAccess;
 import me.fallenbreath.tweakermore.util.event.TweakerMoreEvents;
 import net.minecraft.block.entity.BlockEntity;
@@ -291,7 +292,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 		MinecraftClient mc = MinecraftClient.getInstance();
 		if (hasEnoughPermission() && mc.player != null)
 		{
-			World world = mc.player.clientWorld;
+			World world = EntityUtils.getEntityWorld(mc.player);
 			BlockEntity blockEntity = world.getBlockEntity(pos);
 			if (blockEntity != null && pos.equals(blockEntity.getPos()))
 			{

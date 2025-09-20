@@ -26,6 +26,8 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class EntityUtils
@@ -63,5 +65,14 @@ public class EntityUtils
 			}
 		}
 		return MinecraftClient.getInstance().player;
+	}
+
+	public static World getEntityWorld(@NotNull Entity entity)
+	{
+		//#if 1.21.6 <= MC && MC < 1.21.9
+		//$$ return entity.getWorld();
+		//#else
+		return entity.getEntityWorld();
+		//#endif
 	}
 }

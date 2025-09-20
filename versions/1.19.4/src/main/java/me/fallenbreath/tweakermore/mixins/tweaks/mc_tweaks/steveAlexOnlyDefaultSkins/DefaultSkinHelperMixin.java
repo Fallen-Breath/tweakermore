@@ -74,7 +74,13 @@ public abstract class DefaultSkinHelperMixin
 			String keyword = shouldUseSlimModel ? "/alex.png" : "/steve.png";
 			for (var skin : SKINS)
 			{
-				if (skin.texture().getPath().endsWith(keyword))
+
+				//#if MC >= 1.21.9
+				//$$ var path = skin.body().texturePath().getPath();
+				//#else
+				var path = skin.texture().getPath();
+				//#endif
+				if (path.endsWith(keyword))
 				{
 					cir.setReturnValue(skin);
 					return;

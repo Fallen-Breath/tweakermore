@@ -26,7 +26,12 @@ import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.WorldRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+
+//#if MC >= 1.21.9
+//$$ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+//#else
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+//#endif
 
 /**
  * Only used in mc1.15+
@@ -34,6 +39,15 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(WorldRenderer.class)
 public abstract class WorldRendererMixin
 {
+	//#if MC >= 1.21.9
+	//$$ @ModifyExpressionValue(
+	//$$ 		method = "render",
+	//$$ 		at = @At(
+	//$$ 				value = "INVOKE",
+	//$$ 				target = "Lnet/minecraft/client/render/WorldRenderer;setupFrustum(Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/client/render/Frustum;"
+	//$$ 		)
+	//$$ )
+	//#else
 	@ModifyVariable(
 			method = "render",
 			at = @At(
@@ -42,7 +56,8 @@ public abstract class WorldRendererMixin
 					ordinal = 0
 			)
 	)
-	private Frustum disableCameraFrustumCulling(Frustum frustum)
+	//#endif
+	private Frustum disableCameraFrustumCulling_impl(Frustum frustum)
 	{
 		boolean alwaysVisible = TweakerMoreConfigs.DISABLE_CAMERA_FRUSTUM_CULLING.getBooleanValue();
 		((CouldBeAlwaysVisibleFrustum)frustum).setAlwaysVisible$TKM(alwaysVisible);

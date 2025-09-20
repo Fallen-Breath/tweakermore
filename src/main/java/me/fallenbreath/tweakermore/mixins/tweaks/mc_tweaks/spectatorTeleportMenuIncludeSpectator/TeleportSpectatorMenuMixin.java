@@ -61,7 +61,13 @@ public abstract class TeleportSpectatorMenuMixin
 			{
 				if (entry.getGameMode() == GameMode.SPECTATOR)
 				{
-					TeleportToSpecificPlayerSpectatorCommand command = new TeleportToSpecificPlayerSpectatorCommand(entry.getProfile());
+					TeleportToSpecificPlayerSpectatorCommand command = new TeleportToSpecificPlayerSpectatorCommand(
+							//#if MC >= 1.21.9
+							//$$ entry
+							//#else
+							entry.getProfile()
+							//#endif
+					);
 					((CommandEntryWithSpectatorMark)command).setIsSpectator$TKM(true);
 					extendedElements.add(command);
 				}

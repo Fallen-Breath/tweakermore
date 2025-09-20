@@ -55,7 +55,14 @@ public class InWorldGuiDrawer implements AutoCloseable
 		VertexConsumerProvider.Immediate immediate = RenderUtils.getVertexConsumer();
 		this.guiState = new GuiRenderState();
 		this.drawContext = new DrawContext(mc, this.guiState);
-		this.guiRenderer = new GuiRenderer(this.guiState, immediate, List.of());
+		this.guiRenderer = new GuiRenderer(
+				this.guiState, immediate,
+				//#if MC >= 1.21.9
+				//$$ mc.gameRenderer.getEntityRenderCommandQueue(),  // TODO: check if this work
+				//$$ mc.gameRenderer.getEntityRenderDispatcher(),
+				//#endif
+				List.of()
+		);
 		((InWorldGuiRendererHook)this.guiRenderer).setInWorldGuiRender$TKM(true);
 		this.fogRenderer = new FogRenderer();
 	}

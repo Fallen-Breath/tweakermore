@@ -80,7 +80,7 @@ public abstract class AbstractBlockStateMixin
 			return;
 		}
 
-		if (world.isClient)
+		if (world.isClient())
 		{
 			ActionResult result = PistorderRenderer.getInstance().
 					//#if MC >= 12006

@@ -77,7 +77,14 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	//$$ 		remap = false,
 	//$$ 		cancellable = true
 	//$$ )
-	//$$ private void tweakerMoreCustomConfigGui_IOptionListHotkeyed(int x, int y, float zLevel, int labelWidth, int configWidth, IConfigBase config, CallbackInfo ci)
+	//$$ private void tweakerMoreCustomConfigGui_IOptionListHotkeyed(
+	//$$ 		int x, int y,
+	//$$ 		//#if MC < 1.21.9
+	//$$ 		float zLevel,
+	//$$ 		//#endif
+	//$$ 		int labelWidth, int configWidth, IConfigBase config,
+	//$$ 		CallbackInfo ci
+	//$$ )
 	//$$ {
 	//$$ 	if (this.isTweakerMoreConfigGui())
 	//$$ 	{

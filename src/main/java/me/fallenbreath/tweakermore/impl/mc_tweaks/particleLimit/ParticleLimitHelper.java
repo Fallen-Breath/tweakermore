@@ -32,21 +32,39 @@ import net.minecraft.client.particle.ParticleTextureSheet;
 import java.util.Map;
 import java.util.Queue;
 
+//#if MC >= 1.21.9
+//$$ import me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.particleLimit.ParticleRendererAccessor;
+//#endif
+
 public class ParticleLimitHelper
 {
+	//#if MC >= 1.21.9
+	//$$ @SuppressWarnings({"rawtypes", "unchecked"})
+	//#else
 	@SuppressWarnings("UnstableApiUsage")
+	//#endif
 	public static void onConfigValueChanged(ConfigInteger config)
 	{
 		int newLimit = config.getIntegerValue();
 
 		ParticleManager particleManager = MinecraftClient.getInstance().particleManager;
-		Map<ParticleTextureSheet, Queue<Particle>> particles = ((ParticleManagerAccessor)particleManager).getParticles();
 
+		//#if MC >= 1.21.9
+		//$$ var particles = ((ParticleManagerAccessor)particleManager).getParticles();
+		//$$ for (var particleRenderer : particles.values())
+		//$$ {
+		//$$ 	EvictingQueue<Particle> newQueue = EvictingQueue.create(newLimit);
+		//$$ 	newQueue.addAll(particleRenderer.getParticles());
+		//$$ 	((ParticleRendererAccessor)particleRenderer).setParticles$TKM(newQueue);
+		//$$ }
+		//#else
+		Map<ParticleTextureSheet, Queue<Particle>> particles = ((ParticleManagerAccessor)particleManager).getParticles();
 		for (ParticleTextureSheet key : Lists.newArrayList(particles.keySet()))
 		{
 			EvictingQueue<Particle> newQueue = EvictingQueue.create(newLimit);
 			newQueue.addAll(particles.get(key));
 			particles.put(key, newQueue);
 		}
+		//#endif
 	}
 }

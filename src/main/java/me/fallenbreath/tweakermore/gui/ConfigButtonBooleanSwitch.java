@@ -25,6 +25,10 @@ import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.options.IHotkeyWithSwitch;
 
+//#if MC >= 1.21.9
+//$$ import net.minecraft.client.gui.Click;
+//#endif
+
 public class ConfigButtonBooleanSwitch extends ButtonGeneric
 {
 	private final IHotkeyWithSwitch config;
@@ -37,12 +41,24 @@ public class ConfigButtonBooleanSwitch extends ButtonGeneric
 	}
 
 	@Override
-	protected boolean onMouseClickedImpl(int mouseX, int mouseY, int mouseButton)
+	protected boolean onMouseClickedImpl(
+			//#if MC >= 1.21.9
+			//$$ Click click, boolean doubleClick
+			//#else
+			int mouseX, int mouseY, int mouseButton
+			//#endif
+	)
 	{
 		this.config.toggleBooleanValue();
 		this.updateDisplayString();
 
-		return super.onMouseClickedImpl(mouseX, mouseY, mouseButton);
+		return super.onMouseClickedImpl(
+				//#if MC >= 1.21.9
+				//$$ click, doubleClick
+				//#else
+				mouseX, mouseY, mouseButton
+				//#endif
+		);
 	}
 
 	@Override
