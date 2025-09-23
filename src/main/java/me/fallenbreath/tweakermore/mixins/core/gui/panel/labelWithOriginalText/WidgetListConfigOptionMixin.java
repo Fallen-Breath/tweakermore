@@ -20,6 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.core.gui.panel.labelWithOriginalText;
 
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.sugar.Local;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
@@ -36,8 +37,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.ModifyArgs;
-import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import java.util.function.Function;
 
@@ -58,7 +57,7 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 	@Unique
 	private boolean showOriginalTextsThisTime;
 
-	@ModifyArgs(
+	@WrapWithCondition(
 			method = "addConfigOption",
 			at = @At(
 					value = "INVOKE",
@@ -67,36 +66,37 @@ public abstract class WidgetListConfigOptionMixin extends WidgetConfigOptionBase
 			),
 			remap = false
 	)
-	private void useMyBetterOptionLabelForTweakerMore(Args args, @Local(argsOnly = true) IConfigBase config)
+	private boolean useMyBetterOptionLabelForTweakerMore(
+			WidgetConfigOption self, int x, int y, int width, int height, int textColor, String[] lines,
+			@Local(argsOnly = true) IConfigBase config
+	)
 	{
 		if (isTweakerMoreConfigGui() || TweakerMoreConfigs.APPLY_TWEAKERMORE_OPTION_LABEL_GLOBALLY.getBooleanValue())
 		{
-			int x = args.get(0);
-			int y = args.get(1);
-			int width = args.get(2);
-			int height = args.get(3);
-			int textColor = args.get(4);
-			String[] lines = args.get(5);
-			if (lines == null || lines.length != 1)
+			if (lines != null && lines.length == 1)
 			{
-				return;
+				TweakerMoreOptionLabel label = this.createTweakerMoreOptionLabel(config, x, y, width, height, textColor, lines);
+				this.showOriginalTextsThisTime = label.shouldShowOriginalLines();
+				return false;
 			}
-
-			args.set(5, null);  // cancel original call
-
-			Function<String, String> modifier = s -> s;
-			if (config instanceof TweakerMoreIConfigBase)
-			{
-				modifier = ((TweakerMoreIConfigBase)config).getGuiDisplayLineModifier();
-			}
-			TweakerMoreOptionLabel label = new TweakerMoreOptionLabel(x, y, width, height, textColor, lines, new String[]{config.getName()}, modifier);
-			this.addWidget(label);
-			this.showOriginalTextsThisTime = label.shouldShowOriginalLines();
 		}
-		else
+
+		this.showOriginalTextsThisTime = false;
+		return true;
+	}
+
+	@Unique
+	private TweakerMoreOptionLabel createTweakerMoreOptionLabel(IConfigBase config, int x, int y, int width, int height, int textColor, String[] lines)
+	{
+		Function<String, String> modifier = s -> s;
+		if (config instanceof TweakerMoreIConfigBase)
 		{
-			this.showOriginalTextsThisTime = false;
+			modifier = ((TweakerMoreIConfigBase)config).getGuiDisplayLineModifier();
 		}
+
+		TweakerMoreOptionLabel label = new TweakerMoreOptionLabel(x, y, width, height, textColor, lines, new String[]{config.getName()}, modifier);
+		this.addWidget(label);
+		return label;
 	}
 
 	@ModifyArg(
