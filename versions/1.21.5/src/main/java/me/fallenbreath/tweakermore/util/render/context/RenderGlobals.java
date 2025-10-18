@@ -74,4 +74,9 @@ public class RenderGlobals
 				GlConst.toGl(DestFactor.ONE_MINUS_SRC_ALPHA)
 		);
 	}
+
+	public static boolean isOnRenderThread()
+	{
+		return RenderSystem.isOnRenderThread();
+	}
 }

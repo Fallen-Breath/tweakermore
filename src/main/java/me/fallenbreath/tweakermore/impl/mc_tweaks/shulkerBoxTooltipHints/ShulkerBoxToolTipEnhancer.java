@@ -27,6 +27,7 @@ import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builder
 import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builder.AbstractHintBuilder;
 import me.fallenbreath.tweakermore.util.InventoryUtils;
 import me.fallenbreath.tweakermore.util.Messenger;
+import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.item.ItemStack;
@@ -78,57 +79,69 @@ public class ShulkerBoxToolTipEnhancer
 
 	public static void applyFillLevelHint(ItemStack skulker, List<Text> tooltip)
 	{
-		if (TweakerMoreConfigs.SHULKER_BOX_TOOLTIP_FILL_LEVEL_HINT.getBooleanValue() && tooltip.size() > 0)
+		if (!RenderGlobals.isOnRenderThread())
 		{
-			int slotAmount = InventoryUtils.getInventorySlotAmount(skulker);
-			if (slotAmount == -1)
-			{
-				return;
-			}
-
-			DefaultedList<ItemStack> stackList = fi.dy.masa.malilib.util.InventoryUtils.getStoredItems(skulker, slotAmount);
-			if (stackList.isEmpty())
-			{
-				return;
-			}
-
-			double sum = 0;
-			for (ItemStack stack : stackList)
-			{
-				sum += 1.0D * stack.getCount() / stack.getMaxCount();
-			}
-
-			double ratio = sum / slotAmount;
-			Formatting color = ratio >= 1.0D ? Formatting.DARK_GREEN : Formatting.GRAY;
-			Text fillLevelText = Messenger.s(String.format("%.2f%%", 100 * ratio), color);
-
-			// let fillLevelText be rendered right-aligned
-			String spacing = " ";
-			Text firstLine = Messenger.c(tooltip.get(0), spacing, fillLevelText);
-			TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-
-			ToIntFunction<Text> textLenCalc = text ->
-					//#if MC >= 11600
-					//$$ textRenderer.getWidth(text);
-					//#else
-					textRenderer.getStringWidth(text.asFormattedString());
-					//#endif
-
-			int maxWidth = tooltip.stream().mapToInt(textLenCalc).max().orElse(0);
-
-			while (true)
-			{
-				List<Text> siblings = firstLine.getSiblings();
-				spacing += " ";
-				Text prevSpacing = siblings.get(1);
-				siblings.set(1, Messenger.s(spacing));
-				if (textLenCalc.applyAsInt(firstLine) > maxWidth)
-				{
-					siblings.set(1, prevSpacing);  // rollback
-					break;
-				}
-			}
-			tooltip.set(0, firstLine);
+			// Do nothing in case it's called from non-render thread by whatever mod
+			// see also: https://github.com/Fallen-Breath/tweakermore/issues/138
+			return;
 		}
+		if (!TweakerMoreConfigs.SHULKER_BOX_TOOLTIP_FILL_LEVEL_HINT.getBooleanValue())
+		{
+			return;
+		}
+		if (tooltip.isEmpty())
+		{
+			return;
+		}
+
+		int slotAmount = InventoryUtils.getInventorySlotAmount(skulker);
+		if (slotAmount == -1)
+		{
+			return;
+		}
+
+		DefaultedList<ItemStack> stackList = fi.dy.masa.malilib.util.InventoryUtils.getStoredItems(skulker, slotAmount);
+		if (stackList.isEmpty())
+		{
+			return;
+		}
+
+		double sum = 0;
+		for (ItemStack stack : stackList)
+		{
+			sum += 1.0D * stack.getCount() / stack.getMaxCount();
+		}
+
+		double ratio = sum / slotAmount;
+		Formatting color = ratio >= 1.0D ? Formatting.DARK_GREEN : Formatting.GRAY;
+		Text fillLevelText = Messenger.s(String.format("%.2f%%", 100 * ratio), color);
+
+		// let fillLevelText be rendered right-aligned
+		String spacing = " ";
+		Text firstLine = Messenger.c(tooltip.get(0), spacing, fillLevelText);
+		TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+
+		ToIntFunction<Text> textLenCalc = text ->
+				//#if MC >= 11600
+				//$$ textRenderer.getWidth(text);
+				//#else
+				textRenderer.getStringWidth(text.asFormattedString());
+				//#endif
+
+		int maxWidth = tooltip.stream().mapToInt(textLenCalc).max().orElse(0);
+
+		while (true)
+		{
+			List<Text> siblings = firstLine.getSiblings();
+			spacing += " ";
+			Text prevSpacing = siblings.get(1);
+			siblings.set(1, Messenger.s(spacing));
+			if (textLenCalc.applyAsInt(firstLine) > maxWidth)
+			{
+				siblings.set(1, prevSpacing);  // rollback
+				break;
+			}
+		}
+		tooltip.set(0, firstLine);
 	}
 }

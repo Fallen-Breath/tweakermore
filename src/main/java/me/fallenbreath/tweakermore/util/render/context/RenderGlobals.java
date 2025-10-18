@@ -94,4 +94,9 @@ public class RenderGlobals
 		RenderSystem.disableLighting();
 	}
 	//#endif
+
+	public static boolean isOnRenderThread()
+	{
+		return RenderSystem.isOnRenderThread();
+	}
 }

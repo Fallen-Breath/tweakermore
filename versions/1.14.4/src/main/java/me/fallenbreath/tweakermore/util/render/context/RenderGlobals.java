@@ -21,6 +21,7 @@
 package me.fallenbreath.tweakermore.util.render.context;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.MinecraftClient;
 
 /**
  * mc1.14           : subproject 1.14.4        <--------
@@ -79,5 +80,10 @@ public class RenderGlobals
 	public static void disableLighting()
 	{
 		GlStateManager.disableLighting();
+	}
+
+	public static boolean isOnRenderThread()
+	{
+		return MinecraftClient.getInstance().isOnThread();
 	}
 }
