@@ -20,7 +20,6 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableHoneyBlockEffect;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
@@ -31,26 +30,24 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.15"))
 @Mixin(HoneyBlock.class)
 public abstract class HoneyBlockMixin
 {
-	@ModifyExpressionValue(
-			method = "onEntityCollision",
-			at = @At(value = "INVOKE", target = "Lnet/minecraft/block/HoneyBlock;isSliding(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/Entity;)Z")
-	)
-	private boolean isSliding(boolean original, @Local(argsOnly = true) Entity entity)
+	/**
+	 * The signature of net.minecraft.block.HoneyBlock#onEntityCollision was changed in mc1.21.10.
+	 * If we choose to not`@ModifyExpressionValue` at `isSliding` inside `onEntityCollision`,
+	 * we can have a seamless compatibility between mc1.21.9 and mc1.21.10
+	 */
+	@Inject(method = "isSliding", at = @At("HEAD"), cancellable = true)
+	private void disableHoneyBlockEffect_isSlidingHack(CallbackInfoReturnable<Boolean> cir, @Local(argsOnly = true) Entity entity)
 	{
-		if (original
-				&& TweakerMoreConfigs.DISABLE_HONEY_BLOCK_EFFECT.getBooleanValue()
-				&& entity == MinecraftClient.getInstance().player)
+		if (TweakerMoreConfigs.DISABLE_HONEY_BLOCK_EFFECT.getBooleanValue() && entity == MinecraftClient.getInstance().player)
 		{
-			return false;
-		}
-		else
-		{
-			return original;
+			cir.setReturnValue(false);
 		}
 	}
 }
