@@ -149,7 +149,7 @@ The number of items retained by the autoCollectMaterialListItemRetainItem featur
 
 Automatically fill the opened container with the most numerous item stack in your inventory
 
-iff the item stack is the only most numerous one
+if the item stack is the only most numerous one
 
 and then close the container
 
