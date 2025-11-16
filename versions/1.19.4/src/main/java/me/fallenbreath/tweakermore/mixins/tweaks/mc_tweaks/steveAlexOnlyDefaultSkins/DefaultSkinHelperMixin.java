@@ -45,16 +45,16 @@ public abstract class DefaultSkinHelperMixin
 {
 	@Shadow @Final
 	//#if MC >= 12002
-	//$$ private static PlayerSkin[] SKINS;
+	//$$ private static PlayerSkin[] DEFAULT_SKINS;
 	//#else
-	private static DefaultPlayerSkin.Skin[] SKINS;
+	private static DefaultPlayerSkin.SkinType[] DEFAULT_SKINS;
 	//#endif
 
 	@Inject(
 			//#if MC >= 12002
 			//$$ method = "get(Ljava/util/UUID;)Lnet/minecraft/client/resources/PlayerSkin;",
 			//#else
-			method = "getSkin",
+			method = "getSkinType",
 			//#endif
 			at = @At("HEAD"),
 			cancellable = true
@@ -64,7 +64,7 @@ public abstract class DefaultSkinHelperMixin
 			//#if MC >= 12002
 			//$$ CallbackInfoReturnable<PlayerSkin> cir
 			//#else
-			CallbackInfoReturnable<DefaultPlayerSkin.Skin> cir
+			CallbackInfoReturnable<DefaultPlayerSkin.SkinType> cir
 			//#endif
 	)
 	{
@@ -72,7 +72,7 @@ public abstract class DefaultSkinHelperMixin
 		{
 			boolean shouldUseSlimModel = (uuid.hashCode() & 1) == 1;
 			String keyword = shouldUseSlimModel ? "/alex.png" : "/steve.png";
-			for (var skin : SKINS)
+			for (var skin : DEFAULT_SKINS)
 			{
 
 				//#if MC >= 1.21.9

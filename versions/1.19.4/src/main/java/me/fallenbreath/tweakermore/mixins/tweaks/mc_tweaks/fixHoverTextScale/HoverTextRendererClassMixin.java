@@ -112,7 +112,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 			//#elseif MC >= 12000
 			//$$ method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;)V",
 			//#else
-			method = "renderTooltipFromComponents",
+			method = "renderTooltipInternal",
 			//#endif
 			at = @At("HEAD"),
 			argsOnly = true

@@ -41,7 +41,7 @@ import org.spongepowered.asm.mixin.injection.At;
  * mc1.21.6+          : subproject 1.21.8
  */
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.19"))
-@Mixin(targets = "net.minecraft.client.render.BackgroundRenderer$StatusEffectFogModifier")
+@Mixin(targets = "net.minecraft.client.renderer.FogRenderer$MobEffectFogFunction")
 public interface BackgroundRendererStatusEffectFogModifierMixin
 {
 	@Shadow
@@ -50,14 +50,14 @@ public interface BackgroundRendererStatusEffectFogModifierMixin
 	//#else
 	MobEffect
 	//#endif
-	getStatusEffect();
+	getMobEffect();
 
-	@ModifyReturnValue(method = "shouldApply", at = @At("TAIL"))
+	@ModifyReturnValue(method = "isEnabled", at = @At("TAIL"))
 	default boolean disableDarknessEffect_doNotApplyIfItIsDarknessEffect(boolean shouldApply)
 	{
 		if (TweakerMoreConfigs.DISABLE_DARKNESS_EFFECT.getBooleanValue())
 		{
-			if (this.getStatusEffect() == MobEffects.DARKNESS)
+			if (this.getMobEffect() == MobEffects.DARKNESS)
 			{
 				shouldApply = false;
 			}

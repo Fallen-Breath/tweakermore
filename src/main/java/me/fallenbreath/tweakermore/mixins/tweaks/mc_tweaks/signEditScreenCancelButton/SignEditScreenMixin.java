@@ -66,11 +66,7 @@ public abstract class SignEditScreenMixin extends Screen
 
 	@Shadow protected abstract void onDone();
 
-	//#if MC >= 11903
-	//$$ @Shadow @Final protected SignBlockEntity blockEntity;
-	//#else
 	@Shadow @Final private SignBlockEntity sign;
-	//#endif
 
 	@Unique private boolean editingCancelled = false;
 	@Unique private ClientSignTextRollbacker clientSignTextRollbacker = null;
@@ -79,7 +75,7 @@ public abstract class SignEditScreenMixin extends Screen
 			//#if MC >= 12001
 			//$$ method = "<init>(Lnet/minecraft/block/entity/SignBlockEntity;ZZLnet/minecraft/text/Text;)V",
 			//#elseif MC >= 11903
-			//$$ method = "<init>(Lnet/minecraft/block/entity/SignBlockEntity;ZLnet/minecraft/text/Text;)V",
+			//$$ method = "<init>(Lnet/minecraft/world/level/block/entity/SignBlockEntity;ZLnet/minecraft/network/chat/Component;)V",
 			//#else
 			method = "<init>",
 			//#endif
@@ -89,7 +85,7 @@ public abstract class SignEditScreenMixin extends Screen
 	{
 		this.clientSignTextRollbacker = new ClientSignTextRollbacker(
 				//#if MC >= 11903
-				//$$ (AbstractSignEditScreen)(Object)this, this.blockEntity
+				//$$ (AbstractSignEditScreen)(Object)this, this.sign
 				//#else
 				(SignEditScreen)(Object)this, this.sign
 				//#endif
@@ -127,8 +123,8 @@ public abstract class SignEditScreenMixin extends Screen
 			//$$ this.addRenderableWidget(
 			//$$ 		Button.builder(CommonComponents.GUI_CANCEL, button -> {
 			//$$ 			this.editingCancelled = true;
-			//$$ 			this.finishEditing();
-			//$$ 		}).dimensions(this.width / 2 - 100, this.height / 4 + 120 + 20 + 5, 200, 20).build()
+			//$$ 			this.onDone();
+			//$$ 		}).bounds(this.width / 2 - 100, this.height / 4 + 120 + 20 + 5, 200, 20).build()
 			//$$ );
 			//#else
 

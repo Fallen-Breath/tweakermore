@@ -47,7 +47,14 @@ public abstract class SchematicPlacementMixin
 	@Shadow(remap = false)
 	private BlockPos origin;
 
-	@Inject(method = "<init>", at = @At("TAIL"))
+	@Inject(
+			//#if MC >= 1.19.4
+			//$$ method = "<init>(Lfi/dy/masa/litematica/schematic/LitematicaSchematic;Lnet/minecraft/core/BlockPos;Ljava/lang/String;ZZLfi/dy/masa/litematica/schematic/placement/SchematicPlacementManager;)V",
+			//#else
+			method = "<init>",
+			//#endif
+			at = @At("TAIL")
+	)
 	private void lmOriginOverride000_tweakPlacementOriginTo000(CallbackInfo ci)
 	{
 		if (TweakerMoreConfigs.LM_ORIGIN_OVERRIDE_000.getBooleanValue())

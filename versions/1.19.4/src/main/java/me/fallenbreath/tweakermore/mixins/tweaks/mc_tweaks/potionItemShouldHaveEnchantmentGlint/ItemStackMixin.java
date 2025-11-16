@@ -40,7 +40,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin
 {
-	@Inject(method = "hasGlint", at = @At("RETURN"), cancellable = true)
+	@Inject(method = "hasFoil", at = @At("RETURN"), cancellable = true)
 	private void potionItemShouldHaveEnchantmentGlint_alwaysHasGlint(CallbackInfoReturnable<Boolean> cir)
 	{
 		if (TweakerMoreConfigs.POTION_ITEM_SHOULD_HAVE_ENCHANTMENT_GLINT.getBooleanValue())
@@ -51,7 +51,7 @@ public abstract class ItemStackMixin
 				//#if MC >= 12006
 				//$$ boolean hasEffect = self.get(DataComponents.POTION_CONTENTS) != null;
 				//#else
-				boolean hasEffect = !PotionUtils.getPotionEffects(self).isEmpty();
+				boolean hasEffect = !PotionUtils.getMobEffects(self).isEmpty();
 				//#endif
 				cir.setReturnValue(cir.getReturnValue() || hasEffect);
 			}

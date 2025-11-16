@@ -57,7 +57,17 @@ public abstract class ClientPlayNetworkHandlerMixin
 		SafeAfkHelper.onHealthUpdate(this.minecraft);
 	}
 
-	@Inject(method = {"cleanup", "handleRespawn"}, at = @At("TAIL"))
+	@Inject(
+			method = {
+					//#if MC >= 11900
+					//$$ "close",
+					//#else
+					"cleanup",
+					//#endif
+					"handleRespawn"
+			},
+			at = @At("TAIL")
+	)
 	private void resetLastHurtGameTime(CallbackInfo ci)
 	{
 		SafeAfkHelper.resetHurtTime();

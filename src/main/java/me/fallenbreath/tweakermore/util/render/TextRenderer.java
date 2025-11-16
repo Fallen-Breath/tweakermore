@@ -200,7 +200,7 @@ public class TextRenderer
 					mc.font.drawInBatch(
 							holder.text, textX, textY, this.color, this.shadow, matrix4f, immediate,
 							//#if MC >= 11904
-							//$$ this.seeThrough ? net.minecraft.client.font.TextRenderer.TextLayerType.SEE_THROUGH : net.minecraft.client.font.TextRenderer.TextLayerType.NORMAL,
+							//$$ this.seeThrough ? net.minecraft.client.gui.Font.DisplayMode.SEE_THROUGH : net.minecraft.client.gui.Font.DisplayMode.NORMAL,
 							//#else
 							this.seeThrough,
 							//#endif

@@ -50,7 +50,7 @@ public abstract class WorldRendererMixin
 
 	//#if MC >= 11904
 	//$$ @Inject(
-	//$$ 		method = "render",
+	//$$ 		method = "renderLevel",
 	//$$ 		slice = @Slice(
 	//$$ 				from = @At(
 	//$$ 						//#if MC >= 12106

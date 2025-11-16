@@ -96,7 +96,7 @@ public abstract class ClientPlayerInteractionManagerMixin
 	{
 		if (TweakerMoreConfigs.FIREWORK_ROCKET_THROTTLER.getBooleanValue())
 		{
-			ItemStack itemStack = player.getStackInHand(hand);
+			ItemStack itemStack = player.getItemInHand(hand);
 			if (itemStack.getItem() instanceof FireworkRocketItem)
 			{
 				long now = System.currentTimeMillis();
@@ -113,7 +113,7 @@ public abstract class ClientPlayerInteractionManagerMixin
 	}
 
 	@Inject(
-			method = "sendSequencedPacket",
+			method = "startPrediction",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/client/multiplayer/prediction/PredictiveAction;predict(I)Lnet/minecraft/network/protocol/Packet;",
@@ -133,10 +133,10 @@ public abstract class ClientPlayerInteractionManagerMixin
 	// ========================== update cooldown ==========================
 
 	@ModifyExpressionValue(
-			method = "interactBlockInternal",
+			method = "performUseItemOn",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/world/item/ItemStack;useOnBlock(Lnet/minecraft/item/ItemUsageContext;)Lnet/minecraft/util/ActionResult;"
+					target = "Lnet/minecraft/world/item/ItemStack;useOn(Lnet/minecraft/world/item/context/UseOnContext;)Lnet/minecraft/world/InteractionResult;"
 			)
 	)
 	private InteractionResult fireworkRocketThrottler_updateCooldown_useOnBlock(InteractionResult actionResult)
@@ -167,7 +167,7 @@ public abstract class ClientPlayerInteractionManagerMixin
 	{
 		if (TweakerMoreConfigs.FIREWORK_ROCKET_THROTTLER.getBooleanValue())
 		{
-			if (actionResult.isAccepted())
+			if (actionResult.consumesAction())
 			{
 				this.lastFireworkRocketUsageMilli = System.currentTimeMillis();
 			}

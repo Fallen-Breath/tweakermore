@@ -76,7 +76,7 @@ public abstract class KeyboardMixin
 					//#if MC >= 12106
 					//$$ this.client.player.networkHandler::sendChatCommand;
 					//#elseif MC >= 11903
-					//$$ this.client.player.networkHandler::sendCommand;
+					//$$ this.minecraft.player.connection::sendCommand;
 					//#else
 					cmd -> this.minecraft.player.chat("/" + cmd);
 					//#endif

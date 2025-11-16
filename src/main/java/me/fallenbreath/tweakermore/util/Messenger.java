@@ -38,7 +38,7 @@ public class Messenger
 	{
 		return
 				//#if MC >= 11900
-				//$$ Text.literal
+				//$$ Component.literal
 				//#else
 				new TextComponent
 				//#endif
@@ -73,7 +73,7 @@ public class Messenger
 	{
 		return
 				//#if MC >= 11900
-				//$$ Text.translatable
+				//$$ Component.translatable
 				//#else
 				new TranslatableComponent
 				//#endif

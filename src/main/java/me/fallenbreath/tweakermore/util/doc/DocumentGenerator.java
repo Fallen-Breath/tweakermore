@@ -40,12 +40,16 @@ public class DocumentGenerator
 		TweakerMoreMod.LOGGER.info("Setting client language to {}", lang);
 		LanguageManager languageManager = Minecraft.getInstance().getLanguageManager();
 		Language languageDefinition = languageManager.getLanguage(lang);
-		if (languageDefinition != languageManager.getSelected(  // what we want != current
+		if (
+				languageDefinition !=
 				//#if MC >= 11904
-				//$$ languageManager.getLanguage()
+				//$$ languageManager.getLanguage(languageManager.getSelected())
+				//#else
+				languageManager.getSelected()
 				//#endif
-		))
+		)
 		{
+			// what we want != current
 			languageManager.setSelected(
 					//#if MC >= 11904
 					//$$ lang

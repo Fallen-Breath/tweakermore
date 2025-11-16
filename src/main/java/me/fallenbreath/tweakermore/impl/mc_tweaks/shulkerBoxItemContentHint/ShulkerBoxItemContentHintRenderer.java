@@ -82,7 +82,7 @@ public class ShulkerBoxItemContentHintRenderer
 
 		//#if MC >= 11904
 		//$$ PoseStack textMatrixStack = matrices;
-		//$$ textMatrixStack.push();
+		//$$ textMatrixStack.pushPose();
 		//#elseif MC >= 11500
 		PoseStack textMatrixStack = new PoseStack();
 		//#endif
@@ -153,7 +153,7 @@ public class ShulkerBoxItemContentHintRenderer
 		}
 
 		//#if MC >= 11904
-		//$$ textMatrixStack.pop();
+		//$$ textMatrixStack.popPose();
 		//#endif
 	}
 
@@ -251,7 +251,7 @@ public class ShulkerBoxItemContentHintRenderer
 				textMatrixStack.last().pose(),
 				immediate,
 				//#if MC >= 11904
-				//$$ Font.TextLayerType.NORMAL,
+				//$$ Font.DisplayMode.NORMAL,
 				//#else
 				false,
 				//#endif

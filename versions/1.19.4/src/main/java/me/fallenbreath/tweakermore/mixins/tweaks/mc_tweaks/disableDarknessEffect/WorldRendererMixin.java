@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class WorldRendererMixin
 {
 	@ModifyExpressionValue(
-			method = "hasBlindnessOrDarkness",
+			method = "doesMobEffectBlockSky",
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12006

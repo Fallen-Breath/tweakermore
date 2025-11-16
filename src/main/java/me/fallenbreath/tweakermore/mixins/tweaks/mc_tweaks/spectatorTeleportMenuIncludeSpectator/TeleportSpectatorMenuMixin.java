@@ -76,7 +76,7 @@ public abstract class TeleportSpectatorMenuMixin
 			this.items = extendedElements;
 
 			//#if MC >= 11903
-			//$$ this.elements = Collections.unmodifiableList(this.elements);
+			//$$ this.items = Collections.unmodifiableList(this.items);
 			//#endif
 		}
 	}

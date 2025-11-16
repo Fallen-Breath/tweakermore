@@ -119,7 +119,7 @@ public class DamageCalculator
 		return new DamageCalculator(
 				entity, damage,
 				//#if MC >= 11904
-				//$$ entity.getDamageSources().badRespawnPoint(explosionCenter)
+				//$$ entity.damageSources().badRespawnPointExplosion(explosionCenter)
 				//#else
 				DamageSource.netherBedExplosion(
 						//#if MC >= 11903
@@ -197,7 +197,7 @@ public class DamageCalculator
 			// ref: net.minecraft.entity.LivingEntity#applyArmorToDamage
 			if (!(
 					//#if MC >= 11904
-					//$$ this.damageSource.isIn(DamageTypeTags.BYPASSES_ARMOR)
+					//$$ this.damageSource.is(DamageTypeTags.BYPASSES_ARMOR)
 					//#else
 					this.damageSource.isBypassArmor()
 					//#endif
@@ -226,7 +226,7 @@ public class DamageCalculator
 			//      net.minecraft.entity.LivingEntity#modifyAppliedDamage (mc > 1.19)
 			if (!(
 					//#if MC >= 11904
-					//$$ this.damageSource.isIn(DamageTypeTags.BYPASSES_EFFECTS)
+					//$$ this.damageSource.is(DamageTypeTags.BYPASSES_EFFECTS)
 					//#else
 					this.damageSource.isBypassMagic()
 					//#endif
@@ -234,7 +234,7 @@ public class DamageCalculator
 			{
 				if (this.entity.hasEffect(MobEffects.DAMAGE_RESISTANCE) && this.damageSource !=
 						//#if MC >= 11904
-						//$$ this.entity.getDamageSources().outOfWorld()
+						//$$ this.entity.damageSources().outOfWorld()
 						//#else
 						DamageSource.OUT_OF_WORLD
 						//#endif
@@ -247,7 +247,7 @@ public class DamageCalculator
 				//noinspection PointlessBooleanExpression
 				if (amount > 0.0F && !(
 						//#if MC >= 11904
-						//$$ this.damageSource.isIn(DamageTypeTags.BYPASSES_ENCHANTMENTS)
+						//$$ this.damageSource.is(DamageTypeTags.BYPASSES_ENCHANTMENTS)
 						//#else
 						false
 						//#endif

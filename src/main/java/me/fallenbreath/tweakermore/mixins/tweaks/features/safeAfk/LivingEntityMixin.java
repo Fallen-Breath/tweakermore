@@ -32,7 +32,7 @@ public abstract class LivingEntityMixin
 {
 	@Inject(
 			//#if MC >= 11904
-			//$$ method = "onDamaged",
+			//$$ method = "handleDamageEvent",
 			//#else
 			method = "handleEntityEvent",
 			//#endif

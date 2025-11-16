@@ -61,7 +61,7 @@ public class InWorldPositionTransformer
 		//#if MC >= 11500
 		renderContext.multMatrix(
 				//#if MC >= 11903
-				//$$ new Matrix4f().rotation(camera.getRotation())
+				//$$ new Matrix4f().rotation(camera.rotation())
 				//#else
 				new Matrix4f(camera.rotation())
 				//#endif

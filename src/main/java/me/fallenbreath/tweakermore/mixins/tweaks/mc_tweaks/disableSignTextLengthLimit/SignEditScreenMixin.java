@@ -80,12 +80,7 @@ public abstract class SignEditScreenMixin extends Screen
 	@Shadow private TextFieldHelper signField;
 	//#endif
 
-	@Shadow @Final private SignBlockEntity
-			//#if MC >= 11903
-			//$$ blockEntity;
-			//#else
-			sign;
-			//#endif
+	@Shadow @Final private SignBlockEntity sign;
 
 	//#if MC >= 11600
 	//$$ @Shadow @Final private String[] messages;
@@ -105,7 +100,7 @@ public abstract class SignEditScreenMixin extends Screen
 	//$$ 		//#if MC >= 12000
 	//$$ 		//$$ method = "<init>(Lnet/minecraft/block/entity/SignBlockEntity;ZZLnet/minecraft/text/Text;)V",
 	//$$ 		//#elseif MC >= 11903
-	//$$ 		//$$ method = "<init>(Lnet/minecraft/block/entity/SignBlockEntity;ZLnet/minecraft/text/Text;)V",
+	//$$ 		//$$ method = "<init>(Lnet/minecraft/world/level/block/entity/SignBlockEntity;ZLnet/minecraft/network/chat/Component;)V",
 	//$$ 		//#else
 	//$$ 		method = "<init>",
 	//$$ 		//#endif
@@ -214,12 +209,7 @@ public abstract class SignEditScreenMixin extends Screen
 	{
 		if (TweakerMoreConfigs.DISABLE_SIGN_TEXT_LENGTH_LIMIT.getBooleanValue())
 		{
-			SignBlockEntity sign =
-					//#if MC >= 11903
-					//$$ this.blockEntity;
-					//#else
-					this.sign;
-					//#endif
+			SignBlockEntity sign = this.sign;
 
 			//#if MC >= 11600
 			//$$ int textArrayLen = this.messages.length;
@@ -238,7 +228,7 @@ public abstract class SignEditScreenMixin extends Screen
 				);
 				int maxWidth =
 						//#if MC >= 11903
-						//$$ this.blockEntity.getMaxTextWidth();
+						//$$ this.sign.getMaxTextLineWidth();
 						//#else
 						90;
 						//#endif
@@ -256,7 +246,7 @@ public abstract class SignEditScreenMixin extends Screen
 					mc.font.drawInBatch(
 							"!", xStart - 10, lineIdx * 10 - textArrayLen * 5, ChatFormatting.RED.getColor(), false, matrix4f, immediate,
 							//#if MC >= 11904
-							//$$ Font.TextLayerType.NORMAL,
+							//$$ Font.DisplayMode.NORMAL,
 							//#else
 							false,
 							//#endif

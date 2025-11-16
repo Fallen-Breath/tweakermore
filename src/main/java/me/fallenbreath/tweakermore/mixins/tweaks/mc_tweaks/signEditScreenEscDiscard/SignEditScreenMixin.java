@@ -46,11 +46,7 @@ import net.minecraft.client.gui.screens.inventory.SignEditScreen;
 )
 public abstract class SignEditScreenMixin
 {
-	//#if MC >= 11903
-	//$$ @Shadow @Final protected SignBlockEntity blockEntity;
-	//#else
 	@Shadow @Final private SignBlockEntity sign;
-	//#endif
 
 	@Unique private boolean isClosedByEsc = false;
 	@Unique private ClientSignTextRollbacker clientSignTextRollbacker = null;
@@ -59,7 +55,7 @@ public abstract class SignEditScreenMixin
 			//#if MC >= 12001
 			//$$ method = "<init>(Lnet/minecraft/block/entity/SignBlockEntity;ZZLnet/minecraft/text/Text;)V",
 			//#elseif MC >= 11903
-			//$$ method = "<init>(Lnet/minecraft/block/entity/SignBlockEntity;ZLnet/minecraft/text/Text;)V",
+			//$$ method = "<init>(Lnet/minecraft/world/level/block/entity/SignBlockEntity;ZLnet/minecraft/network/chat/Component;)V",
 			//#else
 			method = "<init>",
 			//#endif
@@ -69,7 +65,7 @@ public abstract class SignEditScreenMixin
 	{
 		this.clientSignTextRollbacker = new ClientSignTextRollbacker(
 				//#if MC >= 11903
-				//$$ (AbstractSignEditScreen)(Object)this, this.blockEntity
+				//$$ (AbstractSignEditScreen)(Object)this, this.sign
 				//#else
 				(SignEditScreen)(Object)this, this.sign
 				//#endif

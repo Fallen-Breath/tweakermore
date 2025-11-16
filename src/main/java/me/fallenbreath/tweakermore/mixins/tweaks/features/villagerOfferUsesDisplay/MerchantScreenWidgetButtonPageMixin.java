@@ -59,14 +59,14 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends Button
 			OnPress onPress
 
 			//#if MC >= 11903
-			//$$ , NarrationSupplier narrationSupplier
+			//$$ , CreateNarration createNarration
 			//#endif
 	)
 	{
 		super(
 				x, y, width, height, message, onPress
 				//#if MC >= 11903
-				//$$ , narrationSupplier
+				//$$ , createNarration
 				//#endif
 		);
 	}
@@ -76,7 +76,7 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends Button
 			at = @At(
 					//#if MC >= 11903
 					//$$ value = "INVOKE",
-					//$$ target = "Lnet/minecraft/client/gui/screen/ingame/MerchantScreen$WidgetButtonPage;getX()I",
+					//$$ target = "Lnet/minecraft/client/gui/screens/inventory/MerchantScreen$TradeOfferButton;getX()I",
 					//#else
 					value = "FIELD",
 					target = "Lnet/minecraft/client/gui/screens/inventory/MerchantScreen$TradeOfferButton;x:I",

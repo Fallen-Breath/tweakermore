@@ -24,13 +24,14 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.IdentifierUtils;
 import me.fallenbreath.tweakermore.util.InventoryUtils;
 import me.fallenbreath.tweakermore.util.ItemUtils;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.NonNullList;
-import net.minecraft.world.item.Item;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
 //#if MC >= 12006
@@ -71,13 +72,19 @@ public class ShulkerBoxItemContentHintCommon
 			return info;
 		}
 
+		//#if MC >= 11900
+		//$$ BiFunction<ItemStack, ItemStack, Boolean> itemSameChecker = ItemStack::isSame;
+		//#else
+		BiFunction<ItemStack, ItemStack, Boolean> itemSameChecker = ItemStack::isSameIgnoreDurability;
+		//#endif
+
 		Predicate<ItemStack> stackFilter = stack -> true;
 		if (TweakerMoreConfigs.SHULKER_BOX_ITEM_CONTENT_HINT_CUSTOM_NAMES_OVERRIDE_ITEM.getBooleanValue())
 		{
 			Optional<ItemStack> override = computeCustomNameOverride(itemStack);
 			if (override.isPresent())
 			{
-				stackFilter = stack -> ItemStack.isSameIgnoreDurability(stack, override.get());
+				stackFilter = stack -> itemSameChecker.apply(stack, override.get());
 			}
 		}
 
@@ -97,7 +104,7 @@ public class ShulkerBoxItemContentHintCommon
 				continue;
 			}
 
-			boolean itemEqual = ItemStack.isSameIgnoreDurability(stack, std);
+			boolean itemEqual = itemSameChecker.apply(stack, std);
 			boolean itemAndNbtEqual =
 					//#if MC >= 12000
 					//$$ ItemStack.canCombine(stack, std);

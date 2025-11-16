@@ -45,13 +45,13 @@ public abstract class ClientPlayNetworkHandlerMixin
 
 	//#if MC >= 11903
 	//$$ @Inject(
-	//$$ 		method = "handlePlayerListAction",
+	//$$ 		method = "applyPlayerInfoUpdate",
 	//$$ 		at = @At(
 	//$$ 				value = "INVOKE",
 	//$$ 				target = "Lnet/minecraft/client/multiplayer/PlayerInfo;setGameMode(Lnet/minecraft/world/level/GameType;)V"
 	//$$ 		)
 	//$$ )
-	//$$ private void mcSpectatorEnterSinkingFixPorting_onGameModeUpdate(PlayerListS2CPacket.Action action, PlayerListS2CPacket.Entry packetEntry, PlayerInfo playerListEntry, CallbackInfo ci)
+	//$$ private void mcSpectatorEnterSinkingFixPorting_onGameModeUpdate(ClientboundPlayerInfoUpdatePacket.Action action, ClientboundPlayerInfoUpdatePacket.Entry packetEntry, PlayerInfo playerListEntry, CallbackInfo ci)
 	//#else
 	@Inject(
 			method = "handlePlayerInfo",
