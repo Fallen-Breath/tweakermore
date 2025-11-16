@@ -248,12 +248,7 @@ public class ShulkerBoxItemContentHintRenderer
 				textY,
 				textColor,
 				true,
-				// TODO: check why this doesn't get remapped
-				//#if MC >= 11800
-				//$$ textMatrixStack.peek().getPositionMatrix(),
-				//#else
 				textMatrixStack.last().pose(),
-				//#endif
 				immediate,
 				//#if MC >= 11904
 				//$$ Font.TextLayerType.NORMAL,
