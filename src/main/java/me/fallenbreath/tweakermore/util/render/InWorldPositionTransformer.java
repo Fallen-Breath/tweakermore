@@ -67,9 +67,9 @@ public class InWorldPositionTransformer
 				//#endif
 		);
 		//#else
-		//$$ EntityRenderDispatcher entityRenderDispatcher = client.getEntityRenderManager();
-		//$$ GlStateManager.rotatef(-entityRenderDispatcher.cameraYaw, 0.0F, 1.0F, 0.0F);
-		//$$ GlStateManager.rotatef(entityRenderDispatcher.cameraPitch, 1.0F, 0.0F, 0.0F);
+		//$$ EntityRenderDispatcher entityRenderDispatcher = client.getEntityRenderDispatcher();
+		//$$ GlStateManager.rotatef(-entityRenderDispatcher.playerRotY, 0.0F, 1.0F, 0.0F);
+		//$$ GlStateManager.rotatef(entityRenderDispatcher.playerRotX, 1.0F, 0.0F, 0.0F);
 		//#endif
 	}
 

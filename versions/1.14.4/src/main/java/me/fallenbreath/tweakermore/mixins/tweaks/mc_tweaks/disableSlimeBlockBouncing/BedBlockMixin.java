@@ -37,10 +37,10 @@ import static me.fallenbreath.tweakermore.util.ModIds.minecraft;
 public abstract class BedBlockMixin
 {
 	@Redirect(
-			method = "onEntityLand",
+			method = "updateEntityAfterFallOn",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/entity/Entity;isSneaking()Z"
+					target = "Lnet/minecraft/world/entity/Entity;isSneaking()Z"
 			),
 			require = 0
 	)

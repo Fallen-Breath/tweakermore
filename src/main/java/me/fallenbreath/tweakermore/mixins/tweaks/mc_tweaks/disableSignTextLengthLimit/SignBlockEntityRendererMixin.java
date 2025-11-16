@@ -35,12 +35,12 @@ import net.minecraft.client.renderer.blockentity.SignRenderer;
 //#endif
 
 //#if MC < 11500
+//$$ import com.llamalad7.mixinextras.sugar.Local;
 //$$ import me.fallenbreath.tweakermore.impl.mc_tweaks.disableSignTextLengthLimit.SignOverflowHintDrawer;
 //$$ import net.minecraft.world.level.block.entity.SignBlockEntity;
 //$$ import net.minecraft.client.gui.Font;
 //$$ import org.spongepowered.asm.mixin.injection.Inject;
 //$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//$$ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 //#endif
 
 @Restriction(conflict = {
@@ -106,15 +106,20 @@ public abstract class SignBlockEntityRendererMixin
 
 	//#if MC < 11500
 	//$$ @Inject(
-	//$$ 		method = "render(Lnet/minecraft/block/entity/SignBlockEntity;DDDFI)V",
+	//$$ 		method = "render(Lnet/minecraft/world/level/block/entity/SignBlockEntity;DDDFI)V",
 	//$$ 		at = @At(
 	//$$ 				value = "INVOKE",
 	//$$ 				target = "Lnet/minecraft/client/gui/Font;draw(Ljava/lang/String;FFI)I",
 	//$$ 				ordinal = 0
-	//$$ 		),
-	//$$ 		locals = LocalCapture.CAPTURE_FAILHARD
+	//$$ 		)
 	//$$ )
-	//$$ private void drawLineOverflowHint(SignBlockEntity signBlockEntity, double xOffset, double yOffset, double zOffset, float tickDelta, int blockBreakStage, CallbackInfo ci, Font textRenderer, float j, int signColor, int lineIdx, String lineContent)
+	//$$ private void drawLineOverflowHint(
+	//$$ 		CallbackInfo ci,
+	//$$ 		@Local(argsOnly = true) SignBlockEntity signBlockEntity,
+	//$$ 		@Local Font textRenderer,
+	//$$ 		@Local(ordinal = 1) int lineIdx,
+	//$$ 		@Local String lineContent
+	//$$ )
 	//$$ {
 	//$$ 	SignOverflowHintDrawer.drawLineOverflowHint(signBlockEntity, textRenderer, lineIdx, lineContent);
 	//$$ }

@@ -52,11 +52,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public abstract class AbstractBlockStateMixin
 {
 	@Inject(
-			//#if MC >= 11500
 			method = "use",
-			//#else
-			//$$ method = "activate",
-			//#endif
 			at = @At("HEAD"),
 			cancellable = true
 	)

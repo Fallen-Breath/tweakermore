@@ -47,12 +47,7 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends Button
 	@SuppressWarnings("target")
 	@Shadow @Final MerchantScreen field_19166;
 
-	@Shadow @Final
-	//#if MC >= 11500
-	int index;
-	//#else
-	//$$ int field_19165;
-	//#endif
+	@Shadow @Final int index;
 
 	public MerchantScreenWidgetButtonPageMixin(
 			int x, int y, int width, int height,
@@ -116,12 +111,7 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends Button
 					//#endif
 			if (x + 50 <= mouseX && mouseX <= x + 65)
 			{
-				//#if MC >= 11500
-				int index = this.index;
-				//#else
-				//$$ int index = this.field_19165;
-				//#endif
-				MerchantOffer offer = this.field_19166.getMenu().getOffers().get(index + ((MerchantScreenAccessor)this.field_19166).getIndexStartOffset());
+				MerchantOffer offer = this.field_19166.getMenu().getOffers().get(this.index + ((MerchantScreenAccessor)this.field_19166).getIndexStartOffset());
 
 				String text = String.format("%d / %d", offer.getUses(), offer.getMaxUses());
 

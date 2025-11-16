@@ -268,7 +268,7 @@ public class ShulkerBoxItemContentHintRenderer
 		//$$ GlStateManager.disableLighting();
 		//$$ GlStateManager.disableDepthTest();
 		//$$ GlStateManager.disableBlend();
-		//$$ textRenderer.drawWithShadow(text, textX, textY, textColor);
+		//$$ textRenderer.drawShadow(text, textX, textY, textColor);
 		//$$ GlStateManager.enableBlend();
 		//$$ GlStateManager.enableLighting();
 		//$$ GlStateManager.enableDepthTest();

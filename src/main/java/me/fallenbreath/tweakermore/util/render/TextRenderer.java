@@ -222,11 +222,11 @@ public class TextRenderer
 				//#else
 				//$$ if (this.shadow)
 				//$$ {
-				//$$ 	mc.textRenderer.drawWithShadow(holder.text, textX, textY, this.color);
+				//$$ 	mc.font.drawShadow(holder.text, textX, textY, this.color);
 				//$$ }
 				//$$ else
 				//$$ {
-				//$$ 	mc.textRenderer.draw(holder.text, textX, textY, this.color);
+				//$$ 	mc.font.draw(holder.text, textX, textY, this.color);
 				//$$ }
 				//#endif
 			}

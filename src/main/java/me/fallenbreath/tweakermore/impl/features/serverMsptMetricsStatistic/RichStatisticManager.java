@@ -124,11 +124,11 @@ public class RichStatisticManager
 				//#if MC >= 11500
 				mc.getWindow().getGuiScaledHeight();
 				//#else
-				//$$ mc.window.getScaledHeight();
+				//$$ mc.window.getGuiScaledHeight();
 				//#endif
 
 		//#if MC >= 12000
-		//$$ drawContext.drawTextWithShadow(mc.textRenderer,
+		//$$ drawContext.drawTextWithShadow(mc.font,
 		//#else
 		mc.font.draw(
 				//#if MC >= 11600

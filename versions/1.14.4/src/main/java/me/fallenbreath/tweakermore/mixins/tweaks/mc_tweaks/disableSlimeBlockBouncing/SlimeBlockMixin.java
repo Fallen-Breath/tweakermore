@@ -38,13 +38,13 @@ public abstract class SlimeBlockMixin
 {
 	@Redirect(
 			method = {
-					"onLandedUpon",
-					"onEntityLand",
-					"onSteppedOn"
+					"fallOn",
+					"updateEntityAfterFallOn",
+					"stepOn"
 			},
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/entity/Entity;isSneaking()Z"
+					target = "Lnet/minecraft/world/entity/Entity;isSneaking()Z"
 			),
 			require = 0
 	)

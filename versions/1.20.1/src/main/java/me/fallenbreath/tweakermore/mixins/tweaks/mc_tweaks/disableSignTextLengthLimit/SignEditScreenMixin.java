@@ -126,7 +126,7 @@ public abstract class SignEditScreenMixin extends Screen
 					int lineHeight = this.blockEntity.getTextLineHeight();
 					int x = xStart - 10;
 					int y = lineIdx * lineHeight - (4 * lineHeight / 2);
-					context.drawText(this.textRenderer, "!", x, y, ChatFormatting.RED.getColorValue(), false);
+					context.drawText(this.font, "!", x, y, ChatFormatting.RED.getColorValue(), false);
 				}
 			}
 		}

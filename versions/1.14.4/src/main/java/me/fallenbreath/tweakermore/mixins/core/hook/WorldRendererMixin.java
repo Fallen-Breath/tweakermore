@@ -33,10 +33,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GameRenderer.class)
 public abstract class WorldRendererMixin
 {
-	@Shadow @Final private Minecraft client;
+	@Shadow @Final private Minecraft minecraft;
 
 	@Inject(
-			method = "renderCenter",
+			method = "render(FJ)V",
 			at = @At(
 					value = "CONSTANT",
 					args = "stringValue=hand"
@@ -44,6 +44,6 @@ public abstract class WorldRendererMixin
 	)
 	private void worldRenderPostHook$TKM(float tickDelta, long endTime, CallbackInfo ci)
 	{
-		TweakerMoreRenderEventHandler.dispatchRenderWorldPostEvent(this.client);
+		TweakerMoreRenderEventHandler.dispatchRenderWorldPostEvent(this.minecraft);
 	}
 }

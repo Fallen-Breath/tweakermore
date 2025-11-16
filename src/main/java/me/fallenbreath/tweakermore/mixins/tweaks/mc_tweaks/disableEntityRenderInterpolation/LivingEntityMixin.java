@@ -41,12 +41,7 @@ public abstract class LivingEntityMixin extends Entity
 		super(type, world);
 	}
 
-	@Shadow protected int
-			//#if MC >= 11500
-			lerpSteps;
-			//#else
-			//$$ field_6210;
-			//#endif
+	@Shadow protected int lerpSteps;
 
 	@Inject(method = "lerpTo", at = @At("TAIL"))
 	private void disableEntityRenderInterpolation_noExtraInterpolationSteps1(
@@ -59,11 +54,7 @@ public abstract class LivingEntityMixin extends Entity
 	{
 		if (TweakerMoreConfigs.DISABLE_ENTITY_RENDER_INTERPOLATION.getBooleanValue())
 		{
-			//#if MC >= 11500
 			this.lerpSteps = 1;
-			//#else
-			//$$ this.field_6210 = 1;
-			//#endif
 
 			if (DisableEntityRenderInterpolationHelper.shouldUpdatePositionOrAnglesDirectly())
 			{

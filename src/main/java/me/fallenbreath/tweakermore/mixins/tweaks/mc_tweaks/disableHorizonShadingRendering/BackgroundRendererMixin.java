@@ -40,7 +40,7 @@ public abstract class BackgroundRendererMixin
 			//#elseif MC >= 11500
 			method = "setupColor",
 			//#else
-			//$$ method = "renderBackground",
+			//$$ method = "setupClearColor",
 			//#endif
 			slice = @Slice(
 					from = @At(

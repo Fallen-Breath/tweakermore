@@ -84,6 +84,6 @@ public class RenderGlobals
 
 	public static boolean isOnRenderThread()
 	{
-		return Minecraft.getInstance().isOnThread();
+		return Minecraft.getInstance().isSameThread();
 	}
 }

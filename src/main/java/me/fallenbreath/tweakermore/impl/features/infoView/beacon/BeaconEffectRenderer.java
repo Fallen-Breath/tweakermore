@@ -195,7 +195,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 			//#elseif MC >= 11500
 			mc.getTextureManager().bind(sprite.atlas().location());
 			//#else
-			//$$ mc.getTextureManager().bindTexture(TextureAtlas.STATUS_EFFECT_ATLAS_TEX);
+			//$$ mc.getTextureManager().bind(TextureAtlas.LOCATION_MOB_EFFECTS);
 			//#endif
 			//#if MC < 12103
 			RenderGlobals.color4f(1.0F, 1.0F, 1.0F, 1.0F);

@@ -53,7 +53,7 @@ public abstract class ItemEntityRendererMixin
 			//#elseif MC >= 11500
 			method = "render(Lnet/minecraft/world/entity/item/ItemEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
 			//#else
-			//$$ method = "method_3997",
+			//$$ method = "setupBobbingItem(Lnet/minecraft/world/entity/item/ItemEntity;DDDFLnet/minecraft/client/resources/model/BakedModel;)I",
 			//#endif
 			at = @At(
 					//#if MC >= 12104
@@ -90,7 +90,7 @@ public abstract class ItemEntityRendererMixin
 			//#elseif MC >= 11500
 			method = "render(Lnet/minecraft/world/entity/item/ItemEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
 			//#else
-			//$$ method = "method_3997",
+			//$$ method = "setupBobbingItem(Lnet/minecraft/world/entity/item/ItemEntity;DDDFLnet/minecraft/client/resources/model/BakedModel;)I",
 			//#endif
 			at = @At(
 					value = "INVOKE",
@@ -132,7 +132,7 @@ public abstract class ItemEntityRendererMixin
 			//#elseif MC >= 11500
 			method = "render(Lnet/minecraft/world/entity/item/ItemEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
 			//#else
-			//$$ method = "method_3997",
+			//$$ method = "setupBobbingItem(Lnet/minecraft/world/entity/item/ItemEntity;DDDFLnet/minecraft/client/resources/model/BakedModel;)I",
 			//#endif
 			at = @At(
 					value = "INVOKE",

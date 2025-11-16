@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.barrierParticleAlway
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.world.ClientWorld;
+import net.minecraft.client.multiplayer.MultiPlayerLevel;
 import net.minecraft.world.level.GameType;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -35,13 +35,13 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
  * mc1.15 ~ mc1.16: subproject 1.15.2 (main project)
  * mc1.17+        : subproject 1.17.1
  */
-@Mixin(ClientWorld.class)
+@Mixin(MultiPlayerLevel.class)
 public abstract class ClientWorldMixin
 {
-	@Shadow @Final private Minecraft client;
+	@Shadow @Final private Minecraft minecraft;
 
 	@ModifyVariable(
-			method = "doRandomBlockDisplayTicks",
+			method = "animateTick",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/core/BlockPos$MutableBlockPos;<init>()V"
@@ -52,7 +52,7 @@ public abstract class ClientWorldMixin
 		if (TweakerMoreConfigs.BARRIER_PARTICLE_ALWAYS_VISIBLE.getBooleanValue())
 		{
 			// keep vanilla's creative mode check
-			if (this.client.interactionManager.getCurrentGameMode() == GameType.CREATIVE)
+			if (this.minecraft.gameMode.getPlayerMode() == GameType.CREATIVE)
 			{
 				spawnBarrierParticles = true;
 			}

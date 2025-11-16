@@ -71,6 +71,10 @@ dependencies {
 	if (mcVersion < 11904) {
 		modRuntimeOnly("com.github.Fallen-Breath:lazydfu:${mcVersion < 11900 ? "0.1.2" : "a7cfc44c0c"}")
 	}
+	if (mcVersion < 11500) {
+		// malilib needs this
+		modRuntimeOnly fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)
+	}
 	if (mcVersion >= 12006) {
 		// modmenu needs these
 		modRuntimeOnly fabricApi.module("fabric-screen-api-v1", project.fabric_api_version)

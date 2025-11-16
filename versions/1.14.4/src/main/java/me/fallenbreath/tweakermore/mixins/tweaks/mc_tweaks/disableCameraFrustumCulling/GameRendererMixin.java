@@ -35,7 +35,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public abstract class GameRendererMixin
 {
 	@ModifyVariable(
-			method = "renderCenter",
+			method = "render(FJ)V",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/client/renderer/culling/Culler;prepare(DDD)V",

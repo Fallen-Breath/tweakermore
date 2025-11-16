@@ -40,7 +40,7 @@ public abstract class BeaconBlockEntityRendererMixin
 			//#elseif MC >= 11500
 			method = "renderBeaconBeam(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;FJII[F)V",
 			//#else
-			//$$ method = "renderBeaconLightBeam",
+			//$$ method = "renderBeaconBeam(DDDDJII[F)V",
 			//#endif
 			at = @At("HEAD"),
 			cancellable = true

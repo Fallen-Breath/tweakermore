@@ -38,20 +38,20 @@ public class SignOverflowHintDrawer
 		//$$ if (TweakerMoreConfigs.DISABLE_SIGN_TEXT_LENGTH_LIMIT.getBooleanValue())
 		//$$ {
 		//$$ 	// make sure it's rendered during SignEditScreen rendering
-		//$$ 	if (signBlockEntity.getCurrentRow() == -1)
+		//$$ 	if (signBlockEntity.getSelectedLine() == -1)
 		//$$ 	{
 		//$$ 		return;
 		//$$ 	}
-  //$$
-		//$$ 	Component[] texts = signBlockEntity.text;
+		//$$
+		//$$ 	Component[] texts = signBlockEntity.messages;
 		//$$ 	if (0 <= lineIdx && lineIdx < texts.length)
 		//$$ 	{
-		//$$ 		boolean overflowed = ComponentRenderUtils.wrapLines(texts[lineIdx], 90, textRenderer, false, true).size() > 1;
+		//$$ 		boolean overflowed = ComponentRenderUtils.wrapComponents(texts[lineIdx], 90, textRenderer, false, true).size() > 1;
 		//$$ 		if (overflowed)
 		//$$ 		{
-		//$$ 			assert ChatFormatting.RED.getColorValue() != null;
-		//$$ 			float xStart = (float)(-textRenderer.getStringWidth(lineContent) / 2);
-		//$$ 			textRenderer.draw("!", xStart - 10, lineIdx * 10 - texts.length * 5, ChatFormatting.RED.getColorValue());
+		//$$ 			assert ChatFormatting.RED.getColor() != null;
+		//$$ 			float xStart = (float)(-textRenderer.width(lineContent) / 2);
+		//$$ 			textRenderer.draw("!", xStart - 10, lineIdx * 10 - texts.length * 5, ChatFormatting.RED.getColor());
 		//$$ 	}
 		//$$ 	}
 		//$$ }

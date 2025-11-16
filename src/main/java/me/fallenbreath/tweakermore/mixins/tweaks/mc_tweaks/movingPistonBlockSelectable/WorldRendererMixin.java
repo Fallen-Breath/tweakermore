@@ -34,11 +34,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class WorldRendererMixin
 {
 	@Inject(
-			//#if MC >= 11500
 			method = "renderHitOutline",
-			//#else
-			//$$ method = "drawHighlightedBlockOutline",
-			//#endif
 			at = @At("HEAD")
 	)
 	private void movingPistonBlockSelectable_blockOutlineRender_start(CallbackInfo ci, @Share("") LocalBooleanRef hasSet)
@@ -51,11 +47,7 @@ public abstract class WorldRendererMixin
 	}
 
 	@Inject(
-			//#if MC >= 11500
 			method = "renderHitOutline",
-			//#else
-			//$$ method = "drawHighlightedBlockOutline",
-			//#endif
 			at = @At("TAIL")
 	)
 	private void movingPistonBlockSelectable_blockOutlineRender_end(CallbackInfo ci, @Share("") LocalBooleanRef hasSet)

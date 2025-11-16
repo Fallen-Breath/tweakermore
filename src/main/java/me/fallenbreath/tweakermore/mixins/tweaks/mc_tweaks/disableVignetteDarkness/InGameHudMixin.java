@@ -33,25 +33,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Gui.class)
 public abstract class InGameHudMixin
 {
-	@Shadow public float
-			//#if MC >= 11500
-			vignetteBrightness;
-			//#else
-			//$$ field_2013;
-			//#endif
+	@Shadow public float vignetteBrightness;
 
 	@Inject(method = "renderVignette", at = @At(value = "HEAD"))
 	private void disableVignetteDarkness_modifyVignetteDarkness(CallbackInfo ci, @Share("pvd") LocalRef<Float> prevVignetteDarkness)
 	{
 		if (TweakerMoreConfigs.DISABLE_VIGNETTE_DARKNESS.getBooleanValue())
 		{
-			//#if MC >= 11500
 			prevVignetteDarkness.set(this.vignetteBrightness);
 			this.vignetteBrightness = 0.0F;
-			//#else
-			//$$ prevVignetteDarkness.set(this.field_2013);
-			//$$ this.field_2013 = 0.0F;
-			//#endif
 		}
 	}
 
@@ -60,11 +50,7 @@ public abstract class InGameHudMixin
 	{
 		if (prevVignetteDarkness.get() != null)
 		{
-			//#if MC >= 11500
 			this.vignetteBrightness = prevVignetteDarkness.get();
-			//#else
-			//$$ this.field_2013 = prevVignetteDarkness.get();
-			//#endif
 		}
 	}
 }

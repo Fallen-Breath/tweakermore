@@ -121,10 +121,6 @@ public class SimpleCachedWorldView implements SimpleWorldView
 	@Override
 	public int getBaseLightLevel(BlockPos pos, int ambientDarkness)
 	{
-		//#if MC >= 11500
 		return this.world.getRawBrightness(pos, ambientDarkness);
-		//#else
-		//$$ return this.world.getLightLevel(pos, ambientDarkness);
-		//#endif
 	}
 }

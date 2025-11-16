@@ -83,7 +83,7 @@ public class LightCacheOFMixin
 				view, state, pos
 		);
 		//#else
-		//$$ return state.getBlockBrightness(view, pos);
+		//$$ return state.getLightColor(view, pos);
 		//#endif
 	}
 }

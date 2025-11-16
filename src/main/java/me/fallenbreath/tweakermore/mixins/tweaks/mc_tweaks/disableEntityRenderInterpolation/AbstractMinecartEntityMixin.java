@@ -48,12 +48,7 @@ public abstract class AbstractMinecartEntityMixin extends Entity
 	//#if MC >= 12103
 	//$$ @Shadow @Final private MinecartBehavior controller;
 	//#else
-	@Shadow private int
-			//#if MC >= 11500
-			lSteps;
-			//#else
-			//$$ field_7669;
-			//#endif
+	@Shadow private int lSteps;
 	//#endif
 
 	@Inject(method = "lerpTo", at = @At("TAIL"))
@@ -77,10 +72,8 @@ public abstract class AbstractMinecartEntityMixin extends Entity
 			//$$ 	// TODO: check if this works
 			//$$ 	emca.setTicksToNextRefresh(1);
 			//$$ }
-			//#elseif MC >= 11500
-			this.lSteps = 1;
 			//#else
-			//$$ this.field_7669 = 1;
+			this.lSteps = 1;
 			//#endif
 
 			if (DisableEntityRenderInterpolationHelper.shouldUpdatePositionOrAnglesDirectly())

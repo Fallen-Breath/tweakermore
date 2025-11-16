@@ -106,7 +106,7 @@ public class ShulkerBoxItemContentHintRenderer
 		var scaler = RenderUtils.createScaler(textX + width * 0.5, textY + height * 0.5, textScale);
 		scaler.apply(renderContext);
 
-		var textRenderer = Minecraft.getInstance().textRenderer;
+		var textRenderer = Minecraft.getInstance().font;
 		renderContext.translate(textX, textY);
 		renderContext.getGuiDrawer().drawText(textRenderer, text, 0, 0, textColor, true);
 
