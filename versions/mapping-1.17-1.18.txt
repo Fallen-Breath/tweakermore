@@ -1,1 +1,0 @@
-net.minecraft.client.util.math.MatrixStack method_34425() multiplyPositionMatrix()

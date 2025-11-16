@@ -1,2 +1,0 @@
-net.minecraft.entity.LivingEntity bodyYaw field_6283
-net.minecraft.entity.LivingEntity prevBodyYaw field_6220

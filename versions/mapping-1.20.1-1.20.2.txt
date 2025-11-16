@@ -1,2 +1,2 @@
-net.minecraft.util.MetricsData net.minecraft.util.profiler.PerformanceLog
-net.minecraft.util.MetricsData pushSample() net.minecraft.util.profiler.PerformanceLog push()
+net.minecraft.util.FrameTimer net.minecraft.util.SampleLogger
+net.minecraft.util.FrameTimer logFrameDuration() net.minecraft.util.SampleLogger logSample()

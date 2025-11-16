@@ -1,7 +1,7 @@
-net.minecraft.text.BaseText net.minecraft.text.MutableText
-net.minecraft.util.math.Matrix4f org.joml.Matrix4f
-net.minecraft.util.math.Vec3f org.joml.Vector3f
-net.minecraft.util.registry.Registry net.minecraft.registry.Registries
+net.minecraft.core.Registry net.minecraft.core.registries.BuiltInRegistries
+net.minecraft.network.chat.BaseComponent net.minecraft.network.chat.MutableComponent
+com.mojang.math.Matrix4f org.joml.Matrix4f
+com.mojang.math.Vector3f org.joml.Vector3f
 
 net.fabricmc.fabric.api.client.command.v1.ClientCommandManager net.fabricmc.fabric.api.client.command.v2.ClientCommandManager
 net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
