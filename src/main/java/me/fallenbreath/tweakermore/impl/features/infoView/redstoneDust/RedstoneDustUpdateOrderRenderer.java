@@ -28,10 +28,10 @@ import me.fallenbreath.tweakermore.impl.features.infoView.CommonScannerInfoViewe
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
-import net.minecraft.block.RedstoneWireBlock;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
+import net.minecraft.world.level.block.RedStoneWireBlock;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 
 import java.util.List;
 import java.util.Objects;
@@ -51,7 +51,7 @@ public class RedstoneDustUpdateOrderRenderer extends CommonScannerInfoViewer
 	@Override
 	public boolean shouldRenderFor(RenderVisitorWorldView world, BlockPos pos)
 	{
-		return world.getBlockState(pos).getBlock() instanceof RedstoneWireBlock;
+		return world.getBlockState(pos).getBlock() instanceof RedStoneWireBlock;
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class RedstoneDustUpdateOrderRenderer extends CommonScannerInfoViewer
 		{
 			return;
 		}
-		int color = Objects.requireNonNull(Formatting.RED.getColorValue()) | ((alphaBits & 0xFF) << 24);
+		int color = Objects.requireNonNull(ChatFormatting.RED.getColor()) | ((alphaBits & 0xFF) << 24);
 
 		List<BlockPos> order = getDustUpdateOrderAt(pos);
 		for (int i = 0; i < order.size(); i++)
@@ -96,7 +96,7 @@ public class RedstoneDustUpdateOrderRenderer extends CommonScannerInfoViewer
 		set.add(pos);
 		for (Direction direction : Direction.values())
 		{
-			set.add(pos.offset(direction));
+			set.add(pos.relative(direction));
 		}
 		return Lists.newArrayList(set);
 	}

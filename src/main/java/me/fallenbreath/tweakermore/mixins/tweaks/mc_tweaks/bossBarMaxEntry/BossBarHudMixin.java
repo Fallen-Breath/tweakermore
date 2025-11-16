@@ -23,15 +23,15 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.bossBarMaxEntry;
 import com.google.common.collect.Iterators;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.gui.hud.BossBarHud;
-import net.minecraft.client.gui.hud.ClientBossBar;
+import net.minecraft.client.gui.components.BossHealthOverlay;
+import net.minecraft.client.gui.components.LerpingBossEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import java.util.Iterator;
 
-@Mixin(BossBarHud.class)
+@Mixin(BossHealthOverlay.class)
 public abstract class BossBarHudMixin
 {
 	@ModifyVariable(
@@ -42,7 +42,7 @@ public abstract class BossBarHudMixin
 					remap = false
 			)
 	)
-	private Iterator<ClientBossBar> tweakerMore_bossBarMaxEntry_checkLimitation(Iterator<ClientBossBar> iterator)
+	private Iterator<LerpingBossEvent> tweakerMore_bossBarMaxEntry_checkLimitation(Iterator<LerpingBossEvent> iterator)
 	{
 		int limitation = TweakerMoreConfigs.BOSS_BAR_MAX_ENTRY.getIntegerValue();
 		if (limitation >= 0)
@@ -59,7 +59,7 @@ public abstract class BossBarHudMixin
 					//#if MC >= 12001
 					//$$ target = "Lnet/minecraft/client/gui/DrawContext;getScaledWindowHeight()I"
 					//#else
-					target = "Lnet/minecraft/client/util/Window;getScaledHeight()I"
+					target = "Lcom/mojang/blaze3d/platform/Window;getGuiScaledHeight()I"
 					//#endif
 			),
 			require = 0

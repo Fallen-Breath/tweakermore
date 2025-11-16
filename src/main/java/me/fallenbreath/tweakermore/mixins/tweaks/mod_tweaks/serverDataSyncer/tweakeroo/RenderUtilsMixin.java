@@ -27,9 +27,9 @@ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.Entity;
-import net.minecraft.inventory.Inventory;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.Container;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -41,17 +41,17 @@ public abstract class RenderUtilsMixin
 			method = "renderInventoryOverlay",
 			at = @At(
 					value = "INVOKE",
-					target = "Lfi/dy/masa/malilib/util/InventoryUtils;getInventory(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/inventory/Inventory;",
+					target = "Lfi/dy/masa/malilib/util/InventoryUtils;getInventory(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/Container;",
 					ordinal = 0,
 					remap = true
 			),
 			remap = false
 	)
-	private static Inventory serverDataSyncer4InventoryOverlay_blockEntity(Inventory inventory)
+	private static Container serverDataSyncer4InventoryOverlay_blockEntity(Container inventory)
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{
-			if (!MinecraftClient.getInstance().isIntegratedServerRunning())
+			if (!Minecraft.getInstance().hasSingleplayerServer())
 			{
 				ServerDataSyncer.getInstance().syncBlockInventory(inventory);
 			}
@@ -63,7 +63,7 @@ public abstract class RenderUtilsMixin
 			method = "renderInventoryOverlay",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/util/hit/EntityHitResult;getEntity()Lnet/minecraft/entity/Entity;",
+					target = "Lnet/minecraft/world/phys/EntityHitResult;getEntity()Lnet/minecraft/world/entity/Entity;",
 					remap = true
 			),
 			remap = false
@@ -72,7 +72,7 @@ public abstract class RenderUtilsMixin
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{
-			if (!MinecraftClient.getInstance().isIntegratedServerRunning())
+			if (!Minecraft.getInstance().hasSingleplayerServer())
 			{
 				ServerDataSyncer.getInstance().syncEntity(entity, false);
 			}

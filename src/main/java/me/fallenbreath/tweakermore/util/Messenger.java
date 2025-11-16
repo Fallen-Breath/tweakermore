@@ -20,13 +20,13 @@
 
 package me.fallenbreath.tweakermore.util;
 
-import net.minecraft.text.BaseText;
-import net.minecraft.text.ClickEvent;
-import net.minecraft.text.HoverEvent;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.Style;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Formatting;
+import net.minecraft.network.chat.BaseComponent;
+import net.minecraft.network.chat.ClickEvent;
+import net.minecraft.network.chat.HoverEvent;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.ChatFormatting;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,27 +39,27 @@ public class Messenger
 	 */
 
 	// simple Text
-	public static BaseText s(Object text)
+	public static BaseComponent s(Object text)
 	{
 		return
 				//#if MC >= 11900
 				//$$ Text.literal
 				//#else
-				new LiteralText
+				new TextComponent
 				//#endif
 						(text.toString());
 	}
 
 	// textfy
-	public static BaseText tf(Object text)
+	public static BaseComponent tf(Object text)
 	{
-		return text instanceof BaseText ? (BaseText)text : s(text);
+		return text instanceof BaseComponent ? (BaseComponent)text : s(text);
 	}
 
 	// compound text
-	public static BaseText c(Object ... fields)
+	public static BaseComponent c(Object ... fields)
 	{
-		BaseText text = s("");
+		BaseComponent text = s("");
 		for (Object field : fields)
 		{
 			text.append(Messenger.tf(field));
@@ -68,28 +68,28 @@ public class Messenger
 	}
 
 	// Simple Text with formatting
-	public static BaseText s(Object text, Formatting textFormatting)
+	public static BaseComponent s(Object text, ChatFormatting textFormatting)
 	{
 		return formatting(s(text), textFormatting);
 	}
 
 	// Translation Text
-	public static BaseText tr(String key, Object ... args)
+	public static BaseComponent tr(String key, Object ... args)
 	{
 		return
 				//#if MC >= 11900
 				//$$ Text.translatable
 				//#else
-				new TranslatableText
+				new TranslatableComponent
 				//#endif
 						(key, args);
 	}
 
 	// Fancy text
 	// A copy will be made to make sure the original displayText will not be modified
-	public static BaseText fancy(@NotNull BaseText displayText, @Nullable BaseText hoverText, @Nullable ClickEvent clickEvent)
+	public static BaseComponent fancy(@NotNull BaseComponent displayText, @Nullable BaseComponent hoverText, @Nullable ClickEvent clickEvent)
 	{
-		BaseText text = copy(displayText);
+		BaseComponent text = copy(displayText);
 		if (hoverText != null)
 		{
 			hover(text, hoverText);
@@ -101,9 +101,9 @@ public class Messenger
 		return text;
 	}
 
-	public static BaseText join(BaseText joiner, BaseText... items)
+	public static BaseComponent join(BaseComponent joiner, BaseComponent... items)
 	{
-		BaseText text = s("");
+		BaseComponent text = s("");
 		for (int i = 0; i < items.length; i++)
 		{
 			if (i > 0)
@@ -121,7 +121,7 @@ public class Messenger
 	 * --------------------
 	 */
 
-	public static BaseText hover(BaseText text, HoverEvent hoverEvent)
+	public static BaseComponent hover(BaseComponent text, HoverEvent hoverEvent)
 	{
 		//#if MC >= 11600
 		//$$ style(text, text.getStyle().withHoverEvent(hoverEvent));
@@ -131,7 +131,7 @@ public class Messenger
 		return text;
 	}
 
-	public static BaseText hover(BaseText text, BaseText hoverText)
+	public static BaseComponent hover(BaseComponent text, BaseComponent hoverText)
 	{
 		return hover(
 				text,
@@ -143,7 +143,7 @@ public class Messenger
 		);
 	}
 
-	public static BaseText click(BaseText text, ClickEvent clickEvent)
+	public static BaseComponent click(BaseComponent text, ClickEvent clickEvent)
 	{
 		//#if MC >= 11600
 		//$$ style(text, text.getStyle().withClickEvent(clickEvent));
@@ -153,26 +153,26 @@ public class Messenger
 		return text;
 	}
 
-	public static BaseText formatting(BaseText text, Formatting... formattings)
+	public static BaseComponent formatting(BaseComponent text, ChatFormatting... formattings)
 	{
-		text.formatted(formattings);
+		text.withStyle(formattings);
 		return text;
 	}
 
-	public static BaseText style(BaseText text, Style style)
+	public static BaseComponent style(BaseComponent text, Style style)
 	{
 		text.setStyle(style);
 		return text;
 	}
 
-	public static BaseText copy(BaseText text)
+	public static BaseComponent copy(BaseComponent text)
 	{
 		//#if MC >= 11900
 		//$$ return text.copy();
 		//#elseif MC >= 11600
 		//$$ return (BaseText)text.shallowCopy();
 		//#else
-		return (BaseText)text.deepCopy();
+		return (BaseComponent)text.deepCopy();
 		//#endif
 	}
 }

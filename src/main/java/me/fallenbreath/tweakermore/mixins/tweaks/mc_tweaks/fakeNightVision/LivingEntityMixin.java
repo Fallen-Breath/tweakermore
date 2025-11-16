@@ -21,10 +21,10 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.fakeNightVision;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -38,7 +38,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class LivingEntityMixin
 {
 	@Inject(
-			method = "hasStatusEffect",
+			method = "hasEffect",
 			at = @At("HEAD"),
 			cancellable = true
 	)
@@ -46,7 +46,7 @@ public abstract class LivingEntityMixin
 			//#if MC >= 12006
 			//$$ RegistryEntry<StatusEffect> effect,
 			//#else
-			StatusEffect effect,
+			MobEffect effect,
 			//#endif
 			CallbackInfoReturnable<Boolean> cir
 	)
@@ -54,8 +54,8 @@ public abstract class LivingEntityMixin
 		if (TweakerMoreConfigs.FAKE_NIGHT_VISION.getBooleanValue())
 		{
 			LivingEntity self = (LivingEntity)(Object)this;
-			MinecraftClient mc = MinecraftClient.getInstance();
-			if (effect == StatusEffects.NIGHT_VISION && (self == mc.player || self == mc.gameRenderer.getCamera().getFocusedEntity()))
+			Minecraft mc = Minecraft.getInstance();
+			if (effect == MobEffects.NIGHT_VISION && (self == mc.player || self == mc.gameRenderer.getMainCamera().getEntity()))
 			{
 				cir.setReturnValue(true);
 			}

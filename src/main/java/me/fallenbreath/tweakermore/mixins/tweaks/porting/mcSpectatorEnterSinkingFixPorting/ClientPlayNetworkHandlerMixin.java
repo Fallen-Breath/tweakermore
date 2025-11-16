@@ -25,12 +25,12 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.network.PlayerListEntry;
-import net.minecraft.network.packet.s2c.play.PlayerListS2CPacket;
-import net.minecraft.world.GameMode;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.multiplayer.PlayerInfo;
+import net.minecraft.network.protocol.game.ClientboundPlayerInfoPacket;
+import net.minecraft.world.level.GameType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -38,10 +38,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.20"))
-@Mixin(ClientPlayNetworkHandler.class)
+@Mixin(ClientPacketListener.class)
 public abstract class ClientPlayNetworkHandlerMixin
 {
-	@Shadow private MinecraftClient client;
+	@Shadow private Minecraft minecraft;
 
 	//#if MC >= 11903
 	//$$ @Inject(
@@ -54,21 +54,21 @@ public abstract class ClientPlayNetworkHandlerMixin
 	//$$ private void mcSpectatorEnterSinkingFixPorting_onGameModeUpdate(PlayerListS2CPacket.Action action, PlayerListS2CPacket.Entry packetEntry, PlayerListEntry playerListEntry, CallbackInfo ci)
 	//#else
 	@Inject(
-			method = "onPlayerList",
+			method = "handlePlayerInfo",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/network/PlayerListEntry;setGameMode(Lnet/minecraft/world/GameMode;)V"
+					target = "Lnet/minecraft/client/multiplayer/PlayerInfo;setGameMode(Lnet/minecraft/world/level/GameType;)V"
 			)
 	)
-	private void mcSpectatorEnterSinkingFixPorting_onGameModeUpdate(PlayerListS2CPacket packet, CallbackInfo ci, @Local PlayerListS2CPacket.Entry packetEntry, @Local PlayerListEntry playerListEntry)
+	private void mcSpectatorEnterSinkingFixPorting_onGameModeUpdate(ClientboundPlayerInfoPacket packet, CallbackInfo ci, @Local ClientboundPlayerInfoPacket.PlayerUpdate packetEntry, @Local PlayerInfo playerListEntry)
 	//#endif
 	{
 		if (TweakerMoreConfigs.MC_SPECTATOR_ENTER_SINKING_FIX_PORTING.getBooleanValue())
 		{
-			ClientPlayerEntity player = this.client.player;
+			LocalPlayer player = this.minecraft.player;
 
 			// is the client's player
-			if (player != null && player.getUuid().equals(
+			if (player != null && player.getUUID().equals(
 					//#if MC >= 11903
 					//$$ packetEntry.profileId()
 					//#else
@@ -76,16 +76,16 @@ public abstract class ClientPlayNetworkHandlerMixin
 					//#endif
 			))
 			{
-				GameMode newGameMode =
+				GameType newGameMode =
 						//#if MC >= 11903
 						//$$ packetEntry.gameMode();
 						//#else
 						packetEntry.getGameMode();
 						//#endif
-				if (newGameMode == GameMode.SPECTATOR && newGameMode != playerListEntry.getGameMode())  // entering spectator
+				if (newGameMode == GameType.SPECTATOR && newGameMode != playerListEntry.getGameMode())  // entering spectator
 				{
 					// clean the velocity at y-axis
-					player.setVelocity(player.getVelocity().multiply(1, 0, 1));
+					player.setDeltaMovement(player.getDeltaMovement().multiply(1, 0, 1));
 				}
 			}
 		}

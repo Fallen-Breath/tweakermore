@@ -22,10 +22,10 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableInventoryScre
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
-import net.minecraft.client.gui.screen.ingame.HorseScreen;
-import net.minecraft.client.gui.screen.ingame.InventoryScreen;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
+import net.minecraft.client.gui.screens.inventory.HorseInventoryScreen;
+import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -37,8 +37,8 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(value = {
 		InventoryScreen.class,
-		CreativeInventoryScreen.class,
-		HorseScreen.class,
+		CreativeModeInventoryScreen.class,
+		HorseInventoryScreen.class,
 })
 public abstract class InventoryScreenMixin
 {
@@ -53,7 +53,7 @@ public abstract class InventoryScreenMixin
 					//#elseif MC >= 11904
 					//$$ target = "Lnet/minecraft/client/gui/screen/ingame/InventoryScreen;drawEntity(Lnet/minecraft/client/util/math/MatrixStack;IIIFFLnet/minecraft/entity/LivingEntity;)V"
 					//#else
-					target = "Lnet/minecraft/client/gui/screen/ingame/InventoryScreen;drawEntity(IIIFFLnet/minecraft/entity/LivingEntity;)V"
+					target = "Lnet/minecraft/client/gui/screens/inventory/InventoryScreen;renderEntityInInventory(IIIFFLnet/minecraft/world/entity/LivingEntity;)V"
 					//#endif
 			)
 	)

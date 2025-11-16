@@ -28,14 +28,14 @@ import me.fallenbreath.tweakermore.util.Messenger;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.TextRenderingUtil;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
-import net.minecraft.block.StructureBlock;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.StructureBlockBlockEntity;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.text.BaseText;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.StructureBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.StructureBlockEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.BaseComponent;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 
 public class StructureBlockContentRenderer extends CommonScannerInfoViewer
 {
@@ -59,11 +59,11 @@ public class StructureBlockContentRenderer extends CommonScannerInfoViewer
 	{
 		// don't sync block entity if the player is operating the structure block
 		// or the player might not be able to switch the structure block mode
-		Screen currentScreen = MinecraftClient.getInstance().currentScreen;
+		Screen currentScreen = Minecraft.getInstance().screen;
 		if (currentScreen instanceof StructureBlockScreenAccessor)
 		{
 			//noinspection RedundantIfStatement
-			if (pos.equals(((StructureBlockScreenAccessor)currentScreen).getStructureBlock().getPos()))
+			if (pos.equals(((StructureBlockScreenAccessor)currentScreen).getStructureBlock().getBlockPos()))
 			{
 				return false;
 			}
@@ -75,14 +75,14 @@ public class StructureBlockContentRenderer extends CommonScannerInfoViewer
 	protected void render(WorldRenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
 		BlockEntity blockEntity = world.getBlockEntity(pos);
-		if (!(blockEntity instanceof StructureBlockBlockEntity))
+		if (!(blockEntity instanceof StructureBlockEntity))
 		{
 			return;
 		}
-		StructureBlockBlockEntity sbe = (StructureBlockBlockEntity)blockEntity;
+		StructureBlockEntity sbe = (StructureBlockEntity)blockEntity;
 
 		String structureName = sbe.getStructureName();
-		BaseText nameText = null;
+		BaseComponent nameText = null;
 		if (!structureName.isEmpty())
 		{
 			String trimmedName = TextRenderingUtil.trim(structureName, TweakerMoreConfigs.INFO_VIEW_STRUCTURE_BLOCK_MAX_WIDTH.getIntegerValue());
@@ -91,20 +91,20 @@ public class StructureBlockContentRenderer extends CommonScannerInfoViewer
 			{
 				String ns = parts[0];
 				String path = parts[1];
-				Formatting nsColor = ns.equals("minecraft") ? Formatting.GRAY : Formatting.YELLOW;
+				ChatFormatting nsColor = ns.equals("minecraft") ? ChatFormatting.GRAY : ChatFormatting.YELLOW;
 				nameText = Messenger.c(
 						Messenger.s(ns, nsColor),
-						Messenger.s(":", Formatting.GRAY),
-						Messenger.s(path, Formatting.AQUA)
+						Messenger.s(":", ChatFormatting.GRAY),
+						Messenger.s(path, ChatFormatting.AQUA)
 				);
 			}
 			else
 			{
-				nameText = Messenger.s(trimmedName, Formatting.AQUA);
+				nameText = Messenger.s(trimmedName, ChatFormatting.AQUA);
 			}
 			if (trimmedName.length() < structureName.length())
 			{
-				nameText = Messenger.c(nameText, Messenger.s("...", Formatting.DARK_GRAY));
+				nameText = Messenger.c(nameText, Messenger.s("...", ChatFormatting.DARK_GRAY));
 			}
 		}
 
@@ -116,7 +116,7 @@ public class StructureBlockContentRenderer extends CommonScannerInfoViewer
 
 		textRenderer.addLine(Messenger.c(
 				Messenger.s("["),
-				Messenger.tr("structure_block.mode." + sbe.getMode().asString()),
+				Messenger.tr("structure_block.mode." + sbe.getMode().getSerializedName()),
 				Messenger.s("]")
 		));
 		if (nameText != null)

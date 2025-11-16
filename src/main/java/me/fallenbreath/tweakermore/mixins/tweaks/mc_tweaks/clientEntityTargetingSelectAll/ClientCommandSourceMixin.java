@@ -23,32 +23,32 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.clientEntityTargetin
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.clientEntityTargetingSelectAll.MinecraftClientWithExtendedTargetEntity;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientCommandSource;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientSuggestionProvider;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(ClientCommandSource.class)
+@Mixin(ClientSuggestionProvider.class)
 public abstract class ClientCommandSourceMixin
 {
-	@Shadow @Final private MinecraftClient client;
+	@Shadow @Final private Minecraft minecraft;
 
 	@ModifyExpressionValue(
-			method = "getEntitySuggestions",
+			method = "getSelectedEntities",
 			at = @At(
 					value = "FIELD",
-					target = "Lnet/minecraft/client/MinecraftClient;crosshairTarget:Lnet/minecraft/util/hit/HitResult;"
+					target = "Lnet/minecraft/client/Minecraft;hitResult:Lnet/minecraft/world/phys/HitResult;"
 			)
 	)
 	private HitResult clientEntityTargetingSelectAll_hackUuidSuggestion(HitResult crosshairTarget)
 	{
 		if (TweakerMoreConfigs.CLIENT_ENTITY_TARGETING_SUPPORT_ALL.getBooleanValue())
 		{
-			EntityHitResult entityHitResult = ((MinecraftClientWithExtendedTargetEntity)this.client).getExtendedEntityHitResult$TKM();
+			EntityHitResult entityHitResult = ((MinecraftClientWithExtendedTargetEntity)this.minecraft).getExtendedEntityHitResult$TKM();
 			if (entityHitResult != null)
 			{
 				crosshairTarget = entityHitResult;

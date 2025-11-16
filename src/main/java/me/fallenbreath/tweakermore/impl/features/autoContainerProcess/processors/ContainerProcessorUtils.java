@@ -22,20 +22,20 @@ package me.fallenbreath.tweakermore.impl.features.autoContainerProcess.processor
 
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.autoContainerProcess.EnderChestBlockAccessor;
-import net.minecraft.client.gui.screen.ingame.ContainerScreen;
-import net.minecraft.container.ContainerType;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.network.chat.Component;
 
 class ContainerProcessorUtils
 {
 	@SuppressWarnings("RedundantIfStatement")
-	public static boolean shouldSkipForEnderChest(ContainerScreen<?> containerScreen, ConfigBoolean ignoreSwitch)
+	public static boolean shouldSkipForEnderChest(AbstractContainerScreen<?> containerScreen, ConfigBoolean ignoreSwitch)
 	{
 		if (ignoreSwitch.getBooleanValue())
 		{
-			Text enderChestTitle = EnderChestBlockAccessor.getContainerName();
+			Component enderChestTitle = EnderChestBlockAccessor.getContainerName();
 			// 9x3 container + title is "container.enderchest" == ender chest
-			if (containerScreen.getContainer().getType() == ContainerType.GENERIC_9X3 && enderChestTitle.equals(containerScreen.getTitle()))
+			if (containerScreen.getMenu().getType() == MenuType.GENERIC_9x3 && enderChestTitle.equals(containerScreen.getTitle()))
 			{
 				return true;
 			}

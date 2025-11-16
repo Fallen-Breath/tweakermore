@@ -20,14 +20,14 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.features.copyItemData;
 
-import net.minecraft.client.gui.screen.ingame.ContainerScreen;
-import net.minecraft.container.Slot;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.world.inventory.Slot;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(ContainerScreen.class)
+@Mixin(AbstractContainerScreen.class)
 public interface ContainerScreenAccessor
 {
-	@Accessor
+	@Accessor("hoveredSlot")
 	Slot getFocusedSlot();
 }

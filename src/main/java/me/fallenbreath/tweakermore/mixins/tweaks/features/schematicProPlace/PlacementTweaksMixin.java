@@ -29,20 +29,20 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.features.schematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.network.ClientPlayerInteractionManager;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.multiplayer.MultiPlayerGameMode;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.item.BlockPlaceContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseOnContext;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -89,16 +89,16 @@ public abstract class PlacementTweaksMixin
 	@Unique
 	@SuppressWarnings("PointlessBooleanExpression")
 	private static BlockHitResult finalBlockPlacementTweak$TKM(
-			ClientPlayerEntity player,
-			ClientWorld world,
+			LocalPlayer player,
+			ClientLevel world,
 			BlockPos posIn,
 			Direction sideIn,
-			Vec3d hitVecIn,
-			Hand hand
+			Vec3 hitVecIn,
+			InteractionHand hand
 	)
 	{
 		BlockHitResult hitResult = new BlockHitResult(hitVecIn, sideIn, posIn, false);
-		ItemPlacementContext ctx = new ItemPlacementContext(new ItemUsageContext(player, hand, hitResult));
+		BlockPlaceContext ctx = new BlockPlaceContext(new UseOnContext(player, hand, hitResult));
 		BlockState state = world.getBlockState(posIn);
 		ItemStack stackOriginal;
 
@@ -110,16 +110,16 @@ public abstract class PlacementTweaksMixin
 		}
 		else
 		{
-			stackOriginal = player.getStackInHand(hand).copy();
+			stackOriginal = player.getItemInHand(hand).copy();
 		}
 
 		if (FeatureToggle.TWEAK_PLACEMENT_RESTRICTION.getBooleanValue() &&
-				state.canReplace(ctx) == false && me.fallenbreath.tweakermore.util.BlockUtils.isReplaceable(state))
+				state.canBeReplaced(ctx) == false && me.fallenbreath.tweakermore.util.BlockUtils.isReplaceable(state))
 		{
-			posIn = posIn.offset(sideIn.getOpposite());
+			posIn = posIn.relative(sideIn.getOpposite());
 		}
 
-		final int afterClickerClickCount = MathHelper.clamp(Configs.Generic.AFTER_CLICKER_CLICK_COUNT.getIntegerValue(), 0, 32);
+		final int afterClickerClickCount = Mth.clamp(Configs.Generic.AFTER_CLICKER_CLICK_COUNT.getIntegerValue(), 0, 32);
 
 		Direction facing = sideIn;
 		boolean flexible = FeatureToggle.TWEAK_FLEXIBLE_BLOCK_PLACEMENT.getBooleanValue();
@@ -153,7 +153,7 @@ public abstract class PlacementTweaksMixin
 			facing = facing.getOpposite(); // go from block face to click on to the requested facing
 			//double relX = hitVecIn.x - posIn.getX();
 			//double x = posIn.getX() + relX + 2 + (facing.getId() * 2);
-			double x = posIn.getX() + 2 + (facing.getId() * 2);
+			double x = posIn.getX() + 2 + (facing.get3DDataValue() * 2);
 
 			if (FeatureToggle.TWEAK_AFTER_CLICKER.getBooleanValue())
 			{
@@ -161,7 +161,7 @@ public abstract class PlacementTweaksMixin
 			}
 
 			//System.out.printf("processRightClickBlockWrapper req facing: %s, x: %.3f, pos: %s, sideIn: %s\n", facing, x, posIn, sideIn);
-			hitVecIn = new Vec3d(x, hitVecIn.y, hitVecIn.z);
+			hitVecIn = new Vec3(x, hitVecIn.y, hitVecIn.z);
 		}
 		//#if MC >= 12103
 		//$$ else if (flexible && rotation && accurate == false &&
@@ -196,11 +196,11 @@ public abstract class PlacementTweaksMixin
 		if (FeatureToggle.TWEAK_Y_MIRROR.getBooleanValue() && Hotkeys.PLACEMENT_Y_MIRROR.getKeybind().isKeybindHeld())
 		{
 			double y = 1 - hitVecIn.y + 2 * posIn.getY(); // = 1 - (hitVec.y - pos.getY()) + pos.getY();
-			hitVecIn = new Vec3d(hitVecIn.x, y, hitVecIn.z);
+			hitVecIn = new Vec3(hitVecIn.x, y, hitVecIn.z);
 
 			if (sideIn.getAxis() == Direction.Axis.Y)
 			{
-				posIn = posIn.offset(sideIn);
+				posIn = posIn.relative(sideIn);
 				sideIn = sideIn.getOpposite();
 			}
 		}
@@ -211,20 +211,20 @@ public abstract class PlacementTweaksMixin
 
 	@Inject(method = "processRightClickBlockWrapper", at = @At("HEAD"), cancellable = true, remap = false)
 	private static void schematicProPlace(
-			ClientPlayerInteractionManager controller,
-			ClientPlayerEntity player,
-			ClientWorld world,
+			MultiPlayerGameMode controller,
+			LocalPlayer player,
+			ClientLevel world,
 			BlockPos posIn,
 			Direction sideIn,
-			Vec3d hitVecIn,
-			Hand hand,
-			CallbackInfoReturnable<ActionResult> cir
+			Vec3 hitVecIn,
+			InteractionHand hand,
+			CallbackInfoReturnable<InteractionResult> cir
 	)
 	{
 		ProPlaceImpl.handleRightClick(
 				() -> {
 					BlockHitResult hitResult = finalBlockPlacementTweak$TKM(player, world, posIn, sideIn, hitVecIn, hand);
-					ItemPlacementContext ctx = new ItemPlacementContext(new ItemUsageContext(player, hand, hitResult));
+					BlockPlaceContext ctx = new BlockPlaceContext(new UseOnContext(player, hand, hitResult));
 					return Pair.of(hitResult, ctx);
 				},
 				cir

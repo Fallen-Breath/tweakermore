@@ -27,25 +27,25 @@ import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.clientEntityTargetingSelectAll.EntityItemPickHelper;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.clientEntityTargetingSelectAll.MinecraftClientWithExtendedTargetEntity;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.SpawnEggItem;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(MinecraftClient.class)
+@Mixin(Minecraft.class)
 public abstract class MinecraftClient_pickEntityMixin
 {
 	@ModifyExpressionValue(
-			method = "doItemPick",
+			method = "pickBlock",
 			at = @At(
 					value = "FIELD",
-					target = "Lnet/minecraft/client/MinecraftClient;crosshairTarget:Lnet/minecraft/util/hit/HitResult;"
+					target = "Lnet/minecraft/client/Minecraft;hitResult:Lnet/minecraft/world/phys/HitResult;"
 			)
 	)
 	private HitResult clientEntityTargetingSelectAll_hackPickItem_replaceHitResult(HitResult crosshairTarget)
@@ -87,10 +87,10 @@ public abstract class MinecraftClient_pickEntityMixin
 	//$$ }
 	//#else
 	@ModifyExpressionValue(
-			method = "doItemPick",
+			method = "pickBlock",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/item/SpawnEggItem;forEntity(Lnet/minecraft/entity/EntityType;)Lnet/minecraft/item/SpawnEggItem;"
+					target = "Lnet/minecraft/world/item/SpawnEggItem;byId(Lnet/minecraft/world/entity/EntityType;)Lnet/minecraft/world/item/SpawnEggItem;"
 			)
 	)
 	private @Nullable SpawnEggItem clientEntityTargetingSelectAll_hackPickItem_overrideVanillaTempResult(
@@ -107,7 +107,7 @@ public abstract class MinecraftClient_pickEntityMixin
 				if (newPickedItem != null)
 				{
 					overrideItemStack.set(newPickedItem);
-					item = SpawnEggItem.forEntity(EntityType.BAT);
+					item = SpawnEggItem.byId(EntityType.BAT);
 				}
 			}
 		}
@@ -115,10 +115,10 @@ public abstract class MinecraftClient_pickEntityMixin
 	}
 
 	@ModifyExpressionValue(
-			method = "doItemPick",
+			method = "pickBlock",
 			at = @At(
 					value = "NEW",
-					target = "(Lnet/minecraft/item/ItemConvertible;)Lnet/minecraft/item/ItemStack;"
+					target = "(Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/item/ItemStack;"
 			)
 	)
 	private ItemStack clientEntityTargetingSelectAll_hackPickItem_applyOurResult(

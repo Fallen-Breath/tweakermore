@@ -22,8 +22,8 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableCameraFrustum
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.disableFrustumChunkCulling.CouldBeAlwaysVisibleFrustum;
-import net.minecraft.client.render.Frustum;
-import net.minecraft.client.render.WorldRenderer;
+import net.minecraft.client.renderer.culling.Frustum;
+import net.minecraft.client.renderer.LevelRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 /**
  * Only used in mc1.15+
  */
-@Mixin(WorldRenderer.class)
+@Mixin(LevelRenderer.class)
 public abstract class WorldRendererMixin
 {
 	//#if MC >= 1.21.9
@@ -49,10 +49,10 @@ public abstract class WorldRendererMixin
 	//$$ )
 	//#else
 	@ModifyVariable(
-			method = "render",
+			method = "renderLevel",
 			at = @At(
 					value = "FIELD",
-					target = "Lnet/minecraft/client/render/WorldRenderer;shouldCaptureFrustum:Z",
+					target = "Lnet/minecraft/client/renderer/LevelRenderer;captureFrustum:Z",
 					ordinal = 0
 			)
 	)

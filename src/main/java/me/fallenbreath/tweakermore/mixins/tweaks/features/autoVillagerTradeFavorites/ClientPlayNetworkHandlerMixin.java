@@ -24,8 +24,8 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.features.autoVillagerTradeFavorites.MerchantAutoFavoritesTrader;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -40,7 +40,7 @@ import org.spongepowered.asm.mixin.Shadow;
 //#endif
 
 @Restriction(require = @Condition(ModIds.itemscroller))
-@Mixin(ClientPlayNetworkHandler.class)
+@Mixin(ClientPacketListener.class)
 public abstract class ClientPlayNetworkHandlerMixin
 		//#if MC >= 12002
 		//$$ extends ClientCommonNetworkHandler
@@ -52,19 +52,19 @@ public abstract class ClientPlayNetworkHandlerMixin
 	//$$ 	super(client, connection, connectionState);
 	//$$ }
 	//#else
-	@Shadow private MinecraftClient client;
+	@Shadow private Minecraft minecraft;
 	//#endif
 
 	@Inject(
-			method = "onSetTradeOffers",
+			method = "handleMerchantOffers",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/container/MerchantContainer;setRefreshTrades(Z)V",
+					target = "Lnet/minecraft/world/inventory/MerchantMenu;setCanRestock(Z)V",
 					shift = At.Shift.AFTER
 			)
 	)
 	private void autoVillagerTradeFavorites(CallbackInfo ci)
 	{
-		MerchantAutoFavoritesTrader.doAutoTrade(this.client);
+		MerchantAutoFavoritesTrader.doAutoTrade(this.minecraft);
 	}
 }

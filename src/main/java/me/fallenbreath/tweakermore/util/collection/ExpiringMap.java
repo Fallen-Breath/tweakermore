@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.util.collection;
 
 import com.google.common.collect.Maps;
-import net.minecraft.util.Util;
+import net.minecraft.Util;
 import org.apache.commons.lang3.NotImplementedException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -45,7 +45,7 @@ public class ExpiringMap<K, V> implements Map<K, V>
 
     private static long getCurrentMs()
     {
-        return Util.getMeasuringTimeMs();
+        return Util.getMillis();
     }
 
     private void cleanTimeoutEntries()

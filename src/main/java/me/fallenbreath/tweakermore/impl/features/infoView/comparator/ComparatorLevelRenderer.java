@@ -25,10 +25,10 @@ import me.fallenbreath.tweakermore.impl.features.infoView.CommonScannerInfoViewe
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
-import net.minecraft.block.ComparatorBlock;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.ComparatorBlockEntity;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.ComparatorBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.ComparatorBlockEntity;
+import net.minecraft.core.BlockPos;
 
 public class ComparatorLevelRenderer extends CommonScannerInfoViewer
 {

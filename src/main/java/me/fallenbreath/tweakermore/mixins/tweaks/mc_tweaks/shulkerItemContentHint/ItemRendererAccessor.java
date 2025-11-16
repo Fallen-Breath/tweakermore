@@ -20,8 +20,8 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.shulkerItemContentHint;
 
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.item.ItemRenderer;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 public interface ItemRendererAccessor
 {
 	//#if MC < 11904
-	@Invoker
+	@Invoker("fillRect")
 	void invokeRenderGuiQuad(BufferBuilder buffer, int x, int y, int width, int height, int red, int green, int blue, int alpha);
 	//#endif
 }

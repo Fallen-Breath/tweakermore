@@ -20,14 +20,14 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.features.schematicProPlace;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.CoralWallFanBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CoralWallFanBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(CoralWallFanBlock.class)
 public interface CoralWallFanBlockAccessor
 {
-	@Accessor
+	@Accessor("deadBlock")
 	Block getDeadCoralBlock();
 }

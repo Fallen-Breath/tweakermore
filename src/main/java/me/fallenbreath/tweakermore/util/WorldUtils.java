@@ -20,9 +20,9 @@
 
 package me.fallenbreath.tweakermore.util;
 
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 public class WorldUtils
@@ -32,7 +32,7 @@ public class WorldUtils
 	 * so you can use it on RenderThread
 	 */
 	@Nullable
-	public static BlockEntity getBlockEntity(World world, BlockPos pos)
+	public static BlockEntity getBlockEntity(Level world, BlockPos pos)
 	{
 		return world.getChunk(pos).getBlockEntity(pos);
 	}

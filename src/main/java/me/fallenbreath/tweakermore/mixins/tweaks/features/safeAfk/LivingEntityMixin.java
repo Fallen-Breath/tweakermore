@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.features.safeAfk;
 
 import me.fallenbreath.tweakermore.impl.features.safeAfk.SafeAfkHelper;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -34,14 +34,14 @@ public abstract class LivingEntityMixin
 			//#if MC >= 11904
 			//$$ method = "onDamaged",
 			//#else
-			method = "handleStatus",
+			method = "handleEntityEvent",
 			//#endif
 			at = @At(
 					//#if MC >= 11904
 					//$$ value = "TAIL"
 					//#else
 					value = "INVOKE",
-					target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"
+					target = "Lnet/minecraft/world/entity/LivingEntity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"
 					//#endif
 			)
 	)

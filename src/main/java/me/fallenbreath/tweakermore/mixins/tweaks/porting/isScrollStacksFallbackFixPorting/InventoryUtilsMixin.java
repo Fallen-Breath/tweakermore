@@ -48,7 +48,7 @@ public abstract class InventoryUtilsMixin
 					//#if MC >= 11600
 					//$$ target = "Lfi/dy/masa/itemscroller/util/InventoryUtils;clickSlotsToMoveItemsFromSlot(Lnet/minecraft/screen/slot/Slot;Lnet/minecraft/client/gui/screen/ingame/HandledScreen;Z)V",
 					//#else
-					target = "Lfi/dy/masa/itemscroller/util/InventoryUtils;clickSlotsToMoveItemsFromSlot(Lnet/minecraft/container/Slot;Lnet/minecraft/client/gui/screen/ingame/ContainerScreen;Z)V",
+					target = "Lfi/dy/masa/itemscroller/util/InventoryUtils;clickSlotsToMoveItemsFromSlot(Lnet/minecraft/world/inventory/Slot;Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;Z)V",
 					//#endif
 					ordinal = 1
 			),

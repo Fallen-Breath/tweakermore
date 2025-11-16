@@ -23,7 +23,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableSignTextLengt
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.util.SelectionManager;
+import net.minecraft.client.gui.font.TextFieldHelper;
 import org.spongepowered.asm.mixin.Mixin;
 
 //#if MC < 11600
@@ -31,16 +31,12 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 //#endif
 
 @Restriction(conflict = @Condition(value = ModIds.caxton, versionPredicates = "<0.3.0-beta.2"))
-@Mixin(SelectionManager.class)
+@Mixin(TextFieldHelper.class)
 public interface SelectionManagerAccessor
 {
 	// un-used since mc 1.16
 	//#if MC < 11600
-	@Accessor(
-			//#if MC < 11500
-			//$$ "field_16455"
-			//#endif
-	)
+	@Accessor("maxWidth")
 	int getMaxLength();
 	//#endif
 }

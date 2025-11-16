@@ -23,14 +23,14 @@ package me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.handler;
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.TemporaryBlockReplacer;
-import net.minecraft.block.BedBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.enums.BedPart;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.level.block.BedBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BedPart;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.biome.Biomes;
 
 /**
  * Bed logic:
@@ -39,7 +39,7 @@ import net.minecraft.world.biome.Biomes;
  */
 public class BedHandler extends AbstractBlockHandler
 {
-	private static final BlockState AIR = Blocks.AIR.getDefaultState();
+	private static final BlockState AIR = Blocks.AIR.defaultBlockState();
 
 	private BlockPos bedHeadPos;
 	private Direction toBedRootDirection;
@@ -53,13 +53,13 @@ public class BedHandler extends AbstractBlockHandler
 		if (blockState.getBlock() instanceof BedBlock)
 		{
 			// ref: net.minecraft.block.BedBlock#onUse
-			boolean currentIsHead = blockState.get(BedBlock.PART) == BedPart.HEAD;
-			Direction direction = blockState.get(BedBlock.FACING);
+			boolean currentIsHead = blockState.getValue(BedBlock.PART) == BedPart.HEAD;
+			Direction direction = blockState.getValue(BedBlock.FACING);
 			if (currentIsHead)
 			{
 				direction = direction.getOpposite();
 			}
-			BlockPos otherPos = blockPos.offset(direction);
+			BlockPos otherPos = blockPos.relative(direction);
 			BlockState otherState = world.getBlockState(otherPos);
 
 			if (currentIsHead)
@@ -88,14 +88,14 @@ public class BedHandler extends AbstractBlockHandler
 			//#if MC >= 11600
 			//$$ return !BedBlock.isOverworld(world.getBestWorld());
 			//#else
-			return !this.world.getBestWorld().dimension.canPlayersSleep() || this.world.getBestWorld().getBiome(blockPos) == Biomes.NETHER;
+			return !this.world.getBestWorld().dimension.mayRespawn() || this.world.getBestWorld().getBiome(blockPos) == Biomes.NETHER;
 			//#endif
 		}
 		return false;
 	}
 
 	@Override
-	public Vec3d getExplosionCenter()
+	public Vec3 getExplosionCenter()
 	{
 		return PositionUtils.centerOf(this.bedHeadPos);
 	}
@@ -122,16 +122,16 @@ public class BedHandler extends AbstractBlockHandler
 	}
 
 	@Override
-	public Vec3d getTextPosition()
+	public Vec3 getTextPosition()
 	{
-		Vec3d headCenter = PositionUtils.centerOf(this.bedHeadPos);
-		Vec3d shiftToMiddle =
+		Vec3 headCenter = PositionUtils.centerOf(this.bedHeadPos);
+		Vec3 shiftToMiddle =
 				//#if MC >= 11600
 				//$$ Vec3d.of
 				//#else
-				new Vec3d
+				new Vec3
 				//#endif
-						(this.toBedRootDirection.getVector()).multiply(0.5);
+						(this.toBedRootDirection.getNormal()).scale(0.5);
 		return headCenter.add(shiftToMiddle);
 	}
 }

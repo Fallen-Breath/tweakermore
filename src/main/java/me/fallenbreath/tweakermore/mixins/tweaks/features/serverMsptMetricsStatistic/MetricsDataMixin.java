@@ -32,14 +32,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#if MC >= 12006
 //$$ import net.minecraft.util.profiler.log.ArrayDebugSampleLog;
 //#else
-import net.minecraft.util.MetricsData;
+import net.minecraft.util.FrameTimer;
 //#endif
 
 @Mixin(
 		//#if MC >= 12006
 		//$$ ArrayDebugSampleLog.class
 		//#else
-		MetricsData.class
+		FrameTimer.class
 		//#endif
 )
 public abstract class MetricsDataMixin implements MetricsDataWithRichStatistic
@@ -67,7 +67,7 @@ public abstract class MetricsDataMixin implements MetricsDataWithRichStatistic
 			//#if MC >= 12006
 			//$$ method = "push(J)V",
 			//#else
-			method = "pushSample",
+			method = "logFrameDuration",
 			//#endif
 			at = @At("TAIL")
 	)

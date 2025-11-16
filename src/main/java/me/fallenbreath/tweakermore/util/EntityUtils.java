@@ -21,18 +21,18 @@
 package me.fallenbreath.tweakermore.util;
 
 import me.fallenbreath.tweakermore.util.compat.tweakeroo.TweakerooAccess;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerAbilities;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.world.World;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Abilities;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class EntityUtils
 {
-	public static PlayerAbilities getPlayerAbilities(PlayerEntity player)
+	public static Abilities getPlayerAbilities(Player player)
 	{
 		//#if MC >= 11700
 		//$$ return player.getAbilities();
@@ -43,9 +43,9 @@ public class EntityUtils
 
 	public static boolean isFlyingCreativePlayer(Entity entity)
 	{
-		if (entity instanceof PlayerEntity)
+		if (entity instanceof Player)
 		{
-			PlayerEntity player = (PlayerEntity)entity;
+			Player player = (Player)entity;
 			return player.isCreative() && getPlayerAbilities(player).flying;
 		}
 		return false;
@@ -54,25 +54,25 @@ public class EntityUtils
 	private static final boolean TWEAKEROO_LOADED = FabricUtils.isModLoaded(ModIds.tweakeroo);
 
 	@Nullable
-	public static ClientPlayerEntity getCurrentPlayerOrFreeCameraEntity()
+	public static LocalPlayer getCurrentPlayerOrFreeCameraEntity()
 	{
 		if (TWEAKEROO_LOADED)
 		{
-			ClientPlayerEntity freecam = TweakerooAccess.getFreecamEntity();
+			LocalPlayer freecam = TweakerooAccess.getFreecamEntity();
 			if (freecam != null)
 			{
 				return freecam;
 			}
 		}
-		return MinecraftClient.getInstance().player;
+		return Minecraft.getInstance().player;
 	}
 
-	public static World getEntityWorld(@NotNull Entity entity)
+	public static Level getEntityWorld(@NotNull Entity entity)
 	{
 		//#if 1.21.6 <= MC && MC < 1.21.9
 		//$$ return entity.getWorld();
 		//#else
-		return entity.getEntityWorld();
+		return entity.getCommandSenderWorld();
 		//#endif
 	}
 }

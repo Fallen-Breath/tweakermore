@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.util.render.context;
 
 import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.GuiComponent;
 import org.jetbrains.annotations.NotNull;
 
 //#if MC >= 12106
@@ -86,12 +86,12 @@ public class GuiRenderContextImpl implements GuiRenderContext
 
 	@Override
 	@NotNull
-	public DrawableHelper getGuiDrawer()
+	public GuiComponent getGuiDrawer()
 	{
 		//#if MC >= 12000
 		//$$ return this.drawContext;
 		//#else
-		return new DrawableHelper(){};
+		return new GuiComponent(){};
 		//#endif
 	}
 

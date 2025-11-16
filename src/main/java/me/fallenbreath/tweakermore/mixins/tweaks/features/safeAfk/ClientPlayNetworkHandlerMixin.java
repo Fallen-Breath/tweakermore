@@ -21,8 +21,8 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.features.safeAfk;
 
 import me.fallenbreath.tweakermore.impl.features.safeAfk.SafeAfkHelper;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.Shadow;
 //#endif
 
-@Mixin(ClientPlayNetworkHandler.class)
+@Mixin(ClientPacketListener.class)
 public abstract class ClientPlayNetworkHandlerMixin
 		//#if MC >= 12002
 		//$$ extends ClientCommonNetworkHandler
@@ -48,16 +48,16 @@ public abstract class ClientPlayNetworkHandlerMixin
 	//$$ 	super(client, connection, connectionState);
 	//$$ }
 	//#else
-	@Shadow private MinecraftClient client;
+	@Shadow private Minecraft minecraft;
 	//#endif
 
-	@Inject(method = "onHealthUpdate", at = @At("TAIL"))
+	@Inject(method = "handleSetHealth", at = @At("TAIL"))
 	private void tweakerMoreSafeAfkHook(CallbackInfo ci)
 	{
-		SafeAfkHelper.onHealthUpdate(this.client);
+		SafeAfkHelper.onHealthUpdate(this.minecraft);
 	}
 
-	@Inject(method = {"clearWorld", "onPlayerRespawn"}, at = @At("TAIL"))
+	@Inject(method = {"cleanup", "handleRespawn"}, at = @At("TAIL"))
 	private void resetLastHurtGameTime(CallbackInfo ci)
 	{
 		SafeAfkHelper.resetHurtTime();

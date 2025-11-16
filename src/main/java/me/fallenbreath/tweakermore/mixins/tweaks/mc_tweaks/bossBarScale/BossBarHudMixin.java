@@ -23,7 +23,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.bossBarScale;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
-import net.minecraft.client.gui.hud.BossBarHud;
+import net.minecraft.client.gui.components.BossHealthOverlay;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -39,7 +39,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //$$ import net.minecraft.client.util.math.MatrixStack;
 //#endif
 
-@Mixin(BossBarHud.class)
+@Mixin(BossHealthOverlay.class)
 public abstract class BossBarHudMixin
 {
 	@Unique

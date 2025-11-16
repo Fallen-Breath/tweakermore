@@ -61,8 +61,8 @@ import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.util.RegistryUtils;
 import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreRenderEventHandler;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.Items;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.Items;
 
 import java.lang.reflect.Field;
 import java.util.Collections;

@@ -22,14 +22,14 @@ package me.fallenbreath.tweakermore.impl.features.infoView.cache;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.EntityUtils;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import org.jetbrains.annotations.Nullable;
 
 class InfoViewCameraUtils
 {
 	@Nullable
-	public static ClientPlayerEntity getCameraEntity()
+	public static LocalPlayer getCameraEntity()
 	{
 		if (TweakerMoreConfigs.INFO_VIEW_FOLLOW_FREECAM.getBooleanValue())
 		{
@@ -37,7 +37,7 @@ class InfoViewCameraUtils
 		}
 		else
 		{
-			return MinecraftClient.getInstance().player;
+			return Minecraft.getInstance().player;
 		}
 	}
 }

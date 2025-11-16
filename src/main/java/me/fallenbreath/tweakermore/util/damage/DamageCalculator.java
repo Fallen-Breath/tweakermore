@@ -21,15 +21,15 @@
 package me.fallenbreath.tweakermore.util.damage;
 
 import me.fallenbreath.tweakermore.TweakerMoreMod;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.DamageUtil;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.damagesource.CombatRules;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.SharedMonsterAttributes;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.Difficulty;
 
 import java.util.Objects;
@@ -43,7 +43,7 @@ import java.util.Objects;
 //#if MC >= 12103
 //$$ import net.minecraft.world.explosion.ExplosionImpl;
 //#else
-import net.minecraft.world.explosion.Explosion;
+import net.minecraft.world.level.Explosion;
 //#endif
 
 //#if MC >= 12100
@@ -66,7 +66,7 @@ public class DamageCalculator
 	//#if MC < 12100
 	@SuppressWarnings("FieldCanBeLocal")
 	//#endif
-	private ServerWorld serverWorld = null;
+	private ServerLevel serverWorld = null;
 
 	private ApplyStage currentStage;
 
@@ -79,7 +79,7 @@ public class DamageCalculator
 	}
 
 	// mc1.21+ EPF calculation needs this
-	public void setServerWorld(ServerWorld serverWorld)
+	public void setServerWorld(ServerLevel serverWorld)
 	{
 		this.serverWorld = serverWorld;
 	}
@@ -95,17 +95,17 @@ public class DamageCalculator
 		return new DamageCalculator(entity, damageAmount, damageSource);
 	}
 
-	public static DamageCalculator explosion(Vec3d explosionCenter, float explosionPower, LivingEntity entity)
+	public static DamageCalculator explosion(Vec3 explosionCenter, float explosionPower, LivingEntity entity)
 	{
 		float exposure =
 				//#if MC >= 12103
 				//$$ ExplosionImpl.calculateReceivedDamage
 				//#else
-				Explosion.getExposure
+				Explosion.getSeenPercent
 				//#endif
 						(explosionCenter, entity);
 		float maxRange = explosionPower * 2.0F;
-		double distanceRatio = Math.sqrt(entity.squaredDistanceTo(explosionCenter)) / (double) maxRange;
+		double distanceRatio = Math.sqrt(entity.distanceToSqr(explosionCenter)) / (double) maxRange;
 		int damage;
 		if (distanceRatio <= 1.0)
 		{
@@ -121,7 +121,7 @@ public class DamageCalculator
 				//#if MC >= 11904
 				//$$ entity.getDamageSources().badRespawnPoint(explosionCenter)
 				//#else
-				DamageSource.netherBed(
+				DamageSource.netherBedExplosion(
 						//#if MC >= 11903
 						//$$ explosionCenter
 						//#endif
@@ -172,14 +172,14 @@ public class DamageCalculator
 	}
 
 	/**
-	 * Reference: {@link net.minecraft.entity.player.PlayerEntity#damage}
+	 * Reference: {@link net.minecraft.world.entity.player.Player#damage}
 	 */
 	public DamageCalculator applyDifficulty(Difficulty difficulty)
 	{
 		this.checkAndSetStage(ApplyStage.DIFFICULTY);
-		if (this.entity instanceof PlayerEntity)
+		if (this.entity instanceof Player)
 		{
-			if (this.damageSource.isScaledWithDifficulty())
+			if (this.damageSource.scalesWithDifficulty())
 			{
 				this.damageAmount = me.fallenbreath.tweakermore.util.damage.DamageUtil.modifyDamageForDifficulty(this.damageAmount, difficulty);
 			}
@@ -199,11 +199,11 @@ public class DamageCalculator
 					//#if MC >= 11904
 					//$$ this.damageSource.isIn(DamageTypeTags.BYPASSES_ARMOR)
 					//#else
-					this.damageSource.bypassesArmor()
+					this.damageSource.isBypassArmor()
 					//#endif
 			))
 			{
-				amount = DamageUtil.getDamageLeft(
+				amount = CombatRules.getDamageAfterAbsorb(
 						//#if MC >= 12100
 						//$$ this.entity,
 						//#endif
@@ -211,13 +211,13 @@ public class DamageCalculator
 						//#if MC >= 12006
 						//$$ this.damageSource,
 						//#endif
-						this.entity.getArmor(),
+						this.entity.getArmorValue(),
 
 						(float)this.entity.
 								//#if MC >= 11600
 								//$$ getAttributeValue(EntityAttributes.GENERIC_ARMOR_TOUGHNESS)
 								//#else
-								getAttributeInstance(EntityAttributes.ARMOR_TOUGHNESS).getValue()
+								getAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).getValue()
 								//#endif
 				);
 			}
@@ -228,11 +228,11 @@ public class DamageCalculator
 					//#if MC >= 11904
 					//$$ this.damageSource.isIn(DamageTypeTags.BYPASSES_EFFECTS)
 					//#else
-					this.damageSource.isUnblockable()
+					this.damageSource.isBypassMagic()
 					//#endif
 			))
 			{
-				if (this.entity.hasStatusEffect(StatusEffects.RESISTANCE) && this.damageSource !=
+				if (this.entity.hasEffect(MobEffects.DAMAGE_RESISTANCE) && this.damageSource !=
 						//#if MC >= 11904
 						//$$ this.entity.getDamageSources().outOfWorld()
 						//#else
@@ -240,7 +240,7 @@ public class DamageCalculator
 						//#endif
 				)
 				{
-					int level = Objects.requireNonNull(this.entity.getStatusEffect(StatusEffects.RESISTANCE)).getAmplifier() + 1;
+					int level = Objects.requireNonNull(this.entity.getEffect(MobEffects.DAMAGE_RESISTANCE)).getAmplifier() + 1;
 					amount = Math.max(amount * (1 - level / 5.0F), 0.0F);
 				}
 
@@ -256,7 +256,7 @@ public class DamageCalculator
 					float level = this.calculateProtectionEnchantmentAmount();
 					if (level > 0)
 					{
-						amount = DamageUtil.getInflictedDamage(amount, level);
+						amount = CombatRules.getDamageAfterMagicAbsorb(amount, level);
 					}
 				}
 			}
@@ -337,7 +337,7 @@ public class DamageCalculator
 		//$$ 	return epf;
 		//$$ }
 		//#else
-		return EnchantmentHelper.getProtectionAmount(this.entity.getArmorItems(), this.damageSource);
+		return EnchantmentHelper.getDamageProtection(this.entity.getArmorSlots(), this.damageSource);
 		//#endif
 	}
 

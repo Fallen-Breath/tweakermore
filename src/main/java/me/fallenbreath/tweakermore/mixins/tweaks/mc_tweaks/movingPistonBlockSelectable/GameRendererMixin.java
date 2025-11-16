@@ -24,7 +24,7 @@ import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.movingPistonBlockSelectable.MovingPistonBlockSelectableHelper;
-import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -42,7 +42,7 @@ public abstract class GameRendererMixin
 			//#if MC >= 12006
 			//$$ method = "findCrosshairTarget",
 			//#else
-			method = "updateTargetedEntity",
+			method = "pick",
 			//#endif
 			at = @At("HEAD")
 	)
@@ -66,7 +66,7 @@ public abstract class GameRendererMixin
 			//#if MC >= 12006
 			//$$ method = "findCrosshairTarget",
 			//#else
-			method = "updateTargetedEntity",
+			method = "pick",
 			//#endif
 			at = @At("TAIL")
 	)

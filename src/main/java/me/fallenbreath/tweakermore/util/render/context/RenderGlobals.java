@@ -78,14 +78,14 @@ public class RenderGlobals
 		RenderSystem.enableBlend();
 	}
 
-	public static void blendFunc(GlStateManager.SrcFactor srcFactor, GlStateManager.DstFactor dstFactor)
+	public static void blendFunc(GlStateManager.SourceFactor srcFactor, GlStateManager.DestFactor dstFactor)
 	{
 		RenderSystem.blendFunc(srcFactor, dstFactor);
 	}
 
 	public static void blendFuncForAlpha()
 	{
-		blendFunc(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
+		blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 	}
 
 	//#if MC < 11700

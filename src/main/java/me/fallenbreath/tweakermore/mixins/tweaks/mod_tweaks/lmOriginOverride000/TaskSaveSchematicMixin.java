@@ -28,7 +28,7 @@ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.lmOriginOverride000.LitematicaOriginOverrideGlobals;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.lmOriginOverride000.LitematicaSchematic000Origin;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -51,7 +51,7 @@ public abstract class TaskSaveSchematicMixin
 			//#endif
 			at = @At(
 					value = "INVOKE",
-					target = "Lfi/dy/masa/litematica/selection/AreaSelection;getEffectiveOrigin()Lnet/minecraft/util/math/BlockPos;",
+					target = "Lfi/dy/masa/litematica/selection/AreaSelection;getEffectiveOrigin()Lnet/minecraft/core/BlockPos;",
 					remap = true
 			),
 			remap = false

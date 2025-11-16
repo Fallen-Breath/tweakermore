@@ -24,17 +24,17 @@ import com.google.common.base.Joiner;
 import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.util.EntityUtils;
 import me.fallenbreath.tweakermore.util.compat.litematica.LitematicaUtils;
-import net.minecraft.block.AbstractSignBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.SignBlockEntity;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.text.Text;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.SignBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -48,9 +48,9 @@ public class SignTextCopier
 {
 	public static void copySignText()
 	{
-		MinecraftClient mc = MinecraftClient.getInstance();
-		ClientPlayerEntity player = EntityUtils.getCurrentPlayerOrFreeCameraEntity();
-		if (player != null && mc.world != null)
+		Minecraft mc = Minecraft.getInstance();
+		LocalPlayer player = EntityUtils.getCurrentPlayerOrFreeCameraEntity();
+		if (player != null && mc.level != null)
 		{
 			BlockPos blockPos = null;
 			SignBlockEntity blockEntity = null;
@@ -61,26 +61,26 @@ public class SignTextCopier
 				blockEntity = tryGetSignBlockEntity(LitematicaUtils.getSchematicWorld(), blockPos);
 				copiedTextKey = "sign_copied_schematic";
 			}
-			if (blockEntity == null && mc.crosshairTarget != null && mc.crosshairTarget.getType() == HitResult.Type.BLOCK)
+			if (blockEntity == null && mc.hitResult != null && mc.hitResult.getType() == HitResult.Type.BLOCK)
 			{
-				blockPos = ((BlockHitResult)mc.crosshairTarget).getBlockPos();
-				blockEntity = tryGetSignBlockEntity(mc.world, blockPos);
+				blockPos = ((BlockHitResult)mc.hitResult).getBlockPos();
+				blockEntity = tryGetSignBlockEntity(mc.level, blockPos);
 				copiedTextKey = "sign_copied";
 			}
 
 			if (blockEntity != null)
 			{
-				BlockState blockState = blockEntity.getCachedState();
-				Text[] texts = getSignTexts(blockEntity, player);
+				BlockState blockState = blockEntity.getBlockState();
+				Component[] texts = getSignTexts(blockEntity, player);
 
 				String text = Joiner.on("\n").join(
 						Arrays.stream(texts).
-								map(Text::getString).
+								map(Component::getString).
 								collect(Collectors.toList())
 				);
 				if (!text.isEmpty())
 				{
-					mc.keyboard.setClipboard(text);
+					mc.keyboardHandler.setClipboard(text);
 					InfoUtils.printActionbarMessage("tweakermore.impl.copySignTextToClipBoard." + copiedTextKey, blockState.getBlock().getName());
 				}
 				else
@@ -93,7 +93,7 @@ public class SignTextCopier
 		InfoUtils.printActionbarMessage("tweakermore.impl.copySignTextToClipBoard.no_sign");
 	}
 
-	private static Text[] getSignTexts(SignBlockEntity blockEntity, ClientPlayerEntity player)
+	private static Component[] getSignTexts(SignBlockEntity blockEntity, LocalPlayer player)
 	{
 		//#if MC >= 12004
 		//$$ return blockEntity.getText((blockEntity).isPlayerFacingFront(player)).getMessages(false);
@@ -102,17 +102,17 @@ public class SignTextCopier
 		//#elseif MC >= 11600
 		//$$ return ((SignBlockEntityAccessor)blockEntity).getTexts();
 		//#else
-		return blockEntity.text;
+		return blockEntity.messages;
 		//#endif
 	}
 
 	@Nullable
-	private static SignBlockEntity tryGetSignBlockEntity(@Nullable World world, @Nullable BlockPos pos)
+	private static SignBlockEntity tryGetSignBlockEntity(@Nullable Level world, @Nullable BlockPos pos)
 	{
 		if (world != null && pos != null)
 		{
 			BlockState blockState = world.getBlockState(pos);
-			if (blockState.getBlock() instanceof AbstractSignBlock)
+			if (blockState.getBlock() instanceof SignBlock)
 			{
 				BlockEntity blockEntity = world.getBlockEntity(pos);
 				if (blockEntity instanceof SignBlockEntity)

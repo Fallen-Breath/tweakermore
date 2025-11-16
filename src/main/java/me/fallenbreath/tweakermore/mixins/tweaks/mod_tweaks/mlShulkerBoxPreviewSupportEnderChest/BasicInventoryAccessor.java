@@ -20,15 +20,15 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.mlShulkerBoxPreviewSupportEnderChest;
 
-import net.minecraft.inventory.BasicInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DefaultedList;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.NonNullList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(BasicInventory.class)
+@Mixin(SimpleContainer.class)
 public interface BasicInventoryAccessor
 {
-	@Accessor
-	DefaultedList<ItemStack> getStackList();
+	@Accessor("items")
+	NonNullList<ItemStack> getStackList();
 }

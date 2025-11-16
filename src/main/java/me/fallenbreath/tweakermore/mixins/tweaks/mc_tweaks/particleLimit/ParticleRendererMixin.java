@@ -24,7 +24,7 @@ import me.fallenbreath.tweakermore.util.mixin.DummyClass;
 import org.spongepowered.asm.mixin.Mixin;
 
 /**
- * See {@link net.minecraft.client.particle.ParticleManager} in mc < 1.21.9
+ * See {@link net.minecraft.client.particle.ParticleEngine} in mc < 1.21.9
  */
 @Mixin(DummyClass.class)
 public abstract class ParticleRendererMixin

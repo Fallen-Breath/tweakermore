@@ -24,13 +24,13 @@ import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import fi.dy.masa.tweakeroo.config.Configs;
 import fi.dy.masa.tweakeroo.util.CameraEntity;
 import me.fallenbreath.tweakermore.util.ReflectionUtils;
-import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.player.LocalPlayer;
 import org.jetbrains.annotations.Nullable;
 
 public class TweakerooAccess
 {
 	@Nullable
-	public static ClientPlayerEntity getFreecamEntity()
+	public static LocalPlayer getFreecamEntity()
 	{
 		return CameraEntity.getCamera();
 	}

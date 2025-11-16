@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.features.shulkerTooltipHints;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.ShulkerBoxToolTipEnhancer;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.Slice;
 //#if MC >= 12105
 //$$ import net.minecraft.component.type.ContainerComponent;
 //#else
-import net.minecraft.block.ShulkerBoxBlock;
+import net.minecraft.world.level.block.ShulkerBoxBlock;
 //#endif
 
 //#if MC >= 12006
@@ -41,7 +41,7 @@ import net.minecraft.block.ShulkerBoxBlock;
 //#if MC >= 11600
 //$$ import net.minecraft.text.MutableText;
 //#else
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 //#endif
 
 @Mixin(
@@ -57,7 +57,7 @@ public abstract class ShulkerBoxBlockMixin
 			//#if MC >= 11600
 			//$$ method = "appendTooltip",
 			//#else
-			method = "buildTooltip",
+			method = "appendHoverText",
 			//#endif
 			slice = @Slice(
 					from = @At(
@@ -96,7 +96,7 @@ public abstract class ShulkerBoxBlockMixin
 		//#if MC >= 11600
 		//$$ MutableText text = (MutableText)textObj;
 		//#else
-		Text text = (Text)textObj;
+		Component text = (Component)textObj;
 		//#endif
 		ShulkerBoxToolTipEnhancer.appendContentHints(
 				//#if MC >= 12006

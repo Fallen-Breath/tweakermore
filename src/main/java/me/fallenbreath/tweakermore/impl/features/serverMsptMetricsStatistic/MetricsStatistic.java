@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.impl.features.serverMsptMetricsStatistic;
 
 import com.google.common.collect.Lists;
-import net.minecraft.util.MetricsData;
+import net.minecraft.util.FrameTimer;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,7 +50,7 @@ public class MetricsStatistic
 	//#if MC >= 12006
 	//$$ private MultiValueDebugSampleLogImpl
 	//#else
-	private MetricsData
+	private FrameTimer
 	//#endif
 			metricsData;
 
@@ -68,7 +68,7 @@ public class MetricsStatistic
 	//#if MC >= 12006
 	//$$ public MultiValueDebugSampleLogImpl
 	//#else
-	public MetricsData
+	public FrameTimer
 	//#endif
 	getMetricsData()
 	{
@@ -80,7 +80,7 @@ public class MetricsStatistic
 		//#if MC >= 12006
 		//$$ this.metricsData = new MultiValueDebugSampleLogImpl(COLUMN_NUM);
 		//#else
-		this.metricsData = new MetricsData();
+		this.metricsData = new FrameTimer();
 		//#endif
 		this.index = 0;
 	}
@@ -123,7 +123,7 @@ public class MetricsStatistic
 		//$$ 	this.metricsData.push(samples[cl], cl);
 		//$$ }
 		//#endif
-		this.metricsData.pushSample(samples[0]);
+		this.metricsData.logFrameDuration(samples[0]);
 
 		this.newSampleChildren.forEach(child -> {
 			for (int cl = 1; cl < samples.length; cl++)

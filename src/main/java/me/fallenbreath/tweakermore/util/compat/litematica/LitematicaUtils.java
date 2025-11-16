@@ -26,11 +26,11 @@ import fi.dy.masa.litematica.world.SchematicWorldHandler;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.util.FabricUtils;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -40,7 +40,7 @@ public class LitematicaUtils
 	private static final boolean LITEMATICA_LOADED = FabricUtils.isModLoaded(ModIds.litematica);
 
 	@Nullable
-	public static World getSchematicWorld()
+	public static Level getSchematicWorld()
 	{
 		if (LITEMATICA_LOADED)
 		{
@@ -64,13 +64,13 @@ public class LitematicaUtils
 		if (LITEMATICA_LOADED)
 		{
 			// reference: fi.dy.masa.litematica.render.OverlayRenderer.renderHoverInfo
-			MinecraftClient mc = MinecraftClient.getInstance();
-			if (mc.world != null)
+			Minecraft mc = Minecraft.getInstance();
+			if (mc.level != null)
 			{
 				try
 				{
 					return Optional.ofNullable(RayTraceUtils.getGenericTrace(
-									mc.world, cameraEntity, 10, true
+									mc.level, cameraEntity, 10, true
 									//#if MC >= 11600
 									//$$ , Configs.InfoOverlays.INFO_OVERLAYS_TARGET_FLUIDS.getBooleanValue()
 									//$$ , false  // includeVerifier

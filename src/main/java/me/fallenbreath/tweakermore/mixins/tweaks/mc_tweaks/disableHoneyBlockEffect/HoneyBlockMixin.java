@@ -25,9 +25,9 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.block.HoneyBlock;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.Entity;
+import net.minecraft.world.level.block.HoneyBlock;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -42,10 +42,10 @@ public abstract class HoneyBlockMixin
 	 * If we choose to not`@ModifyExpressionValue` at `isSliding` inside `onEntityCollision`,
 	 * we can have a seamless compatibility between mc1.21.9 and mc1.21.10
 	 */
-	@Inject(method = "isSliding", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "isSlidingDown", at = @At("HEAD"), cancellable = true)
 	private void disableHoneyBlockEffect_isSlidingHack(CallbackInfoReturnable<Boolean> cir, @Local(argsOnly = true) Entity entity)
 	{
-		if (TweakerMoreConfigs.DISABLE_HONEY_BLOCK_EFFECT.getBooleanValue() && entity == MinecraftClient.getInstance().player)
+		if (TweakerMoreConfigs.DISABLE_HONEY_BLOCK_EFFECT.getBooleanValue() && entity == Minecraft.getInstance().player)
 		{
 			cir.setReturnValue(false);
 		}

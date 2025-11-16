@@ -31,8 +31,8 @@ import me.fallenbreath.tweakermore.impl.features.infoView.growthSpeed.handlers.S
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.block.*;
-import net.minecraft.text.BaseText;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.network.chat.BaseComponent;
+import net.minecraft.core.BlockPos;
 
 import java.util.List;
 
@@ -66,7 +66,7 @@ public class GrowthSpeedRenderer extends CommonScannerInfoViewer
 	protected void render(WorldRenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
 		BlockState blockState = world.getBlockState(pos);
-		List<BaseText> lines = Lists.newArrayList();
+		List<BaseComponent> lines = Lists.newArrayList();
 		for (GrowthSpeedRendererHandler handler : this.handlers)
 		{
 			if (handler.isTarget(blockState))

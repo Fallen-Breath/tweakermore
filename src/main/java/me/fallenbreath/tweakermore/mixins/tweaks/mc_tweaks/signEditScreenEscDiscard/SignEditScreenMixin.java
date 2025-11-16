@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.signEditScreenEscDis
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.signEditScreenCancelCommon.ClientSignTextRollbacker;
-import net.minecraft.block.entity.SignBlockEntity;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#if MC >= 11903
 //$$ import net.minecraft.client.gui.screen.ingame.AbstractSignEditScreen;
 //#else
-import net.minecraft.client.gui.screen.ingame.SignEditScreen;
+import net.minecraft.client.gui.screens.inventory.SignEditScreen;
 //#endif
 
 @Mixin(

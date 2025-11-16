@@ -24,11 +24,11 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.IdentifierUtils;
 import me.fallenbreath.tweakermore.util.InventoryUtils;
 import me.fallenbreath.tweakermore.util.ItemUtils;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DefaultedList;
-import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.Item;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
 
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -65,7 +65,7 @@ public class ShulkerBoxItemContentHintCommon
 		{
 			return info;
 		}
-		Optional<DefaultedList<ItemStack>> stackList = InventoryUtils.getStoredItems(itemStack);
+		Optional<NonNullList<ItemStack>> stackList = InventoryUtils.getStoredItems(itemStack);
 		if (!stackList.isPresent())
 		{
 			return info;
@@ -77,7 +77,7 @@ public class ShulkerBoxItemContentHintCommon
 			Optional<ItemStack> override = computeCustomNameOverride(itemStack);
 			if (override.isPresent())
 			{
-				stackFilter = stack -> ItemStack.areItemsEqual(stack, override.get());
+				stackFilter = stack -> ItemStack.isSameIgnoreDurability(stack, override.get());
 			}
 		}
 
@@ -97,12 +97,12 @@ public class ShulkerBoxItemContentHintCommon
 				continue;
 			}
 
-			boolean itemEqual = ItemStack.areItemsEqual(stack, std);
+			boolean itemEqual = ItemStack.isSameIgnoreDurability(stack, std);
 			boolean itemAndNbtEqual =
 					//#if MC >= 12000
 					//$$ ItemStack.canCombine(stack, std);
 					//#else
-					itemEqual && ItemStack.areTagsEqual(stack, std);
+					itemEqual && ItemStack.tagMatches(stack, std);
 					//#endif
 
 			if (!itemAndNbtEqual)
@@ -136,7 +136,7 @@ public class ShulkerBoxItemContentHintCommon
 			double sum = 0;
 			for (ItemStack stack : stackList.get())
 			{
-				sum += 1.0D * stack.getCount() / stack.getMaxCount();
+				sum += 1.0D * stack.getCount() / stack.getMaxStackSize();
 			}
 
 			double ratio = sum / slotAmount;
@@ -154,19 +154,19 @@ public class ShulkerBoxItemContentHintCommon
 		//#if MC >= 12006
 		//$$ if (!shulkerBoxItemStack.contains(DataComponentTypes.CUSTOM_NAME))
 		//#else
-		if (!shulkerBoxItemStack.hasCustomName())
+		if (!shulkerBoxItemStack.hasCustomHoverName())
 		//#endif
 		{
 			return Optional.empty();
 		}
 
-		Optional<Identifier> itemIdOpt = IdentifierUtils.tryParse(shulkerBoxItemStack.getName().getString());
+		Optional<ResourceLocation> itemIdOpt = IdentifierUtils.tryParse(shulkerBoxItemStack.getHoverName().getString());
 		if (!itemIdOpt.isPresent())
 		{
 			return Optional.empty();
 		}
 
-		if (!Registry.ITEM.containsId(itemIdOpt.get()))
+		if (!Registry.ITEM.containsKey(itemIdOpt.get()))
 		{
 			return Optional.empty();
 		}

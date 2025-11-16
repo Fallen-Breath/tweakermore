@@ -22,26 +22,26 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.moveConnectedServerE
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.moveConnectedServerEntryToTop.MoveConnectedServerEntryToTopHelper;
-import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
-import net.minecraft.client.network.ServerInfo;
-import net.minecraft.client.options.ServerList;
+import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
+import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.client.multiplayer.ServerList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(MultiplayerScreen.class)
+@Mixin(JoinMultiplayerScreen.class)
 public abstract class MultiplayerScreenMixin
 {
 	@Shadow
-	private ServerList serverList;
+	private ServerList servers;
 
 	@Inject(
-			method = "connect(Lnet/minecraft/client/network/ServerInfo;)V",
+			method = "join(Lnet/minecraft/client/multiplayer/ServerData;)V",
 			at = @At("HEAD")
 	)
-	private void moveConnectedServerEntryToTop_recordServerInfoIndex(ServerInfo entry, CallbackInfo ci)
+	private void moveConnectedServerEntryToTop_recordServerInfoIndex(ServerData entry, CallbackInfo ci)
 	{
 		if (!TweakerMoreConfigs.MOVE_CONNECTED_SERVER_ENTRY_TO_TOP.getBooleanValue())
 		{
@@ -49,12 +49,12 @@ public abstract class MultiplayerScreenMixin
 		}
 
 		MoveConnectedServerEntryToTopHelper.selectedIndex = -1;
-		if (this.serverList == null)
+		if (this.servers == null)
 		{
 			return;
 		}
 
-		int idx = ((ServerListAccessor)this.serverList).getServers().indexOf(entry);
+		int idx = ((ServerListAccessor)this.servers).getServers().indexOf(entry);
 		if (idx != -1)
 		{
 			MoveConnectedServerEntryToTopHelper.selectedIndex = idx;

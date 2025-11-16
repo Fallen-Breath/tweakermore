@@ -22,10 +22,10 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableEntityRenderI
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.disableEntityRenderInterpolation.DisableEntityRenderInterpolationHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.vehicle.AbstractMinecartEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -37,10 +37,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //$$ import org.spongepowered.asm.mixin.Final;
 //#endif
 
-@Mixin(AbstractMinecartEntity.class)
+@Mixin(AbstractMinecart.class)
 public abstract class AbstractMinecartEntityMixin extends Entity
 {
-	public AbstractMinecartEntityMixin(EntityType<?> type, World world)
+	public AbstractMinecartEntityMixin(EntityType<?> type, Level world)
 	{
 		super(type, world);
 	}
@@ -50,13 +50,13 @@ public abstract class AbstractMinecartEntityMixin extends Entity
 	//#else
 	@Shadow private int
 			//#if MC >= 11500
-			clientInterpolationSteps;
+			lSteps;
 			//#else
 			//$$ field_7669;
 			//#endif
 	//#endif
 
-	@Inject(method = "updateTrackedPositionAndAngles", at = @At("TAIL"))
+	@Inject(method = "lerpTo", at = @At("TAIL"))
 	private void disableEntityRenderInterpolation_noExtraInterpolationSteps(
 			double x, double y, double z, float yaw, float pitch, int interpolationSteps,
 			//#if MC < 12002
@@ -78,14 +78,14 @@ public abstract class AbstractMinecartEntityMixin extends Entity
 			//$$ 	emca.setTicksToNextRefresh(1);
 			//$$ }
 			//#elseif MC >= 11500
-			this.clientInterpolationSteps = 1;
+			this.lSteps = 1;
 			//#else
 			//$$ this.field_7669 = 1;
 			//#endif
 
 			if (DisableEntityRenderInterpolationHelper.shouldUpdatePositionOrAnglesDirectly())
 			{
-				super.updateTrackedPositionAndAngles(
+				super.lerpTo(
 						x, y, z, yaw, pitch, interpolationSteps
 						//#if MC < 12002
 						, interpolate

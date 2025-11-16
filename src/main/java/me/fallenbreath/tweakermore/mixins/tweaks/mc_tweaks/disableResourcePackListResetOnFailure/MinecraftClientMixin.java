@@ -22,14 +22,14 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableResourcePackL
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.List;
 
 // impl in mc1.15+
-@Mixin(MinecraftClient.class)
+@Mixin(Minecraft.class)
 public abstract class MinecraftClientMixin
 {
 	@WrapWithCondition(
@@ -38,7 +38,7 @@ public abstract class MinecraftClientMixin
 			//#elseif MC >= 11600
 			//$$ method = "method_31186",
 			//#else
-			method = "handleResourceReloadExecption",
+			method = "rollbackResourcePacks",
 			//#endif
 			at = @At(
 					value = "INVOKE",

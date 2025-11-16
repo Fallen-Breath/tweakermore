@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.impl.mod_tweaks.lmOriginOverride000;
 
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 
 public class LitematicaOriginOverrideGlobals
 {

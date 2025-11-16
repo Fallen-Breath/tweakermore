@@ -21,9 +21,9 @@
 package me.fallenbreath.tweakermore.impl.features.infoView.growthSpeed.handlers;
 
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
-import net.minecraft.block.BlockState;
-import net.minecraft.text.BaseText;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.network.chat.BaseComponent;
+import net.minecraft.core.BlockPos;
 
 import java.util.List;
 
@@ -37,7 +37,7 @@ public class CopperGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHa
 	}
 
 	@Override
-	public void addInfoLines(RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos, List<BaseText> lines)
+	public void addInfoLines(RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos, List<BaseComponent> lines)
 	{
 	}
 }

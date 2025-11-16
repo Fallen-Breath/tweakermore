@@ -24,12 +24,12 @@ import fi.dy.masa.itemscroller.util.InventoryUtils;
 import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
-import net.minecraft.client.gui.screen.ingame.ContainerScreen;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.container.Container;
-import net.minecraft.container.Slot;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
 
 import java.util.List;
 
@@ -42,7 +42,7 @@ public class ContainerFiller implements IContainerProcessor
 	}
 
 	@Override
-	public ProcessResult process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
+	public ProcessResult process(LocalPlayer player, AbstractContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
 	{
 		if (ContainerProcessorUtils.shouldSkipForEnderChest(containerScreen, TweakerMoreConfigs.AUTO_FILL_CONTAINER_IGNORE_ENDER_CHEST))
 		{
@@ -52,26 +52,26 @@ public class ContainerFiller implements IContainerProcessor
 		Slot bestSlot = null;
 		long maxCount = TweakerMoreConfigs.AUTO_FILL_CONTAINER_THRESHOLD.getIntegerValue() - 1;
 		for (Slot slot : playerInvSlots)
-			if (slot.hasStack() && containerInvSlots.get(0).canInsert(slot.getStack()))
+			if (slot.hasItem() && containerInvSlots.get(0).mayPlace(slot.getItem()))
 			{
-				long cnt = playerInvSlots.stream().filter(slt -> InventoryUtils.areStacksEqual(slot.getStack(), slt.getStack())).count();
+				long cnt = playerInvSlots.stream().filter(slt -> InventoryUtils.areStacksEqual(slot.getItem(), slt.getItem())).count();
 				if (cnt > maxCount)
 				{
 					maxCount = cnt;
 					bestSlot = slot;
 				}
-				else if (cnt == maxCount && bestSlot != null && !InventoryUtils.areStacksEqual(slot.getStack(), bestSlot.getStack()))
+				else if (cnt == maxCount && bestSlot != null && !InventoryUtils.areStacksEqual(slot.getItem(), bestSlot.getItem()))
 				{
 					bestSlot = null;
 				}
 			}
 		if (bestSlot != null && !allSlots.isEmpty())
 		{
-			Text stackName = bestSlot.getStack().getName();
+			Component stackName = bestSlot.getItem().getHoverName();
 			InventoryUtils.tryMoveStacks(bestSlot, containerScreen, true, true, false);
-			long amount = containerInvSlots.stream().filter(Slot::hasStack).count(), total = containerInvSlots.size();
-			boolean isFull = Container.calculateComparatorOutput(containerInvSlots.get(0).inventory) >= 15;
-			String percentage = String.format("%s%d/%d%s", isFull ? Formatting.GREEN : Formatting.GOLD, amount, total, Formatting.RESET);
+			long amount = containerInvSlots.stream().filter(Slot::hasItem).count(), total = containerInvSlots.size();
+			boolean isFull = AbstractContainerMenu.getRedstoneSignalFromContainer(containerInvSlots.get(0).container) >= 15;
+			String percentage = String.format("%s%d/%d%s", isFull ? ChatFormatting.GREEN : ChatFormatting.GOLD, amount, total, ChatFormatting.RESET);
 			InfoUtils.printActionbarMessage("tweakermore.impl.autoFillContainer.container_filled", containerScreen.getTitle(), stackName, percentage);
 			return ProcessResult.terminated();
 		}

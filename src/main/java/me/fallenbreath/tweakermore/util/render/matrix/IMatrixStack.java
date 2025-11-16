@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.util.render.matrix;
 
-import net.minecraft.client.util.math.Matrix4f;
+import com.mojang.math.Matrix4f;
 
 public interface IMatrixStack
 {

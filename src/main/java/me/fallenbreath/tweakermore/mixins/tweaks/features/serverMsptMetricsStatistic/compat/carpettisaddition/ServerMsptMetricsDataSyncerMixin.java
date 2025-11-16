@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#if MC >= 12006
 //$$ import net.minecraft.util.profiler.MultiValueDebugSampleLogImpl;
 //#else
-import net.minecraft.util.MetricsData;
+import net.minecraft.util.FrameTimer;
 //#endif
 
 @SuppressWarnings("UnresolvedMixinReference")
@@ -48,7 +48,7 @@ public abstract class ServerMsptMetricsDataSyncerMixin
 	//#if MC >= 12006
 	//$$ MultiValueDebugSampleLogImpl
 	//#else
-	MetricsData
+	FrameTimer
 	//#endif
 			metricsData;
 

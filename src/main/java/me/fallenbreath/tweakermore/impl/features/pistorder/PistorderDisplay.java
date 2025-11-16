@@ -29,19 +29,19 @@ import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.TemporaryBlockReplacer;
 import me.fallenbreath.tweakermore.util.render.ColorHolder;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.piston.PistonHandler;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.resource.language.I18n;
-import net.minecraft.state.property.Properties;
-import net.minecraft.text.BaseText;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.WorldChunk;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.piston.PistonStructureResolver;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.network.chat.BaseComponent;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.chunk.LevelChunk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,8 +53,8 @@ import java.util.stream.Collectors;
 
 public class PistorderDisplay
 {
-	private static final String INDICATOR_SUCCESS = Formatting.GREEN + "√";
-	private static final String INDICATOR_FAIL = Formatting.RED + "×";
+	private static final String INDICATOR_SUCCESS = ChatFormatting.GREEN + "√";
+	private static final String INDICATOR_FAIL = ChatFormatting.RED + "×";
 
 	private List<BlockPos> movedBlocks;
 	private List<BlockPos> brokenBlocks;
@@ -62,7 +62,7 @@ public class PistorderDisplay
 	@Nullable
 	private BlockPos immovableBlockPos;
 
-	public final World world;
+	public final Level world;
 	public final BlockPos pistonPos;
 	public final BlockState blockState;
 	public final Direction direction;
@@ -74,7 +74,7 @@ public class PistorderDisplay
 	// used for dynamically_information_update
 	private long lastUpdateTime = -1;
 
-	public PistorderDisplay(World world, BlockPos pistonPos, BlockState blockState, Direction direction, PistonActionType actionType)
+	public PistorderDisplay(Level world, BlockPos pistonPos, BlockState blockState, Direction direction, PistonActionType actionType)
 	{
 		this.world = world;
 		this.pistonPos = pistonPos;
@@ -88,7 +88,7 @@ public class PistorderDisplay
 
 	private Direction getPistonFacing()
 	{
-		return this.blockState.get(Properties.FACING);
+		return this.blockState.getValue(BlockStateProperties.FACING);
 	}
 
 	private boolean isStickyPiston()
@@ -127,7 +127,7 @@ public class PistorderDisplay
 				simulatedPistonPos = this.pistonPos;
 				if (!this.isStickyPiston())
 				{
-					simulatedPistonPos = simulatedPistonPos.offset(this.getPistonFacing());
+					simulatedPistonPos = simulatedPistonPos.relative(this.getPistonFacing());
 				}
 				break;
 			case DISABLED:
@@ -142,9 +142,9 @@ public class PistorderDisplay
 	/**
 	 * Might make the piston blink for a while if the action type is retract
 	 */
-	private void analyze(World world, BlockPos simulatedPistonPos, Direction pistonFacing, PistonActionType PistonActionType)
+	private void analyze(Level world, BlockPos simulatedPistonPos, Direction pistonFacing, PistonActionType PistonActionType)
 	{
-		BlockState air = Blocks.AIR.getDefaultState();
+		BlockState air = Blocks.AIR.defaultBlockState();
 
 		// backing up block states for potential piston (head) block position
 		TemporaryBlockReplacer blockReplacer = new TemporaryBlockReplacer(this.world);
@@ -155,26 +155,26 @@ public class PistorderDisplay
 		}
 		if (PistonActionType.isRetract())
 		{
-			blockReplacer.add(simulatedPistonPos.offset(pistonFacing), air);  // simulated piston head
+			blockReplacer.add(simulatedPistonPos.relative(pistonFacing), air);  // simulated piston head
 		}
 		blockReplacer.removeBlocks();
 
-		PistonHandler pistonHandler = new PistonHandler(world, simulatedPistonPos, pistonFacing, PistonActionType.isPush());
-		this.moveSuccess = pistonHandler.calculatePush();
+		PistonStructureResolver pistonHandler = new PistonStructureResolver(world, simulatedPistonPos, pistonFacing, PistonActionType.isPush());
+		this.moveSuccess = pistonHandler.resolve();
 
 		if (!this.moveSuccess)
 		{
 			int newPushLimit = Math.max(PushLimitManager.getInstance().getPushLimit(), TweakerMoreConfigs.PISTORDER_MAX_SIMULATION_PUSH_LIMIT.getIntegerValue());
 			PushLimitManager.getInstance().overwritePushLimit(newPushLimit);
-			pistonHandler.calculatePush();
+			pistonHandler.resolve();
 		}
 
 		// restoring things
 		blockReplacer.restoreBlocks();
 		PushLimitManager.getInstance().restorePushLimit();  // it's ok if the push limit hasn't been overwritten
 
-		this.brokenBlocks = Lists.newArrayList(pistonHandler.getBrokenBlocks());
-		this.movedBlocks = Lists.newArrayList(pistonHandler.getMovedBlocks());
+		this.brokenBlocks = Lists.newArrayList(pistonHandler.getToDestroy());
+		this.movedBlocks = Lists.newArrayList(pistonHandler.getToPush());
 		this.immovableBlockPos = ((ImmovableBlockPosRecorder)pistonHandler).getImmovableBlockPos$TKM();
 		// reverse the list for the correct order
 		Collections.reverse(this.brokenBlocks);
@@ -183,8 +183,8 @@ public class PistorderDisplay
 
 	private boolean tryIndirectMode()
 	{
-		BlockState blockInFront1 = this.world.getBlockState(this.pistonPos.offset(this.getPistonFacing(), 1));
-		BlockState blockInFront2 = this.world.getBlockState(this.pistonPos.offset(this.getPistonFacing(), 2));
+		BlockState blockInFront1 = this.world.getBlockState(this.pistonPos.relative(this.getPistonFacing(), 1));
+		BlockState blockInFront2 = this.world.getBlockState(this.pistonPos.relative(this.getPistonFacing(), 2));
 		if (blockInFront1.isAir() && !blockInFront2.isAir())
 		{
 			if (this.isStickyPiston())
@@ -216,7 +216,7 @@ public class PistorderDisplay
 		}
 	}
 
-	private static TextRenderer drawString(BlockPos pos, float offsetY, BaseText text, int color)
+	private static TextRenderer drawString(BlockPos pos, float offsetY, BaseComponent text, int color)
 	{
 		ColorHolder colorHolder = ColorHolder.of(color).modify(h -> h.alpha = (int)(0xFF * TweakerMoreConfigs.PISTORDER_TEXT_ALPHA.getDoubleValue()));
 		TextRenderer renderer =  TextRenderer.create().
@@ -229,14 +229,14 @@ public class PistorderDisplay
 		return renderer;
 	}
 
-	private boolean checkState(World world)
+	private boolean checkState(Level world)
 	{
 		if (!Objects.equals(world, this.world))
 		{
 			return false;
 		}
-		BlockView chunk = world.getChunkManager().getChunk(this.pistonPos.getX() >> 4, this.pistonPos.getZ() >> 4);
-		if (chunk instanceof WorldChunk && !((WorldChunk)chunk).isEmpty())  // it's really a loaded chunk
+		BlockGetter chunk = world.getChunkSource().getChunkForLighting(this.pistonPos.getX() >> 4, this.pistonPos.getZ() >> 4);
+		if (chunk instanceof LevelChunk && !((LevelChunk)chunk).isEmpty())  // it's really a loaded chunk
 		{
 			return chunk.getBlockState(this.pistonPos).equals(this.blockState);
 		}
@@ -250,8 +250,8 @@ public class PistorderDisplay
 
 		if (!this.isDisabled())
 		{
-			MinecraftClient client = MinecraftClient.getInstance();
-			if (!this.checkState(client.world))
+			Minecraft client = Minecraft.getInstance();
+			if (!this.checkState(client.level))
 			{
 				this.disable();
 				return Collections.emptyList();
@@ -262,15 +262,15 @@ public class PistorderDisplay
 
 			texts.add(drawString(
 					this.pistonPos, -0.5F,
-					Messenger.s(String.format("%s %s", I18n.translate(actionKey), actionResult), Formatting.GOLD),
+					Messenger.s(String.format("%s %s", I18n.get(actionKey), actionResult), ChatFormatting.GOLD),
 					this.color
 			));
 			texts.add(drawString(
 					this.pistonPos, 0.5F,
 					Messenger.c(
-							Messenger.formatting(Messenger.tr("tweakermore.impl.pistorder.block_count.pre"), Formatting.GOLD),
+							Messenger.formatting(Messenger.tr("tweakermore.impl.pistorder.block_count.pre"), ChatFormatting.GOLD),
 							Messenger.s(this.movedBlocks.size()),
-							Messenger.formatting(Messenger.tr("tweakermore.impl.pistorder.block_count.post"), Formatting.GOLD)
+							Messenger.formatting(Messenger.tr("tweakermore.impl.pistorder.block_count.post"), ChatFormatting.GOLD)
 					),
 					this.color
 			));
@@ -281,12 +281,12 @@ public class PistorderDisplay
 			}
 			for (int i = 0; i < this.brokenBlocks.size(); i++)
 			{
-				texts.add(drawString(this.brokenBlocks.get(i), 0.0F, Messenger.s(i + 1), Formatting.RED.getColorValue()));
+				texts.add(drawString(this.brokenBlocks.get(i), 0.0F, Messenger.s(i + 1), ChatFormatting.RED.getColor()));
 			}
 
 			if (this.immovableBlockPos != null)
 			{
-				texts.add(drawString(this.immovableBlockPos, 0.0F, Messenger.s("×"), Formatting.DARK_RED.getColorValue()));
+				texts.add(drawString(this.immovableBlockPos, 0.0F, Messenger.s("×"), ChatFormatting.DARK_RED.getColor()));
 			}
 		}
 
@@ -297,10 +297,10 @@ public class PistorderDisplay
 	{
 		if (TweakerMoreConfigs.PISTORDER_DYNAMICALLY_INFO_UPDATE.getBooleanValue())
 		{
-			if (this.world.getTime() != this.lastUpdateTime)
+			if (this.world.getGameTime() != this.lastUpdateTime)
 			{
 				this.refreshInformation();
-				this.lastUpdateTime = this.world.getTime();
+				this.lastUpdateTime = this.world.getGameTime();
 			}
 		}
 	}

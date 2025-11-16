@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.impl.mc_tweaks.clientEntityTargetingSelectAll;
 
-import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 import org.jetbrains.annotations.Nullable;
 
 public interface MinecraftClientWithExtendedTargetEntity

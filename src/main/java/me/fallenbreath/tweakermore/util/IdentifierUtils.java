@@ -20,8 +20,8 @@
 
 package me.fallenbreath.tweakermore.util;
 
-import net.minecraft.util.Identifier;
-import net.minecraft.util.InvalidIdentifierException;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.ResourceLocationException;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -29,43 +29,43 @@ import java.util.Optional;
 public class IdentifierUtils
 {
 	/**
-	 * @throws InvalidIdentifierException if the identifier string is invalid
+	 * @throws ResourceLocationException if the identifier string is invalid
 	 */
-	public static Identifier of(String id)
+	public static ResourceLocation of(String id)
 	{
 		//#if MC >= 12100
 		//$$ return Identifier.of(id);
 		//#else
-		return new Identifier(id);
+		return new ResourceLocation(id);
 		//#endif
 	}
 
 	/**
-	 * @throws InvalidIdentifierException if the identifier string is invalid
+	 * @throws ResourceLocationException if the identifier string is invalid
 	 */
-	public static Identifier of(String namespace, String path)
+	public static ResourceLocation of(String namespace, String path)
 	{
 		//#if MC >= 12100
 		//$$ return Identifier.of(namespace, path);
 		//#else
-		return new Identifier(namespace, path);
+		return new ResourceLocation(namespace, path);
 		//#endif
 	}
 
-	public static Optional<Identifier> tryParse(String id)
+	public static Optional<ResourceLocation> tryParse(String id)
 	{
 		try
 		{
 			return Optional.of(of(id));
 		}
-		catch (InvalidIdentifierException e)
+		catch (ResourceLocationException e)
 		{
 			return Optional.empty();
 		}
 	}
 
 	@Nullable
-	public static Identifier tryParseOrNull(String id)
+	public static ResourceLocation tryParseOrNull(String id)
 	{
 		return tryParse(id).orElse(null);
 	}

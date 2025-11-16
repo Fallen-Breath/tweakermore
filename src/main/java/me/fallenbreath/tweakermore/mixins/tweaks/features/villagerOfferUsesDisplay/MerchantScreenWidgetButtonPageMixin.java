@@ -21,9 +21,9 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.features.villagerOfferUsesDisplay;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.gui.screen.ingame.MerchantScreen;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.village.TradeOffer;
+import net.minecraft.client.gui.screens.inventory.MerchantScreen;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.world.item.trading.MerchantOffer;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -41,8 +41,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //$$ import me.fallenbreath.tweakermore.util.Messenger;
 //#endif
 
-@Mixin(targets = "net.minecraft.client.gui.screen.ingame.MerchantScreen$WidgetButtonPage")
-public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
+@Mixin(targets = "net.minecraft.client.gui.screens.inventory.MerchantScreen$TradeOfferButton")
+public abstract class MerchantScreenWidgetButtonPageMixin extends Button
 {
 	@SuppressWarnings("target")
 	@Shadow @Final MerchantScreen field_19166;
@@ -61,7 +61,7 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
 			//#else
 			String message,
 			//#endif
-			PressAction onPress
+			OnPress onPress
 
 			//#if MC >= 11903
 			//$$ , NarrationSupplier narrationSupplier
@@ -92,7 +92,7 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
 					//$$ target = "Lnet/minecraft/client/gui/screen/ingame/MerchantScreen$WidgetButtonPage;getX()I",
 					//#else
 					value = "FIELD",
-					target = "Lnet/minecraft/client/gui/screen/ingame/MerchantScreen$WidgetButtonPage;x:I",
+					target = "Lnet/minecraft/client/gui/screens/inventory/MerchantScreen$TradeOfferButton;x:I",
 					//#endif
 					ordinal = 0
 			)
@@ -121,7 +121,7 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends ButtonWidget
 				//#else
 				//$$ int index = this.field_19165;
 				//#endif
-				TradeOffer offer = this.field_19166.getContainer().getRecipes().get(index + ((MerchantScreenAccessor)this.field_19166).getIndexStartOffset());
+				MerchantOffer offer = this.field_19166.getMenu().getOffers().get(index + ((MerchantScreenAccessor)this.field_19166).getIndexStartOffset());
 
 				String text = String.format("%d / %d", offer.getUses(), offer.getMaxUses());
 

@@ -31,8 +31,8 @@ import me.fallenbreath.tweakermore.impl.features.infoView.cache.ScanningCache;
 import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Map;
 import java.util.function.Supplier;
@@ -57,7 +57,7 @@ public abstract class CommonScannerInfoViewer extends AbstractInfoViewer
 	}
 
 	@Override
-	public Map<BlockPos, Renderer> scanForRender(ScanningCache cache, Vec3d camPos, Vec3d camVec)
+	public Map<BlockPos, Renderer> scanForRender(ScanningCache cache, Vec3 camPos, Vec3 camVec)
 	{
 		double reach = TweakerMoreConfigs.INFO_VIEW_TARGET_DISTANCE.getDoubleValue();
 		double angle = Math.PI * TweakerMoreConfigs.INFO_VIEW_BEAM_ANGLE.getDoubleValue() / 2 / 180;
@@ -77,7 +77,7 @@ public abstract class CommonScannerInfoViewer extends AbstractInfoViewer
 				addCrossHair.run();
 				break;
 			case BEAM:
-				Vec3d beamEnd = camPos.add(camVec.normalize().multiply(reach));
+				Vec3 beamEnd = camPos.add(camVec.normalize().scale(reach));
 				for (BlockPos blockPos : cache.beam(camPos, beamEnd, angle, PositionUtils.BeamMode.BEAM))
 				{
 					result.put(blockPos, this.getRendererFor(false));
@@ -88,7 +88,7 @@ public abstract class CommonScannerInfoViewer extends AbstractInfoViewer
 				for (BlockPos pos : cache.sphere(camPos, reach))
 				{
 					// in the same direction of the camera vector
-					if (PositionUtils.centerOf(pos).add(camPos.negate()).dotProduct(camVec) > 0)
+					if (PositionUtils.centerOf(pos).add(camPos.reverse()).dot(camVec) > 0)
 					{
 						result.put(pos, this.getRendererFor(pos.equals(crossHairPos)));
 					}

@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableEntityDeathTi
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.render.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -30,10 +30,10 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class LivingEntityRendererMixin
 {
 	@ModifyExpressionValue(
-			method = "setupTransforms",
+			method = "setupRotations",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/util/math/MathHelper;sqrt(F)F",
+					target = "Lnet/minecraft/util/Mth;sqrt(F)F",
 					ordinal = 0
 			)
 	)

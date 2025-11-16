@@ -27,8 +27,8 @@ import me.fallenbreath.tweakermore.util.ReflectionUtils;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.metadata.ModMetadata;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.world.ClientWorld;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 
 import java.util.List;
 import java.util.Optional;
@@ -87,7 +87,7 @@ public class CarpetModAccess
 		}
 
 		// carpet.fakes.LevelInterface gets mixed-in into ClientWorld
-		ClientWorld world = MinecraftClient.getInstance().world;
+		ClientLevel world = Minecraft.getInstance().level;
 		if (world == null)
 		{
 			return Optional.of(false);  // not in world, tick is not frozen ofc

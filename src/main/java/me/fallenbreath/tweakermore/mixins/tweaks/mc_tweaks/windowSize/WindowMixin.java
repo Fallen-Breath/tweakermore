@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.windowSize;
 
 import me.fallenbreath.tweakermore.impl.mc_tweaks.windowSize.WindowSizeHelper;
-import net.minecraft.client.util.Window;
+import com.mojang.blaze3d.platform.Window;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Window.class)
 public abstract class WindowMixin
 {
-	@Inject(method = "onWindowSizeChanged", at = @At("TAIL"))
+	@Inject(method = "onResize", at = @At("TAIL"))
 	private void onWindowSizeChanged_windowSize(CallbackInfo ci)
 	{
 		WindowSizeHelper.onWindowSizeChanged((Window)(Object)this);

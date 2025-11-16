@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.fovOverride;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -34,7 +34,7 @@ public abstract class GameRendererMixin
 			method = "getFov",
 			at = @At(
 					value = "FIELD",
-					target = "Lnet/minecraft/client/MinecraftClient;options:Lnet/minecraft/client/options/GameOptions;"
+					target = "Lnet/minecraft/client/Minecraft;options:Lnet/minecraft/client/Options;"
 			),
 			cancellable = true
 	)

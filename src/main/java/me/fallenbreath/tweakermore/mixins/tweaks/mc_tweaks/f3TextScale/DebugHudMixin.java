@@ -26,7 +26,7 @@ import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
-import net.minecraft.client.gui.hud.DebugHud;
+import net.minecraft.client.gui.components.DebugScreenOverlay;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -42,14 +42,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //$$ import com.llamalad7.mixinextras.sugar.Local;
 //#endif
 
-@Mixin(DebugHud.class)
+@Mixin(DebugScreenOverlay.class)
 public abstract class DebugHudMixin
 {
 	@Inject(
 			//#if MC >= 12000
 			//$$ method = "drawText",
 			//#else
-			method = {"renderLeftText", "renderRightText"},
+			method = {"drawGameInformation", "drawSystemInformation"},
 			//#endif
 			at = @At("HEAD")
 	)
@@ -78,14 +78,14 @@ public abstract class DebugHudMixin
 			//#if MC >= 12000
 			//$$ method = "drawText",
 			//#else
-			method = "renderRightText",
+			method = "drawSystemInformation",
 			//#endif
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12000
 					//$$ target = "Lnet/minecraft/client/gui/DrawContext;getScaledWindowWidth()I"
 					//#else
-					target = "Lnet/minecraft/client/util/Window;getScaledWidth()I"
+					target = "Lcom/mojang/blaze3d/platform/Window;getGuiScaledWidth()I"
 					//#endif
 			)
 	)
@@ -102,7 +102,7 @@ public abstract class DebugHudMixin
 			//#if MC >= 12000
 			//$$ method = "drawText",
 			//#else
-			method = {"renderLeftText", "renderRightText"},
+			method = {"drawGameInformation", "drawSystemInformation"},
 			//#endif
 			at = @At("TAIL")
 	)

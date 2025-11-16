@@ -27,10 +27,10 @@ import fi.dy.masa.malilib.util.InfoUtils;
 import fi.dy.masa.malilib.util.ItemType;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
-import net.minecraft.client.gui.screen.ingame.ContainerScreen;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.container.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 import java.util.Set;
@@ -44,23 +44,23 @@ public class ContainerItemPutBackProcessor implements IContainerProcessor
 	}
 
 	@Override
-	public ProcessResult process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
+	public ProcessResult process(LocalPlayer player, AbstractContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
 	{
 		Set<ItemType> inventoryItems = Sets.newHashSet();
 		for (Slot containerInvSlot : containerInvSlots)
 		{
-			inventoryItems.add(new ItemType(containerInvSlot.getStack(), true, true));
+			inventoryItems.add(new ItemType(containerInvSlot.getItem(), true, true));
 		}
 
 		int matchedCount = 0, movedCount = 0;
 		for (Slot playerInvSlot : playerInvSlots)
 		{
-			ItemStack stack = playerInvSlot.getStack();
+			ItemStack stack = playerInvSlot.getItem();
 			if (!stack.isEmpty() && inventoryItems.contains(new ItemType(stack, false, true)))
 			{
 				matchedCount++;
-				InventoryUtils.shiftClickSlot(containerScreen, playerInvSlot.id);
-				if (!playerInvSlot.hasStack())
+				InventoryUtils.shiftClickSlot(containerScreen, playerInvSlot.index);
+				if (!playerInvSlot.hasItem())
 				{
 					movedCount++;
 				}

@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 //#if MC >= 11500
-import net.minecraft.client.world.ClientWorld;
+import net.minecraft.client.multiplayer.ClientLevel;
 //#else
 //$$ import net.minecraft.world.World;
 //#endif
@@ -36,7 +36,7 @@ import net.minecraft.client.world.ClientWorld;
 		//#if MC >= 11600
 		//$$ ClientWorld.Properties.class
 		//#elseif MC >= 11500
-		ClientWorld.class
+		ClientLevel.class
 		//#else
 		//$$ World.class
 		//#endif
@@ -45,7 +45,7 @@ public abstract class ClientWorldMixin
 {
 	@Inject(
 			//#if MC >= 11500
-			method = "getSkyDarknessHeight",
+			method = "getHorizonHeight",
 			//#else
 			//$$ method = "getHorizonHeight",
 			//#endif

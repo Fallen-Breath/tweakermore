@@ -25,11 +25,11 @@ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.pistorder.PistorderRenderer;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -38,7 +38,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 //#if MC >= 11600
 //$$ import net.minecraft.block.AbstractBlock;
 //#else
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.state.BlockState;
 //#endif
 
 @Restriction(conflict = @Condition(value = ModIds.pistorder, versionPredicates = "<=1.6.0"))
@@ -53,7 +53,7 @@ public abstract class AbstractBlockStateMixin
 {
 	@Inject(
 			//#if MC >= 11500
-			method = "onUse",
+			method = "use",
 			//#else
 			//$$ method = "activate",
 			//#endif
@@ -61,15 +61,15 @@ public abstract class AbstractBlockStateMixin
 			cancellable = true
 	)
 	private void tkmPistorder_onPlayerRightClickBlock(
-			World world,
-			PlayerEntity player,
+			Level world,
+			Player player,
 			//#if MC < 12006
-			Hand hand,
+			InteractionHand hand,
 			//#endif
 			BlockHitResult hit,
 
 			//#if MC >= 11500
-			CallbackInfoReturnable<ActionResult> cir
+			CallbackInfoReturnable<InteractionResult> cir
 			//#else
 			//$$ CallbackInfoReturnable<Boolean> cir
 			//#endif
@@ -80,9 +80,9 @@ public abstract class AbstractBlockStateMixin
 			return;
 		}
 
-		if (world.isClient())
+		if (world.isClientSide())
 		{
-			ActionResult result = PistorderRenderer.getInstance().
+			InteractionResult result = PistorderRenderer.getInstance().
 					//#if MC >= 12006
 					//$$ onPlayerRightClickBlockWithMainHand(world, player, hit);
 					//#else
@@ -90,7 +90,7 @@ public abstract class AbstractBlockStateMixin
 					//#endif
 
 			//#if MC >= 11500
-			boolean ok = result.isAccepted();
+			boolean ok = result.consumesAction();
 			//#else
 			//$$ boolean ok = result == ActionResult.SUCCESS;
 			//#endif

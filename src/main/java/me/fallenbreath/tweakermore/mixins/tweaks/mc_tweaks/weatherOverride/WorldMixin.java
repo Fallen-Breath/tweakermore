@@ -23,8 +23,8 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.weatherOverride;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.listentries.WeatherOverrideValue;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.weatherOverride.WeatherOverrideHelper;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.world.World;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -33,16 +33,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.function.Function;
 
-@Mixin(World.class)
+@Mixin(Level.class)
 public abstract class WorldMixin
 {
-	@Inject(method = "getRainGradient", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "getRainLevel", at = @At("HEAD"), cancellable = true)
 	private void weatherOverride_overrideRain(CallbackInfoReturnable<Float> cir)
 	{
 		this.weatherOverride_common(cir, WeatherOverrideValue::getRainGradient);
 	}
 
-	@Inject(method = "getThunderGradient", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "getThunderLevel", at = @At("HEAD"), cancellable = true)
 	private void weatherOverride_overrideThunder(CallbackInfoReturnable<Float> cir)
 	{
 		this.weatherOverride_common(cir, WeatherOverrideValue::getThunderGradient);
@@ -58,8 +58,8 @@ public abstract class WorldMixin
 				return;
 			}
 
-			World self = (World)(Object)this;
-			if (self instanceof ClientWorld)
+			Level self = (Level)(Object)this;
+			if (self instanceof ClientLevel)
 			{
 				WeatherOverrideValue value = (WeatherOverrideValue) TweakerMoreConfigs.WEATHER_OVERRIDE_VALUE.getOptionListValue();
 				cir.setReturnValue(overrider.apply(value));

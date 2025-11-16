@@ -22,25 +22,25 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableCreativeFlyLa
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.player.LocalPlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Slice;
 
-@Mixin(ClientPlayerEntity.class)
+@Mixin(LocalPlayer.class)
 public abstract class ClientPlayerEntityMixin
 {
 	@ModifyExpressionValue(
-			method = "tickMovement",
+			method = "aiStep",
 			slice = @Slice(
 					from = @At(
 							value = "INVOKE",
-							target = "Lnet/minecraft/client/network/AbstractClientPlayerEntity;tickMovement()V"
+							target = "Lnet/minecraft/client/player/AbstractClientPlayer;aiStep()V"
 					)
 			),
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/network/ClientPlayerInteractionManager;isFlyingLocked()Z",
+					target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;isAlwaysFlying()Z",
 					ordinal = 0
 			)
 	)

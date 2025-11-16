@@ -29,9 +29,9 @@ import org.spongepowered.asm.mixin.Mixin;
 //#if MC >= 11500
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSyncer;
-import net.minecraft.block.entity.BeehiveBlockEntity;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.injection.At;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import org.spongepowered.asm.mixin.injection.Slice;
@@ -62,7 +62,7 @@ public abstract class RenderHandlerMixin
 					//#if MC >= 12101
 					//$$ target = "Lfi/dy/masa/minihud/event/RenderHandler;getTargetedBlockEntity(Lnet/minecraft/world/World;Lnet/minecraft/client/MinecraftClient;)Lorg/apache/commons/lang3/tuple/Pair;",
 					//#else
-					target = "Lfi/dy/masa/minihud/event/RenderHandler;getTargetedBlockEntity(Lnet/minecraft/world/World;Lnet/minecraft/client/MinecraftClient;)Lnet/minecraft/block/entity/BlockEntity;",
+					target = "Lfi/dy/masa/minihud/event/RenderHandler;getTargetedBlockEntity(Lnet/minecraft/world/level/Level;Lnet/minecraft/client/Minecraft;)Lnet/minecraft/world/level/block/entity/BlockEntity;",
 					//#endif
 					ordinal = 0,
 					remap = true
@@ -80,7 +80,7 @@ public abstract class RenderHandlerMixin
 			//#if MC >= 12101
 			//$$ BlockEntity blockEntity = original.getLeft();
 			//#endif
-			if (blockEntity instanceof BeehiveBlockEntity && !MinecraftClient.getInstance().isIntegratedServerRunning())
+			if (blockEntity instanceof BeehiveBlockEntity && !Minecraft.getInstance().hasSingleplayerServer())
 			{
 				ServerDataSyncer.getInstance().syncBlockEntity(blockEntity);
 			}

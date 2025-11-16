@@ -24,8 +24,8 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.world.ClientWorld;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
@@ -64,10 +64,10 @@ public abstract class ShadersMixin
 	{
 		if (TweakerMoreConfigs.SHADER_GAME_TIME_AS_WORLD_TIME.getBooleanValue())
 		{
-			ClientWorld clientWorld = MinecraftClient.getInstance().world;
+			ClientLevel clientWorld = Minecraft.getInstance().level;
 			if (clientWorld != null)
 			{
-				worldTime = (int)(clientWorld.getTime() % 24000L);
+				worldTime = (int)(clientWorld.getGameTime() % 24000L);
 			}
 		}
 		return worldTime;

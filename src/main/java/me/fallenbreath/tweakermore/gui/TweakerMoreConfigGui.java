@@ -42,7 +42,7 @@ import me.fallenbreath.tweakermore.mixins.core.gui.access.WidgetSearchBarAccesso
 import me.fallenbreath.tweakermore.util.FabricUtils;
 import me.fallenbreath.tweakermore.util.JsonSaveAble;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -293,7 +293,7 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 			//#else
 			this.searchBar.setSearchOpen(true);
 			//#endif
-			searchBox.setText(previousSearchBarText);
+			searchBox.setValue(previousSearchBarText);
 			// malilib-fabric-1.19.4-0.15.4-sources.jar wrongly renames setFocused() to method_25365(), misleading the remap
 			//#disable-remap
 			searchBox.setFocused(previousSearchBoxFocus);
@@ -341,11 +341,11 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		//#endif
 
 		// tweak label width first, to make sure the panel is not too close or too far from the label
-		labelWidth = MathHelper.clamp(guiWidth - panelWidth, maxTextWidth - 5, maxTextWidth + 100);
+		labelWidth = Mth.clamp(guiWidth - panelWidth, maxTextWidth - 5, maxTextWidth + 100);
 		// decrease the panel width if space is not enough
-		panelWidth = MathHelper.clamp(guiWidth - labelWidth, 100, panelWidth);
+		panelWidth = Mth.clamp(guiWidth - labelWidth, 100, panelWidth);
 		// decrease the label width for a bit if space is still way not enough (the label text might overlap with the panel now)
-		labelWidth = MathHelper.clamp(guiWidth - panelWidth + 25, labelWidth - Math.max((int)(maxTextWidth * 0.4), 30), labelWidth);
+		labelWidth = Mth.clamp(guiWidth - panelWidth + 25, labelWidth - Math.max((int)(maxTextWidth * 0.4), 30), labelWidth);
 
 		// just in case
 		labelWidth = Math.max(labelWidth, 0);

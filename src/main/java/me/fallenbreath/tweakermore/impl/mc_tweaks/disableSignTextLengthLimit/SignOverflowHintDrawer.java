@@ -21,18 +21,18 @@
 package me.fallenbreath.tweakermore.impl.mc_tweaks.disableSignTextLengthLimit;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.block.entity.SignBlockEntity;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.util.Texts;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.components.ComponentRenderUtils;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
 
 public class SignOverflowHintDrawer
 {
 	/**
 	 * Only used in mc1.14.4
 	 */
-	public static void drawLineOverflowHint(SignBlockEntity signBlockEntity, TextRenderer textRenderer, int lineIdx, String lineContent)
+	public static void drawLineOverflowHint(SignBlockEntity signBlockEntity, Font textRenderer, int lineIdx, String lineContent)
 	{
 		//#if MC < 11500
 		//$$ if (TweakerMoreConfigs.DISABLE_SIGN_TEXT_LENGTH_LIMIT.getBooleanValue())

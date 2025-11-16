@@ -25,12 +25,12 @@ import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.listentries.ServerMsptMetricsStatisticType;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 
 //#if MC >= 12006
 //$$ import net.minecraft.util.profiler.MultiValueDebugSampleLogImpl;
 //#else
-import net.minecraft.util.MetricsData;
+import net.minecraft.util.FrameTimer;
 //#endif
 
 
@@ -76,13 +76,13 @@ public class RichStatisticManager
 	//#if MC >= 12006
 	//$$ MultiValueDebugSampleLogImpl
 	//#else
-	MetricsData
+	FrameTimer
 	//#endif
 	modifyServerMsptMetricsStatistic(
 			//#if MC >= 12006
 			//$$ MultiValueDebugSampleLogImpl metricsData
 			//#else
-			MetricsData metricsData
+			FrameTimer metricsData
 			//#endif
 	)
 	{
@@ -119,10 +119,10 @@ public class RichStatisticManager
 		}
 
 		String text = StringUtils.translate("tweakermore.impl.serverMsptMetricsStatisticTypeCycle.hint", value.getDisplayName());
-		MinecraftClient mc = MinecraftClient.getInstance();
+		Minecraft mc = Minecraft.getInstance();
 		int height =
 				//#if MC >= 11500
-				mc.getWindow().getScaledHeight();
+				mc.getWindow().getGuiScaledHeight();
 				//#else
 				//$$ mc.window.getScaledHeight();
 				//#endif
@@ -130,7 +130,7 @@ public class RichStatisticManager
 		//#if MC >= 12000
 		//$$ drawContext.drawTextWithShadow(mc.textRenderer,
 		//#else
-		mc.textRenderer.draw(
+		mc.font.draw(
 				//#if MC >= 11600
 				//$$ matrices,
 				//#endif

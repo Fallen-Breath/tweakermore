@@ -20,14 +20,14 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.rememberServerListScrollPositionOnRefresh;
 
-import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
-import net.minecraft.client.gui.screen.multiplayer.MultiplayerServerListWidget;
+import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
+import net.minecraft.client.gui.screens.multiplayer.ServerSelectionList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(MultiplayerScreen.class)
+@Mixin(JoinMultiplayerScreen.class)
 public interface MultiplayerScreenAccessor
 {
-	@Accessor
-	MultiplayerServerListWidget getServerListWidget();
+	@Accessor("serverSelectionList")
+	ServerSelectionList getServerListWidget();
 }

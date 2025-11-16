@@ -22,10 +22,10 @@ package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builde
 
 import com.google.common.collect.Lists;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.text.BaseText;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.BaseComponent;
+import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -36,14 +36,14 @@ import java.util.List;
 //$$ import net.minecraft.client.item.TooltipType;
 //$$ import net.minecraft.item.Item;
 //#else
-import net.minecraft.item.EnchantedBookItem;
+import net.minecraft.world.item.EnchantedBookItem;
 //#endif
 
 public class EnchantmentHintBuilder extends AbstractHintBuilder
 {
 	@Override
 	@Nullable
-	public BaseText build(
+	public BaseComponent build(
 			//#if MC >= 12006
 			//$$ Item.TooltipContext context,
 			//#endif
@@ -52,7 +52,7 @@ public class EnchantmentHintBuilder extends AbstractHintBuilder
 	{
 		if (TweakerMoreConfigs.SHULKER_BOX_TOOLTIP_ENCHANTMENT_HINT.getBooleanValue())
 		{
-			List<Text> enchantmentTexts = Lists.newArrayList();
+			List<Component> enchantmentTexts = Lists.newArrayList();
 
 			//#if MC >= 12006
 			//$$ var enchantmentTag = itemStack.getOrDefault(DataComponentTypes.STORED_ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT);
@@ -67,8 +67,8 @@ public class EnchantmentHintBuilder extends AbstractHintBuilder
 			//$$ 		//#endif
 			//$$ );
 			//#else
-			ListTag enchantmentTag = itemStack.getItem() instanceof EnchantedBookItem ? EnchantedBookItem.getEnchantmentTag(itemStack) : itemStack.getEnchantments();
-			ItemStack.appendEnchantments(enchantmentTexts, enchantmentTag);
+			ListTag enchantmentTag = itemStack.getItem() instanceof EnchantedBookItem ? EnchantedBookItem.getEnchantments(itemStack) : itemStack.getEnchantmentTags();
+			ItemStack.appendEnchantmentNames(enchantmentTexts, enchantmentTag);
 			//#endif
 
 			return buildSegments(enchantmentTexts);

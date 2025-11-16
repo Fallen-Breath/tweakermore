@@ -25,12 +25,12 @@ import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContextImpl;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.debug.DebugRenderer;
-import net.minecraft.client.util.math.Matrix4f;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.debug.DebugRenderer;
+import com.mojang.math.Matrix4f;
+import net.minecraft.network.chat.Component;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Collections;
 import java.util.List;
@@ -53,8 +53,8 @@ import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
 //#endif
 
 //#if MC >= 11500
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.util.math.Rotation3;
+import net.minecraft.client.renderer.MultiBufferSource;
+import com.mojang.math.Transformation;
 //#endif
 
 public class TextRenderer
@@ -63,7 +63,7 @@ public class TextRenderer
 	private static final double DEFAULT_LINE_HEIGHT_RATIO = 1.0 * RenderUtils.TEXT_LINE_HEIGHT / RenderUtils.TEXT_HEIGHT;
 
 	private final List<TextHolder> lines;
-	private Vec3d pos;
+	private Vec3 pos;
 	private double shiftX;
 	private double shiftY;
 	private double fontScale;
@@ -136,7 +136,7 @@ public class TextRenderer
 		}
 		WorldRenderContext renderContext = createGlobalMatrixRenderContext();
 
-		MinecraftClient mc = MinecraftClient.getInstance();
+		Minecraft mc = Minecraft.getInstance();
 
 		InWorldPositionTransformer positionTransformer = new InWorldPositionTransformer(this.pos);
 		positionTransformer.apply(renderContext);
@@ -194,10 +194,10 @@ public class TextRenderer
 					//#if MC >= 12105
 					//$$ Matrix4f matrix4f = new Matrix4f(AffineTransformation.identity().getMatrix());
 					//#else
-					Matrix4f matrix4f = Rotation3.identity().getMatrix();
+					Matrix4f matrix4f = Transformation.identity().getMatrix();
 					//#endif
-					VertexConsumerProvider.Immediate immediate = RenderUtils.getVertexConsumer();
-					mc.textRenderer.draw(
+					MultiBufferSource.BufferSource immediate = RenderUtils.getVertexConsumer();
+					mc.font.drawInBatch(
 							holder.text, textX, textY, this.color, this.shadow, matrix4f, immediate,
 							//#if MC >= 11904
 							//$$ this.seeThrough ? net.minecraft.client.font.TextRenderer.TextLayerType.SEE_THROUGH : net.minecraft.client.font.TextRenderer.TextLayerType.NORMAL,
@@ -206,7 +206,7 @@ public class TextRenderer
 							//#endif
 							backgroundColor, 0xF000F0
 					);
-					immediate.draw();
+					immediate.endBatch();
 
 					// draw twice when having background
 					if (backgroundColor == 0)
@@ -277,7 +277,7 @@ public class TextRenderer
 		return this.setLines(TextHolder.of(text));
 	}
 
-	public TextRenderer text(Text text)
+	public TextRenderer text(Component text)
 	{
 		return this.setLines(TextHolder.of(text));
 	}
@@ -294,7 +294,7 @@ public class TextRenderer
 		return this.addLines(TextHolder.of(text));
 	}
 
-	public TextRenderer addLine(Text text)
+	public TextRenderer addLine(Component text)
 	{
 		return this.addLines(TextHolder.of(text));
 	}
@@ -305,7 +305,7 @@ public class TextRenderer
 		return this;
 	}
 
-	public TextRenderer at(Vec3d vec3d)
+	public TextRenderer at(Vec3 vec3d)
 	{
 		this.pos = vec3d;
 		return this;
@@ -313,7 +313,7 @@ public class TextRenderer
 
 	public TextRenderer at(double x, double y, double z)
 	{
-		return this.at(new Vec3d(x, y, z));
+		return this.at(new Vec3(x, y, z));
 	}
 
 	public TextRenderer atCenter(BlockPos blockPos)
@@ -411,7 +411,7 @@ public class TextRenderer
 		return RenderUtils.TEXT_HEIGHT * this.lineHeightRatio;
 	}
 
-	public Vec3d getPos()
+	public Vec3 getPos()
 	{
 		return this.pos;
 	}
@@ -457,12 +457,12 @@ public class TextRenderer
 		//$$ }
 		//#endif
 
-		public static TextHolder of(Text text)
+		public static TextHolder of(Component text)
 		{
 			//#if MC >= 11600
 			//$$ return new TextHolder(text.asOrderedText());
 			//#else
-			return new TextHolder(text.asFormattedString());
+			return new TextHolder(text.getColoredString());
 			//#endif
 		}
 

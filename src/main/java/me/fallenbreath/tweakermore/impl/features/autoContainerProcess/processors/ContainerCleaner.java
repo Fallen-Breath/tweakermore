@@ -24,9 +24,9 @@ import fi.dy.masa.itemscroller.util.InventoryUtils;
 import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
-import net.minecraft.client.gui.screen.ingame.ContainerScreen;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.container.Slot;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.inventory.Slot;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class ContainerCleaner implements IContainerProcessor
 	}
 
 	@Override
-	public ProcessResult process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
+	public ProcessResult process(LocalPlayer player, AbstractContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
 	{
 		if (ContainerProcessorUtils.shouldSkipForEnderChest(containerScreen, TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_IGNORE_ENDER_CHEST))
 		{
@@ -49,9 +49,9 @@ public class ContainerCleaner implements IContainerProcessor
 		int counter = 0;
 		for (Slot slot : containerInvSlots)
 		{
-			if (slot.hasStack() && TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_RESTRICTION.isAllowed(slot.getStack().getItem()))
+			if (slot.hasItem() && TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_RESTRICTION.isAllowed(slot.getItem().getItem()))
 			{
-				InventoryUtils.dropStack(containerScreen, slot.id);
+				InventoryUtils.dropStack(containerScreen, slot.index);
 				counter++;
 			}
 		}

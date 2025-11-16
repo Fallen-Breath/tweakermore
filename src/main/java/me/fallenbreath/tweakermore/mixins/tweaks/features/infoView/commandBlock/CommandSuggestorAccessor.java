@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 //#if MC >= 12106
 //$$ import net.minecraft.client.network.ClientCommandSource;
 //#else
-import net.minecraft.server.command.CommandSource;
+import net.minecraft.commands.SharedSuggestionProvider;
 //#endif
 
 //#if MC >= 11600
@@ -35,7 +35,7 @@ import net.minecraft.server.command.CommandSource;
 //#endif
 
 //#if MC >= 11500
-import net.minecraft.client.gui.screen.CommandSuggestor;
+import net.minecraft.client.gui.components.CommandSuggestions;
 //#else
 //$$ import net.minecraft.client.gui.screen.ChatScreen;
 //#endif
@@ -47,18 +47,14 @@ import net.minecraft.client.gui.screen.CommandSuggestor;
  */
 @Mixin(
 		//#if MC >= 11500
-		CommandSuggestor.class
+		CommandSuggestions.class
 		//#else
 		//$$ ChatScreen.class
 		//#endif
 )
 public interface CommandSuggestorAccessor
 {
-	@Invoker(
-			//#if MC < 11500
-			//$$ "getRenderText"
-			//#endif
-	)
+	@Invoker("formatText")
 	static
 	//#if MC >= 11600
 	//$$ OrderedText
@@ -69,7 +65,7 @@ public interface CommandSuggestorAccessor
 			//#if MC >= 12106
 			//$$ ParseResults<ClientCommandSource> parse,
 			//#else
-			ParseResults<CommandSource> parse,
+			ParseResults<SharedSuggestionProvider> parse,
 			//#endif
 			String original, int firstCharacterIndex
 	)

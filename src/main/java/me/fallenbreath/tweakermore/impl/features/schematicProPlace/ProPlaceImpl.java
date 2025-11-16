@@ -27,10 +27,10 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
 import me.fallenbreath.tweakermore.impl.features.schematicProPlace.restrict.PlacementRestrictor;
 import me.fallenbreath.tweakermore.util.StringUtils;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.item.BlockPlaceContext;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.phys.BlockHitResult;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
@@ -48,14 +48,14 @@ public class ProPlaceImpl
 		return comment.replaceFirst("##CONFIGS##", lines);
 	}
 
-	public static void handleRightClick(PlacementContextProvider contextProvider, CallbackInfoReturnable<ActionResult> cir)
+	public static void handleRightClick(PlacementContextProvider contextProvider, CallbackInfoReturnable<InteractionResult> cir)
 	{
 		if (Configs.Generic.EASY_PLACE_MODE.getBooleanValue())
 		{
 			return;
 		}
 
-		MinecraftClient mc = MinecraftClient.getInstance();
+		Minecraft mc = Minecraft.getInstance();
 
 		boolean proPlace = TweakerMoreConfigs.SCHEMATIC_PRO_PLACE.getBooleanValue();
 		boolean autoPick = proPlace || TweakerMoreConfigs.AUTO_PICK_SCHEMATIC_BLOCK.getBooleanValue();
@@ -63,19 +63,19 @@ public class ProPlaceImpl
 
 		if (autoPick)
 		{
-			ItemPlacementContext ctx = contextProvider.provide().getSecond();
-			SchematicBlockPicker.doSchematicWorldPickBlock(mc, ctx.getBlockPos(), ctx.getHand());
+			BlockPlaceContext ctx = contextProvider.provide().getSecond();
+			SchematicBlockPicker.doSchematicWorldPickBlock(mc, ctx.getClickedPos(), ctx.getHand());
 		}
 
 		if (restrict)
 		{
 			// for some tweakeroo stuffs
-			Pair<BlockHitResult, ItemPlacementContext> pair = contextProvider.provide();
+			Pair<BlockHitResult, BlockPlaceContext> pair = contextProvider.provide();
 
 			if (!PlacementRestrictor.canDoBlockPlacement(mc, pair.getFirst(), pair.getSecond()))
 			{
 				// return fail so no more further actions that might cause issues e.g. water bucket using
-				cir.setReturnValue(ActionResult.FAIL);
+				cir.setReturnValue(InteractionResult.FAIL);
 			}
 		}
 	}
@@ -83,6 +83,6 @@ public class ProPlaceImpl
 	@FunctionalInterface
 	public interface PlacementContextProvider
 	{
-		Pair<BlockHitResult, ItemPlacementContext> provide();
+		Pair<BlockHitResult, BlockPlaceContext> provide();
 	}
 }

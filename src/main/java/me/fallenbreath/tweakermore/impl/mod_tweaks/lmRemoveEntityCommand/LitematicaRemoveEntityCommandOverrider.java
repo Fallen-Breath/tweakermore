@@ -28,9 +28,9 @@ import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.listentries.LitematicaRemoveEntityCommandPolicy;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.server.command.CommandSource;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.commands.SharedSuggestionProvider;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -59,16 +59,16 @@ public class LitematicaRemoveEntityCommandOverrider
 	 */
 	private static Optional<Boolean> isCommandValid(String command)
 	{
-		ClientPlayNetworkHandler networkHandler = MinecraftClient.getInstance().getNetworkHandler();
+		ClientPacketListener networkHandler = Minecraft.getInstance().getConnection();
 		if (networkHandler != null)
 		{
 			//#if MC >= 12106
 			//$$ var node =  // the type is CommandNode<ClientCommandSource>
 			//#else
-			CommandNode<CommandSource> node =
+			CommandNode<SharedSuggestionProvider> node =
 			//#endif
-					networkHandler.getCommandDispatcher().findNode(Collections.singleton(command));
-			return Optional.of(node != null && node.canUse(networkHandler.getCommandSource()));
+					networkHandler.getCommands().findNode(Collections.singleton(command));
+			return Optional.of(node != null && node.canUse(networkHandler.getSuggestionsProvider()));
 		}
 		return Optional.empty();
 	}

@@ -22,11 +22,11 @@ package me.fallenbreath.tweakermore.impl.mod_tweaks.mlShulkerBoxPreviewSupportEn
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.mlShulkerBoxPreviewSupportEnderChest.BasicInventoryAccessor;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.DefaultedList;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.core.NonNullList;
 
 import java.util.Optional;
 
@@ -38,26 +38,26 @@ public class EnderChestItemFetcher
 	}
 
 	// make a copy to ensure the original list is unchanged
-	public static DefaultedList<ItemStack> makeCopy(DefaultedList<ItemStack> items)
+	public static NonNullList<ItemStack> makeCopy(NonNullList<ItemStack> items)
 	{
-		DefaultedList<ItemStack> copied = DefaultedList.of();
+		NonNullList<ItemStack> copied = NonNullList.create();
 		items.forEach(itemStack -> copied.add(itemStack.copy()));
 		return copied;
 	}
 
-	public static Optional<DefaultedList<ItemStack>> fetch()
+	public static Optional<NonNullList<ItemStack>> fetch()
 	{
-		MinecraftClient mc = MinecraftClient.getInstance();
-		PlayerEntity player = mc.player;
+		Minecraft mc = Minecraft.getInstance();
+		Player player = mc.player;
 		if (player == null)
 		{
 			return Optional.empty();
 		}
 
-		if (mc.getServer() != null)
+		if (mc.getSingleplayerServer() != null)
 		{
 			// single player
-			PlayerEntity serverPlayer = mc.getServer().getPlayerManager().getPlayer(player.getUuid());
+			Player serverPlayer = mc.getSingleplayerServer().getPlayerList().getPlayer(player.getUUID());
 			return Optional.ofNullable(serverPlayer)
 					.map(p -> ((BasicInventoryAccessor)p.getEnderChestInventory()).getStackList())
 					.map(EnderChestItemFetcher::makeCopy);
@@ -69,7 +69,7 @@ public class EnderChestItemFetcher
 
 	// do hacks here
 	// return empty: nope; not-empty: fetching / fetched
-	private static Optional<DefaultedList<ItemStack>> getEntityData(PlayerEntity player)
+	private static Optional<NonNullList<ItemStack>> getEntityData(Player player)
 	{
 		return Optional.empty();
 	}

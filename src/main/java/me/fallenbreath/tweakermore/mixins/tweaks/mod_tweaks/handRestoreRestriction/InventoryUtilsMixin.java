@@ -26,9 +26,9 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.util.Hand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.InteractionHand;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Slice;
@@ -54,9 +54,9 @@ public abstract class InventoryUtilsMixin
 			),
 			remap = false
 	)
-	private static boolean applyHandRestoreRestriction(boolean booleanValue, /* parent method parameters -> */ PlayerEntity player, Hand hand, boolean allowHotbar)
+	private static boolean applyHandRestoreRestriction(boolean booleanValue, /* parent method parameters -> */ Player player, InteractionHand hand, boolean allowHotbar)
 	{
-		Item currentItem = player.getStackInHand(hand).getItem();
+		Item currentItem = player.getItemInHand(hand).getItem();
 		return booleanValue && TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.isAllowed(currentItem);
 	}
 }

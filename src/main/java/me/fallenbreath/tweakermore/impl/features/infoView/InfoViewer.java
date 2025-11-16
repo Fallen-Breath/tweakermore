@@ -23,8 +23,8 @@ package me.fallenbreath.tweakermore.impl.features.infoView;
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.ScanningCache;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Map;
 
@@ -38,7 +38,7 @@ public interface InfoViewer
 	/**
 	 * Scan and collect positions to be rendered
 	 */
-	Map<BlockPos, Renderer> scanForRender(ScanningCache cache, Vec3d camPos, Vec3d camVec);
+	Map<BlockPos, Renderer> scanForRender(ScanningCache cache, Vec3 camPos, Vec3 camVec);
 
 	/**
 	 * Target filtering: custom checks

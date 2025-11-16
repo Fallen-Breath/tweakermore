@@ -25,10 +25,10 @@ import me.fallenbreath.tweakermore.mixins.tweaks.features.schematicProPlace.Cora
 import me.fallenbreath.tweakermore.mixins.tweaks.features.schematicProPlace.CoralFanBlockAccessor;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.schematicProPlace.CoralWallFanBlockAccessor;
 import net.minecraft.block.*;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tag.FluidTags;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.tags.FluidTags;
 
 import java.util.Optional;
 
@@ -116,7 +116,7 @@ public class LooseCaseChecker
 	 */
 	private static boolean checkIce(BlockState schematicState, Block blockToPlace)
 	{
-		return blockToPlace instanceof IceBlock && schematicState.getFluidState().matches(FluidTags.WATER);
+		return blockToPlace instanceof IceBlock && schematicState.getFluidState().is(FluidTags.WATER);
 	}
 
 	/*
@@ -137,7 +137,7 @@ public class LooseCaseChecker
 	private static Optional<Block> coralLiving2Dead(Block livingCoral)
 	{
 		Block deadCoral = null;
-		if (livingCoral instanceof CoralBlock)
+		if (livingCoral instanceof CoralPlantBlock)
 		{
 			deadCoral = ((CoralBlockAccessor)livingCoral).getDeadCoralBlock();
 		}
@@ -169,8 +169,8 @@ public class LooseCaseChecker
 
 	private static boolean isDeadCoral(Block block)
 	{
-		return block instanceof DeadCoralBlock ||
-				block.getClass() == DeadCoralFanBlock.class ||
-				block.getClass() == DeadCoralWallFanBlock.class;
+		return block instanceof BaseCoralPlantBlock ||
+				block.getClass() == BaseCoralFanBlock.class ||
+				block.getClass() == BaseCoralWallFanBlock.class;
 	}
 }

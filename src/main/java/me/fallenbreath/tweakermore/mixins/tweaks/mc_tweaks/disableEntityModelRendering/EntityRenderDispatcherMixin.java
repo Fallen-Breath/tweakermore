@@ -22,9 +22,9 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableEntityModelRe
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
-import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -38,8 +38,8 @@ import org.spongepowered.asm.mixin.injection.At;
 //#endif
 
 //#if MC >= 11500
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.renderer.MultiBufferSource;
+import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 /**
@@ -68,7 +68,7 @@ public abstract class EntityRenderDispatcherMixin
 					//#elseif MC >= 1.21.3
 					//$$ target = "Lnet/minecraft/client/render/entity/EntityRenderer;render(Lnet/minecraft/client/render/entity/state/EntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V"
 					//#elseif MC >= 1.15.0
-					target = "Lnet/minecraft/client/render/entity/EntityRenderer;render(Lnet/minecraft/entity/Entity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V"
+					target = "Lnet/minecraft/client/renderer/entity/EntityRenderer;render(Lnet/minecraft/world/entity/Entity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"
 					//#else
 					//$$ target = "Lnet/minecraft/client/render/entity/EntityRenderer;render(Lnet/minecraft/entity/Entity;DDDFF)V"
 					//#endif
@@ -81,7 +81,7 @@ public abstract class EntityRenderDispatcherMixin
 	//#elseif MC >= 1.21.3
 	//$$ private <E extends Entity, S extends EntityRenderState> boolean disableEntityModelRendering_cancelRender(EntityRenderer<? super E, S> instance, S entityRenderState, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light)
 	//#elseif MC >= 1.15.0
-	boolean disableEntityModelRendering_cancelRender(EntityRenderer<Entity> instance, Entity entity, float yaw, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light)
+	boolean disableEntityModelRendering_cancelRender(EntityRenderer<Entity> instance, Entity entity, float yaw, float tickDelta, PoseStack matrixStack, MultiBufferSource vertexConsumerProvider, int light)
 	//#else
 	//$$ boolean disableEntityModelRendering_cancelRender(EntityRenderer<Entity> instance, Entity entity, double x, double y, double z, float yaw, float tickDelta)
 	//#endif

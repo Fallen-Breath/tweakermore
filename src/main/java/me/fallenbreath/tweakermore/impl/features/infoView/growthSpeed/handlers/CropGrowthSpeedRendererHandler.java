@@ -24,9 +24,9 @@ import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWor
 import me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.growthSpeed.AttachedStemBlockAccessor;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.growthSpeed.CropBlockAccessor;
 import net.minecraft.block.*;
-import net.minecraft.text.BaseText;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.network.chat.BaseComponent;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 
 import java.util.List;
 
@@ -57,11 +57,11 @@ public class CropGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHand
 
 	/**
 	 * references:
-	 * - {@link net.minecraft.block.CropBlock#scheduledTick} or {@link net.minecraft.block.CropBlock#randomTick}
-	 * - {@link net.minecraft.block.StemBlock#scheduledTick} or {@link net.minecraft.block.StemBlock#randomTick}
+	 * - {@link net.minecraft.world.level.block.CropBlock#scheduledTick} or {@link net.minecraft.world.level.block.CropBlock#randomTick}
+	 * - {@link net.minecraft.world.level.block.StemBlock#scheduledTick} or {@link net.minecraft.world.level.block.StemBlock#randomTick}
 	 */
 	@Override
-	public void addInfoLines(RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos, List<BaseText> lines)
+	public void addInfoLines(RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos, List<BaseComponent> lines)
 	{
 		Block block = world.getBlockState(pos).getBlock();
 		Block cropBlock = block;
@@ -83,7 +83,7 @@ public class CropGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHand
 		float baseSpeed = CropBlockAccessor.invokeGetAvailableMoisture(cropBlock, world, pos);
 
 		Attributes attributes = new Attributes();
-		Formatting color = heatColor(baseSpeed / 10.0);
+		ChatFormatting color = heatColor(baseSpeed / 10.0);
 		attributes.add(tr("crop.base"), s(round(baseSpeed, 6), color));
 
 		{
@@ -94,8 +94,8 @@ public class CropGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHand
 			boolean lightToLiveOk = light >= getMinimumRequiredLightLevelToSurvive(cropBlock);
 			boolean lightToGrowOk = light >= getMinimumRequiredLightLevelToGrowNaturally(cropBlock);
 			boolean lightOk = lightToLiveOk && lightToGrowOk;
-			Formatting lightColor = lightOk ? Formatting.GREEN : lightToLiveOk ? Formatting.GOLD : Formatting.RED;
-			BaseText value = c(s(light + " ", lightColor), bool(lightOk, lightColor));
+			ChatFormatting lightColor = lightOk ? ChatFormatting.GREEN : lightToLiveOk ? ChatFormatting.GOLD : ChatFormatting.RED;
+			BaseComponent value = c(s(light + " ", lightColor), bool(lightOk, lightColor));
 			attributes.add(tr("crop.light"), value, lightOk);
 		}
 

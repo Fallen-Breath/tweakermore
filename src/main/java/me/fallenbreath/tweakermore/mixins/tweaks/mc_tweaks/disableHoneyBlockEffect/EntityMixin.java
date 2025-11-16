@@ -26,10 +26,10 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.block.Block;
-import net.minecraft.block.HoneyBlock;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.Entity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HoneyBlock;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -39,10 +39,10 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class EntityMixin
 {
 	@WrapOperation(
-			method = "getJumpVelocityMultiplier",
+			method = "getBlockJumpFactor",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/block/Block;getJumpVelocityMultiplier()F"
+					target = "Lnet/minecraft/world/level/block/Block;getJumpFactor()F"
 			)
 	)
 	private float disableHoneyBlockEffect_modifyHoneyBlockJumpVelocityMultiplier(Block block, Operation<Float> original)
@@ -51,10 +51,10 @@ public abstract class EntityMixin
 	}
 
 	@WrapOperation(
-			method = "getVelocityMultiplier",
+			method = "getBlockSpeedFactor",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/block/Block;getVelocityMultiplier()F"
+					target = "Lnet/minecraft/world/level/block/Block;getSpeedFactor()F"
 			)
 	)
 	private float disableHoneyBlockEffect_modifyHoneyBlockVelocityMultiplier(Block block, Operation<Float> original)
@@ -69,7 +69,7 @@ public abstract class EntityMixin
 		if (TweakerMoreConfigs.DISABLE_HONEY_BLOCK_EFFECT.getBooleanValue())
 		{
 			Entity self = (Entity)(Object)this;
-			if (block instanceof HoneyBlock && self == MinecraftClient.getInstance().player)
+			if (block instanceof HoneyBlock && self == Minecraft.getInstance().player)
 			{
 				ret = override;
 			}

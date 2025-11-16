@@ -23,8 +23,8 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableSlimeBlockBou
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -36,13 +36,13 @@ import static me.fallenbreath.tweakermore.util.ModIds.minecraft;
 @Mixin(Entity.class)
 public abstract class EntityMixin
 {
-	@Inject(method = "bypassesLandingEffects", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "isSuppressingBounce", at = @At("HEAD"), cancellable = true)
 	private void disableSlimeBlockBouncing(CallbackInfoReturnable<Boolean> cir)
 	{
 		if (TweakerMoreConfigs.DISABLE_SLIME_BLOCK_BOUNCING.getBooleanValue())
 		{
 			Entity self = (Entity)(Object)this;
-			if (self == MinecraftClient.getInstance().player)
+			if (self == Minecraft.getInstance().player)
 			{
 				cir.setReturnValue(true);
 			}

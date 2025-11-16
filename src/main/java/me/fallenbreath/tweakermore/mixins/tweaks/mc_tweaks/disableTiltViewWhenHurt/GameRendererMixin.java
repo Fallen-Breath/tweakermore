@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableTiltViewWhenHurt;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin
 {
-	@Inject(method = "bobViewWhenHurt", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "bobHurt", at = @At("HEAD"), cancellable = true)
 	private void disableTiltViewWhenHurt(CallbackInfo ci)
 	{
 		if (TweakerMoreConfigs.DISABLE_TILT_VIEW_WHEN_HURT.getBooleanValue())

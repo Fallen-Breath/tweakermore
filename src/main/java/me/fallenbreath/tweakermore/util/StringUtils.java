@@ -22,13 +22,13 @@ package me.fallenbreath.tweakermore.util;
 
 import fi.dy.masa.malilib.gui.GuiBase;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
-import net.minecraft.util.Formatting;
+import net.minecraft.ChatFormatting;
 
 public class StringUtils
 {
 	public static String removeFormattingCode(String string)
 	{
-		return Formatting.strip(string);
+		return ChatFormatting.stripFormatting(string);
 	}
 
 	public static String configsToListLines(Iterable<? extends TweakerMoreIConfigBase> configs)

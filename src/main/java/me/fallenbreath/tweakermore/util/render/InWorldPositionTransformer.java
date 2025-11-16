@@ -21,14 +21,14 @@
 package me.fallenbreath.tweakermore.util.render;
 
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.Camera;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.Camera;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Objects;
 
 //#if MC >= 11500
-import net.minecraft.client.util.math.Matrix4f;
+import com.mojang.math.Matrix4f;
 //#else
 //$$ import com.mojang.blaze3d.platform.GlStateManager;
 //$$ import net.minecraft.client.render.entity.EntityRenderDispatcher;
@@ -36,10 +36,10 @@ import net.minecraft.client.util.math.Matrix4f;
 
 public class InWorldPositionTransformer
 {
-	private final Vec3d pos;
+	private final Vec3 pos;
 	private WorldRenderContext renderContext;
 
-	public InWorldPositionTransformer(Vec3d pos)
+	public InWorldPositionTransformer(Vec3 pos)
 	{
 		this.pos = pos;
 		this.renderContext = null;
@@ -51,9 +51,9 @@ public class InWorldPositionTransformer
 	public void apply(WorldRenderContext renderContext)
 	{
 		this.renderContext = renderContext;
-		MinecraftClient client = MinecraftClient.getInstance();
-		Camera camera = client.gameRenderer.getCamera();
-		Vec3d vec3d = this.pos.subtract(camera.getPos());
+		Minecraft client = Minecraft.getInstance();
+		Camera camera = client.gameRenderer.getMainCamera();
+		Vec3 vec3d = this.pos.subtract(camera.getPosition());
 
 		renderContext.pushMatrix();
 		renderContext.translate(vec3d.x, vec3d.y, vec3d.z);
@@ -63,7 +63,7 @@ public class InWorldPositionTransformer
 				//#if MC >= 11903
 				//$$ new Matrix4f().rotation(camera.getRotation())
 				//#else
-				new Matrix4f(camera.getRotation())
+				new Matrix4f(camera.rotation())
 				//#endif
 		);
 		//#else

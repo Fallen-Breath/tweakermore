@@ -26,7 +26,7 @@ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.util.mixin.testers.XaeroCommonMinimapWaypointsIngameRendererTester;
-import net.minecraft.entity.Entity;
+import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
@@ -59,7 +59,7 @@ public abstract class WaypointsIngameRendererMixin
 			method = "render",
 			at = @At(
 					value = "INVOKE_ASSIGN",
-					target = "Lnet/minecraft/client/MinecraftClient;getCameraEntity()Lnet/minecraft/entity/Entity;",
+					target = "Lnet/minecraft/client/Minecraft;getCameraEntity()Lnet/minecraft/world/entity/Entity;",
 					remap = true
 			),
 			require = 0,
@@ -71,7 +71,7 @@ public abstract class WaypointsIngameRendererMixin
 	}
 
 	/**
-	 * {@link #adjustCameraEntityForFreecam1} may fail if xmap choose to directly access field {@link net.minecraft.client.MinecraftClient#cameraEntity}
+	 * {@link #adjustCameraEntityForFreecam1} may fail if xmap choose to directly access field {@link net.minecraft.client.Minecraft#cameraEntity}
 	 * here comes a possible fallback
 	 * <p>
 	 * Since function {@link #adjustCameraEntityForFreecamImpl} is reentrant, it's ok to do ModifyVariable twice
@@ -82,7 +82,7 @@ public abstract class WaypointsIngameRendererMixin
 			method = "render",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/render/GameRenderer;getCamera()Lnet/minecraft/client/render/Camera;",
+					target = "Lnet/minecraft/client/renderer/GameRenderer;getMainCamera()Lnet/minecraft/client/Camera;",
 					ordinal = 0,
 					remap = true
 			),

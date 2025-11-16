@@ -31,7 +31,7 @@ import me.fallenbreath.tweakermore.impl.mod_tweaks.lmOriginOverride000.Litematic
 import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.util.NbtUtils;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -63,7 +63,7 @@ public abstract class LitematicaSchematicMixin implements LitematicaSchematic000
 			method = "createEmptySchematic",
 			at = @At(
 					value = "INVOKE",
-					target = "Lfi/dy/masa/litematica/schematic/LitematicaSchematic;setSubRegionPositions(Ljava/util/List;Lnet/minecraft/util/math/BlockPos;)V"
+					target = "Lfi/dy/masa/litematica/schematic/LitematicaSchematic;setSubRegionPositions(Ljava/util/List;Lnet/minecraft/core/BlockPos;)V"
 			)
 	)
 	private static LitematicaSchematic lmOriginOverride000_mark000Override(LitematicaSchematic schematic)
@@ -92,7 +92,7 @@ public abstract class LitematicaSchematicMixin implements LitematicaSchematic000
 			method = "createEmptySchematic",
 			at = @At(
 					value = "INVOKE",
-					target = "Lfi/dy/masa/litematica/schematic/LitematicaSchematic;setSubRegionPositions(Ljava/util/List;Lnet/minecraft/util/math/BlockPos;)V"
+					target = "Lfi/dy/masa/litematica/schematic/LitematicaSchematic;setSubRegionPositions(Ljava/util/List;Lnet/minecraft/core/BlockPos;)V"
 			)
 	)
 	private static BlockPos lmOriginOverride000_modifyOnSchematicCreated(BlockPos origin)

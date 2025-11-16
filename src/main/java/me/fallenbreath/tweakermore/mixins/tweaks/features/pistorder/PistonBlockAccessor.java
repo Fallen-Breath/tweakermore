@@ -20,11 +20,11 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.features.pistorder;
 
-import net.minecraft.block.PistonBlock;
+import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(PistonBlock.class)
+@Mixin(PistonBaseBlock.class)
 public interface PistonBlockAccessor
 {
 	@Accessor("isSticky")

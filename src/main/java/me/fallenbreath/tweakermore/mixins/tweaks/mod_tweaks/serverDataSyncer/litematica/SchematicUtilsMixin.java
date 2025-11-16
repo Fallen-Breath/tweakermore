@@ -33,8 +33,8 @@ import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.AreaSelectio
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.TargetPair;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.util.Util;
+import net.minecraft.client.Minecraft;
+import net.minecraft.Util;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -62,10 +62,10 @@ public abstract class SchematicUtilsMixin
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{
-			MinecraftClient mc = MinecraftClient.getInstance();
-			if (area != null && !mc.isIntegratedServerRunning() && ServerDataSyncer.hasEnoughPermission())
+			Minecraft mc = Minecraft.getInstance();
+			if (area != null && !mc.hasSingleplayerServer() && ServerDataSyncer.hasEnoughPermission())
 			{
-				MinecraftClient.getInstance().send(() -> syncEverything(area));
+				Minecraft.getInstance().tell(() -> syncEverything(area));
 			}
 		}
 		return area;
@@ -89,7 +89,7 @@ public abstract class SchematicUtilsMixin
 			cancellable = true,
 			remap = false
 	)
-	private static void serverDataSyncer4SelectionClone(MinecraftClient mc, CallbackInfo ci, @Local AreaSelection area)
+	private static void serverDataSyncer4SelectionClone(Minecraft mc, CallbackInfo ci, @Local AreaSelection area)
 	{
 		if (dontInjectClone.get())
 		{
@@ -105,7 +105,7 @@ public abstract class SchematicUtilsMixin
 			return;
 		}
 
-		MinecraftClient.getInstance().send(() -> {
+		Minecraft.getInstance().tell(() -> {
 			try
 			{
 				currentSyncingArenaName = area.getName();
@@ -130,9 +130,9 @@ public abstract class SchematicUtilsMixin
 		final int beTotal = pair.getBlockEntityAmount();
 		final int eTotal = pair.getEntityAmount();
 
-		AtomicLong lastUpdateTime = new AtomicLong(Util.getMeasuringTimeMs());
+		AtomicLong lastUpdateTime = new AtomicLong(Util.getMillis());
 		CompletableFuture<Void> future = ServerDataSyncer.getInstance().syncEverything(pair, (be, e) -> {
-			long currentTime = Util.getMeasuringTimeMs();
+			long currentTime = Util.getMillis();
 			if (currentTime - lastUpdateTime.get() > 500)
 			{
 				lastUpdateTime.set(currentTime);

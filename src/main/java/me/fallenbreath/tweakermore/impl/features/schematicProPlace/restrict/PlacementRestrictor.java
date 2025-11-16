@@ -30,17 +30,17 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.listentries.SchematicBlockPlacementRestrictionHintType;
 import me.fallenbreath.tweakermore.impl.features.schematicProPlace.ProPlaceUtils;
 import net.minecraft.block.*;
-import net.minecraft.block.enums.SlabType;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.property.Properties;
-import net.minecraft.state.property.Property;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.properties.SlabType;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockPlaceContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.Level;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,10 +48,10 @@ import java.util.Optional;
 public class PlacementRestrictor
 {
 	private static final List<Property<?>> FACING_PROPERTIES = Lists.newArrayList(
-			Properties.FACING, Properties.HORIZONTAL_FACING, Properties.HOPPER_FACING,
-			Properties.ROTATION,
-			Properties.BLOCK_HALF,  // stairs, trapdoors
-			Properties.AXIS, Properties.HORIZONTAL_AXIS  // logs, pillars
+			BlockStateProperties.FACING, BlockStateProperties.HORIZONTAL_FACING, BlockStateProperties.FACING_HOPPER,
+			BlockStateProperties.ROTATION_16,
+			BlockStateProperties.HALF,  // stairs, trapdoors
+			BlockStateProperties.AXIS, BlockStateProperties.HORIZONTAL_AXIS  // logs, pillars
 	);
 
 	private static void info(boolean condition, String key, Object... args)
@@ -62,11 +62,11 @@ public class PlacementRestrictor
 		}
 	}
 
-	public static boolean canDoBlockPlacement(MinecraftClient mc, BlockHitResult hitResult, ItemPlacementContext context)
+	public static boolean canDoBlockPlacement(Minecraft mc, BlockHitResult hitResult, BlockPlaceContext context)
 	{
 		final int MARGIN = TweakerMoreConfigs.SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_MARGIN.getIntegerValue();
 		SchematicBlockPlacementRestrictionHintType hintType = (SchematicBlockPlacementRestrictionHintType)TweakerMoreConfigs.SCHEMATIC_BLOCK_PLACEMENT_RESTRICTION_HINT.getOptionListValue();
-		BlockPos pos = context.getBlockPos();
+		BlockPos pos = context.getClickedPos();
 
 		// Always permit if it's far from the schematic
 		if (!WorldUtils.isPositionWithinRangeOfSchematicRegions(pos, MARGIN))
@@ -81,11 +81,11 @@ public class PlacementRestrictor
 			return true;
 		}
 
-		World schematicWorld = SchematicWorldHandler.getSchematicWorld();
-		World realWorld = context.getWorld();
-		PlayerEntity player = context.getPlayer();
+		Level schematicWorld = SchematicWorldHandler.getSchematicWorld();
+		Level realWorld = context.getLevel();
+		Player player = context.getPlayer();
 
-		if (schematicWorld != null && player != null && mc.interactionManager != null)
+		if (schematicWorld != null && player != null && mc.gameMode != null)
 		{
 			// check if the player will interact with the block
 			{
@@ -141,7 +141,7 @@ public class PlacementRestrictor
 				// check if the player is using the correct item stack for block placement
 				if (stackToUse.getItem() != schematicStack.getItem())
 				{
-					info(hintType.showWrongItem, "wrong_item", schematicStack.getName());
+					info(hintType.showWrongItem, "wrong_item", schematicStack.getHoverName());
 					return false;
 				}
 			}
@@ -157,7 +157,7 @@ public class PlacementRestrictor
 				// block type check
 				if (!isBlockToPlaceCorrect(schematicState, stateToPlace))
 				{
-					info(hintType.showNotAllowed, "wrong_block_type", Registry.BLOCK.getId(schematicBlock));
+					info(hintType.showNotAllowed, "wrong_block_type", Registry.BLOCK.getKey(schematicBlock));
 					return false;
 				}
 
@@ -169,8 +169,8 @@ public class PlacementRestrictor
 					{
 						if (blockToPlace instanceof SlabBlock && schematicBlock instanceof SlabBlock)
 						{
-							SlabType targetSlabType = schematicState.get(SlabBlock.TYPE);
-							if (targetSlabType != SlabType.DOUBLE && stateToPlace.get(SlabBlock.TYPE) != targetSlabType)
+							SlabType targetSlabType = schematicState.getValue(SlabBlock.TYPE);
+							if (targetSlabType != SlabType.DOUBLE && stateToPlace.getValue(SlabBlock.TYPE) != targetSlabType)
 							{
 								info(hintType.showNotAllowed, "wrong_slab", targetSlabType);
 								return false;
@@ -183,9 +183,9 @@ public class PlacementRestrictor
 					{
 						for (Property<?> property : FACING_PROPERTIES)
 						{
-							if (stateToPlace.contains(property) && schematicState.contains(property) && stateToPlace.get(property) != schematicState.get(property))
+							if (stateToPlace.hasProperty(property) && schematicState.hasProperty(property) && stateToPlace.getValue(property) != schematicState.getValue(property))
 							{
-								info(hintType.showNotAllowed, "wrong_facing", schematicState.get(property));
+								info(hintType.showNotAllowed, "wrong_facing", schematicState.getValue(property));
 								return false;
 							}
 						}

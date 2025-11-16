@@ -23,7 +23,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.itemTooltipHideUntil
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.itemTooltipHideUntilMouseMove.ContainerScreenWithToolTipHideHelper;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.itemTooltipHideUntilMouseMove.ItemTooltipHideUntilMouseMoveHelper;
-import net.minecraft.client.gui.screen.ingame.ContainerScreen;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //$$ import org.spongepowered.asm.mixin.injection.Coerce;
 //#endif
 
-@Mixin(ContainerScreen.class)
+@Mixin(AbstractContainerScreen.class)
 public abstract class ContainerScreenMixin implements ContainerScreenWithToolTipHideHelper
 {
 	@Unique
@@ -46,7 +46,7 @@ public abstract class ContainerScreenMixin implements ContainerScreenWithToolTip
 		return this.tooltipHideHelper$TKM;
 	}
 
-	@Inject(method = "drawMouseoverTooltip", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "renderTooltip", at = @At("HEAD"), cancellable = true)
 	private void itemTooltipHideUntilMouseMove_impl(
 			//#if MC >= 11600
 			//$$ @Coerce Object whatever,

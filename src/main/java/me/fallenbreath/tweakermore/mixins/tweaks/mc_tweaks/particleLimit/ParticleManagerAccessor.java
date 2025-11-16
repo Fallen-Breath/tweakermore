@@ -20,8 +20,8 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.particleLimit;
 
-import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.client.particle.ParticleTextureSheet;
+import net.minecraft.client.particle.ParticleEngine;
+import net.minecraft.client.particle.ParticleRenderType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
@@ -34,13 +34,13 @@ import net.minecraft.client.particle.Particle;
 import java.util.Queue;
 //#endif
 
-@Mixin(ParticleManager.class)
+@Mixin(ParticleEngine.class)
 public interface ParticleManagerAccessor
 {
 	@Accessor
 	//#if MC >= 1.21.9
 	//$$ Map<ParticleTextureSheet, ParticleRenderer<?>> getParticles();
 	//#else
-	Map<ParticleTextureSheet, Queue<Particle>> getParticles();
+	Map<ParticleRenderType, Queue<Particle>> getParticles();
 	//#endif
 }

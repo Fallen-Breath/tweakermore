@@ -24,8 +24,8 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.preciseItemEntityModel.PreciseItemEntityModelUtils;
-import net.minecraft.client.render.entity.ItemEntityRenderer;
-import net.minecraft.entity.ItemEntity;
+import net.minecraft.client.renderer.entity.ItemEntityRenderer;
+import net.minecraft.world.entity.item.ItemEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -51,7 +51,7 @@ public abstract class ItemEntityRendererMixin
 			//#elseif MC >= 12006
 			//$$ method = "renderStack(Lnet/minecraft/client/render/item/ItemRenderer;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/BakedModel;ZLnet/minecraft/util/math/random/Random;)V",
 			//#elseif MC >= 11500
-			method = "render(Lnet/minecraft/entity/ItemEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
+			method = "render(Lnet/minecraft/world/entity/item/ItemEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
 			//#else
 			//$$ method = "method_3997",
 			//#endif
@@ -64,7 +64,7 @@ public abstract class ItemEntityRendererMixin
 					//#if MC >= 12006
 					//$$ target = "Lnet/minecraft/client/render/entity/ItemEntityRenderer;getRenderedAmount(I)I"
 					//#else
-					target = "Lnet/minecraft/client/render/entity/ItemEntityRenderer;getRenderedAmount(Lnet/minecraft/item/ItemStack;)I"
+					target = "Lnet/minecraft/client/renderer/entity/ItemEntityRenderer;getRenderAmount(Lnet/minecraft/world/item/ItemStack;)I"
 					//#endif
 					//#endif  // if MC >= 12104
 			)
@@ -88,7 +88,7 @@ public abstract class ItemEntityRendererMixin
 			//#elseif MC >= 12103
 			//$$ method = "render(Lnet/minecraft/client/render/entity/state/ItemEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
 			//#elseif MC >= 11500
-			method = "render(Lnet/minecraft/entity/ItemEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
+			method = "render(Lnet/minecraft/world/entity/item/ItemEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
 			//#else
 			//$$ method = "method_3997",
 			//#endif
@@ -97,7 +97,7 @@ public abstract class ItemEntityRendererMixin
 					//#if MC >= 11903
 					//$$ target = "Lnet/minecraft/client/util/math/MatrixStack;translate(FFF)V",
 					//#elseif MC >= 11500
-					target = "Lnet/minecraft/client/util/math/MatrixStack;translate(DDD)V",
+					target = "Lcom/mojang/blaze3d/vertex/PoseStack;translate(DDD)V",
 					//#else
 					//$$ target = "Lcom/mojang/blaze3d/platform/GlStateManager;translatef(FFF)V",
 					//#endif
@@ -130,7 +130,7 @@ public abstract class ItemEntityRendererMixin
 			//#elseif MC >= 12103
 			//$$ method = "render(Lnet/minecraft/client/render/entity/state/ItemEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
 			//#elseif MC >= 11500
-			method = "render(Lnet/minecraft/entity/ItemEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
+			method = "render(Lnet/minecraft/world/entity/item/ItemEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
 			//#else
 			//$$ method = "method_3997",
 			//#endif
@@ -139,7 +139,7 @@ public abstract class ItemEntityRendererMixin
 					//#if MC >= 11903
 					//$$ target = "Lnet/minecraft/util/math/RotationAxis;rotation(F)Lorg/joml/Quaternionf;",
 					//#elseif MC >= 11500
-					target = "Lnet/minecraft/client/util/math/Vector3f;getRadialQuaternion(F)Lnet/minecraft/util/math/Quaternion;",
+					target = "Lcom/mojang/math/Vector3f;rotation(F)Lcom/mojang/math/Quaternion;",
 					//#else
 					//$$ target = "Lcom/mojang/blaze3d/platform/GlStateManager;rotatef(FFFF)V",
 					//#endif
@@ -177,7 +177,7 @@ public abstract class ItemEntityRendererMixin
 				//$$ 	yaw = itemEntityRenderStateExtra.getEntityYaw$TKM();
 				//$$ }
 				//#else
-				float yaw = itemEntity.getYaw(tickDelta);
+				float yaw = itemEntity.getViewYRot(tickDelta);
 				//#endif
 				yaw = (yaw + 360) % 360;
 				for (int r : new int[]{0, 90, 180, 270, 360})
@@ -202,7 +202,7 @@ public abstract class ItemEntityRendererMixin
 			//#elseif MC >= 12103
 			//$$ method = "render(Lnet/minecraft/client/render/entity/state/ItemEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
 			//#elseif MC >= 11500
-			method = "render(Lnet/minecraft/entity/ItemEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
+			method = "render(Lnet/minecraft/world/entity/item/ItemEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
 			//#else
 			//$$ method = "render(Lnet/minecraft/entity/ItemEntity;DDDFF)V",
 			//#endif
@@ -219,7 +219,7 @@ public abstract class ItemEntityRendererMixin
 					//#elseif MC >= 11904
 					//$$ target = "Lnet/minecraft/client/render/item/ItemRenderer;renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V"
 					//#elseif MC >= 11500
-					target = "Lnet/minecraft/client/render/item/ItemRenderer;renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformation$Mode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V"
+					target = "Lnet/minecraft/client/renderer/entity/ItemRenderer;render(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/client/renderer/block/model/ItemTransforms$TransformType;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IILnet/minecraft/client/resources/model/BakedModel;)V"
 					//#else
 					//$$ target = "Lnet/minecraft/client/render/model/json/ModelTransformation;applyGl(Lnet/minecraft/client/render/model/json/ModelTransformation$Type;)V"
 					//#endif
@@ -239,7 +239,7 @@ public abstract class ItemEntityRendererMixin
 			//#elseif MC >= 12103
 			//$$ method = "render(Lnet/minecraft/client/render/entity/state/ItemEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
 			//#elseif MC >= 11500
-			method = "render(Lnet/minecraft/entity/ItemEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
+			method = "render(Lnet/minecraft/world/entity/item/ItemEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
 			//#else
 			//$$ method = "render(Lnet/minecraft/entity/ItemEntity;DDDFF)V",
 			//#endif
@@ -256,7 +256,7 @@ public abstract class ItemEntityRendererMixin
 					//#elseif MC >= 11904
 					//$$ target = "Lnet/minecraft/client/render/item/ItemRenderer;renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V",
 					//#elseif MC >= 11500
-					target = "Lnet/minecraft/client/render/item/ItemRenderer;renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformation$Mode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V",
+					target = "Lnet/minecraft/client/renderer/entity/ItemRenderer;render(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/client/renderer/block/model/ItemTransforms$TransformType;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IILnet/minecraft/client/resources/model/BakedModel;)V",
 					//#else
 					//$$ target = "Lnet/minecraft/client/render/model/json/ModelTransformation;applyGl(Lnet/minecraft/client/render/model/json/ModelTransformation$Type;)V",
 					//#endif

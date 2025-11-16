@@ -26,8 +26,8 @@ import fi.dy.masa.malilib.interfaces.IRenderer;
 import me.fallenbreath.tweakermore.util.render.context.GuiRenderContext;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.util.profiler.Profiler;
+import net.minecraft.client.Minecraft;
+import net.minecraft.util.profiling.ProfilerFiller;
 
 //#if MC >= 12103
 //$$ import net.minecraft.util.profiler.Profilers;
@@ -62,7 +62,7 @@ public abstract class TweakerMoreRenderEventHandler
 	}
 
 	public static void dispatchRenderWorldPostEvent(
-			MinecraftClient mc
+			Minecraft mc
 			//#if MC >= 12006
 			//$$ , Matrix4fStack matrixStack
 			//#elseif MC >= 11600
@@ -73,10 +73,10 @@ public abstract class TweakerMoreRenderEventHandler
 		//#if MC >= 12103
 		//$$ Profiler profiler = Profilers.get();
 		//#else
-		Profiler profiler = mc.getProfiler();
+		ProfilerFiller profiler = mc.getProfiler();
 		//#endif
 
-		profiler.swap("TweakerMore_WorldRenderPostHook");
+		profiler.popPush("TweakerMore_WorldRenderPostHook");
 		WorldRenderContext renderContext = RenderContext.world(
 				//#if MC >= 11600
 				//$$ matrixStack

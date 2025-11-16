@@ -20,8 +20,8 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.beacon;
 
-import net.minecraft.block.entity.BeaconBlockEntity;
-import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.world.level.block.entity.BeaconBlockEntity;
+import net.minecraft.world.effect.MobEffect;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -33,22 +33,22 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(BeaconBlockEntity.class)
 public interface BeaconBlockEntityAccessor
 {
-	@Accessor
+	@Accessor("levels")
 	int getLevel();
 
 	@Nullable
-	@Accessor
+	@Accessor("primaryPower")
 	//#if MC >= 12006
 	//$$ RegistryEntry<StatusEffect> getPrimary();
 	//#else
-	StatusEffect getPrimary();
+	MobEffect getPrimary();
 	//#endif
 
 	@Nullable
-	@Accessor
+	@Accessor("secondaryPower")
 	//#if MC >= 12006
 	//$$ RegistryEntry<StatusEffect> getSecondary();
 	//#else
-	StatusEffect getSecondary();
+	MobEffect getSecondary();
 	//#endif
 }

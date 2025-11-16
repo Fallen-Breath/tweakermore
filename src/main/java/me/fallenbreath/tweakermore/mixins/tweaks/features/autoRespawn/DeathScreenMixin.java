@@ -21,9 +21,9 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.features.autoRespawn;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.gui.screen.DeathScreen;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.screens.DeathScreen;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -35,9 +35,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class DeathScreenMixin extends Screen
 {
 	@Shadow
-	private int ticksSinceDeath;
+	private int delayTicker;
 
-	protected DeathScreenMixin(Text title)
+	protected DeathScreenMixin(Component title)
 	{
 		super(title);
 	}
@@ -51,22 +51,22 @@ public abstract class DeathScreenMixin extends Screen
 		}
 
 		final int DELAY = 20;  // the amount of tick before the spectate / respawn button is enabled
-		if (this.minecraft != null && this.ticksSinceDeath == DELAY)
+		if (this.minecraft != null && this.delayTicker == DELAY)
 		{
 			// delay the operation a bit, cuz currently Minecraft is ticking the DeathScreen itself,
 			// which doesn't seem to be a nice moment to close the screen
-			this.minecraft.send(this::autoRespawn$TKM$impl);
+			this.minecraft.tell(this::autoRespawn$TKM$impl);
 		}
 	}
 
 	@Unique
 	private void autoRespawn$TKM$impl()
 	{
-		if (this.minecraft != null && this.minecraft.player != null && this.minecraft.currentScreen == this)
+		if (this.minecraft != null && this.minecraft.player != null && this.minecraft.screen == this)
 		{
 			// ref: the onPress callback of the spectate / respawn button created in net.minecraft.client.gui.screen.DeathScreen#init
-			this.minecraft.player.requestRespawn();
-			this.minecraft.openScreen(null);
+			this.minecraft.player.respawn();
+			this.minecraft.setScreen(null);
 		}
 	}
 }

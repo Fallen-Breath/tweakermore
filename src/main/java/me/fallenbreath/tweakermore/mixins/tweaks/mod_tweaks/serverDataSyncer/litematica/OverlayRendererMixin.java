@@ -29,10 +29,10 @@ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.Container;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -44,21 +44,21 @@ public abstract class OverlayRendererMixin
 			method = "renderBlockInfoOverlay",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/util/hit/BlockHitResult;getBlockPos()Lnet/minecraft/util/math/BlockPos;",
+					target = "Lnet/minecraft/world/phys/BlockHitResult;getBlockPos()Lnet/minecraft/core/BlockPos;",
 					remap = true
 			),
 			remap = false
 	)
 	private BlockPos serverDataSyncer4InfoOverlay(
 			BlockPos pos,
-			@Local(ordinal = 1) World worldClient
+			@Local(ordinal = 1) Level worldClient
 	)
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{
-			if (worldClient instanceof ClientWorld)
+			if (worldClient instanceof ClientLevel)
 			{
-				Inventory inventory = InventoryUtils.getInventory(worldClient, pos);
+				Container inventory = InventoryUtils.getInventory(worldClient, pos);
 				if (inventory != null)
 				{
 					ServerDataSyncer.getInstance().syncBlockInventory(inventory);

@@ -24,10 +24,10 @@ import com.google.common.collect.EvictingQueue;
 import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.config.options.ConfigInteger;
 import me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.particleLimit.ParticleManagerAccessor;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.client.particle.ParticleTextureSheet;
+import net.minecraft.client.particle.ParticleEngine;
+import net.minecraft.client.particle.ParticleRenderType;
 
 import java.util.Map;
 import java.util.Queue;
@@ -47,7 +47,7 @@ public class ParticleLimitHelper
 	{
 		int newLimit = config.getIntegerValue();
 
-		ParticleManager particleManager = MinecraftClient.getInstance().particleManager;
+		ParticleEngine particleManager = Minecraft.getInstance().particleEngine;
 
 		//#if MC >= 1.21.9
 		//$$ var particles = ((ParticleManagerAccessor)particleManager).getParticles();
@@ -58,8 +58,8 @@ public class ParticleLimitHelper
 		//$$ 	((ParticleRendererAccessor)particleRenderer).setParticles$TKM(newQueue);
 		//$$ }
 		//#else
-		Map<ParticleTextureSheet, Queue<Particle>> particles = ((ParticleManagerAccessor)particleManager).getParticles();
-		for (ParticleTextureSheet key : Lists.newArrayList(particles.keySet()))
+		Map<ParticleRenderType, Queue<Particle>> particles = ((ParticleManagerAccessor)particleManager).getParticles();
+		for (ParticleRenderType key : Lists.newArrayList(particles.keySet()))
 		{
 			EvictingQueue<Particle> newQueue = EvictingQueue.create(newLimit);
 			newQueue.addAll(particles.get(key));

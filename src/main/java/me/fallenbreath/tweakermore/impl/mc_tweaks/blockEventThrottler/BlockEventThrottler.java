@@ -23,15 +23,15 @@ package me.fallenbreath.tweakermore.impl.mc_tweaks.blockEventThrottler;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.RegistryUtils;
-import net.minecraft.block.Block;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 public class BlockEventThrottler
 {
-	public static void throttle(World world, BlockPos pos, Block block, TimedCounter counter, CallbackInfo ci)
+	public static void throttle(Level world, BlockPos pos, Block block, TimedCounter counter, CallbackInfo ci)
 	{
 		if (!TweakerMoreConfigs.BLOCK_EVENT_THROTTLER.getBooleanValue())
 		{
@@ -39,8 +39,8 @@ public class BlockEventThrottler
 			return;
 		}
 
-		MinecraftClient mc = MinecraftClient.getInstance();
-		if (mc.player == null || world != mc.world)
+		Minecraft mc = Minecraft.getInstance();
+		if (mc.player == null || world != mc.level)
 		{
 			// unknown world / player state, don't throttle
 			return;
@@ -57,7 +57,7 @@ public class BlockEventThrottler
 		}
 
 		// reset the counter for new game tick
-		counter.updateTime(world.getTime());
+		counter.updateTime(world.getGameTime());
 
 		// threshold counter
 		if (++counter.amount <= TweakerMoreConfigs.BLOCK_EVENT_THROTTLER_THRESHOLD.getIntegerValue())
@@ -67,7 +67,7 @@ public class BlockEventThrottler
 		}
 
 		// whitelist range
-		double disSqr = mc.player.squaredDistanceTo(PositionUtils.centerOf(pos));
+		double disSqr = mc.player.distanceToSqr(PositionUtils.centerOf(pos));
 		double whitelistRange = TweakerMoreConfigs.BLOCK_EVENT_THROTTLER_WHITELIST_RANGE.getDoubleValue();
 		if (disSqr < whitelistRange * whitelistRange)
 		{

@@ -24,13 +24,13 @@ import com.google.common.collect.Sets;
 import fi.dy.masa.litematica.selection.AreaSelection;
 import fi.dy.masa.litematica.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.EntityUtils;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.level.Level;
 
 import java.util.List;
 import java.util.Set;
@@ -43,8 +43,8 @@ public class AreaSelectionUtil
 	 */
 	public static TargetPair extractBlockEntitiesAndEntities(fi.dy.masa.litematica.selection.Box box, boolean saveableOnly)
 	{
-		MinecraftClient mc = MinecraftClient.getInstance();
-		ClientPlayNetworkHandler networkHandler = mc.getNetworkHandler();
+		Minecraft mc = Minecraft.getInstance();
+		ClientPacketListener networkHandler = mc.getConnection();
 		if (networkHandler == null || mc.player == null)
 		{
 			return TargetPair.none();
@@ -63,23 +63,23 @@ public class AreaSelectionUtil
 		int maxX = Math.max(pos1.getX(), pos2.getX());
 		int maxY = Math.max(pos1.getY(), pos2.getY());
 		int maxZ = Math.max(pos1.getZ(), pos2.getZ());
-		World world = EntityUtils.getEntityWorld(mc.player);
+		Level world = EntityUtils.getEntityWorld(mc.player);
 
-		List<BlockPos> bePositions = BlockPos.stream(minX, minY, minZ, maxX, maxY, maxZ).
-				map(BlockPos::toImmutable).
+		List<BlockPos> bePositions = BlockPos.betweenClosedStream(minX, minY, minZ, maxX, maxY, maxZ).
+				map(BlockPos::immutable).
 				// same check in fi.dy.masa.litematica.schematic.LitematicaSchematic.takeBlocksFromWorldWithinChunk
 				filter(blockPos -> {
 					BlockState blockState = world.getBlockState(blockPos);
 					//#if MC >= 11700
 					//$$ return blockState.hasBlockEntity();
 					//#else
-					return blockState.getBlock().hasBlockEntity();
+					return blockState.getBlock().isEntityBlock();
 					//#endif
 				}).
 				collect(Collectors.toList());
 
-		Box aabb = new Box(minX, minY, minZ, maxX + 1, maxY + 1, maxZ + 1);
-		List<Entity> entities = world.getEntities((Entity)null, aabb, saveableOnly ? entity -> entity.getType().isSaveable() : null);
+		AABB aabb = new AABB(minX, minY, minZ, maxX + 1, maxY + 1, maxZ + 1);
+		List<Entity> entities = world.getEntities((Entity)null, aabb, saveableOnly ? entity -> entity.getType().canSerialize() : null);
 
 		return TargetPair.of(bePositions, entities);
 	}

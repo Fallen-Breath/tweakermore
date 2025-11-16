@@ -24,10 +24,10 @@ import fi.dy.masa.itemscroller.util.InventoryUtils;
 import fi.dy.masa.malilib.util.GuiUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.ingame.MerchantScreen;
-import net.minecraft.container.MerchantContainer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.MerchantScreen;
+import net.minecraft.world.inventory.MerchantMenu;
 
 import java.util.Objects;
 
@@ -38,7 +38,7 @@ import java.util.Objects;
 
 public class MerchantAutoFavoritesTrader
 {
-	public static void doAutoTrade(MinecraftClient mc)
+	public static void doAutoTrade(Minecraft mc)
 	{
 		TweakerMoreConfigBooleanHotkeyed config = TweakerMoreConfigs.AUTO_VILLAGER_TRADE_FAVORITES;
 		if (config.getTweakerMoreOption().isEnabled() && config.getBooleanValue())
@@ -46,7 +46,7 @@ public class MerchantAutoFavoritesTrader
 			Screen screen = GuiUtils.getCurrentScreen();
 			if (screen instanceof MerchantScreen)
 			{
-				MerchantContainer container = ((MerchantScreen) screen).getContainer();
+				MerchantMenu container = ((MerchantScreen) screen).getMenu();
 
 				//#if MC >= 11600
 				//$$ if (!VillagerDataStorage.getInstance().getFavoritesForCurrentVillager(container).favorites.isEmpty())

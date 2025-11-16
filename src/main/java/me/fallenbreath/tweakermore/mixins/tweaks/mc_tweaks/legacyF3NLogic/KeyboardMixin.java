@@ -24,8 +24,8 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.Keyboard;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.KeyboardHandler;
+import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -37,20 +37,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.function.Consumer;
 
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.16"))
-@Mixin(Keyboard.class)
+@Mixin(KeyboardHandler.class)
 public abstract class KeyboardMixin
 {
-	@Shadow @Final private MinecraftClient client;
+	@Shadow @Final private Minecraft minecraft;
 
 	//#if MC < 11600
 	@SuppressWarnings("MixinAnnotationTarget")
 	//#endif
 	@Inject(
-			method = "processF3",
+			method = "handleDebugKeys",
 			slice = @Slice(
 					from = @At(
 							value = "INVOKE",
-							target = "Lnet/minecraft/client/Keyboard;copyLookAt(ZZ)V"
+							target = "Lnet/minecraft/client/KeyboardHandler;copyRecreateCommand(ZZ)V"
 					)
 			),
 			at = @At(
@@ -70,7 +70,7 @@ public abstract class KeyboardMixin
 	{
 		if (TweakerMoreConfigs.LEGACY_F3_N_LOGIC.getBooleanValue())
 		{
-			assert this.client.player != null;
+			assert this.minecraft.player != null;
 
 			Consumer<String> commandSender =
 					//#if MC >= 12106
@@ -78,10 +78,10 @@ public abstract class KeyboardMixin
 					//#elseif MC >= 11903
 					//$$ this.client.player.networkHandler::sendCommand;
 					//#else
-					cmd -> this.client.player.sendChatMessage("/" + cmd);
+					cmd -> this.minecraft.player.chat("/" + cmd);
 					//#endif
 
-			if (this.client.player.isCreative())
+			if (this.minecraft.player.isCreative())
 			{
 				commandSender.accept("gamemode spectator");
 			}

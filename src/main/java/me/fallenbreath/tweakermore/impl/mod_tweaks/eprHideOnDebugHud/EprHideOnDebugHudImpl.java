@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.impl.mod_tweaks.eprHideOnDebugHud;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 public class EprHideOnDebugHudImpl
@@ -30,12 +30,12 @@ public class EprHideOnDebugHudImpl
 	{
 		if (TweakerMoreConfigs.EPR_HIDE_ON_DEBUG_HUD.getBooleanValue())
 		{
-			MinecraftClient mc = MinecraftClient.getInstance();
+			Minecraft mc = Minecraft.getInstance();
 			if (
 					//#if MC >= 12002
 					//$$ mc.getDebugHud().shouldShowDebugHud()
 					//#else
-					mc.options.debugEnabled
+					mc.options.renderDebug
 					//#endif
 			)
 			{

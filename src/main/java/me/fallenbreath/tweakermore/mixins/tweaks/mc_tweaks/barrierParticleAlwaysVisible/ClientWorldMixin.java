@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.barrierParticleAlwaysVisible;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.world.ClientWorld;
+import net.minecraft.client.multiplayer.ClientLevel;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -31,14 +31,14 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
  * mc1.15 ~ mc1.16: subproject 1.15.2 (main project)        <--------
  * mc1.17+        : subproject 1.17.1
  */
-@Mixin(ClientWorld.class)
+@Mixin(ClientLevel.class)
 public abstract class ClientWorldMixin
 {
 	@ModifyVariable(
-			method = "doRandomBlockDisplayTicks",
+			method = "animateTick",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/network/ClientPlayerEntity;getItemsHand()Ljava/lang/Iterable;"
+					target = "Lnet/minecraft/client/player/LocalPlayer;getHandSlots()Ljava/lang/Iterable;"
 			)
 	)
 	private boolean barrierParticleAlwaysVisible_setFlagToTrue(boolean spawnBarrierParticles)

@@ -23,8 +23,8 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.fixHoverTextScale;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.fixHoverTextScale.RenderTooltipArgs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.fixHoverTextScale.ScaleableHoverTextRenderer;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -47,7 +47,7 @@ import java.util.List;
  * See subproject 1.19.3 for implementation for other version range
  * <p>
  * Targeted class:
- *   mc < 1.20: {@link net.minecraft.client.gui.screen.Screen}
+ *   mc < 1.20: {@link net.minecraft.client.gui.screens.Screen}
  *   mc >= 1.20: {@link net.minecraft.client.gui.DrawContext}
  */
 @Mixin(Screen.class)
@@ -63,7 +63,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 	{
 		if (scale != null)
 		{
-			this.hoverTextScale = MathHelper.clamp(scale, 0.01, 1);
+			this.hoverTextScale = Mth.clamp(scale, 0.01, 1);
 		}
 		else
 		{
@@ -140,7 +140,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 			//#endif
 			at = @At(
 					value = "FIELD",
-					target = "Lnet/minecraft/client/gui/screen/Screen;width:I",
+					target = "Lnet/minecraft/client/gui/screens/Screen;width:I",
 					shift = At.Shift.BEFORE
 			),
 			locals = LocalCapture.CAPTURE_FAILHARD
@@ -167,7 +167,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 			//#endif
 			at = @At(
 					value = "FIELD",
-					target = "Lnet/minecraft/client/gui/screen/Screen;width:I",
+					target = "Lnet/minecraft/client/gui/screens/Screen;width:I",
 					ordinal = 0
 			)
 	)
@@ -193,7 +193,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 			//#endif
 			at = @At(
 					value = "FIELD",
-					target = "Lnet/minecraft/client/gui/screen/Screen;height:I",
+					target = "Lnet/minecraft/client/gui/screens/Screen;height:I",
 					ordinal = 0
 			)
 	)
@@ -216,7 +216,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 			//#endif
 			at = @At(
 					value = "FIELD",
-					target = "Lnet/minecraft/client/gui/screen/Screen;height:I",
+					target = "Lnet/minecraft/client/gui/screens/Screen;height:I",
 					ordinal = 0
 			),
 			ordinal = 4

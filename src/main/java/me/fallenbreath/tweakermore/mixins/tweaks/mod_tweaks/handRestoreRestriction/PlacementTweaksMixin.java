@@ -26,11 +26,11 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionHand;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Slice;
@@ -56,9 +56,9 @@ public abstract class PlacementTweaksMixin
 			),
 			remap = false
 	)
-	private static boolean applyHandRestoreRestriction(boolean booleanValue, /* parent method parameters -> */ PlayerEntity player, Hand hand)
+	private static boolean applyHandRestoreRestriction(boolean booleanValue, /* parent method parameters -> */ Player player, InteractionHand hand)
 	{
-		Item currentItem = player.getStackInHand(hand).getItem();
+		Item currentItem = player.getItemInHand(hand).getItem();
 		return booleanValue && TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.isAllowed(currentItem);
 	}
 
@@ -79,13 +79,13 @@ public abstract class PlacementTweaksMixin
 			),
 			remap = false
 	)
-	private static boolean applyHandRestoreRestriction(boolean booleanValue, /* parent method parameters -> */ Hand hand)
+	private static boolean applyHandRestoreRestriction(boolean booleanValue, /* parent method parameters -> */ InteractionHand hand)
 	{
 		boolean result = booleanValue;
-		PlayerEntity player = MinecraftClient.getInstance().player;
+		Player player = Minecraft.getInstance().player;
 		if (player != null)
 		{
-			Item currentItem = player.getStackInHand(hand).getItem();
+			Item currentItem = player.getItemInHand(hand).getItem();
 			result &= TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.isAllowed(currentItem);
 		}
 		return result;
@@ -108,7 +108,7 @@ public abstract class PlacementTweaksMixin
 			),
 			remap = false
 	)
-	private static boolean applyHandRestoreRestriction(boolean booleanValue, /* parent method parameters -> */ PlayerEntity player, Hand hand, ItemStack stackOriginal)
+	private static boolean applyHandRestoreRestriction(boolean booleanValue, /* parent method parameters -> */ Player player, InteractionHand hand, ItemStack stackOriginal)
 	{
 		return booleanValue && TweakerMoreConfigs.HAND_RESTORE_RESTRICTION.isAllowed(stackOriginal.getItem());
 	}

@@ -24,7 +24,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.signMultilinePasteSupport.SelectionManagerInSignEditScreen;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.signMultilinePasteSupport.SignEditScreenRowIndexController;
 import net.minecraft.SharedConstants;
-import net.minecraft.client.util.SelectionManager;
+import net.minecraft.client.gui.font.TextFieldHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -35,7 +35,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.function.Consumer;
 
-@Mixin(SelectionManager.class)
+@Mixin(TextFieldHelper.class)
 public abstract class SelectionManagerMixin implements SelectionManagerInSignEditScreen
 {
 	@Shadow
@@ -44,9 +44,9 @@ public abstract class SelectionManagerMixin implements SelectionManagerInSignEdi
 	//#else
 	protected
 	//#endif
-	abstract void insert(String string);
+	abstract void insertText(String string);
 
-	@Shadow public abstract void moveCaretToEnd();
+	@Shadow public abstract void setEnd();
 
 	@Unique
 	private SignEditScreenRowIndexController signEditScreen;
@@ -68,10 +68,10 @@ public abstract class SelectionManagerMixin implements SelectionManagerInSignEdi
 			//$$ ),
 			//$$ index = 1
 			//#else
-			method = "handleSpecialKey",
+			method = "keyPressed",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/util/Formatting;strip(Ljava/lang/String;)Ljava/lang/String;"
+					target = "Lnet/minecraft/ChatFormatting;stripFormatting(Ljava/lang/String;)Ljava/lang/String;"
 			)
 			//#endif
 	)
@@ -88,7 +88,7 @@ public abstract class SelectionManagerMixin implements SelectionManagerInSignEdi
 			//#if MC >= 11600
 			//$$ method = "insert(Ljava/lang/String;Ljava/lang/String;)V",
 			//#else
-			method = "insert(Ljava/lang/String;)V",
+			method = "insertText(Ljava/lang/String;)V",
 			//#endif
 			at = @At("HEAD"),
 			cancellable = true
@@ -105,11 +105,11 @@ public abstract class SelectionManagerMixin implements SelectionManagerInSignEdi
 				return;
 			}
 
-			Consumer<String> inserter = line -> this.insert(
+			Consumer<String> inserter = line -> this.insertText(
 					//#if MC >= 11600
 					//$$ line
 					//#else
-					SharedConstants.stripInvalidChars(line)
+					SharedConstants.filterText(line)
 					//#endif
 			);
 			String[] lines = string.split("\\n");
@@ -125,7 +125,7 @@ public abstract class SelectionManagerMixin implements SelectionManagerInSignEdi
 				{
 					inserter.accept(lines[i]);
 					this.signEditScreen.addCurrentRowIndex$TKM(1);
-					this.moveCaretToEnd();
+					this.setEnd();
 				}
 				else
 				{

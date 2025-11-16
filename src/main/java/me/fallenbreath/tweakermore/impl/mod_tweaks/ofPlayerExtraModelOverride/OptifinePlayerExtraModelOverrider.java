@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.impl.mod_tweaks.ofPlayerExtraModelOverride;
 
 import fi.dy.masa.malilib.config.options.ConfigOptionList;
 import me.fallenbreath.tweakermore.util.ReflectionUtils;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 
 import java.util.Map;
 import java.util.Optional;
@@ -33,7 +33,7 @@ public class OptifinePlayerExtraModelOverrider
 {
 	public static Optional<OverrideImpl> overridePlayerConfig(String playerName)
 	{
-		boolean isMe = Optional.ofNullable(MinecraftClient.getInstance().player).
+		boolean isMe = Optional.ofNullable(Minecraft.getInstance().player).
 				map(player -> player.getGameProfile().getName().equals(playerName)).
 				orElse(false);
 

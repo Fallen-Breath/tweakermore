@@ -22,8 +22,8 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableRedstoneParti
 
 import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.particle.DustParticleEffect;
-import net.minecraft.particle.ParticleEffect;
+import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.particles.ParticleOptions;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -32,22 +32,22 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#if MC >= 1.21.9
 //$$ import net.minecraft.client.world.ClientWorld;
 //#else
-import net.minecraft.client.render.WorldRenderer;
+import net.minecraft.client.renderer.LevelRenderer;
 //#endif
 
 @Mixin(
 		//#if MC >= 1.21.9
 		//$$ ClientWorld.class
 		//#else
-		WorldRenderer.class
+		LevelRenderer.class
 		//#endif
 )
 public abstract class WorldRendererMixin
 {
-	@Inject(method = "addParticle(Lnet/minecraft/particle/ParticleEffect;ZZDDDDDD)V", at = @At("HEAD"), cancellable = true)
-	private void disableRedstoneParticle(CallbackInfo ci, @Local(argsOnly = true) ParticleEffect particleEffect)
+	@Inject(method = "addParticle(Lnet/minecraft/core/particles/ParticleOptions;ZZDDDDDD)V", at = @At("HEAD"), cancellable = true)
+	private void disableRedstoneParticle(CallbackInfo ci, @Local(argsOnly = true) ParticleOptions particleEffect)
 	{
-		if (TweakerMoreConfigs.DISABLE_REDSTONE_PARTICLE.getBooleanValue() && particleEffect instanceof DustParticleEffect)
+		if (TweakerMoreConfigs.DISABLE_REDSTONE_PARTICLE.getBooleanValue() && particleEffect instanceof DustParticleOptions)
 		{
 			ci.cancel();
 		}

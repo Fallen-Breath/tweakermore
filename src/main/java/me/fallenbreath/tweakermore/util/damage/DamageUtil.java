@@ -20,14 +20,14 @@
 
 package me.fallenbreath.tweakermore.util.damage;
 
-import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.Difficulty;
 
 public class DamageUtil
 {
 	/**
-	 * Reference: {@link net.minecraft.entity.player.PlayerEntity#damage}
-	 * Make sure {@link net.minecraft.entity.damage.DamageSource#isScaledWithDifficulty} is true
+	 * Reference: {@link net.minecraft.world.entity.player.Player#damage}
+	 * Make sure {@link net.minecraft.world.damagesource.DamageSource#isScaledWithDifficulty} is true
 	 */
 	public static float modifyDamageForDifficulty(float amount, Difficulty difficulty)
 	{
@@ -48,7 +48,7 @@ public class DamageUtil
 
 	public static float modifyDamageForDifficulty(float amount, Difficulty difficulty, DamageSource damageSource)
 	{
-		if (damageSource.isScaledWithDifficulty())
+		if (damageSource.scalesWithDifficulty())
 		{
 			amount = modifyDamageForDifficulty(amount, difficulty);
 		}

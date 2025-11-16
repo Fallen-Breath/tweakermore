@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.growthSpeed;
 
-import net.minecraft.block.AttachedStemBlock;
+import net.minecraft.world.level.block.AttachedStemBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
@@ -28,16 +28,16 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 //$$ import net.minecraft.block.Block;
 //$$ import net.minecraft.registry.RegistryKey;
 //#else
-import net.minecraft.block.GourdBlock;
+import net.minecraft.world.level.block.StemGrownBlock;
 //#endif
 
 @Mixin(AttachedStemBlock.class)
 public interface AttachedStemBlockAccessor
 {
-	@Accessor
+	@Accessor("fruit")
 	//#if MC >= 12004
 	//$$ RegistryKey<Block> getStemBlock();
 	//#else
-	GourdBlock getGourdBlock();
+	StemGrownBlock getGourdBlock();
 	//#endif
 }

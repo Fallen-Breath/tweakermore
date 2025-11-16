@@ -20,15 +20,15 @@
 
 package me.fallenbreath.tweakermore.impl.features.infoView.cache;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.LightType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LightLayer;
 
-public interface SimpleWorldView extends BlockView
+public interface SimpleWorldView extends BlockGetter
 {
 	int getLightLevel(BlockPos pos);
 
-	int getLightLevel(LightType type, BlockPos pos);
+	int getLightLevel(LightLayer type, BlockPos pos);
 
 	int getBaseLightLevel(BlockPos pos, int ambientDarkness);
 }

@@ -23,14 +23,14 @@ package me.fallenbreath.tweakermore.impl.mod_tweaks.eCraftMassCraftCompact;
 import fi.dy.masa.itemscroller.recipes.CraftingHandler;
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.container.CraftingResultSlot;
+import net.minecraft.world.inventory.ResultSlot;
 
 public class EasierCraftingRegistrar
 {
 	private static final String EASIER_CRAFTING_INVENTORY_CLASS = "de.guntram.mcmod.easiercrafting.ExtendedGuiInventory";
 	private static final String EASIER_CRAFTING_CRAFTING_TABLE_CLASS = "de.guntram.mcmod.easiercrafting.ExtendedGuiCrafting";
 
-	private static final String CRAFTING_RESULT_SLOT_CLASS = CraftingResultSlot.class.getName();
+	private static final String CRAFTING_RESULT_SLOT_CLASS = ResultSlot.class.getName();
 
 	private static boolean canRegister = false;
 

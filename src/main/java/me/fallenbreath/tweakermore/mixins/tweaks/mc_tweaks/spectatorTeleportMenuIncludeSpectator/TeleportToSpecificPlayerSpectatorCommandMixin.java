@@ -21,18 +21,18 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.spectatorTeleportMenuIncludeSpectator;
 
 import me.fallenbreath.tweakermore.impl.mc_tweaks.spectatorTeleportMenuIncludeSpectator.CommandEntryWithSpectatorMark;
-import net.minecraft.client.gui.hud.spectator.TeleportToSpecificPlayerSpectatorCommand;
-import net.minecraft.text.BaseText;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.client.gui.spectator.PlayerMenuItem;
+import net.minecraft.network.chat.BaseComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(TeleportToSpecificPlayerSpectatorCommand.class)
+@Mixin(PlayerMenuItem.class)
 public abstract class TeleportToSpecificPlayerSpectatorCommandMixin implements CommandEntryWithSpectatorMark
 {
 	@Unique
@@ -48,18 +48,18 @@ public abstract class TeleportToSpecificPlayerSpectatorCommandMixin implements C
 	 * Make the spectator name have style like in player list hud (gray italic)
 	 */
 	@Inject(method = "getName", at = @At("TAIL"))
-	private void spectatorTeleportMenuIncludeSpectator_modifyEntryNameForSpectator(CallbackInfoReturnable<Text> cir)
+	private void spectatorTeleportMenuIncludeSpectator_modifyEntryNameForSpectator(CallbackInfoReturnable<Component> cir)
 	{
 		if (this.isSpectator)
 		{
-			BaseText text = (BaseText)cir.getReturnValue();
+			BaseComponent text = (BaseComponent)cir.getReturnValue();
 			Style style = text.getStyle();
 
 			//#if MC >= 11600
 			//$$ style = style.withColor(Formatting.GRAY);
 			//$$ style = style.withItalic(true);
 			//#else
-			style.setColor(Formatting.GRAY);
+			style.setColor(ChatFormatting.GRAY);
 			style.setItalic(true);
 			//#endif
 

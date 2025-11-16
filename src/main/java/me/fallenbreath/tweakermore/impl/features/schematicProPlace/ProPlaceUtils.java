@@ -21,19 +21,19 @@
 package me.fallenbreath.tweakermore.impl.features.schematicProPlace;
 
 import fi.dy.masa.litematica.materials.MaterialCache;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BubbleColumnBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.BubbleColumnBlock;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 public class ProPlaceUtils
 {
 	/**
 	 * BlockState -> ItemStack via litematica's MaterialCache
 	 */
-	public static ItemStack getItemForState(BlockState state, World world, BlockPos pos)
+	public static ItemStack getItemForState(BlockState state, Level world, BlockPos pos)
 	{
 		ItemStack result = MaterialCache.getInstance().
 					//#if MC >= 11500

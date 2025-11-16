@@ -30,7 +30,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 // used in mc < 1.17
-@Mixin(targets = "net.minecraft.client.gui.screen.ConnectScreen$1")
+@Mixin(targets = "net.minecraft.client.gui.screens.ConnectScreen$1")
 public abstract class ConnectScreenThreadMixin
 {
 	@WrapOperation(

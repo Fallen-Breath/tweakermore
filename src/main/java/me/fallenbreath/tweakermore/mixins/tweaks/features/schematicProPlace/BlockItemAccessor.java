@@ -20,9 +20,9 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.features.schematicProPlace;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BlockPlaceContext;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
@@ -30,5 +30,5 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 public interface BlockItemAccessor
 {
 	@Invoker
-	BlockState invokeGetPlacementState(ItemPlacementContext context);
+	BlockState invokeGetPlacementState(BlockPlaceContext context);
 }

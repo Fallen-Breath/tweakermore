@@ -30,18 +30,18 @@ import me.fallenbreath.tweakermore.mixins.tweaks.features.pistorder.PistonBlockA
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.PistonBlock;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.piston.PistonBaseBlock;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -52,7 +52,7 @@ public class PistorderRenderer implements TweakerMoreIRenderer, IClientTickHandl
 {
 	private static final PistorderRenderer INSTANCE = new PistorderRenderer();
 
-	private final Map<Pair<World, BlockPos>, PistorderDisplay> displayMap = Maps.newHashMap();
+	private final Map<Pair<Level, BlockPos>, PistorderDisplay> displayMap = Maps.newHashMap();
 
 	public static PistorderRenderer getInstance()
 	{
@@ -65,50 +65,50 @@ public class PistorderRenderer implements TweakerMoreIRenderer, IClientTickHandl
 		return TweakerMoreConfigs.PISTORDER.getBooleanValue() && TweakerMoreConfigs.PISTORDER.getTweakerMoreOption().isEnabled();
 	}
 
-	public ActionResult onPlayerRightClickBlock(World world, PlayerEntity player, Hand hand, BlockHitResult hit)
+	public InteractionResult onPlayerRightClickBlock(Level world, Player player, InteractionHand hand, BlockHitResult hit)
 	{
 		if (!this.isEnabled())
 		{
-			return ActionResult.FAIL;
+			return InteractionResult.FAIL;
 		}
 
 		// click with empty main hand, not sneaking
-		if (hand == Hand.MAIN_HAND)
+		if (hand == InteractionHand.MAIN_HAND)
 		{
 			return this.onPlayerRightClickBlockWithMainHand(world, player, hit);
 		}
-		return ActionResult.FAIL;
+		return InteractionResult.FAIL;
 	}
 
-	public ActionResult onPlayerRightClickBlockWithMainHand(World world, PlayerEntity player, BlockHitResult hit)
+	public InteractionResult onPlayerRightClickBlockWithMainHand(Level world, Player player, BlockHitResult hit)
 	{
 		if (!this.isEnabled())
 		{
-			return ActionResult.FAIL;
+			return InteractionResult.FAIL;
 		}
 
-		if (player.getMainHandStack().isEmpty() && !player.isSneaking())
+		if (player.getMainHandItem().isEmpty() && !player.isShiftKeyDown())
 		{
 			BlockPos pos = hit.getBlockPos();
 			BlockState blockState = world.getBlockState(pos);
 			Block block = blockState.getBlock();
-			if (block instanceof PistonBlock)
+			if (block instanceof PistonBaseBlock)
 			{
-				boolean extended = blockState.get(PistonBlock.EXTENDED);
+				boolean extended = blockState.getValue(PistonBaseBlock.EXTENDED);
 				if (!extended || ((PistonBlockAccessor)block).getIsSticky())
 				{
-					this.click(world, pos, blockState, blockState.get(Properties.FACING), extended ? PistonActionType.RETRACT : PistonActionType.PUSH);
-					return ActionResult.SUCCESS;
+					this.click(world, pos, blockState, blockState.getValue(BlockStateProperties.FACING), extended ? PistonActionType.RETRACT : PistonActionType.PUSH);
+					return InteractionResult.SUCCESS;
 				}
 			}
 		}
 
-		return ActionResult.FAIL;
+		return InteractionResult.FAIL;
 	}
 
-	private void click(World world, BlockPos pos, BlockState blockState, Direction pistonFacing, PistonActionType PistonActionType)
+	private void click(Level world, BlockPos pos, BlockState blockState, Direction pistonFacing, PistonActionType PistonActionType)
 	{
-		Pair<World, BlockPos> key = Pair.of(world, pos);
+		Pair<Level, BlockPos> key = Pair.of(world, pos);
 		PistorderDisplay display = this.displayMap.get(key);
 		if (display == null)
 		{
@@ -133,13 +133,13 @@ public class PistorderRenderer implements TweakerMoreIRenderer, IClientTickHandl
 			return;
 		}
 
-		MinecraftClient client = MinecraftClient.getInstance();
+		Minecraft client = Minecraft.getInstance();
 		if (client.player == null)
 		{
 			return;
 		}
 
-		List<Pair<World, BlockPos>> removeList = Lists.newArrayList();
+		List<Pair<Level, BlockPos>> removeList = Lists.newArrayList();
 		List<TextRenderer> texts = Lists.newArrayList();
 		this.displayMap.forEach((key, display) -> {
 			texts.addAll(display.render());
@@ -152,14 +152,14 @@ public class PistorderRenderer implements TweakerMoreIRenderer, IClientTickHandl
 
 		double maxDistance = TweakerMoreConfigs.PISTORDER_MAX_RENDER_DISTANCE.getIntegerValue();
 		texts.stream().
-				map(tr -> Pair.of(client.player.squaredDistanceTo(tr.getPos()), tr)).
+				map(tr -> Pair.of(client.player.distanceToSqr(tr.getPos()), tr)).
 				filter(p -> p.getFirst() <= maxDistance * maxDistance).
 				sorted(Collections.reverseOrder(Comparator.comparingDouble(Pair::getFirst))).
 				forEach(p -> p.getSecond().render());
 	}
 
 	@Override
-	public void onClientTick(MinecraftClient mc)
+	public void onClientTick(Minecraft mc)
 	{
 		this.displayMap.values().forEach(PistorderDisplay::tick);
 	}

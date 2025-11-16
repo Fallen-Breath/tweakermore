@@ -26,16 +26,16 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.container.Container;
-import net.minecraft.container.PlayerContainer;
-import net.minecraft.container.Slot;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DefaultedList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -57,27 +57,27 @@ public abstract class WorldUtilsMixin
 			//#else
 			at = @At(
 					value = "INVOKE_ASSIGN",
-					target = "Lnet/minecraft/entity/player/PlayerInventory;getSlotWithStack(Lnet/minecraft/item/ItemStack;)I",
+					target = "Lnet/minecraft/world/entity/player/Inventory;findSlotMatchingItem(Lnet/minecraft/world/item/ItemStack;)I",
 					ordinal = 0
 			),
 			//#endif
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
 	private static void lmPickBlockShulkersPorting(
-			boolean closest, MinecraftClient mc,
+			boolean closest, Minecraft mc,
 			CallbackInfoReturnable<Boolean> cir,
-			BlockPos pos, World world, BlockState state, ItemStack stack, PlayerInventory inv, int slot
+			BlockPos pos, Level world, BlockState state, ItemStack stack, Inventory inv, int slot
 	)
 	{
 		if (TweakerMoreConfigs.LM_PICK_BLOCK_SHULKERS_PORTING.getBooleanValue())
 		{
 			if (slot == -1 && mc.player != null)
 			{
-				slot = findSlotWithBoxWithItem(mc.player.container, stack);
+				slot = findSlotWithBoxWithItem(mc.player.containerMenu, stack);
 
 				if (slot != -1)
 				{
-					ItemStack boxStack = mc.player.container.slots.get(slot).getStack();
+					ItemStack boxStack = mc.player.containerMenu.slots.get(slot).getItem();
 					InventoryUtils.setPickedItemToHand(boxStack, mc);
 				}
 			}
@@ -87,24 +87,24 @@ public abstract class WorldUtilsMixin
 	@Unique
 	private static boolean doesShulkerBoxContainItem(ItemStack stack, ItemStack referenceItem)
 	{
-		DefaultedList<ItemStack> items = fi.dy.masa.malilib.util.InventoryUtils.getStoredItems(stack);
+		NonNullList<ItemStack> items = fi.dy.masa.malilib.util.InventoryUtils.getStoredItems(stack);
 		return items.stream().anyMatch(item -> fi.dy.masa.malilib.util.InventoryUtils.areStacksEqual(item, referenceItem));
 	}
 
 	@Unique
-	private static int findSlotWithBoxWithItem(Container container, ItemStack stackReference)
+	private static int findSlotWithBoxWithItem(AbstractContainerMenu container, ItemStack stackReference)
 	{
-		final boolean isPlayerInv = container instanceof PlayerContainer;
+		final boolean isPlayerInv = container instanceof InventoryMenu;
 
 		for (int slotNum = 0; slotNum < container.slots.size(); slotNum ++)
 		{
 			Slot slot = container.slots.get(slotNum);
 			if (
-					(!isPlayerInv || fi.dy.masa.malilib.util.InventoryUtils.isRegularInventorySlot(slot.id, false)) &&
-							doesShulkerBoxContainItem(slot.getStack(), stackReference)
+					(!isPlayerInv || fi.dy.masa.malilib.util.InventoryUtils.isRegularInventorySlot(slot.index, false)) &&
+							doesShulkerBoxContainItem(slot.getItem(), stackReference)
 			)
 			{
-				return slot.id;
+				return slot.index;
 			}
 		}
 

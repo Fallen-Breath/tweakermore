@@ -21,37 +21,37 @@
 package me.fallenbreath.tweakermore.impl.features.infoView.cache;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.LightType;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.chunk.ChunkAccess;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
 public class SimpleCachedWorldView implements SimpleWorldView
 {
-	private final World world;
-	private final Long2ObjectOpenHashMap<Chunk> chunkCache = new Long2ObjectOpenHashMap<>();  // chunkPos -> chunk
+	private final Level world;
+	private final Long2ObjectOpenHashMap<ChunkAccess> chunkCache = new Long2ObjectOpenHashMap<>();  // chunkPos -> chunk
 	private final Long2ObjectOpenHashMap<BlockState> blockStateCache = new Long2ObjectOpenHashMap<>();  // blockPos -> blockState
 	private final Long2ObjectOpenHashMap<FluidState> fluidStateCache = new Long2ObjectOpenHashMap<>();  // blockPos -> blockState
 	private final Long2ObjectOpenHashMap<Optional<BlockEntity>> blockEntityCache = new Long2ObjectOpenHashMap<>();  // blockPos -> blockEntity
 
-	public SimpleCachedWorldView(World world)
+	public SimpleCachedWorldView(Level world)
 	{
 		this.world = world;
 	}
 
-	public World getWorld()
+	public Level getWorld()
 	{
 		return this.world;
 	}
 
-	public Chunk getChunk(BlockPos blockPos)
+	public ChunkAccess getChunk(BlockPos blockPos)
 	{
 		ChunkPos chunkPos = new ChunkPos(blockPos);
 		return this.chunkCache.computeIfAbsent(
@@ -91,9 +91,9 @@ public class SimpleCachedWorldView implements SimpleWorldView
 	}
 
 	@Override
-	public int getHeight()
+	public int getMaxBuildHeight()
 	{
-		return this.world.getHeight();
+		return this.world.getMaxBuildHeight();
 	}
 
 	//#if MC >= 11700
@@ -109,20 +109,20 @@ public class SimpleCachedWorldView implements SimpleWorldView
 	@Override
 	public int getLightLevel(BlockPos pos)
 	{
-		return this.world.getLightLevel(pos);
+		return this.world.getMaxLocalRawBrightness(pos);
 	}
 
 	@Override
-	public int getLightLevel(LightType type, BlockPos pos)
+	public int getLightLevel(LightLayer type, BlockPos pos)
 	{
-		return this.world.getLightLevel(type, pos);
+		return this.world.getBrightness(type, pos);
 	}
 
 	@Override
 	public int getBaseLightLevel(BlockPos pos, int ambientDarkness)
 	{
 		//#if MC >= 11500
-		return this.world.getBaseLightLevel(pos, ambientDarkness);
+		return this.world.getRawBrightness(pos, ambientDarkness);
 		//#else
 		//$$ return this.world.getLightLevel(pos, ambientDarkness);
 		//#endif

@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.impl.features.schematicProPlace.restrict;
 
 import com.google.common.collect.Maps;
 import net.minecraft.block.*;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.Map;
 import java.util.Optional;
@@ -85,15 +85,15 @@ public class BlockInteractionRestrictor
 
 	static
 	{
-		interactAble(AbstractButtonBlock.class   ).notAllowed();
+		interactAble(ButtonBlock.class   ).notAllowed();
 		interactAble(AbstractFurnaceBlock.class  );
-		interactAble(AbstractSignBlock.class     );
+		interactAble(SignBlock.class     );
 		interactAble(AnvilBlock.class            );
 		interactAble(BarrelBlock.class           );
 		interactAble(BeaconBlock.class           );
 		interactAble(BedBlock.class              );
 		interactAble(BrewingStandBlock.class     );
-		interactAble(CakeBlock.class             ).when((player, worldState) -> player.canConsume(false)).allowIf(unequalProperty(CakeBlock.BITES));
+		interactAble(CakeBlock.class             ).when((player, worldState) -> player.canEat(false)).allowIf(unequalProperty(CakeBlock.BITES));
 		interactAble(CartographyTableBlock.class );
 		interactAble(CauldronBlock.class         ).notAllowed();
 		interactAble(ChestBlock.class            );
@@ -102,7 +102,7 @@ public class BlockInteractionRestrictor
 		interactAble(DaylightDetectorBlock.class ).when(playerCanModifyWorld()).allowIf(unequalProperty(DaylightDetectorBlock.INVERTED));
 		interactAble(DispenserBlock.class        );
 		interactAble(DoorBlock.class             ).when(canOpenByHand()).allowIf(unequalProperty(DoorBlock.OPEN));
-		interactAble(EnchantingTableBlock.class  );
+		interactAble(EnchantmentTableBlock.class  );
 		interactAble(EnderChestBlock.class       );
 		interactAble(FenceGateBlock.class        ).allowIf(unequalProperty(FenceGateBlock.OPEN));
 		interactAble(GrindstoneBlock.class       );
@@ -112,16 +112,16 @@ public class BlockInteractionRestrictor
 		interactAble(RepeaterBlock.class         ).when(playerCanModifyWorld()).allowIf(unequalProperty(RepeaterBlock.DELAY));
 		interactAble(ShulkerBoxBlock.class       );
 		interactAble(StonecutterBlock.class      );
-		interactAble(TrapdoorBlock.class         ).when(canOpenByHand()).allowIf(unequalProperty(DoorBlock.OPEN));
+		interactAble(TrapDoorBlock.class         ).when(canOpenByHand()).allowIf(unequalProperty(DoorBlock.OPEN));
 	}
 
-	public static Result checkInteract(PlayerEntity player, BlockState worldState, BlockState schematicState)
+	public static Result checkInteract(Player player, BlockState worldState, BlockState schematicState)
 	{
 		// ref: net.minecraft.client.network.ClientPlayerInteractionManager.interactBlock
-		boolean hasItemOnHand = !player.getMainHandStack().isEmpty() || !player.getOffHandStack().isEmpty();
+		boolean hasItemOnHand = !player.getMainHandItem().isEmpty() || !player.getOffhandItem().isEmpty();
 		boolean shiftingAndHasItem =
 				//#if MC >= 11500
-				player.shouldCancelInteraction()
+				player.isSecondaryUseActive()
 				//#else
 				//$$ player.isSneaking()
 				//#endif

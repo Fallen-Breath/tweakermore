@@ -21,8 +21,8 @@
 package me.fallenbreath.tweakermore.impl.mc_tweaks.signEditScreenCancelCommon;
 
 import me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.signEditScreenCancelCommon.SignBlockEntityAccessor;
-import net.minecraft.block.entity.SignBlockEntity;
-import net.minecraft.text.Text;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
+import net.minecraft.network.chat.Component;
 
 //#if MC >= 12001
 //$$ import net.minecraft.block.entity.SignText;
@@ -31,7 +31,7 @@ import net.minecraft.text.Text;
 //#if MC >= 11903
 //$$ import net.minecraft.client.gui.screen.ingame.AbstractSignEditScreen;
 //#else
-import net.minecraft.client.gui.screen.ingame.SignEditScreen;
+import net.minecraft.client.gui.screens.inventory.SignEditScreen;
 //#endif
 
 //#if MC >= 11600
@@ -47,8 +47,8 @@ public class ClientSignTextRollbacker
 	//$$ private final SignText blockEntityFrontText;
 	//$$ private final SignText blockEntityBackText;
 	//#else
-	private final Text[] blockEntityTexts;
-	private final Text[] blockEntityFilteredTexts;
+	private final Component[] blockEntityTexts;
+	private final Component[] blockEntityFilteredTexts;
 	//#endif
 
 	//#if MC >= 11903
@@ -100,7 +100,7 @@ public class ClientSignTextRollbacker
 		for (int i = 0; i < lineNum; i++)
 		{
 			//#if MC < 12001
-			this.signBlockEntity.setTextOnRow(
+			this.signBlockEntity.setMessage(
 					i, this.blockEntityTexts[i]
 					//#if MC >= 11700
 					//$$ , this.blockEntityFilteredTexts[i]

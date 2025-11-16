@@ -24,13 +24,13 @@ import fi.dy.masa.malilib.util.LayerRange;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.schematicProPlace.BlockItemAccessor;
 import me.fallenbreath.tweakermore.util.IdentifierUtils;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BlockPlaceContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -57,20 +57,20 @@ class RestrictionUtils
 	public static boolean isWithinLayerRange(LayerRange layerRange, BlockPos pos, int margin)
 	{
 		return layerRange.intersectsBox(
-				pos.add(-margin, -margin, -margin),
-				pos.add(margin, margin, margin)
+				pos.offset(-margin, -margin, -margin),
+				pos.offset(margin, margin, margin)
 		);
 	}
 
 	/**
 	 * Just a simple check. Not perfect, but it's safe enough
 	 */
-	public static ItemStack getPlayerUsingStack(PlayerEntity player)
+	public static ItemStack getPlayerUsingStack(Player player)
 	{
-		ItemStack stackToUse = player.getMainHandStack();
+		ItemStack stackToUse = player.getMainHandItem();
 		if (stackToUse.isEmpty())
 		{
-			stackToUse = player.getOffHandStack();
+			stackToUse = player.getOffhandItem();
 		}
 		return stackToUse;
 	}
@@ -78,13 +78,13 @@ class RestrictionUtils
 	/**
 	 * What will the block state be like if the player does the block placement
 	 */
-	public static Optional<BlockState> getStateToPlace(ItemPlacementContext context, ItemStack stackToUse)
+	public static Optional<BlockState> getStateToPlace(BlockPlaceContext context, ItemStack stackToUse)
 	{
 		if (stackToUse.getItem() instanceof BlockItem)
 		{
 			// ref: net.minecraft.item.BlockItem.place(net.minecraft.item.ItemPlacementContext)
 			BlockItem blockItem = (BlockItem) stackToUse.getItem();
-			ItemPlacementContext ctx = blockItem.getPlacementContext(context);
+			BlockPlaceContext ctx = blockItem.updatePlacementContext(context);
 			if (ctx != null)
 			{
 				return Optional.ofNullable(((BlockItemAccessor) blockItem).invokeGetPlacementState(ctx));

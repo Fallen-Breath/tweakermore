@@ -31,12 +31,12 @@ import me.fallenbreath.tweakermore.util.FabricUtils;
 import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.Level;
 
 import java.util.*;
 import java.util.function.Function;
@@ -48,23 +48,23 @@ public class InfoViewCachedRenderer
 
 	private boolean isCacheInvalid()
 	{
-		ClientWorld clientWorld = MinecraftClient.getInstance().world;
+		ClientLevel clientWorld = Minecraft.getInstance().level;
 		return clientWorld == null || this.cacheData == null || clientWorld != this.cacheData.clientWorld;
 	}
 
 	public void render(WorldRenderContext renderContext, List<InfoViewer> viewers)
 	{
-		MinecraftClient mc = MinecraftClient.getInstance();
-		World world = WorldUtils.getBestWorld(mc);
-		World clientWorld = mc.world;
-		ClientPlayerEntity cameraPlayer = InfoViewCameraUtils.getCameraEntity();
+		Minecraft mc = Minecraft.getInstance();
+		Level world = WorldUtils.getBestWorld(mc);
+		Level clientWorld = mc.level;
+		LocalPlayer cameraPlayer = InfoViewCameraUtils.getCameraEntity();
 		if (world == null || clientWorld == null || cameraPlayer == null)
 		{
 			return;
 		}
 
-		Vec3d camPos = cameraPlayer.getCameraPosVec(RenderUtils.tickDelta);
-		Vec3d camVec = cameraPlayer.getRotationVec(RenderUtils.tickDelta);
+		Vec3 camPos = cameraPlayer.getEyePosition(RenderUtils.tickDelta);
+		Vec3 camVec = cameraPlayer.getViewVector(RenderUtils.tickDelta);
 
 		long now = System.nanoTime();
 		long ups = TweakerMoreConfigs.INFO_VIEW_SCANNING_PER_SECOND.getIntegerValue();
@@ -90,7 +90,7 @@ public class InfoViewCachedRenderer
 			}
 
 			renderingPositions.keySet().stream().
-					map(pos -> Pair.of(pos, camPos.squaredDistanceTo(PositionUtils.centerOf(pos)))).
+					map(pos -> Pair.of(pos, camPos.distanceToSqr(PositionUtils.centerOf(pos)))).
 					// sort by distance in descending order, so we render block info from far to near (simulating depth test)
 					sorted(Collections.reverseOrder(Comparator.comparingDouble(Pair::getSecond))).
 					forEach(pair -> {
@@ -128,14 +128,14 @@ public class InfoViewCachedRenderer
 	private static class CacheData
 	{
 		@SuppressWarnings("FieldCanBeLocal")
-		private final World bestWorld;  // WorldUtils.getBestWorld()
-		private final World clientWorld;
+		private final Level bestWorld;  // WorldUtils.getBestWorld()
+		private final Level clientWorld;
 		private final RenderVisitorWorldView worldView;
 
 		private final ScanningCache scanningCache;
 		private final Map<BlockPos, List<InfoViewer.Renderer>> renderingPositions;
 
-		private CacheData(World bestWorld, World clientWorld)
+		private CacheData(Level bestWorld, Level clientWorld)
 		{
 			this.bestWorld = bestWorld;
 			this.clientWorld = clientWorld;

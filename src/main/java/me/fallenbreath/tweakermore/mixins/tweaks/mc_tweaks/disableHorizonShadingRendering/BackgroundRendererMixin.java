@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableHorizonShadingRendering;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.render.BackgroundRenderer;
+import net.minecraft.client.renderer.FogRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -31,14 +31,14 @@ import org.spongepowered.asm.mixin.injection.Slice;
  * mc1.21.6-: subproject 1.15.2 (main project)        <--------
  * mc1.21.6+: subproject 1.21.8
  */
-@Mixin(BackgroundRenderer.class)
+@Mixin(FogRenderer.class)
 public abstract class BackgroundRendererMixin
 {
 	@ModifyVariable(
 			//#if MC >= 12103
 			//$$ method = "getFogColor",
 			//#elseif MC >= 11500
-			method = "render",
+			method = "setupColor",
 			//#else
 			//$$ method = "renderBackground",
 			//#endif
@@ -50,7 +50,7 @@ public abstract class BackgroundRendererMixin
 							//#elseif MC >= 11600
 							//$$ target = "Lnet/minecraft/client/world/ClientWorld$Properties;getHorizonShadingRatio()D"
 							//#else
-							target = "Lnet/minecraft/world/dimension/Dimension;getHorizonShadingRatio()D"
+							target = "Lnet/minecraft/world/level/dimension/Dimension;getClearColorScale()D"
 							//#endif
 					)
 			),
@@ -60,7 +60,7 @@ public abstract class BackgroundRendererMixin
 					//$$ target = "Lnet/minecraft/client/render/BackgroundRenderer;getFogModifier(Lnet/minecraft/entity/Entity;F)Lnet/minecraft/client/render/BackgroundRenderer$StatusEffectFogModifier;"
 					//#else
 
-					target = "Lnet/minecraft/client/render/Camera;getFocusedEntity()Lnet/minecraft/entity/Entity;",
+					target = "Lnet/minecraft/client/Camera;getEntity()Lnet/minecraft/world/entity/Entity;",
 					//#if MC >= 11700
 					//$$ ordinal = 1
 					//#else

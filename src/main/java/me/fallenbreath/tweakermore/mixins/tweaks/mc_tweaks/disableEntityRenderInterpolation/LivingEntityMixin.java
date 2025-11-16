@@ -22,10 +22,10 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableEntityRenderI
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.disableEntityRenderInterpolation.DisableEntityRenderInterpolationHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -36,19 +36,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity
 {
-	public LivingEntityMixin(EntityType<?> type, World world)
+	public LivingEntityMixin(EntityType<?> type, Level world)
 	{
 		super(type, world);
 	}
 
 	@Shadow protected int
 			//#if MC >= 11500
-			bodyTrackingIncrements;
+			lerpSteps;
 			//#else
 			//$$ field_6210;
 			//#endif
 
-	@Inject(method = "updateTrackedPositionAndAngles", at = @At("TAIL"))
+	@Inject(method = "lerpTo", at = @At("TAIL"))
 	private void disableEntityRenderInterpolation_noExtraInterpolationSteps1(
 			double x, double y, double z, float yaw, float pitch, int interpolationSteps,
 			//#if MC < 12002
@@ -60,14 +60,14 @@ public abstract class LivingEntityMixin extends Entity
 		if (TweakerMoreConfigs.DISABLE_ENTITY_RENDER_INTERPOLATION.getBooleanValue())
 		{
 			//#if MC >= 11500
-			this.bodyTrackingIncrements = 1;
+			this.lerpSteps = 1;
 			//#else
 			//$$ this.field_6210 = 1;
 			//#endif
 
 			if (DisableEntityRenderInterpolationHelper.shouldUpdatePositionOrAnglesDirectly())
 			{
-				super.updateTrackedPositionAndAngles(
+				super.lerpTo(
 						x, y, z, yaw, pitch, interpolationSteps
 						//#if MC < 12002
 						, interpolate
@@ -77,7 +77,7 @@ public abstract class LivingEntityMixin extends Entity
 		}
 	}
 
-	@ModifyVariable(method = "updateTrackedHeadRotation", at = @At("HEAD"), argsOnly = true)
+	@ModifyVariable(method = "lerpHeadTo", at = @At("HEAD"), argsOnly = true)
 	private int disableEntityRenderInterpolation_noExtraInterpolationSteps2(int interpolationSteps, float yaw, int interpolationSteps_)
 	{
 		if (TweakerMoreConfigs.DISABLE_ENTITY_RENDER_INTERPOLATION.getBooleanValue())
@@ -86,7 +86,7 @@ public abstract class LivingEntityMixin extends Entity
 
 			if (DisableEntityRenderInterpolationHelper.shouldUpdatePositionOrAnglesDirectly())
 			{
-				super.updateTrackedHeadRotation(yaw, interpolationSteps);
+				super.lerpHeadTo(yaw, interpolationSteps);
 			}
 		}
 		return interpolationSteps;

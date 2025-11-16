@@ -28,12 +28,12 @@ import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builder
 import me.fallenbreath.tweakermore.util.InventoryUtils;
 import me.fallenbreath.tweakermore.util.Messenger;
 import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.text.Text;
-import net.minecraft.util.DefaultedList;
-import net.minecraft.util.Formatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.Component;
+import net.minecraft.core.NonNullList;
+import net.minecraft.ChatFormatting;
 
 import java.util.List;
 import java.util.Objects;
@@ -62,7 +62,7 @@ public class ShulkerBoxToolTipEnhancer
 			//#if MC >= 11600
 			//$$ MutableText text
 			//#else
-			Text text
+			Component text
 			//#endif
 	)
 	{
@@ -77,7 +77,7 @@ public class ShulkerBoxToolTipEnhancer
 				forEach(text::append);
 	}
 
-	public static void applyFillLevelHint(ItemStack skulker, List<Text> tooltip)
+	public static void applyFillLevelHint(ItemStack skulker, List<Component> tooltip)
 	{
 		if (!RenderGlobals.isOnRenderThread())
 		{
@@ -100,7 +100,7 @@ public class ShulkerBoxToolTipEnhancer
 			return;
 		}
 
-		DefaultedList<ItemStack> stackList = fi.dy.masa.malilib.util.InventoryUtils.getStoredItems(skulker, slotAmount);
+		NonNullList<ItemStack> stackList = fi.dy.masa.malilib.util.InventoryUtils.getStoredItems(skulker, slotAmount);
 		if (stackList.isEmpty())
 		{
 			return;
@@ -109,32 +109,32 @@ public class ShulkerBoxToolTipEnhancer
 		double sum = 0;
 		for (ItemStack stack : stackList)
 		{
-			sum += 1.0D * stack.getCount() / stack.getMaxCount();
+			sum += 1.0D * stack.getCount() / stack.getMaxStackSize();
 		}
 
 		double ratio = sum / slotAmount;
-		Formatting color = ratio >= 1.0D ? Formatting.DARK_GREEN : Formatting.GRAY;
-		Text fillLevelText = Messenger.s(String.format("%.2f%%", 100 * ratio), color);
+		ChatFormatting color = ratio >= 1.0D ? ChatFormatting.DARK_GREEN : ChatFormatting.GRAY;
+		Component fillLevelText = Messenger.s(String.format("%.2f%%", 100 * ratio), color);
 
 		// let fillLevelText be rendered right-aligned
 		String spacing = " ";
-		Text firstLine = Messenger.c(tooltip.get(0), spacing, fillLevelText);
-		TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+		Component firstLine = Messenger.c(tooltip.get(0), spacing, fillLevelText);
+		Font textRenderer = Minecraft.getInstance().font;
 
-		ToIntFunction<Text> textLenCalc = text ->
+		ToIntFunction<Component> textLenCalc = text ->
 				//#if MC >= 11600
 				//$$ textRenderer.getWidth(text);
 				//#else
-				textRenderer.getStringWidth(text.asFormattedString());
+				textRenderer.width(text.getColoredString());
 				//#endif
 
 		int maxWidth = tooltip.stream().mapToInt(textLenCalc).max().orElse(0);
 
 		while (true)
 		{
-			List<Text> siblings = firstLine.getSiblings();
+			List<Component> siblings = firstLine.getSiblings();
 			spacing += " ";
-			Text prevSpacing = siblings.get(1);
+			Component prevSpacing = siblings.get(1);
 			siblings.set(1, Messenger.s(spacing));
 			if (textLenCalc.applyAsInt(firstLine) > maxWidth)
 			{

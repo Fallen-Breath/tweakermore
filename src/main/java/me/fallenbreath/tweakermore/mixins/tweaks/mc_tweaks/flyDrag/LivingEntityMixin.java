@@ -22,11 +22,11 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.flyDrag;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.EntityUtils;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.world.World;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity
 {
-	public LivingEntityMixin(EntityType<?> type, World world)
+	public LivingEntityMixin(EntityType<?> type, Level world)
 	{
 		super(type, world);
 	}
@@ -52,7 +52,7 @@ public abstract class LivingEntityMixin extends Entity
 					//#elseif MC >= 11600
 					//$$ target = "Lnet/minecraft/entity/LivingEntity;method_26318(Lnet/minecraft/util/math/Vec3d;F)Lnet/minecraft/util/math/Vec3d;"
 					//#elseif MC >= 11500
-					target = "Lnet/minecraft/entity/LivingEntity;applyClimbingSpeed(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;"
+					target = "Lnet/minecraft/world/entity/LivingEntity;handleOnClimbable(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;"
 					//#else
 					//$$ target = "Lnet/minecraft/entity/LivingEntity;method_18801(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;"
 					//#endif
@@ -62,7 +62,7 @@ public abstract class LivingEntityMixin extends Entity
 	private float creativeFlyDrag(float dragFactor)
 	{
 		LivingEntity self = (LivingEntity)(Object)this;
-		if (self == MinecraftClient.getInstance().player && TweakerMoreConfigs.FLY_DRAG.isModified())
+		if (self == Minecraft.getInstance().player && TweakerMoreConfigs.FLY_DRAG.isModified())
 		{
 			//#if MC >= 12000
 			//$$ boolean onGround = this.isOnGround();

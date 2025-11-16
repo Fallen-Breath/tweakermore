@@ -22,12 +22,12 @@ package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builde
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.Messenger;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.text.BaseText;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.BaseComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -39,46 +39,46 @@ import java.util.List;
 public abstract class AbstractHintBuilder
 {
 	@Nullable
-	public abstract BaseText build(
+	public abstract BaseComponent build(
 			//#if MC >= 12006
 			//$$ Item.TooltipContext context,
 			//#endif
 			ItemStack itemStack
 	);
 
-	protected static BaseText getDivider()
+	protected static BaseComponent getDivider()
 	{
-		return Messenger.s(" | ", Formatting.DARK_GRAY);
+		return Messenger.s(" | ", ChatFormatting.DARK_GRAY);
 	}
 
 	@Nullable
-	protected static BaseText buildSegments(List<Text> texts)
+	protected static BaseComponent buildSegments(List<Component> texts)
 	{
 		int amount = texts.size();
 		if (amount == 0)
 		{
 			return null;
 		}
-		BaseText extraText = getDivider();
+		BaseComponent extraText = getDivider();
 
 		int maxLength = TweakerMoreConfigs.SHULKER_BOX_TOOLTIP_HINT_LENGTH_LIMIT.getIntegerValue();
-		TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+		Font textRenderer = Minecraft.getInstance().font;
 		int idx;
 		for (idx = 0; idx < amount; idx++)
 		{
-			if (idx > 0 && textRenderer.getStringWidth(extraText.getString() + texts.get(idx).getString()) > maxLength)
+			if (idx > 0 && textRenderer.width(extraText.getString() + texts.get(idx).getString()) > maxLength)
 			{
 				break;
 			}
 			extraText.append(texts.get(idx));
 			if (idx < amount - 1)
 			{
-				extraText.append(Messenger.s(", ", Formatting.GRAY));
+				extraText.append(Messenger.s(", ", ChatFormatting.GRAY));
 			}
 		}
 		if (idx < amount)
 		{
-			extraText.append(Messenger.formatting(Messenger.tr("tweakermore.impl.shulkerBoxTooltipHintBuilder.more", amount - idx), Formatting.GRAY));
+			extraText.append(Messenger.formatting(Messenger.tr("tweakermore.impl.shulkerBoxTooltipHintBuilder.more", amount - idx), ChatFormatting.GRAY));
 		}
 
 		return extraText;

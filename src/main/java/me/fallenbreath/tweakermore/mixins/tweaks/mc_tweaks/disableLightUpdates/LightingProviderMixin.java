@@ -22,21 +22,21 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableLightUpdates;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.disableLightUpdates.ILightingProvider;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.light.LightingProvider;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.lighting.LevelLightEngine;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(LightingProvider.class)
+@Mixin(LevelLightEngine.class)
 public abstract class LightingProviderMixin implements ILightingProvider
 {
 	@Unique
-	private World world;
+	private Level world;
 
-	public void setWorld$tweakermore(World world)
+	public void setWorld$tweakermore(Level world)
 	{
 		this.world = world;
 	}
@@ -45,7 +45,7 @@ public abstract class LightingProviderMixin implements ILightingProvider
 	private void noLightUpdate(CallbackInfo ci)
 	{
 		// if it's null, it's ofc a server-side world
-		if (this.world != null && this.world.isClient() && TweakerMoreConfigs.DISABLE_LIGHT_UPDATES.getBooleanValue())
+		if (this.world != null && this.world.isClientSide() && TweakerMoreConfigs.DISABLE_LIGHT_UPDATES.getBooleanValue())
 		{
 			ci.cancel();
 		}

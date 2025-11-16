@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.util.render;
 
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 
 //#if MC >= 11600
 //$$ import com.google.common.collect.Lists;
@@ -95,8 +95,8 @@ public class TextRenderingUtil
 
 	public static String trim(String text, int maxWidth, PostTrimModifier<String> postTrimModifier)
 	{
-		MinecraftClient mc = MinecraftClient.getInstance();
-		String trimmedText = mc.textRenderer.trimToWidth(text, maxWidth);
+		Minecraft mc = Minecraft.getInstance();
+		String trimmedText = mc.font.substrByWidth(text, maxWidth);
 		if (trimmedText.length() < text.length())
 		{
 			trimmedText = postTrimModifier.modify(trimmedText);

@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.util.render.context;
 
-import net.minecraft.client.gui.DrawableHelper;  // will be remapped to DrawContext in mc1.20
+import net.minecraft.client.gui.GuiComponent;  // will be remapped to DrawContext in mc1.20
 import org.jetbrains.annotations.NotNull;
 
 //#if 11600 <= MC && MC < 12000
@@ -36,7 +36,7 @@ public interface GuiRenderContext
 	//#endif
 
 	@NotNull
-	DrawableHelper getGuiDrawer();
+	GuiComponent getGuiDrawer();
 
 	// ============================= Manipulators =============================
 

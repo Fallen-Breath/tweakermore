@@ -22,10 +22,10 @@ package me.fallenbreath.tweakermore.impl.features.copyItemDataToClipBoard;
 
 import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.copyItemData.ContainerScreenAccessor;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.ingame.ContainerScreen;
-import net.minecraft.container.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 
 //#if MC >= 12100
@@ -41,13 +41,13 @@ public class ItemDataCopier
 {
 	public static void copyItemData()
 	{
-		MinecraftClient mc = MinecraftClient.getInstance();
-		if (mc.currentScreen instanceof ContainerScreen)
+		Minecraft mc = Minecraft.getInstance();
+		if (mc.screen instanceof AbstractContainerScreen)
 		{
-			Slot slot = ((ContainerScreenAccessor)mc.currentScreen).getFocusedSlot();
-			if (slot != null && slot.hasStack() && mc.world != null)
+			Slot slot = ((ContainerScreenAccessor)mc.screen).getFocusedSlot();
+			if (slot != null && slot.hasItem() && mc.level != null)
 			{
-				ItemStack itemStack = slot.getStack();
+				ItemStack itemStack = slot.getItem();
 
 				//#if MC >= 12006
 				//$$ var arg = new ItemStackArgument(
@@ -72,8 +72,8 @@ public class ItemDataCopier
 				}
 				//#endif
 
-				mc.keyboard.setClipboard(command);
-				InfoUtils.printActionbarMessage("tweakermore.impl.copyItemDataToClipBoard.item_copied", itemStack.getName());
+				mc.keyboardHandler.setClipboard(command);
+				InfoUtils.printActionbarMessage("tweakermore.impl.copyItemDataToClipBoard.item_copied", itemStack.getHoverName());
 			}
 		}
 	}

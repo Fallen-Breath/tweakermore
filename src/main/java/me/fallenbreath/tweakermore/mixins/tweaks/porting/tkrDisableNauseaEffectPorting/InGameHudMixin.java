@@ -25,10 +25,10 @@ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.porting.tkrDisableNauseaEffectPorting.ClientPlayerEntityWithRealNauseaStrength;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.util.Mth;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -40,16 +40,16 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 //#endif
 
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.17"))
-@Mixin(InGameHud.class)
+@Mixin(Gui.class)
 public abstract class InGameHudMixin
 {
-	@Shadow @Final private MinecraftClient client;
+	@Shadow @Final private Minecraft minecraft;
 
 	@ModifyVariable(
 			method = "render",
 			at = @At(
 					value = "INVOKE_ASSIGN",
-					target = "Lnet/minecraft/util/math/MathHelper;lerp(FFF)F",
+					target = "Lnet/minecraft/util/Mth;lerp(FFF)F",
 					ordinal = 0
 			),
 			ordinal = 1
@@ -64,14 +64,14 @@ public abstract class InGameHudMixin
 	{
 		if (TweakerMoreConfigs.TKR_DISABLE_NAUSEA_EFFECT_PORTING.getBooleanValue())
 		{
-			ClientPlayerEntity player = this.client.player;
+			LocalPlayer player = this.minecraft.player;
 
 			// necessary instanceof check, since that mixin might not be applied
 			if (player instanceof ClientPlayerEntityWithRealNauseaStrength)
 			{
 				float lastNauseaStrength = ((ClientPlayerEntityWithRealNauseaStrength)player).getRealLastNauseaStrength$TKM();
 				float nextNauseaStrength = ((ClientPlayerEntityWithRealNauseaStrength)player).getRealNextNauseaStrength$TKM();
-				value = MathHelper.lerp(tickDelta, lastNauseaStrength, nextNauseaStrength);
+				value = Mth.lerp(tickDelta, lastNauseaStrength, nextNauseaStrength);
 			}
 		}
 		return value;

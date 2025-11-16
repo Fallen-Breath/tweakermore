@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.util.render.context;
 
 import me.fallenbreath.tweakermore.util.render.matrix.IMatrixStack;
-import net.minecraft.client.util.math.Matrix4f;
+import com.mojang.math.Matrix4f;
 import org.jetbrains.annotations.NotNull;
 
 public class WorldRenderContextImpl implements WorldRenderContext

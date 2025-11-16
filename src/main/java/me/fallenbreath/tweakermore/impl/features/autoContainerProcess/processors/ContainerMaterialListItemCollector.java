@@ -36,11 +36,11 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
 import me.fallenbreath.tweakermore.config.options.listentries.AutoCollectMaterialListItemLogType;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.autoCollectMaterialListItem.MaterialListHudRendererAccessor;
-import net.minecraft.client.gui.screen.ingame.ContainerScreen;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Formatting;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.ChatFormatting;
 
 import java.util.List;
 
@@ -69,7 +69,7 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 	 * Requires litematica mod
 	 */
 	@Override
-	public ProcessResult process(ClientPlayerEntity player, ContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
+	public ProcessResult process(LocalPlayer player, AbstractContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
 	{
 		MaterialListBase materialList = DataManager.getMaterialList();
 		if (materialList != null)
@@ -96,9 +96,9 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 				int totalTaken = 0;
 				for (Slot slot : containerInvSlots)
 				{
-					if (InventoryUtils.areStacksEqual(stack, slot.getStack()))
+					if (InventoryUtils.areStacksEqual(stack, slot.getItem()))
 					{
-						int stackAmount = slot.getStack().getCount();
+						int stackAmount = slot.getItem().getCount();
 						int tryMoveAmount = Math.min(missing, stackAmount);
 						if (TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_RETAIN_ITEM.getBooleanValue())
 						{
@@ -110,15 +110,15 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 							}
 						}
 
-						String itemName = stack.getItem().getName().getString();
+						String itemName = stack.getItem().getDescription().getString();
 						this.moveToPlayerInventory(containerScreen, playerInvSlots, slot, tryMoveAmount);
-						int moved = stackAmount - slot.getStack().getCount();
+						int moved = stackAmount - slot.getItem().getCount();
 						missing -= moved;
 						totalTaken += moved;
 						TweakerMoreMod.LOGGER.debug("Moved {}x (attempt {}x) {} to player inventory, still miss {} items", moved, tryMoveAmount, itemName, missing);
 						if (moved == 0)
 						{
-							TweakerMoreMod.LOGGER.debug("Player inventory is full for item {}", stack.getItem().getName().getString());
+							TweakerMoreMod.LOGGER.debug("Player inventory is full for item {}", stack.getItem().getDescription().getString());
 							break;
 						}
 					}
@@ -131,13 +131,13 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 					}
 					takenSomething = true;
 					String missingColor = missing == 0 ? GuiBase.TXT_GREEN : GuiBase.TXT_GOLD;
-					Formatting formatting = stack.getRarity().
+					ChatFormatting formatting = stack.getRarity().
 							//#if MC >= 12006
 							//$$ getFormatting();
 							//#else
-							formatting;
+							color;
 							//#endif
-					String stackName = formatting + stack.getName().getString() + GuiBase.TXT_RST;
+					String stackName = formatting + stack.getHoverName().getString() + GuiBase.TXT_RST;
 					if (summaryOnly)
 					{
 						summaries.add(String.format("%s +%s", stackName, missingColor + totalTaken + GuiBase.TXT_RST));
@@ -149,7 +149,7 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 								"tweakermore.impl.autoCollectMaterialListItem.info.line",
 								GuiBase.TXT_GOLD + totalTaken + GuiBase.TXT_RST,
 								stackName,
-								missingColor + hudRendererAccessor.invokeGetFormattedCountString(missing, stack.getMaxCount()) + GuiBase.TXT_RST
+								missingColor + hudRendererAccessor.invokeGetFormattedCountString(missing, stack.getMaxStackSize()) + GuiBase.TXT_RST
 						);
 					}
 				}
@@ -177,12 +177,12 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 		return new ProcessResult(true, TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_CLOSE_GUI.getBooleanValue());
 	}
 
-	private void moveToPlayerInventory(ContainerScreen<?> containerScreen, List<Slot> playerInvSlots, Slot fromSlot, int amount)
+	private void moveToPlayerInventory(AbstractContainerScreen<?> containerScreen, List<Slot> playerInvSlots, Slot fromSlot, int amount)
 	{
-		ItemStack stack = fromSlot.getStack().copy();
+		ItemStack stack = fromSlot.getItem().copy();
 		if (amount == stack.getCount())
 		{
-			InventoryUtils.shiftClickSlot(containerScreen, fromSlot.id);
+			InventoryUtils.shiftClickSlot(containerScreen, fromSlot.index);
 			return;
 		}
 		else if (amount > stack.getCount())
@@ -192,29 +192,29 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 		}
 		// ensured amount <= stack.getCount()
 
-		InventoryUtils.leftClickSlot(containerScreen, fromSlot.id);
+		InventoryUtils.leftClickSlot(containerScreen, fromSlot.index);
 		// reversed iterating to match vanilla shift-click item putting order
 		for (int idx = playerInvSlots.size() - 1; idx >= 0; idx--)
 		{
 			Slot slot = playerInvSlots.get(idx);
 			int clickAmount = 0;
-			if (slot.hasStack() && InventoryUtils.areStacksEqual(slot.getStack(), stack))
+			if (slot.hasItem() && InventoryUtils.areStacksEqual(slot.getItem(), stack))
 			{
-				ItemStack invStack = slot.getStack();
-				clickAmount = Math.min(invStack.getMaxCount() - invStack.getCount(), amount);
+				ItemStack invStack = slot.getItem();
+				clickAmount = Math.min(invStack.getMaxStackSize() - invStack.getCount(), amount);
 			}
-			else if (!slot.hasStack())
+			else if (!slot.hasItem())
 			{
 				clickAmount = amount;
 			}
-			for (int i = 0; i < clickAmount; i++) InventoryUtils.rightClickSlot(containerScreen, slot.id);
+			for (int i = 0; i < clickAmount; i++) InventoryUtils.rightClickSlot(containerScreen, slot.index);
 			amount -= clickAmount;
 			if (amount == 0)
 			{
 				break;
 			}
 		}
-		InventoryUtils.leftClickSlot(containerScreen, fromSlot.id);
+		InventoryUtils.leftClickSlot(containerScreen, fromSlot.index);
 		if (amount != 0)
 		{
 			TweakerMoreMod.LOGGER.warn("Failed to move full item stack to player inventory, {} items remains", amount);

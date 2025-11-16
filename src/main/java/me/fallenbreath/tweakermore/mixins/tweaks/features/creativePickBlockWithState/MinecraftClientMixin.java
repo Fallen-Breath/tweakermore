@@ -25,15 +25,15 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.core.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -48,14 +48,14 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 //#endif
 
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.21.4"))
-@Mixin(MinecraftClient.class)
+@Mixin(Minecraft.class)
 public abstract class MinecraftClientMixin
 {
 	@Inject(
-			method = "doItemPick",
+			method = "pickBlock",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/item/ItemStack;isEmpty()Z",
+					target = "Lnet/minecraft/world/item/ItemStack;isEmpty()Z",
 					ordinal = 0
 			),
 			locals = LocalCapture.CAPTURE_FAILHARD
@@ -82,7 +82,7 @@ public abstract class MinecraftClientMixin
 				//$$ itemStack.set(DataComponentTypes.BLOCK_STATE, new BlockStateComponent(properties));
 				//#else
 				CompoundTag nbt = new CompoundTag();
-				blockState.getEntries().forEach((property, value) -> {
+				blockState.getValues().forEach((property, value) -> {
 					nbt.putString(property.getName(), value.toString());
 				});
 				itemStack.getOrCreateTag().put("BlockStateTag", nbt);

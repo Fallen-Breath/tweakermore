@@ -21,21 +21,21 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.daytimeOverride;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.world.World;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(World.class)
+@Mixin(Level.class)
 public abstract class WorldMixin
 {
-	@Inject(method = "getTimeOfDay", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "getDayTime", at = @At("HEAD"), cancellable = true)
 	private void overwriteDayTime(CallbackInfoReturnable<Long> cir)
 	{
-		World self = (World)(Object)this;
-		if (self instanceof ClientWorld)
+		Level self = (Level)(Object)this;
+		if (self instanceof ClientLevel)
 		{
 			if (TweakerMoreConfigs.DAYTIME_OVERRIDE.getBooleanValue())
 			{

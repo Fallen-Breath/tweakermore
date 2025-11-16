@@ -23,7 +23,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.yeetServerIpReversed
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.yeetServerIpReversedDnsLookup.InetAddressPatcher;
-import net.minecraft.client.network.MultiplayerServerListPinger;
+import net.minecraft.client.multiplayer.ServerStatusPinger;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -31,11 +31,11 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 // used in mc < 1.17
-@Mixin(MultiplayerServerListPinger.class)
+@Mixin(ServerStatusPinger.class)
 public abstract class MultiplayerServerListPingerMixin
 {
 	@WrapOperation(
-			method = "add",
+			method = "pingServer",
 			at = @At(
 					value = "INVOKE",
 					target = "Ljava/net/InetAddress;getByName(Ljava/lang/String;)Ljava/net/InetAddress;"

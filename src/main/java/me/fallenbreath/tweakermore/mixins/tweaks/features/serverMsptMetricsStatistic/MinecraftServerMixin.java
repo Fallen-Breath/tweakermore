@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.features.serverMsptMetricsStat
 
 import me.fallenbreath.tweakermore.impl.features.serverMsptMetricsStatistic.MetricsDataWithRichStatistic;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.MetricsData;
+import net.minecraft.util.FrameTimer;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -33,11 +33,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(MinecraftServer.class)
 public abstract class MinecraftServerMixin
 {
-	@Shadow @Final private MetricsData metricsData;
+	@Shadow @Final private FrameTimer frameTimer;
 
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void serverMsptMetricsStatistic_hookMetricsData(CallbackInfo ci)
 	{
-		((MetricsDataWithRichStatistic)this.metricsData).enableRichStatistic$TKM();
+		((MetricsDataWithRichStatistic)this.frameTimer).enableRichStatistic$TKM();
 	}
 }

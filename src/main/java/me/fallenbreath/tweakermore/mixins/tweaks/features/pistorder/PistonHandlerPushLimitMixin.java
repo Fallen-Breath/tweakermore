@@ -26,16 +26,16 @@ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.features.pistorder.PistorderRenderer;
 import me.fallenbreath.tweakermore.impl.features.pistorder.pushlimit.PushLimitManager;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.block.piston.PistonHandler;
+import net.minecraft.world.level.block.piston.PistonStructureResolver;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Restriction(conflict = @Condition(value = ModIds.pistorder, versionPredicates = "<=1.6.0"))
-@Mixin(PistonHandler.class)
+@Mixin(PistonStructureResolver.class)
 public abstract class PistonHandlerPushLimitMixin
 {
 	@ModifyExpressionValue(
-			method = "tryMove",
+			method = "addBlockLine",
 			at = @At(
 					value = "CONSTANT",
 					args = "intValue=12"

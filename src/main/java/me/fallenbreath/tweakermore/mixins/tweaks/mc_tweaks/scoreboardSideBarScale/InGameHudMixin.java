@@ -23,7 +23,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.scoreboardSideBarSca
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
-import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.gui.Gui;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -43,11 +43,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //$$ import com.llamalad7.mixinextras.sugar.Local;
 //#endif
 
-@Mixin(InGameHud.class)
+@Mixin(Gui.class)
 public abstract class InGameHudMixin
 {
 	//#if MC < 12006
-	@Shadow private int scaledWidth;
+	@Shadow private int screenWidth;
 	//#endif
 
 	@Unique
@@ -60,14 +60,14 @@ public abstract class InGameHudMixin
 			//#elseif MC >= 12004
 			//$$ method = "method_55440",  // lambda method as the context.draw() callback in method renderScoreboardSidebar
 			//#else
-			method = "renderScoreboardSidebar",
+			method = "displayScoreboardSidebar",
 			//#endif
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 11600
 					//$$ target = "Lnet/minecraft/client/option/GameOptions;getTextBackgroundColor(F)I",
 					//#else
-					target = "Lnet/minecraft/client/options/GameOptions;getTextBackgroundColor(F)I",
+					target = "Lnet/minecraft/client/Options;getBackgroundColor(F)I",
 					//#endif
 					ordinal = 0
 			),
@@ -92,7 +92,7 @@ public abstract class InGameHudMixin
 			//#if MC >= 12006
 			//$$ int scaledWidth = matrixStackOrDrawContext.getScaledWindowWidth();
 			//#endif
-			this.scaler = RenderUtils.createScaler(scaledWidth, centerY, TweakerMoreConfigs.SCOREBOARD_SIDE_BAR_SCALE.getDoubleValue());
+			this.scaler = RenderUtils.createScaler(this.screenWidth, centerY, TweakerMoreConfigs.SCOREBOARD_SIDE_BAR_SCALE.getDoubleValue());
 			this.scaler.apply(RenderContext.gui(
 					//#if MC >= 11600
 					//$$ matrixStackOrDrawContext
@@ -106,7 +106,7 @@ public abstract class InGameHudMixin
 			//#if MC >= 12006
 			//$$ method = "renderScoreboardSidebar(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/scoreboard/ScoreboardObjective;)V",
 			//#else
-			method = "renderScoreboardSidebar",
+			method = "displayScoreboardSidebar",
 			//#endif
 			at = @At("RETURN")
 	)

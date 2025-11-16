@@ -35,7 +35,7 @@ import me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.RespawnBl
 import me.fallenbreath.tweakermore.impl.features.infoView.structureBlock.StructureBlockContentRenderer;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -88,7 +88,7 @@ public class InfoViewRenderer implements TweakerMoreIRenderer, IClientTickHandle
 	}
 
 	@Override
-	public void onClientTick(MinecraftClient client)
+	public void onClientTick(Minecraft client)
 	{
 		this.cachedRenderer.onClientTick();
 		CONTENT_PREVIEWERS.forEach(InfoViewer::onClientTick);

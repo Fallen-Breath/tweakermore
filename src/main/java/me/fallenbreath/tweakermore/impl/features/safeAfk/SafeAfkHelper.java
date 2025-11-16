@@ -23,12 +23,12 @@ package me.fallenbreath.tweakermore.impl.features.safeAfk;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.Messenger;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.DisconnectedScreen;
-import net.minecraft.client.gui.screen.TitleScreen;
-import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.text.BaseText;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.DisconnectedScreen;
+import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.network.chat.BaseComponent;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -57,18 +57,18 @@ public class SafeAfkHelper
 		return System.currentTimeMillis() - lastHurtMs <= MAX_TIME_WAIT;
 	}
 
-	public static void onHealthUpdate(MinecraftClient mc)
+	public static void onHealthUpdate(Minecraft mc)
 	{
 		if (TweakerMoreConfigs.SAFE_AFK.getBooleanValue())
 		{
-			if (mc.player != null && mc.world != null && hasRecord())
+			if (mc.player != null && mc.level != null && hasRecord())
 			{
 				float health = mc.player.getHealth();
-				float maxHealth = mc.player.getMaximumHealth();
+				float maxHealth = mc.player.getMaxHealth();
 				if (maxHealth > 0 && health < TweakerMoreConfigs.SAFE_AFK_HEALTH_THRESHOLD.getDoubleValue())
 				{
-					BaseText title = Messenger.s(TweakerMoreMod.MOD_NAME + " " + TweakerMoreConfigs.SAFE_AFK.getPrettyName());
-					BaseText reason = Messenger.tr(
+					BaseComponent title = Messenger.s(TweakerMoreMod.MOD_NAME + " " + TweakerMoreConfigs.SAFE_AFK.getPrettyName());
+					BaseComponent reason = Messenger.tr(
 							"tweakermore.impl.safeAfk.received_damage",
 							new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),
 							String.format("%.1f / %.1f (%.0f%%)", health, maxHealth, health / maxHealth * 100)
@@ -80,11 +80,11 @@ public class SafeAfkHelper
 						//$$ mc.world.disconnect(Text.translatable("multiplayer.status.quitting"));
 						//$$ mc.disconnectWithProgressScreen();
 						//#else
-						mc.world.disconnect();
-						mc.disconnect();
+						mc.level.disconnect();
+						mc.clearLevel();
 						//#endif
-						mc.openScreen(new DisconnectedScreen(
-								new MultiplayerScreen(new TitleScreen()),
+						mc.setScreen(new DisconnectedScreen(
+								new JoinMultiplayerScreen(new TitleScreen()),
 								//#if MC >= 11600
 								//$$ title,
 								//#else
@@ -102,8 +102,8 @@ public class SafeAfkHelper
 	{
 		if (TweakerMoreConfigs.SAFE_AFK.getBooleanValue())
 		{
-			MinecraftClient mc = MinecraftClient.getInstance();
-			if (livingEntity == mc.player && mc.world != null)
+			Minecraft mc = Minecraft.getInstance();
+			if (livingEntity == mc.player && mc.level != null)
 			{
 				recordHurtTime();
 			}

@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.netherPortalSoundChance;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.block.NetherPortalBlock;
+import net.minecraft.world.level.block.NetherPortalBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 public abstract class NetherPortalBlockMixin
 {
 	@ModifyConstant(
-			method = "randomDisplayTick",
+			method = "animateTick",
 			constant = @Constant(intValue = 100),
 			require = 0,
 			allow = 1

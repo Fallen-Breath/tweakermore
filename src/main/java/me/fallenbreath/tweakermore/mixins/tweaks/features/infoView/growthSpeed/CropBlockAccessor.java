@@ -20,18 +20,18 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.growthSpeed;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.CropBlock;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(CropBlock.class)
 public interface CropBlockAccessor
 {
-	@Invoker
-	static float invokeGetAvailableMoisture(Block block, BlockView world, BlockPos pos)
+	@Invoker("getGrowthSpeed")
+	static float invokeGetAvailableMoisture(Block block, BlockGetter world, BlockPos pos)
 	{
 		return 0;
 	}

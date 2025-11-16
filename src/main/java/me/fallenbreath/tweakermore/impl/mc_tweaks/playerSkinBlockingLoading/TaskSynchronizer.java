@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.impl.mc_tweaks.playerSkinBlockingLoading;
 
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -28,7 +28,7 @@ public class TaskSynchronizer
 {
 	public static void runOnClientThread(Runnable runnable)
 	{
-		MinecraftClient.getInstance().send(runnable);
+		Minecraft.getInstance().tell(runnable);
 	}
 
 	/**

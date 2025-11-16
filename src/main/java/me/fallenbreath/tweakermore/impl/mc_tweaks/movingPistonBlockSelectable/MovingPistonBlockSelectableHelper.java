@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.impl.mc_tweaks.movingPistonBlockSelectable;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 
 public class MovingPistonBlockSelectableHelper
 {
@@ -37,7 +37,7 @@ public class MovingPistonBlockSelectableHelper
 
 	private static boolean currentPlayerIsCreative()
 	{
-		MinecraftClient mc = MinecraftClient.getInstance();
+		Minecraft mc = Minecraft.getInstance();
 		if (mc != null && mc.player != null)
 		{
 			return mc.player.isCreative();

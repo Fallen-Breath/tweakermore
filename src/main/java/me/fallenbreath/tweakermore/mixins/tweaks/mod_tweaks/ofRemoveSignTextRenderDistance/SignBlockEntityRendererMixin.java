@@ -25,13 +25,13 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Restriction(require = @Condition(ModIds.optifine))
-@Mixin(SignBlockEntityRenderer.class)
+@Mixin(SignRenderer.class)
 public abstract class SignBlockEntityRendererMixin
 {
 	@Dynamic("Added by optifine")
@@ -39,7 +39,7 @@ public abstract class SignBlockEntityRendererMixin
 			method = "isRenderText",
 			at = @At(
 					value = "FIELD",
-					target = "Lnet/minecraft/client/render/block/entity/SignBlockEntityRenderer;textRenderDistanceSq:D",
+					target = "Lnet/minecraft/client/renderer/blockentity/SignRenderer;textRenderDistanceSq:D",
 					remap = true
 			),
 			remap = false

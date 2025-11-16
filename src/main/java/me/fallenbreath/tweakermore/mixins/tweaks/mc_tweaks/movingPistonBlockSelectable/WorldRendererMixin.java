@@ -24,18 +24,18 @@ import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.movingPistonBlockSelectable.MovingPistonBlockSelectableHelper;
-import net.minecraft.client.render.WorldRenderer;
+import net.minecraft.client.renderer.LevelRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(WorldRenderer.class)
+@Mixin(LevelRenderer.class)
 public abstract class WorldRendererMixin
 {
 	@Inject(
 			//#if MC >= 11500
-			method = "drawBlockOutline",
+			method = "renderHitOutline",
 			//#else
 			//$$ method = "drawHighlightedBlockOutline",
 			//#endif
@@ -52,7 +52,7 @@ public abstract class WorldRendererMixin
 
 	@Inject(
 			//#if MC >= 11500
-			method = "drawBlockOutline",
+			method = "renderHitOutline",
 			//#else
 			//$$ method = "drawHighlightedBlockOutline",
 			//#endif

@@ -21,12 +21,12 @@
 package me.fallenbreath.tweakermore.impl.features.infoView.growthSpeed.handlers;
 
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.MushroomPlantBlock;
-import net.minecraft.text.BaseText;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.MushroomBlock;
+import net.minecraft.network.chat.BaseComponent;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 
 import java.util.List;
 
@@ -37,17 +37,17 @@ public class SmallMushroomGrowthSpeedRenderer extends BasicGrowthSpeedRendererHa
 	@Override
 	public boolean isTarget(BlockState blockState)
 	{
-		return blockState.getBlock() instanceof MushroomPlantBlock;
+		return blockState.getBlock() instanceof MushroomBlock;
 	}
 
 	@Override
-	public void addInfoLines(RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos, List<BaseText> lines)
+	public void addInfoLines(RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos, List<BaseComponent> lines)
 	{
 		int count = countSameBlocks(world, pos);
 		boolean canGrow = countSameBlocks(world, pos) < 5;
 		if (isCrossHairPos)
 		{
-			lines.add(pair(tr("mushroom.count"), s(count, Formatting.GOLD)));
+			lines.add(pair(tr("mushroom.count"), s(count, ChatFormatting.GOLD)));
 			lines.add(pair(tr("mushroom.can_grow"), bool(canGrow)));
 		}
 		else
@@ -57,14 +57,14 @@ public class SmallMushroomGrowthSpeedRenderer extends BasicGrowthSpeedRendererHa
 	}
 
 	/**
-	 * Reference: {@link net.minecraft.block.MushroomPlantBlock#scheduledTick} or {@link net.minecraft.block.MushroomPlantBlock#randomTick}
+	 * Reference: {@link net.minecraft.world.level.block.MushroomBlock#scheduledTick} or {@link net.minecraft.world.level.block.MushroomBlock#randomTick}
 	 */
 	private static int countSameBlocks(RenderVisitorWorldView world, BlockPos pos)
 	{
 		Block mushroomBlock = world.getBlockState(pos).getBlock();
 
 		int count = 0;
-		for (BlockPos blockPos : BlockPos.iterate(pos.add(-4, -1, -4), pos.add(4, 1, 4)))
+		for (BlockPos blockPos : BlockPos.betweenClosed(pos.offset(-4, -1, -4), pos.offset(4, 1, 4)))
 		{
 			if (world.getBlockState(blockPos).getBlock() == mushroomBlock)
 			{

@@ -24,8 +24,8 @@ import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSyncer;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -40,7 +40,7 @@ public abstract class RenderVisitorWorldViewMixin
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{
-			if (!MinecraftClient.getInstance().isIntegratedServerRunning() && ServerDataSyncer.hasEnoughPermission())
+			if (!Minecraft.getInstance().hasSingleplayerServer() && ServerDataSyncer.hasEnoughPermission())
 			{
 				ServerDataSyncer.getInstance().syncBlockEntityAt(blockPos);
 			}

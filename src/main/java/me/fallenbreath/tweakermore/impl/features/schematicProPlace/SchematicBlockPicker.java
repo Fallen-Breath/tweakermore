@@ -29,14 +29,14 @@ import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.util.LayerRange;
 import me.fallenbreath.tweakermore.util.FabricUtils;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 //#if MC >= 11600
 //$$ import fi.dy.masa.litematica.config.Configs;
@@ -50,7 +50,7 @@ public class SchematicBlockPicker
 	/**
 	 * Stolen from {@link fi.dy.masa.litematica.util.WorldUtils#doSchematicWorldPickBlock}
 	 */
-	public static void doSchematicWorldPickBlock(MinecraftClient mc, BlockPos pos, Hand hand)
+	public static void doSchematicWorldPickBlock(Minecraft mc, BlockPos pos, InteractionHand hand)
 	{
 		// do nothing if schematic rendering is not enabled
 		if (!Configs.Visuals.ENABLE_RENDERING.getBooleanValue() || !Configs.Visuals.ENABLE_SCHEMATIC_RENDERING.getBooleanValue())
@@ -58,9 +58,9 @@ public class SchematicBlockPicker
 			return;
 		}
 
-		World schematicWorld = SchematicWorldHandler.getSchematicWorld();
-		World clientWorld = mc.world;
-		if (schematicWorld != null && mc.player != null && clientWorld != null && mc.interactionManager != null)
+		Level schematicWorld = SchematicWorldHandler.getSchematicWorld();
+		Level clientWorld = mc.level;
+		if (schematicWorld != null && mc.player != null && clientWorld != null && mc.gameMode != null)
 		{
 			LayerRange layerRange = DataManager.getRenderLayerRange();
 			if (!layerRange.isPositionWithinRange(pos))
@@ -77,23 +77,23 @@ public class SchematicBlockPicker
 			if (!stack.isEmpty())
 			{
 				//#if MC < 11700
-				PlayerInventory inv = mc.player.inventory;
+				Inventory inv = mc.player.inventory;
 				stack = stack.copy();
-				if (mc.player.abilities.creativeMode)
+				if (mc.player.abilities.instabuild)
 				{
 					BlockEntity te = schematicWorld.getBlockEntity(pos);
-					if (GuiBase.isCtrlDown() && te != null && clientWorld.isAir(pos))
+					if (GuiBase.isCtrlDown() && te != null && clientWorld.isEmptyBlock(pos))
 					{
 						ItemUtils.storeTEInStack(stack, te);
 					}
 
 					InventoryUtils.setPickedItemToHand(stack, mc);
-					mc.interactionManager.clickCreativeStack(mc.player.getStackInHand(Hand.MAIN_HAND), 36 + inv.selectedSlot);
+					mc.gameMode.handleCreativeModeItemAdd(mc.player.getItemInHand(InteractionHand.MAIN_HAND), 36 + inv.selected);
 				}
 				else
 				{
-					int slot = inv.getSlotWithStack(stack);
-					boolean shouldPick = inv.selectedSlot != slot;
+					int slot = inv.findSlotMatchingItem(stack);
+					boolean shouldPick = inv.selected != slot;
 					if (shouldPick && slot != -1)
 					{
 						InventoryUtils.setPickedItemToHand(stack, mc);
@@ -118,7 +118,7 @@ public class SchematicBlockPicker
 		}
 	}
 
-	private static void fixTweakerooHandRestoreState(Hand hand)
+	private static void fixTweakerooHandRestoreState(InteractionHand hand)
 	{
 		if (TWEAKEROO_LOADED)
 		{

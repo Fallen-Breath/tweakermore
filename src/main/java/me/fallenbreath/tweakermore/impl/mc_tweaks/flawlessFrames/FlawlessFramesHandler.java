@@ -23,8 +23,8 @@ package me.fallenbreath.tweakermore.impl.mc_tweaks.flawlessFrames;
 import com.google.common.collect.ImmutableList;
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.WorldRenderer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.LevelRenderer;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class FlawlessFramesHandler
 	{
 		hook = null;
 		Class<?> clazz = null;
-		WorldRenderer worldRenderer = MinecraftClient.getInstance().worldRenderer;
+		LevelRenderer worldRenderer = Minecraft.getInstance().levelRenderer;
 		for (String hookClass : HOOK_CLASSES)
 		{
 			try
@@ -59,7 +59,7 @@ public class FlawlessFramesHandler
 		}
 		try
 		{
-			hook = clazz.getConstructor(WorldRenderer.class).newInstance(worldRenderer);
+			hook = clazz.getConstructor(LevelRenderer.class).newInstance(worldRenderer);
 		}
 		catch (Exception e)
 		{

@@ -21,9 +21,9 @@
 package me.fallenbreath.tweakermore.impl.features.schematicProPlace.restrict;
 
 import fi.dy.masa.malilib.util.StringUtils;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.state.property.Property;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.state.properties.Property;
 
 import java.util.Optional;
 
@@ -33,7 +33,7 @@ public class InteractAllowedTesters
 
 	public interface Impl
 	{
-		boolean test(PlayerEntity player, BlockState worldState, BlockState schematicState);
+		boolean test(Player player, BlockState worldState, BlockState schematicState);
 	}
 
 	private static String msg(String id)
@@ -72,7 +72,7 @@ public class InteractAllowedTesters
 	public static InteractAllowedTester unequalProperty(Property<?> property)
 	{
 		return of("property_protection", (player, worldState, schematicState) ->
-				worldState.getBlock() != schematicState.getBlock() || worldState.get(property) != schematicState.get(property)
+				worldState.getBlock() != schematicState.getBlock() || worldState.getValue(property) != schematicState.getValue(property)
 		);
 	}
 }

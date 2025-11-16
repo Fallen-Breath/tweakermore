@@ -25,8 +25,8 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.ChatScreen;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.ChatScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -47,7 +47,7 @@ public abstract class RenderHandlerMixin
 					//#if MC >= 12002
 					//$$ target = "Lnet/minecraft/client/option/GameOptions;hudHidden:Z",
 					//#else
-					target = "Lnet/minecraft/client/options/GameOptions;debugEnabled:Z",
+					target = "Lnet/minecraft/client/Options;renderDebug:Z",
 					//#endif
 					remap = true
 			),
@@ -58,7 +58,7 @@ public abstract class RenderHandlerMixin
 	{
 		if (TweakerMoreConfigs.MINIHUD_HIDE_IF_CHAT_SCREEN_OPENED.getBooleanValue())
 		{
-			if (MinecraftClient.getInstance().currentScreen instanceof ChatScreen)
+			if (Minecraft.getInstance().screen instanceof ChatScreen)
 			{
 				ci.cancel();
 			}

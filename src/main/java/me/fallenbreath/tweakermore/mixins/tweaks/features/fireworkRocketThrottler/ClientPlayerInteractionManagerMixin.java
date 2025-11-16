@@ -23,23 +23,23 @@ package me.fallenbreath.tweakermore.mixins.tweaks.features.fireworkRocketThrottl
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.network.ClientPlayerInteractionManager;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.FireworkItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.world.World;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.multiplayer.MultiPlayerGameMode;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.FireworkRocketItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(ClientPlayerInteractionManager.class)
+@Mixin(MultiPlayerGameMode.class)
 public abstract class ClientPlayerInteractionManagerMixin
 {
 	@Unique
@@ -48,39 +48,39 @@ public abstract class ClientPlayerInteractionManagerMixin
 	// ========================== activate cooldown ==========================
 
 	@Inject(
-			method = "interactBlock",
+			method = "useItemOn",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/network/ClientPlayNetworkHandler;sendPacket(Lnet/minecraft/network/Packet;)V",
+					target = "Lnet/minecraft/client/multiplayer/ClientPacketListener;send(Lnet/minecraft/network/protocol/Packet;)V",
 					ordinal = 2
 			),
 			cancellable = true
 	)
-	private void fireworkRocketThrottler_cancelIfCooldown_useOnBlock(ClientPlayerEntity player, ClientWorld world, Hand hand, BlockHitResult hitResult, CallbackInfoReturnable<ActionResult> cir)
+	private void fireworkRocketThrottler_cancelIfCooldown_useOnBlock(LocalPlayer player, ClientLevel world, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir)
 	{
 		cancelIfCooldown(player, hand, cir);
 	}
 
 	@Inject(
-			method = "interactItem",
+			method = "useItem",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/network/ClientPlayNetworkHandler;sendPacket(Lnet/minecraft/network/Packet;)V"
+					target = "Lnet/minecraft/client/multiplayer/ClientPacketListener;send(Lnet/minecraft/network/protocol/Packet;)V"
 			),
 			cancellable = true
 	)
-	private void fireworkRocketThrottler_cancelIfCooldown_useAtAir(PlayerEntity player, World world, Hand hand, CallbackInfoReturnable<ActionResult> cir)
+	private void fireworkRocketThrottler_cancelIfCooldown_useAtAir(Player player, Level world, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir)
 	{
 		cancelIfCooldown(player, hand, cir);
 	}
 
 	@Unique
-	private void cancelIfCooldown(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir)
+	private void cancelIfCooldown(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir)
 	{
 		if (TweakerMoreConfigs.FIREWORK_ROCKET_THROTTLER.getBooleanValue())
 		{
-			ItemStack itemStack = player.getStackInHand(hand);
-			if (itemStack.getItem() instanceof FireworkItem)
+			ItemStack itemStack = player.getItemInHand(hand);
+			if (itemStack.getItem() instanceof FireworkRocketItem)
 			{
 				long now = System.currentTimeMillis();
 				double cooldown = TweakerMoreConfigs.FIREWORK_ROCKET_THROTTLER_COOLDOWN.getDoubleValue();
@@ -88,7 +88,7 @@ public abstract class ClientPlayerInteractionManagerMixin
 				if (remaining > 0)
 				{
 					InfoUtils.printActionbarMessage("tweakermore.impl.fireworkRocketThrottler.throttled", String.format("%.1f", remaining));
-					cir.setReturnValue(ActionResult.FAIL);
+					cir.setReturnValue(InteractionResult.FAIL);
 				}
 			}
 		}
@@ -97,39 +97,39 @@ public abstract class ClientPlayerInteractionManagerMixin
 	// ========================== update cooldown ==========================
 
 	@ModifyExpressionValue(
-			method = "interactBlock",
+			method = "useItemOn",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/item/ItemStack;useOnBlock(Lnet/minecraft/item/ItemUsageContext;)Lnet/minecraft/util/ActionResult;"
+					target = "Lnet/minecraft/world/item/ItemStack;useOn(Lnet/minecraft/world/item/UseOnContext;)Lnet/minecraft/world/InteractionResult;"
 			)
 	)
-	private ActionResult fireworkRocketThrottler_updateCooldown_useOnBlock(ActionResult actionResult)
+	private InteractionResult fireworkRocketThrottler_updateCooldown_useOnBlock(InteractionResult actionResult)
 	{
 		updateCooldownOnUse(actionResult);
 		return actionResult;
 	}
 
 	@ModifyExpressionValue(
-			method = "interactItem",
+			method = "useItem",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/util/TypedActionResult;getResult()Lnet/minecraft/util/ActionResult;"
+					target = "Lnet/minecraft/world/InteractionResultHolder;getResult()Lnet/minecraft/world/InteractionResult;"
 			)
 	)
-	private ActionResult fireworkRocketThrottler_updateCooldown_useAtAir(ActionResult actionResult)
+	private InteractionResult fireworkRocketThrottler_updateCooldown_useAtAir(InteractionResult actionResult)
 	{
 		updateCooldownOnUse(actionResult);
 		return actionResult;
 	}
 
 	@Unique
-	private void updateCooldownOnUse(ActionResult actionResult)
+	private void updateCooldownOnUse(InteractionResult actionResult)
 	{
 		if (TweakerMoreConfigs.FIREWORK_ROCKET_THROTTLER.getBooleanValue())
 		{
 			if (
 					//#if MC >= 11500
-					actionResult.isAccepted()
+					actionResult.consumesAction()
 					//#else
 					//$$ actionResult == ActionResult.SUCCESS
 					//#endif

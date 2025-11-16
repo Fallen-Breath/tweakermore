@@ -23,19 +23,19 @@ package me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer;
 import com.google.common.collect.Maps;
 import me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.DataQueryHandlerAccessor;
 import me.fallenbreath.tweakermore.util.collection.ExpiringMap;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.packet.c2s.play.QueryBlockNbtC2SPacket;
-import net.minecraft.network.packet.c2s.play.QueryEntityNbtC2SPacket;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.network.protocol.game.ServerboundBlockEntityTagQuery;
+import net.minecraft.network.protocol.game.ServerboundEntityTagQuery;
+import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 import java.util.Optional;
 
 /**
- * Reference: {@link net.minecraft.client.network.DataQueryHandler}
+ * Reference: {@link net.minecraft.client.DebugQueryHandler}
  * But stores multiple callbacks
  */
 public class DataQueryHandlerPro
@@ -43,14 +43,14 @@ public class DataQueryHandlerPro
 	private final Map<Integer, Callback> callbacks = new ExpiringMap<>(Maps.newHashMap(), 30_000);
 	private int idCounter = 0;
 
-	private static Optional<ClientPlayNetworkHandler> getNetworkHandler()
+	private static Optional<ClientPacketListener> getNetworkHandler()
 	{
-		return Optional.ofNullable(MinecraftClient.getInstance().getNetworkHandler());
+		return Optional.ofNullable(Minecraft.getInstance().getConnection());
 	}
 
-	public int generateTransactionId(ClientPlayNetworkHandler networkHandler)
+	public int generateTransactionId(ClientPacketListener networkHandler)
 	{
-		DataQueryHandlerAccessor accessor = (DataQueryHandlerAccessor)networkHandler.getDataQueryHandler();
+		DataQueryHandlerAccessor accessor = (DataQueryHandlerAccessor)networkHandler.getDebugQueryHandler();
 		int id = (accessor.getExpectedTransactionId() ^ 0x80000000) + this.idCounter;  // make sure it's far enough from vanilla's id
 		this.idCounter = (this.idCounter + 1) % (1 << 20);  // 10M concurrency is enough
 		return id;
@@ -70,7 +70,7 @@ public class DataQueryHandlerPro
 		}
 	}
 
-	private int nextQuery(ClientPlayNetworkHandler networkHandler, Callback callback)
+	private int nextQuery(ClientPacketListener networkHandler, Callback callback)
 	{
 		int transactionId = this.generateTransactionId(networkHandler);
 		this.callbacks.put(transactionId, callback);
@@ -86,7 +86,7 @@ public class DataQueryHandlerPro
 	{
 		getNetworkHandler().ifPresent(networkHandler -> {
 			int id = this.nextQuery(networkHandler, callback);
-			networkHandler.sendPacket(new QueryEntityNbtC2SPacket(id, entityNetworkId));
+			networkHandler.send(new ServerboundEntityTagQuery(id, entityNetworkId));
 		});
 	}
 
@@ -94,7 +94,7 @@ public class DataQueryHandlerPro
 	{
 		getNetworkHandler().ifPresent(networkHandler -> {
 			int id = this.nextQuery(networkHandler, callback);
-			networkHandler.sendPacket(new QueryBlockNbtC2SPacket(id, pos));
+			networkHandler.send(new ServerboundBlockEntityTagQuery(id, pos));
 		});
 	}
 

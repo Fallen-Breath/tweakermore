@@ -22,18 +22,18 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.movingPistonBlockSel
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.movingPistonBlockSelectable.MovingPistonBlockSelectableHelper;
-import net.minecraft.block.PistonExtensionBlock;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.level.block.piston.MovingPistonBlock;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.Shapes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(PistonExtensionBlock.class)
+@Mixin(MovingPistonBlock.class)
 public abstract class PistonExtensionBlockMixin
 {
-	@Inject(method = "getOutlineShape", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
 	private void movingPistonBlockSelectable_modifyOutlineShapeToFullCube(CallbackInfoReturnable<VoxelShape> cir)
 	{
 		// Add a check to avoid the TweakerMoreConfigs class being loaded too early (e.g. at Blocks.<clinit>)
@@ -42,7 +42,7 @@ public abstract class PistonExtensionBlockMixin
 		{
 			if (TweakerMoreConfigs.MOVING_PISTON_BLOCK_SELECTABLE.getBooleanValue() && MovingPistonBlockSelectableHelper.applyOutlineShapeOverride.get())
 			{
-				cir.setReturnValue(VoxelShapes.fullCube());
+				cir.setReturnValue(Shapes.block());
 			}
 		}
 	}

@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.signMultilinePasteSu
 
 import me.fallenbreath.tweakermore.impl.mc_tweaks.signMultilinePasteSupport.SelectionManagerInSignEditScreen;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.signMultilinePasteSupport.SignEditScreenRowIndexController;
-import net.minecraft.client.util.SelectionManager;
+import net.minecraft.client.gui.font.TextFieldHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#if MC >= 11903
 //$$ import net.minecraft.client.gui.screen.ingame.AbstractSignEditScreen;
 //#else
-import net.minecraft.client.gui.screen.ingame.SignEditScreen;
+import net.minecraft.client.gui.screens.inventory.SignEditScreen;
 //#endif
 
 @Mixin(
@@ -44,19 +44,19 @@ import net.minecraft.client.gui.screen.ingame.SignEditScreen;
 )
 public abstract class SignEditScreenMixin implements SignEditScreenRowIndexController
 {
-	@Shadow private SelectionManager selectionManager;
-	@Shadow private int currentRow;
+	@Shadow private TextFieldHelper signField;
+	@Shadow private int line;
 
 	@Inject(method = "init", at = @At("TAIL"))
 	private void signMultilinePasteSupport_storeSelfInSelectionManager(CallbackInfo ci)
 	{
-		((SelectionManagerInSignEditScreen)this.selectionManager).setSignEditScreen$TKM(this);
+		((SelectionManagerInSignEditScreen)this.signField).setSignEditScreen$TKM(this);
 	}
 
 	@Override
 	public boolean canAddCurrentRowIndex$TKM(int delta)
 	{
-		int newIndex = this.currentRow + delta;
+		int newIndex = this.line + delta;
 		return 0 <= newIndex && newIndex <= 3;
 	}
 
@@ -65,7 +65,7 @@ public abstract class SignEditScreenMixin implements SignEditScreenRowIndexContr
 	{
 		if (this.canAddCurrentRowIndex$TKM(delta))
 		{
-			this.currentRow += delta;
+			this.line += delta;
 		}
 	}
 }

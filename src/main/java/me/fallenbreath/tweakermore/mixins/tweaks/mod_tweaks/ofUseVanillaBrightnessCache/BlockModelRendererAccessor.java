@@ -23,16 +23,16 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.ofUseVanillaBrightn
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.render.block.BlockModelRenderer;
+import net.minecraft.client.renderer.block.ModelBlockRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Restriction(require = @Condition(ModIds.optifine))
-@Mixin(BlockModelRenderer.class)
+@Mixin(ModelBlockRenderer.class)
 public interface BlockModelRendererAccessor
 {
-	@Accessor
-	static ThreadLocal<BlockModelRenderer.BrightnessCache> getBrightnessCache()
+	@Accessor("CACHE")
+	static ThreadLocal<ModelBlockRenderer.Cache> getBrightnessCache()
 	{
 		throw new RuntimeException();
 	}

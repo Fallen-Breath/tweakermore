@@ -23,8 +23,8 @@ package me.fallenbreath.tweakermore.util;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.longs.Long2DoubleOpenHashMap;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -33,7 +33,7 @@ import java.util.function.Consumer;
 
 public class PositionUtils
 {
-	public static BlockPos floored(Vec3d vec3d)
+	public static BlockPos floored(Vec3 vec3d)
 	{
 		//#if MC >= 11904
 		//$$ return BlockPos.ofFloored(vec3d);
@@ -42,9 +42,9 @@ public class PositionUtils
 		//#endif
 	}
 
-	public static Vec3d centerOf(BlockPos blockPos)
+	public static Vec3 centerOf(BlockPos blockPos)
 	{
-		return new Vec3d(blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5);
+		return new Vec3(blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5);
 	}
 
 	public static Collection<BlockPos> boxSurface(BlockPos pos1, BlockPos pos2)
@@ -93,10 +93,10 @@ public class PositionUtils
 		return result;
 	}
 
-	public static Collection<BlockPos> beam(Vec3d startPos, Vec3d endPos, double coneAngle, BeamMode mode)
+	public static Collection<BlockPos> beam(Vec3 startPos, Vec3 endPos, double coneAngle, BeamMode mode)
 	{
-		Vec3d dir1 = endPos.subtract(startPos).normalize();
-		if (dir1 == Vec3d.ZERO)
+		Vec3 dir1 = endPos.subtract(startPos).normalize();
+		if (dir1 == Vec3.ZERO)
 		{
 			return Collections.emptyList();
 		}
@@ -110,9 +110,9 @@ public class PositionUtils
 		for (double len = 0, angle = coneAngle; len < maxLen + step; len += step)
 		{
 			double r = len * Math.sin(angle);
-			Vec3d vec3d = startPos.add(dir1.multiply(len));
-			Vec3d a = vec3d.add(-r, -r, -r);
-			Vec3d b = vec3d.add(+r, +r, +r);
+			Vec3 vec3d = startPos.add(dir1.scale(len));
+			Vec3 a = vec3d.add(-r, -r, -r);
+			Vec3 b = vec3d.add(+r, +r, +r);
 			BlockPos pos1 = new BlockPos((int)Math.floor(a.x), (int)Math.floor(a.y),(int)Math.floor(a.z));
 			BlockPos pos2 = new BlockPos((int)Math.ceil(b.x), (int)Math.ceil(b.y),(int)Math.ceil(b.z));
 
@@ -186,12 +186,12 @@ public class PositionUtils
 
 		List<BlockPos> result = Lists.newArrayList();
 		positions.forEach((l, a) -> {
-			BlockPos pos = BlockPos.fromLong(l);
-			Vec3d vec3d = PositionUtils.centerOf(pos).subtract(startPos);
+			BlockPos pos = BlockPos.of(l);
+			Vec3 vec3d = PositionUtils.centerOf(pos).subtract(startPos);
 			if (vec3d.length() <= maxLen)
 			{
-				Vec3d dir2 = vec3d.normalize();
-				double cos = dir2.dotProduct(dir1);
+				Vec3 dir2 = vec3d.normalize();
+				double cos = dir2.dot(dir1);
 				if (cos >= Math.cos(a))
 				{
 					result.add(pos);

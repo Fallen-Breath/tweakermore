@@ -27,7 +27,7 @@ import com.mojang.brigadier.suggestion.Suggestions;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 
 //#if MC >= 11500
-import net.minecraft.client.gui.screen.CommandSuggestor;
+import net.minecraft.client.gui.components.CommandSuggestions;
 //#else
 //$$ import net.minecraft.client.gui.screen.ChatScreen;
 //#endif
@@ -45,7 +45,7 @@ import java.util.Map;
  * the class name is not changed to make git happier
  */
 //#if MC >= 11500
-@Mixin(CommandSuggestor.class)
+@Mixin(CommandSuggestions.class)
 //#else
 //$$ @Mixin(ChatScreen.class)
 //#endif

@@ -22,8 +22,8 @@ package me.fallenbreath.tweakermore.mixins.tweaks.features.serverMsptMetricsStat
 
 import me.fallenbreath.tweakermore.impl.features.serverMsptMetricsStatistic.MetricsDataWithRichStatistic;
 import me.fallenbreath.tweakermore.impl.features.serverMsptMetricsStatistic.RichStatisticManager;
-import net.minecraft.client.gui.hud.DebugHud;
-import net.minecraft.util.MetricsData;
+import net.minecraft.client.gui.components.DebugScreenOverlay;
+import net.minecraft.util.FrameTimer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,21 +41,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * <= mc1.20.1: subproject 1.15.2 (main project)        <--------
  * >= mc1.20.2: subproject 1.20.2
  */
-@Mixin(DebugHud.class)
+@Mixin(DebugScreenOverlay.class)
 public abstract class DebugHudMixin
 {
-	@Unique private MetricsData originMetricsData$TKM = null;
+	@Unique private FrameTimer originMetricsData$TKM = null;
 
-	@ModifyVariable(method = "drawMetricsData", at = @At("HEAD"), argsOnly = true)
-	private MetricsData serverMsptMetricsStatistic_modify(
-			MetricsData metricsData,
+	@ModifyVariable(method = "drawChart", at = @At("HEAD"), argsOnly = true)
+	private FrameTimer serverMsptMetricsStatistic_modify(
+			FrameTimer metricsData,
 			/* parent method parameters vvv */
 			//#if MC >= 12000
 			//$$ DrawContext matrixStackOrDrawContext,
 			//#elseif MC >= 11600
 			//$$ MatrixStack matrixStackOrDrawContext,
 			//#endif
-			MetricsData metricsData_, int x, int width, boolean showFps
+			FrameTimer metricsData_, int x, int width, boolean showFps
 	)
 	{
 		if (!showFps)
@@ -71,7 +71,7 @@ public abstract class DebugHudMixin
 	}
 
 	@Inject(
-			method = "drawMetricsData",
+			method = "drawChart",
 			//#if MC >= 12000
 			//$$ at = @At("TAIL")
 			//#else
@@ -92,7 +92,7 @@ public abstract class DebugHudMixin
 			//#elseif MC >= 11600
 			//$$ MatrixStack matrixStackOrDrawContext,
 			//#endif
-			MetricsData metricsData, int x, int width, boolean showFps, CallbackInfo ci
+			FrameTimer metricsData, int x, int width, boolean showFps, CallbackInfo ci
 	)
 	{
 		if (!showFps && this.originMetricsData$TKM != null)
@@ -100,7 +100,7 @@ public abstract class DebugHudMixin
 			RichStatisticManager manager = ((MetricsDataWithRichStatistic)this.originMetricsData$TKM).getRichStatisticManager$TKM();
 			if (manager != null)
 			{
-				long[] ls = metricsData.getSamples();
+				long[] ls = metricsData.getLog();
 				int m = Math.max(0, ls.length - width);
 				int n = ls.length - m;
 

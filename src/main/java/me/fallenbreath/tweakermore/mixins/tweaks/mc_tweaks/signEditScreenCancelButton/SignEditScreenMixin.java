@@ -22,10 +22,10 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.signEditScreenCancel
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.signEditScreenCancelCommon.ClientSignTextRollbacker;
-import net.minecraft.block.entity.SignBlockEntity;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.text.Text;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -41,7 +41,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#if MC >= 11903
 //$$ import net.minecraft.client.gui.screen.ingame.AbstractSignEditScreen;
 //#else
-import net.minecraft.client.gui.screen.ingame.SignEditScreen;
+import net.minecraft.client.gui.screens.inventory.SignEditScreen;
 //#endif
 
 //#if MC >= 11600
@@ -59,12 +59,12 @@ import fi.dy.masa.malilib.util.StringUtils;
 )
 public abstract class SignEditScreenMixin extends Screen
 {
-	protected SignEditScreenMixin(Text title)
+	protected SignEditScreenMixin(Component title)
 	{
 		super(title);
 	}
 
-	@Shadow protected abstract void finishEditing();
+	@Shadow protected abstract void onDone();
 
 	//#if MC >= 11903
 	//$$ @Shadow @Final protected SignBlockEntity blockEntity;
@@ -137,7 +137,7 @@ public abstract class SignEditScreenMixin extends Screen
 			//#else
 			this.addButton
 			//#endif
-					(new ButtonWidget(
+					(new Button(
 					this.width / 2 - 100, this.height / 4 + 120 + 20 + 5, 200, 20,
 					//#if MC >= 11600
 					//$$ ScreenTexts.CANCEL,
@@ -146,7 +146,7 @@ public abstract class SignEditScreenMixin extends Screen
 					//#endif
 					buttonWidget -> {
 						this.editingCancelled = true;
-						this.finishEditing();
+						this.onDone();
 					}
 			));
 

@@ -21,13 +21,13 @@
 package me.fallenbreath.tweakermore.impl.features.refreshInventory;
 
 import fi.dy.masa.malilib.util.InfoUtils;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.container.Container;
-import net.minecraft.container.SlotActionType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.network.packet.c2s.play.ClickWindowC2SPacket;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.network.protocol.game.ServerboundContainerClickPacket;
 
 //#if MC >= 12105
 //$$ import net.minecraft.screen.sync.ItemStackHash;
@@ -51,8 +51,8 @@ public class InventoryRefresher
 	 */
 	public static void refresh()
 	{
-		MinecraftClient mc = MinecraftClient.getInstance();
-		ClientPlayNetworkHandler networkHandler = mc.getNetworkHandler();
+		Minecraft mc = Minecraft.getInstance();
+		ClientPacketListener networkHandler = mc.getConnection();
 		if (networkHandler != null && mc.player != null)
 		{
 			ItemStack uniqueItem = new ItemStack(Items.STONE);
@@ -66,17 +66,17 @@ public class InventoryRefresher
 			uniqueItem.getOrCreateTag().putDouble("force_resync", Double.NaN);
 			//#endif
 
-			Container csh = mc.player.container;
+			AbstractContainerMenu csh = mc.player.containerMenu;
 			//#if MC >= 12105
 			//$$ ItemStackHash itemStackHash = ItemStackHash.fromItemStack(uniqueItem, networkHandler.method_68823());
 			//#endif
-			networkHandler.sendPacket(new ClickWindowC2SPacket(
-					csh.syncId,
+			networkHandler.send(new ServerboundContainerClickPacket(
+					csh.containerId,
 					//#if MC >= 11700
 					//$$ csh.getRevision(),
 					//#endif
 					(short)-999, (byte)2,
-					SlotActionType.QUICK_CRAFT,
+					ClickType.QUICK_CRAFT,
 					//#if MC < 12105
 					uniqueItem,
 					//#endif
@@ -87,7 +87,7 @@ public class InventoryRefresher
 					//$$ //$$ , itemStackHash
 					//$$ //#endif
 					//#else
-					csh.getNextActionId(mc.player.inventory)
+					csh.backup(mc.player.inventory)
 					//#endif
 			));
 

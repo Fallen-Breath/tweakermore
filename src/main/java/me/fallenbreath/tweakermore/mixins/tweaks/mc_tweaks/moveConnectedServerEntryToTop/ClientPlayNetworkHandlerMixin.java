@@ -21,16 +21,16 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.moveConnectedServerEntryToTop;
 
 import me.fallenbreath.tweakermore.impl.mc_tweaks.moveConnectedServerEntryToTop.MoveConnectedServerEntryToTopHelper;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ClientPlayNetworkHandler.class)
+@Mixin(ClientPacketListener.class)
 public abstract class ClientPlayNetworkHandlerMixin
 {
-	@Inject(method = "onGameJoin", at = @At("TAIL"))
+	@Inject(method = "handleLogin", at = @At("TAIL"))
 	private void relocateServerListEntryToTop_hookClientJoinWorld(CallbackInfo ci)
 	{
 		MoveConnectedServerEntryToTopHelper.onJoinWorld();

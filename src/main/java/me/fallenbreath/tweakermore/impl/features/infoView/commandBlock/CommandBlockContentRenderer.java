@@ -29,16 +29,16 @@ import me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.commandBlock.
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.TextRenderingUtil;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
-import net.minecraft.block.CommandBlock;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.CommandBlockBlockEntity;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.server.command.CommandSource;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.CommandBlockExecutor;
+import net.minecraft.world.level.block.CommandBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.CommandBlockEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.commands.SharedSuggestionProvider;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BaseCommandBlock;
 
 //#if MC >= 11600
 //$$ import me.fallenbreath.tweakermore.util.render.TextRenderingUtil;
@@ -59,7 +59,7 @@ public class CommandBlockContentRenderer extends CommonScannerInfoViewer
 	@Override
 	public boolean shouldRenderFor(RenderVisitorWorldView world, BlockPos pos)
 	{
-		return world.getBlockState(pos).getBlock() instanceof CommandBlock && world.getBlockEntity(pos) instanceof CommandBlockBlockEntity;
+		return world.getBlockState(pos).getBlock() instanceof CommandBlock && world.getBlockEntity(pos) instanceof CommandBlockEntity;
 	}
 
 	@Override
@@ -72,18 +72,18 @@ public class CommandBlockContentRenderer extends CommonScannerInfoViewer
 	protected void render(WorldRenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
 		BlockEntity blockEntity = world.getBlockEntity(pos);
-		if (!(blockEntity instanceof CommandBlockBlockEntity))
+		if (!(blockEntity instanceof CommandBlockEntity))
 		{
 			return;
 		}
 
-		CommandBlockExecutor executor = ((CommandBlockBlockEntity)blockEntity).getCommandExecutor();
+		BaseCommandBlock executor = ((CommandBlockEntity)blockEntity).getCommandBlock();
 		String command = executor.getCommand();
-		Text lastOutput = executor.getLastOutput();
+		Component lastOutput = executor.getLastOutput();
 		final int MAX_WIDTH = TweakerMoreConfigs.INFO_VIEW_COMMAND_BLOCK_MAX_WIDTH.getIntegerValue();
 
 		// parse command for highlight logic
-		ClientPlayerEntity player = MinecraftClient.getInstance().player;
+		LocalPlayer player = Minecraft.getInstance().player;
 		if (player == null)
 		{
 			return;
@@ -96,10 +96,10 @@ public class CommandBlockContentRenderer extends CommonScannerInfoViewer
 		//#if MC >= 12106
 		//$$ var parse =  // the type is ParseResults<ClientCommandSource>
 		//#else
-		ParseResults<CommandSource> parse =
+		ParseResults<SharedSuggestionProvider> parse =
 		//#endif
-				player.networkHandler.getCommandDispatcher().parse(
-						stringReader, player.networkHandler.getCommandSource()
+				player.connection.getCommands().parse(
+						stringReader, player.connection.getSuggestionsProvider()
 				);
 
 		// trim command
@@ -115,7 +115,7 @@ public class CommandBlockContentRenderer extends CommonScannerInfoViewer
 			//#if MC >= 11600
 			//$$ displayText = OrderedText.concat(displayText, TextRenderingUtil.string2orderedText(Formatting.DARK_GRAY + "..."));
 			//#else
-			displayText += Formatting.DARK_GRAY + "...";
+			displayText += ChatFormatting.DARK_GRAY + "...";
 			//#endif
 		}
 
@@ -135,9 +135,9 @@ public class CommandBlockContentRenderer extends CommonScannerInfoViewer
 			//$$ );
 			//#else
 			String trimmedLastOutput = TextRenderingUtil.trim(
-					lastOutput.asFormattedString(),
+					lastOutput.getColoredString(),
 					MAX_WIDTH,
-					trimmedText -> trimmedText + Formatting.DARK_GRAY + "..."
+					trimmedText -> trimmedText + ChatFormatting.DARK_GRAY + "..."
 			);
 			//#endif
 			textRenderer.addLine(trimmedLastOutput);

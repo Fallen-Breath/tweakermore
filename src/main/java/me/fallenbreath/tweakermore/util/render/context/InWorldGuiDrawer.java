@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.util.render.context;
 
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.GuiComponent;
 import org.jetbrains.annotations.NotNull;
 
 //#if MC >= 12000
@@ -43,12 +43,12 @@ public class InWorldGuiDrawer
 	//#endif
 
 	@NotNull
-	public DrawableHelper getGuiDrawer()
+	public GuiComponent getGuiDrawer()
 	{
 		//#if MC >= 12000
 		//$$ return this.drawContext;
 		//#else
-		return new DrawableHelper(){};
+		return new GuiComponent(){};
 		//#endif
 	}
 

@@ -24,10 +24,10 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.fixHoverTextScale.ScaleableHoverTextRenderer;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.ChatScreen;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.text.Text;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.ChatScreen;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -44,7 +44,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ChatScreen.class)
 public abstract class ChatScreenMixin extends Screen
 {
-	protected ChatScreenMixin(Text title)
+	protected ChatScreenMixin(Component title)
 	{
 		super(title);
 	}
@@ -62,7 +62,7 @@ public abstract class ChatScreenMixin extends Screen
 					//#elseif MC >= 11600
 					//$$ target = "Lnet/minecraft/client/gui/screen/ChatScreen;renderTextHoverEffect(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/text/Style;II)V"
 					//#else
-					target = "Lnet/minecraft/client/gui/screen/ChatScreen;renderComponentHoverEffect(Lnet/minecraft/text/Text;II)V"
+					target = "Lnet/minecraft/client/gui/screens/ChatScreen;renderComponentHoverEffect(Lnet/minecraft/network/chat/Component;II)V"
 					//#endif
 			)
 	)
@@ -77,11 +77,11 @@ public abstract class ChatScreenMixin extends Screen
 	{
 		if (TweakerMoreConfigs.FIX_HOVER_TEXT_SCALE.getBooleanValue())
 		{
-			MinecraftClient mc = this.minecraft;
+			Minecraft mc = this.minecraft;
 
 			if (mc != null)
 			{
-				double scale = mc.inGameHud.getChatHud().getChatScale();
+				double scale = mc.gui.getChat().getScale();
 				this.hoverScaler$TKM = RenderUtils.createScaler(mouseX, mouseY, scale);
 				this.hoverScaler$TKM.apply(RenderContext.gui(
 						//#if MC >= 11600
@@ -108,7 +108,7 @@ public abstract class ChatScreenMixin extends Screen
 					//#elseif MC >= 11600
 					//$$ target = "Lnet/minecraft/client/gui/screen/ChatScreen;renderTextHoverEffect(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/text/Style;II)V",
 					//#else
-					target = "Lnet/minecraft/client/gui/screen/ChatScreen;renderComponentHoverEffect(Lnet/minecraft/text/Text;II)V",
+					target = "Lnet/minecraft/client/gui/screens/ChatScreen;renderComponentHoverEffect(Lnet/minecraft/network/chat/Component;II)V",
 					//#endif
 					shift = At.Shift.AFTER
 			)

@@ -20,13 +20,13 @@
 
 package me.fallenbreath.tweakermore.impl.mc_tweaks.clientEntityTargetingSelectAll;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ExperienceOrbEntity;
-import net.minecraft.entity.FallingBlockEntity;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.Nullable;
 
 public class EntityItemPickHelper
@@ -36,9 +36,9 @@ public class EntityItemPickHelper
 	{
 		if (entity instanceof ItemEntity)
 		{
-			return ((ItemEntity)entity).getStack().copy();
+			return ((ItemEntity)entity).getItem().copy();
 		}
-		else if (entity instanceof ExperienceOrbEntity)
+		else if (entity instanceof ExperienceOrb)
 		{
 			return new ItemStack(Items.EXPERIENCE_BOTTLE);
 		}

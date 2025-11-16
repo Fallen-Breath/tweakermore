@@ -23,8 +23,8 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.signEditScreenCancel
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.block.entity.SignBlockEntity;
-import net.minecraft.text.Text;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
+import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
@@ -32,8 +32,8 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(SignBlockEntity.class)
 public interface SignBlockEntityAccessor
 {
-	@Accessor("text")
-	Text[] getTexts$TKM();
+	@Accessor("messages")
+	Component[] getTexts$TKM();
 
 	//#if MC >= 11700
 	//$$ @Accessor("filteredTexts")

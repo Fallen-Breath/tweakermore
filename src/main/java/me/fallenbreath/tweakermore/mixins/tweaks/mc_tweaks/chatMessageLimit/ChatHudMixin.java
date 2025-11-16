@@ -26,7 +26,7 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.gui.hud.ChatHud;
+import net.minecraft.client.gui.components.ChatComponent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
@@ -47,14 +47,14 @@ import java.util.List;
 		@Condition(ModIds.raise_chat_limit),
 		@Condition(ModIds.wheres_my_chat_history)
 })
-@Mixin(ChatHud.class)
+@Mixin(ChatComponent.class)
 public abstract class ChatHudMixin
 {
 	@Mutable
-	@Shadow @Final private List<?> messages;
+	@Shadow @Final private List<?> allMessages;
 
 	@Mutable
-	@Shadow @Final private List<?> visibleMessages;
+	@Shadow @Final private List<?> trimmedMessages;
 
 	@ModifyExpressionValue(
 			//#if MC >= 12006
@@ -65,7 +65,7 @@ public abstract class ChatHudMixin
 			//#elseif MC >= 11901
 			//$$ method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;ILnet/minecraft/client/gui/hud/MessageIndicator;Z)V",
 			//#else
-			method = "addMessage(Lnet/minecraft/text/Text;IIZ)V",
+			method = "addMessage(Lnet/minecraft/network/chat/Component;IIZ)V",
 			//#endif
 			at = @At(
 					value = "CONSTANT",
@@ -89,7 +89,7 @@ public abstract class ChatHudMixin
 					//#elseif MC >= 11600
 					//$$ target = "Lnet/minecraft/client/gui/hud/ChatHud;fill(Lnet/minecraft/client/util/math/MatrixStack;IIIII)V"
 					//#else
-					target = "Lnet/minecraft/client/gui/hud/ChatHud;fill(IIIII)V"
+					target = "Lnet/minecraft/client/gui/components/ChatComponent;fill(IIIII)V"
 					//#endif
 			)
 	)
@@ -125,7 +125,7 @@ public abstract class ChatHudMixin
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void chatMessageLimit_replaceMessageContainerWithLinkedList(CallbackInfo ci)
 	{
-		this.messages = Lists.newLinkedList(this.messages);
-		this.visibleMessages = Lists.newLinkedList(this.visibleMessages);
+		this.allMessages = Lists.newLinkedList(this.allMessages);
+		this.trimmedMessages = Lists.newLinkedList(this.trimmedMessages);
 	}
 }

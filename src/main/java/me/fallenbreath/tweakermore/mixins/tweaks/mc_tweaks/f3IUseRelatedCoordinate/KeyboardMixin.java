@@ -21,17 +21,17 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.f3IUseRelatedCoordinate;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.Keyboard;
+import net.minecraft.client.KeyboardHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
-@Mixin(Keyboard.class)
+@Mixin(KeyboardHandler.class)
 public abstract class KeyboardMixin
 {
 	@ModifyArgs(
-			method = "copyBlock",
+			method = "copyCreateBlockCommand",
 			at = @At(
 					value = "INVOKE",
 					target = "Ljava/lang/String;format(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
@@ -58,7 +58,7 @@ public abstract class KeyboardMixin
 	}
 
 	@ModifyArgs(
-			method = "copyEntity",
+			method = "copyCreateEntityCommand",
 			at = @At(
 					value = "INVOKE",
 					target = "Ljava/lang/String;format(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",

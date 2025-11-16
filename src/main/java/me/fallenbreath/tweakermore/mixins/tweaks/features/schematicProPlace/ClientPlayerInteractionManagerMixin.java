@@ -25,41 +25,41 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.features.schematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.network.ClientPlayerInteractionManager;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.multiplayer.MultiPlayerGameMode;
+import net.minecraft.world.item.BlockPlaceContext;
+import net.minecraft.world.item.UseOnContext;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.phys.BlockHitResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 //#if MC < 11900
-import net.minecraft.client.world.ClientWorld;
+import net.minecraft.client.multiplayer.ClientLevel;
 //#endif
 
 /**
  * For injection when tweakeroo is present, see {@link PlacementTweaksMixin}
  */
 @Restriction(require = @Condition(ModIds.litematica), conflict = @Condition(ModIds.tweakeroo))
-@Mixin(ClientPlayerInteractionManager.class)
+@Mixin(MultiPlayerGameMode.class)
 public abstract class ClientPlayerInteractionManagerMixin
 {
-	@Inject(method = "interactBlock", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "useItemOn", at = @At("HEAD"), cancellable = true)
 	private void schematicProPlace(
-			ClientPlayerEntity player,
+			LocalPlayer player,
 			//#if MC < 11900
-			ClientWorld world,
+			ClientLevel world,
 			//#endif
-			Hand hand,
+			InteractionHand hand,
 			BlockHitResult hitResult,
-			CallbackInfoReturnable<ActionResult> cir
+			CallbackInfoReturnable<InteractionResult> cir
 	)
 	{
-		ItemPlacementContext ctx = new ItemPlacementContext(new ItemUsageContext(player, hand, hitResult));
+		BlockPlaceContext ctx = new BlockPlaceContext(new UseOnContext(player, hand, hitResult));
 
 		ProPlaceImpl.handleRightClick(() -> Pair.of(hitResult, ctx), cir);
 	}

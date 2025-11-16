@@ -20,17 +20,17 @@
 
 package me.fallenbreath.tweakermore.util;
 
-import net.minecraft.block.AbstractFurnaceBlock;
-import net.minecraft.block.BarrelBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BrewingStandBlock;
-import net.minecraft.block.ChestBlock;
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.HopperBlock;
-import net.minecraft.block.ShulkerBoxBlock;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DefaultedList;
+import net.minecraft.world.level.block.AbstractFurnaceBlock;
+import net.minecraft.world.level.block.BarrelBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BrewingStandBlock;
+import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.block.HopperBlock;
+import net.minecraft.world.level.block.ShulkerBoxBlock;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.NonNullList;
 
 import java.util.Optional;
 
@@ -61,7 +61,7 @@ public class InventoryUtils
 		return -1;
 	}
 
-	public static Optional<DefaultedList<ItemStack>> getStoredItems(ItemStack itemStack)
+	public static Optional<NonNullList<ItemStack>> getStoredItems(ItemStack itemStack)
 	{
 		int slotAmount = InventoryUtils.getInventorySlotAmount(itemStack);
 		if (slotAmount == -1)

@@ -20,9 +20,9 @@
 
 package me.fallenbreath.tweakermore.impl.mc_tweaks.disableLightUpdates;
 
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 
 public interface ILightingProvider
 {
-	void setWorld$tweakermore(World world$tweakermore);
+	void setWorld$tweakermore(Level world$tweakermore);
 }

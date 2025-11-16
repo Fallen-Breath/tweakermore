@@ -23,14 +23,14 @@ package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builde
 import com.google.common.collect.Lists;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.Messenger;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.LingeringPotionItem;
-import net.minecraft.item.PotionItem;
-import net.minecraft.item.TippedArrowItem;
-import net.minecraft.potion.PotionUtil;
-import net.minecraft.text.BaseText;
-import net.minecraft.text.Text;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.LingeringPotionItem;
+import net.minecraft.world.item.PotionItem;
+import net.minecraft.world.item.TippedArrowItem;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.network.chat.BaseComponent;
+import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -44,7 +44,7 @@ public class PotionHintBuilder extends AbstractHintBuilder
 {
 	@Override
 	@Nullable
-	public BaseText build(
+	public BaseComponent build(
 			//#if MC >= 12006
 			//$$ Item.TooltipContext context,
 			//#endif
@@ -60,11 +60,11 @@ public class PotionHintBuilder extends AbstractHintBuilder
 			//$$ var potions = itemStack.get(DataComponentTypes.POTION_CONTENTS);
 			//$$ if (ratio > 0 && potions != null)
 			//#else
-			if (ratio > 0 && !PotionUtil.getPotionEffects(itemStack).isEmpty())
+			if (ratio > 0 && !PotionUtils.getMobEffects(itemStack).isEmpty())
 			//#endif
 
 			{
-				List<Text> potionTexts = Lists.newArrayList();
+				List<Component> potionTexts = Lists.newArrayList();
 				//#if MC >= 12004
 				//$$ var world = net.minecraft.client.MinecraftClient.getInstance().world;
 				//$$ float tickRate = world != null ? world.getTickManager().getTickRate() : 20.0f;
@@ -75,7 +75,7 @@ public class PotionHintBuilder extends AbstractHintBuilder
 				//#elseif MC >= 12006
 				//$$ potions.buildTooltip(potionTexts::add, ratio, tickRate);
 				//#else
-				PotionUtil.buildTooltip(
+				PotionUtils.addPotionTooltip(
 						itemStack, potionTexts, ratio
 						//#if MC >= 12004
 						//$$ , tickRate
@@ -84,7 +84,7 @@ public class PotionHintBuilder extends AbstractHintBuilder
 				//#endif
 
 				int i = 0;
-				BaseText newLine = Messenger.s("");
+				BaseComponent newLine = Messenger.s("");
 				for (; i < potionTexts.size(); i++)
 				{
 					// we don't want the "potion.whenDrank" section

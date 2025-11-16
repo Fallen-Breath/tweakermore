@@ -23,7 +23,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.daytimeOverride;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalLongRef;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.world.ClientWorld;
+import net.minecraft.client.multiplayer.ClientLevel;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -37,14 +37,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Modify daytime here too,
  * so the logic used when the client received a time update packet can be reused by us (gamerule changing etc.)
  */
-@Mixin(ClientWorld.class)
+@Mixin(ClientLevel.class)
 public abstract class ClientWorldMixin
 {
 	@Inject(
 			//#if MC >= 12103
 			//$$ method = "setTime",
 			//#else
-			method = "setTimeOfDay",
+			method = "setDayTime",
 			//#endif
 			at = @At("HEAD")
 	)

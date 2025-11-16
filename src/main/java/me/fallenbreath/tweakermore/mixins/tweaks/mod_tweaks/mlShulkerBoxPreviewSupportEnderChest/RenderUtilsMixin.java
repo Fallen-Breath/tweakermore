@@ -25,8 +25,8 @@ import com.llamalad7.mixinextras.sugar.Local;
 import fi.dy.masa.malilib.render.InventoryOverlay;
 import fi.dy.masa.malilib.render.RenderUtils;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.mlShulkerBoxPreviewSupportEnderChest.EnderChestItemFetcher;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DefaultedList;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.NonNullList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -41,7 +41,7 @@ public abstract class RenderUtilsMixin
 					//#if MC >= 12006
 					//$$ target = "Lnet/minecraft/component/ComponentMap;contains(Lnet/minecraft/component/DataComponentType;)Z",
 					//#else
-					target = "Lnet/minecraft/item/ItemStack;hasTag()Z",
+					target = "Lnet/minecraft/world/item/ItemStack;hasTag()Z",
 					//#endif
 					ordinal = 0
 			)
@@ -55,11 +55,11 @@ public abstract class RenderUtilsMixin
 			method = "renderShulkerBoxPreview",
 			at = @At(
 					value = "INVOKE_ASSIGN",
-					target = "Lfi/dy/masa/malilib/util/InventoryUtils;getStoredItems(Lnet/minecraft/item/ItemStack;I)Lnet/minecraft/util/DefaultedList;",
+					target = "Lfi/dy/masa/malilib/util/InventoryUtils;getStoredItems(Lnet/minecraft/world/item/ItemStack;I)Lnet/minecraft/core/NonNullList;",
 					shift = At.Shift.AFTER
 			)
 	)
-	private static DefaultedList<ItemStack> mlShulkerBoxPreviewSupportEnderChest_hackItemList(DefaultedList<ItemStack> items, @Local(argsOnly = true) ItemStack stack)
+	private static NonNullList<ItemStack> mlShulkerBoxPreviewSupportEnderChest_hackItemList(NonNullList<ItemStack> items, @Local(argsOnly = true) ItemStack stack)
 	{
 		if (EnderChestItemFetcher.enableFor(stack))
 		{
@@ -72,7 +72,7 @@ public abstract class RenderUtilsMixin
 			method = "renderShulkerBoxPreview",
 			at = @At(
 					value = "INVOKE_ASSIGN",
-					target = "Lfi/dy/masa/malilib/render/InventoryOverlay;getInventoryType(Lnet/minecraft/item/ItemStack;)Lfi/dy/masa/malilib/render/InventoryOverlay$InventoryRenderType;",
+					target = "Lfi/dy/masa/malilib/render/InventoryOverlay;getInventoryType(Lnet/minecraft/world/item/ItemStack;)Lfi/dy/masa/malilib/render/InventoryOverlay$InventoryRenderType;",
 					shift = At.Shift.AFTER
 			)
 	)

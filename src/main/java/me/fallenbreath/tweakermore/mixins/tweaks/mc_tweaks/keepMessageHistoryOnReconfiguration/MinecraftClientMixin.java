@@ -20,10 +20,10 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.keepMessageHistoryOnReconfiguration;
 
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(MinecraftClient.class)
+@Mixin(Minecraft.class)
 public abstract class MinecraftClientMixin
 {
 }

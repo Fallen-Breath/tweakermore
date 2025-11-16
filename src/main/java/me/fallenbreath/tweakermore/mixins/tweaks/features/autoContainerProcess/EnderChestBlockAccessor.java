@@ -20,25 +20,25 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.features.autoContainerProcess;
 
-import net.minecraft.block.EnderChestBlock;
+import net.minecraft.world.level.block.EnderChestBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 //#if MC >= 11600
 //$$ import net.minecraft.text.Text;
 //#else
-import net.minecraft.text.TranslatableText;
+import net.minecraft.network.chat.TranslatableComponent;
 //#endif
 
 @Mixin(EnderChestBlock.class)
 public interface EnderChestBlockAccessor
 {
-	@Accessor("CONTAINER_NAME")
+	@Accessor("CONTAINER_TITLE")
 	static
 	//#if MC >= 11600
 	//$$ Text
 	//#else
-	TranslatableText
+	TranslatableComponent
 	//#endif
 	getContainerName()
 	{

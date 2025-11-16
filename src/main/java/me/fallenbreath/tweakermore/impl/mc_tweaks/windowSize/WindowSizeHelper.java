@@ -24,8 +24,8 @@ import fi.dy.masa.malilib.gui.Message;
 import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.util.Window;
+import net.minecraft.client.Minecraft;
+import com.mojang.blaze3d.platform.Window;
 import org.lwjgl.glfw.GLFW;
 
 public class WindowSizeHelper
@@ -58,8 +58,8 @@ public class WindowSizeHelper
 			return;
 		}
 
-		int windowWidth = window.getWidth();
-		int windowHeight = window.getHeight();
+		int windowWidth = window.getScreenWidth();
+		int windowHeight = window.getScreenHeight();
 		int configWidth = getConfigWidth();
 		int configHeight = getConfigHeight();
 
@@ -84,7 +84,7 @@ public class WindowSizeHelper
 
 	private static Window getMcWindow()
 	{
-		MinecraftClient mc = MinecraftClient.getInstance();
+		Minecraft mc = Minecraft.getInstance();
 		//#if MC >= 11500
 		return mc.getWindow();
 		//#else
@@ -114,6 +114,6 @@ public class WindowSizeHelper
 			// remember to check this before calling applyWindowSizeImpl()
 			throw new RuntimeException("resize in full screen");
 		}
-		GLFW.glfwSetWindowSize(window.getHandle(), getConfigWidth(), getConfigHeight());
+		GLFW.glfwSetWindowSize(window.getWindow(), getConfigWidth(), getConfigHeight());
 	}
 }

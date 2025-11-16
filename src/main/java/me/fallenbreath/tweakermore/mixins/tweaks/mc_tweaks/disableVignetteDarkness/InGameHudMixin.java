@@ -23,31 +23,31 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableVignetteDarkn
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.gui.Gui;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(InGameHud.class)
+@Mixin(Gui.class)
 public abstract class InGameHudMixin
 {
 	@Shadow public float
 			//#if MC >= 11500
-			vignetteDarkness;
+			vignetteBrightness;
 			//#else
 			//$$ field_2013;
 			//#endif
 
-	@Inject(method = "renderVignetteOverlay", at = @At(value = "HEAD"))
+	@Inject(method = "renderVignette", at = @At(value = "HEAD"))
 	private void disableVignetteDarkness_modifyVignetteDarkness(CallbackInfo ci, @Share("pvd") LocalRef<Float> prevVignetteDarkness)
 	{
 		if (TweakerMoreConfigs.DISABLE_VIGNETTE_DARKNESS.getBooleanValue())
 		{
 			//#if MC >= 11500
-			prevVignetteDarkness.set(this.vignetteDarkness);
-			this.vignetteDarkness = 0.0F;
+			prevVignetteDarkness.set(this.vignetteBrightness);
+			this.vignetteBrightness = 0.0F;
 			//#else
 			//$$ prevVignetteDarkness.set(this.field_2013);
 			//$$ this.field_2013 = 0.0F;
@@ -55,13 +55,13 @@ public abstract class InGameHudMixin
 		}
 	}
 
-	@Inject(method = "renderVignetteOverlay", at = @At(value = "TAIL"))
+	@Inject(method = "renderVignette", at = @At(value = "TAIL"))
 	private void disableVignetteDarkness_restoreVignetteDarkness(CallbackInfo ci, @Share("pvd") LocalRef<Float> prevVignetteDarkness)
 	{
 		if (prevVignetteDarkness.get() != null)
 		{
 			//#if MC >= 11500
-			this.vignetteDarkness = prevVignetteDarkness.get();
+			this.vignetteBrightness = prevVignetteDarkness.get();
 			//#else
 			//$$ this.field_2013 = prevVignetteDarkness.get();
 			//#endif

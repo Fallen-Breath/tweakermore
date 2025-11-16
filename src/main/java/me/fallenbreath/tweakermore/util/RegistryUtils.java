@@ -20,19 +20,19 @@
 
 package me.fallenbreath.tweakermore.util;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.Item;
+import net.minecraft.core.Registry;
 
 public class RegistryUtils
 {
 	public static String getItemId(Item item)
 	{
-		return Registry.ITEM.getId(item).toString();
+		return Registry.ITEM.getKey(item).toString();
 	}
 
 	public static String getBlockId(Block block)
 	{
-		return Registry.BLOCK.getId(block).toString();
+		return Registry.BLOCK.getKey(block).toString();
 	}
 }

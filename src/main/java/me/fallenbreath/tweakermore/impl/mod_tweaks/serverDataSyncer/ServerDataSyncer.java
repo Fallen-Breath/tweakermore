@@ -28,14 +28,14 @@ import me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.Dou
 import me.fallenbreath.tweakermore.util.EntityUtils;
 import me.fallenbreath.tweakermore.util.compat.carpettisaddition.CarpetTISAdditionAccess;
 import me.fallenbreath.tweakermore.util.event.TweakerMoreEvents;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.Entity;
-import net.minecraft.inventory.DoubleInventory;
-import net.minecraft.inventory.Inventory;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.CompoundContainer;
+import net.minecraft.world.Container;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -87,8 +87,8 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 
 	public static boolean hasEnoughPermission()
 	{
-		MinecraftClient mc = MinecraftClient.getInstance();
-		if (mc.player != null && mc.player.allowsPermissionLevel(2))
+		Minecraft mc = Minecraft.getInstance();
+		if (mc.player != null && mc.player.hasPermissions(2))
 		{
 			return true;
 		}
@@ -102,7 +102,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 	}
 
 	@Override
-	public void onClientTick(MinecraftClient mc)
+	public void onClientTick(Minecraft mc)
 	{
 		this.resetSyncLimiter();
 		this.tickTask();
@@ -126,7 +126,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 		if (hasEnoughPermission())
 		{
 			return Optional.of(this.syncedEntityId.computeIfAbsent(
-					entity.getEntityId(),
+					entity.getId(),
 					entityId -> {
 						CompletableFuture<CompoundTag> future = new CompletableFuture<>();
 						this.runOrEnqueueTask(() -> {
@@ -152,12 +152,12 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 		if (hasEnoughPermission())
 		{
 			return Optional.of(this.syncBlockEntityPos.computeIfAbsent(
-					blockEntity.getPos(),
+					blockEntity.getBlockPos(),
 					pos -> {
 						CompletableFuture<CompoundTag> future = new CompletableFuture<>();
 						this.runOrEnqueueTask(() -> {
 							TweakerMoreMod.LOGGER.debug("Syncing block entity data at {}", pos);
-							this.queryHandler.queryBlockNbt(blockEntity.getPos(), future::complete);
+							this.queryHandler.queryBlockNbt(blockEntity.getBlockPos(), future::complete);
 						});
 						return future;
 					}
@@ -199,7 +199,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 						//$$ 	entity.readData(NbtReadView.create(logging, entity.getRegistryManager(), nbt));
 						//$$ }
 						//#else
-						entity.fromTag(nbt);
+						entity.load(nbt);
 						//#endif
 						if (restorer != null)
 						{
@@ -240,13 +240,13 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 		if (hasEnoughPermission())
 		{
 			Optional<CompletableFuture<CompoundTag>> opt = fetchBlockEntity(blockEntity);
-			World world = blockEntity.getWorld();
+			Level world = blockEntity.getLevel();
 			if (opt.isPresent() && world != null)
 			{
 				return opt.get().thenAccept(nbt -> {
 					if (nbt != null)
 					{
-						BlockPos pos = blockEntity.getPos();
+						BlockPos pos = blockEntity.getBlockPos();
 						try
 						{
 							//#if MC >= 12106
@@ -261,7 +261,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 							//#elseif MC >= 11600
 							//$$ blockEntity.fromTag(blockEntity.getCachedState(), nbt);
 							//#else
-							blockEntity.fromTag(nbt);
+							blockEntity.load(nbt);
 							//#endif
 							TweakerMoreMod.LOGGER.debug("Synced block entity data at {}", pos);
 						}
@@ -289,12 +289,12 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 	 */
 	public CompletableFuture<Void> syncBlockEntityAt(BlockPos pos)
 	{
-		MinecraftClient mc = MinecraftClient.getInstance();
+		Minecraft mc = Minecraft.getInstance();
 		if (hasEnoughPermission() && mc.player != null)
 		{
-			World world = EntityUtils.getEntityWorld(mc.player);
+			Level world = EntityUtils.getEntityWorld(mc.player);
 			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity != null && pos.equals(blockEntity.getPos()))
+			if (blockEntity != null && pos.equals(blockEntity.getBlockPos()))
 			{
 				return syncBlockEntity(blockEntity);
 			}
@@ -307,13 +307,13 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 	 *
 	 * @return a future indicating when all required sync operation completes
 	 */
-	public CompletableFuture<Void> syncBlockInventory(Inventory inventory)
+	public CompletableFuture<Void> syncBlockInventory(Container inventory)
 	{
 		if (inventory instanceof BlockEntity)
 		{
 			return this.syncBlockEntity((BlockEntity)inventory);
 		}
-		else if (inventory instanceof DoubleInventory)
+		else if (inventory instanceof CompoundContainer)
 		{
 			DoubleInventoryAccessor accessor = (DoubleInventoryAccessor)inventory;
 			return CompletableFuture.allOf(

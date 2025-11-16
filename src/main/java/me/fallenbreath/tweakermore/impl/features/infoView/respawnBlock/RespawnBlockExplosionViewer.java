@@ -35,16 +35,16 @@ import me.fallenbreath.tweakermore.util.damage.DamageCalculator;
 import me.fallenbreath.tweakermore.util.damage.DamageUtil;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.BaseText;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.network.chat.BaseComponent;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -60,7 +60,7 @@ public class RespawnBlockExplosionViewer extends CommonScannerInfoViewer
 	);
 
 	private final LongOpenHashSet renderedKeys = new LongOpenHashSet();
-	private final Map<Vec3d, DamageCache> damageCache = Maps.newHashMap();
+	private final Map<Vec3, DamageCache> damageCache = Maps.newHashMap();
 
 	public RespawnBlockExplosionViewer()
 	{
@@ -72,7 +72,7 @@ public class RespawnBlockExplosionViewer extends CommonScannerInfoViewer
 	}
 
 	@Nullable
-	private static Formatting stagedColor(float value, float[] bounds, Formatting[] formattings)
+	private static ChatFormatting stagedColor(float value, float[] bounds, ChatFormatting[] formattings)
 	{
 		if (bounds.length == formattings.length)
 		{
@@ -109,8 +109,8 @@ public class RespawnBlockExplosionViewer extends CommonScannerInfoViewer
 	@Override
 	protected void render(WorldRenderContext context, RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos)
 	{
-		MinecraftClient mc = MinecraftClient.getInstance();
-		ClientWorld clientWorld = mc.world;
+		Minecraft mc = Minecraft.getInstance();
+		ClientLevel clientWorld = mc.level;
 		if (clientWorld == null || mc.player == null)
 		{
 			return;
@@ -139,10 +139,10 @@ public class RespawnBlockExplosionViewer extends CommonScannerInfoViewer
 					DamageCalculator calculator = DamageCalculator.explosion(explosionCenter, handler.getExplosionPower(), mc.player);
 					replacer.restoreBlocks();
 
-					World bestWorld = world.getBestWorld();
-					if (bestWorld instanceof ServerWorld)
+					Level bestWorld = world.getBestWorld();
+					if (bestWorld instanceof ServerLevel)
 					{
-						calculator.setServerWorld((ServerWorld)bestWorld);
+						calculator.setServerWorld((ServerLevel)bestWorld);
 					}
 
 					calculator.applyDifficulty(bestWorld.getDifficulty());
@@ -155,26 +155,26 @@ public class RespawnBlockExplosionViewer extends CommonScannerInfoViewer
 					return new DamageCache(calculator.getDamageSource(), baseAmount, appliedAmount, remainingHealth);
 				});
 
-		Formatting amountFmt = stagedColor(
+		ChatFormatting amountFmt = stagedColor(
 				cache.remainingHealth,
-				new float[]{0.0F, mc.player.getMaximumHealth() * 0.2F},
-				new Formatting[]{Formatting.RED, Formatting.GOLD}
+				new float[]{0.0F, mc.player.getMaxHealth() * 0.2F},
+				new ChatFormatting[]{ChatFormatting.RED, ChatFormatting.GOLD}
 		);
-		Formatting lineFmt = stagedColor(
+		ChatFormatting lineFmt = stagedColor(
 				cache.baseAmount,
 				new float[]{1E-6F, DamageUtil.modifyDamageForDifficulty(1.0F, world.getBestWorld().getDifficulty(), cache.damageSource)},
-				new Formatting[]{Formatting.DARK_GRAY, Formatting.GRAY}
+				new ChatFormatting[]{ChatFormatting.DARK_GRAY, ChatFormatting.GRAY}
 		);
 
-		Function<Float, BaseText> float2text = hp -> {
-			BaseText text = Messenger.s(String.format("%.2f", hp));
+		Function<Float, BaseComponent> float2text = hp -> {
+			BaseComponent text = Messenger.s(String.format("%.2f", hp));
 			if (amountFmt != null)
 			{
 				Messenger.formatting(text, amountFmt);
 			}
 			return text;
 		};
-		Function<BaseText, BaseText> lineModifier = text -> {
+		Function<BaseComponent, BaseComponent> lineModifier = text -> {
 			if (amountFmt == null && lineFmt != null)
 			{
 				Messenger.formatting(text, lineFmt);
@@ -182,8 +182,8 @@ public class RespawnBlockExplosionViewer extends CommonScannerInfoViewer
 			return text;
 		};
 
-		BaseText line1 = Messenger.tr("tweakermore.impl.infoViewRespawnBlockExplosion.damage", float2text.apply(cache.appliedAmount));
-		BaseText line2 = Messenger.c("-> ", float2text.apply(cache.remainingHealth), "HP");
+		BaseComponent line1 = Messenger.tr("tweakermore.impl.infoViewRespawnBlockExplosion.damage", float2text.apply(cache.appliedAmount));
+		BaseComponent line2 = Messenger.c("-> ", float2text.apply(cache.remainingHealth), "HP");
 		double alpha = TweakerMoreConfigs.INFO_VIEW_RESPAWN_BLOCK_EXPLOSION_TEXT_ALPHA.getDoubleValue();
 		if (alpha > 0)
 		{

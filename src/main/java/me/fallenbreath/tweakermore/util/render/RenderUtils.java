@@ -22,8 +22,8 @@ package me.fallenbreath.tweakermore.util.render;
 
 import me.fallenbreath.tweakermore.util.render.context.GuiRenderContext;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 
 import java.util.Objects;
 
@@ -42,22 +42,22 @@ import java.util.Objects;
 //#endif
 
 //#if MC >= 11500
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.VertexConsumerProvider;
+import com.mojang.blaze3d.vertex.Tesselator;
+import net.minecraft.client.renderer.MultiBufferSource;
 //#endif
 
 public class RenderUtils
 {
-	private static final TextRenderer TEXT_RENDERER = MinecraftClient.getInstance().textRenderer;
+	private static final Font TEXT_RENDERER = Minecraft.getInstance().font;
 
-	public static final int TEXT_HEIGHT = TEXT_RENDERER.fontHeight;
+	public static final int TEXT_HEIGHT = TEXT_RENDERER.lineHeight;
 	// text with background has 1 extra height at the top
 	public static final int TEXT_LINE_HEIGHT = RenderUtils.TEXT_HEIGHT + 1;
 	public static float tickDelta = 1.0F;
 
 	public static int getRenderWidth(String text)
 	{
-		return TEXT_RENDERER.getStringWidth(text);
+		return TEXT_RENDERER.width(text);
 	}
 
 	public static int getSizeScalingXSign()
@@ -78,12 +78,12 @@ public class RenderUtils
 	//#endif
 
 	//#if MC >= 11500
-	public static VertexConsumerProvider.Immediate getVertexConsumer()
+	public static MultiBufferSource.BufferSource getVertexConsumer()
 	{
 		//#if MC >= 12100
 		//$$ return MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
 		//#else
-		return VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
+		return MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
 		//#endif
 	}
 	//#endif

@@ -22,10 +22,10 @@ package me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.handler;
 
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.util.TemporaryBlockReplacer;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.Level;
 
 public abstract class AbstractBlockHandler
 {
@@ -42,7 +42,7 @@ public abstract class AbstractBlockHandler
 
 	public abstract boolean isValid();
 
-	public abstract Vec3d getExplosionCenter();
+	public abstract Vec3 getExplosionCenter();
 
 	public abstract BlockPos getDeduplicationKey();
 
@@ -50,7 +50,7 @@ public abstract class AbstractBlockHandler
 
 	public abstract float getExplosionPower();
 
-	public Vec3d getTextPosition()
+	public Vec3 getTextPosition()
 	{
 		return this.getExplosionCenter();
 	}

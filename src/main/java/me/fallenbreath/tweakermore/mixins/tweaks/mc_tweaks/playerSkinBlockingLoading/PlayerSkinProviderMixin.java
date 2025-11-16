@@ -25,7 +25,7 @@ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.playerSkinBlockingLoading.TaskSynchronizer;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.texture.PlayerSkinProvider;
+import net.minecraft.client.resources.SkinManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -44,7 +44,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
  *   >= mc1.20.2        : subproject 1.20.2
  */
 @Restriction(conflict = @Condition(ModIds.custom_skin_loader))
-@Mixin(PlayerSkinProvider.class)
+@Mixin(SkinManager.class)
 public abstract class PlayerSkinProviderMixin
 {
 	//#if MC >= 11500
@@ -52,13 +52,13 @@ public abstract class PlayerSkinProviderMixin
 	//#else
 	//$$ @ModifyArg(
 	//#endif
-			method = "loadSkin(Lcom/mojang/authlib/GameProfile;Lnet/minecraft/client/texture/PlayerSkinProvider$SkinTextureAvailableCallback;Z)V",
+			method = "registerSkins(Lcom/mojang/authlib/GameProfile;Lnet/minecraft/client/resources/SkinManager$SkinTextureCallback;Z)V",
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 11800
 					//$$ target = "Lnet/minecraft/util/Util;getMainWorkerExecutor()Ljava/util/concurrent/ExecutorService;"
 					//#elseif MC >= 11500
-					target = "Lnet/minecraft/util/Util;getServerWorkerExecutor()Ljava/util/concurrent/Executor;"
+					target = "Lnet/minecraft/Util;backgroundExecutor()Ljava/util/concurrent/Executor;"
 					//#else
 					//$$ target = "Ljava/util/concurrent/ExecutorService;submit(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;"
 					//#endif

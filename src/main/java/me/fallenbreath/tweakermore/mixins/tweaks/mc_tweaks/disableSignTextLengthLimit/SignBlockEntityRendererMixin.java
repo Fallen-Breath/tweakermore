@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 //#if MC >= 12104
 //$$ import net.minecraft.client.render.block.entity.AbstractSignBlockEntityRenderer;
 //#else
-import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
 //#endif
 
 //#if MC < 11500
@@ -53,7 +53,7 @@ import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
 		//#if MC >= 12104
 		//$$ AbstractSignBlockEntityRenderer.class
 		//#else
-		SignBlockEntityRenderer.class
+		SignRenderer.class
 		//#endif
 )
 public abstract class SignBlockEntityRendererMixin
@@ -84,7 +84,7 @@ public abstract class SignBlockEntityRendererMixin
 					//#if MC >= 11600
 					//$$ target = "Lnet/minecraft/client/font/TextRenderer;wrapLines(Lnet/minecraft/text/StringVisitable;I)Ljava/util/List;",
 					//#else
-					target = "Lnet/minecraft/client/util/Texts;wrapLines(Lnet/minecraft/text/Text;ILnet/minecraft/client/font/TextRenderer;ZZ)Ljava/util/List;",
+					target = "Lnet/minecraft/client/gui/components/ComponentRenderUtils;wrapComponents(Lnet/minecraft/network/chat/Component;ILnet/minecraft/client/gui/Font;ZZ)Ljava/util/List;",
 					//#endif
 					remap = true
 			),

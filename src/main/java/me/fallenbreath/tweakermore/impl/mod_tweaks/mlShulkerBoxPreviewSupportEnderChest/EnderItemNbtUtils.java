@@ -36,7 +36,7 @@ public class EnderItemNbtUtils
 
 	/**
 	 * NOTES: in mc1.21.5+, no "all list items are nbt" check will be made,
-	 * matching the vanilla implementation ${@link net.minecraft.entity.player.PlayerEntity#readCustomDataFromTag}
+	 * matching the vanilla implementation ${@link net.minecraft.world.entity.player.Player#readCustomDataFromTag}
 	 * to read the "EnderItems" list
 	 */
 	public static ListTag getNbtListOrEmpty(CompoundTag nbt, String key)

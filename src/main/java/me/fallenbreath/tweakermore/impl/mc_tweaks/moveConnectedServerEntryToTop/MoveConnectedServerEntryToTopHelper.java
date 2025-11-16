@@ -22,9 +22,9 @@ package me.fallenbreath.tweakermore.impl.mc_tweaks.moveConnectedServerEntryToTop
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.moveConnectedServerEntryToTop.ServerListAccessor;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ServerInfo;
-import net.minecraft.client.options.ServerList;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.client.multiplayer.ServerList;
 
 import java.util.List;
 
@@ -40,8 +40,8 @@ public class MoveConnectedServerEntryToTopHelper
 			return;
 		}
 
-		MinecraftClient mc = MinecraftClient.getInstance();
-		ServerInfo currentEntry = mc.getCurrentServerEntry();
+		Minecraft mc = Minecraft.getInstance();
+		ServerData currentEntry = mc.getCurrentServer();
 		if (currentEntry == null)
 		{
 			return;
@@ -49,17 +49,17 @@ public class MoveConnectedServerEntryToTopHelper
 
 		// ref: net.minecraft.client.options.ServerList#updateServerListEntry
 		ServerList serverList = new ServerList(mc);
-		serverList.loadFile();
+		serverList.load();
 
-		List<ServerInfo> servers = ((ServerListAccessor)serverList).getServers();
+		List<ServerData> servers = ((ServerListAccessor)serverList).getServers();
 
 		int idx = selectedIndex;
 		boolean ok = false;
 		if (0 <= idx && idx < servers.size())
 		{
 			// verify the fresh ServerInfo, in case the file got modified
-			ServerInfo serverInfo = servers.get(idx);
-			if (serverInfo.name.equals(currentEntry.name) && serverInfo.address.equals(currentEntry.address))
+			ServerData serverInfo = servers.get(idx);
+			if (serverInfo.name.equals(currentEntry.name) && serverInfo.ip.equals(currentEntry.ip))
 			{
 				ok = true;
 			}
@@ -71,13 +71,13 @@ public class MoveConnectedServerEntryToTopHelper
 		}
 
 		// move idx to the first
-		ServerInfo serverInfo = servers.get(idx);
+		ServerData serverInfo = servers.get(idx);
 		for (int i = idx; i > 0; i--)
 		{
-			serverList.set(i, servers.get(i - 1));
+			serverList.replace(i, servers.get(i - 1));
 		}
-		serverList.set(0, serverInfo);
+		serverList.replace(0, serverInfo);
 
-		serverList.saveFile();
+		serverList.save();
 	}
 }

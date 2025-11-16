@@ -25,7 +25,7 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.render.BackgroundRenderer;
+import net.minecraft.client.renderer.FogRenderer;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -33,12 +33,12 @@ import org.spongepowered.asm.mixin.injection.At;
 //#if MC >= 11700
 //$$ import net.minecraft.client.render.CameraSubmersionType;
 //#else
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 //#endif
 
 @Restriction(require = @Condition(ModIds.optifine))
-@Mixin(BackgroundRenderer.class)
+@Mixin(FogRenderer.class)
 public abstract class BackgroundRenderer_optifineMixin
 {
 	@Dynamic("Added by optifine")
@@ -50,7 +50,7 @@ public abstract class BackgroundRenderer_optifineMixin
 					//#if MC >= 11700
 					//$$ target = "Lnet/minecraft/client/render/Camera;getSubmersionType()Lnet/minecraft/client/render/CameraSubmersionType;",
 					//#else
-					target = "Lnet/minecraft/client/render/Camera;getSubmergedFluidState()Lnet/minecraft/fluid/FluidState;",
+					target = "Lnet/minecraft/client/Camera;getFluidInCamera()Lnet/minecraft/world/level/material/FluidState;",
 					//#endif
 					remap = true
 			),
@@ -70,7 +70,7 @@ public abstract class BackgroundRenderer_optifineMixin
 			//#if MC >= 11700
 			//$$ return CameraSubmersionType.NONE;
 			//#else
-			return Fluids.EMPTY.getDefaultState();
+			return Fluids.EMPTY.defaultFluidState();
 			//#endif
 		}
 		//#if MC >= 11700

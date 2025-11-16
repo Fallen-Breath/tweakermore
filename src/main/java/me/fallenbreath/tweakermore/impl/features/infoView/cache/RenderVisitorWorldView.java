@@ -21,13 +21,13 @@
 package me.fallenbreath.tweakermore.impl.features.infoView.cache;
 
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.LightType;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,19 +45,19 @@ public class RenderVisitorWorldView implements SimpleWorldView
 		this.clientWorldView = clientWorld;
 	}
 
-	public World getBestWorld()
+	public Level getBestWorld()
 	{
 		return this.bestWorldView.getWorld();
 	}
 
-	public World getClientWorld()
+	public Level getClientWorld()
 	{
 		return this.clientWorldView.getWorld();
 	}
 
 	public boolean isBestWorldServerWorld()
 	{
-		return this.getBestWorld() instanceof ServerWorld;
+		return this.getBestWorld() instanceof ServerLevel;
 	}
 
 	public void syncBlockEntity(BlockPos pos)
@@ -95,9 +95,9 @@ public class RenderVisitorWorldView implements SimpleWorldView
 	}
 
 	@Override
-	public int getHeight()
+	public int getMaxBuildHeight()
 	{
-		return this.clientWorldView.getHeight();
+		return this.clientWorldView.getMaxBuildHeight();
 	}
 
 	//#if MC >= 11700
@@ -117,7 +117,7 @@ public class RenderVisitorWorldView implements SimpleWorldView
 	}
 
 	@Override
-	public int getLightLevel(LightType type, BlockPos pos)
+	public int getLightLevel(LightLayer type, BlockPos pos)
 	{
 		return this.clientWorldView.getLightLevel(type, pos);
 	}

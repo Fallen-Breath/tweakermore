@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.util.render.matrix;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.util.math.Matrix4f;
+import com.mojang.math.Matrix4f;
 
 //#if MC >= 11600
 //$$ import net.minecraft.client.util.math.MatrixStack;

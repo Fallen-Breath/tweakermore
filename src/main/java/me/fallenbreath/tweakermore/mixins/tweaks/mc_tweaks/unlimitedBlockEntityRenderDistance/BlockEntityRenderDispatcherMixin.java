@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.unlimitedBlockEntity
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -33,7 +33,7 @@ public abstract class BlockEntityRenderDispatcherMixin
 			//#if MC >= 12109
 			//$$ method = "getRenderState",
 			//#elseif MC >= 11500
-			method = "render(Lnet/minecraft/block/entity/BlockEntity;FLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;)V",
+			method = "render(Lnet/minecraft/world/level/block/entity/BlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;)V",
 			//#else
 			//$$ method = "render(Lnet/minecraft/block/entity/BlockEntity;FI)V",
 			//#endif
@@ -42,7 +42,7 @@ public abstract class BlockEntityRenderDispatcherMixin
 					//#if MC >= 11700
 					//$$ target = "Lnet/minecraft/client/render/block/entity/BlockEntityRenderer;isInRenderDistance(Lnet/minecraft/block/entity/BlockEntity;Lnet/minecraft/util/math/Vec3d;)Z"
 					//#else
-					target = "Lnet/minecraft/block/entity/BlockEntity;getSquaredRenderDistance()D"
+					target = "Lnet/minecraft/world/level/block/entity/BlockEntity;getViewDistance()D"
 					//#endif
 			)
 	)

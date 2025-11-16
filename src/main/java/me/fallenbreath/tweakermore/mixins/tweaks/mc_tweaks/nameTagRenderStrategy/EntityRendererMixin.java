@@ -23,9 +23,9 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.nameTagRenderStrateg
 import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.listentries.RestrictionType;
-import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -50,7 +50,7 @@ public abstract class EntityRendererMixin
 {
 	@Inject(
 			//#if MC >= 11500
-			method = "renderLabelIfPresent",
+			method = "renderNameTag",
 			//#else
 			//$$ method = "renderLabel(Lnet/minecraft/entity/Entity;Ljava/lang/String;DDDI)V",
 			//#endif
@@ -72,7 +72,7 @@ public abstract class EntityRendererMixin
 				//#if MC >= 12103
 				//$$ entityState instanceof PlayerEntityRenderState playerEntityRenderState
 				//#else
-				entity instanceof PlayerEntity
+				entity instanceof Player
 				//#endif
 		)
 		{
@@ -81,7 +81,7 @@ public abstract class EntityRendererMixin
 			//#elseif MC >= 12103
 			//$$ String playerName = playerEntityRenderState.name;
 			//#else
-			String playerName = ((PlayerEntity)entity).getGameProfile().getName();
+			String playerName = ((Player)entity).getGameProfile().getName();
 			//#endif
 			if (playerName == null)
 			{

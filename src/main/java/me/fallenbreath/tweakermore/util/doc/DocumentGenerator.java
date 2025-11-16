@@ -23,9 +23,9 @@ package me.fallenbreath.tweakermore.util.doc;
 import com.google.common.collect.ImmutableList;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.util.FabricUtils;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.resource.language.LanguageDefinition;
-import net.minecraft.client.resource.language.LanguageManager;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.language.Language;
+import net.minecraft.client.resources.language.LanguageManager;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -38,22 +38,22 @@ public class DocumentGenerator
 	private static CompletableFuture<Void> setLanguage(String lang)
 	{
 		TweakerMoreMod.LOGGER.info("Setting client language to {}", lang);
-		LanguageManager languageManager = MinecraftClient.getInstance().getLanguageManager();
-		LanguageDefinition languageDefinition = languageManager.getLanguage(lang);
-		if (languageDefinition != languageManager.getLanguage(  // what we want != current
+		LanguageManager languageManager = Minecraft.getInstance().getLanguageManager();
+		Language languageDefinition = languageManager.getLanguage(lang);
+		if (languageDefinition != languageManager.getSelected(  // what we want != current
 				//#if MC >= 11904
 				//$$ languageManager.getLanguage()
 				//#endif
 		))
 		{
-			languageManager.setLanguage(
+			languageManager.setSelected(
 					//#if MC >= 11904
 					//$$ lang
 					//#else
 					languageDefinition
 					//#endif
 			);
-			return MinecraftClient.getInstance().reloadResources();
+			return Minecraft.getInstance().reloadResourcePacks();
 		}
 		return CompletableFuture.allOf();
 	}
@@ -71,7 +71,7 @@ public class DocumentGenerator
 			completableFuture = new CompletableFuture<>();  // assign to any value first to prevent hotkey spam
 
 			TweakerMoreMod.LOGGER.info("Generating doc...");
-			String prevLang = MinecraftClient.getInstance().options.language;
+			String prevLang = Minecraft.getInstance().options.languageCode;
 
 			CompletableFuture<Void>[] futures = new CompletableFuture[LANGS.size() + 1];
 			for (int i = 0; i < futures.length; i++)
@@ -96,7 +96,7 @@ public class DocumentGenerator
 					if (exit)
 					{
 						TweakerMoreMod.LOGGER.info("Stopping Minecraft client");
-						MinecraftClient.getInstance().scheduleStop();
+						Minecraft.getInstance().stop();
 					}
 				});
 			});

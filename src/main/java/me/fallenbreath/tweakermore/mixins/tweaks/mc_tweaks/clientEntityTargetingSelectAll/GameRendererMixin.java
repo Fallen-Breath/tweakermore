@@ -24,12 +24,12 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.clientEntityTargetingSelectAll.MinecraftClientWithExtendedTargetEntity;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.GameRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -41,22 +41,22 @@ import java.util.function.Predicate;
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin
 {
-	@Shadow @Final private MinecraftClient client;
+	@Shadow @Final private Minecraft minecraft;
 
 	@WrapOperation(
 			//#if MC >= 12006
 			//$$ method = "findCrosshairTarget",
 			//#else
-			method = "updateTargetedEntity",
+			method = "pick",
 			//#endif
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/entity/ProjectileUtil;rayTrace(Lnet/minecraft/entity/Entity;Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/Box;Ljava/util/function/Predicate;D)Lnet/minecraft/util/hit/EntityHitResult;"
+					target = "Lnet/minecraft/world/entity/projectile/ProjectileUtil;getEntityHitResult(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate;D)Lnet/minecraft/world/phys/EntityHitResult;"
 			)
 	)
-	private @Nullable EntityHitResult clientEntityTargetingSelectAll_makeExtendedTarget(Entity entity, Vec3d vecStart, Vec3d vecEnd, Box box, Predicate<Entity> predicate, double reach, Operation<EntityHitResult> original)
+	private @Nullable EntityHitResult clientEntityTargetingSelectAll_makeExtendedTarget(Entity entity, Vec3 vecStart, Vec3 vecEnd, AABB box, Predicate<Entity> predicate, double reach, Operation<EntityHitResult> original)
 	{
-		MinecraftClientWithExtendedTargetEntity access = (MinecraftClientWithExtendedTargetEntity)this.client;
+		MinecraftClientWithExtendedTargetEntity access = (MinecraftClientWithExtendedTargetEntity)this.minecraft;
 		if (TweakerMoreConfigs.CLIENT_ENTITY_TARGETING_SUPPORT_ALL.getBooleanValue())
 		{
 			access.setExtendedEntityHitResult$TKM(original.call(entity, vecStart, vecEnd, box, (Predicate<Entity>)e -> true, reach));

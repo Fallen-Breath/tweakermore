@@ -28,11 +28,11 @@ import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSy
 import me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.mlShulkerBoxPreviewSupportEnderChest.BasicInventoryAccessor;
 import me.fallenbreath.tweakermore.util.collection.ExpiringMap;
 import me.fallenbreath.tweakermore.util.event.TweakerMoreEvents;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EnderChestInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DefaultedList;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.PlayerEnderChestContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.NonNullList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -55,7 +55,7 @@ import java.util.UUID;
 public abstract class EnderChestItemFetcherMixin
 {
 	@Unique
-	private static final ExpiringMap<UUID, EnderChestInventory> CACHE = new ExpiringMap<>(Maps.newHashMap(), 5_000);
+	private static final ExpiringMap<UUID, PlayerEnderChestContainer> CACHE = new ExpiringMap<>(Maps.newHashMap(), 5_000);
 	@Unique
 	private static final long COOLDOWN_MS = 250;  // 0.25s (5gt)
 	@Unique
@@ -71,12 +71,12 @@ public abstract class EnderChestItemFetcherMixin
 
 	@SuppressWarnings("UnresolvedMixinReference")
 	@Inject(method = "getEntityData", at = @At("HEAD"), remap = false, cancellable = true)
-	private static void serverDataSyncer4mlShulkerBoxPreviewSupportEnderChest(@Coerce Entity entity, CallbackInfoReturnable<Optional<DefaultedList<ItemStack>>> cir)
+	private static void serverDataSyncer4mlShulkerBoxPreviewSupportEnderChest(@Coerce Entity entity, CallbackInfoReturnable<Optional<NonNullList<ItemStack>>> cir)
 	{
-		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue() && ServerDataSyncer.hasEnoughPermission() && entity instanceof PlayerEntity)
+		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue() && ServerDataSyncer.hasEnoughPermission() && entity instanceof Player)
 		{
-			PlayerEntity player = (PlayerEntity)entity;
-			UUID uuid = player.getUuid();
+			Player player = (Player)entity;
+			UUID uuid = player.getUUID();
 
 			// syncing the complete data of a player is a bit costly,
 			// so we slow it down and only do it every 5 gt
@@ -87,7 +87,7 @@ public abstract class EnderChestItemFetcherMixin
 
 				ServerDataSyncer.getInstance().fetchEntity(player).
 						ifPresent(future -> {
-							EnderChestInventory enderChestInventory = CACHE.computeIfAbsent(uuid, k -> new EnderChestInventory());
+							PlayerEnderChestContainer enderChestInventory = CACHE.computeIfAbsent(uuid, k -> new PlayerEnderChestContainer());
 							CACHE.keepAlive(uuid);
 							future.thenAccept(nbt -> {
 								// ref: net.minecraft.entity.player.PlayerEntity#readCustomDataFromTag
@@ -104,7 +104,7 @@ public abstract class EnderChestItemFetcherMixin
 								//#else
 								if (nbt != null && EnderItemNbtUtils.containsList(nbt, "EnderItems"))
 								{
-									enderChestInventory.readTags(
+									enderChestInventory.fromTag(
 											EnderItemNbtUtils.getNbtListOrEmpty(nbt, "EnderItems")
 											//#if MC >= 12006
 											//$$ , player.getRegistryManager()
@@ -116,7 +116,7 @@ public abstract class EnderChestItemFetcherMixin
 						});
 			}
 
-			EnderChestInventory inventory = CACHE.get(uuid);
+			PlayerEnderChestContainer inventory = CACHE.get(uuid);
 			if (inventory != null)
 			{
 				cir.setReturnValue(Optional.ofNullable(((BasicInventoryAccessor)inventory).getStackList()));

@@ -22,11 +22,11 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.f3GSimplify;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.render.debug.ChunkBorderDebugRenderer;
+import net.minecraft.client.renderer.debug.ChunkBorderRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(ChunkBorderDebugRenderer.class)
+@Mixin(ChunkBorderRenderer.class)
 public abstract class ChunkBorderDebugRendererMixin
 {
 	@ModifyExpressionValue(

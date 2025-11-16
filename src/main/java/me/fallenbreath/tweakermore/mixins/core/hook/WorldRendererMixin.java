@@ -22,8 +22,8 @@ package me.fallenbreath.tweakermore.mixins.core.hook;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.tweakermore.util.render.TweakerMoreRenderEventHandler;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.WorldRenderer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.LevelRenderer;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -34,17 +34,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#if MC >= 12006
 //$$ import org.joml.Matrix4fStack;
 //#else
-import net.minecraft.client.util.math.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 //#if MC >= 11904
 //$$ import org.spongepowered.asm.mixin.injection.Slice;
 //#endif
 
-@Mixin(WorldRenderer.class)
+@Mixin(LevelRenderer.class)
 public abstract class WorldRendererMixin
 {
-	@Shadow @Final private MinecraftClient client;
+	@Shadow @Final private Minecraft minecraft;
 
 	// around the renderChunkDebugInfo method call, before the matrixStack.pop() (matrixStack == RenderSystem.getModelViewStack())
 
@@ -79,10 +79,10 @@ public abstract class WorldRendererMixin
 	//$$ )
 	//#else
 	@Inject(
-			method = "render",
+			method = "renderLevel",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/render/WorldRenderer;renderChunkDebugInfo(Lnet/minecraft/client/render/Camera;)V"
+					target = "Lnet/minecraft/client/renderer/LevelRenderer;renderDebug(Lnet/minecraft/client/Camera;)V"
 			)
 	)
 	//#endif
@@ -96,12 +96,12 @@ public abstract class WorldRendererMixin
 			//#if MC >= 12006
 			//$$ Matrix4fStack matrices
 			//#else
-			MatrixStack matrices
+			PoseStack matrices
 			//#endif
 	)
 	{
 		TweakerMoreRenderEventHandler.dispatchRenderWorldPostEvent(
-				this.client
+				this.minecraft
 				//#if MC >= 11600
 				//$$ , matrices
 				//#endif

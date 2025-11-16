@@ -20,19 +20,19 @@
 
 package me.fallenbreath.tweakermore.impl.mc_tweaks.preciseItemEntityModel;
 
-import net.minecraft.client.render.model.json.Transformation;
-import net.minecraft.client.util.math.Vector3f;
+import net.minecraft.client.renderer.block.model.ItemTransform;
+import com.mojang.math.Vector3f;
 
 public class PreciseItemEntityModelUtils
 {
 	public static final ThreadLocal<Boolean> transformOverrideFlag = ThreadLocal.withInitial(() -> false);
 
-	public static Transformation modifyTransformation(Transformation transformation)
+	public static ItemTransform modifyTransformation(ItemTransform transformation)
 	{
 		if (transformOverrideFlag.get())
 		{
 			float len = 0.25f;  // size of the item entity
-			transformation = new Transformation(
+			transformation = new ItemTransform(
 					//#if MC >= 12105
 					//$$ transformation.rotation(),
 					//#else

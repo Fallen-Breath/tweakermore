@@ -21,8 +21,8 @@
 package me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer;
 
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.core.BlockPos;
 
 import java.util.Collection;
 import java.util.Collections;

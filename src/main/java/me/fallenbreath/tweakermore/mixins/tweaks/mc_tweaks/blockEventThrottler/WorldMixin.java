@@ -22,24 +22,24 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.blockEventThrottler;
 
 import me.fallenbreath.tweakermore.impl.mc_tweaks.blockEventThrottler.BlockEventThrottler;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.blockEventThrottler.TimedCounter;
-import net.minecraft.block.Block;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = World.class, priority = 500)
+@Mixin(value = Level.class, priority = 500)
 public abstract class WorldMixin
 {
 	@Unique
 	private final TimedCounter blockEventThrottlerCounter = new TimedCounter();
 
-	@Inject(method = "addBlockAction", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "blockEvent", at = @At("HEAD"), cancellable = true)
 	private void blockEventThrottler_throttle$TKM(BlockPos pos, Block block, int type, int data, CallbackInfo ci)
 	{
-		BlockEventThrottler.throttle((World)(Object)this, pos, block, this.blockEventThrottlerCounter, ci);
+		BlockEventThrottler.throttle((Level)(Object)this, pos, block, this.blockEventThrottlerCounter, ci);
 	}
 }

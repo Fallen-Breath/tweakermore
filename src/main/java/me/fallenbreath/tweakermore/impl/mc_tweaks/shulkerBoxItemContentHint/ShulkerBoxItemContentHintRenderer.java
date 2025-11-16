@@ -26,12 +26,12 @@ import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.GuiRenderContext;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.item.ItemRenderer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import com.mojang.blaze3d.vertex.Tesselator;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.util.Mth;
 
 //#if MC >= 12000
 //$$ import net.minecraft.client.render.RenderLayer;
@@ -41,13 +41,13 @@ import net.minecraft.util.math.MathHelper;
 //$$ import net.minecraft.client.gui.DrawableHelper;
 //#else
 import me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.shulkerItemContentHint.ItemRendererAccessor;
-import net.minecraft.client.render.BufferBuilder;
+import com.mojang.blaze3d.vertex.BufferBuilder;
 //#endif
 
 //#if MC >= 11500
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.renderer.MultiBufferSource;
+import com.mojang.blaze3d.vertex.PoseStack;
 //#else
 //$$ import com.mojang.blaze3d.platform.GlStateManager;
 //#endif
@@ -84,7 +84,7 @@ public class ShulkerBoxItemContentHintRenderer
 		//$$ MatrixStack textMatrixStack = matrices;
 		//$$ textMatrixStack.push();
 		//#elseif MC >= 11500
-		MatrixStack textMatrixStack = new MatrixStack();
+		PoseStack textMatrixStack = new PoseStack();
 		//#endif
 
 		GuiRenderContext renderContext = RenderContext.gui(
@@ -126,7 +126,7 @@ public class ShulkerBoxItemContentHintRenderer
 					//#if MC >= 11904
 					//$$ 150 + 10,
 					//#else
-					itemRenderer.zOffset + 150,
+					itemRenderer.blitOffset + 150,
 					//#endif
 					info, x, y
 			);
@@ -169,7 +169,7 @@ public class ShulkerBoxItemContentHintRenderer
 		isRendering.set(true);
 
 		//#if MC < 11904
-		float zOffset = itemRenderer.zOffset;
+		float zOffset = itemRenderer.blitOffset;
 		//#endif
 
 		try
@@ -178,18 +178,18 @@ public class ShulkerBoxItemContentHintRenderer
 			//$$ renderContext.pushMatrix();
 			//$$ renderContext.translateDirect(0, 0, 10);
 			//#else
-			itemRenderer.zOffset += 10;
+			itemRenderer.blitOffset += 10;
 			// scale the z axis, so the lighting of the item can render correctly
 			// see net.minecraft.client.render.item.ItemRenderer.renderGuiItemModel for z offset applying
 			renderContext.scaleDirect(1, 1, info.scale);
-			renderContext.translateDirect(0, 0, (100.0F + itemRenderer.zOffset) * (1 / info.scale - 1));
+			renderContext.translateDirect(0, 0, (100.0F + itemRenderer.blitOffset) * (1 / info.scale - 1));
 			//#endif
 
 			//#if MC >= 12000
 			//$$ drawContext.drawItemWithoutEntity(info.stack, x, y);
 			//#else
 			// we do this manually so no need to care about extra z-offset modification of itemRenderer in its ItemRenderer#renderGuiItem
-			itemRenderer.renderGuiItemIcon(
+			itemRenderer.renderGuiItem(
 					//#if MC >= 11904
 					//$$ renderContext.getMcRawMatrixStack(),
 					//#endif
@@ -204,14 +204,14 @@ public class ShulkerBoxItemContentHintRenderer
 			//#if MC >= 11904
 			//$$ renderContext.popMatrix();
 			//#else
-			itemRenderer.zOffset = zOffset;
+			itemRenderer.blitOffset = zOffset;
 			//#endif
 		}
 	}
 
 	private static void renderText(
 			//#if MC >= 11500
-			MatrixStack textMatrixStack,
+			PoseStack textMatrixStack,
 			//#endif
 			//#if MC >= 12000
 			//$$ DrawContext drawContext,
@@ -237,12 +237,12 @@ public class ShulkerBoxItemContentHintRenderer
 				//$$ textMatrixStack
 				//#endif
 		));
-		TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+		Font textRenderer = Minecraft.getInstance().font;
 
 		//#if MC >= 11500
 		textMatrixStack.translate(0.0, 0.0, zOffset);
-		VertexConsumerProvider.Immediate immediate = RenderUtils.getVertexConsumer();
-		textRenderer.draw(
+		MultiBufferSource.BufferSource immediate = RenderUtils.getVertexConsumer();
+		textRenderer.drawInBatch(
 				text,
 				textX,
 				textY,
@@ -252,7 +252,7 @@ public class ShulkerBoxItemContentHintRenderer
 				//#if MC >= 11800
 				//$$ textMatrixStack.peek().getPositionMatrix(),
 				//#else
-				textMatrixStack.peek().getModel(),
+				textMatrixStack.last().pose(),
 				//#endif
 				immediate,
 				//#if MC >= 11904
@@ -263,7 +263,7 @@ public class ShulkerBoxItemContentHintRenderer
 				0,
 				0xF000F0
 		);
-		immediate.draw();
+		immediate.endBatch();
 		//#else
 		//$$ GlStateManager.disableLighting();
 		//$$ GlStateManager.disableDepthTest();
@@ -322,7 +322,7 @@ public class ShulkerBoxItemContentHintRenderer
 		//#endif
 
 		int h = (int)Math.round(fillRatio * HEIGHT);
-		int color = MathHelper.hsvToRgb((float)(fillRatio / 3), 1.0F, 1.0F);
+		int color = Mth.hsvToRgb((float)(fillRatio / 3), 1.0F, 1.0F);
 		if (h == 0)
 		{
 			// make sure h > 0 so it's visible enough
@@ -346,8 +346,8 @@ public class ShulkerBoxItemContentHintRenderer
 		//$$ };
 		//#else
 		ItemRendererAccessor accessor = (ItemRendererAccessor)itemRenderer;
-		Tessellator tessellator = Tessellator.getInstance();
-		BufferBuilder bufferBuilder = tessellator.getBuffer();
+		Tesselator tessellator = Tesselator.getInstance();
+		BufferBuilder bufferBuilder = tessellator.getBuilder();
 		GuiQuadDrawer drawer = (x_, y_, width_, height_, color_) -> {
 			accessor.invokeRenderGuiQuad(bufferBuilder, x_, y_, width_ , height_,color_ >> 16 & 0xFF, color_ >> 8 & 0xFF, color_ & 0xFF, 0xFF);
 		};

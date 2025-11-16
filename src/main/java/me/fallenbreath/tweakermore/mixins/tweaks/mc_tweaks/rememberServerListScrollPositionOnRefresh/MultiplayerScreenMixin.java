@@ -21,20 +21,20 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.rememberServerListScrollPositionOnRefresh;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
-import net.minecraft.client.gui.screen.multiplayer.MultiplayerServerListWidget;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
+import net.minecraft.client.gui.screens.multiplayer.ServerSelectionList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(MultiplayerScreen.class)
+@Mixin(JoinMultiplayerScreen.class)
 public abstract class MultiplayerScreenMixin
 {
 	@Inject(
-			method = "refresh",
+			method = "refreshServerList",
 			at = @At("TAIL")  // at TAIL, the newScreen has performed init(), so its `serverListWidget` field has been initialized
 	)
 	private void rememberServerListScrollPositionOnRefresh_inheritScrollPosition(CallbackInfo ci)
@@ -44,15 +44,15 @@ public abstract class MultiplayerScreenMixin
 			return;
 		}
 
-		Screen oldScreen = (MultiplayerScreen)(Object)this;
-		Screen newScreen = MinecraftClient.getInstance().currentScreen;
+		Screen oldScreen = (JoinMultiplayerScreen)(Object)this;
+		Screen newScreen = Minecraft.getInstance().screen;
 		if (!(oldScreen instanceof MultiplayerScreenAccessor && newScreen instanceof MultiplayerScreenAccessor))
 		{
 			return;
 		}
 
-		MultiplayerServerListWidget oldWidget = ((MultiplayerScreenAccessor)oldScreen).getServerListWidget();
-		MultiplayerServerListWidget newWidget = ((MultiplayerScreenAccessor)newScreen).getServerListWidget();
+		ServerSelectionList oldWidget = ((MultiplayerScreenAccessor)oldScreen).getServerListWidget();
+		ServerSelectionList newWidget = ((MultiplayerScreenAccessor)newScreen).getServerListWidget();
 		if (oldWidget == null || newWidget == null)
 		{
 			return;

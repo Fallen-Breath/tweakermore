@@ -20,14 +20,14 @@
 
 package me.fallenbreath.tweakermore.impl.features.schematicProPlace.restrict;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
 
 //#if MC >= 12000
 //$$ import me.fallenbreath.tweakermore.util.BlockUtils;
 //$$ import net.minecraft.block.BlockSetType;
 //#else
-import net.minecraft.block.Material;
+import net.minecraft.world.level.material.Material;
 //#endif
 
 /**
@@ -35,7 +35,7 @@ import net.minecraft.block.Material;
  */
 public interface InteractAbleTester
 {
-	boolean isInteractAble(PlayerEntity player, BlockState worldState);
+	boolean isInteractAble(Player player, BlockState worldState);
 
 	default InteractAbleTester and(InteractAbleTester other)
 	{
@@ -49,7 +49,7 @@ public interface InteractAbleTester
 
 	static InteractAbleTester playerCanModifyWorld()
 	{
-		return (player, worldState) -> player.canModifyWorld();
+		return (player, worldState) -> player.mayBuild();
 	}
 
 	/**

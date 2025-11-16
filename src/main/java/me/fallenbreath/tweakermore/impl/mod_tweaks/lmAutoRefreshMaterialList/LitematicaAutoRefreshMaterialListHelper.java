@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.impl.mod_tweaks.lmAutoRefreshMaterialList;
 
 import fi.dy.masa.malilib.interfaces.IClientTickHandler;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 import org.jetbrains.annotations.Nullable;
 
 public class LitematicaAutoRefreshMaterialListHelper implements IClientTickHandler
@@ -42,7 +42,7 @@ public class LitematicaAutoRefreshMaterialListHelper implements IClientTickHandl
 	}
 
 	@Override
-	public void onClientTick(MinecraftClient mc)
+	public void onClientTick(Minecraft mc)
 	{
 		if (this.refreshTask != null)
 		{
