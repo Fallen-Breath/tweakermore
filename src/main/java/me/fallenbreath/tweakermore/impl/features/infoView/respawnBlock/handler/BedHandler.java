@@ -127,7 +127,7 @@ public class BedHandler extends AbstractBlockHandler
 		Vec3 headCenter = PositionUtils.centerOf(this.bedHeadPos);
 		Vec3 shiftToMiddle =
 				//#if MC >= 11600
-				//$$ Vec3d.of
+				//$$ Vec3.of
 				//#else
 				new Vec3
 				//#endif

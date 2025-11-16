@@ -42,8 +42,8 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 //#if MC >= 12006
 //$$ import com.google.common.collect.Maps;
-//$$ import net.minecraft.component.DataComponentTypes;
-//$$ import net.minecraft.component.type.BlockStateComponent;
+//$$ import net.minecraft.core.component.DataComponents;
+//$$ import net.minecraft.world.item.component.BlockItemStateProperties;
 //$$ import java.util.Map;
 //#endif
 
@@ -79,7 +79,7 @@ public abstract class MinecraftClientMixin
 				//$$ blockState.getEntries().forEach((property, value) -> {
 				//$$ 	properties.put(property.getName(), value.toString());
 				//$$ });
-				//$$ itemStack.set(DataComponentTypes.BLOCK_STATE, new BlockStateComponent(properties));
+				//$$ itemStack.set(DataComponents.BLOCK_STATE, new BlockItemStateProperties(properties));
 				//#else
 				CompoundTag nbt = new CompoundTag();
 				blockState.getValues().forEach((property, value) -> {

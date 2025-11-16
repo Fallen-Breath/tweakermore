@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 //#if MC >= 12104
-//$$ import net.minecraft.client.render.item.ItemRenderState;
+//$$ import net.minecraft.client.renderer.item.ItemStackRenderState;
 //#else
 import net.minecraft.client.renderer.entity.ItemRenderer;
 //#endif
@@ -38,7 +38,7 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.15"))
 @Mixin(
 		//#if MC >= 12104
-		//$$ ItemRenderState.LayerRenderState.class
+		//$$ ItemStackRenderState.LayerRenderState.class
 		//#else
 		ItemRenderer.class
 		//#endif
@@ -60,16 +60,16 @@ public abstract class ItemRendererMixin
 			at = @At(
 					//#if MC >= 12105
 					//$$ value = "FIELD",
-					//$$ target = "Lnet/minecraft/client/render/item/ItemRenderState$LayerRenderState;transform:Lnet/minecraft/client/render/model/json/Transformation;"
+					//$$ target = "Lnet/minecraft/client/renderer/item/ItemStackRenderState$LayerRenderState;transform:Lnet/minecraft/client/renderer/block/model/ItemTransform;"
 					//#else
 
 					value = "INVOKE",
 					//#if MC >= 12104
-					//$$ target = "Lnet/minecraft/client/render/item/ItemRenderState$LayerRenderState;getTransformation()Lnet/minecraft/client/render/model/json/Transformation;"
+					//$$ target = "Lnet/minecraft/client/renderer/item/ItemStackRenderState$LayerRenderState;transform()Lnet/minecraft/client/renderer/block/model/ItemTransform;"
 					//#elseif MC >= 12103
-					//$$ target = "Lnet/minecraft/client/render/model/json/ModelTransformation;getTransformation(Lnet/minecraft/item/ModelTransformationMode;)Lnet/minecraft/client/render/model/json/Transformation;"
+					//$$ target = "Lnet/minecraft/client/renderer/block/model/ItemTransforms;getTransform(Lnet/minecraft/world/item/ItemDisplayContext;)Lnet/minecraft/client/renderer/block/model/ItemTransform;"
 					//#elseif MC >= 11904
-					//$$ target = "Lnet/minecraft/client/render/model/json/ModelTransformation;getTransformation(Lnet/minecraft/client/render/model/json/ModelTransformationMode;)Lnet/minecraft/client/render/model/json/Transformation;"
+					//$$ target = "Lnet/minecraft/client/renderer/block/model/ItemTransforms;getTransform(Lnet/minecraft/world/item/ItemDisplayContext;)Lnet/minecraft/client/renderer/block/model/ItemTransform;"
 					//#else
 					target = "Lnet/minecraft/client/renderer/block/model/ItemTransforms;getTransform(Lnet/minecraft/client/renderer/block/model/ItemTransforms$TransformType;)Lnet/minecraft/client/renderer/block/model/ItemTransform;"
 					//#endif

@@ -25,11 +25,11 @@ import net.minecraft.client.Minecraft;
 //#if MC >= 11600
 //$$ import com.google.common.collect.Lists;
 //$$ import me.fallenbreath.tweakermore.mixins.util.render.TextHandlerAccessor;
-//$$ import net.minecraft.client.font.TextHandler;
-//$$ import net.minecraft.client.font.TextRenderer;
-//$$ import net.minecraft.client.font.TextVisitFactory;
-//$$ import net.minecraft.text.OrderedText;
-//$$ import net.minecraft.text.Style;
+//$$ import net.minecraft.client.StringSplitter;
+//$$ import net.minecraft.client.gui.Font;
+//$$ import net.minecraft.util.StringDecomposer;
+//$$ import net.minecraft.util.FormattedCharSequence;
+//$$ import net.minecraft.network.chat.Style;
 //$$ import org.apache.commons.lang3.mutable.MutableFloat;
 //$$ import org.apache.commons.lang3.tuple.Triple;
 //$$ import java.util.List;
@@ -38,12 +38,12 @@ import net.minecraft.client.Minecraft;
 public class TextRenderingUtil
 {
 	//#if MC >= 11600
-	//$$ public static OrderedText string2orderedText(String string)
+	//$$ public static FormattedCharSequence string2orderedText(String string)
 	//$$ {
-	//$$ 	return visitor -> TextVisitFactory.visitFormatted(string, Style.EMPTY, visitor);
+	//$$ 	return visitor -> StringDecomposer.visitFormatted(string, Style.EMPTY, visitor);
 	//$$ }
 	//$$
-	//$$ public static String orderedText2string(OrderedText text)
+	//$$ public static String orderedText2string(FormattedCharSequence text)
 	//$$ {
 	//$$ 	StringBuilder builder = new StringBuilder();
 	//$$ 	text.accept((index, style, codePoint) -> {
@@ -53,10 +53,10 @@ public class TextRenderingUtil
 	//$$ 	return builder.toString();
 	//$$ }
 	//$$
-	//$$ public static OrderedText trim(OrderedText text, int maxWidth, PostTrimModifier<OrderedText> postTrimModifier)
+	//$$ public static FormattedCharSequence trim(FormattedCharSequence text, int maxWidth, PostTrimModifier<FormattedCharSequence> postTrimModifier)
 	//$$ {
-	//$$ 	TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-	//$$ 	TextHandler.WidthRetriever widthRetriever = ((TextHandlerAccessor)textRenderer.getTextHandler()).getWidthRetriever();
+	//$$ 	Font textRenderer = Minecraft.getInstance().textRenderer;
+	//$$ 	StringSplitter.WidthRetriever widthRetriever = ((TextHandlerAccessor)textRenderer.getTextHandler()).getWidthRetriever();
 	//$$
 	//$$ 	List<Triple<Integer, Style, Integer>> elements = Lists.newArrayList();
 	//$$ 	MutableFloat width = new MutableFloat(0);
@@ -70,7 +70,7 @@ public class TextRenderingUtil
 	//$$ 		return ok;
 	//$$ 	});
 	//$$
-	//$$ 	OrderedText trimmedText = visitor ->
+	//$$ 	FormattedCharSequence trimmedText = visitor ->
 	//$$ 	{
 	//$$ 		for (Triple<Integer, Style, Integer> element : elements)
 	//$$ 		{
@@ -87,7 +87,7 @@ public class TextRenderingUtil
 	//$$ 	}
 	//$$ 	return trimmedText;
 	//$$ }
-	//$$ public static OrderedText trim(OrderedText text, int maxWidth)
+	//$$ public static FormattedCharSequence trim(FormattedCharSequence text, int maxWidth)
 	//$$ {
 	//$$ 	return trim(text, maxWidth, t -> t);
 	//$$ }

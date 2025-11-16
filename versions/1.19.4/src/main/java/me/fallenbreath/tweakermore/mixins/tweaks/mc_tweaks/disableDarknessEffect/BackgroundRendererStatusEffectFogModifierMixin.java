@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 //#if MC >= 12006
-//$$ import net.minecraft.registry.entry.RegistryEntry;
+//$$ import net.minecraft.core.Holder;
 //#endif
 
 /**
@@ -46,7 +46,7 @@ public interface BackgroundRendererStatusEffectFogModifierMixin
 {
 	@Shadow
 	//#if MC >= 12006
-	//$$ RegistryEntry<StatusEffect>
+	//$$ Holder<MobEffect>
 	//#else
 	StatusEffect
 	//#endif

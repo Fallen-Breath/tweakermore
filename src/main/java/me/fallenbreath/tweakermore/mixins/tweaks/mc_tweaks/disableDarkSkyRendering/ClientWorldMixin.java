@@ -29,7 +29,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 //#if MC >= 11500
 import net.minecraft.client.multiplayer.ClientLevel;
 //#else
-//$$ import net.minecraft.world.World;
+//$$ import net.minecraft.world.level.Level;
 //#endif
 
 @Mixin(
@@ -38,7 +38,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 		//#elseif MC >= 11500
 		ClientLevel.class
 		//#else
-		//$$ World.class
+		//$$ Level.class
 		//#endif
 )
 public abstract class ClientWorldMixin

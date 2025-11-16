@@ -32,12 +32,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC >= 12000
-//$$ import net.minecraft.client.gui.DrawContext;
+//$$ import net.minecraft.client.gui.GuiGraphics;
 //#endif
 
 //#if MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
-//$$ import net.minecraft.text.Text;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
+//$$ import net.minecraft.network.chat.Component;
 //$$ import me.fallenbreath.tweakermore.util.Messenger;
 //#endif
 
@@ -57,7 +57,7 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends Button
 	public MerchantScreenWidgetButtonPageMixin(
 			int x, int y, int width, int height,
 			//#if MC >= 11600
-			//$$ Text message,
+			//$$ Component message,
 			//#else
 			String message,
 			//#endif
@@ -99,9 +99,9 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends Button
 	)
 	private void renderMaxUsesAmount(
 			//#if MC >= 12000
-			//$$ DrawContext context,
+			//$$ GuiGraphics context,
 			//#elseif MC >= 11600
-			//$$ MatrixStack matrices,
+			//$$ PoseStack matrices,
 			//#endif
 			int mouseX, int mouseY, CallbackInfo ci
 	)

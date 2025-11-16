@@ -48,10 +48,10 @@ public abstract class ClientPlayNetworkHandlerMixin
 	//$$ 		method = "handlePlayerListAction",
 	//$$ 		at = @At(
 	//$$ 				value = "INVOKE",
-	//$$ 				target = "Lnet/minecraft/client/network/PlayerListEntry;setGameMode(Lnet/minecraft/world/GameMode;)V"
+	//$$ 				target = "Lnet/minecraft/client/multiplayer/PlayerInfo;setGameMode(Lnet/minecraft/world/level/GameType;)V"
 	//$$ 		)
 	//$$ )
-	//$$ private void mcSpectatorEnterSinkingFixPorting_onGameModeUpdate(PlayerListS2CPacket.Action action, PlayerListS2CPacket.Entry packetEntry, PlayerListEntry playerListEntry, CallbackInfo ci)
+	//$$ private void mcSpectatorEnterSinkingFixPorting_onGameModeUpdate(PlayerListS2CPacket.Action action, PlayerListS2CPacket.Entry packetEntry, PlayerInfo playerListEntry, CallbackInfo ci)
 	//#else
 	@Inject(
 			method = "handlePlayerInfo",

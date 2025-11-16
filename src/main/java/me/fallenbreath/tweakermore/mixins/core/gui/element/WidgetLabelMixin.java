@@ -38,11 +38,11 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import java.util.List;
 
 //#if MC >= 12000
-//$$ import net.minecraft.client.gui.DrawContext;
+//$$ import net.minecraft.client.gui.GuiGraphics;
 //#endif
 
 //#if MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 //#if MC < 11500
@@ -128,9 +128,9 @@ public abstract class WidgetLabelMixin extends WidgetBase
 			//#endif
 
 			//#if MC >= 12000
-			//$$ DrawContext matrixStackOrDrawContext,
+			//$$ GuiGraphics matrixStackOrDrawContext,
 			//#elseif MC >= 11600
-			//$$ MatrixStack matrixStackOrDrawContext,
+			//$$ PoseStack matrixStackOrDrawContext,
 			//#endif
 			CallbackInfo ci,
 			int fontHeight, int yCenter, int yTextStart, int i, String text

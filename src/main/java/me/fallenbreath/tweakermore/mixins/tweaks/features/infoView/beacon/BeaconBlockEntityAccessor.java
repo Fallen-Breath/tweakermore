@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 //#if MC >= 12006
-//$$ import net.minecraft.registry.entry.RegistryEntry;
+//$$ import net.minecraft.core.Holder;
 //#endif
 
 @Mixin(BeaconBlockEntity.class)
@@ -39,7 +39,7 @@ public interface BeaconBlockEntityAccessor
 	@Nullable
 	@Accessor("primaryPower")
 	//#if MC >= 12006
-	//$$ RegistryEntry<StatusEffect> getPrimary();
+	//$$ Holder<MobEffect> getPrimary();
 	//#else
 	MobEffect getPrimary();
 	//#endif
@@ -47,7 +47,7 @@ public interface BeaconBlockEntityAccessor
 	@Nullable
 	@Accessor("secondaryPower")
 	//#if MC >= 12006
-	//$$ RegistryEntry<StatusEffect> getSecondary();
+	//$$ Holder<MobEffect> getSecondary();
 	//#else
 	MobEffect getSecondary();
 	//#endif

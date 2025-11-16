@@ -39,7 +39,7 @@ import org.spongepowered.asm.mixin.injection.Slice;
 
 //#if MC >= 12101
 //$$ import org.apache.commons.lang3.tuple.Pair;
-//$$ import net.minecraft.nbt.NbtCompound;
+//$$ import net.minecraft.nbt.CompoundTag;
 //#endif
 
 @Restriction(require = @Condition(ModIds.minihud))
@@ -70,7 +70,7 @@ public abstract class RenderHandlerMixin
 			remap = false
 	)
 	//#if MC >= 12101
-	//$$ private Pair<BlockEntity, NbtCompound> serverDataSyncer4BeehiveBeeCount(Pair<BlockEntity, NbtCompound> original)
+	//$$ private Pair<BlockEntity, CompoundTag> serverDataSyncer4BeehiveBeeCount(Pair<BlockEntity, CompoundTag> original)
 	//#else
 	private BlockEntity serverDataSyncer4BeehiveBeeCount(BlockEntity blockEntity)
 	//#endif

@@ -31,14 +31,14 @@ import java.util.List;
 import java.util.function.Consumer;
 
 //#if MC >= 1.21.9
-//$$ import net.minecraft.client.input.CharInput;
-//$$ import net.minecraft.client.input.KeyInput;
+//$$ import net.minecraft.client.input.CharacterEvent;
+//$$ import net.minecraft.client.input.KeyEvent;
 //#endif
 
 //#if MC >= 12000
-//$$ import net.minecraft.client.gui.DrawContext;
+//$$ import net.minecraft.client.gui.GuiGraphics;
 //#elseif MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 /**
@@ -112,7 +112,7 @@ public class SelectorDropDownList<T extends IStringValue> extends WidgetDropDown
 	@Override
 	protected boolean onKeyTypedImpl(
 			//#if MC >= 1.21.9
-			//$$ KeyInput input
+			//$$ KeyEvent input
 			//#else
 			int keyCode, int scanCode, int modifiers
 			//#endif
@@ -124,7 +124,7 @@ public class SelectorDropDownList<T extends IStringValue> extends WidgetDropDown
 	@Override
 	protected boolean onCharTypedImpl(
 			//#if MC >= 1.21.9
-			//$$ CharInput input
+			//$$ CharacterEvent input
 			//#else
 			char charIn, int modifiers
 			//#endif
@@ -148,7 +148,7 @@ public class SelectorDropDownList<T extends IStringValue> extends WidgetDropDown
 	 */
 	@Override
 	//#if MC >= 12106
-	//$$ public void postRenderHovered(DrawContext drawContext, int mouseX, int mouseY, boolean selected)
+	//$$ public void postRenderHovered(GuiGraphics drawContext, int mouseX, int mouseY, boolean selected)
 	//$$ {
 	//$$ 	super.postRenderHovered(drawContext, mouseX, mouseY, selected);
 	//$$ 	if (this.hoverText != null && this.isMouseOver(mouseX, mouseY) && !this.isOpen)
@@ -160,9 +160,9 @@ public class SelectorDropDownList<T extends IStringValue> extends WidgetDropDown
 	public void postRenderHovered(
 			int mouseX, int mouseY, boolean selected
 			//#if MC >= 12000
-			//$$ , DrawContext matrixStackOrDrawContext
+			//$$ , GuiGraphics matrixStackOrDrawContext
 			//#elseif MC >= 11600
-			//$$ , MatrixStack matrixStackOrDrawContext
+			//$$ , PoseStack matrixStackOrDrawContext
 			//#endif
 	)
 	{

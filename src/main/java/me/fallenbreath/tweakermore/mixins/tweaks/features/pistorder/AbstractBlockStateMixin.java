@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 //#if MC >= 11600
-//$$ import net.minecraft.block.AbstractBlock;
+//$$ import net.minecraft.world.level.block.state.BlockBehaviour;
 //#else
 import net.minecraft.world.level.block.state.BlockState;
 //#endif
@@ -44,7 +44,7 @@ import net.minecraft.world.level.block.state.BlockState;
 @Restriction(conflict = @Condition(value = ModIds.pistorder, versionPredicates = "<=1.6.0"))
 @Mixin(
 		//#if MC >= 11600
-		//$$ AbstractBlock.AbstractBlockState.class
+		//$$ BlockBehaviour.AbstractBlockState.class
 		//#else
 		BlockState.class
 		//#endif
@@ -92,7 +92,7 @@ public abstract class AbstractBlockStateMixin
 			//#if MC >= 11500
 			boolean ok = result.consumesAction();
 			//#else
-			//$$ boolean ok = result == ActionResult.SUCCESS;
+			//$$ boolean ok = result == InteractionResult.SUCCESS;
 			//#endif
 
 			if (ok && TweakerMoreConfigs.PISTORDER_SWING_HAND.getBooleanValue())

@@ -42,7 +42,7 @@ import net.minecraft.world.level.BaseCommandBlock;
 
 //#if MC >= 11600
 //$$ import me.fallenbreath.tweakermore.util.render.TextRenderingUtil;
-//$$ import net.minecraft.text.OrderedText;
+//$$ import net.minecraft.util.FormattedCharSequence;
 //#endif
 
 public class CommandBlockContentRenderer extends CommonScannerInfoViewer
@@ -105,7 +105,7 @@ public class CommandBlockContentRenderer extends CommonScannerInfoViewer
 		// trim command
 		String trimmedCommand = TextRenderingUtil.trim(command, MAX_WIDTH);
 		//#if MC >= 11600
-		//$$ OrderedText
+		//$$ FormattedCharSequence
 		//#else
 		String
 		//#endif
@@ -113,7 +113,7 @@ public class CommandBlockContentRenderer extends CommonScannerInfoViewer
 		if (trimmedCommand.length() < command.length())
 		{
 			//#if MC >= 11600
-			//$$ displayText = OrderedText.concat(displayText, TextRenderingUtil.string2orderedText(Formatting.DARK_GRAY + "..."));
+			//$$ displayText = FormattedCharSequence.concat(displayText, TextRenderingUtil.string2orderedText(ChatFormatting.DARK_GRAY + "..."));
 			//#else
 			displayText += ChatFormatting.DARK_GRAY + "...";
 			//#endif
@@ -128,10 +128,10 @@ public class CommandBlockContentRenderer extends CommonScannerInfoViewer
 		if (!lastOutput.getString().isEmpty())
 		{
 			//#if MC >= 11600
-			//$$ OrderedText trimmedLastOutput = TextRenderingUtil.trim(
+			//$$ FormattedCharSequence trimmedLastOutput = TextRenderingUtil.trim(
 			//$$ 		lastOutput.asOrderedText(),
 			//$$ 		MAX_WIDTH,
-			//$$ 		trimmedText -> OrderedText.concat(trimmedText, TextRenderingUtil.string2orderedText(Formatting.DARK_GRAY + "..."))
+			//$$ 		trimmedText -> FormattedCharSequence.concat(trimmedText, TextRenderingUtil.string2orderedText(ChatFormatting.DARK_GRAY + "..."))
 			//$$ );
 			//#else
 			String trimmedLastOutput = TextRenderingUtil.trim(

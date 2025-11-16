@@ -46,9 +46,9 @@ import java.util.UUID;
 //#if MC >= 12106
 //$$ import me.fallenbreath.tweakermore.TweakerMoreMod;
 //$$ import me.fallenbreath.tweakermore.util.EntityUtils;
-//$$ import net.minecraft.inventory.StackWithSlot;
-//$$ import net.minecraft.storage.NbtReadView;
-//$$ import net.minecraft.util.ErrorReporter;
+//$$ import net.minecraft.world.ItemStackWithSlot;
+//$$ import net.minecraft.world.level.storage.TagValueInput;
+//$$ import net.minecraft.util.ProblemReporter;
 //#endif
 
 @Mixin(EnderChestItemFetcher.class)
@@ -90,15 +90,15 @@ public abstract class EnderChestItemFetcherMixin
 							PlayerEnderChestContainer enderChestInventory = CACHE.computeIfAbsent(uuid, k -> new PlayerEnderChestContainer());
 							CACHE.keepAlive(uuid);
 							future.thenAccept(nbt -> {
-								// ref: net.minecraft.entity.player.PlayerEntity#readCustomDataFromTag
+								// ref: net.minecraft.entity.player.Player#readCustomDataFromTag
 
 								//#if MC >= 12106
-								//$$ try (ErrorReporter.Logging logging = new ErrorReporter.Logging(player.getErrorReporterContext(), TweakerMoreMod.LOGGER))
+								//$$ try (ProblemReporter.Logging logging = new ProblemReporter.Logging(player.getErrorReporterContext(), TweakerMoreMod.LOGGER))
 								//$$ {
 								//$$ 	if (nbt != null && EnderItemNbtUtils.containsList(nbt, "EnderItems"))
 								//$$ 	{
-								//$$ 		var nbtView = NbtReadView.create(logging, EntityUtils.getEntityWorld(player).getRegistryManager(), nbt);
-								//$$ 		enderChestInventory.readData(nbtView.getTypedListView("EnderItems", StackWithSlot.CODEC));
+								//$$ 		var nbtView = TagValueInput.create(logging, EntityUtils.getEntityWorld(player).getRegistryManager(), nbt);
+								//$$ 		enderChestInventory.readData(nbtView.getTypedListView("EnderItems", ItemStackWithSlot.CODEC));
 								//$$ 	}
 								//$$ }
 								//#else

@@ -32,12 +32,12 @@ import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
 //#endif
 
 //#if MC >= 12000
-//$$ import net.minecraft.client.gui.DrawContext;
+//$$ import net.minecraft.client.gui.GuiGraphics;
 //#endif
 
 //#if MC >= 11600
 //$$ import org.jetbrains.annotations.NotNull;
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 /**
@@ -51,7 +51,7 @@ public abstract class RenderContext
 			//#if MC >= 12006
 			//$$ @NotNull Matrix4fStack matrixStack
 			//#elseif MC >= 11600
-			//$$ @NotNull MatrixStack matrixStack
+			//$$ @NotNull PoseStack matrixStack
 			//#endif
 	)
 	{
@@ -66,9 +66,9 @@ public abstract class RenderContext
 
 	public static GuiRenderContext gui(
 			//#if MC >= 12000
-			//$$ @NotNull DrawContext drawContext
+			//$$ @NotNull GuiGraphics drawContext
 			//#elseif MC >= 11600
-			//$$ @NotNull MatrixStack matrixStack
+			//$$ @NotNull PoseStack matrixStack
 			//#endif
 	)
 	{
@@ -82,7 +82,7 @@ public abstract class RenderContext
 	}
 
 	//#if MC >= 12000
-	//$$ public static GuiRenderContext gui(@NotNull DrawContext drawContext, @NotNull MatrixStack matrixStack)
+	//$$ public static GuiRenderContext gui(@NotNull GuiGraphics drawContext, @NotNull PoseStack matrixStack)
 	//$$ {
 	//$$ 	return new GuiRenderContextImpl(drawContext, new McMatrixStack(matrixStack));
 	//$$ }

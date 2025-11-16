@@ -37,11 +37,11 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 //#if MC >= 12100
-//$$ import net.minecraft.resource.featuretoggle.FeatureSet;
+//$$ import net.minecraft.world.flag.FeatureFlagSet;
 //#endif
 
 //#if MC >= 11700
-//$$ import net.minecraft.util.TypeFilter;
+//$$ import net.minecraft.world.level.entity.EntityTypeTest;
 //#else
 import net.minecraft.entity.EntityType;
 //#endif
@@ -83,7 +83,7 @@ public interface EntitySelectorAccessor
 	@Nullable
 	@Accessor("type")
 	//#if MC >= 11700
-	//$$ TypeFilter<Entity, ?> getEntityFilter();
+	//$$ EntityTypeTest<Entity, ?> getEntityFilter();
 	//#else
 	EntityType<?> getType();
 	//#endif
@@ -92,12 +92,12 @@ public interface EntitySelectorAccessor
 	Predicate<Entity> invokeGetPositionPredicate(
 			Vec3d pos
 			//#if MC >= 12100
-			//$$ , @Nullable Box box, @Nullable FeatureSet enabledFeatures
+			//$$ , @Nullable AABB box, @Nullable FeatureFlagSet enabledFeatures
 			//#endif
 	);
 
 	//#if MC >= 12100
 	//$$ @Invoker
-	//$$ Box invokeGetOffsetBox(Vec3d offset);
+	//$$ AABB invokeGetOffsetBox(Vec3 offset);
 	//#endif
 }

@@ -29,15 +29,15 @@ import org.spongepowered.asm.mixin.injection.Group;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 //#if MC >= 12104
-//$$ import net.minecraft.client.render.block.entity.AbstractSignBlockEntityRenderer;
+//$$ import net.minecraft.client.renderer.blockentity.AbstractSignRenderer;
 //#else
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 //#endif
 
 //#if MC < 11500
 //$$ import me.fallenbreath.tweakermore.impl.mc_tweaks.disableSignTextLengthLimit.SignOverflowHintDrawer;
-//$$ import net.minecraft.block.entity.SignBlockEntity;
-//$$ import net.minecraft.client.font.TextRenderer;
+//$$ import net.minecraft.world.level.block.entity.SignBlockEntity;
+//$$ import net.minecraft.client.gui.Font;
 //$$ import org.spongepowered.asm.mixin.injection.Inject;
 //$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //$$ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
@@ -51,7 +51,7 @@ import net.minecraft.client.renderer.blockentity.SignRenderer;
 })
 @Mixin(
 		//#if MC >= 12104
-		//$$ AbstractSignBlockEntityRenderer.class
+		//$$ AbstractSignRenderer.class
 		//#else
 		SignRenderer.class
 		//#endif
@@ -82,7 +82,7 @@ public abstract class SignBlockEntityRendererMixin
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 11600
-					//$$ target = "Lnet/minecraft/client/font/TextRenderer;wrapLines(Lnet/minecraft/text/StringVisitable;I)Ljava/util/List;",
+					//$$ target = "Lnet/minecraft/client/gui/Font;split(Lnet/minecraft/network/chat/FormattedText;I)Ljava/util/List;",
 					//#else
 					target = "Lnet/minecraft/client/gui/components/ComponentRenderUtils;wrapComponents(Lnet/minecraft/network/chat/Component;ILnet/minecraft/client/gui/Font;ZZ)Ljava/util/List;",
 					//#endif
@@ -109,12 +109,12 @@ public abstract class SignBlockEntityRendererMixin
 	//$$ 		method = "render(Lnet/minecraft/block/entity/SignBlockEntity;DDDFI)V",
 	//$$ 		at = @At(
 	//$$ 				value = "INVOKE",
-	//$$ 				target = "Lnet/minecraft/client/font/TextRenderer;draw(Ljava/lang/String;FFI)I",
+	//$$ 				target = "Lnet/minecraft/client/gui/Font;draw(Ljava/lang/String;FFI)I",
 	//$$ 				ordinal = 0
 	//$$ 		),
 	//$$ 		locals = LocalCapture.CAPTURE_FAILHARD
 	//$$ )
-	//$$ private void drawLineOverflowHint(SignBlockEntity signBlockEntity, double xOffset, double yOffset, double zOffset, float tickDelta, int blockBreakStage, CallbackInfo ci, TextRenderer textRenderer, float j, int signColor, int lineIdx, String lineContent)
+	//$$ private void drawLineOverflowHint(SignBlockEntity signBlockEntity, double xOffset, double yOffset, double zOffset, float tickDelta, int blockBreakStage, CallbackInfo ci, Font textRenderer, float j, int signColor, int lineIdx, String lineContent)
 	//$$ {
 	//$$ 	SignOverflowHintDrawer.drawLineOverflowHint(signBlockEntity, textRenderer, lineIdx, lineContent);
 	//$$ }

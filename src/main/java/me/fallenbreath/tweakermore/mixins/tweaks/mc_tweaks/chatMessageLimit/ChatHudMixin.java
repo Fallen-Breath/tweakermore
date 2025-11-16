@@ -63,7 +63,7 @@ public abstract class ChatHudMixin
 			//$$ 		"addMessage(Lnet/minecraft/client/gui/hud/ChatHudLine;)V"
 			//$$ },
 			//#elseif MC >= 11901
-			//$$ method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;ILnet/minecraft/client/gui/hud/MessageIndicator;Z)V",
+			//$$ method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;ILnet/minecraft/client/GuiMessageTag;Z)V",
 			//#else
 			method = "addMessage(Lnet/minecraft/network/chat/Component;IIZ)V",
 			//#endif
@@ -85,7 +85,7 @@ public abstract class ChatHudMixin
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12000
-					//$$ target = "Lnet/minecraft/client/gui/DrawContext;fill(IIIII)V"
+					//$$ target = "Lnet/minecraft/client/gui/GuiGraphics;fill(IIIII)V"
 					//#elseif MC >= 11600
 					//$$ target = "Lnet/minecraft/client/gui/hud/ChatHud;fill(Lnet/minecraft/client/util/math/MatrixStack;IIIII)V"
 					//#else

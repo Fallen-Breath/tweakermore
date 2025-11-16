@@ -148,7 +148,7 @@ public class PistorderDisplay
 
 		// backing up block states for potential piston (head) block position
 		TemporaryBlockReplacer blockReplacer = new TemporaryBlockReplacer(this.world);
-		// not necessary to replace the piston pos with barrier or something in-movable since vanilla PistonHandler handles it
+		// not necessary to replace the piston pos with barrier or something in-movable since vanilla PistonStructureResolver handles it
 		if (!this.pistonPos.equals(simulatedPistonPos))
 		{
 			blockReplacer.add(this.pistonPos, air);  // piston pos, in case it's in-direct mode

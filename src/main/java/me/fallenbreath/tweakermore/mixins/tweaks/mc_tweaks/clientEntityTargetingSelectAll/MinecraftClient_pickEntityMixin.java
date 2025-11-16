@@ -68,7 +68,7 @@ public abstract class MinecraftClient_pickEntityMixin
 	//$$ 		method = "doItemPick",
 	//$$ 		at = @At(
 	//$$ 				value = "INVOKE",
-	//$$ 				target = "Lnet/minecraft/entity/Entity;getPickBlockStack()Lnet/minecraft/item/ItemStack;"
+	//$$ 				target = "Lnet/minecraft/world/entity/Entity;getPickResult()Lnet/minecraft/world/item/ItemStack;"
 	//$$ 		)
 	//$$ )
 	//$$ private @Nullable ItemStack clientEntityTargetingSelectAll_hackPickItem_overrideVanillaResult(

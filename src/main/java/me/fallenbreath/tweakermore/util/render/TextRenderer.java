@@ -48,8 +48,8 @@ import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
 //#endif
 
 //#if MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
-//$$ import net.minecraft.text.OrderedText;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
+//$$ import net.minecraft.util.FormattedCharSequence;
 //#endif
 
 //#if MC >= 11500
@@ -115,7 +115,7 @@ public class TextRenderer
 						//#if MC >= 11700
 						//$$ RenderSystem.getModelViewStack()
 						//#elseif MC >= 11600
-						//$$ new MatrixStack()  // dummy matrix, will not be used for transformations
+						//$$ new PoseStack()  // dummy matrix, will not be used for transformations
 						//#endif
 				)
 		);
@@ -266,7 +266,7 @@ public class TextRenderer
 	}
 
 	//#if MC >= 11600
-	//$$ public TextRenderer text(OrderedText text)
+	//$$ public TextRenderer text(FormattedCharSequence text)
 	//$$ {
 	//$$	return this.setLines(TextHolder.of(text));
 	//$$ }
@@ -283,7 +283,7 @@ public class TextRenderer
 	}
 
 	//#if MC >= 11600
-	//$$ public TextRenderer addLine(OrderedText text)
+	//$$ public TextRenderer addLine(FormattedCharSequence text)
 	//$$ {
 	//$$ 	return this.addLines(TextHolder.of(text));
 	//$$ }
@@ -423,14 +423,14 @@ public class TextRenderer
 	private static class TextHolder
 	{
 		//#if MC >= 11600
-		//$$ public final OrderedText text;
+		//$$ public final FormattedCharSequence text;
 		//#else
 		public final String text;
 		//#endif
 
 		private TextHolder(
 				//#if MC >= 11600
-				//$$ OrderedText text
+				//$$ FormattedCharSequence text
 				//#else
 				String text
 				//#endif
@@ -441,7 +441,7 @@ public class TextRenderer
 
 		public static TextHolder of(
 				//#if MC >= 11600
-				//$$ OrderedText text
+				//$$ FormattedCharSequence text
 				//#else
 				String text
 				//#endif

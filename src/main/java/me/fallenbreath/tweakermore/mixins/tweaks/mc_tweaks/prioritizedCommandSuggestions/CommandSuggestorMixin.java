@@ -29,7 +29,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 //#if MC >= 11500
 import net.minecraft.client.gui.components.CommandSuggestions;
 //#else
-//$$ import net.minecraft.client.gui.screen.ChatScreen;
+//$$ import net.minecraft.client.gui.screens.ChatScreen;
 //#endif
 
 import org.spongepowered.asm.mixin.Mixin;

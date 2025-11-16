@@ -30,8 +30,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC >= 11904
-//$$ import net.minecraft.client.util.math.MatrixStack;
-//$$ import net.minecraft.world.World;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
+//$$ import net.minecraft.world.level.Level;
 //#endif
 
 @Mixin(ItemRenderer.class)
@@ -39,18 +39,18 @@ public abstract class ItemRendererMixin
 {
 	@Inject(
 			//#if MC >= 11904
-			//$$ method = "innerRenderInGui(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;IIII)V",
+			//$$ method = "tryRenderGuiItem(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;IIII)V",
 			//#elseif MC >= 11700
-			//$$ method = "innerRenderInGui(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;IIII)V",
+			//$$ method = "tryRenderGuiItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;IIII)V",
 			//#else
 			method = "renderAndDecorateItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;II)V",
 			//#endif
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 11904
-					//$$ target = "Lnet/minecraft/client/render/item/ItemRenderer;renderGuiItemModel(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/item/ItemStack;IILnet/minecraft/client/render/model/BakedModel;)V",
+					//$$ target = "Lnet/minecraft/client/renderer/entity/ItemRenderer;renderGuiItem(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/item/ItemStack;IILnet/minecraft/client/resources/model/BakedModel;)V",
 					//#elseif MC >= 11700
-					//$$ target = "Lnet/minecraft/client/render/item/ItemRenderer;renderGuiItemModel(Lnet/minecraft/item/ItemStack;IILnet/minecraft/client/render/model/BakedModel;)V",
+					//$$ target = "Lnet/minecraft/client/renderer/entity/ItemRenderer;renderGuiItem(Lnet/minecraft/world/item/ItemStack;IILnet/minecraft/client/resources/model/BakedModel;)V",
 					//#else
 					target = "Lnet/minecraft/client/renderer/entity/ItemRenderer;renderGuiItem(Lnet/minecraft/world/item/ItemStack;IILnet/minecraft/client/resources/model/BakedModel;)V",
 					//#endif
@@ -59,11 +59,11 @@ public abstract class ItemRendererMixin
 	)
 	private void shulkerItemContentHint_impl(
 			//#if MC >= 11904
-			//$$ MatrixStack matrices,
+			//$$ PoseStack matrices,
 			//#endif
 			LivingEntity entity,
 			//#if MC >= 11904
-			//$$ World world,
+			//$$ Level world,
 			//#endif
 
 			ItemStack itemStack, int x, int y,

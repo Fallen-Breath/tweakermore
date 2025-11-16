@@ -33,9 +33,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC >= 12000
-//$$ import net.minecraft.client.gui.DrawContext;
+//$$ import net.minecraft.client.gui.GuiGraphics;
 //#elseif MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 //#if MC >= 11600
@@ -56,9 +56,9 @@ public abstract class DebugHudMixin
 	private void f3TextScale_renderLeftRightText_scalingApply(
 			CallbackInfo ci,
 			//#if MC >= 12000
-			//$$ @Local(argsOnly = true) DrawContext matrixStackOrDrawContext,
+			//$$ @Local(argsOnly = true) GuiGraphics matrixStackOrDrawContext,
 			//#elseif MC >= 11600
-			//$$ @Local(argsOnly = true) MatrixStack matrixStackOrDrawContext,
+			//$$ @Local(argsOnly = true) PoseStack matrixStackOrDrawContext,
 			//#endif
 			@Share("scaler") LocalRef<RenderUtils.Scaler> scaler
 	)
@@ -83,7 +83,7 @@ public abstract class DebugHudMixin
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12000
-					//$$ target = "Lnet/minecraft/client/gui/DrawContext;getScaledWindowWidth()I"
+					//$$ target = "Lnet/minecraft/client/gui/GuiGraphics;guiWidth()I"
 					//#else
 					target = "Lcom/mojang/blaze3d/platform/Window;getGuiScaledWidth()I"
 					//#endif

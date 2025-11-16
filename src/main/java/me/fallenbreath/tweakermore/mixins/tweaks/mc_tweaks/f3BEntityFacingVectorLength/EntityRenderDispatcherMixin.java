@@ -41,7 +41,7 @@ public abstract class EntityRenderDispatcherMixin
 	@ModifyExpressionValue(
 	//#endif
 			//#if MC >= 12105
-			//$$ method = "renderHitboxes(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/entity/state/EntityHitboxAndView;Lnet/minecraft/client/render/VertexConsumer;F)V",
+			//$$ method = "renderHitboxesAndViewVector(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/entity/state/HitboxesRenderState;Lcom/mojang/blaze3d/vertex/VertexConsumer;F)V",
 			//#else
 			method = "renderHitbox",
 			slice = @Slice(
@@ -55,7 +55,7 @@ public abstract class EntityRenderDispatcherMixin
 			at = @At(
 					//#if MC >= 12100
 					//$$ value = "INVOKE",
-					//$$ target = "Lnet/minecraft/util/math/Vec3d;multiply(D)Lnet/minecraft/util/math/Vec3d;",
+					//$$ target = "Lnet/minecraft/world/phys/Vec3;scale(D)Lnet/minecraft/world/phys/Vec3;",
 					//$$ ordinal = 0
 					//#else
 					value = "CONSTANT",

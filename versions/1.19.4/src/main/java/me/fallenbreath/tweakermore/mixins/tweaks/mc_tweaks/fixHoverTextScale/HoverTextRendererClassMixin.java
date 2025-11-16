@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC >= 12000
-//$$ import net.minecraft.client.gui.DrawContext;
+//$$ import net.minecraft.client.gui.GuiGraphics;
 //#else
 import net.minecraft.client.gui.screen.Screen;
 //#endif
@@ -49,7 +49,7 @@ import net.minecraft.client.gui.screen.Screen;
  */
 @Mixin(
 		//#if MC >= 12000
-		//$$ DrawContext.class
+		//$$ GuiGraphics.class
 		//#else
 		Screen.class
 		//#endif

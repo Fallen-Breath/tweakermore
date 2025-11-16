@@ -55,10 +55,10 @@ public abstract class WorldRendererMixin
 	//$$ 				from = @At(
 	//$$ 						//#if MC >= 12106
 	//$$ 						//$$ value = "INVOKE",
-	//$$ 						//$$ target = "Lnet/minecraft/client/render/WorldRenderer;renderWeather(Lnet/minecraft/client/render/FrameGraphBuilder;Lnet/minecraft/util/math/Vec3d;FLcom/mojang/blaze3d/buffers/GpuBufferSlice;)V"
+	//$$ 						//$$ target = "Lnet/minecraft/client/renderer/LevelRenderer;addWeatherPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/world/phys/Vec3;FLcom/mojang/blaze3d/buffers/GpuBufferSlice;)V"
 	//$$ 						//#elseif MC >= 12103
 	//$$ 						//$$ value = "INVOKE",
-	//$$ 						//$$ target = "Lnet/minecraft/client/render/WorldRenderer;renderWeather(Lnet/minecraft/client/render/FrameGraphBuilder;Lnet/minecraft/client/render/LightmapTextureManager;Lnet/minecraft/util/math/Vec3d;FLnet/minecraft/client/render/Fog;)V"
+	//$$ 						//$$ target = "Lnet/minecraft/client/renderer/LevelRenderer;addWeatherPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/client/renderer/LightTexture;Lnet/minecraft/world/phys/Vec3;FLnet/minecraft/client/renderer/FogParameters;)V"
 	//$$ 						//#else
 	//$$ 						value = "CONSTANT",
 	//$$ 						args = "stringValue=weather",
@@ -72,7 +72,7 @@ public abstract class WorldRendererMixin
 	//$$ 				//$$ target = "Lorg/joml/Matrix4fStack;popMatrix()Lorg/joml/Matrix4fStack;",
 	//$$ 				//$$ remap = false,
 	//$$ 				//#else
-	//$$ 				target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V",
+	//$$ 				target = "Lcom/mojang/blaze3d/vertex/PoseStack;popPose()V",
 	//$$ 				//#endif
 	//$$ 				ordinal = 0
 	//$$ 		)

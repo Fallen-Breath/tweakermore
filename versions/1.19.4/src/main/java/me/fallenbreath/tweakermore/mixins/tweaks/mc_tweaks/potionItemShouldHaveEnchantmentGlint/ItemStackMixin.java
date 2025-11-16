@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 //#if MC >= 12006
-//$$ import net.minecraft.component.DataComponentTypes;
+//$$ import net.minecraft.core.component.DataComponents;
 //#endif
 
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.19.4"))
@@ -49,7 +49,7 @@ public abstract class ItemStackMixin
 			if (self.getItem() instanceof PotionItem)
 			{
 				//#if MC >= 12006
-				//$$ boolean hasEffect = self.get(DataComponentTypes.POTION_CONTENTS) != null;
+				//$$ boolean hasEffect = self.get(DataComponents.POTION_CONTENTS) != null;
 				//#else
 				boolean hasEffect = !PotionUtil.getPotionEffects(self).isEmpty();
 				//#endif

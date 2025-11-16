@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 //#if MC >= 11700
-//$$ import net.minecraft.client.render.CameraSubmersionType;
+//$$ import net.minecraft.world.level.material.FogType;
 //#else
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -49,14 +49,14 @@ public abstract class BackgroundRendererMixin
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 11700
-					//$$ target = "Lnet/minecraft/client/render/Camera;getSubmersionType()Lnet/minecraft/client/render/CameraSubmersionType;"
+					//$$ target = "Lnet/minecraft/client/Camera;getFluidInCamera()Lnet/minecraft/world/level/material/FogType;"
 					//#else
 					target = "Lnet/minecraft/client/Camera;getFluidInCamera()Lnet/minecraft/world/level/material/FluidState;"
 					//#endif
 			)
 	)
 	//#if MC >= 11700
-	//$$ private static CameraSubmersionType disableSubmergedFog(CameraSubmersionType cameraSubmersionType)
+	//$$ private static FogType disableSubmergedFog(FogType cameraSubmersionType)
 	//#elseif MC >= 11500
 	private static FluidState disableSubmergedFog(FluidState fluidState)
 	//#else
@@ -66,7 +66,7 @@ public abstract class BackgroundRendererMixin
 		if (TweakerMoreConfigs.DISABLE_CAMERA_SUBMERSION_FOG.getBooleanValue())
 		{
 			//#if MC >= 11700
-			//$$ cameraSubmersionType = CameraSubmersionType.NONE;
+			//$$ cameraSubmersionType = FogType.NONE;
 			//#else
 			fluidState = Fluids.EMPTY.defaultFluidState();
 			//#endif

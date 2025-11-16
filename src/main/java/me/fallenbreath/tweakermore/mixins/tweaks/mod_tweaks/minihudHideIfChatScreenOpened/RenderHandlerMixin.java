@@ -45,7 +45,7 @@ public abstract class RenderHandlerMixin
 			at = @At(
 					value = "FIELD",
 					//#if MC >= 12002
-					//$$ target = "Lnet/minecraft/client/option/GameOptions;hudHidden:Z",
+					//$$ target = "Lnet/minecraft/client/Options;hideGui:Z",
 					//#else
 					target = "Lnet/minecraft/client/Options;renderDebug:Z",
 					//#endif

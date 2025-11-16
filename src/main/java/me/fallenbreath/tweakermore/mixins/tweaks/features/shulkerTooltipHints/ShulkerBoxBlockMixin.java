@@ -29,24 +29,24 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Slice;
 
 //#if MC >= 12105
-//$$ import net.minecraft.component.type.ContainerComponent;
+//$$ import net.minecraft.world.item.component.ItemContainerContents;
 //#else
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 //#endif
 
 //#if MC >= 12006
-//$$ import net.minecraft.item.Item;
+//$$ import net.minecraft.world.item.Item;
 //#endif
 
 //#if MC >= 11600
-//$$ import net.minecraft.text.MutableText;
+//$$ import net.minecraft.network.chat.MutableComponent;
 //#else
 import net.minecraft.network.chat.Component;
 //#endif
 
 @Mixin(
 		//#if MC >= 12105
-		//$$ ContainerComponent.class
+		//$$ ItemContainerContents.class
 		//#else
 		ShulkerBoxBlock.class
 		//#endif
@@ -94,7 +94,7 @@ public abstract class ShulkerBoxBlockMixin
 	)
 	{
 		//#if MC >= 11600
-		//$$ MutableText text = (MutableText)textObj;
+		//$$ MutableComponent text = (MutableComponent)textObj;
 		//#else
 		Component text = (Component)textObj;
 		//#endif

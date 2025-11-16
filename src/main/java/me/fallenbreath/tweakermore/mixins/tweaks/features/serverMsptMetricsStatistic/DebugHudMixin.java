@@ -32,9 +32,9 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC >= 12000
-//$$ import net.minecraft.client.gui.DrawContext;
+//$$ import net.minecraft.client.gui.GuiGraphics;
 //#elseif MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 /**
@@ -51,9 +51,9 @@ public abstract class DebugHudMixin
 			FrameTimer metricsData,
 			/* parent method parameters vvv */
 			//#if MC >= 12000
-			//$$ DrawContext matrixStackOrDrawContext,
+			//$$ GuiGraphics matrixStackOrDrawContext,
 			//#elseif MC >= 11600
-			//$$ MatrixStack matrixStackOrDrawContext,
+			//$$ PoseStack matrixStackOrDrawContext,
 			//#endif
 			FrameTimer metricsData_, int x, int width, boolean showFps
 	)
@@ -88,9 +88,9 @@ public abstract class DebugHudMixin
 	)
 	private void serverMsptMetricsStatistic_renderExtra(
 			//#if MC >= 12000
-			//$$ DrawContext matrixStackOrDrawContext,
+			//$$ GuiGraphics matrixStackOrDrawContext,
 			//#elseif MC >= 11600
-			//$$ MatrixStack matrixStackOrDrawContext,
+			//$$ PoseStack matrixStackOrDrawContext,
 			//#endif
 			FrameTimer metricsData, int x, int width, boolean showFps, CallbackInfo ci
 	)

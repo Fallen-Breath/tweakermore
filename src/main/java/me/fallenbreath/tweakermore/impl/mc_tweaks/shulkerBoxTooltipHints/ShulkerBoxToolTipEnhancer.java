@@ -40,11 +40,11 @@ import java.util.Objects;
 import java.util.function.ToIntFunction;
 
 //#if MC >= 12006
-//$$ import net.minecraft.item.Item;
+//$$ import net.minecraft.world.item.Item;
 //#endif
 
 //#if MC >= 11600
-//$$ import net.minecraft.text.MutableText;
+//$$ import net.minecraft.network.chat.MutableComponent;
 //#endif
 
 public class ShulkerBoxToolTipEnhancer
@@ -60,7 +60,7 @@ public class ShulkerBoxToolTipEnhancer
 			//#endif
 			ItemStack itemStack,
 			//#if MC >= 11600
-			//$$ MutableText text
+			//$$ MutableComponent text
 			//#else
 			Component text
 			//#endif

@@ -38,7 +38,7 @@ import net.minecraft.util.Mth;
 //#endif
 
 //#if MC >= 11904
-//$$ import net.minecraft.client.gui.DrawableHelper;
+//$$ import net.minecraft.client.gui.GuiComponent;
 //#else
 import me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.shulkerItemContentHint.ItemRendererAccessor;
 import com.mojang.blaze3d.vertex.BufferBuilder;
@@ -64,7 +64,7 @@ public class ShulkerBoxItemContentHintRenderer
 
 	public static void render(
 			//#if MC >= 11904
-			//$$ MatrixStack matrices,
+			//$$ PoseStack matrices,
 			//#endif
 			//#if MC >= 12000
 			//$$ DrawContext drawContext,
@@ -81,7 +81,7 @@ public class ShulkerBoxItemContentHintRenderer
 		}
 
 		//#if MC >= 11904
-		//$$ MatrixStack textMatrixStack = matrices;
+		//$$ PoseStack textMatrixStack = matrices;
 		//$$ textMatrixStack.push();
 		//#elseif MC >= 11500
 		PoseStack textMatrixStack = new PoseStack();
@@ -256,7 +256,7 @@ public class ShulkerBoxItemContentHintRenderer
 				//#endif
 				immediate,
 				//#if MC >= 11904
-				//$$ TextRenderer.TextLayerType.NORMAL,
+				//$$ Font.TextLayerType.NORMAL,
 				//#else
 				false,
 				//#endif
@@ -342,7 +342,7 @@ public class ShulkerBoxItemContentHintRenderer
 		//$$ };
 		//#elseif MC >= 11904
 		//$$ GuiQuadDrawer drawer = (x_, y_, width_, height_, color_) -> {
-		//$$ 	DrawableHelper.fill(renderContext.getMcRawMatrixStack(), x_, y_, x_ + width_, y_ + height_, color_ | 0xFF000000);
+		//$$ 	GuiComponent.fill(renderContext.getMcRawMatrixStack(), x_, y_, x_ + width_, y_ + height_, color_ | 0xFF000000);
 		//$$ };
 		//#else
 		ItemRendererAccessor accessor = (ItemRendererAccessor)itemRenderer;

@@ -57,7 +57,7 @@ public abstract class BossBarHudMixin
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12001
-					//$$ target = "Lnet/minecraft/client/gui/DrawContext;getScaledWindowHeight()I"
+					//$$ target = "Lnet/minecraft/client/gui/GuiGraphics;guiHeight()I"
 					//#else
 					target = "Lcom/mojang/blaze3d/platform/Window;getGuiScaledHeight()I"
 					//#endif

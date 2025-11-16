@@ -40,7 +40,7 @@ public abstract class FrustumMixin implements CouldBeAlwaysVisibleFrustum
 	private boolean alwaysVisible = false;
 
 	//#if MC >= 11800
-	//$$ @Inject(method = "<init>(Lnet/minecraft/client/render/Frustum;)V", at = @At("TAIL"))
+	//$$ @Inject(method = "<init>(Lnet/minecraft/client/renderer/culling/Frustum;)V", at = @At("TAIL"))
 	//$$ private void copyAlwaysVisibleFlag(Frustum frustum, CallbackInfo ci)
 	//$$ {
 	//$$ 	this.alwaysVisible = ((FrustumMixin)(Object)frustum).alwaysVisible;

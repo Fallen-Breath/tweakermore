@@ -34,9 +34,9 @@ import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC >= 12000
-//$$ import net.minecraft.client.gui.DrawContext;
+//$$ import net.minecraft.client.gui.GuiGraphics;
 //#elseif MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 @Mixin(BossHealthOverlay.class)
@@ -59,9 +59,9 @@ public abstract class BossBarHudMixin
 	private int tweakerMore_bossBarScale_push(
 			int windowsWidth
 			//#if MC >= 12000
-			//$$ , DrawContext matrixStackOrDrawContext
+			//$$ , GuiGraphics matrixStackOrDrawContext
 			//#elseif MC >= 11600
-			//$$ , MatrixStack matrixStackOrDrawContext
+			//$$ , PoseStack matrixStackOrDrawContext
 			//#endif
 	)
 	{

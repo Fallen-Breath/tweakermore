@@ -25,8 +25,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 //#if MC >= 12004
-//$$ import net.minecraft.block.Block;
-//$$ import net.minecraft.registry.RegistryKey;
+//$$ import net.minecraft.world.level.block.Block;
+//$$ import net.minecraft.resources.ResourceKey;
 //#else
 import net.minecraft.world.level.block.StemGrownBlock;
 //#endif
@@ -36,7 +36,7 @@ public interface AttachedStemBlockAccessor
 {
 	@Accessor("fruit")
 	//#if MC >= 12004
-	//$$ RegistryKey<Block> getStemBlock();
+	//$$ ResourceKey<Block> getStemBlock();
 	//#else
 	StemGrownBlock getGourdBlock();
 	//#endif

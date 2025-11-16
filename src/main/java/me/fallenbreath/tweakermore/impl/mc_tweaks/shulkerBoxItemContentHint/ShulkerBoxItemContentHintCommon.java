@@ -34,7 +34,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 //#if MC >= 12006
-//$$ import net.minecraft.component.DataComponentTypes;
+//$$ import net.minecraft.core.component.DataComponents;
 //#endif
 
 public class ShulkerBoxItemContentHintCommon
@@ -152,7 +152,7 @@ public class ShulkerBoxItemContentHintCommon
 	private static Optional<ItemStack> computeCustomNameOverride(ItemStack shulkerBoxItemStack)
 	{
 		//#if MC >= 12006
-		//$$ if (!shulkerBoxItemStack.contains(DataComponentTypes.CUSTOM_NAME))
+		//$$ if (!shulkerBoxItemStack.contains(DataComponents.CUSTOM_NAME))
 		//#else
 		if (!shulkerBoxItemStack.hasCustomHoverName())
 		//#endif

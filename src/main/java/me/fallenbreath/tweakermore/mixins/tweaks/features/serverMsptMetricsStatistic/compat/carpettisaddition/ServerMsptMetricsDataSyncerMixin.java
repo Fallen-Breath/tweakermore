@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC >= 12006
-//$$ import net.minecraft.util.profiler.MultiValueDebugSampleLogImpl;
+//$$ import net.minecraft.util.debugchart.LocalSampleLogger;
 //#else
 import net.minecraft.util.FrameTimer;
 //#endif
@@ -46,7 +46,7 @@ public abstract class ServerMsptMetricsDataSyncerMixin
 	@Shadow(remap = false)
 	private
 	//#if MC >= 12006
-	//$$ MultiValueDebugSampleLogImpl
+	//$$ LocalSampleLogger
 	//#else
 	FrameTimer
 	//#endif

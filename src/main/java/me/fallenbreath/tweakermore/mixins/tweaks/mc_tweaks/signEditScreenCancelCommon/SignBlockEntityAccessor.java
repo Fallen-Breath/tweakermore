@@ -37,6 +37,6 @@ public interface SignBlockEntityAccessor
 
 	//#if MC >= 11700
 	//$$ @Accessor("filteredTexts")
-	//$$ Text[] getFilteredTexts$TKM();
+	//$$ Component[] getFilteredTexts$TKM();
 	//#endif
 }

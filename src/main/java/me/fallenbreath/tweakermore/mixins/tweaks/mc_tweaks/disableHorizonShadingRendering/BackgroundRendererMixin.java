@@ -46,9 +46,9 @@ public abstract class BackgroundRendererMixin
 					from = @At(
 							value = "INVOKE",
 							//#if MC >= 11800
-							//$$ target = "Lnet/minecraft/client/world/ClientWorld$Properties;getHorizonShadingRatio()F"
+							//$$ target = "Lnet/minecraft/client/multiplayer/ClientLevel$ClientLevelData;getClearColorScale()F"
 							//#elseif MC >= 11600
-							//$$ target = "Lnet/minecraft/client/world/ClientWorld$Properties;getHorizonShadingRatio()D"
+							//$$ target = "Lnet/minecraft/client/multiplayer/ClientLevel$ClientLevelData;getClearColorScale()D"
 							//#else
 							target = "Lnet/minecraft/world/level/dimension/Dimension;getClearColorScale()D"
 							//#endif
@@ -57,7 +57,7 @@ public abstract class BackgroundRendererMixin
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 11900
-					//$$ target = "Lnet/minecraft/client/render/BackgroundRenderer;getFogModifier(Lnet/minecraft/entity/Entity;F)Lnet/minecraft/client/render/BackgroundRenderer$StatusEffectFogModifier;"
+					//$$ target = "Lnet/minecraft/client/renderer/FogRenderer;getPriorityFogFunction(Lnet/minecraft/world/entity/Entity;F)Lnet/minecraft/client/renderer/FogRenderer$MobEffectFogFunction;"
 					//#else
 
 					target = "Lnet/minecraft/client/Camera;getEntity()Lnet/minecraft/world/entity/Entity;",

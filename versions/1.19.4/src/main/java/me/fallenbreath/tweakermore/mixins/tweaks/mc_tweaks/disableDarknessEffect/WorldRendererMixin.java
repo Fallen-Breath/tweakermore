@@ -38,7 +38,7 @@ public abstract class WorldRendererMixin
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12006
-					//$$ target = "Lnet/minecraft/entity/LivingEntity;hasStatusEffect(Lnet/minecraft/registry/entry/RegistryEntry;)Z",
+					//$$ target = "Lnet/minecraft/world/entity/LivingEntity;hasEffect(Lnet/minecraft/core/Holder;)Z",
 					//#else
 					target = "Lnet/minecraft/entity/LivingEntity;hasStatusEffect(Lnet/minecraft/entity/effect/StatusEffect;)Z",
 					//#endif

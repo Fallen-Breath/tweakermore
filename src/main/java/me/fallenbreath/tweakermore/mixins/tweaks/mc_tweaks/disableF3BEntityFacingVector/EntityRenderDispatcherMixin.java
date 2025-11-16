@@ -27,9 +27,9 @@ import org.spongepowered.asm.mixin.injection.At;
 
 //#if MC >= 12100
 //$$ import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
-//$$ import net.minecraft.client.render.VertexConsumer;
-//$$ import net.minecraft.client.util.math.MatrixStack;
-//$$ import net.minecraft.util.math.Vec3d;
+//$$ import com.mojang.blaze3d.vertex.VertexConsumer;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
+//$$ import net.minecraft.world.phys.Vec3;
 //$$ import org.joml.Vector3f;
 //#else
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -45,16 +45,16 @@ public abstract class EntityRenderDispatcherMixin
 	@Inject(
 	//#endif
 			//#if MC >= 12105
-			//$$ method = "renderHitboxes(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/entity/state/EntityHitboxAndView;Lnet/minecraft/client/render/VertexConsumer;F)V",
+			//$$ method = "renderHitboxesAndViewVector(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/entity/state/HitboxesRenderState;Lcom/mojang/blaze3d/vertex/VertexConsumer;F)V",
 			//#else
 			method = "renderHitbox",
 			//#endif
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12103
-					//$$ target = "Lnet/minecraft/client/render/VertexRendering;drawVector(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;Lorg/joml/Vector3f;Lnet/minecraft/util/math/Vec3d;I)V",
+					//$$ target = "Lnet/minecraft/client/renderer/ShapeRenderer;renderVector(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;Lorg/joml/Vector3f;Lnet/minecraft/world/phys/Vec3;I)V",
 					//#elseif MC >= 12100
-					//$$ target = "Lnet/minecraft/client/render/entity/EntityRenderDispatcher;drawVector(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;Lorg/joml/Vector3f;Lnet/minecraft/util/math/Vec3d;I)V",
+					//$$ target = "Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;renderVector(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;Lorg/joml/Vector3f;Lnet/minecraft/world/phys/Vec3;I)V",
 					//#else
 					target = "Lnet/minecraft/world/entity/Entity;getViewVector(F)Lnet/minecraft/world/phys/Vec3;",
 					//#endif
@@ -65,7 +65,7 @@ public abstract class EntityRenderDispatcherMixin
 			//#endif
 	)
 	//#if MC >= 12100
-	//$$ private static boolean f3BDisableFacingVector_cancelCall(MatrixStack matrixStack, VertexConsumer vertexConsumer, Vector3f vector3f, Vec3d vec3d, int i)
+	//$$ private static boolean f3BDisableFacingVector_cancelCall(PoseStack matrixStack, VertexConsumer vertexConsumer, Vector3f vector3f, Vec3 vec3d, int i)
 	//$$ {
 	//$$ 	return !TweakerMoreConfigs.DISABLE_F3_B_ENTITY_FACING_VECTOR.getBooleanValue();
 	//$$ }

@@ -24,7 +24,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.math.Matrix4f;
 
 //#if MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 // see other impls in subproject 1.14.4, 1.17.1
@@ -34,16 +34,16 @@ import com.mojang.math.Matrix4f;
 public class McMatrixStack implements IMatrixStack
 {
 	//#if MC >= 11600
-	//$$ private final MatrixStack matrixStack;
+	//$$ private final PoseStack matrixStack;
 	//$$
-	//$$ public McMatrixStack(MatrixStack matrixStack)
+	//$$ public McMatrixStack(PoseStack matrixStack)
 	//$$ {
 	//$$ 	this.matrixStack = matrixStack;
 	//$$ }
 	//#endif
 
 	//#if MC >= 11600
-	//$$ public MatrixStack asMcRaw()
+	//$$ public PoseStack asMcRaw()
 	//$$ {
 	//$$ 	return this.matrixStack;
 	//$$ }

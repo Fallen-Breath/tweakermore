@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 //#if MC >= 12006
-//$$ import net.minecraft.registry.entry.RegistryEntry;
+//$$ import net.minecraft.core.Holder;
 //#endif
 
 @Mixin(LivingEntity.class)
@@ -44,7 +44,7 @@ public abstract class LivingEntityMixin
 	)
 	private void fakeNightVision(
 			//#if MC >= 12006
-			//$$ RegistryEntry<StatusEffect> effect,
+			//$$ Holder<MobEffect> effect,
 			//#else
 			MobEffect effect,
 			//#endif

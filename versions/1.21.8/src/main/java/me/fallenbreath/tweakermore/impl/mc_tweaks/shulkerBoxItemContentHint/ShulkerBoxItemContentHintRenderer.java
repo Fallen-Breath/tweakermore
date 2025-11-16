@@ -128,7 +128,7 @@ public class ShulkerBoxItemContentHintRenderer
 		y = y + SLOT_WIDTH - HEIGHT;
 
 		// ====== [begin] ref: net.minecraft.client.render.item.ItemRenderer#renderGuiItemOverlay ======
-		// see net.minecraft.client.gui.DrawContext#drawItemBar
+		// see net.minecraft.client.gui.GuiGraphics#drawItemBar
 
 		RenderGlobals.disableDepthTest();
 

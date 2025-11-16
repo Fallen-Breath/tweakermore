@@ -26,8 +26,8 @@ import org.jetbrains.annotations.NotNull;
 //#if MC >= 12000
 //$$ import me.fallenbreath.tweakermore.util.render.RenderUtils;
 //$$ import me.fallenbreath.tweakermore.mixins.util.render.DrawContextAccessor;
-//$$ import net.minecraft.client.MinecraftClient;
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import net.minecraft.client.Minecraft;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 public class InWorldGuiDrawer
@@ -36,7 +36,7 @@ public class InWorldGuiDrawer
 	//$$ @NotNull
 	//$$ private final DrawContext drawContext;
 	//$$
-	//$$ public InWorldGuiDrawer(MatrixStack matrixStack)
+	//$$ public InWorldGuiDrawer(PoseStack matrixStack)
 	//$$ {
 	//$$ 	this.drawContext = createDrawContext(matrixStack);
 	//$$ }
@@ -53,9 +53,9 @@ public class InWorldGuiDrawer
 	}
 
 	//#if MC >= 12000
-	//$$ private static DrawContext createDrawContext(MatrixStack matrixStack)
+	//$$ private static DrawContext createDrawContext(PoseStack matrixStack)
 	//$$ {
-	//$$ 	var drawContext = new DrawContext(MinecraftClient.getInstance(), RenderUtils.getVertexConsumer());
+	//$$ 	var drawContext = new DrawContext(Minecraft.getInstance(), RenderUtils.getVertexConsumer());
 	//$$ 	((DrawContextAccessor)drawContext).setMatrices(matrixStack);
 	//$$ 	return drawContext;
 	//$$ }

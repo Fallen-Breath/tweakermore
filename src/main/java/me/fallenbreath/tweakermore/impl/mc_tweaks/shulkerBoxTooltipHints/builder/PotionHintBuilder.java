@@ -36,8 +36,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 //#if MC >= 12006
-//$$ import net.minecraft.component.DataComponentTypes;
-//$$ import net.minecraft.item.Item;
+//$$ import net.minecraft.core.component.DataComponents;
+//$$ import net.minecraft.world.item.Item;
 //#endif
 
 public class PotionHintBuilder extends AbstractHintBuilder
@@ -57,7 +57,7 @@ public class PotionHintBuilder extends AbstractHintBuilder
 			float ratio = getPotionDurationRatio(item);
 
 			//#if MC >= 12006
-			//$$ var potions = itemStack.get(DataComponentTypes.POTION_CONTENTS);
+			//$$ var potions = itemStack.get(DataComponents.POTION_CONTENTS);
 			//$$ if (ratio > 0 && potions != null)
 			//#else
 			if (ratio > 0 && !PotionUtils.getMobEffects(itemStack).isEmpty())

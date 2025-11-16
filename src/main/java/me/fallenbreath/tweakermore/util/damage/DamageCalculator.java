@@ -36,24 +36,24 @@ import java.util.Objects;
 
 //#if MC >= 12105
 //$$ import com.google.common.collect.Lists;
-//$$ import net.minecraft.component.type.AttributeModifierSlot;
-//$$ import net.minecraft.entity.EquipmentSlot;
+//$$ import net.minecraft.world.entity.EquipmentSlotGroup;
+//$$ import net.minecraft.world.entity.EquipmentSlot;
 //#endif
 
 //#if MC >= 12103
-//$$ import net.minecraft.world.explosion.ExplosionImpl;
+//$$ import net.minecraft.world.level.ServerExplosion;
 //#else
 import net.minecraft.world.level.Explosion;
 //#endif
 
 //#if MC >= 12100
-//$$ import net.minecraft.enchantment.Enchantments;
-//$$ import net.minecraft.item.ItemStack;
+//$$ import net.minecraft.world.item.enchantment.Enchantments;
+//$$ import net.minecraft.world.item.ItemStack;
 //$$ import java.util.List;
 //#endif
 
 //#if MC >= 11904
-//$$ import net.minecraft.registry.tag.DamageTypeTags;
+//$$ import net.minecraft.tags.DamageTypeTags;
 //#endif
 
 @SuppressWarnings("UnusedReturnValue")
@@ -99,7 +99,7 @@ public class DamageCalculator
 	{
 		float exposure =
 				//#if MC >= 12103
-				//$$ ExplosionImpl.calculateReceivedDamage
+				//$$ ServerExplosion.calculateReceivedDamage
 				//#else
 				Explosion.getSeenPercent
 				//#endif
@@ -271,7 +271,7 @@ public class DamageCalculator
 	//$$ {
 	//$$ 	//#if MC >= 12105
 	//$$ 	//$$ List<ItemStack> armorItems = Lists.newArrayList();
-	//$$ 	//$$ for (EquipmentSlot equipmentSlot : AttributeModifierSlot.ARMOR)
+	//$$ 	//$$ for (EquipmentSlot equipmentSlot : EquipmentSlotGroup.ARMOR)
 	//$$ 	//$$ {
 	//$$ 	//$$ 	armorItems.add(entity.getEquippedStack(equipmentSlot));
 	//$$ 	//$$ }
@@ -291,7 +291,7 @@ public class DamageCalculator
 		//$$ }
 		//$$ else
 		//$$ {
-		//$$ 	// it's impossible do this client-side (Enchantment#modifyDamageProtection requires a ServerWorld)
+		//$$ 	// it's impossible do this client-side (Enchantment#modifyDamageProtection requires a ServerLevel)
 		//$$ 	// what we can do best, is to simulate the basic legacy vanilla behavior
 		//$$
 		//$$ 	// reference: mc1.20.6 net.minecraft.enchantment.ProtectionEnchantment.getProtectionAmount

@@ -57,7 +57,7 @@ public class MoveConnectedServerEntryToTopHelper
 		boolean ok = false;
 		if (0 <= idx && idx < servers.size())
 		{
-			// verify the fresh ServerInfo, in case the file got modified
+			// verify the fresh ServerData, in case the file got modified
 			ServerData serverInfo = servers.get(idx);
 			if (serverInfo.name.equals(currentEntry.name) && serverInfo.ip.equals(currentEntry.ip))
 			{

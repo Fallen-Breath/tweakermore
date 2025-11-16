@@ -32,9 +32,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC >= 12002
-//$$ import net.minecraft.client.network.ClientCommonNetworkHandler;
-//$$ import net.minecraft.client.network.ClientConnectionState;
-//$$ import net.minecraft.network.ClientConnection;
+//$$ import net.minecraft.client.multiplayer.ClientCommonPacketListenerImpl;
+//$$ import net.minecraft.client.multiplayer.CommonListenerCookie;
+//$$ import net.minecraft.network.Connection;
 //#else
 import org.spongepowered.asm.mixin.Shadow;
 //#endif
@@ -43,11 +43,11 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(ClientPacketListener.class)
 public abstract class ClientPlayNetworkHandlerMixin
 		//#if MC >= 12002
-		//$$ extends ClientCommonNetworkHandler
+		//$$ extends ClientCommonPacketListenerImpl
 		//#endif
 {
 	//#if MC >= 12002
-	//$$ protected ClientPlayNetworkHandlerMixin(MinecraftClient client, ClientConnection connection, ClientConnectionState connectionState)
+	//$$ protected ClientPlayNetworkHandlerMixin(Minecraft client, Connection connection, CommonListenerCookie connectionState)
 	//$$ {
 	//$$ 	super(client, connection, connectionState);
 	//$$ }

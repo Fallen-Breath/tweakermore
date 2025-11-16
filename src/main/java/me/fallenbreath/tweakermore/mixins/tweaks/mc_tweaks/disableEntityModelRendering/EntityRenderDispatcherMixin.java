@@ -29,12 +29,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 //#if MC >= 12109
-//$$ import net.minecraft.client.render.command.OrderedRenderCommandQueue;
-//$$ import net.minecraft.client.render.state.CameraRenderState;
+//$$ import net.minecraft.client.renderer.SubmitNodeCollector;
+//$$ import net.minecraft.client.renderer.state.CameraRenderState;
 //#endif
 
 //#if MC >= 12103
-//$$ import net.minecraft.client.render.entity.state.EntityRenderState;
+//$$ import net.minecraft.client.renderer.entity.state.EntityRenderState;
 //#endif
 
 //#if MC >= 11500
@@ -53,33 +53,33 @@ public abstract class EntityRenderDispatcherMixin
 			//#if MC >= 1.21.9
 			//$$ method = "render",
 			//#elseif MC >= 1.21.3
-			//$$ method = "render(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/render/entity/EntityRenderer;)V",
+			//$$ method = "render(Lnet/minecraft/world/entity/Entity;DDDFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/renderer/entity/EntityRenderer;)V",
 			//#elseif MC >= 1.15.0
 			method = "render",
 			//#else
-			//$$ method = "render(Lnet/minecraft/entity/Entity;DDDFFZ)V",
+			//$$ method = "render(Lnet/minecraft/world/entity/Entity;DDDFFZ)V",
 			//#endif
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 1.21.9
-					//$$ target = "Lnet/minecraft/client/render/entity/EntityRenderer;render(Lnet/minecraft/client/render/entity/state/EntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;Lnet/minecraft/client/render/state/CameraRenderState;)V"
+					//$$ target = "Lnet/minecraft/client/renderer/entity/EntityRenderer;submit(Lnet/minecraft/client/renderer/entity/state/EntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V"
 					//#elseif MC >= 1.21.5
-					//$$ target = "Lnet/minecraft/client/render/entity/EntityRenderDispatcher;render(Lnet/minecraft/client/render/entity/state/EntityRenderState;DDDLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/render/entity/EntityRenderer;)V"
+					//$$ target = "Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;render(Lnet/minecraft/client/renderer/entity/state/EntityRenderState;DDDLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/renderer/entity/EntityRenderer;)V"
 					//#elseif MC >= 1.21.3
-					//$$ target = "Lnet/minecraft/client/render/entity/EntityRenderer;render(Lnet/minecraft/client/render/entity/state/EntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V"
+					//$$ target = "Lnet/minecraft/client/renderer/entity/EntityRenderer;render(Lnet/minecraft/client/renderer/entity/state/EntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"
 					//#elseif MC >= 1.15.0
 					target = "Lnet/minecraft/client/renderer/entity/EntityRenderer;render(Lnet/minecraft/world/entity/Entity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"
 					//#else
-					//$$ target = "Lnet/minecraft/client/render/entity/EntityRenderer;render(Lnet/minecraft/entity/Entity;DDDFF)V"
+					//$$ target = "Lnet/minecraft/client/renderer/entity/EntityRenderer;render(Lnet/minecraft/world/entity/Entity;DDDFF)V"
 					//#endif
 			)
 	)
 	//#if MC >= 1.21.9
-	//$$ private <S extends EntityRenderState> boolean disableEntityModelRendering_cancelRender(EntityRenderer instance, S entityRenderState, MatrixStack matrixStack, OrderedRenderCommandQueue orderedRenderCommandQueue, CameraRenderState cameraRenderState)
+	//$$ private <S extends EntityRenderState> boolean disableEntityModelRendering_cancelRender(EntityRenderer instance, S entityRenderState, PoseStack matrixStack, SubmitNodeCollector orderedRenderCommandQueue, CameraRenderState cameraRenderState)
 	//#elseif MC >= 1.21.5
-	//$$ private <E extends Entity, S extends EntityRenderState> boolean disableEntityModelRendering_cancelRender(EntityRenderDispatcher instance, S entityRenderState, double x, double y, double z, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, EntityRenderer<? super E, S> entityRenderer)
+	//$$ private <E extends Entity, S extends EntityRenderState> boolean disableEntityModelRendering_cancelRender(EntityRenderDispatcher instance, S entityRenderState, double x, double y, double z, PoseStack matrixStack, MultiBufferSource vertexConsumerProvider, int light, EntityRenderer<? super E, S> entityRenderer)
 	//#elseif MC >= 1.21.3
-	//$$ private <E extends Entity, S extends EntityRenderState> boolean disableEntityModelRendering_cancelRender(EntityRenderer<? super E, S> instance, S entityRenderState, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light)
+	//$$ private <E extends Entity, S extends EntityRenderState> boolean disableEntityModelRendering_cancelRender(EntityRenderer<? super E, S> instance, S entityRenderState, PoseStack matrixStack, MultiBufferSource vertexConsumerProvider, int light)
 	//#elseif MC >= 1.15.0
 	boolean disableEntityModelRendering_cancelRender(EntityRenderer<Entity> instance, Entity entity, float yaw, float tickDelta, PoseStack matrixStack, MultiBufferSource vertexConsumerProvider, int light)
 	//#else

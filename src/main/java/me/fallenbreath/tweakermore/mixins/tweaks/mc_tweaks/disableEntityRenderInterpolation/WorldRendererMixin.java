@@ -39,7 +39,7 @@ public abstract class WorldRendererMixin
 	//$$ 		method = "fillEntityRenderStates",
 	//$$ 		at = @At(
 	//$$ 				value = "INVOKE",
-	//$$ 				target = "Lnet/minecraft/client/render/RenderTickCounter;getTickProgress(Z)F"
+	//$$ 				target = "Lnet/minecraft/client/DeltaTracker;getGameTimeDeltaPartialTick(Z)F"
 	//$$ 		)
 	//$$ )
 	//#else

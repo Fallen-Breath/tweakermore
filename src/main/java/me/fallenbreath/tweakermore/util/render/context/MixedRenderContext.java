@@ -25,7 +25,7 @@ import net.minecraft.client.gui.GuiComponent;
 import org.jetbrains.annotations.NotNull;
 
 //#if MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 /**
@@ -53,14 +53,14 @@ public class MixedRenderContext extends WorldRenderContextImpl
 	public static MixedRenderContext create()
 	{
 		//#if MC >= 11600
-		//$$ return new MixedRenderContext(new McMatrixStack(new MatrixStack()));
+		//$$ return new MixedRenderContext(new McMatrixStack(new PoseStack()));
 		//#else
 		return new MixedRenderContext(new McMatrixStack());
 		//#endif
 	}
 
 	//#if 11600 <= MC && MC < 12000
-	//$$ public MatrixStack getMcRawMatrixStack()
+	//$$ public PoseStack getMcRawMatrixStack()
 	//$$ {
 	//$$ 	return ((McMatrixStack)this.getMatrixStack()).asMcRaw();
 	//$$ }

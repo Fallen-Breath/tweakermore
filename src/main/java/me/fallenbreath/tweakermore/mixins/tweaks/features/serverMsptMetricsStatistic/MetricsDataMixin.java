@@ -30,14 +30,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC >= 12006
-//$$ import net.minecraft.util.profiler.log.ArrayDebugSampleLog;
+//$$ import net.minecraft.util.debugchart.AbstractSampleLogger;
 //#else
 import net.minecraft.util.FrameTimer;
 //#endif
 
 @Mixin(
 		//#if MC >= 12006
-		//$$ ArrayDebugSampleLog.class
+		//$$ AbstractSampleLogger.class
 		//#else
 		FrameTimer.class
 		//#endif

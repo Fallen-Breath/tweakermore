@@ -25,11 +25,11 @@ import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.network.chat.Component;
 
 //#if MC >= 12001
-//$$ import net.minecraft.block.entity.SignText;
+//$$ import net.minecraft.world.level.block.entity.SignText;
 //#endif
 
 //#if MC >= 11903
-//$$ import net.minecraft.client.gui.screen.ingame.AbstractSignEditScreen;
+//$$ import net.minecraft.client.gui.screens.inventory.AbstractSignEditScreen;
 //#else
 import net.minecraft.client.gui.screens.inventory.SignEditScreen;
 //#endif

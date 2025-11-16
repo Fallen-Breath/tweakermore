@@ -29,12 +29,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 
 //#if MC >= 12100
-//$$ import net.minecraft.component.ComponentChanges;
-//$$ import net.minecraft.util.Util;
+//$$ import net.minecraft.core.component.DataComponentPatch;
+//$$ import net.minecraft.Util;
 //#endif
 
 //#if MC >= 12006
-//$$ import net.minecraft.command.argument.ItemStackArgument;
+//$$ import net.minecraft.commands.arguments.item.ItemInput;
 //#endif
 
 public class ItemDataCopier
@@ -50,11 +50,11 @@ public class ItemDataCopier
 				ItemStack itemStack = slot.getItem();
 
 				//#if MC >= 12006
-				//$$ var arg = new ItemStackArgument(
+				//$$ var arg = new ItemInput(
 				//$$ 		itemStack.getRegistryEntry(),
 				//$$ 		//#if MC >= 12100
 				//$$ 		//$$ Util.make(() -> {
-				//$$ 		//$$ 	var builder = ComponentChanges.builder();
+				//$$ 		//$$ 	var builder = DataComponentPatch.builder();
 				//$$ 		//$$ 	itemStack.getComponents().forEach(builder::add);
 				//$$ 		//$$ 	return builder.build();
 				//$$ 		//$$ })

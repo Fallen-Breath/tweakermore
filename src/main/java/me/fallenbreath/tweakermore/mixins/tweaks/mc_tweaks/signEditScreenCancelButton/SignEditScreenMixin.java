@@ -39,13 +39,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#endif
 
 //#if MC >= 11903
-//$$ import net.minecraft.client.gui.screen.ingame.AbstractSignEditScreen;
+//$$ import net.minecraft.client.gui.screens.inventory.AbstractSignEditScreen;
 //#else
 import net.minecraft.client.gui.screens.inventory.SignEditScreen;
 //#endif
 
 //#if MC >= 11600
-//$$ import net.minecraft.client.gui.screen.ScreenTexts;
+//$$ import net.minecraft.network.chat.CommonComponents;
 //#else
 import fi.dy.masa.malilib.util.StringUtils;
 //#endif
@@ -103,7 +103,7 @@ public abstract class SignEditScreenMixin extends Screen
 	//$$ 		method = "init",
 	//$$ 		at = @At(
 	//$$ 				value = "INVOKE",
-	//$$ 				target = "Lnet/minecraft/client/gui/widget/ButtonWidget$Builder;dimensions(IIII)Lnet/minecraft/client/gui/widget/ButtonWidget$Builder;"
+	//$$ 				target = "Lnet/minecraft/client/gui/components/Button$Builder;bounds(IIII)Lnet/minecraft/client/gui/components/Button$Builder;"
 	//$$ 		),
 	//$$ 		index = 1
 	//$$ )
@@ -125,7 +125,7 @@ public abstract class SignEditScreenMixin extends Screen
 		{
 			//#if MC >= 11903
 			//$$ this.addDrawableChild(
-			//$$ 		ButtonWidget.builder(ScreenTexts.CANCEL, button -> {
+			//$$ 		Button.builder(CommonComponents.CANCEL, button -> {
 			//$$ 			this.editingCancelled = true;
 			//$$ 			this.finishEditing();
 			//$$ 		}).dimensions(this.width / 2 - 100, this.height / 4 + 120 + 20 + 5, 200, 20).build()
@@ -140,7 +140,7 @@ public abstract class SignEditScreenMixin extends Screen
 					(new Button(
 					this.width / 2 - 100, this.height / 4 + 120 + 20 + 5, 200, 20,
 					//#if MC >= 11600
-					//$$ ScreenTexts.CANCEL,
+					//$$ CommonComponents.CANCEL,
 					//#else
 					StringUtils.translate("gui.cancel"),
 					//#endif

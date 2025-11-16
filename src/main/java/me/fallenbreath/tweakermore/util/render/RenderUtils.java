@@ -33,12 +33,12 @@ import java.util.Objects;
 
 //#if MC >= 12100
 //$$ import net.minecraft.client.render.RenderLayer;
-//$$ import net.minecraft.client.util.BufferAllocator;
+//$$ import com.mojang.blaze3d.vertex.ByteBufferBuilder;
 //#endif
 
 //#if MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
-//$$ import net.minecraft.text.OrderedText;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
+//$$ import net.minecraft.util.FormattedCharSequence;
 //#endif
 
 //#if MC >= 11500
@@ -71,7 +71,7 @@ public class RenderUtils
 	}
 
 	//#if MC >= 11600
-	//$$ public static int getRenderWidth(OrderedText text)
+	//$$ public static int getRenderWidth(FormattedCharSequence text)
 	//$$ {
 	//$$ 	return TEXT_RENDERER.getWidth(text);
 	//$$ }
@@ -81,7 +81,7 @@ public class RenderUtils
 	public static MultiBufferSource.BufferSource getVertexConsumer()
 	{
 		//#if MC >= 12100
-		//$$ return MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
+		//$$ return Minecraft.getInstance().getBufferBuilders().getEntityVertexConsumers();
 		//#else
 		return MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
 		//#endif

@@ -35,8 +35,8 @@ import static me.fallenbreath.tweakermore.util.Messenger.s;
 import static me.fallenbreath.tweakermore.util.Messenger.style;
 
 //#if MC >= 12004
-//$$ import net.minecraft.block.OxidizableDoorBlock;
-//$$ import net.minecraft.block.enums.DoubleBlockHalf;
+//$$ import net.minecraft.world.level.block.WeatheringCopperDoorBlock;
+//$$ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 //#endif
 
 public class CopperGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHandler
@@ -50,10 +50,10 @@ public class CopperGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHa
 	private static boolean canDegrade(BlockState blockState)
 	{
 		//#if MC >= 12004
-		//$$ // see net.minecraft.block.OxidizableDoorBlock#randomTick
-		//$$ if (blockState.getBlock() instanceof OxidizableDoorBlock)
+		//$$ // see net.minecraft.block.WeatheringCopperDoorBlock#randomTick
+		//$$ if (blockState.getBlock() instanceof WeatheringCopperDoorBlock)
 		//$$ {
-		//$$ 	return blockState.get(OxidizableDoorBlock.HALF) == DoubleBlockHalf.LOWER;
+		//$$ 	return blockState.get(WeatheringCopperDoorBlock.HALF) == DoubleBlockHalf.LOWER;
 		//$$ }
 		//#endif
 		return true;

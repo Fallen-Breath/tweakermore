@@ -131,7 +131,7 @@ public abstract class ClientPlayerInteractionManagerMixin
 					//#if MC >= 11500
 					actionResult.consumesAction()
 					//#else
-					//$$ actionResult == ActionResult.SUCCESS
+					//$$ actionResult == InteractionResult.SUCCESS
 					//#endif
 			)
 			{

@@ -34,9 +34,9 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC >= 12000
-//$$ import net.minecraft.client.gui.DrawContext;
+//$$ import net.minecraft.client.gui.GuiGraphics;
 //#elseif MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 //#if MC >= 11600
@@ -56,7 +56,7 @@ public abstract class InGameHudMixin
 
 	@ModifyVariable(
 			//#if MC >= 12103
-			//$$ method = "renderScoreboardSidebar(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/scoreboard/ScoreboardObjective;)V",  // lambda method as the context.draw() callback in method renderScoreboardSidebar
+			//$$ method = "displayScoreboardSidebar(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/scores/Objective;)V",  // lambda method as the context.draw() callback in method renderScoreboardSidebar
 			//#elseif MC >= 12004
 			//$$ method = "method_55440",  // lambda method as the context.draw() callback in method renderScoreboardSidebar
 			//#else
@@ -65,7 +65,7 @@ public abstract class InGameHudMixin
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 11600
-					//$$ target = "Lnet/minecraft/client/option/GameOptions;getTextBackgroundColor(F)I",
+					//$$ target = "Lnet/minecraft/client/Options;getBackgroundColor(F)I",
 					//#else
 					target = "Lnet/minecraft/client/Options;getBackgroundColor(F)I",
 					//#endif
@@ -80,9 +80,9 @@ public abstract class InGameHudMixin
 	private int tweakerMore_scoreboardSideBarScale_push(
 			int centerY
 			//#if MC >= 12000
-			//$$ , @Local(argsOnly = true) DrawContext matrixStackOrDrawContext
+			//$$ , @Local(argsOnly = true) GuiGraphics matrixStackOrDrawContext
 			//#elseif MC >= 11600
-			//$$ , @Local(argsOnly = true) MatrixStack matrixStackOrDrawContext
+			//$$ , @Local(argsOnly = true) PoseStack matrixStackOrDrawContext
 			//#endif
 	)
 	{
@@ -104,7 +104,7 @@ public abstract class InGameHudMixin
 
 	@Inject(
 			//#if MC >= 12006
-			//$$ method = "renderScoreboardSidebar(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/scoreboard/ScoreboardObjective;)V",
+			//$$ method = "displayScoreboardSidebar(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/scores/Objective;)V",
 			//#else
 			method = "displayScoreboardSidebar",
 			//#endif

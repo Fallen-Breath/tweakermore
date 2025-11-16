@@ -189,7 +189,7 @@ public abstract class PlacementTweaksMixin
 		//$$ 	}
 		//$$
 		//$$ 	//System.out.printf("processRightClickBlockWrapper/Orientation req facing: %s, x: %.3f, pos: %s, sideIn: %s\n", facing, x, posIn, sideIn);
-		//$$ 	hitVecIn = new Vec3d(x, hitVecIn.y, hitVecIn.z);
+		//$$ 	hitVecIn = new Vec3(x, hitVecIn.y, hitVecIn.z);
 		//$$ }
 		//#endif
 

@@ -44,8 +44,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
 
 //#if MC >= 12106
-//$$ import net.minecraft.storage.NbtReadView;
-//$$ import net.minecraft.util.ErrorReporter;
+//$$ import net.minecraft.world.level.storage.TagValueInput;
+//$$ import net.minecraft.util.ProblemReporter;
 //#endif
 
 public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHandler
@@ -194,9 +194,9 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 					try
 					{
 						//#if MC >= 12106
-						//$$ try (ErrorReporter.Logging logging = new ErrorReporter.Logging(entity.getErrorReporterContext(), TweakerMoreMod.LOGGER))
+						//$$ try (ProblemReporter.Logging logging = new ProblemReporter.Logging(entity.getErrorReporterContext(), TweakerMoreMod.LOGGER))
 						//$$ {
-						//$$ 	entity.readData(NbtReadView.create(logging, entity.getRegistryManager(), nbt));
+						//$$ 	entity.readData(TagValueInput.create(logging, entity.getRegistryManager(), nbt));
 						//$$ }
 						//#else
 						entity.load(nbt);
@@ -250,9 +250,9 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 						try
 						{
 							//#if MC >= 12106
-							//$$ try (ErrorReporter.Logging logging = new ErrorReporter.Logging(blockEntity.getReporterContext(), TweakerMoreMod.LOGGER))
+							//$$ try (ProblemReporter.Logging logging = new ProblemReporter.Logging(blockEntity.getReporterContext(), TweakerMoreMod.LOGGER))
 							//$$ {
-							//$$ 	blockEntity.read(NbtReadView.create(logging, world.getRegistryManager(), nbt));
+							//$$ 	blockEntity.read(TagValueInput.create(logging, world.getRegistryManager(), nbt));
 							//$$ }
 							//#elseif MC >= 12006
 							//$$ blockEntity.read(nbt, blockEntity.getWorld().getRegistryManager());

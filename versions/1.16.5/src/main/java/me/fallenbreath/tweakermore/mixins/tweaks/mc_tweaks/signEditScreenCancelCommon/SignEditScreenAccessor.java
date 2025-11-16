@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 //#if MC >= 11903
-//$$ import net.minecraft.client.gui.screen.ingame.AbstractSignEditScreen;
+//$$ import net.minecraft.client.gui.screens.inventory.AbstractSignEditScreen;
 //#else
 import net.minecraft.client.gui.screen.ingame.SignEditScreen;
 //#endif

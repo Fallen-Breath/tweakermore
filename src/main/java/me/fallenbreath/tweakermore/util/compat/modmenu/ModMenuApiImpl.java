@@ -29,7 +29,7 @@ import io.github.prospector.modmenu.api.ModMenuApi;
 //#else
 //$$ import io.github.prospector.modmenu.api.ModMenuApi;
 //$$ import me.fallenbreath.tweakermore.TweakerMoreMod;
-//$$ import net.minecraft.client.gui.screen.Screen;
+//$$ import net.minecraft.client.gui.screens.Screen;
 //$$ import java.util.function.Function;
 //#endif
 

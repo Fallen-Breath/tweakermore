@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 //#if MC >= 12006
-//$$ import net.minecraft.util.profiler.MultiValueDebugSampleLogImpl;
+//$$ import net.minecraft.util.debugchart.LocalSampleLogger;
 //#else
 import net.minecraft.util.profiler.PerformanceLog;
 //#endif
@@ -52,7 +52,7 @@ public abstract class DebugHudMixin
 
 	@Shadow @Final private
 	//#if MC >= 12006
-	//$$ MultiValueDebugSampleLogImpl
+	//$$ LocalSampleLogger
 	//#else
 	PerformanceLog
 	//#endif
@@ -70,7 +70,7 @@ public abstract class DebugHudMixin
 
 	@Unique private
 	//#if MC >= 12006
-	//$$ MultiValueDebugSampleLogImpl
+	//$$ LocalSampleLogger
 	//#else
 	PerformanceLog
 	//#endif
@@ -95,11 +95,11 @@ public abstract class DebugHudMixin
 		DebugChartAccessor chart = (DebugChartAccessor)this.tickChart;
 		//#if MC >= 12006
 		//$$ var chartLog = chart.getLog();
-		//$$ if (!(chartLog instanceof MultiValueDebugSampleLogImpl))
+		//$$ if (!(chartLog instanceof LocalSampleLogger))
 		//$$ {
 		//$$ 	return;
 		//$$ }
-		//$$ var metricsData = (MultiValueDebugSampleLogImpl)chartLog;
+		//$$ var metricsData = (LocalSampleLogger)chartLog;
 		//#else
 		PerformanceLog metricsData = chart.getLog();
 		//#endif

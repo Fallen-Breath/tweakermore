@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC >= 11903
-//$$ import net.minecraft.client.gui.screen.ingame.AbstractSignEditScreen;
+//$$ import net.minecraft.client.gui.screens.inventory.AbstractSignEditScreen;
 //#else
 import net.minecraft.client.gui.screens.inventory.SignEditScreen;
 //#endif

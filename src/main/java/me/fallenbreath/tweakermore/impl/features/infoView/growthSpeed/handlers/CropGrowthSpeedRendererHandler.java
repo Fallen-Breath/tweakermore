@@ -34,12 +34,12 @@ import static me.fallenbreath.tweakermore.util.Messenger.c;
 import static me.fallenbreath.tweakermore.util.Messenger.s;
 
 //#if MC >= 12004
-//$$ import net.minecraft.registry.RegistryKeys;
+//$$ import net.minecraft.core.registries.Registries;
 //#endif
 
 //#if MC >= 12001
-//$$ import net.minecraft.block.PitcherCropBlock;
-//$$ import net.minecraft.block.enums.DoubleBlockHalf;
+//$$ import net.minecraft.world.level.block.PitcherCropBlock;
+//$$ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 //#endif
 
 public class CropGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHandler
@@ -70,7 +70,7 @@ public class CropGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHand
 			//#if MC >= 12004
 			//$$ // see net.minecraft.block.AttachedStemBlock#getStateForNeighborUpdate
 			//$$ var optional = world.getBestWorld().getRegistryManager().
-			//$$ 		get(RegistryKeys.BLOCK).
+			//$$ 		get(Registries.BLOCK).
 			//$$ 		getOrEmpty(((AttachedStemBlockAccessor)block).getStemBlock());
 			//$$ if (optional.isPresent())
 			//$$ {

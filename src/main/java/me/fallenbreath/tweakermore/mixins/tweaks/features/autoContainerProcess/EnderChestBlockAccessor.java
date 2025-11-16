@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 //#if MC >= 11600
-//$$ import net.minecraft.text.Text;
+//$$ import net.minecraft.network.chat.Component;
 //#else
 import net.minecraft.network.chat.TranslatableComponent;
 //#endif
@@ -36,7 +36,7 @@ public interface EnderChestBlockAccessor
 	@Accessor("CONTAINER_TITLE")
 	static
 	//#if MC >= 11600
-	//$$ Text
+	//$$ Component
 	//#else
 	TranslatableComponent
 	//#endif

@@ -33,7 +33,7 @@ import org.jetbrains.annotations.NotNull;
 //#endif
 
 //#if 11600 <= MC && MC < 12000
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 public class GuiRenderContextImpl implements GuiRenderContext
@@ -78,7 +78,7 @@ public class GuiRenderContextImpl implements GuiRenderContext
 	//#if 11600 <= MC && MC < 12000
 	//$$ @Override
 	//$$ @NotNull
-	//$$ public MatrixStack getMcRawMatrixStack()
+	//$$ public PoseStack getMcRawMatrixStack()
 	//$$ {
 	//$$ 	return this.matrixStack.asMcRaw();
 	//$$ }

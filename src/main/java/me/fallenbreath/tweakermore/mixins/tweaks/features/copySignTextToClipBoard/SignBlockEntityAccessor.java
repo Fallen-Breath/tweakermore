@@ -24,7 +24,7 @@ import net.minecraft.world.level.block.entity.SignBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 
 //#if 11600 <= MC && MC < 12000
-//$$ import net.minecraft.text.Text;
+//$$ import net.minecraft.network.chat.Component;
 //$$ import org.spongepowered.asm.mixin.gen.Accessor;
 //#endif
 
@@ -34,6 +34,6 @@ public interface SignBlockEntityAccessor
 {
 	//#if 11600 <= MC && MC < 12000
 	//$$ @Accessor
-	//$$ Text[] getTexts();
+	//$$ Component[] getTexts();
 	//#endif
 }

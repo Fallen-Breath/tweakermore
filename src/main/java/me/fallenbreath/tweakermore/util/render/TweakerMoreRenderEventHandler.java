@@ -30,7 +30,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.profiling.ProfilerFiller;
 
 //#if MC >= 12103
-//$$ import net.minecraft.util.profiler.Profilers;
+//$$ import net.minecraft.util.profiling.ProfilerFiller;
 //#endif
 
 //#if MC >= 12006
@@ -38,11 +38,11 @@ import net.minecraft.util.profiling.ProfilerFiller;
 //#endif
 
 //#if MC >= 12000
-//$$ import net.minecraft.client.gui.DrawContext;
+//$$ import net.minecraft.client.gui.GuiGraphics;
 //#endif
 
 //#if MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 import java.util.List;
@@ -66,12 +66,12 @@ public abstract class TweakerMoreRenderEventHandler
 			//#if MC >= 12006
 			//$$ , Matrix4fStack matrixStack
 			//#elseif MC >= 11600
-			//$$ , MatrixStack matrixStack
+			//$$ , PoseStack matrixStack
 			//#endif
 	)
 	{
 		//#if MC >= 12103
-		//$$ Profiler profiler = Profilers.get();
+		//$$ ProfilerFiller profiler = Profiler.get();
 		//#else
 		ProfilerFiller profiler = mc.getProfiler();
 		//#endif
@@ -96,11 +96,11 @@ public abstract class TweakerMoreRenderEventHandler
 		@Override
 		public void onRenderGameOverlayPost(
 				//#if MC >= 12000
-				//$$ DrawContext matrixStackOrDrawContext
+				//$$ GuiGraphics matrixStackOrDrawContext
 				//#elseif MC >= 11700
-				//$$ MatrixStack matrixStackOrDrawContext
+				//$$ PoseStack matrixStackOrDrawContext
 				//#elseif MC >= 11600
-				//$$ float partialTicks, MatrixStack matrixStackOrDrawContext
+				//$$ float partialTicks, PoseStack matrixStackOrDrawContext
 				//#else
 				float partialTicks
 				//#endif

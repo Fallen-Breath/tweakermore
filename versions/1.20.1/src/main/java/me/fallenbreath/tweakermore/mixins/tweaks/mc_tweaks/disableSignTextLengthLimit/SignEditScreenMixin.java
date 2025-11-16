@@ -96,7 +96,7 @@ public abstract class SignEditScreenMixin extends Screen
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12106
-					//$$ target = "Lnet/minecraft/client/gui/DrawContext;drawText(Lnet/minecraft/client/font/TextRenderer;Ljava/lang/String;IIIZ)V",
+					//$$ target = "Lnet/minecraft/client/gui/GuiGraphics;drawString(Lnet/minecraft/client/gui/Font;Ljava/lang/String;IIIZ)V",
 					//#else
 					target = "Lnet/minecraft/client/gui/DrawContext;drawText(Lnet/minecraft/client/font/TextRenderer;Ljava/lang/String;IIIZ)I",
 					//#endif

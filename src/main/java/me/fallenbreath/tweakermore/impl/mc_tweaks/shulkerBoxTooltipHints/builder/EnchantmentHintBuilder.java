@@ -31,10 +31,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 //#if MC >= 12006
-//$$ import net.minecraft.component.DataComponentTypes;
-//$$ import net.minecraft.component.type.ItemEnchantmentsComponent;
-//$$ import net.minecraft.client.item.TooltipType;
-//$$ import net.minecraft.item.Item;
+//$$ import net.minecraft.core.component.DataComponents;
+//$$ import net.minecraft.world.item.enchantment.ItemEnchantments;
+//$$ import net.minecraft.world.item.TooltipFlag;
+//$$ import net.minecraft.world.item.Item;
 //#else
 import net.minecraft.world.item.EnchantedBookItem;
 //#endif
@@ -55,13 +55,13 @@ public class EnchantmentHintBuilder extends AbstractHintBuilder
 			List<Component> enchantmentTexts = Lists.newArrayList();
 
 			//#if MC >= 12006
-			//$$ var enchantmentTag = itemStack.getOrDefault(DataComponentTypes.STORED_ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT);
-			//$$ if (enchantmentTag == ItemEnchantmentsComponent.DEFAULT)
+			//$$ var enchantmentTag = itemStack.getOrDefault(DataComponents.STORED_ENCHANTMENTS, ItemEnchantments.DEFAULT);
+			//$$ if (enchantmentTag == ItemEnchantments.DEFAULT)
 			//$$ {
-			//$$ 	enchantmentTag = itemStack.getOrDefault(DataComponentTypes.ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT);
+			//$$ 	enchantmentTag = itemStack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.DEFAULT);
 			//$$ }
 			//$$ enchantmentTag.appendTooltip(
-			//$$ 		context, enchantmentTexts::add, TooltipType.ADVANCED
+			//$$ 		context, enchantmentTexts::add, TooltipFlag.ADVANCED
 			//$$ 		//#if MC >= 12105
 			//$$ 		//$$ , itemStack
 			//$$ 		//#endif

@@ -56,7 +56,7 @@ public abstract class PlayerSkinProviderMixin
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 11800
-					//$$ target = "Lnet/minecraft/util/Util;getMainWorkerExecutor()Ljava/util/concurrent/ExecutorService;"
+					//$$ target = "Lnet/minecraft/Util;backgroundExecutor()Ljava/util/concurrent/ExecutorService;"
 					//#elseif MC >= 11500
 					target = "Lnet/minecraft/Util;backgroundExecutor()Ljava/util/concurrent/Executor;"
 					//#else

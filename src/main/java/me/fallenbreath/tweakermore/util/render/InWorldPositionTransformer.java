@@ -31,7 +31,7 @@ import java.util.Objects;
 import com.mojang.math.Matrix4f;
 //#else
 //$$ import com.mojang.blaze3d.platform.GlStateManager;
-//$$ import net.minecraft.client.render.entity.EntityRenderDispatcher;
+//$$ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 //#endif
 
 public class InWorldPositionTransformer

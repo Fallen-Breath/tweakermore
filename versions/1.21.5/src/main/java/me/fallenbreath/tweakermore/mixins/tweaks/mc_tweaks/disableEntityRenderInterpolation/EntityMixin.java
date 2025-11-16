@@ -33,7 +33,7 @@ public abstract class EntityMixin
 {
 	@ModifyExpressionValue(
 			//#if MC >= 1.21.9
-			//$$ method = "updateTrackedPositionAndAngles(Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;)V",
+			//$$ method = "moveOrInterpolateTo(Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;)V",
 			//#else
 			method = "updateTrackedPositionAndAngles",
 			//#endif

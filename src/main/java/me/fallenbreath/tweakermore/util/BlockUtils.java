@@ -22,9 +22,9 @@ package me.fallenbreath.tweakermore.util;
 
 //#if MC >= 12000
 //$$ import me.fallenbreath.tweakermore.mixins.util.TrapdoorBlockAccessor;
-//$$ import net.minecraft.block.Block;
-//$$ import net.minecraft.block.DoorBlock;
-//$$ import net.minecraft.block.BlockSetType;
+//$$ import net.minecraft.world.level.block.Block;
+//$$ import net.minecraft.world.level.block.DoorBlock;
+//$$ import net.minecraft.world.level.block.state.properties.BlockSetType;
 //$$ import java.util.Optional;
 //#endif
 

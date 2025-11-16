@@ -30,13 +30,13 @@ import net.minecraft.world.item.Items;
 import net.minecraft.network.protocol.game.ServerboundContainerClickPacket;
 
 //#if MC >= 12105
-//$$ import net.minecraft.screen.sync.ItemStackHash;
+//$$ import net.minecraft.network.HashedStack;
 //#endif
 
 //#if MC >= 12006
-//$$ import net.minecraft.component.DataComponentTypes;
-//$$ import net.minecraft.component.type.NbtComponent;
-//$$ import net.minecraft.nbt.NbtCompound;
+//$$ import net.minecraft.core.component.DataComponents;
+//$$ import net.minecraft.world.item.component.CustomData;
+//$$ import net.minecraft.nbt.CompoundTag;
 //#endif
 
 //#if MC >= 11700
@@ -59,16 +59,16 @@ public class InventoryRefresher
 
 			// Tags with NaN are not equal, so the server will find an inventory desync and send an inventory refresh to the client
 			//#if MC >= 12006
-			//$$ var nbt = new NbtCompound();
+			//$$ var nbt = new CompoundTag();
 			//$$ nbt.putDouble("force_sync", Double.NaN);
-			//$$ NbtComponent.set(DataComponentTypes.CUSTOM_DATA, uniqueItem, nbt);
+			//$$ CustomData.set(DataComponents.CUSTOM_DATA, uniqueItem, nbt);
 			//#else
 			uniqueItem.getOrCreateTag().putDouble("force_resync", Double.NaN);
 			//#endif
 
 			AbstractContainerMenu csh = mc.player.containerMenu;
 			//#if MC >= 12105
-			//$$ ItemStackHash itemStackHash = ItemStackHash.fromItemStack(uniqueItem, networkHandler.method_68823());
+			//$$ HashedStack itemStackHash = HashedStack.fromItemStack(uniqueItem, networkHandler.method_68823());
 			//#endif
 			networkHandler.send(new ServerboundContainerClickPacket(
 					csh.containerId,

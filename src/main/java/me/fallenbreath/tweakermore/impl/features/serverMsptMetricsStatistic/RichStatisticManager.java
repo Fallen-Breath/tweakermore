@@ -28,16 +28,16 @@ import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 
 //#if MC >= 12006
-//$$ import net.minecraft.util.profiler.MultiValueDebugSampleLogImpl;
+//$$ import net.minecraft.util.debugchart.LocalSampleLogger;
 //#else
 import net.minecraft.util.FrameTimer;
 //#endif
 
 
 //#if MC >= 12000
-//$$ import net.minecraft.client.gui.DrawContext;
+//$$ import net.minecraft.client.gui.GuiGraphics;
 //#elseif MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 public class RichStatisticManager
@@ -74,13 +74,13 @@ public class RichStatisticManager
 
 	public
 	//#if MC >= 12006
-	//$$ MultiValueDebugSampleLogImpl
+	//$$ LocalSampleLogger
 	//#else
 	FrameTimer
 	//#endif
 	modifyServerMsptMetricsStatistic(
 			//#if MC >= 12006
-			//$$ MultiValueDebugSampleLogImpl metricsData
+			//$$ LocalSampleLogger metricsData
 			//#else
 			FrameTimer metricsData
 			//#endif
@@ -105,9 +105,9 @@ public class RichStatisticManager
 
 	public void renderExtraOnDebugHud(
 			//#if MC >= 12000
-			//$$ DrawContext drawContext,
+			//$$ GuiGraphics drawContext,
 			//#elseif MC >= 11600
-			//$$ MatrixStack matrices,
+			//$$ PoseStack matrices,
 			//#endif
 			int x, int width
 	)

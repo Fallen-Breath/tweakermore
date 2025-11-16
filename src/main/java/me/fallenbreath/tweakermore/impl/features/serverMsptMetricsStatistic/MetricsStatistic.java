@@ -29,8 +29,8 @@ import java.util.function.Function;
 import java.util.stream.LongStream;
 
 //#if MC >= 12006
-//$$ import net.minecraft.util.profiler.MultiValueDebugSampleLogImpl;
-//$$ import net.minecraft.util.profiler.ServerTickType;
+//$$ import net.minecraft.util.debugchart.LocalSampleLogger;
+//$$ import net.minecraft.util.debugchart.TpsDebugDimensions;
 //#endif
 
 public class MetricsStatistic
@@ -42,13 +42,13 @@ public class MetricsStatistic
 
 	private static final int COLUMN_NUM =
 			//#if MC >= 12006
-			//$$ ServerTickType.values().length;
+			//$$ TpsDebugDimensions.values().length;
 			//#else
 			4;
 			//#endif
 
 	//#if MC >= 12006
-	//$$ private MultiValueDebugSampleLogImpl
+	//$$ private LocalSampleLogger
 	//#else
 	private FrameTimer
 	//#endif
@@ -66,7 +66,7 @@ public class MetricsStatistic
 	}
 
 	//#if MC >= 12006
-	//$$ public MultiValueDebugSampleLogImpl
+	//$$ public LocalSampleLogger
 	//#else
 	public FrameTimer
 	//#endif
@@ -78,7 +78,7 @@ public class MetricsStatistic
 	public void reset()
 	{
 		//#if MC >= 12006
-		//$$ this.metricsData = new MultiValueDebugSampleLogImpl(COLUMN_NUM);
+		//$$ this.metricsData = new LocalSampleLogger(COLUMN_NUM);
 		//#else
 		this.metricsData = new FrameTimer();
 		//#endif

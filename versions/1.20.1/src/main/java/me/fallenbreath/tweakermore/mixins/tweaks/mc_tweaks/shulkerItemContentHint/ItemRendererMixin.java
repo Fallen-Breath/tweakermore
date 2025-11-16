@@ -34,14 +34,14 @@ public abstract class ItemRendererMixin
 {
 	@Inject(
 			//#if MC >= 12106
-			//$$ method = "drawItem(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;III)V",
+			//$$ method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V",
 			//#else
 			method = "drawItem(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;IIII)V",
 			//#endif
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12106
-					//$$ target = "Lnet/minecraft/client/gui/render/state/GuiRenderState;addItem(Lnet/minecraft/client/gui/render/state/ItemGuiElementRenderState;)V",
+					//$$ target = "Lnet/minecraft/client/gui/render/state/GuiRenderState;submitItem(Lnet/minecraft/client/gui/render/state/GuiItemRenderState;)V",
 					//#else
 					target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V",
 					//#endif

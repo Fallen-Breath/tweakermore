@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 //#if MC >= 12006
-//$$ import net.minecraft.item.Item;
+//$$ import net.minecraft.world.item.Item;
 //#endif
 
 public abstract class AbstractHintBuilder

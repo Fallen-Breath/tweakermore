@@ -24,7 +24,7 @@ import net.minecraft.client.gui.GuiComponent;  // will be remapped to DrawContex
 import org.jetbrains.annotations.NotNull;
 
 //#if 11600 <= MC && MC < 12000
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 public interface GuiRenderContext
@@ -32,7 +32,7 @@ public interface GuiRenderContext
 	// ============================= Getters =============================
 
 	//#if 11600 <= MC && MC < 12000
-	//$$ MatrixStack getMcRawMatrixStack();
+	//$$ PoseStack getMcRawMatrixStack();
 	//#endif
 
 	@NotNull

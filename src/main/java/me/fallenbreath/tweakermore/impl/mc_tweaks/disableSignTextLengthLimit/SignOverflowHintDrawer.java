@@ -43,15 +43,15 @@ public class SignOverflowHintDrawer
 		//$$ 		return;
 		//$$ 	}
   //$$
-		//$$ 	Text[] texts = signBlockEntity.text;
+		//$$ 	Component[] texts = signBlockEntity.text;
 		//$$ 	if (0 <= lineIdx && lineIdx < texts.length)
 		//$$ 	{
-		//$$ 		boolean overflowed = Texts.wrapLines(texts[lineIdx], 90, textRenderer, false, true).size() > 1;
+		//$$ 		boolean overflowed = ComponentRenderUtils.wrapLines(texts[lineIdx], 90, textRenderer, false, true).size() > 1;
 		//$$ 		if (overflowed)
 		//$$ 		{
-		//$$ 			assert Formatting.RED.getColorValue() != null;
+		//$$ 			assert ChatFormatting.RED.getColorValue() != null;
 		//$$ 			float xStart = (float)(-textRenderer.getStringWidth(lineContent) / 2);
-		//$$ 			textRenderer.draw("!", xStart - 10, lineIdx * 10 - texts.length * 5, Formatting.RED.getColorValue());
+		//$$ 			textRenderer.draw("!", xStart - 10, lineIdx * 10 - texts.length * 5, ChatFormatting.RED.getColorValue());
 		//$$ 	}
 		//$$ 	}
 		//$$ }

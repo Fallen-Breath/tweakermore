@@ -64,7 +64,7 @@ public abstract class SelectionManagerMixin implements SelectionManagerInSignEdi
 			//$$ method = "paste",
 			//$$ at = @At(
 			//$$ 		value = "INVOKE",
-			//$$ 		target = "Lnet/minecraft/client/util/SelectionManager;insert(Ljava/lang/String;Ljava/lang/String;)V"
+			//$$ 		target = "Lnet/minecraft/client/gui/font/TextFieldHelper;insertText(Ljava/lang/String;Ljava/lang/String;)V"
 			//$$ ),
 			//$$ index = 1
 			//#else
@@ -86,7 +86,7 @@ public abstract class SelectionManagerMixin implements SelectionManagerInSignEdi
 
 	@Inject(
 			//#if MC >= 11600
-			//$$ method = "insert(Ljava/lang/String;Ljava/lang/String;)V",
+			//$$ method = "insertText(Ljava/lang/String;Ljava/lang/String;)V",
 			//#else
 			method = "insertText(Ljava/lang/String;)V",
 			//#endif

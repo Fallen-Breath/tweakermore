@@ -32,14 +32,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC >= 12103
-//$$ import net.minecraft.entity.vehicle.AbstractBoatEntity;
+//$$ import net.minecraft.world.entity.vehicle.AbstractBoat;
 //#else
 import net.minecraft.world.entity.vehicle.Boat;
 //#endif
 
 @Mixin(
 		//#if MC >= 12103
-		//$$ AbstractBoatEntity.class
+		//$$ AbstractBoat.class
 		//#else
 		Boat.class
 		//#endif

@@ -45,20 +45,20 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import java.util.List;
 
 //#if MC >= 11904
-//$$ import net.minecraft.client.font.TextRenderer;
+//$$ import net.minecraft.client.gui.Font;
 //#endif
 
 //#if MC >= 11903
 //$$ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-//$$ import net.minecraft.client.gui.screen.ingame.AbstractSignEditScreen;
+//$$ import net.minecraft.client.gui.screens.inventory.AbstractSignEditScreen;
 //$$ import org.joml.Vector3f;
 //#else
 import net.minecraft.client.gui.screens.inventory.SignEditScreen;
 //#endif
 
 //#if MC >= 11700
-//$$ import net.minecraft.client.render.VertexConsumer;
-//$$ import net.minecraft.client.util.SpriteIdentifier;
+//$$ import com.mojang.blaze3d.vertex.VertexConsumer;
+//$$ import net.minecraft.client.resources.model.Material;
 //$$ import org.spongepowered.asm.mixin.Unique;
 //#endif
 
@@ -118,7 +118,7 @@ public abstract class SignEditScreenMixin extends Screen
 	//$$ 		//#endif
 	//$$ 		boolean filtered,
 	//$$ 		//#if MC >= 11903
-	//$$ 		//$$ Text title,
+	//$$ 		//$$ Component title,
 	//$$ 		//#endif
 	//$$ 		CallbackInfo ci
 	//$$ )
@@ -132,7 +132,7 @@ public abstract class SignEditScreenMixin extends Screen
 	//$$ 		method = "method_45658",  // lambda method in init
 	//$$ 		at = @At(
 	//$$ 				value = "INVOKE",
-	//$$ 				target = "Lnet/minecraft/block/entity/SignBlockEntity;getMaxTextWidth()I",
+	//$$ 				target = "Lnet/minecraft/world/level/block/entity/SignBlockEntity;getMaxTextLineWidth()I",
 	//$$ 				remap = true
 	//$$ 		),
 	//$$ 		remap = false
@@ -192,9 +192,9 @@ public abstract class SignEditScreenMixin extends Screen
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 11904
-					//$$ target = "Lnet/minecraft/client/font/TextRenderer;draw(Ljava/lang/String;FFIZLorg/joml/Matrix4f;Lnet/minecraft/client/render/VertexConsumerProvider;Lnet/minecraft/client/font/TextRenderer$TextLayerType;IIZ)I",
+					//$$ target = "Lnet/minecraft/client/gui/Font;drawInBatch(Ljava/lang/String;FFIZLorg/joml/Matrix4f;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/gui/Font$DisplayMode;IIZ)I",
 					//#elseif MC >= 11600
-					//$$ target = "Lnet/minecraft/client/font/TextRenderer;draw(Ljava/lang/String;FFIZLnet/minecraft/util/math/Matrix4f;Lnet/minecraft/client/render/VertexConsumerProvider;ZIIZ)I",
+					//$$ target = "Lnet/minecraft/client/gui/Font;drawInBatch(Ljava/lang/String;FFIZLcom/mojang/math/Matrix4f;Lnet/minecraft/client/renderer/MultiBufferSource;ZIIZ)I",
 					//#else
 					target = "Lnet/minecraft/client/gui/Font;drawInBatch(Ljava/lang/String;FFIZLcom/mojang/math/Matrix4f;Lnet/minecraft/client/renderer/MultiBufferSource;ZII)I",
 					//#endif
@@ -203,11 +203,11 @@ public abstract class SignEditScreenMixin extends Screen
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
 	//#if MC >= 11903
-	//$$ private void drawLineOverflowHint(MatrixStack matrices, VertexConsumerProvider.Immediate immediate, CallbackInfo ci, Vector3f vector3f, int i, boolean bl, int j, int k, int l, int m, Matrix4f matrix4f, int lineIdx, String string, float xStart)
+	//$$ private void drawLineOverflowHint(PoseStack matrices, MultiBufferSource.Immediate immediate, CallbackInfo ci, Vector3f vector3f, int i, boolean bl, int j, int k, int l, int m, Matrix4f matrix4f, int lineIdx, String string, float xStart)
 	//#elseif MC >= 11700
-	//$$ private void drawLineOverflowHint(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci, float f, BlockState blockState, boolean bl, boolean bl2, float g, VertexConsumerProvider.Immediate immediate, SpriteIdentifier spriteIdentifier, VertexConsumer vertexConsumer, float h, int i, int j, int k, int l, Matrix4f matrix4f, int lineIdx, String string, float xStart)
+	//$$ private void drawLineOverflowHint(PoseStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci, float f, BlockState blockState, boolean bl, boolean bl2, float g, MultiBufferSource.Immediate immediate, Material spriteIdentifier, VertexConsumer vertexConsumer, float h, int i, int j, int k, int l, Matrix4f matrix4f, int lineIdx, String string, float xStart)
 	//#elseif MC >= 11600
-	//$$ private void drawLineOverflowHint(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci, float f, BlockState blockState, boolean bl, boolean bl2, float g, VertexConsumerProvider.Immediate immediate, float h, int i, int j, int k, int l, Matrix4f matrix4f, int lineIdx, String string, float xStart)
+	//$$ private void drawLineOverflowHint(PoseStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci, float f, BlockState blockState, boolean bl, boolean bl2, float g, MultiBufferSource.Immediate immediate, float h, int i, int j, int k, int l, Matrix4f matrix4f, int lineIdx, String string, float xStart)
 	//#else
 	private void drawLineOverflowHint(int mouseX, int mouseY, float delta, CallbackInfo ci, PoseStack matrixStack, float f, BlockState blockState, boolean bl, boolean bl2, float g, MultiBufferSource.BufferSource immediate, float h, int i, String strings[], Matrix4f matrix4f, int k, int l, int m, int n, int lineIdx, String string, float xStart)
 	//#endif
@@ -223,7 +223,7 @@ public abstract class SignEditScreenMixin extends Screen
 
 			//#if MC >= 11600
 			//$$ int textArrayLen = this.text.length;
-			//$$ MinecraftClient mc = this.client;
+			//$$ Minecraft mc = this.client;
 			//#else
 			int textArrayLen = sign.messages.length;
 			Minecraft mc = this.minecraft;
@@ -257,7 +257,7 @@ public abstract class SignEditScreenMixin extends Screen
 					mc.font.drawInBatch(
 							"!", xStart - 10, lineIdx * 10 - textArrayLen * 5, ChatFormatting.RED.getColor(), false, matrix4f, immediate,
 							//#if MC >= 11904
-							//$$ TextRenderer.TextLayerType.NORMAL,
+							//$$ Font.TextLayerType.NORMAL,
 							//#else
 							false,
 							//#endif

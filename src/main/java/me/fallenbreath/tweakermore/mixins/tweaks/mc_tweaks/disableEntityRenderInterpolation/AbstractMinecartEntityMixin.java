@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC >= 12103
-//$$ import net.minecraft.entity.vehicle.MinecartController;
+//$$ import net.minecraft.world.entity.vehicle.MinecartBehavior;
 //$$ import org.spongepowered.asm.mixin.Final;
 //#endif
 
@@ -46,7 +46,7 @@ public abstract class AbstractMinecartEntityMixin extends Entity
 	}
 
 	//#if MC >= 12103
-	//$$ @Shadow @Final private MinecartController controller;
+	//$$ @Shadow @Final private MinecartBehavior controller;
 	//#else
 	@Shadow private int
 			//#if MC >= 11500

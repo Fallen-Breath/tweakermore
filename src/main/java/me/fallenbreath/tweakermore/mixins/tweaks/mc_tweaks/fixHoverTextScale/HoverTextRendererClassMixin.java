@@ -39,7 +39,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import java.util.List;
 
 //#if MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 /**
@@ -147,7 +147,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 	)
 	private void fixHoverTextScale_storeLocals(
 			//#if MC >= 11600
-			//$$ MatrixStack matrices,
+			//$$ PoseStack matrices,
 			//#endif
 			List<?> text, int x, int y,
 			CallbackInfo ci,

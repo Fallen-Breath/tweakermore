@@ -35,12 +35,12 @@ public abstract class BlockEntityRenderDispatcherMixin
 			//#elseif MC >= 11500
 			method = "render(Lnet/minecraft/world/level/block/entity/BlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;)V",
 			//#else
-			//$$ method = "render(Lnet/minecraft/block/entity/BlockEntity;FI)V",
+			//$$ method = "render(Lnet/minecraft/world/level/block/entity/BlockEntity;FI)V",
 			//#endif
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 11700
-					//$$ target = "Lnet/minecraft/client/render/block/entity/BlockEntityRenderer;isInRenderDistance(Lnet/minecraft/block/entity/BlockEntity;Lnet/minecraft/util/math/Vec3d;)Z"
+					//$$ target = "Lnet/minecraft/client/renderer/blockentity/BlockEntityRenderer;shouldRender(Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/phys/Vec3;)Z"
 					//#else
 					target = "Lnet/minecraft/world/level/block/entity/BlockEntity;getViewDistance()D"
 					//#endif

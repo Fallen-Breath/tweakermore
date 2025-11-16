@@ -25,7 +25,7 @@ import net.minecraft.world.entity.player.Player;
 
 //#if MC >= 12000
 //$$ import me.fallenbreath.tweakermore.util.BlockUtils;
-//$$ import net.minecraft.block.BlockSetType;
+//$$ import net.minecraft.world.level.block.state.properties.BlockSetType;
 //#else
 import net.minecraft.world.level.material.Material;
 //#endif

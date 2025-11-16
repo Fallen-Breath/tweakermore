@@ -50,8 +50,8 @@ import java.util.List;
 //#endif
 
 //#if MC >= 12006
-//$$ import net.minecraft.registry.Registries;
-//$$ import net.minecraft.registry.entry.RegistryEntry;
+//$$ import net.minecraft.core.registries.BuiltInRegistries;
+//$$ import net.minecraft.core.Holder;
 //$$ import java.util.Optional;
 //#endif
 
@@ -61,11 +61,11 @@ import java.util.List;
 
 //#if MC >= 11600
 //$$ import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 //#if MC < 11500
-//$$ import net.minecraft.client.texture.SpriteAtlasTexture;
+//$$ import net.minecraft.client.renderer.texture.TextureAtlas;
 //#endif
 
 public class BeaconEffectRenderer extends CommonScannerInfoViewer
@@ -109,8 +109,8 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 		int beaconLevel = accessor.getLevel();
 
 		//#if MC >= 12006
-		//$$ StatusEffect primary = Optional.ofNullable(accessor.getPrimary()).map(RegistryEntry::value).orElse(null);
-		//$$ StatusEffect secondary = Optional.ofNullable(accessor.getSecondary()).map(RegistryEntry::value).orElse(null);
+		//$$ MobEffect primary = Optional.ofNullable(accessor.getPrimary()).map(Holder::value).orElse(null);
+		//$$ MobEffect secondary = Optional.ofNullable(accessor.getSecondary()).map(Holder::value).orElse(null);
 		//#else
 		MobEffect primary = accessor.getPrimary();
 		MobEffect secondary = accessor.getSecondary();
@@ -159,7 +159,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 
 		TextureAtlasSprite sprite = mc.getMobEffectTextures().get(
 				//#if MC >= 12006
-				//$$ Registries.STATUS_EFFECT.getEntry(statusEffect)
+				//$$ BuiltInRegistries.STATUS_EFFECT.getEntry(statusEffect)
 				//#else
 				statusEffect
 				//#endif
@@ -195,7 +195,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 			//#elseif MC >= 11500
 			mc.getTextureManager().bind(sprite.atlas().location());
 			//#else
-			//$$ mc.getTextureManager().bindTexture(SpriteAtlasTexture.STATUS_EFFECT_ATLAS_TEX);
+			//$$ mc.getTextureManager().bindTexture(TextureAtlas.STATUS_EFFECT_ATLAS_TEX);
 			//#endif
 			//#if MC < 12103
 			RenderGlobals.color4f(1.0F, 1.0F, 1.0F, 1.0F);

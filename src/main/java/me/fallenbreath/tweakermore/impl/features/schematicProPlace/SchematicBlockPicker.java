@@ -40,7 +40,7 @@ import net.minecraft.world.level.Level;
 
 //#if MC >= 11600
 //$$ import fi.dy.masa.litematica.config.Configs;
-//$$ import net.minecraft.screen.slot.Slot;
+//$$ import net.minecraft.world.inventory.Slot;
 //#endif
 
 public class SchematicBlockPicker

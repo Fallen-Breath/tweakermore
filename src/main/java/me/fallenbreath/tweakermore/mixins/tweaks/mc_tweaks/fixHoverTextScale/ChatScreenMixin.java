@@ -36,9 +36,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC >= 12000
-//$$ import net.minecraft.client.gui.DrawContext;
+//$$ import net.minecraft.client.gui.GuiGraphics;
 //#elseif MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 @Mixin(ChatScreen.class)
@@ -58,7 +58,7 @@ public abstract class ChatScreenMixin extends Screen
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12000
-					//$$ target = "Lnet/minecraft/client/gui/DrawContext;drawHoverEvent(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/Style;II)V"
+					//$$ target = "Lnet/minecraft/client/gui/GuiGraphics;renderComponentHoverEffect(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Style;II)V"
 					//#elseif MC >= 11600
 					//$$ target = "Lnet/minecraft/client/gui/screen/ChatScreen;renderTextHoverEffect(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/text/Style;II)V"
 					//#else
@@ -68,9 +68,9 @@ public abstract class ChatScreenMixin extends Screen
 	)
 	private void fixHoverTextScale_doScale(
 			//#if MC >= 12000
-			//$$ DrawContext matrixStackOrDrawContext,
+			//$$ GuiGraphics matrixStackOrDrawContext,
 			//#elseif MC >= 11600
-			//$$ MatrixStack matrixStackOrDrawContext,
+			//$$ PoseStack matrixStackOrDrawContext,
 			//#endif
 			int mouseX, int mouseY, float delta, CallbackInfo ci
 	)
@@ -104,7 +104,7 @@ public abstract class ChatScreenMixin extends Screen
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12000
-					//$$ target = "Lnet/minecraft/client/gui/DrawContext;drawHoverEvent(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/Style;II)V",
+					//$$ target = "Lnet/minecraft/client/gui/GuiGraphics;renderComponentHoverEffect(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Style;II)V",
 					//#elseif MC >= 11600
 					//$$ target = "Lnet/minecraft/client/gui/screen/ChatScreen;renderTextHoverEffect(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/text/Style;II)V",
 					//#else
@@ -115,9 +115,9 @@ public abstract class ChatScreenMixin extends Screen
 	)
 	private void fixHoverTextScale_restoreScale(
 			//#if MC >= 12000
-			//$$ DrawContext matrixStackOrDrawContext,
+			//$$ GuiGraphics matrixStackOrDrawContext,
 			//#elseif MC >= 11600
-			//$$ MatrixStack matrixStackOrDrawContext,
+			//$$ PoseStack matrixStackOrDrawContext,
 			//#endif
 			int mouseX, int mouseY, float delta, CallbackInfo ci
 	)

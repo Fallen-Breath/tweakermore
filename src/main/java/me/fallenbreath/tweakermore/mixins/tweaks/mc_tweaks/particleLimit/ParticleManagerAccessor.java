@@ -28,7 +28,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 import java.util.Map;
 
 //#if MC >= 1.21.9
-//$$ import net.minecraft.client.particle.ParticleRenderer;
+//$$ import net.minecraft.client.particle.ParticleGroup;
 //#else
 import net.minecraft.client.particle.Particle;
 import java.util.Queue;
@@ -39,7 +39,7 @@ public interface ParticleManagerAccessor
 {
 	@Accessor
 	//#if MC >= 1.21.9
-	//$$ Map<ParticleTextureSheet, ParticleRenderer<?>> getParticles();
+	//$$ Map<ParticleRenderType, ParticleGroup<?>> getParticles();
 	//#else
 	Map<ParticleRenderType, Queue<Particle>> getParticles();
 	//#endif

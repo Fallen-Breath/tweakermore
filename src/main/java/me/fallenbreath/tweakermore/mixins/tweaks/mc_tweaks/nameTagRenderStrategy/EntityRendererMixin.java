@@ -38,7 +38,7 @@ import java.util.List;
 //#endif
 
 //#if MC >= 12103
-//$$ import net.minecraft.client.render.entity.state.EntityRenderState;
+//$$ import net.minecraft.client.renderer.entity.state.EntityRenderState;
 //$$ import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 //#endif
 
@@ -52,7 +52,7 @@ public abstract class EntityRendererMixin
 			//#if MC >= 11500
 			method = "renderNameTag",
 			//#else
-			//$$ method = "renderLabel(Lnet/minecraft/entity/Entity;Ljava/lang/String;DDDI)V",
+			//$$ method = "renderNameTag(Lnet/minecraft/world/entity/Entity;Ljava/lang/String;DDDI)V",
 			//#endif
 			at = @At("HEAD"),
 			cancellable = true

@@ -26,7 +26,7 @@ import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.options.IHotkeyWithSwitch;
 
 //#if MC >= 1.21.9
-//$$ import net.minecraft.client.gui.Click;
+//$$ import net.minecraft.client.input.MouseButtonEvent;
 //#endif
 
 public class ConfigButtonBooleanSwitch extends ButtonGeneric
@@ -43,7 +43,7 @@ public class ConfigButtonBooleanSwitch extends ButtonGeneric
 	@Override
 	protected boolean onMouseClickedImpl(
 			//#if MC >= 1.21.9
-			//$$ Click click, boolean doubleClick
+			//$$ MouseButtonEvent click, boolean doubleClick
 			//#else
 			int mouseX, int mouseY, int mouseButton
 			//#endif

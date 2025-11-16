@@ -29,7 +29,7 @@ import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 //#if MC >= 12006
-//$$ import net.minecraft.util.profiler.log.MultiValueDebugSampleLog;
+//$$ import net.minecraft.util.debugchart.SampleStorage;
 //#else
 import net.minecraft.util.profiler.PerformanceLog;
 //#endif
@@ -40,7 +40,7 @@ public interface DebugChartAccessor
 {
 	@Accessor
 	//#if MC >= 12006
-	//$$ MultiValueDebugSampleLog
+	//$$ SampleStorage
 	//#else
 	PerformanceLog
 	//#endif
@@ -49,7 +49,7 @@ public interface DebugChartAccessor
 	@Accessor @Mutable
 	void setLog(
 			//#if MC >= 12006
-			//$$ MultiValueDebugSampleLog log
+			//$$ SampleStorage log
 			//#else
 			PerformanceLog log
 			//#endif

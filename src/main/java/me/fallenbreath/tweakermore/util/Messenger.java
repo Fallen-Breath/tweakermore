@@ -170,7 +170,7 @@ public class Messenger
 		//#if MC >= 11900
 		//$$ return text.copy();
 		//#elseif MC >= 11600
-		//$$ return (BaseText)text.shallowCopy();
+		//$$ return (BaseComponent)text.shallowCopy();
 		//#else
 		return (BaseComponent)text.deepCopy();
 		//#endif

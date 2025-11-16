@@ -56,7 +56,7 @@ public abstract class TeleportToSpecificPlayerSpectatorCommandMixin implements C
 			Style style = text.getStyle();
 
 			//#if MC >= 11600
-			//$$ style = style.withColor(Formatting.GRAY);
+			//$$ style = style.withColor(ChatFormatting.GRAY);
 			//$$ style = style.withItalic(true);
 			//#else
 			style.setColor(ChatFormatting.GRAY);

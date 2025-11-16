@@ -78,7 +78,7 @@ public class LightCacheOFMixin
 		//#if MC >= 11500
 		return LevelRenderer.getLightColor(
 				//#if MC >= 12105
-				//$$ WorldRenderer.BrightnessGetter.DEFAULT,
+				//$$ LevelRenderer.BrightnessGetter.DEFAULT,
 				//#endif
 				view, state, pos
 		);

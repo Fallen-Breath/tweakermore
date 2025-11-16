@@ -25,19 +25,19 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 //#if MC >= 12106
-//$$ import net.minecraft.client.network.ClientCommandSource;
+//$$ import net.minecraft.client.multiplayer.ClientSuggestionProvider;
 //#else
 import net.minecraft.commands.SharedSuggestionProvider;
 //#endif
 
 //#if MC >= 11600
-//$$ import net.minecraft.text.OrderedText;
+//$$ import net.minecraft.util.FormattedCharSequence;
 //#endif
 
 //#if MC >= 11500
 import net.minecraft.client.gui.components.CommandSuggestions;
 //#else
-//$$ import net.minecraft.client.gui.screen.ChatScreen;
+//$$ import net.minecraft.client.gui.screens.ChatScreen;
 //#endif
 
 /**
@@ -57,13 +57,13 @@ public interface CommandSuggestorAccessor
 	@Invoker("formatText")
 	static
 	//#if MC >= 11600
-	//$$ OrderedText
+	//$$ FormattedCharSequence
 	//#else
 	String
 	//#endif
 	invokeHighlight(
 			//#if MC >= 12106
-			//$$ ParseResults<ClientCommandSource> parse,
+			//$$ ParseResults<ClientSuggestionProvider> parse,
 			//#else
 			ParseResults<SharedSuggestionProvider> parse,
 			//#endif

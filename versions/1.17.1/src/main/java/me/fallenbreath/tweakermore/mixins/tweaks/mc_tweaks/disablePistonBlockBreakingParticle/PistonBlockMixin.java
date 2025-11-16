@@ -49,7 +49,7 @@ public abstract class PistonBlockMixin
 	)
 	private boolean disablePistonBlockBreakingParticle(
 			//#if MC >= 12105
-			//$$ World instance, int eventId, BlockPos pos, int data
+			//$$ Level instance, int eventId, BlockPos pos, int data
 			//#else
 			World instance, BlockPos pos, BlockState state
 			//#endif

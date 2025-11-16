@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 //#if MC >= 11600
-//$$ import net.minecraft.client.util.math.MatrixStack;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.17"))
@@ -57,7 +57,7 @@ public abstract class InGameHudMixin
 	private float tkrDisableNauseaEffectPorting_makeSureNetherPortalOverlayIsNotAffected(
 			float value,
 			//#if MC >= 11600
-			//$$ MatrixStack matrixStack,
+			//$$ PoseStack matrixStack,
 			//#endif
 			float tickDelta
 	)

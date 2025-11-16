@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.UUID;
 
 //#if MC >= 12002
-//$$ import net.minecraft.client.util.SkinTextures;
+//$$ import net.minecraft.client.resources.PlayerSkin;
 //#endif
 
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.19.3"))
@@ -45,14 +45,14 @@ public abstract class DefaultSkinHelperMixin
 {
 	@Shadow @Final
 	//#if MC >= 12002
-	//$$ private static SkinTextures[] SKINS;
+	//$$ private static PlayerSkin[] SKINS;
 	//#else
 	private static DefaultSkinHelper.Skin[] SKINS;
 	//#endif
 
 	@Inject(
 			//#if MC >= 12002
-			//$$ method = "getSkinTextures(Ljava/util/UUID;)Lnet/minecraft/client/util/SkinTextures;",
+			//$$ method = "get(Ljava/util/UUID;)Lnet/minecraft/client/resources/PlayerSkin;",
 			//#else
 			method = "getSkin",
 			//#endif
@@ -62,7 +62,7 @@ public abstract class DefaultSkinHelperMixin
 	private static void steveAlexOnlyDefaultSkins_overrideAlgorithm(
 			UUID uuid,
 			//#if MC >= 12002
-			//$$ CallbackInfoReturnable<SkinTextures> cir
+			//$$ CallbackInfoReturnable<PlayerSkin> cir
 			//#else
 			CallbackInfoReturnable<DefaultSkinHelper.Skin> cir
 			//#endif

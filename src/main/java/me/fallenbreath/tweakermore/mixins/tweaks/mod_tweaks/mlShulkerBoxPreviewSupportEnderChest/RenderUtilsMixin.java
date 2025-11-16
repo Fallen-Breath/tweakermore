@@ -39,7 +39,7 @@ public abstract class RenderUtilsMixin
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12006
-					//$$ target = "Lnet/minecraft/component/ComponentMap;contains(Lnet/minecraft/component/DataComponentType;)Z",
+					//$$ target = "Lnet/minecraft/core/component/DataComponentMap;has(Lnet/minecraft/core/component/DataComponentType;)Z",
 					//#else
 					target = "Lnet/minecraft/world/item/ItemStack;hasTag()Z",
 					//#endif
