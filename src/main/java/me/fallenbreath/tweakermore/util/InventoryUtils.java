@@ -20,17 +20,10 @@
 
 package me.fallenbreath.tweakermore.util;
 
-import net.minecraft.world.level.block.AbstractFurnaceBlock;
-import net.minecraft.world.level.block.BarrelBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BrewingStandBlock;
-import net.minecraft.world.level.block.ChestBlock;
-import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.level.block.HopperBlock;
-import net.minecraft.world.level.block.ShulkerBoxBlock;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.core.NonNullList;
+import net.minecraft.world.level.block.*;
 
 import java.util.Optional;
 

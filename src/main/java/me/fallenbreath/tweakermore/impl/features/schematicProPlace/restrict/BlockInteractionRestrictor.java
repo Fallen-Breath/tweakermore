@@ -21,8 +21,9 @@
 package me.fallenbreath.tweakermore.impl.features.schematicProPlace.restrict;
 
 import com.google.common.collect.Maps;
-import net.minecraft.block.*;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Map;
 import java.util.Optional;
@@ -85,9 +86,9 @@ public class BlockInteractionRestrictor
 
 	static
 	{
-		interactAble(ButtonBlock.class   ).notAllowed();
+		interactAble(ButtonBlock.class           ).notAllowed();
 		interactAble(AbstractFurnaceBlock.class  );
-		interactAble(SignBlock.class     );
+		interactAble(SignBlock.class             );
 		interactAble(AnvilBlock.class            );
 		interactAble(BarrelBlock.class           );
 		interactAble(BeaconBlock.class           );
@@ -102,7 +103,7 @@ public class BlockInteractionRestrictor
 		interactAble(DaylightDetectorBlock.class ).when(playerCanModifyWorld()).allowIf(unequalProperty(DaylightDetectorBlock.INVERTED));
 		interactAble(DispenserBlock.class        );
 		interactAble(DoorBlock.class             ).when(canOpenByHand()).allowIf(unequalProperty(DoorBlock.OPEN));
-		interactAble(EnchantmentTableBlock.class  );
+		interactAble(EnchantmentTableBlock.class );
 		interactAble(EnderChestBlock.class       );
 		interactAble(FenceGateBlock.class        ).allowIf(unequalProperty(FenceGateBlock.OPEN));
 		interactAble(GrindstoneBlock.class       );

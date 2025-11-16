@@ -136,7 +136,7 @@ public abstract class ClientPlayerInteractionManagerMixin
 			method = "interactBlockInternal",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/item/ItemStack;useOnBlock(Lnet/minecraft/item/ItemUsageContext;)Lnet/minecraft/util/ActionResult;"
+					target = "Lnet/minecraft/world/item/ItemStack;useOnBlock(Lnet/minecraft/item/ItemUsageContext;)Lnet/minecraft/util/ActionResult;"
 			)
 	)
 	private ActionResult fireworkRocketThrottler_updateCooldown_useOnBlock(ActionResult actionResult)

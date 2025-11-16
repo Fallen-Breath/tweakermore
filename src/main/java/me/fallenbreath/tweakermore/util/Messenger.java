@@ -20,13 +20,8 @@
 
 package me.fallenbreath.tweakermore.util;
 
-import net.minecraft.network.chat.BaseComponent;
-import net.minecraft.network.chat.ClickEvent;
-import net.minecraft.network.chat.HoverEvent;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

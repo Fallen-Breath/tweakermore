@@ -36,7 +36,7 @@ public abstract class ItemRendererMixin
 			//#if MC >= 12106
 			//$$ method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V",
 			//#else
-			method = "drawItem(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;IIII)V",
+			method = "drawItem(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/world/World;Lnet/minecraft/world/item/ItemStack;IIII)V",
 			//#endif
 			at = @At(
 					value = "INVOKE",

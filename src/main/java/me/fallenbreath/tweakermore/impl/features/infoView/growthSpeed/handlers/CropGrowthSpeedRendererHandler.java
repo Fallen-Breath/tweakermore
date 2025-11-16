@@ -23,10 +23,14 @@ package me.fallenbreath.tweakermore.impl.features.infoView.growthSpeed.handlers;
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.growthSpeed.AttachedStemBlockAccessor;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.growthSpeed.CropBlockAccessor;
-import net.minecraft.block.*;
-import net.minecraft.network.chat.BaseComponent;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.BaseComponent;
+import net.minecraft.world.level.block.AttachedStemBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.StemBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
@@ -57,8 +61,8 @@ public class CropGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHand
 
 	/**
 	 * references:
-	 * - {@link net.minecraft.world.level.block.CropBlock#scheduledTick} or {@link net.minecraft.world.level.block.CropBlock#randomTick}
-	 * - {@link net.minecraft.world.level.block.StemBlock#scheduledTick} or {@link net.minecraft.world.level.block.StemBlock#randomTick}
+	 * - {@link net.minecraft.world.level.block.CropBlock#tick} or {@link net.minecraft.world.level.block.CropBlock#randomTick}
+	 * - {@link net.minecraft.world.level.block.StemBlock#tick} or {@link net.minecraft.world.level.block.StemBlock#randomTick}
 	 */
 	@Override
 	public void addInfoLines(RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos, List<BaseComponent> lines)

@@ -39,14 +39,14 @@ public abstract class InventoryUtilsMixin
 {
 	@Inject(
 			//#if MC >= 11600
-			//$$ method = "tryMoveStacks(Lnet/minecraft/item/ItemStack;Lnet/minecraft/screen/slot/Slot;Lnet/minecraft/client/gui/screen/ingame/HandledScreen;ZZZ)V",
+			//$$ method = "tryMoveStacks(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/inventory/Slot;Lnet/minecraft/client/gui/screen/ingame/HandledScreen;ZZZ)V",
 			//#else
-			method = "tryMoveStacks(Lnet/minecraft/item/ItemStack;Lnet/minecraft/container/Slot;Lnet/minecraft/client/gui/screen/ingame/ContainerScreen;ZZZ)V",
+			method = "tryMoveStacks(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/inventory/Slot;Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;ZZZ)V",
 			//#endif
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 11600
-					//$$ target = "Lfi/dy/masa/itemscroller/util/InventoryUtils;clickSlotsToMoveItemsFromSlot(Lnet/minecraft/screen/slot/Slot;Lnet/minecraft/client/gui/screen/ingame/HandledScreen;Z)V",
+					//$$ target = "Lfi/dy/masa/itemscroller/util/InventoryUtils;clickSlotsToMoveItemsFromSlot(Lnet/minecraft/world/inventory/Slot;Lnet/minecraft/client/gui/screen/ingame/HandledScreen;Z)V",
 					//#else
 					target = "Lfi/dy/masa/itemscroller/util/InventoryUtils;clickSlotsToMoveItemsFromSlot(Lnet/minecraft/world/inventory/Slot;Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;Z)V",
 					//#endif

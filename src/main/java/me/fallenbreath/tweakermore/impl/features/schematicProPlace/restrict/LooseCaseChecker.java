@@ -24,11 +24,12 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.schematicProPlace.CoralBlockAccessor;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.schematicProPlace.CoralFanBlockAccessor;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.schematicProPlace.CoralWallFanBlockAccessor;
-import net.minecraft.block.*;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.tags.FluidTags;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Optional;
 

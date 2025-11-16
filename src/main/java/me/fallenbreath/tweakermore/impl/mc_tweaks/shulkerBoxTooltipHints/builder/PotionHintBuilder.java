@@ -23,14 +23,10 @@ package me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builde
 import com.google.common.collect.Lists;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.Messenger;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.LingeringPotionItem;
-import net.minecraft.world.item.PotionItem;
-import net.minecraft.world.item.TippedArrowItem;
-import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.network.chat.BaseComponent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;

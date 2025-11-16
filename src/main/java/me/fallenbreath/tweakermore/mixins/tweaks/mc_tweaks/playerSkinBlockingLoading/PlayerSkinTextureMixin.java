@@ -35,7 +35,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public abstract class PlayerSkinTextureMixin
 {
 	@ModifyArg(
-			method = "load",
+			method = "load(Lnet/minecraft/server/packs/resources/ResourceManager;)V",
 			at = @At(
 					value = "INVOKE",
 					target = "Ljava/util/concurrent/CompletableFuture;runAsync(Ljava/lang/Runnable;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;"

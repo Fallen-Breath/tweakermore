@@ -25,11 +25,11 @@ import me.fallenbreath.tweakermore.impl.features.autoContainerProcess.processors
 import me.fallenbreath.tweakermore.mixins.tweaks.features.autoContainerProcess.ItemScrollerInventoryUtilsAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screen.ingame.*;
+import net.minecraft.client.gui.screens.inventory.*;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.entity.player.Inventory;
 
 import java.util.List;
 import java.util.stream.Collectors;

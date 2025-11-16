@@ -40,7 +40,7 @@ public abstract class ClientWorldMixin
 			method = "getBlockParticle",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/item/ItemStack;getItem()Lnet/minecraft/item/Item;",
+					target = "Lnet/minecraft/world/item/ItemStack;getItem()Lnet/minecraft/item/Item;",
 					ordinal = 0
 			)
 	)

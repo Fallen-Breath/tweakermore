@@ -53,7 +53,7 @@ public abstract class RenderHandlerMixin
 			method = "onRenderTooltipLast",
 			at = @At(
 					value = "INVOKE",
-					target = "Lfi/dy/masa/malilib/util/InventoryUtils;shulkerBoxHasItems(Lnet/minecraft/item/ItemStack;)Z"
+					target = "Lfi/dy/masa/malilib/util/InventoryUtils;shulkerBoxHasItems(Lnet/minecraft/world/item/ItemStack;)Z"
 			)
 	)
 	private boolean mlShulkerBoxPreviewSupportEnderChest_tweakerooSkipCheck2(boolean contains, @Local(argsOnly = true) ItemStack stack)

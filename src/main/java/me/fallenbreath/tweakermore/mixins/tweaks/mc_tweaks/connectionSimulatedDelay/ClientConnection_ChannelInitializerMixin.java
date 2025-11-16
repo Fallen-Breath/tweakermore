@@ -29,8 +29,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(targets = {
-		"net/minecraft/network/ClientConnection$1",  // anonymous class in connect
-		"net/minecraft/network/ClientConnection$" +  // anonymous class in connectLocal
+		"net/minecraft/network/Connection$1",  // anonymous class in connect
+		"net/minecraft/network/Connection$" +  // anonymous class in connectLocal
 				//#if MC >= 12006
 				//$$ "3"
 				//#else
