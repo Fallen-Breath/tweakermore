@@ -94,17 +94,17 @@ public class RenderVisitorWorldView implements SimpleWorldView
 		return this.bestWorldView.getBlockEntity(pos);
 	}
 
-	@Override
-	public int getMaxBuildHeight()
-	{
-		return this.clientWorldView.getMaxBuildHeight();
-	}
-
 	//#if MC >= 11700
 	//$$ @Override
-	//$$ public int getBottomY()
+	//$$ public int getHeight()
 	//$$ {
-	//$$ 	return this.clientWorldView.getBottomY();
+	//$$ 	return this.clientWorldView.getHeight();
+	//$$ }
+	//$$
+	//$$ @Override
+	//$$ public int getMinBuildHeight()
+	//$$ {
+	//$$ 	return this.clientWorldView.getMinBuildHeight();
 	//$$ }
 	//#endif
 

@@ -73,7 +73,7 @@ public class InventoryRefresher
 			networkHandler.send(new ServerboundContainerClickPacket(
 					csh.containerId,
 					//#if MC >= 11700
-					//$$ csh.getRevision(),
+					//$$ csh.getStateId(),
 					//#endif
 					(short)-999, (byte)2,
 					ClickType.QUICK_CRAFT,

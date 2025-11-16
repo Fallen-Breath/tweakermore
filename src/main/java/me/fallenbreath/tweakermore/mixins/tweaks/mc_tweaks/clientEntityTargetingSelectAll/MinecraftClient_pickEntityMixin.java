@@ -65,7 +65,7 @@ public abstract class MinecraftClient_pickEntityMixin
 	//$$ // now it's done on the serverside, we can't perform any tweak on this anymore :(
 	//#elseif MC >= 11700
 	//$$ @ModifyExpressionValue(
-	//$$ 		method = "doItemPick",
+	//$$ 		method = "pickBlock",
 	//$$ 		at = @At(
 	//$$ 				value = "INVOKE",
 	//$$ 				target = "Lnet/minecraft/world/entity/Entity;getPickResult()Lnet/minecraft/world/item/ItemStack;"

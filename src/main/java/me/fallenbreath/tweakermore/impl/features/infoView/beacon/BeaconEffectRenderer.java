@@ -191,7 +191,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 			//#elseif MC >= 11903
 			//$$ RenderSystem.setShaderTexture(0, sprite.getAtlasId());
 			//#elseif MC >= 11700
-			//$$ RenderSystem.setShaderTexture(0, sprite.getAtlas().getId());
+			//$$ RenderSystem.setShaderTexture(0, sprite.atlas().getId());
 			//#elseif MC >= 11500
 			mc.getTextureManager().bind(sprite.atlas().location());
 			//#else

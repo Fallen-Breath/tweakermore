@@ -124,7 +124,7 @@ public abstract class SignEditScreenMixin extends Screen
 		if (TweakerMoreConfigs.SIGN_EDIT_SCREEN_CANCEL_BUTTON.getBooleanValue())
 		{
 			//#if MC >= 11903
-			//$$ this.addDrawableChild(
+			//$$ this.addRenderableWidget(
 			//$$ 		Button.builder(CommonComponents.GUI_CANCEL, button -> {
 			//$$ 			this.editingCancelled = true;
 			//$$ 			this.finishEditing();
@@ -133,7 +133,7 @@ public abstract class SignEditScreenMixin extends Screen
 			//#else
 
 			//#if MC >= 11700
-			//$$ this.addDrawableChild
+			//$$ this.addRenderableWidget
 			//#else
 			this.addButton
 			//#endif

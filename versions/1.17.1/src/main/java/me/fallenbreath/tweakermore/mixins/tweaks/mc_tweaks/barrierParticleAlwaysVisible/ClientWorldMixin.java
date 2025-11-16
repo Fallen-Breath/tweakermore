@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.barrierParticleAlway
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.world.ClientWorld;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,14 +33,14 @@ import org.spongepowered.asm.mixin.injection.At;
  * mc1.15 ~ mc1.16: subproject 1.15.2 (main project)
  * mc1.17+        : subproject 1.17.1        <--------
  */
-@Mixin(ClientWorld.class)
+@Mixin(ClientLevel.class)
 public abstract class ClientWorldMixin
 {
 	@ModifyExpressionValue(
-			method = "getBlockParticle",
+			method = "getMarkerParticleStatus",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/world/item/ItemStack;getItem()Lnet/minecraft/item/Item;",
+					target = "Lnet/minecraft/world/item/ItemStack;getItem()Lnet/minecraft/world/item/Item;",
 					ordinal = 0
 			)
 	)

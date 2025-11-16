@@ -136,7 +136,7 @@ public class EntitySelectorHack
 			{
 				if (
 						//#if MC >= 11700
-						//$$ (selector.getEntityFilter() == null || selector.getEntityFilter().downcast(entity) != null)
+						//$$ (selector.getEntityFilter() == null || selector.getEntityFilter().tryCast(entity) != null)
 						//#else
 						(selector.getType() == null || entity.getType() == selector.getType())
 						//#endif

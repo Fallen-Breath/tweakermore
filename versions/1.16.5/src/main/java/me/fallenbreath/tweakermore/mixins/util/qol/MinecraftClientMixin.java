@@ -37,8 +37,6 @@ public abstract class MinecraftClientMixin
 	@Redirect(
 			//#if MC >= 11800
 			//$$ method = "createUserApiService",
-			//#elseif MC >= 11700
-			//$$ method = "createSocialInteractionsService",
 			//#else
 			method = "createSocialInteractions",
 			//#endif

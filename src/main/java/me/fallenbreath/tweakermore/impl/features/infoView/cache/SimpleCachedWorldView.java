@@ -90,17 +90,17 @@ public class SimpleCachedWorldView implements SimpleWorldView
 		).orElse(null);
 	}
 
-	@Override
-	public int getMaxBuildHeight()
-	{
-		return this.world.getMaxBuildHeight();
-	}
-
 	//#if MC >= 11700
 	//$$ @Override
-	//$$ public int getBottomY()
+	//$$ public int getHeight()
 	//$$ {
-	//$$ 	return this.world.getBottomY();
+	//$$ 	return this.world.getHeight();
+	//$$ }
+	//$$
+	//$$ @Override
+	//$$ public int getMinBuildHeight()
+	//$$ {
+	//$$ 	return this.world.getMinBuildHeight();
 	//$$ }
 	//#endif
 

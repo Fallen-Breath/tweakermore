@@ -33,9 +33,7 @@ import java.util.List;
 public abstract class MinecraftClientMixin
 {
 	@WrapWithCondition(
-			//#if MC >= 11700
-			//$$ method = "onResourceReloadFailure",
-			//#elseif MC >= 11600
+			//#if MC >= 11600
 			//$$ method = "clearResourcePacksOnError",
 			//#else
 			method = "rollbackResourcePacks",

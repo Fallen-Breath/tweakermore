@@ -41,13 +41,13 @@ public class McMatrixStack implements IMatrixStack
 	@Override
 	public void pushMatrix()
 	{
-		this.matrixStack.push();
+		this.matrixStack.pushPose();
 	}
 
 	@Override
 	public void popMatrix()
 	{
-		this.matrixStack.pop();
+		this.matrixStack.popPose();
 	}
 
 	@Override
@@ -65,6 +65,6 @@ public class McMatrixStack implements IMatrixStack
 	@Override
 	public void mul(Matrix4f matrix4f)
 	{
-		this.matrixStack.method_34425(matrix4f);
+		this.matrixStack.mulPoseMatrix(matrix4f);
 	}
 }

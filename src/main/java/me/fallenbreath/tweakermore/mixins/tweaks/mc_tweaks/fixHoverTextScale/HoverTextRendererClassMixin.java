@@ -124,7 +124,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 
 	@Inject(
 			//#if MC >= 11700
-			//$$ method = "renderTooltipFromComponents",
+			//$$ method = "renderTooltipInternal(Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/List;II)V",
 			//#elseif MC >= 11600
 			//$$ method = "renderTooltip(Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/List;II)V",
 			//#else
@@ -151,7 +151,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 
 	@ModifyExpressionValue(
 			//#if MC >= 11700
-			//$$ method = "renderTooltipFromComponents",
+			//$$ method = "renderTooltipInternal(Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/List;II)V",
 			//#elseif MC >= 11600
 			//$$ method = "renderTooltip(Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/List;II)V",
 			//#else
@@ -177,7 +177,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 
 	@ModifyExpressionValue(
 			//#if MC >= 11700
-			//$$ method = "renderTooltipFromComponents",
+			//$$ method = "renderTooltipInternal(Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/List;II)V",
 			//#elseif MC >= 11600
 			//$$ method = "renderTooltip(Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/List;II)V",
 			//#else
@@ -200,7 +200,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 
 	@ModifyVariable(
 			//#if MC >= 11700
-			//$$ method = "renderTooltipFromComponents",
+			//$$ method = "renderTooltipInternal(Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/List;II)V",
 			//#elseif MC >= 11600
 			//$$ method = "renderTooltip(Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/List;II)V",
 			//#else

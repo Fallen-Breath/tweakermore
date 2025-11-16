@@ -63,8 +63,8 @@ public class EntityMotionStateRestorer
 		this.velocity = entity.getDeltaMovement();
 
 		//#if MC >= 11700
-		//$$ this.yaw = entity.getYaw();
-		//$$ this.pitch = entity.getPitch();
+		//$$ this.yaw = entity.getYRot();
+		//$$ this.pitch = entity.getXRot();
 		//#else
 		this.yaw = entity.yRot;
 		this.pitch = entity.xRot;
@@ -96,8 +96,8 @@ public class EntityMotionStateRestorer
 		this.entity.setDeltaMovement(this.velocity);
 
 		//#if MC >= 11700
-		//$$ this.entity.setYaw(this.yaw);
-		//$$ this.entity.setPitch(this.pitch);
+		//$$ this.entity.setYRot(this.yaw);
+		//$$ this.entity.setXRot(this.pitch);
 		//#else
 		this.entity.yRot = this.yaw;
 		this.entity.xRot = this.pitch;

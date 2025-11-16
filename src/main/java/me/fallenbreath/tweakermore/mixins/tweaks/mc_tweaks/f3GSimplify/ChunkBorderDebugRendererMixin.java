@@ -37,7 +37,7 @@ public abstract class ChunkBorderDebugRendererMixin
 					//#if MC >= 11700
 					//$$ @At(
 					//$$ 		value = "INVOKE",
-					//$$ 		target = "Lnet/minecraft/client/world/ClientWorld;getTopY()I",
+					//$$ 		target = "Lnet/minecraft/client/multiplayer/ClientLevel;getMaxBuildHeight()I",
 					//$$ 		ordinal = 1
 					//$$ ),
 					//#else

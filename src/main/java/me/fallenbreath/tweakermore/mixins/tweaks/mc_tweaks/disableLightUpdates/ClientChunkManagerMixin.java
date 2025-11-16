@@ -38,7 +38,7 @@ public abstract class ClientChunkManagerMixin
 
 	@Shadow @Final
 	//#if MC >= 11700
-	//$$ ClientWorld world;
+	//$$ ClientLevel level;
 	//#else
 	private ClientLevel level;
 	//#endif

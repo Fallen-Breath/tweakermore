@@ -61,8 +61,8 @@ public class CopperGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHa
 
 	/**
 	 * Reference:
-	 * - {@link net.minecraft.block.OxidizableBlock#randomTick}
-	 * - {@link net.minecraft.block.ChangeOverTimeBlock#tickDegradation}
+	 * - {@link net.minecraft.world.level.block.WeatheringCopperFullBlock#randomTick}
+	 * - {@link net.minecraft.world.level.block.ChangeOverTimeBlock#applyChangeOverTime}
 	 */
 	@Override
 	public void addInfoLines(RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos, List<BaseComponent> lines)
@@ -80,7 +80,7 @@ public class CopperGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHa
 		BaseComponent lowerCountText = s(result.lowerCount, ChatFormatting.DARK_PURPLE);
 		if (result.lowerCount > 0)
 		{
-			style(lowerCountText, lowerCountText.getStyle().withUnderline(true));
+			style(lowerCountText, lowerCountText.getStyle().withUnderlined(true));
 		}
 
 		Attributes attr1 = new Attributes();
@@ -94,16 +94,16 @@ public class CopperGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHa
 	}
 
 	/**
-	 * Reference: {@link net.minecraft.block.ChangeOverTimeBlock#tryDegrade}
+	 * Reference: {@link net.minecraft.world.level.block.ChangeOverTimeBlock#applyChangeOverTime}
 	 */
 	private static CalcResult calc(RenderVisitorWorldView world, BlockPos pos, ChangeOverTimeBlock<?> self)
 	{
-		int selfLevel = self.getDegradationLevel().ordinal();
+		int selfLevel = self.getAge().ordinal();
 		CalcResult result = new CalcResult();
 
-		for (BlockPos blockPos : BlockPos.iterateOutwards(pos, 4, 4, 4))
+		for (BlockPos blockPos : BlockPos.withinManhattan(pos, 4, 4, 4))
 		{
-			int distance = blockPos.getManhattanDistance(pos);
+			int distance = blockPos.distManhattan(pos);
 			if (distance > 4)
 			{
 				break;
@@ -116,8 +116,8 @@ public class CopperGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHa
 			Block block = world.getBlockState(blockPos).getBlock();
 			if (block instanceof ChangeOverTimeBlock)
 			{
-				Enum<?> enum_ = ((ChangeOverTimeBlock<?>)block).getDegradationLevel();
-				if (self.getDegradationLevel().getClass() == enum_.getClass())
+				Enum<?> enum_ = ((ChangeOverTimeBlock<?>)block).getAge();
+				if (self.getAge().getClass() == enum_.getClass())
 				{
 					int otherLevel = enum_.ordinal();
 					if (otherLevel < selfLevel)
@@ -139,7 +139,7 @@ public class CopperGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHa
 		if (result.lowerCount == 0)
 		{
 			float f = (float)(result.higherCount + 1) / (float)(result.higherCount + result.sameCount + 1);
-			result.chance = f * f * self.getDegradationChanceMultiplier();
+			result.chance = f * f * self.getChanceModifier();
 		}
 		else
 		{
