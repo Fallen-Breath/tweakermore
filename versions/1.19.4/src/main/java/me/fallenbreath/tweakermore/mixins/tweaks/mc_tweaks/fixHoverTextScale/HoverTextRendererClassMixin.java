@@ -76,7 +76,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 			//#if MC >= 12000
 			//$$ method = "drawHoverEvent",
 			//#else
-			method = "renderTextHoverEffect",
+			method = "renderComponentHoverEffect",
 			//#endif
 			at = @At("TAIL")
 	)
@@ -89,7 +89,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 			//#if MC >= 12000
 			//$$ method = "drawHoverEvent",
 			//#else
-			method = "renderTextHoverEffect",
+			method = "renderComponentHoverEffect",
 			//#endif
 			at = @At(
 					value = "INVOKE",

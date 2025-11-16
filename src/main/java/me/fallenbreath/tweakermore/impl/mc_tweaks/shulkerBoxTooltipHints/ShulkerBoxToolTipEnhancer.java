@@ -123,7 +123,7 @@ public class ShulkerBoxToolTipEnhancer
 
 		ToIntFunction<Component> textLenCalc = text ->
 				//#if MC >= 11600
-				//$$ textRenderer.getWidth(text);
+				//$$ textRenderer.width(text);
 				//#else
 				textRenderer.width(text.getColoredString());
 				//#endif

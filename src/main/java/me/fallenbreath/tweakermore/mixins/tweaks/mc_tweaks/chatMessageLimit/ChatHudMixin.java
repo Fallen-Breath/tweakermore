@@ -87,7 +87,7 @@ public abstract class ChatHudMixin
 					//#if MC >= 12000
 					//$$ target = "Lnet/minecraft/client/gui/GuiGraphics;fill(IIIII)V"
 					//#elseif MC >= 11600
-					//$$ target = "Lnet/minecraft/client/gui/hud/ChatHud;fill(Lnet/minecraft/client/util/math/MatrixStack;IIIII)V"
+					//$$ target = "Lnet/minecraft/client/gui/components/ChatComponent;fill(Lcom/mojang/blaze3d/vertex/PoseStack;IIIII)V"
 					//#else
 					target = "Lnet/minecraft/client/gui/components/ChatComponent;fill(IIIII)V"
 					//#endif

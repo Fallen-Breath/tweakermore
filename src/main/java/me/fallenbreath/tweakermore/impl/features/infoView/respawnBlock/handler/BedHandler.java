@@ -86,7 +86,7 @@ public class BedHandler extends AbstractBlockHandler
 		if (this.bedHeadPos != null)  // isBed check
 		{
 			//#if MC >= 11600
-			//$$ return !BedBlock.isOverworld(world.getBestWorld());
+			//$$ return !BedBlock.canSetSpawn(world.getBestWorld());
 			//#else
 			return !this.world.getBestWorld().dimension.mayRespawn() || this.world.getBestWorld().getBiome(blockPos) == Biomes.NETHER;
 			//#endif
@@ -127,7 +127,7 @@ public class BedHandler extends AbstractBlockHandler
 		Vec3 headCenter = PositionUtils.centerOf(this.bedHeadPos);
 		Vec3 shiftToMiddle =
 				//#if MC >= 11600
-				//$$ Vec3.of
+				//$$ Vec3.atLowerCornerOf
 				//#else
 				new Vec3
 				//#endif

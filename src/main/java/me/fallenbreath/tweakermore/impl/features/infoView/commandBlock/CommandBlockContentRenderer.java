@@ -113,7 +113,7 @@ public class CommandBlockContentRenderer extends CommonScannerInfoViewer
 		if (trimmedCommand.length() < command.length())
 		{
 			//#if MC >= 11600
-			//$$ displayText = FormattedCharSequence.concat(displayText, TextRenderingUtil.string2orderedText(ChatFormatting.DARK_GRAY + "..."));
+			//$$ displayText = FormattedCharSequence.composite(displayText, TextRenderingUtil.string2orderedText(ChatFormatting.DARK_GRAY + "..."));
 			//#else
 			displayText += ChatFormatting.DARK_GRAY + "...";
 			//#endif
@@ -129,9 +129,9 @@ public class CommandBlockContentRenderer extends CommonScannerInfoViewer
 		{
 			//#if MC >= 11600
 			//$$ FormattedCharSequence trimmedLastOutput = TextRenderingUtil.trim(
-			//$$ 		lastOutput.asOrderedText(),
+			//$$ 		lastOutput.getVisualOrderText(),
 			//$$ 		MAX_WIDTH,
-			//$$ 		trimmedText -> FormattedCharSequence.concat(trimmedText, TextRenderingUtil.string2orderedText(ChatFormatting.DARK_GRAY + "..."))
+			//$$ 		trimmedText -> FormattedCharSequence.composite(trimmedText, TextRenderingUtil.string2orderedText(ChatFormatting.DARK_GRAY + "..."))
 			//$$ );
 			//#else
 			String trimmedLastOutput = TextRenderingUtil.trim(

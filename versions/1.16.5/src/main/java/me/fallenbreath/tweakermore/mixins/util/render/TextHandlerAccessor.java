@@ -27,6 +27,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(StringSplitter.class)
 public interface TextHandlerAccessor
 {
-	@Accessor
-	StringSplitter.WidthRetriever getWidthRetriever();
+	@Accessor("widthProvider")
+	StringSplitter.WidthProvider getWidthRetriever();
 }

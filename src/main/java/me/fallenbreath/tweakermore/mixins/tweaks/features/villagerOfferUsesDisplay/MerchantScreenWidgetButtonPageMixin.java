@@ -80,9 +80,9 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends Button
 			//#if MC >= 12000
 			//$$ method = "renderTooltip(Lnet/minecraft/client/gui/DrawContext;II)V",
 			//#elseif MC >= 11700
-			//$$ method = "renderTooltip(Lnet/minecraft/client/util/math/MatrixStack;II)V",
+			//$$ method = "renderTooltip(Lcom/mojang/blaze3d/vertex/PoseStack;II)V",
 			//#elseif MC >= 11600
-			//$$ method = "renderToolTip(Lnet/minecraft/client/util/math/MatrixStack;II)V",
+			//$$ method = "renderToolTip(Lcom/mojang/blaze3d/vertex/PoseStack;II)V",
 			//#else
 			method = "renderToolTip(II)V",
 			//#endif

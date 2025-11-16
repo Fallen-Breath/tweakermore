@@ -88,7 +88,7 @@ public abstract class SignEditScreenMixin extends Screen
 			//#endif
 
 	//#if MC >= 11600
-	//$$ @Shadow @Final private String[] text;
+	//$$ @Shadow @Final private String[] messages;
 	//#endif
 
 	//#if MC >= 11700
@@ -203,11 +203,11 @@ public abstract class SignEditScreenMixin extends Screen
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
 	//#if MC >= 11903
-	//$$ private void drawLineOverflowHint(PoseStack matrices, MultiBufferSource.Immediate immediate, CallbackInfo ci, Vector3f vector3f, int i, boolean bl, int j, int k, int l, int m, Matrix4f matrix4f, int lineIdx, String string, float xStart)
+	//$$ private void drawLineOverflowHint(PoseStack matrices, MultiBufferSource.BufferSource immediate, CallbackInfo ci, Vector3f vector3f, int i, boolean bl, int j, int k, int l, int m, Matrix4f matrix4f, int lineIdx, String string, float xStart)
 	//#elseif MC >= 11700
-	//$$ private void drawLineOverflowHint(PoseStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci, float f, BlockState blockState, boolean bl, boolean bl2, float g, MultiBufferSource.Immediate immediate, Material spriteIdentifier, VertexConsumer vertexConsumer, float h, int i, int j, int k, int l, Matrix4f matrix4f, int lineIdx, String string, float xStart)
+	//$$ private void drawLineOverflowHint(PoseStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci, float f, BlockState blockState, boolean bl, boolean bl2, float g, MultiBufferSource.BufferSource immediate, Material spriteIdentifier, VertexConsumer vertexConsumer, float h, int i, int j, int k, int l, Matrix4f matrix4f, int lineIdx, String string, float xStart)
 	//#elseif MC >= 11600
-	//$$ private void drawLineOverflowHint(PoseStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci, float f, BlockState blockState, boolean bl, boolean bl2, float g, MultiBufferSource.Immediate immediate, float h, int i, int j, int k, int l, Matrix4f matrix4f, int lineIdx, String string, float xStart)
+	//$$ private void drawLineOverflowHint(PoseStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci, float f, BlockState blockState, boolean bl, boolean bl2, float g, MultiBufferSource.BufferSource immediate, float h, int i, int j, int k, int l, Matrix4f matrix4f, int lineIdx, String string, float xStart)
 	//#else
 	private void drawLineOverflowHint(int mouseX, int mouseY, float delta, CallbackInfo ci, PoseStack matrixStack, float f, BlockState blockState, boolean bl, boolean bl2, float g, MultiBufferSource.BufferSource immediate, float h, int i, String strings[], Matrix4f matrix4f, int k, int l, int m, int n, int lineIdx, String string, float xStart)
 	//#endif
@@ -222,12 +222,11 @@ public abstract class SignEditScreenMixin extends Screen
 					//#endif
 
 			//#if MC >= 11600
-			//$$ int textArrayLen = this.text.length;
-			//$$ Minecraft mc = this.client;
+			//$$ int textArrayLen = this.messages.length;
 			//#else
 			int textArrayLen = sign.messages.length;
-			Minecraft mc = this.minecraft;
 			//#endif
+			Minecraft mc = this.minecraft;
 
 			if (mc != null && 0 <= lineIdx && lineIdx < textArrayLen)
 			{
@@ -246,7 +245,7 @@ public abstract class SignEditScreenMixin extends Screen
 
 				List<?> wrapped =
 						//#if MC >= 11600
-						//$$ mc.textRenderer.wrapLines(text, maxWidth);
+						//$$ mc.font.split(text, maxWidth);
 						//#else
 						ComponentRenderUtils.wrapComponents(text, maxWidth, mc.font, false, true);
 						//#endif

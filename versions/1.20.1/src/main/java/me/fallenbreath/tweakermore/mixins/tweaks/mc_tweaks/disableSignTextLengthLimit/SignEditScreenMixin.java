@@ -112,12 +112,12 @@ public abstract class SignEditScreenMixin extends Screen
 		if (TweakerMoreConfigs.DISABLE_SIGN_TEXT_LENGTH_LIMIT.getBooleanValue())
 		{
 			int textArrayLen = this.messages.length;
-			Minecraft mc = this.client;
+			Minecraft mc = this.minecraft;
 			if (mc != null && 0 <= lineIdx && lineIdx < textArrayLen)
 			{
 				Component text = this.text.getMessage(lineIdx, this.filtered$TKM);
 				int maxWidth = this.blockEntity.getMaxTextWidth();
-				List<?> wrapped = mc.textRenderer.wrapLines(text, maxWidth);
+				List<?> wrapped = mc.font.split(text, maxWidth);
 				boolean overflowed = wrapped.size() > 1;
 
 				if (overflowed)

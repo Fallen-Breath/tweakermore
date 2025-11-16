@@ -56,7 +56,7 @@ public abstract class KeyboardMixin
 			at = @At(
 					//#if MC >= 11600
 					//$$ value = "INVOKE",
-					//$$ target = "Lnet/minecraft/client/network/ClientPlayerEntity;isSpectator()Z",
+					//$$ target = "Lnet/minecraft/client/player/LocalPlayer;isSpectator()Z",
 					//$$ ordinal = 0
 					//#else
 					// this mixin will not be applied due to @Restriction annotation

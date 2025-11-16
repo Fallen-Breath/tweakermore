@@ -73,7 +73,7 @@ public class RenderUtils
 	//#if MC >= 11600
 	//$$ public static int getRenderWidth(FormattedCharSequence text)
 	//$$ {
-	//$$ 	return TEXT_RENDERER.getWidth(text);
+	//$$ 	return TEXT_RENDERER.width(text);
 	//$$ }
 	//#endif
 

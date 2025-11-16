@@ -49,9 +49,9 @@ public abstract class ItemRendererMixin
 			//#if MC >= 12104
 			//$$ method = "render",
 			//#elseif MC >= 12103
-			//$$ method = "renderItem(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/item/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;ZF)V",
+			//$$ method = "renderItem(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/item/ModelTransformationMode;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;ZF)V",
 			//#elseif MC >= 11904
-			//$$ method = "renderItem(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V",
+			//$$ method = "renderItem(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V",
 			//#elseif MC >= 11500
 			method = "render(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/client/renderer/block/model/ItemTransforms$TransformType;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IILnet/minecraft/client/resources/model/BakedModel;)V",
 			//#else

@@ -38,6 +38,6 @@ import net.minecraft.client.gui.screens.inventory.SignEditScreen;
 )
 public interface SignEditScreenAccessor
 {
-	@Accessor("text")
+	@Accessor("messages")
 	String[] getTexts$TKM();
 }

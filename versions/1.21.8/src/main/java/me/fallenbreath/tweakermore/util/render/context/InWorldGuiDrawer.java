@@ -52,7 +52,7 @@ public class InWorldGuiDrawer implements AutoCloseable
 	{
 		// reference: net.minecraft.client.render.GameRenderer#GameRenderer
 		Minecraft mc = Minecraft.getInstance();
-		MultiBufferSource.Immediate immediate = RenderUtils.getVertexConsumer();
+		MultiBufferSource.BufferSource immediate = RenderUtils.getVertexConsumer();
 		this.guiState = new GuiRenderState();
 		this.drawContext = new GuiGraphics(mc, this.guiState);
 		this.guiRenderer = new GuiRenderer(

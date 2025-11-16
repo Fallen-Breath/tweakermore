@@ -45,7 +45,7 @@ public abstract class ItemEntityRendererMixin
 {
 	@ModifyExpressionValue(
 			//#if MC >= 12109
-			//$$ method = "Lnet/minecraft/client/render/entity/ItemEntityRenderer;render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;ILnet/minecraft/client/render/entity/state/ItemStackEntityRenderState;Lnet/minecraft/util/math/random/Random;Lnet/minecraft/util/math/Box;)V",
+			//$$ method = "Lnet/minecraft/client/render/entity/ItemEntityRenderer;render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;ILnet/minecraft/client/render/entity/state/ItemStackEntityRenderState;Lnet/minecraft/util/math/random/Random;Lnet/minecraft/util/math/Box;)V",
 			//#elseif MC >= 12104
 			//$$ method = "renderStack",
 			//#elseif MC >= 12006

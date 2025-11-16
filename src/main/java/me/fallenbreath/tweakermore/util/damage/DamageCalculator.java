@@ -215,7 +215,7 @@ public class DamageCalculator
 
 						(float)this.entity.
 								//#if MC >= 11600
-								//$$ getAttributeValue(EntityAttributes.GENERIC_ARMOR_TOUGHNESS)
+								//$$ getAttributeValue(Attributes.ARMOR_TOUGHNESS)
 								//#else
 								getAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).getValue()
 								//#endif

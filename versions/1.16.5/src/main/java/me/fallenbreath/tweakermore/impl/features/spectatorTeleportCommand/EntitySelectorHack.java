@@ -26,13 +26,12 @@ import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.spectatorTeleportCommand.EntitySelectorAccessor;
 import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.multiplayer.PlayerInfo;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.commands.arguments.selector.EntitySelector;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
@@ -48,30 +47,30 @@ public class EntitySelectorHack
 	{
 		EntitySelectorAccessor selector = (EntitySelectorAccessor)entitySelector;
 		Minecraft mc = source.getClient();
-		ClientWorld world = source.getWorld();
-		ClientPacketListener networkHandler = mc.getNetworkHandler();
+		ClientLevel world = source.getWorld();
+		ClientPacketListener networkHandler = mc.getConnection();
 		if (networkHandler == null)
 		{
-			throw EntityArgument.ENTITY_NOT_FOUND_EXCEPTION.create();
+			throw EntityArgument.NO_ENTITIES_FOUND.create();
 		}
 
 		if (selector.getPlayerName() != null)
 		{
-			for (PlayerInfo entry : networkHandler.getPlayerList())
+			for (PlayerInfo entry : networkHandler.getOnlinePlayers())
 			{
 				if (entry.getProfile().getName().equalsIgnoreCase(selector.getPlayerName()))
 				{
 					return entry.getProfile().getId();
 				}
 			}
-			throw EntityArgument.PLAYER_NOT_FOUND_EXCEPTION.create();
+			throw EntityArgument.NO_PLAYERS_FOUND.create();
 		}
 		else if (selector.getUuid() != null)
 		{
 			boolean found = false;
-			for (Entity entity : world.getEntities())
+			for (Entity entity : world.entitiesForRendering())
 			{
-				if (entity.getUuid().equals(selector.getUuid()))
+				if (entity.getUUID().equals(selector.getUuid()))
 				{
 					found = true;
 					break;
@@ -96,7 +95,7 @@ public class EntitySelectorHack
 			{
 				if (source.getEntity() != null && predicate.test(source.getEntity()))
 				{
-					return source.getEntity().getUuid();
+					return source.getEntity().getUUID();
 				}
 			}
 			else
@@ -108,32 +107,32 @@ public class EntitySelectorHack
 				}
 				if (!candidates.isEmpty())
 				{
-					return candidates.get(0).getUuid();
+					return candidates.get(0).getUUID();
 				}
 			}
-			throw EntityArgument.ENTITY_NOT_FOUND_EXCEPTION.create();
+			throw EntityArgument.NO_ENTITIES_FOUND.create();
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	private static List<Entity> getEntitiesFromWorld(EntitySelectorAccessor selector, ClientWorld world, Vec3 pos, Predicate<Entity> predicate)
+	private static List<Entity> getEntitiesFromWorld(EntitySelectorAccessor selector, ClientLevel world, Vec3 pos, Predicate<Entity> predicate)
 	{
 		if (selector.getBox() != null)
 		{
-			return (List<Entity>)world.getEntitiesByType(
+			return (List<Entity>)world.getEntities(
 					//#if MC >= 11700
 					//$$ selector.getEntityFilter(),
 					//#else
 					selector.getType(),
 					//#endif
-					selector.getBox().offset(pos),
+					selector.getBox().move(pos),
 					predicate
 			);
 		}
 		else
 		{
 			List<Entity> entities = Lists.newArrayList();
-			for (Entity entity : world.getEntities())
+			for (Entity entity : world.entitiesForRendering())
 			{
 				if (
 						//#if MC >= 11700

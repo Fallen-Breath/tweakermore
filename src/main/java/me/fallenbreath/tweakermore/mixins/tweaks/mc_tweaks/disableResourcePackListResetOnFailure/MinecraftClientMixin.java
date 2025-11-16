@@ -36,7 +36,7 @@ public abstract class MinecraftClientMixin
 			//#if MC >= 11700
 			//$$ method = "onResourceReloadFailure",
 			//#elseif MC >= 11600
-			//$$ method = "method_31186",
+			//$$ method = "clearResourcePacksOnError",
 			//#else
 			method = "rollbackResourcePacks",
 			//#endif

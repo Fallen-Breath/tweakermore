@@ -205,9 +205,9 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 			//$$ renderContext.getGuiDrawer().drawSpriteStretched(RenderLayer::getGuiTexturedOverlay, sprite, 0, 0, ICON_SIZE, ICON_SIZE, 0xFFFFFFFF);
 			//$$ renderContext.getGuiDrawer().draw();
 			//#elseif MC >= 12000
-			//$$ renderContext.getGuiDrawer().drawSprite(0, 0, 0, ICON_SIZE, ICON_SIZE, sprite);
+			//$$ renderContext.getGuiDrawer().blit(0, 0, 0, ICON_SIZE, ICON_SIZE, sprite);
 			//#elseif MC >= 11600
-			//$$ renderContext.getGuiDrawer().drawSprite(renderContext.getMcRawMatrixStack(), 0, 0, 0, ICON_SIZE, ICON_SIZE, sprite);
+			//$$ renderContext.getGuiDrawer().blit(renderContext.getMcRawMatrixStack(), 0, 0, 0, ICON_SIZE, ICON_SIZE, sprite);
 			//#else
 			renderContext.getGuiDrawer().blit(0, 0, 0, ICON_SIZE, ICON_SIZE, sprite);
 			//#endif

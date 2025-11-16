@@ -42,7 +42,7 @@ public class RespawnAnchorHandler extends AbstractBlockHandler
 		// ref: net.minecraft.block.RespawnAnchorBlock.onUse
 		if (this.blockState.getBlock() instanceof RespawnAnchorBlock)
 		{
-			return !RespawnAnchorBlock.isNether(this.world.getBestWorld());
+			return !RespawnAnchorBlock.canSetSpawn(this.world.getBestWorld());
 		}
 		return false;
 	}
@@ -62,7 +62,7 @@ public class RespawnAnchorHandler extends AbstractBlockHandler
 	@Override
 	public void addBlocksToRemove(TemporaryBlockReplacer replacer)
 	{
-		replacer.add(this.blockPos, Blocks.AIR.getDefaultState());
+		replacer.add(this.blockPos, Blocks.AIR.defaultBlockState());
 	}
 
 	@Override

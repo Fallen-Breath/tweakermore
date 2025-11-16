@@ -72,11 +72,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 	}
 
 	@Inject(
-			//#if MC >= 11600
-			//$$ method = "renderTextHoverEffect",
-			//#else
 			method = "renderComponentHoverEffect",
-			//#endif
 			at = @At("TAIL")
 	)
 	private void fixHoverTextScale_cleanup(CallbackInfo ci)
@@ -85,11 +81,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 	}
 
 	@ModifyArg(
-			//#if MC >= 11600
-			//$$ method = "renderTextHoverEffect",
-			//#else
 			method = "renderComponentHoverEffect",
-			//#endif
 			at = @At(
 					value = "INVOKE",
 					target = "Ljava/lang/Math;max(II)I"
@@ -134,7 +126,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 			//#if MC >= 11700
 			//$$ method = "renderTooltipFromComponents",
 			//#elseif MC >= 11600
-			//$$ method = "renderOrderedTooltip",
+			//$$ method = "renderTooltip(Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/List;II)V",
 			//#else
 			method = "renderTooltip(Ljava/util/List;II)V",
 			//#endif
@@ -161,7 +153,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 			//#if MC >= 11700
 			//$$ method = "renderTooltipFromComponents",
 			//#elseif MC >= 11600
-			//$$ method = "renderOrderedTooltip",
+			//$$ method = "renderTooltip(Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/List;II)V",
 			//#else
 			method = "renderTooltip(Ljava/util/List;II)V",
 			//#endif
@@ -187,7 +179,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 			//#if MC >= 11700
 			//$$ method = "renderTooltipFromComponents",
 			//#elseif MC >= 11600
-			//$$ method = "renderOrderedTooltip",
+			//$$ method = "renderTooltip(Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/List;II)V",
 			//#else
 			method = "renderTooltip(Ljava/util/List;II)V",
 			//#endif
@@ -210,7 +202,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 			//#if MC >= 11700
 			//$$ method = "renderTooltipFromComponents",
 			//#elseif MC >= 11600
-			//$$ method = "renderOrderedTooltip",
+			//$$ method = "renderTooltip(Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/List;II)V",
 			//#else
 			method = "renderTooltip(Ljava/util/List;II)V",
 			//#endif

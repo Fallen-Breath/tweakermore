@@ -460,7 +460,7 @@ public class TextRenderer
 		public static TextHolder of(Component text)
 		{
 			//#if MC >= 11600
-			//$$ return new TextHolder(text.asOrderedText());
+			//$$ return new TextHolder(text.getVisualOrderText());
 			//#else
 			return new TextHolder(text.getColoredString());
 			//#endif

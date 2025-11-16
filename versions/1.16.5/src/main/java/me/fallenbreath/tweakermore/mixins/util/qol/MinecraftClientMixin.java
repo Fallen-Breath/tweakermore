@@ -40,7 +40,7 @@ public abstract class MinecraftClientMixin
 			//#elseif MC >= 11700
 			//$$ method = "createSocialInteractionsService",
 			//#else
-			method = "method_31382",
+			method = "createSocialInteractions",
 			//#endif
 			at = @At(
 					value = "INVOKE",

@@ -125,7 +125,7 @@ public abstract class SignEditScreenMixin extends Screen
 		{
 			//#if MC >= 11903
 			//$$ this.addDrawableChild(
-			//$$ 		Button.builder(CommonComponents.CANCEL, button -> {
+			//$$ 		Button.builder(CommonComponents.GUI_CANCEL, button -> {
 			//$$ 			this.editingCancelled = true;
 			//$$ 			this.finishEditing();
 			//$$ 		}).dimensions(this.width / 2 - 100, this.height / 4 + 120 + 20 + 5, 200, 20).build()
@@ -140,7 +140,7 @@ public abstract class SignEditScreenMixin extends Screen
 					(new Button(
 					this.width / 2 - 100, this.height / 4 + 120 + 20 + 5, 200, 20,
 					//#if MC >= 11600
-					//$$ CommonComponents.CANCEL,
+					//$$ CommonComponents.GUI_CANCEL,
 					//#else
 					StringUtils.translate("gui.cancel"),
 					//#endif

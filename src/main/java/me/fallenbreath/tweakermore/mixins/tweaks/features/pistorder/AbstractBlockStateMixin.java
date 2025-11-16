@@ -44,7 +44,7 @@ import net.minecraft.world.level.block.state.BlockState;
 @Restriction(conflict = @Condition(value = ModIds.pistorder, versionPredicates = "<=1.6.0"))
 @Mixin(
 		//#if MC >= 11600
-		//$$ BlockBehaviour.AbstractBlockState.class
+		//$$ BlockBehaviour.BlockStateBase.class
 		//#else
 		BlockState.class
 		//#endif

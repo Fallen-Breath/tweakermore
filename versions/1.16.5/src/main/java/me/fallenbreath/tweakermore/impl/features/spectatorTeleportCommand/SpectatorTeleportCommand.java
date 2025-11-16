@@ -103,7 +103,7 @@ public class SpectatorTeleportCommand
 		}
 
 		TweakerMoreMod.LOGGER.info("Performing spectator teleport to entity {}", target);
-		player.networkHandler.sendPacket(new ServerboundTeleportToEntityPacket(target));
+		player.connection.send(new ServerboundTeleportToEntityPacket(target));
 		return 1;
 	}
 }

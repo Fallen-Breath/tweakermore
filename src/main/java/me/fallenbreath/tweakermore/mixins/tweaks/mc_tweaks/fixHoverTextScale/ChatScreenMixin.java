@@ -60,7 +60,7 @@ public abstract class ChatScreenMixin extends Screen
 					//#if MC >= 12000
 					//$$ target = "Lnet/minecraft/client/gui/GuiGraphics;renderComponentHoverEffect(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Style;II)V"
 					//#elseif MC >= 11600
-					//$$ target = "Lnet/minecraft/client/gui/screen/ChatScreen;renderTextHoverEffect(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/text/Style;II)V"
+					//$$ target = "Lnet/minecraft/client/gui/screens/ChatScreen;renderComponentHoverEffect(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/network/chat/Style;II)V"
 					//#else
 					target = "Lnet/minecraft/client/gui/screens/ChatScreen;renderComponentHoverEffect(Lnet/minecraft/network/chat/Component;II)V"
 					//#endif
@@ -106,7 +106,7 @@ public abstract class ChatScreenMixin extends Screen
 					//#if MC >= 12000
 					//$$ target = "Lnet/minecraft/client/gui/GuiGraphics;renderComponentHoverEffect(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Style;II)V",
 					//#elseif MC >= 11600
-					//$$ target = "Lnet/minecraft/client/gui/screen/ChatScreen;renderTextHoverEffect(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/text/Style;II)V",
+					//$$ target = "Lnet/minecraft/client/gui/screens/ChatScreen;renderComponentHoverEffect(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/network/chat/Style;II)V",
 					//#else
 					target = "Lnet/minecraft/client/gui/screens/ChatScreen;renderComponentHoverEffect(Lnet/minecraft/network/chat/Component;II)V",
 					//#endif

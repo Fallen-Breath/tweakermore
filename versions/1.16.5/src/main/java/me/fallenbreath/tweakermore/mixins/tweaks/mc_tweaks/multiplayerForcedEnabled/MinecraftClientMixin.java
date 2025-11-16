@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Minecraft.class)
 public abstract class MinecraftClientMixin
 {
-	@Inject(method = "isMultiplayerEnabled", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "allowsMultiplayer", at = @At("HEAD"), cancellable = true)
 	private void multiplayerForcedEnabled(CallbackInfoReturnable<Boolean> cir)
 	{
 		if (TweakerMoreConfigs.MULTIPLAYER_FORCED_ENABLED.getBooleanValue())

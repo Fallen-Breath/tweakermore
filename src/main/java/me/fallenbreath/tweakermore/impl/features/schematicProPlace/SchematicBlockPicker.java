@@ -101,10 +101,10 @@ public class SchematicBlockPicker
 					//#if MC >= 11600
 					//$$ else if (slot == -1 && Configs.Generic.PICK_BLOCK_SHULKERS.getBooleanValue())
 					//$$ {
-					//$$ 	slot = InventoryUtils.findSlotWithBoxWithItem(mc.player.playerScreenHandler, stack, false);
+					//$$ 	slot = InventoryUtils.findSlotWithBoxWithItem(mc.player.inventoryMenu, stack, false);
 					//$$ 	if (slot != -1)
 					//$$ 	{
-					//$$ 		ItemStack boxStack = ((Slot) mc.player.playerScreenHandler.slots.get(slot)).getStack();
+					//$$ 		ItemStack boxStack = ((Slot) mc.player.inventoryMenu.slots.get(slot)).getItem();
 					//$$ 		InventoryUtils.setPickedItemToHand(boxStack, mc);
 					//$$ 	}
 					//$$ }

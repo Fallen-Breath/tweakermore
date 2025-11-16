@@ -49,35 +49,35 @@ import net.minecraft.world.entity.EntityType;
 @Mixin(EntitySelector.class)
 public interface EntitySelectorAccessor
 {
-	@Accessor
+	@Accessor("predicate")
 	//#if MC >= 12100
 	//$$ List<Predicate<Entity>> getPredicates();
 	//#else
 	Predicate<Entity> getBasePredicate();
 	//#endif
 
-	@Accessor
-	MinMaxBounds.FloatRange getDistance();
+	@Accessor("range")
+	MinMaxBounds.Floats getDistance();
 
-	@Accessor
+	@Accessor("position")
 	Function<Vec3, Vec3> getPositionOffset();
 
-	@Accessor
+	@Accessor("order")
 	BiConsumer<Vec3, List<? extends Entity>> getSorter();
 
 	@Nullable
-	@Accessor
+	@Accessor("aabb")
 	AABB getBox();
 
-	@Accessor
+	@Accessor("currentEntity")
 	boolean getSenderOnly();
 
 	@Nullable
-	@Accessor
+	@Accessor("playerName")
 	String getPlayerName();
 
 	@Nullable
-	@Accessor
+	@Accessor("entityUUID")
 	UUID getUuid();
 
 	@Nullable
@@ -88,7 +88,7 @@ public interface EntitySelectorAccessor
 	EntityType<?> getType();
 	//#endif
 
-	@Invoker
+	@Invoker("getPredicate")
 	Predicate<Entity> invokeGetPositionPredicate(
 			Vec3 pos
 			//#if MC >= 12100
@@ -97,7 +97,7 @@ public interface EntitySelectorAccessor
 	);
 
 	//#if MC >= 12100
-	//$$ @Invoker
+	//$$ @Invoker("getAbsoluteAabb")
 	//$$ AABB invokeGetOffsetBox(Vec3 offset);
 	//#endif
 }

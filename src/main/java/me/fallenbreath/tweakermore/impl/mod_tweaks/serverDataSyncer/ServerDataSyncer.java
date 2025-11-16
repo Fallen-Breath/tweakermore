@@ -259,7 +259,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 							//#elseif MC >= 11700
 							//$$ blockEntity.readNbt(nbt);
 							//#elseif MC >= 11600
-							//$$ blockEntity.fromTag(blockEntity.getCachedState(), nbt);
+							//$$ blockEntity.load(blockEntity.getBlockState(), nbt);
 							//#else
 							blockEntity.load(nbt);
 							//#endif

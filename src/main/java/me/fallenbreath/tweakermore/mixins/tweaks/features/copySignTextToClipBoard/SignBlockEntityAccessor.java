@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.Mixin;
 public interface SignBlockEntityAccessor
 {
 	//#if 11600 <= MC && MC < 12000
-	//$$ @Accessor
+	//$$ @Accessor("messages")
 	//$$ Component[] getTexts();
 	//#endif
 }

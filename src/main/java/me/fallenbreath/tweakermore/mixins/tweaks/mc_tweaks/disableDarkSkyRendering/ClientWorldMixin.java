@@ -34,7 +34,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 
 @Mixin(
 		//#if MC >= 11600
-		//$$ ClientWorld.Properties.class
+		//$$ ClientLevel.ClientLevelData.class
 		//#elseif MC >= 11500
 		ClientLevel.class
 		//#else

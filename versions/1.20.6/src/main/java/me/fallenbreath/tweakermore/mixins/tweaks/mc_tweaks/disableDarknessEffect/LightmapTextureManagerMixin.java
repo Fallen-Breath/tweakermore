@@ -34,7 +34,7 @@ public abstract class LightmapTextureManagerMixin
 			method = "getDarknessFactor",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/network/ClientPlayerEntity;getStatusEffect(Lnet/minecraft/registry/entry/RegistryEntry;)Lnet/minecraft/entity/effect/StatusEffectInstance;"
+					target = "Lnet/minecraft/client/player/LocalPlayer;getStatusEffect(Lnet/minecraft/registry/entry/RegistryEntry;)Lnet/minecraft/entity/effect/StatusEffectInstance;"
 			)
 	)
 	private MobEffectInstance disableDarknessEffect_doesNotHaveStatusEffect(MobEffectInstance instance)

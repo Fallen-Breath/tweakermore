@@ -63,13 +63,7 @@ public abstract class OverlayRendererLightLevelMixin
 			BlockPos pos = new BlockPos(x, y, z);
 			BlockPos posDown = pos.below();
 			BlockState state = chunk.getBlockState(pos);
-			boolean inSolidBlock = state.
-					//#if MC >= 11600
-					//$$ isSolidBlock
-					//#else
-					isRedstoneConductor
-					//#endif
-							(world, pos);
+			boolean inSolidBlock = state.isRedstoneConductor(world, pos);
 			BlockState stateDown = chunk.getBlockState(posDown);
 			boolean aboveNonAirBlock = !stateDown.isAir() && !(stateDown.getBlock() instanceof LiquidBlock);
 			cir.setReturnValue(!inSolidBlock && aboveNonAirBlock);

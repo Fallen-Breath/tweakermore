@@ -20,7 +20,9 @@
 
 package me.fallenbreath.tweakermore.util.render;
 
+import me.fallenbreath.tweakermore.mixins.util.render.TextHandlerAccessor;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 
 //#if MC >= 11600
 //$$ import com.google.common.collect.Lists;
@@ -40,7 +42,7 @@ public class TextRenderingUtil
 	//#if MC >= 11600
 	//$$ public static FormattedCharSequence string2orderedText(String string)
 	//$$ {
-	//$$ 	return visitor -> StringDecomposer.visitFormatted(string, Style.EMPTY, visitor);
+	//$$ 	return visitor -> StringDecomposer.iterateFormatted(string, Style.EMPTY, visitor);
 	//$$ }
 	//$$
 	//$$ public static String orderedText2string(FormattedCharSequence text)
@@ -55,8 +57,8 @@ public class TextRenderingUtil
 	//$$
 	//$$ public static FormattedCharSequence trim(FormattedCharSequence text, int maxWidth, PostTrimModifier<FormattedCharSequence> postTrimModifier)
 	//$$ {
-	//$$ 	Font textRenderer = Minecraft.getInstance().textRenderer;
-	//$$ 	StringSplitter.WidthRetriever widthRetriever = ((TextHandlerAccessor)textRenderer.getTextHandler()).getWidthRetriever();
+	//$$ 	Font textRenderer = Minecraft.getInstance().font;
+	//$$ 	StringSplitter.WidthProvider widthRetriever = ((TextHandlerAccessor)textRenderer.getSplitter()).getWidthRetriever();
 	//$$
 	//$$ 	List<Triple<Integer, Style, Integer>> elements = Lists.newArrayList();
 	//$$ 	MutableFloat width = new MutableFloat(0);
@@ -96,7 +98,13 @@ public class TextRenderingUtil
 	public static String trim(String text, int maxWidth, PostTrimModifier<String> postTrimModifier)
 	{
 		Minecraft mc = Minecraft.getInstance();
-		String trimmedText = mc.font.substrByWidth(text, maxWidth);
+		String trimmedText = mc.font.
+				//#if MC >= 11600
+				//$$ plainSubstrByWidth
+				//#else
+				substrByWidth
+				//#endif
+						(text, maxWidth);
 		if (trimmedText.length() < text.length())
 		{
 			trimmedText = postTrimModifier.modify(trimmedText);

@@ -37,11 +37,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ClientPlayNetworkHandlerMixin
 {
 	@Inject(
-			//#if MC >= 11600
-			//$$ method = "onOpenScreen",
-			//#else
 			method = "handleOpenScreen",
-			//#endif
 			at = @At("TAIL")
 	)
 	private void tweakerMoreAntuContainerProcessorMarking(CallbackInfo ci)

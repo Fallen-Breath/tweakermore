@@ -33,7 +33,7 @@ public abstract class LightmapTextureManagerMixin
 			method = "update",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/network/ClientPlayerEntity;getEffectFadeFactor(Lnet/minecraft/registry/entry/RegistryEntry;F)F"
+					target = "Lnet/minecraft/client/player/LocalPlayer;getEffectFadeFactor(Lnet/minecraft/registry/entry/RegistryEntry;F)F"
 			)
 	)
 	private float disableDarknessEffect_doesNotHaveStatusEffect(float factor)

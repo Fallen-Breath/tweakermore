@@ -54,11 +54,7 @@ import net.minecraft.network.chat.Component;
 public abstract class ShulkerBoxBlockMixin
 {
 	@ModifyArg(
-			//#if MC >= 11600
-			//$$ method = "appendTooltip",
-			//#else
 			method = "appendHoverText",
-			//#endif
 			slice = @Slice(
 					from = @At(
 							value = "CONSTANT",
