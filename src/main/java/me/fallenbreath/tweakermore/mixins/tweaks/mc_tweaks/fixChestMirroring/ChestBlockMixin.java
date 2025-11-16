@@ -43,11 +43,11 @@ public abstract class ChestBlockMixin
 	{
 		if (TweakerMoreConfigs.FIX_CHEST_MIRRORING.getBooleanValue())
 		{
-			ChestType chestType = state.getValue(ChestBlockMixin.TYPE);
+			ChestType chestType = state.getValue(TYPE);
 			if (mirror != Mirror.NONE && chestType != ChestType.SINGLE)
 			{
 				// the chest type is always reverted when mirrored
-				cir.setReturnValue(cir.getReturnValue().setValue(ChestBlockMixin.TYPE, chestType.getOpposite()));
+				cir.setReturnValue(cir.getReturnValue().setValue(TYPE, chestType.getOpposite()));
 			}
 		}
 	}

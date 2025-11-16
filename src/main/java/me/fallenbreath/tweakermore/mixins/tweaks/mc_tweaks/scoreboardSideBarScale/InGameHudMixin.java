@@ -92,7 +92,7 @@ public abstract class InGameHudMixin
 			//#if MC >= 12006
 			//$$ int scaledWidth = matrixStackOrDrawContext.getScaledWindowWidth();
 			//#endif
-			this.scaler = RenderUtils.createScaler(this.screenWidth, centerY, TweakerMoreConfigs.SCOREBOARD_SIDE_BAR_SCALE.getDoubleValue());
+			this.scaler = RenderUtils.createScaler(screenWidth, centerY, TweakerMoreConfigs.SCOREBOARD_SIDE_BAR_SCALE.getDoubleValue());
 			this.scaler.apply(RenderContext.gui(
 					//#if MC >= 11600
 					//$$ matrixStackOrDrawContext
