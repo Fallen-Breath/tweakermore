@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.preciseItemEntityModel;
 
 import me.fallenbreath.tweakermore.impl.mc_tweaks.preciseItemEntityModel.ItemEntityRenderStateExtra;
-import net.minecraft.client.render.entity.state.ItemEntityRenderState;
+import net.minecraft.client.renderer.entity.state.ItemEntityRenderState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 

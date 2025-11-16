@@ -22,9 +22,9 @@ package me.fallenbreath.tweakermore.mixins.tweaks.features.serverMsptMetricsStat
 
 import me.fallenbreath.tweakermore.impl.features.serverMsptMetricsStatistic.MetricsDataWithRichStatistic;
 import me.fallenbreath.tweakermore.impl.features.serverMsptMetricsStatistic.RichStatisticManager;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.hud.DebugHud;
-import net.minecraft.client.gui.hud.debug.TickChart;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.DebugScreenOverlay;
+import net.minecraft.client.gui.components.debugchart.TpsDebugChart;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -38,14 +38,14 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 //#if MC >= 12006
 //$$ import net.minecraft.util.debugchart.LocalSampleLogger;
 //#else
-import net.minecraft.util.profiler.PerformanceLog;
+import net.minecraft.util.SampleLogger;
 //#endif
 
 /**
  * <= mc1.20.1: subproject 1.15.2 (main project)
  * >= mc1.20.2: subproject 1.20.2        <--------
  */
-@Mixin(DebugHud.class)
+@Mixin(DebugScreenOverlay.class)
 public abstract class DebugHudMixin
 {
 	// ============================ enabling ============================
@@ -54,7 +54,7 @@ public abstract class DebugHudMixin
 	//#if MC >= 12006
 	//$$ LocalSampleLogger
 	//#else
-	PerformanceLog
+	SampleLogger
 	//#endif
 			tickNanosLog;
 
@@ -66,13 +66,13 @@ public abstract class DebugHudMixin
 
 	// ============================ render ============================
 
-	@Shadow @Final private TickChart tickChart;
+	@Shadow @Final private TpsDebugChart tickChart;
 
 	@Unique private
 	//#if MC >= 12006
 	//$$ LocalSampleLogger
 	//#else
-	PerformanceLog
+	SampleLogger
 	//#endif
 			originMetricsData$TKM = null;
 
@@ -101,7 +101,7 @@ public abstract class DebugHudMixin
 		//$$ }
 		//$$ var metricsData = (LocalSampleLogger)chartLog;
 		//#else
-		PerformanceLog metricsData = chart.getLog();
+		SampleLogger metricsData = chart.getLog();
 		//#endif
 
 		RichStatisticManager manager = ((MetricsDataWithRichStatistic)metricsData).getRichStatisticManager$TKM();
@@ -126,7 +126,7 @@ public abstract class DebugHudMixin
 					shift = At.Shift.AFTER
 			)
 	)
-	private void serverMsptMetricsStatistic_renderExtra(DrawContext drawContext, CallbackInfo ci)
+	private void serverMsptMetricsStatistic_renderExtra(GuiGraphics drawContext, CallbackInfo ci)
 	{
 		if (this.originMetricsData$TKM != null)
 		{

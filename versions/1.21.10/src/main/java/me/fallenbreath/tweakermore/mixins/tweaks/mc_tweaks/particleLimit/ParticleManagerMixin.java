@@ -20,13 +20,13 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.particleLimit;
 
-import net.minecraft.client.particle.ParticleManager;
+import net.minecraft.client.particle.ParticleEngine;
 import org.spongepowered.asm.mixin.Mixin;
 
 /**
  * See {@link ParticleRendererMixin} in mc >= 1.21.9
  */
-@Mixin(ParticleManager.class)
+@Mixin(ParticleEngine.class)
 public abstract class ParticleManagerMixin
 {
 }

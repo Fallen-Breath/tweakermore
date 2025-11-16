@@ -22,14 +22,14 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.shulkerItemContentHi
 
 import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxItemContentHint.ShulkerBoxItemContentHintRenderer;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.item.ItemStack;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(DrawContext.class)
+@Mixin(GuiGraphics.class)
 public abstract class ItemRendererMixin
 {
 	@Inject(
@@ -43,7 +43,7 @@ public abstract class ItemRendererMixin
 					//#if MC >= 12106
 					//$$ target = "Lnet/minecraft/client/gui/render/state/GuiRenderState;submitItem(Lnet/minecraft/client/gui/render/state/GuiItemRenderState;)V",
 					//#else
-					target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V",
+					target = "Lcom/mojang/blaze3d/vertex/PoseStack;popPose()V",
 					//#endif
 					shift = At.Shift.AFTER
 			)
@@ -55,7 +55,7 @@ public abstract class ItemRendererMixin
 			@Local(argsOnly = true, ordinal = 1) int y
 	)
 	{
-		DrawContext self = (DrawContext)(Object)this;
+		GuiGraphics self = (GuiGraphics)(Object)this;
 		ShulkerBoxItemContentHintRenderer.render(
 				//#if MC < 12106
 				self.getMatrices(),

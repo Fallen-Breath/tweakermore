@@ -29,7 +29,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.itemTooltipHideUntilMouseMove.ContainerScreenWithToolTipHideHelper;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.itemTooltipHideUntilMouseMove.MalilibRenderTooltipLastCancelHelper;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.gui.screen.ingame.InventoryScreen;
+import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

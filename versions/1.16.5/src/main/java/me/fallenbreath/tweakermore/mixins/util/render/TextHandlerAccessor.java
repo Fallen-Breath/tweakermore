@@ -20,13 +20,13 @@
 
 package me.fallenbreath.tweakermore.mixins.util.render;
 
-import net.minecraft.client.font.TextHandler;
+import net.minecraft.client.StringSplitter;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(TextHandler.class)
+@Mixin(StringSplitter.class)
 public interface TextHandlerAccessor
 {
 	@Accessor
-	TextHandler.WidthRetriever getWidthRetriever();
+	StringSplitter.WidthRetriever getWidthRetriever();
 }

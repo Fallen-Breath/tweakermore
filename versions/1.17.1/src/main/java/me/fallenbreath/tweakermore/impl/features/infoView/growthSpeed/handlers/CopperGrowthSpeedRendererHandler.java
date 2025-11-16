@@ -21,13 +21,13 @@
 package me.fallenbreath.tweakermore.impl.features.infoView.growthSpeed.handlers;
 
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Degradable;
-import net.minecraft.block.Oxidizable;
-import net.minecraft.text.BaseText;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.ChangeOverTimeBlock;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.network.chat.BaseComponent;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 
 import java.util.List;
 
@@ -44,7 +44,7 @@ public class CopperGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHa
 	@Override
 	public boolean isTarget(BlockState blockState)
 	{
-		return blockState.getBlock() instanceof Oxidizable && canDegrade(blockState);
+		return blockState.getBlock() instanceof WeatheringCopper && canDegrade(blockState);
 	}
 
 	private static boolean canDegrade(BlockState blockState)
@@ -62,22 +62,22 @@ public class CopperGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHa
 	/**
 	 * Reference:
 	 * - {@link net.minecraft.block.OxidizableBlock#randomTick}
-	 * - {@link net.minecraft.block.Degradable#tickDegradation}
+	 * - {@link net.minecraft.block.ChangeOverTimeBlock#tickDegradation}
 	 */
 	@Override
-	public void addInfoLines(RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos, List<BaseText> lines)
+	public void addInfoLines(RenderVisitorWorldView world, BlockPos pos, boolean isCrossHairPos, List<BaseComponent> lines)
 	{
 		Block block = world.getBlockState(pos).getBlock();
-		if (!(block instanceof Degradable))
+		if (!(block instanceof ChangeOverTimeBlock))
 		{
 			return;
 		}
 
 		final float checkChance = 0.05688889F;  // is it `(8 / 9 + 56) / 100`?
-		CalcResult result = calc(world, pos, (Degradable<?>)block);
+		CalcResult result = calc(world, pos, (ChangeOverTimeBlock<?>)block);
 		float finalChance = result.chance * checkChance;
 
-		BaseText lowerCountText = s(result.lowerCount, Formatting.DARK_PURPLE);
+		BaseComponent lowerCountText = s(result.lowerCount, ChatFormatting.DARK_PURPLE);
 		if (result.lowerCount > 0)
 		{
 			style(lowerCountText, lowerCountText.getStyle().withUnderline(true));
@@ -85,18 +85,18 @@ public class CopperGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHa
 
 		Attributes attr1 = new Attributes();
 		Attributes attr2 = new Attributes();
-		attr1.add(tr("copper.chance"), s(round(finalChance * 100, 3) + "%", Formatting.YELLOW));
+		attr1.add(tr("copper.chance"), s(round(finalChance * 100, 3) + "%", ChatFormatting.YELLOW));
 		attr2.add(tr("copper.lower"), lowerCountText);
-		attr2.add(tr("copper.same"), s(result.sameCount, Formatting.BLUE));
-		attr2.add(tr("copper.higher"), s(result.higherCount, Formatting.DARK_AQUA));
+		attr2.add(tr("copper.same"), s(result.sameCount, ChatFormatting.BLUE));
+		attr2.add(tr("copper.higher"), s(result.higherCount, ChatFormatting.DARK_AQUA));
 		attr1.export(lines, isCrossHairPos);
 		attr2.export(lines, isCrossHairPos);
 	}
 
 	/**
-	 * Reference: {@link net.minecraft.block.Degradable#tryDegrade}
+	 * Reference: {@link net.minecraft.block.ChangeOverTimeBlock#tryDegrade}
 	 */
-	private static CalcResult calc(RenderVisitorWorldView world, BlockPos pos, Degradable<?> self)
+	private static CalcResult calc(RenderVisitorWorldView world, BlockPos pos, ChangeOverTimeBlock<?> self)
 	{
 		int selfLevel = self.getDegradationLevel().ordinal();
 		CalcResult result = new CalcResult();
@@ -114,9 +114,9 @@ public class CopperGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHa
 			}
 
 			Block block = world.getBlockState(blockPos).getBlock();
-			if (block instanceof Degradable)
+			if (block instanceof ChangeOverTimeBlock)
 			{
-				Enum<?> enum_ = ((Degradable<?>)block).getDegradationLevel();
+				Enum<?> enum_ = ((ChangeOverTimeBlock<?>)block).getDegradationLevel();
 				if (self.getDegradationLevel().getClass() == enum_.getClass())
 				{
 					int otherLevel = enum_.ordinal();

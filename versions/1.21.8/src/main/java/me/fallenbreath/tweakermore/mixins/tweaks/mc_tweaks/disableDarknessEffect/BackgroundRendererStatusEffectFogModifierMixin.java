@@ -25,8 +25,8 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.render.fog.DarknessEffectFogModifier;
-import net.minecraft.client.render.fog.StatusEffectFogModifier;
+import net.minecraft.client.renderer.fog.environment.DarknessFogEnvironment;
+import net.minecraft.client.renderer.fog.environment.MobEffectFogEnvironment;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.At;
  * mc1.21.6+          : subproject 1.21.8        <--------
  */
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.19"))
-@Mixin(StatusEffectFogModifier.class)
+@Mixin(MobEffectFogEnvironment.class)
 public abstract class BackgroundRendererStatusEffectFogModifierMixin
 {
 	@ModifyReturnValue(method = "shouldApply", at = @At("TAIL"))
@@ -44,7 +44,7 @@ public abstract class BackgroundRendererStatusEffectFogModifierMixin
 	{
 		if (TweakerMoreConfigs.DISABLE_DARKNESS_EFFECT.getBooleanValue())
 		{
-			if ((Object)this instanceof DarknessEffectFogModifier)
+			if ((Object)this instanceof DarknessFogEnvironment)
 			{
 				shouldApply = false;
 			}

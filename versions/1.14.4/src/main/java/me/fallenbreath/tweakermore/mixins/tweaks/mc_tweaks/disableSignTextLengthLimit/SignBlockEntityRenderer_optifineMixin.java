@@ -25,10 +25,10 @@ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.disableSignTextLengthLimit.SignOverflowHintDrawer;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.SignBlockEntity;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -46,7 +46,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 		},
 		conflict = @Condition(value = ModIds.caxton, versionPredicates = "<0.3.0-beta.2")
 )
-@Mixin(SignBlockEntityRenderer.class)
+@Mixin(SignRenderer.class)
 public abstract class SignBlockEntityRenderer_optifineMixin
 {
 	@SuppressWarnings({"UnresolvedMixinReference", "MixinAnnotationTarget"})
@@ -54,7 +54,7 @@ public abstract class SignBlockEntityRenderer_optifineMixin
 			method = "lambda$render$0",  // lambda method in method render after being polluted by optifine
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/util/Texts;wrapLines(Lnet/minecraft/text/Text;ILnet/minecraft/client/font/TextRenderer;ZZ)Ljava/util/List;",
+					target = "Lnet/minecraft/client/gui/components/ComponentRenderUtils;wrapComponents(Lnet/minecraft/network/chat/Component;ILnet/minecraft/client/gui/Font;ZZ)Ljava/util/List;",
 					remap = true
 			),
 			remap = false
@@ -69,15 +69,15 @@ public abstract class SignBlockEntityRenderer_optifineMixin
 	}
 
 	@Inject(
-			method = "render(Lnet/minecraft/block/entity/SignBlockEntity;DDDFI)V",
+			method = "render(Lnet/minecraft/world/level/block/entity/SignBlockEntity;DDDFI)V",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/font/TextRenderer;draw(Ljava/lang/String;FFI)I",
+					target = "Lnet/minecraft/client/gui/Font;draw(Ljava/lang/String;FFI)I",
 					ordinal = 0
 			),
 			locals = LocalCapture.CAPTURE_FAILSOFT
 	)
-	private void drawLineOverflowHint(SignBlockEntity signBlockEntity, double xOffset, double yOffset, double zOffset, float tickDelta, int blockBreakStage, CallbackInfo ci, BlockState blockstate, float f, TextRenderer textRenderer, float f1, int i, int lineIdx, String lineContent)
+	private void drawLineOverflowHint(SignBlockEntity signBlockEntity, double xOffset, double yOffset, double zOffset, float tickDelta, int blockBreakStage, CallbackInfo ci, BlockState blockstate, float f, Font textRenderer, float f1, int i, int lineIdx, String lineContent)
 	{
 		SignOverflowHintDrawer.drawLineOverflowHint(signBlockEntity, textRenderer, lineIdx, lineContent);
 	}

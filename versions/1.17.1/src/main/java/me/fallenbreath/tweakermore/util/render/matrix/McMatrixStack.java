@@ -20,20 +20,20 @@
 
 package me.fallenbreath.tweakermore.util.render.matrix;
 
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.Matrix4f;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Matrix4f;
 
 // see other impls in subproject 1.14.4, 1.15.2
 public class McMatrixStack implements IMatrixStack
 {
-	private final MatrixStack matrixStack;
+	private final PoseStack matrixStack;
 
-	public McMatrixStack(MatrixStack matrixStack)
+	public McMatrixStack(PoseStack matrixStack)
 	{
 		this.matrixStack = matrixStack;
 	}
 
-	public MatrixStack asMcRaw()
+	public PoseStack asMcRaw()
 	{
 		return this.matrixStack;
 	}

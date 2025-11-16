@@ -23,11 +23,11 @@ package me.fallenbreath.tweakermore.impl.features.infoView.respawnBlock.handler;
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.TemporaryBlockReplacer;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.RespawnAnchorBlock;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RespawnAnchorBlock;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 public class RespawnAnchorHandler extends AbstractBlockHandler
 {
@@ -48,7 +48,7 @@ public class RespawnAnchorHandler extends AbstractBlockHandler
 	}
 
 	@Override
-	public Vec3d getExplosionCenter()
+	public Vec3 getExplosionCenter()
 	{
 		return PositionUtils.centerOf(this.blockPos);
 	}

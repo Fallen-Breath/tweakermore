@@ -21,13 +21,13 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.tickFreezeAutoReplaceWithUnfreeze;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-@Mixin(ClientPlayNetworkHandler.class)
+@Mixin(ClientPacketListener.class)
 public abstract class ClientPlayNetworkHandlerMixin
 {
 	@ModifyVariable(method = "sendChatCommand", at = @At("HEAD"), argsOnly = true)
@@ -37,7 +37,7 @@ public abstract class ClientPlayNetworkHandlerMixin
 		{
 			if ("tick freeze".equals(command))
 			{
-				MinecraftClient mc = MinecraftClient.getInstance();
+				Minecraft mc = Minecraft.getInstance();
 				if (mc.world != null && mc.world.getTickManager().isFrozen())
 				{
 					command = "tick unfreeze";

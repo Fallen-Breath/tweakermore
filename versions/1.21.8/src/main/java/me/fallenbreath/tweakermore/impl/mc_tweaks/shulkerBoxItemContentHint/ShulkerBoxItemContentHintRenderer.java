@@ -26,11 +26,11 @@ import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.GuiRenderContext;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gl.RenderPipelines;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.util.Mth;
 
 /**
  * mc1.21.6-: subproject 1.15.2 (main project)
@@ -41,7 +41,7 @@ public class ShulkerBoxItemContentHintRenderer
 	private static final int SLOT_WIDTH = 16;
 	static final ThreadLocal<Boolean> isRendering = ThreadLocal.withInitial(() -> false);
 
-	public static void render(DrawContext drawContext, ItemStack itemStack, int x, int y)
+	public static void render(GuiGraphics drawContext, ItemStack itemStack, int x, int y)
 	{
 		ShulkerBoxItemContentHintCommon.Info info = ShulkerBoxItemContentHintCommon.prepareInformation(itemStack);
 		if (!info.enabled)
@@ -106,7 +106,7 @@ public class ShulkerBoxItemContentHintRenderer
 		var scaler = RenderUtils.createScaler(textX + width * 0.5, textY + height * 0.5, textScale);
 		scaler.apply(renderContext);
 
-		var textRenderer = MinecraftClient.getInstance().textRenderer;
+		var textRenderer = Minecraft.getInstance().textRenderer;
 		renderContext.translate(textX, textY);
 		renderContext.getGuiDrawer().drawText(textRenderer, text, 0, 0, textColor, true);
 
@@ -133,7 +133,7 @@ public class ShulkerBoxItemContentHintRenderer
 		RenderGlobals.disableDepthTest();
 
 		int h = (int)Math.round(fillRatio * HEIGHT);
-		int color = MathHelper.hsvToRgb((float)(fillRatio / 3), 1.0F, 1.0F);
+		int color = Mth.hsvToRgb((float)(fillRatio / 3), 1.0F, 1.0F);
 		if (h == 0)
 		{
 			// make sure h > 0 so it's visible enough

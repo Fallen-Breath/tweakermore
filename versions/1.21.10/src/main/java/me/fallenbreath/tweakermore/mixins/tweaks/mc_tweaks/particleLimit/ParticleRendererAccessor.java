@@ -21,14 +21,14 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.particleLimit;
 
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleRenderer;
+import net.minecraft.client.particle.ParticleGroup;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.Queue;
 
-@Mixin(ParticleRenderer.class)
+@Mixin(ParticleGroup.class)
 public interface ParticleRendererAccessor<P extends Particle>
 {
 	@Accessor("particles")

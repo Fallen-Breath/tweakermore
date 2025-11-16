@@ -27,7 +27,7 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.mlShulkerBoxPreviewSupportEnderChest.EnderChestItemFetcher;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -41,7 +41,7 @@ public abstract class RenderHandlerMixin
 			method = "onRenderTooltipLast",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/component/ComponentMap;contains(Lnet/minecraft/component/DataComponentType;)Z"
+					target = "Lnet/minecraft/core/component/DataComponentMap;has(Lnet/minecraft/core/component/DataComponentType;)Z"
 			)
 	)
 	private boolean mlShulkerBoxPreviewSupportEnderChest_minihudSkipCheck1(boolean contains, @Local(argsOnly = true) ItemStack stack)

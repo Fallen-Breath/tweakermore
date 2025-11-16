@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableHorizonShadin
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.render.fog.FogRenderer;
+import net.minecraft.client.renderer.fog.FogRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Slice;
@@ -39,12 +39,12 @@ public abstract class BackgroundRendererMixin
 			slice = @Slice(
 					from = @At(
 							value = "INVOKE",
-							target = "Lnet/minecraft/client/world/ClientWorld$Properties;getVoidDarknessRange()F"
+							target = "Lnet/minecraft/client/multiplayer/ClientLevel$ClientLevelData;voidDarknessOnsetRange()F"
 					)
 			),
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/util/math/MathHelper;clamp(FFF)F",
+					target = "Lnet/minecraft/util/Mth;clamp(FFF)F",
 					ordinal = 0
 			)
 	)

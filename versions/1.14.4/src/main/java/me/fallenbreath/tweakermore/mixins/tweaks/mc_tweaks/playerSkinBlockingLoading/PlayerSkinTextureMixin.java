@@ -22,7 +22,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.playerSkinBlockingLo
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.playerSkinBlockingLoading.TaskSynchronizer;
-import net.minecraft.client.texture.PlayerSkinTexture;
+import net.minecraft.client.renderer.texture.HttpTexture;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(PlayerSkinTexture.class)
+@Mixin(HttpTexture.class)
 public abstract class PlayerSkinTextureMixin
 {
 	@Shadow private @Nullable Thread downloadThread;

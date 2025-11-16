@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.util.render.matrix;
 
 import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.client.util.math.Matrix4f;
+import com.mojang.math.Matrix4f;
 
 // see other impls in subproject 1.15.2, 1.17.1
 public class McMatrixStack implements IMatrixStack

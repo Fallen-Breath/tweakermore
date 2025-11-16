@@ -37,16 +37,16 @@ import me.fallenbreath.tweakermore.util.render.TweakerMoreRenderPipelines;
 import me.fallenbreath.tweakermore.util.render.context.MixedRenderContext;
 import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
-import net.minecraft.block.BeaconBlock;
-import net.minecraft.block.entity.BeaconBlockEntity;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.gl.RenderPipelines;
-import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.level.block.BeaconBlock;
+import net.minecraft.world.level.block.entity.BeaconBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Holder;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 import java.util.Optional;
@@ -92,13 +92,13 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 		BeaconBlockEntityAccessor accessor = (BeaconBlockEntityAccessor)blockEntity;
 		int beaconLevel = accessor.getLevel();
 
-		StatusEffect primary = Optional.ofNullable(accessor.getPrimary()).map(RegistryEntry::value).orElse(null);
-		StatusEffect secondary = Optional.ofNullable(accessor.getSecondary()).map(RegistryEntry::value).orElse(null);
+		MobEffect primary = Optional.ofNullable(accessor.getPrimary()).map(Holder::value).orElse(null);
+		MobEffect secondary = Optional.ofNullable(accessor.getSecondary()).map(Holder::value).orElse(null);
 
 		if (primary != null)
 		{
 			// list of (effect, level)
-			List<Pair<StatusEffect, Integer>> effects = Lists.newArrayList();
+			List<Pair<MobEffect, Integer>> effects = Lists.newArrayList();
 
 			effects.add(Pair.of(primary, beaconLevel >= 4 && primary == secondary ? 1 : 0));
 			if (beaconLevel >= 4 && primary != secondary && secondary != null)
@@ -106,14 +106,14 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 				effects.add(Pair.of(secondary, 0));
 			}
 
-			Vec3d centerPos = PositionUtils.centerOf(pos);
+			Vec3 centerPos = PositionUtils.centerOf(pos);
 			double maxWidth = effects.stream().
 					mapToDouble(pair -> this.calculateRowWidth(pair.getFirst(), pair.getSecond())).
 					max().orElse(0);
 			for (int i = 0; i < effects.size(); i++)
 			{
-				Pair<StatusEffect, Integer> pair = effects.get(i);
-				StatusEffect statusEffect = pair.getFirst();
+				Pair<MobEffect, Integer> pair = effects.get(i);
+				MobEffect statusEffect = pair.getFirst();
 				int amplifier = pair.getSecond();
 
 				double deltaX = -maxWidth / 2;  // unit: pixel (in scale=FONT_SCALE context)
@@ -125,15 +125,15 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 		}
 	}
 
-	private double calculateRowWidth(StatusEffect statusEffect, int amplifier)
+	private double calculateRowWidth(MobEffect statusEffect, int amplifier)
 	{
 		double textWidth = RenderUtils.getRenderWidth(getStatusEffectText(statusEffect, amplifier));
 		return ICON_RENDERED_SIZE + MARGIN + textWidth;
 	}
 
-	private void renderStatusEffectIcon(WorldRenderContext context, Vec3d pos, StatusEffect statusEffect, int amplifier, double deltaX, double kDeltaY)
+	private void renderStatusEffectIcon(WorldRenderContext context, Vec3 pos, MobEffect statusEffect, int amplifier, double deltaX, double kDeltaY)
 	{
-		var sprite = InGameHud.getEffectTexture(Registries.STATUS_EFFECT.getEntry(statusEffect));
+		var sprite = Gui.getEffectTexture(BuiltInRegistries.STATUS_EFFECT.getEntry(statusEffect));
 		MixedRenderContext mrc = MixedRenderContext.create(context);
 
 		InWorldPositionTransformer positionTransformer = new InWorldPositionTransformer(pos);
@@ -158,7 +158,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 		positionTransformer.restore();
 	}
 
-	private void renderStatusEffectText(Vec3d pos, StatusEffect statusEffect, int amplifier, double deltaX, double kDeltaY)
+	private void renderStatusEffectText(Vec3 pos, MobEffect statusEffect, int amplifier, double deltaX, double kDeltaY)
 	{
 		String description = getStatusEffectText(statusEffect, amplifier);
 		TextRenderer textRenderer = TextRenderer.create().
@@ -170,7 +170,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 		textRenderer.render();
 	}
 
-	private static String getStatusEffectText(StatusEffect statusEffect, int amplifier)
+	private static String getStatusEffectText(MobEffect statusEffect, int amplifier)
 	{
 		return StringUtils.translate(statusEffect.getTranslationKey()) + ' ' + StringUtils.translate("enchantment.level." + (amplifier + 1));
 	}

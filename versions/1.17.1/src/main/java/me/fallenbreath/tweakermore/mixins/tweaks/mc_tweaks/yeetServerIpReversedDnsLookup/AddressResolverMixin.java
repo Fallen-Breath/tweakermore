@@ -24,7 +24,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.yeetServerIpReversedDnsLookup.InetAddressPatcher;
 import me.fallenbreath.tweakermore.util.mixin.DummyClass;
-import net.minecraft.client.network.AddressResolver;
+import net.minecraft.client.multiplayer.resolver.ServerAddressResolver;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -32,7 +32,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 // used in mc >= 1.17
-@Mixin(AddressResolver.class)
+@Mixin(ServerAddressResolver.class)
 public interface AddressResolverMixin
 {
 	@WrapOperation(

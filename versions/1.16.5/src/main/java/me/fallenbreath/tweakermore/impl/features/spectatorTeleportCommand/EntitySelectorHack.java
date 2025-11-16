@@ -25,15 +25,15 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.spectatorTeleportCommand.EntitySelectorAccessor;
 import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.client.network.PlayerListEntry;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.command.EntitySelector;
-import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.commands.arguments.selector.EntitySelector;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 import java.util.UUID;
@@ -47,24 +47,24 @@ public class EntitySelectorHack
 	public static UUID getSingleEntityUuid(EntitySelector entitySelector, FabricClientCommandSource source) throws CommandSyntaxException
 	{
 		EntitySelectorAccessor selector = (EntitySelectorAccessor)entitySelector;
-		MinecraftClient mc = source.getClient();
+		Minecraft mc = source.getClient();
 		ClientWorld world = source.getWorld();
-		ClientPlayNetworkHandler networkHandler = mc.getNetworkHandler();
+		ClientPacketListener networkHandler = mc.getNetworkHandler();
 		if (networkHandler == null)
 		{
-			throw EntityArgumentType.ENTITY_NOT_FOUND_EXCEPTION.create();
+			throw EntityArgument.ENTITY_NOT_FOUND_EXCEPTION.create();
 		}
 
 		if (selector.getPlayerName() != null)
 		{
-			for (PlayerListEntry entry : networkHandler.getPlayerList())
+			for (PlayerInfo entry : networkHandler.getPlayerList())
 			{
 				if (entry.getProfile().getName().equalsIgnoreCase(selector.getPlayerName()))
 				{
 					return entry.getProfile().getId();
 				}
 			}
-			throw EntityArgumentType.PLAYER_NOT_FOUND_EXCEPTION.create();
+			throw EntityArgument.PLAYER_NOT_FOUND_EXCEPTION.create();
 		}
 		else if (selector.getUuid() != null)
 		{
@@ -85,7 +85,7 @@ public class EntitySelectorHack
 		}
 		else
 		{
-			Vec3d pos = selector.getPositionOffset().apply(source.getPosition());
+			Vec3 pos = selector.getPositionOffset().apply(source.getPosition());
 			Predicate<Entity> predicate = selector.invokeGetPositionPredicate(
 					pos
 					//#if MC >= 12100
@@ -111,12 +111,12 @@ public class EntitySelectorHack
 					return candidates.get(0).getUuid();
 				}
 			}
-			throw EntityArgumentType.ENTITY_NOT_FOUND_EXCEPTION.create();
+			throw EntityArgument.ENTITY_NOT_FOUND_EXCEPTION.create();
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	private static List<Entity> getEntitiesFromWorld(EntitySelectorAccessor selector, ClientWorld world, Vec3d pos, Predicate<Entity> predicate)
+	private static List<Entity> getEntitiesFromWorld(EntitySelectorAccessor selector, ClientWorld world, Vec3 pos, Predicate<Entity> predicate)
 	{
 		if (selector.getBox() != null)
 		{

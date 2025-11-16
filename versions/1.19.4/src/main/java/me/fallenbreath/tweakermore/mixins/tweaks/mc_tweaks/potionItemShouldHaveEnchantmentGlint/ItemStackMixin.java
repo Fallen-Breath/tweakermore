@@ -24,9 +24,9 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.PotionItem;
-import net.minecraft.potion.PotionUtil;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PotionItem;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -51,7 +51,7 @@ public abstract class ItemStackMixin
 				//#if MC >= 12006
 				//$$ boolean hasEffect = self.get(DataComponents.POTION_CONTENTS) != null;
 				//#else
-				boolean hasEffect = !PotionUtil.getPotionEffects(self).isEmpty();
+				boolean hasEffect = !PotionUtils.getPotionEffects(self).isEmpty();
 				//#endif
 				cir.setReturnValue(cir.getReturnValue() || hasEffect);
 			}

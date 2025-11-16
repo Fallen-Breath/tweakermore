@@ -23,12 +23,12 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.keepMessageHistoryOn
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.keepMessageHistoryOnReconfiguration.KeepMessageHistoryOnReconfigurationHelper;
-import net.minecraft.client.gui.hud.ChatHud;
-import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.gui.components.ChatComponent;
+import net.minecraft.client.gui.Gui;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(InGameHud.class)
+@Mixin(Gui.class)
 public abstract class InGameHudMixin
 {
 	@SuppressWarnings("RedundantIfStatement")
@@ -36,10 +36,10 @@ public abstract class InGameHudMixin
 			method = "clear",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/gui/hud/ChatHud;clear(Z)V"
+					target = "Lnet/minecraft/client/gui/components/ChatComponent;clearMessages(Z)V"
 			)
 	)
-	private boolean keepMessageOnReconfiguration_dontClearChatHud(ChatHud instance, boolean clearHistory)
+	private boolean keepMessageOnReconfiguration_dontClearChatHud(ChatComponent instance, boolean clearHistory)
 	{
 		if (TweakerMoreConfigs.KEEP_MESSAGE_HISTORY_ON_RECONFIGURATION.getBooleanValue())
 		{

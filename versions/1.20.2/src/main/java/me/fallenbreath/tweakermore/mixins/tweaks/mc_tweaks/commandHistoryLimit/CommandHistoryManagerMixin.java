@@ -22,11 +22,11 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.commandHistoryLimit;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.util.CommandHistoryManager;
+import net.minecraft.client.CommandHistory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(CommandHistoryManager.class)
+@Mixin(CommandHistory.class)
 public abstract class CommandHistoryManagerMixin
 {
 	@ModifyExpressionValue(

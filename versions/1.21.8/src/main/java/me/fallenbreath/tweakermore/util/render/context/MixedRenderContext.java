@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.util.render.context;
 
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.GuiGraphics;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
 
@@ -52,7 +52,7 @@ public class MixedRenderContext implements WorldRenderContext
 	}
 
 	@NotNull
-	public DrawContext getGuiDrawer()
+	public GuiGraphics getGuiDrawer()
 	{
 		return this.guiDrawer.getDrawContext();
 	}

@@ -26,14 +26,14 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.block.entity.SignBlockEntity;
-import net.minecraft.block.entity.SignText;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.ingame.AbstractSignEditScreen;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
+import net.minecraft.world.level.block.entity.SignText;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.AbstractSignEditScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -59,16 +59,16 @@ public abstract class SignEditScreenMixin extends Screen
 	@Shadow private SignText text;
 	@Unique private boolean filtered$TKM;
 
-	protected SignEditScreenMixin(Text title)
+	protected SignEditScreenMixin(Component title)
 	{
 		super(title);
 	}
 
 	@Inject(
-			method = "<init>(Lnet/minecraft/block/entity/SignBlockEntity;ZZLnet/minecraft/text/Text;)V",
+			method = "<init>(Lnet/minecraft/world/level/block/entity/SignBlockEntity;ZZLnet/minecraft/network/chat/Component;)V",
 			at = @At("TAIL")
 	)
-	private void recordFilteredParam(SignBlockEntity blockEntity, boolean front, boolean filtered, Text title, CallbackInfo ci)
+	private void recordFilteredParam(SignBlockEntity blockEntity, boolean front, boolean filtered, Component title, CallbackInfo ci)
 	{
 		this.filtered$TKM = filtered;
 	}
@@ -77,7 +77,7 @@ public abstract class SignEditScreenMixin extends Screen
 			method = "method_45658",  // lambda method in init
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/block/entity/SignBlockEntity;getMaxTextWidth()I",
+					target = "Lnet/minecraft/world/level/block/entity/SignBlockEntity;getMaxTextLineWidth()I",
 					remap = true
 			),
 			remap = false
@@ -98,13 +98,13 @@ public abstract class SignEditScreenMixin extends Screen
 					//#if MC >= 12106
 					//$$ target = "Lnet/minecraft/client/gui/GuiGraphics;drawString(Lnet/minecraft/client/gui/Font;Ljava/lang/String;IIIZ)V",
 					//#else
-					target = "Lnet/minecraft/client/gui/DrawContext;drawText(Lnet/minecraft/client/font/TextRenderer;Ljava/lang/String;IIIZ)I",
+					target = "Lnet/minecraft/client/gui/GuiGraphics;drawString(Lnet/minecraft/client/gui/Font;Ljava/lang/String;IIIZ)I",
 					//#endif
 					ordinal = 0
 			)
 	)
 	private void drawLineOverflowHint(
-			DrawContext context, CallbackInfo ci,
+			GuiGraphics context, CallbackInfo ci,
 			@Local(ordinal = 5) int lineIdx,
 			@Local(ordinal = 6) int xStart
 	)
@@ -112,21 +112,21 @@ public abstract class SignEditScreenMixin extends Screen
 		if (TweakerMoreConfigs.DISABLE_SIGN_TEXT_LENGTH_LIMIT.getBooleanValue())
 		{
 			int textArrayLen = this.messages.length;
-			MinecraftClient mc = this.client;
+			Minecraft mc = this.client;
 			if (mc != null && 0 <= lineIdx && lineIdx < textArrayLen)
 			{
-				Text text = this.text.getMessage(lineIdx, this.filtered$TKM);
+				Component text = this.text.getMessage(lineIdx, this.filtered$TKM);
 				int maxWidth = this.blockEntity.getMaxTextWidth();
 				List<?> wrapped = mc.textRenderer.wrapLines(text, maxWidth);
 				boolean overflowed = wrapped.size() > 1;
 
 				if (overflowed)
 				{
-					assert Formatting.RED.getColorValue() != null;
+					assert ChatFormatting.RED.getColorValue() != null;
 					int lineHeight = this.blockEntity.getTextLineHeight();
 					int x = xStart - 10;
 					int y = lineIdx * lineHeight - (4 * lineHeight / 2);
-					context.drawText(this.textRenderer, "!", x, y, Formatting.RED.getColorValue(), false);
+					context.drawText(this.textRenderer, "!", x, y, ChatFormatting.RED.getColorValue(), false);
 				}
 			}
 		}

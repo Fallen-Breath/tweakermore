@@ -23,7 +23,7 @@ package me.fallenbreath.tweakermore.mixins.util.qol;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.util.mixin.testers.DevelopmentEnvironmentTester;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Coerce;
@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 // impl in mc [1.16, 1.20.4)
 @Restriction(require = @Condition(type = Condition.Type.TESTER, tester = DevelopmentEnvironmentTester.class))
-@Mixin(MinecraftClient.class)
+@Mixin(Minecraft.class)
 public abstract class MinecraftClientMixin
 {
 	@Redirect(

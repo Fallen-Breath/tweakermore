@@ -22,8 +22,8 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableCameraFrustum
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.disableFrustumChunkCulling.CouldBeAlwaysVisibleFrustum;
-import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.render.VisibleRegion;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.culling.Culler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -38,11 +38,11 @@ public abstract class GameRendererMixin
 			method = "renderCenter",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/render/VisibleRegion;setOrigin(DDD)V",
+					target = "Lnet/minecraft/client/renderer/culling/Culler;prepare(DDD)V",
 					shift = At.Shift.AFTER
 			)
 	)
-	private VisibleRegion disableCameraFrustumCulling_impl(VisibleRegion visibleRegion)
+	private Culler disableCameraFrustumCulling_impl(Culler visibleRegion)
 	{
 		if (TweakerMoreConfigs.DISABLE_CAMERA_FRUSTUM_CULLING.getBooleanValue())
 		{

@@ -25,7 +25,7 @@ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.util.DefaultSkinHelper;
+import net.minecraft.client.resources.DefaultPlayerSkin;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -40,14 +40,14 @@ import java.util.UUID;
 //#endif
 
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.19.3"))
-@Mixin(DefaultSkinHelper.class)
+@Mixin(DefaultPlayerSkin.class)
 public abstract class DefaultSkinHelperMixin
 {
 	@Shadow @Final
 	//#if MC >= 12002
 	//$$ private static PlayerSkin[] SKINS;
 	//#else
-	private static DefaultSkinHelper.Skin[] SKINS;
+	private static DefaultPlayerSkin.Skin[] SKINS;
 	//#endif
 
 	@Inject(
@@ -64,7 +64,7 @@ public abstract class DefaultSkinHelperMixin
 			//#if MC >= 12002
 			//$$ CallbackInfoReturnable<PlayerSkin> cir
 			//#else
-			CallbackInfoReturnable<DefaultSkinHelper.Skin> cir
+			CallbackInfoReturnable<DefaultPlayerSkin.Skin> cir
 			//#endif
 	)
 	{

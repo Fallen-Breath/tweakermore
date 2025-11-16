@@ -22,12 +22,12 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableDarknessEffec
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.render.LightmapTextureManager;
-import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.world.effect.MobEffectInstance;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(LightmapTextureManager.class)
+@Mixin(LightTexture.class)
 public abstract class LightmapTextureManagerMixin
 {
 	@ModifyExpressionValue(
@@ -37,7 +37,7 @@ public abstract class LightmapTextureManagerMixin
 					target = "Lnet/minecraft/client/network/ClientPlayerEntity;getStatusEffect(Lnet/minecraft/registry/entry/RegistryEntry;)Lnet/minecraft/entity/effect/StatusEffectInstance;"
 			)
 	)
-	private StatusEffectInstance disableDarknessEffect_doesNotHaveStatusEffect(StatusEffectInstance instance)
+	private MobEffectInstance disableDarknessEffect_doesNotHaveStatusEffect(MobEffectInstance instance)
 	{
 		if (TweakerMoreConfigs.DISABLE_DARKNESS_EFFECT.getBooleanValue())
 		{

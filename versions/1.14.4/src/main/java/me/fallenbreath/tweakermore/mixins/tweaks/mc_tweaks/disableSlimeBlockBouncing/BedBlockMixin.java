@@ -23,9 +23,9 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableSlimeBlockBou
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.block.BedBlock;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.Entity;
+import net.minecraft.world.level.block.BedBlock;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -48,7 +48,7 @@ public abstract class BedBlockMixin
 	{
 		if (TweakerMoreConfigs.DISABLE_SLIME_BLOCK_BOUNCING.getBooleanValue())
 		{
-			if (entity == MinecraftClient.getInstance().player)
+			if (entity == Minecraft.getInstance().player)
 			{
 				return true;
 			}

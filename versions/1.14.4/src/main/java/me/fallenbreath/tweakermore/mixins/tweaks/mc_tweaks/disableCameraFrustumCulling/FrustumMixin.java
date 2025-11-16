@@ -21,14 +21,14 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableCameraFrustumCulling;
 
 import me.fallenbreath.tweakermore.impl.mc_tweaks.disableFrustumChunkCulling.CouldBeAlwaysVisibleFrustum;
-import net.minecraft.client.render.FrustumWithOrigin;
+import net.minecraft.client.renderer.culling.FrustumCuller;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(FrustumWithOrigin.class)
+@Mixin(FrustumCuller.class)
 public abstract class FrustumMixin implements CouldBeAlwaysVisibleFrustum
 {
 	@Unique
@@ -47,7 +47,7 @@ public abstract class FrustumMixin implements CouldBeAlwaysVisibleFrustum
 	}
 
 	@Inject(
-			method = "intersects(DDDDDD)Z",
+			method = "cubeInFrustum(DDDDDD)Z",
 			at = @At("HEAD"),
 			cancellable = true
 	)

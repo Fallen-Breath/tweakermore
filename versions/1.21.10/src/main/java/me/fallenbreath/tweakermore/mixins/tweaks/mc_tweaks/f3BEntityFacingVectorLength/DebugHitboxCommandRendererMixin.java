@@ -21,19 +21,19 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.f3BEntityFacingVectorLength;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.render.command.DebugHitboxCommandRenderer;
+import net.minecraft.client.renderer.feature.HitboxFeatureRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-@Mixin(DebugHitboxCommandRenderer.class)
+@Mixin(HitboxFeatureRenderer.class)
 public abstract class DebugHitboxCommandRendererMixin
 {
 	@ModifyArg(
 			method = "renderDebugHitbox",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/util/math/Vec3d;multiply(D)Lnet/minecraft/util/math/Vec3d;",
+					target = "Lnet/minecraft/world/phys/Vec3;scale(D)Lnet/minecraft/world/phys/Vec3;",
 					ordinal = 0
 			)
 	)

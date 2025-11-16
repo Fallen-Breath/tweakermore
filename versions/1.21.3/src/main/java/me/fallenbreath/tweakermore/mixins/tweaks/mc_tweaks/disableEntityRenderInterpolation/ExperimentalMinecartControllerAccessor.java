@@ -20,11 +20,11 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableEntityRenderInterpolation;
 
-import net.minecraft.entity.vehicle.ExperimentalMinecartController;
+import net.minecraft.world.entity.vehicle.NewMinecartBehavior;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(ExperimentalMinecartController.class)
+@Mixin(NewMinecartBehavior.class)
 public interface ExperimentalMinecartControllerAccessor
 {
 	@Accessor

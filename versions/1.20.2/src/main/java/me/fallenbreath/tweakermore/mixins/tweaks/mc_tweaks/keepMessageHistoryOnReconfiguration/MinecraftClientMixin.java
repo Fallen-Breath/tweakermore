@@ -24,22 +24,22 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.keepMessageHistoryOnReconfiguration.KeepMessageHistoryOnReconfigurationHelper;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(MinecraftClient.class)
+@Mixin(Minecraft.class)
 public abstract class MinecraftClientMixin
 {
 	@WrapOperation(
 			method = "enterReconfiguration",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/gui/hud/InGameHud;clear()V"
+					target = "Lnet/minecraft/client/gui/Gui;onDisconnected()V"
 			)
 	)
-	private void keepMessageOnReconfiguration_markIsReconfiguring(InGameHud instance, Operation<Void> original)
+	private void keepMessageOnReconfiguration_markIsReconfiguring(Gui instance, Operation<Void> original)
 	{
 		boolean optionEnabled = TweakerMoreConfigs.KEEP_MESSAGE_HISTORY_ON_RECONFIGURATION.getBooleanValue();
 		if (optionEnabled)

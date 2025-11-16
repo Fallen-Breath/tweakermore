@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.util.compat.carpet;
 
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 
 public class CarpetModAccess
 {
@@ -29,7 +29,7 @@ public class CarpetModAccess
 	 */
 	public static boolean isTickFrozen()
 	{
-		var world = MinecraftClient.getInstance().world;
+		var world = Minecraft.getInstance().world;
 		return world != null && world.getTickManager().isFrozen();
 	}
 }

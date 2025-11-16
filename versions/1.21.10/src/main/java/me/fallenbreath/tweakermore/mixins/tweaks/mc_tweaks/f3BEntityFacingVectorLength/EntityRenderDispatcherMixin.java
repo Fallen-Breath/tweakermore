@@ -20,13 +20,13 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.f3BEntityFacingVectorLength;
 
-import net.minecraft.client.render.entity.EntityRenderManager;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import org.spongepowered.asm.mixin.Mixin;
 
 /**
  * See {@link DebugHitboxCommandRendererMixin} in mc >= 1.21.9
  */
-@Mixin(EntityRenderManager.class)
+@Mixin(EntityRenderDispatcher.class)
 public abstract class EntityRenderDispatcherMixin
 {
 }

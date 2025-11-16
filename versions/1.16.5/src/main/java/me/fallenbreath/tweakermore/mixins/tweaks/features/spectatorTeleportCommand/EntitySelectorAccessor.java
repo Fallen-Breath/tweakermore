@@ -20,11 +20,11 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.features.spectatorTeleportCommand;
 
-import net.minecraft.command.EntitySelector;
-import net.minecraft.entity.Entity;
-import net.minecraft.predicate.NumberRange;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.commands.arguments.selector.EntitySelector;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -43,7 +43,7 @@ import java.util.function.Predicate;
 //#if MC >= 11700
 //$$ import net.minecraft.world.level.entity.EntityTypeTest;
 //#else
-import net.minecraft.entity.EntityType;
+import net.minecraft.world.entity.EntityType;
 //#endif
 
 @Mixin(EntitySelector.class)
@@ -57,17 +57,17 @@ public interface EntitySelectorAccessor
 	//#endif
 
 	@Accessor
-	NumberRange.FloatRange getDistance();
+	MinMaxBounds.FloatRange getDistance();
 
 	@Accessor
-	Function<Vec3d, Vec3d> getPositionOffset();
+	Function<Vec3, Vec3> getPositionOffset();
 
 	@Accessor
-	BiConsumer<Vec3d, List<? extends Entity>> getSorter();
+	BiConsumer<Vec3, List<? extends Entity>> getSorter();
 
 	@Nullable
 	@Accessor
-	Box getBox();
+	AABB getBox();
 
 	@Accessor
 	boolean getSenderOnly();
@@ -90,7 +90,7 @@ public interface EntitySelectorAccessor
 
 	@Invoker
 	Predicate<Entity> invokeGetPositionPredicate(
-			Vec3d pos
+			Vec3 pos
 			//#if MC >= 12100
 			//$$ , @Nullable AABB box, @Nullable FeatureFlagSet enabledFeatures
 			//#endif

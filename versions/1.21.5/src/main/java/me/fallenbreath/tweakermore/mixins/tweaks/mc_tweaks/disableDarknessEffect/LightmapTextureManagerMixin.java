@@ -22,11 +22,11 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableDarknessEffec
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.render.LightmapTextureManager;
+import net.minecraft.client.renderer.LightTexture;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(LightmapTextureManager.class)
+@Mixin(LightTexture.class)
 public abstract class LightmapTextureManagerMixin
 {
 	@ModifyExpressionValue(

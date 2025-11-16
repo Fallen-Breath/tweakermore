@@ -25,8 +25,8 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -48,7 +48,7 @@ public interface BackgroundRendererStatusEffectFogModifierMixin
 	//#if MC >= 12006
 	//$$ Holder<MobEffect>
 	//#else
-	StatusEffect
+	MobEffect
 	//#endif
 	getStatusEffect();
 
@@ -57,7 +57,7 @@ public interface BackgroundRendererStatusEffectFogModifierMixin
 	{
 		if (TweakerMoreConfigs.DISABLE_DARKNESS_EFFECT.getBooleanValue())
 		{
-			if (this.getStatusEffect() == StatusEffects.DARKNESS)
+			if (this.getStatusEffect() == MobEffects.DARKNESS)
 			{
 				shouldApply = false;
 			}

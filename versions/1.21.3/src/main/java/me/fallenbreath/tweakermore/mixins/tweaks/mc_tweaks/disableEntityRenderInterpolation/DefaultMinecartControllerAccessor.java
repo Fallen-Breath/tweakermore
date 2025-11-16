@@ -20,11 +20,11 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableEntityRenderInterpolation;
 
-import net.minecraft.entity.vehicle.DefaultMinecartController;
+import net.minecraft.world.entity.vehicle.OldMinecartBehavior;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(DefaultMinecartController.class)
+@Mixin(OldMinecartBehavior.class)
 public interface DefaultMinecartControllerAccessor
 {
 	@Accessor("step")

@@ -30,13 +30,13 @@ import me.fallenbreath.tweakermore.util.FabricUtils;
 import me.fallenbreath.tweakermore.util.Messenger;
 import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.command.EntitySelector;
-import net.minecraft.network.packet.c2s.play.SpectatorTeleportC2SPacket;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.commands.arguments.selector.EntitySelector;
+import net.minecraft.network.protocol.game.ServerboundTeleportToEntityPacket;
 
 import java.util.UUID;
 
-import static net.minecraft.command.argument.EntityArgumentType.entity;
+import static net.minecraft.commands.arguments.EntityArgument.entity;
 
 //#if MC >= 11900
 //$$ import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
@@ -95,7 +95,7 @@ public class SpectatorTeleportCommand
 
 	private static int doSpectatorTeleport(FabricClientCommandSource source, UUID target)
 	{
-		ClientPlayerEntity player = source.getPlayer();
+		LocalPlayer player = source.getPlayer();
 		if (!player.isSpectator())
 		{
 			source.sendError(Messenger.tr("tweakermore.impl.spectatorTeleportCommand.need_spectator"));
@@ -103,7 +103,7 @@ public class SpectatorTeleportCommand
 		}
 
 		TweakerMoreMod.LOGGER.info("Performing spectator teleport to entity {}", target);
-		player.networkHandler.sendPacket(new SpectatorTeleportC2SPacket(target));
+		player.networkHandler.sendPacket(new ServerboundTeleportToEntityPacket(target));
 		return 1;
 	}
 }

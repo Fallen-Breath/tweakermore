@@ -23,7 +23,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.features.serverMsptMetricsStat
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.gui.hud.debug.DebugChart;
+import net.minecraft.client.gui.components.debugchart.AbstractDebugChart;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -31,18 +31,18 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 //#if MC >= 12006
 //$$ import net.minecraft.util.debugchart.SampleStorage;
 //#else
-import net.minecraft.util.profiler.PerformanceLog;
+import net.minecraft.util.SampleLogger;
 //#endif
 
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.20.2"))
-@Mixin(DebugChart.class)
+@Mixin(AbstractDebugChart.class)
 public interface DebugChartAccessor
 {
 	@Accessor
 	//#if MC >= 12006
 	//$$ SampleStorage
 	//#else
-	PerformanceLog
+	SampleLogger
 	//#endif
 	getLog();
 
@@ -51,7 +51,7 @@ public interface DebugChartAccessor
 			//#if MC >= 12006
 			//$$ SampleStorage log
 			//#else
-			PerformanceLog log
+			SampleLogger log
 			//#endif
 	);
 }

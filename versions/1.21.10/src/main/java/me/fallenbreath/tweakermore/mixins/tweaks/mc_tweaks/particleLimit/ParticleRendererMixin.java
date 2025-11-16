@@ -21,12 +21,12 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.particleLimit;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.particle.ParticleRenderer;
+import net.minecraft.client.particle.ParticleGroup;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-@Mixin(ParticleRenderer.class)
+@Mixin(ParticleGroup.class)
 public abstract class ParticleRendererMixin
 {
 	@ModifyArg(

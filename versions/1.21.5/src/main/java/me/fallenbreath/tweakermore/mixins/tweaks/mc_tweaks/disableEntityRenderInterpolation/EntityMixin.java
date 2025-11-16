@@ -23,8 +23,8 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableEntityRenderI
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.disableEntityRenderInterpolation.DisableEntityRenderInterpolationHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.PositionInterpolator;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InterpolationHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -39,10 +39,10 @@ public abstract class EntityMixin
 			//#endif
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/entity/Entity;getInterpolator()Lnet/minecraft/entity/PositionInterpolator;"
+					target = "Lnet/minecraft/world/entity/Entity;getInterpolation()Lnet/minecraft/world/entity/InterpolationHandler;"
 			)
 	)
-	private PositionInterpolator disableEntityRenderInterpolation_hack(PositionInterpolator positionInterpolator)
+	private InterpolationHandler disableEntityRenderInterpolation_hack(InterpolationHandler positionInterpolator)
 	{
 		if (TweakerMoreConfigs.DISABLE_ENTITY_RENDER_INTERPOLATION.getBooleanValue())
 		{

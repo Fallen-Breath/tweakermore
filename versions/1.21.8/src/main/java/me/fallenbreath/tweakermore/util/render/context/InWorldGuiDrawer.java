@@ -23,12 +23,12 @@ package me.fallenbreath.tweakermore.util.render.context;
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.fallenbreath.tweakermore.util.RunOnce;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.render.GuiRenderer;
 import net.minecraft.client.gui.render.state.GuiRenderState;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.fog.FogRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.fog.FogRenderer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -43,7 +43,7 @@ public class InWorldGuiDrawer implements AutoCloseable
 		return inst;
 	});
 
-	private final DrawContext drawContext;
+	private final GuiGraphics drawContext;
 	private final GuiRenderState guiState;
 	private final GuiRenderer guiRenderer;
 	private final FogRenderer fogRenderer;
@@ -51,10 +51,10 @@ public class InWorldGuiDrawer implements AutoCloseable
 	private InWorldGuiDrawer()
 	{
 		// reference: net.minecraft.client.render.GameRenderer#GameRenderer
-		MinecraftClient mc = MinecraftClient.getInstance();
-		VertexConsumerProvider.Immediate immediate = RenderUtils.getVertexConsumer();
+		Minecraft mc = Minecraft.getInstance();
+		MultiBufferSource.Immediate immediate = RenderUtils.getVertexConsumer();
 		this.guiState = new GuiRenderState();
-		this.drawContext = new DrawContext(mc, this.guiState);
+		this.drawContext = new GuiGraphics(mc, this.guiState);
 		this.guiRenderer = new GuiRenderer(
 				this.guiState, immediate,
 				//#if MC >= 1.21.9
@@ -99,7 +99,7 @@ public class InWorldGuiDrawer implements AutoCloseable
 	}
 
 	@NotNull
-	public DrawContext getDrawContext()
+	public GuiGraphics getDrawContext()
 	{
 		return this.drawContext;
 	}

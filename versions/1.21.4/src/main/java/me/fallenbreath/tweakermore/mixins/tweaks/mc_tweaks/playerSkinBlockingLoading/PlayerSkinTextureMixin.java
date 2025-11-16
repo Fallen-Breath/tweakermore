@@ -23,8 +23,8 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.playerSkinBlockingLo
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.playerSkinBlockingLoading.TaskSynchronizer;
-import net.minecraft.client.texture.PlayerSkinTextureDownloader;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.renderer.texture.SkinTextureDownloader;
+import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -34,7 +34,7 @@ import java.util.concurrent.CompletableFuture;
  *  <  mc1.21.3: subproject 1.15.2 (main project)
  *  >= mc1.21.4: subproject 1.21.4        <--------
  */
-@Mixin(PlayerSkinTextureDownloader.class)
+@Mixin(SkinTextureDownloader.class)
 public abstract class PlayerSkinTextureMixin
 {
 	@ModifyExpressionValue(
@@ -44,7 +44,7 @@ public abstract class PlayerSkinTextureMixin
 					target = "Ljava/util/concurrent/CompletableFuture;supplyAsync(Ljava/util/function/Supplier;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;"
 			)
 	)
-	private static CompletableFuture<Identifier> playerSkinBlockingLoading_blockingTextureDownloading(CompletableFuture<Identifier> future)
+	private static CompletableFuture<ResourceLocation> playerSkinBlockingLoading_blockingTextureDownloading(CompletableFuture<ResourceLocation> future)
 	{
 		if (TweakerMoreConfigs.PLAYER_SKIN_BLOCKING_LOADING.getBooleanValue())
 		{

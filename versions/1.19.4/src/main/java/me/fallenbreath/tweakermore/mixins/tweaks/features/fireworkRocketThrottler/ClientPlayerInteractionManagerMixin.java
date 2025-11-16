@@ -24,14 +24,14 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.network.ClientPlayerInteractionManager;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.FireworkRocketItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.multiplayer.MultiPlayerGameMode;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.FireworkRocketItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
 import org.apache.commons.lang3.mutable.MutableObject;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -40,7 +40,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(ClientPlayerInteractionManager.class)
+@Mixin(MultiPlayerGameMode.class)
 public abstract class ClientPlayerInteractionManagerMixin
 {
 	@Unique
@@ -58,16 +58,16 @@ public abstract class ClientPlayerInteractionManagerMixin
 	)
 	private void fireworkRocketThrottler_cancelIfCooldown_useOnBlock(
 			CallbackInfoReturnable<Packet<?>> cir,
-			@Local(argsOnly = true) ClientPlayerEntity player,
-			@Local(argsOnly = true) Hand hand,
-			@Local(argsOnly = true) MutableObject<ActionResult> actionResult
+			@Local(argsOnly = true) LocalPlayer player,
+			@Local(argsOnly = true) InteractionHand hand,
+			@Local(argsOnly = true) MutableObject<InteractionResult> actionResult
 	)
 	{
 		if (checkCooldown(player, hand))
 		{
 			this.nullPacketSkipping.set(true);
 			cir.setReturnValue(null);
-			actionResult.setValue(ActionResult.FAIL);
+			actionResult.setValue(InteractionResult.FAIL);
 		}
 	}
 
@@ -78,21 +78,21 @@ public abstract class ClientPlayerInteractionManagerMixin
 	)
 	private void fireworkRocketThrottler_cancelIfCooldown_useAtAir(
 			CallbackInfoReturnable<Packet<?>> cir,
-			@Local(argsOnly = true) PlayerEntity player,
-			@Local(argsOnly = true) Hand hand,
-			@Local(argsOnly = true) MutableObject<ActionResult> actionResult
+			@Local(argsOnly = true) Player player,
+			@Local(argsOnly = true) InteractionHand hand,
+			@Local(argsOnly = true) MutableObject<InteractionResult> actionResult
 	)
 	{
 		if (checkCooldown(player, hand))
 		{
 			this.nullPacketSkipping.set(true);
 			cir.setReturnValue(null);
-			actionResult.setValue(ActionResult.FAIL);
+			actionResult.setValue(InteractionResult.FAIL);
 		}
 	}
 
 	@Unique
-	private boolean checkCooldown(PlayerEntity player, Hand hand)
+	private boolean checkCooldown(Player player, InteractionHand hand)
 	{
 		if (TweakerMoreConfigs.FIREWORK_ROCKET_THROTTLER.getBooleanValue())
 		{
@@ -116,7 +116,7 @@ public abstract class ClientPlayerInteractionManagerMixin
 			method = "sendSequencedPacket",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/network/SequencedPacketCreator;predict(I)Lnet/minecraft/network/packet/Packet;",
+					target = "Lnet/minecraft/client/multiplayer/prediction/PredictiveAction;predict(I)Lnet/minecraft/network/protocol/Packet;",
 					shift = At.Shift.AFTER
 			),
 			cancellable = true
@@ -139,7 +139,7 @@ public abstract class ClientPlayerInteractionManagerMixin
 					target = "Lnet/minecraft/world/item/ItemStack;useOnBlock(Lnet/minecraft/item/ItemUsageContext;)Lnet/minecraft/util/ActionResult;"
 			)
 	)
-	private ActionResult fireworkRocketThrottler_updateCooldown_useOnBlock(ActionResult actionResult)
+	private InteractionResult fireworkRocketThrottler_updateCooldown_useOnBlock(InteractionResult actionResult)
 	{
 		updateCooldownOnUse(actionResult);
 		return actionResult;
@@ -152,18 +152,18 @@ public abstract class ClientPlayerInteractionManagerMixin
 					//#if MC >= 12103
 					//$$ target = "Lnet/minecraft/world/item/ItemStack;use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult;"
 					//#else
-					target = "Lnet/minecraft/util/TypedActionResult;getResult()Lnet/minecraft/util/ActionResult;"
+					target = "Lnet/minecraft/world/InteractionResultHolder;getResult()Lnet/minecraft/world/InteractionResult;"
 					//#endif
 			)
 	)
-	private ActionResult fireworkRocketThrottler_updateCooldown_useAtAir(ActionResult actionResult)
+	private InteractionResult fireworkRocketThrottler_updateCooldown_useAtAir(InteractionResult actionResult)
 	{
 		updateCooldownOnUse(actionResult);
 		return actionResult;
 	}
 
 	@Unique
-	private void updateCooldownOnUse(ActionResult actionResult)
+	private void updateCooldownOnUse(InteractionResult actionResult)
 	{
 		if (TweakerMoreConfigs.FIREWORK_ROCKET_THROTTLER.getBooleanValue())
 		{

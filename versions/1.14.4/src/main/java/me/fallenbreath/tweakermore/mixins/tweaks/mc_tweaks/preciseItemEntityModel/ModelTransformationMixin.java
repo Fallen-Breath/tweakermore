@@ -25,23 +25,23 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.preciseItemEntityModel.PreciseItemEntityModelUtils;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.client.render.model.json.ModelTransformation;
-import net.minecraft.client.render.model.json.Transformation;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.block.model.ItemTransform;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.15"))
-@Mixin(ModelTransformation.class)
+@Mixin(ItemTransforms.class)
 public abstract class ModelTransformationMixin
 {
 	@ModifyExpressionValue(
-			method = "applyGl(Lnet/minecraft/client/render/model/json/ModelTransformation$Type;)V",
+			method = "apply(Lnet/minecraft/client/renderer/block/model/ItemTransforms$TransformType;)V",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/render/model/json/ModelTransformation;getTransformation(Lnet/minecraft/client/render/model/json/ModelTransformation$Type;)Lnet/minecraft/client/render/model/json/Transformation;"
+					target = "Lnet/minecraft/client/renderer/block/model/ItemTransforms;getTransform(Lnet/minecraft/client/renderer/block/model/ItemTransforms$TransformType;)Lnet/minecraft/client/renderer/block/model/ItemTransform;"
 			)
 	)
-	private Transformation preciseItemEntityModel_tweakTransformationScale(Transformation transformation)
+	private ItemTransform preciseItemEntityModel_tweakTransformationScale(ItemTransform transformation)
 	{
 		return PreciseItemEntityModelUtils.modifyTransformation(transformation);
 	}

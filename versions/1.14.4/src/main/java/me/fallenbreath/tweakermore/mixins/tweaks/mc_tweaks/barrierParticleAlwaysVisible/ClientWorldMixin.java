@@ -21,9 +21,9 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.barrierParticleAlwaysVisible;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.world.GameMode;
+import net.minecraft.world.level.GameType;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -38,13 +38,13 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(ClientWorld.class)
 public abstract class ClientWorldMixin
 {
-	@Shadow @Final private MinecraftClient client;
+	@Shadow @Final private Minecraft client;
 
 	@ModifyVariable(
 			method = "doRandomBlockDisplayTicks",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/util/math/BlockPos$Mutable;<init>()V"
+					target = "Lnet/minecraft/core/BlockPos$MutableBlockPos;<init>()V"
 			)
 	)
 	private boolean barrierParticleAlwaysVisible_setFlagToTrue(boolean spawnBarrierParticles)
@@ -52,7 +52,7 @@ public abstract class ClientWorldMixin
 		if (TweakerMoreConfigs.BARRIER_PARTICLE_ALWAYS_VISIBLE.getBooleanValue())
 		{
 			// keep vanilla's creative mode check
-			if (this.client.interactionManager.getCurrentGameMode() == GameMode.CREATIVE)
+			if (this.client.interactionManager.getCurrentGameMode() == GameType.CREATIVE)
 			{
 				spawnBarrierParticles = true;
 			}
