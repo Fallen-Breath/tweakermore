@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class CommandHistoryManagerMixin
 {
 	@ModifyExpressionValue(
-			method = "add",
+			method = "addCommand",
 			at = @At(
 					value = "CONSTANT",
 					args = "intValue=50"

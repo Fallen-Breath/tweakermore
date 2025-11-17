@@ -56,17 +56,17 @@ public abstract class DebugHudMixin
 	//#else
 	SampleLogger
 	//#endif
-			tickNanosLog;
+			tickTimeLogger;
 
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void enableRichStatisticForTickNanosLog(CallbackInfo ci)
 	{
-		((MetricsDataWithRichStatistic)this.tickNanosLog).enableRichStatistic$TKM();
+		((MetricsDataWithRichStatistic)this.tickTimeLogger).enableRichStatistic$TKM();
 	}
 
 	// ============================ render ============================
 
-	@Shadow @Final private TpsDebugChart tickChart;
+	@Shadow @Final private TpsDebugChart tpsChart;
 
 	@Unique private
 	//#if MC >= 12006
@@ -83,16 +83,16 @@ public abstract class DebugHudMixin
 			//#if MC >= 12103
 			//$$ method = "render",
 			//#else
-			method = "method_51746",  // lambda method in tickChart()
+			method = "method_51746",  // lambda method in render()
 			//#endif
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/gui/hud/debug/TickChart;render(Lnet/minecraft/client/gui/DrawContext;II)V"
+					target = "Lnet/minecraft/client/gui/components/debugchart/TpsDebugChart;drawChart(Lnet/minecraft/client/gui/GuiGraphics;II)V"
 			)
 	)
 	private void serverMsptMetricsStatistic_modify(Args args)
 	{
-		DebugChartAccessor chart = (DebugChartAccessor)this.tickChart;
+		DebugChartAccessor chart = (DebugChartAccessor)this.tpsChart;
 		//#if MC >= 12006
 		//$$ var chartLog = chart.getLog();
 		//$$ if (!(chartLog instanceof LocalSampleLogger))
@@ -118,12 +118,11 @@ public abstract class DebugHudMixin
 			//#if MC >= 12103
 			//$$ method = "render",
 			//#else
-			method = "method_51746",  // lambda method in tickChart()
+			method = "method_51746",  // lambda method in render()
 			//#endif
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/gui/hud/debug/TickChart;render(Lnet/minecraft/client/gui/DrawContext;II)V",
-					shift = At.Shift.AFTER
+					target = "Lnet/minecraft/client/gui/components/debugchart/TpsDebugChart;drawChart(Lnet/minecraft/client/gui/GuiGraphics;II)V"
 			)
 	)
 	private void serverMsptMetricsStatistic_renderExtra(GuiGraphics drawContext, CallbackInfo ci)
@@ -136,7 +135,7 @@ public abstract class DebugHudMixin
 				manager.renderExtraOnDebugHud(drawContext, this.tickChartX$TKM, this.tickChartWidth$TKM);
 			}
 
-			DebugChartAccessor chart = (DebugChartAccessor)this.tickChart;
+			DebugChartAccessor chart = (DebugChartAccessor)this.tpsChart;
 			chart.setLog(this.originMetricsData$TKM);
 			this.originMetricsData$TKM = null;
 		}

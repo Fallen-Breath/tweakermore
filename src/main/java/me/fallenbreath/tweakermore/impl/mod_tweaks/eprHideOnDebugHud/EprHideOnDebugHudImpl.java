@@ -33,7 +33,7 @@ public class EprHideOnDebugHudImpl
 			Minecraft mc = Minecraft.getInstance();
 			if (
 					//#if MC >= 12002
-					//$$ mc.getDebugHud().shouldShowDebugHud()
+					//$$ mc.getDebugOverlay().showDebugScreen()
 					//#else
 					mc.options.renderDebug
 					//#endif

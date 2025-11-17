@@ -47,6 +47,8 @@ public abstract class AbstractMinecartEntityMixin extends Entity
 
 	//#if MC >= 12103
 	//$$ @Shadow @Final private MinecartBehavior controller;
+	//#elseif MC >= 12002
+	//$$ @Shadow private int lerpSteps;
 	//#else
 	@Shadow private int lSteps;
 	//#endif
@@ -72,6 +74,8 @@ public abstract class AbstractMinecartEntityMixin extends Entity
 			//$$ 	// TODO: check if this works
 			//$$ 	emca.setTicksToNextRefresh(1);
 			//$$ }
+			//#elseif MC >= 12002
+			//$$ this.lerpSteps = 1;
 			//#else
 			this.lSteps = 1;
 			//#endif

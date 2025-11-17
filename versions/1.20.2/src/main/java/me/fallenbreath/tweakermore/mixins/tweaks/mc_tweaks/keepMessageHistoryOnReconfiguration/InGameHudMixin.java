@@ -33,7 +33,7 @@ public abstract class InGameHudMixin
 {
 	@SuppressWarnings("RedundantIfStatement")
 	@WrapWithCondition(
-			method = "clear",
+			method = "onDisconnected",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/client/gui/components/ChatComponent;clearMessages(Z)V"

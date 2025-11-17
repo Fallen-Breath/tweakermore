@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class MinecraftClientMixin
 {
 	@WrapOperation(
-			method = "enterReconfiguration",
+			method = "clearClientLevel",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/client/gui/Gui;onDisconnected()V"

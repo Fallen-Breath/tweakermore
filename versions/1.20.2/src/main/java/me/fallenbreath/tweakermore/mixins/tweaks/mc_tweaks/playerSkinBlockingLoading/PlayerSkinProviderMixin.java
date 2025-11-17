@@ -40,11 +40,11 @@ import java.util.concurrent.CompletableFuture;
  *   >= mc1.20.2        : subproject 1.20.2        <--------
  */
 @Restriction(conflict = @Condition(ModIds.custom_skin_loader))
-@Mixin(targets = "net/minecraft/client/texture/PlayerSkinProvider$1")  // the CacheLoader subclass in PlayerSkinProvider's constructor
+@Mixin(targets = "net/minecraft/client/resources/SkinManager$1")  // the CacheLoader subclass in PlayerSkinProvider's constructor
 public abstract class PlayerSkinProviderMixin
 {
 	@ModifyExpressionValue(
-			method = "load(Lnet/minecraft/client/texture/PlayerSkinProvider$Key;)Ljava/util/concurrent/CompletableFuture;",
+			method = "load(Lnet/minecraft/client/resources/SkinManager$CacheKey;)Ljava/util/concurrent/CompletableFuture;",
 			at = @At(
 					value = "INVOKE",
 					target = "Ljava/util/concurrent/CompletableFuture;supplyAsync(Ljava/util/function/Supplier;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;"

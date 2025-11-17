@@ -38,7 +38,7 @@ import net.minecraft.util.SampleLogger;
 @Mixin(AbstractDebugChart.class)
 public interface DebugChartAccessor
 {
-	@Accessor
+	@Accessor("logger")
 	//#if MC >= 12006
 	//$$ SampleStorage
 	//#else
@@ -46,7 +46,7 @@ public interface DebugChartAccessor
 	//#endif
 	getLog();
 
-	@Accessor @Mutable
+	@Accessor("logger") @Mutable
 	void setLog(
 			//#if MC >= 12006
 			//$$ SampleStorage log
