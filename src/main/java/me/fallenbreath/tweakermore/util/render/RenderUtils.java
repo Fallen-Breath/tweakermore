@@ -81,7 +81,7 @@ public class RenderUtils
 	public static MultiBufferSource.BufferSource getVertexConsumer()
 	{
 		//#if MC >= 12100
-		//$$ return Minecraft.getInstance().getBufferBuilders().getEntityVertexConsumers();
+		//$$ return Minecraft.getInstance().renderBuffers().bufferSource();
 		//#else
 		return MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
 		//#endif

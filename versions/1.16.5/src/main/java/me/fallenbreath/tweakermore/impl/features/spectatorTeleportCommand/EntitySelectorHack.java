@@ -88,7 +88,7 @@ public class EntitySelectorHack
 			Predicate<Entity> predicate = selector.invokeGetPositionPredicate(
 					pos
 					//#if MC >= 12100
-					//$$ , selector.invokeGetOffsetBox(pos), source.getEnabledFeatures()
+					//$$ , selector.invokeGetOffsetBox(pos), source.enabledFeatures()
 					//#endif
 			);
 			if (selector.getSenderOnly())

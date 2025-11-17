@@ -277,7 +277,7 @@ public class DamageCalculator
 	//$$ 	//$$ }
 	//$$ 	//$$ return armorItems;
 	//$$ 	//#else
-	//$$ 	return entity.getArmorItems();
+	//$$ 	return entity.getArmorSlots();
 	//$$ 	//#endif
 	//$$ }
 	//#endif
@@ -287,7 +287,7 @@ public class DamageCalculator
 		//#if MC >= 12100
 		//$$ if (this.serverWorld != null)
 		//$$ {
-		//$$ 	return EnchantmentHelper.getProtectionAmount(this.serverWorld, this.entity, this.damageSource);
+		//$$ 	return EnchantmentHelper.getDamageProtection(this.serverWorld, this.entity, this.damageSource);
 		//$$ }
 		//$$ else
 		//$$ {
@@ -296,7 +296,7 @@ public class DamageCalculator
 		//$$
 		//$$ 	// reference: mc1.20.6 net.minecraft.enchantment.ProtectionEnchantment.getProtectionAmount
 		//$$ 	var source = this.damageSource;
-		//$$ 	if (source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
+		//$$ 	if (source.is(DamageTypeTags.BYPASSES_INVULNERABILITY))
 		//$$ 	{
 		//$$ 		return 0;
 		//$$ 	}
@@ -304,9 +304,9 @@ public class DamageCalculator
 		//$$ 	float epf = 0;
 		//$$ 	for (var item : getEntityAllArmorItems(this.entity))
 		//$$ 	{
-		//$$ 		for (var enchantmentEntry : item.getEnchantments().getEnchantmentEntries())
+		//$$ 		for (var enchantmentEntry : item.getEnchantments().entrySet())
 		//$$ 		{
-		//$$ 			var enchantment = enchantmentEntry.getKey().getKey().orElse(null);
+		//$$ 			var enchantment = enchantmentEntry.getKey().unwrapKey().orElse(null);
 		//$$ 			if (enchantment == null)
 		//$$ 			{
 		//$$ 				continue;
@@ -316,19 +316,19 @@ public class DamageCalculator
 		//$$ 			{
 		//$$ 				epf += level;
 		//$$ 			}
-		//$$ 			else if (enchantment == Enchantments.FIRE_PROTECTION && source.isIn(DamageTypeTags.IS_FIRE))
+		//$$ 			else if (enchantment == Enchantments.FIRE_PROTECTION && source.is(DamageTypeTags.IS_FIRE))
 		//$$ 			{
 		//$$ 				epf += level * 2;
 		//$$ 			}
-		//$$ 			else if (enchantment == Enchantments.FEATHER_FALLING && source.isIn(DamageTypeTags.IS_FALL))
+		//$$ 			else if (enchantment == Enchantments.FEATHER_FALLING && source.is(DamageTypeTags.IS_FALL))
 		//$$ 			{
 		//$$ 				epf += level * 3;
 		//$$ 			}
-		//$$ 			else if (enchantment == Enchantments.BLAST_PROTECTION && source.isIn(DamageTypeTags.IS_EXPLOSION))
+		//$$ 			else if (enchantment == Enchantments.BLAST_PROTECTION && source.is(DamageTypeTags.IS_EXPLOSION))
 		//$$ 			{
 		//$$ 				epf += level * 2;
 		//$$ 			}
-		//$$ 			else if (enchantment == Enchantments.PROJECTILE_PROTECTION && source.isIn(DamageTypeTags.IS_PROJECTILE))
+		//$$ 			else if (enchantment == Enchantments.PROJECTILE_PROTECTION && source.is(DamageTypeTags.IS_PROJECTILE))
 		//$$ 			{
 		//$$ 				epf += level * 2;
 		//$$ 			}

@@ -49,10 +49,11 @@ import net.minecraft.world.entity.EntityType;
 @Mixin(EntitySelector.class)
 public interface EntitySelectorAccessor
 {
-	@Accessor("predicate")
 	//#if MC >= 12100
+	//$$ @Accessor("contextFreePredicates")
 	//$$ List<Predicate<Entity>> getPredicates();
 	//#else
+	@Accessor("predicate")
 	Predicate<Entity> getBasePredicate();
 	//#endif
 

@@ -33,17 +33,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#endif
 
 //#if MC >= 12100
-//$$ import net.minecraft.client.render.RenderTickCounter;
+//$$ import net.minecraft.client.DeltaTracker;
 //#endif
 
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin
 {
-	@Inject(method = "render(FJZ)V", at = @At("HEAD"))
+	@Inject(method = "render", at = @At("HEAD"))
 	private void recordTickDelta_renderStart(
 			CallbackInfo ci,
 			//#if MC >= 12100
-			//$$ @Local(argsOnly = true) RenderTickCounter tickCounter
+			//$$ @Local(argsOnly = true) DeltaTracker tickCounter
 			//#else
 			@Local(argsOnly = true) float tickDelta
 			//#endif
@@ -51,13 +51,13 @@ public abstract class GameRendererMixin
 	{
 		RenderUtils.tickDelta =
 				//#if MC >= 12100
-				//$$ tickCounter.getTickDelta(false);
+				//$$ tickCounter.getGameTimeDeltaPartialTick(false);
 				//#else
 				tickDelta;
 				//#endif
 	}
 
-	@Inject(method = "render(FJZ)V", at = @At("TAIL"))
+	@Inject(method = "render", at = @At("TAIL"))
 	private void recordTickDelta_renderEnd(CallbackInfo ci)
 	{
 		RenderUtils.tickDelta = 1.0F;

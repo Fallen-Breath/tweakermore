@@ -43,7 +43,7 @@ public abstract class InventoryUtilsMixin
 					target = "Lnet/minecraft/world/level/block/entity/BlockEntity;saveWithFullMetadata(Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/nbt/CompoundTag;"
 			)
 	)
-	private static BlockEntity serverDataSyncer4InventoryOverlay_blockEntity(BlockEntity blockEntity, HolderLookup.WrapperLookup wrapperLookup)
+	private static BlockEntity serverDataSyncer4InventoryOverlay_blockEntity(BlockEntity blockEntity, HolderLookup.Provider wrapperLookup)
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{

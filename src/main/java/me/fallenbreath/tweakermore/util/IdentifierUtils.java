@@ -34,7 +34,7 @@ public class IdentifierUtils
 	public static ResourceLocation of(String id)
 	{
 		//#if MC >= 12100
-		//$$ return ResourceLocation.of(id);
+		//$$ return ResourceLocation.parse(id);
 		//#else
 		return new ResourceLocation(id);
 		//#endif
@@ -46,7 +46,7 @@ public class IdentifierUtils
 	public static ResourceLocation of(String namespace, String path)
 	{
 		//#if MC >= 12100
-		//$$ return ResourceLocation.of(namespace, path);
+		//$$ return ResourceLocation.fromNamespaceAndPath(namespace, path);
 		//#else
 		return new ResourceLocation(namespace, path);
 		//#endif

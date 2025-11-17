@@ -55,7 +55,7 @@ public class ItemDataCopier
 				//$$ 		//#if MC >= 12100
 				//$$ 		//$$ Util.make(() -> {
 				//$$ 		//$$ 	var builder = DataComponentPatch.builder();
-				//$$ 		//$$ 	itemStack.getComponents().forEach(builder::add);
+				//$$ 		//$$ 	itemStack.getComponents().forEach(builder::set);
 				//$$ 		//$$ 	return builder.build();
 				//$$ 		//$$ })
 				//$$ 		//#else

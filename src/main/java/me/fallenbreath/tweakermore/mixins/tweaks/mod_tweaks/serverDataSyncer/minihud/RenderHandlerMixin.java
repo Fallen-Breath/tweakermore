@@ -60,7 +60,7 @@ public abstract class RenderHandlerMixin
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12101
-					//$$ target = "Lfi/dy/masa/minihud/event/RenderHandler;getTargetedBlockEntity(Lnet/minecraft/world/World;Lnet/minecraft/client/MinecraftClient;)Lorg/apache/commons/lang3/tuple/Pair;",
+					//$$ target = "Lfi/dy/masa/minihud/event/RenderHandler;getTargetedBlockEntity(Lnet/minecraft/world/level/Level;Lnet/minecraft/client/Minecraft;)Lorg/apache/commons/lang3/tuple/Pair;",
 					//#else
 					target = "Lfi/dy/masa/minihud/event/RenderHandler;getTargetedBlockEntity(Lnet/minecraft/world/level/Level;Lnet/minecraft/client/Minecraft;)Lnet/minecraft/world/level/block/entity/BlockEntity;",
 					//#endif
