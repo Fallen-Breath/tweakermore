@@ -32,7 +32,7 @@ import java.util.Objects;
 //#endif
 
 //#if MC >= 12100
-//$$ import net.minecraft.client.render.RenderLayer;
+//$$ import net.minecraft.client.renderer.RenderType;
 //$$ import com.mojang.blaze3d.vertex.ByteBufferBuilder;
 //#endif
 

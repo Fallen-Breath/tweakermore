@@ -45,7 +45,7 @@ import net.minecraft.client.gui.screens.Screen;
  * <p>
  * Targeted class:
  *   mc < 1.20: {@link net.minecraft.client.gui.screen.Screen}
- *   mc >= 1.20: {@link net.minecraft.client.gui.DrawContext}
+ *   mc >= 1.20: {@link net.minecraft.client.gui.GuiGraphics}
  */
 @Mixin(
 		//#if MC >= 12000
@@ -73,11 +73,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 	}
 
 	@Inject(
-			//#if MC >= 12000
-			//$$ method = "drawHoverEvent",
-			//#else
 			method = "renderComponentHoverEffect",
-			//#endif
 			at = @At("TAIL")
 	)
 	private void fixHoverTextScale_cleanup(CallbackInfo ci)
@@ -86,11 +82,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 	}
 
 	@ModifyArg(
-			//#if MC >= 12000
-			//$$ method = "drawHoverEvent",
-			//#else
 			method = "renderComponentHoverEffect",
-			//#endif
 			at = @At(
 					value = "INVOKE",
 					target = "Ljava/lang/Math;max(II)I"
@@ -108,9 +100,9 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 
 	@ModifyVariable(
 			//#if MC >= 12103
-			//$$ method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V",
+			//$$ method = "renderTooltipInternal(Lnet/minecraft/client/gui/Font;Ljava/util/List;IILnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;Lnet/minecraft/resources/ResourceLocation;)V",
 			//#elseif MC >= 12000
-			//$$ method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;)V",
+			//$$ method = "renderTooltipInternal(Lnet/minecraft/client/gui/Font;Ljava/util/List;IILnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;)V",
 			//#else
 			method = "renderTooltipInternal",
 			//#endif

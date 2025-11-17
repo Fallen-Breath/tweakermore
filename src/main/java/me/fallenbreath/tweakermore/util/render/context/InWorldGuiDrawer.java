@@ -34,7 +34,7 @@ public class InWorldGuiDrawer
 {
 	//#if MC >= 12000
 	//$$ @NotNull
-	//$$ private final DrawContext drawContext;
+	//$$ private final GuiGraphics drawContext;
 	//$$
 	//$$ public InWorldGuiDrawer(PoseStack matrixStack)
 	//$$ {
@@ -53,9 +53,9 @@ public class InWorldGuiDrawer
 	}
 
 	//#if MC >= 12000
-	//$$ private static DrawContext createDrawContext(PoseStack matrixStack)
+	//$$ private static GuiGraphics createDrawContext(PoseStack matrixStack)
 	//$$ {
-	//$$ 	var drawContext = new DrawContext(Minecraft.getInstance(), RenderUtils.getVertexConsumer());
+	//$$ 	var drawContext = new GuiGraphics(Minecraft.getInstance(), RenderUtils.getVertexConsumer());
 	//$$ 	((DrawContextAccessor)drawContext).setMatrices(matrixStack);
 	//$$ 	return drawContext;
 	//$$ }

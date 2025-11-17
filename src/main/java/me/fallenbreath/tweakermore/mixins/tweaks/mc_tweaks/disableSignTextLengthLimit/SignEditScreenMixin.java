@@ -98,7 +98,7 @@ public abstract class SignEditScreenMixin extends Screen
 	//#if MC >= 11700
 	//$$ @Inject(
 	//$$ 		//#if MC >= 12000
-	//$$ 		//$$ method = "<init>(Lnet/minecraft/block/entity/SignBlockEntity;ZZLnet/minecraft/text/Text;)V",
+	//$$ 		//$$ method = "<init>(Lnet/minecraft/world/level/block/entity/SignBlockEntity;ZZLnet/minecraft/network/chat/Component;)V",
 	//$$ 		//#elseif MC >= 11903
 	//$$ 		//$$ method = "<init>(Lnet/minecraft/world/level/block/entity/SignBlockEntity;ZLnet/minecraft/network/chat/Component;)V",
 	//$$ 		//#else

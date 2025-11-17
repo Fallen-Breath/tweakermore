@@ -40,7 +40,7 @@ public class GuiRenderContextImpl implements GuiRenderContext
 {
 	//#if MC >= 12000
 	//$$ @NotNull
-	//$$ private final DrawContext drawContext;
+	//$$ private final GuiGraphics drawContext;
 	//#endif
 
 	@NotNull
@@ -51,20 +51,20 @@ public class GuiRenderContextImpl implements GuiRenderContext
 	//#endif
 
 	//#if MC >= 12000
-	//$$ public GuiRenderContextImpl(@NotNull DrawContext drawContext, @NotNull IMatrixStack matrixStack)
+	//$$ public GuiRenderContextImpl(@NotNull GuiGraphics drawContext, @NotNull IMatrixStack matrixStack)
 	//$$ {
 	//$$ 	this.drawContext = drawContext;
 	//$$ 	this.matrixStack = matrixStack;
 	//$$ }
 	//$$
-	//$$ public GuiRenderContextImpl(@NotNull DrawContext drawContext)
+	//$$ public GuiRenderContextImpl(@NotNull GuiGraphics drawContext)
 	//$$ {
 	//$$ 	this(
 	//$$ 			drawContext,
 	//$$ 			//#if MC >= 12106
-	//$$ 			//$$ new Joml3x2fMatrixStack(drawContext.getMatrices())
+	//$$ 			//$$ new Joml3x2fMatrixStack(drawContext.pose())
 	//$$ 			//#else
-	//$$ 			new McMatrixStack(drawContext.getMatrices())
+	//$$ 			new McMatrixStack(drawContext.pose())
 	//$$ 			//#endif
 	//$$ 	);
 	//$$ }

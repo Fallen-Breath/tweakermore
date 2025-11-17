@@ -48,7 +48,7 @@ import java.util.List;
  * <p>
  * Targeted class:
  *   mc < 1.20: {@link net.minecraft.client.gui.screens.Screen}
- *   mc >= 1.20: {@link net.minecraft.client.gui.DrawContext}
+ *   mc >= 1.20: {@link net.minecraft.client.gui.GuiGraphics}
  */
 @Mixin(Screen.class)
 public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextRenderer

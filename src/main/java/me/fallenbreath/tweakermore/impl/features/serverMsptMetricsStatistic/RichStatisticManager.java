@@ -128,7 +128,7 @@ public class RichStatisticManager
 				//#endif
 
 		//#if MC >= 12000
-		//$$ drawContext.drawTextWithShadow(mc.font,
+		//$$ drawContext.drawString(mc.font,
 		//#else
 		mc.font.draw(
 				//#if MC >= 11600

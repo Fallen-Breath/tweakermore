@@ -52,7 +52,7 @@ import java.util.List;
 @Mixin(AbstractSignEditScreen.class)
 public abstract class SignEditScreenMixin extends Screen
 {
-	@Shadow @Final private SignBlockEntity blockEntity;
+	@Shadow @Final private SignBlockEntity sign;
 
 	@Shadow @Final private String[] messages;
 
@@ -116,17 +116,17 @@ public abstract class SignEditScreenMixin extends Screen
 			if (mc != null && 0 <= lineIdx && lineIdx < textArrayLen)
 			{
 				Component text = this.text.getMessage(lineIdx, this.filtered$TKM);
-				int maxWidth = this.blockEntity.getMaxTextWidth();
+				int maxWidth = this.sign.getMaxTextLineWidth();
 				List<?> wrapped = mc.font.split(text, maxWidth);
 				boolean overflowed = wrapped.size() > 1;
 
 				if (overflowed)
 				{
-					assert ChatFormatting.RED.getColorValue() != null;
-					int lineHeight = this.blockEntity.getTextLineHeight();
+					assert ChatFormatting.RED.getColor() != null;
+					int lineHeight = this.sign.getTextLineHeight();
 					int x = xStart - 10;
 					int y = lineIdx * lineHeight - (4 * lineHeight / 2);
-					context.drawText(this.font, "!", x, y, ChatFormatting.RED.getColorValue(), false);
+					context.drawString(this.font, "!", x, y, ChatFormatting.RED.getColor(), false);
 				}
 			}
 		}

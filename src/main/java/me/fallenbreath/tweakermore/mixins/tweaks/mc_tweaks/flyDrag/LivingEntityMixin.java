@@ -65,7 +65,7 @@ public abstract class LivingEntityMixin extends Entity
 		if (self == Minecraft.getInstance().player && TweakerMoreConfigs.FLY_DRAG.isModified())
 		{
 			//#if MC >= 12000
-			//$$ boolean onGround = this.isOnGround();
+			//$$ boolean onGround = this.onGround();
 			//#else
 			boolean onGround = this.onGround;
 			//#endif

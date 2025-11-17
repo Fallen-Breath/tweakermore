@@ -98,7 +98,7 @@ public class SignTextCopier
 		//#if MC >= 12004
 		//$$ return blockEntity.getText((blockEntity).isPlayerFacingFront(player)).getMessages(false);
 		//#elseif MC >= 12000
-		//$$ return blockEntity.getTextFacing(player).getMessages(false);
+		//$$ return blockEntity.getTextFacingPlayer(player).getMessages(false);
 		//#elseif MC >= 11600
 		//$$ return ((SignBlockEntityAccessor)blockEntity).getTexts();
 		//#else

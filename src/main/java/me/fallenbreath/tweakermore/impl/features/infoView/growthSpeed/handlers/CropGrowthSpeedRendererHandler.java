@@ -54,7 +54,7 @@ public class CropGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHand
 		Block block = blockState.getBlock();
 		return block instanceof CropBlock || block instanceof StemBlock || block instanceof AttachedStemBlock
 				//#if MC >= 12001
-				//$$ || (block instanceof PitcherCropBlock && blockState.get(PitcherCropBlock.HALF) == DoubleBlockHalf.LOWER)
+				//$$ || (block instanceof PitcherCropBlock && blockState.getValue(PitcherCropBlock.HALF) == DoubleBlockHalf.LOWER)
 				//#endif
 				;
 	}

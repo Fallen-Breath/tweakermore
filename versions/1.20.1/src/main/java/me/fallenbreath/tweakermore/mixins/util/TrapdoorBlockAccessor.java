@@ -29,6 +29,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(TrapDoorBlock.class)
 public interface TrapdoorBlockAccessor
 {
-	@Accessor
+	@Accessor("type")
 	BlockSetType getBlockSetType();
 }

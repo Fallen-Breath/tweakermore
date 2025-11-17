@@ -36,7 +36,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 public interface DrawContextAccessor
 {
 	@Mutable
-	@Accessor
+	@Accessor("pose")
 	void setMatrices(
 			//#if MC >= 12106
 			//$$ Matrix3x2fStack matrices

@@ -46,7 +46,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 
 //#if MC >= 12103
-//$$ import net.minecraft.client.render.RenderLayer;
+//$$ import net.minecraft.client.renderer.RenderType;
 //#endif
 
 //#if MC >= 12006

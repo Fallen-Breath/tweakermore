@@ -34,7 +34,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.util.Mth;
 
 //#if MC >= 12000
-//$$ import net.minecraft.client.render.RenderLayer;
+//$$ import net.minecraft.client.renderer.RenderType;
 //#endif
 
 //#if MC >= 11904
@@ -67,7 +67,7 @@ public class ShulkerBoxItemContentHintRenderer
 			//$$ PoseStack matrices,
 			//#endif
 			//#if MC >= 12000
-			//$$ DrawContext drawContext,
+			//$$ GuiGraphics drawContext,
 			//#else
 			ItemRenderer itemRenderer,
 			//#endif
@@ -160,7 +160,7 @@ public class ShulkerBoxItemContentHintRenderer
 	private static void renderMiniItem(
 			GuiRenderContext renderContext,
 			//#if MC >= 12000
-			//$$ DrawContext drawContext,
+			//$$ GuiGraphics drawContext,
 			//#else
 			ItemRenderer itemRenderer,
 			//#endif
@@ -186,7 +186,7 @@ public class ShulkerBoxItemContentHintRenderer
 			//#endif
 
 			//#if MC >= 12000
-			//$$ drawContext.drawItemWithoutEntity(info.stack, x, y);
+			//$$ drawContext.renderFakeItem(info.stack, x, y);
 			//#else
 			// we do this manually so no need to care about extra z-offset modification of itemRenderer in its ItemRenderer#renderGuiItem
 			itemRenderer.renderGuiItem(
@@ -214,7 +214,7 @@ public class ShulkerBoxItemContentHintRenderer
 			PoseStack textMatrixStack,
 			//#endif
 			//#if MC >= 12000
-			//$$ DrawContext drawContext,
+			//$$ GuiGraphics drawContext,
 			//#endif
 			double zOffset, ShulkerBoxItemContentHintCommon.Info info, int x, int y
 	)
@@ -295,7 +295,7 @@ public class ShulkerBoxItemContentHintRenderer
 		y = y + SLOT_WIDTH - HEIGHT;
 
 		// ====== [begin] ref: net.minecraft.client.render.item.ItemRenderer#renderGuiItemOverlay ======
-		// (mc1.20+) net.minecraft.client.gui.DrawContext.drawItemInSlot
+		// (mc1.20+) net.minecraft.client.gui.GuiGraphics.drawItemInSlot
 
 		//#if MC >= 11500
 
@@ -332,8 +332,8 @@ public class ShulkerBoxItemContentHintRenderer
 
 		//#if MC >= 12000
 		//$$ GuiQuadDrawer drawer = (x_, y_, width_, height_, color_) -> {
-		//$$ 	// see net.minecraft.client.gui.DrawContext#drawItemInSlot
-		//$$ 	renderContext.getGuiDrawer().fill(RenderLayer.getGuiOverlay(), x_, y_, x_ + width_, y_ + height_, color_ | 0xFF000000);
+		//$$ 	// see net.minecraft.client.gui.GuiGraphics#drawItemInSlot
+		//$$ 	renderContext.getGuiDrawer().fill(RenderType.guiOverlay(), x_, y_, x_ + width_, y_ + height_, color_ | 0xFF000000);
 		//$$ };
 		//#elseif MC >= 11904
 		//$$ GuiQuadDrawer drawer = (x_, y_, width_, height_, color_) -> {

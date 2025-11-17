@@ -35,7 +35,7 @@ public class BlockUtils
 	public static boolean isReplaceable(BlockState state)
 	{
 		//#if MC >= 12000
-		//$$ return state.isReplaceable();
+		//$$ return state.canBeReplaced();
 		//#else
 		return state.getMaterial().isReplaceable();
 		//#endif
@@ -49,7 +49,7 @@ public class BlockUtils
 	//$$ {
 	//$$ 	if (block instanceof DoorBlock doorBlock)
 	//$$ 	{
-	//$$ 		return Optional.ofNullable(doorBlock.getBlockSetType());
+	//$$ 		return Optional.ofNullable(doorBlock.type());
 	//$$ 	}
 	//$$ 	else if (block instanceof TrapdoorBlockAccessor trapdoorBlock)
 	//$$ 	{

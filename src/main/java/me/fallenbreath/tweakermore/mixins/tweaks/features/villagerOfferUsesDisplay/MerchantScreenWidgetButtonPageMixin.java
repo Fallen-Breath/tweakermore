@@ -108,7 +108,7 @@ public abstract class MerchantScreenWidgetButtonPageMixin extends Button
 				String text = String.format("%d / %d", offer.getUses(), offer.getMaxUses());
 
 				//#if MC >= 12000
-				//$$ context.drawTooltip(((ScreenAccessor)this.field_19166).getTextRenderer(), Messenger.s(text), mouseX, mouseY);
+				//$$ context.renderTooltip(((ScreenAccessor)this.field_19166).getTextRenderer(), Messenger.s(text), mouseX, mouseY);
 				//#else
 				this.field_19166.renderTooltip(
 						//#if MC >= 11600

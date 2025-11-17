@@ -47,7 +47,7 @@ public abstract class DebugHudMixin
 {
 	@Inject(
 			//#if MC >= 12000
-			//$$ method = "drawText",
+			//$$ method = "renderLines",
 			//#else
 			method = {"drawGameInformation", "drawSystemInformation"},
 			//#endif
@@ -76,7 +76,7 @@ public abstract class DebugHudMixin
 
 	@ModifyExpressionValue(
 			//#if MC >= 12000
-			//$$ method = "drawText",
+			//$$ method = "renderLines",
 			//#else
 			method = "drawSystemInformation",
 			//#endif
@@ -100,7 +100,7 @@ public abstract class DebugHudMixin
 
 	@Inject(
 			//#if MC >= 12000
-			//$$ method = "drawText",
+			//$$ method = "renderLines",
 			//#else
 			method = {"drawGameInformation", "drawSystemInformation"},
 			//#endif
