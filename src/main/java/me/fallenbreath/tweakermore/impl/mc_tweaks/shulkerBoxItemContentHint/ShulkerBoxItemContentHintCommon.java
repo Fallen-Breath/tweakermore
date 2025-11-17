@@ -159,7 +159,7 @@ public class ShulkerBoxItemContentHintCommon
 	private static Optional<ItemStack> computeCustomNameOverride(ItemStack shulkerBoxItemStack)
 	{
 		//#if MC >= 12006
-		//$$ if (!shulkerBoxItemStack.contains(DataComponents.CUSTOM_NAME))
+		//$$ if (!shulkerBoxItemStack.has(DataComponents.CUSTOM_NAME))
 		//#else
 		if (!shulkerBoxItemStack.hasCustomHoverName())
 		//#endif

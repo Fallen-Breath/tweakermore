@@ -51,7 +51,7 @@ public class ItemDataCopier
 
 				//#if MC >= 12006
 				//$$ var arg = new ItemInput(
-				//$$ 		itemStack.getRegistryEntry(),
+				//$$ 		itemStack.getItemHolder(),
 				//$$ 		//#if MC >= 12100
 				//$$ 		//$$ Util.make(() -> {
 				//$$ 		//$$ 	var builder = DataComponentPatch.builder();
@@ -62,7 +62,7 @@ public class ItemDataCopier
 				//$$ 		itemStack.getComponents()
 				//$$ 		//#endif
 				//$$ );
-				//$$ String command = String.format("/give @s %s", arg.asString(mc.world.getRegistryManager()));
+				//$$ String command = String.format("/give @s %s", arg.serialize(mc.level.registryAccess()));
 				//#else
 				String command = String.format("/give @s %s", itemStack.getItem());
 				CompoundTag nbt = itemStack.getTag();

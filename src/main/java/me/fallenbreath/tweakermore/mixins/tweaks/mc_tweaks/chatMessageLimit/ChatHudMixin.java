@@ -59,8 +59,8 @@ public abstract class ChatHudMixin
 	@ModifyExpressionValue(
 			//#if MC >= 12006
 			//$$ method = {
-			//$$ 		"addVisibleMessage",
-			//$$ 		"addMessage(Lnet/minecraft/client/gui/hud/ChatHudLine;)V"
+			//$$ 		"addMessageToDisplayQueue",
+			//$$ 		"addMessageToQueue(Lnet/minecraft/client/GuiMessage;)V"
 			//$$ },
 			//#elseif MC >= 11901
 			//$$ method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;ILnet/minecraft/client/GuiMessageTag;Z)V",

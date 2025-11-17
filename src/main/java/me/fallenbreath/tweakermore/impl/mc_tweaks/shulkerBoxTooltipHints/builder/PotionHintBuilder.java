@@ -67,7 +67,7 @@ public class PotionHintBuilder extends AbstractHintBuilder
 				//#endif
 
 				//#if MC >= 12006
-				//$$ PotionContentsComponent.buildTooltip(potions.getEffects(), potionTexts::add, ratio, tickRate);
+				//$$ PotionContents.addPotionTooltip(potions.getAllEffects(), potionTexts::add, ratio, tickRate);
 				//#elseif MC >= 12006
 				//$$ potions.buildTooltip(potionTexts::add, ratio, tickRate);
 				//#else

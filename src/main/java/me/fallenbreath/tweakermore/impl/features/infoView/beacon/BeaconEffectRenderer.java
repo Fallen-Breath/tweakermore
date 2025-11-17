@@ -159,7 +159,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 
 		TextureAtlasSprite sprite = mc.getMobEffectTextures().get(
 				//#if MC >= 12006
-				//$$ BuiltInRegistries.STATUS_EFFECT.getEntry(statusEffect)
+				//$$ BuiltInRegistries.MOB_EFFECT.wrapAsHolder(statusEffect)
 				//#else
 				statusEffect
 				//#endif

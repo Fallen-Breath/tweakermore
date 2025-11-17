@@ -40,7 +40,7 @@ public abstract class GameRendererMixin
 {
 	@Inject(
 			//#if MC >= 12006
-			//$$ method = "findCrosshairTarget",
+			//$$ method = "pick(Lnet/minecraft/world/entity/Entity;DDF)Lnet/minecraft/world/phys/HitResult;",
 			//#else
 			method = "pick",
 			//#endif
@@ -64,7 +64,7 @@ public abstract class GameRendererMixin
 
 	@Inject(
 			//#if MC >= 12006
-			//$$ method = "findCrosshairTarget",
+			//$$ method = "pick(Lnet/minecraft/world/entity/Entity;DDF)Lnet/minecraft/world/phys/HitResult;",
 			//#else
 			method = "pick",
 			//#endif

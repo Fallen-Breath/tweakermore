@@ -120,7 +120,7 @@ public class MetricsStatistic
 		//#if MC >= 12006
 		//$$ for (int cl = 1; cl < COLUMN_NUM; cl++)
 		//$$ {
-		//$$ 	this.metricsData.push(samples[cl], cl);
+		//$$ 	this.metricsData.logPartialSample(samples[cl], cl);
 		//$$ }
 		//#endif
 		this.metricsData.logFrameDuration(samples[0]);

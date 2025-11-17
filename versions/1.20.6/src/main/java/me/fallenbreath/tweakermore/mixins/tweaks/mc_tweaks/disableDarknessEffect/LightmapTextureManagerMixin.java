@@ -31,10 +31,10 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class LightmapTextureManagerMixin
 {
 	@ModifyExpressionValue(
-			method = "getDarknessFactor",
+			method = "getDarknessGamma",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/player/LocalPlayer;getStatusEffect(Lnet/minecraft/registry/entry/RegistryEntry;)Lnet/minecraft/entity/effect/StatusEffectInstance;"
+					target = "Lnet/minecraft/client/player/LocalPlayer;getEffect(Lnet/minecraft/core/Holder;)Lnet/minecraft/world/effect/MobEffectInstance;"
 			)
 	)
 	private MobEffectInstance disableDarknessEffect_doesNotHaveStatusEffect(MobEffectInstance instance)

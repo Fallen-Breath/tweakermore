@@ -64,11 +64,7 @@ public abstract class MetricsDataMixin implements MetricsDataWithRichStatistic
 	}
 
 	@Inject(
-			//#if MC >= 12006
-			//$$ method = "push(J)V",
-			//#else
 			method = "logFrameDuration",
-			//#endif
 			at = @At("TAIL")
 	)
 	private void serverMsptMetricsStatistic_callback1(long time, CallbackInfo ci)
@@ -81,7 +77,7 @@ public abstract class MetricsDataMixin implements MetricsDataWithRichStatistic
 
 	//#if MC >= 12006
 	//$$ @Inject(
-	//$$ 		method = "push(JI)V",
+	//$$ 		method = "logPartialSample",
 	//$$ 		at = @At("TAIL")
 	//$$ )
 	//$$ private void serverMsptMetricsStatistic_callback2(long value, int column, CallbackInfo ci)

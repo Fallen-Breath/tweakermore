@@ -76,7 +76,7 @@ public abstract class MinecraftClientMixin
 
 				//#if MC >= 12006
 				//$$ Map<String, String> properties = Maps.newLinkedHashMap();
-				//$$ blockState.getEntries().forEach((property, value) -> {
+				//$$ blockState.getValues().forEach((property, value) -> {
 				//$$ 	properties.put(property.getName(), value.toString());
 				//$$ });
 				//$$ itemStack.set(DataComponents.BLOCK_STATE, new BlockItemStateProperties(properties));

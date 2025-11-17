@@ -133,7 +133,7 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 					String missingColor = missing == 0 ? GuiBase.TXT_GREEN : GuiBase.TXT_GOLD;
 					ChatFormatting formatting = stack.getRarity().
 							//#if MC >= 12006
-							//$$ getFormatting();
+							//$$ color();
 							//#else
 							color;
 							//#endif
