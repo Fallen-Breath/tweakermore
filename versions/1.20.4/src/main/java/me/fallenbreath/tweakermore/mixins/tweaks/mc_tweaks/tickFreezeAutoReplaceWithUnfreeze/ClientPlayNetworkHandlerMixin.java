@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(ClientPacketListener.class)
 public abstract class ClientPlayNetworkHandlerMixin
 {
-	@ModifyVariable(method = "sendChatCommand", at = @At("HEAD"), argsOnly = true)
+	@ModifyVariable(method = "sendCommand", at = @At("HEAD"), argsOnly = true)
 	private String tickFreezeAutoReplaceWithUnfreeze_doModification(String command)
 	{
 		if (TweakerMoreConfigs.TICK_FREEZE_AUTO_REPLACE_WITH_UNFREEZE.getBooleanValue())
@@ -38,7 +38,7 @@ public abstract class ClientPlayNetworkHandlerMixin
 			if ("tick freeze".equals(command))
 			{
 				Minecraft mc = Minecraft.getInstance();
-				if (mc.world != null && mc.world.getTickManager().isFrozen())
+				if (mc.level != null && mc.level.tickRateManager().isFrozen())
 				{
 					command = "tick unfreeze";
 				}

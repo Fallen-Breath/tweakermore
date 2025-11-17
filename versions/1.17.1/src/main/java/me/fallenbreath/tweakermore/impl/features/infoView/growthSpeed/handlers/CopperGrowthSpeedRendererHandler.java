@@ -53,7 +53,7 @@ public class CopperGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHa
 		//$$ // see net.minecraft.block.WeatheringCopperDoorBlock#randomTick
 		//$$ if (blockState.getBlock() instanceof WeatheringCopperDoorBlock)
 		//$$ {
-		//$$ 	return blockState.get(WeatheringCopperDoorBlock.HALF) == DoubleBlockHalf.LOWER;
+		//$$ 	return blockState.getValue(WeatheringCopperDoorBlock.HALF) == DoubleBlockHalf.LOWER;
 		//$$ }
 		//#endif
 		return true;

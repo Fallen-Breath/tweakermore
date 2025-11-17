@@ -196,7 +196,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 						//#if MC >= 12106
 						//$$ try (ProblemReporter.Logging logging = new ProblemReporter.Logging(entity.getErrorReporterContext(), TweakerMoreMod.LOGGER))
 						//$$ {
-						//$$ 	entity.readData(TagValueInput.create(logging, entity.getRegistryManager(), nbt));
+						//$$ 	entity.readData(TagValueInput.create(logging, entity.registryAccess(), nbt));
 						//$$ }
 						//#else
 						entity.load(nbt);
@@ -252,7 +252,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 							//#if MC >= 12106
 							//$$ try (ProblemReporter.Logging logging = new ProblemReporter.Logging(blockEntity.getReporterContext(), TweakerMoreMod.LOGGER))
 							//$$ {
-							//$$ 	blockEntity.read(TagValueInput.create(logging, world.getRegistryManager(), nbt));
+							//$$ 	blockEntity.read(TagValueInput.create(logging, world.registryAccess(), nbt));
 							//$$ }
 							//#elseif MC >= 12006
 							//$$ blockEntity.read(nbt, blockEntity.getWorld().getRegistryManager());

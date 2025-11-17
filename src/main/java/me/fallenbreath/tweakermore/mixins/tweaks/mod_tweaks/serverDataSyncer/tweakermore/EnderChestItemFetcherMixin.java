@@ -97,7 +97,7 @@ public abstract class EnderChestItemFetcherMixin
 								//$$ {
 								//$$ 	if (nbt != null && EnderItemNbtUtils.containsList(nbt, "EnderItems"))
 								//$$ 	{
-								//$$ 		var nbtView = TagValueInput.create(logging, EntityUtils.getEntityWorld(player).getRegistryManager(), nbt);
+								//$$ 		var nbtView = TagValueInput.create(logging, EntityUtils.getEntityWorld(player).registryAccess(), nbt);
 								//$$ 		enderChestInventory.readData(nbtView.getTypedListView("EnderItems", ItemStackWithSlot.CODEC));
 								//$$ 	}
 								//$$ }
@@ -107,7 +107,7 @@ public abstract class EnderChestItemFetcherMixin
 									enderChestInventory.fromTag(
 											EnderItemNbtUtils.getNbtListOrEmpty(nbt, "EnderItems")
 											//#if MC >= 12006
-											//$$ , player.getRegistryManager()
+											//$$ , player.registryAccess()
 											//#endif
 									);
 								}

@@ -62,8 +62,8 @@ public class PotionHintBuilder extends AbstractHintBuilder
 			{
 				List<Component> potionTexts = Lists.newArrayList();
 				//#if MC >= 12004
-				//$$ var world = net.minecraft.client.MinecraftClient.getInstance().world;
-				//$$ float tickRate = world != null ? world.getTickManager().getTickRate() : 20.0f;
+				//$$ var world = net.minecraft.client.Minecraft.getInstance().level;
+				//$$ float tickRate = world != null ? world.tickRateManager().tickrate() : 20.0f;
 				//#endif
 
 				//#if MC >= 12006

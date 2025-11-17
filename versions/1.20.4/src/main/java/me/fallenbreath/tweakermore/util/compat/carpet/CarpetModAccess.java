@@ -29,7 +29,7 @@ public class CarpetModAccess
 	 */
 	public static boolean isTickFrozen()
 	{
-		var world = Minecraft.getInstance().world;
-		return world != null && world.getTickManager().isFrozen();
+		var world = Minecraft.getInstance().level;
+		return world != null && world.tickRateManager().isFrozen();
 	}
 }

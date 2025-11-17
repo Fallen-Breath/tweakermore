@@ -51,11 +51,7 @@ public abstract class BoatEntityMixin extends Entity
 		super(type, world);
 	}
 
-	//#if MC >= 12004
-	//$$ @Shadow private int lerpTicks;
-	//#else
 	@Shadow private int lerpSteps;
-	//#endif
 
 	@Inject(method = "lerpTo", at = @At("TAIL"))
 	private void disableEntityRenderInterpolation_noExtraInterpolationSteps(
@@ -68,11 +64,7 @@ public abstract class BoatEntityMixin extends Entity
 	{
 		if (TweakerMoreConfigs.DISABLE_ENTITY_RENDER_INTERPOLATION.getBooleanValue())
 		{
-			//#if MC >= 12004
-			//$$ this.lerpTicks = 1;
-			//#else
 			this.lerpSteps = 1;
-			//#endif
 
 			if (DisableEntityRenderInterpolationHelper.shouldUpdatePositionOrAnglesDirectly())
 			{

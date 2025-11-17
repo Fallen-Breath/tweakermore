@@ -72,10 +72,10 @@ public class CropGrowthSpeedRendererHandler extends BasicGrowthSpeedRendererHand
 		if (block instanceof AttachedStemBlockAccessor)
 		{
 			//#if MC >= 12004
-			//$$ // see net.minecraft.block.AttachedStemBlock#getStateForNeighborUpdate
-			//$$ var optional = world.getBestWorld().getRegistryManager().
-			//$$ 		get(Registries.BLOCK).
-			//$$ 		getOrEmpty(((AttachedStemBlockAccessor)block).getStemBlock());
+			//$$ // see net.minecraft.world.level.block.AttachedStemBlock#updateShape
+			//$$ var optional = world.getBestWorld().registryAccess().
+			//$$ 		registryOrThrow(Registries.BLOCK).
+			//$$ 		getOptional(((AttachedStemBlockAccessor)block).getStemBlock());
 			//$$ if (optional.isPresent())
 			//$$ {
 			//$$ 	cropBlock = optional.get();
