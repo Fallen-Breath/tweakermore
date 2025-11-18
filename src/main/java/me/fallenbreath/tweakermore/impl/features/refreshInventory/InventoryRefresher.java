@@ -68,7 +68,7 @@ public class InventoryRefresher
 
 			AbstractContainerMenu csh = mc.player.containerMenu;
 			//#if MC >= 12105
-			//$$ HashedStack itemStackHash = HashedStack.fromItemStack(uniqueItem, networkHandler.method_68823());
+			//$$ HashedStack itemStackHash = HashedStack.create(uniqueItem, networkHandler.decoratedHashOpsGenenerator());
 			//#endif
 			networkHandler.send(new ServerboundContainerClickPacket(
 					csh.containerId,

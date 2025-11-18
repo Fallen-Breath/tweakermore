@@ -41,7 +41,7 @@ public abstract class PistonBlockMixin
 			at = @At(
 					value = "INVOKE",
 					//#if MC >= 12105
-					//$$ target = "Lnet/minecraft/world/World;syncWorldEvent(ILnet/minecraft/util/math/BlockPos;I)V"
+					//$$ target = "Lnet/minecraft/world/level/Level;levelEvent(ILnet/minecraft/core/BlockPos;I)V"
 					//#else
 					target = "Lnet/minecraft/world/level/Level;addDestroyBlockEffect(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V"
 					//#endif

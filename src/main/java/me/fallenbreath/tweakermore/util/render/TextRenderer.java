@@ -192,7 +192,7 @@ public class TextRenderer
 				while (true)
 				{
 					//#if MC >= 12105
-					//$$ Matrix4f matrix4f = new Matrix4f(AffineTransformation.identity().getMatrix());
+					//$$ Matrix4f matrix4f = new Matrix4f(Transformation.identity().getMatrix());
 					//#else
 					Matrix4f matrix4f = Transformation.identity().getMatrix();
 					//#endif

@@ -90,7 +90,7 @@ public abstract class EnderChestItemFetcherMixin
 							PlayerEnderChestContainer enderChestInventory = CACHE.computeIfAbsent(uuid, k -> new PlayerEnderChestContainer());
 							CACHE.keepAlive(uuid);
 							future.thenAccept(nbt -> {
-								// ref: net.minecraft.entity.player.Player#readCustomDataFromTag
+								// ref: net.minecraft.entity.player.Player#readAdditionalSaveData
 
 								//#if MC >= 12106
 								//$$ try (ProblemReporter.Logging logging = new ProblemReporter.Logging(player.getErrorReporterContext(), TweakerMoreMod.LOGGER))

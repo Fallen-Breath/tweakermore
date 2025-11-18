@@ -32,11 +32,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class EntityMixin
 {
 	@ModifyExpressionValue(
-			//#if MC >= 1.21.9
-			//$$ method = "moveOrInterpolateTo(Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;)V",
-			//#else
-			method = "updateTrackedPositionAndAngles",
-			//#endif
+			method = "moveOrInterpolateTo",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/world/entity/Entity;getInterpolation()Lnet/minecraft/world/entity/InterpolationHandler;"
@@ -48,7 +44,7 @@ public abstract class EntityMixin
 		{
 			if (positionInterpolator != null)
 			{
-				positionInterpolator.setLerpDuration(0);
+				positionInterpolator.setInterpolationLength(0);
 				if (!DisableEntityRenderInterpolationHelper.shouldUpdatePositionOrAnglesDirectly())
 				{
 					// adjust the codeflow in the following vanilla code

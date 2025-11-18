@@ -30,10 +30,10 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class LightmapTextureManagerMixin
 {
 	@ModifyExpressionValue(
-			method = "update",
+			method = "updateLightTexture",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/player/LocalPlayer;getEffectFadeFactor(Lnet/minecraft/registry/entry/RegistryEntry;F)F"
+					target = "Lnet/minecraft/client/player/LocalPlayer;getEffectBlendFactor(Lnet/minecraft/core/Holder;F)F"
 			)
 	)
 	private float disableDarknessEffect_doesNotHaveStatusEffect(float factor)

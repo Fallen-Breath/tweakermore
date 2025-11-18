@@ -36,13 +36,13 @@ public class EnderItemNbtUtils
 
 	/**
 	 * NOTES: in mc1.21.5+, no "all list items are nbt" check will be made,
-	 * matching the vanilla implementation ${@link net.minecraft.world.entity.player.Player#readCustomDataFromTag}
+	 * matching the vanilla implementation ${@link net.minecraft.world.entity.player.Player#readAdditionalSaveData}
 	 * to read the "EnderItems" list
 	 */
 	public static ListTag getNbtListOrEmpty(CompoundTag nbt, String key)
 	{
 		//#if MC >= 12105
-		//$$ return nbt.getList(key).orElseGet(NbtList::new);
+		//$$ return nbt.getList(key).orElseGet(ListTag::new);
 		//#else
 		return nbt.getList(key, 10  /* NBT */);
 		//#endif

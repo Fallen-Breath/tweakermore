@@ -37,7 +37,7 @@ public class NbtUtils
 	public static CompoundTag getNbtOrEmpty(CompoundTag nbt, String key)
 	{
 		//#if MC >= 12105
-		//$$ return nbt.getCompound(key).orElseGet(NbtCompound::new);
+		//$$ return nbt.getCompound(key).orElseGet(CompoundTag::new);
 		//#else
 		return nbt.getCompound(key);
 		//#endif

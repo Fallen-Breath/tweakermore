@@ -273,7 +273,7 @@ public class DamageCalculator
 	//$$ 	//$$ List<ItemStack> armorItems = Lists.newArrayList();
 	//$$ 	//$$ for (EquipmentSlot equipmentSlot : EquipmentSlotGroup.ARMOR)
 	//$$ 	//$$ {
-	//$$ 	//$$ 	armorItems.add(entity.getEquippedStack(equipmentSlot));
+	//$$ 	//$$ 	armorItems.add(entity.getItemBySlot(equipmentSlot));
 	//$$ 	//$$ }
 	//$$ 	//$$ return armorItems;
 	//$$ 	//#else
