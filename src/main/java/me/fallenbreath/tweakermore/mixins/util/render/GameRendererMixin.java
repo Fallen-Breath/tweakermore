@@ -39,7 +39,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin
 {
-	@Inject(method = "render", at = @At("HEAD"))
+	@Inject(
+			//#if MC >= 11500
+			method = "render",
+			//#else
+			//$$ method = "render(FJZ)V",
+			//#endif
+			at = @At("HEAD")
+	)
 	private void recordTickDelta_renderStart(
 			CallbackInfo ci,
 			//#if MC >= 12100
@@ -57,7 +64,14 @@ public abstract class GameRendererMixin
 				//#endif
 	}
 
-	@Inject(method = "render", at = @At("TAIL"))
+	@Inject(
+			//#if MC >= 11500
+			method = "render",
+			//#else
+			//$$ method = "render(FJZ)V",
+			//#endif
+			at = @At("TAIL")
+	)
 	private void recordTickDelta_renderEnd(CallbackInfo ci)
 	{
 		RenderUtils.tickDelta = 1.0F;
