@@ -41,7 +41,7 @@ public abstract class WorldRendererMixin
 {
 	//#if MC >= 1.21.9
 	//$$ @ModifyExpressionValue(
-	//$$ 		method = "render",
+	//$$ 		method = "renderLevel",
 	//$$ 		at = @At(
 	//$$ 				value = "INVOKE",
 	//$$ 				target = "Lnet/minecraft/client/renderer/LevelRenderer;prepareCullFrustum(Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/client/renderer/culling/Frustum;"

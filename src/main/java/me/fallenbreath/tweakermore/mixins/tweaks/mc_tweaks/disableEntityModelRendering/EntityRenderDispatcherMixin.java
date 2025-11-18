@@ -51,7 +51,7 @@ public abstract class EntityRenderDispatcherMixin
 {
 	@WrapWithCondition(
 			//#if MC >= 1.21.9
-			//$$ method = "render",
+			//$$ method = "submit",
 			//#elseif MC >= 1.21.3
 			//$$ method = "render(Lnet/minecraft/world/entity/Entity;DDDFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/renderer/entity/EntityRenderer;)V",
 			//#elseif MC >= 1.15.0

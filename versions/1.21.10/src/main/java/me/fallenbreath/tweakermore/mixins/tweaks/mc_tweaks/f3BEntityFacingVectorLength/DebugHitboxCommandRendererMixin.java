@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public abstract class DebugHitboxCommandRendererMixin
 {
 	@ModifyArg(
-			method = "renderDebugHitbox",
+			method = "renderHitboxesAndViewVector",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/world/phys/Vec3;scale(D)Lnet/minecraft/world/phys/Vec3;",

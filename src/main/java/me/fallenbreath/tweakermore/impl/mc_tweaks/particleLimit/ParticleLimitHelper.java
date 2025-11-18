@@ -54,7 +54,7 @@ public class ParticleLimitHelper
 		//$$ for (var particleRenderer : particles.values())
 		//$$ {
 		//$$ 	EvictingQueue<Particle> newQueue = EvictingQueue.create(newLimit);
-		//$$ 	newQueue.addAll(particleRenderer.getParticles());
+		//$$ 	newQueue.addAll(particleRenderer.getAll());
 		//$$ 	((ParticleRendererAccessor)particleRenderer).setParticles$TKM(newQueue);
 		//$$ }
 		//#else

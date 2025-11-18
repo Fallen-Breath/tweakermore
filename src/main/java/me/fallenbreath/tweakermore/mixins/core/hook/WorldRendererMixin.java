@@ -53,7 +53,10 @@ public abstract class WorldRendererMixin
 	//$$ 		method = "renderLevel",
 	//$$ 		slice = @Slice(
 	//$$ 				from = @At(
-	//$$ 						//#if MC >= 12106
+	//$$ 						//#if MC >= 12110
+	//$$ 						//$$ value = "INVOKE",
+	//$$ 						//$$ target = "Lnet/minecraft/client/renderer/LevelRenderer;addWeatherPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/world/phys/Vec3;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;)V"
+	//$$ 						//#elseif MC >= 12106
 	//$$ 						//$$ value = "INVOKE",
 	//$$ 						//$$ target = "Lnet/minecraft/client/renderer/LevelRenderer;addWeatherPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/world/phys/Vec3;FLcom/mojang/blaze3d/buffers/GpuBufferSlice;)V"
 	//$$ 						//#elseif MC >= 12104

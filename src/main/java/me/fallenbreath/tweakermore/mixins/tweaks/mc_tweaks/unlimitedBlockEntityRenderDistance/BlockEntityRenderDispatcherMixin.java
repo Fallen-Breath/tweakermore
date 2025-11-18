@@ -31,7 +31,7 @@ public abstract class BlockEntityRenderDispatcherMixin
 {
 	@ModifyExpressionValue(
 			//#if MC >= 12109
-			//$$ method = "getRenderState",
+			//$$ method = "tryExtractRenderState",
 			//#elseif MC >= 11500
 			method = "render(Lnet/minecraft/world/level/block/entity/BlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;)V",
 			//#else

@@ -58,8 +58,8 @@ public class InWorldGuiDrawer implements AutoCloseable
 		this.guiRenderer = new GuiRenderer(
 				this.guiState, immediate,
 				//#if MC >= 1.21.9
-				//$$ mc.gameRenderer.getEntityRenderCommandQueue(),  // TODO: check if this work
-				//$$ mc.gameRenderer.getEntityRenderDispatcher(),
+				//$$ mc.gameRenderer.getSubmitNodeStorage(),  // TODO: check if this work
+				//$$ mc.gameRenderer.getFeatureRenderDispatcher(),
 				//#endif
 				List.of()
 		);

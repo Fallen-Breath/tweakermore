@@ -36,7 +36,7 @@ public abstract class WorldRendererMixin
 {
 	//#if MC >= 1.21.9
 	//$$ @ModifyExpressionValue(
-	//$$ 		method = "fillEntityRenderStates",
+	//$$ 		method = "extractVisibleEntities",
 	//$$ 		at = @At(
 	//$$ 				value = "INVOKE",
 	//$$ 				target = "Lnet/minecraft/client/DeltaTracker;getGameTimeDeltaPartialTick(Z)F"

@@ -32,7 +32,11 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class EntityMixin
 {
 	@ModifyExpressionValue(
+			//#if MC >= 1.21.9
+			//$$ method = "moveOrInterpolateTo(Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;)V",
+			//#else
 			method = "moveOrInterpolateTo",
+			//#endif
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/world/entity/Entity;getInterpolation()Lnet/minecraft/world/entity/InterpolationHandler;"

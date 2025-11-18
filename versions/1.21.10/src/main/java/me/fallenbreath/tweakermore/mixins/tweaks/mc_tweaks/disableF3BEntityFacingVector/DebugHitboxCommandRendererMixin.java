@@ -21,21 +21,20 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableF3BEntityFacingVector;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
-import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.renderer.feature.HitboxFeatureRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import net.minecraft.client.renderer.feature.HitboxFeatureRenderer;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(HitboxFeatureRenderer.class)
 public abstract class DebugHitboxCommandRendererMixin
 {
 	@WrapWithCondition(
-			method = "renderDebugHitbox",
+			method = "renderHitboxesAndViewVector",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/client/renderer/ShapeRenderer;renderVector(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;Lorg/joml/Vector3f;Lnet/minecraft/world/phys/Vec3;I)V",

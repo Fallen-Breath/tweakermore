@@ -23,8 +23,8 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.nameTagRenderStrateg
 import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.nameTagRenderStrategy.PlayerEntityRenderStateWithPlayerProfileName;
 import net.minecraft.client.entity.ClientAvatarEntity;
-import net.minecraft.client.render.entity.PlayerEntityRenderer;
-import net.minecraft.client.renderer.entity.state.PlayerRenderState;
+import net.minecraft.client.renderer.entity.player.AvatarRenderer;
+import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.world.entity.Avatar;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(PlayerEntityRenderer.class)
+@Mixin(AvatarRenderer.class)
 public abstract class PlayerEntityRendererMixin<AvatarlikeEntity extends Avatar & ClientAvatarEntity>
 {
 	@Inject(
@@ -42,7 +42,7 @@ public abstract class PlayerEntityRendererMixin<AvatarlikeEntity extends Avatar 
 	private void nameTagRenderStrategy_attachPlayerProfileName(
 			CallbackInfo ci,
 			@Local(argsOnly = true) AvatarlikeEntity playerLikeEntity,
-			@Local(argsOnly = true) PlayerEntityRenderState playerEntityRenderState
+			@Local(argsOnly = true) AvatarRenderState playerEntityRenderState
 	)
 	{
 		String playerProfileName = null;
