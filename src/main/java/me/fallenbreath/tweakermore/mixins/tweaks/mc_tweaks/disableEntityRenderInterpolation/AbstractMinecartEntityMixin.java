@@ -46,7 +46,7 @@ public abstract class AbstractMinecartEntityMixin extends Entity
 	}
 
 	//#if MC >= 12103
-	//$$ @Shadow @Final private MinecartBehavior controller;
+	//$$ @Shadow @Final private MinecartBehavior behavior;
 	//#elseif MC >= 12002
 	//$$ @Shadow private int lerpSteps;
 	//#else
@@ -65,11 +65,11 @@ public abstract class AbstractMinecartEntityMixin extends Entity
 		if (TweakerMoreConfigs.DISABLE_ENTITY_RENDER_INTERPOLATION.getBooleanValue())
 		{
 			//#if MC >= 12103
-			//$$ if (this.controller instanceof DefaultMinecartControllerAccessor dmca)
+			//$$ if (this.behavior instanceof DefaultMinecartControllerAccessor dmca)
 			//$$ {
 			//$$ 	dmca.setLerpStep(1);
 			//$$ }
-			//$$ else if (this.controller instanceof ExperimentalMinecartControllerAccessor emca)
+			//$$ else if (this.behavior instanceof ExperimentalMinecartControllerAccessor emca)
 			//$$ {
 			//$$ 	// TODO: check if this works
 			//$$ 	emca.setTicksToNextRefresh(1);

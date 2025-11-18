@@ -42,7 +42,7 @@ public abstract class ClientWorldMixin
 {
 	@Inject(
 			//#if MC >= 12103
-			//$$ method = "setTime",
+			//$$ method = "setTimeFromServer",
 			//#else
 			method = "setDayTime",
 			//#endif

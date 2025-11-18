@@ -41,7 +41,7 @@ public abstract class LivingEntityMixin extends Entity
 
 	@ModifyVariable(
 			//#if MC >= 12103
-			//$$ method = "travelMidAir",
+			//$$ method = "travelInAir",
 			//#else
 			method = "travel",
 			//#endif

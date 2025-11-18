@@ -36,7 +36,7 @@ public abstract class BackgroundRendererMixin
 {
 	@ModifyVariable(
 			//#if MC >= 12103
-			//$$ method = "getFogColor",
+			//$$ method = "computeFogColor",
 			//#elseif MC >= 11500
 			method = "setupColor",
 			//#else

@@ -110,7 +110,11 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 							}
 						}
 
+						//#if MC >= 12103
+						//$$ String itemName = stack.getItem().getName().getString();
+						//#else
 						String itemName = stack.getItem().getDescription().getString();
+						//#endif
 						this.moveToPlayerInventory(containerScreen, playerInvSlots, slot, tryMoveAmount);
 						int moved = stackAmount - slot.getItem().getCount();
 						missing -= moved;
@@ -118,7 +122,7 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 						TweakerMoreMod.LOGGER.debug("Moved {}x (attempt {}x) {} to player inventory, still miss {} items", moved, tryMoveAmount, itemName, missing);
 						if (moved == 0)
 						{
-							TweakerMoreMod.LOGGER.debug("Player inventory is full for item {}", stack.getItem().getDescription().getString());
+							TweakerMoreMod.LOGGER.debug("Player inventory is full for item {}", itemName);
 							break;
 						}
 					}

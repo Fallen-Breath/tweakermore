@@ -180,7 +180,7 @@ public abstract class PlacementTweaksMixin
 		//$$ 	}
 		//$$ 	else
 		//$$ 	{
-		//$$ 		x = posIn.getX() + 2 + (facing.getId() * 2);
+		//$$ 		x = posIn.getX() + 2 + (facing.get3DDataValue() * 2);
 		//$$ 	}
 		//$$
 		//$$ 	if (FeatureToggle.TWEAK_AFTER_CLICKER.getBooleanValue())

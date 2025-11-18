@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024  Fallen_Breath and contributors
+ * Copyright (C) 2025  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,15 +18,23 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableEntityRenderInterpolation;
+package me.fallenbreath.tweakermore.util;
 
-import net.minecraft.world.entity.vehicle.OldMinecartBehavior;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Accessor;
+import net.minecraft.client.Minecraft;
 
-@Mixin(OldMinecartBehavior.class)
-public interface DefaultMinecartControllerAccessor
+public class GameUtils
 {
-	@Accessor("lerpSteps")
-	void setLerpStep(int lerpStep);
+	public static void scheduleOnClientThread(Minecraft mc, Runnable runnable)
+	{
+		//#if MC >= 1.21.3
+		//$$ mc.schedule(runnable);
+		//#else
+		mc.tell(runnable);
+		//#endif
+	}
+
+	public static void scheduleOnClientThread(Runnable runnable)
+	{
+		scheduleOnClientThread(Minecraft.getInstance(), runnable);
+	}
 }

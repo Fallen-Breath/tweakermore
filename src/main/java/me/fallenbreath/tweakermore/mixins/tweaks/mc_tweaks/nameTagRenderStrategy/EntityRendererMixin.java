@@ -39,7 +39,7 @@ import java.util.List;
 
 //#if MC >= 12103
 //$$ import net.minecraft.client.renderer.entity.state.EntityRenderState;
-//$$ import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
+//$$ import net.minecraft.client.renderer.entity.state.PlayerRenderState;
 //#endif
 
 @Mixin(EntityRenderer.class)
@@ -70,7 +70,7 @@ public abstract class EntityRendererMixin
 		if (
 				strategyType != RestrictionType.NONE &&
 				//#if MC >= 12103
-				//$$ entityState instanceof PlayerEntityRenderState playerEntityRenderState
+				//$$ entityState instanceof PlayerRenderState playerEntityRenderState
 				//#else
 				entity instanceof Player
 				//#endif

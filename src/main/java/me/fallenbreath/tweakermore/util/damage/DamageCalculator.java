@@ -99,7 +99,7 @@ public class DamageCalculator
 	{
 		float exposure =
 				//#if MC >= 12103
-				//$$ ServerExplosion.calculateReceivedDamage
+				//$$ ServerExplosion.getSeenPercent
 				//#else
 				Explosion.getSeenPercent
 				//#endif

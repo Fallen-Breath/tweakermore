@@ -55,7 +55,12 @@ public abstract class DeathScreenMixin extends Screen
 		{
 			// delay the operation a bit, cuz currently Minecraft is ticking the DeathScreen itself,
 			// which doesn't seem to be a nice moment to close the screen
-			this.minecraft.tell(this::autoRespawn$TKM$impl);
+			//#if MC >= 12103
+			//$$ this.minecraft.schedule
+			//#else
+			this.minecraft.tell
+			//#endif
+					(this::autoRespawn$TKM$impl);
 		}
 	}
 

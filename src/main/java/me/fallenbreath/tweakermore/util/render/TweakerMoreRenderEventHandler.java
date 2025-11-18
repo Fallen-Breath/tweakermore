@@ -30,7 +30,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.profiling.ProfilerFiller;
 
 //#if MC >= 12103
-//$$ import net.minecraft.util.profiling.ProfilerFiller;
+//$$ import net.minecraft.util.profiling.Profiler;
 //#endif
 
 //#if MC >= 12006

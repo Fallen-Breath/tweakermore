@@ -176,7 +176,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 			RenderGlobals.disableLighting();
 			//#endif
 
-			// ref: net.minecraft.client.gui.hud.InGameHud#renderStatusEffectOverlay
+			// ref: net.minecraft.client.gui.Gui#renderEffects
 
 			renderContext.scale(FONT_SCALE * RenderUtils.getSizeScalingXSign(), -FONT_SCALE, FONT_SCALE);
 			renderContext.translate(deltaX, 0, 0);
@@ -202,8 +202,8 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 			//#endif
 
 			//#if MC >= 12103
-			//$$ renderContext.getGuiDrawer().drawSpriteStretched(RenderLayer::getGuiTexturedOverlay, sprite, 0, 0, ICON_SIZE, ICON_SIZE, 0xFFFFFFFF);
-			//$$ renderContext.getGuiDrawer().draw();
+			//$$ renderContext.getGuiDrawer().blitSprite(RenderType::guiTexturedOverlay, sprite, 0, 0, ICON_SIZE, ICON_SIZE, 0xFFFFFFFF);
+			//$$ renderContext.getGuiDrawer().flush();
 			//#elseif MC >= 12000
 			//$$ renderContext.getGuiDrawer().blit(0, 0, 0, ICON_SIZE, ICON_SIZE, sprite);
 			//#elseif MC >= 11600

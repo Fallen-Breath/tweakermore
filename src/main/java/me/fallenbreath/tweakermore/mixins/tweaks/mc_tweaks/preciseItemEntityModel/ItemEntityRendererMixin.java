@@ -282,7 +282,7 @@ public abstract class ItemEntityRendererMixin
 	//$$ 	{
 	//$$ 		if (itemEntityRenderState instanceof ItemEntityRenderStateExtra itemEntityRenderStateExtra)
 	//$$ 		{
-	//$$ 			itemEntityRenderStateExtra.setEntityYaw$TKM(itemEntity.getYaw(tickDelta));
+	//$$ 			itemEntityRenderStateExtra.setEntityYaw$TKM(itemEntity.getYRot(tickDelta));
 	//$$ 		}
 	//$$ 	}
 	//$$ }

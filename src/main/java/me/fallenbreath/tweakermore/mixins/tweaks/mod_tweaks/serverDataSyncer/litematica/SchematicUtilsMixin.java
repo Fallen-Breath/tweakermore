@@ -32,6 +32,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.AreaSelectionUtil;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.TargetPair;
+import me.fallenbreath.tweakermore.util.GameUtils;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.Util;
@@ -65,7 +66,7 @@ public abstract class SchematicUtilsMixin
 			Minecraft mc = Minecraft.getInstance();
 			if (area != null && !mc.hasSingleplayerServer() && ServerDataSyncer.hasEnoughPermission())
 			{
-				Minecraft.getInstance().tell(() -> syncEverything(area));
+				GameUtils.scheduleOnClientThread(() -> syncEverything(area));
 			}
 		}
 		return area;
@@ -105,7 +106,7 @@ public abstract class SchematicUtilsMixin
 			return;
 		}
 
-		Minecraft.getInstance().tell(() -> {
+		GameUtils.scheduleOnClientThread(() -> {
 			try
 			{
 				currentSyncingArenaName = area.getName();

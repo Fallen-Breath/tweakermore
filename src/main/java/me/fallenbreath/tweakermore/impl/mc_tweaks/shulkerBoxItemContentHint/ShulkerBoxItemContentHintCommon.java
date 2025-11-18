@@ -178,11 +178,11 @@ public class ShulkerBoxItemContentHintCommon
 			return Optional.empty();
 		}
 
-		Item item = Registry.ITEM.
-				// remapping from low version to mc1.21.3 will rename the `get` to `getEntry`, which is bad
-				//#disable-remap
-				get(itemIdOpt.get());
-				//#enable-remap
+		//#if MC >= 12103
+		//$$ Item item = BuiltInRegistries.ITEM.getValue(itemIdOpt.get());
+		//#else
+		Item item = Registry.ITEM.get(itemIdOpt.get());
+		//#endif
 		return Optional.of(new ItemStack(item));
 	}
 }

@@ -131,7 +131,13 @@ public class BedHandler extends AbstractBlockHandler
 				//#else
 				new Vec3
 				//#endif
-						(this.toBedRootDirection.getNormal()).scale(0.5);
+						(this.toBedRootDirection.
+								//#if MC >= 12103
+								//$$ getUnitVec3i()
+								//#else
+								getNormal()
+								//#endif
+						).scale(0.5);
 		return headCenter.add(shiftToMiddle);
 	}
 }
