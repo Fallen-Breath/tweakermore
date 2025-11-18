@@ -56,6 +56,9 @@ public abstract class WorldRendererMixin
 	//$$ 						//#if MC >= 12106
 	//$$ 						//$$ value = "INVOKE",
 	//$$ 						//$$ target = "Lnet/minecraft/client/renderer/LevelRenderer;addWeatherPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/world/phys/Vec3;FLcom/mojang/blaze3d/buffers/GpuBufferSlice;)V"
+	//$$ 						//#elseif MC >= 12104
+	//$$ 						//$$ value = "INVOKE",
+	//$$ 						//$$ target = "Lnet/minecraft/client/renderer/LevelRenderer;addWeatherPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/world/phys/Vec3;FLnet/minecraft/client/renderer/FogParameters;)V"
 	//$$ 						//#elseif MC >= 12103
 	//$$ 						//$$ value = "INVOKE",
 	//$$ 						//$$ target = "Lnet/minecraft/client/renderer/LevelRenderer;addWeatherPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/client/renderer/LightTexture;Lnet/minecraft/world/phys/Vec3;FLnet/minecraft/client/renderer/FogParameters;)V"

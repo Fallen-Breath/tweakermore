@@ -38,7 +38,7 @@ import java.util.concurrent.CompletableFuture;
 public abstract class PlayerSkinTextureMixin
 {
 	@ModifyExpressionValue(
-			method = "downloadAndRegisterTexture",
+			method = "downloadAndRegisterSkin",
 			at = @At(
 					value = "INVOKE",
 					target = "Ljava/util/concurrent/CompletableFuture;supplyAsync(Ljava/util/function/Supplier;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;"

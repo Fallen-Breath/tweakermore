@@ -59,7 +59,7 @@ public abstract class MultiplayerScreenMixin
 		}
 
 		//#if MC >= 12104
-		//$$ newWidget.setScrollY(oldWidget.getScrollY());
+		//$$ newWidget.setScrollAmount(oldWidget.scrollAmount());
 		//#else
 		newWidget.setScrollAmount(oldWidget.getScrollAmount());
 		//#endif

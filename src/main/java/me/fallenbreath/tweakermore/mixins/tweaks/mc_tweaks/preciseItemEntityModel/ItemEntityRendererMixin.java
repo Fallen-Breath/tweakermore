@@ -44,10 +44,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ItemEntityRendererMixin
 {
 	@ModifyExpressionValue(
-			//#if MC >= 12109
-			//$$ method = "Lnet/minecraft/client/render/entity/ItemEntityRenderer;render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;ILnet/minecraft/client/render/entity/state/ItemStackEntityRenderState;Lnet/minecraft/util/math/random/Random;Lnet/minecraft/util/math/Box;)V",
-			//#elseif MC >= 12104
-			//$$ method = "renderStack",
+			//#if MC >= 12104
+			//$$ method = "renderMultipleFromCount",
 			//#elseif MC >= 12006
 			//$$ method = "renderMultipleFromCount(Lnet/minecraft/client/renderer/entity/ItemRenderer;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/world/item/ItemStack;Lnet/minecraft/client/resources/model/BakedModel;ZLnet/minecraft/util/RandomSource;)V",
 			//#elseif MC >= 11500
