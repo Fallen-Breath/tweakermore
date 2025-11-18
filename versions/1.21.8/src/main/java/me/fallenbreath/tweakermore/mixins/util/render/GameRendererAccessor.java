@@ -28,6 +28,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(GameRenderer.class)
 public interface GameRendererAccessor
 {
-	@Accessor
+	@Accessor("guiRenderState")
 	GuiRenderState getGuiState();
 }

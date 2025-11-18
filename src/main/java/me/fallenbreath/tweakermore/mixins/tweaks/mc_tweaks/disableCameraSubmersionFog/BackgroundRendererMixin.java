@@ -42,7 +42,7 @@ public abstract class BackgroundRendererMixin
 {
 	@ModifyExpressionValue(
 			//#if MC >= 12106
-			//$$ method = "getCameraSubmersionType",
+			//$$ method = "getFogType",
 			//#else
 			method = "setupFog",
 			//#endif

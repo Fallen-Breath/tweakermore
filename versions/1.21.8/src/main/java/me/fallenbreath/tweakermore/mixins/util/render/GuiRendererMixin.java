@@ -47,7 +47,7 @@ public abstract class GuiRendererMixin implements InWorldGuiRendererHook
 	}
 
 	@WrapWithCondition(
-			method = "renderPreparedDraws",
+			method = "draw",
 			at = @At(
 					value = "INVOKE",
 					target = "Lcom/mojang/blaze3d/systems/RenderSystem;setProjectionMatrix(Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lcom/mojang/blaze3d/ProjectionType;)V"
@@ -62,7 +62,7 @@ public abstract class GuiRendererMixin implements InWorldGuiRendererHook
 	}
 
 	@ModifyArg(
-			method = "renderPreparedDraws",
+			method = "draw",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/client/renderer/DynamicUniforms;writeTransform(Lorg/joml/Matrix4fc;Lorg/joml/Vector4fc;Lorg/joml/Vector3fc;Lorg/joml/Matrix4fc;F)Lcom/mojang/blaze3d/buffers/GpuBufferSlice;"

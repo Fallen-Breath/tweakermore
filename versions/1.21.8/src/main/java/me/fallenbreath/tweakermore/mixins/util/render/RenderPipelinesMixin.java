@@ -36,7 +36,7 @@ import me.fallenbreath.tweakermore.util.render.TweakerMoreRenderPipelines;
 @Mixin(RenderPipelines.class)
 public abstract class RenderPipelinesMixin
 {
-	@Shadow @Final private static RenderPipeline.Snippet POSITION_TEX_COLOR_SNIPPET;
+	@Shadow @Final private static RenderPipeline.Snippet GUI_TEXTURED_SNIPPET;
 
 	@Shadow
 	private static RenderPipeline register(RenderPipeline pipeline)
@@ -48,7 +48,7 @@ public abstract class RenderPipelinesMixin
 	private static void addTweakerMorePipelines(CallbackInfo ci)
 	{
 		TweakerMoreRenderPipelines.GUI_TEXTURED_NO_DEPTH_TEST = register(
-				RenderPipeline.builder(POSITION_TEX_COLOR_SNIPPET).
+				RenderPipeline.builder(GUI_TEXTURED_SNIPPET).
 				withLocation(IdentifierUtils.of(TweakerMoreMod.MOD_ID, "pipeline/gui_textured_no_depth_test")).
 				withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST).
 				withDepthWrite(false).

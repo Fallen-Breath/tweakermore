@@ -73,9 +73,7 @@ public abstract class KeyboardMixin
 			assert this.minecraft.player != null;
 
 			Consumer<String> commandSender =
-					//#if MC >= 12106
-					//$$ this.client.player.networkHandler::sendChatCommand;
-					//#elseif MC >= 11903
+					//#if MC >= 11903
 					//$$ this.minecraft.player.connection::sendCommand;
 					//#else
 					cmd -> this.minecraft.player.chat("/" + cmd);

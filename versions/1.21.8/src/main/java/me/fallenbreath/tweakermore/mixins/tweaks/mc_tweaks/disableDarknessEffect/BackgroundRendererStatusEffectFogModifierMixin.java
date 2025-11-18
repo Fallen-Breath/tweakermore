@@ -39,7 +39,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(MobEffectFogEnvironment.class)
 public abstract class BackgroundRendererStatusEffectFogModifierMixin
 {
-	@ModifyReturnValue(method = "shouldApply", at = @At("TAIL"))
+	@ModifyReturnValue(method = "isApplicable", at = @At("TAIL"))
 	private boolean disableDarknessEffect_doNotApplyIfItIsDarknessEffect(boolean shouldApply)
 	{
 		if (TweakerMoreConfigs.DISABLE_DARKNESS_EFFECT.getBooleanValue())

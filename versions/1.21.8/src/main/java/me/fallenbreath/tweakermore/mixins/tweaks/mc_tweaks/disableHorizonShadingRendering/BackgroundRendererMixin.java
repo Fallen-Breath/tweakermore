@@ -35,7 +35,7 @@ import org.spongepowered.asm.mixin.injection.Slice;
 public abstract class BackgroundRendererMixin
 {
 	@ModifyExpressionValue(
-			method = "getFogColor",
+			method = "computeFogColor",
 			slice = @Slice(
 					from = @At(
 							value = "INVOKE",

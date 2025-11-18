@@ -90,15 +90,15 @@ public abstract class EnderChestItemFetcherMixin
 							PlayerEnderChestContainer enderChestInventory = CACHE.computeIfAbsent(uuid, k -> new PlayerEnderChestContainer());
 							CACHE.keepAlive(uuid);
 							future.thenAccept(nbt -> {
-								// ref: net.minecraft.entity.player.Player#readAdditionalSaveData
+								// ref: net.minecraft.world.entity.player.Player#readAdditionalSaveData
 
 								//#if MC >= 12106
-								//$$ try (ProblemReporter.Logging logging = new ProblemReporter.Logging(player.getErrorReporterContext(), TweakerMoreMod.LOGGER))
+								//$$ try (ProblemReporter.ScopedCollector logging = new ProblemReporter.ScopedCollector(player.problemPath(), TweakerMoreMod.LOGGER))
 								//$$ {
 								//$$ 	if (nbt != null && EnderItemNbtUtils.containsList(nbt, "EnderItems"))
 								//$$ 	{
 								//$$ 		var nbtView = TagValueInput.create(logging, EntityUtils.getEntityWorld(player).registryAccess(), nbt);
-								//$$ 		enderChestInventory.readData(nbtView.getTypedListView("EnderItems", ItemStackWithSlot.CODEC));
+								//$$ 		enderChestInventory.fromSlots(nbtView.listOrEmpty("EnderItems", ItemStackWithSlot.CODEC));
 								//$$ 	}
 								//$$ }
 								//#else

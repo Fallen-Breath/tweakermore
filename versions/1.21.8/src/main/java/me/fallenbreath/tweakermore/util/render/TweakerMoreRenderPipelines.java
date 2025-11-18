@@ -24,6 +24,6 @@ import com.mojang.blaze3d.pipeline.RenderPipeline;
 
 public class TweakerMoreRenderPipelines
 {
-	// net.minecraft.client.gl.RenderPipelines#GUI_TEXTURED, but has depthTest disabled
+	// net.minecraft.client.renderer.RenderPipelines#GUI_TEXTURED, but has depthTest disabled
 	public static RenderPipeline GUI_TEXTURED_NO_DEPTH_TEST;
 }

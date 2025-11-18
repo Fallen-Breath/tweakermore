@@ -76,8 +76,8 @@ public class SafeAfkHelper
 					resetHurtTime();
 					mc.execute(() -> {
 						//#if MC >= 12106
-						//$$ // ref: mc1.21.5 net.minecraft.client.world.ClientWorld#disconnect
-						//$$ mc.world.disconnect(Component.translatable("multiplayer.status.quitting"));
+						//$$ // ref: mc1.21.5 net.minecraft.client.multiplayer.ClientLevel#disconnect
+						//$$ mc.level.disconnect(Component.translatable("multiplayer.status.quitting"));
 						//$$ mc.disconnectWithProgressScreen();
 						//#else
 						mc.level.disconnect();

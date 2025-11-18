@@ -133,7 +133,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 
 	private void renderStatusEffectIcon(WorldRenderContext context, Vec3 pos, MobEffect statusEffect, int amplifier, double deltaX, double kDeltaY)
 	{
-		var sprite = Gui.getEffectTexture(BuiltInRegistries.STATUS_EFFECT.getEntry(statusEffect));
+		var sprite = Gui.getMobEffectSprite(BuiltInRegistries.MOB_EFFECT.wrapAsHolder(statusEffect));
 		MixedRenderContext mrc = MixedRenderContext.create(context);
 
 		InWorldPositionTransformer positionTransformer = new InWorldPositionTransformer(pos);
@@ -150,7 +150,7 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 			mrc.scale(k, k, k);
 			mrc.translate(0, ICON_SIZE * (-0.5 + kDeltaY), 0);
 
-			mrc.getGuiDrawer().drawGuiTexture(TweakerMoreRenderPipelines.GUI_TEXTURED_NO_DEPTH_TEST, sprite, 0, 0, ICON_SIZE, ICON_SIZE);
+			mrc.getGuiDrawer().blitSprite(TweakerMoreRenderPipelines.GUI_TEXTURED_NO_DEPTH_TEST, sprite, 0, 0, ICON_SIZE, ICON_SIZE);
 			mrc.renderGuiElements();
 
 			RenderGlobals.enableDepthTest();
@@ -172,6 +172,6 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 
 	private static String getStatusEffectText(MobEffect statusEffect, int amplifier)
 	{
-		return StringUtils.translate(statusEffect.getTranslationKey()) + ' ' + StringUtils.translate("enchantment.level." + (amplifier + 1));
+		return StringUtils.translate(statusEffect.getDescriptionId()) + ' ' + StringUtils.translate("enchantment.level." + (amplifier + 1));
 	}
 }

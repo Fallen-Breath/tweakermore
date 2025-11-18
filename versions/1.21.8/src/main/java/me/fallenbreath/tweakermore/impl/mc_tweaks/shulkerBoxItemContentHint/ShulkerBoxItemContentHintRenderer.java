@@ -84,7 +84,7 @@ public class ShulkerBoxItemContentHintRenderer
 		isRendering.set(true);
 		try
 		{
-			renderContext.getGuiDrawer().drawItem(stack, x, y);
+			renderContext.getGuiDrawer().renderItem(stack, x, y);
 		}
 		finally
 		{
@@ -108,7 +108,7 @@ public class ShulkerBoxItemContentHintRenderer
 
 		var textRenderer = Minecraft.getInstance().font;
 		renderContext.translate(textX, textY);
-		renderContext.getGuiDrawer().drawText(textRenderer, text, 0, 0, textColor, true);
+		renderContext.getGuiDrawer().drawString(textRenderer, text, 0, 0, textColor, true);
 
 		scaler.restore();
 	}
