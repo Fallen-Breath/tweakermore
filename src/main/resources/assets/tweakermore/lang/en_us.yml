@@ -131,7 +131,7 @@ tweakermore:
         Using degree measure
     infoViewFollowFreecam:
       .: infoViewFollowFreecam
-      comment: Wen free camera from tweakeroo is enabled, use freecam's camera to render all info view features
+      comment: When free camera from tweakeroo is enabled, use freecam's camera to render all info view features
     infoViewTargetDistance:
       .: infoViewTargetDistance
       comment: The maximum target distance of info view

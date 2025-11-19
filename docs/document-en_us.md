@@ -493,7 +493,7 @@ Scale of the displayed text rendered by infoViewComparator
 
 ### infoViewFollowFreecam
 
-Wen free camera from tweakeroo is enabled, use freecam's camera to render all info view features
+When free camera from tweakeroo is enabled, use freecam's camera to render all info view features
 
 - Category: Features
 - Type: hotkey togglable boolean (Generic)
