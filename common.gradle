@@ -211,7 +211,7 @@ processResources {
 	// so we need to adjust it
 	filesMatching("tweakermore.optifine_mixins.json") {
 		def valueMap = [
-				"archivesBaseName": archivesBaseName,
+				"archivesBaseName": base.archivesName.get(),
 		]
 		expand valueMap
 	}
