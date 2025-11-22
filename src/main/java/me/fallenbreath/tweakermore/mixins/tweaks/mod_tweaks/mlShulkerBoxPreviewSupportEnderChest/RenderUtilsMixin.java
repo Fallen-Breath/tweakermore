@@ -22,14 +22,18 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.mlShulkerBoxPreview
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import fi.dy.masa.malilib.render.InventoryOverlay;
 import fi.dy.masa.malilib.render.RenderUtils;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.mlShulkerBoxPreviewSupportEnderChest.EnderChestItemFetcher;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
+
+//#if MC >= 1.21.11
+//$$ import fi.dy.masa.malilib.render.InventoryOverlayType;
+//#else
+import fi.dy.masa.malilib.render.InventoryOverlay;
+//#endif
 
 @Mixin(RenderUtils.class)
 public abstract class RenderUtilsMixin
@@ -51,12 +55,11 @@ public abstract class RenderUtilsMixin
 		return hasTag || EnderChestItemFetcher.enableFor(stack);
 	}
 
-	@ModifyVariable(
+	@ModifyExpressionValue(
 			method = "renderShulkerBoxPreview",
 			at = @At(
-					value = "INVOKE_ASSIGN",
-					target = "Lfi/dy/masa/malilib/util/InventoryUtils;getStoredItems(Lnet/minecraft/world/item/ItemStack;I)Lnet/minecraft/core/NonNullList;",
-					shift = At.Shift.AFTER
+					value = "INVOKE",
+					target = "Lfi/dy/masa/malilib/util/InventoryUtils;getStoredItems(Lnet/minecraft/world/item/ItemStack;I)Lnet/minecraft/core/NonNullList;"
 			)
 	)
 	private static NonNullList<ItemStack> mlShulkerBoxPreviewSupportEnderChest_hackItemList(NonNullList<ItemStack> items, @Local(argsOnly = true) ItemStack stack)
@@ -68,19 +71,30 @@ public abstract class RenderUtilsMixin
 		return items;
 	}
 
-	@ModifyVariable(
+	@ModifyExpressionValue(
 			method = "renderShulkerBoxPreview",
 			at = @At(
-					value = "INVOKE_ASSIGN",
-					target = "Lfi/dy/masa/malilib/render/InventoryOverlay;getInventoryType(Lnet/minecraft/world/item/ItemStack;)Lfi/dy/masa/malilib/render/InventoryOverlay$InventoryRenderType;",
-					shift = At.Shift.AFTER
+					value = "INVOKE",
+					//#if MC >= 1.21.11
+					//$$ target = "Lfi/dy/masa/malilib/render/InventoryOverlay;getInventoryType(Lnet/minecraft/world/item/ItemStack;)Lfi/dy/masa/malilib/render/InventoryOverlayType;"
+					//#else
+					target = "Lfi/dy/masa/malilib/render/InventoryOverlay;getInventoryType(Lnet/minecraft/world/item/ItemStack;)Lfi/dy/masa/malilib/render/InventoryOverlay$InventoryRenderType;"
+					//#endif
 			)
 	)
+	//#if MC >= 1.21.11
+	//$$ private static InventoryOverlayType mlShulkerBoxPreviewSupportEnderChest_modifyInventoryType(InventoryOverlayType type, @Local(argsOnly = true) ItemStack stack)
+	//#else
 	private static InventoryOverlay.InventoryRenderType mlShulkerBoxPreviewSupportEnderChest_modifyInventoryType(InventoryOverlay.InventoryRenderType type, @Local(argsOnly = true) ItemStack stack)
+	//#endif
 	{
 		if (EnderChestItemFetcher.enableFor(stack))
 		{
+			//#if MC >= 1.21.11
+			//$$ type = InventoryOverlayType.FIXED_27;
+			//#else
 			type = InventoryOverlay.InventoryRenderType.FIXED_27;
+			//#endif
 		}
 		return type;
 	}

@@ -76,6 +76,7 @@
     "tweaks.mc_tweaks.clientEntityTargetingSelectAll.ClientCommandSourceMixin",
     "tweaks.mc_tweaks.clientEntityTargetingSelectAll.GameRendererMixin",
     "tweaks.mc_tweaks.clientEntityTargetingSelectAll.KeyboardMixin",
+    "tweaks.mc_tweaks.clientEntityTargetingSelectAll.LocalPlayerMixin",
     "tweaks.mc_tweaks.clientEntityTargetingSelectAll.MinecraftClient_extendedTargetMixin",
     "tweaks.mc_tweaks.clientEntityTargetingSelectAll.MinecraftClient_pickEntityMixin",
     "tweaks.mc_tweaks.commandHistoryLimit.CommandHistoryManagerMixin",

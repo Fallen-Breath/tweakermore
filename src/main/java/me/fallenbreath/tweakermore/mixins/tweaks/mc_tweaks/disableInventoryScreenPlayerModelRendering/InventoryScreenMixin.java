@@ -23,11 +23,16 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableInventoryScre
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
-import net.minecraft.client.gui.screens.inventory.HorseInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+
+//#if MC >= 1.21.11
+//$$ import net.minecraft.client.gui.screens.inventory.AbstractMountInventoryScreen;
+//#else
+import net.minecraft.client.gui.screens.inventory.HorseInventoryScreen;
+//#endif
 
 //#if MC >= 12000
 //$$ import net.minecraft.client.gui.GuiGraphics;
@@ -38,7 +43,11 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(value = {
 		InventoryScreen.class,
 		CreativeModeInventoryScreen.class,
+		//#if MC >= 1.21.11
+		//$$ AbstractMountInventoryScreen.class,
+		//#else
 		HorseInventoryScreen.class,
+		//#endif
 })
 public abstract class InventoryScreenMixin
 {

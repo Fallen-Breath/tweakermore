@@ -18,19 +18,18 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.f3BEntityFacingVectorLength;
+package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.clientEntityTargetingSelectAll;
 
 import me.fallenbreath.tweakermore.util.mixin.DummyClass;
 import org.spongepowered.asm.mixin.Mixin;
 
 /**
- * See {@link EntityRenderDispatcherMixin} in mc < 1.21.9
+ * mc1.21.10- : subproject 1.15.2 (main project)
+ * mc1.21.11+ : subproject 1.21.11        <--------
  * <p>
- * mc1.21.8-          : subproject 1.15.2 (main project)        <--------
- * mc1.21.9 ~ 1.21.10 : subproject 1.21.10
- * mc1.21.11+         : subproject 1.21.11
+ * the implementation is in {@link LocalPlayerMixin} in this mc version
  */
 @Mixin(DummyClass.class)
-public abstract class DebugHitboxCommandRendererMixin
+public abstract class GameRendererMixin
 {
 }

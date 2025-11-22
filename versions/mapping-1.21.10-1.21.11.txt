@@ -1,0 +1,2 @@
+net.minecraft.client.Camera getEntity() entity()
+net.minecraft.client.Camera getPosition() position()

@@ -28,6 +28,7 @@ import me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.serverDataSyncer.Dou
 import me.fallenbreath.tweakermore.util.EntityUtils;
 import me.fallenbreath.tweakermore.util.compat.carpettisaddition.CarpetTISAdditionAccess;
 import me.fallenbreath.tweakermore.util.event.TweakerMoreEvents;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
@@ -42,6 +43,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
+
+//#if MC >= 12111
+//$$ import net.minecraft.server.permissions.Permission;
+//$$ import net.minecraft.server.permissions.PermissionCheck;
+//$$ import net.minecraft.server.permissions.PermissionLevel;
+//#endif
 
 //#if MC >= 12106
 //$$ import net.minecraft.world.level.storage.TagValueInput;
@@ -85,10 +92,21 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 		return this.queryHandler;
 	}
 
+	@SuppressWarnings("SameParameterValue")
+	private static boolean doesPlayerHasPermission(Player player, int level)
+	{
+		//#if MC >= 1.21.11
+		//$$ var permission = new Permission.HasCommandLevel(PermissionLevel.byId(level));
+		//$$ return new PermissionCheck.Require(permission).check(player.permissions());
+		//#else
+		return player.hasPermissions(level);
+		//#endif
+	}
+
 	public static boolean hasEnoughPermission()
 	{
 		Minecraft mc = Minecraft.getInstance();
-		if (mc.player != null && mc.player.hasPermissions(2))
+		if (mc.player != null && doesPlayerHasPermission(mc.player,2))
 		{
 			return true;
 		}

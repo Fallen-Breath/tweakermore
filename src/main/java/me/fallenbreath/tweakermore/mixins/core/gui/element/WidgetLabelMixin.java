@@ -37,7 +37,9 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.List;
 
-//#if MC >= 12000
+//#if MC >= 12111
+//$$ import fi.dy.masa.malilib.render.GuiContext;
+//#elseif MC >= 12000
 //$$ import net.minecraft.client.gui.GuiGraphics;
 //#endif
 
@@ -127,7 +129,9 @@ public abstract class WidgetLabelMixin extends WidgetBase
 			int mouseX, int mouseY, boolean selected,
 			//#endif
 
-			//#if MC >= 12000
+			//#if MC >= 12111
+			//$$ GuiContext matrixStackOrDrawContext,
+			//#elseif MC >= 12000
 			//$$ GuiGraphics matrixStackOrDrawContext,
 			//#elseif MC >= 11600
 			//$$ PoseStack matrixStackOrDrawContext,

@@ -65,11 +65,15 @@ public abstract class GuiRendererMixin implements InWorldGuiRendererHook
 			method = "draw",
 			at = @At(
 					value = "INVOKE",
+					//#if MC >= 1.21.11
+					//$$ target = "Lnet/minecraft/client/renderer/DynamicUniforms;writeTransform(Lorg/joml/Matrix4fc;Lorg/joml/Vector4fc;Lorg/joml/Vector3fc;Lorg/joml/Matrix4fc;)Lcom/mojang/blaze3d/buffers/GpuBufferSlice;"
+					//#else
 					target = "Lnet/minecraft/client/renderer/DynamicUniforms;writeTransform(Lorg/joml/Matrix4fc;Lorg/joml/Vector4fc;Lorg/joml/Vector3fc;Lorg/joml/Matrix4fc;F)Lcom/mojang/blaze3d/buffers/GpuBufferSlice;"
+					//#endif
 			),
 			index = 0
 	)
-	private Matrix4fc w(Matrix4fc matrix4fc)
+	private Matrix4fc setMatricToGlobalModelViewMatrix(Matrix4fc matrix4fc)
 	{
 		if (this.inWorldGuiRender$TKM)
 		{

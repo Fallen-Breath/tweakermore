@@ -21,21 +21,21 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.f3BEntityFacingVectorLength;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.renderer.feature.HitboxFeatureRenderer;
+import net.minecraft.client.renderer.debug.EntityHitboxDebugRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 /**
  * mc1.21.8-          : subproject 1.15.2 (main project)
- * mc1.21.9 ~ 1.21.10 : subproject 1.21.10        <--------
- * mc1.21.11+         : subproject 1.21.11
+ * mc1.21.9 ~ 1.21.10 : subproject 1.21.10
+ * mc1.21.11+         : subproject 1.21.11        <--------
  */
-@Mixin(HitboxFeatureRenderer.class)
+@Mixin(EntityHitboxDebugRenderer.class)
 public abstract class DebugHitboxCommandRendererMixin
 {
 	@ModifyArg(
-			method = "renderHitboxesAndViewVector",
+			method = "showHitboxes",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/world/phys/Vec3;scale(D)Lnet/minecraft/world/phys/Vec3;",

@@ -41,6 +41,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
+/**
+ * mc1.21.10- : subproject 1.15.2 (main project)
+ * mc1.21.11+ : subproject 1.21.11        <--------
+ */
 @Mixin(ChatScreen.class)
 public abstract class ChatScreenMixin extends Screen
 {

@@ -32,7 +32,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-//#if MC >= 12000
+//#if MC >= 12111
+//$$ import fi.dy.masa.malilib.render.GuiContext;
+//#elseif MC >= 12000
 //$$ import net.minecraft.client.gui.GuiGraphics;
 //#elseif MC >= 11600
 //$$ import com.mojang.blaze3d.vertex.PoseStack;
@@ -84,7 +86,9 @@ public abstract class WidgetListBaseMixin<TYPE, WIDGET extends WidgetListEntryBa
 
 	@Inject(method = "drawContents", at = @At("TAIL"), remap = false)
 	private void drawTweakerMoreConfigGuiDropDownListAgainAfterHover(
-			//#if MC >= 12000
+			//#if MC >= 12111
+			//$$ GuiContext matrixStackOrDrawContext,
+			//#elseif MC >= 12000
 			//$$ GuiGraphics matrixStackOrDrawContext,
 			//#elseif MC >= 11600
 			//$$ PoseStack matrixStackOrDrawContext,
@@ -114,7 +118,9 @@ public abstract class WidgetListBaseMixin<TYPE, WIDGET extends WidgetListEntryBa
 
 	@Unique
 	private void drawTweakerMoreConfigGuiDropDownListAgain(
-			//#if MC >= 12000
+			//#if MC >= 12111
+			//$$ GuiContext matrixStackOrDrawContext,
+			//#elseif MC >= 12000
 			//$$ GuiGraphics matrixStackOrDrawContext,
 			//#elseif MC >= 11600
 			//$$ PoseStack matrixStackOrDrawContext,

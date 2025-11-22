@@ -26,6 +26,10 @@ import org.spongepowered.asm.mixin.Mixin;
 
 /**
  * See {@link EntityRenderDispatcherMixin} in mc < 1.21.9
+ * <p>
+ * mc1.21.8-          : subproject 1.15.2 (main project)        <--------
+ * mc1.21.9 ~ 1.21.10 : subproject 1.21.10
+ * mc1.21.11+         : subproject 1.21.11
  */
 @Mixin(DummyClass.class)
 public abstract class DebugHitboxCommandRendererMixin

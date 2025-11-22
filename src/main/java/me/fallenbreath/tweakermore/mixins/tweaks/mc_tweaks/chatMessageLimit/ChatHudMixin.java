@@ -81,10 +81,17 @@ public abstract class ChatHudMixin
 	}
 
 	@ModifyArgs(
+			//#if MC >= 12111
+			//$$ method = "render(Lnet/minecraft/client/gui/components/ChatComponent$ChatGraphicsAccess;IIZ)V",
+			//#else
 			method = "render",
+			//#endif
 			at = @At(
 					value = "INVOKE",
-					//#if MC >= 12000
+					//#if MC >= 12111
+					//$$ target = "Lnet/minecraft/client/gui/components/ChatComponent$ChatGraphicsAccess;fill(IIIII)V",
+					//$$ ordinal = 0
+					//#elseif MC >= 12000
 					//$$ target = "Lnet/minecraft/client/gui/GuiGraphics;fill(IIIII)V"
 					//#elseif MC >= 11600
 					//$$ target = "Lnet/minecraft/client/gui/components/ChatComponent;fill(Lcom/mojang/blaze3d/vertex/PoseStack;IIIII)V"

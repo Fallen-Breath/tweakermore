@@ -52,7 +52,9 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-//#if MC >= 12000
+//#if MC >= 12111
+//$$ import fi.dy.masa.malilib.render.GuiContext;
+//#elseif MC >= 12000
 //$$ import net.minecraft.client.gui.GuiGraphics;
 //#elseif MC >= 11600
 //$$ import com.mojang.blaze3d.vertex.PoseStack;
@@ -310,7 +312,9 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 	}
 
 	public void renderDropDownList(
-			//#if MC >= 12000
+			//#if MC >= 12111
+			//$$ GuiContext matrixStackOrDrawContext,
+			//#elseif MC >= 12000
 			//$$ GuiGraphics matrixStackOrDrawContext,
 			//#elseif MC >= 11600
 			//$$ PoseStack matrixStackOrDrawContext,

@@ -32,6 +32,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.biome.Biomes;
 
+//#if MC >= 1.21.11
+//$$ import net.minecraft.world.attribute.EnvironmentAttributes;
+//#endif
+
 /**
  * Bed logic:
  * - Click at bed head: Always explodes. Explodes at bed head pos
@@ -52,7 +56,7 @@ public class BedHandler extends AbstractBlockHandler
 		this.bedRootPos = null;
 		if (blockState.getBlock() instanceof BedBlock)
 		{
-			// ref: net.minecraft.block.BedBlock#onUse
+			// ref: net.minecraft.world.level.block.BedBlock#use
 			boolean currentIsHead = blockState.getValue(BedBlock.PART) == BedPart.HEAD;
 			Direction direction = blockState.getValue(BedBlock.FACING);
 			if (currentIsHead)
@@ -82,10 +86,12 @@ public class BedHandler extends AbstractBlockHandler
 	@Override
 	public boolean isValid()
 	{
-		// ref: net.minecraft.block.BedBlock#onUse
+		// ref: net.minecraft.world.level.block.BedBlock#use
 		if (this.bedHeadPos != null)  // isBed check
 		{
-			//#if MC >= 11600
+			//#if MC >= 12111
+			//$$ return world.getBestWorld().environmentAttributes().getValue(EnvironmentAttributes.BED_RULE, this.bedHeadPos).explodes();
+			//#elseif MC >= 11600
 			//$$ return !BedBlock.canSetSpawn(world.getBestWorld());
 			//#else
 			return !this.world.getBestWorld().dimension.mayRespawn() || this.world.getBestWorld().getBiome(blockPos) == Biomes.NETHER;

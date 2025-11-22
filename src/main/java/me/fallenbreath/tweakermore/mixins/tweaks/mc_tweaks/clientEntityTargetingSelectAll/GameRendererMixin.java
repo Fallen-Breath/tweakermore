@@ -38,6 +38,10 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.function.Predicate;
 
+/**
+ * mc1.21.10- : subproject 1.15.2 (main project)        <--------
+ * mc1.21.11+ : subproject 1.21.11
+ */
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin
 {

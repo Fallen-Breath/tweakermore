@@ -37,7 +37,9 @@ import net.minecraft.util.profiling.ProfilerFiller;
 //$$ import org.joml.Matrix4fStack;
 //#endif
 
-//#if MC >= 12000
+//#if MC >= 12111
+//$$ import fi.dy.masa.malilib.render.GuiContext;
+//#elseif MC >= 12000
 //$$ import net.minecraft.client.gui.GuiGraphics;
 //#endif
 
@@ -95,7 +97,9 @@ public abstract class TweakerMoreRenderEventHandler
 	{
 		@Override
 		public void onRenderGameOverlayPost(
-				//#if MC >= 12000
+				//#if MC >= 12111
+				//$$ GuiContext matrixStackOrDrawContext
+				//#elseif MC >= 12000
 				//$$ GuiGraphics matrixStackOrDrawContext
 				//#elseif MC >= 11700
 				//$$ PoseStack matrixStackOrDrawContext

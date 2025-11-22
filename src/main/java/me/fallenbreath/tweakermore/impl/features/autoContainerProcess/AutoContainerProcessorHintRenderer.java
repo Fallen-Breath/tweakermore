@@ -33,8 +33,8 @@ import me.fallenbreath.tweakermore.util.render.context.GuiRenderContext;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//#if MC >= 11600
-//$$ import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
+//#if MC >= 12111
+//$$ import fi.dy.masa.malilib.render.GuiContext;
 //#endif
 
 public class AutoContainerProcessorHintRenderer implements TweakerMoreIRenderer
@@ -62,7 +62,9 @@ public class AutoContainerProcessorHintRenderer implements TweakerMoreIRenderer
 		lines.add(0, GuiBase.TXT_UNDERLINE + fi.dy.masa.malilib.util.StringUtils.translate("tweakermore.impl.containerProcessorHint.title"));
 
 		RenderUtils.renderText(
-				//#if MC >= 12106
+				//#if MC >= 12111
+				//$$ GuiContext.fromGuiGraphics(context.getGuiDrawer()),
+				//#elseif MC >= 12106
 				//$$ context.getGuiDrawer(),
 				//#endif
 				0, 0,

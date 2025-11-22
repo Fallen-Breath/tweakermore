@@ -18,36 +18,33 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.f3BEntityFacingVectorLength;
+package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableF3BEntityFacingVector;
 
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.renderer.feature.HitboxFeatureRenderer;
+import net.minecraft.client.renderer.debug.EntityHitboxDebugRenderer;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 /**
  * mc1.21.8-          : subproject 1.15.2 (main project)
- * mc1.21.9 ~ 1.21.10 : subproject 1.21.10        <--------
- * mc1.21.11+         : subproject 1.21.11
+ * mc1.21.9 ~ 1.21.10 : subproject 1.21.10
+ * mc1.21.11+         : subproject 1.21.11        <--------
  */
-@Mixin(HitboxFeatureRenderer.class)
+@Mixin(EntityHitboxDebugRenderer.class)
 public abstract class DebugHitboxCommandRendererMixin
 {
-	@ModifyArg(
-			method = "renderHitboxesAndViewVector",
+	@WrapWithCondition(
+			method = "showHitboxes",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/world/phys/Vec3;scale(D)Lnet/minecraft/world/phys/Vec3;",
+					target = "Lnet/minecraft/gizmos/Gizmos;arrow(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;I)Lnet/minecraft/gizmos/GizmoProperties;",
 					ordinal = 0
 			)
 	)
-	private static double f3BDisableFacingVector_tweakLength(double len)
+	private static boolean f3BDisableFacingVector_cancelCall(Vec3 start, Vec3 end, int argb)
 	{
-		if (TweakerMoreConfigs.F3_B_ENTITY_FACING_VECTOR_LENGTH.isModified())
-		{
-			len = Math.max(0, TweakerMoreConfigs.F3_B_ENTITY_FACING_VECTOR_LENGTH.getDoubleValue());
-		}
-		return len;
+		return !TweakerMoreConfigs.DISABLE_F3_B_ENTITY_FACING_VECTOR.getBooleanValue();
 	}
 }

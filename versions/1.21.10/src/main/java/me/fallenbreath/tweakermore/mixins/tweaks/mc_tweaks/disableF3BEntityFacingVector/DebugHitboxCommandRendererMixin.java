@@ -30,6 +30,11 @@ import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+/**
+ * mc1.21.8-          : subproject 1.15.2 (main project)
+ * mc1.21.9 ~ 1.21.10 : subproject 1.21.10        <--------
+ * mc1.21.11+         : subproject 1.21.11
+ */
 @Mixin(HitboxFeatureRenderer.class)
 public abstract class DebugHitboxCommandRendererMixin
 {

@@ -22,14 +22,13 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.movingPistonBlockSel
 
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
-import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.movingPistonBlockSelectable.MovingPistonBlockSelectableHelper;
 import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 
-//#if MC >= 12006
+//#if 12006 <= MC && MC < 12111
 //$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 //#else
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -39,7 +38,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class GameRendererMixin
 {
 	@Inject(
-			//#if MC >= 12006
+			//#if MC >= 12111
+			//$$ method = "pick(F)V",
+			//#elseif MC >= 12006
 			//$$ method = "pick(Lnet/minecraft/world/entity/Entity;DDF)Lnet/minecraft/world/phys/HitResult;",
 			//#else
 			method = "pick",
@@ -47,7 +48,7 @@ public abstract class GameRendererMixin
 			at = @At("HEAD")
 	)
 	private void movingPistonBlockSelectable_clientCrosshairTargetUpdate_start(
-			//#if MC >= 12006
+			//#if 12006 <= MC && MC < 12111
 			//$$ CallbackInfoReturnable<?> cir,
 			//#else
 			CallbackInfo ci,
@@ -63,7 +64,9 @@ public abstract class GameRendererMixin
 	}
 
 	@Inject(
-			//#if MC >= 12006
+			//#if MC >= 12111
+			//$$ method = "pick(F)V",
+			//#elseif MC >= 12006
 			//$$ method = "pick(Lnet/minecraft/world/entity/Entity;DDF)Lnet/minecraft/world/phys/HitResult;",
 			//#else
 			method = "pick",
@@ -71,7 +74,7 @@ public abstract class GameRendererMixin
 			at = @At("TAIL")
 	)
 	private void movingPistonBlockSelectable_clientCrosshairTargetUpdate_end(
-			//#if MC >= 12006
+			//#if 12006 <= MC && MC < 12111
 			//$$ CallbackInfoReturnable<?> cir,
 			//#else
 			CallbackInfo ci,

@@ -30,11 +30,16 @@ import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSy
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.HolderLookup;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+
+//#if MC >= 1.21.11
+//$$ import fi.dy.masa.malilib.util.data.tag.CompoundData;
+//#else
+import net.minecraft.nbt.CompoundTag;
+//#endif
 
 @Restriction(require = @Condition(ModIds.minihud))
 @Mixin(InventoryOverlayHandler.class)
@@ -60,7 +65,14 @@ public abstract class InventoryOverlayHandlerMixin
 	}
 
 	@ModifyVariable(method = "getTargetInventoryFromEntity", at = @At("HEAD"), argsOnly = true)
-	private Entity serverDataSyncer4InventoryOverlay_entity(Entity entity, @Local(argsOnly = true) CompoundTag nbt)
+	private Entity serverDataSyncer4InventoryOverlay_entity(
+			Entity entity,
+			//#if MC >= 1.21.11
+			//$$ @Local(argsOnly = true) CompoundData nbt
+			//#else
+			@Local(argsOnly = true) CompoundTag nbt
+			//#endif
+	)
 	{
 		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
 		{

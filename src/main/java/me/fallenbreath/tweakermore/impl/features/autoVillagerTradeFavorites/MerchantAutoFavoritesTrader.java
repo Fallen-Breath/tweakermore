@@ -49,7 +49,14 @@ public class MerchantAutoFavoritesTrader
 				MerchantMenu container = ((MerchantScreen) screen).getMenu();
 
 				//#if MC >= 11600
-				//$$ if (!VillagerDataStorage.getInstance().getFavoritesForCurrentVillager(container).favorites.isEmpty())
+				//$$ if (
+				//$$ 		!VillagerDataStorage.getInstance().getFavoritesForCurrentVillager(container).
+				//$$ 		//#if MC >= 12111
+				//$$ 		//$$ favorites().isEmpty()
+				//$$ 		//#else
+				//$$ 		favorites.isEmpty()
+				//$$ 		//#endif
+				//$$ )
 				//$$ {
 				//$$ 	InventoryUtils.villagerTradeEverythingPossibleWithAllFavoritedTrades();
 				//$$ 	InfoUtils.printActionbarMessage("tweakermore.impl.autoVillagerTradeFavorites.triggered", config.getPrettyName(), screen.getTitle());

@@ -30,6 +30,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
+//#if MC >= 1.21.11
+//$$ import fi.dy.masa.malilib.render.GuiContext;
+//#endif
+
 //#if MC >= 1.21.9
 //$$ import net.minecraft.client.input.CharacterEvent;
 //$$ import net.minecraft.client.input.KeyEvent;
@@ -148,7 +152,11 @@ public class SelectorDropDownList<T extends IStringValue> extends WidgetDropDown
 	 */
 	@Override
 	//#if MC >= 12106
+	//$$ //#if MC >= 12111
+	//$$ //$$ public void postRenderHovered(GuiContext drawContext, int mouseX, int mouseY, boolean selected)
+	//$$ //#else
 	//$$ public void postRenderHovered(GuiGraphics drawContext, int mouseX, int mouseY, boolean selected)
+	//$$ //#endif
 	//$$ {
 	//$$ 	super.postRenderHovered(drawContext, mouseX, mouseY, selected);
 	//$$ 	if (this.hoverText != null && this.isMouseOver(mouseX, mouseY) && !this.isOpen)

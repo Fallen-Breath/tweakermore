@@ -29,6 +29,10 @@ import net.minecraft.world.level.block.RespawnAnchorBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 
+//#if MC >= 1.21.11
+//$$ import net.minecraft.world.attribute.EnvironmentAttributes;
+//#endif
+
 public class RespawnAnchorHandler extends AbstractBlockHandler
 {
 	public RespawnAnchorHandler(RenderVisitorWorldView world, BlockPos blockPos, BlockState blockState)
@@ -39,10 +43,15 @@ public class RespawnAnchorHandler extends AbstractBlockHandler
 	@Override
 	public boolean isValid()
 	{
-		// ref: net.minecraft.block.RespawnAnchorBlock.onUse
+		// ref: net.minecraft.world.level.block.RespawnAnchorBlock#use
 		if (this.blockState.getBlock() instanceof RespawnAnchorBlock)
 		{
+			// XXX: check if clientlevel works too since RespawnAnchorBlock.canSetSpawn uses serverlevel
+			//#if MC >= 1.21.11
+			//$$ return !this.world.getBestWorld().environmentAttributes().getValue(EnvironmentAttributes.RESPAWN_ANCHOR_WORKS, blockPos);
+			//#else
 			return !RespawnAnchorBlock.canSetSpawn(this.world.getBestWorld());
+			//#endif
 		}
 		return false;
 	}
