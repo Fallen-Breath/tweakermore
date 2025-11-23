@@ -70,7 +70,7 @@ public abstract class LocalPlayerMixin extends Player
 	@Shadow
 	private static HitResult pick(Entity cameraEntity, double blockInteractionRange, double entityInteractionRange, float partialTicks)
 	{
-		return null;
+		throw new AssertionError();
 	}
 
 	@Unique private static final Predicate<Entity> extendedPredicateThatAcceptsAll = e -> true;
