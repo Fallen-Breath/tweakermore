@@ -1066,6 +1066,11 @@ public class TweakerMoreConfigs
 
 	static
 	{
+		loadConfigFields();
+	}
+
+	private static void loadConfigFields()
+	{
 		for (Field field : TweakerMoreConfigs.class.getDeclaredFields())
 		{
 			Config annotation = field.getAnnotation(Config.class);
@@ -1088,7 +1093,7 @@ public class TweakerMoreConfigs
 						));
 					}
 
-					TweakerMoreOption tweakerMoreOption = new TweakerMoreOption(annotation, (TweakerMoreIConfigBase)config);
+					TweakerMoreOption tweakerMoreOption = new TweakerMoreOption(field.getName(), annotation, (TweakerMoreIConfigBase)config);
 					OPTIONS.add(tweakerMoreOption);
 					CATEGORY_TO_OPTION.computeIfAbsent(tweakerMoreOption.getCategory(), k -> Lists.newArrayList()).add(tweakerMoreOption);
 					TYPE_TO_OPTION.computeIfAbsent(tweakerMoreOption.getType(), k -> Lists.newArrayList()).add(tweakerMoreOption);
@@ -1100,6 +1105,26 @@ public class TweakerMoreConfigs
 					TweakerMoreMod.LOGGER.error("TweakerMoreConfigs init failed", e);
 					throw new RuntimeException(e);
 				}
+			}
+		}
+	}
+
+	public static void validateOptionTranslations()
+	{
+		for (TweakerMoreOption option : OPTIONS)
+		{
+			TweakerMoreIConfigBase config = option.getConfig();
+			if (config.getConfigGuiDisplayName().startsWith("tweakermore.config."))
+			{
+				TweakerMoreMod.LOGGER.warn("Found missing translation for the gui display name of config {} (field {})", config.getName(), option.getFieldName());
+			}
+			if (config.getComment() == null || config.getComment().startsWith("tweakermore.config."))
+			{
+				TweakerMoreMod.LOGGER.warn("Found missing translation for the comment of config {} (field {})", config.getName(), option.getFieldName());
+			}
+			if (config instanceof TweakerMoreConfigBooleanHotkeyed && config.getPrettyName().startsWith("tweakermore.config."))
+			{
+				TweakerMoreMod.LOGGER.warn("Found missing translation for the pretty name of config {} (field {})", config.getName(), option.getFieldName());
 			}
 		}
 	}

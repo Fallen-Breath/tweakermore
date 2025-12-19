@@ -43,6 +43,7 @@ tweakermore:
         若启用，则在使用@option#autoCollectMaterialListItem@从容器中取出物品时，
         不会取走容器格子中的所有物品，而是会保留指定数量的物品
         另见：选项 @option#autoCollectMaterialListItemRetainItemAmount@
+      pretty_name: 自动收集材料列表物品-保留容器物品
     autoCollectMaterialListItemRetainItemAmount:
       .: 自动收集材料列表物品-保留容器物品数
       comment: 功能@option#autoCollectMaterialListItemRetainItem@保留的物品数量
@@ -89,6 +90,7 @@ tweakermore:
     autoRespawn:
       .: 自动重生
       comment: 自动在死亡界面的@tr#deathScreen.spectate@/@tr#deathScreen.respawn@按钮变为可用时进行重生
+      pretty_name: 自动重生
     containerProcessorHint:
       .: 自动容器处理提示
       comment: 在界面右上角显示自动容器处理相关功能的开启情况，包括：
@@ -114,6 +116,7 @@ tweakermore:
     fireworkRocketThrottler:
       .: 烟花火箭限速器
       comment: 限制烟花火箭的最大使用频率，防止连点器放烟花
+      pretty_name: 烟花火箭限速器
     fireworkRocketThrottlerCooldown:
       .: 烟花火箭限速器-冷却时间
       comment: 选项@option#fireworkRocketThrottler@的冷却时间，单位秒
@@ -132,6 +135,7 @@ tweakermore:
     infoViewFollowFreecam:
       .: 信息展示设置-跟随Freecam
       comment: 在tweakeroo的freecam开启时，跟随freecam的相机实体来渲染信息展示相关特性
+      pretty_name: 信息展示设置-跟随Freecam
     infoViewTargetDistance:
       .: 信息展示设置-目标距离
       comment: 信息展示目标的最大距离
@@ -150,6 +154,7 @@ tweakermore:
     infoViewBeacon:
       .: 信息展示-信标
       comment: 展示信标的状态效果
+      pretty_name: 信息展示-信标
     infoViewBeaconRenderStrategy:
       .: 信息展示-信标-渲染策略
       comment: 选项@option#infoViewBeacon@的渲染策略
@@ -161,6 +166,7 @@ tweakermore:
       comment: |-
         展示比较器的信号强度
         在多人服务器中，比较器方块实体的数据可以通过选项@option#serverDataSyncer@同步至客户端
+      pretty_name: 信息展示-比较器
     infoViewComparatorRenderStrategy:
       .: 信息展示-比较器-渲染策略
       comment: 选项@option#infoViewComparator@的渲染策略
@@ -193,6 +199,7 @@ tweakermore:
       comment: |-
         展示作物类方块的生长速度、铜块的锈蚀速度，以及相关的信息
         注：展示的概率是随机刻选择后的概率
+      pretty_name: 信息展示-生长速度
     infoViewGrowthSpeedRenderStrategy:
       .: 信息展示-生长速度-渲染策略
       comment: 选项@option#infoViewGrowthSpeed@的渲染策略
@@ -207,6 +214,7 @@ tweakermore:
       comment: |-
         展示漏斗的冷却时间
         在多人服务器中，漏斗方块实体的数据可以通过选项@option#serverDataSyncer@同步至客户端
+      pretty_name: 信息展示-漏斗
     infoViewHopperRenderStrategy:
       .: 信息展示-漏斗-渲染策略
       comment: 选项@option#infoViewHopper@的渲染策略
@@ -408,12 +416,14 @@ tweakermore:
       comment: |-
         让屏障的粒子效果在玩家未手持屏障物品时也依然可被渲染
         当然，你还是需要处于创造模式才能让屏障粒子显形
+      pretty_name: 屏障粒子始终可见
     blockEventThrottler:
       .: 方块事件节流阀
       comment: |-
         方块事件节流阀功能的总开关
         约束每个游戏刻内，客户端可以处理的方块事件数量
         超出限制的方块事件将被抛弃
+      pretty_name: 方块事件节流阀
     blockEventThrottlerTargetBlocks:
       .: 方块事件节流阀-目标方块
       comment: |-
@@ -451,6 +461,7 @@ tweakermore:
         2. 输入/kill然后tab补全面前的投掷物实体（UUID补全） 
         3. 把一个物品实体用鼠标中间拎进物品栏 (实体物品提取)
         注：原版环境下，只能选中有碰撞箱且非旁观者的实体
+      pretty_name: 客户端实体目标选择所有实体
     commandHistoryLimit:
       .: 指令历史数量上限
       comment: 修改历史命令的最大数量，该历史也会被存储在 "command_history.txt" 文件中
@@ -646,6 +657,7 @@ tweakermore:
       comment: |-
         FOV覆盖的开关
         另见：选项 @option#fovOverrideValue@，即FOV覆盖的取值
+      pretty_name: FOV覆盖-开关
     fovOverrideValue:
       .: FOV覆盖-取值
       comment: |-
@@ -724,6 +736,7 @@ tweakermore:
         2. 当物品实体包含大于1个物品时，移除额外渲染的那些堆叠模型
         3. 调整模型位置和大小，确保模型与物品实体的碰撞箱精确匹配
         4. 强制物品模型面向南方。可以通过选项@option#preciseItemEntityModelYawSnap@来替代
+      pretty_name: 精准物品实体模型
     preciseItemEntityModelYawSnap:
       .: 精准物品实体模型-朝向吸附
       comment: |-
@@ -984,6 +997,7 @@ tweakermore:
         - Litematica的方块信息显示
         - MiniHUD的蜂巢蜜蜂数量显示
         需要玩家拥有服务器的OP权限（权限等级2）才能正常工作
+      pretty_name: 服务端数据同步器
     serverDataSyncerQueryInterval:
       .: 服务端数据同步器查询间隔
       comment: |-
@@ -1030,6 +1044,7 @@ tweakermore:
       comment: |-
         从Tweakeroo mc1.17+移植disableNauseaEffect
         同时修复了玩家在接触地狱门时，地狱门材质覆盖无法显示的问题
+      pretty_name: Tweakeroo禁用扭曲效果-移植
 
     # ================================ Setting ================================
 

@@ -20,6 +20,7 @@
 
 package me.fallenbreath.tweakermore.event;
 
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
 
 public class TweakerMoreClientEvents
@@ -27,5 +28,6 @@ public class TweakerMoreClientEvents
 	public static void onClientInitFinished()
 	{
 		DocumentGenerator.runIfEnabled();
+		TweakerMoreConfigs.validateOptionTranslations();
 	}
 }
