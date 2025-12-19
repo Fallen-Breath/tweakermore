@@ -18,31 +18,20 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.mixins.doc;
+package me.fallenbreath.tweakermore.event;
 
-import me.fallenbreath.tweakermore.event.TweakerMoreClientEvents;
-import net.minecraft.client.Minecraft;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import me.fallenbreath.tweakermore.util.render.context.GuiRenderContext;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 
-@Mixin(Minecraft.class)
-public abstract class MinecraftClientMixin
+public interface TweakerMoreIRenderer
 {
-	@Inject(
-			//#if MC >= 11600
-			//$$ method = "method_29338",
-			//#elseif MC >= 11500
-			method = "method_24227",
-			//#else
-			//$$ method = "method_18504",
-			//#endif
-			at = @At("TAIL"),
-			remap = false
-	)
-	private void onClientInitFinished(CallbackInfo ci)
-	{
-		TweakerMoreClientEvents.onClientInitFinished();
-	}
+	/**
+	 * A hook like {@link fi.dy.masa.malilib.interfaces.IRenderer#onRenderWorldLast}
+	 */
+	default void onRenderWorldLast(WorldRenderContext context) {}
+
+	/**
+	 * A hook like {@link fi.dy.masa.malilib.interfaces.IRenderer#onRenderGameOverlayPost}
+	 */
+	default void onRenderGameOverlayPost(GuiRenderContext context) {}
 }

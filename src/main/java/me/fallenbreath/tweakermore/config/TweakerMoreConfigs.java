@@ -60,7 +60,7 @@ import me.fallenbreath.tweakermore.impl.setting.debug.TweakerMoreDebugHelper;
 import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.util.RegistryUtils;
 import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
-import me.fallenbreath.tweakermore.util.render.TweakerMoreRenderEventHandler;
+import me.fallenbreath.tweakermore.event.TweakerMoreRenderEvents;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.item.Items;
 
@@ -1026,9 +1026,9 @@ public class TweakerMoreConfigs
 		TickHandler.getInstance().registerClientTickHandler(LitematicaAutoRefreshMaterialListHelper.getInstance());
 		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
 		TickHandler.getInstance().registerClientTickHandler(PistorderRenderer.getInstance());
-		TweakerMoreRenderEventHandler.register(new AutoContainerProcessorHintRenderer());
-		TweakerMoreRenderEventHandler.register(InfoViewRenderer.getInstance());
-		TweakerMoreRenderEventHandler.register(PistorderRenderer.getInstance());
+		TweakerMoreRenderEvents.register(new AutoContainerProcessorHintRenderer());
+		TweakerMoreRenderEvents.register(InfoViewRenderer.getInstance());
+		TweakerMoreRenderEvents.register(PistorderRenderer.getInstance());
 
 		//////////// Misc ////////////
 

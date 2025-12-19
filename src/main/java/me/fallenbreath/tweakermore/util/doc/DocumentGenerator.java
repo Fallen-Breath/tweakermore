@@ -114,7 +114,7 @@ public class DocumentGenerator
 		generateDoc(false);
 	}
 
-	public static void onClientInitFinished()
+	public static void runIfEnabled()
 	{
 		// -Dtweakermore.gen_doc=true
 		if (FabricUtils.isDevelopmentEnvironment() && "true".equals(System.getProperty(TweakerMoreMod.MOD_ID + ".gen_doc")))

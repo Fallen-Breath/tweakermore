@@ -28,7 +28,7 @@ import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.pistorder.PistonBlockAccessor;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
-import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
+import me.fallenbreath.tweakermore.event.TweakerMoreIRenderer;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;

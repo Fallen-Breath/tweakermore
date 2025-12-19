@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.core.hook;
 
-import me.fallenbreath.tweakermore.util.render.TweakerMoreRenderEventHandler;
+import me.fallenbreath.tweakermore.event.TweakerMoreRenderEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Final;
@@ -44,6 +44,6 @@ public abstract class WorldRendererMixin
 	)
 	private void worldRenderPostHook$TKM(float tickDelta, long endTime, CallbackInfo ci)
 	{
-		TweakerMoreRenderEventHandler.dispatchRenderWorldPostEvent(this.minecraft);
+		TweakerMoreRenderEvents.dispatchRenderWorldPostEvent(this.minecraft);
 	}
 }

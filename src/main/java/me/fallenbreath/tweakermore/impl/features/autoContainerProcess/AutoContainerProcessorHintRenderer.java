@@ -27,7 +27,7 @@ import fi.dy.masa.malilib.render.RenderUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.autoContainerProcess.processors.IContainerProcessor;
 import me.fallenbreath.tweakermore.util.StringUtils;
-import me.fallenbreath.tweakermore.util.render.TweakerMoreIRenderer;
+import me.fallenbreath.tweakermore.event.TweakerMoreIRenderer;
 import me.fallenbreath.tweakermore.util.render.context.GuiRenderContext;
 
 import java.util.List;
