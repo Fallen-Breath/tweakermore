@@ -41,7 +41,7 @@ def mod_dependencies = [
 		// - loom doesn't remap base class method (method_10263) call of fi.dy.masa.malilib.util.SubChunkPos in
 		//   fi.dy.masa.litematica.render.schematic.WorldRendererSchematic.setupTerrain, resulting in a crash in dev env
 		//   so we have to disable litematica in [1.15, 1.17) at runtime
-		[curseForgeOrOther(project.litematica_file_id, 'curse.maven:litematica-308892', 'com.github.sakura-ryoko:litematica'), (mcVersion < 11500 || 11700 <= mcVersion) && mcVersion < 12111],
+		[curseForgeOrOther(project.litematica_file_id, 'curse.maven:litematica-308892', 'com.github.sakura-ryoko:litematica'), mcVersion < 11500 || 11700 <= mcVersion],
 
 		// we're using modmenu for mc 1.15.2 for 1.14.4, so we use modCompileOnly
 		["com.terraformersmc:modmenu:${project.mod_menu_version}"          , mcVersion >= 11500 && mcVersion < 12106],
