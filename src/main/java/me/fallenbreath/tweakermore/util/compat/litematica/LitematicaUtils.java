@@ -44,7 +44,7 @@ public class LitematicaUtils
 	{
 		if (LITEMATICA_LOADED)
 		{
-			return SchematicWorldHandler.getSchematicWorld();
+			return Access.getSchematicWorld();
 		}
 		return null;
 	}
@@ -53,7 +53,7 @@ public class LitematicaUtils
 	{
 		if (LITEMATICA_LOADED)
 		{
-			return Configs.Visuals.ENABLE_RENDERING.getBooleanValue();
+			return Access.isRenderingEnabled();
 		}
 		return false;
 	}
@@ -62,6 +62,27 @@ public class LitematicaUtils
 	public static BlockPos getSchematicWorldCrosshairTargetPos(Entity cameraEntity)
 	{
 		if (LITEMATICA_LOADED)
+		{
+			return Access.getSchematicWorldCrosshairTargetPos(cameraEntity);
+		}
+		return null;
+	}
+
+	private static class Access
+	{
+		@Nullable
+		public static Level getSchematicWorld()
+		{
+			return SchematicWorldHandler.getSchematicWorld();
+		}
+
+		public static boolean isRenderingEnabled()
+		{
+			return Configs.Visuals.ENABLE_RENDERING.getBooleanValue();
+		}
+
+		@Nullable
+		public static BlockPos getSchematicWorldCrosshairTargetPos(Entity cameraEntity)
 		{
 			// reference: fi.dy.masa.litematica.render.OverlayRenderer.renderHoverInfo
 			Minecraft mc = Minecraft.getInstance();
@@ -86,7 +107,7 @@ public class LitematicaUtils
 					return null;
 				}
 			}
+			return null;
 		}
-		return null;
 	}
 }
