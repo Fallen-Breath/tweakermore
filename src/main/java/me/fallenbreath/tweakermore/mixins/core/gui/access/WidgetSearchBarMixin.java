@@ -27,5 +27,5 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(DummyClass.class)
 public abstract class WidgetSearchBarMixin implements WidgetSearchBarSearchOpenStateAccess
 {
-	// impl in mc1.21.9+
+	// impl in mc1.21.8+
 }
