@@ -71,6 +71,9 @@ public abstract class RenderUtilsMixin
 		return items;
 	}
 
+	//#if 1.21.10 <= MC && MC < 1.21.11
+	//$$ @SuppressWarnings("deprecation")
+	//#endif
 	@ModifyExpressionValue(
 			method = "renderShulkerBoxPreview",
 			at = @At(
