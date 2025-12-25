@@ -1,10 +1,11 @@
+final int mcVersion = project.mcVersion
+final boolean unobfuscated = mcVersion >= 26_00_00
+
 apply plugin: 'maven-publish'
 apply plugin: 'com.github.hierynomus.license'
-apply plugin: 'fabric-loom'
+apply plugin: unobfuscated ? 'net.fabricmc.fabric-loom' : 'net.fabricmc.fabric-loom-remap'
 apply plugin: 'com.replaymod.preprocess'
 apply plugin: 'me.fallenbreath.yamlang'
-
-int mcVersion = project.mcVersion
 
 repositories {
 	maven {
@@ -31,7 +32,7 @@ static String curseForgeOrOther(version, curseForge, other) {
 	return ((version as String) ==~ /\d+/ ? curseForge  : other) + ':' + version
 }
 
-// list of (dependencyNotation -> should use modImplementation)
+// list of (dependencyNotation -> should use autoImplementation)
 def mod_dependencies = [
 		[project.malilib_version.count(':') == 2 ? project.malilib_version : (mcVersion >= 12101 ? "com.github.sakura-ryoko:malilib:${project.malilib_version}" : "fi.dy.masa.malilib:${project.malilib_version}"), true],
 		[curseForgeOrOther(project.tweakeroo_file_id   , 'curse.maven:tweakeroo-297344'    , 'com.github.sakura-ryoko:tweakeroo'   ), true],
@@ -47,25 +48,33 @@ def mod_dependencies = [
 		["com.terraformersmc:modmenu:${project.mod_menu_version}"          , mcVersion >= 11500 && mcVersion < 12106],
 ]
 
-
-// https://github.com/FabricMC/fabric-loader/issues/783
-configurations {
-	modRuntimeOnly.exclude group: 'net.fabricmc', module: 'fabric-loader'
-}
-configurations {
-	modImplementation.exclude group: 'io.github.prospector', module: 'modmenu'
-}
-
 dependencies {
+	def processDependency = { dep ->
+		// https://github.com/FabricMC/fabric-loader/issues/783
+		if (dep instanceof ModuleDependency) {
+            if (!(dep.group == 'net.fabricmc' && dep.name == 'fabric-loader')) {
+                dep.exclude group: 'net.fabricmc', module: 'fabric-loader'
+            }
+            dep.exclude group: 'io.github.prospector', module: 'modmenu'
+			dep.exclude group: 'com.github.sakura-ryoko', module: 'malilib'
+		}
+		return dep
+	}
+	def autoImplementation = { Object... args -> processDependency(unobfuscated ? implementation(*args) : modImplementation(*args)) }
+	def autoRuntimeOnly = { Object... args -> processDependency(unobfuscated ? runtimeOnly(*args) : modRuntimeOnly(*args)) }
+	def autoCompileOnly = { Object... args -> processDependency(unobfuscated ? compileOnly(*args) : modCompileOnly(*args)) }
+
 	// loom
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings loom.layered() {
-		officialMojangMappings()
-		if (project.parchment_version.size() > 0) {
-			parchment("org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip")
+	if (!unobfuscated) {
+		mappings loom.layered() {
+			officialMojangMappings()
+			if (project.parchment_version.size() > 0) {
+				parchment("org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip")
+			}
 		}
 	}
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	autoImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// compact stuffs
 	if (11700 <= mcVersion && mcVersion < 11800) {
@@ -77,37 +86,32 @@ dependencies {
 
 	// runtime mods
 	if (mcVersion < 11904) {
-		modRuntimeOnly("com.github.Fallen-Breath:lazydfu:${mcVersion < 11900 ? "0.1.2" : "a7cfc44c0c"}")
+		autoRuntimeOnly("com.github.Fallen-Breath:lazydfu:${mcVersion < 11900 ? "0.1.2" : "a7cfc44c0c"}")
 	}
 	if (mcVersion >= 12006) {
 		// modmenu needs these
-		modRuntimeOnly fabricApi.module("fabric-screen-api-v1", project.fabric_api_version)
-		modRuntimeOnly fabricApi.module("fabric-key-binding-api-v1", project.fabric_api_version)
-		modRuntimeOnly fabricApi.module("fabric-lifecycle-events-v1", project.fabric_api_version)
+		autoRuntimeOnly fabricApi.module("fabric-screen-api-v1", project.fabric_api_version)
+		autoRuntimeOnly fabricApi.module("fabric-key-binding-api-v1", project.fabric_api_version)
+		autoRuntimeOnly fabricApi.module("fabric-lifecycle-events-v1", project.fabric_api_version)
 	}
 
 	mod_dependencies.forEach {item ->
 		def dependencyNotation = item[0]
 		def activatedInRuntime = item[1]
 		if (activatedInRuntime) {
-			modImplementation(dependencyNotation) {
-				exclude group: 'com.github.sakura-ryoko', module: 'malilib'
-			}
-		}
-		else {
-			modCompileOnly(dependencyNotation) {
-				exclude group: 'com.github.sakura-ryoko', module: 'malilib'
-			}
+			autoImplementation(dependencyNotation)
+		} else {
+			autoCompileOnly(dependencyNotation)
 		}
 	}
 
 	// library mods
 	if (mcVersion >= 11600) {
 		// the client-side command
-		include(modImplementation(fabricApi.module("fabric-api-base", project.fabric_api_version)))  // command api dependency
-		include(modImplementation(fabricApi.module("fabric-command-api-v${mcVersion >= 11900 ? 2 : 1}", project.fabric_api_version)))
+		include(autoImplementation(fabricApi.module("fabric-api-base", project.fabric_api_version)))  // command api dependency
+		include(autoImplementation(fabricApi.module("fabric-command-api-v${mcVersion >= 11900 ? 2 : 1}", project.fabric_api_version)))
 	}
-	include(modImplementation("me.fallenbreath:conditional-mixin-fabric:${project.conditionalmixin_version}"))
+	include(autoImplementation("me.fallenbreath:conditional-mixin-fabric:${project.conditionalmixin_version}"))
 	if (mcVersion < 12005) {
 		include("io.github.llamalad7:mixinextras-fabric:${project.mixinextras_version}")
 	}
@@ -119,7 +123,9 @@ dependencies {
 def MIXIN_CONFIG_PATHS = ['tweakermore.mixins.json', 'tweakermore.optifine_mixins.json']
 String LANG_DIR = 'assets/tweakermore/lang'
 JavaVersion JAVA_COMPATIBILITY
-if (mcVersion >= 12005) {
+if (mcVersion >= 260000) {
+	JAVA_COMPATIBILITY = JavaVersion.VERSION_25
+} else if (mcVersion >= 12005) {
 	JAVA_COMPATIBILITY = JavaVersion.VERSION_21
 } else if (mcVersion >= 11800) {
 	JAVA_COMPATIBILITY = JavaVersion.VERSION_17
@@ -261,8 +267,9 @@ java {
 }
 
 jar {
+    inputs.property "archives_base_name", project.archives_base_name
 	from("../../LICENSE") {
-		rename { "${it}_${project.archives_base_name}" }
+		rename { "${it}_${inputs.properties.archives_base_name}" }
 	}
 }
 
