@@ -18,16 +18,26 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.event;
+package me.fallenbreath.tweakermore.util;
 
-import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
+import me.fallenbreath.tweakermore.TweakerMoreMod;
 
-public class TweakerMoreClientEvents
+public class EnvironmentUtils
 {
-	public static void onClientInitFinished()
+	private static boolean isDevEnvAndPropertyIsTrue(String key)
 	{
-		TweakerMoreConfigs.validateOptionTranslations();
-		DocumentGenerator.runIfEnabled();
+		return FabricUtils.isDevelopmentEnvironment() && "true".equals(System.getProperty(key));
+	}
+
+	// -Dtweakermore.gen_doc=true
+	public static boolean docGenEnabled()
+	{
+		return isDevEnvAndPropertyIsTrue(TweakerMoreMod.MOD_ID + ".gen_doc");
+	}
+
+	// -Dtweakermore.gen_doc=true
+	public static boolean failHardOnMissingTranslation()
+	{
+		return isDevEnvAndPropertyIsTrue(TweakerMoreMod.MOD_ID + ".validate_translation");
 	}
 }

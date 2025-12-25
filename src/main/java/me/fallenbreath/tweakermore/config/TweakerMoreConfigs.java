@@ -57,6 +57,8 @@ import me.fallenbreath.tweakermore.impl.mod_tweaks.ofPlayerExtraModelOverride.Op
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.impl.porting.lmCustomSchematicBaseDirectoryPorting.LitematicaCustomSchematicBaseDirectoryPorting;
 import me.fallenbreath.tweakermore.impl.setting.debug.TweakerMoreDebugHelper;
+import me.fallenbreath.tweakermore.util.EnvironmentUtils;
+import me.fallenbreath.tweakermore.util.FabricUtils;
 import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.util.RegistryUtils;
 import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
@@ -1118,21 +1120,30 @@ public class TweakerMoreConfigs
 
 	public static void validateOptionTranslations()
 	{
+		int missingCnt = 0;
 		for (TweakerMoreOption option : OPTIONS)
 		{
 			TweakerMoreIConfigBase config = option.getConfig();
 			if (config.getConfigGuiDisplayName().startsWith("tweakermore.config."))
 			{
 				TweakerMoreMod.LOGGER.warn("Found missing translation for the gui display name of config {} (field {})", config.getName(), option.getFieldName());
+				missingCnt++;
 			}
 			if (config.getComment() == null || config.getComment().startsWith("tweakermore.config."))
 			{
 				TweakerMoreMod.LOGGER.warn("Found missing translation for the comment of config {} (field {})", config.getName(), option.getFieldName());
+				missingCnt++;
 			}
 			if (config instanceof TweakerMoreConfigBooleanHotkeyed && config.getPrettyName().startsWith("tweakermore.config."))
 			{
 				TweakerMoreMod.LOGGER.warn("Found missing translation for the pretty name of config {} (field {})", config.getName(), option.getFieldName());
+				missingCnt++;
 			}
+		}
+		if (missingCnt > 0 && EnvironmentUtils.failHardOnMissingTranslation())
+		{
+			TweakerMoreMod.LOGGER.error("Found {} missing translations for TweakerMore's config", missingCnt);
+			System.exit(1);
 		}
 	}
 
