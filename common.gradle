@@ -21,6 +21,10 @@ repositories {
         url = 'https://www.cursemaven.com'
 	}
 	maven {
+		url = "https://api.modrinth.com/maven"
+		content { includeGroup("maven.modrinth") }
+	}
+	maven {
 		url = 'https://maven.fallenbreath.me/jitpack'
 	}
 	maven {
@@ -29,6 +33,9 @@ repositories {
 }
 
 static String curseForgeOrOther(version, curseForge, other) {
+	if (version.count(':') == 2) {
+		return version
+	}
 	return ((version as String) ==~ /\d+/ ? curseForge  : other) + ':' + version
 }
 
