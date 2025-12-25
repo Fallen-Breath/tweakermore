@@ -108,6 +108,7 @@
     "tweaks.mc_tweaks.disableEntityRenderInterpolation.WorldRendererMixin",
     "tweaks.mc_tweaks.disableF3BEntityFacingVector.DebugHitboxCommandRendererMixin",
     "tweaks.mc_tweaks.disableF3BEntityFacingVector.EntityRenderDispatcherMixin",
+    "tweaks.mc_tweaks.disableF3BEntityFacingVectorAsArrow.EntityHitboxDebugRendererMixin",
     "tweaks.mc_tweaks.disableHoneyBlockEffect.EntityMixin",
     "tweaks.mc_tweaks.disableHoneyBlockEffect.HoneyBlockMixin",
     "tweaks.mc_tweaks.disableHorizonShadingRendering.BackgroundRendererMixin",

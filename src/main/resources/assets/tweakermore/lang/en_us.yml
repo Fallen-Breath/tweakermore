@@ -547,6 +547,12 @@ tweakermore:
         Disable the rendered entity facing vector line when F3 + B is on
         See also: option @option#f3BEntityFacingVectorLength@
       pretty_name: Disable F3+B Entity Facing Vector
+    disableF3BEntityFacingVectorAsArrow:
+      .: disableF3BEntityFacingVectorAsArrow
+      comment: |-
+        Make the entity facing vector be rendered as a line instead of an arrow when F3 + B is on
+        This brings back the behavior from Minecraft < 1.21.11
+      pretty_name: Disable F3+B Entity Facing Vector As Arrow
     disableHoneyBlockEffect:
       .: disableHoneyBlockEffect
       comment: |-

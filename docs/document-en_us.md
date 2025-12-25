@@ -1443,6 +1443,20 @@ See also: option f3BEntityFacingVectorLength
 - Default value: *no hotkey*, `false`
 
 
+### disableF3BEntityFacingVectorAsArrow
+
+Make the entity facing vector be rendered as a line instead of an arrow when F3 + B is on
+
+This brings back the behavior from Minecraft < 1.21.11
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean (Disable)
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Minecraft (`minecraft`) `>=1.21.11`
+
+
 ### disableHoneyBlockEffect
 
 Disable honey block effects such as "slowdown", "cannot jump"

@@ -1439,6 +1439,20 @@ schematicBlockPlacement的严格模式
 - 默认值: *无快捷键*, `false`
 
 
+### 禁用F3+B实体朝向线段渲染成箭头 (disableF3BEntityFacingVectorAsArrow)
+
+在启用F3+B实体碰撞箱显示后，使代表实体朝向的线段仅渲染向量线条部分，不要渲染箭头
+
+这将还原回Minecraft 1.21.11之前的表现
+
+- 分类: MC修改
+- 类型: 带热键布尔值 (禁用)
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Minecraft (`minecraft`) `>=1.21.11`
+
+
 ### 禁用蜂蜜块效果 (disableHoneyBlockEffect)
 
 禁用蜂蜜块对玩家造成的各类效果，如移动减速、跳跃阻止等

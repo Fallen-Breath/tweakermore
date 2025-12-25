@@ -500,6 +500,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_F3_B_ENTITY_FACING_VECTOR = newConfigBooleanHotkeyed("disableF3BEntityFacingVector");
 
+	@Config(type = Config.Type.DISABLE, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.21.11")), category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_F3_B_ENTITY_FACING_VECTOR_AS_ARROW = newConfigBooleanHotkeyed("disableF3BEntityFacingVectorAsArrow");
+
 	@Config(type = Config.Type.DISABLE, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.15")), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_HONEY_BLOCK_EFFECT = newConfigBooleanHotkeyed("disableHoneyBlockEffect");
 

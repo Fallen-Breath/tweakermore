@@ -547,6 +547,12 @@ tweakermore:
         在启用F3+B实体碰撞箱显示后，禁用渲染代表实体朝向的线段
         另见：选项 @option#f3BEntityFacingVectorLength@
       pretty_name: 禁用F3+B实体朝向线段渲染
+    disableF3BEntityFacingVectorAsArrow:
+      .: 禁用F3+B实体朝向线段渲染成箭头
+      comment: |-
+        在启用F3+B实体碰撞箱显示后，使代表实体朝向的线段仅渲染向量线条部分，不要渲染箭头
+        这将还原回Minecraft 1.21.11之前的表现
+      pretty_name: 禁用F3+B实体朝向线段渲染成箭头
     disableHoneyBlockEffect:
       .: 禁用蜂蜜块效果
       comment: |-
