@@ -1428,8 +1428,8 @@ This may resolve the issue when using carpet mod's /tick [freeze|step] command,
 that it may take up to 60gt for the entity's position / angles to be correctly displayed on the client side.
 
 - Category: MC Tweaks
-- Type: boolean (Generic)
-- Default value: `false`
+- Type: hotkey togglable boolean (Disable)
+- Default value: *no hotkey*, `false`
 
 
 ### disableF3BEntityFacingVector
@@ -1439,7 +1439,7 @@ Disable the rendered entity facing vector line when F3 + B is on
 See also: option f3BEntityFacingVectorLength
 
 - Category: MC Tweaks
-- Type: hotkey togglable boolean (Tweak)
+- Type: hotkey togglable boolean (Disable)
 - Default value: *no hotkey*, `false`
 
 

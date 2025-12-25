@@ -492,10 +492,10 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_ENTITY_RENDER_INTERPOLATION = newConfigBooleanHotkeyed("disableEntityRenderInterpolation");
 
-	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigBoolean DISABLE_ENTITY_RENDER_INTERPOLATION_FORCED_SYNC = newConfigBoolean("disableEntityRenderInterpolationForcedSync", false);
+	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_ENTITY_RENDER_INTERPOLATION_FORCED_SYNC = newConfigBooleanHotkeyed("disableEntityRenderInterpolationForcedSync", false);
 
-	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_F3_B_ENTITY_FACING_VECTOR = newConfigBooleanHotkeyed("disableF3BEntityFacingVector");
 
 	@Config(type = Config.Type.DISABLE, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.15")), category = Config.Category.MC_TWEAKS)
@@ -1085,6 +1085,13 @@ public class TweakerMoreConfigs
 						continue;
 					}
 
+					if (((TweakerMoreIConfigBase)config).getName().startsWith("disable") && annotation.type() != Config.Type.DISABLE)
+					{
+						throw new IllegalStateException(String.format(
+								"Config %s annotated with type %s is prefixed with \"disable\" but its type is not DISABLE",
+								field.getName(), annotation.type()
+						));
+					}
 					if ((annotation.type() == Config.Type.TWEAK || annotation.type() == Config.Type.DISABLE) && !(config instanceof IHotkeyTogglable))
 					{
 						throw new IllegalStateException(String.format(

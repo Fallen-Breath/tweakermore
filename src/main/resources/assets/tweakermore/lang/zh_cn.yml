@@ -540,6 +540,7 @@ tweakermore:
         在客户端接收到生物/载具的位置/朝向更新数据包时，总是直接设置该实体的位置/朝向
         这可缓解在carpet mod的/tick [freeze|step]操作下，
         可能需要等待最长60gt，才能在客户端正确显示实体位置/朝向的问题
+      pretty_name: 禁用实体渲染插值-强制同步
     disableF3BEntityFacingVector:
       .: 禁用F3+B实体朝向线段渲染
       comment: |-

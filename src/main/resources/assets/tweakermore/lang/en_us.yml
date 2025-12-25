@@ -540,6 +540,7 @@ tweakermore:
         Always set entity's position / angles directly, when receives position / angles update packets of creatures / vehicles
         This may resolve the issue when using carpet mod's /tick [freeze|step] command, 
         that it may take up to 60gt for the entity's position / angles to be correctly displayed on the client side.
+      pretty_name: Disable Entity Render Interpolation Forced Sync
     disableF3BEntityFacingVector:
       .: disableF3BEntityFacingVector
       comment: |-
