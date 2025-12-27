@@ -10,25 +10,31 @@ apply plugin: 'me.fallenbreath.yamlang'
 repositories {
 	maven {
 		url = 'https://maven.parchmentmc.org'
+		content { includeGroup('org.parchmentmc.data') }
 	}
 	maven {
 		url = 'https://masa.dy.fi/maven'
+		content { includeGroupAndSubgroups('fi.dy.masa') }
 	}
 	maven {
 		url = 'https://maven.terraformersmc.com/releases'
+		content { includeGroup('com.terraformersmc') }
 	}
 	maven {
         url = 'https://www.cursemaven.com'
+		content { includeGroup('curse.maven') }
 	}
 	maven {
-		url = "https://api.modrinth.com/maven"
-		content { includeGroup("maven.modrinth") }
+		url = 'https://api.modrinth.com/maven'
+		content { includeGroup('maven.modrinth') }
 	}
 	maven {
 		url = 'https://maven.fallenbreath.me/jitpack'
+		content { includeGroupAndSubgroups('com.github') }
 	}
 	maven {
 		url = 'https://maven.fallenbreath.me/releases'
+		content { includeGroup('me.fallenbreath') }
 	}
 }
 
