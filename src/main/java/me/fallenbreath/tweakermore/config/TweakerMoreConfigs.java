@@ -58,10 +58,12 @@ import me.fallenbreath.tweakermore.impl.mod_tweaks.ofPlayerExtraModelOverride.Op
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.impl.porting.lmCustomSchematicBaseDirectoryPorting.LitematicaCustomSchematicBaseDirectoryPorting;
 import me.fallenbreath.tweakermore.impl.setting.debug.TweakerMoreDebugHelper;
+import me.fallenbreath.tweakermore.util.EnvironmentUtils;
+import me.fallenbreath.tweakermore.util.FabricUtils;
 import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.util.RegistryUtils;
 import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
-import me.fallenbreath.tweakermore.util.render.TweakerMoreRenderEventHandler;
+import me.fallenbreath.tweakermore.event.TweakerMoreRenderEvents;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.item.Items;
 
@@ -493,11 +495,14 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_ENTITY_RENDER_INTERPOLATION = newConfigBooleanHotkeyed("disableEntityRenderInterpolation");
 
-	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigBoolean DISABLE_ENTITY_RENDER_INTERPOLATION_FORCED_SYNC = newConfigBoolean("disableEntityRenderInterpolationForcedSync", false);
+	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_ENTITY_RENDER_INTERPOLATION_FORCED_SYNC = newConfigBooleanHotkeyed("disableEntityRenderInterpolationForcedSync", false);
 
-	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_F3_B_ENTITY_FACING_VECTOR = newConfigBooleanHotkeyed("disableF3BEntityFacingVector");
+
+	@Config(type = Config.Type.DISABLE, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.21.11")), category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_F3_B_ENTITY_FACING_VECTOR_AS_ARROW = newConfigBooleanHotkeyed("disableF3BEntityFacingVectorAsArrow");
 
 	@Config(type = Config.Type.DISABLE, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.15")), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_HONEY_BLOCK_EFFECT = newConfigBooleanHotkeyed("disableHoneyBlockEffect");
@@ -1043,9 +1048,9 @@ public class TweakerMoreConfigs
 		TickHandler.getInstance().registerClientTickHandler(LitematicaAutoRefreshMaterialListHelper.getInstance());
 		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
 		TickHandler.getInstance().registerClientTickHandler(PistorderRenderer.getInstance());
-		TweakerMoreRenderEventHandler.register(new AutoContainerProcessorHintRenderer());
-		TweakerMoreRenderEventHandler.register(InfoViewRenderer.getInstance());
-		TweakerMoreRenderEventHandler.register(PistorderRenderer.getInstance());
+		TweakerMoreRenderEvents.register(new AutoContainerProcessorHintRenderer());
+		TweakerMoreRenderEvents.register(InfoViewRenderer.getInstance());
+		TweakerMoreRenderEvents.register(PistorderRenderer.getInstance());
 
 		//////////// Misc ////////////
 
@@ -1083,6 +1088,11 @@ public class TweakerMoreConfigs
 
 	static
 	{
+		loadConfigFields();
+	}
+
+	private static void loadConfigFields()
+	{
 		for (Field field : TweakerMoreConfigs.class.getDeclaredFields())
 		{
 			Config annotation = field.getAnnotation(Config.class);
@@ -1097,6 +1107,13 @@ public class TweakerMoreConfigs
 						continue;
 					}
 
+					if (((TweakerMoreIConfigBase)config).getName().startsWith("disable") && annotation.type() != Config.Type.DISABLE)
+					{
+						throw new IllegalStateException(String.format(
+								"Config %s annotated with type %s is prefixed with \"disable\" but its type is not DISABLE",
+								field.getName(), annotation.type()
+						));
+					}
 					if ((annotation.type() == Config.Type.TWEAK || annotation.type() == Config.Type.DISABLE) && !(config instanceof IHotkeyTogglable))
 					{
 						throw new IllegalStateException(String.format(
@@ -1105,7 +1122,7 @@ public class TweakerMoreConfigs
 						));
 					}
 
-					TweakerMoreOption tweakerMoreOption = new TweakerMoreOption(annotation, (TweakerMoreIConfigBase)config);
+					TweakerMoreOption tweakerMoreOption = new TweakerMoreOption(field.getName(), annotation, (TweakerMoreIConfigBase)config);
 					OPTIONS.add(tweakerMoreOption);
 					CATEGORY_TO_OPTION.computeIfAbsent(tweakerMoreOption.getCategory(), k -> Lists.newArrayList()).add(tweakerMoreOption);
 					TYPE_TO_OPTION.computeIfAbsent(tweakerMoreOption.getType(), k -> Lists.newArrayList()).add(tweakerMoreOption);
@@ -1118,6 +1135,35 @@ public class TweakerMoreConfigs
 					throw new RuntimeException(e);
 				}
 			}
+		}
+	}
+
+	public static void validateOptionTranslations()
+	{
+		int missingCnt = 0;
+		for (TweakerMoreOption option : OPTIONS)
+		{
+			TweakerMoreIConfigBase config = option.getConfig();
+			if (config.getConfigGuiDisplayName().startsWith("tweakermore.config."))
+			{
+				TweakerMoreMod.LOGGER.warn("Found missing translation for the gui display name of config {} (field {})", config.getName(), option.getFieldName());
+				missingCnt++;
+			}
+			if (config.getComment() == null || config.getComment().startsWith("tweakermore.config."))
+			{
+				TweakerMoreMod.LOGGER.warn("Found missing translation for the comment of config {} (field {})", config.getName(), option.getFieldName());
+				missingCnt++;
+			}
+			if (config instanceof TweakerMoreConfigBooleanHotkeyed && config.getPrettyName().startsWith("tweakermore.config."))
+			{
+				TweakerMoreMod.LOGGER.warn("Found missing translation for the pretty name of config {} (field {})", config.getName(), option.getFieldName());
+				missingCnt++;
+			}
+		}
+		if (missingCnt > 0 && EnvironmentUtils.failHardOnMissingTranslation())
+		{
+			TweakerMoreMod.LOGGER.error("Found {} missing translations for TweakerMore's config", missingCnt);
+			System.exit(1);
 		}
 	}
 

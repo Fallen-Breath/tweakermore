@@ -51,12 +51,10 @@ public class EntityUtils
 		return false;
 	}
 
-	private static final boolean TWEAKEROO_LOADED = FabricUtils.isModLoaded(ModIds.tweakeroo);
-
 	@Nullable
 	public static LocalPlayer getCurrentPlayerOrFreeCameraEntity()
 	{
-		if (TWEAKEROO_LOADED)
+		if (TweakerooAccess.TWEAKEROO_LOADED)
 		{
 			LocalPlayer freecam = TweakerooAccess.getFreecamEntity();
 			if (freecam != null)

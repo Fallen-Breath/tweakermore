@@ -42,6 +42,7 @@ import java.util.stream.Collectors;
 
 public class TweakerMoreOption
 {
+	private final String fieldName;
 	private final Config annotation;
 	private final TweakerMoreIConfigBase config;
 	private final List<ModRestriction> modRestrictions;
@@ -51,13 +52,19 @@ public class TweakerMoreOption
 	protected Function<String, String> commentModifier = null;
 	private boolean appendFooterFlag = true;
 
-	public TweakerMoreOption(Config annotation, TweakerMoreIConfigBase config)
+	public TweakerMoreOption(String fieldName, Config annotation, TweakerMoreIConfigBase config)
 	{
+		this.fieldName = fieldName;
 		this.annotation = annotation;
 		this.config = config;
 		this.modRestrictions = Arrays.stream(annotation.restriction()).map(ModRestriction::of).collect(Collectors.toList());
 		this.minecraftRestrictions = Arrays.stream(annotation.restriction()).map(r -> ModRestriction.of(r, c -> ModIds.minecraft.equals(c.value()))).collect(Collectors.toList());
 		this.statistic = new OptionStatistic();
+	}
+
+	public String getFieldName()
+	{
+		return this.fieldName;
 	}
 
 	public Config.Type getType()

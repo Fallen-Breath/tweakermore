@@ -9,6 +9,7 @@ pluginManagement {
 		maven {
 			name = 'Jitpack'
 			url = 'https://maven.fallenbreath.me/jitpack'
+			content { includeGroupAndSubgroups("com.github") }
 		}
 		mavenCentral()
 		gradlePluginPortal()

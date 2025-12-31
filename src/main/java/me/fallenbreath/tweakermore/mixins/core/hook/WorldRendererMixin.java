@@ -21,7 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.core.hook;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import me.fallenbreath.tweakermore.util.render.TweakerMoreRenderEventHandler;
+import me.fallenbreath.tweakermore.event.TweakerMoreRenderEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import org.spongepowered.asm.mixin.Final;
@@ -106,7 +106,7 @@ public abstract class WorldRendererMixin
 			//#endif
 	)
 	{
-		TweakerMoreRenderEventHandler.dispatchRenderWorldPostEvent(
+		TweakerMoreRenderEvents.dispatchRenderWorldPostEvent(
 				this.minecraft
 				//#if MC >= 11600
 				//$$ , matrices

@@ -18,14 +18,16 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.mixins.core.gui.access;
+package me.fallenbreath.tweakermore.event;
 
-import me.fallenbreath.tweakermore.gui.WidgetSearchBarSearchOpenStateAccess;
-import me.fallenbreath.tweakermore.util.mixin.DummyClass;
-import org.spongepowered.asm.mixin.Mixin;
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
 
-@Mixin(DummyClass.class)
-public abstract class WidgetSearchBarMixin implements WidgetSearchBarSearchOpenStateAccess
+public class TweakerMoreClientEvents
 {
-	// impl in mc1.21.8+
+	public static void onClientInitFinished()
+	{
+		TweakerMoreConfigs.validateOptionTranslations();
+		DocumentGenerator.runIfEnabled();
+	}
 }

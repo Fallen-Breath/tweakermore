@@ -27,7 +27,8 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-// TODO: remove this hack before 1.21.9 release
+// Remove this hack before 1.21.9 release?
+// -- nope, cuz malilib 1.21.8-0.25.6 is released with the `setSearchOpen` signature change issue
 @Mixin(WidgetSearchBar.class)
 public abstract class WidgetSearchBarMixin implements WidgetSearchBarSearchOpenStateAccess
 {

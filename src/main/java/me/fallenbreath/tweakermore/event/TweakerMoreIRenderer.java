@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2025  Fallen_Breath and contributors
+ * Copyright (C) 2023  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,14 +18,20 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.mixins.core.gui.access;
+package me.fallenbreath.tweakermore.event;
 
-import me.fallenbreath.tweakermore.gui.WidgetSearchBarSearchOpenStateAccess;
-import me.fallenbreath.tweakermore.util.mixin.DummyClass;
-import org.spongepowered.asm.mixin.Mixin;
+import me.fallenbreath.tweakermore.util.render.context.GuiRenderContext;
+import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 
-@Mixin(DummyClass.class)
-public abstract class WidgetSearchBarMixin implements WidgetSearchBarSearchOpenStateAccess
+public interface TweakerMoreIRenderer
 {
-	// impl in mc1.21.8+
+	/**
+	 * A hook like {@link fi.dy.masa.malilib.interfaces.IRenderer#onRenderWorldLast}
+	 */
+	default void onRenderWorldLast(WorldRenderContext context) {}
+
+	/**
+	 * A hook like {@link fi.dy.masa.malilib.interfaces.IRenderer#onRenderGameOverlayPost}
+	 */
+	default void onRenderGameOverlayPost(GuiRenderContext context) {}
 }

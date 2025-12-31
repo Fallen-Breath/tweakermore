@@ -24,7 +24,7 @@ import fi.dy.masa.malilib.config.ConfigManager;
 import fi.dy.masa.malilib.event.InitializationHandler;
 import fi.dy.masa.malilib.event.InputEventHandler;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
-import me.fallenbreath.tweakermore.util.render.TweakerMoreRenderEventHandler;
+import me.fallenbreath.tweakermore.event.TweakerMoreRenderEvents;
 
 //#if MC >= 12101
 //$$ import fi.dy.masa.malilib.registry.Registry;
@@ -44,7 +44,7 @@ public class MalilibStuffsInitializer
 			//$$ Registry.CONFIG_SCREEN.registerConfigScreenFactory(new ModInfo(TweakerMoreMod.MOD_ID, TweakerMoreMod.MOD_NAME, TweakerMoreConfigGui::new));
 			//#endif
 
-			TweakerMoreRenderEventHandler.init();
+			TweakerMoreRenderEvents.init();
 			TweakerMoreConfigs.initConfigs();
 		});
 	}

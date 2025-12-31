@@ -18,7 +18,7 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.util.render;
+package me.fallenbreath.tweakermore.event;
 
 import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.event.RenderEventHandler;
@@ -49,7 +49,7 @@ import net.minecraft.util.profiling.ProfilerFiller;
 
 import java.util.List;
 
-public abstract class TweakerMoreRenderEventHandler
+public abstract class TweakerMoreRenderEvents
 {
 	private static final List<TweakerMoreIRenderer> renderers = Lists.newArrayList();
 

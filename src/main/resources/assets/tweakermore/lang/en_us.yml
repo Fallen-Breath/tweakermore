@@ -43,6 +43,7 @@ tweakermore:
         If enabled, when using @option#autoCollectMaterialListItem@ to collect items from a container,
         it will not take all items from the container slots. Instead, it will retain a specified amount of items
         See also: Option @option#autoCollectMaterialListItemRetainItemAmount@
+      pretty_name: Auto Collect Material List ItemRetain Item
     autoCollectMaterialListItemRetainItemAmount:
       .: autoCollectMaterialListItemRetainItemAmount
       comment: The number of items retained by the @option#autoCollectMaterialListItemRetainItem@ feature
@@ -89,6 +90,7 @@ tweakermore:
     autoRespawn:
       .: autoRespawn
       comment: Automatically perform respawn when the @tr#deathScreen.spectate@/@tr#deathScreen.respawn@ button in death screen is available
+      pretty_name: Auto Respawn
     containerProcessorHint:
       .: containerProcessorHint
       comment: 'Displays the enabling status of auto container processing related features, including:'
@@ -114,6 +116,7 @@ tweakermore:
     fireworkRocketThrottler:
       .: fireworkRocketThrottler
       comment: Limits the maximum frequency of firework rocket usage, to avoid setting off rockets with auto-clicker
+      pretty_name: Firework Rocket Throttler
     fireworkRocketThrottlerCooldown:
       .: fireworkRocketThrottlerCooldown
       comment: The cooldown value of option @option#fireworkRocketThrottler@ in seconds
@@ -132,6 +135,7 @@ tweakermore:
     infoViewFollowFreecam:
       .: infoViewFollowFreecam
       comment: When free camera from tweakeroo is enabled, use freecam's camera to render all info view features
+      pretty_name: Info View Follow Freecam
     infoViewTargetDistance:
       .: infoViewTargetDistance
       comment: The maximum target distance of info view
@@ -150,6 +154,7 @@ tweakermore:
     infoViewBeacon:
       .: infoViewBeacon
       comment: View the status effects of beacons
+      pretty_name: Info View Beacon
     infoViewBeaconRenderStrategy:
       .: infoViewBeaconRenderST
       comment: The view rendering strategy of @option#infoViewBeacon@
@@ -161,6 +166,7 @@ tweakermore:
       comment: |
         View the signal level of comparator
         In multiplayer server, comparator block entity data can be synced to client using option @option#serverDataSyncer@
+      pretty_name: Info View Comparator
     infoViewComparatorRenderStrategy:
       .: infoViewComparatorRenderST
       comment: The view rendering strategy of @option#infoViewComparator@
@@ -193,6 +199,7 @@ tweakermore:
       comment: |-
         Display growth speed of crop blocks, weathering speed of copper blocks, and related information
         Note: The chance displayed is the probability after a random tick selection
+      pretty_name: Info View Growth Speed
     infoViewGrowthSpeedRenderStrategy:
       .: infoViewGrowthSpeedRenderST
       comment: The view rendering strategy of @option#infoViewGrowthSpeed@
@@ -207,6 +214,7 @@ tweakermore:
       comment: |
         View the cooldown of hopper
         In multiplayer server, hopper block entity data can be synced to client using option @option#serverDataSyncer@
+      pretty_name: Info View Hopper
     infoViewHopperRenderStrategy:
       .: infoViewHopperRenderST
       comment: The view rendering strategy of @option#infoViewHopper@
@@ -408,12 +416,14 @@ tweakermore:
       comment: |-
         Make barrier particles visible without the requirement to hold a barrier item in your hands
         Of course, you still need to be in creative mode to see the barrier particles
+      pretty_name: Barrier Particle Always Visible
     blockEventThrottler:
       .: blockEventThrottler
       comment: |-
         The switch of the block event throttler tweak
         Restricts the amount of client-side block event that can be processed in each game tick
         Future incoming block event exceeding the limit will be discarded
+      pretty_name: Block Event Throttler
     blockEventThrottlerTargetBlocks:
       .: blockEventThrottlerTargetBlocks
       comment: |-
@@ -451,6 +461,7 @@ tweakermore:
         2. Enter /kill and tab-suggested a projectile entity (UUID suggestion)
         3. Pick the item stack from the item entity to your inventory (pick entity)
         Notes: In vanilla, client can only select collide-able and non-spectator entities
+      pretty_name: Client Entity Targeting Select All
     commandHistoryLimit:
       .: commandHistoryLimit
       comment: Modify the maximum number of command history entries, which are also saved in the "command_history.txt" file
@@ -529,12 +540,19 @@ tweakermore:
         Always set entity's position / angles directly, when receives position / angles update packets of creatures / vehicles
         This may resolve the issue when using carpet mod's /tick [freeze|step] command, 
         that it may take up to 60gt for the entity's position / angles to be correctly displayed on the client side.
+      pretty_name: Disable Entity Render Interpolation Forced Sync
     disableF3BEntityFacingVector:
       .: disableF3BEntityFacingVector
       comment: |-
         Disable the rendered entity facing vector line when F3 + B is on
         See also: option @option#f3BEntityFacingVectorLength@
       pretty_name: Disable F3+B Entity Facing Vector
+    disableF3BEntityFacingVectorAsArrow:
+      .: disableF3BEntityFacingVectorAsArrow
+      comment: |-
+        Make the entity facing vector be rendered as a line instead of an arrow when F3 + B is on
+        This brings back the behavior from Minecraft < 1.21.11
+      pretty_name: Disable F3+B Entity Facing Vector As Arrow
     disableHoneyBlockEffect:
       .: disableHoneyBlockEffect
       comment: |-
@@ -646,6 +664,7 @@ tweakermore:
       comment: |-
         The switch of the FOV override
         See also: option @option#fovOverrideValue@ for the overridden value
+      pretty_name: FOV Override Enabled
     fovOverrideValue:
       .: fovOverrideValue
       comment: |-
@@ -724,6 +743,7 @@ tweakermore:
         2. Removing the extra stacked item models when the stack contains more than one item
         3. Adjusting the model's position and size to ensure the model matches the bounding box precisely
         4. Forcing the item model to face south, alternatively configurable with the option @option#preciseItemEntityModelYawSnap@
+      pretty_name: Precise Item Entity Model
     preciseItemEntityModelYawSnap:
       .: preciseItemEntityModelYawSnap
       comment: |-
@@ -985,6 +1005,7 @@ tweakermore:
         - MiniHUD bee hive bee amount display
         - Litematica block info overlay
         Requires player having OP permission (permission level 2) for it to work
+      pretty_name: Server Data Syncer
     serverDataSyncerQueryInterval:
       .: serverDataSyncerQueryInterval
       comment: |-
@@ -1031,6 +1052,7 @@ tweakermore:
       comment: |-
         Backports option disableNauseaEffect from Tweakeroo mc1.17+
         Also fixes the nether portal overlay fails to be displayed with this option on
+      pretty_name: Tweakeroo Disable Nausea Effect Porting
 
     # ================================ Setting ================================
 

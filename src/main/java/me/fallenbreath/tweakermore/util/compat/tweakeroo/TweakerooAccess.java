@@ -23,34 +23,62 @@ package me.fallenbreath.tweakermore.util.compat.tweakeroo;
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import fi.dy.masa.tweakeroo.config.Configs;
 import fi.dy.masa.tweakeroo.util.CameraEntity;
+import me.fallenbreath.tweakermore.util.FabricUtils;
+import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.util.ReflectionUtils;
 import net.minecraft.client.player.LocalPlayer;
 import org.jetbrains.annotations.Nullable;
 
 public class TweakerooAccess
 {
+	public static final boolean TWEAKEROO_LOADED = FabricUtils.isModLoaded(ModIds.tweakeroo);
+
 	@Nullable
 	public static LocalPlayer getFreecamEntity()
 	{
-		return CameraEntity.getCamera();
+		if (TWEAKEROO_LOADED)
+		{
+			return Access.getFreecamEntity();
+		}
+		return null;
 	}
 
 	// for 1.21+ tweakeroo,
 	// CARPET_ACCURATE_PLACEMENT_PROTOCOL changed to ACCURATE_PLACEMENT_PROTOCOL
 	public static boolean getAccuratePlacementProtocolValue()
 	{
-		Class<?> genericClass = Configs.Generic.class;
-		ReflectionUtils.ValueWrapper<ConfigBoolean> newAccField = ReflectionUtils.getStaticField(genericClass, "ACCURATE_PLACEMENT_PROTOCOL");
-		if (newAccField.isPresent())
+		if (TWEAKEROO_LOADED)
 		{
-			return newAccField.get().getBooleanValue();
+			return Access.getAccuratePlacementProtocolValue();
 		}
-		ReflectionUtils.ValueWrapper<ConfigBoolean> oldAccField = ReflectionUtils.getStaticField(genericClass, "CARPET_ACCURATE_PLACEMENT_PROTOCOL");
-		if (oldAccField.isPresent())
+		return false;
+	}
+
+	private static class Access
+	{
+		@Nullable
+		public static LocalPlayer getFreecamEntity()
 		{
-			return oldAccField.get().getBooleanValue();
+			return CameraEntity.getCamera();
 		}
 
-		return false;
+		// for 1.21+ tweakeroo,
+		// CARPET_ACCURATE_PLACEMENT_PROTOCOL changed to ACCURATE_PLACEMENT_PROTOCOL
+		public static boolean getAccuratePlacementProtocolValue()
+		{
+			Class<?> genericClass = Configs.Generic.class;
+			ReflectionUtils.ValueWrapper<ConfigBoolean> newAccField = ReflectionUtils.getStaticField(genericClass, "ACCURATE_PLACEMENT_PROTOCOL");
+			if (newAccField.isPresent())
+			{
+				return newAccField.get().getBooleanValue();
+			}
+			ReflectionUtils.ValueWrapper<ConfigBoolean> oldAccField = ReflectionUtils.getStaticField(genericClass, "CARPET_ACCURATE_PLACEMENT_PROTOCOL");
+			if (oldAccField.isPresent())
+			{
+				return oldAccField.get().getBooleanValue();
+			}
+
+			return false;
+		}
 	}
 }

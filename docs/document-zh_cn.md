@@ -1424,8 +1424,8 @@ schematicBlockPlacement的严格模式
 可能需要等待最长60gt，才能在客户端正确显示实体位置/朝向的问题
 
 - 分类: MC修改
-- 类型: 布尔值 (通用)
-- 默认值: `false`
+- 类型: 带热键布尔值 (禁用)
+- 默认值: *无快捷键*, `false`
 
 
 ### 禁用F3+B实体朝向线段渲染 (disableF3BEntityFacingVector)
@@ -1435,8 +1435,22 @@ schematicBlockPlacement的严格模式
 另见：选项 F3+B实体朝向线段长度
 
 - 分类: MC修改
-- 类型: 带热键布尔值 (工具)
+- 类型: 带热键布尔值 (禁用)
 - 默认值: *无快捷键*, `false`
+
+
+### 禁用F3+B实体朝向线段渲染成箭头 (disableF3BEntityFacingVectorAsArrow)
+
+在启用F3+B实体碰撞箱显示后，使代表实体朝向的线段仅渲染向量线条部分，不要渲染箭头
+
+这将还原回Minecraft 1.21.11之前的表现
+
+- 分类: MC修改
+- 类型: 带热键布尔值 (禁用)
+- 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Minecraft (`minecraft`) `>=1.21.11`
 
 
 ### 禁用蜂蜜块效果 (disableHoneyBlockEffect)

@@ -18,34 +18,36 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableF3BEntityFacingVector;
+package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableF3BEntityFacingVectorAsArrow;
 
-import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.renderer.debug.EntityHitboxDebugRenderer;
+import net.minecraft.gizmos.GizmoProperties;
+import net.minecraft.gizmos.Gizmos;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-/**
- * mc1.21.8-          : subproject 1.15.2 (main project)
- * mc1.21.9 ~ 1.21.10 : subproject 1.21.10
- * mc1.21.11+         : subproject 1.21.11        <--------
- */
 @Mixin(EntityHitboxDebugRenderer.class)
-public abstract class DebugHitboxCommandRendererMixin
+public abstract class EntityHitboxDebugRendererMixin
 {
-	@SuppressWarnings("WrapWithConditionTargetsNonVoid")
-	@WrapWithCondition(
+	@WrapOperation(
 			method = "showHitboxes",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/gizmos/Gizmos;arrow(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;I)Lnet/minecraft/gizmos/GizmoProperties;",
-					ordinal = 0
+					target = "Lnet/minecraft/gizmos/Gizmos;arrow(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;I)Lnet/minecraft/gizmos/GizmoProperties;"
 			)
 	)
-	private static boolean f3BDisableFacingVector_cancelCall(Vec3 start, Vec3 end, int argb)
+	private GizmoProperties w(Vec3 start, Vec3 end, int argb, Operation<GizmoProperties> original)
 	{
-		return !TweakerMoreConfigs.DISABLE_F3_B_ENTITY_FACING_VECTOR.getBooleanValue();
+		if (TweakerMoreConfigs.DISABLE_F3_B_ENTITY_FACING_VECTOR_AS_ARROW.getBooleanValue())
+		{
+			return Gizmos.line(start, end, argb);
+		}
+
+		// vanilla
+		return original.call(start, end, argb);
 	}
 }

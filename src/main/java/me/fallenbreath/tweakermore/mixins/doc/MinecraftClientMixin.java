@@ -20,7 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.doc;
 
-import me.fallenbreath.tweakermore.util.doc.DocumentGenerator;
+import me.fallenbreath.tweakermore.event.TweakerMoreClientEvents;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -43,6 +43,6 @@ public abstract class MinecraftClientMixin
 	)
 	private void onClientInitFinished(CallbackInfo ci)
 	{
-		DocumentGenerator.onClientInitFinished();
+		TweakerMoreClientEvents.onClientInitFinished();
 	}
 }
