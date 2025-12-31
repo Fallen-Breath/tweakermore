@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.config;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import fi.dy.masa.litematica.util.SchematicWorldRefresher;
 import fi.dy.masa.malilib.config.HudAlignment;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IHotkeyTogglable;
@@ -768,6 +769,20 @@ public class TweakerMoreConfigs
 
 	@Config(
 			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(ModIds.litematica)),
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigBoolean LM_INVENTORY_CHECK = newConfigBoolean("lmInventoryCheck", false);
+
+	@Config(
+			type = Config.Type.GENERIC,
+			restriction = @Restriction(require = @Condition(ModIds.litematica)),
+			category = Config.Category.MOD_TWEAKS
+	)
+	public static final TweakerMoreConfigColor LM_INVENTORY_CHECK_COLOR = newConfigColor("lmInventoryCheckColor", "#3C30FF60");
+
+	@Config(
+			type = Config.Type.GENERIC,
 			restriction = @Restriction(require = @Condition(ModIds.minihud)),
 			category = Config.Category.MOD_TWEAKS
 	)
@@ -1014,6 +1029,8 @@ public class TweakerMoreConfigs
 		OF_WITCH_HAT.setValueChangeCallback(OptifinePlayerExtraModelOverrider::onConfigValueChanged);
 		PARTICLE_LIMIT.setValueChangeCallback(ParticleLimitHelper::onConfigValueChanged);
 		FLAWLESS_FRAMES.setValueChangeCallback(FlawlessFramesHandler::onConfigValueChanged);
+		LM_INVENTORY_CHECK.setValueChangeCallback(__ -> SchematicWorldRefresher.INSTANCE.updateAll());
+		LM_INVENTORY_CHECK_COLOR.setValueChangeCallback(__ -> SchematicWorldRefresher.INSTANCE.updateAll());
 
 		// debugs
 		TWEAKERMORE_DEBUG_MODE.setValueChangeCallback(redrawConfigGui);

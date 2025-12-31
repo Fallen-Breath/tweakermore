@@ -116,4 +116,8 @@ public abstract class ConfigFactory
 	{
 		return new TweakerMoreConfigOptionListHotkeyed(name, defaultValue, defaultStorageString, settings);
 	}
+
+	public static TweakerMoreConfigColor newConfigColor(String name, String defaultValue) {
+		return new TweakerMoreConfigColor(name, defaultValue);
+	}
 }
