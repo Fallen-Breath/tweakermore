@@ -68,8 +68,10 @@ dependencies {
             if (!(dep.group == 'net.fabricmc' && dep.name == 'fabric-loader')) {
                 dep.exclude group: 'net.fabricmc', module: 'fabric-loader'
             }
-            dep.exclude group: 'io.github.prospector', module: 'modmenu'
-			dep.exclude group: 'com.github.sakura-ryoko', module: 'malilib'
+			if (!(dep.group == 'com.github.sakura-ryoko' && dep.name == 'malilib')) {
+				dep.exclude group: 'com.github.sakura-ryoko', module: 'malilib'
+			}
+			dep.exclude group: 'io.github.prospector', module: 'modmenu'
 		}
 		return dep
 	}
