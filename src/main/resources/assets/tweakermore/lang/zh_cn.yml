@@ -687,6 +687,21 @@ tweakermore:
       comment: |-
         修改快捷键F3+N的逻辑至1.15及之前的逻辑
         提示，1.15以前的逻辑为：创造模式->旁观者模式、其他模式->创造模式
+    lowerExplosionSound:
+      .: 降低爆炸音效
+      comment: |-
+        降低爆炸音效的音量，使其没那么吵
+        另见：@option#lowerExplosionSoundLimitPerTick@, @option#lowerExplosionSoundPercent@
+    lowerExplosionSoundLimitPerTick:
+      .: 降低爆炸音效-数量限制
+      comment: |-
+        限制每个tick内在同一坐标播放的爆炸音效的数量
+        另见：@option#lowerExplosionSound@
+    lowerExplosionSoundPercent:
+      .: 降低爆炸音效-百分比
+      comment: |-
+        应用于每个爆炸音效音量上的百分比系数
+        另见：@option#lowerExplosionSound@
     maxChatHudHeight:
       .: 最大聊天界面高度
       comment: 聊天界面高度的最大值

@@ -687,6 +687,21 @@ tweakermore:
       comment: |-
         Modify the logic of hotkey F3 + N back to 1.15 and before
         1.15- logic cheat sheet: creative -> spectator, other -> creative
+    lowerExplosionSound:
+      .: lowerExplosionSound
+      comment: |-
+        Lower the volume of explosion sound effects, making it less noisy
+        See also: @option#lowerExplosionSoundLimitPerTick@, @option#lowerExplosionSoundPercent@
+    lowerExplosionSoundLimitPerTick:
+      .: lowerExplosionSoundLimitPerTick
+      comment: |-
+        Limit the number of explosion sound effects played for each same coordinate per tick
+        See also: @option#lowerExplosionSound@
+    lowerExplosionSoundPercent:
+      .: lowerExplosionSoundPercent
+      comment: |-
+        The percentage coefficient applied to the volume of each explosion sound effect
+        See also: @option#lowerExplosionSound@
     maxChatHudHeight:
       .: maxChatHudHeight
       comment: The maximum height of the chat hud

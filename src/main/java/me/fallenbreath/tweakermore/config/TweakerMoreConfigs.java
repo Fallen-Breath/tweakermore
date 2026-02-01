@@ -47,6 +47,7 @@ import me.fallenbreath.tweakermore.impl.features.refreshInventory.InventoryRefre
 import me.fallenbreath.tweakermore.impl.features.schematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.impl.features.spectatorTeleportCommand.SpectatorTeleportCommand;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.flawlessFrames.FlawlessFramesHandler;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.lowerExplosionSoundLimitPerTick.LowerExplosionSoundLimitPerTickHelper;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.movingPistonBlockSelectable.MovingPistonBlockSelectableHelper;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.particleLimit.ParticleLimitHelper;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.windowSize.WindowSizeHelper;
@@ -582,6 +583,15 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBoolean LEGACY_F3_N_LOGIC = newConfigBoolean("legacyF3NLogic", false);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBoolean LOWER_EXPLOSION_SOUND = newConfigBoolean("lowerExplosionSound", false);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigInteger LOWER_EXPLOSION_SOUND_LIMIT_PER_TICK = newConfigInteger("lowerExplosionSoundLimitPerTick", 10, -1, 1000);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigDouble LOWER_EXPLOSION_SOUND_PERCENT = newConfigDouble("lowerExplosionSoundPercent", 1, 0, 100);
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigInteger MAX_CHAT_HUD_HEIGHT = newConfigInteger("maxChatHudHeight", 160, 160, 1000);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
@@ -1029,6 +1039,7 @@ public class TweakerMoreConfigs
 		//////////// Event Listeners ////////////
 
 		TickHandler.getInstance().registerClientTickHandler(LitematicaAutoRefreshMaterialListHelper.getInstance());
+		TickHandler.getInstance().registerClientTickHandler(LowerExplosionSoundLimitPerTickHelper::onClientTick);
 		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
 		TickHandler.getInstance().registerClientTickHandler(PistorderRenderer.getInstance());
 		TweakerMoreRenderEvents.register(new AutoContainerProcessorHintRenderer());

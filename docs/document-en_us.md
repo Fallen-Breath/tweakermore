@@ -1767,6 +1767,43 @@ Modify the logic of hotkey F3 + N back to 1.15 and before
     - Minecraft (`minecraft`) `>=1.16`
 
 
+### lowerExplosionSound
+
+Lower the volume of explosion sound effects, making it less noisy
+
+See also: lowerExplosionSoundLimitPerTick, lowerExplosionSoundPercent
+
+- Category: MC Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+
+
+### lowerExplosionSoundLimitPerTick
+
+Limit the number of explosion sound effects played for each same coordinate per tick
+
+See also: lowerExplosionSound
+
+- Category: MC Tweaks
+- Type: integer (Generic)
+- Default value: `10`
+- Minimum value: `-1`
+- Maximum value: `1000`
+
+
+### lowerExplosionSoundPercent
+
+The percentage coefficient applied to the volume of each explosion sound effect
+
+See also: lowerExplosionSound
+
+- Category: MC Tweaks
+- Type: double (Generic)
+- Default value: `1.0`
+- Minimum value: `0.0`
+- Maximum value: `100.0`
+
+
 ### maxChatHudHeight
 
 The maximum height of the chat hud
