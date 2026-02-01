@@ -55,6 +55,10 @@ public abstract class ClientLevelMixin
 		)
 		{
 			int limitPerTick = TweakerMoreConfigs.LOWER_EXPLOSION_SOUND_LIMIT_PER_TICK.getIntegerValue();
+			if (limitPerTick < 0)
+			{
+				return;  // do nothing if limit < 0
+			}
 			if (limitPerTick == 0 || LowerExplosionSoundLimitPerTickHelper.increaseAndGetExplosionSoundCount(x, y,z) > limitPerTick)
 			{
 				ci.cancel();

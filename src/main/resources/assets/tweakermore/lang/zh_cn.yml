@@ -696,6 +696,7 @@ tweakermore:
       .: 降低爆炸音效-数量限制
       comment: |-
         限制每个tick内在同一坐标播放的爆炸音效的数量
+        若其值小于零，则不作限制
         另见：@option#lowerExplosionSound@
     lowerExplosionSoundPercent:
       .: 降低爆炸音效-百分比

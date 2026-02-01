@@ -1782,6 +1782,8 @@ See also: lowerExplosionSoundLimitPerTick, lowerExplosionSoundPercent
 
 Limit the number of explosion sound effects played for each same coordinate per tick
 
+If the value is negative, no limit is applied
+
 See also: lowerExplosionSound
 
 - Category: MC Tweaks
