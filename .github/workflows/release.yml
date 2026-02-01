@@ -70,9 +70,11 @@ jobs:
 
     strategy:
       matrix: ${{ fromJson(needs.matrix_prep.outputs.matrix) }}
+      fail-fast: false
+      max-parallel: 4
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Display context
         run: |
@@ -81,7 +83,7 @@ jobs:
           echo target_release_tag = ${{ github.event.inputs.target_release_tag }}
 
       - name: Download build artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: build-artifacts
           path: build-artifacts
@@ -143,7 +145,7 @@ jobs:
           cat $GITHUB_OUTPUT
 
       - name: Prepare changelog
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         id: changelog
         with:
           script: return process.env.CHANGELOG
