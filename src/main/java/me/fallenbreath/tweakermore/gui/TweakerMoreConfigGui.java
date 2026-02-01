@@ -86,8 +86,8 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 	@Override
 	public void removed()
 	{
-		super.removed();
 		currentInstance = null;
+		super.removed();
 	}
 
 	public static Setting getSetting()
