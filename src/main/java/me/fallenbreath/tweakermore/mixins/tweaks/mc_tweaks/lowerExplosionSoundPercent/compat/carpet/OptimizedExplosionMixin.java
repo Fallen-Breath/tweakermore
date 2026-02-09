@@ -42,7 +42,11 @@ public abstract class OptimizedExplosionMixin
 			method = "doExplosionB",
 			at = @At(
 					value = "INVOKE",
+					// fabric-carpet in mc1.19.4 keeps using the playSound with different intermediary name
+					// so don't let remap remaps with intermediary
+					//#disable-remap
 					target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V",
+					//#enable-remap
 					remap = true
 			),
 			index = 6,
