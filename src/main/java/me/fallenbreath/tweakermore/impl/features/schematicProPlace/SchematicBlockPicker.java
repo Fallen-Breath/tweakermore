@@ -20,7 +20,6 @@
 
 package me.fallenbreath.tweakermore.impl.features.schematicProPlace;
 
-import fi.dy.masa.litematica.config.Configs;
 import fi.dy.masa.litematica.data.DataManager;
 import fi.dy.masa.litematica.util.InventoryUtils;
 import fi.dy.masa.litematica.util.ItemUtils;
@@ -29,14 +28,14 @@ import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.util.LayerRange;
 import me.fallenbreath.tweakermore.util.FabricUtils;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 //#if MC >= 11600
 //$$ import fi.dy.masa.litematica.config.Configs;
@@ -53,7 +52,7 @@ public class SchematicBlockPicker
 	public static void doSchematicWorldPickBlock(Minecraft mc, BlockPos pos, InteractionHand hand)
 	{
 		// do nothing if schematic rendering is not enabled
-		if (!Configs.Visuals.ENABLE_RENDERING.getBooleanValue() || !Configs.Visuals.ENABLE_SCHEMATIC_RENDERING.getBooleanValue())
+		if (!LitematicaConfigAccess.ENABLE_RENDERING().getBooleanValue() || !LitematicaConfigAccess.ENABLE_SCHEMATIC_RENDERING().getBooleanValue())
 		{
 			return;
 		}

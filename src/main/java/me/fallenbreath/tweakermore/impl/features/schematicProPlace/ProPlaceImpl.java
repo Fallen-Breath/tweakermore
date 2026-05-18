@@ -28,8 +28,8 @@ import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkey
 import me.fallenbreath.tweakermore.impl.features.schematicProPlace.restrict.PlacementRestrictor;
 import me.fallenbreath.tweakermore.util.StringUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.item.BlockPlaceContext;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.BlockPlaceContext;
 import net.minecraft.world.phys.BlockHitResult;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
