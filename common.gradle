@@ -42,27 +42,20 @@ repositories {
 	}
 }
 
-static String curseForgeOrOther(version, curseForge, other) {
-	if (version.count(':') == 2) {
-		return version
-	}
-	return ((version as String) ==~ /\d+/ ? curseForge  : other) + ':' + version
-}
-
 // list of (dependencyNotation -> should use autoImplementation)
 def mod_dependencies = [
-		[project.malilib_version.count(':') == 2 ? project.malilib_version : (12101 <= mcVersion && mcVersion < 12111 ? "com.github.sakura-ryoko:malilib:${project.malilib_version}" : "fi.dy.masa.malilib:${project.malilib_version}"), true],
-		[curseForgeOrOther(project.tweakeroo_file_id   , 'curse.maven:tweakeroo-297344'    , 'com.github.sakura-ryoko:tweakeroo'   ), true],
-		[curseForgeOrOther(project.itemscroller_file_id, 'curse.maven:item-scroller-242064', 'com.github.sakura-ryoko:itemscroller'), true],
-		[curseForgeOrOther(project.minihud_file_id     , 'curse.maven:minihud-244260'      , 'com.github.sakura-ryoko:minihud'     ), true],
+		[project.malilib_version    , true],
+		[project.tweakeroo_version  , true],
+		[project.itemscroller_version, true],
+		[project.minihud_version    , true],
 
 		// - loom doesn't remap base class method (method_10263) call of fi.dy.masa.malilib.util.SubChunkPos in
 		//   fi.dy.masa.litematica.render.schematic.WorldRendererSchematic.setupTerrain, resulting in a crash in dev env
 		//   so we have to disable litematica in [1.15, 1.17) at runtime
-		[curseForgeOrOther(project.litematica_file_id, 'curse.maven:litematica-308892', 'com.github.sakura-ryoko:litematica'), mcVersion < 11500 || 11700 <= mcVersion],
+		[project.litematica_version , mcVersion < 11500 || 11700 <= mcVersion],
 
 		// we're using modmenu for mc 1.15.2 for 1.14.4, so we use modCompileOnly
-		["com.terraformersmc:modmenu:${project.mod_menu_version}"          , mcVersion >= 11500 && mcVersion < 12106],
+		["com.terraformersmc:modmenu:${project.mod_menu_version}", mcVersion >= 11500 && mcVersion < 12106],
 ]
 
 dependencies {
