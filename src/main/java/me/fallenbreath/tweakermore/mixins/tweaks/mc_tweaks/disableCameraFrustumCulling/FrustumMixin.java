@@ -29,6 +29,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+//#if MC >= 26.1
+//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//#endif
+
+//#if MC >= 1.21.2
+//$$ import net.minecraft.world.level.levelgen.structure.BoundingBox;
+//#endif
+
 //#if MC >= 11800
 //$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#endif
@@ -41,7 +49,15 @@ public abstract class FrustumMixin implements CouldBeAlwaysVisibleFrustum
 
 	//#if MC >= 11800
 	//$$ @Inject(method = "<init>(Lnet/minecraft/client/renderer/culling/Frustum;)V", at = @At("TAIL"))
-	//$$ private void copyAlwaysVisibleFlag(Frustum frustum, CallbackInfo ci)
+	//$$ private void disableCameraFrustumCulling_copyAlwaysVisibleFlagOnCtor(Frustum frustum, CallbackInfo ci)
+	//$$ {
+	//$$ 	this.alwaysVisible = ((FrustumMixin)(Object)frustum).alwaysVisible;
+	//$$ }
+	//#endif
+
+	//#if MC >= 26.1
+	//$$ @Inject(method = "set(Lnet/minecraft/client/renderer/culling/Frustum;)V", at = @At("TAIL"))
+	//$$ private void disableCameraFrustumCulling_copyAlwaysVisibleFlagOnSet(Frustum frustum, CallbackInfo ci)
 	//$$ {
 	//$$ 	this.alwaysVisible = ((FrustumMixin)(Object)frustum).alwaysVisible;
 	//$$ }
@@ -64,11 +80,41 @@ public abstract class FrustumMixin implements CouldBeAlwaysVisibleFrustum
 			at = @At("HEAD"),
 			cancellable = true
 	)
-	private void disableCameraFrustumCulling_implementAlwaysVisible(AABB box, CallbackInfoReturnable<Boolean> cir)
+	private void disableCameraFrustumCulling_implementAlwaysVisible_0(AABB box, CallbackInfoReturnable<Boolean> cir)
 	{
 		if (this.alwaysVisible)
 		{
 			cir.setReturnValue(true);
 		}
 	}
+
+	//#if MC >= 1.21.2
+	//$$ @Inject(
+	//$$ 		method = "cubeInFrustum(Lnet/minecraft/world/level/levelgen/structure/BoundingBox;)I",
+	//$$ 		at = @At("HEAD"),
+	//$$ 		cancellable = true
+	//$$ )
+	//$$ private void disableCameraFrustumCulling_implementAlwaysVisible_1(BoundingBox box, CallbackInfoReturnable<Integer> cir)
+	//$$ {
+	//$$ 	if (this.alwaysVisible)
+	//$$ 	{
+	//$$ 		cir.setReturnValue(-2);
+	//$$ 	}
+	//$$ }
+	//#endif
+
+	//#if MC >= 1.21.9
+	//$$ @Inject(
+	//$$ 		method = "pointInFrustum(DDD)Z",
+	//$$ 		at = @At("HEAD"),
+	//$$ 		cancellable = true
+	//$$ )
+	//$$ private void disableCameraFrustumCulling_implementAlwaysVisible_2(double x, double y, double z, CallbackInfoReturnable<Boolean> cir)
+	//$$ {
+	//$$ 	if (this.alwaysVisible)
+	//$$ 	{
+	//$$ 		cir.setReturnValue(true);
+	//$$ 	}
+	//$$ }
+	//#endif
 }
