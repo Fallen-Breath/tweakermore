@@ -25,10 +25,9 @@ import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 
-import java.util.Objects;
-
 //#if MC >= 11904
 //$$ import org.joml.Matrix3x2f;
+//$$ import org.joml.Matrix3x2fStack;
 //#endif
 
 //#if MC >= 12100
@@ -141,6 +140,15 @@ public class RenderUtils
 		//$$ 	matrix.translate((float)(-anchorX * factor), (float)(-anchorY * factor));
 		//$$ 	matrix.scale((float)factor, (float)factor);
 		//$$ 	matrix.translate((float)(anchorX / factor), (float)(anchorY / factor));
+		//$$ }
+		//$$
+		//$$ public void apply(Matrix3x2fStack matrix)
+		//$$ {
+		//$$ 	matrix.pushMatrix();
+		//$$ 	matrix.translate((float)(-anchorX * factor), (float)(-anchorY * factor));
+		//$$ 	matrix.scale((float)factor, (float)factor);
+		//$$ 	matrix.translate((float)(anchorX / factor), (float)(anchorY / factor));
+		//$$ 	this.restoreFunc = matrix::popMatrix;
 		//$$ }
 		//#endif
 

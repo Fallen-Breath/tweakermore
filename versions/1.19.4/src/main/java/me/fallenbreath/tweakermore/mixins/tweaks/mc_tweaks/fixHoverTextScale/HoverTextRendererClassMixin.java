@@ -33,6 +33,12 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//#if MC >= 26.1
+//$$ import org.joml.Matrix3x2fStack;
+//$$ import org.spongepowered.asm.mixin.Final;
+//$$ import org.spongepowered.asm.mixin.Shadow;
+//#endif
+
 //#if MC >= 12000
 //$$ import net.minecraft.client.gui.GuiGraphics;
 //#else
@@ -56,6 +62,12 @@ import net.minecraft.client.gui.screens.Screen;
 )
 public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextRenderer
 {
+	//#if MC >= 26.1
+	//$$ @Shadow @Final private Matrix3x2fStack pose;
+	//$$ @Shadow @Final private int mouseX;
+	//$$ @Shadow @Final private int mouseY;
+	//#endif
+
 	@Unique
 	private Double hoverTextScale = null;
 
@@ -72,9 +84,31 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 		}
 	}
 
+	//#if MC >= 26.1
+	//$$ @Inject(
+	//$$ 		method = "tooltip",
+	//$$ 		at = @At(
+	//$$ 				value = "INVOKE",
+	//$$ 				target = "Lorg/joml/Matrix3x2fStack;pushMatrix()Lorg/joml/Matrix3x2fStack;",
+	//$$ 				shift = At.Shift.AFTER
+	//$$ 		)
+	//$$ )
+	//$$ private void fixHoverTextScale_applyPoseScale(CallbackInfo ci)
+	//$$ {
+	//$$ 	if (this.hoverTextScale != null)
+	//$$ 	{
+	//$$ 		// no need to push-pop matrix since vanilla code already has that
+	//$$ 		float s = this.hoverTextScale.floatValue();
+	//$$ 		this.pose.translate(this.mouseX, this.mouseY);
+	//$$ 		this.pose.scale(s, s);
+	//$$ 		this.pose.translate(-this.mouseX, -this.mouseY);
+	//$$ 	}
+	//$$ }
+	//#endif
+
 	@Inject(
 			//#if MC >= 26.1
-			//$$ method = "componentHoverEffect",
+			//$$ method = "tooltip",
 			//#else
 			method = "renderComponentHoverEffect",
 			//#endif
@@ -137,7 +171,7 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 				int screenHeight = screen.height;
 				//#endif
 
-				// see vanilla: net.minecraft.client.gui.tooltip.HoveredTooltipPositioner#getPosition
+				// see vanilla: net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner#positionTooltip
 				x += 12;
 				y -= 12;
 

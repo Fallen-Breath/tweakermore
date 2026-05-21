@@ -22,18 +22,21 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.fixHoverTextScale;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.fixHoverTextScale.ScaleableHoverTextRenderer;
-import me.fallenbreath.tweakermore.util.render.RenderUtils;
-import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+//#if MC < 26.1
+import me.fallenbreath.tweakermore.util.render.RenderUtils;
+import me.fallenbreath.tweakermore.util.render.context.RenderContext;
+import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Unique;
+//#endif
 
 /**
  * mc1.21.10- : subproject 1.15.2 (main project)
@@ -45,8 +48,10 @@ public abstract class ChatScreenMixin
 	@Shadow @Final int mouseX;
 	@Shadow @Final int mouseY;
 
+	//#if MC < 26.1
 	@Unique @Nullable
 	private RenderUtils.Scaler hoverScaler$TKM = null;
+	//#endif
 
 	@Inject(
 			//#if MC >= 26.1
@@ -56,7 +61,6 @@ public abstract class ChatScreenMixin
 			//#endif
 			at = @At(
 					value = "INVOKE",
-					// FIXME: does this scaler really work in 26.1?
 					//#if MC >= 26.1
 					//$$ target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;componentHoverEffect(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Style;II)V"
 					//#else
@@ -74,8 +78,11 @@ public abstract class ChatScreenMixin
 			if (mc != null)
 			{
 				double scale = mc.options.chatScale().get();
+
+				//#if MC < 26.1
 				this.hoverScaler$TKM = RenderUtils.createScaler(this.mouseX, this.mouseY, scale);
 				this.hoverScaler$TKM.apply(RenderContext.gui( self));
+				//#endif
 
 				ScaleableHoverTextRenderer shtr = (ScaleableHoverTextRenderer)self;
 				shtr.setHoverTextScale$TKM(scale);
@@ -83,6 +90,7 @@ public abstract class ChatScreenMixin
 		}
 	}
 
+	//#if MC < 26.1
 	@Inject(
 			//#if MC >= 26.1
 			//$$ method = "extractDeferredElements",
@@ -112,4 +120,5 @@ public abstract class ChatScreenMixin
 			shtr.setHoverTextScale$TKM(null);
 		}
 	}
+	//#endif
 }
