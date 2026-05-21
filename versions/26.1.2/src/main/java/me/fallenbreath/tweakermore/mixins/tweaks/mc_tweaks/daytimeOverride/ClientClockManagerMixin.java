@@ -20,34 +20,28 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.daytimeOverride;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.ClientClockManager;
-import net.minecraft.world.clock.ClockNetworkState;
+import net.minecraft.core.Holder;
+import net.minecraft.world.clock.WorldClock;
+import net.minecraft.world.clock.WorldClocks;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 /**
- * Modify daytime here too,
- * so the logic used when the client received a time update packet can be reused by us (gamerule changing etc.)
+ * Modify overworld clock time, which is where the game rendering logic queries from
  */
 @Mixin(ClientClockManager.class)
 public abstract class ClientClockManagerMixin
 {
-	// currently `handleUpdates` is only called in `ClientPacketListener#handleSetTime`,
-	// which means that only the time update packet can trigger this
-	@ModifyVariable(
-			method = "lambda$handleUpdates$0",
-			at = @At("HEAD"),
-			argsOnly = true
-	)
-	private ClockNetworkState overwriteDayTime_modifySetter(ClockNetworkState state)
+	@ModifyReturnValue(method = "getTotalTicks", at = @At("TAIL"))
+	private long overwriteDayTime_modifyGgetTotalTicks(long ret, Holder<WorldClock> definition)
 	{
-		if (TweakerMoreConfigs.DAYTIME_OVERRIDE.getBooleanValue())
+		if (definition.is(WorldClocks.OVERWORLD) && TweakerMoreConfigs.DAYTIME_OVERRIDE.getBooleanValue())
 		{
-			long dayTime = TweakerMoreConfigs.DAYTIME_OVERRIDE_VALUE.getIntegerValue();
-			state = new ClockNetworkState(dayTime, 0, 0);
+			ret = TweakerMoreConfigs.DAYTIME_OVERRIDE_VALUE.getIntegerValue();
 		}
-		return state;
+		return ret;
 	}
 }
