@@ -24,6 +24,7 @@ import fi.dy.masa.minihud.event.RenderHandler;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.GameUtils;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.ChatScreen;
@@ -60,7 +61,7 @@ public abstract class RenderHandlerMixin
 	{
 		if (TweakerMoreConfigs.MINIHUD_HIDE_IF_CHAT_SCREEN_OPENED.getBooleanValue())
 		{
-			if (Minecraft.getInstance().screen instanceof ChatScreen)
+			if (GameUtils.getCurrentMinecraftScreen() instanceof ChatScreen)
 			{
 				ci.cancel();
 			}

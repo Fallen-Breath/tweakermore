@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.impl.features.autoContainerProcess;
 import com.google.common.collect.ImmutableList;
 import me.fallenbreath.tweakermore.impl.features.autoContainerProcess.processors.*;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.autoContainerProcess.ItemScrollerInventoryUtilsAccessor;
+import me.fallenbreath.tweakermore.util.GameUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.*;
@@ -57,7 +58,7 @@ public class ContainerProcessorManager
 	{
 		if (hasTweakEnabled())
 		{
-			Screen screen = Minecraft.getInstance().screen;
+			Screen screen = GameUtils.getCurrentMinecraftScreen();
 			LocalPlayer player = Minecraft.getInstance().player;
 			if (player != null && screen instanceof AbstractContainerScreen<?>)
 			{

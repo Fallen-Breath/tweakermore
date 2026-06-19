@@ -22,7 +22,9 @@ package me.fallenbreath.tweakermore.impl.features.copyItemDataToClipBoard;
 
 import fi.dy.masa.malilib.util.InfoUtils;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.copyItemData.ContainerScreenAccessor;
+import me.fallenbreath.tweakermore.util.GameUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -48,9 +50,10 @@ public class ItemDataCopier
 	public static void copyItemData()
 	{
 		Minecraft mc = Minecraft.getInstance();
-		if (mc.screen instanceof AbstractContainerScreen)
+		Screen screen = GameUtils.getCurrentMinecraftScreen(mc);
+		if (screen instanceof AbstractContainerScreen)
 		{
-			Slot slot = ((ContainerScreenAccessor)mc.screen).getFocusedSlot();
+			Slot slot = ((ContainerScreenAccessor)screen).getFocusedSlot();
 			if (slot != null && slot.hasItem() && mc.level != null)
 			{
 				ItemStack itemStack = slot.getItem();

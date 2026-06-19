@@ -1,0 +1,2 @@
+net.minecraft.advancements.criterion.MinMaxBounds net.minecraft.advancements.predicates.MinMaxBounds
+fi.dy.masa.malilib.util.LayerRange fi.dy.masa.malilib.util.position.LayerRange

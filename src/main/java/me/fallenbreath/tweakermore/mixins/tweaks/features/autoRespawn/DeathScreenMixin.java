@@ -21,6 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.features.autoRespawn;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.GameUtils;
 import net.minecraft.client.gui.screens.DeathScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -67,7 +68,7 @@ public abstract class DeathScreenMixin extends Screen
 	@Unique
 	private void autoRespawn$TKM$impl()
 	{
-		if (this.minecraft != null && this.minecraft.player != null && this.minecraft.screen == this)
+		if (this.minecraft != null && this.minecraft.player != null && GameUtils.getCurrentMinecraftScreen(this.minecraft) == this)
 		{
 			// ref: the onPress callback of the spectate / respawn button created in net.minecraft.client.gui.screen.DeathScreen#init
 			this.minecraft.player.respawn();

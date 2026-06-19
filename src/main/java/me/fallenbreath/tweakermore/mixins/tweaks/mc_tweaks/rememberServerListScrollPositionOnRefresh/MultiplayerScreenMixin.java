@@ -21,6 +21,7 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.rememberServerListScrollPositionOnRefresh;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.GameUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
@@ -45,7 +46,7 @@ public abstract class MultiplayerScreenMixin
 		}
 
 		Screen oldScreen = (JoinMultiplayerScreen)(Object)this;
-		Screen newScreen = Minecraft.getInstance().screen;
+		Screen newScreen = GameUtils.getCurrentMinecraftScreen();
 		if (!(oldScreen instanceof MultiplayerScreenAccessor && newScreen instanceof MultiplayerScreenAccessor))
 		{
 			return;

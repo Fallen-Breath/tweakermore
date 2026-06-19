@@ -21,6 +21,7 @@
 package me.fallenbreath.tweakermore.util;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 
 public class GameUtils
 {
@@ -36,5 +37,19 @@ public class GameUtils
 	public static void scheduleOnClientThread(Runnable runnable)
 	{
 		scheduleOnClientThread(Minecraft.getInstance(), runnable);
+	}
+
+	public static Screen getCurrentMinecraftScreen(Minecraft mc)
+	{
+		//#if MC >= 26.2
+		//$$ return mc.gui.screen();
+		//#else
+		return mc.screen;
+		//#endif
+	}
+
+	public static Screen getCurrentMinecraftScreen()
+	{
+		return getCurrentMinecraftScreen(Minecraft.getInstance());
 	}
 }

@@ -24,6 +24,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.CommonScannerInfoViewer;
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.infoView.structureBlock.StructureBlockScreenAccessor;
+import me.fallenbreath.tweakermore.util.GameUtils;
 import me.fallenbreath.tweakermore.util.Messenger;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.TextRenderingUtil;
@@ -59,7 +60,7 @@ public class StructureBlockContentRenderer extends CommonScannerInfoViewer
 	{
 		// don't sync block entity if the player is operating the structure block
 		// or the player might not be able to switch the structure block mode
-		Screen currentScreen = Minecraft.getInstance().screen;
+		Screen currentScreen = GameUtils.getCurrentMinecraftScreen();
 		if (currentScreen instanceof StructureBlockScreenAccessor)
 		{
 			//noinspection RedundantIfStatement

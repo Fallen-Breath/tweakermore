@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.features.autoContainerProcess;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.features.autoContainerProcess.AutoProcessableScreen;
+import me.fallenbreath.tweakermore.util.GameUtils;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -42,7 +43,7 @@ public abstract class ClientPlayNetworkHandlerMixin
 	)
 	private void tweakerMoreAntuContainerProcessorMarking(CallbackInfo ci)
 	{
-		Screen screen = Minecraft.getInstance().screen;
+		Screen screen = GameUtils.getCurrentMinecraftScreen();
 		if (screen != null)
 		{
 			((AutoProcessableScreen)screen).setShouldProcess$TKM(true);
