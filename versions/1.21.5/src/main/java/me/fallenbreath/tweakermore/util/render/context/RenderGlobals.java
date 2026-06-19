@@ -22,9 +22,14 @@ package me.fallenbreath.tweakermore.util.render.context;
 
 import com.mojang.blaze3d.opengl.GlConst;
 import com.mojang.blaze3d.opengl.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
+
+//#if MC >= 26.2
+//$$ import com.mojang.blaze3d.platform.BlendFactor;
+//#else
 import com.mojang.blaze3d.platform.DestFactor;
 import com.mojang.blaze3d.platform.SourceFactor;
-import com.mojang.blaze3d.systems.RenderSystem;
+//#endif
 
 /**
  * mc1.14           : subproject 1.14.4
@@ -52,7 +57,11 @@ public class RenderGlobals
 
 	public static void enableBlend()
 	{
+		//#if MC >= 26.2
+		//$$ GlStateManager._enableBlend(0);  // FIXME
+		//#else
 		GlStateManager._enableBlend();
+		//#endif
 	}
 
 	public static void blendFunc(int srcFactorRGB, int dstFactorRgb, int srcFactorAlpha, int dstFactorAlpha)
@@ -68,10 +77,17 @@ public class RenderGlobals
 	public static void blendFuncForAlpha()
 	{
 		blendFunc(
+				//#if MC >= 26.2
+				//$$ GlConst.toGl(BlendFactor.SRC_ALPHA),
+				//$$ GlConst.toGl(BlendFactor.ONE_MINUS_SRC_ALPHA),
+				//$$ GlConst.toGl(BlendFactor.ONE),
+				//$$ GlConst.toGl(BlendFactor.ONE_MINUS_SRC_ALPHA)
+				//#else
 				GlConst.toGl(SourceFactor.SRC_ALPHA),
 				GlConst.toGl(DestFactor.ONE_MINUS_SRC_ALPHA),
 				GlConst.toGl(SourceFactor.ONE),
 				GlConst.toGl(DestFactor.ONE_MINUS_SRC_ALPHA)
+				//#endif
 		);
 	}
 

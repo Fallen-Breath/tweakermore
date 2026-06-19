@@ -32,6 +32,9 @@ import java.util.Queue;
 public interface ParticleRendererAccessor<P extends Particle>
 {
 	@Accessor("particles")
+	Queue<P> getParticles$TKM();
+
+	@Accessor("particles")
 	@Mutable
 	void setParticles$TKM(Queue<P> particles);
 }

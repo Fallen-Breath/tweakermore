@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2026  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,9 +18,33 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.impl.mc_tweaks.disableSignTextLengthLimit;
+package me.fallenbreath.tweakermore.util;
 
-public class SignOverflowHintDrawer
+import java.util.Objects;
+
+//#if MC >= 26.2
+//$$ import net.minecraft.network.chat.TextColor;
+//#else
+import net.minecraft.ChatFormatting;
+//#endif
+
+public class ColorUtils
 {
-	// Only used in mc1.14.4
+	public static int getRedColor()
+	{
+		//#if MC >= 26.2
+		//$$ return TextColor.RED.getValue();
+		//#else
+		return Objects.requireNonNull(ChatFormatting.RED.getColor());
+		//#endif
+	}
+
+	public static int getDarkRedColor()
+	{
+		//#if MC >= 26.2
+		//$$ return TextColor.DARK_RED.getValue();
+		//#else
+		return Objects.requireNonNull(ChatFormatting.DARK_RED.getColor());
+		//#endif
+	}
 }

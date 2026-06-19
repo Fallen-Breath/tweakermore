@@ -83,15 +83,22 @@ public class SafeAfkHelper
 						mc.level.disconnect();
 						mc.clearLevel();
 						//#endif
-						mc.setScreen(new DisconnectedScreen(
-								new JoinMultiplayerScreen(new TitleScreen()),
-								//#if MC >= 11600
-								//$$ title,
-								//#else
-								title.getString(),
-								//#endif
-								reason
-						));
+
+						//#if MC >= 26.2
+						//$$ mc.gui.setScreen(
+						//#else
+						mc.setScreen(
+						//#endif
+								new DisconnectedScreen(
+										new JoinMultiplayerScreen(new TitleScreen()),
+										//#if MC >= 11600
+										//$$ title,
+										//#else
+										title.getString(),
+										//#endif
+										reason
+								)
+						);
 					});
 				}
 			}

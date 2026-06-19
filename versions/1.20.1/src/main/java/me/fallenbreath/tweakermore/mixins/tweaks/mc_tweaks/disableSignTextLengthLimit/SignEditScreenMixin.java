@@ -25,6 +25,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.ColorUtils;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.entity.SignText;
@@ -131,11 +132,10 @@ public abstract class SignEditScreenMixin extends Screen
 
 				if (overflowed)
 				{
-					assert ChatFormatting.RED.getColor() != null;
 					int lineHeight = this.sign.getTextLineHeight();
 					int x = xStart - 10;
 					int y = lineIdx * lineHeight - (4 * lineHeight / 2);
-					context.drawString(this.font, "!", x, y, ChatFormatting.RED.getColor(), false);
+					context.drawString(this.font, "!", x, y, ColorUtils.getRedColor(), false);
 				}
 			}
 		}

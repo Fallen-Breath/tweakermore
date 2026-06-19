@@ -24,6 +24,7 @@ import com.google.common.collect.Lists;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.pistorder.pushlimit.PushLimitManager;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.pistorder.PistonBlockAccessor;
+import me.fallenbreath.tweakermore.util.ColorUtils;
 import me.fallenbreath.tweakermore.util.Messenger;
 import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.TemporaryBlockReplacer;
@@ -281,12 +282,12 @@ public class PistorderDisplay
 			}
 			for (int i = 0; i < this.brokenBlocks.size(); i++)
 			{
-				texts.add(drawString(this.brokenBlocks.get(i), 0.0F, Messenger.s(i + 1), ChatFormatting.RED.getColor()));
+				texts.add(drawString(this.brokenBlocks.get(i), 0.0F, Messenger.s(i + 1), ColorUtils.getRedColor()));
 			}
 
 			if (this.immovableBlockPos != null)
 			{
-				texts.add(drawString(this.immovableBlockPos, 0.0F, Messenger.s("×"), ChatFormatting.DARK_RED.getColor()));
+				texts.add(drawString(this.immovableBlockPos, 0.0F, Messenger.s("×"), ColorUtils.getDarkRedColor()));
 			}
 		}
 

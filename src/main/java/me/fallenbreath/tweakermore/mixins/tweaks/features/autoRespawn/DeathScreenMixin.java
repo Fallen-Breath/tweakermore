@@ -72,7 +72,12 @@ public abstract class DeathScreenMixin extends Screen
 		{
 			// ref: the onPress callback of the spectate / respawn button created in net.minecraft.client.gui.screen.DeathScreen#init
 			this.minecraft.player.respawn();
+
+			//#if MC >= 26.2
+			//$$ this.minecraft.gui.setScreen(null);
+			//#else
 			this.minecraft.setScreen(null);
+			//#endif
 		}
 	}
 }

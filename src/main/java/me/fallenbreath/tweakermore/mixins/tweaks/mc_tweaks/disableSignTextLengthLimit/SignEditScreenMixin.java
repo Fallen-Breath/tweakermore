@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableSignTextLengt
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.util.ColorUtils;
 import me.fallenbreath.tweakermore.util.ModIds;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
@@ -242,9 +243,8 @@ public abstract class SignEditScreenMixin extends Screen
 				boolean overflowed = wrapped.size() > 1;
 				if (overflowed)
 				{
-					assert ChatFormatting.RED.getColor() != null;
 					mc.font.drawInBatch(
-							"!", xStart - 10, lineIdx * 10 - textArrayLen * 5, ChatFormatting.RED.getColor(), false, matrix4f, immediate,
+							"!", xStart - 10, lineIdx * 10 - textArrayLen * 5, ColorUtils.getRedColor(), false, matrix4f, immediate,
 							//#if MC >= 11904
 							//$$ Font.DisplayMode.NORMAL,
 							//#else

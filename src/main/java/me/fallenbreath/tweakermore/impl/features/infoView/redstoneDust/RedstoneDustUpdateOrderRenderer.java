@@ -26,15 +26,14 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.listentries.InfoViewTargetStrategy;
 import me.fallenbreath.tweakermore.impl.features.infoView.CommonScannerInfoViewer;
 import me.fallenbreath.tweakermore.impl.features.infoView.cache.RenderVisitorWorldView;
+import me.fallenbreath.tweakermore.util.ColorUtils;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
-import net.minecraft.world.level.block.RedStoneWireBlock;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.RedStoneWireBlock;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 public class RedstoneDustUpdateOrderRenderer extends CommonScannerInfoViewer
@@ -68,7 +67,7 @@ public class RedstoneDustUpdateOrderRenderer extends CommonScannerInfoViewer
 		{
 			return;
 		}
-		int color = Objects.requireNonNull(ChatFormatting.RED.getColor()) | ((alphaBits & 0xFF) << 24);
+		int color = ColorUtils.getRedColor() | ((alphaBits & 0xFF) << 24);
 
 		List<BlockPos> order = getDustUpdateOrderAt(pos);
 		for (int i = 0; i < order.size(); i++)

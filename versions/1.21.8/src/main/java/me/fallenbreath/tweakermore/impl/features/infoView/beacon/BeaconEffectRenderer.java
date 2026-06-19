@@ -20,10 +20,8 @@
 
 package me.fallenbreath.tweakermore.impl.features.infoView.beacon;
 
-import com.google.common.base.Suppliers;
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Pair;
-import fi.dy.masa.malilib.render.MaLiLibPipelines;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.features.infoView.CommonScannerInfoViewer;
@@ -40,8 +38,6 @@ import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.world.level.block.BeaconBlock;
 import net.minecraft.world.level.block.entity.BeaconBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.Holder;
@@ -50,7 +46,12 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Supplier;
+
+//#if MC >= 26.2
+//$$ import net.minecraft.client.gui.Hud;
+//#else
+import net.minecraft.client.gui.Gui;
+//#endif
 
 public class BeaconEffectRenderer extends CommonScannerInfoViewer
 {
@@ -133,7 +134,11 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 
 	private void renderStatusEffectIcon(WorldRenderContext context, Vec3 pos, MobEffect statusEffect, int amplifier, double deltaX, double kDeltaY)
 	{
+		//#if MC >= 26.2
+		//$$ var sprite = Hud.getMobEffectSprite(BuiltInRegistries.MOB_EFFECT.wrapAsHolder(statusEffect));
+		//#else
 		var sprite = Gui.getMobEffectSprite(BuiltInRegistries.MOB_EFFECT.wrapAsHolder(statusEffect));
+		//#endif
 		MixedRenderContext mrc = MixedRenderContext.create(context);
 
 		InWorldPositionTransformer positionTransformer = new InWorldPositionTransformer(pos);

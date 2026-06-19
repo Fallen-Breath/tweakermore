@@ -37,8 +37,11 @@ import org.spongepowered.asm.mixin.injection.At;
 //$$ import net.minecraft.client.renderer.entity.state.EntityRenderState;
 //#endif
 
-//#if MC >= 11500
+//#if 11500 <= MC && MC < 26.2
 import net.minecraft.client.renderer.MultiBufferSource;
+//#endif
+
+//#if MC >= 11500
 import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 

@@ -104,7 +104,11 @@ dependencies {
 		// modmenu needs these
 		autoRuntimeOnly fabricApi.module("fabric-screen-api-v1", project.fabric_api_version)
 		autoRuntimeOnly fabricApi.module(mcVersion >= 260000 ? "fabric-key-mapping-api-v1" : "fabric-key-binding-api-v1", project.fabric_api_version)
-		autoRuntimeOnly fabricApi.module("fabric-lifecycle-events-v1", project.fabric_api_version)
+		if (mcVersion >= 260200) {
+			autoImplementation fabricApi.module("fabric-lifecycle-events-v1", project.fabric_api_version)
+		} else {
+			autoRuntimeOnly fabricApi.module("fabric-lifecycle-events-v1", project.fabric_api_version)
+		}
 	}
 	if (mcVersion >= 260000) {
 		// malilib use "implementation" instead of "modApi" / "api" so we need to do this
