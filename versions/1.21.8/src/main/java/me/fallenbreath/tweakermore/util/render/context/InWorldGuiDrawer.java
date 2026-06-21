@@ -27,7 +27,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.render.GuiRenderer;
 import net.minecraft.client.gui.render.state.GuiRenderState;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.fog.FogRenderer;
 import org.jetbrains.annotations.NotNull;
 
@@ -46,20 +45,36 @@ public class InWorldGuiDrawer implements AutoCloseable
 	private final GuiGraphics drawContext;
 	private final GuiRenderState guiState;
 	private final GuiRenderer guiRenderer;
+
+	//#if MC < 26.2
 	private final FogRenderer fogRenderer;
+	//#endif
 
 	private InWorldGuiDrawer()
 	{
 		// reference: net.minecraft.client.renderer.GameRenderer#GameRenderer
 		Minecraft mc = Minecraft.getInstance();
-		MultiBufferSource.BufferSource immediate = RenderUtils.getVertexConsumer();
+
+		//#if MC < 26.2
+		var immediate = RenderUtils.getVertexConsumer();
+		//#endif
+
 		this.guiState = new GuiRenderState();
+
 		//#if MC >= 1.21.11
 		//$$ // TODO: check if mouseX,mouseY setting to 0,0 works
 		//$$ this.drawContext = new GuiGraphics(mc, this.guiState, 0, 0);
 		//#else
 		this.drawContext = new GuiGraphics(mc, this.guiState);
 		//#endif
+
+		//#if MC >= 26.2
+		//$$ this.guiRenderer = new GuiRenderer(
+		//$$ 		guiState,
+		//$$ 		mc.gameRenderer.featureRenderDispatcher(),
+		//$$ 		List.of()
+		//$$ );
+		//#else
 		this.guiRenderer = new GuiRenderer(
 				this.guiState, immediate,
 				//#if MC >= 1.21.9
@@ -68,8 +83,13 @@ public class InWorldGuiDrawer implements AutoCloseable
 				//#endif
 				List.of()
 		);
+		//#endif
+
 		((InWorldGuiRendererHook)this.guiRenderer).setInWorldGuiRender$TKM(true);
+
+		//#if MC < 26.2
 		this.fogRenderer = new FogRenderer();
+		//#endif
 	}
 
 	public static InWorldGuiDrawer getInstance()
@@ -88,7 +108,11 @@ public class InWorldGuiDrawer implements AutoCloseable
 	public void render()
 	{
 		RenderSystem.backupProjectionMatrix();
+		//#if MC >= 26.2
+		//$$ this.guiRenderer.render();
+		//#else
 		this.guiRenderer.render(this.fogRenderer.getBuffer(FogRenderer.FogMode.NONE));
+		//#endif
 		RenderSystem.restoreProjectionMatrix();
 
 		//#if MC >= 26.1
@@ -97,7 +121,10 @@ public class InWorldGuiDrawer implements AutoCloseable
 		this.guiRenderer.incrementFrameNumber();
 		//#endif
 
+		//#if MC < 26.2
 		this.fogRenderer.endFrame();
+		//#endif
+
 		this.guiState.reset();
 	}
 
@@ -105,7 +132,10 @@ public class InWorldGuiDrawer implements AutoCloseable
 	public void close()
 	{
 		this.guiRenderer.close();
+
+		//#if MC < 26.2
 		this.fogRenderer.close();
+		//#endif
 	}
 
 	@NotNull

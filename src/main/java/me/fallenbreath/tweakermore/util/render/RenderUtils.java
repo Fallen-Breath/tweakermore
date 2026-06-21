@@ -40,7 +40,7 @@ import net.minecraft.client.gui.Font;
 //$$ import net.minecraft.util.FormattedCharSequence;
 //#endif
 
-//#if MC >= 11500
+//#if 11500 <= MC && MC < 26.2
 import com.mojang.blaze3d.vertex.Tesselator;
 import net.minecraft.client.renderer.MultiBufferSource;
 //#endif
@@ -76,7 +76,7 @@ public class RenderUtils
 	//$$ }
 	//#endif
 
-	//#if MC >= 11500
+	//#if 11500 <= MC && MC < 26.2
 	public static MultiBufferSource.BufferSource getVertexConsumer()
 	{
 		//#if MC >= 12100

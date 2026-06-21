@@ -43,6 +43,10 @@ import java.util.function.Function;
 import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
 //#endif
 
+//#if MC >= 11904
+//$$ import net.minecraft.client.gui.Font;
+//#endif
+
 //#if MC >= 11700
 //$$ import com.mojang.blaze3d.systems.RenderSystem;
 //#endif
@@ -52,7 +56,7 @@ import me.fallenbreath.tweakermore.util.render.matrix.McMatrixStack;
 //$$ import net.minecraft.util.FormattedCharSequence;
 //#endif
 
-//#if MC >= 11500
+//#if 11500 <= MC && MC < 26.2
 import net.minecraft.client.renderer.MultiBufferSource;
 import com.mojang.math.Transformation;
 //#endif
@@ -61,6 +65,10 @@ public class TextRenderer
 {
 	public static final double DEFAULT_FONT_SCALE = 0.025;
 	private static final double DEFAULT_LINE_HEIGHT_RATIO = 1.0 * RenderUtils.TEXT_LINE_HEIGHT / RenderUtils.TEXT_HEIGHT;
+
+	//#if MC >= 26.2
+	//$$ private static final int FULL_BRIGHT_LIGHT = 0xF000F0;
+	//#endif
 
 	private final List<TextHolder> lines;
 	private Vec3 pos;
@@ -181,6 +189,34 @@ public class TextRenderer
 			RenderGlobals.enableBlend();
 			RenderGlobals.blendFuncForAlpha();
 
+			//#if MC >= 11904
+			//$$ var displayMode = this.seeThrough ? Font.DisplayMode.SEE_THROUGH : Font.DisplayMode.NORMAL;
+			//#endif
+
+			//#if MC >= 26.2
+			//$$ try (ImmediateTextDrawer drawer = new ImmediateTextDrawer(displayMode, FULL_BRIGHT_LIGHT))
+			//$$ {
+			//$$ 	for (int i = 0; i < lineNum; i++)
+			//$$ 	{
+			//$$ 		TextHolder holder = this.lines.get(i);
+			//$$ 		float textX = (float)this.horizontalAlignment.getTextX(maxTextWidth, holder.getWidth());
+			//$$ 		float textY = (float)(this.getLineHeight() * i);
+			//$$
+			//$$ 		int backgroundColor = this.backgroundColor;
+			//$$ 		while (true)
+			//$$ 		{
+			//$$ 			drawer.append(mc.font.prepareText(holder.text, textX, textY, this.color, this.shadow, false, backgroundColor));
+			//$$ 			if (backgroundColor == 0)
+			//$$ 			{
+			//$$ 				break;
+			//$$ 			}
+			//$$ 			backgroundColor = 0;
+			//$$ 		}
+			//$$ 	}
+			//$$ 	drawer.draw();
+			//$$ }
+			//#else
+
 			for (int i = 0; i < lineNum; i++)
 			{
 				TextHolder holder = this.lines.get(i);
@@ -202,7 +238,7 @@ public class TextRenderer
 					mc.font.drawInBatch(
 							holder.text, textX, textY, this.color, this.shadow, matrix4f, immediate,
 							//#if MC >= 11904
-							//$$ this.seeThrough ? net.minecraft.client.gui.Font.DisplayMode.SEE_THROUGH : net.minecraft.client.gui.Font.DisplayMode.NORMAL,
+							//$$ displayMode,
 							//#else
 							this.seeThrough,
 							//#endif
@@ -232,6 +268,8 @@ public class TextRenderer
 				//$$ }
 				//#endif
 			}
+
+			//#endif  // if MC >= 26.2
 
 			//#if MC < 11600
 			RenderGlobals.color4f(1.0F, 1.0F, 1.0F, 1.0F);

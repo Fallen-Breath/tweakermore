@@ -21,18 +21,21 @@
 package me.fallenbreath.tweakermore.mixins.util.render;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
-import com.llamalad7.mixinextras.sugar.Local;
-import com.mojang.blaze3d.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.ProjectionType;
+import com.mojang.blaze3d.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.fallenbreath.tweakermore.util.render.context.InWorldGuiRendererHook;
 import net.minecraft.client.gui.render.GuiRenderer;
-import com.mojang.blaze3d.platform.Window;
-import org.joml.Matrix4fc;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+
+//#if MC >= 26.2
+//$$ import org.joml.Matrix4f;
+//#else
+import org.joml.Matrix4fc;
+//#endif
 
 @Mixin(GuiRenderer.class)
 public abstract class GuiRendererMixin implements InWorldGuiRendererHook
@@ -62,7 +65,9 @@ public abstract class GuiRendererMixin implements InWorldGuiRendererHook
 			method = "draw",
 			at = @At(
 					value = "INVOKE",
-					//#if MC >= 1.21.11
+					//#if MC >= 26.2
+					//$$ target = "Lnet/minecraft/client/renderer/DynamicUniforms;writeTransform(Lorg/joml/Matrix4f;)Lcom/mojang/blaze3d/buffers/GpuBufferSlice;"
+					//#elseif MC >= 1.21.11
 					//$$ target = "Lnet/minecraft/client/renderer/DynamicUniforms;writeTransform(Lorg/joml/Matrix4fc;Lorg/joml/Vector4fc;Lorg/joml/Vector3fc;Lorg/joml/Matrix4fc;)Lcom/mojang/blaze3d/buffers/GpuBufferSlice;"
 					//#else
 					target = "Lnet/minecraft/client/renderer/DynamicUniforms;writeTransform(Lorg/joml/Matrix4fc;Lorg/joml/Vector4fc;Lorg/joml/Vector3fc;Lorg/joml/Matrix4fc;F)Lcom/mojang/blaze3d/buffers/GpuBufferSlice;"
@@ -70,6 +75,16 @@ public abstract class GuiRendererMixin implements InWorldGuiRendererHook
 			),
 			index = 0
 	)
+	//#if MC >= 26.2
+	//$$ private Matrix4f setMatrixToGlobalModelViewMatrix(Matrix4f matrix4f)
+	//$$ {
+	//$$ 	if (this.inWorldGuiRender$TKM)
+	//$$ 	{
+	//$$ 		matrix4f = RenderSystem.getModelViewMatrixCopy();
+	//$$ 	}
+	//$$ 	return matrix4f;
+	//$$ }
+	//#else
 	private Matrix4fc setMatricToGlobalModelViewMatrix(Matrix4fc matrix4fc)
 	{
 		if (this.inWorldGuiRender$TKM)
@@ -78,4 +93,5 @@ public abstract class GuiRendererMixin implements InWorldGuiRendererHook
 		}
 		return matrix4fc;
 	}
+	//#endif
 }
