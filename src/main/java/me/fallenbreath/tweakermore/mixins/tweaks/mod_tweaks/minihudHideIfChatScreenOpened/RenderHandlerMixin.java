@@ -46,10 +46,14 @@ public abstract class RenderHandlerMixin
 			method = "onRenderGameOverlayPost",
 			//#endif
 			at = @At(
-					value = "FIELD",
-					//#if MC >= 12002
+					//#if MC >= 26.2
+					//$$ value = "INVOKE",
+					//$$ target = "Lnet/minecraft/client/gui/Hud;isHidden()Z",
+					//#elseif MC >= 12002
+					//$$ value = "FIELD",
 					//$$ target = "Lnet/minecraft/client/Options;hideGui:Z",
 					//#else
+					value = "FIELD",
 					target = "Lnet/minecraft/client/Options;renderDebug:Z",
 					//#endif
 					remap = true

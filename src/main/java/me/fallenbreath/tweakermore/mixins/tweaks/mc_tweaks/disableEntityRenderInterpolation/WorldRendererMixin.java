@@ -21,9 +21,14 @@
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableEntityRenderInterpolation;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.renderer.LevelRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+
+//#if MC >= 26.2
+//$$ import net.minecraft.client.renderer.extract.LevelExtractor;
+//#else
+import net.minecraft.client.renderer.LevelRenderer;
+//#endif
 
 //#if MC >= 1.21.9
 //$$ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
@@ -31,7 +36,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 //#endif
 
-@Mixin(LevelRenderer.class)
+@Mixin(
+		//#if MC >= 26.2
+		//$$ LevelExtractor.class
+		//#else
+		LevelRenderer.class
+		//#endif
+)
 public abstract class WorldRendererMixin
 {
 	//#if MC >= 1.21.9

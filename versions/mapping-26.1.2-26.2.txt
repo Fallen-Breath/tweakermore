@@ -1,3 +1,5 @@
-net.minecraft.advancements.criterion.MinMaxBounds net.minecraft.advancements.predicates.MinMaxBounds
 fi.dy.masa.malilib.util.LayerRange fi.dy.masa.malilib.util.position.LayerRange
+
+net.minecraft.advancements.criterion.MinMaxBounds net.minecraft.advancements.predicates.MinMaxBounds
 net.minecraft.client.renderer.GameRenderer getMainCamera() mainCamera()
+net.minecraft.client.renderer.GameRenderer getNightVisionScale() nightVisionScale()

@@ -24,11 +24,22 @@ import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.keepMessageHistoryOnReconfiguration.KeepMessageHistoryOnReconfigurationHelper;
 import net.minecraft.client.gui.components.ChatComponent;
-import net.minecraft.client.gui.Gui;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(Gui.class)
+//#if MC >= 26.2
+//$$ import net.minecraft.client.gui.Hud;
+//#else
+import net.minecraft.client.gui.Gui;
+//#endif
+
+@Mixin(
+		//#if MC >= 26.2
+		//$$ Hud.class
+		//#else
+		Gui.class
+		//#endif
+)
 public abstract class InGameHudMixin
 {
 	@SuppressWarnings("RedundantIfStatement")

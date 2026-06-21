@@ -25,9 +25,14 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.keepMessageHistoryOnReconfiguration.KeepMessageHistoryOnReconfigurationHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+
+//#if MC >= 26.2
+//$$ import net.minecraft.client.gui.Hud;
+//#else
+import net.minecraft.client.gui.Gui;
+//#endif
 
 @Mixin(Minecraft.class)
 public abstract class MinecraftClientMixin
@@ -36,10 +41,21 @@ public abstract class MinecraftClientMixin
 			method = "clearClientLevel",
 			at = @At(
 					value = "INVOKE",
+					//#if MC >= 26.2
+					//$$ target = "Lnet/minecraft/client/gui/Hud;onDisconnected()V"
+					//#else
 					target = "Lnet/minecraft/client/gui/Gui;onDisconnected()V"
+					//#endif
 			)
 	)
-	private void keepMessageOnReconfiguration_markIsReconfiguring(Gui instance, Operation<Void> original)
+	private void keepMessageOnReconfiguration_markIsReconfiguring(
+			//#if MC >= 26.2
+			//$$ Hud instance,
+			//#else
+			Gui instance,
+			//#endif
+			Operation<Void> original
+	)
 	{
 		boolean optionEnabled = TweakerMoreConfigs.KEEP_MESSAGE_HISTORY_ON_RECONFIGURATION.getBooleanValue();
 		if (optionEnabled)

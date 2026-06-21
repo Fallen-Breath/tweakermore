@@ -23,14 +23,25 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableVignetteDarkn
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.gui.Gui;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(Gui.class)
+//#if MC >= 26.2
+//$$ import net.minecraft.client.gui.Hud;
+//#else
+import net.minecraft.client.gui.Gui;
+//#endif
+
+@Mixin(
+		//#if MC >= 26.2
+		//$$ Hud.class
+		//#else
+		Gui.class
+		//#endif
+)
 public abstract class InGameHudMixin
 {
 	@Shadow public float vignetteBrightness;

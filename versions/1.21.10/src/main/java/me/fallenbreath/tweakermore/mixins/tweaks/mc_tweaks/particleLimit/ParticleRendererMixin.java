@@ -33,7 +33,11 @@ public abstract class ParticleRendererMixin
 			method = "<init>",
 			at = @At(
 					value = "INVOKE",
+					//#if MC >= 26.2
+					//$$ target = "Ljava/util/ArrayDeque;<init>(I)V",
+					//#else
 					target = "Lcom/google/common/collect/EvictingQueue;create(I)Lcom/google/common/collect/EvictingQueue;",
+					//#endif
 					remap = false
 			)
 	)

@@ -23,7 +23,6 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.scoreboardSideBarSca
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
-import net.minecraft.client.gui.Gui;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -32,6 +31,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+//#if MC >= 26.2
+//$$ import net.minecraft.client.gui.Hud;
+//#else
+import net.minecraft.client.gui.Gui;
+//#endif
 
 //#if MC >= 12000
 //$$ import net.minecraft.client.gui.GuiGraphics;
@@ -43,7 +48,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //$$ import com.llamalad7.mixinextras.sugar.Local;
 //#endif
 
-@Mixin(Gui.class)
+@Mixin(
+		//#if MC >= 26.2
+		//$$ Hud.class
+		//#else
+		Gui.class
+		//#endif
+)
 public abstract class InGameHudMixin
 {
 	//#if MC < 12006

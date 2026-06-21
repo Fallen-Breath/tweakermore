@@ -22,19 +22,33 @@ package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.movingPistonBlockSel
 
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
-import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.movingPistonBlockSelectable.MovingPistonBlockSelectableHelper;
-import net.minecraft.client.renderer.LevelRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(LevelRenderer.class)
+//#if MC >= 26.2
+//$$ import net.minecraft.client.renderer.extract.LevelExtractor;
+//#else
+import net.minecraft.client.renderer.LevelRenderer;
+//#endif
+
+@Mixin(
+		//#if MC >= 26.2
+		//$$ LevelExtractor.class
+		//#else
+		LevelRenderer.class
+		//#endif
+)
 public abstract class WorldRendererMixin
 {
 	@Inject(
+			//#if MC >= 26.2
+			//$$ method = "extractBlockOutline",
+			//#else
 			method = "renderHitOutline",
+			//#endif
 			at = @At("HEAD")
 	)
 	private void movingPistonBlockSelectable_blockOutlineRender_start(CallbackInfo ci, @Share("") LocalBooleanRef hasSet)
@@ -47,7 +61,11 @@ public abstract class WorldRendererMixin
 	}
 
 	@Inject(
+			//#if MC >= 26.2
+			//$$ method = "extractBlockOutline",
+			//#else
 			method = "renderHitOutline",
+			//#endif
 			at = @At("TAIL")
 	)
 	private void movingPistonBlockSelectable_blockOutlineRender_end(CallbackInfo ci, @Share("") LocalBooleanRef hasSet)

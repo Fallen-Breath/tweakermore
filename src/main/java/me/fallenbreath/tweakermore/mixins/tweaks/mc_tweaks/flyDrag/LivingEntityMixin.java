@@ -57,9 +57,13 @@ public abstract class LivingEntityMixin extends Entity
 					//$$ target = "Lnet/minecraft/world/entity/LivingEntity;handleOnClimbable(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;"
 					//#endif
 			),
+			//#if MC >= 26.2
+			//$$ ordinal = 0
+			//#else
 			ordinal = 1
+			//#endif
 	)
-	private float creativeFlyDrag(float dragFactor)
+	private float creativeFlyDrag_modifyDragFactor(float dragFactor)
 	{
 		LivingEntity self = (LivingEntity)(Object)this;
 		if (self == Minecraft.getInstance().player && TweakerMoreConfigs.FLY_DRAG.isModified())
