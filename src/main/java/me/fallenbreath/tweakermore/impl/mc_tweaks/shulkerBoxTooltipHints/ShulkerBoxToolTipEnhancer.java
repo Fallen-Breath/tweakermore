@@ -25,6 +25,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builder.PotionHintBuilder;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builder.EnchantmentHintBuilder;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.shulkerBoxTooltipHints.builder.AbstractHintBuilder;
+import me.fallenbreath.tweakermore.util.GameUtils;
 import me.fallenbreath.tweakermore.util.InventoryUtils;
 import me.fallenbreath.tweakermore.util.Messenger;
 import net.minecraft.client.Minecraft;
@@ -37,12 +38,6 @@ import net.minecraft.ChatFormatting;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.ToIntFunction;
-
-//#if MC >= 12108
-//$$ import com.mojang.blaze3d.systems.RenderSystem;
-//#else
-import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
-//#endif
 
 //#if MC >= 12006
 //$$ import net.minecraft.world.item.Item;
@@ -84,13 +79,7 @@ public class ShulkerBoxToolTipEnhancer
 
 	public static void applyFillLevelHint(ItemStack skulker, List<Component> tooltip)
 	{
-		if (
-				//#if MC >= 12108
-				//$$ !RenderSystem.isOnRenderThread()
-				//#else
-				!RenderGlobals.isOnRenderThread()
-				//#endif
-		)
+		if (!GameUtils.isOnRenderThread())
 		{
 			// Do nothing in case it's called from non-render thread by whatever mod
 			// see also: https://github.com/Fallen-Breath/tweakermore/issues/138

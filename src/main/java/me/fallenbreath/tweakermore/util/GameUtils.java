@@ -23,8 +23,23 @@ package me.fallenbreath.tweakermore.util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 
+//#if MC >= 12108
+//$$ import com.mojang.blaze3d.systems.RenderSystem;
+//#else
+import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
+//#endif
+
 public class GameUtils
 {
+	public static boolean isOnRenderThread()
+	{
+		//#if MC >= 12108
+		//$$ return RenderSystem.isOnRenderThread();
+		//#else
+		return RenderGlobals.isOnRenderThread();
+		//#endif
+	}
+
 	public static void scheduleOnClientThread(Minecraft mc, Runnable runnable)
 	{
 		//#if MC >= 1.21.3
