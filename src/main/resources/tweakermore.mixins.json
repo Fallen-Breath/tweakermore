@@ -65,6 +65,7 @@
     "tweaks.features.shulkerTooltipFillLevelHint.ItemStackMixin",
     "tweaks.features.shulkerTooltipHints.ShulkerBoxBlockMixin",
     "tweaks.features.spectatorTeleportCommand.EntitySelectorAccessor",
+    "tweaks.features.spectatorTeleportCommand.PlayerMenuItemMixin",
     "tweaks.features.villagerOfferUsesDisplay.MerchantScreenAccessor",
     "tweaks.features.villagerOfferUsesDisplay.MerchantScreenWidgetButtonPageMixin",
     "tweaks.features.villagerOfferUsesDisplay.ScreenAccessor",
