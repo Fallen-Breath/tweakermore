@@ -23,6 +23,7 @@ package me.fallenbreath.tweakermore.event;
 import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.event.RenderEventHandler;
 import fi.dy.masa.malilib.interfaces.IRenderer;
+import me.fallenbreath.tweakermore.util.render.TextRenderer;
 import me.fallenbreath.tweakermore.util.render.context.GuiRenderContext;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
@@ -88,8 +89,22 @@ public abstract class TweakerMoreRenderEvents
 				//$$ matrixStack
 				//#endif
 		);
-		renderers.forEach(renderer -> renderer.onRenderWorldLast(renderContext));
-		profiler.pop();
+		TextRenderer.beginBatch();
+		try
+		{
+			renderers.forEach(renderer -> renderer.onRenderWorldLast(renderContext));
+		}
+		finally
+		{
+			try
+			{
+				TextRenderer.endBatch();
+			}
+			finally
+			{
+				profiler.pop();
+			}
+		}
 	}
 
 	private static void dispatchRenderGameOverlayPost(GuiRenderContext renderContext)

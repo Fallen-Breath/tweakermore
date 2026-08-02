@@ -36,6 +36,10 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+//#if MC >= 26.2
+//$$ import org.joml.Matrix4fStack;
+//#endif
+
 //#if MC < 12105
 import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 //#endif
@@ -104,12 +108,46 @@ public class TextRenderer
 		return new TextRenderer();
 	}
 
+	public static void beginBatch()
+	{
+		//#if MC >= 26.2
+		//$$ TextRenderBatch.beginBatch();
+		//#endif
+	}
+
+	public static void endBatch()
+	{
+		//#if MC >= 26.2
+		//$$ TextRenderBatch.endBatch();
+		//#endif
+	}
+
+	public static void flushBatch()
+	{
+		//#if MC >= 26.2
+		//$$ TextRenderBatch.flushActiveBatch();
+		//#endif
+	}
+
+	public static void closeBatch()
+	{
+		//#if MC >= 26.2
+		//$$ TextRenderBatch.closeSharedBatch();
+		//#endif
+	}
+
 	/*
 	 * ============================
 	 *         Render Impl
 	 * ============================
 	 */
 
+	//#if MC >= 26.2
+	//$$ private static WorldRenderContext createLocalMatrixRenderContext(Matrix4fStack matrixStack)
+	//$$ {
+	//$$ 	return new WorldRenderContextImpl(new JomlMatrixStack(matrixStack));
+	//$$ }
+	//#else
 	private static WorldRenderContext createGlobalMatrixRenderContext()
 	{
 		// if transformation is applied to the RenderContext's matrix,
@@ -131,6 +169,7 @@ public class TextRenderer
 				)
 		);
 	}
+	//#endif
 
 	/**
 	 * Draw given lines with centered format
@@ -145,7 +184,12 @@ public class TextRenderer
 		{
 			return;
 		}
+		//#if MC >= 26.2
+		//$$ Matrix4fStack textMatrixStack = new Matrix4fStack(8);
+		//$$ WorldRenderContext renderContext = createLocalMatrixRenderContext(textMatrixStack);
+		//#else
 		WorldRenderContext renderContext = createGlobalMatrixRenderContext();
+		//#endif
 
 		Minecraft mc = Minecraft.getInstance();
 
@@ -203,7 +247,7 @@ public class TextRenderer
 			//#endif
 
 			//#if MC >= 26.2
-			//$$ try (ImmediateTextDrawer drawer = new ImmediateTextDrawer(displayMode, FULL_BRIGHT_LIGHT))
+			//$$ try (ImmediateTextDrawer drawer = new ImmediateTextDrawer(textMatrixStack, displayMode, FULL_BRIGHT_LIGHT))
 			//$$ {
 			//$$ 	for (int i = 0; i < lineNum; i++)
 			//$$ 	{

@@ -20,7 +20,6 @@
 
 package me.fallenbreath.tweakermore.util.render;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.font.TextRenderable;
 import net.minecraft.client.renderer.StagedVertexBuffer;
@@ -33,17 +32,21 @@ import java.util.Map;
 
 public class ImmediateTextDrawer implements Font.GlyphVisitor, AutoCloseable
 {
-	private static final Matrix4fc IDENTITY_MATRIX = new Matrix4f();
-
+	private final Matrix4fc pose;
 	private final Font.DisplayMode displayMode;
 	private final int lightCoords;
-	private final StagedVertexBuffer stagedBuffer = new StagedVertexBuffer(() -> "TweakerMore TextRenderer", 65536);
+	private final TextRenderBatch batch;
+	private final boolean immediate;
 	private final Map<RenderType, StagedVertexBuffer.Draw> draws = new LinkedHashMap<>();
 
-	ImmediateTextDrawer(Font.DisplayMode displayMode, int lightCoords)
+	ImmediateTextDrawer(Matrix4fc pose, Font.DisplayMode displayMode, int lightCoords)
 	{
+		this.pose = new Matrix4f(pose);
 		this.displayMode = displayMode;
 		this.lightCoords = lightCoords;
+		TextRenderBatch activeBatch = TextRenderBatch.getActiveBatch();
+		this.immediate = activeBatch == null;
+		this.batch = this.immediate ? TextRenderBatch.createImmediate() : activeBatch;
 	}
 
 	public void append(Font.PreparedText preparedText)
@@ -55,40 +58,30 @@ public class ImmediateTextDrawer implements Font.GlyphVisitor, AutoCloseable
 	public void acceptRenderable(TextRenderable renderable)
 	{
 		RenderType renderType = renderable.renderType(this.displayMode);
-		StagedVertexBuffer.Draw draw = this.draws.computeIfAbsent(renderType, this::createDraw);
-		renderable.render(IDENTITY_MATRIX, this.stagedBuffer.getVertexBuilder(draw), this.lightCoords, false);
+		StagedVertexBuffer.Draw draw = this.draws.get(renderType);
+		if (draw == null)
+		{
+			draw = this.batch.getOrCreateDraw(renderType, this.draws.isEmpty());
+			this.draws.put(renderType, draw);
+		}
+		renderable.render(this.pose, this.batch.getStagedBuffer().getVertexBuilder(draw), this.lightCoords, false);
 	}
 
 	public void draw()
 	{
-		if (this.draws.isEmpty())
+		if (this.immediate)
 		{
-			return;
+			this.batch.flush();
 		}
-
-		this.stagedBuffer.upload();
-		this.draws.forEach((renderType, draw) -> {
-			StagedVertexBuffer.ExecuteInfo executeInfo = this.stagedBuffer.getExecuteInfo(draw);
-			if (executeInfo != null)
-			{
-				renderType.prepare().drawFromBuffer(executeInfo);
-			}
-		});
-		this.stagedBuffer.endDraw();
 	}
 
 	@Override
 	public void close()
 	{
-		this.stagedBuffer.close();
-	}
-
-	private StagedVertexBuffer.Draw createDraw(RenderType renderType)
-	{
-		return this.stagedBuffer.appendDraw(
-				renderType.format(),
-				renderType.primitiveTopology(),
-				renderType.sortOnUpload() ? RenderSystem.getProjectionType().vertexSorting() : null
-		);
+		if (this.immediate)
+		{
+			this.batch.flush();
+			this.batch.close();
+		}
 	}
 }

@@ -32,6 +32,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //$$ import me.fallenbreath.tweakermore.util.render.context.InWorldGuiDrawer;
 //#endif
 
+//#if MC >= 26.2
+//$$ import me.fallenbreath.tweakermore.util.render.TextRenderer;
+//#endif
+
 //#if MC >= 12100
 //$$ import net.minecraft.client.DeltaTracker;
 //#endif
@@ -82,6 +86,9 @@ public abstract class GameRendererMixin
 	//$$ private void hookGameRendererClose(CallbackInfo ci)
 	//$$ {
 	//$$ 	InWorldGuiDrawer.closeInstance();
+		//#if MC >= 26.2
+		//$$ 	TextRenderer.closeBatch();
+		//#endif
 	//$$ }
 	//#endif
 }

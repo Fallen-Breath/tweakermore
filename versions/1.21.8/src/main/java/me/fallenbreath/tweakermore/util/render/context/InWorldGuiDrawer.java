@@ -32,6 +32,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+//#if MC >= 26.2
+//$$ import me.fallenbreath.tweakermore.util.render.TextRenderer;
+//#endif
+
 public class InWorldGuiDrawer implements AutoCloseable
 {
 	public static boolean initializing = false;
@@ -107,6 +111,10 @@ public class InWorldGuiDrawer implements AutoCloseable
 
 	public void render()
 	{
+		//#if MC >= 26.2
+		//$$ TextRenderer.flushBatch();
+		//#endif
+
 		RenderSystem.backupProjectionMatrix();
 		//#if MC >= 26.2
 		//$$ this.guiRenderer.render();
