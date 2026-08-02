@@ -22,7 +22,6 @@ package me.fallenbreath.tweakermore.util.render;
 
 import com.google.common.collect.Lists;
 import me.fallenbreath.tweakermore.util.PositionUtils;
-import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContextImpl;
 import net.minecraft.client.Minecraft;
@@ -36,6 +35,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+
+//#if MC < 12105
+import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
+//#endif
 
 //#if MC >= 12006
 //$$ import me.fallenbreath.tweakermore.util.render.matrix.JomlMatrixStack;
@@ -155,6 +158,7 @@ public class TextRenderer
 			RenderGlobals.disableLighting();
 			//#endif
 
+			//#if MC < 12105
 			if (this.seeThrough)
 			{
 				RenderGlobals.disableDepthTest();
@@ -163,12 +167,15 @@ public class TextRenderer
 			{
 				RenderGlobals.enableDepthTest();
 			}
+			//#endif
 
 			//#if MC < 11904
 			RenderGlobals.enableTexture();
 			//#endif
 
+			//#if MC < 12105
 			RenderGlobals.depthMask(true);
+			//#endif
 
 			int lineNum = this.lines.size();
 			double maxTextWidth = this.lines.stream().mapToInt(TextHolder::getWidth).max().orElse(0);
@@ -185,9 +192,11 @@ public class TextRenderer
 			RenderGlobals.enableAlphaTest();
 			//#endif
 
+			//#if MC < 12105
 			// enable transparent-able text rendering
 			RenderGlobals.enableBlend();
 			RenderGlobals.blendFuncForAlpha();
+			//#endif
 
 			//#if MC >= 11904
 			//$$ var displayMode = this.seeThrough ? Font.DisplayMode.SEE_THROUGH : Font.DisplayMode.NORMAL;

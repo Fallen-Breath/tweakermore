@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2025  Fallen_Breath and contributors
+ * Copyright (C) 2026  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,9 +18,11 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.util.render;
+package me.fallenbreath.tweakermore.util.render.context;
 
-public class TweakerMoreRenderPipelines
+public class RenderGlobals
 {
-	// impl in mc [1.21.6, 1.21.9)
+	private RenderGlobals() {}
+
+	// Global OpenGL state operations are not used with the pipeline-based renderers in mc1.21.6+.
 }

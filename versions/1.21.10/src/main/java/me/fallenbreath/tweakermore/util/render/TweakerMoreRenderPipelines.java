@@ -2,7 +2,7 @@
  * This file is part of the TweakerMore project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2025  Fallen_Breath and contributors
+ * Copyright (C) 2026  Fallen_Breath and contributors
  *
  * TweakerMore is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -22,5 +22,5 @@ package me.fallenbreath.tweakermore.util.render;
 
 public class TweakerMoreRenderPipelines
 {
-	// impl in mc [1.21.6, 1.21.9)
+	// The custom no-depth GUI pipeline is only needed before mc1.21.9.
 }

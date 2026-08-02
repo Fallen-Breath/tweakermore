@@ -25,7 +25,6 @@ import me.fallenbreath.tweakermore.util.render.ColorHolder;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.context.GuiRenderContext;
 import me.fallenbreath.tweakermore.util.render.context.RenderContext;
-import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.gui.GuiGraphics;
@@ -130,8 +129,6 @@ public class ShulkerBoxItemContentHintRenderer
 		// ====== [begin] ref: net.minecraft.client.render.item.ItemRenderer#renderGuiItemOverlay ======
 		// see net.minecraft.client.gui.GuiGraphics#drawItemBar
 
-		RenderGlobals.disableDepthTest();
-
 		int h = (int)Math.round(fillRatio * HEIGHT);
 		int color = Mth.hsvToRgb((float)(fillRatio / 3), 1.0F, 1.0F);
 		if (h == 0)
@@ -152,8 +149,6 @@ public class ShulkerBoxItemContentHintRenderer
 
 		drawer.draw( x, y, WIDTH, HEIGHT, 0x040404);
 		drawer.draw(x, y + HEIGHT - h, WIDTH, h, color);
-
-		RenderGlobals.enableDepthTest();
 
 		// ====== [end] ref: net.minecraft.client.render.item.ItemRenderer#renderGuiItemOverlay ======
 	}

@@ -31,9 +31,7 @@ import me.fallenbreath.tweakermore.util.PositionUtils;
 import me.fallenbreath.tweakermore.util.render.InWorldPositionTransformer;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
 import me.fallenbreath.tweakermore.util.render.TextRenderer;
-import me.fallenbreath.tweakermore.util.render.TweakerMoreRenderPipelines;
 import me.fallenbreath.tweakermore.util.render.context.MixedRenderContext;
-import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 import me.fallenbreath.tweakermore.util.render.context.WorldRenderContext;
 import net.minecraft.world.level.block.BeaconBlock;
 import net.minecraft.world.level.block.entity.BeaconBlockEntity;
@@ -43,6 +41,12 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.Holder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
+
+//#if MC >= 12110
+//$$ import net.minecraft.client.renderer.RenderPipelines;
+//#else
+import me.fallenbreath.tweakermore.util.render.TweakerMoreRenderPipelines;
+//#endif
 
 import java.util.List;
 import java.util.Optional;
@@ -144,9 +148,6 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 		InWorldPositionTransformer positionTransformer = new InWorldPositionTransformer(pos);
 		positionTransformer.apply(mrc);
 		{
-			RenderGlobals.disableDepthTest();
-			RenderGlobals.enableBlend();
-
 			mrc.scale(FONT_SCALE * RenderUtils.getSizeScalingXSign(), -FONT_SCALE, FONT_SCALE);
 			mrc.translate(deltaX, 0, 0);
 
@@ -155,10 +156,15 @@ public class BeaconEffectRenderer extends CommonScannerInfoViewer
 			mrc.scale(k, k, k);
 			mrc.translate(0, ICON_SIZE * (-0.5 + kDeltaY), 0);
 
-			mrc.getGuiDrawer().blitSprite(TweakerMoreRenderPipelines.GUI_TEXTURED_NO_DEPTH_TEST, sprite, 0, 0, ICON_SIZE, ICON_SIZE);
+			mrc.getGuiDrawer().blitSprite(
+					//#if MC >= 12110
+					//$$ RenderPipelines.GUI_TEXTURED,
+					//#else
+					TweakerMoreRenderPipelines.GUI_TEXTURED_NO_DEPTH_TEST,
+					//#endif
+					sprite, 0, 0, ICON_SIZE, ICON_SIZE
+			);
 			mrc.renderGuiElements();
-
-			RenderGlobals.enableDepthTest();
 		}
 		positionTransformer.restore();
 	}

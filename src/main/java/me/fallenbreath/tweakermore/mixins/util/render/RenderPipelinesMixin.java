@@ -26,5 +26,5 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(DummyClass.class)
 public abstract class RenderPipelinesMixin
 {
-	// impl in mc1.21.6+
+	// impl in mc [1.21.6, 1.21.9)
 }

@@ -22,7 +22,6 @@ package me.fallenbreath.tweakermore.impl.mc_tweaks.tadpoleBucketTooltipHints;
 
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.util.Messenger;
-import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -34,6 +33,12 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
+//#if MC >= 12108
+//$$ import com.mojang.blaze3d.systems.RenderSystem;
+//#else
+import me.fallenbreath.tweakermore.util.render.context.RenderGlobals;
+//#endif
+
 //#if MC >= 12006
 //$$ import net.minecraft.core.component.DataComponents;
 //$$ import net.minecraft.world.item.component.CustomData;
@@ -43,7 +48,13 @@ public class TadpoleBucketToolTipEnhancer
 {
 	public static void applyLeftTimeHint(ItemStack bucket, List<Component> tooltip)
 	{
-		if (!RenderGlobals.isOnRenderThread())
+		if (
+				//#if MC >= 12108
+				//$$ !RenderSystem.isOnRenderThread()
+				//#else
+				!RenderGlobals.isOnRenderThread()
+				//#endif
+		)
 		{
 			// Do nothing in case it's called from non-render thread by whatever mod
 			// see also: https://github.com/Fallen-Breath/tweakermore/issues/138
