@@ -27,8 +27,16 @@ import net.minecraft.world.inventory.ResultSlot;
 
 public class EasierCraftingRegistrar
 {
-	private static final String EASIER_CRAFTING_INVENTORY_CLASS = "de.guntram.mcmod.easiercrafting.ExtendedGuiInventory";
-	private static final String EASIER_CRAFTING_CRAFTING_TABLE_CLASS = "de.guntram.mcmod.easiercrafting.ExtendedGuiCrafting";
+	private static final String[] EASIER_CRAFTING_INVENTORY_CLASS = new String[]{
+			"de.guntram.mcmod.easiercrafting.ExtendedGuiInventory",
+			"de.guntram.mcmod.easiercrafting.extendedScreen.ExtendedGuiInventory",
+			"de.guntram.mcmod.easiercrafting.extendedScreen.ExtendedInventoryScreen",
+	};
+	private static final String[] EASIER_CRAFTING_CRAFTING_TABLE_CLASS = new String[]{
+			"de.guntram.mcmod.easiercrafting.ExtendedGuiCrafting",
+			"de.guntram.mcmod.easiercrafting.extendedScreen.ExtendedGuiCrafting",
+			"de.guntram.mcmod.easiercrafting.extendedScreen.ExtendedCraftingScreen",
+	};
 
 	private static final String CRAFTING_RESULT_SLOT_CLASS = ResultSlot.class.getName();
 
@@ -39,8 +47,38 @@ public class EasierCraftingRegistrar
 		if (canRegister && TweakerMoreConfigs.ECRAFT_ITEM_SCROLLER_COMPACT.getBooleanValue() && TweakerMoreConfigs.ECRAFT_ITEM_SCROLLER_COMPACT.getTweakerMoreOption().isEnabled())
 		{
 			canRegister = false;
-			CraftingHandler.addCraftingGridDefinition(EASIER_CRAFTING_INVENTORY_CLASS, CRAFTING_RESULT_SLOT_CLASS, 0, new CraftingHandler.SlotRange(1, 4));
-			CraftingHandler.addCraftingGridDefinition(EASIER_CRAFTING_CRAFTING_TABLE_CLASS, CRAFTING_RESULT_SLOT_CLASS, 0, new CraftingHandler.SlotRange(1, 9));
+			doRegister();
+		}
+	}
+
+	private static void doRegister()
+	{
+		for (String inventoryClass : EASIER_CRAFTING_INVENTORY_CLASS)
+		{
+			if (isClassExisted(inventoryClass))
+			{
+				CraftingHandler.addCraftingGridDefinition(inventoryClass, CRAFTING_RESULT_SLOT_CLASS, 0, new CraftingHandler.SlotRange(1, 4));
+			}
+		}
+		for (String craftingTableClass : EASIER_CRAFTING_CRAFTING_TABLE_CLASS)
+		{
+			if (isClassExisted(craftingTableClass))
+			{
+				CraftingHandler.addCraftingGridDefinition(craftingTableClass, CRAFTING_RESULT_SLOT_CLASS, 0, new CraftingHandler.SlotRange(1, 9));
+			}
+		}
+	}
+
+	private static boolean isClassExisted(String className)
+	{
+		try
+		{
+			Class.forName(className);
+			return true;
+		}
+		catch (ClassNotFoundException e)
+		{
+			return false;
 		}
 	}
 

@@ -2362,6 +2362,12 @@ e.g. broken mass craft
     - EasierCrafting (`easiercrafting`)
     - Item Scroller (`itemscroller`)
 
+  *or*
+
+  - Required mods:
+    - EasierCrafting updated (`easiercrafting-updated`)
+    - Item Scroller (`itemscroller`)
+
 ![eCraftItemScrollerCompact](assets/eCraftItemScrollerCompact.png)
 
 
@@ -2582,6 +2588,7 @@ Back to vanilla behavior where sign text is always rendered together with the si
 - Mod restrictions:
   - Required mods:
     - Optifine (`optifabric`)
+    - Minecraft (`minecraft`) `<26.1`
 
 
 ### Optifine-SantaHat (ofSantaHat)
@@ -2624,6 +2631,7 @@ Increases FPS with smooth lighting on for a few
 - Mod restrictions:
   - Required mods:
     - Optifine (`optifabric`)
+    - Minecraft (`minecraft`) `<26.1`
 
 
 ### Optifine-WitchHat (ofWitchHat)

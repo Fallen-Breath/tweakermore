@@ -1334,6 +1334,7 @@ tweakermore:
       compactchat: CompactChat
       customskinloader: CustomSkinLoader
       easiercrafting: EasierCrafting
+      easiercrafting-updated: EasierCrafting updated
       explayerenderer: ExtraPlayerRenderer
       fabric: Fabric API
       fabricloader: Fabric Loader

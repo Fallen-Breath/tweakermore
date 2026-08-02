@@ -2356,6 +2356,12 @@ FOV覆盖的开关
     - EasierCrafting (`easiercrafting`)
     - Item Scroller (`itemscroller`)
 
+  *或*
+
+  - 依赖模组:
+    - EasierCrafting updated (`easiercrafting-updated`)
+    - Item Scroller (`itemscroller`)
+
 ![eCraftItemScrollerCompact](assets/eCraftItemScrollerCompact.png)
 
 
@@ -2576,6 +2582,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
 - 模组约束:
   - 依赖模组:
     - Optifine (`optifabric`)
+    - Minecraft (`minecraft`) `<26.1`
 
 
 ### Optifine-圣诞老人帽子 (ofSantaHat)
@@ -2618,6 +2625,7 @@ Mini HUD的光照等级显示仅于可刷怪方块上渲染
 - 模组约束:
   - 依赖模组:
     - Optifine (`optifabric`)
+    - Minecraft (`minecraft`) `<26.1`
 
 
 ### Optifine-女巫帽子 (ofWitchHat)

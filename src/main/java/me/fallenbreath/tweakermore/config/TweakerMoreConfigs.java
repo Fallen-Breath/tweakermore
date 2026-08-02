@@ -720,10 +720,16 @@ public class TweakerMoreConfigs
 
 	@Config(
 			type = Config.Type.GENERIC,
-			restriction = @Restriction(require = {
-					@Condition(ModIds.easier_crafting),
-					@Condition(ModIds.itemscroller)
-			}),
+			restriction = {
+					@Restriction(require = {
+							@Condition(ModIds.easier_crafting),
+							@Condition(ModIds.itemscroller)
+					}),
+					@Restriction(require = {
+							@Condition(ModIds.easier_crafting_updated),
+							@Condition(ModIds.itemscroller)
+					})
+			},
 			category = Config.Category.MOD_TWEAKS
 	)
 	public static final TweakerMoreConfigBoolean ECRAFT_ITEM_SCROLLER_COMPACT = newConfigBoolean("eCraftItemScrollerCompact", false);

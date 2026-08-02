@@ -53,6 +53,7 @@ public class ModIds
 	public static final String caxton = "caxton";
 	public static final String custom_skin_loader = "customskinloader";
 	public static final String easier_crafting = "easiercrafting";
+	public static final String easier_crafting_updated = "easiercrafting-updated";
 	public static final String extra_player_renderer = "explayerenderer";
 	public static final String fabric_carpet = "carpet";
 	public static final String iris = "iris";
