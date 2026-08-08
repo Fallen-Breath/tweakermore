@@ -43,6 +43,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ItemEntityRenderer.class)
 public abstract class ItemEntityRendererMixin
 {
+	//#if MC < 1.21.4
 	@ModifyExpressionValue(
 			//#if MC >= 12110
 			//$$ method = "renderMultipleFromCount(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/ItemClusterRenderState;Lnet/minecraft/util/RandomSource;)V",
@@ -83,6 +84,7 @@ public abstract class ItemEntityRendererMixin
 		}
 		return amount;
 	}
+	//#endif  // MC < 1.21.4
 
 	@ModifyArg(
 			//#if MC >= 26.1
