@@ -29,6 +29,7 @@ import me.fallenbreath.tweakermore.impl.features.autoContainerProcess.processors
 import me.fallenbreath.tweakermore.util.StringUtils;
 import me.fallenbreath.tweakermore.event.TweakerMoreIRenderer;
 import me.fallenbreath.tweakermore.util.render.context.GuiRenderContext;
+import net.minecraft.client.Minecraft;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,6 +44,12 @@ public class AutoContainerProcessorHintRenderer implements TweakerMoreIRenderer
 	public void onRenderGameOverlayPost(GuiRenderContext context)
 	{
 		if (!TweakerMoreConfigs.CONTAINER_PROCESSOR_HINT.getBooleanValue())
+		{
+			return;
+		}
+
+		Minecraft mc = Minecraft.getInstance();
+		if (mc.player == null || mc.font == null)  // `RenderUtils.renderText` needs these
 		{
 			return;
 		}
