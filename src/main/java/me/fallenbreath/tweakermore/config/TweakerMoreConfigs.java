@@ -720,6 +720,7 @@ public class TweakerMoreConfigs
 
 	@Config(
 			type = Config.Type.GENERIC,
+			// see also: me.fallenbreath.tweakermore.util.mixin.testers.ECraftItemScrollerCompactModTester
 			restriction = {
 					@Restriction(require = {
 							@Condition(ModIds.easier_crafting),

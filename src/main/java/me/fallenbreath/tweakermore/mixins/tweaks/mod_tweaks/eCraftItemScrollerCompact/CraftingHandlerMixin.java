@@ -24,12 +24,13 @@ import fi.dy.masa.itemscroller.recipes.CraftingHandler;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.eCraftMassCraftCompact.EasierCraftingRegistrar;
+import me.fallenbreath.tweakermore.util.mixin.testers.ECraftItemScrollerCompactModTester;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Restriction(require = @Condition(type = Condition.Type.MIXIN, value = "me.fallenbreath.tweakermore.mixins.tweaks.mod_tweaks.eCraftItemScrollerCompact.ConfigsMixin"))
+@Restriction(require = @Condition(type = Condition.Type.TESTER, tester = ECraftItemScrollerCompactModTester.class))
 @Mixin(CraftingHandler.class)
 public abstract class CraftingHandlerMixin
 {
