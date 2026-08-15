@@ -41,6 +41,7 @@ import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.impl.features.autoContainerProcess.AutoContainerProcessorHintRenderer;
 import me.fallenbreath.tweakermore.impl.features.copyItemDataToClipBoard.ItemDataCopier;
 import me.fallenbreath.tweakermore.impl.features.copySignTextToClipBoard.SignTextCopier;
+import me.fallenbreath.tweakermore.impl.features.freecamTeleportCommand.FreecamTeleportCommand;
 import me.fallenbreath.tweakermore.impl.features.infoView.InfoViewRenderer;
 import me.fallenbreath.tweakermore.impl.features.pistorder.PistorderRenderer;
 import me.fallenbreath.tweakermore.impl.features.refreshInventory.InventoryRefresher;
@@ -213,6 +214,12 @@ public class TweakerMoreConfigs
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigDouble FIREWORK_ROCKET_THROTTLER_COOLDOWN = newConfigDouble("fireworkRocketThrottlerCooldown", 1, 0, 5);
+
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = {@Condition(ModIds.tweakeroo), @Condition(value = ModIds.minecraft, versionPredicates = ">=1.16")}), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBoolean FREECAM_TELEPORT_COMMAND = newConfigBoolean("freecamTeleportCommand", false);
+
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = {@Condition(ModIds.tweakeroo), @Condition(value = ModIds.minecraft, versionPredicates = ">=1.16")}), category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigString FREECAM_TELEPORT_COMMAND_PREFIX = newConfigString("freecamTeleportCommandPrefix", "fctp");
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBooleanHotkeyed INFO_VIEW = newConfigBooleanHotkeyed("infoView");
@@ -1087,6 +1094,7 @@ public class TweakerMoreConfigs
 		TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_RESTRICTION.setListType((UsageRestriction.ListType)TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_LIST_TYPE.getOptionListValue());
 		TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_RESTRICTION.setListContents(TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_BLACKLIST.getStrings(), TweakerMoreConfigs.AUTO_CLEAN_CONTAINER_WHITELIST.getStrings());
 
+		FreecamTeleportCommand.init();
 		SpectatorTeleportCommand.init();
 		WindowSizeHelper.onConfigLoaded();
 	}

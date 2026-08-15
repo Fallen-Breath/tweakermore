@@ -32,6 +32,7 @@ import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.commands.arguments.selector.EntitySelector;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
@@ -84,34 +85,70 @@ public class EntitySelectorHack
 		}
 		else
 		{
-			Vec3 pos = selector.getPositionOffset().apply(source.getPosition());
-			Predicate<Entity> predicate = selector.invokeGetPositionPredicate(
-					pos
-					//#if MC >= 12100
-					//$$ , selector.invokeGetOffsetBox(pos), source.enabledFeatures()
-					//#endif
-			);
-			if (selector.getSenderOnly())
+			return getSingleEntity(entitySelector, source).getUUID();
+		}
+	}
+
+	public static Entity getSingleEntity(EntitySelector entitySelector, FabricClientCommandSource source) throws CommandSyntaxException
+	{
+		return getSingleEntity(entitySelector, source, source.getPosition());
+	}
+
+	public static Entity getSingleEntity(EntitySelector entitySelector, FabricClientCommandSource source, Vec3 origin) throws CommandSyntaxException
+	{
+		EntitySelectorAccessor selector = (EntitySelectorAccessor)entitySelector;
+		ClientLevel world = source.getWorld();
+
+		if (selector.getPlayerName() != null)
+		{
+			for (Entity entity : world.entitiesForRendering())
 			{
-				if (source.getEntity() != null && predicate.test(source.getEntity()))
+				if (entity instanceof Player && entity.getName().getString().equalsIgnoreCase(selector.getPlayerName()))
 				{
-					return source.getEntity().getUUID();
+					return entity;
 				}
 			}
-			else
+			throw EntityArgument.NO_PLAYERS_FOUND.create();
+		}
+		else if (selector.getUuid() != null)
+		{
+			for (Entity entity : world.entitiesForRendering())
 			{
-				List<Entity> candidates = getEntitiesFromWorld(selector, world, pos, predicate);
-				if (candidates.size() > 1)
+				if (entity.getUUID().equals(selector.getUuid()))
 				{
-					selector.getSorter().accept(pos, candidates);
-				}
-				if (!candidates.isEmpty())
-				{
-					return candidates.get(0).getUUID();
+					return entity;
 				}
 			}
 			throw EntityArgument.NO_ENTITIES_FOUND.create();
 		}
+
+		Vec3 pos = selector.getPositionOffset().apply(origin);
+		Predicate<Entity> predicate = selector.invokeGetPositionPredicate(
+				pos
+				//#if MC >= 12100
+				//$$ , selector.invokeGetOffsetBox(pos), source.enabledFeatures()
+				//#endif
+		);
+		if (selector.getSenderOnly())
+		{
+			if (source.getEntity() != null && predicate.test(source.getEntity()))
+			{
+				return source.getEntity();
+			}
+		}
+		else
+		{
+			List<Entity> candidates = getEntitiesFromWorld(selector, world, pos, predicate);
+			if (candidates.size() > 1)
+			{
+				selector.getSorter().accept(pos, candidates);
+			}
+			if (!candidates.isEmpty())
+			{
+				return candidates.get(0);
+			}
+		}
+		throw EntityArgument.NO_ENTITIES_FOUND.create();
 	}
 
 	@SuppressWarnings("unchecked")

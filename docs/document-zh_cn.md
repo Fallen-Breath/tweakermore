@@ -335,6 +335,40 @@ TweakerMore提供的新功能
 - 最大值: `5.0`
 
 
+### 灵魂出窍传送指令 (freecamTeleportCommand)
+
+创建一个仅客户端的指令，用于将tweakeroo的自由相机移动至指定坐标或客户端已知的实体
+
+指令格式：/fctp <x> <y> <z>或/fctp <target>，其中"fctp"前缀可通过灵魂出窍传送指令-指令前缀设置
+
+该指令仅在灵魂出窍启用时有效，且绝不会移动真实玩家
+
+在开启/关闭后，可能需要重新加入世界，才能同步该指令的开启状态
+
+- 分类: 功能
+- 类型: 布尔值 (通用)
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Tweakeroo (`tweakeroo`)
+    - Minecraft (`minecraft`) `>=1.16`
+
+
+### 灵魂出窍传送指令-指令前缀 (freecamTeleportCommandPrefix)
+
+调整灵魂出窍传送指令的指令前缀
+
+需重启游戏 (<1.19) / 重进世界 (>=1.19) 才能应用修改
+
+- 分类: 功能
+- 类型: 字符串 (通用)
+- 默认值: `fctp`
+- 模组约束:
+  - 依赖模组:
+    - Tweakeroo (`tweakeroo`)
+    - Minecraft (`minecraft`) `>=1.16`
+
+
 ### 信息展示 (infoView)
 
 信息展示相关特性的总开关

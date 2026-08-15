@@ -120,6 +120,18 @@ tweakermore:
     fireworkRocketThrottlerCooldown:
       .: fireworkRocketThrottlerCooldown
       comment: The cooldown value of option @option#fireworkRocketThrottler@ in seconds
+    freecamTeleportCommand:
+      .: freecamTeleportCommand
+      comment: |-
+        Create a client-side command that moves tweakeroo's free camera to coordinates or a client-known entity
+        Command syntax: /fctp <x> <y> <z> or /fctp <target>. The "fctp" prefix can be modified with @option#freecamTeleportCommandPrefix@
+        This command only works while freecam is active and never moves the real player
+        After enabling / disabling, a world-rejoin might be required to sync the command tree state
+    freecamTeleportCommandPrefix:
+      .: freecamTeleportCommandPrefix
+      comment: |-
+        Modify the command prefix of @option#freecamTeleportCommand@
+        You need to restart the game (<1.19) / rejoin the world (>=1.19) to apply the prefix modification
     infoView:
       .: infoView
       comment: |-
@@ -1316,6 +1328,8 @@ tweakermore:
       more: '... %1$sx'
     spectatorTeleportCommand:
       need_spectator: You need to be in spectator mode to use this command
+    freecamTeleportCommand:
+      need_freecam: You need to enable tweakeroo's freecam to use this command
     tweakerMoreDevMixinAudit:
       success: Mixin audit succeeded
     windowSize:

@@ -120,6 +120,18 @@ tweakermore:
     fireworkRocketThrottlerCooldown:
       .: 烟花火箭限速器-冷却时间
       comment: 选项@option#fireworkRocketThrottler@的冷却时间，单位秒
+    freecamTeleportCommand:
+      .: 灵魂出窍传送指令
+      comment: |-
+        创建一个仅客户端的指令，用于将tweakeroo的自由相机移动至指定坐标或客户端已知的实体
+        指令格式：/fctp <x> <y> <z>或/fctp <target>，其中"fctp"前缀可通过@option#freecamTeleportCommandPrefix@设置
+        该指令仅在灵魂出窍启用时有效，且绝不会移动真实玩家
+        在开启/关闭后，可能需要重新加入世界，才能同步该指令的开启状态
+    freecamTeleportCommandPrefix:
+      .: 灵魂出窍传送指令-指令前缀
+      comment: |-
+        调整@option#freecamTeleportCommand@的指令前缀
+        需重启游戏 (<1.19) / 重进世界 (>=1.19) 才能应用修改
     infoView:
       .: 信息展示
       comment: |-
@@ -1315,6 +1327,8 @@ tweakermore:
       more: '... %1$sx'
     spectatorTeleportCommand:
       need_spectator: 你需要在旁观者模式下才能使用该指令
+    freecamTeleportCommand:
+      need_freecam: 你需要先启用tweakeroo的灵魂出窍才能使用该指令
     tweakerMoreDevMixinAudit:
       success: Mixin审计成功
     windowSize:

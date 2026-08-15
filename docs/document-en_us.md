@@ -335,6 +335,40 @@ The cooldown value of option fireworkRocketThrottler in seconds
 - Maximum value: `5.0`
 
 
+### freecamTeleportCommand
+
+Create a client-side command that moves tweakeroo's free camera to coordinates or a client-known entity
+
+Command syntax: /fctp <x> <y> <z> or /fctp <target>. The "fctp" prefix can be modified with freecamTeleportCommandPrefix
+
+This command only works while freecam is active and never moves the real player
+
+After enabling / disabling, a world-rejoin might be required to sync the command tree state
+
+- Category: Features
+- Type: boolean (Generic)
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
+    - Minecraft (`minecraft`) `>=1.16`
+
+
+### freecamTeleportCommandPrefix
+
+Modify the command prefix of freecamTeleportCommand
+
+You need to restart the game (<1.19) / rejoin the world (>=1.19) to apply the prefix modification
+
+- Category: Features
+- Type: string (Generic)
+- Default value: `fctp`
+- Mod restrictions:
+  - Required mods:
+    - Tweakeroo (`tweakeroo`)
+    - Minecraft (`minecraft`) `>=1.16`
+
+
 ### infoView
 
 The main switch of the info view feature
