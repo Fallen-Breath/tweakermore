@@ -99,6 +99,21 @@ If the container gui should be closed after using the autoCollectMaterialListIte
     - Item Scroller (`itemscroller`)
 
 
+### Auto Collect Material List Item - Extra Amount (autoCollectMaterialListItemExtraAmount)
+
+The extra number of each missing material to collect when using autoCollectMaterialListItem
+
+- Category: Features
+- Type: integer (Generic)
+- Default value: `0`
+- Minimum value: `0`
+- Maximum value: `128`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
 ### autoCollectMaterialListItemMessageType
 
 The way to show information when using the autoCollectMaterialListItem feature
@@ -113,11 +128,30 @@ The way to show information when using the autoCollectMaterialListItem feature
     - Item Scroller (`itemscroller`)
 
 
+### Auto Collect Material List Item - Require Sufficient Supply (autoCollectMaterialListItemRequireSufficientSupply)
+
+When using autoCollectMaterialListItem, only collect a material if the opened container
+
+has sufficient supply to satisfy the full collection target
+
+- Category: Features
+- Type: boolean (Generic)
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
 ### autoCollectMaterialListItemRetainItem
 
 If enabled, when using autoCollectMaterialListItem to collect items from a container,
 
 it will not take all items from the container slots. Instead, it will retain a specified amount of items
+
+This rule does not apply to shulker boxes collected by Auto Collect Material List Item - Take Single-Material Shulker Boxes
+
+because shulker boxes are unstackable
 
 See also: Option autoCollectMaterialListItemRetainItemAmount
 
@@ -139,6 +173,53 @@ The number of items retained by the autoCollectMaterialListItemRetainItem featur
 - Default value: `1`
 - Minimum value: `1`
 - Maximum value: `63`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
+### Auto Collect Material List Item - Round Up to Full Stacks (autoCollectMaterialListItemRoundUpToStack)
+
+When using autoCollectMaterialListItem, round the amount to collect up to
+
+the smallest multiple of the item's maximum stack size that satisfies the required amount
+
+- Category: Features
+- Type: boolean (Generic)
+- Default value: `false`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
+### Auto Collect Material List Item - Minimum Shulker Box Fill Ratio (autoCollectMaterialListItemShulkerBoxFillThreshold)
+
+The minimum fill ratio required for a single-material shulker box to be collected by
+
+Auto Collect Material List Item - Take Single-Material Shulker Boxes. 1.0 requires a full box; 0.5 requires a half-full box
+
+- Category: Features
+- Type: double (Generic)
+- Default value: `1.0`
+- Minimum value: `0.0`
+- Maximum value: `1.0`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
+### Auto Collect Material List Item - Take Single-Material Shulker Boxes (autoCollectMaterialListItemTakeShulkerBoxes)
+
+When using autoCollectMaterialListItem, also collect shulker boxes that only contain
+
+a single required item and meet Auto Collect Material List Item - Minimum Shulker Box Fill Ratio
+
+- Category: Features
+- Type: boolean (Generic)
+- Default value: `false`
 - Mod restrictions:
   - Required mods:
     - Litematica (`litematica`)

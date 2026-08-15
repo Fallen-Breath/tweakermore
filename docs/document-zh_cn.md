@@ -99,6 +99,21 @@ TweakerMore提供的新功能
     - Item Scroller (`itemscroller`)
 
 
+### 自动收集材料列表物品-额外拿取数量 (autoCollectMaterialListItemExtraAmount)
+
+使用自动收集材料列表物品时，每种缺失材料额外拿取的数量
+
+- 分类: 功能
+- 类型: 整数 (通用)
+- 默认值: `0`
+- 最小值: `0`
+- 最大值: `128`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
 ### 自动收集材料列表物品-消息类型 (autoCollectMaterialListItemMessageType)
 
 在使用自动收集材料列表物品功能时展示信息的方法
@@ -113,11 +128,30 @@ TweakerMore提供的新功能
     - Item Scroller (`itemscroller`)
 
 
+### 自动收集材料列表物品-仅在容器存量充足时拿取 (autoCollectMaterialListItemRequireSufficientSupply)
+
+使用自动收集材料列表物品时，仅当打开的容器中某种材料的存量
+
+可以满足本次完整收集目标时，才拿取该材料
+
+- 分类: 功能
+- 类型: 布尔值 (通用)
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
 ### 自动收集材料列表物品-保留容器物品 (autoCollectMaterialListItemRetainItem)
 
 若启用，则在使用自动收集材料列表物品从容器中取出物品时，
 
 不会取走容器格子中的所有物品，而是会保留指定数量的物品
+
+此规则不作用于自动收集材料列表物品-拿取单一材料潜影盒拿取的潜影盒，
+
+因为潜影盒不可堆叠
 
 另见：选项 自动收集材料列表物品-保留容器物品数
 
@@ -139,6 +173,53 @@ TweakerMore提供的新功能
 - 默认值: `1`
 - 最小值: `1`
 - 最大值: `63`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
+### 自动收集材料列表物品-按整组向上取整 (autoCollectMaterialListItemRoundUpToStack)
+
+使用自动收集材料列表物品时，将拿取数量向上取整为
+
+不小于所需数量的最小整组数量
+
+- 分类: 功能
+- 类型: 布尔值 (通用)
+- 默认值: `false`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
+### 自动收集材料列表物品-潜影盒最低填充率 (autoCollectMaterialListItemShulkerBoxFillThreshold)
+
+自动收集材料列表物品-拿取单一材料潜影盒拿取单一物品潜影盒所需的最低填充率
+
+1.0表示必须装满，0.5表示至少装满一半
+
+- 分类: 功能
+- 类型: 实数 (通用)
+- 默认值: `1.0`
+- 最小值: `0.0`
+- 最大值: `1.0`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
+### 自动收集材料列表物品-拿取单一材料潜影盒 (autoCollectMaterialListItemTakeShulkerBoxes)
+
+使用自动收集材料列表物品时，也会拿取仅装有同一种所需物品且
+
+达到自动收集材料列表物品-潜影盒最低填充率的潜影盒
+
+- 分类: 功能
+- 类型: 布尔值 (通用)
+- 默认值: `false`
 - 模组约束:
   - 依赖模组:
     - Litematica (`litematica`)

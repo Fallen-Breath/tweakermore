@@ -31,22 +31,52 @@ tweakermore:
         打开容器后，自动收集litematica材料列表中缺失的物品至玩家物品栏
         然后关闭容器
       pretty_name: 自动收集材料列表物品
-    autoCollectMaterialListItemMessageType:
-      .: 自动收集材料列表物品-消息类型
-      comment: 在使用@option#autoCollectMaterialListItem@功能时展示信息的方法
     autoCollectMaterialListItemCloseGui:
       .: 自动收集材料列表物品-关闭GUI
       comment: 在使用@option#autoCollectMaterialListItem@功能后，是否关闭容器的GUI
+    autoCollectMaterialListItemExtraAmount:
+      .: 自动收集材料列表物品-额外拿取数量
+      comment: 使用@option#autoCollectMaterialListItem@时，每种缺失材料额外拿取的数量
+      pretty_name: 自动收集材料列表物品-额外拿取数量
+    autoCollectMaterialListItemMessageType:
+      .: 自动收集材料列表物品-消息类型
+      comment: 在使用@option#autoCollectMaterialListItem@功能时展示信息的方法
+    autoCollectMaterialListItemRequireSufficientSupply:
+      .: 自动收集材料列表物品-仅在容器存量充足时拿取
+      comment: |-
+        使用@option#autoCollectMaterialListItem@时，仅当打开的容器中某种材料的存量
+        可以满足本次完整收集目标时，才拿取该材料
+      pretty_name: 自动收集材料列表物品-仅在容器存量充足时拿取
     autoCollectMaterialListItemRetainItem:
       .: 自动收集材料列表物品-保留容器物品
       comment: |-
         若启用，则在使用@option#autoCollectMaterialListItem@从容器中取出物品时，
         不会取走容器格子中的所有物品，而是会保留指定数量的物品
+        此规则不作用于@option#autoCollectMaterialListItemTakeShulkerBoxes@拿取的潜影盒，
+        因为潜影盒不可堆叠
         另见：选项 @option#autoCollectMaterialListItemRetainItemAmount@
       pretty_name: 自动收集材料列表物品-保留容器物品
     autoCollectMaterialListItemRetainItemAmount:
       .: 自动收集材料列表物品-保留容器物品数
       comment: 功能@option#autoCollectMaterialListItemRetainItem@保留的物品数量
+    autoCollectMaterialListItemRoundUpToStack:
+      .: 自动收集材料列表物品-按整组向上取整
+      comment: |-
+        使用@option#autoCollectMaterialListItem@时，将拿取数量向上取整为
+        不小于所需数量的最小整组数量
+      pretty_name: 自动收集材料列表物品-按整组向上取整
+    autoCollectMaterialListItemShulkerBoxFillThreshold:
+      .: 自动收集材料列表物品-潜影盒最低填充率
+      comment: |-
+        @option#autoCollectMaterialListItemTakeShulkerBoxes@拿取单一物品潜影盒所需的最低填充率
+        1.0表示必须装满，0.5表示至少装满一半
+      pretty_name: 自动收集材料列表物品-潜影盒最低填充率
+    autoCollectMaterialListItemTakeShulkerBoxes:
+      .: 自动收集材料列表物品-拿取单一材料潜影盒
+      comment: |-
+        使用@option#autoCollectMaterialListItem@时，也会拿取仅装有同一种所需物品且
+        达到@option#autoCollectMaterialListItemShulkerBoxFillThreshold@的潜影盒
+      pretty_name: 自动收集材料列表物品-拿取单一材料潜影盒
     autoFillContainer:
       .: 自动装填容器
       comment: |-

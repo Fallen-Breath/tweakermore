@@ -31,22 +31,52 @@ tweakermore:
         Automatically collect missing items in litematica mod material list in the opened container to player inventory
         and then close the container
       pretty_name: Auto Collect Material List Item
-    autoCollectMaterialListItemMessageType:
-      .: autoCollectMaterialListItemMessageType
-      comment: The way to show information when using the @option#autoCollectMaterialListItem@ feature
     autoCollectMaterialListItemCloseGui:
       .: autoCollectMaterialListItemCloseGui
       comment: If the container gui should be closed after using the @option#autoCollectMaterialListItem@ feature
+    autoCollectMaterialListItemExtraAmount:
+      .: Auto Collect Material List Item - Extra Amount
+      comment: The extra number of each missing material to collect when using @option#autoCollectMaterialListItem@
+      pretty_name: Auto Collect Material List Item - Extra Amount
+    autoCollectMaterialListItemMessageType:
+      .: autoCollectMaterialListItemMessageType
+      comment: The way to show information when using the @option#autoCollectMaterialListItem@ feature
+    autoCollectMaterialListItemRequireSufficientSupply:
+      .: Auto Collect Material List Item - Require Sufficient Supply
+      comment: |-
+        When using @option#autoCollectMaterialListItem@, only collect a material if the opened container
+        has sufficient supply to satisfy the full collection target
+      pretty_name: Auto Collect Material List Item - Require Sufficient Supply
     autoCollectMaterialListItemRetainItem:
       .: autoCollectMaterialListItemRetainItem
       comment: |-
         If enabled, when using @option#autoCollectMaterialListItem@ to collect items from a container,
         it will not take all items from the container slots. Instead, it will retain a specified amount of items
+        This rule does not apply to shulker boxes collected by @option#autoCollectMaterialListItemTakeShulkerBoxes@
+        because shulker boxes are unstackable
         See also: Option @option#autoCollectMaterialListItemRetainItemAmount@
       pretty_name: Auto Collect Material List ItemRetain Item
     autoCollectMaterialListItemRetainItemAmount:
       .: autoCollectMaterialListItemRetainItemAmount
       comment: The number of items retained by the @option#autoCollectMaterialListItemRetainItem@ feature
+    autoCollectMaterialListItemRoundUpToStack:
+      .: Auto Collect Material List Item - Round Up to Full Stacks
+      comment: |-
+        When using @option#autoCollectMaterialListItem@, round the amount to collect up to
+        the smallest multiple of the item's maximum stack size that satisfies the required amount
+      pretty_name: Auto Collect Material List Item - Round Up to Full Stacks
+    autoCollectMaterialListItemShulkerBoxFillThreshold:
+      .: Auto Collect Material List Item - Minimum Shulker Box Fill Ratio
+      comment: |-
+        The minimum fill ratio required for a single-material shulker box to be collected by
+        @option#autoCollectMaterialListItemTakeShulkerBoxes@. 1.0 requires a full box; 0.5 requires a half-full box
+      pretty_name: Auto Collect Material List Item - Minimum Shulker Box Fill Ratio
+    autoCollectMaterialListItemTakeShulkerBoxes:
+      .: Auto Collect Material List Item - Take Single-Material Shulker Boxes
+      comment: |-
+        When using @option#autoCollectMaterialListItem@, also collect shulker boxes that only contain
+        a single required item and meet @option#autoCollectMaterialListItemShulkerBoxFillThreshold@
+      pretty_name: Auto Collect Material List Item - Take Single-Material Shulker Boxes
     autoFillContainer:
       .: autoFillContainer
       comment: |-

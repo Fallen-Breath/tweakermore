@@ -36,16 +36,21 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
 import me.fallenbreath.tweakermore.config.options.listentries.AutoCollectMaterialListItemLogType;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.autoCollectMaterialListItem.MaterialListHudRendererAccessor;
+import me.fallenbreath.tweakermore.util.ItemUtils;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.ChatFormatting;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ContainerMaterialListItemCollector implements IContainerProcessor
 {
+	private static final int SHULKER_BOX_SLOT_COUNT = 27;
+
 	@Override
 	public TweakerMoreConfigBooleanHotkeyed getConfig()
 	{
@@ -72,115 +77,309 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 	public ProcessResult process(LocalPlayer player, AbstractContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
 	{
 		MaterialListBase materialList = DataManager.getMaterialList();
-		if (materialList != null)
+		if (materialList == null)
 		{
-			MaterialListHudRendererAccessor hudRendererAccessor = (MaterialListHudRendererAccessor)materialList.getHudRenderer();
-			String guiTitle = containerScreen.getTitle().getString();
+			log(Message.MessageType.WARNING, "tweakermore.impl.autoCollectMaterialListItem.no_material_list");
+			return new ProcessResult(true, TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_CLOSE_GUI.getBooleanValue());
+		}
 
-			// refresh before operation starts to make sure it's up-to-date
-			MaterialListUtils.updateAvailableCounts(materialList.getMaterialsAll(), player);
-			List<MaterialListEntry> missingOnly = materialList.getMaterialsMissingOnly(true);
+		MaterialListHudRendererAccessor hudRendererAccessor = (MaterialListHudRendererAccessor)materialList.getHudRenderer();
+		String guiTitle = containerScreen.getTitle().getString();
 
-			boolean summaryOnly = TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_MESSAGE_TYPE.getOptionListValue() == AutoCollectMaterialListItemLogType.SUMMARY;
-			List<String> summaries = Lists.newArrayList();
+		// refresh before operation starts to make sure it's up-to-date
+		MaterialListUtils.updateAvailableCounts(materialList.getMaterialsAll(), player);
+		List<MaterialListEntry> missingOnly = materialList.getMaterialsMissingOnly(true);
 
-			boolean takenSomething = false;
-			for (MaterialListEntry entry : missingOnly)
+		boolean summaryOnly = TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_MESSAGE_TYPE.getOptionListValue() == AutoCollectMaterialListItemLogType.SUMMARY;
+		List<String> summaries = Lists.newArrayList();
+		boolean takenSomething = false;
+
+		for (MaterialListEntry entry : missingOnly)
+		{
+			int amountToCollect = this.calculateAmountToCollect(materialList, entry);
+			if (amountToCollect <= 0)
 			{
-				int missing = entry.getCountMissing() * materialList.getMultiplier() - entry.getCountAvailable();
-				ItemStack stack = entry.getStack();
-				if (missing <= 0)
-				{
-					continue;
-				}
-				int totalTaken = 0;
-				for (Slot slot : containerInvSlots)
-				{
-					if (InventoryUtils.areStacksEqual(stack, slot.getItem()))
-					{
-						int stackAmount = slot.getItem().getCount();
-						int tryMoveAmount = Math.min(missing, stackAmount);
-						if (TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_RETAIN_ITEM.getBooleanValue())
-						{
-							int retainAmount = TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_KEEP_RETAIN_AMOUNT.getIntegerValue();
-							tryMoveAmount = Math.min(tryMoveAmount, stackAmount - retainAmount);
-							if (tryMoveAmount <= 0)
-							{
-								continue;
-							}
-						}
-
-						//#if MC >= 26.1
-						//$$ String itemName = stack.getItem().getName(stack).getString();
-						//#elseif MC >= 12103
-						//$$ String itemName = stack.getItem().getName().getString();
-						//#else
-						String itemName = stack.getItem().getDescription().getString();
-						//#endif
-						this.moveToPlayerInventory(containerScreen, playerInvSlots, slot, tryMoveAmount);
-						int moved = stackAmount - slot.getItem().getCount();
-						missing -= moved;
-						totalTaken += moved;
-						TweakerMoreMod.LOGGER.debug("Moved {}x (attempt {}x) {} to player inventory, still miss {} items", moved, tryMoveAmount, itemName, missing);
-						if (moved == 0)
-						{
-							TweakerMoreMod.LOGGER.debug("Player inventory is full for item {}", itemName);
-							break;
-						}
-					}
-				}
-				if (totalTaken > 0)
-				{
-					if (!takenSomething && !summaryOnly)
-					{
-						log(Message.MessageType.INFO, "tweakermore.impl.autoCollectMaterialListItem.info.title", guiTitle);
-					}
-					takenSomething = true;
-					String missingColor = missing == 0 ? GuiBase.TXT_GREEN : GuiBase.TXT_GOLD;
-					ChatFormatting formatting = stack.getRarity().
-							//#if MC >= 12006
-							//$$ color();
-							//#else
-							color;
-							//#endif
-					String stackName = formatting + stack.getHoverName().getString() + GuiBase.TXT_RST;
-					if (summaryOnly)
-					{
-						summaries.add(String.format("%s +%s", stackName, missingColor + totalTaken + GuiBase.TXT_RST));
-					}
-					else
-					{
-						log(
-								Message.MessageType.INFO,
-								"tweakermore.impl.autoCollectMaterialListItem.info.line",
-								GuiBase.TXT_GOLD + totalTaken + GuiBase.TXT_RST,
-								stackName,
-								missingColor + hudRendererAccessor.invokeGetFormattedCountString(missing, stack.getMaxStackSize()) + GuiBase.TXT_RST
-						);
-					}
-				}
+				continue;
 			}
 
-			if (takenSomething)
+			MaterialCollection collection = this.createMaterialCollection(entry.getStack(), amountToCollect, containerInvSlots);
+			if (
+					TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_REQUIRE_SUFFICIENT_SUPPLY.getBooleanValue() &&
+					collection.getAvailableAmount() < collection.amountRemaining
+			)
 			{
-				if (summaryOnly)
-				{
-					log(Message.MessageType.INFO, Joiner.on(", ").join(summaries));
-				}
-			}
-			else
-			{
-				log(Message.MessageType.INFO, "tweakermore.impl.autoCollectMaterialListItem.took_nothing", guiTitle);
+				continue;
 			}
 
-			// refresh after operation ends
-			hudRendererAccessor.setLastUpdateTime(-1);
+			this.collectMaterial(containerScreen, playerInvSlots, containerInvSlots, collection);
+			if (collection.totalTaken <= 0)
+			{
+				continue;
+			}
+
+			if (!takenSomething && !summaryOnly)
+			{
+				log(Message.MessageType.INFO, "tweakermore.impl.autoCollectMaterialListItem.info.title", guiTitle);
+			}
+			takenSomething = true;
+			this.reportCollection(hudRendererAccessor, collection, summaryOnly, summaries);
+		}
+
+		if (!takenSomething)
+		{
+			log(Message.MessageType.INFO, "tweakermore.impl.autoCollectMaterialListItem.took_nothing", guiTitle);
+		}
+		else if (summaryOnly)
+		{
+			log(Message.MessageType.INFO, Joiner.on(", ").join(summaries));
+		}
+
+		// refresh after operation ends
+		hudRendererAccessor.setLastUpdateTime(-1);
+		return new ProcessResult(true, TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_CLOSE_GUI.getBooleanValue());
+	}
+
+	private int calculateAmountToCollect(MaterialListBase materialList, MaterialListEntry entry)
+	{
+		// Match Litematica's missing-only filter: multipliers apply to the total material count
+		long requiredAmount = materialList.getMultiplier() == 1 ?
+				entry.getCountMissing() : (long)entry.getCountTotal() * materialList.getMultiplier();
+		requiredAmount -= entry.getCountAvailable();
+		if (requiredAmount <= 0)
+		{
+			return 0;
+		}
+
+		requiredAmount += TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_EXTRA_AMOUNT.getIntegerValue();
+		if (TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_ROUND_UP_TO_STACK.getBooleanValue())
+		{
+			int maxStackSize = entry.getStack().getMaxStackSize();
+			requiredAmount = (requiredAmount + maxStackSize - 1) / maxStackSize * maxStackSize;
+		}
+		return (int)Math.min(requiredAmount, Integer.MAX_VALUE);
+	}
+
+	private MaterialCollection createMaterialCollection(ItemStack stack, int amountToCollect, List<Slot> containerInvSlots)
+	{
+		MaterialCollection collection = new MaterialCollection(stack, amountToCollect);
+		boolean takeShulkerBoxes = TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_TAKE_SHULKER_BOXES.getBooleanValue();
+		for (Slot slot : containerInvSlots)
+		{
+			ItemStack slotStack = slot.getItem();
+			if (InventoryUtils.areStacksEqual(stack, slotStack))
+			{
+				collection.looseItemAmount += this.getMovableLooseItemAmount(slotStack);
+			}
+			else if (takeShulkerBoxes && ItemUtils.isShulkerBox(slotStack.getItem()))
+			{
+				// Retaining items only applies to loose stacks; shulker boxes are unstackable
+				int contentAmount = this.getShulkerBoxContentAmount(slotStack, stack);
+				for (int i = 0; contentAmount > 0 && i < slotStack.getCount(); i++)
+				{
+					collection.shulkerBoxCandidates.add(new ShulkerBoxCandidate(slot, contentAmount));
+				}
+			}
+		}
+		collection.shulkerBoxCandidates.sort((left, right) -> Integer.compare(right.itemAmount, left.itemAmount));
+		return collection;
+	}
+
+	private void collectMaterial(
+			AbstractContainerScreen<?> containerScreen,
+			List<Slot> playerInvSlots,
+			List<Slot> containerInvSlots,
+			MaterialCollection collection
+	)
+	{
+		String itemName = this.getItemName(collection.stack);
+		this.collectShulkerBoxes(containerScreen, playerInvSlots, collection, itemName);
+		this.collectLooseItems(containerScreen, playerInvSlots, containerInvSlots, collection, itemName);
+	}
+
+	private void collectShulkerBoxes(
+			AbstractContainerScreen<?> containerScreen,
+			List<Slot> playerInvSlots,
+			MaterialCollection collection,
+			String itemName
+	)
+	{
+		while (collection.amountRemaining > 0)
+		{
+			int candidateIndex = this.findShulkerBoxToMove(
+					collection.shulkerBoxCandidates,
+					collection.amountRemaining,
+					collection.looseItemAmount
+			);
+			if (candidateIndex < 0)
+			{
+				break;
+			}
+
+			ShulkerBoxCandidate candidate = collection.shulkerBoxCandidates.remove(candidateIndex);
+			if (this.moveShulkerBoxToPlayerInventory(containerScreen, playerInvSlots, candidate))
+			{
+				collection.recordTaken(candidate.itemAmount);
+				TweakerMoreMod.LOGGER.debug("Moved 1x shulker box containing {}x {}, still miss {} items", candidate.itemAmount, itemName, collection.amountRemaining);
+			}
+		}
+	}
+
+	private void collectLooseItems(
+			AbstractContainerScreen<?> containerScreen,
+			List<Slot> playerInvSlots,
+			List<Slot> containerInvSlots,
+			MaterialCollection collection,
+			String itemName
+	)
+	{
+		for (Slot slot : containerInvSlots)
+		{
+			if (collection.amountRemaining <= 0)
+			{
+				break;
+			}
+			if (!InventoryUtils.areStacksEqual(collection.stack, slot.getItem()))
+			{
+				continue;
+			}
+
+			int stackAmount = slot.getItem().getCount();
+			int tryMoveAmount = Math.min(collection.amountRemaining, this.getMovableLooseItemAmount(slot.getItem()));
+			if (tryMoveAmount <= 0)
+			{
+				continue;
+			}
+
+			this.moveToPlayerInventory(containerScreen, playerInvSlots, slot, tryMoveAmount);
+			int moved = stackAmount - slot.getItem().getCount();
+			collection.recordTaken(moved);
+			TweakerMoreMod.LOGGER.debug("Moved {}x (attempt {}x) {} to player inventory, still miss {} items", moved, tryMoveAmount, itemName, collection.amountRemaining);
+			if (moved == 0)
+			{
+				TweakerMoreMod.LOGGER.debug("Player inventory is full for item {}", itemName);
+				break;
+			}
+		}
+	}
+
+	private void reportCollection(
+			MaterialListHudRendererAccessor hudRendererAccessor,
+			MaterialCollection collection,
+			boolean summaryOnly,
+			List<String> summaries
+	)
+	{
+		String missingColor = collection.amountRemaining == 0 ? GuiBase.TXT_GREEN : GuiBase.TXT_GOLD;
+		ChatFormatting formatting = collection.stack.getRarity().
+				//#if MC >= 12006
+				//$$ color();
+				//#else
+				color;
+				//#endif
+		String stackName = formatting + collection.stack.getHoverName().getString() + GuiBase.TXT_RST;
+		if (summaryOnly)
+		{
+			summaries.add(String.format("%s +%s", stackName, missingColor + collection.totalTaken + GuiBase.TXT_RST));
 		}
 		else
 		{
-			log(Message.MessageType.WARNING, "tweakermore.impl.autoCollectMaterialListItem.no_material_list");
+			log(
+					Message.MessageType.INFO,
+					"tweakermore.impl.autoCollectMaterialListItem.info.line",
+					GuiBase.TXT_GOLD + collection.totalTaken + GuiBase.TXT_RST,
+					stackName,
+					missingColor + hudRendererAccessor.invokeGetFormattedCountString(collection.amountRemaining, collection.stack.getMaxStackSize()) + GuiBase.TXT_RST
+			);
 		}
-		return new ProcessResult(true, TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_CLOSE_GUI.getBooleanValue());
+	}
+
+	private String getItemName(ItemStack stack)
+	{
+		//#if MC >= 26.1
+		//$$ return stack.getItem().getName(stack).getString();
+		//#elseif MC >= 12103
+		//$$ return stack.getItem().getName().getString();
+		//#else
+		return stack.getItem().getDescription().getString();
+		//#endif
+	}
+
+	private int getMovableLooseItemAmount(ItemStack stack)
+	{
+		int amount = stack.getCount();
+		if (TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_RETAIN_ITEM.getBooleanValue())
+		{
+			amount -= TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_KEEP_RETAIN_AMOUNT.getIntegerValue();
+		}
+		return Math.max(0, amount);
+	}
+
+	private int getShulkerBoxContentAmount(ItemStack shulkerBox, ItemStack expectedStack)
+	{
+		if (!ItemUtils.isShulkerBox(shulkerBox.getItem()))
+		{
+			return 0;
+		}
+
+		Optional<NonNullList<ItemStack>> storedItems = me.fallenbreath.tweakermore.util.InventoryUtils.getStoredItems(shulkerBox);
+		if (!storedItems.isPresent() || storedItems.get().size() != SHULKER_BOX_SLOT_COUNT)
+		{
+			return 0;
+		}
+
+		int itemAmount = 0;
+		for (ItemStack storedStack : storedItems.get())
+		{
+			if (storedStack.isEmpty())
+			{
+				continue;
+			}
+			if (!InventoryUtils.areStacksEqual(expectedStack, storedStack))
+			{
+				return 0;
+			}
+			itemAmount += storedStack.getCount();
+		}
+
+		if (itemAmount <= 0)
+		{
+			return 0;
+		}
+
+		int fullAmount = SHULKER_BOX_SLOT_COUNT * expectedStack.getMaxStackSize();
+		double fillRatio = (double)itemAmount / fullAmount;
+		if (fillRatio < TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_SHULKER_BOX_FILL_THRESHOLD.getDoubleValue())
+		{
+			return 0;
+		}
+		return itemAmount;
+	}
+
+	private int findShulkerBoxToMove(List<ShulkerBoxCandidate> candidates, int missing, long looseItemAmount)
+	{
+		// Candidates are sorted from fullest to emptiest. Prefer the fullest box that won't exceed the target
+		for (int index = 0; index < candidates.size(); index++)
+		{
+			if (candidates.get(index).itemAmount <= missing)
+			{
+				return index;
+			}
+		}
+
+		// If loose items can't fill the gap, use the smallest box to minimize unavoidable over-collection
+		return missing > looseItemAmount && !candidates.isEmpty() ? candidates.size() - 1 : -1;
+	}
+
+	private boolean moveShulkerBoxToPlayerInventory(
+			AbstractContainerScreen<?> containerScreen,
+			List<Slot> playerInvSlots,
+			ShulkerBoxCandidate candidate
+	)
+	{
+		int stackAmount = candidate.slot.getItem().getCount();
+		this.moveToPlayerInventory(containerScreen, playerInvSlots, candidate.slot, 1);
+		int movedBoxes = stackAmount - candidate.slot.getItem().getCount();
+		return movedBoxes > 0;
 	}
 
 	private void moveToPlayerInventory(AbstractContainerScreen<?> containerScreen, List<Slot> playerInvSlots, Slot fromSlot, int amount)
@@ -224,6 +423,49 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 		if (amount != 0)
 		{
 			TweakerMoreMod.LOGGER.warn("Failed to move full item stack to player inventory, {} items remains", amount);
+		}
+	}
+
+	private static class ShulkerBoxCandidate
+	{
+		private final Slot slot;
+		private final int itemAmount;
+
+		private ShulkerBoxCandidate(Slot slot, int itemAmount)
+		{
+			this.slot = slot;
+			this.itemAmount = itemAmount;
+		}
+	}
+
+	private static class MaterialCollection
+	{
+		private final ItemStack stack;
+		private int amountRemaining;
+		private long looseItemAmount;
+		private final List<ShulkerBoxCandidate> shulkerBoxCandidates = Lists.newArrayList();
+		private long totalTaken;
+
+		private MaterialCollection(ItemStack stack, int amountToCollect)
+		{
+			this.stack = stack;
+			this.amountRemaining = amountToCollect;
+		}
+
+		private long getAvailableAmount()
+		{
+			long amount = this.looseItemAmount;
+			for (ShulkerBoxCandidate candidate : this.shulkerBoxCandidates)
+			{
+				amount += candidate.itemAmount;
+			}
+			return amount;
+		}
+
+		private void recordTaken(int amount)
+		{
+			this.amountRemaining = Math.max(0, this.amountRemaining - amount);
+			this.totalTaken += amount;
 		}
 	}
 }
