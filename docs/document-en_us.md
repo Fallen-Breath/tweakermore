@@ -1888,6 +1888,17 @@ Modify the client-side particle limit. Affects both ticking limit and rendering 
 - Maximum value: `1000000`
 
 
+### playerListScale
+
+Scale the player list HUD with the given factor
+
+- Category: MC Tweaks
+- Type: double (Generic)
+- Default value: `1.0`
+- Minimum value: `0.001`
+- Maximum value: `2.0`
+
+
 ### playerNameTagRenderStrategyList
 
 The whitelist / blacklist used in playerNameTagRenderStrategyList

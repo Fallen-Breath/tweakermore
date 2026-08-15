@@ -732,6 +732,9 @@ tweakermore:
     particleLimit:
       .: particleLimit
       comment: Modify the client-side particle limit. Affects both ticking limit and rendering limit
+    playerListScale:
+      .: playerListScale
+      comment: Scale the player list HUD with the given factor
     playerNameTagRenderStrategyList:
       .: playerNameTagRenderStrategyList
       comment: |-

@@ -168,6 +168,7 @@
     "tweaks.mc_tweaks.particleLimit.ParticleManagerMixin",
     "tweaks.mc_tweaks.particleLimit.ParticleRendererAccessor",
     "tweaks.mc_tweaks.particleLimit.ParticleRendererMixin",
+    "tweaks.mc_tweaks.playerListScale.PlayerTabOverlayMixin",
     "tweaks.mc_tweaks.playerSkinBlockingLoading.PlayerSkinProviderMixin",
     "tweaks.mc_tweaks.playerSkinBlockingLoading.PlayerSkinTextureMixin",
     "tweaks.mc_tweaks.playerSkinBlockingLoading.compat.customskinloader.FakeSkinManagerMixin_Ancient",

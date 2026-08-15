@@ -732,6 +732,9 @@ tweakermore:
     particleLimit:
       .: 粒子数量上限
       comment: 修改客户端的粒子数量上限。同时影响运算的上限和渲染的上限
+    playerListScale:
+      .: 玩家列表缩放
+      comment: 将玩家列表按照给定参数进行缩放显示
     playerNameTagRenderStrategyList:
       .: 玩家名称标签渲染策略-列表
       comment: |-
