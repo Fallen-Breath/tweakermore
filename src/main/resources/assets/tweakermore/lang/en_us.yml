@@ -1290,7 +1290,8 @@ tweakermore:
     autoCollectMaterialListItem:
       info:
         title: Items took from container %1$s
-        line: '- %1$sx %2$s, still missing %3$s'
+        line: '- %1$sx %2$s%4$s, still missing %3$s'
+        extra: ' (%1$s extra)'
       took_nothing: Took nothing required in the material list from %1$s
       no_material_list: No material list is activated
     autoFillContainer:

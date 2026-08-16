@@ -1289,7 +1289,8 @@ tweakermore:
     autoCollectMaterialListItem:
       info:
         title: '从%1$s中收集了:'
-        line: '- %1$s 个%2$s，仍需 %3$s'
+        line: '- %1$s 个%2$s%4$s，仍需 %3$s'
+        extra: ' (多拿了 %1$s)'
       took_nothing: 未在%1$s中收集任何材料列表中需要的物品
       no_material_list: 没有生效的材料列表
     autoFillContainer:

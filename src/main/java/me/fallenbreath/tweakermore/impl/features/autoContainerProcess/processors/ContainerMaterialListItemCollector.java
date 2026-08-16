@@ -96,13 +96,14 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 
 		for (MaterialListEntry entry : missingOnly)
 		{
-			int amountToCollect = this.calculateAmountToCollect(materialList, entry);
-			if (amountToCollect <= 0)
+			int amountRequired = this.calculateRequiredAmount(materialList, entry);
+			if (amountRequired <= 0)
 			{
 				continue;
 			}
 
-			MaterialCollection collection = this.createMaterialCollection(entry.getStack(), amountToCollect, containerInvSlots);
+			int collectionTarget = this.calculateCollectionTarget(entry.getStack(), amountRequired);
+			MaterialCollection collection = this.createMaterialCollection(entry.getStack(), amountRequired, collectionTarget, containerInvSlots);
 			if (
 					TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_REQUIRE_SUFFICIENT_SUPPLY.getBooleanValue() &&
 					collection.getAvailableAmount() < collection.amountRemaining
@@ -139,7 +140,7 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 		return new ProcessResult(true, TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_CLOSE_GUI.getBooleanValue());
 	}
 
-	private int calculateAmountToCollect(MaterialListBase materialList, MaterialListEntry entry)
+	private int calculateRequiredAmount(MaterialListBase materialList, MaterialListEntry entry)
 	{
 		// Match Litematica's missing-only filter: multipliers apply to the total material count
 		long requiredAmount = materialList.getMultiplier() == 1 ?
@@ -149,19 +150,23 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 		{
 			return 0;
 		}
-
-		requiredAmount += TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_EXTRA_AMOUNT.getIntegerValue();
-		if (TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_ROUND_UP_TO_STACK.getBooleanValue())
-		{
-			int maxStackSize = entry.getStack().getMaxStackSize();
-			requiredAmount = (requiredAmount + maxStackSize - 1) / maxStackSize * maxStackSize;
-		}
 		return (int)Math.min(requiredAmount, Integer.MAX_VALUE);
 	}
 
-	private MaterialCollection createMaterialCollection(ItemStack stack, int amountToCollect, List<Slot> containerInvSlots)
+	private int calculateCollectionTarget(ItemStack stack, int amountRequired)
 	{
-		MaterialCollection collection = new MaterialCollection(stack, amountToCollect);
+		long collectionTarget = (long)amountRequired + TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_EXTRA_AMOUNT.getIntegerValue();
+		if (TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_ROUND_UP_TO_STACK.getBooleanValue())
+		{
+			int maxStackSize = stack.getMaxStackSize();
+			collectionTarget = (collectionTarget + maxStackSize - 1) / maxStackSize * maxStackSize;
+		}
+		return (int)Math.min(collectionTarget, Integer.MAX_VALUE);
+	}
+
+	private MaterialCollection createMaterialCollection(ItemStack stack, int amountRequired, int collectionTarget, List<Slot> containerInvSlots)
+	{
+		MaterialCollection collection = new MaterialCollection(stack, amountRequired, collectionTarget);
 		boolean takeShulkerBoxes = TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_TAKE_SHULKER_BOXES.getBooleanValue();
 		for (Slot slot : containerInvSlots)
 		{
@@ -270,6 +275,7 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 	)
 	{
 		String missingColor = collection.amountRemaining == 0 ? GuiBase.TXT_GREEN : GuiBase.TXT_GOLD;
+		String extraTakenSuffix = this.getExtraTakenSuffix(collection);
 		ChatFormatting formatting = collection.stack.getRarity().
 				//#if MC >= 12006
 				//$$ color();
@@ -279,7 +285,7 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 		String stackName = formatting + collection.stack.getHoverName().getString() + GuiBase.TXT_RST;
 		if (summaryOnly)
 		{
-			summaries.add(String.format("%s +%s", stackName, missingColor + collection.totalTaken + GuiBase.TXT_RST));
+			summaries.add(String.format("%s +%s%s", stackName, missingColor + collection.totalTaken + GuiBase.TXT_RST, extraTakenSuffix));
 		}
 		else
 		{
@@ -288,9 +294,19 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 					"tweakermore.impl.autoCollectMaterialListItem.info.line",
 					GuiBase.TXT_GOLD + collection.totalTaken + GuiBase.TXT_RST,
 					stackName,
-					missingColor + hudRendererAccessor.invokeGetFormattedCountString(collection.amountRemaining, collection.stack.getMaxStackSize()) + GuiBase.TXT_RST
+					missingColor + hudRendererAccessor.invokeGetFormattedCountString(collection.amountRemaining, collection.stack.getMaxStackSize()) + GuiBase.TXT_RST,
+					extraTakenSuffix
 			);
 		}
+	}
+
+	private String getExtraTakenSuffix(MaterialCollection collection)
+	{
+		long extraTaken = collection.getExtraTakenAmount();
+		return extraTaken > 0 ? StringUtils.translate(
+				"tweakermore.impl.autoCollectMaterialListItem.info.extra",
+				GuiBase.TXT_GOLD + extraTaken + GuiBase.TXT_RST
+		) : "";
 	}
 
 	private String getItemName(ItemStack stack)
@@ -441,15 +457,17 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 	private static class MaterialCollection
 	{
 		private final ItemStack stack;
+		private final int amountRequired;
 		private int amountRemaining;
 		private long looseItemAmount;
 		private final List<ShulkerBoxCandidate> shulkerBoxCandidates = Lists.newArrayList();
 		private long totalTaken;
 
-		private MaterialCollection(ItemStack stack, int amountToCollect)
+		private MaterialCollection(ItemStack stack, int amountRequired, int collectionTarget)
 		{
 			this.stack = stack;
-			this.amountRemaining = amountToCollect;
+			this.amountRequired = amountRequired;
+			this.amountRemaining = collectionTarget;
 		}
 
 		private long getAvailableAmount()
@@ -466,6 +484,11 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 		{
 			this.amountRemaining = Math.max(0, this.amountRemaining - amount);
 			this.totalTaken += amount;
+		}
+
+		private long getExtraTakenAmount()
+		{
+			return Math.max(0, this.totalTaken - this.amountRequired);
 		}
 	}
 }
