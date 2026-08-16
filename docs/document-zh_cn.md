@@ -1207,6 +1207,15 @@ schematicBlockPlacement的严格模式
     - Minecraft (`minecraft`) `>=1.16`
 
 
+### 载具伪潜行 (vehicleFakeSneaking)
+
+防止玩家控制的载具从方块边缘跌落
+
+- 分类: 功能
+- 类型: 带热键布尔值 (工具)
+- 默认值: *无快捷键*, `false`
+
+
 ### 村民交易次数显示 (villagerOfferUsesDisplay)
 
 在村民交易列表中显示当前交易的次数以及上限

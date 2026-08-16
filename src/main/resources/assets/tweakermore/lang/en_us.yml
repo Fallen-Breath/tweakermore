@@ -445,6 +445,10 @@ tweakermore:
       comment: |-
         Modify the command prefix of @option#spectatorTeleportCommand@
         You need to restart the game (<1.19) / rejoin the world (>=1.19) to apply the prefix modification
+    vehicleFakeSneaking:
+      .: vehicleFakeSneaking
+      comment: Prevent player-controlled vehicles from falling off block edges
+      pretty_name: Vehicle Fake Sneaking
     villagerOfferUsesDisplay:
       .: villagerOfferUsesDisplay
       comment: |-

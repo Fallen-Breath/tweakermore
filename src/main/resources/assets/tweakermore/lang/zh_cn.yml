@@ -445,6 +445,10 @@ tweakermore:
       comment: |-
         调整@option#spectatorTeleportCommand@的指令前缀
         需重启游戏 (<1.19) / 重进世界 (>=1.19) 才能应用修改
+    vehicleFakeSneaking:
+      .: 载具伪潜行
+      comment: 防止玩家控制的载具从方块边缘跌落
+      pretty_name: 载具伪潜行
     villagerOfferUsesDisplay:
       .: 村民交易次数显示
       comment: |-

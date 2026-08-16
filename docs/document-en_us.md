@@ -1211,6 +1211,15 @@ You need to restart the game (<1.19) / rejoin the world (>=1.19) to apply the pr
     - Minecraft (`minecraft`) `>=1.16`
 
 
+### vehicleFakeSneaking
+
+Prevent player-controlled vehicles from falling off block edges
+
+- Category: Features
+- Type: hotkey togglable boolean (Tweak)
+- Default value: *no hotkey*, `false`
+
+
 ### villagerOfferUsesDisplay
 
 Display villager offer use and limit amount on villager offer list

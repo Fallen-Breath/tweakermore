@@ -465,6 +465,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.16")), category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigString SPECTATOR_TELEPORT_COMMAND_PREFIX = newConfigString("spectatorTeleportCommandPrefix", "stp");
 
+	@Config(type = Config.Type.TWEAK, category = Config.Category.FEATURES)
+	public static final TweakerMoreConfigBooleanHotkeyed VEHICLE_FAKE_SNEAKING = newConfigBooleanHotkeyed("vehicleFakeSneaking");
+
 	@Config(type = Config.Type.GENERIC, category = Config.Category.FEATURES)
 	public static final TweakerMoreConfigBoolean VILLAGER_OFFER_USES_DISPLAY = newConfigBoolean("villagerOfferUsesDisplay", false);
 
