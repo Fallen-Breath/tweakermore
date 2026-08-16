@@ -96,18 +96,15 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 
 		for (MaterialListEntry entry : missingOnly)
 		{
-			int amountRequired = this.calculateRequiredAmount(materialList, entry);
-			if (amountRequired <= 0)
+			int materialListRequiredAmount = this.calculateMaterialListRequiredAmount(materialList, entry);
+			if (materialListRequiredAmount <= 0)
 			{
 				continue;
 			}
 
-			int collectionTarget = this.calculateCollectionTarget(entry.getStack(), amountRequired);
-			MaterialCollection collection = this.createMaterialCollection(entry.getStack(), amountRequired, collectionTarget, containerInvSlots);
-			if (
-					TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_REQUIRE_SUFFICIENT_SUPPLY.getBooleanValue() &&
-					collection.getAvailableAmount() < collection.amountRemaining
-			)
+			int collectionTarget = this.calculateCollectionTarget(entry.getStack(), materialListRequiredAmount);
+			MaterialCollection collection = this.createMaterialCollection(entry.getStack(), materialListRequiredAmount, collectionTarget, containerInvSlots);
+			if (TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_REQUIRE_SUFFICIENT_SUPPLY.getBooleanValue() && !collection.hasSufficientSupply())
 			{
 				continue;
 			}
@@ -140,33 +137,33 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 		return new ProcessResult(true, TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_CLOSE_GUI.getBooleanValue());
 	}
 
-	private int calculateRequiredAmount(MaterialListBase materialList, MaterialListEntry entry)
+	private int calculateMaterialListRequiredAmount(MaterialListBase materialList, MaterialListEntry entry)
 	{
 		// Match Litematica's missing-only filter: multipliers apply to the total material count
-		long requiredAmount = materialList.getMultiplier() == 1 ?
-				entry.getCountMissing() : (long)entry.getCountTotal() * materialList.getMultiplier();
-		requiredAmount -= entry.getCountAvailable();
-		if (requiredAmount <= 0)
+		long materialListRequiredAmount = materialList.getMultiplier() == 1 ? entry.getCountMissing() : (long)entry.getCountTotal() * materialList.getMultiplier();
+		materialListRequiredAmount -= entry.getCountAvailable();
+		if (materialListRequiredAmount <= 0)
 		{
 			return 0;
 		}
-		return (int)Math.min(requiredAmount, Integer.MAX_VALUE);
+		return (int)Math.min(materialListRequiredAmount, Integer.MAX_VALUE);
 	}
 
-	private int calculateCollectionTarget(ItemStack stack, int amountRequired)
+	private int calculateCollectionTarget(ItemStack stack, int materialListRequiredAmount)
 	{
-		long collectionTarget = (long)amountRequired + TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_EXTRA_AMOUNT.getIntegerValue();
+		long collectionTarget = (long)materialListRequiredAmount + TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_EXTRA_AMOUNT.getIntegerValue();
 		if (TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_ROUND_UP_TO_STACK.getBooleanValue())
 		{
 			int maxStackSize = stack.getMaxStackSize();
-			collectionTarget = (collectionTarget + maxStackSize - 1) / maxStackSize * maxStackSize;
+			long roundedTarget = ((long)materialListRequiredAmount + maxStackSize - 1) / maxStackSize * maxStackSize;
+			collectionTarget = Math.max(collectionTarget, roundedTarget);
 		}
 		return (int)Math.min(collectionTarget, Integer.MAX_VALUE);
 	}
 
-	private MaterialCollection createMaterialCollection(ItemStack stack, int amountRequired, int collectionTarget, List<Slot> containerInvSlots)
+	private MaterialCollection createMaterialCollection(ItemStack stack, int materialListRequiredAmount, int collectionTarget, List<Slot> containerInvSlots)
 	{
-		MaterialCollection collection = new MaterialCollection(stack, amountRequired, collectionTarget);
+		MaterialCollection collection = new MaterialCollection(stack, materialListRequiredAmount, collectionTarget);
 		boolean takeShulkerBoxes = TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_TAKE_SHULKER_BOXES.getBooleanValue();
 		for (Slot slot : containerInvSlots)
 		{
@@ -189,32 +186,19 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 		return collection;
 	}
 
-	private void collectMaterial(
-			AbstractContainerScreen<?> containerScreen,
-			List<Slot> playerInvSlots,
-			List<Slot> containerInvSlots,
-			MaterialCollection collection
-	)
+	private void collectMaterial(AbstractContainerScreen<?> containerScreen, List<Slot> playerInvSlots, List<Slot> containerInvSlots, MaterialCollection collection)
 	{
 		String itemName = this.getItemName(collection.stack);
 		this.collectShulkerBoxes(containerScreen, playerInvSlots, collection, itemName);
 		this.collectLooseItems(containerScreen, playerInvSlots, containerInvSlots, collection, itemName);
 	}
 
-	private void collectShulkerBoxes(
-			AbstractContainerScreen<?> containerScreen,
-			List<Slot> playerInvSlots,
-			MaterialCollection collection,
-			String itemName
-	)
+	private void collectShulkerBoxes(AbstractContainerScreen<?> containerScreen, List<Slot> playerInvSlots, MaterialCollection collection, String itemName)
 	{
-		while (collection.amountRemaining > 0)
+		while (!collection.hasReachedTarget())
 		{
-			int candidateIndex = this.findShulkerBoxToMove(
-					collection.shulkerBoxCandidates,
-					collection.amountRemaining,
-					collection.looseItemAmount
-			);
+			int targetAmountRemaining = collection.getTargetAmountRemaining();
+			int candidateIndex = this.findShulkerBoxToMove(collection.shulkerBoxCandidates, targetAmountRemaining, collection.looseItemAmount);
 			if (candidateIndex < 0)
 			{
 				break;
@@ -224,22 +208,17 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 			if (this.moveShulkerBoxToPlayerInventory(containerScreen, playerInvSlots, candidate))
 			{
 				collection.recordTaken(candidate.itemAmount);
-				TweakerMoreMod.LOGGER.debug("Moved 1x shulker box containing {}x {}, still miss {} items", candidate.itemAmount, itemName, collection.amountRemaining);
+				TweakerMoreMod.LOGGER.debug("Moved 1x shulker box containing {}x {}, {} items short of collection target", candidate.itemAmount, itemName, collection.getTargetAmountRemaining());
 			}
 		}
 	}
 
-	private void collectLooseItems(
-			AbstractContainerScreen<?> containerScreen,
-			List<Slot> playerInvSlots,
-			List<Slot> containerInvSlots,
-			MaterialCollection collection,
-			String itemName
-	)
+	private void collectLooseItems(AbstractContainerScreen<?> containerScreen, List<Slot> playerInvSlots, List<Slot> containerInvSlots, MaterialCollection collection, String itemName)
 	{
 		for (Slot slot : containerInvSlots)
 		{
-			if (collection.amountRemaining <= 0)
+			int targetAmountRemaining = collection.getTargetAmountRemaining();
+			if (targetAmountRemaining <= 0)
 			{
 				break;
 			}
@@ -249,7 +228,7 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 			}
 
 			int stackAmount = slot.getItem().getCount();
-			int tryMoveAmount = Math.min(collection.amountRemaining, this.getMovableLooseItemAmount(slot.getItem()));
+			int tryMoveAmount = Math.min(targetAmountRemaining, this.getMovableLooseItemAmount(slot.getItem()));
 			if (tryMoveAmount <= 0)
 			{
 				continue;
@@ -258,7 +237,7 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 			this.moveToPlayerInventory(containerScreen, playerInvSlots, slot, tryMoveAmount);
 			int moved = stackAmount - slot.getItem().getCount();
 			collection.recordTaken(moved);
-			TweakerMoreMod.LOGGER.debug("Moved {}x (attempt {}x) {} to player inventory, still miss {} items", moved, tryMoveAmount, itemName, collection.amountRemaining);
+			TweakerMoreMod.LOGGER.debug("Moved {}x (attempt {}x) {} to player inventory, {} items short of collection target", moved, tryMoveAmount, itemName, collection.getTargetAmountRemaining());
 			if (moved == 0)
 			{
 				TweakerMoreMod.LOGGER.debug("Player inventory is full for item {}", itemName);
@@ -267,15 +246,10 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 		}
 	}
 
-	private void reportCollection(
-			MaterialListHudRendererAccessor hudRendererAccessor,
-			MaterialCollection collection,
-			boolean summaryOnly,
-			List<String> summaries
-	)
+	private void reportCollection(MaterialListHudRendererAccessor hudRendererAccessor, MaterialCollection collection, boolean summaryOnly, List<String> summaries)
 	{
-		String missingColor = collection.amountRemaining == 0 ? GuiBase.TXT_GREEN : GuiBase.TXT_GOLD;
-		String extraTakenSuffix = this.getExtraTakenSuffix(collection);
+		String amountColor = collection.hasReachedTarget() ? GuiBase.TXT_GREEN : GuiBase.TXT_GOLD;
+		String overRequiredSuffix = this.getOverRequiredSuffix(collection);
 		ChatFormatting formatting = collection.stack.getRarity().
 				//#if MC >= 12006
 				//$$ color();
@@ -285,28 +259,44 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 		String stackName = formatting + collection.stack.getHoverName().getString() + GuiBase.TXT_RST;
 		if (summaryOnly)
 		{
-			summaries.add(String.format("%s +%s%s", stackName, missingColor + collection.totalTaken + GuiBase.TXT_RST, extraTakenSuffix));
+			summaries.add(String.format("%s +%s%s", stackName, amountColor + collection.totalTaken + GuiBase.TXT_RST, overRequiredSuffix));
 		}
 		else
 		{
-			log(
-					Message.MessageType.INFO,
-					"tweakermore.impl.autoCollectMaterialListItem.info.line",
-					GuiBase.TXT_GOLD + collection.totalTaken + GuiBase.TXT_RST,
-					stackName,
-					missingColor + hudRendererAccessor.invokeGetFormattedCountString(collection.amountRemaining, collection.stack.getMaxStackSize()) + GuiBase.TXT_RST,
-					extraTakenSuffix
-			);
+			String progressSuffix = this.getProgressSuffix(hudRendererAccessor, collection);
+			log(Message.MessageType.INFO, "tweakermore.impl.autoCollectMaterialListItem.info.line", GuiBase.TXT_GOLD + collection.totalTaken + GuiBase.TXT_RST, stackName, overRequiredSuffix, progressSuffix);
 		}
 	}
 
-	private String getExtraTakenSuffix(MaterialCollection collection)
+	private String getOverRequiredSuffix(MaterialCollection collection)
 	{
-		long extraTaken = collection.getExtraTakenAmount();
-		return extraTaken > 0 ? StringUtils.translate(
-				"tweakermore.impl.autoCollectMaterialListItem.info.extra",
-				GuiBase.TXT_GOLD + extraTaken + GuiBase.TXT_RST
-		) : "";
+		long amountOverRequired = collection.getAmountOverMaterialListRequirement();
+		return amountOverRequired > 0 ? StringUtils.translate("tweakermore.impl.autoCollectMaterialListItem.info.over_required", GuiBase.TXT_GOLD + amountOverRequired + GuiBase.TXT_RST) : "";
+	}
+
+	private String getProgressSuffix(MaterialListHudRendererAccessor hudRendererAccessor, MaterialCollection collection)
+	{
+		int materialListAmountRemaining = collection.getMaterialListAmountRemaining();
+		int targetAmountRemaining = collection.getTargetAmountRemaining();
+		int amountRemaining;
+		String translationKey;
+		if (materialListAmountRemaining > 0)
+		{
+			amountRemaining = materialListAmountRemaining;
+			translationKey = "tweakermore.impl.autoCollectMaterialListItem.info.material_list_remaining";
+		}
+		else if (targetAmountRemaining > 0)
+		{
+			amountRemaining = targetAmountRemaining;
+			translationKey = "tweakermore.impl.autoCollectMaterialListItem.info.target_remaining";
+		}
+		else
+		{
+			return "";
+		}
+
+		String formattedAmount = hudRendererAccessor.invokeGetFormattedCountString(amountRemaining, collection.stack.getMaxStackSize());
+		return StringUtils.translate(translationKey, GuiBase.TXT_GOLD + formattedAmount + GuiBase.TXT_RST);
 	}
 
 	private String getItemName(ItemStack stack)
@@ -371,26 +361,22 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 		return itemAmount;
 	}
 
-	private int findShulkerBoxToMove(List<ShulkerBoxCandidate> candidates, int missing, long looseItemAmount)
+	private int findShulkerBoxToMove(List<ShulkerBoxCandidate> candidates, int targetAmountRemaining, long looseItemAmount)
 	{
 		// Candidates are sorted from fullest to emptiest. Prefer the fullest box that won't exceed the target
 		for (int index = 0; index < candidates.size(); index++)
 		{
-			if (candidates.get(index).itemAmount <= missing)
+			if (candidates.get(index).itemAmount <= targetAmountRemaining)
 			{
 				return index;
 			}
 		}
 
 		// If loose items can't fill the gap, use the smallest box to minimize unavoidable over-collection
-		return missing > looseItemAmount && !candidates.isEmpty() ? candidates.size() - 1 : -1;
+		return targetAmountRemaining > looseItemAmount && !candidates.isEmpty() ? candidates.size() - 1 : -1;
 	}
 
-	private boolean moveShulkerBoxToPlayerInventory(
-			AbstractContainerScreen<?> containerScreen,
-			List<Slot> playerInvSlots,
-			ShulkerBoxCandidate candidate
-	)
+	private boolean moveShulkerBoxToPlayerInventory(AbstractContainerScreen<?> containerScreen, List<Slot> playerInvSlots, ShulkerBoxCandidate candidate)
 	{
 		int stackAmount = candidate.slot.getItem().getCount();
 		this.moveToPlayerInventory(containerScreen, playerInvSlots, candidate.slot, 1);
@@ -457,17 +443,22 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 	private static class MaterialCollection
 	{
 		private final ItemStack stack;
-		private final int amountRequired;
-		private int amountRemaining;
+		private final int materialListRequiredAmount;
+		private final int collectionTarget;
 		private long looseItemAmount;
 		private final List<ShulkerBoxCandidate> shulkerBoxCandidates = Lists.newArrayList();
 		private long totalTaken;
 
-		private MaterialCollection(ItemStack stack, int amountRequired, int collectionTarget)
+		private MaterialCollection(ItemStack stack, int materialListRequiredAmount, int collectionTarget)
 		{
 			this.stack = stack;
-			this.amountRequired = amountRequired;
-			this.amountRemaining = collectionTarget;
+			this.materialListRequiredAmount = materialListRequiredAmount;
+			this.collectionTarget = collectionTarget;
+		}
+
+		private boolean hasSufficientSupply()
+		{
+			return this.getAvailableAmount() >= this.collectionTarget;
 		}
 
 		private long getAvailableAmount()
@@ -482,13 +473,27 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 
 		private void recordTaken(int amount)
 		{
-			this.amountRemaining = Math.max(0, this.amountRemaining - amount);
 			this.totalTaken += amount;
 		}
 
-		private long getExtraTakenAmount()
+		private boolean hasReachedTarget()
 		{
-			return Math.max(0, this.totalTaken - this.amountRequired);
+			return this.totalTaken >= this.collectionTarget;
+		}
+
+		private int getTargetAmountRemaining()
+		{
+			return (int)Math.max(0, this.collectionTarget - this.totalTaken);
+		}
+
+		private int getMaterialListAmountRemaining()
+		{
+			return (int)Math.max(0, this.materialListRequiredAmount - this.totalTaken);
+		}
+
+		private long getAmountOverMaterialListRequirement()
+		{
+			return Math.max(0, this.totalTaken - this.materialListRequiredAmount);
 		}
 	}
 }
