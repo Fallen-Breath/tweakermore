@@ -31,3 +31,7 @@ bin/
 # fabric
 
 run/
+
+# scripts
+__pycache__
+*.py[cod]
