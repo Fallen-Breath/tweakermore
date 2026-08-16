@@ -48,6 +48,17 @@ public class ProPlaceImpl
 		return comment.replaceFirst("##CONFIGS##", lines);
 	}
 
+	public static void tryAutoPickSchematicBlock(BlockPlaceContext ctx)
+	{
+		boolean proPlace = TweakerMoreConfigs.SCHEMATIC_PRO_PLACE.getBooleanValue();
+		boolean autoPick = proPlace || TweakerMoreConfigs.AUTO_PICK_SCHEMATIC_BLOCK.getBooleanValue();
+
+		if (!Configs.Generic.EASY_PLACE_MODE.getBooleanValue() && autoPick)
+		{
+			SchematicBlockPicker.doSchematicWorldPickBlock(Minecraft.getInstance(), ctx.getClickedPos(), ctx.getHand());
+		}
+	}
+
 	public static void handleRightClick(PlacementContextProvider contextProvider, CallbackInfoReturnable<InteractionResult> cir)
 	{
 		if (Configs.Generic.EASY_PLACE_MODE.getBooleanValue())
@@ -64,7 +75,7 @@ public class ProPlaceImpl
 		if (autoPick)
 		{
 			BlockPlaceContext ctx = contextProvider.provide().getSecond();
-			SchematicBlockPicker.doSchematicWorldPickBlock(mc, ctx.getClickedPos(), ctx.getHand());
+			tryAutoPickSchematicBlock(ctx);
 		}
 
 		if (restrict)

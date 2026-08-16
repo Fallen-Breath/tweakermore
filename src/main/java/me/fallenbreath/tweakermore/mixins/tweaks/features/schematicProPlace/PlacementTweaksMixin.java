@@ -20,6 +20,7 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.features.schematicProPlace;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.datafixers.util.Pair;
 import fi.dy.masa.tweakeroo.config.Configs;
 import fi.dy.masa.tweakeroo.config.FeatureToggle;
@@ -74,6 +75,33 @@ public abstract class PlacementTweaksMixin
 	//#endif
 
 	@Shadow private static ItemStack[] stackBeforeUse;
+
+	/**
+	 * Tweakeroo calculates accurate placement before processRightClickBlockWrapper.
+	 * Pick once here for that calculation; the wrapper hook picks again at the final adjusted position.
+	 */
+	@Inject(method = "tryPlaceBlock", at = @At("HEAD"), remap = false)
+	private static void schematicProPlaceAccuratePlacementPrePick(
+			CallbackInfoReturnable<InteractionResult> cir,
+			@Local(argsOnly = true) LocalPlayer player,
+			@Local(argsOnly = true) BlockPos posIn,
+			@Local(argsOnly = true, ordinal = 0) Direction sideIn,
+			@Local(argsOnly = true) Vec3 hitVec,
+			@Local(argsOnly = true) InteractionHand hand
+	)
+	{
+		boolean accurate = FeatureToggle.TWEAK_ACCURATE_BLOCK_PLACEMENT.getBooleanValue();
+		boolean accurateIn = Hotkeys.ACCURATE_BLOCK_PLACEMENT_IN.getKeybind().isKeybindHeld();
+		boolean accurateReverse = Hotkeys.ACCURATE_BLOCK_PLACEMENT_REVERSE.getKeybind().isKeybindHeld();
+		boolean afterClicker = FeatureToggle.TWEAK_AFTER_CLICKER.getBooleanValue();
+
+		if (accurate && (accurateIn || accurateReverse || afterClicker))
+		{
+			BlockHitResult hitResult = new BlockHitResult(hitVec, sideIn, posIn, false);
+			BlockPlaceContext ctx = new BlockPlaceContext(new UseOnContext(player, hand, hitResult));
+			ProPlaceImpl.tryAutoPickSchematicBlock(ctx);
+		}
+	}
 
 	/**
 	 * There's still some final block placement tweaks inside the processRightClickBlockWrapper method.

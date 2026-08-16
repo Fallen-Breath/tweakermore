@@ -69,52 +69,64 @@ public class SchematicBlockPicker
 			BlockState state = schematicWorld.getBlockState(pos);
 			ItemStack stack = ProPlaceUtils.getItemForState(state, schematicWorld, pos);
 
-			//#if MC >= 11700
-			//$$ InventoryUtils.schematicWorldPickBlock(stack, pos, schematicWorld, mc);
-			//#endif
-
 			if (!stack.isEmpty())
 			{
-				//#if MC < 11700
-				Inventory inv = mc.player.inventory;
-				stack = stack.copy();
-				if (mc.player.abilities.instabuild)
+				boolean alreadyHolding = !GuiBase.isCtrlDown() && fi.dy.masa.malilib.util.InventoryUtils.areStacksEqual(stack, mc.player.getMainHandItem());
+				if (!alreadyHolding)
 				{
-					BlockEntity te = schematicWorld.getBlockEntity(pos);
-					if (GuiBase.isCtrlDown() && te != null && clientWorld.isEmptyBlock(pos))
-					{
-						ItemUtils.storeTEInStack(stack, te);
-					}
-
-					InventoryUtils.setPickedItemToHand(stack, mc);
-					mc.gameMode.handleCreativeModeItemAdd(mc.player.getItemInHand(InteractionHand.MAIN_HAND), 36 + inv.selected);
+					pickSchematicBlock(mc, pos, schematicWorld, stack);
 				}
-				else
-				{
-					int slot = inv.findSlotMatchingItem(stack);
-					boolean shouldPick = inv.selected != slot;
-					if (shouldPick && slot != -1)
-					{
-						InventoryUtils.setPickedItemToHand(stack, mc);
-					}
-					//#if MC >= 11600
-					//$$ else if (slot == -1 && Configs.Generic.PICK_BLOCK_SHULKERS.getBooleanValue())
-					//$$ {
-					//$$ 	slot = InventoryUtils.findSlotWithBoxWithItem(mc.player.inventoryMenu, stack, false);
-					//$$ 	if (slot != -1)
-					//$$ 	{
-					//$$ 		ItemStack boxStack = ((Slot) mc.player.inventoryMenu.slots.get(slot)).getItem();
-					//$$ 		InventoryUtils.setPickedItemToHand(boxStack, mc);
-					//$$ 	}
-					//$$ }
-					//#endif
-				}
-				//#endif  // if MC < 11700
 
 				// so hand restore works fine
 				fixTweakerooHandRestoreState(hand);
 			}
 		}
+	}
+
+	private static void pickSchematicBlock(Minecraft mc, BlockPos pos, Level schematicWorld, ItemStack stack)
+	{
+		if (mc.player == null || mc.gameMode == null || mc.level == null)
+		{
+			return;
+		}
+
+		//#if MC >= 11700
+		//$$ InventoryUtils.schematicWorldPickBlock(stack, pos, schematicWorld, mc);
+		//#else
+		Inventory inv = mc.player.inventory;
+		stack = stack.copy();
+		if (mc.player.abilities.instabuild)
+		{
+			BlockEntity te = schematicWorld.getBlockEntity(pos);
+			if (GuiBase.isCtrlDown() && te != null && mc.level.isEmptyBlock(pos))
+			{
+				ItemUtils.storeTEInStack(stack, te);
+			}
+
+			InventoryUtils.setPickedItemToHand(stack, mc);
+			mc.gameMode.handleCreativeModeItemAdd(mc.player.getItemInHand(InteractionHand.MAIN_HAND), 36 + inv.selected);
+		}
+		else
+		{
+			int slot = inv.findSlotMatchingItem(stack);
+			boolean shouldPick = inv.selected != slot;
+			if (shouldPick && slot != -1)
+			{
+				InventoryUtils.setPickedItemToHand(stack, mc);
+			}
+			//#if MC >= 11600
+			//$$ else if (slot == -1 && Configs.Generic.PICK_BLOCK_SHULKERS.getBooleanValue())
+			//$$ {
+			//$$ 	slot = InventoryUtils.findSlotWithBoxWithItem(mc.player.inventoryMenu, stack, false);
+			//$$ 	if (slot != -1)
+			//$$ 	{
+			//$$ 		ItemStack boxStack = ((Slot) mc.player.inventoryMenu.slots.get(slot)).getItem();
+			//$$ 		InventoryUtils.setPickedItemToHand(boxStack, mc);
+			//$$ 	}
+			//$$ }
+			//#endif
+		}
+		//#endif
 	}
 
 	private static void fixTweakerooHandRestoreState(InteractionHand hand)
