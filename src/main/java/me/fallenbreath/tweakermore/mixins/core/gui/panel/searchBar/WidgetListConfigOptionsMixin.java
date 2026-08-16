@@ -20,10 +20,14 @@
 
 package me.fallenbreath.tweakermore.mixins.core.gui.panel.searchBar;
 
+import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetConfigOption;
 import fi.dy.masa.malilib.gui.widgets.WidgetListConfigOptions;
 import fi.dy.masa.malilib.gui.widgets.WidgetListConfigOptionsBase;
+import fi.dy.masa.malilib.gui.widgets.WidgetSearchBarConfigs;
+import fi.dy.masa.malilib.hotkeys.IHotkey;
+import fi.dy.masa.malilib.hotkeys.IKeybind;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,10 +37,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Collection;
+
 @Mixin(WidgetListConfigOptions.class)
 public abstract class WidgetListConfigOptionsMixin extends WidgetListConfigOptionsBase<GuiConfigsBase.ConfigOptionWrapper, WidgetConfigOption>
 {
 	@Shadow(remap = false) @Final protected GuiConfigsBase parent;
+	@Shadow(remap = false) @Final protected WidgetSearchBarConfigs widgetSearchConfigs;
 
 	public WidgetListConfigOptionsMixin(int x, int y, int width, int height, int configWidth)
 	{
@@ -74,5 +81,41 @@ public abstract class WidgetListConfigOptionsMixin extends WidgetListConfigOptio
 		{
 			((TweakerMoreConfigGui)this.parent).setSearchBar(this.widgetSearchBar);
 		}
+	}
+
+	@Inject(
+			method = "addFilteredContents",
+			at = @At("HEAD"),
+			cancellable = true,
+			remap = false
+	)
+	private void filterTweakerMoreConfigsByHotkey(Collection<GuiConfigsBase.ConfigOptionWrapper> entries, CallbackInfo ci)
+	{
+		if (!(this.parent instanceof TweakerMoreConfigGui) || this.widgetSearchConfigs == null)
+		{
+			return;
+		}
+
+		String filterText = this.widgetSearchConfigs.getFilter();
+		IKeybind filterKeys = this.widgetSearchConfigs.getKeybind();
+		boolean hasFilterKeys = this.widgetSearchConfigs.isSearchOpen() && !filterKeys.getKeys().isEmpty();
+
+		for (GuiConfigsBase.ConfigOptionWrapper entry : entries)
+		{
+			IConfigBase config = entry.getConfig();
+			if (config == null)
+			{
+				continue;
+			}
+
+			boolean matchesText = filterText.isEmpty() || this.entryMatchesFilter(entry, filterText);
+			boolean matchesKeys = !hasFilterKeys || (config instanceof IHotkey && ((IHotkey)config).getKeybind().overlaps(filterKeys));
+			if (matchesText && matchesKeys)
+			{
+				this.listContents.add(entry);
+			}
+		}
+
+		ci.cancel();
 	}
 }

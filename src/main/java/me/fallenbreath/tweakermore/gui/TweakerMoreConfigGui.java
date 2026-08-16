@@ -29,8 +29,10 @@ import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.GuiTextFieldGeneric;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
+import fi.dy.masa.malilib.gui.button.ConfigButtonKeybind;
 import fi.dy.masa.malilib.gui.widgets.WidgetBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetSearchBar;
+import fi.dy.masa.malilib.gui.widgets.WidgetSearchBarConfigs;
 import fi.dy.masa.malilib.interfaces.IStringValue;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
@@ -39,6 +41,7 @@ import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.TweakerMoreOption;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreIConfigBase;
 import me.fallenbreath.tweakermore.mixins.core.gui.access.WidgetSearchBarAccessor;
+import me.fallenbreath.tweakermore.mixins.core.gui.access.WidgetSearchBarConfigsAccessor;
 import me.fallenbreath.tweakermore.util.FabricUtils;
 import me.fallenbreath.tweakermore.util.JsonSaveAble;
 import me.fallenbreath.tweakermore.util.render.RenderUtils;
@@ -62,6 +65,10 @@ import java.util.stream.Stream;
 
 public class TweakerMoreConfigGui extends GuiConfigsBase
 {
+	private static final int SEARCH_CONTROL_GAP = 5;
+	private static final int KEYBIND_SEARCH_BUTTON_WIDTH = 100;
+	private static final int MIN_TEXT_SEARCH_BAR_WIDTH = 50;
+
 	@Nullable
 	private static TweakerMoreConfigGui currentInstance = null;
 	private static final Setting SETTING = new Setting();
@@ -100,9 +107,20 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		return Optional.ofNullable(currentInstance);
 	}
 
+	public static boolean isCurrentSearchBar(WidgetSearchBar searchBar)
+	{
+		return currentInstance != null && currentInstance.searchBar == searchBar;
+	}
+
 	public void setSearchBar(WidgetSearchBar searchBar)
 	{
 		this.searchBar = searchBar;
+	}
+
+	@Override
+	protected boolean useKeybindSearch()
+	{
+		return true;
 	}
 
 	public static void openGui()
@@ -130,13 +148,26 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 		x = this.initSortingStrategyDropDownList(x) - 5;
 		if (this.searchBar != null)
 		{
+			if (this.searchBar instanceof WidgetSearchBarConfigs)
+			{
+				x = this.placeKeybindSearchButton((WidgetSearchBarConfigs)this.searchBar, x);
+			}
+
 			GuiTextFieldGeneric searchBox = ((WidgetSearchBarAccessor)this.searchBar).getSearchBox();
-			int deltaWidth = Math.max(50, x - this.searchBar.getX()) - this.searchBar.getWidth();
+			int deltaWidth = Math.max(MIN_TEXT_SEARCH_BAR_WIDTH, x - this.searchBar.getX()) - this.searchBar.getWidth();
 			this.searchBar.setWidth(this.searchBar.getWidth() + deltaWidth);
 			searchBox.setWidth(searchBox.getWidth() + deltaWidth);
 		}
 
 		initBottomStatLine();
+	}
+
+	private int placeKeybindSearchButton(WidgetSearchBarConfigs searchBar, int right)
+	{
+		ConfigButtonKeybind button = ((WidgetSearchBarConfigsAccessor)searchBar).getButton();
+		button.setWidth(KEYBIND_SEARCH_BUTTON_WIDTH);
+		button.setX(right - KEYBIND_SEARCH_BUTTON_WIDTH);
+		return button.getX() - SEARCH_CONTROL_GAP;
 	}
 
 	// filtered by category and filterType
@@ -277,11 +308,16 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 	{
 		// storing search bar data
 		String previousSearchBarText = null;
+		String previousSearchKey = null;
 		boolean previousSearchBoxFocus = false;
 		if (keepSearchBar && this.searchBar != null && this.searchBar.isSearchOpen())
 		{
 			previousSearchBarText = this.searchBar.getFilter();
 			previousSearchBoxFocus = ((WidgetSearchBarAccessor)this.searchBar).getSearchBox().isFocused();
+			if (this.searchBar instanceof WidgetSearchBarConfigs)
+			{
+				previousSearchKey = ((WidgetSearchBarConfigs)this.searchBar).getKeybind().getStringValue();
+			}
 		}
 
 		this.reCreateListWidget();
@@ -300,6 +336,11 @@ public class TweakerMoreConfigGui extends GuiConfigsBase
 			//#disable-remap
 			searchBox.setFocused(previousSearchBoxFocus);
 			//#enable-remap
+			if (previousSearchKey != null && this.searchBar instanceof WidgetSearchBarConfigs)
+			{
+				((WidgetSearchBarConfigs)this.searchBar).getKeybind().setValueFromString(previousSearchKey);
+			}
+			Objects.requireNonNull(this.getListWidget()).refreshEntries();
 		}
 
 		Objects.requireNonNull(this.getListWidget()).resetScrollbarPosition();
