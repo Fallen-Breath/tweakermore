@@ -459,6 +459,13 @@ tweakermore:
         Make barrier particles visible without the requirement to hold a barrier item in your hands
         Of course, you still need to be in creative mode to see the barrier particles
       pretty_name: Barrier Particle Always Visible
+    blockBreakingCooldownOverride:
+      .: blockBreakingCooldownOverride
+      comment: Overrides the block breaking cooldown in creative mode
+      pretty_name: Block Breaking Cooldown Override
+    blockBreakingCooldownOverrideValue:
+      .: blockBreakingCooldownOverrideValue
+      comment: The block breaking cooldown in game ticks overridden by tweak @option#blockBreakingCooldownOverride@
     blockEventThrottler:
       .: blockEventThrottler
       comment: |-

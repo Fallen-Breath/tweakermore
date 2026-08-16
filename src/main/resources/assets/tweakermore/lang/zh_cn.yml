@@ -459,6 +459,13 @@ tweakermore:
         让屏障的粒子效果在玩家未手持屏障物品时也依然可被渲染
         当然，你还是需要处于创造模式才能让屏障粒子显形
       pretty_name: 屏障粒子始终可见
+    blockBreakingCooldownOverride:
+      .: 方块破坏冷却覆盖
+      comment: 覆盖创造模式下的方块破坏冷却
+      pretty_name: 方块破坏冷却覆盖
+    blockBreakingCooldownOverrideValue:
+      .: 方块破坏冷却覆盖值
+      comment: 功能@option#blockBreakingCooldownOverride@所使用的方块破坏冷却，单位为游戏刻
     blockEventThrottler:
       .: 方块事件节流阀
       comment: |-

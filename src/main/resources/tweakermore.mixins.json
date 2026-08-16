@@ -70,6 +70,7 @@
     "tweaks.features.villagerOfferUsesDisplay.MerchantScreenWidgetButtonPageMixin",
     "tweaks.features.villagerOfferUsesDisplay.ScreenAccessor",
     "tweaks.mc_tweaks.barrierParticleAlwaysVisible.ClientWorldMixin",
+    "tweaks.mc_tweaks.blockBreakingCooldownOverride.ClientPlayerInteractionManagerMixin",
     "tweaks.mc_tweaks.blockEventThrottler.WorldMixin",
     "tweaks.mc_tweaks.bossBarMaxEntry.BossBarHudMixin",
     "tweaks.mc_tweaks.bossBarScale.BossBarHudMixin",

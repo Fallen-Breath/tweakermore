@@ -476,6 +476,12 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBooleanHotkeyed BARRIER_PARTICLE_ALWAYS_VISIBLE = newConfigBooleanHotkeyed("barrierParticleAlwaysVisible");
 
 	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed BLOCK_BREAKING_COOLDOWN_OVERRIDE = newConfigBooleanHotkeyed("blockBreakingCooldownOverride");
+
+	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigInteger BLOCK_BREAKING_COOLDOWN_OVERRIDE_VALUE = newConfigInteger("blockBreakingCooldownOverrideValue", 5, 0, 100);
+
+	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed BLOCK_EVENT_THROTTLER = newConfigBooleanHotkeyed("blockEventThrottler");
 
 	@Config(type = Config.Type.LIST, category = Config.Category.MC_TWEAKS)

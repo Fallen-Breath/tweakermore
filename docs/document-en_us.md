@@ -1239,6 +1239,26 @@ Of course, you still need to be in creative mode to see the barrier particles
 - Default value: *no hotkey*, `false`
 
 
+### blockBreakingCooldownOverride
+
+Overrides the block breaking cooldown in creative mode
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean (Tweak)
+- Default value: *no hotkey*, `false`
+
+
+### blockBreakingCooldownOverrideValue
+
+The block breaking cooldown in game ticks overridden by tweak blockBreakingCooldownOverride
+
+- Category: MC Tweaks
+- Type: integer (Generic)
+- Default value: `5`
+- Minimum value: `0`
+- Maximum value: `100`
+
+
 ### blockEventThrottler
 
 The switch of the block event throttler tweak

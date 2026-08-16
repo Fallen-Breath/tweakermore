@@ -1235,6 +1235,26 @@ schematicBlockPlacement的严格模式
 - 默认值: *无快捷键*, `false`
 
 
+### 方块破坏冷却覆盖 (blockBreakingCooldownOverride)
+
+覆盖创造模式下的方块破坏冷却
+
+- 分类: MC修改
+- 类型: 带热键布尔值 (工具)
+- 默认值: *无快捷键*, `false`
+
+
+### 方块破坏冷却覆盖值 (blockBreakingCooldownOverrideValue)
+
+功能方块破坏冷却覆盖所使用的方块破坏冷却，单位为游戏刻
+
+- 分类: MC修改
+- 类型: 整数 (通用)
+- 默认值: `5`
+- 最小值: `0`
+- 最大值: `100`
+
+
 ### 方块事件节流阀 (blockEventThrottler)
 
 方块事件节流阀功能的总开关
