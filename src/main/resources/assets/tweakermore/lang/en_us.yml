@@ -871,6 +871,9 @@ tweakermore:
     signEditScreenCancelButton:
       .: signEditScreenCancelButton
       comment: Add a cancel button to the sign edit screen that cancels the editing and discard all changes
+    signEditScreenClearAllButton:
+      .: signEditScreenClearAllButton
+      comment: Add a button to the sign edit screen for clearing sign messages
     signEditScreenEscDiscard:
       .: signEditScreenEscDiscard
       comment: When the sign edit screen is closed by ESC key, discard all changes made
@@ -1267,6 +1270,9 @@ tweakermore:
         disabled: Disabled
       config_button_option_list_hovering:
         title: 'Available values:'
+    sign_edit_screen:
+      clear_all: ×
+      clear_all_hover: Clear sign messages
 
   # ================================ Statistic ================================
 

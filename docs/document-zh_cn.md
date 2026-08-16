@@ -2272,6 +2272,15 @@ FOV覆盖的开关
 ![signEditScreenCancelButton](assets/signEditScreenCancelButton.png)
 
 
+### 告示牌编辑界面清空按钮 (signEditScreenClearAllButton)
+
+在告示牌编辑界面添加一个用于清空告示牌消息的按钮
+
+- 分类: MC修改
+- 类型: 布尔值 (通用)
+- 默认值: `false`
+
+
 ### 告示牌编辑界面在ESC时丢弃更改 (signEditScreenEscDiscard)
 
 在告示牌编辑界面被ESC键关闭时，丢弃所有更改，还原回编辑前的状态

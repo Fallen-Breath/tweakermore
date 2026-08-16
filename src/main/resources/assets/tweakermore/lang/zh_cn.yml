@@ -870,6 +870,9 @@ tweakermore:
     signEditScreenCancelButton:
       .: 告示牌编辑界面取消按钮
       comment: 在标牌编辑界面添加一个取消按钮，用于取消编辑并丢弃所有更改
+    signEditScreenClearAllButton:
+      .: 告示牌编辑界面清空按钮
+      comment: 在告示牌编辑界面添加一个用于清空告示牌消息的按钮
     signEditScreenEscDiscard:
       .: 告示牌编辑界面在ESC时丢弃更改
       comment: 在告示牌编辑界面被ESC键关闭时，丢弃所有更改，还原回编辑前的状态
@@ -1266,6 +1269,9 @@ tweakermore:
         disabled: 已禁用
       config_button_option_list_hovering:
         title: '可用值列表:'
+    sign_edit_screen:
+      clear_all: ×
+      clear_all_hover: 清空告示牌消息
 
   # ================================ Statistic ================================
 

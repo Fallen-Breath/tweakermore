@@ -2278,6 +2278,15 @@ Add a cancel button to the sign edit screen that cancels the editing and discard
 ![signEditScreenCancelButton](assets/signEditScreenCancelButton.png)
 
 
+### signEditScreenClearAllButton
+
+Add a button to the sign edit screen for clearing sign messages
+
+- Category: MC Tweaks
+- Type: boolean (Generic)
+- Default value: `false`
+
+
 ### signEditScreenEscDiscard
 
 When the sign edit screen is closed by ESC key, discard all changes made
