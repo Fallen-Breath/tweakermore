@@ -28,9 +28,15 @@ tweakermore:
     autoCollectMaterialListItem:
       .: 自动收集材料列表物品
       comment: |-
-        打开容器后，自动收集litematica材料列表中缺失的物品至玩家物品栏
+        打开容器后，根据所选材料来源自动收集缺失物品至玩家物品栏
         然后关闭容器
       pretty_name: 自动收集材料列表物品
+    autoCollectMaterialListItemSource:
+      .: 自动收集材料列表物品-材料来源
+      comment: |-
+        @option#autoCollectMaterialListItem@使用的所需材料来源
+        Syncmatica_r来源会读取本地玩家已认领的材料需求
+      pretty_name: 自动收集材料列表物品-材料来源
     autoCollectMaterialListItemCloseGui:
       .: 自动收集材料列表物品-关闭GUI
       comment: 在使用@option#autoCollectMaterialListItem@功能后，是否关闭容器的GUI
@@ -1176,6 +1182,9 @@ tweakermore:
   # ================================ List entries ================================
 
   list_entry:
+    autoCollectMaterialListItemSource:
+      litematica: Litematica
+      syncmatica_r: Syncmatica_r
     autoCollectMaterialListItemMessageType:
       full: 完整
       summary: 摘要
@@ -1297,8 +1306,9 @@ tweakermore:
         material_list_remaining: '，仍需 %1$s'
         over_required: ' (比材料需求多拿 %1$s)'
         target_remaining: '，距拿取目标还差 %1$s'
-      took_nothing: 未在%1$s中收集任何材料列表中需要的物品
+      took_nothing: 未在%1$s中收集任何所选材料来源需要的物品
       no_material_list: 没有生效的材料列表
+      syncmatica_r_unavailable: Syncmatica_r材料API不可用
     autoFillContainer:
       container_filled: 已使用所有 %2$s 物品装填容器 %1$s (%3$s)
       best_slot_not_found: 未找到最适合装填容器的物品

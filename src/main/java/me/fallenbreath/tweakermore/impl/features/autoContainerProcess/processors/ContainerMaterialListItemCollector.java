@@ -35,8 +35,12 @@ import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.config.options.TweakerMoreConfigBooleanHotkeyed;
 import me.fallenbreath.tweakermore.config.options.listentries.AutoCollectMaterialListItemLogType;
+import me.fallenbreath.tweakermore.config.options.listentries.AutoCollectMaterialListItemSource;
 import me.fallenbreath.tweakermore.mixins.tweaks.features.autoCollectMaterialListItem.MaterialListHudRendererAccessor;
 import me.fallenbreath.tweakermore.util.ItemUtils;
+import me.fallenbreath.tweakermore.util.RegistryUtils;
+import me.fallenbreath.tweakermore.util.compat.syncmatica.ClaimedMaterialRequirement;
+import me.fallenbreath.tweakermore.util.compat.syncmatica.SyncmaticaMaterialApiAccess;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.NonNullList;
@@ -44,6 +48,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.ChatFormatting;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,34 +81,44 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 	@Override
 	public ProcessResult process(LocalPlayer player, AbstractContainerScreen<?> containerScreen, List<Slot> allSlots, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
 	{
-		MaterialListBase materialList = DataManager.getMaterialList();
-		if (materialList == null)
+		List<MaterialRequirement> requirements;
+		MaterialListHudRendererAccessor hudRendererAccessor = null;
+		AutoCollectMaterialListItemSource source = (AutoCollectMaterialListItemSource)TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_SOURCE.getOptionListValue();
+		if (source == AutoCollectMaterialListItemSource.SYNCMATICA_R)
 		{
-			log(Message.MessageType.WARNING, "tweakermore.impl.autoCollectMaterialListItem.no_material_list");
-			return new ProcessResult(true, TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_CLOSE_GUI.getBooleanValue());
+			Optional<List<ClaimedMaterialRequirement>> claimedRequirements = SyncmaticaMaterialApiAccess.getClaimedMaterialRequirements(player.getUUID());
+			if (!claimedRequirements.isPresent())
+			{
+				log(Message.MessageType.WARNING, "tweakermore.impl.autoCollectMaterialListItem.syncmatica_r_unavailable");
+				return new ProcessResult(true, TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_CLOSE_GUI.getBooleanValue());
+			}
+			requirements = this.createSyncmaticaRequirements(claimedRequirements.get(), playerInvSlots, containerInvSlots);
+		}
+		else
+		{
+			MaterialListBase materialList = DataManager.getMaterialList();
+			if (materialList == null)
+			{
+				log(Message.MessageType.WARNING, "tweakermore.impl.autoCollectMaterialListItem.no_material_list");
+				return new ProcessResult(true, TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_CLOSE_GUI.getBooleanValue());
+			}
+
+			hudRendererAccessor = (MaterialListHudRendererAccessor)materialList.getHudRenderer();
+			// refresh before operation starts to make sure it's up-to-date
+			MaterialListUtils.updateAvailableCounts(materialList.getMaterialsAll(), player);
+			requirements = this.createLitematicaRequirements(materialList);
 		}
 
-		MaterialListHudRendererAccessor hudRendererAccessor = (MaterialListHudRendererAccessor)materialList.getHudRenderer();
 		String guiTitle = containerScreen.getTitle().getString();
-
-		// refresh before operation starts to make sure it's up-to-date
-		MaterialListUtils.updateAvailableCounts(materialList.getMaterialsAll(), player);
-		List<MaterialListEntry> missingOnly = materialList.getMaterialsMissingOnly(true);
 
 		boolean summaryOnly = TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_MESSAGE_TYPE.getOptionListValue() == AutoCollectMaterialListItemLogType.SUMMARY;
 		List<String> summaries = Lists.newArrayList();
 		boolean takenSomething = false;
 
-		for (MaterialListEntry entry : missingOnly)
+		for (MaterialRequirement requirement : requirements)
 		{
-			int materialListRequiredAmount = this.calculateMaterialListRequiredAmount(materialList, entry);
-			if (materialListRequiredAmount <= 0)
-			{
-				continue;
-			}
-
-			int collectionTarget = this.calculateCollectionTarget(entry.getStack(), materialListRequiredAmount);
-			MaterialCollection collection = this.createMaterialCollection(entry.getStack(), materialListRequiredAmount, collectionTarget, containerInvSlots);
+			int collectionTarget = this.calculateCollectionTarget(requirement.stack, requirement.requiredAmount);
+			MaterialCollection collection = this.createMaterialCollection(requirement.stack, requirement.requiredAmount, collectionTarget, containerInvSlots);
 			if (TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_REQUIRE_SUFFICIENT_SUPPLY.getBooleanValue() && !collection.hasSufficientSupply())
 			{
 				continue;
@@ -132,9 +147,101 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 			log(Message.MessageType.INFO, Joiner.on(", ").join(summaries));
 		}
 
-		// refresh after operation ends
-		hudRendererAccessor.setLastUpdateTime(-1);
+		if (hudRendererAccessor != null)
+		{
+			// refresh after operation ends
+			hudRendererAccessor.setLastUpdateTime(-1);
+		}
 		return new ProcessResult(true, TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_CLOSE_GUI.getBooleanValue());
+	}
+
+	private List<MaterialRequirement> createLitematicaRequirements(MaterialListBase materialList)
+	{
+		List<MaterialRequirement> requirements = new ArrayList<>();
+		for (MaterialListEntry entry : materialList.getMaterialsMissingOnly(true))
+		{
+			int requiredAmount = this.calculateMaterialListRequiredAmount(materialList, entry);
+			if (requiredAmount > 0)
+			{
+				requirements.add(new MaterialRequirement(entry.getStack(), requiredAmount));
+			}
+		}
+		return requirements;
+	}
+
+	private List<MaterialRequirement> createSyncmaticaRequirements(List<ClaimedMaterialRequirement> claimedRequirements, List<Slot> playerInvSlots, List<Slot> containerInvSlots)
+	{
+		List<MaterialRequirement> requirements = new ArrayList<>();
+		for (ClaimedMaterialRequirement claimedRequirement : claimedRequirements)
+		{
+			if (!claimedRequirement.getVariant().isEmpty())
+			{
+				TweakerMoreMod.LOGGER.debug("Skipping unsupported Syncmatica_r material variant '{}' for {}", claimedRequirement.getVariant(), claimedRequirement.getItemId());
+				continue;
+			}
+
+			int requiredAmount = this.subtractPlayerInventory(claimedRequirement, playerInvSlots);
+			Optional<ItemStack> stack = this.findMatchingStack(claimedRequirement.getItemId(), containerInvSlots);
+			if (requiredAmount > 0 && stack.isPresent())
+			{
+				requirements.add(new MaterialRequirement(stack.get(), requiredAmount));
+			}
+		}
+		return requirements;
+	}
+
+	private int subtractPlayerInventory(ClaimedMaterialRequirement requirement, List<Slot> playerInvSlots)
+	{
+		long carriedAmount = 0;
+		for (Slot slot : playerInvSlots)
+		{
+			if (this.matchesItemId(slot.getItem(), requirement.getItemId()))
+			{
+				carriedAmount += slot.getItem().getCount();
+			}
+		}
+		return (int)Math.max(0, (long)requirement.getMissingAmount() - carriedAmount);
+	}
+
+	private Optional<ItemStack> findMatchingStack(String itemId, List<Slot> containerInvSlots)
+	{
+		for (Slot slot : containerInvSlots)
+		{
+			ItemStack stack = slot.getItem();
+			if (this.matchesItemId(stack, itemId))
+			{
+				return Optional.of(stack.copy());
+			}
+		}
+
+		if (TweakerMoreConfigs.AUTO_COLLECT_MATERIAL_LIST_ITEM_TAKE_SHULKER_BOXES.getBooleanValue())
+		{
+			for (Slot slot : containerInvSlots)
+			{
+				ItemStack containerStack = slot.getItem();
+				if (!ItemUtils.isShulkerBox(containerStack.getItem()))
+				{
+					continue;
+				}
+				Optional<NonNullList<ItemStack>> storedItems = me.fallenbreath.tweakermore.util.InventoryUtils.getStoredItems(containerStack);
+				if (storedItems.isPresent())
+				{
+					for (ItemStack storedStack : storedItems.get())
+					{
+						if (this.matchesItemId(storedStack, itemId))
+						{
+							return Optional.of(storedStack.copy());
+						}
+					}
+				}
+			}
+		}
+		return Optional.empty();
+	}
+
+	private boolean matchesItemId(ItemStack stack, String itemId)
+	{
+		return !stack.isEmpty() && RegistryUtils.getItemId(stack.getItem()).equals(itemId);
 	}
 
 	private int calculateMaterialListRequiredAmount(MaterialListBase materialList, MaterialListEntry entry)
@@ -295,7 +402,9 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 			return "";
 		}
 
-		String formattedAmount = hudRendererAccessor.invokeGetFormattedCountString(amountRemaining, collection.stack.getMaxStackSize());
+		String formattedAmount = hudRendererAccessor != null ?
+				hudRendererAccessor.invokeGetFormattedCountString(amountRemaining, collection.stack.getMaxStackSize()) :
+				Integer.toString(amountRemaining);
 		return StringUtils.translate(translationKey, GuiBase.TXT_GOLD + formattedAmount + GuiBase.TXT_RST);
 	}
 
@@ -437,6 +546,18 @@ public class ContainerMaterialListItemCollector implements IContainerProcessor
 		{
 			this.slot = slot;
 			this.itemAmount = itemAmount;
+		}
+	}
+
+	private static class MaterialRequirement
+	{
+		private final ItemStack stack;
+		private final int requiredAmount;
+
+		private MaterialRequirement(ItemStack stack, int requiredAmount)
+		{
+			this.stack = stack;
+			this.requiredAmount = requiredAmount;
 		}
 	}
 
