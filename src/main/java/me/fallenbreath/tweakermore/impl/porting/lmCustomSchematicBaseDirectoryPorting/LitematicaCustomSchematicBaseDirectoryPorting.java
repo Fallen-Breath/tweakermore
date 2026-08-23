@@ -37,11 +37,9 @@ public class LitematicaCustomSchematicBaseDirectoryPorting
 	 */
 	public static File getDefaultBaseSchematicDirectory()
 	{
-		//#if MC >= 26.1
+		//#if MC >= 1.21.11
 		//$$ return FileUtils.getRealPathIfPossible(FileUtils.getMinecraftDirectory().resolve("schematics")).toFile();
-		//#elseif MC >= 12109
-		//$$ return FileUtils.getRealPathIfPossible(FileUtils.getMinecraftDirectoryAsPath().resolve("schematics")).toFile();
-		//#elseif MC >= 12105
+		//#elseif MC >= 1.21
 		//$$ return FileUtils.getCanonicalFileIfPossible(FileUtils.getMinecraftDirectoryAsPath().resolve("schematics").toFile());
 		//#else
 		return FileUtils.getCanonicalFileIfPossible(new File(FileUtils.getMinecraftDirectory(), "schematics"));
