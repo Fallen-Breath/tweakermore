@@ -30,7 +30,6 @@ import me.fallenbreath.tweakermore.impl.mod_tweaks.lmOriginOverride000.Litematic
 import me.fallenbreath.tweakermore.impl.mod_tweaks.lmOriginOverride000.LitematicaSchematic000Origin;
 import me.fallenbreath.tweakermore.util.ModIds;
 import me.fallenbreath.tweakermore.util.NbtUtils;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -39,6 +38,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+//#if MC >= 1.21.11
+//$$ import fi.dy.masa.malilib.util.data.tag.CompoundData;
+//#else
+import net.minecraft.nbt.CompoundTag;
+//#endif
 
 @Restriction(require = @Condition(ModIds.litematica))
 @Mixin(LitematicaSchematic.class)
@@ -104,8 +109,21 @@ public abstract class LitematicaSchematicMixin implements LitematicaSchematic000
 		return origin;
 	}
 
-	@ModifyVariable(method = "writeToNBT", at = @At("TAIL"))
+	//#if MC >= 1.21.11
+	//$$ @ModifyVariable(method = {"writeToData", "writeToData_v6"}, at = @At("TAIL"), remap = false)
+	//$$ private CompoundData lmOriginOverride000_save000Flag(CompoundData nbt)
+	//#else
+	@ModifyVariable(
+			method = {
+					"writeToNBT",
+					//#if MC >= 1.21
+					//$$ "writeToNBT_v6",
+					//#endif
+			},
+			at = @At("TAIL")
+	)
 	private CompoundTag lmOriginOverride000_save000Flag(CompoundTag nbt)
+	//#endif
 	{
 		if (TweakerMoreConfigs.LM_ORIGIN_OVERRIDE_000.getBooleanValue())
 		{
@@ -117,12 +135,25 @@ public abstract class LitematicaSchematicMixin implements LitematicaSchematic000
 		return nbt;
 	}
 
+	//#if MC >= 1.21.11
+	//$$ @Inject(method = "readFromData", at = @At("HEAD"), remap = false)
+	//$$ private void lmOriginOverride000_load000Flag(CompoundData nbt, CallbackInfoReturnable<Boolean> cir)
+	//#else
 	@Inject(method = "readFromNBT", at = @At("HEAD"))
 	private void lmOriginOverride000_load000Flag(CompoundTag nbt, CallbackInfoReturnable<Boolean> cir)
+	//#endif
 	{
 		if (TweakerMoreConfigs.LM_ORIGIN_OVERRIDE_000.getBooleanValue())
 		{
-			if (NbtUtils.getBooleanOrFalse(nbt, LitematicaOriginOverrideGlobals.ORIGIN_OVERRIDE_FLAG))
+			String key = LitematicaOriginOverrideGlobals.ORIGIN_OVERRIDE_FLAG;
+
+			//#if MC >= 1.21.11
+			//$$ boolean value = nbt.getBoolean(key);
+			//#else
+			boolean value = NbtUtils.getBooleanOrFalse(nbt, key);
+			//#endif
+
+			if (value)
 			{
 				this.set000Origin$TKM(true);
 			}
