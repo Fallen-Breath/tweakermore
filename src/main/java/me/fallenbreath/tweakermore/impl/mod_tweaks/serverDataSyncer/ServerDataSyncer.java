@@ -37,14 +37,18 @@ import net.minecraft.world.Container;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.ChestType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiConsumer;
 
-//#if MC >= 12111
+//#if MC >= 1.21.11
 //$$ import net.minecraft.server.permissions.Permission;
 //$$ import net.minecraft.server.permissions.PermissionCheck;
 //$$ import net.minecraft.server.permissions.PermissionLevel;
@@ -185,15 +189,15 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 	}
 
 	/**
-	 * Sync the given entity data from the server
+	 * Sync the given entity data from the server to the client world
 	 *
 	 * @return a future indicating when the sync operation completes
 	 *   - If succeeded: future completes when syncing done
 	 *   - If failed: future completes immediately
 	 */
-	public CompletableFuture<Void> syncEntity(Entity entity, boolean syncMotionState)
+	public CompletableFuture<Void> syncEntityToWorld(Entity entity, boolean syncMotionState)
 	{
-		Optional<CompletableFuture<CompoundTag>> opt = fetchEntity(entity);
+		Optional<CompletableFuture<CompoundTag>> opt = this.fetchEntity(entity);
 		if (opt.isPresent())
 		{
 			return opt.get().thenAccept(nbt -> {
@@ -230,7 +234,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 						TweakerMoreMod.LOGGER.warn("Failed to sync entity data of {}: {}", entity, exception);
 						if (TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
 						{
-							TweakerMoreMod.LOGGER.warn("[TweakerMore Debug] ServerDataSyncer#syncEntity", exception);
+							TweakerMoreMod.LOGGER.warn("[TweakerMore Debug] ServerDataSyncer#syncEntityToWorld", exception);
 						}
 					}
 				}
@@ -241,71 +245,91 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 			return CompletableFuture.allOf();
 		}
 	}
-	public CompletableFuture<Void> syncEntity(Entity entity)
+	public CompletableFuture<Void> syncEntityToWorld(Entity entity)
 	{
-		return this.syncEntity(entity, true);
+		return this.syncEntityToWorld(entity, true);
 	}
 
 	/**
-	 * Sync the given block entity data from the server
+	 * Sync exactly one block entity from the server and pass its data to the consumer.
+	 * Connected inventories are not discovered by this method.
 	 *
 	 * @return a future indicating when the sync operation completes
 	 *   - If succeeded: future completes when syncing done
 	 *   - If failed: future completes immediately
 	 */
-	public CompletableFuture<Void> syncBlockEntity(BlockEntity blockEntity)
+	public CompletableFuture<Void> syncBlockEntity(BlockEntity blockEntity, BiConsumer<BlockEntity, CompoundTag> dataConsumer)
 	{
-		if (hasEnoughPermission())
+		Optional<CompletableFuture<CompoundTag>> opt = this.fetchBlockEntity(blockEntity);
+		if (opt.isPresent())
 		{
-			Optional<CompletableFuture<CompoundTag>> opt = fetchBlockEntity(blockEntity);
-			Level world = blockEntity.getLevel();
-			if (opt.isPresent() && world != null)
-			{
-				return opt.get().thenAccept(nbt -> {
-					if (nbt != null)
-					{
-						BlockPos pos = blockEntity.getBlockPos();
-						try
-						{
-							//#if MC >= 12106
-							//$$ try (ProblemReporter.ScopedCollector logging = new ProblemReporter.ScopedCollector(blockEntity.problemPath(), TweakerMoreMod.LOGGER))
-							//$$ {
-							//$$ 	blockEntity.loadWithComponents(TagValueInput.create(logging, world.registryAccess(), nbt));
-							//$$ }
-							//#elseif MC >= 12006
-							//$$ blockEntity.loadWithComponents(nbt, blockEntity.getLevel().registryAccess());
-							//#elseif MC >= 11700
-							//$$ blockEntity.load(nbt);
-							//#elseif MC >= 11600
-							//$$ blockEntity.load(blockEntity.getBlockState(), nbt);
-							//#else
-							blockEntity.load(nbt);
-							//#endif
-							TweakerMoreMod.LOGGER.debug("Synced block entity data at {}", pos);
-						}
-						catch (Exception exception)
-						{
-							TweakerMoreMod.LOGGER.warn("Failed to sync block entity data at {}: {}", pos, exception);
-							if (TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
-							{
-								TweakerMoreMod.LOGGER.warn("[TweakerMore Debug] ServerDataSyncer#syncBlockEntity", exception);
-							}
-						}
-					}
-				});
-			}
+			return opt.get().thenAccept(nbt -> {
+				if (nbt != null)
+				{
+					dataConsumer.accept(blockEntity, nbt);
+				}
+			});
 		}
 		return CompletableFuture.allOf();
 	}
 
 	/**
-	 * Sync the data of the block entity at given position from the server
+	 * Sync exactly one block entity from the server to the client world
+	 */
+	public CompletableFuture<Void> syncBlockEntityToWorld(BlockEntity blockEntity)
+	{
+		if (blockEntity.getLevel() != null)
+		{
+			return this.syncBlockEntity(blockEntity, this::loadBlockEntityNbt);
+		}
+		return CompletableFuture.allOf();
+	}
+
+	private void loadBlockEntityNbt(BlockEntity blockEntity, CompoundTag nbt)
+	{
+		Level world = blockEntity.getLevel();
+		if (world == null)
+		{
+			return;
+		}
+
+		BlockPos pos = blockEntity.getBlockPos();
+		try
+		{
+			//#if MC >= 12106
+			//$$ try (ProblemReporter.ScopedCollector logging = new ProblemReporter.ScopedCollector(blockEntity.problemPath(), TweakerMoreMod.LOGGER))
+			//$$ {
+			//$$ 	blockEntity.loadWithComponents(TagValueInput.create(logging, world.registryAccess(), nbt));
+			//$$ }
+			//#elseif MC >= 12006
+			//$$ blockEntity.loadWithComponents(nbt, world.registryAccess());
+			//#elseif MC >= 11700
+			//$$ blockEntity.load(nbt);
+			//#elseif MC >= 11600
+			//$$ blockEntity.load(blockEntity.getBlockState(), nbt);
+			//#else
+			blockEntity.load(nbt);
+			//#endif
+			TweakerMoreMod.LOGGER.debug("Synced block entity data at {}", pos);
+		}
+		catch (Exception exception)
+		{
+			TweakerMoreMod.LOGGER.warn("Failed to sync block entity data at {}: {}", pos, exception);
+			if (TweakerMoreConfigs.TWEAKERMORE_DEBUG_MODE.getBooleanValue())
+			{
+				TweakerMoreMod.LOGGER.warn("[TweakerMore Debug] ServerDataSyncer#loadBlockEntityNbt", exception);
+			}
+		}
+	}
+
+	/**
+	 * Sync the block entity at the given position from the server to the client world
 	 *
 	 * @return a future indicating when the sync operation completes
 	 *   - If succeeded: future completes when syncing done
 	 *   - If failed: future completes immediately
 	 */
-	public CompletableFuture<Void> syncBlockEntityAt(BlockPos pos)
+	public CompletableFuture<Void> syncBlockEntityToWorldAt(BlockPos pos)
 	{
 		Minecraft mc = Minecraft.getInstance();
 		if (hasEnoughPermission() && mc.player != null)
@@ -314,41 +338,86 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 			BlockEntity blockEntity = world.getBlockEntity(pos);
 			if (blockEntity != null && pos.equals(blockEntity.getBlockPos()))
 			{
-				return syncBlockEntity(blockEntity);
+				return this.syncBlockEntityToWorld(blockEntity);
 			}
 		}
 		return CompletableFuture.allOf();
 	}
 
 	/**
-	 * Sync the data of the underlying block entities from given inventory from the server
+	 * Sync the underlying block entities of the given inventory from the server to the client world
 	 *
 	 * @return a future indicating when all required sync operation completes
 	 */
-	public CompletableFuture<Void> syncBlockInventory(Container inventory)
+	public CompletableFuture<Void> syncBlockInventoryToWorld(Container inventory)
 	{
 		if (inventory instanceof BlockEntity)
 		{
-			return this.syncBlockEntity((BlockEntity)inventory);
+			return this.syncBlockEntityToWorld((BlockEntity)inventory);
 		}
 		else if (inventory instanceof CompoundContainer)
 		{
 			DoubleInventoryAccessor accessor = (DoubleInventoryAccessor)inventory;
 			return CompletableFuture.allOf(
-					syncBlockInventory(accessor.getFirst()),
-					syncBlockInventory(accessor.getSecond())
+					this.syncBlockInventoryToWorld(accessor.getFirst()),
+					this.syncBlockInventoryToWorld(accessor.getSecond())
 			);
 		}
 		return CompletableFuture.allOf();
 	}
 
-	public CompletableFuture<Void> syncEverything(TargetPair pair, ProgressCallback callback)
+	/**
+	 * Sync a block inventory and pass the fetched data to the consumer.
+	 * Both halves of a double chest are synced when available.
+	 */
+	@SuppressWarnings("deprecation")
+	public CompletableFuture<Void> syncBlockInventory(BlockEntity blockEntity, BiConsumer<BlockEntity, CompoundTag> dataConsumer)
+	{
+		CompletableFuture<Void> future = this.syncBlockEntity(blockEntity, dataConsumer);
+
+		Level world = blockEntity.getLevel();
+		if (world == null)
+		{
+			return future;
+		}
+
+		BlockPos pos = blockEntity.getBlockPos();
+		BlockState state = world.getBlockState(pos);
+		if (!(state.getBlock() instanceof ChestBlock) || state.getValue(ChestBlock.TYPE) == ChestType.SINGLE)
+		{
+			return future;
+		}
+
+		BlockPos adjacentPos = pos.relative(ChestBlock.getConnectedDirection(state));
+		if (!world.hasChunkAt(adjacentPos))
+		{
+			return future;
+		}
+
+		BlockState adjacentState = world.getBlockState(adjacentPos);
+		if (adjacentState.getBlock() != state.getBlock() ||
+				adjacentState.getValue(ChestBlock.TYPE) == ChestType.SINGLE ||
+				adjacentState.getValue(ChestBlock.TYPE) == state.getValue(ChestBlock.TYPE) ||
+				adjacentState.getValue(ChestBlock.FACING) != state.getValue(ChestBlock.FACING))
+		{
+			return future;
+		}
+
+		BlockEntity adjacentBlockEntity = world.getBlockEntity(adjacentPos);
+		if (adjacentBlockEntity != null)
+		{
+			return CompletableFuture.allOf(future, this.syncBlockEntity(adjacentBlockEntity, dataConsumer));
+		}
+		return future;
+	}
+
+	public CompletableFuture<Void> syncEverythingToWorld(TargetPair pair, ProgressCallback callback)
 	{
 		AtomicInteger beCounter = new AtomicInteger(0);
 		AtomicInteger entityCounter = new AtomicInteger(0);
 		CompletableFuture<Void> beSynced = CompletableFuture.allOf(
 				pair.getBlockEntityPositions().stream().
-						map(this::syncBlockEntityAt).
+						map(this::syncBlockEntityToWorldAt).
 						map(f -> f.thenRun(
 								() -> callback.apply(beCounter.addAndGet(1), entityCounter.get())
 						)).
@@ -356,7 +425,7 @@ public class ServerDataSyncer extends LimitedTaskRunner implements IClientTickHa
 		);
 		CompletableFuture<Void> entitySynced = CompletableFuture.allOf(
 				pair.getEntities().stream().
-						map(this::syncEntity).
+						map(this::syncEntityToWorld).
 						map(f -> f.thenRun(
 								() -> callback.apply(beCounter.get(), entityCounter.addAndGet(1))
 						)).

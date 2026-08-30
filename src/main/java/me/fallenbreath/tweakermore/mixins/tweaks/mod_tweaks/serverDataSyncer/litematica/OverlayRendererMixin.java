@@ -61,7 +61,7 @@ public abstract class OverlayRendererMixin
 				Container inventory = InventoryUtils.getInventory(worldClient, pos);
 				if (inventory != null)
 				{
-					ServerDataSyncer.getInstance().syncBlockInventory(inventory);
+					ServerDataSyncer.getInstance().syncBlockInventoryToWorld(inventory);
 				}
 			}
 		}

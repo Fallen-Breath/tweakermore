@@ -53,7 +53,7 @@ public abstract class RenderUtilsMixin
 		{
 			if (!Minecraft.getInstance().hasSingleplayerServer())
 			{
-				ServerDataSyncer.getInstance().syncBlockInventory(inventory);
+				ServerDataSyncer.getInstance().syncBlockInventoryToWorld(inventory);
 			}
 		}
 		return inventory;
@@ -74,7 +74,7 @@ public abstract class RenderUtilsMixin
 		{
 			if (!Minecraft.getInstance().hasSingleplayerServer())
 			{
-				ServerDataSyncer.getInstance().syncEntity(entity, false);
+				ServerDataSyncer.getInstance().syncEntityToWorld(entity, false);
 			}
 		}
 		return entity;

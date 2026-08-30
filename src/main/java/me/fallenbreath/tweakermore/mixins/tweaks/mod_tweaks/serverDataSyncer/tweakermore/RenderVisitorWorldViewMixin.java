@@ -42,7 +42,7 @@ public abstract class RenderVisitorWorldViewMixin
 		{
 			if (!Minecraft.getInstance().hasSingleplayerServer() && ServerDataSyncer.hasEnoughPermission())
 			{
-				ServerDataSyncer.getInstance().syncBlockEntityAt(blockPos);
+				ServerDataSyncer.getInstance().syncBlockEntityToWorldAt(blockPos);
 			}
 		}
 	}

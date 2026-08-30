@@ -60,15 +60,11 @@ public abstract class InventoryOverlayHandlerMixin
 	//$$ 		BlockEntity blockEntityToSync = blockEntity != null ? blockEntity : world != null ? world.getBlockEntity(pos) : null;
 	//$$ 		if (blockEntityToSync != null)
 	//$$ 		{
-	//$$ 			ServerDataSyncer serverDataSyncer = ServerDataSyncer.getInstance();
-	//$$ 			serverDataSyncer.syncBlockEntity(blockEntityToSync);
-	//$$ 			// Newer MiniHUD versions read inventories from the data syncer cache.
-	//$$ 			serverDataSyncer.fetchBlockEntity(blockEntityToSync).ifPresent(future -> future.thenAccept(nbt -> {
-	//$$ 				if (nbt != null)
-	//$$ 				{
-	//$$ 					((InventoryOverlayHandler)(Object)this).getDataSyncer().handleBlockEntityData(pos, nbt);
-	//$$ 				}
-	//$$ 			}));
+	//$$ 			var dataSyncer = ((InventoryOverlayHandler)(Object)this).getDataSyncer();
+	//$$ 			ServerDataSyncer.getInstance().syncBlockInventory(
+	//$$ 					blockEntityToSync,
+	//$$ 					(target, nbt) -> dataSyncer.handleBlockEntityData(target.getBlockPos(), nbt)
+	//$$ 			);
 	//$$ 		}
 	//$$ 	}
 	//$$ 	return blockEntity;
@@ -87,7 +83,7 @@ public abstract class InventoryOverlayHandlerMixin
 		{
 			if (blockEntity != null)
 			{
-				ServerDataSyncer.getInstance().syncBlockEntity(blockEntity);
+				ServerDataSyncer.getInstance().syncBlockEntityToWorld(blockEntity);
 			}
 		}
 		return blockEntity;
@@ -109,7 +105,7 @@ public abstract class InventoryOverlayHandlerMixin
 			// if nbt != null, tweakeroo itself has already fetched the entity data from wherever else
 			if (nbt == null)
 			{
-				ServerDataSyncer.getInstance().syncEntity(entity, false);
+				ServerDataSyncer.getInstance().syncEntityToWorld(entity, false);
 			}
 		}
 		return entity;

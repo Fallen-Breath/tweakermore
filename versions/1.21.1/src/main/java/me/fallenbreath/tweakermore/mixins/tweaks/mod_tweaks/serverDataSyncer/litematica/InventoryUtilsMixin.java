@@ -49,7 +49,7 @@ public abstract class InventoryUtilsMixin
 		{
 			if (blockEntity != null)
 			{
-				ServerDataSyncer.getInstance().syncBlockEntity(blockEntity);
+				ServerDataSyncer.getInstance().syncBlockEntityToWorld(blockEntity);
 			}
 		}
 		return blockEntity;

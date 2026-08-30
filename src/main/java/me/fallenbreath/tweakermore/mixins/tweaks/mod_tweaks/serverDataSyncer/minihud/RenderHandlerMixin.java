@@ -82,7 +82,7 @@ public abstract class RenderHandlerMixin
 			//#endif
 			if (blockEntity instanceof BeehiveBlockEntity && !Minecraft.getInstance().hasSingleplayerServer())
 			{
-				ServerDataSyncer.getInstance().syncBlockEntity(blockEntity);
+				ServerDataSyncer.getInstance().syncBlockEntityToWorld(blockEntity);
 			}
 		}
 		//#if MC >= 12101

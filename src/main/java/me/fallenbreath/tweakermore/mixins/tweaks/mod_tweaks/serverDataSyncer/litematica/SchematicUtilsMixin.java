@@ -132,7 +132,7 @@ public abstract class SchematicUtilsMixin
 		final int eTotal = pair.getEntityAmount();
 
 		AtomicLong lastUpdateTime = new AtomicLong(Util.getMillis());
-		CompletableFuture<Void> future = ServerDataSyncer.getInstance().syncEverything(pair, (be, e) -> {
+		CompletableFuture<Void> future = ServerDataSyncer.getInstance().syncEverythingToWorld(pair, (be, e) -> {
 			long currentTime = Util.getMillis();
 			if (currentTime - lastUpdateTime.get() > 500)
 			{
