@@ -28,9 +28,10 @@ import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.serverDataSyncer.ServerDataSyncer;
 import me.fallenbreath.tweakermore.util.ModIds;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -38,6 +39,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 //#if MC >= 1.21.11
 //$$ import fi.dy.masa.malilib.util.data.tag.CompoundData;
 //#else
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 //#endif
 
@@ -45,6 +47,33 @@ import net.minecraft.nbt.CompoundTag;
 @Mixin(InventoryOverlayHandler.class)
 public abstract class InventoryOverlayHandlerMixin
 {
+	//#if MC >= 1.21.11
+	//$$ @ModifyVariable(method = "getTargetInventoryFromBlock", at = @At("HEAD"), argsOnly = true)
+	//$$ private BlockEntity serverDataSyncer4InventoryOverlay_blockEntity(
+	//$$ 		BlockEntity blockEntity,
+	//$$ 		@Local(argsOnly = true) Level world,
+	//$$ 		@Local(argsOnly = true) BlockPos pos
+	//$$ )
+	//$$ {
+	//$$ 	if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
+	//$$ 	{
+	//$$ 		BlockEntity blockEntityToSync = blockEntity != null ? blockEntity : world != null ? world.getBlockEntity(pos) : null;
+	//$$ 		if (blockEntityToSync != null)
+	//$$ 		{
+	//$$ 			ServerDataSyncer serverDataSyncer = ServerDataSyncer.getInstance();
+	//$$ 			serverDataSyncer.syncBlockEntity(blockEntityToSync);
+	//$$ 			// Newer MiniHUD versions read inventories from the data syncer cache.
+	//$$ 			serverDataSyncer.fetchBlockEntity(blockEntityToSync).ifPresent(future -> future.thenAccept(nbt -> {
+	//$$ 				if (nbt != null)
+	//$$ 				{
+	//$$ 					((InventoryOverlayHandler)(Object)this).getDataSyncer().handleBlockEntityData(pos, nbt);
+	//$$ 				}
+	//$$ 			}));
+	//$$ 		}
+	//$$ 	}
+	//$$ 	return blockEntity;
+	//$$ }
+	//#else
 	@ModifyReceiver(
 			method = "getTargetInventoryFromBlock",
 			at = @At(
@@ -63,6 +92,7 @@ public abstract class InventoryOverlayHandlerMixin
 		}
 		return blockEntity;
 	}
+	//#endif
 
 	@ModifyVariable(method = "getTargetInventoryFromEntity", at = @At("HEAD"), argsOnly = true)
 	private Entity serverDataSyncer4InventoryOverlay_entity(

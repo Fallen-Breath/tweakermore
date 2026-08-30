@@ -238,7 +238,7 @@ public abstract class PlacementTweaksMixin
 
 
 	@Inject(method = "processRightClickBlockWrapper", at = @At("HEAD"), cancellable = true, remap = false)
-	private static void schematicProPlace(
+	private static void schematicProPlace_hack(
 			MultiPlayerGameMode controller,
 			LocalPlayer player,
 			ClientLevel world,
@@ -246,6 +246,9 @@ public abstract class PlacementTweaksMixin
 			Direction sideIn,
 			Vec3 hitVecIn,
 			InteractionHand hand,
+			//#if MC >= 1.21.11
+			//$$ boolean hitInside,
+			//#endif
 			CallbackInfoReturnable<InteractionResult> cir
 	)
 	{
