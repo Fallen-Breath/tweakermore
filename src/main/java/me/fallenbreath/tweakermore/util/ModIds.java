@@ -62,6 +62,7 @@ public class ModIds
 	public static final String pistorder = "pistorder";
 	public static final String replay_mod = "replaymod";
 	public static final String sodium = "sodium";
+	public static final String syncmatica_r = "syncmatica_r";
 	public static final String xaero_betterpvp = "xaerobetterpvp";
 	public static final String xaero_minimap = "xaerominimap";
 	public static final String xaero_worldmap = "xaeroworldmap";

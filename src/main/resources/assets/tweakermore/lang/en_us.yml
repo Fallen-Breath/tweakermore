@@ -28,9 +28,15 @@ tweakermore:
     autoCollectMaterialListItem:
       .: autoCollectMaterialListItem
       comment: |-
-        Automatically collect missing items in litematica mod material list in the opened container to player inventory
+        Automatically collect missing items from the selected material source in the opened container to player inventory
         and then close the container
       pretty_name: Auto Collect Material List Item
+    autoCollectMaterialListItemSource:
+      .: Auto Collect Material List Item - Material Source
+      comment: |-
+        The source of required materials used by @option#autoCollectMaterialListItem@
+        Syncmatica_r reads the local player's claimed material requirements
+      pretty_name: Auto Collect Material List Item - Material Source
     autoCollectMaterialListItemCloseGui:
       .: autoCollectMaterialListItemCloseGui
       comment: If the container gui should be closed after using the @option#autoCollectMaterialListItem@ feature
@@ -1177,6 +1183,9 @@ tweakermore:
   # ================================ List entries ================================
 
   list_entry:
+    autoCollectMaterialListItemSource:
+      litematica: Litematica
+      syncmatica_r: Syncmatica_r
     autoCollectMaterialListItemMessageType:
       full: Full
       summary: Summary
@@ -1298,8 +1307,9 @@ tweakermore:
         material_list_remaining: ', still missing %1$s'
         over_required: ' (+%1$s over required)'
         target_remaining: ', %1$s short of collection target'
-      took_nothing: Took nothing required in the material list from %1$s
+      took_nothing: Took nothing required by the selected material source from %1$s
       no_material_list: No material list is activated
+      syncmatica_r_unavailable: Syncmatica_r material API is unavailable
     autoFillContainer:
       container_filled: Filled %1$s with all %2$s items (%3$s)
       best_slot_not_found: Most suitable item to fill the container not found

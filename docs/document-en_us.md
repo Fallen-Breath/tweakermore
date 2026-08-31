@@ -73,13 +73,29 @@ Items that will be thrown out from the container with autoCleanContainer
 
 ### autoCollectMaterialListItem
 
-Automatically collect missing items in litematica mod material list in the opened container to player inventory
+Automatically collect missing items from the selected material source in the opened container to player inventory
 
 and then close the container
 
 - Category: Features
 - Type: hotkey togglable boolean (Tweak)
 - Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
+### Auto Collect Material List Item - Material Source (autoCollectMaterialListItemSource)
+
+The source of required materials used by autoCollectMaterialListItem
+
+Syncmatica_r reads the local player's claimed material requirements
+
+- Category: Features
+- Type: option list (List)
+- Default value: `Litematica`
+- Available options: `Litematica`, `Syncmatica_r`
 - Mod restrictions:
   - Required mods:
     - Litematica (`litematica`)
