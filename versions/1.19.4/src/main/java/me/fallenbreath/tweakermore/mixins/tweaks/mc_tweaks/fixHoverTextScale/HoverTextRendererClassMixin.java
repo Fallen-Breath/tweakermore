@@ -110,7 +110,9 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 			//#if MC >= 26.1
 			//$$ method = "tooltip",
 			//#else
+			//#disable-remap
 			method = "renderComponentHoverEffect",
+			//#enable-remap
 			//#endif
 			at = @At("TAIL")
 	)
@@ -123,7 +125,9 @@ public abstract class HoverTextRendererClassMixin implements ScaleableHoverTextR
 			//#if MC >= 26.1
 			//$$ method = "componentHoverEffect",
 			//#else
+			//#disable-remap
 			method = "renderComponentHoverEffect",
+			//#enable-remap
 			//#endif
 			at = @At(
 					value = "INVOKE",
