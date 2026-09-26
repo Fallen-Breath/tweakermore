@@ -20,32 +20,15 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.daytimeOverride;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
-import net.minecraft.client.ClientClockManager;
-import net.minecraft.core.Holder;
-import net.minecraft.world.clock.WorldClock;
-import net.minecraft.world.clock.WorldClocks;
+import me.fallenbreath.tweakermore.util.mixin.DummyClass;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
 
 /**
- * Modify overworld clock time, which is where the game rendering logic queries from
- * <p>
- * mc < 26.1       : subproject 1.15.2 (main project)
- * mc [26.1, 26.3) : subproject 26.1.2        <--------
+ * mc < 26.3       : subproject 1.15.2 (main project)        <--------
  * mc >= 26.3      : subproject 26.3
  */
-@Mixin(ClientClockManager.class)
-public abstract class ClientClockManagerMixin
+@Mixin(DummyClass.class)
+public abstract class ClientClockInstanceMixin
 {
-	@ModifyReturnValue(method = "getTotalTicks", at = @At("TAIL"))
-	private long overwriteDayTime_modifyGgetTotalTicks(long ret, Holder<WorldClock> definition)
-	{
-		if (definition.is(WorldClocks.OVERWORLD) && TweakerMoreConfigs.DAYTIME_OVERRIDE.getBooleanValue())
-		{
-			ret = TweakerMoreConfigs.DAYTIME_OVERRIDE_VALUE.getIntegerValue();
-		}
-		return ret;
-	}
+	// impl in mc >= 26.3
 }

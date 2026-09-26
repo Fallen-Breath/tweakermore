@@ -36,6 +36,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 /**
  * Modify daytime here too,
  * so the logic used when the client received a time update packet can be reused by us (gamerule changing etc.)
+ * <p>
+ * mc <  26.1 : subproject 1.15.2 (main project)
+ * mc >= 26.1 : subproject 26.1.2        <--------
  */
 @Mixin(ClientLevel.class)
 public abstract class ClientWorldMixin
