@@ -29,6 +29,14 @@ import org.joml.Matrix4f;
 import java.util.ArrayList;
 import java.util.List;
 
+//#if MC >= 26.3
+//$$ import com.mojang.blaze3d.pipeline.RenderTarget;
+//$$ import com.mojang.renderpearl.api.commands.RenderPass;
+//$$ import net.minecraft.client.Minecraft;
+//$$ import java.util.Optional;
+//$$ import java.util.OptionalDouble;
+//#endif
+
 /**
  * Batches {@link TextRenderer} geometry into a shared {@link StagedVertexBuffer}. The build, upload, and execute
  * flow follows Minecraft 26.2's {@code TextFeatureRenderer}, {@code RenderTypeFeatureRenderer}, and {@code StagedVertexBuffer}.
@@ -170,6 +178,27 @@ public final class TextRenderBatch implements AutoCloseable
 		{
 			// Follow vanilla's staged flow: upload once, execute ordered draws, then end the draw.
 			this.stagedBuffer.upload();
+
+			//#if MC >= 26.3
+			//$$ RenderTarget target = Minecraft.getInstance().gameRenderer.mainRenderTarget();
+			//$$ RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(
+			//$$ 		() -> "TweakerMore Text",
+			//$$ 		target.getColorTextureView(), Optional.empty(),
+			//$$ 		target.getDepthTextureView(), OptionalDouble.empty()
+			//$$ );
+			//$$ try (renderPass)
+			//$$ {
+			//$$ 		RenderSystem.bindDefaultUniforms(renderPass);
+			//$$ 		for (DrawEntry entry : this.draws)
+			//$$ 		{
+			//$$ 			StagedVertexBuffer.ExecuteInfo executeInfo = this.stagedBuffer.getExecuteInfo(entry.draw);
+			//$$ 			if (executeInfo != null)
+			//$$ 			{
+			//$$ 				entry.renderType.prepare().drawFromBuffer(executeInfo, renderPass);
+			//$$ 			}
+			//$$ 		}
+			//$$ }
+			//#else
 			for (DrawEntry entry : this.draws)
 			{
 				StagedVertexBuffer.ExecuteInfo executeInfo = this.stagedBuffer.getExecuteInfo(entry.draw);
@@ -178,6 +207,7 @@ public final class TextRenderBatch implements AutoCloseable
 					entry.renderType.prepare().drawFromBuffer(executeInfo);
 				}
 			}
+			//#endif
 		}
 		finally
 		{

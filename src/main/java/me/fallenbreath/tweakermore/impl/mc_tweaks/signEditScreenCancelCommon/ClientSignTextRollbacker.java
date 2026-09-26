@@ -24,6 +24,10 @@ import me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.signEditScreenCancelC
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.network.chat.Component;
 
+//#if MC >= 26.3
+//$$ import net.minecraft.world.level.block.entity.SignTextSlot;
+//#endif
+
 //#if MC >= 12001
 //$$ import net.minecraft.world.level.block.entity.SignText;
 //#endif
@@ -70,7 +74,10 @@ public class ClientSignTextRollbacker
 		this.signEditScreen = signEditScreen;
 		this.signBlockEntity = signBlockEntity;
 
-		//#if MC >= 12001
+		//#if MC >= 26.3
+		//$$ this.blockEntityFrontText = this.signBlockEntity.getText(SignTextSlot.FRONT);
+		//$$ this.blockEntityBackText = this.signBlockEntity.getText(SignTextSlot.BACK);
+		//#elseif MC >= 12001
 		//$$ this.blockEntityFrontText = this.signBlockEntity.getText(true);
 		//$$ this.blockEntityBackText = this.signBlockEntity.getText(false);
 		//#else
@@ -91,7 +98,10 @@ public class ClientSignTextRollbacker
 
 	public void rollback()
 	{
-		//#if MC >= 12001
+		//#if MC >= 26.3
+		//$$ this.signBlockEntity.setText(this.blockEntityFrontText, SignTextSlot.FRONT);
+		//$$ this.signBlockEntity.setText(this.blockEntityBackText, SignTextSlot.BACK);
+		//#elseif MC >= 12001
 		//$$ this.signBlockEntity.setText(this.blockEntityFrontText, true);
 		//$$ this.signBlockEntity.setText(this.blockEntityBackText, false);
 		//#endif
