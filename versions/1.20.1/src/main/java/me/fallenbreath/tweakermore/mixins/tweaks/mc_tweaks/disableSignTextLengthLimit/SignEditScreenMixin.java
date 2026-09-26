@@ -66,16 +66,29 @@ public abstract class SignEditScreenMixin extends Screen
 	}
 
 	@Inject(
+			//#if MC >= 26.3
+			//$$ method = "<init>(Lnet/minecraft/world/level/block/entity/SignBlockEntity;Lnet/minecraft/world/level/block/entity/SignTextSlot;ZLnet/minecraft/network/chat/Component;)V",
+			//#else
 			method = "<init>(Lnet/minecraft/world/level/block/entity/SignBlockEntity;ZZLnet/minecraft/network/chat/Component;)V",
+			//#endif
 			at = @At("TAIL")
 	)
-	private void recordFilteredParam(SignBlockEntity blockEntity, boolean front, boolean filtered, Component title, CallbackInfo ci)
+	private void recordFilteredParam(
+			CallbackInfo ci,
+			//#if MC >= 26.3
+			//$$ @Local(ordinal = 0, argsOnly = true) boolean filtered
+			//#else
+			@Local(ordinal = 1, argsOnly = true) boolean filtered
+			//#endif
+	)
 	{
 		this.filtered$TKM = filtered;
 	}
 
 	@ModifyExpressionValue(
-			//#if MC >= 26.1
+			//#if MC >= 26.3
+			//$$ method = "lambda$new$1",  // lambda method in init
+			//#elseif MC >= 26.1
 			//$$ method = "lambda$init$2",  // lambda method in init
 			//#else
 			method = "method_45658",  // lambda method in init
@@ -125,7 +138,12 @@ public abstract class SignEditScreenMixin extends Screen
 			Minecraft mc = this.minecraft;
 			if (mc != null && 0 <= lineIdx && lineIdx < textArrayLen)
 			{
+				//#if MC >= 26.3
+				//$$ Component text = this.text.getMessages(this.filtered$TKM).get(lineIdx);
+				//#else
 				Component text = this.text.getMessage(lineIdx, this.filtered$TKM);
+				//#endif
+
 				int maxWidth = this.sign.getMaxTextLineWidth();
 				List<?> wrapped = mc.font.split(text, maxWidth);
 				boolean overflowed = wrapped.size() > 1;

@@ -26,7 +26,10 @@ import me.fallenbreath.tweakermore.TweakerMoreMod;
 import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
 import net.minecraft.client.Minecraft;
 import com.mojang.blaze3d.platform.Window;
+
+//#if MC < 26.3
 import org.lwjgl.glfw.GLFW;
+//#endif
 
 public class WindowSizeHelper
 {
@@ -38,7 +41,7 @@ public class WindowSizeHelper
 		{
 			return;
 		}
-		if (window.isFullscreen())
+		if (isFullscreen(window))
 		{
 			InfoUtils.showGuiOrInGameMessage(Message.MessageType.WARNING, "tweakermore.impl.windowSize.full_screen_nope");
 			return;
@@ -53,7 +56,7 @@ public class WindowSizeHelper
 		{
 			return;
 		}
-		if (window.isFullscreen())
+		if (isFullscreen(window))
 		{
 			return;
 		}
@@ -94,7 +97,7 @@ public class WindowSizeHelper
 
 	private static boolean canPerformSizeChange(Window window)
 	{
-		return window != null && !window.isFullscreen();
+		return window != null && !isFullscreen(window);
 	}
 
 	private static int getConfigWidth()
@@ -109,11 +112,25 @@ public class WindowSizeHelper
 
 	private static void applyWindowSizeImpl(Window window)
 	{
-		if (window.isFullscreen())
+		if (isFullscreen(window))
 		{
 			// remember to check this before calling applyWindowSizeImpl()
 			throw new RuntimeException("resize in full screen");
 		}
+
+		//#if MC >= 26.3
+		//$$ window.setWindowed(getConfigWidth(), getConfigHeight());
+		//#else
 		GLFW.glfwSetWindowSize(window.getWindow(), getConfigWidth(), getConfigHeight());
+		//#endif
+	}
+
+	private static boolean isFullscreen(Window window)
+	{
+		//#if MC >= 26.3
+		//$$ return Minecraft.getInstance().options.fullscreen().get();
+		//#else
+		return window != null && window.isFullscreen();
+		//#endif
 	}
 }

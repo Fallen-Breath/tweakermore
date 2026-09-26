@@ -72,7 +72,9 @@ public abstract class SignEditScreenMixin extends Screen
 	@Unique private ClientSignTextRollbacker clientSignTextRollbacker = null;
 
 	@Inject(
-			//#if MC >= 12001
+			//#if MC >= 26.3
+			//$$ method = "<init>(Lnet/minecraft/world/level/block/entity/SignBlockEntity;Lnet/minecraft/world/level/block/entity/SignTextSlot;ZLnet/minecraft/network/chat/Component;)V",
+			//#elseif MC >= 12001
 			//$$ method = "<init>(Lnet/minecraft/world/level/block/entity/SignBlockEntity;ZZLnet/minecraft/network/chat/Component;)V",
 			//#elseif MC >= 11903
 			//$$ method = "<init>(Lnet/minecraft/world/level/block/entity/SignBlockEntity;ZLnet/minecraft/network/chat/Component;)V",
