@@ -20,8 +20,9 @@
 
 package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.daytimeOverride;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.daytimeOverride.ClientClockInstanceWithOverworldMark;
 import net.minecraft.client.ClientClockManager;
 import net.minecraft.core.Holder;
 import net.minecraft.world.clock.WorldClock;
@@ -30,22 +31,29 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 /**
- * Modify overworld clock time, which is where the game rendering logic queries from
- * <p>
  * mc < 26.1       : subproject 1.15.2 (main project)
- * mc [26.1, 26.3) : subproject 26.1.2        <--------
- * mc >= 26.3      : subproject 26.3
+ * mc [26.1, 26.3) : subproject 26.1.2
+ * mc >= 26.3      : subproject 26.3        <--------
  */
 @Mixin(ClientClockManager.class)
 public abstract class ClientClockManagerMixin
 {
-	@ModifyReturnValue(method = "getTotalTicks", at = @At("TAIL"))
-	private long overwriteDayTime_modifyGgetTotalTicks(long ret, Holder<WorldClock> definition)
+	@ModifyExpressionValue(
+			method = "lambda$getInstance$0",
+			at = @At(
+					value = "NEW",
+					target = "()Lnet/minecraft/client/ClientClockManager$ClientClockInstance;"
+			)
+	)
+	private static ClientClockManager.ClientClockInstance daytimeOverride_markOverworld(
+			ClientClockManager.ClientClockInstance clock,
+			@Local(argsOnly = true) Holder<WorldClock> definition
+	)
 	{
-		if (definition.is(WorldClocks.OVERWORLD) && TweakerMoreConfigs.DAYTIME_OVERRIDE.getBooleanValue())
+		if (definition.is(WorldClocks.OVERWORLD))
 		{
-			ret = TweakerMoreConfigs.DAYTIME_OVERRIDE_VALUE.getIntegerValue();
+			((ClientClockInstanceWithOverworldMark)clock).setIsOverworldClockInstance$tweakermore();
 		}
-		return ret;
+		return clock;
 	}
 }

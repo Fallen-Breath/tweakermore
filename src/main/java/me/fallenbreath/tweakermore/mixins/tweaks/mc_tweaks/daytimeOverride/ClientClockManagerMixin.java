@@ -24,7 +24,9 @@ import me.fallenbreath.tweakermore.util.mixin.DummyClass;
 import org.spongepowered.asm.mixin.Mixin;
 
 /**
- * See {@link ClientWorldMixin} in mc < 26.1
+ * mc < 26.1       : subproject 1.15.2 (main project)        <--------
+ * mc [26.1, 26.3) : subproject 26.1.2
+ * mc >= 26.3      : subproject 26.3
  */
 @Mixin(DummyClass.class)
 public abstract class ClientClockManagerMixin

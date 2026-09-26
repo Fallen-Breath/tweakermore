@@ -80,7 +80,9 @@ public abstract class DebugHudMixin
 			//#endif
 			at = @At(
 					value = "INVOKE",
-					//#if MC >= 26.1
+					//#if MC >= 26.3
+					//$$ target = "Lnet/minecraft/client/gui/components/debugchart/TpsDebugChart;extractRenderState(Lnet/minecraft/client/gui/GuiGraphicsExtractor;III)V"
+					//#elseif MC >= 26.1
 					//$$ target = "Lnet/minecraft/client/gui/components/debugchart/TpsDebugChart;extractRenderState(Lnet/minecraft/client/gui/GuiGraphicsExtractor;II)V"
 					//#else
 					target = "Lnet/minecraft/client/gui/components/debugchart/TpsDebugChart;drawChart(Lnet/minecraft/client/gui/GuiGraphics;II)V"
@@ -126,7 +128,9 @@ public abstract class DebugHudMixin
 			//#endif
 			at = @At(
 					value = "INVOKE",
-					//#if MC >= 26.1
+					//#if MC >= 26.3
+					//$$ target = "Lnet/minecraft/client/gui/components/debugchart/TpsDebugChart;extractRenderState(Lnet/minecraft/client/gui/GuiGraphicsExtractor;III)V",
+					//#elseif MC >= 26.1
 					//$$ target = "Lnet/minecraft/client/gui/components/debugchart/TpsDebugChart;extractRenderState(Lnet/minecraft/client/gui/GuiGraphicsExtractor;II)V",
 					//#else
 					target = "Lnet/minecraft/client/gui/components/debugchart/TpsDebugChart;drawChart(Lnet/minecraft/client/gui/GuiGraphics;II)V",

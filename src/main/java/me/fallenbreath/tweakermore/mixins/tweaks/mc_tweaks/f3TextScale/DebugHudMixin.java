@@ -32,6 +32,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//#if MC >= 26.3
+//$$ import org.spongepowered.asm.mixin.injection.ModifyVariable;
+//#endif
+
 //#if MC >= 12000
 //$$ import net.minecraft.client.gui.GuiGraphics;
 //#elseif MC >= 11600
@@ -76,6 +80,9 @@ public abstract class DebugHudMixin
 		}
 	}
 
+	//#if MC >= 26.3
+	//$$ @ModifyVariable(method = "extractLines", at = @At("HEAD"), argsOnly = true, ordinal = 0)
+	//#else
 	@ModifyExpressionValue(
 			//#if MC >= 26.1
 			//$$ method = "extractLines",
@@ -93,6 +100,7 @@ public abstract class DebugHudMixin
 					//#endif
 			)
 	)
+	//#endif
 	private int f3TextScale_renderRightText_fixWindowScaledWidth(int width, @Share("scaler") LocalRef<RenderUtils.Scaler> scaler)
 	{
 		if (scaler.get() != null)

@@ -57,7 +57,12 @@ public abstract class SignEditScreenMixin extends Screen
 
 	@Shadow @Final private String[] messages;
 
+	//#if MC >= 26.3
+	//$$ @Shadow @Final private SignText.Mutable text;
+	//#else
 	@Shadow private SignText text;
+	//#endif
+
 	@Unique private boolean filtered$TKM;
 
 	protected SignEditScreenMixin(Component title)
@@ -128,8 +133,13 @@ public abstract class SignEditScreenMixin extends Screen
 	private void drawLineOverflowHint(
 			CallbackInfo ci,
 			@Local(argsOnly = true) GuiGraphics context,
+			//#if MC >= 26.3
+			//$$ @Local(ordinal = 4) int lineIdx,
+			//$$ @Local(ordinal = 5) int xStart
+			//#else
 			@Local(ordinal = 5) int lineIdx,
 			@Local(ordinal = 6) int xStart
+			//#endif
 	)
 	{
 		if (TweakerMoreConfigs.DISABLE_SIGN_TEXT_LENGTH_LIMIT.getBooleanValue())
@@ -139,7 +149,7 @@ public abstract class SignEditScreenMixin extends Screen
 			if (mc != null && 0 <= lineIdx && lineIdx < textArrayLen)
 			{
 				//#if MC >= 26.3
-				//$$ Component text = this.text.getMessages(this.filtered$TKM).get(lineIdx);
+				//$$ Component text = this.text.asImmutable().getMessages(this.filtered$TKM).get(lineIdx);
 				//#else
 				Component text = this.text.getMessage(lineIdx, this.filtered$TKM);
 				//#endif

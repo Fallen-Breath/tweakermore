@@ -44,7 +44,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class GameRendererMixin
 {
 	@Inject(
-			//#if MC >= 11500
+			//#if MC >= 26.3
+			//$$ method = "extract",
+			//#elseif MC >= 11500
 			method = "render",
 			//#else
 			//$$ method = "render(FJZ)V",

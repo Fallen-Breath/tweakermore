@@ -18,16 +18,9 @@
  * along with TweakerMore.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.daytimeOverride;
+package me.fallenbreath.tweakermore.impl.mc_tweaks.daytimeOverride;
 
-import me.fallenbreath.tweakermore.util.mixin.DummyClass;
-import org.spongepowered.asm.mixin.Mixin;
-
-/**
- * mc <  26.1 : subproject 1.15.2 (main project)
- * mc >= 26.1 : subproject 26.1.2        <--------
- */
-@Mixin(DummyClass.class)
-public abstract class ClientWorldMixin
+public interface ClientClockInstanceWithOverworldMark
 {
+	void setIsOverworldClockInstance$tweakermore();
 }

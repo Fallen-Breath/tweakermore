@@ -144,16 +144,22 @@ public abstract class ItemEntityRendererMixin
 			//#endif
 			at = @At(
 					value = "INVOKE",
-					//#if MC >= 11903
+					//#if MC >= 26.3
+					//$$ target = "Lcom/mojang/blaze3d/vertex/PoseStack;rotate(Lcom/mojang/math/Axis;F)V",
+					//#elseif MC >= 11903
 					//$$ target = "Lcom/mojang/math/Axis;rotation(F)Lorg/joml/Quaternionf;",
 					//#elseif MC >= 11500
 					target = "Lcom/mojang/math/Vector3f;rotation(F)Lcom/mojang/math/Quaternion;",
 					//#else
 					//$$ target = "Lcom/mojang/blaze3d/platform/GlStateManager;rotatef(FFFF)V",
 					//#endif
-					ordinal = 0
+				ordinal = 0
 			),
+			//#if MC >= 26.3
+			//$$ index = 1
+			//#else
 			index = 0
+			//#endif
 	)
 	private float preciseItemEntityModel_tweakItemEntityRotation(
 			float rotation,

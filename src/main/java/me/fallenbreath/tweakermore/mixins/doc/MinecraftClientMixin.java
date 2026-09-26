@@ -27,6 +27,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//#if MC >= 26.3
+//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+//#endif
+
 @Mixin(Minecraft.class)
 public abstract class MinecraftClientMixin
 {
@@ -43,7 +47,13 @@ public abstract class MinecraftClientMixin
 			at = @At("TAIL"),
 			remap = false
 	)
-	private void onClientInitFinished(CallbackInfo ci)
+	private void onClientInitFinished(
+			//#if MC >= 26.3
+			//$$ CallbackInfoReturnable<?> cir
+			//#else
+			CallbackInfo ci
+			//#endif
+	)
 	{
 		TweakerMoreClientEvents.onClientInitFinished();
 	}
