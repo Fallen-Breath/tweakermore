@@ -1388,6 +1388,24 @@ Notes: In vanilla, client can only select collide-able and non-spectator entitie
 - Default value: *no hotkey*, `false`
 
 
+### clientSidePickBlock
+
+Perform middle-click block and entity picking on the client instead of requesting the server to pick
+
+Inventory changes are still synchronized normally with the server
+
+In creative mode, Ctrl + middle-click copies the target block data available on the client.
+
+This data may be incomplete; for example, container contents may be missing.
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean (Generic)
+- Default value: *no hotkey*, `false`
+- Mod restrictions:
+  - Required mods:
+    - Minecraft (`minecraft`) `>=1.21.4`
+
+
 ### commandHistoryLimit
 
 Modify the maximum number of command history entries, which are also saved in the "command_history.txt" file

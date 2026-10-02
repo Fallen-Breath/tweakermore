@@ -515,6 +515,14 @@ tweakermore:
         3. Pick the item stack from the item entity to your inventory (pick entity)
         Notes: In vanilla, client can only select collide-able and non-spectator entities
       pretty_name: Client Entity Targeting Select All
+    clientSidePickBlock:
+      .: clientSidePickBlock
+      comment: |-
+        Perform middle-click block and entity picking on the client instead of requesting the server to pick
+        Inventory changes are still synchronized normally with the server
+        In creative mode, Ctrl + middle-click copies the target block data available on the client.
+        This data may be incomplete; for example, container contents may be missing.
+      pretty_name: Client-side Block Picking
     commandHistoryLimit:
       .: commandHistoryLimit
       comment: Modify the maximum number of command history entries, which are also saved in the "command_history.txt" file

@@ -519,6 +519,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed CLIENT_ENTITY_TARGETING_SUPPORT_ALL = newConfigBooleanHotkeyed("clientEntityTargetingSelectAll");
 
+	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.21.4")), category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed CLIENT_SIDE_PICK_BLOCK = newConfigBooleanHotkeyed("clientSidePickBlock");
+
 	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.20.2")), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigInteger COMMAND_HISTORY_LIMIT = newConfigInteger("commandHistoryLimit", 50, 50, 10000);
 
