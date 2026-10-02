@@ -20,6 +20,9 @@
 
 package me.fallenbreath.tweakermore.impl.mc_tweaks.clientSidePickBlock;
 
+import me.fallenbreath.tweakermore.config.TweakerMoreConfigs;
+import me.fallenbreath.tweakermore.impl.features.creativePickBlockWithState.CreativePickBlockWithStateHelper;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.clientEntityTargetingSelectAll.EntityItemPickHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -80,6 +83,7 @@ public class ClientSidePickBlockHelper
 				addBlockDataToItem(stack, blockEntity, mc.level);
 			}
 		}
+		CreativePickBlockWithStateHelper.storeBlockState(mc.player.hasInfiniteMaterials(), stack, state, state.getBlock());
 		pickItem(mc, stack);
 	}
 
@@ -95,6 +99,10 @@ public class ClientSidePickBlockHelper
 		}
 
 		ItemStack stack = entity.getPickResult();
+		if (stack == null && TweakerMoreConfigs.CLIENT_ENTITY_TARGETING_SUPPORT_ALL.getBooleanValue())
+		{
+			stack = EntityItemPickHelper.pickItem(entity);
+		}
 		if (stack != null)
 		{
 			pickItem(mc, stack);

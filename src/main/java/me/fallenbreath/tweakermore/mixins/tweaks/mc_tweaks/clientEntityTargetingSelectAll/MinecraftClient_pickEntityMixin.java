@@ -66,7 +66,7 @@ public abstract class MinecraftClient_pickEntityMixin
 	}
 
 	//#if MC >= 12104
-	//$$ // now it's done on the serverside, we can't perform any tweak on this anymore :(
+	//$$ // Newer versions supplement the result through the clientSidePickBlock option instead.
 	//#elseif MC >= 11700
 	//$$ @ModifyExpressionValue(
 	//$$ 		method = "pickBlock",

@@ -27,7 +27,8 @@ import me.fallenbreath.tweakermore.util.mixin.DummyClass;
 import org.spongepowered.asm.mixin.Mixin;
 
 /**
- * Does not work in mc1.21.4+ anymore, since now the pick block action is done on the server-side, not the client-side
+ * Newer versions call {@link me.fallenbreath.tweakermore.impl.features.creativePickBlockWithState.CreativePickBlockWithStateHelper}
+ * through the clientSidePickBlock option instead of modifying vanilla picking.
  */
 @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = "<1.21.4"))
 @Mixin(DummyClass.class)

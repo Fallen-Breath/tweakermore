@@ -143,6 +143,7 @@ tweakermore:
         When performing creative pick block action (middle click) with hotkey pressed,
         store the target block's block state into the nbt named "BlockStateTag" of the picked item.
         So the block state can be restored when you place blocks with the picked item
+        In MC 1.21.4+, this requires @option#clientSidePickBlock@ to be enabled.
     fireworkRocketThrottler:
       .: fireworkRocketThrottler
       comment: Limits the maximum frequency of firework rocket usage, to avoid setting off rockets with auto-clicker
@@ -508,7 +509,8 @@ tweakermore:
         Make the following client-side entity targeting stuffs being able to select all types of entities:
         1. F3 + I entity data querying
         2. Client-side command suggestion with target entity UUID
-        3. Mouse middle-click item picking. Supports picking items, xp orbs and falling blocks (MC < 1.21.4)
+        3. Mouse middle-click item picking. Supports picking items, xp orbs and falling blocks.
+        In MC 1.21.4+, picking these special entities requires @option#clientSidePickBlock@ to be enabled.
         Example use cases:
         1. Get a /summon command for an item entity (F3 + I)
         2. Enter /kill and tab-suggested a projectile entity (UUID suggestion)
