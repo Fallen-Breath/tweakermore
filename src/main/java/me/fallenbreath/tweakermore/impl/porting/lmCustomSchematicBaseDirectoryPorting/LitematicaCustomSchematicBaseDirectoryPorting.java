@@ -35,6 +35,9 @@ public class LitematicaCustomSchematicBaseDirectoryPorting
 	 * We can't just call {@code DataManager.getDefaultBaseSchematicDirectory()},
 	 * cuz we are mixin-ing into the DataManager class
 	 */
+	//#if 1.21.8 < MC && MC <= 1.21.10
+	//$$ @SuppressWarnings("deprecation")
+	//#endif
 	public static File getDefaultBaseSchematicDirectory()
 	{
 		//#if MC >= 1.21.11
