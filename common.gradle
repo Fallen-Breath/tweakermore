@@ -163,7 +163,10 @@ JavaVersion MIXIN_COMPATIBILITY_LEVEL = JAVA_COMPATIBILITY
 loom {
 	accessWidenerPath = file("tweakermore.accesswidener")
 
-    def commonVmArgs = ['-Dmixin.debug.export=true']
+	def commonVmArgs = [
+			'--sun-misc-unsafe-memory-access=allow',  // suppress https://github.com/netty/netty/issues/14942
+			'-Dmixin.debug.export=true',
+	]
 	var enableCountInjections = false
 	if (enableCountInjections) {
 		// Notes: most tweakeroo versions cannot pass this check
@@ -307,6 +310,11 @@ jar {
 	from("../../LICENSE") {
 		rename { "${it}_${inputs.properties.archives_base_name}" }
 	}
+}
+
+test {
+	// suppress https://github.com/netty/netty/issues/14942
+	jvmArgs += ['--sun-misc-unsafe-memory-access=allow']
 }
 
 // https://github.com/hierynomus/license-gradle-plugin
