@@ -50,6 +50,13 @@ jobs:
           BUILD_ID: ${{ github.run_number }}
           BUILD_RELEASE: ${{ inputs.release }}
 
+      - name: Install client audit runtime dependencies
+        if: ${{ inputs.mixin_audit }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y libegl1 libegl-mesa0
+          python3 -c 'import ctypes; ctypes.CDLL("libEGL.so.1").eglChooseConfig; print("EGL library loaded successfully")'
+
       - name: Run mixin audit check for Minecraft client
         if: ${{ inputs.mixin_audit }}
         timeout-minutes: 10
