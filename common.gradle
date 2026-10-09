@@ -178,7 +178,7 @@ loom {
 		ideConfigGenerated = true
 	}
 	runs {
-		def auditVmArgs = [*commonVmArgs, '-DmixinAuditor.audit=true', '-DmixinAuditor.when=game_init']
+		def auditVmArgs = [*commonVmArgs, '-DmixinAuditor.audit=true']
 		clientMixinAudit {
 			client()
 			vmArgs auditVmArgs
