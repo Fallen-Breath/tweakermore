@@ -53,6 +53,10 @@ jobs:
       - name: Run mixin audit check for Minecraft client
         if: ${{ inputs.mixin_audit }}
         timeout-minutes: 10
+        env:
+          # Use EGL for SDL3 OpenGL contexts under Xvfb (MC 26.3+).
+          # https://wiki.libsdl.org/SDL3/SDL_HINT_VIDEO_FORCE_EGL
+          SDL_VIDEO_FORCE_EGL: '1'
         run: |
           mkdir -p ./run
           ./gradlew runClientMixinAudit
