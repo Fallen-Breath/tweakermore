@@ -74,6 +74,7 @@ dependencies {
 	}
 	def autoImplementation = { Object... args -> processDependency(unobfuscated ? implementation(*args) : modImplementation(*args)) }
 	def autoRuntimeOnly = { Object... args -> processDependency(unobfuscated ? runtimeOnly(*args) : modRuntimeOnly(*args)) }
+	def autoLocalRuntime = { Object... args -> processDependency(unobfuscated ? localRuntime(*args) : modLocalRuntime(*args)) }
 	def autoCompileOnly = { Object... args -> processDependency(unobfuscated ? compileOnly(*args) : modCompileOnly(*args)) }
 
 	// loom
@@ -97,6 +98,7 @@ dependencies {
 	}
 
 	// runtime mods
+	autoLocalRuntime "me.fallenbreath:mixin-auditor:0.3.0-${unobfuscated ? 'u' : 'o'}"
 	if (mcVersion < 11904) {
 		autoRuntimeOnly("com.github.Fallen-Breath:lazydfu:${mcVersion < 11900 ? "0.1.2" : "a7cfc44c0c"}")
 	}
@@ -176,7 +178,7 @@ loom {
 		ideConfigGenerated = true
 	}
 	runs {
-        def auditVmArgs = [*commonVmArgs, '-Dtweakermore.mixin_audit=true']
+		def auditVmArgs = [*commonVmArgs, '-DmixinAuditor.audit=true', '-DmixinAuditor.when=game_init']
 		clientMixinAudit {
 			client()
 			vmArgs auditVmArgs

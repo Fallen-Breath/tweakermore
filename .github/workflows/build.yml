@@ -12,6 +12,11 @@ on:
         type: string
         required: false
         default: ''
+      mixin_audit:
+        description: run mixin audit for Minecraft after build
+        type: boolean
+        required: false
+        default: false
 
 jobs:
   build:
@@ -44,6 +49,13 @@ jobs:
         env:
           BUILD_ID: ${{ github.run_number }}
           BUILD_RELEASE: ${{ inputs.release }}
+
+      - name: Run mixin audit check for Minecraft client
+        if: ${{ inputs.mixin_audit }}
+        timeout-minutes: 10
+        run: |
+          mkdir -p ./run
+          ./gradlew runClientMixinAudit
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
