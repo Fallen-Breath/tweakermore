@@ -768,9 +768,11 @@ tweakermore:
         Make the moving piston block (b36) selectable, so you can interact with it easily
         The outline shape of a moving piston block will be set to a full cube
         See also: @option#movingPistonBlockSelectableCreativeOnly@
+      pretty_name: Moving Piston Block Selectable
     movingPistonBlockSelectableCreativeOnly:
       .: movingPistonBlockSelectableCreativeOnly
       comment: Enable option @option#movingPistonBlockSelectable@ only if the current player is in creative mode
+      pretty_name: Moving Piston Block Selectable Creative Only
     multiplayerForcedEnabled:
       .: multiplayerForcedEnabled
       comment: |-

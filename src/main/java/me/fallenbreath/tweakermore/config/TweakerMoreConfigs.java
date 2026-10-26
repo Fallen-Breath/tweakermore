@@ -664,10 +664,10 @@ public class TweakerMoreConfigs
 	public static final TweakerMoreConfigBoolean MOVE_CONNECTED_SERVER_ENTRY_TO_TOP = newConfigBoolean("moveConnectedServerEntryToTop", false);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigBoolean MOVING_PISTON_BLOCK_SELECTABLE = newConfigBoolean("movingPistonBlockSelectable", false);
+	public static final TweakerMoreConfigBooleanHotkeyed MOVING_PISTON_BLOCK_SELECTABLE = newConfigBooleanHotkeyed("movingPistonBlockSelectable", false);
 
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
-	public static final TweakerMoreConfigBoolean MOVING_PISTON_BLOCK_SELECTABLE_CREATE_ONLY = newConfigBoolean("movingPistonBlockSelectableCreativeOnly", true);
+	public static final TweakerMoreConfigBooleanHotkeyed MOVING_PISTON_BLOCK_SELECTABLE_CREATE_ONLY = newConfigBooleanHotkeyed("movingPistonBlockSelectableCreativeOnly", true);
 
 	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.16")), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean MULTIPLAYER_FORCED_ENABLED = newConfigBoolean("multiplayerForcedEnabled", false);
