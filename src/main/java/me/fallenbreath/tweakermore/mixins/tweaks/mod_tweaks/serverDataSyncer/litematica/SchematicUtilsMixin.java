@@ -61,13 +61,9 @@ public abstract class SchematicUtilsMixin
 	)
 	private static AreaSelection serverDataSyncer4SchematicSave(AreaSelection area)
 	{
-		if (TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
+		if (shouldSyncSelection(Minecraft.getInstance(), area))
 		{
-			Minecraft mc = Minecraft.getInstance();
-			if (area != null && !mc.hasSingleplayerServer() && ServerDataSyncer.hasEnoughPermission())
-			{
-				GameUtils.scheduleOnClientThread(() -> syncEverything(area));
-			}
+			GameUtils.scheduleOnClientThread(() -> syncEverything(area));
 		}
 		return area;
 	}
@@ -92,7 +88,7 @@ public abstract class SchematicUtilsMixin
 	)
 	private static void serverDataSyncer4SelectionClone(Minecraft mc, CallbackInfo ci, @Local AreaSelection area)
 	{
-		if (dontInjectClone.get())
+		if (dontInjectClone.get() || !shouldSyncSelection(mc, area))
 		{
 			return;
 		}
@@ -120,6 +116,16 @@ public abstract class SchematicUtilsMixin
 				dontInjectClone.remove();
 			}
 		});
+	}
+
+	@Unique
+	private static boolean shouldSyncSelection(Minecraft mc, @Nullable AreaSelection area)
+	{
+		if (!TweakerMoreConfigs.SERVER_DATA_SYNCER.getBooleanValue())
+		{
+			return false;
+		}
+		return area != null && !mc.hasSingleplayerServer() && ServerDataSyncer.hasEnoughPermission();
 	}
 
 	@Unique
