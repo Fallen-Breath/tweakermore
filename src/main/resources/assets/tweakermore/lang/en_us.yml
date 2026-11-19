@@ -652,6 +652,12 @@ tweakermore:
         WARNING: It might crash the game on every launch due to invalid pack being loaded.
         If that happen, you need to manually edit the "options.txt" to remove the invalid packs
       pretty_name: Disable Resource Pack List Reset On Failure
+    disableSignGuiOnPlacement:
+      .: disableSignGuiOnPlacement
+      comment: |-
+        Skip the editor when placing a sign or hanging sign
+        To edit placed signs on Minecraft 1.20+, keep Tweakeroo's disableSignGui turned off
+      pretty_name: Disable Sign GUI on Placement
     disableSignTextLengthLimit:
       .: disableSignTextLengthLimit
       comment: |-

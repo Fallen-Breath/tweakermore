@@ -1699,6 +1699,17 @@ If that happen, you need to manually edit the "options.txt" to remove the invali
 - Default value: *no hotkey*, `false`
 
 
+### disableSignGuiOnPlacement
+
+Skip the editor when placing a sign or hanging sign
+
+To edit placed signs on Minecraft 1.20+, keep Tweakeroo's disableSignGui turned off
+
+- Category: MC Tweaks
+- Type: hotkey togglable boolean (Disable)
+- Default value: *no hotkey*, `false`
+
+
 ### disableSignTextLengthLimit
 
 Disable the text length limit based on character width when editing or rendering a sign block

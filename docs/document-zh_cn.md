@@ -1695,6 +1695,17 @@ schematicBlockPlacement的严格模式
 - 默认值: *无快捷键*, `false`
 
 
+### 放置告示牌时禁用编辑界面 (disableSignGuiOnPlacement)
+
+放置告示牌或悬挂告示牌时跳过编辑界面
+
+在 MC 1.20+ 中，如需右键编辑已放置的告示牌，请保持 Tweakeroo 的 disableSignGui 关闭
+
+- 分类: MC修改
+- 类型: 带热键布尔值 (禁用)
+- 默认值: *无快捷键*, `false`
+
+
 ### 禁用告示牌文本长度限制 (disableSignTextLengthLimit)
 
 禁用在编辑或渲染告示牌时，告示牌基于字符长度的文本长度限制

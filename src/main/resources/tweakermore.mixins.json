@@ -126,6 +126,8 @@
     "tweaks.mc_tweaks.disablePistonBlockBreakingParticle.PistonBlockMixin",
     "tweaks.mc_tweaks.disableRedstoneParticle.WorldRendererMixin",
     "tweaks.mc_tweaks.disableResourcePackListResetOnFailure.MinecraftClientMixin",
+    "tweaks.mc_tweaks.disableSignGuiOnPlacement.BlockItemMixin",
+    "tweaks.mc_tweaks.disableSignGuiOnPlacement.LocalPlayerMixin",
     "tweaks.mc_tweaks.disableSignTextLengthLimit.SelectionManagerAccessor",
     "tweaks.mc_tweaks.disableSignTextLengthLimit.SignBlockEntityRenderer_optifineMixin",
     "tweaks.mc_tweaks.disableSignTextLengthLimit.SignBlockEntityRendererMixin",

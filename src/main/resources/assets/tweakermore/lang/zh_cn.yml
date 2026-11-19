@@ -652,6 +652,12 @@ tweakermore:
         警告：这可能会由于加载了无效的资源包，而导致游戏每次启动时都崩溃
         如果出现这种情况，你需要手动编辑 options.txt 文件以移除无效的资源包
       pretty_name: 禁用资源包加载失败时的资源包列表重置
+    disableSignGuiOnPlacement:
+      .: 放置告示牌时禁用编辑界面
+      comment: |-
+        放置告示牌或悬挂告示牌时跳过编辑界面
+        在 MC 1.20+ 中，如需右键编辑已放置的告示牌，请保持 Tweakeroo 的 disableSignGui 关闭
+      pretty_name: 放置告示牌时禁用编辑界面
     disableSignTextLengthLimit:
       .: 禁用告示牌文本长度限制
       comment: |-

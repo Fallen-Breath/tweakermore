@@ -28,6 +28,7 @@ import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IHotkeyTogglable;
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import fi.dy.masa.malilib.event.TickHandler;
+import fi.dy.masa.malilib.event.WorldLoadHandler;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import fi.dy.masa.malilib.interfaces.IValueChangeCallback;
 import fi.dy.masa.malilib.util.restrictions.ItemRestriction;
@@ -47,6 +48,7 @@ import me.fallenbreath.tweakermore.impl.features.pistorder.PistorderRenderer;
 import me.fallenbreath.tweakermore.impl.features.refreshInventory.InventoryRefresher;
 import me.fallenbreath.tweakermore.impl.features.schematicProPlace.ProPlaceImpl;
 import me.fallenbreath.tweakermore.impl.features.spectatorTeleportCommand.SpectatorTeleportCommand;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.disableSignGuiOnPlacement.SignPlacementTracker;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.flawlessFrames.FlawlessFramesHandler;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.lowerExplosionSoundLimitPerTick.LowerExplosionSoundLimitPerTickHelper;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.movingPistonBlockSelectable.MovingPistonBlockSelectableHelper;
@@ -594,6 +596,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_RESOURCE_PACK_LIST_RESET_ON_FAILURE = newConfigBooleanHotkeyed("disableResourcePackListResetOnFailure");
 
+	@Config(type = Config.Type.DISABLE, category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_SIGN_GUI_ON_PLACEMENT = newConfigBooleanHotkeyed("disableSignGuiOnPlacement");
+
 	@Config(type = Config.Type.DISABLE, restriction = @Restriction(conflict = @Condition(value = ModIds.caxton, versionPredicates = "<0.3.0-beta.2")), category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed DISABLE_SIGN_TEXT_LENGTH_LIMIT = newConfigBooleanHotkeyed("disableSignTextLengthLimit");
 
@@ -1113,6 +1118,7 @@ public class TweakerMoreConfigs
 		setHotkeyCallback(WINDOW_SIZE_APPLY, WindowSizeHelper::applyWindowSize, false);
 
 		// value listeners
+		DISABLE_SIGN_GUI_ON_PLACEMENT.setValueChangeCallback(config -> SignPlacementTracker.INSTANCE.clear());
 		ECRAFT_ITEM_SCROLLER_COMPACT.setValueChangeCallback(EasierCraftingRegistrar::onConfigValueChanged);
 		HIDE_DISABLE_OPTIONS.setValueChangeCallback(redrawConfigGui);
 		LM_REMOVE_ENTITY_COMMAND.setValueChangeCallback(LitematicaRemoveEntityCommandOverrider::onCommandOverrideChanged);
@@ -1129,6 +1135,7 @@ public class TweakerMoreConfigs
 
 		//////////// Event Listeners ////////////
 
+		WorldLoadHandler.getInstance().registerWorldLoadPreHandler(SignPlacementTracker.INSTANCE);
 		TickHandler.getInstance().registerClientTickHandler(LitematicaAutoRefreshMaterialListHelper.getInstance());
 		TickHandler.getInstance().registerClientTickHandler(LowerExplosionSoundLimitPerTickHelper::onClientTick);
 		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());
