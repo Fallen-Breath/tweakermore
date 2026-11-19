@@ -663,10 +663,10 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean MOVE_CONNECTED_SERVER_ENTRY_TO_TOP = newConfigBoolean("moveConnectedServerEntryToTop", false);
 
-	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed MOVING_PISTON_BLOCK_SELECTABLE = newConfigBooleanHotkeyed("movingPistonBlockSelectable", false);
 
-	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
+	@Config(type = Config.Type.TWEAK, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBooleanHotkeyed MOVING_PISTON_BLOCK_SELECTABLE_CREATE_ONLY = newConfigBooleanHotkeyed("movingPistonBlockSelectableCreativeOnly", true);
 
 	@Config(type = Config.Type.GENERIC, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.16")), category = Config.Category.MC_TWEAKS)
