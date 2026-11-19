@@ -21,7 +21,6 @@
 package me.fallenbreath.tweakermore.config;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import fi.dy.masa.malilib.config.ConfigUtils;
@@ -29,7 +28,7 @@ import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IConfigHandler;
 import fi.dy.masa.malilib.util.JsonUtils;
 import me.fallenbreath.tweakermore.TweakerMoreMod;
-import me.fallenbreath.tweakermore.config.migration.ConfigRenameMigration;
+import me.fallenbreath.tweakermore.config.migration.ConfigMigration;
 import me.fallenbreath.tweakermore.config.statistic.OptionStatisticSaver;
 import me.fallenbreath.tweakermore.gui.TweakerMoreConfigGui;
 import me.fallenbreath.tweakermore.util.FabricUtils;
@@ -113,11 +112,7 @@ public class TweakerMoreConfigStorage implements IConfigHandler
 			this.loadedJson = new JsonParser().parse(root.toString()).getAsJsonObject();
 			//#endif
 
-			ConfigRenameMigration.patchConfig(root, Lists.newArrayList(
-					// keys are collected from calls to ConfigUtils in the rest of this method
-					"Generic", "GenericHotkeys", "Lists", "Fixes",
-					"TweakHotkeys", "TweakToggles", "DisableHotkeys", "DisableToggles"
-			));
+			ConfigMigration.patchConfig(root);
 		}
 		ConfigUtils.readConfigBase(root, "Generic", getConfigOptions(Config.Type.GENERIC));
 		ConfigUtils.readConfigBase(root, "GenericHotkeys", getConfigOptions(Config.Type.HOTKEY));

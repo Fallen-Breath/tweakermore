@@ -1998,8 +1998,8 @@ The outline shape of a moving piston block will be set to a full cube
 See also: movingPistonBlockSelectableCreativeOnly
 
 - Category: MC Tweaks
-- Type: boolean (Generic)
-- Default value: `false`
+- Type: hotkey togglable boolean (Tweak)
+- Default value: *no hotkey*, `false`
 
 
 ### movingPistonBlockSelectableCreativeOnly
@@ -2007,8 +2007,8 @@ See also: movingPistonBlockSelectableCreativeOnly
 Enable option movingPistonBlockSelectable only if the current player is in creative mode
 
 - Category: MC Tweaks
-- Type: boolean (Generic)
-- Default value: `true`
+- Type: hotkey togglable boolean (Tweak)
+- Default value: *no hotkey*, `true`
 
 
 ### multiplayerForcedEnabled
