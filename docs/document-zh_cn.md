@@ -73,13 +73,29 @@ TweakerMore提供的新功能
 
 ### 自动收集材料列表物品 (autoCollectMaterialListItem)
 
-打开容器后，自动收集litematica材料列表中缺失的物品至玩家物品栏
+打开容器后，根据所选材料来源自动收集缺失物品至玩家物品栏
 
 然后关闭容器
 
 - 分类: 功能
 - 类型: 带热键布尔值 (工具)
 - 默认值: *无快捷键*, `false`
+- 模组约束:
+  - 依赖模组:
+    - Litematica (`litematica`)
+    - Item Scroller (`itemscroller`)
+
+
+### 自动收集材料列表物品-材料来源 (autoCollectMaterialListItemSource)
+
+自动收集材料列表物品使用的所需材料来源
+
+Syncmatica_r来源会读取本地玩家已认领的材料需求
+
+- 分类: 功能
+- 类型: 选项列表 (列表)
+- 默认值: `Litematica`
+- 可用选项: `Litematica`, `Syncmatica_r`
 - 模组约束:
   - 依赖模组:
     - Litematica (`litematica`)
