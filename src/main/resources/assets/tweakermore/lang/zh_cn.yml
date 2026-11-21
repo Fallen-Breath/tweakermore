@@ -898,6 +898,9 @@ tweakermore:
     signEditScreenEscDiscard:
       .: 告示牌编辑界面在ESC时丢弃更改
       comment: 在告示牌编辑界面被ESC键关闭时，丢弃所有更改，还原回编辑前的状态
+    signEditingRequireHotkey:
+      .: 编辑告示牌需要快捷键
+      comment: 右键已有告示牌时，需要按住快捷键才能编辑文字
     signMultilinePasteSupport:
       .: 告示牌多行粘贴支持
       comment: |-

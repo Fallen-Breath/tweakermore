@@ -2300,6 +2300,18 @@ FOV覆盖的开关
 ![shulkerBoxTooltipPotionInfoHint](assets/shulkerBoxTooltipPotionInfoHint-zh_cn.png)
 
 
+### 编辑告示牌需要快捷键 (signEditingRequireHotkey)
+
+右键已有告示牌时，需要按住快捷键才能编辑文字
+
+- 分类: MC修改
+- 类型: 带开关热键 (热键)
+- 默认值: `LEFT_ALT`
+- 模组约束:
+  - 依赖模组:
+    - Minecraft (`minecraft`) `>=1.20.1`
+
+
 ### 告示牌编辑界面取消按钮 (signEditScreenCancelButton)
 
 在标牌编辑界面添加一个取消按钮，用于取消编辑并丢弃所有更改

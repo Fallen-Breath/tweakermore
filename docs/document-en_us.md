@@ -2306,6 +2306,18 @@ Display potion information of items in the tooltip of shulker box items
 ![shulkerBoxTooltipPotionInfoHint](assets/shulkerBoxTooltipPotionInfoHint-en_us.png)
 
 
+### signEditingRequireHotkey
+
+Hold the hotkey when right-clicking an existing sign to edit its text
+
+- Category: MC Tweaks
+- Type: hotkey with switch (Hotkey)
+- Default value: `LEFT_ALT`
+- Mod restrictions:
+  - Required mods:
+    - Minecraft (`minecraft`) `>=1.20.1`
+
+
 ### signEditScreenCancelButton
 
 Add a cancel button to the sign edit screen that cancels the editing and discard all changes

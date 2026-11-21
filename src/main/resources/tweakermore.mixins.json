@@ -200,6 +200,8 @@
     "tweaks.mc_tweaks.signEditScreenCancelCommon.SignEditScreenAccessor",
     "tweaks.mc_tweaks.signEditScreenClearAllButton.SignEditScreenMixin",
     "tweaks.mc_tweaks.signEditScreenEscDiscard.SignEditScreenMixin",
+    "tweaks.mc_tweaks.signEditingRequireHotkey.ClientPacketListenerMixin",
+    "tweaks.mc_tweaks.signEditingRequireHotkey.SignBlockMixin",
     "tweaks.mc_tweaks.signMultilinePasteSupport.SelectionManagerMixin",
     "tweaks.mc_tweaks.signMultilinePasteSupport.SignEditScreenMixin",
     "tweaks.mc_tweaks.spectatorTeleportMenuIncludeSpectator.TeleportSpectatorMenuMixin",

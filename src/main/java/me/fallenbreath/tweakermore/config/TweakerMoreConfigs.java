@@ -53,6 +53,7 @@ import me.fallenbreath.tweakermore.impl.mc_tweaks.flawlessFrames.FlawlessFramesH
 import me.fallenbreath.tweakermore.impl.mc_tweaks.lowerExplosionSoundLimitPerTick.LowerExplosionSoundLimitPerTickHelper;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.movingPistonBlockSelectable.MovingPistonBlockSelectableHelper;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.particleLimit.ParticleLimitHelper;
+import me.fallenbreath.tweakermore.impl.mc_tweaks.signEditingRequireHotkey.SignEditRejectionTracker;
 import me.fallenbreath.tweakermore.impl.mc_tweaks.windowSize.WindowSizeHelper;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.eCraftMassCraftCompact.EasierCraftingRegistrar;
 import me.fallenbreath.tweakermore.impl.mod_tweaks.lmAutoRefreshMaterialList.LitematicaAutoRefreshMaterialListHelper;
@@ -749,6 +750,9 @@ public class TweakerMoreConfigs
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean SIGN_EDIT_SCREEN_ESC_DISCARD = newConfigBoolean("signEditScreenEscDiscard", false);
 
+	@Config(type = Config.Type.HOTKEY, restriction = @Restriction(require = @Condition(value = ModIds.minecraft, versionPredicates = ">=1.20.1")), category = Config.Category.MC_TWEAKS)
+	public static final TweakerMoreConfigHotkeyWithSwitch SIGN_EDITING_REQUIRE_HOTKEY = newConfigHotKeyWithSwitch("signEditingRequireHotkey", false, "LEFT_ALT", KeybindSettings.MODIFIER_INGAME);
+
 	@Config(type = Config.Type.GENERIC, category = Config.Category.MC_TWEAKS)
 	public static final TweakerMoreConfigBoolean SIGN_MULTILINE_PASTE_SUPPORT = newConfigBoolean("signMultilinePasteSupport", false);
 
@@ -1125,6 +1129,7 @@ public class TweakerMoreConfigs
 		OF_SANTA_HAT.setValueChangeCallback(OptifinePlayerExtraModelOverrider::onConfigValueChanged);
 		OF_WITCH_HAT.setValueChangeCallback(OptifinePlayerExtraModelOverrider::onConfigValueChanged);
 		PARTICLE_LIMIT.setValueChangeCallback(ParticleLimitHelper::onConfigValueChanged);
+		SIGN_EDITING_REQUIRE_HOTKEY.setValueChangeCallback(config -> SignEditRejectionTracker.INSTANCE.clear());
 		FLAWLESS_FRAMES.setValueChangeCallback(FlawlessFramesHandler::onConfigValueChanged);
 
 		// debugs
@@ -1136,6 +1141,7 @@ public class TweakerMoreConfigs
 		//////////// Event Listeners ////////////
 
 		WorldLoadHandler.getInstance().registerWorldLoadPreHandler(SignPlacementTracker.INSTANCE);
+		WorldLoadHandler.getInstance().registerWorldLoadPreHandler(SignEditRejectionTracker.INSTANCE);
 		TickHandler.getInstance().registerClientTickHandler(LitematicaAutoRefreshMaterialListHelper.getInstance());
 		TickHandler.getInstance().registerClientTickHandler(LowerExplosionSoundLimitPerTickHelper::onClientTick);
 		TickHandler.getInstance().registerClientTickHandler(ServerDataSyncer.getInstance());

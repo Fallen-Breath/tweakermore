@@ -899,6 +899,9 @@ tweakermore:
     signEditScreenEscDiscard:
       .: signEditScreenEscDiscard
       comment: When the sign edit screen is closed by ESC key, discard all changes made
+    signEditingRequireHotkey:
+      .: signEditingRequireHotkey
+      comment: Hold the hotkey when right-clicking an existing sign to edit its text
     signMultilinePasteSupport:
       .: signMultilinePasteSupport
       comment: |-
